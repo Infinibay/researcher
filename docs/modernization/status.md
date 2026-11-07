@@ -4,6 +4,18 @@ La implementación del [plan completo](../superpowers/plans/2026-10-31-actualiza
 
 ## Resultados disponibles
 
+- **Recuperación de servicio activo corregida:** una caída real reveló que el
+  recibo local dejaba ocupada la concesión global e impedía continuar. Ahora se
+  verifica y retira el dominio original, incluidos recibos anteriores, conservando
+  efectos y consumo desconocido. El caso corregido recupera la pregunta y permite
+  una continuación explícita de450segundos sin limpieza adicional.59 pruebas de
+  fuente/evaluador y38 instaladas pasan;606 archivos coinciden y40 definiciones
+  están documentadas. Cinco despachos reales en total; fallos previos conservados,
+  todos los servicios cerrados. Siguen VM con proceso activo y demás alcance;
+  no hay otra suite global ni aceptación de páginas.
+  [Informe](service-crash-review.md), [recibos](service-crash-live.json),
+  [validación](service-crash-results.json).
+
 - **Preguntas y continuidad comprobadas:** catálogo3 y pedidos históricos sin
   autoridad vigente para admisiones sin hilo; conversación nueva conserva su
   reinicio explícito.46 pruebas de fuente/46 instaladas y5 del verificador pasan,

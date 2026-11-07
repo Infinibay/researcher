@@ -1,0 +1,31 @@
+{
+  "base_commit": "3a84ba6",
+  "wheel": "researcher-0.1.0-cp312-cp312-linux_x86_64.whl",
+  "wheel_sha256": "40de04374de6c287a4939914a6d9e1d3ed60263e01b48b570639d2bc63faa212",
+  "source_files_matching_wheel_and_installation": 606,
+  "product_files_matching": 324,
+  "observed": {
+    "cases": 38,
+    "passed": 38,
+    "failed": 0,
+    "skipped": 0,
+    "backend_modules": 226,
+    "all_backend_imports_from_native_env": true,
+    "seconds": 19.225,
+    "exit_code": 0
+  },
+  "tests": [
+    "backend/tests/runtime/test_recovery_domain.py",
+    "backend/tests/runtime/test_run_recovery.py",
+    "backend/tests/runtime/test_human_questions.py",
+    "backend/tests/runtime/test_publication_recovery.py",
+    "backend/tests/runtime/test_remote_recovery.py"
+  ],
+  "real_model_turns": 0,
+  "limits": [
+    "Selected tests, not the global suite",
+    "Synthetic managed installation data, no historical user-data migration",
+    "Exact recovery controls, domain closure and preserved questions; no human comprehension claim",
+    "No model calls, external accounts or GitHub workflow execution"
+  ]
+}

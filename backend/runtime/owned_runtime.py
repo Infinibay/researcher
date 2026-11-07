@@ -357,6 +357,14 @@ class OwnedCodexRuntime:
             self.authority, store, project_id, run_id, attempt_id
         )
 
+    def close_attempt(self, store, project_id, run_id, attempt_id):
+        """Release the original witnessed domain after a crashed native run without replaying inference or releasing its unknown usage reservation."""
+        from backend.runtime.publication_closure import close_original_attempt
+
+        return close_original_attempt(
+            self.authority, store, project_id, run_id, attempt_id
+        )
+
     @asynccontextmanager
     async def open(
         self,

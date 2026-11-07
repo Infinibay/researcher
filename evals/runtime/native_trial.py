@@ -101,12 +101,13 @@ async def backend(trial, evidence, *, starter=None):
     api = f'http://127.0.0.1:{port}'
     process = log = None
     lifecycle = {'owned_backend_terminal': False}
+    previous_keys = set((trial.installation / 'auth').glob('owner-*.key'))
     try:
         process, log = (starter or host_smoke.start)(trial.installation, trial.root, port, 1)
         async with httpx.AsyncClient(base_url=api, timeout=15, trust_env=False) as owner:
-            keys = list((trial.installation / 'auth').glob('owner-*.key'))
+            keys = list(set((trial.installation / 'auth').glob('owner-*.key')) - previous_keys)
             if len(keys) != 1:
-                raise RuntimeError('Expected one pairing file for this synthetic installation')
+                raise RuntimeError('Expected one new pairing file from this original service start')
             response = await owner.post('/api/session', json={'code': keys[0].read_text().strip()}, headers={'X-Researcher-Client': 'web'})
             response.raise_for_status()
             owner.headers['X-Researcher-CSRF'] = response.json()['csrf_token']

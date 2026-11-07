@@ -1,0 +1,212 @@
+[
+  {
+    "cell": null,
+    "code": "F841",
+    "end_location": {
+      "column": 14,
+      "row": 424
+    },
+    "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/runtime/owned_runtime.py",
+    "fix": {
+      "applicability": "unsafe",
+      "edits": [
+        {
+          "content": "",
+          "end_location": {
+            "column": 17,
+            "row": 424
+          },
+          "location": {
+            "column": 9,
+            "row": 424
+          }
+        }
+      ],
+      "message": "Remove assignment to unused variable `audit`"
+    },
+    "location": {
+      "column": 9,
+      "row": 424
+    },
+    "message": "Local variable `audit` is assigned to but never used",
+    "name": "unused-variable",
+    "noqa_row": 424,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unused-variable"
+  },
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 95,
+      "row": 684
+    },
+    "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/runtime/owned_runtime.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "                                from backend.planning.materials import (\n                                    PredecessorMaterials,\n                                )\n                                from backend.runtime.predecessor_tools import (\n                                    PredecessorTools,\n                                )\n",
+          "end_location": {
+            "column": 1,
+            "row": 685
+          },
+          "location": {
+            "column": 1,
+            "row": 683
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 33,
+      "row": 683
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 683,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  },
+  {
+    "cell": null,
+    "code": "RUF059",
+    "end_location": {
+      "column": 20,
+      "row": 14
+    },
+    "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/tests/runtime/test_recovery_domain.py",
+    "fix": {
+      "applicability": "unsafe",
+      "edits": [
+        {
+          "content": "_peers",
+          "end_location": {
+            "column": 20,
+            "row": 14
+          },
+          "location": {
+            "column": 15,
+            "row": 14
+          }
+        }
+      ],
+      "message": "Prefix it with an underscore or any other dummy variable pattern"
+    },
+    "location": {
+      "column": 15,
+      "row": 14
+    },
+    "message": "Unpacked variable `peers` is never used",
+    "name": "unused-unpacked-variable",
+    "noqa_row": 14,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unused-unpacked-variable"
+  },
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 44,
+      "row": 68
+    },
+    "filename": "/home/andres/.codex/worktrees/b09e/researcher/evals/runtime/crash_worker.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "    import uvicorn\n\n    from backend.api.main import create_app\n",
+          "end_location": {
+            "column": 1,
+            "row": 69
+          },
+          "location": {
+            "column": 1,
+            "row": 67
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 5,
+      "row": 67
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 67,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  },
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 66,
+      "row": 96
+    },
+    "filename": "/home/andres/.codex/worktrees/b09e/researcher/evals/runtime/native_trial.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "    from backend.research.sqlite_store import SQLiteResearchStore\n    from evals.operation import host_smoke\n",
+          "end_location": {
+            "column": 1,
+            "row": 97
+          },
+          "location": {
+            "column": 1,
+            "row": 95
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 5,
+      "row": 95
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 95,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  },
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 12,
+      "row": 19
+    },
+    "filename": "/home/andres/.codex/worktrees/b09e/researcher/evals/runtime/run_service_crash.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "import argparse\nimport asyncio\nimport json\nimport os\nimport select\nimport signal\nimport sqlite3\nimport subprocess\nimport sys\nimport time\nfrom contextlib import closing\nfrom pathlib import Path\n\n",
+          "end_location": {
+            "column": 1,
+            "row": 21
+          },
+          "location": {
+            "column": 1,
+            "row": 8
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 1,
+      "row": 8
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 8,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  }
+]

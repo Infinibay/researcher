@@ -605,3 +605,10 @@ y1 variable sin uso. El comportamiento central y el paquete se comprobaron.
 Retomar después de todas las capacidades principales. Las60 revisiones estáticas
 de prompts desactualizadas y la evaluación humana siguen en el trabajo principal,
 no se reclasifican como pulido. [Evidencia](communication-flow-review.md).
+
+## DD085 · Estilo tras recuperación de servicio activo
+
+Seis avisos Ruff en los archivos inspeccionados:4 de imports y2 de variables sin
+uso. Resolver después de todas las capacidades principales; no repetir modelos
+ni la suite global por ese pulido. [Ubicaciones](service-crash-lint.json).
+La VM con proceso activo y demás recuperación siguen como trabajo principal.

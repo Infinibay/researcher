@@ -1,0 +1,44 @@
+{
+  "base_commit": "3a84ba6",
+  "started_at": "2026-11-07T08:03:22Z",
+  "status": "bounded_service_recovery_verified",
+  "source_and_evaluator_tests": {
+    "passed": 59,
+    "failed": 0,
+    "errors": 0,
+    "seconds": 18.489
+  },
+  "installed": {
+    "cases": 38,
+    "passed": 38,
+    "failed": 0,
+    "skipped": 0,
+    "backend_modules": 226,
+    "all_backend_imports_from_native_env": true,
+    "seconds": 19.225,
+    "exit_code": 0
+  },
+  "red_tests_failed": 3,
+  "real_model_turns": 5,
+  "admissions_sent": 6,
+  "observed_tokens": 276484,
+  "docstrings": 40,
+  "lint_findings": 6,
+  "machine_reboot_tested_this_block": false,
+  "new_frontend_or_browser_acceptance": false,
+  "global_suite_repeated": false,
+  "retained_failures": [
+    "Stale pairing-file assumption in evaluator; resumed same original effect without replay",
+    "Global concession remained active after public recovery; explicit continuation failed before inference"
+  ],
+  "remaining": [
+    "Active-process VM reboot and broader failure scenarios",
+    "Human/other-profile/scientific communication evaluation and stale prompt reviews",
+    "Ken/Chroma security and licenses",
+    "Historical owner data location/import",
+    "Full acceptance of12 pages",
+    "All fine details after macro capabilities, then independent whole-plan review"
+  ],
+  "record_cutoff_at": "2026-11-07T08:25:01Z",
+  "elapsed_seconds_to_record_cutoff": 1299
+}

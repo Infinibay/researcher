@@ -1,0 +1,246 @@
+{
+  "checked_definitions": 40,
+  "all_documented": true,
+  "entries": [
+    {
+      "path": "evals/runtime/crash_worker.py",
+      "name": "<module>",
+      "line": 1,
+      "documented": true
+    },
+    {
+      "path": "evals/runtime/crash_worker.py",
+      "name": "main",
+      "line": 15,
+      "documented": true
+    },
+    {
+      "path": "evals/runtime/crash_worker.py",
+      "name": "ready",
+      "line": 33,
+      "documented": true
+    },
+    {
+      "path": "evals/runtime/crash_worker.py",
+      "name": "record_call",
+      "line": 43,
+      "documented": true
+    },
+    {
+      "path": "evals/runtime/crash_worker.py",
+      "name": "hold_question",
+      "line": 56,
+      "documented": true
+    },
+    {
+      "path": "evals/runtime/run_service_crash.py",
+      "name": "<module>",
+      "line": 1,
+      "documented": true
+    },
+    {
+      "path": "evals/runtime/run_service_crash.py",
+      "name": "snapshot",
+      "line": 46,
+      "documented": true
+    },
+    {
+      "path": "evals/runtime/run_service_crash.py",
+      "name": "verify_recovery",
+      "line": 60,
+      "documented": true
+    },
+    {
+      "path": "evals/runtime/run_service_crash.py",
+      "name": "pin_native",
+      "line": 78,
+      "documented": true
+    },
+    {
+      "path": "evals/runtime/run_service_crash.py",
+      "name": "start_gated",
+      "line": 100,
+      "documented": true
+    },
+    {
+      "path": "evals/runtime/run_service_crash.py",
+      "name": "retire_trial_domains",
+      "line": 130,
+      "documented": true
+    },
+    {
+      "path": "evals/runtime/run_service_crash.py",
+      "name": "global_domain_state",
+      "line": 149,
+      "documented": true
+    },
+    {
+      "path": "evals/runtime/run_service_crash.py",
+      "name": "recover_and_continue",
+      "line": 161,
+      "documented": true
+    },
+    {
+      "path": "evals/runtime/run_service_crash.py",
+      "name": "scenario",
+      "line": 226,
+      "documented": true
+    },
+    {
+      "path": "evals/runtime/run_service_crash.py",
+      "name": "main",
+      "line": 309,
+      "documented": true
+    },
+    {
+      "path": "evals/runtime/run_service_crash.py",
+      "name": "admit",
+      "line": 239,
+      "documented": true
+    },
+    {
+      "path": "evals/runtime/test_service_crash.py",
+      "name": "<module>",
+      "line": 1,
+      "documented": true
+    },
+    {
+      "path": "evals/runtime/test_service_crash.py",
+      "name": "observations",
+      "line": 10,
+      "documented": true
+    },
+    {
+      "path": "evals/runtime/test_service_crash.py",
+      "name": "test_preserved_effects_support_only_the_durable_recovery_outcome",
+      "line": 23,
+      "documented": true
+    },
+    {
+      "path": "evals/runtime/test_service_crash.py",
+      "name": "test_plausible_final_prose_cannot_hide_invalid_crash_evidence",
+      "line": 32,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_recovery_domain.py",
+      "name": "<module>",
+      "line": 1,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_recovery_domain.py",
+      "name": "test_recovery_cannot_report_success_while_original_domain_remains_active",
+      "line": 11,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_recovery_domain.py",
+      "name": "test_recovery_rechecks_domain_after_failure_and_preserves_original_receipt",
+      "line": 33,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_recovery_domain.py",
+      "name": "test_global_recovery_refuses_mismatched_original_provenance_before_control",
+      "line": 60,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_recovery_domain.py",
+      "name": "test_owned_runtime_exposes_the_same_exact_attempt_closure_boundary",
+      "line": 87,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_recovery_domain.py",
+      "name": "close_attempt",
+      "line": 20,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_recovery_domain.py",
+      "name": "close_attempt",
+      "line": 40,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_recovery_domain.py",
+      "name": "journal",
+      "line": 73,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_recovery_domain.py",
+      "name": "forbidden_control",
+      "line": 77,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_recovery_domain.py",
+      "name": "close",
+      "line": 96,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/publication_closure.py",
+      "name": "<module>",
+      "line": 1,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/publication_closure.py",
+      "name": "close_original_publication",
+      "line": 10,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/publication_closure.py",
+      "name": "close_original_attempt",
+      "line": 24,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/owned_runtime.py",
+      "name": "<module>",
+      "line": 1,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/owned_runtime.py",
+      "name": "close_attempt",
+      "line": 360,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/service.py",
+      "name": "<module>",
+      "line": 1,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/service.py",
+      "name": "_reconcile_once",
+      "line": 958,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/service.py",
+      "name": "_close_recovered_domain",
+      "line": 996,
+      "documented": true
+    },
+    {
+      "path": "evals/runtime/native_trial.py",
+      "name": "<module>",
+      "line": 1,
+      "documented": true
+    },
+    {
+      "path": "evals/runtime/native_trial.py",
+      "name": "backend",
+      "line": 93,
+      "documented": true
+    }
+  ]
+}

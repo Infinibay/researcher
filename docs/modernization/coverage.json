@@ -533,7 +533,13 @@
         "docs/architecture/legacy-engine-removal.md",
         "docs/modernization/engine-removal-results.json",
         "docs/modernization/engine-removal-packaging.json",
-        "backend/tests/runtime/test_legacy_engine_removal.py"
+        "backend/tests/runtime/test_legacy_engine_removal.py",
+        "docs/modernization/service-crash-review.md",
+        "docs/modernization/service-crash-live.json",
+        "docs/modernization/service-crash-results.json",
+        "docs/modernization/recovery-domain-packaging.json",
+        "backend/tests/runtime/test_recovery_domain.py",
+        "evals/runtime/run_service_crash.py"
       ],
       "remaining": [
         "Durable product startup/shutdown and all tool lifecycle integration; old flows are not covered by owned command evidence",
@@ -684,7 +690,13 @@
         "docs/modernization/native-git-packaging.json",
         "docs/architecture/prior-branch-input.md",
         "docs/modernization/prior-branch-results.json",
-        "docs/modernization/prior-branch-packaging.json"
+        "docs/modernization/prior-branch-packaging.json",
+        "docs/modernization/service-crash-review.md",
+        "docs/modernization/service-crash-live.json",
+        "docs/modernization/service-crash-results.json",
+        "docs/modernization/recovery-domain-packaging.json",
+        "backend/tests/runtime/test_recovery_domain.py",
+        "evals/runtime/run_service_crash.py"
       ]
     },
     "E06": {
@@ -778,7 +790,13 @@
         "frontend/src/components/layout/ProjectExecutionControls.tsx",
         "frontend/tests/project-controls.browser.mjs",
         "docs/design/audits/2026-11-06-project-controls/report.md",
-        "docs/design/audits/2026-11-06-project-controls/evidence.json"
+        "docs/design/audits/2026-11-06-project-controls/evidence.json",
+        "docs/modernization/service-crash-review.md",
+        "docs/modernization/service-crash-live.json",
+        "docs/modernization/service-crash-results.json",
+        "docs/modernization/recovery-domain-packaging.json",
+        "backend/tests/runtime/test_recovery_domain.py",
+        "evals/runtime/run_service_crash.py"
       ]
     },
     "E07": {
@@ -4599,6 +4617,29 @@
         "Human comprehension/effort and other profiles/communication journeys",
         "Revalidate60 stale static prompt review decisions",
         "Representative scientific evaluation and full page acceptance"
+      ]
+    },
+    "active_service_recovery": {
+      "status": "in_progress",
+      "scope": "Actual native service crash after a confirmed capture or question; global concession retirement and explicit continuation. VM/kernel failures remain separate.",
+      "evidence": [
+        "docs/modernization/service-crash-review.md",
+        "docs/modernization/service-crash-live.json",
+        "docs/modernization/service-crash-results.json",
+        "docs/modernization/recovery-domain-packaging.json",
+        "backend/tests/runtime/test_recovery_domain.py",
+        "evals/runtime/run_service_crash.py"
+      ],
+      "verified": [
+        "59 source/evaluator tests and38 installed tests",
+        "Real pre-fix failure before continuation inference; corrected two-turn question scenario passes without emergency cleanup",
+        "Source effect survived original crash; its resumed recovery explicitly records prior emergency cleanup",
+        "Five actual dispatches across retained failures and corrected validation; all services terminal"
+      ],
+      "remaining": [
+        "Active-process VM/kernel restart",
+        "Broader destructive/recovery scenarios and historical owner data",
+        "Human comprehension and full interface acceptance"
       ]
     }
   }

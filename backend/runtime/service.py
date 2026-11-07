@@ -956,9 +956,10 @@ class RuntimeService:
         return await asyncio.shield(task)
 
     async def _reconcile_once(self, command):
-        """Close original peers and grant-bound tools before completing recovery without replay."""
+        """Close original peers, tools and witnessed domain before recovery without replay, including rechecks of older local-only receipts."""
         work = await asyncio.to_thread(self.recovery.preflight, **command)
         if work["completed"] is not None:
+            await self._close_recovered_domain(command)
             return work["completed"]
         slot = self._workers.get(command["run_id"])
         if slot is not None and slot.attempt_id == command["attempt_id"]:
@@ -984,7 +985,21 @@ class RuntimeService:
                 ) from result
             if isinstance(result, BaseException):
                 raise result
+        if slot is not None and slot.attempt_id == command["attempt_id"] and slot.task is not None:
+            try:
+                await asyncio.wait_for(asyncio.shield(slot.task), timeout=10)
+            except TimeoutError as error:
+                raise RunConflict("Original runtime finalizer has not released its domain") from error
+        await self._close_recovered_domain(command)
         return await asyncio.to_thread(self.recovery.complete, **command)
+
+    async def _close_recovered_domain(self, command):
+        """Use the owning runtime's closure boundary; non-owned test/runtime adapters retain their local protocol."""
+        close = getattr(self.runtime, "close_attempt", None)
+        if close is not None:
+            await asyncio.to_thread(
+                close, self.store, command["project_id"], command["run_id"], command["attempt_id"]
+            )
 
     async def correct(self, **command):
         validate_correction(**command)

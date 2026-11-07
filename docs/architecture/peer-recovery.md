@@ -1,5 +1,25 @@
 # Cierre comprobable y recuperación sin replay
 
+## Actualización: concesión global después de perder el servicio
+
+El ensayo real del7noviembre encontró que cerrar los peers y devolver un recibo
+local no liberaba la concesión global del intento. La pregunta quedaba recuperada,
+pero una continuación explícita fallaba antes de inferir con `AuthorityConflict`.
+
+La recuperación del runtime propio ahora reutiliza el retiro comprobado por el
+journal global: valida base, proyecto, tarea, intento y fence; exige cierre del
+dueño anterior y del dominio; después proyecta ese cierre a la base original.
+Se conservan las restricciones específicas de publicación. Si el trabajador local
+todavía existe, su finalizador debe terminar antes de confirmar el retiro global.
+Un fallo de esa prueba deja la recuperación incompleta y permite reconsultarla.
+
+También se comprueba el dominio al recuperar un recibo local ya guardado, para no
+perpetuar la omisión en instalaciones existentes. Se mantiene el mismo recibo,
+las operaciones y los consumos desconocidos; no se admite inferencia ni se repiten
+escrituras desde este control. [Ensayo y límites](../modernization/service-crash-review.md).
+
+## Contrato y evidencia anteriores
+
 Estado: integrado en el recorrido nativo de investigación. Comandos, consumidores
 antiguos, transferencia entre despliegues y aceptación visual siguen pendientes.
 

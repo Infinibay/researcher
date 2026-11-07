@@ -7993,3 +7993,69 @@ reusing prior recovery evidence and checking exact missing scenarios before edit
 Human/other-profile/scientific evaluation, prompt revalidation, historical owner
 data, Ken/Chroma/licenses,12-page acceptance and final independent whole-plan
 review remain in scope. Publish the updated list and measured start at transition.
+
+
+## 2026-11-07 08:03:22UTC — active execution recovery brief
+
+Previous turn is progress:3a84ba6 and original terminal runtime receipts. Reuse
+parent-loss kernel and prior-boot archive evidence; neither proves recovery of
+an active model during a service crash or guest reboot. Exercise separately:
+actual subscription/Ken turn with a committed tool effect whose reply is held;
+a durable material question before its host callback; explicit original-service
+SIGKILL and same-installation restart/reconciliation without replay. Preserve
+corrections, original input, unknown usage and exact operation receipts. Then
+extend the isolated VM probe from prepared registration to active peer/process
+state; never reboot the owner host, copy real credentials into the offline VM,
+or call a controlled no-op a real inference. All macro scope remains open.
+
+
+## 2026-11-07 08:25:01UTC — active service recovery checkpoint
+
+Bounded block08:03:22–08:25:01UTC,21min39s to validation/record cutoff. PROGRESS.
+Ruling: reuse exact witnessed-domain retirement already used by publication,
+keeping publication-specific admission checks — local peer receipts demonstrably
+did not release broker:active — incorrect provenance could affect another domain,
+so original database/project/task/attempt/fence remain mandatory and tested.
+
+Real subscribed Codex/Ken crash after committed capture: pinned native was alive,
+original API Popen exited-9, source/input/correction/receipt retained. Restart
+helper incorrectly required one pairing file; it now selects the new file from
+that observed start. Original failure retained. Emergency cleanup had retired
+the global grant; subsequent HTTP recovery/explicit continuation reused the
+original capture. Do not attribute that earlier physical cleanup to HTTP.
+
+Real question commit before callback: HTTP recovery reached waiting_input and
+answer advanced context without inference, but explicit continuation failed
+AuthorityConflict before dispatch. broker:active retained the old concession.
+Three red regressions covered fresh and older local receipts plus retry. Service
+now closes the owning runtime's witnessed domain before completing recovery,
+including old receipt rechecks, and drains a local worker before global retirement.
+Unknown inference reservations, effects and exact original receipts remain.
+Four provenance controls and adapter test added; no prompt or schema change.
+
+59 source/evaluator tests pass18.489s;38 installed19.225s.606 Python/SQL files
+match source/wheel/installation,324 productive;226 backend modules installed.
+Wheel SHA40de04374de6c287a4939914a6d9e1d3ed60263e01b48b570639d2bc63faa212.
+Corrected actual question scenario48.152s: public recovery retires global domain,
+original pidfd closes, all peers closed, answer records only context3; explicit
+second admission receives original request and explains7.5minutes=450seconds.
+No emergency cleanup. Real totals5dispatches/6admissions,276484observed tokens,
+3unknown/2settled; not billing. All7 service handles terminal.40definitions have
+docstrings. DD085 keeps6style findings until all macro tasks are done.
+
+No frontend, global suite, human evaluation or new VM test.43broad scenarios
+and0/12full page acceptances remain. Latest user policy remains persistent:
+updated done/current/pending with measured block time at each main transition,
+all macro tasks before all details, no invented overall percentage/ETA.
+
+Next block, not started: active-process VM reboot. Cached assets are
+.superpowers/sdd/2026-10-31-actualizacion-proyecto/reboot-vm-tools/vmlinuz and
+reboot-vm-tools/root/usr/bin/qemu-system-x86_64. Existing reboot_guest.before
+only prepares a peer, then exits before PID1 reboots. To cover active processes,
+PID1 must observe a guarded readiness marker while the original holder remains
+alive, then reboot only the disposable guest. No NIC or real credentials/model
+inference in VM; distinguish this kernel/process coverage from the real-model
+service-crash coverage above. Preserve old prepared regression and all failures.
+Other macro work: human/other-profile/scientific communication, stale prompt
+reviews, Ken/Chroma/licenses, owner historical-data location/import,12-page
+acceptance. Independent whole-plan review after macro tasks and deferred details.

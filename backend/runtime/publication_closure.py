@@ -1,4 +1,4 @@
-"""Retire original witnessed publication domains before new readonly recovery, never infer closure from a client boolean or a local status."""
+"""Retire original witnessed attempt domains before recovery, preserving publication-specific admission checks."""
 
 from backend.runtime.authority_journal import WitnessedAuthorityJournal
 from backend.runtime.code_publications import CodePublications
@@ -10,23 +10,34 @@ from backend.runtime.peer_registry import PeerRegistry
 def close_original_publication(
     authority, store, project_id, run_id, attempt_id, *, remote=False
 ):
-    """Match global grants to original database/attempt/fence and project verified retirement before declaring that original execution closed."""
-    registry = PeerRegistry(store)
-    origin = registry._database_identity()
+    """Validate the original publication request before reusing exact-attempt domain retirement."""
     with store._transaction() as conn:
-        run = store._row(conn, project_id, run_id)
         if remote:
             from backend.runtime.remote_runtime import RemotePublications
 
             RemotePublications(store)._request(conn, project_id, run_id)
         else:
             CodePublications(store)._request(conn, project_id, run_id)
+    return close_original_attempt(authority, store, project_id, run_id, attempt_id)
+
+
+def close_original_attempt(authority, store, project_id, run_id, attempt_id):
+    """Retire only witnessed grants matching the original database, task, attempt and fence.
+
+Local peer closure does not release a global concession after service death.
+Keep remote usage unknown, preserve tombstones, and reject any living original
+owner or unproved domain instead of declaring the next admission safe.
+"""
+    registry = PeerRegistry(store)
+    origin = registry._database_identity()
+    with store._transaction() as conn:
+        run = store._row(conn, project_id, run_id)
         attempt = conn.execute(
             "SELECT * FROM runtime_attempts WHERE id=? AND run_id=?",
             (attempt_id, run_id),
         ).fetchone()
         if attempt is None or run["current_attempt_id"] != attempt_id:
-            raise RunConflict("Original publication attempt differs; refresh its state")
+            raise RunConflict("Original attempt differs; refresh its state")
         fence = attempt["fence"]
     grants = []
     with WitnessedAuthorityJournal(**authority) as journal:
@@ -44,7 +55,7 @@ def close_original_publication(
                 grant.get("fence"),
             ) != (origin, project_id, run["task_id"], fence):
                 raise RunConflict(
-                    "Original global publication grant provenance differs"
+                    "Original global attempt grant provenance differs"
                 )
             grant_id = key.removeprefix("broker:grant:")
             closed = PeerBroker.recover(journal, grant_id)
@@ -53,7 +64,7 @@ def close_original_publication(
                 or closed.get("domain_removed") is not True
             ):
                 raise RunConflict(
-                    "Original publication domain retirement is unconfirmed"
+                    "Original attempt domain retirement is unconfirmed"
                 )
             PeerBroker.project_recovered(journal, grant_id)
             grants.append(grant_id)
@@ -63,7 +74,7 @@ def close_original_publication(
             if key.startswith("broker:op:") and op.get("grant_id") in grants
         ]
         if any(op.get("execution_closed") is not True for op in operations):
-            raise RunConflict("Original publication operations have not all closed")
+            raise RunConflict("Original attempt operations have not all closed")
     with store._transaction() as conn:
         peers = [
             dict(p)
@@ -74,7 +85,7 @@ def close_original_publication(
     for peer in peers:
         if peer["init_pid"] is not None and not grants:
             raise RunConflict(
-                "Original global domain proof is missing for a bound publication command"
+                "Original global domain proof is missing for a bound attempt peer"
             )
         if peer["state"] != "closed" and (
             peer["state"] != "prepared" or peer["init_pid"] is not None

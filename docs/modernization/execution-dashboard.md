@@ -28,7 +28,44 @@ que se pueda comparar el avance; no presentar microajustes como tareas principal
 - Última suite global: `9fb873c`,2210 casos,2178 pasan,31 fallan y1 error de fixture; sin omisiones. La carrera de backup encontrada se corrigió después con40 pruebas instaladas. No se declara una nueva corrida global verde; la referencia `0c8b8d9` queda como evidencia histórica.
 - Los 43 escenarios amplios siguen abiertos en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Etapa actual: preguntas y continuidad comprobadas; calidad integral pendiente
+## Etapa actual: recuperación de servicio comprobada; VM activa siguiente
+
+Inicio medido: **2026-11-07 08:03:22 UTC**. Corte de validación/registro:
+**08:25:01 UTC**, **21 min 39 s**. La caída real encontró una concesión global
+sin retirar: la pregunta se recuperaba, pero la continuación fallaba antes de
+inferir. Se corrigió reutilizando el cierre comprobado de dominio, también al
+recuperar recibos antiguos. No se liberan reservas de consumo desconocido.
+
+Pasan59 pruebas de fuente/evaluador y38 del wheel;606 archivos coinciden,
+324 productivos.40 definiciones documentadas. El caso corregido mata el servicio
+con un actor real activo, recupera la pregunta, guarda la respuesta sin ejecutar
+nada y permite una nueva instrucción que explica450segundos. Dominio retirado,
+peers cerrados, cero limpieza adicional. Cinco despachos reales en total,
+incluidos fallos conservados; todos los servicios cerrados.
+[Informe y límites](service-crash-review.md), [recibos](service-crash-live.json),
+[paquete](recovery-domain-packaging.json).
+
+**Lista actualizada al cambiar de tarea:**
+- Terminado en este bloque: recuperación ante caída del servicio y retiro global
+  del intento, **21 min 39 s**. No equivale a toda la recuperación del sistema.
+- Terminado previamente: continuidad/preguntas respondibles, **19 min 50 s**;
+  correcciones/auditoría de dependencias, **26 min 14 s**.
+- Siguiente principal: reinicio de la VM con un proceso activo y recuperación
+  conservando su identidad/historial. Aún no comenzó; registrar inicio al comenzar.
+  La prueba anterior de VM sólo tenía un registro preparado.
+- Pendiente: demás recuperación, evaluación humana/otros perfiles/científica y
+  revalidación de prompts, Ken/Chroma/licencias, datos históricos del propietario
+  y aceptación integral de12 páginas.
+- Después de todas las capacidades principales: detalles acumulados, validación
+  final y revisión independiente. DD085 conserva6 avisos de estilo.
+
+Se conservan dos fallos distintos: emparejamiento del evaluador tras SIGKILL y
+concesión global del producto. La captura se retomó sin repetirla; su cierre
+previo por limpieza no se atribuye a la API. Sólo se repitió la pregunta para
+validar la corrección. No hubo frontend, otra suite global ni nueva prueba de VM.
+Siguen43 escenarios amplios abiertos y0/12 páginas completamente aceptadas.
+
+## Etapa anterior: preguntas y continuidad comprobadas; calidad integral pendiente
 
 El catálogo3 exige registrar preguntas materiales mediante la herramienta. Las
 admisiones directas sin hilo reciben pedidos anteriores de la misma tarea con

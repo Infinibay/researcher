@@ -1,0 +1,211 @@
+{
+  "base_commit": "3a84ba6",
+  "corrected_wheel_sha256": "40de04374de6c287a4939914a6d9e1d3ed60263e01b48b570639d2bc63faa212",
+  "real_model_turns": 5,
+  "admissions_sent": 6,
+  "observed_tokens": 276484,
+  "usage_status_counts": {
+    "unknown": 3,
+    "settled": 2
+  },
+  "all_original_services_terminal": true,
+  "scripted_owner": true,
+  "machine_reboot": false,
+  "human_comprehension": null,
+  "cases": [
+    {
+      "name": "captured_effect_resumed",
+      "original_receipt_sha256": "a5baa38452d95e5da409cde1ecee3cacc46a2c3f246f50d48cfb6db0110a296e",
+      "analyzed_receipt_sha256": "bfd55a697bf1fed4b015d5bf05ec62508799f34c570e1de57a7d46a1a6c24ac8",
+      "status": "passed_after_separately_recorded_cleanup",
+      "seconds": 27.938,
+      "admissions_sent": 2,
+      "actual_dispatches": 2,
+      "native_alive_before_sigkill": true,
+      "fault_boundary": "committed_capture_before_reply",
+      "services": [
+        {
+          "owned_backend_terminal": true,
+          "service_exit": -9
+        },
+        {
+          "owned_backend_terminal": true,
+          "service_exit": 143
+        },
+        {
+          "owned_backend_terminal": true,
+          "service_exit": 143
+        }
+      ],
+      "recovery": {
+        "run_id": "895f17ee-56c1-4261-970f-88004bcf292e",
+        "attempt_id": "3019e81b-6008-43a1-be3b-61f137025eeb",
+        "status": "failed",
+        "local_execution_closed": true,
+        "inference_started": false,
+        "task_accepted": false
+      },
+      "effects_context_inputs_preserved": true,
+      "original_usage_unknown": true,
+      "repeated_recovery_same_receipt": true,
+      "global_after_recovery": null,
+      "emergency_cleanup": [
+        {
+          "grant_id": "f6dfddc13bde86b03e4744b6d11fd113ae1894343b52e7f13e0fbf59e0c1cf25",
+          "state": "retired",
+          "domain_removed": true
+        }
+      ],
+      "continuation_status": "needs_review",
+      "attempts": [
+        {
+          "attempt_id": "3019e81b-6008-43a1-be3b-61f137025eeb",
+          "model": "gpt-6.1-sol",
+          "policy_sha256": "d0da2ecbcd184ea0995a8e0794ad218571a0e3e2f30675ac53a3137e3f87179c",
+          "context_version": 2,
+          "dispatch_status": "unknown",
+          "observed_tokens": 24771,
+          "native_result": null
+        },
+        {
+          "attempt_id": "bed7d692-a742-4a44-9ea8-fa807ee0ed88",
+          "model": "gpt-6.1-sol",
+          "policy_sha256": "d0da2ecbcd184ea0995a8e0794ad218571a0e3e2f30675ac53a3137e3f87179c",
+          "context_version": 2,
+          "dispatch_status": "settled",
+          "observed_tokens": 76516,
+          "native_result": {
+            "native_status": "completed",
+            "summary": "Según la fuente guardada de `policy.md` (fuente 1), **0,21 representa una tasa del 21 %**.\n\nPor ejemplo, para un subtotal de 100:\n\n- Impuesto: `100 × 0,21 = 21`.\n- Total: `100 + 21 = 121,00`.\n\nLa política indica redondear una sola vez al final usando `ROUND_HALF_UP`.\n\nLeí `invoice.py` con `ken_read`: actualmente devuelve `subtotal + tax_rate`, por lo que ese ejemplo daría **100,21**, en lugar de **121,00**. El test leído espera `121.00`; no lo ejecuté.\n\nUsé la captura existente, sin recapturar. No modifiqué código, creé informes, acepté ni publiqué."
+          }
+        }
+      ],
+      "limitation": "Original failure cleanup retired the global grant before this resumed HTTP recovery. Do not attribute that closure to HTTP.",
+      "initial_failure": "Expected one pairing file for this synthetic installation",
+      "initial_seconds": 24.073
+    },
+    {
+      "name": "question_before_fix",
+      "original_receipt_sha256": "08dc13c2a05a00d22c26b52f588c38ec43cf9e9ceec693ad3474ede7703ad483",
+      "analyzed_receipt_sha256": "08dc13c2a05a00d22c26b52f588c38ec43cf9e9ceec693ad3474ede7703ad483",
+      "status": "failed",
+      "seconds": 27.629,
+      "admissions_sent": 2,
+      "actual_dispatches": 1,
+      "native_alive_before_sigkill": true,
+      "fault_boundary": "committed_question_before_callback",
+      "services": [
+        {
+          "owned_backend_terminal": true,
+          "service_exit": -9
+        },
+        {
+          "owned_backend_terminal": true,
+          "service_exit": 143
+        }
+      ],
+      "recovery": {
+        "run_id": "aaa5bfc2-c2f6-40e8-acf9-5537a834e68e",
+        "attempt_id": "a1518153-285a-41c9-a6de-5d32a87df692",
+        "status": "waiting_input",
+        "local_execution_closed": true,
+        "inference_started": false,
+        "task_accepted": false
+      },
+      "effects_context_inputs_preserved": true,
+      "original_usage_unknown": true,
+      "repeated_recovery_same_receipt": true,
+      "global_after_recovery": null,
+      "emergency_cleanup": [
+        {
+          "grant_id": "cf457cc07ab18c006d19980257c5587ef7a035ce8537a8bda964e2a33ebaba59",
+          "state": "retired",
+          "domain_removed": true
+        }
+      ],
+      "continuation_status": "failed",
+      "attempts": [
+        {
+          "attempt_id": "a1518153-285a-41c9-a6de-5d32a87df692",
+          "model": "gpt-6.1-sol",
+          "policy_sha256": "d0da2ecbcd184ea0995a8e0794ad218571a0e3e2f30675ac53a3137e3f87179c",
+          "context_version": 2,
+          "dispatch_status": "unknown",
+          "observed_tokens": 49649,
+          "native_result": null
+        }
+      ],
+      "limitation": null,
+      "failure": "Explicit continuation did not finish",
+      "continuation_inference_started": false
+    },
+    {
+      "name": "question_after_fix",
+      "original_receipt_sha256": "7f5871c8e071bf7e4a06f6a18edfbc1281d057896c7858d78588fdf2ffd48350",
+      "analyzed_receipt_sha256": "7f5871c8e071bf7e4a06f6a18edfbc1281d057896c7858d78588fdf2ffd48350",
+      "status": "passed",
+      "seconds": 48.152,
+      "admissions_sent": 2,
+      "actual_dispatches": 2,
+      "native_alive_before_sigkill": true,
+      "fault_boundary": "committed_question_before_callback",
+      "services": [
+        {
+          "owned_backend_terminal": true,
+          "service_exit": -9
+        },
+        {
+          "owned_backend_terminal": true,
+          "service_exit": 143
+        }
+      ],
+      "recovery": {
+        "run_id": "75fc3ec9-57e2-41a7-b1fc-bfb809146a47",
+        "attempt_id": "b6ab51c1-9d5f-4360-bbd4-48d0c65d3cfd",
+        "status": "waiting_input",
+        "local_execution_closed": true,
+        "inference_started": false,
+        "task_accepted": false
+      },
+      "effects_context_inputs_preserved": true,
+      "original_usage_unknown": true,
+      "repeated_recovery_same_receipt": true,
+      "global_after_recovery": {
+        "active_concession": false,
+        "grants": [
+          {
+            "attempt_id": "b6ab51c1-9d5f-4360-bbd4-48d0c65d3cfd",
+            "state": "retired",
+            "domain_removed": true
+          }
+        ]
+      },
+      "emergency_cleanup": [],
+      "continuation_status": "needs_review",
+      "attempts": [
+        {
+          "attempt_id": "b6ab51c1-9d5f-4360-bbd4-48d0c65d3cfd",
+          "model": "gpt-6.1-sol",
+          "policy_sha256": "d0da2ecbcd184ea0995a8e0794ad218571a0e3e2f30675ac53a3137e3f87179c",
+          "context_version": 2,
+          "dispatch_status": "unknown",
+          "observed_tokens": 49643,
+          "native_result": null
+        },
+        {
+          "attempt_id": "2e1c5179-b512-4080-bcba-43707bc23793",
+          "model": "gpt-6.1-sol",
+          "policy_sha256": "d0da2ecbcd184ea0995a8e0794ad218571a0e3e2f30675ac53a3137e3f87179c",
+          "context_version": 3,
+          "dispatch_status": "settled",
+          "observed_tokens": 75905,
+          "native_result": {
+            "native_status": "completed",
+            "summary": "**7,5 minutos equivalen a 450 segundos.**\n\nUsé tu aclaración registrada: la unidad original es minutos y el destino es segundos. Como cada minuto tiene 60 segundos:\n\n**7,5 × 60 = 450 segundos.**\n\nUn ejemplo sencillo: 7 minutos son 420 segundos y medio minuto son 30 segundos. Sumados dan **450 segundos**.\n\nBusqué con una consulta en inglés mediante `ken_find` y leí `invoice.py` con `ken_read`. El archivo contiene un cálculo de facturación; no documenta unidades de duración. No modifiqué código, creé informes ni publiqué nada."
+          }
+        }
+      ],
+      "limitation": null
+    }
+  ]
+}
