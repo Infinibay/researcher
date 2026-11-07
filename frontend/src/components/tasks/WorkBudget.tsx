@@ -35,6 +35,7 @@ export function WorkBudget({projectId}:{projectId:number}){
     <p>Por ejemplo: si se reservan 3.000 ms para extraer un documento y se pierde la medición, esos 3.000 ms siguen contabilizados. Un resultado completo guardado puede recuperarse sin recalcular. Ampliar el cupo no repite cálculos inciertos.</p>
     <LocalWork key={projectId} projectId={projectId}/>
    </div>}
+   <details><summary className="min-h-11 cursor-pointer">Qué incluye este presupuesto</summary><p>El cupo de solicitudes incluye preparar Ken y abrir la sesión. La CPU de documentos y búsqueda local tiene su propio cupo; no representa toda la CPU de Ken, del runtime ni del servidor. Ese total acumulado no está disponible aquí. Las llamadas internas del proveedor sólo se conocen cuando este las informa.</p></details>
    <BudgetPolicyEditor key={projectId} budget={budget} fresh={!query.error}/>
   </>}
  </section>

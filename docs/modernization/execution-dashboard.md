@@ -26,9 +26,39 @@ que se pueda comparar el avance; no presentar microajustes como tareas principal
 - Codex por suscripción y Ken publicado ensayados. Fuentes/citas, informes draft y revisión documental independiente conectados. Desarrollo admitido desde Tareas/Conversación con captura y comprobaciones explícitas; revisión independiente solicitada desde Tareas y aceptación del propietario conectada. Publicación local desde aceptación conectada; recuperación local de sólo lectura conectada; transporte remoto configurable conectado; recuperación remota y controles de Tareas conectados; ejecución/activación antiguas por tarea y proyecto retiradas; auxiliares de generación/proveedor, herramientas antiguas y sus cinco bibliotecas retirados. También se retiraron API interna, CLI, servicios/listeners y flows/helpers antiguos. También se retiraron autonomía, plantillas históricas y lectores de proveedor sin consumidores; se conserva el control de parada de trabajadores registrados.
 - Interfaz: doce pilotos, 36/36 conceptos de escritorio y 12/12 móviles; todas las rutas tienen piloto y 0/12 páginas están completamente aceptadas.
 - Última suite global: `9fb873c`,2210 casos,2178 pasan,31 fallan y1 error de fixture; sin omisiones. La carrera de backup encontrada se corrigió después con40 pruebas instaladas. No se declara una nueva corrida global verde; la referencia `0c8b8d9` queda como evidencia histórica.
-- U06 (configuración por intento y guardado interrumpido) y E07 (loop acotado y rechazo sin rework automático) quedan comprobados; siguen41de43escenarios amplios abiertos en [coverage.json](coverage.json). No hay un porcentaje global defendible.
+- U06 (configuración por intento), E07 (loop acotado) y E08 (presupuesto del trabajo observable) quedan comprobados; siguen40de43escenarios amplios sin aceptación completa en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Estado actual: admisión previa a preparación comprobada
+## Estado actual: E08 comprobado
+
+Bloque **2026-11-07 18:09:42–18:17:59 UTC**, **8min17s hasta validar**.
+Documentación/checkpoint posteriores fuera del tramo. La matriz de requisitos
+cubre operación/intento/proyecto, herramientas/Ken, auxiliares, concurrencia,
+retry, consumo desconocido y cuota recibida sin fallback.
+
+64casos instalados pasan,0fallos/omisiones;5DOM y build pasan.647archivos
+coinciden,344de producto idénticos al paquete previo de163pases. Inventario297
+módulos;85prompts revisados. La generación de cuota es controlada;0turnos reales.
+CPU completa del servicio y trabajo interno no informado no se inventan como
+mediciones. [Aceptación y límites](budget-acceptance-review.md).
+
+- Terminado: admisión previa, recuperación/restauración y aceptación deE08;
+  también estaban comprobados U06/E07.
+- En curso al cerrar: documentación y checkpoint local.
+- Siguiente principal: aceptación conjunta de los escenarios del motorE01–E06
+  (atribución, estados, Stop, resultados tardíos, reinicio y efectos inciertos).
+  **No iniciado**; registrar hora real. Reusar evidencia válida y corregir sólo
+  brechas funcionales demostradas; detalles al final.
+- Pendiente después: otros escenarios amplios, datos históricos, evaluaciones,
+  aceptación integral de12páginas, dependencias y distribución.
+- Al final: detalles registrados —incluidoDD112—, validación global y revisión
+  independiente de todo el plan.
+
+Quedan40de43escenarios sin aceptación completa;0/12páginas aceptadas por completo.
+Estos conteos no son porcentaje de implementación. La última suite global con
+fallos sigue siendo referencia. No hay plazo restante sustentado. Lista y tiempos
+se publican en cada cambio de tarea y persisten tras compactar.
+
+## Etapa anterior: admisión previa a preparación comprobada
 
 Bloque **2026-11-07 17:53:04–18:07:01 UTC**, **13min57s hasta validar**.
 Documentación/checkpoint posteriores fuera del tramo. El proyecto sin cupo ya

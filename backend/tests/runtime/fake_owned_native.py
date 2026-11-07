@@ -1164,6 +1164,13 @@ for line in sys.stdin:
             raise AssertionError("The configured group memory limit did not stop allocation")
         elif Path("/run/researcher-source/.ken/hold-turn").exists():
             Path("/home/actor/.codex/turn-entered").write_text("entered")
+        elif Path("/run/researcher-source/.ken/quota-exhausted").exists():
+            record = Path('/home/actor/.codex/fixture-quota.json')
+            turns = json.loads(record.read_text())['turns'] if record.exists() else 0
+            record.write_text(json.dumps({'turns':turns+1,'model_provider':'openai'}))
+            send({'method':'turn/completed','params':{'threadId':native_thread_id,
+                  'turn':{'id':native_turn_id,'status':'failed',
+                          'error':{'message':'Controlled quota exhausted; no usage measurement supplied.'}}}})
         elif Path("/run/researcher-source/.ken/chatter-only").exists():
             for index in range(50):
                 send({'method':'item/reasoning/textDelta','params':{'threadId':native_thread_id,'turnId':native_turn_id,'delta':'Still considering the task.'}})

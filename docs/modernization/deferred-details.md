@@ -839,3 +839,15 @@ su limitación de encuadre móvil. Véase la auditoría de presupuesto auxiliar.
 | DD-110 | El historial local muestra hashes completos, formato/fecha/CPU con locale del navegador y el error de red original (`Failed to fetch`). Afinar etiquetas de cálculo/nuevo cálculo, densidad, traducción de error y asociación visual con su intento. Tres capturas completas del componente y controles/recibos comprobados; no repetir procesos por estos detalles. | `LocalWork.tsx`, `localWork.ts`, auditoría `2026-11-07-local-continuation` | Pasada final después de todas las capacidades principales. Reconciliar identidad ausente/cambio de kernel/hueco de creación sigue siendo trabajo funcional, no DD110. |
 
 | DD-111 | El encabezado genérico del historial local habla de volver a comprobar cierre al autorizar; para una copia restaurada conviene decir validar diagnóstico/condiciones. El aviso específico y el formulario sí explican que el host original no tiene cierre comprobado y que la autorización pertenece a la copia. Mantener densidad/locale/hash y viewport móvil habitual en la pasada visual final, junto con DD110. | `LocalWork.tsx`, auditoría `2026-11-07-local-restoration` | Pulido posterior a capacidades principales; no repetir backup/enrollment/kernel por esta frase. |
+
+
+## DD112 — explicación específica de fallos del proveedor
+
+El ensayo de cuota confirma failed, un solo turno y reserva desconocida conservada,
+pero la explicación de ciertos errores nativos sigue siendo genérica: el resultado
+contiene un error del protocolo y finish conserva estado/resumen. En la pasada
+final, traducir categorías verificadas a mensajes útiles, sin mostrar arbitrariamente
+texto del proveedor ni asumir una clase de error a partir de una palabra. Preservar
+no-replay/no-fallback. Evidencia: test_budget_acceptance.py, CodexSession.run y
+RuntimeService._run. No repetir ahora ensayos de cuota ni rediseñar el motor por el
+texto; la aceptación amplia de comunicación y los demás escenarios siguen aparte.

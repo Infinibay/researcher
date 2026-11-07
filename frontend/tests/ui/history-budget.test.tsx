@@ -70,6 +70,7 @@ it('explains reserved capacity without turning missing usage into zero or retain
  const view=render(<WorkBudget projectId={1}/>,{wrapper:wrapper()})
  expect(await screen.findByText('No disponible')).toBeVisible()
  expect(screen.getByText(/Cuota y coste de la suscripción/)).toBeVisible()
+ expect(screen.getByText(/El cupo de solicitudes incluye preparar Ken/)).toHaveTextContent('Ese total acumulado no está disponible aquí')
  expect(screen.getByText(/Se mantienen reservados/)).toHaveTextContent('100')
  view.rerender(<WorkBudget projectId={2}/>)
  await waitFor(()=>expect(screen.queryByText(/Se mantienen reservados/)).toBeNull())

@@ -1,0 +1,46 @@
+{
+  "base_commit": "0587a5a",
+  "started_at": "2026-11-07T18:09:42Z",
+  "validated_at": "2026-11-07T18:17:59Z",
+  "elapsed_seconds_until_validation": 497,
+  "duration_scope": "Audit, acceptance scenarios and validation; later documentation/checkpoint excluded.",
+  "source_new_cases": {
+    "passed": 3,
+    "failed": 0
+  },
+  "installed": {
+    "cases": 64,
+    "passed": 64,
+    "failed": 0,
+    "skipped": 0,
+    "backend_modules": 237,
+    "all_backend_imports_from_native_env": true,
+    "seconds": 41.696,
+    "exit_code": 0
+  },
+  "reused_product_python_sql_files_identical_to_preparation_package": 344,
+  "frontend": {
+    "dom_passed": 5,
+    "build": "passed",
+    "browser_audit": "not repeated",
+    "pages_fully_accepted": 0
+  },
+  "inventory_product_modules": 297,
+  "new_python_definitions_documented": 2,
+  "prompts": {
+    "files": 302,
+    "reviewed": 85,
+    "pending": 0
+  },
+  "scenario": "E08",
+  "status": "complete",
+  "scope": "Product-owned observable work admission, per-operation/attempt/project limits, bounded concurrency/retry, conservative unknown consumption and no host provider fallback after received quota failure.",
+  "limitations": [
+    "Provider internal hidden work/retry/quota is not observable",
+    "Complete accumulated native/Ken/service CPU is not available in the project panel and is explicitly labeled",
+    "Controlled generation, not live quota exhaustion or model/human evaluation",
+    "Other scenarios and global suite remain separate"
+  ],
+  "real_model_turns": 0,
+  "whole_plan": "in_progress"
+}

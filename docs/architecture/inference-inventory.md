@@ -1,12 +1,12 @@
 # Inventario de inferencia y servicios auxiliares
 
-Estado comprobado el **2026-11-07**, sobre el producto de `294943d`. Las rutas
+Estado actualizado el **2026-11-07**; aceptación actual sobre el producto de `0587a5a`. Las rutas
 antiguas enumeradas en versiones anteriores ya no son rutas activas.
 La integración posterior de [presupuesto local](auxiliary-work-budget.md) añade
 reserva/consumo por proyecto e intento y su control web; versiones62/63 incorporan
 continuación y recuperación tras restauración. La versión64 admite preparación
-antes de abrir Ken/runtime. **E08 sigue abierto por el contraste amplio de todos
-los límites/consumos observables**, no por esas recuperaciones ya implementadas.
+antes de abrir Ken/runtime. **E08 queda comprobado para las fronteras de trabajo observable del producto**,
+con mediciones ausentes y límites de observación explícitos en la web.
 La inspección AST citada al final conserva su fecha/base original.
 
 ## Generación del producto actual
@@ -58,9 +58,9 @@ El exportador Chroma conserva un entorno aislado y obligaciones de migración/
 seguridad pendientes. Los shims Infinidev de `evals/runtime` son evaluación,
 no un segundo adaptador productivo.
 
-## Alcance y siguiente requisito funcional
+## Alcance histórico y aceptación actual
 
-Se analizaron **289 archivos Python de producto** con AST: imports estáticos de
+En la auditoría histórica sobre294943d se analizaron **289 archivos Python de producto** con AST: imports estáticos de
 las seis familias indicadas, llamadas generativas conocidas y el literal
 `turn/start`. No aparecen esos imports/calls antiguos; se encontró la entrada
 nativa indicada. Se conservan hashes y límites en el
@@ -90,3 +90,10 @@ La migración64 cuenta preparaciones sin dispatch como capacidad retenida. Al
 congelar el envío, el dispatch sustituye esa reserva sin contar dos solicitudes.
 No convierte preparación en tokens consumidos. La interfaz distingue ambas fases
 por proyecto e intento. [Verificación](../modernization/preparation-budget-review.md).
+
+La aceptación actual repite el inventario sobre297módulos productivos y contrasta
+cada cláusula deE08. Los límites por operación/intento/proyecto incluyen preparación,
+herramientas del host/Ken y auxiliares locales. La falta de datos no se presenta
+como cero ni como capacidad de facturación conocida. El total completo de CPU del
+servidor no está consolidado en el panel; el texto lo distingue del cupo local.
+[Requisitos, evidencias y límites de E08](../modernization/budget-acceptance-review.md).

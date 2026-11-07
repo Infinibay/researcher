@@ -906,7 +906,7 @@
       ]
     },
     "E08": {
-      "status": "in_progress",
+      "status": "complete",
       "evidence": [
         "backend/runtime/codex_session.py",
         "backend/tests/runtime/test_codex_session.py",
@@ -1001,11 +1001,21 @@
         "docs/modernization/preparation-budget-review.md",
         "docs/modernization/preparation-budget-results.json",
         "docs/modernization/preparation-budget-packaging.json",
-        "backend/tests/runtime/test_preparation_budget.py"
+        "backend/tests/runtime/test_preparation_budget.py",
+        "docs/modernization/budget-acceptance-review.md",
+        "docs/modernization/budget-acceptance-results.json",
+        "docs/modernization/budget-acceptance-packaging.json",
+        "docs/modernization/budget-acceptance-inventory.json",
+        "backend/tests/runtime/test_budget_acceptance.py"
       ],
-      "remaining": [
-        "Preparation now requires durable project admission before runtime.open. Failed preparation retains capacity; exact input/dispatch replaces the original hold without counting twice. Local continuation and restored permissions are also verified.",
-        "Complete broad E08 coverage audit for observable native/Ken/administrative consumption and owner explanations. Available domain telemetry is not yet consolidated here as accumulated whole-service CPU. Provider-internal billing/quota and global multi-installation accounting remain explicitly unknown."
+      "remaining": [],
+      "completion_scope": "Product-owned observable work admission, per-operation/attempt/project limits, bounded concurrency/retry, conservative unknown consumption and no host provider fallback after received quota failure.",
+      "verified_at": "2026-11-07",
+      "limitations": [
+        "Provider internal hidden work/retry/quota is not observable",
+        "Complete accumulated native/Ken/service CPU is not available in the project panel and is explicitly labeled",
+        "Controlled generation, not live quota exhaustion or model/human evaluation",
+        "Other scenarios and global suite remain separate"
       ]
     },
     "E09": {
@@ -5157,6 +5167,21 @@
       "remaining": [
         "Broad E08 consumption coverage remains open; this does not claim cumulative whole-service CPU or provider billing.",
         "No whole-page browser acceptance or global suite claim."
+      ]
+    },
+    "observable_budget_acceptance": {
+      "status": "verified",
+      "scope": "Product-owned observable work admission, per-operation/attempt/project limits, bounded concurrency/retry, conservative unknown consumption and no host provider fallback after received quota failure.",
+      "evidence": [
+        "docs/modernization/budget-acceptance-review.md",
+        "docs/modernization/budget-acceptance-results.json",
+        "docs/modernization/budget-acceptance-packaging.json",
+        "docs/modernization/budget-acceptance-inventory.json",
+        "backend/tests/runtime/test_budget_acceptance.py"
+      ],
+      "remaining": [
+        "Forty other broad scenarios remain without complete acceptance; this is not whole-plan completion.",
+        "DD112 provider-error explanation joins final polish; full-page/human/global acceptance remains separate."
       ]
     }
   }

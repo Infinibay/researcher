@@ -1,0 +1,35 @@
+{
+  "base_commit": "0587a5a",
+  "wheel": "researcher-0.1.0-cp312-cp312-linux_x86_64.whl",
+  "wheel_sha256": "eeef0ae5e63c91637f6e9acc7474a16765a686df4799506eec3175218f5739c4",
+  "source_files_matching_wheel_and_installation": 647,
+  "product_files_matching": 344,
+  "observed": {
+    "cases": 64,
+    "passed": 64,
+    "failed": 0,
+    "skipped": 0,
+    "backend_modules": 237,
+    "all_backend_imports_from_native_env": true,
+    "seconds": 41.696,
+    "exit_code": 0
+  },
+  "tests": [
+    "backend/tests/runtime/test_budget_acceptance.py",
+    "backend/tests/runtime/test_preparation_budget.py",
+    "backend/tests/runtime/test_aggregate_execution_budget.py",
+    "backend/tests/runtime/test_host_tool_budget.py",
+    "backend/tests/runtime/test_owned_tool_budget.py",
+    "backend/tests/runtime/test_subscription_auth.py",
+    "backend/tests/runtime/test_subscription_provider.py",
+    "backend/tests/runtime/test_auxiliary_budget.py",
+    "backend/tests/runtime/test_history_budget.py"
+  ],
+  "real_model_turns": 0,
+  "limits": [
+    "Selected tests, not the global suite",
+    "Synthetic managed installation data, no historical user-data migration",
+    "E08 admission and observable-work boundaries: controlled quota failure, shared capacity, preparation, host tool allowance, subscription isolation and local accounting. No universal observation of provider-internal calls or full-service CPU/billing measurement.",
+    "No model calls, external accounts or GitHub workflow execution"
+  ]
+}
