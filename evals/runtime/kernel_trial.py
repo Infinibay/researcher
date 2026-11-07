@@ -27,6 +27,7 @@ class KernelTrial:
     cgroup_parent: Path
     project_id: int
     task_id: int
+    broker_limits: object = None
 
     @asynccontextmanager
     async def open(self):
@@ -42,7 +43,8 @@ class KernelTrial:
 
         self.store = SQLiteRunStore(self.database)
         binding = WorkspaceRegistry(self.database, self.root / 'sources').bind(self.project_id, 11)
-        self.run = self.store.admit(RunSpec(self.project_id, self.task_id, 'diagnostic', 1,
+        context = self.store.context_snapshot(self.project_id, self.task_id)
+        self.run = self.store.admit(RunSpec(self.project_id, self.task_id, 'diagnostic', context['context_version'],
                                            'kernel-evaluation', 'Account-free native command evaluation', 'codex'), binding=binding)
         self.lease, self.peers = AttemptPeers.claim(self.store, self.project_id, self.run.run_id, 'kernel-evaluation-owner', lease_seconds=120)
         self.domain_path = self.cgroup_parent / ('researcher-eval-command-' + uuid4().hex)
@@ -52,7 +54,7 @@ class KernelTrial:
             with ExecutionDomain.open(self.domain_path) as domain, WitnessedAuthorityJournal(**self.authority) as storage:
                 (self.root / 'domain.json').write_text(json.dumps({'path': str(self.domain_path), 'identity': asdict(domain.identity)}, indent=2) + '\n')
                 self.storage = storage
-                self.broker = PeerBroker(storage, domain)
+                self.broker = PeerBroker(storage, domain, limits=self.broker_limits)
                 async with AsyncPeerBroker(self.broker) as owner:
                     self.owner = owner
                     yield self
@@ -73,15 +75,18 @@ class KernelTrial:
                                        lease=self.lease, workspace=self.workspace, asset=self.asset)
 
 
-def prepare(root, codex_binary, cgroup_parent, *, project_id=101, task_id=1001):
+def prepare(root, codex_binary, cgroup_parent, *, project_id=101, task_id=1001, broker_limits=None):
     """Validate account-free host resources and create fresh source storage and independent authority."""
     from backend.runtime.bootstrap import initialize_authority, initialize_database
     from backend.runtime.broker_profile import CodexAsset
     from backend.runtime.native_commands import VERSION, _version
+    from backend.runtime.peer_broker import BrokerLimits
 
     root = Path(root).absolute()
     if root.exists():
         raise FileExistsError('Kernel evaluation needs a NEW private trial directory')
+    if broker_limits is not None and not isinstance(broker_limits, BrokerLimits):
+        raise ValueError('Expected validated explicit broker limits')
     parent = Path(cgroup_parent).resolve(strict=True)
     if not parent.is_relative_to('/sys/fs/cgroup') or not os.access(parent, os.W_OK) or not {'memory', 'pids'} <= set((parent / 'cgroup.subtree_control').read_text().split()):
         raise ValueError('Supply an existing delegated cgroup v2 parent with memory/pids controllers')
@@ -100,7 +105,7 @@ def prepare(root, codex_binary, cgroup_parent, *, project_id=101, task_id=1001):
     (root / 'preparation.json').write_text(json.dumps({'format': 1, 'purpose': 'synthetic-kernel-evaluation',
         'authority': authority, 'native_sha256': asset.sha256, 'native_version': VERSION,
         'project_id': project_id, 'task_id': task_id, 'model_turns': 0}, indent=2) + '\n')
-    return KernelTrial(root, workspace, database, authority, asset, parent, project_id, task_id)
+    return KernelTrial(root, workspace, database, authority, asset, parent, project_id, task_id, broker_limits)
 
 
 async def wait_output(worker, handle, marker, *, timeout=10):

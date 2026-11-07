@@ -2,8 +2,8 @@
 
 El producto exige `owned-codex-v1`. Un script conservado y un recibo histórico
 no prueban el comportamiento de la instalación actual. Esta carpeta contiene
-escenarios anteriores cuya migración completa sigue pendiente; no ejecutarlos
-como una suite de aceptación vigente.
+escenarios productivos migrados y experimentos históricos de candidatos. Su
+conjunto no es una suite de aceptación integral del proyecto.
 
 ## Comprobaciones vigentes
 
@@ -110,16 +110,36 @@ haber cerrado los procesos no convierte el trabajo en exitoso. La preparación
 se observa mediante stdout original; el cierre mediante pidfd y estado del
 cgroup. [Resultados e intentos fallidos](../../docs/modernization/kernel-evaluation-runners-results.json).
 
-### Escenarios restantes
+### Ken e inspección del propietario sin modelos
+
+Ken publicado usa `owner.ken` y `broker_mcp`, con preparación y MCP dentro del
+dominio actual. Requiere caché local verificada y un límite explícito de memoria:
+el ensayo documentado usa los 2048 MiB configurados para el host, frente a los
+512 MiB genéricos del helper de comandos. No descarga modelos ni usa cuentas.
+
+```sh
+python evals/security/run_ken_isolation.py --live --ken-command /ruta/ken --model-cache /ruta/cache --memory-mib 2048 --codex-binary /ruta/codex --cgroup-parent /sys/fs/cgroup/ruta/delegada
+python evals/runtime/run_owner_command_inspection.py --codex-binary /ruta/codex --cgroup-parent /sys/fs/cgroup/ruta/delegada
+```
+
+La inspección crea un comando real nuevo mediante `owner_trial.py`, cierra sus
+procesos y copia sólo esa base sintética para leer el recibo por HTTP. No recibe
+`--source-root` ni adopta autoridad histórica. El backend instalado sirve la UI
+compilada y mantiene la inferencia sin configurar. Comprueba las ventanas de
+bytes, autorización y separación de proyectos, y compara nueve tablas del runtime.
+La captura [de navegador](../ui/README.md) comparte esta fixture. Cada ejecución
+produce un directorio privado nuevo y conserva el cierre de su servidor original.
+[Resultados y límites](../../docs/modernization/remaining-evaluation-runners-results.json).
+
+### Experimentos históricos y aceptación pendiente
 
 | Runner conservado | Alcance que falta comprobar con el runtime vigente |
 | --- | --- |
 | `run_research.py`, `serve_infinidev_research.py` | Comparación directa de candidatos, entorno y política de herramientas; no aceptación del producto nativo |
-| `../security/run_ken_isolation.py` | Revalidar Ken publicado y aislamiento en la composición vigente |
-| `run_owner_command_inspection.py`, `../ui/run_owner_capture.py` | Lectura de recibos y navegación sobre fixture sintético actual, portable y reproducible; hoy dependen de un ensayo anterior específico |
 
-Las pruebas ordinarias del producto cubren contratos de estas capacidades,
-pero no se cuentan como ejecución de estos runners ni como comprensión humana.
+Los recorridos anteriores comprueban escenarios concretos; no aceptan la calidad
+de todos los modelos/prompts, comprensión humana, investigación científica o todas
+las páginas. Las pruebas ordinarias tampoco sustituyen esos ensayos.
 Las pruebas de procesos/cgroups se ejecutan en serie. La configuración y los
 resultados de esta revisión están en [retirada de configuración](../../docs/architecture/retained-configuration.md).
 

@@ -1,0 +1,126 @@
+[
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 63,
+      "row": 27
+    },
+    "filename": "evals/runtime/run_owner_command_inspection.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "    from evals.runtime.owner_trial import fingerprint, prepare\n    from evals.runtime.run_research import backend, environment\n",
+          "end_location": {
+            "column": 1,
+            "row": 28
+          },
+          "location": {
+            "column": 1,
+            "row": 25
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 5,
+      "row": 25
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 25,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  },
+  {
+    "cell": null,
+    "code": "ASYNC221",
+    "end_location": {
+      "column": 27,
+      "row": 83
+    },
+    "filename": "evals/security/run_ken_isolation.py",
+    "fix": null,
+    "location": {
+      "column": 13,
+      "row": 83
+    },
+    "message": "Async functions should not run processes with blocking methods",
+    "name": "run-process-in-async-function",
+    "noqa_row": 83,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/run-process-in-async-function"
+  },
+  {
+    "cell": null,
+    "code": "F401",
+    "end_location": {
+      "column": 15,
+      "row": 12
+    },
+    "filename": "evals/ui/run_owner_capture.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "",
+          "end_location": {
+            "column": 1,
+            "row": 13
+          },
+          "location": {
+            "column": 1,
+            "row": 12
+          }
+        }
+      ],
+      "message": "Remove unused import: `sqlite3`"
+    },
+    "location": {
+      "column": 8,
+      "row": 12
+    },
+    "message": "`sqlite3` imported but unused",
+    "name": "unused-import",
+    "noqa_row": 12,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unused-import"
+  },
+  {
+    "cell": null,
+    "code": "F401",
+    "end_location": {
+      "column": 31,
+      "row": 14
+    },
+    "filename": "evals/ui/run_owner_capture.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "",
+          "end_location": {
+            "column": 1,
+            "row": 15
+          },
+          "location": {
+            "column": 1,
+            "row": 14
+          }
+        }
+      ],
+      "message": "Remove unused import: `contextlib.closing`"
+    },
+    "location": {
+      "column": 24,
+      "row": 14
+    },
+    "message": "`contextlib.closing` imported but unused",
+    "name": "unused-import",
+    "noqa_row": 14,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unused-import"
+  }
+]

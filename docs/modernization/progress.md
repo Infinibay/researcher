@@ -7545,3 +7545,42 @@ isolation or full-page acceptance claimed. 43 broad scenarios remain open;
 inspection/UI runners, then remaining macro capabilities. All fine details last.
 User policy persists: updated done/current/pending list at each principal task
 transition, with measured time and explicit uncertainty; no invented percentage.
+
+
+## Remaining product evaluation runners — 2026-11-06
+
+Previous goal turn PROGRESS:a06d0ea. Started02:13:12UTC, same managedworktree.
+PublishedKenisolation now uses owner.ken/broker_mcp rather than a secondary
+stdio launcher. Fresh independent alpha/beta sources/authorities, real local
+embedding preparation and same-topic memories.12controls pass including own
+semantic/text/valid-KQL2 positives, foreignpath/symlink/controlsecret denials.
+Original empty structural query was not useful evidence; replaced with valid
+query and its positive control. Both original domains/peers closed,0modelturns.
+
+Generic512MiB fixture preparation failed without stdout/stderr or exitcounter;
+OOM remains hypothesis. Explicit existing host2GiB policy succeeds with observed
+~1.39GBpeak/noOOM. Another harnessfailure read4linesafterdocstringmovedmarker5;
+correctedwindow. Bothfailures retained. No actual account opened or policyraised.
+
+Fresh owner_trial executes actual calculation, closesoriginalactors then backs up
+only sourceDB into separate inspectioncopy. No priortrial/workspace/authority
+adopted. Taskmetadataupdate exposed hardcodedcontext1; KernelTrial now admits
+actualcontext_snapshot version.2missingfixture RED then1contextFAIL22PASS;
+final23PASS3.93s including helper/currentlegacyconsumer guards. HTTPsource/copy
+nine-table fingerprints unchanged,13windowreads/86UTF8bytes,401anonymous/bearer,
+404foreignproject; noconfiguredinference. Optional sharedHTTP lifecycle records
+originalserviceexit(-15) andclosed; current installedbackend/sourcekernel composition.
+
+Browserfirstfailure: old exact projectselectorname vs liveARIA withprojectname.
+Corrected selector; current desktop8/mobile9 states pass with0Axe/JS/errors/
+externalrequests/mutations andobservedkeyboardfocus. FourselectedPNGs reviewed
+andpublished; fullpageacceptancefalse. Commandexit0 distinctfromdiagnosticrunfailed
+andtasknotaccepted. Allbackend/browser/nativeactorsclosed,authtempfilesremoved.
+29Pythonmodule/class/functiondocs plus capture JSDoc;4lintDD070 deferred.
+Product sources/frontendbuildunchanged, no wheel/image rebuild or global suite.
+
+Next data migration/inverses/real restore/reboot enrollment,history/budgets,
+real/human/scientific/global eval,dependencysecurity/12pageacceptance,allfinedetails
+andfreshfinalreview.43broadscenarios36in_progress/7pending;12pilots48concepts0accepted.
+Historical candidate experiments remain outside current product scenario evidence.
+Keep whole goalactive; no push/merge/deploy. Updated checklist everyprincipaltransition.

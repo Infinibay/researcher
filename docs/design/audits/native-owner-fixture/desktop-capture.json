@@ -1,0 +1,80 @@
+{
+  "browser": "156.0.8078.4",
+  "viewport": {
+    "width": 1440,
+    "height": 1024
+  },
+  "captures": [
+    {
+      "step": 1,
+      "route": "/tasks",
+      "label": "01-tasks-initial",
+      "violations": []
+    },
+    {
+      "step": 2,
+      "route": "/tasks",
+      "label": "02-project-menu",
+      "violations": []
+    },
+    {
+      "step": 3,
+      "route": "/tasks",
+      "label": "03-tasks-selected",
+      "violations": []
+    },
+    {
+      "step": 4,
+      "route": "/tasks",
+      "label": "04-task-inspector",
+      "violations": []
+    },
+    {
+      "step": 5,
+      "route": "/tasks",
+      "label": "05-commands-open",
+      "violations": []
+    },
+    {
+      "step": 6,
+      "route": "/tasks",
+      "label": "06-command-output",
+      "violations": []
+    },
+    {
+      "step": 7,
+      "route": "/chat",
+      "label": "07-chat-selected",
+      "violations": []
+    },
+    {
+      "step": 8,
+      "route": "/chat",
+      "label": "08-chat-task",
+      "violations": []
+    }
+  ],
+  "blocked_external_origins": [],
+  "page_errors": [],
+  "assets": [
+    {
+      "path": "/assets/index-CRr5YqTd.css",
+      "status": 200,
+      "content_type": "text/css; charset=utf-8"
+    },
+    {
+      "path": "/assets/index-b5iACo8x.js",
+      "status": 200,
+      "content_type": "text/javascript; charset=utf-8"
+    }
+  ],
+  "mutating_requests": [],
+  "keyboard": {
+    "skip_link_first": true,
+    "skip_moves_focus_to_main": true
+  },
+  "navigation": {
+    "main_focused": true,
+    "heading_in_viewport": true
+  }
+}

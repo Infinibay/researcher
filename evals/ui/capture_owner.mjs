@@ -39,6 +39,7 @@ try {
     const resource = response.request().resourceType()
     if (['script','stylesheet'].includes(resource)) evidence.assets.push({path:new URL(response.url()).pathname,status:response.status(),content_type:response.headers()['content-type']})
   })
+  /** Save observed layout, accessible structure, pixels and scoped accessibility evidence. */
   async function capture(name) {
     const step = evidence.captures.length + 1
     const label = `${String(step).padStart(2,'0')}-${name}`
@@ -83,11 +84,11 @@ try {
   await capture('tasks-initial')
   if (config.flow !== 'initial') {
     // Targets come from the preceding live ARIA snapshots, not source guesses.
-    await page.getByRole('button',{name:'Seleccionar proyecto',exact:true}).click()
+    await page.getByRole('button',{name:/^Seleccionar proyecto:/}).click()
     await capture('project-menu')
     if (['selected','inspector','commands'].includes(config.flow)) {
       await page.getByRole('button',{name:'Research ALPHA_ONLY',exact:true}).click()
-      await expect(page.getByRole('button',{name:'Seleccionar proyecto',exact:true})).toContainText('Research ALPHA_ONLY')
+      await expect(page.getByRole('button',{name:/^Seleccionar proyecto:/})).toContainText('Research ALPHA_ONLY')
       await page.getByText('Policy report',{exact:true}).waitFor()
       await capture('tasks-selected')
       if (['inspector','commands'].includes(config.flow)) {
@@ -103,7 +104,8 @@ try {
           await page.getByRole('button',{name:'Ver salida',exact:true}).click()
           await page.getByRole('region',{name:'Salida del comando seleccionado',exact:true}).waitFor()
           await page.getByRole('status').filter({hasText:'Consultando la salida guardada…'}).waitFor({state:'hidden'})
-          await page.getByText('Bytes 1–95 de 95 guardados',{exact:true}).waitFor()
+          await page.getByText(`Bytes 1–${config.stdout_bytes} de ${config.stdout_bytes} guardados`,{exact:true}).waitFor()
+          await expect(page.getByRole('region',{name:'Salida estándar',exact:true})).toContainText(config.expected_stdout.trim())
           await page.getByRole('region',{name:'Salida estándar',exact:true}).scrollIntoViewIfNeeded()
           await capture('command-output')
         }

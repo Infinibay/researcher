@@ -1,7 +1,7 @@
 """Read real native receipts over owned local HTTP; never start inference.
 
-Uses a copy of an earlier synthetic trial. No original/user database is migrated,
-and read-only source fingerprints detect unintended changes.
+Creates a fresh command-only fixture and inspects its closed receipt. No account,
+model or historical/operator database is used; fingerprints detect mutations.
 """
 
 import argparse
@@ -20,60 +20,22 @@ import httpx
 REPO = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(REPO))
 
-TABLES = (
-    "runtime_runs",
-    "runtime_attempts",
-    "runtime_jobs",
-    "runtime_peers",
-    "runtime_inference_dispatches",
-    "runtime_input_snapshots",
-    "tool_grants",
-    "research_reports",
-    "tasks",
-)
-
-
-def fingerprint(database):
-    result = {}
-    with closing(
-        sqlite3.connect(database.resolve().as_uri() + "?mode=ro", uri=True)
-    ) as conn:
-        for table in TABLES:
-            rows = conn.execute("SELECT * FROM " + table + " ORDER BY 1,2").fetchall()
-            result[table] = {
-                "rows": len(rows),
-                "sha256": hashlib.sha256(repr(rows).encode()).hexdigest(),
-            }
-    return result
-
-
 async def main(args):
+    """Verify owner-only byte-window reads on a fresh actual native command without replay."""
     from evals.runtime.run_research import backend, environment
 
-    trials = (REPO / ".researcher/evaluations").resolve()
-    source = args.source_root.resolve(strict=True)
-    if not source.is_relative_to(trials):
-        raise ValueError(
-            "Only an explicit synthetic trial below .researcher/evaluations is supported"
-        )
-    source_database = source / "research.db"
+    from evals.runtime.owner_trial import fingerprint, prepare
+
+    trials = (REPO / '.researcher/evaluations').resolve()
+    root = trials / ('owner-command-inspection-' + uuid4().hex[:8])
+    trial = await prepare(root, args.codex_binary, args.cgroup_parent)
+    source_database, database = trial.source_database, trial.database
     before_source = fingerprint(source_database)
-    root = trials / ("owner-command-inspection-" + uuid4().hex[:8])
-    root.mkdir()
-    database = root / "research.db"
-    with (
-        closing(
-            sqlite3.connect(source_database.as_uri() + "?mode=ro", uri=True)
-        ) as origin,
-        closing(sqlite3.connect(database)) as target,
-    ):
-        origin.backup(target)
     before_copy = fingerprint(database)
-    assert before_copy == before_source
     evidence = {
         "status": "starting",
         "root": str(root),
-        "source_trial": source.name,
+        "fixture": "fresh native command, closed before inspection",
         "new_inference_turns": 0,
         "image_calls": 0,
     }
@@ -87,7 +49,7 @@ async def main(args):
                 "This bounded probe expects the one-job analysis fixture"
             )
             run_id, project, task, job_id, expected_stdout, expected_stderr = rows[0]
-        async with backend(root, environment(), seed_data=False) as (
+        async with backend(root, environment(), seed_data=False, evidence=evidence) as (
             _store,
             owner,
             api,
@@ -171,5 +133,6 @@ async def main(args):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--source-root", type=Path, required=True)
-    asyncio.run(main(parser.parse_args()))
+    from evals.runtime.kernel_trial import arguments
+
+    asyncio.run(main(arguments(parser)))

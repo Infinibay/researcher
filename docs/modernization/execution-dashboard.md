@@ -19,7 +19,32 @@ o porcentaje. No reconstruir tiempos históricos a partir de recuerdos del chat.
 - Última suite global completada al retomar `0c8b8d9`: 2148 casos, 2045 pasan, 100 fallan y tres se omiten. Mismos 100 identificadores heredados; no se afirman causas idénticas. Pasan 965 casos del runtime. La política Git añadida después tiene verificación separada.
 - Los 43 escenarios amplios siguen abiertos en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Etapa actual: tres evaluaciones de procesos migradas; siguen Ken e inspección
+## Etapa actual: Ken e inspección migrados; siguen datos y restauración
+
+Ken publicado pasa 12 controles mediante el broker actual, con fuentes/memorias
+separadas, modelos locales y cierre comprobado. La fixture del propietario crea
+un comando real nuevo y lee sus resultados por HTTP y navegador, sin depender de
+un ensayo histórico ni configurar inferencia. Pasan 23 tests dirigidos, la lectura
+HTTP en 13 ventanas y 17 estados de escritorio/móvil sin hallazgos Axe ni errores
+JS. Se documentan 29 módulos/clases/funciones y se revisan cuatro capturas.
+Tiempo medido de este bloque: unos 14 minutos (02:13:12–02:27 UTC).
+[Resultados y límites](remaining-evaluation-runners-results.json),
+[revisión visual acotada](../design/audits/native-owner-fixture/report.md).
+
+**Lista vigente:**
+- Cerrado en este bloque: Ken por broker, inspección HTTP y captura de Tareas/
+  Conversación con fixtures nuevos. Cero modelos y todos los actores cerrados.
+- Siguiente: migraciones, inversas, restauración real y recuperación/re-enrollment
+  tras reboot; comenzar por el inventario y los fallos conocidos de migración.
+- Después: historial/presupuestos; evaluaciones real, humana, científica y global;
+  seguridad de dependencias, aceptación completa de 12 páginas y revisión final.
+- Al final: detalles secundarios. DD070 conserva cuatro avisos de lint y la
+  altura de cabecera móvil. Siguen abiertos 43 escenarios y 0/12 aceptaciones integrales.
+
+No se actualiza un porcentaje global ni se atribuye aceptación actual a los
+experimentos históricos de candidatos. No hubo cambios productivos ni rebuild.
+
+## Etapa anterior: tres evaluaciones de procesos migradas
 
 Análisis, comandos y pérdida del padre usan el broker/dominio actual, bases
 sintéticas y autoridades nuevas. Pasan los siete controles de análisis, Stop

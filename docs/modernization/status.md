@@ -4,6 +4,15 @@ La implementación del [plan completo](../superpowers/plans/2026-10-31-actualiza
 
 ## Resultados disponibles
 
+- **Ken e inspección usan fixtures actuales:** 12 controles de Ken por el broker,
+  HTTP con salida fragmentada y 17 estados reales de Tareas/Conversación en
+  escritorio/móvil, sin modelos ni cambios en registros. Pasan 23 pruebas;
+  29 módulos/clases/funciones documentados y cuatro capturas revisadas. Todos
+  los actores y servidores originales cerrados. Siguen datos/restauración,
+  historial/presupuestos y aceptación integral; los candidatos históricos no se
+  cuentan como evaluación actual. [Resultados](remaining-evaluation-runners-results.json),
+  [revisión visual](../design/audits/native-owner-fixture/report.md).
+
 - **Tres evaluaciones de procesos migradas al broker actual:** análisis pasa sus
   siete controles; comandos comprueba cancelación, aislamiento, cierre con SQLite
   bloqueado y pérdida de RPC; pérdida del padre comprueba recuperación sin

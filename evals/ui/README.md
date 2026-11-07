@@ -1,6 +1,7 @@
 # Owner workspace browser checks
 
-These checks use an isolated copy of a prior **synthetic** analysis trial. They
+These checks create a fresh account-free native command and copy only its closed
+synthetic database for inspection. They
 pair a real local owner session over HTTP, open the built UI in sandboxed Chromium,
 and read Tasks, command receipts/output, and Conversation. They never submit model
 turns or product mutations. The login form itself is outside this flow.
@@ -9,8 +10,9 @@ From the repository root, build the frontend, then run (replace tool paths with
 your installed pinned Node and Playwright browser directory):
 
 ```sh
-.venv/bin/python evals/ui/run_owner_capture.py \
-  --source-root .researcher/evaluations/analysis-inference-7792402f \
+python evals/ui/run_owner_capture.py \
+  --codex-binary /absolute/path/to/codex \
+  --cgroup-parent /sys/fs/cgroup/delegated-parent \
   --node /absolute/path/to/node \
   --browsers /absolute/path/to/playwright-browsers \
   --flow commands --keyboard --check
@@ -28,12 +30,16 @@ errors, failed assets, external dependencies and unexpected product mutations.
 section navigation; it does not claim a complete keyboard audit. PNG, ARIA, header
 layout, raw axe results and runtime fingerprints are saved with each run.
 
-The source fixture must already exist beneath `.researcher/evaluations`. The
-`commands` flow expects the real saved analysis trial's ALPHA project, task1001
-and95 output bytes; it deliberately fails on another fixture. It is not yet a
-self-contained clean-install E2E suite or coverage of every UI state. The nine
-runtime-table fingerprints do not compare all database tables. Pairing is performed
-by the HTTP helper, so zero browser mutations excludes that initial pairing.
+No `--source-root` or previous trial is required. `owner_trial.py` creates the
+ALPHA/BETA projects, task1001 and actual calculation output, then closes all native
+actors before HTTP starts. The browser checks the exact output bytes/text supplied
+by that fresh fixture; the byte count is not hard-coded. No runtime inference is
+configured. This requires preinstalled tools, native extension and a built web UI;
+it is not a clean-install or all-page acceptance suite. Nine runtime-table
+fingerprints do not compare every database table. Pairing occurs before browser
+capture, so zero browser mutations excludes that initial pairing.
 
-Published captures and findings:
+Current 17-state desktop/mobile run and selected visual review:
+[fresh owner fixture audit](../../docs/design/audits/native-owner-fixture/report.md).
+Historical captures and findings:
 [owner workspace audit](../../docs/design/audits/2026-11-01-owner-workspace/report.md).

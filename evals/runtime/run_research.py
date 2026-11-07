@@ -122,7 +122,7 @@ async def ready(client, process, path):
 
 
 @asynccontextmanager
-async def backend(root, env, *, runtime_settings=None, seed_data=True):
+async def backend(root, env, *, runtime_settings=None, seed_data=True, evidence=None):
     """Serve an isolated trial from the invoking installed Python; only explicit owned runtime profiles may execute.
 
     Without runtime_settings this fixture provides read/owner HTTP checks and
@@ -213,6 +213,11 @@ async def backend(root, env, *, runtime_settings=None, seed_data=True):
             yield SQLiteResearchStore(database), client, api, database
     finally:
         await terminate(process)
+        if evidence is not None:
+            lifecycle = {'owned_backend_terminal': process.returncode is not None,
+                         'service_exit': process.returncode}
+            evidence.update(lifecycle)
+            (root / 'service-lifecycle.json').write_text(json.dumps(lifecycle, indent=2) + '\n')
         log.close()
         owner_control.cleanup()
 

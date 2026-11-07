@@ -4234,7 +4234,7 @@
     },
     "evaluation_runner_migration": {
       "status": "in_progress",
-      "scope": "Current business MCP/HTTP harness, six installed native interaction scenarios and three real account-free broker command/analysis/parent-loss runners. Ken-isolation and owner inspection/UI runner scenarios stay open.",
+      "scope": "Current business MCP/HTTP harness, six installed native interaction scenarios, three account-free kernel runners, published Ken broker isolation and fresh owner HTTP/browser fixtures. Historical candidate benchmarks and integral acceptance remain open.",
       "evidence": [
         "evals/runtime/README.md",
         "evals/runtime/run_research.py",
@@ -4246,12 +4246,18 @@
         "docs/modernization/native-evaluation-runners-results.json",
         "evals/runtime/kernel_trial.py",
         "backend/tests/runtime/test_kernel_evaluation.py",
-        "docs/modernization/kernel-evaluation-runners-results.json"
+        "docs/modernization/kernel-evaluation-runners-results.json",
+        "evals/runtime/owner_trial.py",
+        "evals/security/run_ken_isolation.py",
+        "backend/tests/runtime/test_owner_evaluation.py",
+        "docs/modernization/remaining-evaluation-runners-results.json",
+        "docs/design/audits/native-owner-fixture/report.md"
       ],
       "limitations": [
         "Five live native harnesses pass; calculation original harness failed on45vs54catalog mismatch. Corrected checker, original artifacts and original HTTP receipt recovery pass with zero new dispatches.",
-        "No current global suite, human/scientific benchmark, full-page acceptance or acceptance of remaining Ken-isolation/owner-UI runners.",
-        "Kernel scenarios use source backend and separate authorities; zero model turns. Physical closure preserves unknown command results; no additional concurrency authorization."
+        "No current global suite, human/scientific benchmark, full-page acceptance or refreshed historical candidate comparison. Owner UI fixture exercises read-only states without configured inference.",
+        "Kernel scenarios use source backend and separate authorities; zero model turns. Physical closure preserves unknown command results; no additional concurrency authorization.",
+        "Ken12controls and ownerHTTP/browser17states pass with real processes and fresh sources; bounded evidence, not blanket isolation or UI acceptance."
       ]
     }
   }

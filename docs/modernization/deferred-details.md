@@ -391,3 +391,23 @@ ausente en Python portable, reutilización de un intento invalidado y observaci�
 prematura de cgroup vacío. Sus recibos fallidos se conservan. El directorio
 CODEX_HOME privado forma parte del perfil actual y no equivale a heredar cuenta.
 
+
+
+## DD070 — detalles tras migrar Ken e inspección
+
+Cuatro avisos de lint: dos imports sin uso, uno de orden y una llamada breve a
+`git init` dentro del runner async. Conservar `remaining-evaluation-runners-lint.json`
+para el final de las capacidades principales. No repetir Ken por estos avisos.
+
+Las capturas móviles muestran una cabecera de unos 215 px a 844 px de alto,
+con los controles visibles y sin recorte. Revisar su densidad y la de los
+metadatos durante el pulido final, sin atribuir una aceptación completa de páginas
+al recorrido de lectura. El hash de captura comprueba el índice compilado; ampliar
+la huella a todos los assets pertenece al endurecimiento posterior del evaluador.
+
+Se corrigieron los bloqueos funcionales del evaluador: contexto vigente después
+de cambiar la tarea sintética, lectura que incluya el docstring y valor, y nombre
+accesible actual del selector. Se conserva la preparación fallida con 512 MiB:
+no se capturó su código/counters, por lo que OOM es una hipótesis, no un hecho.
+Con los 2 GiB configurados para el host, Ken termina y registra un pico cercano
+a 1,39 GB sin OOM. No se aumenta ningún límite de la instalación del operador.

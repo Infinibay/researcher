@@ -1,0 +1,242 @@
+{
+  "base_commit": "a06d0ea",
+  "date": "2026-11-06",
+  "scope": "Published Ken broker isolation and current HTTP/browser owner inspection on fresh account-free native command fixtures; no model or full-page acceptance.",
+  "tests": {
+    "distinct_cases": 23,
+    "passed": 23,
+    "failed": 0,
+    "skipped": 0,
+    "files": [
+      "backend/tests/runtime/test_owner_evaluation.py",
+      "backend/tests/runtime/test_kernel_evaluation.py",
+      "backend/tests/runtime/test_research_evaluation.py"
+    ],
+    "red": [
+      "two missing-module failures",
+      "stale fixed context version after changing synthetic task metadata"
+    ]
+  },
+  "documentation": {
+    "python_modules_classes_functions": 29,
+    "js_named_function_jsdoc": 1,
+    "missing_new_changed_definitions": 0
+  },
+  "ken": {
+    "status": "passed",
+    "model_turns_submitted": 0,
+    "ken_version": "0.18.0",
+    "local_embeddings": true,
+    "composition": "owner.ken/broker_mcp",
+    "memory_limit_bytes": 2147483648,
+    "original_sources_unchanged": true,
+    "independent_memories": true,
+    "lifecycles": [
+      {
+        "domain_removed": true,
+        "all_peers_closed": true,
+        "model_turns": 0,
+        "run_status": "failed"
+      },
+      {
+        "domain_removed": true,
+        "all_peers_closed": true,
+        "model_turns": 0,
+        "run_status": "failed"
+      }
+    ],
+    "checks": [
+      {
+        "check": "own-source-positive-control",
+        "status": "passed"
+      },
+      {
+        "check": "own-semantic-search",
+        "status": "passed"
+      },
+      {
+        "check": "own-text-search",
+        "status": "passed"
+      },
+      {
+        "check": "own-structure-search",
+        "status": "passed"
+      },
+      {
+        "tool": "ken_read",
+        "arguments_kind": "path",
+        "is_error": true,
+        "foreign_secret_present": false
+      },
+      {
+        "tool": "ken_read",
+        "arguments_kind": "path",
+        "is_error": true,
+        "foreign_secret_present": false
+      },
+      {
+        "tool": "ken_read",
+        "arguments_kind": "path",
+        "is_error": true,
+        "foreign_secret_present": false
+      },
+      {
+        "tool": "ken_find",
+        "arguments_kind": "text",
+        "is_error": false,
+        "foreign_secret_present": false
+      },
+      {
+        "tool": "ken_find",
+        "arguments_kind": "structure",
+        "is_error": true,
+        "foreign_secret_present": false
+      },
+      {
+        "tool": "ken_related",
+        "arguments_kind": "path",
+        "is_error": true,
+        "foreign_secret_present": false
+      },
+      {
+        "tool": "ken_recall",
+        "arguments_kind": "topic",
+        "is_error": false,
+        "foreign_secret_present": false
+      },
+      {
+        "tool": "ken_recall",
+        "arguments_kind": "path",
+        "is_error": false,
+        "foreign_secret_present": false
+      }
+    ],
+    "receipt_sha256": "2c32c06b442a1682217fab9563a3b2815193dbd724bb74004bcf4b646d9734e5",
+    "preparation": {
+      "alpha": {
+        "exit_code": 0,
+        "memory_peak_bytes": 1397665792,
+        "memory_events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0\n",
+        "receipt_sha256": "b1c3909f380b646bd28fc0919aa553ee75bc336fdb6a23eedb62005dfadbb167"
+      },
+      "beta": {
+        "exit_code": 0,
+        "memory_peak_bytes": 1393053696,
+        "memory_events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0\n",
+        "receipt_sha256": "8026b7802023a277071fb88134908b1d4406d767a6774025149287c51a99f304"
+      }
+    }
+  },
+  "http_inspection": {
+    "status": "passed",
+    "fixture": "fresh native command, closed before inspection",
+    "new_inference_turns": 0,
+    "image_calls": 0,
+    "window_reads": 13,
+    "stdout_bytes": 86,
+    "stdout_sha256": "cac1147188656ba55fdd3a79e82646c1816b56732019f1562883447268de7d2b",
+    "anonymous_and_bearer_status": 401,
+    "foreign_project_status": 404,
+    "runtime_configured": false,
+    "owned_backend_terminal": true,
+    "service_exit": -15,
+    "original_unchanged": true,
+    "copy_runtime_tables_unchanged": true,
+    "browser_acceptance": "not_tested",
+    "receipt_sha256": "ea6e1ed520821fc31e7e42657b04ab203168b20b961cb5d6d79809a00f860e3d",
+    "fingerprinted_runtime_tables": 9
+  },
+  "browser": {
+    "desktop": {
+      "capture_receipt_sha256": "d9e089b7ab7ec5e25a8ea536e9ffe0f176c20d7b606973d75b6dc906deb8bca3",
+      "scenario_receipt_sha256": "f78a472ec042432d18408edc1e647c65fdea56d8b7bfb6e2725582279298b8c2",
+      "states": 8,
+      "browser": "156.0.8078.4",
+      "viewport": {
+        "width": 1440,
+        "height": 1024
+      },
+      "axe_violations": 0,
+      "page_errors": [],
+      "mutating_requests": [],
+      "external_origins": [],
+      "keyboard": {
+        "skip_link_first": true,
+        "skip_moves_focus_to_main": true
+      },
+      "navigation": {
+        "main_focused": true,
+        "heading_in_viewport": true
+      },
+      "service_exit": -15,
+      "owned_backend_terminal": true,
+      "source_and_copy_runtime_tables_unchanged": true,
+      "build_index_sha256": "c7cfc70af249492157bfd2bf6eab1a95efca0ae834d06ca67b3e6afd292aa088",
+      "full_page_acceptance": false
+    },
+    "mobile": {
+      "capture_receipt_sha256": "a8d0eb95fe5596c45b7a7fc249edea183d3792c7e80c64496a3e17d937fdeae5",
+      "scenario_receipt_sha256": "f78a472ec042432d18408edc1e647c65fdea56d8b7bfb6e2725582279298b8c2",
+      "states": 9,
+      "browser": "156.0.8078.4",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "axe_violations": 0,
+      "page_errors": [],
+      "mutating_requests": [],
+      "external_origins": [],
+      "keyboard": {
+        "skip_link_first": true,
+        "skip_moves_focus_to_main": true
+      },
+      "navigation": {
+        "main_focused": true,
+        "heading_in_viewport": true
+      },
+      "service_exit": -15,
+      "owned_backend_terminal": true,
+      "source_and_copy_runtime_tables_unchanged": true,
+      "build_index_sha256": "c7cfc70af249492157bfd2bf6eab1a95efca0ae834d06ca67b3e6afd292aa088",
+      "full_page_acceptance": false
+    }
+  },
+  "preserved_failures": [
+    {
+      "receipt_sha256": "cdf2b32acdbcbe31ac62dc0268f753cb865a07d085ff8b389a24a27df9f827c9",
+      "status": "failed",
+      "reason": "Preparation exited without output under the generic512MiB command default. Exit/memory counters were not captured; memory exhaustion is suspected, not proved. Explicit configured2GiB later passed with about1.39GB observed peak."
+    },
+    {
+      "receipt_sha256": "f4c6cba01e00629cf5651d74b9ce2e2c759e03add8858c59511a165b0196c584",
+      "status": "failed",
+      "reason": "Source docstring moved the expected marker beyond the four-line read window; extend to six lines."
+    },
+    {
+      "receipt_sha256": "20bc2d0ef787c7545e55c529b876602f043e8d4eed6ede24383757699d004fa5",
+      "status": "failed",
+      "reason": "Historical exact project-selector accessible name no longer matched the current name, which includes the project; use observed live ARIA label."
+    }
+  ],
+  "model_turns_submitted": 0,
+  "original_trial_domains_removed": true,
+  "lint": {
+    "count": 4,
+    "codes": {
+      "I001": 1,
+      "ASYNC221": 1,
+      "F401": 2
+    },
+    "deferred": "DD070"
+  },
+  "limitations": [
+    "Source broker fixtures, installed HTTP backend and existing compiled frontend; product sources unchanged, no new wheel/image build",
+    "Ken0.18.0 with preinstalled pinned local embeddings and explicit2GiB ceiling; no live generative inference or billing",
+    "Owner HTTP runtime is unconfigured for inference; successful command exit does not accept a research task",
+    "Nine runtime tables compared; not an all-table migration or real-user restore test",
+    "17states on Chromium156 at1440x1024/390x844; only four selected screenshots visually reviewed",
+    "No login UI, all-page, cross-browser, full keyboard, human/scientific or global acceptance",
+    "Historical candidate experiments remain historical; current candidate/model benchmarks still require separate evaluation"
+  ]
+}

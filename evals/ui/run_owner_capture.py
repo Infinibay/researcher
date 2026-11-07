@@ -20,38 +20,27 @@ sys.path.insert(0, str(REPO))
 
 
 async def main(args):
-    from evals.runtime.run_owner_command_inspection import fingerprint
+    """Capture current owner pages over actual HTTP using a new closed native-command fixture."""
+    from evals.runtime.owner_trial import fingerprint, prepare
     from evals.runtime.run_research import backend, environment
 
-    source = args.source_root.resolve(strict=True)
-    trials = REPO / ".researcher/evaluations"
-    if not source.is_relative_to(trials):
-        raise ValueError(
-            "Only a prior synthetic trial below .researcher/evaluations is supported"
-        )
-    before_source = fingerprint(source / "research.db")
-    root = trials / ("owner-ui-" + uuid4().hex[:8])
-    root.mkdir(mode=0o700)
-    with (
-        closing(
-            sqlite3.connect((source / "research.db").as_uri() + "?mode=ro", uri=True)
-        ) as original,
-        closing(sqlite3.connect(root / "research.db")) as copy,
-    ):
-        original.backup(copy)
+    trials = REPO / '.researcher/evaluations'
+    root = trials / ('owner-ui-' + uuid4().hex[:8])
+    trial = await prepare(root, args.codex_binary, args.cgroup_parent)
+    before_source = fingerprint(trial.source_database)
     auth = root / "browser-auth.json"
     build_index = REPO / "frontend/dist/index.html"
     build_hash = hashlib.sha256(build_index.read_bytes()).hexdigest()
     evidence = {
         "status": "starting",
-        "source_trial": source.name,
+        "fixture": "fresh native command, closed before capture",
         "model_turns_submitted": 0,
         "image_generation_calls": 0,
         "login_flow": "preauthenticated via real owner HTTP; login UI not tested",
     }
     print("Owner browser capture:", root, flush=True)
     try:
-        async with backend(root, environment(), seed_data=False) as (
+        async with backend(root, environment(), seed_data=False, evidence=evidence) as (
             _store,
             owner,
             api,
@@ -61,6 +50,8 @@ async def main(args):
                 "base_url": api,
                 "output": str(root),
                 "flow": args.flow,
+                "stdout_bytes": len(trial.expected_stdout),
+                "expected_stdout": trial.expected_stdout.decode(),
                 "check": args.check,
                 "viewport": args.viewport,
                 "keyboard": args.keyboard,
@@ -98,7 +89,7 @@ async def main(args):
             (root / "browser.stderr").write_bytes(stderr)
             assert process.returncode == 0, stderr[-2000:].decode(errors="replace")
         assert fingerprint(root / "research.db") == before_source
-        assert fingerprint(source / "research.db") == before_source
+        assert fingerprint(trial.source_database) == before_source
         assert hashlib.sha256(build_index.read_bytes()).hexdigest() == build_hash, (
             "Build changed during capture; screenshots rejected"
         )
@@ -122,7 +113,6 @@ async def main(args):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--source-root", type=Path, required=True)
     parser.add_argument("--node", type=Path, required=True)
     parser.add_argument("--browsers", type=Path, required=True)
     parser.add_argument(
@@ -133,4 +123,6 @@ if __name__ == "__main__":
     parser.add_argument("--check", action="store_true")
     parser.add_argument("--viewport", choices=["desktop", "mobile"], default="desktop")
     parser.add_argument("--keyboard", action="store_true")
-    asyncio.run(main(parser.parse_args()))
+    from evals.runtime.kernel_trial import arguments
+
+    asyncio.run(main(arguments(parser)))
