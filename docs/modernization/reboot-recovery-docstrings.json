@@ -1,0 +1,351 @@
+{
+  "base_commit": "a8add29",
+  "changed_or_new_definitions_documented": 49,
+  "missing": [],
+  "contracts": [
+    {
+      "path": "backend/cli/bootstrap.py",
+      "symbol": "main",
+      "line": 9,
+      "docstring": "Run one explicit local administration action; help never reads assets, initializes data or downloads.",
+      "file_sha256": "024aa508aa01a93e7a21df5da52d734048cb661edfd0b5124d62ee81cfe5e816"
+    },
+    {
+      "path": "backend/db/peer_archive_migration.py",
+      "symbol": "restore_peer_archive_schema",
+      "line": 4,
+      "docstring": "Remove only unused latest migration57 on an idle administrative connection.\n\nRun with the service stopped. Once archival provenance exists, retain it and\nuse forward repair or an explicit verified backup restore instead of deletion.",
+      "file_sha256": "5af48bd11836e66a8223ec549d23b35b3826fce71a87aa0579e5caba3b02a1ef"
+    },
+    {
+      "path": "backend/runtime/authority_journal.py",
+      "symbol": "WitnessedAuthorityJournal",
+      "line": 171,
+      "docstring": "Open-only CAS storage. Commit receipts acknowledge data, never effects.\n\n``load`` verifies actual SQL rows and reconciles an interrupted witnessed\ntransition forward. ``commit`` deduplicates the original intent, even after\nlater transitions. The expected authority ID comes from external provision,\nnot from adopting a project DB or treating absent files as a fresh install.",
+      "file_sha256": "3879a1b7107cfbc96e6c9e4e51262ecbef7e08363b90c653d82024a5230fd8c0"
+    },
+    {
+      "path": "backend/runtime/authority_journal.py",
+      "symbol": "WitnessedAuthorityJournal._header",
+      "line": 498,
+      "docstring": "Require the live kernel/observer enrollment for every normal authority operation.",
+      "file_sha256": "3879a1b7107cfbc96e6c9e4e51262ecbef7e08363b90c653d82024a5230fd8c0"
+    },
+    {
+      "path": "backend/runtime/authority_journal.py",
+      "symbol": "WitnessedAuthorityJournal._validate_header",
+      "line": 502,
+      "docstring": "Check exact provisioned file identity and header shape against explicitly selected observations.",
+      "file_sha256": "3879a1b7107cfbc96e6c9e4e51262ecbef7e08363b90c653d82024a5230fd8c0"
+    },
+    {
+      "path": "backend/runtime/installation_backup.py",
+      "symbol": "backup_installation",
+      "line": 93,
+      "docstring": "Capture current or explicitly verified prior-kernel data; neither mode transfers old execution authority.",
+      "file_sha256": "78a27330720f31f03018e82e19f0d15e8e65671326bbd7e9be87a9846bbea23b"
+    },
+    {
+      "path": "backend/runtime/installation_backup.py",
+      "symbol": "_verify_backup",
+      "line": 214,
+      "docstring": "Share the caller's deadline across verification and subsequent restoration.",
+      "file_sha256": "78a27330720f31f03018e82e19f0d15e8e65671326bbd7e9be87a9846bbea23b"
+    },
+    {
+      "path": "backend/runtime/installation_restore.py",
+      "symbol": "restore_installation",
+      "line": 81,
+      "docstring": "Verify first, then restore new private storage with an explicit pending-enrollment barrier.\n\nFailure retains inspectable partial paths. Completion preserves data and\nhistorical evidence but does not authorize the new host to run old work.",
+      "file_sha256": "73cce0faf126c46522c35c6204fde1755e334dd76c6b89f71d257f786939fda5"
+    },
+    {
+      "path": "backend/runtime/reboot_authority.py",
+      "symbol": "validate_reboot_evidence",
+      "line": 14,
+      "docstring": "Validate portable historical observations without interpreting them as current execution authority.",
+      "file_sha256": "86b13fae3504e4243f6be79bf0c0d2ed383da8a5761c61472816a74f4f160fd2"
+    },
+    {
+      "path": "backend/runtime/reboot_authority.py",
+      "symbol": "unarchived_peers",
+      "line": 31,
+      "docstring": "Read current registrations separately from previously archived copies, including version56 sources.",
+      "file_sha256": "86b13fae3504e4243f6be79bf0c0d2ed383da8a5761c61472816a74f4f160fd2"
+    },
+    {
+      "path": "backend/runtime/reboot_authority.py",
+      "symbol": "prior_kernel_peers",
+      "line": 38,
+      "docstring": "Identify prior-kernel registrations for archival; a different kernel is not global proof of death.",
+      "file_sha256": "86b13fae3504e4243f6be79bf0c0d2ed383da8a5761c61472816a74f4f160fd2"
+    },
+    {
+      "path": "backend/runtime/reboot_authority.py",
+      "symbol": "archive_prior_peers",
+      "line": 47,
+      "docstring": "Preserve copied identities and their original states without fabricating native closure receipts.",
+      "file_sha256": "86b13fae3504e4243f6be79bf0c0d2ed383da8a5761c61472816a74f4f160fd2"
+    },
+    {
+      "path": "backend/runtime/reboot_authority.py",
+      "symbol": "_RebootArchive",
+      "line": 61,
+      "docstring": "Reuse file/chain/state validation only; neither normal loads nor writes are exposed for old enrollment.",
+      "file_sha256": "86b13fae3504e4243f6be79bf0c0d2ed383da8a5761c61472816a74f4f160fd2"
+    },
+    {
+      "path": "backend/runtime/reboot_authority.py",
+      "symbol": "_RebootArchive._header",
+      "line": 64,
+      "docstring": "Verify original file identities under a different recorded kernel before retaining its provenance.",
+      "file_sha256": "86b13fae3504e4243f6be79bf0c0d2ed383da8a5761c61472816a74f4f160fd2"
+    },
+    {
+      "path": "backend/runtime/reboot_authority.py",
+      "symbol": "_RebootArchive.load",
+      "line": 79,
+      "docstring": "Refuse normal recovery semantics that could repair an old writable authority journal.",
+      "file_sha256": "86b13fae3504e4243f6be79bf0c0d2ed383da8a5761c61472816a74f4f160fd2"
+    },
+    {
+      "path": "backend/runtime/reboot_authority.py",
+      "symbol": "_RebootArchive.commit",
+      "line": 83,
+      "docstring": "Refuse every attempt to mint or mutate old execution authority.",
+      "file_sha256": "86b13fae3504e4243f6be79bf0c0d2ed383da8a5761c61472816a74f4f160fd2"
+    },
+    {
+      "path": "backend/runtime/reboot_authority.py",
+      "symbol": "_RebootArchive._verified",
+      "line": 87,
+      "docstring": "Prevent inherited snapshot paths from truncating or applying the historical witness.",
+      "file_sha256": "86b13fae3504e4243f6be79bf0c0d2ed383da8a5761c61472816a74f4f160fd2"
+    },
+    {
+      "path": "backend/runtime/reboot_authority.py",
+      "symbol": "_RebootArchive.frozen_history",
+      "line": 92,
+      "docstring": "Hold original locks and attest cross-store agreement without finishing pending journal transitions.",
+      "file_sha256": "86b13fae3504e4243f6be79bf0c0d2ed383da8a5761c61472816a74f4f160fd2"
+    },
+    {
+      "path": "backend/runtime/reboot_authority.py",
+      "symbol": "frozen_reboot_evidence",
+      "line": 119,
+      "docstring": "Expose only a frozen historical snapshot and provenance, never an old authority mutation handle.",
+      "file_sha256": "86b13fae3504e4243f6be79bf0c0d2ed383da8a5761c61472816a74f4f160fd2"
+    },
+    {
+      "path": "backend/runtime/restored_enrollment.py",
+      "symbol": "enroll_restored_host",
+      "line": 63,
+      "docstring": "Enable a verified pending restore with fresh assets, authority and pairing; publish activation last.\n\nThe original backup remains the recovery source. Existing or partially created\nauthority is never reset, reused or repaired by retrying this operation.",
+      "file_sha256": "6955cb0bd1efb35505e5c9484902cd2b34b1f194e99c24784b6a2f8e361fe352"
+    },
+    {
+      "path": "backend/tests/runtime/test_migration_chain.py",
+      "symbol": "test_forward_targets_form_one_complete_history_and_preserve_seeded_data",
+      "line": 24,
+      "docstring": "Reach every supported post-legacy version, then repeat startup without losing IDs or relations.",
+      "file_sha256": "7a88d20980caf50bc07f37d41c3e392b1d4fdf7d4fc970a28a223f9bc3c87f40"
+    },
+    {
+      "path": "backend/tests/runtime/test_migration_chain.py",
+      "symbol": "test_writer_crash_before_version_commit_preserves_prior_schema_and_resumes",
+      "line": 49,
+      "docstring": "Abruptly kill only a new migration child before its history insert, then recover that same DB.",
+      "file_sha256": "7a88d20980caf50bc07f37d41c3e392b1d4fdf7d4fc970a28a223f9bc3c87f40"
+    },
+    {
+      "path": "backend/tests/runtime/test_migration_chain.py",
+      "symbol": "test_invalid_forward_target_never_creates_storage",
+      "line": 83,
+      "docstring": "Unknown targets and booleans cannot create a partial installation as a side effect.",
+      "file_sha256": "7a88d20980caf50bc07f37d41c3e392b1d4fdf7d4fc970a28a223f9bc3c87f40"
+    },
+    {
+      "path": "backend/tests/runtime/test_migration_chain.py",
+      "symbol": "test_forward_rejects_unsupported_history_without_rewriting_rows",
+      "line": 94,
+      "docstring": "A forward migration cannot hide a future version, fill a fabricated gap or act as downgrade.",
+      "file_sha256": "7a88d20980caf50bc07f37d41c3e392b1d4fdf7d4fc970a28a223f9bc3c87f40"
+    },
+    {
+      "path": "backend/tests/runtime/test_reboot_backup.py",
+      "symbol": "changed_kernel",
+      "line": 15,
+      "docstring": "Model only the observation boundary; separate VM evidence must prove an actual kernel restart.",
+      "file_sha256": "1b47c4168e99fac86553d003e313084eeda91c992ed745cfde0173bd68399a79"
+    },
+    {
+      "path": "backend/tests/runtime/test_reboot_backup.py",
+      "symbol": "test_reboot_archive_requires_a_different_kernel_and_retains_normal_guard",
+      "line": 24,
+      "docstring": "Changing only the observer cannot bypass live enrollment, even for explicit archival.",
+      "file_sha256": "1b47c4168e99fac86553d003e313084eeda91c992ed745cfde0173bd68399a79"
+    },
+    {
+      "path": "backend/tests/runtime/test_reboot_backup.py",
+      "symbol": "test_reboot_backup_restores_live_old_peer_as_history",
+      "line": 40,
+      "docstring": "Old-kernel peers retain uncertainty and gain explicit archival provenance in the restored copy.",
+      "file_sha256": "1b47c4168e99fac86553d003e313084eeda91c992ed745cfde0173bd68399a79"
+    },
+    {
+      "path": "backend/tests/runtime/test_reboot_backup.py",
+      "symbol": "test_unused_archive_inverse_and_future_refusal_preserve_data",
+      "line": 85,
+      "docstring": "An unused latest step can be reversed; a future schema is never silently downgraded.",
+      "file_sha256": "1b47c4168e99fac86553d003e313084eeda91c992ed745cfde0173bd68399a79"
+    },
+    {
+      "path": "backend/tests/runtime/test_reboot_backup.py",
+      "symbol": "test_reboot_cannot_rebind_original_evidence",
+      "line": 105,
+      "docstring": "Old-kernel capture keeps file identity and manifest/header agreement as mandatory evidence.",
+      "file_sha256": "1b47c4168e99fac86553d003e313084eeda91c992ed745cfde0173bd68399a79"
+    },
+    {
+      "path": "backend/tests/runtime/test_reboot_backup.py",
+      "symbol": "test_prior_kernel_peer_origin_must_match_the_witness",
+      "line": 130,
+      "docstring": "A current-kernel or foreign-observer registration cannot become historical by association.",
+      "file_sha256": "1b47c4168e99fac86553d003e313084eeda91c992ed745cfde0173bd68399a79"
+    },
+    {
+      "path": "backend/tests/runtime/test_reboot_backup.py",
+      "symbol": "test_reboot_archive_preserves_prepared_and_torn_history_without_repair",
+      "line": 145,
+      "docstring": "Read valid crash boundaries as evidence without applying an old grant or truncating its bytes.",
+      "file_sha256": "1b47c4168e99fac86553d003e313084eeda91c992ed745cfde0173bd68399a79"
+    },
+    {
+      "path": "backend/tests/runtime/test_reboot_backup.py",
+      "symbol": "test_changed_kernel_does_not_excuse_corrupt_history",
+      "line": 167,
+      "docstring": "A reboot never permits a rewound, corrupt or missing independent witness to become trusted.",
+      "file_sha256": "1b47c4168e99fac86553d003e313084eeda91c992ed745cfde0173bd68399a79"
+    },
+    {
+      "path": "backend/tests/runtime/test_reboot_backup.py",
+      "symbol": "test_reboot_manifest_cannot_claim_the_same_kernel",
+      "line": 178,
+      "docstring": "Malformed reboot metadata is rejected before any restored destination is created.",
+      "file_sha256": "1b47c4168e99fac86553d003e313084eeda91c992ed745cfde0173bd68399a79"
+    },
+    {
+      "path": "evals/operation/reboot_guest.py",
+      "symbol": "save",
+      "line": 16,
+      "docstring": "Persist one original phase receipt before the guest kernel is restarted.",
+      "file_sha256": "ca3811e9990c760fe1d8a0deeba70effc89552886d7370a9380414315ed00f8c"
+    },
+    {
+      "path": "evals/operation/reboot_guest.py",
+      "symbol": "helper",
+      "line": 24,
+      "docstring": "Load only the copied evaluation helper; keep backend imports in the installed environment.",
+      "file_sha256": "ca3811e9990c760fe1d8a0deeba70effc89552886d7370a9380414315ed00f8c"
+    },
+    {
+      "path": "evals/operation/reboot_guest.py",
+      "symbol": "authority_bytes",
+      "line": 32,
+      "docstring": "Hash the three original authority files without recording credentials or mutable service logs.",
+      "file_sha256": "ca3811e9990c760fe1d8a0deeba70effc89552886d7370a9380414315ed00f8c"
+    },
+    {
+      "path": "evals/operation/reboot_guest.py",
+      "symbol": "before",
+      "line": 38,
+      "docstring": "Prepare synthetic retained data and a real old-kernel registration, then leave it pending.",
+      "file_sha256": "ca3811e9990c760fe1d8a0deeba70effc89552886d7370a9380414315ed00f8c"
+    },
+    {
+      "path": "evals/operation/reboot_guest.py",
+      "symbol": "command",
+      "line": 63,
+      "docstring": "Invoke one public installed administrative command once and retain its failure output.",
+      "file_sha256": "ca3811e9990c760fe1d8a0deeba70effc89552886d7370a9380414315ed00f8c"
+    },
+    {
+      "path": "evals/operation/reboot_guest.py",
+      "symbol": "after",
+      "line": 73,
+      "docstring": "Observe another boot, restore as fresh authority and read retained data through the native API.",
+      "file_sha256": "ca3811e9990c760fe1d8a0deeba70effc89552886d7370a9380414315ed00f8c"
+    },
+    {
+      "path": "evals/operation/reboot_guest.py",
+      "symbol": "main",
+      "line": 139,
+      "docstring": "Accept the fixed disposable guest paths and execute exactly the phase selected by PID1.",
+      "file_sha256": "ca3811e9990c760fe1d8a0deeba70effc89552886d7370a9380414315ed00f8c"
+    },
+    {
+      "path": "evals/operation/reboot_guest_init.py",
+      "symbol": "mount",
+      "line": 18,
+      "docstring": "Mount one fixed guest filesystem and surface the kernel's original errno.",
+      "file_sha256": "58bb0691896d1353b629ab2028fcadc27582ee3da7fe364e6aaef9fc3de4dc62"
+    },
+    {
+      "path": "evals/operation/reboot_guest_init.py",
+      "symbol": "boot",
+      "line": 26,
+      "docstring": "Prepare guest-only devices/controllers and run the unprivileged installed-product fixture.",
+      "file_sha256": "58bb0691896d1353b629ab2028fcadc27582ee3da7fe364e6aaef9fc3de4dc62"
+    },
+    {
+      "path": "evals/operation/reboot_guest_init.py",
+      "symbol": "main",
+      "line": 74,
+      "docstring": "Reboot only after a successful first phase; preserve and report any fixture failure.",
+      "file_sha256": "58bb0691896d1353b629ab2028fcadc27582ee3da7fe364e6aaef9fc3de4dc62"
+    },
+    {
+      "path": "evals/operation/reboot_vm.py",
+      "symbol": "copy_file",
+      "line": 22,
+      "docstring": "Copy a trusted local asset's bytes into the new fixture, dereferencing asset symlinks.",
+      "file_sha256": "bab2b6f567d4f6b7a05efa2f16f136c2aca00cf22c29fa38473b6b1028894ef4"
+    },
+    {
+      "path": "evals/operation/reboot_vm.py",
+      "symbol": "copy_tree",
+      "line": 28,
+      "docstring": "Copy a trusted environment without interpreter caches, preserving virtualenv symlinks.",
+      "file_sha256": "bab2b6f567d4f6b7a05efa2f16f136c2aca00cf22c29fa38473b6b1028894ef4"
+    },
+    {
+      "path": "evals/operation/reboot_vm.py",
+      "symbol": "libraries",
+      "line": 33,
+      "docstring": "Copy the host dynamic-loader closure needed by the portable interpreter and installed extensions.",
+      "file_sha256": "bab2b6f567d4f6b7a05efa2f16f136c2aca00cf22c29fa38473b6b1028894ef4"
+    },
+    {
+      "path": "evals/operation/reboot_vm.py",
+      "symbol": "prepare",
+      "line": 60,
+      "docstring": "Build a private initramfs and persistent synthetic disk from explicitly selected installed assets.",
+      "file_sha256": "bab2b6f567d4f6b7a05efa2f16f136c2aca00cf22c29fa38473b6b1028894ef4"
+    },
+    {
+      "path": "evals/operation/reboot_vm.py",
+      "symbol": "run",
+      "line": 136,
+      "docstring": "Own one QEMU process across both boots and preserve the original outcome without replay.",
+      "file_sha256": "bab2b6f567d4f6b7a05efa2f16f136c2aca00cf22c29fa38473b6b1028894ef4"
+    },
+    {
+      "path": "evals/operation/reboot_vm.py",
+      "symbol": "main",
+      "line": 176,
+      "docstring": "Prepare and execute one NEW isolated trial with a declared original-process deadline.",
+      "file_sha256": "bab2b6f567d4f6b7a05efa2f16f136c2aca00cf22c29fa38473b6b1028894ef4"
+    }
+  ],
+  "scope": "New/changed Python definitions and modules in this delivery. Relevant new frontend modules and exported helpers also carry English JSDoc; no claim that all historic project definitions are documented."
+}

@@ -78,7 +78,6 @@ authority is never reset, reused or repaired by retrying this operation.
     with _exclusive_owner(database), closing(sqlite3.connect(database.as_uri()+'?mode=rw',uri=True,timeout=0)) as db:
         db.row_factory = sqlite3.Row
         db.execute('PRAGMA foreign_keys=ON')
-        db.execute('BEGIN IMMEDIATE')
         marker = _read_json(root/'installation.json')
         if marker.get('format') != 1 or marker.get('status') != 'restored_pending_enrollment':
             raise ValueError('Enrollment requires a completed restore with pending enrollment')
@@ -91,12 +90,33 @@ authority is never reset, reused or repaired by retrying this operation.
         if any(os.path.lexists(p) for p in (root/'authority',witness,root/'enrollment.json',root/'runtime.enrolled.json',root/'installation.enrolled.json')):
             raise FileExistsError('Enrollment requires NEW authority/witness paths; preserve partial state and restore the backup to another NEW directory')
         config, observations = _resources(assets)
+        from backend.db.migration_catalog import LATEST_VERSION
+        from backend.tools.base.db import ensure_migrations
+
+        schema_before = db.execute('SELECT MAX(version) FROM schema_migrations').fetchone()[0]
+        if schema_before != LATEST_VERSION:
+            ensure_migrations(str(database),existing_only=True)
+        db.execute('BEGIN IMMEDIATE')
         if db.execute('PRAGMA integrity_check').fetchone()[0] != 'ok' or db.execute('PRAGMA foreign_key_check').fetchone():
             raise ValueError('Restored database integrity check failed')
-        if db.execute("SELECT 1 FROM runtime_peers WHERE state!='closed' LIMIT 1").fetchone():
-            raise ValueError('Restore contains peers without recorded closure; inspect the original backup')
+        reboot_peers = []
+        if 'reboot_evidence' in restoration:
+            from backend.runtime.reboot_authority import prior_kernel_peers
+
+            reboot_peers = prior_kernel_peers(db,restoration['reboot_evidence'])
+        else:
+            from backend.runtime.reboot_authority import unarchived_peers
+
+            if unarchived_peers(db):
+                raise ValueError('Restore contains peers without recorded closure or archival; inspect the original backup')
         authority = initialize_authority(database_dir=root/'authority',witness_dir=witness)
         historical = _retain_as_history(db,database,marker['snapshot_id'])
+        if 'reboot_evidence' in restoration:
+            from backend.runtime.reboot_authority import archive_prior_peers
+
+            archive_prior_peers(db,reboot_peers,database=database,snapshot_id=marker['snapshot_id'],archived_at=time.time())
+            historical['prior_kernel_peers'] = reboot_peers
+            historical['reboot_evidence'] = restoration['reboot_evidence']
         db.commit()
         config.update(runtime_profile='owned-codex-v1',workspace_root=str(root/'sources'),
                       control_root=str(root/'control'),authority=authority,max_concurrent=1)
@@ -107,6 +127,7 @@ authority is never reset, reused or repaired by retrying this operation.
                   'restoration':marker['restoration'],'environment':_environment(root),
                   'authority_id':authority['authority_id'],'resource_observations':observations,
                   'historical_work':historical,'model_turns':0,'old_work_replayed':False,
+                  'schema_before':schema_before,'schema_version':LATEST_VERSION,
                   'original_host_closure_proven':False,
                   'limits':'Fresh local authority only. Copied pending work is history; original actors and remote effects are not adopted or declared closed.'}
         if config.get('static_dir'):

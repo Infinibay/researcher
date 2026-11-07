@@ -139,6 +139,8 @@ def restore_installation(backup, destination, **limits):
                'database':database,'relocations':changes,'git_path_files_repaired':git_changes,
                'old_authority_id':manifest['authority_evidence']['authority_id'],
                'model_turns':0,'old_work_replayed':False}
+    if 'reboot_evidence' in manifest:
+        receipt['reboot_evidence'] = manifest['reboot_evidence']
     _write_new(root / evidence / 'restoration.json', receipt)
     for target, mode in reversed(directories):
         os.chmod(target, mode)

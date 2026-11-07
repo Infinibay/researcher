@@ -1,0 +1,115 @@
+{
+  "base_commit": "a8add29",
+  "status": "passed_with_stated_scope",
+  "source_tests": {
+    "cases": 137,
+    "passed": 137,
+    "seconds": 42.46
+  },
+  "installed_tests": {
+    "cases": 137,
+    "passed": 137,
+    "failed": 0,
+    "skipped": 0,
+    "backend_modules": 227,
+    "all_backend_imports_from_native_env": true,
+    "seconds": 43.442,
+    "exit_code": 0
+  },
+  "wheel_sha256": "82e2ac64052e9f23d5cb30f3f56465c823e16d7e8867c08ada6f134d21aafcdc",
+  "source_wheel_installation_files": 588,
+  "product_files": 315,
+  "documented_definitions": 49,
+  "lint_notices": 45,
+  "actual_vm": {
+    "status": "passed",
+    "model_turns": 0,
+    "preparation": {
+      "ken_model_files": 26,
+      "host_dynamic_libraries": 20,
+      "real_account_copied": false,
+      "installed_environment": "/home/andres/.codex/worktrees/b09e/researcher/.superpowers/sdd/2026-10-31-actualizacion-proyecto/native-runtime-env",
+      "kernel_sha256": "c3132370c0d126faf45a97559ca985e254c14f7cb9a7fd5ed2bc9e22ee0c7ddd"
+    },
+    "source_boot_id": "8cf8e5ca-664a-49ce-aa9c-8619c28c1708",
+    "observed_boot_id": "ca25fe50-72f5-40b3-a8c1-3ffe5c7590e5",
+    "original_authority_unchanged": true,
+    "normal_old_authority_refused": true,
+    "old_peer_state_preserved": "prepared",
+    "archival_history_retained": true,
+    "new_authority_id": "2da63f86-8d53-4067-a482-9a70ad8650b1",
+    "kernel_probe": {
+      "child_exit_code": 0,
+      "domain_removed": true
+    },
+    "source_authority_id": "86825af6-8183-425d-8dcf-6d6f11827dc2",
+    "resources": {
+      "native_version": "codex-cli 0.166.0",
+      "native_sha256": "b8a11fedf24b2dfb59a70c9e52b030f9a508dcd49cd2dd0d41956f4c785156b8",
+      "code_host_sha256": "657f4e902726e05867c937b583049d5997e057f8cd0ab40450633c9c9ef8d630",
+      "ken_version": "0.18.0",
+      "ken_artifacts_verified": 26,
+      "credential_snapshot_valid": true,
+      "remote_entitlement_verified": false
+    },
+    "snapshot_id": "cc9134aa58d34b30a95bd58e83071ba6",
+    "schema_version": 57,
+    "service_exit": 143,
+    "installed_backend": true,
+    "http_retained_data_verified": true,
+    "real_credentials_copied": false,
+    "old_work_replayed": false,
+    "limits": "Controlled VM kernel restart and synthetic data. No power-loss, model inference, original-actor closure proof or historical user-data migration.",
+    "qemu_exit": 0,
+    "network_card": false,
+    "qemu_processes_started": 1,
+    "elapsed_seconds": 23.25
+  },
+  "verification_interval_utc": {
+    "start": "2026-11-07 03:44:03",
+    "end": "2026-11-07 04:17:47",
+    "seconds": 2024
+  },
+  "evaluation_file_sha256": {
+    "evals/operation/reboot_vm.py": "bab2b6f567d4f6b7a05efa2f16f136c2aca00cf22c29fa38473b6b1028894ef4",
+    "evals/operation/reboot_guest.py": "ca3811e9990c760fe1d8a0deeba70effc89552886d7370a9380414315ed00f8c",
+    "evals/operation/reboot_guest_init.py": "58bb0691896d1353b629ab2028fcadc27582ee3da7fe364e6aaef9fc3de4dc62",
+    "evals/operation/reboot_guest_boot.sh": "7c0aa4e6f6c35e8951f12d324a9c61b3fe9d404d752d8a97323830eb47e71666",
+    "evals/operation/host_smoke.py": "662472a62c495a33afd8f33019a83e2ee671b703d8cde714e8dfb58b16643173"
+  },
+  "prior_trials": [
+    {
+      "trial": "v1",
+      "status": "preparation_failed",
+      "cause": "Bundled Ken OpenMP library lookup in the fixture dependency scan; no VM started."
+    },
+    {
+      "trial": "v2",
+      "status": "failed_stopped",
+      "cause": "Portable Python needs mounted proc to expand its loader origin. Original VM terminated by exact pidfd after panic; automatic panic reboot was removed."
+    },
+    {
+      "trial": "v3",
+      "status": "failed_stopped",
+      "cause": "Python early entropy fallback required devtmpfs before interpreter startup; owned VM stopped on panic."
+    },
+    {
+      "trial": "v4",
+      "status": "failed_powered_off",
+      "cause": "mkfs populated root inode remained owned by root; fixture could not create its private installation."
+    },
+    {
+      "trial": "v5",
+      "status": "failed_powered_off",
+      "cause": "Actual reboot, backup/restore/enrollment passed; fixture caller needed membership inside delegated cgroup subtree for native spawn."
+    }
+  ],
+  "limits": [
+    "One controlled successful VM reboot with synthetic data; no owner-host reboot or power-loss simulation.",
+    "Old prepared peer registration retained as history; no native inference actor was running during reboot.",
+    "Real Codex binaries and published Ken with26public assets validated; no model request, no Ken ranking call and no real account copied in this VM.",
+    "Previous restored-host evaluation separately proves a subscription/Ken turn on the host; it is not the same VM run.",
+    "No real user-data migration, current global suite, human/scientific benchmark or full-page acceptance.",
+    "All43broad scenarios and0of12fullpageacceptances remain open."
+  ]
+}

@@ -90,8 +90,10 @@ def _registered_paths(db, root, items):
                 raise ValueError(f'Registered {table} storage is missing or not a regular {kind}')
 
 
-def backup_installation(directory, destination, **limits):
-    """Freeze current data/authority, copy stable files and publish the manifest only after all checks pass."""
+def backup_installation(directory, destination, *, after_reboot=False, **limits):
+    """Capture current or explicitly verified prior-kernel data; neither mode transfers old execution authority."""
+    if type(after_reboot) is not bool:
+        raise ValueError('Prior-kernel archival must be explicitly selected')
     budget = CopyBudget(**limits)
     environment = host_environment(directory)
     root = Path(directory).resolve(strict=True)
@@ -111,13 +113,19 @@ def backup_installation(directory, destination, **limits):
     if authority_db != root / 'authority/authority.db':
         raise ValueError('Authority database must belong to this installation backup domain')
     with ExitStack() as stack:
-        journal = stack.enter_context(WitnessedAuthorityJournal(**authority))
-        state = stack.enter_context(journal.frozen_snapshot())
-        if state.records.get('broker:active') is not None or any(
+        reboot_evidence = None
+        if after_reboot:
+            from backend.runtime.reboot_authority import frozen_reboot_evidence
+
+            state,reboot_evidence = stack.enter_context(frozen_reboot_evidence(authority))
+        else:
+            journal = stack.enter_context(WitnessedAuthorityJournal(**authority))
+            state = stack.enter_context(journal.frozen_snapshot())
+        if not after_reboot and (state.records.get('broker:active') is not None or any(
             (key.startswith('broker:grant:') and (value.get('state') != 'retired' or value.get('domain_removed') is not True))
             or (key.startswith('broker:op:') and value.get('execution_closed') is not True)
             for key, value in state.records.items() if isinstance(value, dict)
-        ):
+        )):
             raise ValueError('Close or reconcile native authority before taking a portable data backup')
         first = inventory(root, budget)
         databases = set()
@@ -136,8 +144,15 @@ def backup_installation(directory, destination, **limits):
             conn.execute('BEGIN IMMEDIATE')
             connections[name] = conn
         db = connections['source.db']
-        if db.execute("SELECT 1 FROM runtime_peers WHERE state!='closed' LIMIT 1").fetchone():
-            raise ValueError('Reconcile original unclosed peers before backup')
+        if after_reboot:
+            from backend.runtime.reboot_authority import prior_kernel_peers
+
+            prior_kernel_peers(db,reboot_evidence)
+        else:
+            from backend.runtime.reboot_authority import unarchived_peers
+
+            if unarchived_peers(db):
+                raise ValueError('Reconcile original unclosed peers before backup')
         before = _without_sidecars(inventory(root, budget), databases)
         _registered_paths(db, root, before)
         from backend.runtime.installation_restore import _git_metadata
@@ -182,6 +197,8 @@ def backup_installation(directory, destination, **limits):
                     'authority_evidence': {'authority_id': authority['authority_id'], 'sequence': state.sequence, 'state_hash': state.state_hash, 'external': external},
                     'external_resources': {key: config[key] for key in ('codex_binary','code_mode_host','ken_command','model_cache','token_file','cgroup_parent','static_dir') if key in config},
                     'bytes': budget.bytes, 'restore_requires_fresh_enrollment': True}
+        if reboot_evidence is not None:
+            manifest['reboot_evidence'] = reboot_evidence
         _sync_directory(objects)
         _write_new(output / 'manifest.pending', manifest)
         os.rename(output / 'manifest.pending', output / 'manifest.json')
@@ -205,6 +222,10 @@ def _verify_backup(directory, budget):
         raise ValueError('Backup has no supported completion manifest')
     if not re.fullmatch('[a-f0-9]{32}', manifest.get('snapshot_id','')):
         raise ValueError('Backup snapshot identity is invalid')
+    if 'reboot_evidence' in manifest:
+        from backend.runtime.reboot_authority import validate_reboot_evidence
+
+        validate_reboot_evidence(manifest['reboot_evidence'])
     entries = manifest['entries']
     budget.check(entries=len(entries))
     by_path = {}
@@ -245,6 +266,13 @@ def _verify_backup(directory, budget):
                         raise ValueError('Backup database counts or integrity differ from manifest')
     if set(p.name for p in (root / 'objects').iterdir()) != {Path(name).name for name in seen}:
         raise ValueError('Backup contains unlisted or missing content objects')
+    if 'reboot_evidence' in manifest:
+        witness = next(entry for entry in manifest['authority_evidence']['external'] if entry['role']=='witness')
+        with open_file(root,witness['object']) as stream:
+            header = json.loads(stream.readline(1024*1024+1))['payload']
+        evidence = manifest['reboot_evidence']
+        if (header.get('kind'),header.get('authority_id'),header.get('boot_id'),header.get('observer_namespace')) != ('HEADER',manifest['authority_evidence']['authority_id'],evidence['source_boot_id'],evidence['source_observer_namespace']):
+            raise ValueError('Prior-kernel provenance differs from the archived original authority header')
     if 'source.db' not in by_path or not Path(manifest['source_root']).is_absolute():
         raise ValueError('Backup lacks its source database or original root identity')
     return manifest

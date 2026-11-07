@@ -12,6 +12,12 @@ Indicar el tiempo medido del tramo cuando se disponga de él; si una estimación
 del trabajo restante no está sustentada, decirlo en lugar de inventar un plazo
 o porcentaje. No reconstruir tiempos históricos a partir de recuerdos del chat.
 
+Formato de cada actualización: **terminado con evidencia / en curso / pendiente
+en orden / detalles al final**. Añadir duración medida del bloque que termina y
+hora de inicio del siguiente; durante un bloque, etiquetar el tiempo transcurrido
+como tal, sin confundirlo con una estimación del trabajo restante. Mantener esta
+lista en el documento además de publicarla en el chat, para retomarla tras compactar.
+
 ## Estado comprobado
 
 - Codex por suscripción y Ken publicado ensayados. Fuentes/citas, informes draft y revisión documental independiente conectados. Desarrollo admitido desde Tareas/Conversación con captura y comprobaciones explícitas; revisión independiente solicitada desde Tareas y aceptación del propietario conectada. Publicación local desde aceptación conectada; recuperación local de sólo lectura conectada; transporte remoto configurable conectado; recuperación remota y controles de Tareas conectados; ejecución/activación antiguas por tarea y proyecto retiradas; auxiliares de generación/proveedor, herramientas antiguas y sus cinco bibliotecas retirados. También se retiraron API interna, CLI, servicios/listeners y flows/helpers antiguos. También se retiraron autonomía, plantillas históricas y lectores de proveedor sin consumidores; se conserva el control de parada de trabajadores registrados.
@@ -19,7 +25,40 @@ o porcentaje. No reconstruir tiempos históricos a partir de recuerdos del chat.
 - Última suite global completada al retomar `0c8b8d9`: 2148 casos, 2045 pasan, 100 fallan y tres se omiten. Mismos 100 identificadores heredados; no se afirman causas idénticas. Pasan 965 casos del runtime. La política Git añadida después tiene verificación separada.
 - Los 43 escenarios amplios siguen abiertos en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Etapa actual: recorrido nativo restaurado comprobado; sigue recuperación tras reboot
+## Etapa actual: recuperación tras reboot comprobada; siguen datos históricos
+
+Un proceso QEMU completa dos arranques con identificadores de kernel diferentes.
+La autoridad anterior rechaza su uso; los comandos públicos capturan su evidencia,
+restauran en otra ruta y crean autoridad nueva. El estado del proceso registrado
+antes del reboot se conserva como historial, sin inventar cierre. Después pasan
+un proceso no-op real y lecturas HTTP de tareas/adjuntos; servicio y VM terminan.
+Se verifican Codex, Ken publicado y26 archivos de modelos, sin cuenta real ni
+inferencia. Los cinco intentos previos y sus causas del entorno de ensayo quedan
+registrados. [Resultados y límites](reboot-recovery-results.json).
+
+Pasan **137 pruebas de fuente y137 del paquete instalado**, incluidos esquema56
+a57 e inversa que rechaza borrar historial.588 archivos Python/SQL coinciden,
+315 productivos;49 definiciones están documentadas. Tiempo hasta verificar:
+**33min44s** (03:44:03–04:17:47 UTC). El ensayo exitoso completo llevó23,25s;
+el tiempo del bloque incluye implementación y preparación/correcciones de la VM.
+
+**Lista vigente:**
+- Terminado: recorrido restaurado con suscripción/Ken y ahora recuperación tras
+  reinicio controlado de una VM con conservación y lectura del historial.
+- Siguiente principal: datos históricos y formatos externos. Sigue pendiente la
+  respuesta sobre ubicación de los datos reales; avanzar con importadores/ensayos.
+- Después: historial/presupuestos;
+  evaluaciones real, humana, científica y global; seguridad de dependencias;
+  aceptación integral de las12 páginas; revisión final del plan completo.
+- Al final de las tareas gruesas: detalles secundarios registrados en
+  [deferred-details.md](deferred-details.md); DD075 conserva45 avisos de lint.
+
+Este ensayo no cubre pérdida de energía, un agente nativo ejecutándose durante el
+reboot, datos históricos del propietario ni aceptación integral. Los43 escenarios
+amplios y las12 aceptaciones completas siguen abiertos. No se reinició el equipo
+del propietario ni se hicieron push, merge o despliegue.
+
+## Etapa anterior: recorrido nativo restaurado comprobado; sigue recuperación tras reboot
 
 El ensayo nuevo copia datos sintéticos a otra ruta y conserva una petición antigua
 sin ejecutarla. Tras reinscripción, envía una única petición nueva mediante la

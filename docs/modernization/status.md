@@ -4,6 +4,16 @@ La implementación del [plan completo](../superpowers/plans/2026-10-31-actualiza
 
 ## Resultados disponibles
 
+- **Recuperación tras reinicio real de una VM comprobada:** se conserva la
+  autoridad anterior como evidencia y el estado original de procesos registrados;
+  la copia recibe autoridad nueva. Pasan el proceso no-op y lecturas HTTP de datos
+  retenidos, con servicio/VM cerrados.137 pruebas de fuente y137 instaladas;
+  588 archivos coincidentes,49 definiciones documentadas. Compatibilidad56→57 e
+  inversa sin pérdida de historial. Cero inferencias/cuentas reales en la VM.
+  Siguen datos históricos y aceptación integral; no cubre pérdida de energía ni
+  un agente nativo en ejecución durante reboot.
+  [Resultados](reboot-recovery-results.json), [paquete](reboot-recovery-packaging.json).
+
 - **Recorrido real sobre instalación restaurada comprobado:** una solicitud
   nueva con la suscripción usa Ken, calcula200, guarda un finding con dos citas y
   un informe draft; otro arranque conserva los resultados. La solicitud copiada

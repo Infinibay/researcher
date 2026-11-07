@@ -1,0 +1,33 @@
+{
+  "base_commit": "a8add29",
+  "wheel": "researcher-0.1.0-cp312-cp312-linux_x86_64.whl",
+  "wheel_sha256": "82e2ac64052e9f23d5cb30f3f56465c823e16d7e8867c08ada6f134d21aafcdc",
+  "source_files_matching_wheel_and_installation": 588,
+  "product_files_matching": 315,
+  "observed": {
+    "cases": 137,
+    "passed": 137,
+    "failed": 0,
+    "skipped": 0,
+    "backend_modules": 227,
+    "all_backend_imports_from_native_env": true,
+    "seconds": 43.442,
+    "exit_code": 0
+  },
+  "tests": [
+    "backend/tests/runtime/test_reboot_backup.py",
+    "backend/tests/runtime/test_restored_enrollment.py",
+    "backend/tests/runtime/test_migration_chain.py",
+    "backend/tests/runtime/test_installation_backup.py",
+    "backend/tests/runtime/test_authority_journal.py",
+    "backend/tests/runtime/test_authority_journal_crash.py",
+    "backend/tests/runtime/test_authority_history_reuse.py"
+  ],
+  "real_model_turns": 0,
+  "limits": [
+    "Selected tests, not the global suite",
+    "Synthetic managed installation data, no historical user-data migration",
+    "Selected source-level recovery and migration checks; actual kernel reboot evidence is recorded separately",
+    "Local Git, HTTP and SQLite are real; no model calls or remote repositories"
+  ]
+}

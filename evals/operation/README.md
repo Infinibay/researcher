@@ -45,3 +45,41 @@ JavaScript ni certifica atribución de resultados adversariales.
 estos ensayos demuestra por sí solo un reboot del kernel, pérdida de energía,
 migración de datos históricos del propietario, calidad científica o comprensión
 humana. [Resultado actual del host restaurado](../../docs/modernization/restored-host-evaluation-results.json).
+
+## Reinicio real del kernel en una VM desechable
+
+`reboot_vm.py` construye un initramfs y un disco ext4 privados y arranca un único
+proceso QEMU/KVM. El primer arranque crea datos sintéticos, una solicitud y un
+registro de proceso pendiente. El segundo observa otro identificador de kernel,
+comprueba el rechazo de la autoridad anterior y ejecuta los comandos públicos de
+copia tras reboot, restauración y reinscripción. Comprueba un proceso no-op real
+y lee los datos retenidos mediante la API nativa instalada.
+
+```bash
+/ruta/al/entorno/bin/python -I evals/operation/reboot_vm.py \
+  --output /ruta/privada/ensayo-vm-nuevo \
+  --qemu /ruta/herramientas/usr/bin/qemu-system-x86_64 \
+  --kernel /ruta/vmlinuz \
+  --assets /ruta/privada/recursos-host.json \
+  --runtime-env /ruta/al/entorno \
+  --timeout 240
+```
+
+Requiere UID1000, acceso a `/dev/kvm`, Python3.12 portable, `cpio`, `mkfs.ext4`,
+Git/bubblewrap y un kernel x86_64 con ext4 y virtio integrados. QEMU debe incluir
+sus bibliotecas y firmware bajo el mismo prefijo `usr`. La invocación sigue el
+[arranque directo de Linux](https://www.qemu.org/docs/master/system/linuxboot.html)
+y las [opciones del emulador](https://www.qemu.org/docs/master/system/invocation.html).
+
+Se copian el entorno instalado y los binarios/modelos públicos ya preparados;
+el archivo de cuenta real no se lee ni copia. Se crea una credencial sintética,
+no se instala una tarjeta de red y no se admite inferencia. El reinicio y apagado
+ocurren dentro del guest, protegidos por PID1 y la marca del initramfs. No ejecutar
+los auxiliares `reboot_guest*.py` como administración del host.
+
+El plazo corresponde al proceso QEMU original. Al vencer, el harness termina
+ese proceso y conserva `disk.raw`, `serial.log` y `host-result.json`; no reintenta.
+Un timeout del observador externo requiere seguir el mismo handle. Este ensayo
+no cubre pérdida de energía, datos reales del propietario, un agente nativo
+ejecutándose durante el reboot ni prueba de cierre del host original.
+[Resultado y alcance del ensayo actual](../../docs/modernization/reboot-recovery-results.json).

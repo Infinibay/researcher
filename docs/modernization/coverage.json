@@ -1027,7 +1027,7 @@
         "Complete scenario acceptance across durable product runtime, legacy consumers, data recovery and UI where applicable"
       ],
       "implemented": [
-        "Coherent forward catalog18–56 and explicit staged targets;39 abrupt child-writer interruptions resume original DB, historical fixtures/inverses preserve original data.208 source and127 installed directed cases pass; no real-data/full-restore acceptance."
+        "Coherent forward catalog18\u201356 and explicit staged targets;39 abrupt child-writer interruptions resume original DB, historical fixtures/inverses preserve original data.208 source and127 installed directed cases pass; no real-data/full-restore acceptance."
       ]
     },
     "D02": {
@@ -1352,7 +1352,14 @@
         "evals/operation/restored_host.py",
         "backend/tests/runtime/test_restored_host_evaluation.py",
         "evals/operation/README.md",
-        "docs/modernization/restored-host-evaluation-results.json"
+        "docs/modernization/restored-host-evaluation-results.json",
+        "backend/runtime/reboot_authority.py",
+        "backend/db/peer_archive_schema.sql",
+        "backend/db/peer_archive_migration.py",
+        "backend/tests/runtime/test_reboot_backup.py",
+        "evals/operation/reboot_vm.py",
+        "docs/modernization/reboot-recovery-results.json",
+        "docs/modernization/reboot-recovery-packaging.json"
       ],
       "remaining": [
         "Full product runtime/client integration and browser acceptance; HTTP owner guard does not complete the entire scenario"
@@ -1360,7 +1367,8 @@
       "implemented": [
         "Managed installation data backup/verification/another-path restore preserves SQLite, uploads and linked Git worktrees.82source/82installed tests pass; restored execution remains pending enrollment. No production-data or operational recovery acceptance.",
         "Fresh restored-host enrollment, paused copied plans and preserved pending history, exact browser endpoint/intent archival, service restart and abrupt-child recovery:94source/94installed,129frontendcontracts/4DOM,3browserstates. No restored model run, reboot or real-data acceptance.",
-        "One fresh installed subscription/Ken run after another-path restoration and enrollment; source-return correlation, calculation200, finding/twoquotes/draft report, fivepeers closed and secondservice startup preservesoutcomes. Originalpendingrequest untouched.12harness testsPASS. Samekernel, syntheticdata; not reboot or historical-data acceptance."
+        "One fresh installed subscription/Ken run after another-path restoration and enrollment; source-return correlation, calculation200, finding/twoquotes/draft report, fivepeers closed and secondservice startup preservesoutcomes. Originalpendingrequest untouched.12harness testsPASS. Samekernel, syntheticdata; not reboot or historical-data acceptance.",
+        "Explicit prior-kernel archival preserves original peer states without closure claims; schema56-to57 enrollment and unused-only inverse.137source/137installed tests; actual isolated VM reboot, fresh authority, native no-op closure and paired HTTP retained-data reads pass. Syntheticdata, no model call or power-loss/live-agent-during-reboot acceptance."
       ]
     },
     "U01": {
@@ -1619,7 +1627,7 @@
       ],
       "implemented": [
         "Explicit new source/authority storage CLI, existing-only API/CLI/launcher startup and cancellation/failure cleanup; owned product fixture uses production initializer. No complete managed-host enrollment or restore claim.",
-        "Coherent forward catalog18–56 and explicit staged targets;39 abrupt child-writer interruptions resume original DB, historical fixtures/inverses preserve original data.208 source and127 installed directed cases pass; no real-data/full-restore acceptance.",
+        "Coherent forward catalog18\u201356 and explicit staged targets;39 abrupt child-writer interruptions resume original DB, historical fixtures/inverses preserve original data.208 source and127 installed directed cases pass; no real-data/full-restore acceptance.",
         "Managed installation data backup/verification/another-path restore preserves SQLite, uploads and linked Git worktrees.82source/82installed tests pass; restored execution remains pending enrollment. No production-data or operational recovery acceptance."
       ]
     },
@@ -2081,11 +2089,11 @@
       "native_adapter_observation": {
         "test": "backend/tests/runtime/test_code_publications.py::test_publication_request_is_immutable_and_startup_preserves_original_records[frozen_author]",
         "observed": "Actual max schema version55 vs expected54, reproduced source and installed. Earlier immutable request/original state assertions pass. Both test and migration source unchanged from1da098e.",
-        "action": "Resolve during comprehensive migration43–55/inverse/restore validation; do not silently update assertion during adapter retirement. Include cache-only Chroma export when original documents are unavailable.",
+        "action": "Resolve during comprehensive migration43\u201355/inverse/restore validation; do not silently update assertion during adapter retirement. Include cache-only Chroma export when original documents are unavailable.",
         "resolution": "Known historical version29 and max54 failures resolved by real forward prefixes and a catalog-bound latest-version assertion. Current version56 pinned by full-chain test;208source/127installed cases pass. Original observation remains historical evidence, not a current failure."
       },
       "implemented": [
-        "Coherent forward catalog18–56 and explicit staged targets;39 abrupt child-writer interruptions resume original DB, historical fixtures/inverses preserve original data.208 source and127 installed directed cases pass; no real-data/full-restore acceptance.",
+        "Coherent forward catalog18\u201356 and explicit staged targets;39 abrupt child-writer interruptions resume original DB, historical fixtures/inverses preserve original data.208 source and127 installed directed cases pass; no real-data/full-restore acceptance.",
         "Managed installation data backup/verification/another-path restore preserves SQLite, uploads and linked Git worktrees.82source/82installed tests pass; restored execution remains pending enrollment. No production-data or operational recovery acceptance."
       ]
     },
@@ -2114,17 +2122,25 @@
         "evals/operation/restored_host.py",
         "backend/tests/runtime/test_restored_host_evaluation.py",
         "evals/operation/README.md",
-        "docs/modernization/restored-host-evaluation-results.json"
+        "docs/modernization/restored-host-evaluation-results.json",
+        "backend/runtime/reboot_authority.py",
+        "backend/db/peer_archive_schema.sql",
+        "backend/db/peer_archive_migration.py",
+        "backend/tests/runtime/test_reboot_backup.py",
+        "evals/operation/reboot_vm.py",
+        "docs/modernization/reboot-recovery-results.json",
+        "docs/modernization/reboot-recovery-packaging.json"
       ],
       "implemented": [
         "Managed installation data backup/verification/another-path restore preserves SQLite, uploads and linked Git worktrees.82source/82installed tests pass; restored execution remains pending enrollment. No production-data or operational recovery acceptance.",
         "Fresh restored-host enrollment, paused copied plans and preserved pending history, exact browser endpoint/intent archival, service restart and abrupt-child recovery:94source/94installed,129frontendcontracts/4DOM,3browserstates. No restored model run, reboot or real-data acceptance.",
-        "One fresh installed subscription/Ken run after another-path restoration and enrollment; source-return correlation, calculation200, finding/twoquotes/draft report, fivepeers closed and secondservice startup preservesoutcomes. Originalpendingrequest untouched.12harness testsPASS. Samekernel, syntheticdata; not reboot or historical-data acceptance."
+        "One fresh installed subscription/Ken run after another-path restoration and enrollment; source-return correlation, calculation200, finding/twoquotes/draft report, fivepeers closed and secondservice startup preservesoutcomes. Originalpendingrequest untouched.12harness testsPASS. Samekernel, syntheticdata; not reboot or historical-data acceptance.",
+        "Explicit prior-kernel archival preserves original peer states without closure claims; schema56-to57 enrollment and unused-only inverse.137source/137installed tests; actual isolated VM reboot, fresh authority, native no-op closure and paired HTTP retained-data reads pass. Syntheticdata, no model call or power-loss/live-agent-during-reboot acceptance."
       ],
       "remaining": [
-        "Actual reboot and independent witness recovery",
         "Historical real-data location/import, filesystem-only reports, Chroma-only documents and external legacy layouts",
-        "Later inverse/recovery paths and metadata-size support where needed"
+        "Later inverse/recovery paths and metadata-size support where needed",
+        "Broader destructive-failure/active-actor disaster acceptance remains distinct from this controlled synthetic reboot rehearsal"
       ]
     },
     "design_audit": {
@@ -3556,13 +3572,13 @@
         "Strict owner API and scheduler capability gate; no remote transport means admission refused, no generic broker profile fallback",
         "Push/PR/merge durable prerequisites and separate merge stages, known receipts immutable, unknown remote effects retained;61directed+2sharedlocalnative+77frontend pass",
         "Configured operator-only HTTPS credential/trust, fixed trusted Git argv through actual broker/domain and readonly sealed repository configuration; shares host network, not kernel destination ACL",
-        "Real TLS/Git smart HTTP and controlled Forgejo REST push→PR→exact merge plus held receive-pack Stop; original stage uncertain, local closure real, repeat action no new write;82directed+1physical pass;73documented definitions",
+        "Real TLS/Git smart HTTP and controlled Forgejo REST push\u2192PR\u2192exact merge plus held receive-pack Stop; original stage uncertain, local closure real, repeat action no new write;82directed+1physical pass;73documented definitions",
         "Schema46 exclusive original HTTP host identity/client closure and immutable fresh readonly observer attempts; original global domain retirement before recovery",
         "Exact readonly remote Git type/capsule and bounded GET-only recovery; historical context and missing candidate allowed, issue/native/model authority denied",
-        "Owner CSRF/strict recovery API and immutable same-command receipt;88directed and native TLS Stop→server completes→fresh observation with no new write pass",
+        "Owner CSRF/strict recovery API and immutable same-command receipt;88directed and native TLS Stop\u2192server completes\u2192fresh observation with no new write pass",
         "Final TLS integration recovers response-lost PR and merge bookkeeping, then held push/Stop; no repeat POST/push/inference. Final wheel88PASS/337package-only modules/730matching sources;58documented definitions",
         "Owner readonly destination discovery derives canonical remote ID and branch facts from configured origin, checks accepted provenance before/after, no writes/inference; configured-only capability and saved bounded original history",
-        "Tasks explicit push→PR→merge and separate readonly original recovery; packet/root/predecessor/version/head validated, original requests survive lost reply/reload, no generic host run recovery or model label",
+        "Tasks explicit push\u2192PR\u2192merge and separate readonly original recovery; packet/root/predecessor/version/head validated, original requests survive lost reply/reload, no generic host run recovery or model label",
         "92backend/92wheel/80frontend/build pass;9rendered states at1440/390px zero errors/overflow/Axe on panel, browser remote/domain witnesses explicitly synthetic and separate from prior real native TLS;23Python+31TS documented declarations"
       ],
       "remaining": [
@@ -3707,13 +3723,13 @@
         "Existing deterministic dispatcher and ordinary review/owner-acceptance/dependency path; no second model loop, native replay, autoaccept or budget reset.",
         "Current physical database peer origin/closure, effects/jobs and graph context validated before authority; late changed evidence blocks instead of silently adopting it.",
         "Strict owner API, retained private terminal command and React Tasks controls; original authorization recovered after loss/restart/reload, paused graph remains paused.",
-        "Transactional schema49→50 preservation and failed-rebuild rollback;118source selected,116wheel,1owned,88frontend,6browser states and documented Python changes."
+        "Transactional schema49\u219250 preservation and failed-rebuild rollback;118source selected,116wheel,1owned,88frontend,6browser states and documented Python changes."
       ],
       "remaining": [
         "Corrected-graph adoption and replacement of unused obsolete successor permission connected; manual drafts/unaccepted-run and private candidate adoption still required.",
         "Late changed predecessor evidence blocks an already authorized successor; explicit replacement of that unused obsolete authorization is still required.",
         "Remaining legacy flows/autonomy/claims/listeners/tools and global physical legacy exclusion remain.",
-        "Remaining6web routes,0/12pages fully accepted, all43broad scenarios and full install/restore/inverses43–50/final fresh branch review remain."
+        "Remaining6web routes,0/12pages fully accepted, all43broad scenarios and full install/restore/inverses43\u201350/final fresh branch review remain."
       ]
     },
     "corrected_graph_reauthorization": {
@@ -3736,12 +3752,12 @@
         "One nonforking replacement of unissued/obsolete deliveries, retained exact current native acceptances, closed proposals become history; no repeated model session, fake acceptance, budget reset or second coordinator.",
         "Effective graph context invalidation, exact authorization revision in pause/resume even for same manifest; parent admission cannot borrow stale revised-history authority from another/global DB.",
         "API, retained terminal and Tasks adoption packets survive loss/restart/reload. Before/after task/project text, known accepted results and separate paused adoption/resume shown. Structured context history React crash fixed.",
-        "133source/135wheel/92frontend/1owned controlled-generation physical chain and6browser states;74Python docs; migration failure rollback50→51 and original identity/FK verified."
+        "133source/135wheel/92frontend/1owned controlled-generation physical chain and6browser states;74Python docs; migration failure rollback50\u219251 and original identity/FK verified."
       ],
       "remaining": [
         "Actual legacy flows/autonomy/claims/listeners/tool migration and global physical legacy writer exclusion.",
         "Manual drafts/unaccepted-run and private candidate file adoption, remaining domain task types, integral retained code review/acceptance/publication scenarios.",
-        "Full prompts/books/evals/science/human understanding,6remaining web routes/0of12pages fully accepted,43broad scenarios, current global failures/clean install/restore/inverses43–51/final fresh review."
+        "Full prompts/books/evals/science/human understanding,6remaining web routes/0of12pages fully accepted,43broad scenarios, current global failures/clean install/restore/inverses43\u201351/final fresh review."
       ]
     },
     "native_exploratory_investigation": {
@@ -3817,7 +3833,7 @@
       "remaining": [
         "Explicit import of old linked/dirty worktrees and interrupted uncaptured private copies, without inventing native authorship or original input.",
         "Carryover selection for automatic plan successors; actual DevelopmentFlow/CodeReviewFlow and remaining legacy/auxiliary-inference retirement and global atomic physical exclusion.",
-        "Retained-code publication chain, wider terminal/web endpoint parity, remote recovery, full prompt/book/model/scientific/human evaluations, remaining concepts/routes/all-page acceptance, global known failures, clean installation/restore/inverses43–53 and final independent review."
+        "Retained-code publication chain, wider terminal/web endpoint parity, remote recovery, full prompt/book/model/scientific/human evaluations, remaining concepts/routes/all-page acceptance, global known failures, clean installation/restore/inverses43\u201353 and final independent review."
       ]
     },
     "selected_old_file_import": {
@@ -3843,7 +3859,7 @@
         "Explicit selected paths, not automatic full-tree history/rename/ignored-file or deletion-intent discovery. All original files remain available for another selection.",
         "Point-in-time equal observations are not atomic Git snapshot or proof of producer closure. Existing native admission/controller restrictions remain; global atomic physical exclusion still required.",
         "Actual DevelopmentFlow/CodeReviewFlow and remaining legacy/auxiliary-inference retirement, automatic plan successor material selection and retained-code publication chain remain principal.",
-        "Queued prior-origin visibilityDD020, web/terminal endpoint parity, remote recovery, full prompt/book/model/scientific/human evaluations, remaining visual concepts/routes/all-page acceptance, global known failures, clean installation/restore/inverses43–53 and final fresh review remain in full active plan."
+        "Queued prior-origin visibilityDD020, web/terminal endpoint parity, remote recovery, full prompt/book/model/scientific/human evaluations, remaining visual concepts/routes/all-page acceptance, global known failures, clean installation/restore/inverses43\u201353 and final fresh review remain in full active plan."
       ]
     },
     "accepted_predecessor_code_material": {
@@ -4188,7 +4204,7 @@
         "Pinned-base multistage web/API image installs native wheel and runs as uid1000; source API fixture restored.",
         "Explicit upload/static paths; storage health checks chosen attachment root without setup.",
         "Actual isolated Podman bootstrap refusal, owner pairing, compiled web, project/upload/download and repeat startup with retained bytes and invalidated sessions.",
-        "Pinned Forgejo LTS configuration and synthetic9→15 upgrade, verified TLS/native PR transport and cold restore rehearsed separately."
+        "Pinned Forgejo LTS configuration and synthetic9\u219215 upgrade, verified TLS/native PR transport and cold restore rehearsed separately."
       ],
       "evidence": [
         "docs/architecture/container-operation.md",

@@ -5,8 +5,9 @@ preparada y restaurarlos en otra carpeta. La restauración conserva los datos y
 el historial y termina en `pending_enrollment`. El comando separado
 `enroll-restored-host` habilita la nueva instalación con recursos y autoridad
 nuevos. Se han comprobado su arranque, un turno completo de modelo/Ken y el
-reinicio del servicio; siguen pendientes el reboot real y datos históricos del
-propietario. No es todavía una aceptación integral de
+reinicio del servicio. También se comprobó la recuperación tras reiniciar una VM
+con datos sintéticos; siguen pendientes los datos históricos del propietario.
+No es todavía una aceptación integral de
 recuperación tras un desastre.
 
 ```bash
@@ -43,6 +44,32 @@ cierre, bloqueos de otro escritor y entradas especiales como sockets. Comprueba
 también que los uploads, repositorios y worktrees activos registrados estén
 incluidos. Las rutas Git que dependen de almacenamiento externo requieren una
 migración explícita de ese almacenamiento; no se omiten silenciosamente.
+
+### Recuperación explícita tras un cambio de kernel
+
+Si el sistema se reinició, la autoridad anterior rechaza su uso normal. El modo
+`backup-host --after-reboot` permite capturar esa autoridad como evidencia para
+seguir con `verify-backup`, `restore-host` y `enroll-restored-host` en rutas nuevas.
+Exige un identificador de arranque diferente, las identidades originales de los
+tres archivos, una cadena de testigo válida y acuerdo con el estado SQL. Cambiar
+sólo el observador de procesos no alcanza. Conserva las transiciones preparadas
+y colas incompletas del testigo sin aplicar concesiones ni reparar el journal.
+SQLite puede efectuar su propia recuperación al abrir sus archivos; este modo
+no promete una copia forense de todos los bytes de un disco después de perder energía.
+
+Los registros de procesos pendientes deben pertenecer al kernel y observador
+originales. La reinscripción conserva su estado original y registra por separado
+su procedencia en `runtime_peer_archives` (migración57). **Archivado no significa
+cerrado**: un kernel diferente también puede corresponder a una copia en otro
+equipo. El host original y los efectos remotos pueden seguir requiriendo
+comprobación. Los registros archivados no se adoptan para ejecutar ni acreditar
+resultados en el host nuevo.
+
+La reinscripción actualiza una copia de esquema56 antes de activar el servicio.
+Con el servicio detenido, `restore_peer_archive_schema` permite deshacer el paso57
+únicamente si todavía no contiene historial y no hay versiones posteriores.
+Si existe historial archivado, se conserva y se recurre a reparación hacia
+adelante o a restaurar una copia verificada; la inversa nunca lo elimina.
 
 La copia incluye los archivos bajo la instalación, snapshots SQLite consistentes
 y el testigo independiente de autoridad. Los journals transitorios de SQLite se
@@ -136,8 +163,17 @@ se revisó en escritorio/móvil y ante falta de almacenamiento; esto no acepta l
 [paquete](../modernization/restored-enrollment-packaging.json),
 [revisión visual](../design/audits/restored-session/report.md).
 
-Siguen siendo tareas principales la recuperación de autoridad tras
-reboot real, inventario/migración de datos históricos, documentos conservados
+El ensayo de [`reboot_vm.py`](../../evals/operation/reboot_vm.py) completa dos
+arranques reales dentro de un proceso QEMU, con identificadores de kernel
+diferentes. Comprueba rechazo de autoridad anterior, los comandos públicos de
+recuperación, un proceso no-op con cierre y lecturas HTTP de tareas/adjuntos.
+Conserva un registro pendiente anterior, sin declarar que sea prueba de cierre.
+El servicio y la VM terminan; no hubo inferencia ni cuenta real dentro de la VM.
+Los cinco fallos de preparación previos y sus causas quedan registrados junto
+al resultado exitoso. No simula pérdida de energía ni un agente nativo ejecutándose
+durante el reboot. [Evidencia](../modernization/reboot-recovery-results.json).
+
+Siguen siendo tareas principales el inventario/migración de datos históricos, documentos conservados
 sólo en Chroma, informes guardados sólo en archivos y despliegues antiguos con
 almacenamiento fuera de una instalación administrada. Restaurar una copia
 anterior tampoco conserva escrituras realizadas después de aquella copia.

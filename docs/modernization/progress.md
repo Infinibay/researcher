@@ -7672,3 +7672,43 @@ Added evals/operation/restored_host.py using installedbackend underpython-I and 
 Source6REDmissingimplementation, then12PASS.15definitionsdocumented;3lintDD074deferred. Live95234terminal0:onesubscriptiongpt-6.1-sol admission e7294efd-fba1-4202-86d3-1fcba7f831f1, onecalcstdout200exit0,1finding2citations1draftreport,5peersclosed,serviceexits143/143;observedtokenhighwater280439(notbilling). Kenreadreturnedexactunits.pycode. Originalrun cfc22d44-e702-44d0-9de5-b3f786a87382 remainsqueuedinoriginal/noattempt, supersededonlyincopy. Allbackendimportswheelinstalled;312productPythonSQLfiles matchsource/wheel/install. Reused b87642b6de7afa7a412bf647735cc5bf26255f60e50b974448e208a0104202bc unchangedruntime ratherthanrebuild. Read-onlyverifyCLI passedzeroextraadmissions. Original/privateoutcome retainsfullreceipt, publicsafe metadata inrestored-host-evaluation-results.json.
 
 Communicationreview:correctinspection-versus-executiondistinction, exactsources, simple137fichas+63example, draftstatus and limits. Methodologytext toolongforaddition deferredDD074; nohumancomprehensionorscientificvalidationclaim. Allprocesshandlesclosed. Measured03:34:13–03:40:47UTC=394s(6m34s). Nextmain realkernelreboot/authorityrecovery;actualhistoricaldata/import/inverses,history/budgets,evaluations/security,12pages,finedetails,finalreview remain.43broadscenariosopen.
+
+
+## 2026-11-07 — Explicit prior-kernel recovery and real VM reboot
+
+Base a8add29. The previous turn updated durable tracking policy; this turn
+completed source behavior and operational evidence. Managed worktree only; full
+goal remains active, macro-first. Historical-data-path question remains pending.
+
+backup-host --after-reboot validates original file identities, independent witness
+chain, prior boot/observer and SQL agreement. Pending/torn witness evidence is
+retained without applying or repairing old grants. Normal enrollment stays strict.
+Important correction: another kernel can mean a clone on another host, not death
+of original actors. Migration57 records archival provenance and preserves raw peer
+states; it never fabricates closure. Version56 copies advance before enrollment;
+unused-only inverse refuses archival history and future versions.
+
+137 source and137 installed tests pass, including40 migration interruption cases.
+588 Python/SQL files match source/wheel/install,315 product files;227 backend
+modules imported only from installed environment. Wheel built through sdist:
+82e2ac64052e9f23d5cb30f3f56465c823e16d7e8867c08ada6f134d21aafcdc.
+49 changed/new Python definitions documented.45 lint notices deferred as DD075.
+
+One QEMU process in v6 observed different guest boot UUIDs, rejected old normal
+authority, used public backup/verify/restore/enroll commands, preserved old peer
+state/history and source authority bytes, and passed the actual native no-op
+closure plus paired HTTP task/upload reads. Service exit143 and QEMU exit0.
+Actual Codex0.166 and published Ken0.18/26public assets validated; synthetic account,
+no NIC, no inference. Successful trial23.25seconds including preparation.
+Earlier trials retained: v1 bundled OpenMP lookup; v2 proc-dependent Python loader
+and explicitly stopped panic loop; v3 early devtmpfs entropy fallback; v4 disk-root
+ownership; v5 caller membership outside delegated cgroup subtree after successful
+reboot/restoration. Corrected fixture failures, never treated them as passing.
+
+Verified interval03:44:03–04:17:47UTC=2024seconds(33m44s). No owner-host reboot,
+power-loss test, native inference actor running during reboot, real-user migration,
+push/merge/deployment, new global suite or full-page acceptance. Broader disaster
+acceptance remains distinct from this controlled rehearsal. All43 scenarios remain
+open and0of12pages fullyaccepted. Next principal task: historical-data/import
+formats and later recovery/inverses; then history/budgets, current human/scientific/
+global evaluations, dependency security,12page acceptance, details and final review.

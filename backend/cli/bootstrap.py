@@ -46,6 +46,8 @@ def main(argv=None):
     ):
         operation = commands.add_parser(command, help=description)
         operation.add_argument('--directory' if command == 'backup-host' else '--backup', required=True)
+        if command == 'backup-host':
+            operation.add_argument('--after-reboot',action='store_true',help='Explicitly archive verified old-kernel authority; never replay its work')
         if command != 'verify-backup':
             operation.add_argument('--destination', required=True)
         operation.add_argument('--max-bytes', type=int, default=20 * 1024**3)
@@ -62,7 +64,7 @@ def main(argv=None):
 
             limits = {key: getattr(options, key) for key in ('max_bytes','max_files','timeout')}
             if options.command == 'backup-host':
-                result = backup_installation(options.directory, options.destination, **limits)
+                result = backup_installation(options.directory, options.destination, after_reboot=options.after_reboot, **limits)
             elif options.command == 'restore-host':
                 result = restore_installation(options.backup, options.destination, **limits)
             else:

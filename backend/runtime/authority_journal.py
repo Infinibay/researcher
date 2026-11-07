@@ -496,6 +496,11 @@ class WitnessedAuthorityJournal:
         return history
 
     def _header(self, payload):
+        """Require the live kernel/observer enrollment for every normal authority operation."""
+        self._validate_header(payload, expected_boot=boot_id(), expected_observer=observer_namespace())
+
+    def _validate_header(self, payload, *, expected_boot, expected_observer):
+        """Check exact provisioned file identity and header shape against explicitly selected observations."""
         if not isinstance(payload, dict) or not isinstance(payload.get("files"), dict):
             raise AuthorityUncertain("Invalid authority enrollment shape")
         if (
@@ -513,8 +518,8 @@ class WitnessedAuthorityJournal:
             "format": 1,
             "authority_id": self.authority_id,
             "files": self._identities,
-            "boot_id": boot_id(),
-            "observer_namespace": observer_namespace(),
+            "boot_id": expected_boot,
+            "observer_namespace": expected_observer,
         }:
             raise AuthorityUncertain(
                 "Authority files, kernel or observer differ from enrollment"

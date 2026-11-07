@@ -471,3 +471,17 @@ inspección/ejecución, cita evidencia y usa el ejemplo137fichas+63fichas; aun a
 su lenguaje metodológico resulta largo para una suma. Ajustar esa proporcionalidad
 en la pasada de comunicación/prompts, con evaluación apropiada, sin convertir
 este hallazgo en otra ejecución de la misma prueba ya aprobada.
+
+## DD075 — pulido tras recuperación de autoridad y ensayo de reboot
+
+Se conservan45 avisos en `reboot-recovery-lint.json`: orden de imports, fixtures
+reutilizadas, contextos/comprensiones, captura deliberada de excepciones y modo
+del archivo auxiliar. El initramfs asigna explícitamente el modo ejecutable a su
+entrada; el auxiliar Python no se ejecuta directamente. Revisar estas convenciones
+al terminar las capacidades principales, sin repetir el ensayo por estilo.
+
+Continúan los avisos de Starlette/httpx y del diagnóstico `codex --version` sobre
+su HOME deliberadamente inexistente. El aprovisionador de VM está limitado a
+Linux/KVM, UID1000 y Python3.12 portable; generalizar esa herramienta de evaluación
+puede esperar. Datos reales, importadores, soporte de metadatos necesario y
+aceptación integral siguen siendo trabajo principal, no detalles diferidos.
