@@ -887,3 +887,19 @@ mientras cierra un worker antiguo. Preservar el cuerpo/clave tras respuesta perd
 y mostrar el refresco antes de facilitar la siguiente edición. No rehacer ahora
 el panel ni afirmar que se observó ese caso en navegador; aceptación integral
 de la página y comprensión humana siguen pendientes.
+
+## DD116 — entregar trabajo independiente antes de preguntar
+
+En el ensayo actual C10, el agente detectó correctamente las unidades incompatibles
+y registró una pregunta durable con las dos conversiones condicionales. Omitió el
+importe independiente de 50 EUR solicitado en el mismo encargo. No aparece en la
+pregunta, el resultado ni los eventos nativos persistidos; no se infiere qué pensó
+el modelo. La política actual ya exige completar trabajo independiente antes de
+preguntar, por lo que repetir esa frase no demuestra una solución.
+
+Conservar el ensayo original parcial. Tras los bloques grandes, revisar un canal
+de entrega parcial durable antes de cerrar por pregunta y comprobar que el usuario
+ve el resultado independiente sin tomar el volumen ambiguo como resuelto. Es una
+brecha funcional acotada, no sólo pulido de texto: C10 sigue abierto hasta validarla.
+No generar ahora nuevas respuestas para sustituir el fallo observado. Evidencia:
+[handoff-communication-review.md](handoff-communication-review.md).

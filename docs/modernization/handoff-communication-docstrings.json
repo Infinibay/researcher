@@ -1,0 +1,69 @@
+{
+  "documented_nodes": 9,
+  "missing": [],
+  "contracts": [
+    {
+      "path": "evals/handoff_communication/run.py",
+      "symbol": "register",
+      "line": 65,
+      "docstring": "Freeze both cases, exact current policy, sources and operator-bounded ceilings before observing either outcome.",
+      "file_sha256": "bfbacb3114ae1a5fae55ed2eade38dfa3c2bc01edcab3accd4a5a79acbf51f95"
+    },
+    {
+      "path": "evals/handoff_communication/run.py",
+      "symbol": "verify_controls",
+      "line": 91,
+      "docstring": "Check scope, exact policy/context delivery and actual question state without grading human comprehension from prose.",
+      "file_sha256": "bfbacb3114ae1a5fae55ed2eade38dfa3c2bc01edcab3accd4a5a79acbf51f95"
+    },
+    {
+      "path": "evals/handoff_communication/run.py",
+      "symbol": "scope_checks",
+      "line": 117,
+      "docstring": "Inspect final synthetic source bytes and effect tables without opening installation credentials.",
+      "file_sha256": "bfbacb3114ae1a5fae55ed2eade38dfa3c2bc01edcab3accd4a5a79acbf51f95"
+    },
+    {
+      "path": "evals/handoff_communication/run.py",
+      "symbol": "run",
+      "line": 128,
+      "docstring": "Execute each frozen case at most once; retain failures and require original service closure before proceeding.",
+      "file_sha256": "bfbacb3114ae1a5fae55ed2eade38dfa3c2bc01edcab3accd4a5a79acbf51f95"
+    },
+    {
+      "path": "evals/handoff_communication/run.py",
+      "symbol": "main",
+      "line": 154,
+      "docstring": "Require separate preparation/live intent and fresh case paths; no key-based billing or automatic replay is introduced.",
+      "file_sha256": "bfbacb3114ae1a5fae55ed2eade38dfa3c2bc01edcab3accd4a5a79acbf51f95"
+    },
+    {
+      "path": "evals/handoff_communication/test_protocol.py",
+      "symbol": "observation",
+      "line": 11,
+      "docstring": "Build a controlled verifier witness; these values never count as model evidence.",
+      "file_sha256": "ebd0c8f70814439ef2f84244420ac87625f70da0c8efeed59aa9711eb774c428"
+    },
+    {
+      "path": "evals/handoff_communication/test_protocol.py",
+      "symbol": "test_controlled_witness_matches_only_its_original_case",
+      "line": 21,
+      "docstring": "Question and explanation cases retain different required states and exact supplied context.",
+      "file_sha256": "ebd0c8f70814439ef2f84244420ac87625f70da0c8efeed59aa9711eb774c428"
+    },
+    {
+      "path": "evals/handoff_communication/test_protocol.py",
+      "symbol": "test_correct_prose_cannot_hide_wrong_scope_or_missing_question",
+      "line": 30,
+      "docstring": "Reject changed authority and lifecycle evidence independently of the answer's wording.",
+      "file_sha256": "ebd0c8f70814439ef2f84244420ac87625f70da0c8efeed59aa9711eb774c428"
+    },
+    {
+      "path": "evals/handoff_communication/test_protocol.py",
+      "symbol": "test_registration_freezes_two_cases_and_preserves_lower_operator_limits",
+      "line": 42,
+      "docstring": "Preparation never sends inference, overwrites an experiment or exceeds the supplied resource limits.",
+      "file_sha256": "ebd0c8f70814439ef2f84244420ac87625f70da0c8efeed59aa9711eb774c428"
+    }
+  ]
+}

@@ -1,0 +1,157 @@
+{
+  "base_commit": "4cca5d4",
+  "status": "partial",
+  "scenario": "C10",
+  "product_changes": false,
+  "protocol_tests": {
+    "passed": 9,
+    "failed": 0,
+    "seconds": 0.11,
+    "log": ".superpowers/sdd/2026-10-31-actualizacion-proyecto/handoff-protocol-tests-final.log",
+    "initial_fixture_failure": "Required shared allowed_model_receipt_variation metadata missing; fixed before live admission; initial8passed1failed retained."
+  },
+  "model_turns": 2,
+  "replays": 0,
+  "human_comprehension": null,
+  "observed_tokens_total": 129211,
+  "observed_tokens_total_is_final_usage": false,
+  "native_trial_seconds_total": 54.489,
+  "cases": [
+    {
+      "attempt_id": "54945e78-44ab-4c0e-9f99-7f769862f2aa",
+      "instructions_sha256": "18e0e5823107e52d7d65e566be53ec7a52fe9cd5b532f7a41b316ae11800cb44",
+      "catalog_hash": "2b8dc99c7925ffad4507cb87788722a6c706ad83790b8962dfd0d27747593c7c",
+      "model_control": {
+        "model": "gpt-6.1-sol",
+        "reasoning_effort": "low",
+        "source": "host",
+        "revision": 0,
+        "project_id": 101,
+        "actor_id": "researcher",
+        "fence": 1
+      },
+      "native_result": {
+        "native_status": "completed",
+        "summary": "El importe total es **50,00 euros**: 4 unidades × 12,50 €/unidad = 50,00 €.\n\nPor ejemplo, dos unidades cuestan 25,00 €; otras dos cuestan otros 25,00 €. Sumadas, dan 50,00 €, sin cargos adicionales. Es el cálculo que implementa `line_total` en `evidence.py`: cantidad por precio unitario."
+      },
+      "observed_tokens": 77694,
+      "dispatch_status": "settled",
+      "case_id": "simple_handoff",
+      "controls": "passed",
+      "semantic_review": {
+        "status": "passed",
+        "independent_result_delivered": true,
+        "human_comprehension": null
+      },
+      "result_path": ".superpowers/sdd/2026-10-31-actualizacion-proyecto/handoff-current-2026-11-07/simple_handoff/simple_handoff-candidate/result.json",
+      "result_sha256": "b7ab7fc3cf08ba15744ee3369b8107de3929af0f13adcecad546ac741f782774",
+      "run_status": "needs_review",
+      "admissions": 1,
+      "attempt_count": 1,
+      "canonical_questions": [],
+      "native_event_kinds": [
+        "tool.started",
+        "tool.completed",
+        "tool.started",
+        "tool.completed",
+        "turn.completed"
+      ],
+      "maximum_reserved_tokens": 350000,
+      "tools": [
+        "ken_find",
+        "ken_read"
+      ],
+      "seconds": 25.619,
+      "scope_checks": {
+        "source_files_unchanged": true,
+        "effect_counts": {
+          "research_reports": 0,
+          "runtime_result_acceptances": 0,
+          "runtime_code_acceptances": 0,
+          "runtime_code_publication_requests": 0
+        }
+      },
+      "all_peers_closed": true,
+      "unrevoked_grants": 0,
+      "owned_backend_terminal": true,
+      "service_exit": -15
+    },
+    {
+      "attempt_id": "55045266-0922-4e1f-a2b4-c671ef37421f",
+      "instructions_sha256": "18e0e5823107e52d7d65e566be53ec7a52fe9cd5b532f7a41b316ae11800cb44",
+      "catalog_hash": "2b8dc99c7925ffad4507cb87788722a6c706ad83790b8962dfd0d27747593c7c",
+      "model_control": {
+        "model": "gpt-6.1-sol",
+        "reasoning_effort": "low",
+        "source": "host",
+        "revision": 0,
+        "project_id": 101,
+        "actor_id": "researcher",
+        "fence": 1
+      },
+      "native_result": null,
+      "observed_tokens": 51517,
+      "dispatch_status": "unknown",
+      "case_id": "contradictory_handoff",
+      "controls": "passed",
+      "semantic_review": {
+        "status": "partial",
+        "independent_result_delivered": false,
+        "human_comprehension": null
+      },
+      "result_path": ".superpowers/sdd/2026-10-31-actualizacion-proyecto/handoff-current-2026-11-07/contradictory_handoff/contradictory_handoff-candidate/result.json",
+      "result_sha256": "75975f8628145b33614d3f5bf3da51ebbfc60f7f9719facabf4c699f7d0fb3fa",
+      "run_status": "waiting_input",
+      "admissions": 1,
+      "attempt_count": 1,
+      "canonical_questions": [
+        [
+          {
+            "example": "",
+            "id": "m7_confirmed_unit",
+            "options": [
+              "L",
+              "mL",
+              "Todavía no está confirmada"
+            ],
+            "question": "¿Cuál es la unidad correcta de M7, revisión 4, con valor 7,5: L o mL?",
+            "why_needed": "El handoff dice L y evidence.py dice mL; sin resolver esa contradicción, los posibles resultados son 7.500 mL y 7,5 mL y no puede elegirse un valor operativo."
+          }
+        ]
+      ],
+      "native_event_kinds": [
+        "tool.started",
+        "tool.completed",
+        "tool.started",
+        "tool.completed",
+        "tool.started"
+      ],
+      "maximum_reserved_tokens": 350000,
+      "tools": [
+        "ken_find",
+        "ken_read",
+        "researcher_ask_user"
+      ],
+      "seconds": 28.87,
+      "scope_checks": {
+        "source_files_unchanged": true,
+        "effect_counts": {
+          "research_reports": 0,
+          "runtime_result_acceptances": 0,
+          "runtime_code_acceptances": 0,
+          "runtime_code_publication_requests": 0
+        }
+      },
+      "all_peers_closed": true,
+      "unrevoked_grants": 0,
+      "owned_backend_terminal": true,
+      "service_exit": -15
+    }
+  ],
+  "limitations": [
+    "Synthetic prior-agent context; not a live two-model handoff or representative sample.",
+    "Contradictory case omits independent useful work: absent in persisted native events, question and final result; C10 remains in progress. No claim about private reasoning.",
+    "Unknown interrupted dispatch remains reserved; observed tokens are neither final usage nor monetary cost.",
+    "No product change, new global suite, full-page acceptance or historical-data migration."
+  ]
+}

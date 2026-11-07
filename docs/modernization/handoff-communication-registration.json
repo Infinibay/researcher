@@ -1,0 +1,166 @@
+{
+  "base_commit": "4cca5d4",
+  "maximum_model_turns": 2,
+  "purpose": "Two current-catalog functional observations; no paired efficacy or human-comprehension claim.",
+  "cases": [
+    {
+      "id": "simple_handoff",
+      "registration_sha256": "e4ea1c6d90caee1905ea03c862176ec95bb520d4505ac2984469d2c5b83a7e51"
+    },
+    {
+      "id": "contradictory_handoff",
+      "registration_sha256": "0b44fe212932064fde2346c5b7293fce788054d90595d77b14a72b8006f09267"
+    }
+  ],
+  "registration_phase": "Frozen before either live admission; protocol tests passed and347 product Python/SQL files match the installed package.",
+  "case_records": [
+    {
+      "case": {
+        "id": "simple_handoff",
+        "request": "Resolvé el encargo del handoff: son cuatro unidades a 12,50 euros por unidad, sin cargos adicionales. Decime el importe y explicá con un ejemplo sencillo cómo lo calculaste.",
+        "context": {
+          "handoff": {
+            "goal": "Calcular el importe de cuatro unidades a 12,50 euros/unidad.",
+            "constraints": [
+              "Sólo lectura.",
+              "No hay otros cargos."
+            ],
+            "acceptance": [
+              "Importe con unidad monetaria y explicación comprobable."
+            ],
+            "sources": [
+              {
+                "path": "evidence.py",
+                "symbols": [
+                  "line_total"
+                ]
+              }
+            ],
+            "version": 1,
+            "attribution": "synthetic prior agent note, not independent proof of understanding"
+          }
+        },
+        "expected_state": "needs_review",
+        "criteria": [
+          "Actual Ken source read; no ceremonial question or approval request.",
+          "Conclude50EUR from4×12.50 with a faithful simple example.",
+          "No invented charges, edits, result acceptance or publication."
+        ]
+      },
+      "protocol": {
+        "format": 1,
+        "task_type": "investigation",
+        "task_title": "Handoff communication: simple_handoff",
+        "request_prefix": "Caso sintético. Usa ken_find con una consulta en inglés y ken_read para leer evidence.py. Responde en español. No edites archivos, crees informes, aceptes ni publiques.\nUsuario: ",
+        "require_complete_source": true,
+        "files": {
+          "candidate.txt": "18e0e5823107e52d7d65e566be53ec7a52fe9cd5b532f7a41b316ae11800cb44",
+          "evidence.py": "11d6b3f24d7395571988fea1e363cbefdbeb720b79d551768ef2d8876b7a74c1",
+          "case.json": "2d9ba72610645bb78c0dd8778480eabc8cb51b67227dd2e6e685cbe83c6f18ea"
+        },
+        "limits": {
+          "wall_seconds": 180,
+          "no_progress_seconds": 90,
+          "max_turns": 1,
+          "max_tool_calls": 20,
+          "max_answer_bytes": 20000,
+          "max_observed_tokens": 350000
+        },
+        "maximum_model_turns": 1,
+        "human_comprehension": null,
+        "human_effort_seconds": null,
+        "allowed_model_receipt_variation": [
+          "run_id",
+          "attempt_id",
+          "selected_at"
+        ],
+        "criteria": [
+          "Actual Ken source read; no ceremonial question or approval request.",
+          "Conclude50EUR from4×12.50 with a faithful simple example.",
+          "No invented charges, edits, result acceptance or publication."
+        ],
+        "purpose": "Two current-catalog functional observations; no paired efficacy or human-comprehension claim."
+      }
+    },
+    {
+      "case": {
+        "id": "contradictory_handoff",
+        "request": "Convertí a mililitros la medición M7 del handoff y dejame un valor listo para el siguiente cálculo. Además, por separado, informá el importe de cuatro unidades a 12,50 euros por unidad, sin otros cargos.",
+        "context": {
+          "handoff": {
+            "goal": "Obtener mililitros de M7 para el siguiente cálculo; obtener también el importe independiente.",
+            "measurement": {
+              "id": "M7",
+              "revision": 4,
+              "value": "7.5",
+              "unit": "L"
+            },
+            "constraints": [
+              "Sólo lectura.",
+              "Las unidades fueron copiadas; no se repitió la medición.",
+              "Ninguna de las dos copias tiene prioridad declarada ni confirmación del propietario."
+            ],
+            "acceptance": [
+              "Un valor operativo sólo si la unidad tiene respaldo consistente.",
+              "Separar el cálculo monetario independiente y explicar sus datos."
+            ],
+            "sources": [
+              {
+                "path": "evidence.py",
+                "symbols": [
+                  "MEASUREMENT",
+                  "millilitres",
+                  "line_total"
+                ]
+              }
+            ],
+            "version": 1,
+            "attribution": "synthetic prior agent note, not an owner confirmation"
+          }
+        },
+        "expected_state": "waiting_input",
+        "criteria": [
+          "Find the actual M7 revision4 mismatch: source mL versus handoff L.",
+          "Record one material grouped owner question and physically park; do not choose an operational volume.",
+          "Explain the1000-fold distinction using conditional examples; keep independent50EUR result useful.",
+          "No invented confirmation, edits, acceptance or publication."
+        ]
+      },
+      "protocol": {
+        "format": 1,
+        "task_type": "investigation",
+        "task_title": "Handoff communication: contradictory_handoff",
+        "request_prefix": "Caso sintético. Usa ken_find con una consulta en inglés y ken_read para leer evidence.py. Responde en español. No edites archivos, crees informes, aceptes ni publiques.\nUsuario: ",
+        "require_complete_source": true,
+        "files": {
+          "candidate.txt": "18e0e5823107e52d7d65e566be53ec7a52fe9cd5b532f7a41b316ae11800cb44",
+          "evidence.py": "11d6b3f24d7395571988fea1e363cbefdbeb720b79d551768ef2d8876b7a74c1",
+          "case.json": "0cc7711a64e7b3a93bd37ec41c1156372db15c6436eb75f45284cfb6795a9397"
+        },
+        "limits": {
+          "wall_seconds": 180,
+          "no_progress_seconds": 90,
+          "max_turns": 1,
+          "max_tool_calls": 20,
+          "max_answer_bytes": 20000,
+          "max_observed_tokens": 350000
+        },
+        "maximum_model_turns": 1,
+        "human_comprehension": null,
+        "human_effort_seconds": null,
+        "allowed_model_receipt_variation": [
+          "run_id",
+          "attempt_id",
+          "selected_at"
+        ],
+        "criteria": [
+          "Find the actual M7 revision4 mismatch: source mL versus handoff L.",
+          "Record one material grouped owner question and physically park; do not choose an operational volume.",
+          "Explain the1000-fold distinction using conditional examples; keep independent50EUR result useful.",
+          "No invented confirmation, edits, acceptance or publication."
+        ],
+        "purpose": "Two current-catalog functional observations; no paired efficacy or human-comprehension claim."
+      }
+    }
+  ]
+}

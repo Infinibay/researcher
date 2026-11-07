@@ -466,15 +466,21 @@
         "docs/modernization/communication-acceptance-artifact-comparison.json",
         "backend/tests/runtime/test_communication_acceptance.py",
         "backend/tests/runtime/test_plan_execution.py",
-        "backend/tests/runtime/test_project_planning.py"
+        "backend/tests/runtime/test_project_planning.py",
+        "docs/modernization/handoff-communication-registration.json",
+        "docs/modernization/handoff-communication-results.json",
+        "docs/modernization/handoff-communication-review.md",
+        "evals/handoff_communication/run.py"
       ],
       "remaining": [
-        "Verify current-agent behavior: a simple handoff begins without ceremonial confirmation, while a material contradiction stops only dependent work and explains the reason.",
-        "Representative explanation quality and human understanding remain in their broader evaluation deliverables; storage/protocol evidence is not a substitute."
+        "Deliver useful independent work before a material question closes the turn: the contradictory original trial omitted the separately requested50EUR calculation (DD116). Preserve this partial outcome; do not replay it as a success.",
+        "Representative explanation quality and human understanding remain in broader evaluation deliverables; synthetic handoff context and correct prose do not establish understanding."
       ],
       "implemented": [
-        "Current installed host tests preserve original handoff goal, acceptance, source identities, explicit assumptions and version; changed predecessor premises fence the consumer and invented source quotations cannot validate a plan."
-      ]
+        "Current installed host tests preserve original handoff goal, acceptance, source identities, explicit assumptions and version; changed predecessor premises fence the consumer and invented source quotations cannot validate a plan.",
+        "Two original current-policy subscription/Ken observations: simple50EUR task completes without ritual; conflicting M7 units yield one durable material question, correct conditional volumes and physical closure without choosing an operational value."
+      ],
+      "last_observed_at": "2026-11-07"
     },
     "E01": {
       "status": "complete",

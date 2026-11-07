@@ -28,7 +28,34 @@ que se pueda comparar el avance; no presentar microajustes como tareas principal
 - Última suite global: `9fb873c`,2210 casos,2178 pasan,31 fallan y1 error de fixture; sin omisiones. La carrera de backup encontrada se corrigió después con40 pruebas instaladas. No se declara una nueva corrida global verde; la referencia `0c8b8d9` queda como evidencia histórica.
 - U06, E01–E12 y C01–C09 quedan comprobados con el alcance de sus matrices; siguen 21 de 43 escenarios amplios sin aceptación completa en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Estado actual: C01–C09 comprobados; C10 y evaluación siguen abiertos
+## Estado actual: C10 observado; siguiente datos y persistencia
+
+Bloque **2026-11-07 19:42:23–19:54:51 UTC**, **12 min 28 s hasta verificar**,
+desde `4cca5d4`. Documentación y checkpoint posteriores excluidos.
+Dos ensayos originales por suscripción y Ken: el simple pasa; la contradicción
+produce una pregunta y se detiene correctamente, pero omite el importe independiente.
+**C10 sigue abierto**. [Resultados, evidencia y límites](handoff-communication-review.md).
+
+- Terminado: U06, E01–E12 y C01–C09. Los dos ensayos actuales se conservaron;
+  nueve controles del evaluador pasan y no hubo cambios de producto.
+- En curso al cerrar: documentación y checkpoint local de la observación parcial.
+- Siguiente principal: **D01–D04, datos y persistencia**: migraciones interrumpidas,
+  bloqueos de SQLite, eventos/transacciones y cancelación. Reutilizar evidencia
+  válida y corregir sólo brechas funcionales. **No iniciado**; anotar hora real al empezar.
+- Pendiente después: demás escenarios, datos históricos, evaluación representativa
+  y comprensión humana, aceptación de las 12 páginas, dependencias y distribución.
+- Al final: pendientes aplazados, incluida entrega independiente antes de preguntar
+  (DD116, obligación funcional que mantiene C10 abierto), validación global y revisión
+  independiente del plan completo.
+
+**22 de 43 escenarios comprobados; 21 abiertos. 0/12 páginas plenamente aceptadas**,
+con 12 pilotos y 48 conceptos. No equivalen a porcentaje de implementación.
+Dos turnos originales, sin repetición; comprensión humana desconocida y consumo
+final del intento interrumpido desconocido, con su reserva conservada. La última
+suite global mantiene fallos históricos. Lista y tiempo se publican en cada cambio
+de tarea y se conservan tras compactar; primero lo grueso, después lo fino.
+
+## Etapa anterior: C01–C09 comprobados; C10 y evaluación siguen abiertos
 
 Bloque **2026-11-07 19:24:02–19:38:49 UTC**, **14 min 47 s hasta verificar**.
 Documentación/checkpoint posteriores excluidos. Se corrigió una brecha funcional:
