@@ -121,6 +121,15 @@ prompts, recibos, handoffs y evidencias originales. Se revocan concesiones copia
 caducan preguntas pendientes y el consumo reservado sin desenlace queda desconocido.
 Los eventos y `enrollment.json` registran el estado anterior y esta decisión.
 
+Los comandos copiados que estaban despachándose o cancelándose pasan a `unknown`;
+sus estados anteriores quedan en `historical_work.jobs`. No se inventan código
+de salida, fecha de finalización ni cierre del proceso. Las salidas ya guardadas,
+la intención de cancelar y los errores previos se conservan. Un comando `exited`
+mantiene íntegro su recibo. La base original y la copia verificada no se modifican.
+Esto se comprobó con un comando realmente activo durante el reinicio de una VM,
+otro cálculo terminado y una corrección de contexto retenida.
+[Ensayo y límites](../modernization/active-reboot-review.md).
+
 Esto no afirma que el host original o sus efectos remotos estén detenidos. Por
 ejemplo, una publicación enviada después del snapshot podría haber terminado en
 el remoto sin aparecer en la copia. Hay que consultar ese resultado original

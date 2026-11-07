@@ -1,0 +1,153 @@
+{
+  "inspection": "Readonly extraction from original terminal VM disk; source and restored SQLite checked independently",
+  "disk_sha256": "f894c8cfbd300aeb0c8dcd33df72f53de47203784a81bf60997444826859b080",
+  "files": {
+    "before.json": "8435f6f0109414e77fa58e78abb4a9889742eac9acbd4600dc9f1a456cb9ae1e",
+    "init.json": "a9e90b3299b15eea4b9023deb2abe743121a30fbaeb7c8c8a490f31e3b5756dc",
+    "result.json": "a63a930361be4effbf178aa118ab219983003c479f9f677027914e40ceedb50a",
+    "original.db": "9069211a1b5b12d9f39f462df47822965802cefdfff03c578e1266e78bf818e6",
+    "restored.db": "66c7c7ae5b873c55a0ce6823cf1adeaea4234215d6585dd4ced976739beb30d8",
+    "original.db-wal": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "original.db-shm": "fd4c9fda9cd3f9ae7c962b0ddf37232294d55580e1aa165aa06129b8549389eb",
+    "restored.db-wal": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "restored.db-shm": "fd4c9fda9cd3f9ae7c962b0ddf37232294d55580e1aa165aa06129b8549389eb"
+  },
+  "databases": {
+    "original": {
+      "jobs": [
+        {
+          "id": "0d7e9ebb-f2a7-4a19-8643-0e7eae7d1843",
+          "operation_key": "completed-calculation",
+          "status": "exited",
+          "exit_code": 0,
+          "stdout": "200\n",
+          "stderr": "",
+          "error": null
+        },
+        {
+          "id": "1547549a-f022-405a-bec6-e5ffbee6f826",
+          "operation_key": "interrupted-command",
+          "status": "dispatching",
+          "exit_code": null,
+          "stdout": "",
+          "stderr": "",
+          "error": null
+        }
+      ],
+      "peers": [
+        {
+          "id": "45fecbf49b86459c98d8beb996a22dbd",
+          "kind": "native",
+          "state": "prepared",
+          "boot_id": "ef670f1a-39e6-45b7-9855-588d0bb1a852"
+        },
+        {
+          "id": "a1b5765acaa24355af450171095a523e",
+          "kind": "command",
+          "state": "bound",
+          "boot_id": "ef670f1a-39e6-45b7-9855-588d0bb1a852"
+        },
+        {
+          "id": "de990c00c381449c97a1bccfbcd14c16",
+          "kind": "business",
+          "state": "prepared",
+          "boot_id": "ef670f1a-39e6-45b7-9855-588d0bb1a852"
+        }
+      ],
+      "runs": [
+        {
+          "id": "2a478c54-d3d7-4fd2-84af-3fe642261f42",
+          "status": "running",
+          "context_version": 2,
+          "prompt": "Retain the completed calculation and interrupted command without replay"
+        }
+      ],
+      "archives": [],
+      "context_revisions": [
+        {
+          "version": 2,
+          "statement": "Conservar el cálculo terminado y no repetir comandos tras el reinicio."
+        }
+      ],
+      "model_dispatches": 0,
+      "integrity": "ok",
+      "foreign_keys": "ok"
+    },
+    "restored": {
+      "jobs": [
+        {
+          "id": "0d7e9ebb-f2a7-4a19-8643-0e7eae7d1843",
+          "operation_key": "completed-calculation",
+          "status": "exited",
+          "exit_code": 0,
+          "stdout": "200\n",
+          "stderr": "",
+          "error": null
+        },
+        {
+          "id": "1547549a-f022-405a-bec6-e5ffbee6f826",
+          "operation_key": "interrupted-command",
+          "status": "unknown",
+          "exit_code": null,
+          "stdout": "",
+          "stderr": "",
+          "error": "RestoredHistoricalExecution"
+        }
+      ],
+      "peers": [
+        {
+          "id": "45fecbf49b86459c98d8beb996a22dbd",
+          "kind": "native",
+          "state": "prepared",
+          "boot_id": "ef670f1a-39e6-45b7-9855-588d0bb1a852"
+        },
+        {
+          "id": "a1b5765acaa24355af450171095a523e",
+          "kind": "command",
+          "state": "bound",
+          "boot_id": "ef670f1a-39e6-45b7-9855-588d0bb1a852"
+        },
+        {
+          "id": "de990c00c381449c97a1bccfbcd14c16",
+          "kind": "business",
+          "state": "prepared",
+          "boot_id": "ef670f1a-39e6-45b7-9855-588d0bb1a852"
+        }
+      ],
+      "runs": [
+        {
+          "id": "2a478c54-d3d7-4fd2-84af-3fe642261f42",
+          "status": "superseded",
+          "context_version": 2,
+          "prompt": "Retain the completed calculation and interrupted command without replay"
+        }
+      ],
+      "archives": [
+        {
+          "peer_id": "de990c00c381449c97a1bccfbcd14c16",
+          "original_state": "prepared",
+          "origin_boot_id": "ef670f1a-39e6-45b7-9855-588d0bb1a852"
+        },
+        {
+          "peer_id": "45fecbf49b86459c98d8beb996a22dbd",
+          "original_state": "prepared",
+          "origin_boot_id": "ef670f1a-39e6-45b7-9855-588d0bb1a852"
+        },
+        {
+          "peer_id": "a1b5765acaa24355af450171095a523e",
+          "original_state": "bound",
+          "origin_boot_id": "ef670f1a-39e6-45b7-9855-588d0bb1a852"
+        }
+      ],
+      "context_revisions": [
+        {
+          "version": 2,
+          "statement": "Conservar el cálculo terminado y no repetir comandos tras el reinicio."
+        }
+      ],
+      "model_dispatches": 0,
+      "integrity": "ok",
+      "foreign_keys": "ok"
+    }
+  }
+}

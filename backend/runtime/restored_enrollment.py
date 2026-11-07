@@ -35,10 +35,10 @@ def _exclusive_owner(database):
 
 
 def _retain_as_history(db, database, snapshot_id):
-    """Withdraw copied permissions and pause graphs without fabricating physical or remote closure."""
+    """Preserve completed jobs and mark copied active jobs unknown; withdraw grants and pause graphs without claiming physical or remote closure."""
     now = time.time()
     store = SQLiteRunStore(database)
-    changes = {'runs': [], 'paused_plans': [], 'expired_questions': []}
+    changes = {'runs': [], 'jobs': [], 'paused_plans': [], 'expired_questions': []}
     for item in db.execute("SELECT id,project_id FROM runtime_runs WHERE status IN ('queued','running','cancelling','reconciling','waiting_input','needs_review')").fetchall():
         row = store._row(db,item['project_id'],item['id'])
         original = {key:row[key] for key in ('id','project_id','task_id','status','fence','current_attempt_id','attempt_status')}
@@ -49,6 +49,10 @@ def _retain_as_history(db, database, snapshot_id):
             'detail':'Conservado como historial de la instalación original. No se reanudó aquí; revisa los efectos del host original antes de pedir otra ejecución.',
         })
         changes['runs'].append(original)
+    changes['jobs'] = [dict(row) for row in db.execute(
+        "SELECT id,run_id,attempt_id,status,exit_code,error,ended_at FROM runtime_jobs WHERE status<>'exited' ORDER BY rowid"
+    )]
+    db.execute("UPDATE runtime_jobs SET status='unknown',error=COALESCE(error,'RestoredHistoricalExecution') WHERE status IN ('dispatching','cancelling')")
     for row in db.execute("SELECT id,project_id FROM runtime_plan_executions WHERE status='active'").fetchall():
         changes['paused_plans'].append(dict(row))
     db.execute("UPDATE runtime_plan_executions SET status='paused',updated_at=? WHERE status='active'",(now,))

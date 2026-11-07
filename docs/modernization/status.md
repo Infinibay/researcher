@@ -4,6 +4,17 @@ La implementación del [plan completo](../superpowers/plans/2026-10-31-actualiza
 
 ## Resultados disponibles
 
+- **VM con comando activo comprobada:** reinicio observado con el dueño, el
+  namespace del peer y el hijo vivos; cálculo200, instrucción/corrección y estados
+  históricos conservados. Se corrigió la reinscripción para presentar como
+  desconocidos los jobs interrumpidos, sin repetirlos ni inventar cierre. Las dos
+  bases se verificaron desde el disco retenido. Cero modelos/cuentas reales;
+  servicio/VM cerrados.607 archivos coinciden y23 definiciones están documentadas.
+  Fuente27 aprobados/3 fallos históricos de preparación; wheel24/los mismos3.
+  Bloque15min57s; siguiente principal: revalidación de prompts y consumidores.
+  [Informe](active-reboot-review.md), [validación](active-reboot-results.json),
+  [inspección independiente](active-reboot-disk-inspection.json).
+
 - **Recuperación de servicio activo corregida:** una caída real reveló que el
   recibo local dejaba ocupada la concesión global e impedía continuar. Ahora se
   verifica y retira el dominio original, incluidos recibos anteriores, conservando

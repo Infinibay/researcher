@@ -8059,3 +8059,67 @@ service-crash coverage above. Preserve old prepared regression and all failures.
 Other macro work: human/other-profile/scientific communication, stale prompt
 reviews, Ken/Chroma/licenses, owner historical-data location/import,12-page
 acceptance. Independent whole-plan review after macro tasks and deferred details.
+
+
+## 2026-11-07 08:26:45UTC — active VM reboot brief
+
+Previous goal turn PROGRESS:cbf8a9f, corrected real subscription/Ken service
+crash with global retirement and explicit continuation. Current task extends
+existing actual-VM reboot from prepared-only registration to a real active
+command/native subprocess. Preserve prior prepared-case behavior. PID1 must
+observe the original holder and bound peer alive at the reboot boundary; never
+reboot the owner host or put its real account/network inside the guest. Public
+backup-after-reboot/restore/enrollment must preserve committed data and unknown
+job/result state without replay or falsely marking archived peers closed.
+Validate the installed current wheel, guest guards and original QEMU handle;
+retain failures and do not infer parent/process closure merely from a changed
+boot UUID in arbitrary copies. All broader macro scope remains active.
+
+
+## 2026-11-07 08:42:42UTC — active VM reboot checkpoint
+
+Block08:26:45–08:42:42UTC15min57s to validation/record cutoff. PROGRESS.
+Ruling: use the real account-free Codex command peer for the isolated-kernel
+failure, preserving separate actual-model service-crash evidence — no NIC or
+real credentials in the VM — does not prove inference during guest reboot,
+power-loss recovery or arbitrary original-host death from portable boot IDs.
+
+New --active-command mode retains the original holder while PID1 observes that
+holder, the exact private namespace init and actual command child alive by PID,
+start tick and namespace. A completed calculation200 precedes the active waiting
+command. PID1 then reboots the same QEMU, without first reaping the holder.
+Public backup-after-reboot/verify/restore/enrollment and installed HTTP retained
+tasks/attachment pass; source peers remain2prepared/1bound and gain copied
+archival provenance. Original input/context2 retained, no command replay.
+
+Found another core gap before VM execution: copied dispatching/cancelling jobs
+kept an apparent active status.3RED storage regressions; enrollment now marks
+those copies unknown and retains original job metadata in historical_work.jobs,
+including original errors, partial stdout/cancel intent and unchanged completed
+receipts. Original DB remains untouched; no exit/ended/physical-closure fiction.
+No schema change. Current source/installed wheel607files324productive match.
+WheelSHA4da361b1f3dbe95a19d1f9e6427a362696358115f54982e9fa6467cb52504cfe.
+
+Actual VMv1 failed before peer admission: storage correction returns int, not
+HTTP dict; original disk/log retained, powered off. VMv2 passes23.95s including
+preparation,2boots and shutdown,1QEMU for that case. Both original VM handles
+terminal;0models/realaccounts. Sourcebootef670f1a-39e6-45b7-9855-588d0bb1a852,
+secondboote7cf7fa7-6f6e-4b01-93d4-4deaa82ebec3. Readonly debugfs extraction and
+independent SQL inspection of both disk databases verifies2jobs/3peers/context,
+200preserved/unknowninterrupted,0dispatches,integrity/FKs. Initial extractor's
+relative URI error was corrected against the same disk, without VM replay.
+
+Source30cases:27PASS/3known historical fixture failures; installed27cases:
+24PASS/the same3FAIL,0skip. Exact failures already exist in current-global-results:
+reboot backups at56/57 and inverse test call the58inverse on the59fixture. Keep
+raw exit1 and suite_green=false; do not mistake package-check receipt for green.
+New3job regressions and3guard tests pass.23definitions documented;18RuffDD086.
+No frontend/global suite/new page acceptance.43broadscenarios/0of12pages remain.
+
+Next main block, not started: revalidate prompt inventory and consumer decisions
+(previously83candidates/23current/60stale). Preserve actual catalog policies and
+historical identities, examine source before marking reviewed, use book skills
+where they inform reasoning; do not autoapprove hashes. Human/other-profile/
+scientific evaluation remains distinct. Then security/licenses, owner historical
+data, full12-page acceptance and other recovery remain. All macro tasks before
+all details; publish updated done/current/pending and measured start at transition.

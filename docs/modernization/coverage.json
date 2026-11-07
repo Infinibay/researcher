@@ -539,7 +539,13 @@
         "docs/modernization/service-crash-results.json",
         "docs/modernization/recovery-domain-packaging.json",
         "backend/tests/runtime/test_recovery_domain.py",
-        "evals/runtime/run_service_crash.py"
+        "evals/runtime/run_service_crash.py",
+        "docs/modernization/active-reboot-review.md",
+        "docs/modernization/active-reboot-results.json",
+        "docs/modernization/active-reboot-disk-inspection.json",
+        "docs/modernization/active-reboot-packaging.json",
+        "backend/tests/runtime/test_restored_jobs.py",
+        "evals/operation/reboot_guest.py"
       ],
       "remaining": [
         "Durable product startup/shutdown and all tool lifecycle integration; old flows are not covered by owned command evidence",
@@ -696,7 +702,13 @@
         "docs/modernization/service-crash-results.json",
         "docs/modernization/recovery-domain-packaging.json",
         "backend/tests/runtime/test_recovery_domain.py",
-        "evals/runtime/run_service_crash.py"
+        "evals/runtime/run_service_crash.py",
+        "docs/modernization/active-reboot-review.md",
+        "docs/modernization/active-reboot-results.json",
+        "docs/modernization/active-reboot-disk-inspection.json",
+        "docs/modernization/active-reboot-packaging.json",
+        "backend/tests/runtime/test_restored_jobs.py",
+        "evals/operation/reboot_guest.py"
       ]
     },
     "E06": {
@@ -796,7 +808,13 @@
         "docs/modernization/service-crash-results.json",
         "docs/modernization/recovery-domain-packaging.json",
         "backend/tests/runtime/test_recovery_domain.py",
-        "evals/runtime/run_service_crash.py"
+        "evals/runtime/run_service_crash.py",
+        "docs/modernization/active-reboot-review.md",
+        "docs/modernization/active-reboot-results.json",
+        "docs/modernization/active-reboot-disk-inspection.json",
+        "docs/modernization/active-reboot-packaging.json",
+        "backend/tests/runtime/test_restored_jobs.py",
+        "evals/operation/reboot_guest.py"
       ]
     },
     "E07": {
@@ -2315,7 +2333,13 @@
         "docs/modernization/recovery-policy-packaging.json",
         "backend/db/wiki_migration.py",
         "backend/tests/research/test_wiki_migration.py",
-        "docs/modernization/recovery-policy-before-wiki-fix-packaging.json"
+        "docs/modernization/recovery-policy-before-wiki-fix-packaging.json",
+        "docs/modernization/active-reboot-review.md",
+        "docs/modernization/active-reboot-results.json",
+        "docs/modernization/active-reboot-disk-inspection.json",
+        "docs/modernization/active-reboot-packaging.json",
+        "backend/tests/runtime/test_restored_jobs.py",
+        "evals/operation/reboot_guest.py"
       ],
       "implemented": [
         "Managed installation data backup/verification/another-path restore preserves SQLite, uploads and linked Git worktrees.82source/82installed tests pass; restored execution remains pending enrollment. No production-data or operational recovery acceptance.",
@@ -4640,6 +4664,28 @@
         "Active-process VM/kernel restart",
         "Broader destructive/recovery scenarios and historical owner data",
         "Human comprehension and full interface acceptance"
+      ]
+    },
+    "active_vm_reboot": {
+      "status": "verified",
+      "scope": "Controlled same-QEMU kernel restart with an actual native command peer and child alive; retained completed calculation, unknown interrupted job and archived peer provenance. No model inference in the VM or historical owner-data claim.",
+      "evidence": [
+        "docs/modernization/active-reboot-review.md",
+        "docs/modernization/active-reboot-results.json",
+        "docs/modernization/active-reboot-disk-inspection.json",
+        "docs/modernization/active-reboot-packaging.json",
+        "backend/tests/runtime/test_restored_jobs.py",
+        "evals/operation/reboot_guest.py"
+      ],
+      "verified": [
+        "Original holder/private peer namespace/command child observed alive by guest PID1",
+        "Public backup-after-reboot, restore and enrollment followed by installed HTTP reads",
+        "Independent readonly inspection of original VM disk confirms preserved original and restored state,2jobs/3peers/context and no replay"
+      ],
+      "limits": [
+        "No power-loss or distributed-original-host closure proof",
+        "Current schema59; three old historical-schema fixture failures remain visible",
+        "Human comprehension and full page acceptance remain open"
       ]
     }
   }

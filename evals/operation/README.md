@@ -55,6 +55,15 @@ comprueba el rechazo de la autoridad anterior y ejecuta los comandos públicos d
 copia tras reboot, restauración y reinscripción. Comprueba un proceso no-op real
 y lee los datos retenidos mediante la API nativa instalada.
 
+Con `--active-command`, el primer arranque mantiene un peer real de comandos
+Codex y su hijo ejecutando hasta el reinicio. Primero guarda un cálculo terminado;
+después inicia un comando que espera. PID1 comprueba el dueño original, el init
+de su namespace privado y el hijo mediante PID, inicio y namespace antes de
+reiniciar. Conserva un recibo de esa observación y no cierra el preparador antes
+del reboot. El segundo arranque exige el cálculo anterior intacto, el comando
+interrumpido como `unknown`, los peers originales archivados sin cierre inventado
+y la corrección de contexto conservada. Ningún comando se repite.
+
 ```bash
 /ruta/al/entorno/bin/python -I evals/operation/reboot_vm.py \
   --output /ruta/privada/ensayo-vm-nuevo \
@@ -80,9 +89,12 @@ los auxiliares `reboot_guest*.py` como administración del host.
 El plazo corresponde al proceso QEMU original. Al vencer, el harness termina
 ese proceso y conserva `disk.raw`, `serial.log` y `host-result.json`; no reintenta.
 Un timeout del observador externo requiere seguir el mismo handle. Este ensayo
-no cubre pérdida de energía, datos reales del propietario, un agente nativo
-ejecutándose durante el reboot ni prueba de cierre del host original.
+no cubre pérdida de energía, datos reales del propietario ni inferencia de modelo
+durante el reboot. La prueba con comando activo es distinta de la prueba con sólo
+un registro preparado. Sus recibos copiados tampoco prueban por sí solos el cierre
+de un host original arbitrario.
 [Resultado y alcance del ensayo actual](../../docs/modernization/reboot-recovery-results.json).
+[Ensayo con proceso activo](../../docs/modernization/active-reboot-review.md).
 
 ## Importación de SQL, archivos y Chroma reales sobre datos sintéticos
 

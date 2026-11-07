@@ -116,6 +116,7 @@ def prepare(args, output):
               'model_cache':'/state/models','token_file':'/state/synthetic-account.json',
               'cgroup_parent':'/sys/fs/cgroup/researcher','project_turn_limit':1,'project_token_limit':1}
     (payload/'assets.json').write_text(json.dumps(config))
+    (payload/'eval-mode.json').write_text(json.dumps({'active_command': args.active_command}))
     disk = output/'disk.raw'
     with disk.open('xb') as stream:
         stream.truncate(4*1024**3)
@@ -179,6 +180,8 @@ def main():
     for name in ('output','qemu','kernel','assets','runtime-env'):
         parser.add_argument('--'+name,type=Path,required=True)
     parser.add_argument('--timeout',type=int,default=240)
+    parser.add_argument('--active-command', action='store_true',
+                        help='Keep a real Codex command peer and child alive until the guest kernel restarts; no inference')
     args = parser.parse_args()
     for name in ('qemu','kernel','assets','runtime_env'):
         setattr(args,name,getattr(args,name).resolve(strict=True))

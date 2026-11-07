@@ -612,3 +612,14 @@ Seis avisos Ruff en los archivos inspeccionados:4 de imports y2 de variables sin
 uso. Resolver después de todas las capacidades principales; no repetir modelos
 ni la suite global por ese pulido. [Ubicaciones](service-crash-lint.json).
 La VM con proceso activo y demás recuperación siguen como trabajo principal.
+
+
+## DD086 · Estilo tras VM activa y jobs restaurados
+
+Dieciocho avisos Ruff: imports, registros de fixtures que requieren alias,
+context managers, forma de dict, shebang del helper invocado mediante Python y
+captura deliberada de fallos del init. El ensayo real comprueba el recorrido
+central; retomar ese pulido después de todas las capacidades principales.
+[Ubicaciones](active-reboot-lint.json). Los3 fallos de preparación histórica de
+reboot ya están documentados en DD081 y en la suite global previa; no constituyen
+una suite actual verde ni se solucionan ahora por cambios cosméticos.

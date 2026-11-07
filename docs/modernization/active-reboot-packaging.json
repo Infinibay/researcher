@@ -1,0 +1,47 @@
+{
+  "base_commit": "cbf8a9f",
+  "wheel": "researcher-0.1.0-cp312-cp312-linux_x86_64.whl",
+  "wheel_sha256": "4da361b1f3dbe95a19d1f9e6427a362696358115f54982e9fa6467cb52504cfe",
+  "source_files_matching_wheel_and_installation": 607,
+  "product_files_matching": 324,
+  "observed": {
+    "cases": 27,
+    "passed": 24,
+    "failed": 3,
+    "skipped": 0,
+    "backend_modules": 226,
+    "all_backend_imports_from_native_env": true,
+    "seconds": 20.984,
+    "exit_code": 1
+  },
+  "tests": [
+    "backend/tests/runtime/test_restored_jobs.py",
+    "backend/tests/runtime/test_restored_enrollment.py",
+    "backend/tests/runtime/test_reboot_backup.py"
+  ],
+  "real_model_turns": 0,
+  "limits": [
+    "Selected tests, not the global suite",
+    "Synthetic managed installation data, no historical user-data migration",
+    "Three existing historical-schema fixture setup failures retained; current-schema restoration and new job tests must pass",
+    "No model calls, external accounts or GitHub workflow execution"
+  ],
+  "known_fixture_failures": [
+    {
+      "name": "test_reboot_backup_restores_live_old_peer_as_history[56]",
+      "class": "",
+      "message": "RuntimeError: Reference provenance inverse refuses a newer schema"
+    },
+    {
+      "name": "test_reboot_backup_restores_live_old_peer_as_history[57]",
+      "class": "",
+      "message": "RuntimeError: Reference provenance inverse refuses a newer schema"
+    },
+    {
+      "name": "test_unused_archive_inverse_and_future_refusal_preserve_data",
+      "class": "",
+      "message": "RuntimeError: Reference provenance inverse refuses a newer schema"
+    }
+  ],
+  "suite_green": false
+}

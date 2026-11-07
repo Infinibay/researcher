@@ -1,0 +1,144 @@
+{
+  "checked_definitions": 23,
+  "all_documented": true,
+  "entries": [
+    {
+      "path": "backend/tests/runtime/test_restored_jobs.py",
+      "name": "<module>",
+      "line": 1,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_restored_jobs.py",
+      "name": "test_restored_jobs_preserve_completed_effects_and_original_uncertainty",
+      "line": 13,
+      "documented": true
+    },
+    {
+      "path": "evals/operation/test_reboot_guard.py",
+      "name": "<module>",
+      "line": 1,
+      "documented": true
+    },
+    {
+      "path": "evals/operation/test_reboot_guard.py",
+      "name": "identity",
+      "line": 13,
+      "documented": true
+    },
+    {
+      "path": "evals/operation/test_reboot_guard.py",
+      "name": "test_live_original_process_is_observable_but_changed_identity_is_rejected",
+      "line": 20,
+      "documented": true
+    },
+    {
+      "path": "evals/operation/test_reboot_guard.py",
+      "name": "test_exited_original_handle_cannot_be_reported_as_active",
+      "line": 30,
+      "documented": true
+    },
+    {
+      "path": "evals/operation/test_reboot_guard.py",
+      "name": "test_host_invocation_refuses_before_loading_reboot_syscalls",
+      "line": 43,
+      "documented": true
+    },
+    {
+      "path": "evals/operation/test_reboot_guard.py",
+      "name": "forbidden_libc",
+      "line": 47,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/restored_enrollment.py",
+      "name": "<module>",
+      "line": 1,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/restored_enrollment.py",
+      "name": "_retain_as_history",
+      "line": 37,
+      "documented": true
+    },
+    {
+      "path": "evals/operation/reboot_vm.py",
+      "name": "<module>",
+      "line": 1,
+      "documented": true
+    },
+    {
+      "path": "evals/operation/reboot_vm.py",
+      "name": "prepare",
+      "line": 60,
+      "documented": true
+    },
+    {
+      "path": "evals/operation/reboot_vm.py",
+      "name": "main",
+      "line": 177,
+      "documented": true
+    },
+    {
+      "path": "evals/operation/reboot_guest.py",
+      "name": "<module>",
+      "line": 1,
+      "documented": true
+    },
+    {
+      "path": "evals/operation/reboot_guest.py",
+      "name": "command_identity",
+      "line": 64,
+      "documented": true
+    },
+    {
+      "path": "evals/operation/reboot_guest.py",
+      "name": "before_active",
+      "line": 85,
+      "documented": true
+    },
+    {
+      "path": "evals/operation/reboot_guest.py",
+      "name": "after",
+      "line": 172,
+      "documented": true
+    },
+    {
+      "path": "evals/operation/reboot_guest.py",
+      "name": "main",
+      "line": 261,
+      "documented": true
+    },
+    {
+      "path": "evals/operation/reboot_guest_init.py",
+      "name": "<module>",
+      "line": 1,
+      "documented": true
+    },
+    {
+      "path": "evals/operation/reboot_guest_init.py",
+      "name": "observe_live_process",
+      "line": 19,
+      "documented": true
+    },
+    {
+      "path": "evals/operation/reboot_guest_init.py",
+      "name": "await_active_before_reboot",
+      "line": 29,
+      "documented": true
+    },
+    {
+      "path": "evals/operation/reboot_guest_init.py",
+      "name": "boot",
+      "line": 64,
+      "documented": true
+    },
+    {
+      "path": "evals/operation/reboot_guest_init.py",
+      "name": "main",
+      "line": 126,
+      "documented": true
+    }
+  ]
+}

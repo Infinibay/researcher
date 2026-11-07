@@ -28,7 +28,44 @@ que se pueda comparar el avance; no presentar microajustes como tareas principal
 - Última suite global: `9fb873c`,2210 casos,2178 pasan,31 fallan y1 error de fixture; sin omisiones. La carrera de backup encontrada se corrigió después con40 pruebas instaladas. No se declara una nueva corrida global verde; la referencia `0c8b8d9` queda como evidencia histórica.
 - Los 43 escenarios amplios siguen abiertos en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Etapa actual: recuperación de servicio comprobada; VM activa siguiente
+## Etapa actual: VM activa comprobada; prompts siguientes
+
+Bloque medido **08:26:45–08:42:42 UTC**, **15 min 57 s**. Se comprobó el
+reinicio del mismo invitado mientras su dueño, namespace del peer y comando hijo
+seguían vivos. La restauración conserva el cálculo200, la instrucción/corrección
+y tres peers con estados originales archivados; el comando interrumpido queda
+`unknown`, sin ejecución repetida ni cierre inventado. Se corrigió esa omisión
+en la reinscripción. La base original permanece igual.
+
+La segunda VM pasó en23,95s y cerró su servicio y QEMU; la primera falló antes
+admitir el peer por un retorno mal interpretado en el evaluador y se conserva.
+Cero modelos/cuentas reales. Inspección independiente de ambas bases del disco
+retenido confirma los datos.607 archivos coinciden,324 productivos;23 definiciones
+documentadas. Pruebas fuente:27 aprobadas/3 fallos históricos de preparación;
+instaladas:24 aprobadas/los mismos3 fallos. No se declara suite verde.
+[Informe](active-reboot-review.md), [recibos](active-reboot-results.json),
+[inspección del disco](active-reboot-disk-inspection.json).
+
+**Lista actualizada al cambiar de tarea:**
+- Terminado: reinicio de VM con un comando activo e historial de jobs restaurados,
+  **15 min 57 s**. Alcance distinto de inferencia real o pérdida de energía.
+- Terminado previamente: recuperación de servicio activo, **21 min 39 s**;
+  continuidad/preguntas respondibles, **19 min 50 s**.
+- Siguiente principal: revalidación de prompts y consumidores; revisar las60
+  decisiones estáticas desactualizadas del inventario previo. Todavía no comenzó;
+  publicar inicio al comenzar.
+- Pendiente: evaluación humana/otros perfiles/científica, seguridad Ken/Chroma y
+  licencias, datos históricos del propietario, aceptación integral de12 páginas
+  y demás recuperación.
+- Después de todas las capacidades principales: detalles acumulados, validación
+  final y revisión independiente. DD086 conserva18 avisos de estilo; los3 fallos
+  históricos ya estaban registrados en la suite global anterior y DD081.
+
+No hubo nueva suite global ni aceptación de páginas. Siguen43 escenarios amplios
+abiertos y0/12 páginas completamente aceptadas. No hay un porcentaje global
+sustentado. La lista y el tiempo por transición se mantienen tras compactar.
+
+## Etapa anterior: recuperación de servicio comprobada; VM activa siguiente
 
 Inicio medido: **2026-11-07 08:03:22 UTC**. Corte de validación/registro:
 **08:25:01 UTC**, **21 min 39 s**. La caída real encontró una concesión global

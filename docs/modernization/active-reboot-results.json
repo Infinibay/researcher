@@ -1,0 +1,142 @@
+{
+  "base_commit": "cbf8a9f",
+  "started_at": "2026-11-07T08:26:45Z",
+  "status": "active_vm_reboot_and_copied_job_uncertainty_verified",
+  "source": {
+    "cases": 30,
+    "passed": 27,
+    "failed": 3,
+    "errors": 0,
+    "seconds": 20.228
+  },
+  "installed": {
+    "cases": 27,
+    "passed": 24,
+    "failed": 3,
+    "skipped": 0,
+    "backend_modules": 226,
+    "all_backend_imports_from_native_env": true,
+    "seconds": 20.984,
+    "exit_code": 1
+  },
+  "suite_green": false,
+  "known_historical_fixture_failures": [
+    {
+      "name": "test_reboot_backup_restores_live_old_peer_as_history[56]",
+      "message": "RuntimeError: Reference provenance inverse refuses a newer schema"
+    },
+    {
+      "name": "test_reboot_backup_restores_live_old_peer_as_history[57]",
+      "message": "RuntimeError: Reference provenance inverse refuses a newer schema"
+    },
+    {
+      "name": "test_unused_archive_inverse_and_future_refusal_preserve_data",
+      "message": "RuntimeError: Reference provenance inverse refuses a newer schema"
+    }
+  ],
+  "prior_global_receipt_sha256": "eed91947765baa925ed4050be5857f64d4a19d72c1d105b1f8a3e2ae421c2d05",
+  "red_tests_failed": 3,
+  "wheel_sha256": "4da361b1f3dbe95a19d1f9e6427a362696358115f54982e9fa6467cb52504cfe",
+  "vm": {
+    "status": "passed",
+    "model_turns": 0,
+    "preparation": {
+      "ken_model_files": 26,
+      "host_dynamic_libraries": 20,
+      "real_account_copied": false,
+      "kernel_sha256": "c3132370c0d126faf45a97559ca985e254c14f7cb9a7fd5ed2bc9e22ee0c7ddd"
+    },
+    "source_boot_id": "ef670f1a-39e6-45b7-9855-588d0bb1a852",
+    "observed_boot_id": "e7cf7fa7-6f6e-4b01-93d4-4deaa82ebec3",
+    "original_authority_unchanged": true,
+    "normal_old_authority_refused": true,
+    "old_peer_state_preserved": "bound",
+    "archival_history_retained": true,
+    "new_authority_id": "68c6cb9d-e9f2-46f7-aa0e-91ecd6fda4a6",
+    "kernel_probe": {
+      "child_exit_code": 0,
+      "domain_removed": true
+    },
+    "source_authority_id": "dcc3a7ee-e8de-43d5-993b-865e4c846b1d",
+    "resources": {
+      "native_version": "codex-cli 0.166.0",
+      "native_sha256": "b8a11fedf24b2dfb59a70c9e52b030f9a508dcd49cd2dd0d41956f4c785156b8",
+      "code_host_sha256": "657f4e902726e05867c937b583049d5997e057f8cd0ab40450633c9c9ef8d630",
+      "ken_version": "0.18.0",
+      "ken_artifacts_verified": 26,
+      "credential_snapshot_valid": true,
+      "remote_entitlement_verified": false
+    },
+    "snapshot_id": "354b429fdd3e4d57959d91c1c2a2ea62",
+    "schema_version": 59,
+    "service_exit": 143,
+    "installed_backend": true,
+    "http_retained_data_verified": true,
+    "real_credentials_copied": false,
+    "old_work_replayed": false,
+    "active_process_evidence": {
+      "holder_and_native_and_command_observed_alive_at_reboot": true,
+      "completed_job_preserved": true,
+      "completed_stdout": "200\n",
+      "interrupted_status": "unknown",
+      "interrupted_exit_code": null,
+      "archived_peer_falsely_marked_closed": false,
+      "context_preserved": true,
+      "commands_replayed": false,
+      "init_witness": {
+        "boot_id": "ef670f1a-39e6-45b7-9855-588d0bb1a852",
+        "holder_alive": true,
+        "peer_alive": true,
+        "command_alive": true,
+        "holder_pid": 95,
+        "peer_id": "a1b5765acaa24355af450171095a523e",
+        "job_id": "1547549a-f022-405a-bec6-e5ffbee6f826"
+      }
+    },
+    "limits": "Controlled VM kernel restart and synthetic data. No power-loss, model inference, original-actor closure proof or historical user-data migration.",
+    "qemu_exit": 0,
+    "network_card": false,
+    "qemu_processes_started": 1,
+    "elapsed_seconds": 23.95
+  },
+  "original_vm_receipt_sha256": "2f976a54a0770e5702a8c365694ef65e24cb9c2badb47bfc63c29d8ab8c6dd71",
+  "serial_sha256": "8e7e6e53a327af6d3b7491f4b432a7a4299a467c5b81c025f42d4f3c32484629",
+  "readonly_disk_inspection": "active-reboot-disk-inspection.json",
+  "initial_failed_vm": {
+    "receipt": {
+      "status": "failed",
+      "model_turns": 0,
+      "preparation": {
+        "ken_model_files": 26,
+        "host_dynamic_libraries": 20,
+        "real_account_copied": false,
+        "kernel_sha256": "c3132370c0d126faf45a97559ca985e254c14f7cb9a7fd5ed2bc9e22ee0c7ddd"
+      },
+      "error_type": "RuntimeError",
+      "elapsed_seconds": 15.86
+    },
+    "receipt_sha256": "bb3c6e0adffc0a2053f0541e2c09ffb0f078d5e7cecacbbf248d3258b4da2223",
+    "serial_sha256": "0b82623a5bfc65f7be2b1c93096e2b6539f5a516c4c701f21bce3c83e4906c75",
+    "cause": "Evaluator indexed the integer returned by SQLiteRunStore.correct_context as an HTTP response object; failed before peer admission. Original VM powered off, new VM prepared after the correction."
+  },
+  "inspection_correction": "Initial readonly extractor used a relative SQLite file URI. Re-read the same extracted disk data with an absolute URI; no new VM or native operation.",
+  "model_turns": 0,
+  "real_account_copied": false,
+  "synthetic_account_validation_only": true,
+  "all_owned_vm_handles_terminal": true,
+  "qemu_processes_total_including_failed_preparation": 2,
+  "docstrings": 23,
+  "lint_findings": 18,
+  "global_suite_repeated": false,
+  "new_frontend_or_browser_acceptance": false,
+  "remaining": [
+    "Human and other-profile/scientific communication evaluation and stale prompt reviews",
+    "Ken/Chroma security and licenses",
+    "Historical owner data location/import",
+    "Full acceptance of12 pages",
+    "Broader failure recovery including power loss; no model inference inside this VM",
+    "Fine details only after macro capabilities, followed by independent whole-plan review"
+  ],
+  "record_cutoff_at": "2026-11-07T08:42:42Z",
+  "elapsed_seconds_to_record_cutoff": 957
+}
