@@ -1,0 +1,302 @@
+{
+  "base_commit": "7cfed60",
+  "changed_or_new_definitions_documented": 42,
+  "missing": [],
+  "contracts": [
+    {
+      "path": "backend/cli/bootstrap.py",
+      "symbol": "main",
+      "line": 9,
+      "docstring": "Run one explicit local administration action; help never reads assets, initializes data or downloads.",
+      "file_sha256": "e450d37608cd32ede394282b0e729114c30fcb8bf578cd1241e7e87c291e3902"
+    },
+    {
+      "path": "backend/runtime/authority_journal.py",
+      "symbol": "WitnessedAuthorityJournal",
+      "line": 171,
+      "docstring": "Open-only CAS storage. Commit receipts acknowledge data, never effects.\n\n``load`` verifies actual SQL rows and reconciles an interrupted witnessed\ntransition forward. ``commit`` deduplicates the original intent, even after\nlater transitions. The expected authority ID comes from external provision,\nnot from adopting a project DB or treating absent files as a fresh install.",
+      "file_sha256": "3121ad8b24c867a27f76a3a978d3799c61572d9358573109314f90fa3e32fb9c"
+    },
+    {
+      "path": "backend/runtime/authority_journal.py",
+      "symbol": "WitnessedAuthorityJournal.frozen_snapshot",
+      "line": 672,
+      "docstring": "Hold verified authority storage against mutations while an offline backup captures both stores.\n\nThis grants no actor authority. Callers must reject live concessions and\nmust not call other journal operations while holding this context.",
+      "file_sha256": "3121ad8b24c867a27f76a3a978d3799c61572d9358573109314f90fa3e32fb9c"
+    },
+    {
+      "path": "backend/runtime/installation_backup.py",
+      "symbol": "new_directory",
+      "line": 26,
+      "docstring": "Create a private new output root without following or replacing an existing destination.",
+      "file_sha256": "49e1bcc43463fdb3b08c94fc355fa633b6c757a2fcd4b502888ff9be40c0907a"
+    },
+    {
+      "path": "backend/runtime/installation_backup.py",
+      "symbol": "database_receipt",
+      "line": 35,
+      "docstring": "Check SQLite integrity/references and count all retained tables without reading row contents.",
+      "file_sha256": "49e1bcc43463fdb3b08c94fc355fa633b6c757a2fcd4b502888ff9be40c0907a"
+    },
+    {
+      "path": "backend/runtime/installation_backup.py",
+      "symbol": "_database_copy",
+      "line": 49,
+      "docstring": "Snapshot a separately locked SQLite writer into a closed, self-contained ordinary database file.",
+      "file_sha256": "49e1bcc43463fdb3b08c94fc355fa633b6c757a2fcd4b502888ff9be40c0907a"
+    },
+    {
+      "path": "backend/runtime/installation_backup.py",
+      "symbol": "_without_sidecars",
+      "line": 66,
+      "docstring": "Exclude only SQLite transient journals; their committed contents are captured through backup().",
+      "file_sha256": "49e1bcc43463fdb3b08c94fc355fa633b6c757a2fcd4b502888ff9be40c0907a"
+    },
+    {
+      "path": "backend/runtime/installation_backup.py",
+      "symbol": "_stable_inventory",
+      "line": 72,
+      "docstring": "Ignore directory timestamps affected by SQLite sidecars while retaining membership and file identities.",
+      "file_sha256": "49e1bcc43463fdb3b08c94fc355fa633b6c757a2fcd4b502888ff9be40c0907a"
+    },
+    {
+      "path": "backend/runtime/installation_backup.py",
+      "symbol": "_registered_paths",
+      "line": 77,
+      "docstring": "Require every currently registered upload, repository and active legacy worktree to be included.",
+      "file_sha256": "49e1bcc43463fdb3b08c94fc355fa633b6c757a2fcd4b502888ff9be40c0907a"
+    },
+    {
+      "path": "backend/runtime/installation_backup.py",
+      "symbol": "backup_installation",
+      "line": 93,
+      "docstring": "Freeze current data/authority, copy stable files and publish the manifest only after all checks pass.",
+      "file_sha256": "49e1bcc43463fdb3b08c94fc355fa633b6c757a2fcd4b502888ff9be40c0907a"
+    },
+    {
+      "path": "backend/runtime/installation_backup.py",
+      "symbol": "verify_backup",
+      "line": 192,
+      "docstring": "Validate every path, parent, object hash and SQLite snapshot before any restoration writes.",
+      "file_sha256": "49e1bcc43463fdb3b08c94fc355fa633b6c757a2fcd4b502888ff9be40c0907a"
+    },
+    {
+      "path": "backend/runtime/installation_backup.py",
+      "symbol": "_verify_backup",
+      "line": 197,
+      "docstring": "Share the caller's deadline across verification and subsequent restoration.",
+      "file_sha256": "49e1bcc43463fdb3b08c94fc355fa633b6c757a2fcd4b502888ff9be40c0907a"
+    },
+    {
+      "path": "backend/runtime/installation_restore.py",
+      "symbol": "relocated",
+      "line": 15,
+      "docstring": "Translate an absolute path under the original root while retaining unrelated historical text verbatim.",
+      "file_sha256": "d64cbe6ff504ec74e4c8a4983e443394502fa74962ea4564a523294acf892da2"
+    },
+    {
+      "path": "backend/runtime/installation_restore.py",
+      "symbol": "_git_metadata",
+      "line": 23,
+      "docstring": "Repair only Git administrative path files, preserving commits, branches, indexes and dirty worktrees.",
+      "file_sha256": "d64cbe6ff504ec74e4c8a4983e443394502fa74962ea4564a523294acf892da2"
+    },
+    {
+      "path": "backend/runtime/installation_restore.py",
+      "symbol": "_relocate_registrations",
+      "line": 65,
+      "docstring": "Move current storage registrations only; immutable run/candidate/grant/history bindings remain original.",
+      "file_sha256": "d64cbe6ff504ec74e4c8a4983e443394502fa74962ea4564a523294acf892da2"
+    },
+    {
+      "path": "backend/runtime/installation_restore.py",
+      "symbol": "restore_installation",
+      "line": 81,
+      "docstring": "Verify first, then restore new private storage with an explicit pending-enrollment barrier.\n\nFailure retains inspectable partial paths. Completion preserves data and\nhistorical evidence but does not authorize the new host to run old work.",
+      "file_sha256": "d64cbe6ff504ec74e4c8a4983e443394502fa74962ea4564a523294acf892da2"
+    },
+    {
+      "path": "backend/runtime/installation_restore.py",
+      "symbol": "restore_installation.target_name",
+      "line": 102,
+      "docstring": "Archive original launch/access authority as evidence instead of activating copied credentials.",
+      "file_sha256": "d64cbe6ff504ec74e4c8a4983e443394502fa74962ea4564a523294acf892da2"
+    },
+    {
+      "path": "backend/runtime/snapshot_files.py",
+      "symbol": "relative_name",
+      "line": 11,
+      "docstring": "Accept only canonical relative paths; manifests cannot choose paths outside their root.",
+      "file_sha256": "4322246a1d5ce96f0e7c2c332e9b76c11ae8e1a7bd7df148b822330eae4389fd"
+    },
+    {
+      "path": "backend/runtime/snapshot_files.py",
+      "symbol": "open_file",
+      "line": 22,
+      "docstring": "Pin each parent and a regular leaf without following source or backup symlinks.",
+      "file_sha256": "4322246a1d5ce96f0e7c2c332e9b76c11ae8e1a7bd7df148b822330eae4389fd"
+    },
+    {
+      "path": "backend/runtime/snapshot_files.py",
+      "symbol": "CopyBudget",
+      "line": 43,
+      "docstring": "Bound total copied bytes, entry count and elapsed time for one explicit local operation.",
+      "file_sha256": "4322246a1d5ce96f0e7c2c332e9b76c11ae8e1a7bd7df148b822330eae4389fd"
+    },
+    {
+      "path": "backend/runtime/snapshot_files.py",
+      "symbol": "CopyBudget.__init__",
+      "line": 46,
+      "docstring": "Reject invalid limits before creating partial destination state.",
+      "file_sha256": "4322246a1d5ce96f0e7c2c332e9b76c11ae8e1a7bd7df148b822330eae4389fd"
+    },
+    {
+      "path": "backend/runtime/snapshot_files.py",
+      "symbol": "CopyBudget.check",
+      "line": 54,
+      "docstring": "Fail visibly instead of truncating a file or silently omitting entries.",
+      "file_sha256": "4322246a1d5ce96f0e7c2c332e9b76c11ae8e1a7bd7df148b822330eae4389fd"
+    },
+    {
+      "path": "backend/runtime/snapshot_files.py",
+      "symbol": "inventory",
+      "line": 60,
+      "docstring": "List regular files, directories and symlinks without traversing a symlink or special device.",
+      "file_sha256": "4322246a1d5ce96f0e7c2c332e9b76c11ae8e1a7bd7df148b822330eae4389fd"
+    },
+    {
+      "path": "backend/runtime/snapshot_files.py",
+      "symbol": "inventory.walk",
+      "line": 64,
+      "docstring": "Visit pinned directory entries and capture metadata used to detect concurrent changes.",
+      "file_sha256": "4322246a1d5ce96f0e7c2c332e9b76c11ae8e1a7bd7df148b822330eae4389fd"
+    },
+    {
+      "path": "backend/runtime/snapshot_files.py",
+      "symbol": "copy_regular",
+      "line": 98,
+      "docstring": "Stream one stable regular file into a new private destination and return its content hash.",
+      "file_sha256": "4322246a1d5ce96f0e7c2c332e9b76c11ae8e1a7bd7df148b822330eae4389fd"
+    },
+    {
+      "path": "backend/runtime/snapshot_files.py",
+      "symbol": "digest_file",
+      "line": 121,
+      "docstring": "Hash an existing regular file through pinned no-follow descriptors within the deadline.",
+      "file_sha256": "4322246a1d5ce96f0e7c2c332e9b76c11ae8e1a7bd7df148b822330eae4389fd"
+    },
+    {
+      "path": "backend/tests/runtime/test_installation_backup.py",
+      "symbol": "git",
+      "line": 12,
+      "docstring": "Run bounded local Git fixture commands without network, hooks or inherited user configuration.",
+      "file_sha256": "2c846de31bb4963c3324deaed5e1448288e13bebb6353c70f19cf76889190f7a"
+    },
+    {
+      "path": "backend/tests/runtime/test_installation_backup.py",
+      "symbol": "installation",
+      "line": 19,
+      "docstring": "Prepare real data/authority formats with no native resources or model admission claimed.",
+      "file_sha256": "2c846de31bb4963c3324deaed5e1448288e13bebb6353c70f19cf76889190f7a"
+    },
+    {
+      "path": "backend/tests/runtime/test_installation_backup.py",
+      "symbol": "test_backup_restores_original_data_uploads_and_linked_git_at_another_path",
+      "line": 57,
+      "docstring": "Another-path restoration retains bytes/relations and blocks native startup until fresh enrollment.",
+      "file_sha256": "2c846de31bb4963c3324deaed5e1448288e13bebb6353c70f19cf76889190f7a"
+    },
+    {
+      "path": "backend/tests/runtime/test_installation_backup.py",
+      "symbol": "test_backup_refuses_active_writers_or_native_concession",
+      "line": 96,
+      "docstring": "A busy source or authority is an explicit refusal, never an inconsistent successful backup.",
+      "file_sha256": "2c846de31bb4963c3324deaed5e1448288e13bebb6353c70f19cf76889190f7a"
+    },
+    {
+      "path": "backend/tests/runtime/test_installation_backup.py",
+      "symbol": "test_restore_verifies_before_creating_destination",
+      "line": 117,
+      "docstring": "Tampering, missing objects and manifest path escapes cannot publish a partial usable restore.",
+      "file_sha256": "2c846de31bb4963c3324deaed5e1448288e13bebb6353c70f19cf76889190f7a"
+    },
+    {
+      "path": "backend/tests/runtime/test_installation_backup.py",
+      "symbol": "test_interrupted_backup_is_retained_without_completion_marker",
+      "line": 138,
+      "docstring": "Copy failure keeps inspectable partial files but never produces a usable manifest or overwrites source.",
+      "file_sha256": "2c846de31bb4963c3324deaed5e1448288e13bebb6353c70f19cf76889190f7a"
+    },
+    {
+      "path": "backend/tests/runtime/test_installation_backup.py",
+      "symbol": "test_interrupted_backup_is_retained_without_completion_marker.fail_later",
+      "line": 145,
+      "docstring": "Fail after a real initial file copy to exercise partial-output semantics.",
+      "file_sha256": "2c846de31bb4963c3324deaed5e1448288e13bebb6353c70f19cf76889190f7a"
+    },
+    {
+      "path": "backend/tests/runtime/test_installation_backup.py",
+      "symbol": "test_copy_detects_noncooperating_source_changes",
+      "line": 159,
+      "docstring": "A user edit during the frozen SQL interval cannot receive a successful snapshot manifest.",
+      "file_sha256": "2c846de31bb4963c3324deaed5e1448288e13bebb6353c70f19cf76889190f7a"
+    },
+    {
+      "path": "backend/tests/runtime/test_installation_backup.py",
+      "symbol": "test_copy_detects_noncooperating_source_changes.copy_and_change",
+      "line": 165,
+      "docstring": "Mutate an original file after its bytes have actually been copied.",
+      "file_sha256": "2c846de31bb4963c3324deaed5e1448288e13bebb6353c70f19cf76889190f7a"
+    },
+    {
+      "path": "backend/tests/runtime/test_installation_backup.py",
+      "symbol": "test_external_git_objects_cannot_be_silently_omitted",
+      "line": 176,
+      "docstring": "An alternate object store outside the captured root requires explicit storage migration first.",
+      "file_sha256": "2c846de31bb4963c3324deaed5e1448288e13bebb6353c70f19cf76889190f7a"
+    },
+    {
+      "path": "backend/tests/runtime/test_installation_backup.py",
+      "symbol": "test_abrupt_restore_exit_never_enables_host_or_overwrites_existing_state",
+      "line": 188,
+      "docstring": "Kill an owned restore child after actual copied data; original backup stays verifiable and partial host inactive.",
+      "file_sha256": "2c846de31bb4963c3324deaed5e1448288e13bebb6353c70f19cf76889190f7a"
+    },
+    {
+      "path": "backend/tests/runtime/test_installation_backup.py",
+      "symbol": "test_public_backup_verify_restore_commands_are_inference_free",
+      "line": 220,
+      "docstring": "The packaged command produces verifiable receipts and pending-enrollment storage with real files and SQL.",
+      "file_sha256": "2c846de31bb4963c3324deaed5e1448288e13bebb6353c70f19cf76889190f7a"
+    },
+    {
+      "path": "backend/tests/runtime/test_installation_backup.py",
+      "symbol": "test_snapshot_limits_fail_without_successful_manifest",
+      "line": 239,
+      "docstring": "Finite operator limits reject incomplete work instead of truncating snapshot data.",
+      "file_sha256": "2c846de31bb4963c3324deaed5e1448288e13bebb6353c70f19cf76889190f7a"
+    },
+    {
+      "path": "backend/tests/runtime/test_installation_backup.py",
+      "symbol": "test_outputs_cannot_enter_original_storage_through_parent_alias",
+      "line": 248,
+      "docstring": "Canonical parent checks protect original host and witness even when the caller uses a symlink alias.",
+      "file_sha256": "2c846de31bb4963c3324deaed5e1448288e13bebb6353c70f19cf76889190f7a"
+    },
+    {
+      "path": "backend/tests/runtime/test_installation_backup.py",
+      "symbol": "test_restored_owner_reads_upload_and_report_with_original_project_boundaries",
+      "line": 262,
+      "docstring": "Restored data is readable through actual HTTP handlers without configuring or admitting a native runtime.",
+      "file_sha256": "2c846de31bb4963c3324deaed5e1448288e13bebb6353c70f19cf76889190f7a"
+    },
+    {
+      "path": "backend/tests/runtime/test_installation_backup.py",
+      "symbol": "test_symlinked_git_metadata_requires_explicit_storage_capture",
+      "line": 293,
+      "docstring": "A .git symlink cannot make a snapshot silently omit its actual repository metadata.",
+      "file_sha256": "2c846de31bb4963c3324deaed5e1448288e13bebb6353c70f19cf76889190f7a"
+    }
+  ],
+  "scope": "New/changed Python definitions and modules in this delivery. Relevant new frontend modules and exported helpers also carry English JSDoc; no claim that all historic project definitions are documented."
+}

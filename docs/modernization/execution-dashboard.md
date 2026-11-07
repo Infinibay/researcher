@@ -19,7 +19,37 @@ o porcentaje. No reconstruir tiempos históricos a partir de recuerdos del chat.
 - Última suite global completada al retomar `0c8b8d9`: 2148 casos, 2045 pasan, 100 fallan y tres se omiten. Mismos 100 identificadores heredados; no se afirman causas idénticas. Pasan 965 casos del runtime. La política Git añadida después tiene verificación separada.
 - Los 43 escenarios amplios siguen abiertos en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Etapa actual: cadena de migraciones comprobada; sigue restauración
+## Etapa actual: copia/restauración de datos implementada; sigue reinscripción
+
+Los comandos `backup-host`, `verify-backup` y `restore-host` capturan datos
+consistentes, verifican manifiesto/hashes/conteos y restauran en otra carpeta.
+Conservan archivos, adjuntos, Git/worktrees y cambios sin commit; los lectores
+HTTP mantienen la separación por proyecto. La autoridad y el acceso antiguos
+quedan como evidencia, con ejecución bloqueada hasta reinscripción explícita.
+Pasan 82 pruebas de fuente y 82 instaladas; los 19 casos de restore se repitieron
+tras sincronizar los directorios finales. Coinciden 581 archivos Python/SQL,
+311 productivos. Las 42 definiciones nuevas/modificadas tienen docstrings.
+Tiempo medido hasta verificar: 19 minutos 42 segundos (02:50:44–03:10:26 UTC).
+[Guía](../architecture/installation-backup.md),
+[resultados](installation-backup-results.json), [paquete](installation-backup-packaging.json).
+
+**Lista vigente:**
+- Implementado en este tramo: copia/verificación/restauración de datos de una
+  instalación administrada. No se habilitó todavía ejecución en el host restaurado.
+- Siguiente principal, dentro del mismo bloque: reinscripción del nuevo host,
+  conciliación de intentos/entregas sin replay y recuperación tras reboot.
+- Pendiente de ubicación: datos históricos reales. Las tres rutas predeterminadas
+  están ausentes y se consultó al propietario; siguen informes sólo en archivos,
+  documentos sólo en Chroma y layouts históricos externos.
+- Después: historial/presupuestos; evaluaciones real, humana, científica y global;
+  seguridad de dependencias, aceptación de las 12 páginas y revisión final.
+- Al final: detalles secundarios; DD072 conserva 15 avisos de lint.
+
+El bloque de restauración operativa permanece abierto. Siguen abiertos los 43
+escenarios amplios y 0/12 páginas tienen aceptación integral. No se modificaron
+bases del usuario ni se hicieron llamadas a modelos, push, merge o despliegue.
+
+## Etapa anterior: cadena de migraciones comprobada; sigue restauración
 
 Un catálogo único conserva el orden18–56, permite avances con destino explícito
 sin downgrade y rechaza historial futuro o incompleto. Las39 interrupciones de

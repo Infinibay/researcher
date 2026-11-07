@@ -4,6 +4,16 @@ La implementación del [plan completo](../superpowers/plans/2026-10-31-actualiza
 
 ## Resultados disponibles
 
+- **Copia y restauración de datos disponibles por CLI:** manifiesto/hashes/conteos,
+  snapshots SQLite y traslado de adjuntos/repositorios/worktrees. Los lectores
+  HTTP conservan el alcance por proyecto. La restauración termina pendiente de
+  reinscripción, sin copiar permisos activos ni repetir trabajo. Pasan 82 pruebas
+  de fuente y 82 instaladas; 581 archivos coinciden y 42 definiciones tienen
+  docstrings. Siguen reinscripción, conciliación, reboot y datos históricos reales,
+  cuya ubicación se consultó porque las rutas predeterminadas están ausentes.
+  [Guía](../architecture/installation-backup.md),
+  [resultados](installation-backup-results.json), [paquete](installation-backup-packaging.json).
+
 - **Cadena de migraciones18–56 comprobada:** catálogo único y destinos de avance
   explícitos;39 procesos interrumpidos conservan el esquema previo y continúan
   sobre la misma base. Pasan208 pruebas dirigidas de fuente y127 instaladas;

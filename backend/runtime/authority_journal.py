@@ -668,6 +668,24 @@ class WitnessedAuthorityJournal:
             snapshot, _ = self._verified(conn)
             return snapshot
 
+    @contextmanager
+    def frozen_snapshot(self):
+        """Hold verified authority storage against mutations while an offline backup captures both stores.
+
+        This grants no actor authority. Callers must reject live concessions and
+        must not call other journal operations while holding this context.
+        """
+        failure = None
+        with self._operation() as conn:
+            snapshot, _ = self._verified(conn)
+            try:
+                yield snapshot
+            except BaseException as exc:
+                # The external copy can fail without implying corrupt authority.
+                failure = (exc, exc.__traceback__)
+        if failure is not None:
+            raise failure[0].with_traceback(failure[1])
+
     def commit(self, expected, *, transition_id, puts, deletes=()):
         _operation_id(transition_id)
         puts, deletes = _delta(puts, deletes)

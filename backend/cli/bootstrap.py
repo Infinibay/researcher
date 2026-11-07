@@ -1,4 +1,4 @@
-"""Explicit inference-free storage/host initialization and local resource diagnostics."""
+"""Explicit inference-free host initialization, data backup/restore and local diagnostics."""
 
 import argparse
 import json
@@ -7,9 +7,9 @@ import sys
 
 
 def main(argv=None):
-    """Run one explicit setup action; help never reads assets, initializes data or downloads."""
+    """Run one explicit local administration action; help never reads assets, initializes data or downloads."""
     parser = argparse.ArgumentParser(
-        description="Initialize NEW installation storage. Never repair/adopt a lost or existing deployment."
+        description="Initialize new storage, inspect resources, or explicitly back up and restore data. Restored execution requires separate enrollment."
     )
     commands = parser.add_subparsers(dest="command", required=True)
     database = commands.add_parser(
@@ -35,12 +35,36 @@ def main(argv=None):
     check = commands.add_parser('check-host', help='Verify local host resources without inference or downloads')
     check.add_argument('--directory', required=True)
     check.add_argument('--probe', action='store_true', help='Also birth and retire one fixed no-op kernel child')
+    for command, description in (
+        ('backup-host', 'Capture consistent installation data after closing native work'),
+        ('verify-backup', 'Verify every backup object, path, database and manifest'),
+        ('restore-host', 'Restore data into a NEW directory; execution remains pending enrollment'),
+    ):
+        operation = commands.add_parser(command, help=description)
+        operation.add_argument('--directory' if command == 'backup-host' else '--backup', required=True)
+        if command != 'verify-backup':
+            operation.add_argument('--destination', required=True)
+        operation.add_argument('--max-bytes', type=int, default=20 * 1024**3)
+        operation.add_argument('--max-files', type=int, default=200000)
+        operation.add_argument('--timeout', type=int, default=300)
     options = parser.parse_args(argv)
     # Lazy import: even --help has no database/runtime/credential side effects.
     from backend.runtime.bootstrap import initialize_authority, initialize_database
 
     try:
-        if options.command == 'init-host':
+        if options.command in ('backup-host', 'verify-backup', 'restore-host'):
+            from backend.runtime.installation_backup import backup_installation, verify_backup
+            from backend.runtime.installation_restore import restore_installation
+
+            limits = {key: getattr(options, key) for key in ('max_bytes','max_files','timeout')}
+            if options.command == 'backup-host':
+                result = backup_installation(options.directory, options.destination, **limits)
+            elif options.command == 'restore-host':
+                result = restore_installation(options.backup, options.destination, **limits)
+            else:
+                manifest = verify_backup(options.backup, **limits)
+                result = {'status':'verified','snapshot_id':manifest['snapshot_id'],'entries':len(manifest['entries']),'bytes':manifest['bytes'],'execution_enrolled':False}
+        elif options.command == 'init-host':
             from backend.runtime.host_installation import initialize_host, _read_json
 
             result = initialize_host(options.directory, witness_dir=options.witness_dir, assets=_read_json(options.assets))
@@ -60,9 +84,9 @@ def main(argv=None):
             result = initialize_authority(
                 database_dir=options.database_dir, witness_dir=options.witness_dir
             )
-    except (OSError, ValueError, RuntimeError, sqlite3.DatabaseError) as exc:
+    except (OSError, ValueError, RuntimeError, sqlite3.DatabaseError, KeyError, TypeError) as exc:
         print(
-            f"Initialization refused/failed: {exc}. Keep any partial paths for inspection; "
+            f"Operation refused/failed: {exc}. Keep any partial paths for inspection; "
             "do not delete existing state or retry as a repair.",
             file=sys.stderr,
         )

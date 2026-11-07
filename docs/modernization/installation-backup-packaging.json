@@ -1,0 +1,32 @@
+{
+  "base_commit": "7cfed60",
+  "wheel": "researcher-0.1.0-cp312-cp312-linux_x86_64.whl",
+  "wheel_sha256": "b4df3f623039fc93272d845f7067fdfc6f2113f1679079dd86440bf7635c8a09",
+  "source_files_matching_wheel_and_installation": 581,
+  "product_files_matching": 311,
+  "observed": {
+    "cases": 82,
+    "passed": 82,
+    "failed": 0,
+    "skipped": 0,
+    "backend_modules": 208,
+    "all_backend_imports_from_native_env": true,
+    "seconds": 18.08,
+    "exit_code": 0
+  },
+  "tests": [
+    "backend/tests/runtime/test_installation_backup.py",
+    "backend/tests/runtime/test_authority_journal.py",
+    "backend/tests/runtime/test_authority_journal_crash.py",
+    "backend/tests/runtime/test_authority_history_reuse.py",
+    "backend/tests/runtime/test_host_installation.py",
+    "backend/tests/cli/test_bootstrap.py"
+  ],
+  "real_model_turns": 0,
+  "limits": [
+    "Selected tests, not the global suite",
+    "Synthetic managed installation data, no historical user-data migration",
+    "Restore ends pending enrollment; no reboot or restored native execution acceptance",
+    "Local Git, HTTP and SQLite are real; no model calls or remote repositories"
+  ]
+}

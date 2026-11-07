@@ -428,3 +428,20 @@ se corrigieron: prefijos completos y registros SQL correspondientes a su época.
 Las inversas con historial siguen rechazándose; no se rebajaron sus guardas.
 Restauración completa, datos reales e inversas/recuperación posteriores siguen
 siendo trabajo principal, no detalles diferidos.
+
+
+## DD072 — estilo tras la copia y restauración de datos
+
+Quince avisos de lint conservados en `installation-backup-lint.json`: orden de
+imports, dos imports sin uso, estilo de un contexto/comprensión, tipo de excepción
+y la captura de `BaseException` que preserva el error del consumidor fuera del
+bloque de autoridad. Revisar su intención antes de aplicar cambios automáticos.
+Se mantiene también el aviso heredado de Starlette/httpx. El pulido del módulo
+compartido de rutas administrativas Git puede esperar a todas las capacidades
+principales; el comportamiento de paths, límites y conservación sí está probado.
+
+Se corrigieron los fallos funcionales observados: el error de copia no se presenta
+como corrupción de autoridad; los enlaces Git relativos se resuelven desde la
+ubicación original; los destinos con alias no pueden entrar en los originales.
+La reinscripción, conciliación, reboot y migración de datos reales son trabajo
+principal pendiente, no detalles diferidos.

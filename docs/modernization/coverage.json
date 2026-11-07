@@ -1334,10 +1334,20 @@
         "backend/tests/api/test_local_access.py",
         "backend/tests/api/test_websocket_lifecycle.py",
         "frontend/tests",
-        "docs/modernization/local-access-evidence.json"
+        "docs/modernization/local-access-evidence.json",
+        "backend/runtime/installation_backup.py",
+        "backend/runtime/installation_restore.py",
+        "backend/runtime/snapshot_files.py",
+        "backend/tests/runtime/test_installation_backup.py",
+        "docs/architecture/installation-backup.md",
+        "docs/modernization/installation-backup-results.json",
+        "docs/modernization/installation-backup-packaging.json"
       ],
       "remaining": [
         "Full product runtime/client integration and browser acceptance; HTTP owner guard does not complete the entire scenario"
+      ],
+      "implemented": [
+        "Managed installation data backup/verification/another-path restore preserves SQLite, uploads and linked Git worktrees.82source/82installed tests pass; restored execution remains pending enrollment. No production-data or operational recovery acceptance."
       ]
     },
     "U01": {
@@ -1579,7 +1589,14 @@
         "backend/tests/runtime/migration_fixtures.py",
         "docs/architecture/forward-migrations.md",
         "docs/modernization/migration-chain-results.json",
-        "docs/modernization/migration-chain-packaging.json"
+        "docs/modernization/migration-chain-packaging.json",
+        "backend/runtime/installation_backup.py",
+        "backend/runtime/installation_restore.py",
+        "backend/runtime/snapshot_files.py",
+        "backend/tests/runtime/test_installation_backup.py",
+        "docs/architecture/installation-backup.md",
+        "docs/modernization/installation-backup-results.json",
+        "docs/modernization/installation-backup-packaging.json"
       ],
       "remaining": [
         "Historical and real-data migration plus complete restore validation",
@@ -1589,7 +1606,8 @@
       ],
       "implemented": [
         "Explicit new source/authority storage CLI, existing-only API/CLI/launcher startup and cancellation/failure cleanup; owned product fixture uses production initializer. No complete managed-host enrollment or restore claim.",
-        "Coherent forward catalog18–56 and explicit staged targets;39 abrupt child-writer interruptions resume original DB, historical fixtures/inverses preserve original data.208 source and127 installed directed cases pass; no real-data/full-restore acceptance."
+        "Coherent forward catalog18–56 and explicit staged targets;39 abrupt child-writer interruptions resume original DB, historical fixtures/inverses preserve original data.208 source and127 installed directed cases pass; no real-data/full-restore acceptance.",
+        "Managed installation data backup/verification/another-path restore preserves SQLite, uploads and linked Git worktrees.82source/82installed tests pass; restored execution remains pending enrollment. No production-data or operational recovery acceptance."
       ]
     },
     "runtime_comparison": {
@@ -2032,7 +2050,14 @@
         "backend/tests/runtime/migration_fixtures.py",
         "docs/architecture/forward-migrations.md",
         "docs/modernization/migration-chain-results.json",
-        "docs/modernization/migration-chain-packaging.json"
+        "docs/modernization/migration-chain-packaging.json",
+        "backend/runtime/installation_backup.py",
+        "backend/runtime/installation_restore.py",
+        "backend/runtime/snapshot_files.py",
+        "backend/tests/runtime/test_installation_backup.py",
+        "docs/architecture/installation-backup.md",
+        "docs/modernization/installation-backup-results.json",
+        "docs/modernization/installation-backup-packaging.json"
       ],
       "remaining": [
         "Complete real-data inventory/migration and full consistent backup/restore, including repos/worktrees/artifact files",
@@ -2047,17 +2072,34 @@
         "resolution": "Known historical version29 and max54 failures resolved by real forward prefixes and a catalog-bound latest-version assertion. Current version56 pinned by full-chain test;208source/127installed cases pass. Original observation remains historical evidence, not a current failure."
       },
       "implemented": [
-        "Coherent forward catalog18–56 and explicit staged targets;39 abrupt child-writer interruptions resume original DB, historical fixtures/inverses preserve original data.208 source and127 installed directed cases pass; no real-data/full-restore acceptance."
+        "Coherent forward catalog18–56 and explicit staged targets;39 abrupt child-writer interruptions resume original DB, historical fixtures/inverses preserve original data.208 source and127 installed directed cases pass; no real-data/full-restore acceptance.",
+        "Managed installation data backup/verification/another-path restore preserves SQLite, uploads and linked Git worktrees.82source/82installed tests pass; restored execution remains pending enrollment. No production-data or operational recovery acceptance."
       ]
     },
     "backup_restore": {
-      "status": "pending",
+      "status": "in_progress",
       "evidence": [
         "docs/architecture/forgejo-upgrade.md",
         "docs/modernization/forgejo-upgrade-results.json",
         "docker-compose.yml",
         "compose.podman.yml",
-        "evals/operation/forgejo_upgrade.py"
+        "evals/operation/forgejo_upgrade.py",
+        "backend/runtime/installation_backup.py",
+        "backend/runtime/installation_restore.py",
+        "backend/runtime/snapshot_files.py",
+        "backend/tests/runtime/test_installation_backup.py",
+        "docs/architecture/installation-backup.md",
+        "docs/modernization/installation-backup-results.json",
+        "docs/modernization/installation-backup-packaging.json"
+      ],
+      "implemented": [
+        "Managed installation data backup/verification/another-path restore preserves SQLite, uploads and linked Git worktrees.82source/82installed tests pass; restored execution remains pending enrollment. No production-data or operational recovery acceptance."
+      ],
+      "remaining": [
+        "Explicit restored-host enrollment and reconciliation without replay or rewriting original authority",
+        "Actual reboot and independent witness recovery",
+        "Historical real-data location/import, filesystem-only reports, Chroma-only documents and external legacy layouts",
+        "Full operational restore acceptance including native runtime after enrollment"
       ]
     },
     "design_audit": {

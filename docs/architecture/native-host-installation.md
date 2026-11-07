@@ -94,3 +94,13 @@ launcher instalado. Los pipes transfieren descriptores independientes al loop
 y liberan los originales: así, el cierre diferido no puede cerrar un descriptor
 que ya se reutilizó, y cerrar stdin sí entrega EOF al proceso. Se comprueba tanto
 con `asyncio` como con `uvloop`, incluyendo comandos y operaciones Git.
+
+
+## Copiar y restaurar los datos
+
+`researcher-bootstrap` incorpora `backup-host`, `verify-backup` y `restore-host`.
+Ver la [guía de copia y restauración](installation-backup.md). La copia incluye
+base, archivos y repositorios/worktrees; las cuentas y herramientas externas
+permanecen como referencias. Restaurar produce datos comprobados en otra ruta,
+con acceso/autoridad originales archivados y ejecución pendiente de reinscripción.
+La recuperación operativa completa tras reboot sigue abierta.

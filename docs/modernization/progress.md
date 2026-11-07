@@ -7619,3 +7619,34 @@ final details and whole-plan review.43broad scenarios remain open and0pagesfully
 accepted. No user data changed, model calls, push, merge, deployment or goal
 completion. Contract/results/package evidence: forward-migrations.md and
 migration-chain-{results,packaging,docstrings,lint}.json.
+
+
+## 2026-11-07 — installation data backup and relocation, enrollment still open
+
+Public bootstrap commands backup-host/verify-backup/restore-host now use verified
+authority freeze, SQLite writer locks/backup, stable no-follow file snapshots,
+manifest hashes/counts and explicit finite budgets. Refuse live grants/unclosed
+peers, changing sources, corrupt/missing objects, path/parent escapes, original
+storage overlap and uncaptured Git metadata. Restore preserves Git commits and
+dirty linked worktrees, remaps current registrations and retains immutable
+historical bindings. Original config/authority/access are archived; the new host
+marker is pending enrollment. HTTP upload/report reads preserve project scopes.
+
+82directed source tests pass;19restore cases rerun after directory fsync addition.
+82installed cases pass,208backend imports only from the noneditable environment,
+581PythonSQL files match(311product). Wheel fromsdist:
+b4df3f623039fc93272d845f7067fdfc6f2113f1679079dd86440bf7635c8a09.
+42changed/new definitions documented. DD072 defers15lint notices and inherited
+Starlette/httpx warning. Original red/exception/Git-relative failures retained.
+Real SQLite/Git/HTTP and an actual restore child exit92; no model or user data.
+
+Measured1182seconds(19m42s),02:50:44–03:10:26UTC. Default historical DB paths in
+original checkout(.data/infinibay.db,.researcher/researcher.db)and/research/infinibay.db
+are absent; no environment override. Async owner question requests real data path;
+response not yet available. Ken indexes are not product user data.
+
+Next principal step remains within full restore: fresh host enrollment and
+reconciliation of old runs/graph deliveries without replay or false closure;
+actual reboot, historical data/Chroma/filesystem-only import. Then history/budgets,
+human/scientific/global evaluation, dependency security,12page acceptance, details
+and final whole-plan review.43scenarios open,0acceptedpages. No push/merge/deploy.

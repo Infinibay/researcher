@@ -1,0 +1,116 @@
+{
+  "base_commit": "7cfed60",
+  "date": "2026-11-07",
+  "scope": "Managed installation data backup, verification and another-path restore pending enrollment; no operational recovery completion.",
+  "commands": [
+    "researcher-bootstrap backup-host --directory PATH --destination NEW_PATH",
+    "researcher-bootstrap verify-backup --backup PATH",
+    "researcher-bootstrap restore-host --backup PATH --destination NEW_PATH"
+  ],
+  "source_tests": [
+    {
+      "receipt": ".superpowers/sdd/2026-10-31-actualizacion-proyecto/installation-backup-source.xml",
+      "sha256": "75974ec49b1cc2d5bbbb73a321c92c5c76d8d8bf3250d481be7ceb5772456065",
+      "cases": 82,
+      "passed": 82,
+      "failed": 0,
+      "skipped": 0,
+      "seconds": 17.367
+    },
+    {
+      "receipt": ".superpowers/sdd/2026-10-31-actualizacion-proyecto/installation-backup-durability.xml",
+      "sha256": "3c5cfd9bf1c2bd49674808373f02d399f6f1f442aa148b68e85e87060ac86bf5",
+      "cases": 19,
+      "passed": 19,
+      "failed": 0,
+      "skipped": 0,
+      "seconds": 7.9
+    }
+  ],
+  "distinct_directed_source_cases": 82,
+  "final_restore_cases_retested_after_directory_sync": 19,
+  "files_and_data": [
+    "Real SQLite backup with source write locks and verified authority freeze",
+    "All recorded uploads/repositories/active legacy worktrees must belong to captured root",
+    "SHA256, byte counts, table counts, integrity/FK checks and completion manifest",
+    "Linked Git worktree administrative repair preserving commits and dirty files",
+    "Current path registrations relocated; immutable historical bindings unchanged",
+    "Old launch/authority/access archived; fresh auth directory and pending-enrollment launcher barrier",
+    "HTTP download/report reads preserve project boundaries; no configured runtime or native runs"
+  ],
+  "faults_verified": [
+    "Source database writer contention",
+    "Authority writer contention and active concession refusal",
+    "Missing/corrupted content object",
+    "Manifest traversal and symlink parent",
+    "Copy failure preserves incomplete folder without manifest",
+    "Concurrent user edit detected",
+    "External Git alternates and symlinked metadata refused",
+    "Owned restore child exits92 after two real copies; original backup remains valid and partial host has no startup marker",
+    "Existing/overlapping destinations and parent symlink aliases refused",
+    "Byte/file/time configuration limits"
+  ],
+  "prior_attempts": [
+    {
+      "log": "installation-backup-red.log",
+      "result": "9 failures: backup and restore modules absent"
+    },
+    {
+      "log": "installation-backup-first.log",
+      "result": "8 pass,1 fail: journal context translated external copy OSError into an authority error; exception propagation corrected"
+    },
+    {
+      "log": "installation-backup-second.log",
+      "result": "52 pass before expanded scenarios"
+    },
+    {
+      "log": "installation-backup-expanded.log",
+      "result": "14 pass,2 fail: relative Git metadata resolved against destination instead of original tree; corrected"
+    },
+    {
+      "log": "installation-backup-checked.log",
+      "result": "80 pass before final HTTP and symbolic Git checks"
+    }
+  ],
+  "documentation": {
+    "changed_or_new_python_definitions": 42,
+    "missing": 0,
+    "receipt": "installation-backup-docstrings.json"
+  },
+  "deferred": "DD072:15 lint notices and inherited Starlette/httpx warning; no polishing pass",
+  "historical_data_discovery": {
+    "checked_paths": [
+      "/home/andres/Proyects/researcher/.data/infinibay.db",
+      "/home/andres/Proyects/researcher/.researcher/researcher.db",
+      "/research/infinibay.db"
+    ],
+    "all_absent": true,
+    "environment_database_override_present": false,
+    "question": "Requested the historical installation/database location asynchronously; no response recorded yet",
+    "original_repository_only_sqlite_seen": "Ken index files, not evidence of a product/user database"
+  },
+  "real_model_turns": 0,
+  "user_data_changed": false,
+  "remaining_main_work": [
+    "Explicit restored-host re-enrollment without copying/rewriting original authority witness",
+    "Reconcile restored attempts and pending graph deliveries without replay or false closure",
+    "Actual reboot and independent witness recovery policy",
+    "Real historical data migration, filesystem-only report hydration and Chroma-only document export",
+    "External/custom legacy storage layouts",
+    "Later history/budgets, human/scientific/global evaluation, dependency security and12page acceptance"
+  ],
+  "limits": [
+    "No production-user data migration",
+    "No accepted operational restore with native execution; pending enrollment is intentional and incomplete",
+    "Local file/hash integrity does not authenticate an externally tampered manifest",
+    "No power-loss simulation; physical child interruption only",
+    "No new full global suite or whole-plan acceptance"
+  ],
+  "timing": {
+    "started_utc": "2026-11-07 02:50:44",
+    "verification_cutoff_utc": "2026-11-07 03:10:26",
+    "elapsed_seconds_to_verification": 1182,
+    "interpretation": "Measured time for data backup/restore delivery; operational recovery remains open"
+  },
+  "package_receipt": "installation-backup-packaging.json"
+}
