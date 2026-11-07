@@ -69,6 +69,24 @@ def _without_sidecars(items, databases):
     return {key: value for key, value in items.items() if key not in excluded}
 
 
+def _sqlite_sidecar(root, name):
+    """Recognize a reserved sidecar only through its no-follow SQLite base, never by suffix alone."""
+    for suffix in ('-wal', '-shm', '-journal'):
+        if name.endswith(suffix):
+            try:
+                with open_file(root, name[:-len(suffix)]) as source:
+                    return source.read(16) == b'SQLite format 3\x00'
+            except (OSError, ValueError):
+                # Unknown bases do not authorize omission; normal inventory/probing still applies.
+                return False
+    return False
+
+
+def _backup_inventory(root, budget):
+    """Ignore proven SQLite sidecars before stat/open because idle connection closure can remove them."""
+    return inventory(root, budget, exclude=lambda name: _sqlite_sidecar(root, name))
+
+
 def _stable_inventory(items):
     """Ignore directory timestamps affected by SQLite sidecars while retaining membership and file identities."""
     return {name: ({'kind': 'directory', 'mode': item['mode'], 'identity': item['identity'][:2]} if item['kind'] == 'directory' else item) for name, item in items.items()}
@@ -127,7 +145,7 @@ def backup_installation(directory, destination, *, after_reboot=False, **limits)
             for key, value in state.records.items() if isinstance(value, dict)
         )):
             raise ValueError('Close or reconcile native authority before taking a portable data backup')
-        first = inventory(root, budget)
+        first = _backup_inventory(root, budget)
         databases = set()
         for name, item in first.items():
             if item['kind'] == 'file':
@@ -153,7 +171,7 @@ def backup_installation(directory, destination, *, after_reboot=False, **limits)
 
             if unarchived_peers(db):
                 raise ValueError('Reconcile original unclosed peers before backup')
-        before = _without_sidecars(inventory(root, budget), databases)
+        before = _without_sidecars(_backup_inventory(root, budget), databases)
         _registered_paths(db, root, before)
         from backend.runtime.installation_restore import _git_metadata
 
@@ -182,7 +200,7 @@ def backup_installation(directory, destination, *, after_reboot=False, **limits)
             object_name = 'objects/authority-' + key
             details = copy_regular(source.parent, source.name, output / object_name, budget)
             external.append({'role': key, 'source_path': str(source), 'object': object_name, **details})
-        after = _without_sidecars(inventory(root, budget), databases)
+        after = _without_sidecars(_backup_inventory(root, budget), databases)
         if _stable_inventory(before) != _stable_inventory(after):
             raise ValueError('Installation changed while copying; partial backup retained without completion marker')
         # File hashes also catch changes from non-cooperating editors within the frozen DB interval.

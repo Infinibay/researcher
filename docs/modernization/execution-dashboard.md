@@ -22,10 +22,47 @@ lista en el documento además de publicarla en el chat, para retomarla tras comp
 
 - Codex por suscripción y Ken publicado ensayados. Fuentes/citas, informes draft y revisión documental independiente conectados. Desarrollo admitido desde Tareas/Conversación con captura y comprobaciones explícitas; revisión independiente solicitada desde Tareas y aceptación del propietario conectada. Publicación local desde aceptación conectada; recuperación local de sólo lectura conectada; transporte remoto configurable conectado; recuperación remota y controles de Tareas conectados; ejecución/activación antiguas por tarea y proyecto retiradas; auxiliares de generación/proveedor, herramientas antiguas y sus cinco bibliotecas retirados. También se retiraron API interna, CLI, servicios/listeners y flows/helpers antiguos. También se retiraron autonomía, plantillas históricas y lectores de proveedor sin consumidores; se conserva el control de parada de trabajadores registrados.
 - Interfaz: doce pilotos, 36/36 conceptos de escritorio y 12/12 móviles; todas las rutas tienen piloto y 0/12 páginas están completamente aceptadas.
-- Última suite global completada al retomar `0c8b8d9`: 2148 casos, 2045 pasan, 100 fallan y tres se omiten. Mismos 100 identificadores heredados; no se afirman causas idénticas. Pasan 965 casos del runtime. La política Git añadida después tiene verificación separada.
+- Última suite global: `9fb873c`,2210 casos,2178 pasan,31 fallan y1 error de fixture; sin omisiones. La carrera de backup encontrada se corrigió después con40 pruebas instaladas. No se declara una nueva corrida global verde; la referencia `0c8b8d9` queda como evidencia histórica.
 - Los 43 escenarios amplios siguen abiertos en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Etapa actual: eventos y reconexión comprobados; sigue evaluación global
+## Etapa actual: diagnóstico global cerrado y carrera del backup corregida
+
+La suite común sobre `9fb873c` terminó: **2210 casos,2178 pasan,31 fallan y1 error
+al preparar una prueba**, sin omisiones;23min46s de ejecución. Los776 archivos de
+código/pruebas inspeccionados conservaron sus hashes durante la corrida. De los
+100 fallos de la referencia antigua,75 ya no se recopilan,1 pasa y24 persisten.
+No es una suite global verde. [Resultado y clasificación](current-global-results.json).
+
+La carrera real del backup se reprodujo en cuatro combinaciones de base/ventana:
+SQLite cerraba su última conexión y quitaba archivos temporales antes de que el
+backup los abriera. Ahora se excluyen antes de consultar metadatos sólo si su base
+se reconoce como SQLite. Se conservan filas confirmadas y archivos del usuario
+con nombres parecidos; si desaparece uno de estos últimos, la copia se rechaza.
+Pasan38 pruebas centrales de fuente,2 de compatibilidad y40 instaladas;602 archivos
+Python/SQL coinciden,324 productivos. Las9 definiciones nuevas/modificadas tienen
+docstrings. [Corrección](backup-sidecar-results.json), [paquete](backup-sidecar-packaging.json).
+
+**Lista vigente al cambiar de tarea:**
+- Terminado: evaluación global y clasificación inicial, **27min20s**
+  (05:55:53–06:23:13 UTC);23min46s fueron ejecución de la suite.
+- Terminado: carrera del backup, **8 min 27 s** (06:23:13–06:31:40 UTC),
+  incluyendo reproducción, corrección, diagnóstico dirigido y verificación instalada.
+- Siguiente principal: evaluación de contexto y comunicación; casos reservados,
+  comparación de prompts y preparación de observación humana. Aún no comenzó.
+- Pendiente: datos históricos reales del propietario; recuperación más amplia;
+  evaluaciones reales/científicas restantes; seguridad; aceptación integral de12 páginas.
+- Al final de las capacidades principales: DD080/081 y los demás detalles,
+  seguido de revisión independiente de todo el plan.
+
+DD081 conserva24 casos del contrato antiguo de estados,5 preparaciones históricas,
+1 fixture ausente y1 límite de prueba pendiente. El caso de checks pasa en23,614s
+con límite diagnóstico60s; el límite común20s y los límites del producto siguen
+iguales. Ruff347/ESLint9 pendientes en el corte global;12 avisos en los tres
+archivos del arreglo. No se repite una suite de24min por ese pulido. Siguen43
+escenarios amplios y0/12 páginas completamente aceptadas. Falta `test:e2e` unificado
+y evaluación humana; no se reemplazan por estas pruebas dirigidas.
+
+## Etapa anterior: eventos y reconexión comprobados
 
 HTTP y WebSocket recuperan el mismo historial confirmado, con cursor exacto por
 ID. Cada cliente tiene su emisor y plazo; una conexión lenta no bloquea a otras.

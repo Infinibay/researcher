@@ -1,0 +1,2536 @@
+{
+  "base_commit": "9fb873c",
+  "scope": "Current global style checks; no code changes, no functional acceptance claim. Recheck changed files during the final cleanup.",
+  "backend": {
+    "command": "uvx --offline ruff check backend --output-format json",
+    "findings": 347,
+    "by_rule": {
+      "F401": 58,
+      "I001": 130,
+      "PLW1510": 26,
+      "S110": 9,
+      "BLE001": 21,
+      "UP017": 3,
+      "TRY004": 7,
+      "UP035": 3,
+      "LOG015": 1,
+      "UP045": 3,
+      "UP006": 3,
+      "F841": 2,
+      "FURB188": 1,
+      "RUF022": 3,
+      "SIM117": 14,
+      "RUF012": 3,
+      "C401": 1,
+      "RET501": 1,
+      "F811": 35,
+      "C408": 1,
+      "RUF059": 10,
+      "PLC0414": 10,
+      "ISC004": 1,
+      "S102": 1
+    },
+    "items": [
+      {
+        "path": "backend/api/dependencies.py",
+        "line": 9,
+        "column": 35,
+        "rule": "F401",
+        "message": "`backend.tools.base.db.DBConnection` imported but unused"
+      },
+      {
+        "path": "backend/api/dependencies.py",
+        "line": 9,
+        "column": 49,
+        "rule": "F401",
+        "message": "`backend.tools.base.db.execute_with_retry` imported but unused"
+      },
+      {
+        "path": "backend/api/dependencies.py",
+        "line": 9,
+        "column": 69,
+        "rule": "F401",
+        "message": "`backend.tools.base.db.get_db_path` imported but unused"
+      },
+      {
+        "path": "backend/api/main.py",
+        "line": 171,
+        "column": 5,
+        "rule": "I001",
+        "message": "Import block is un-sorted or un-formatted"
+      },
+      {
+        "path": "backend/api/models/agent.py",
+        "line": 5,
+        "column": 33,
+        "rule": "F401",
+        "message": "`pydantic.Field` imported but unused"
+      },
+      {
+        "path": "backend/api/models/chat.py",
+        "line": 3,
+        "column": 1,
+        "rule": "I001",
+        "message": "Import block is un-sorted or un-formatted"
+      },
+      {
+        "path": "backend/api/models/project.py",
+        "line": 5,
+        "column": 22,
+        "rule": "F401",
+        "message": "`datetime.datetime` imported but unused"
+      },
+      {
+        "path": "backend/api/research_dependencies.py",
+        "line": 3,
+        "column": 1,
+        "rule": "I001",
+        "message": "Import block is un-sorted or un-formatted"
+      },
+      {
+        "path": "backend/api/routes/git.py",
+        "line": 33,
+        "column": 1,
+        "rule": "I001",
+        "message": "Import block is un-sorted or un-formatted"
+      },
+      {
+        "path": "backend/api/routes/git.py",
+        "line": 359,
+        "column": 16,
+        "rule": "PLW1510",
+        "message": "`subprocess.run` without explicit `check` argument"
+      },
+      {
+        "path": "backend/api/routes/git.py",
+        "line": 607,
+        "column": 5,
+        "rule": "S110",
+        "message": "`try`-`except`-`pass` detected, consider logging the exception"
+      },
+      {
+        "path": "backend/api/routes/git.py",
+        "line": 607,
+        "column": 12,
+        "rule": "BLE001",
+        "message": "Do not catch blind exception: `Exception`"
+      },
+      {
+        "path": "backend/api/routes/health.py",
+        "line": 34,
+        "column": 5,
+        "rule": "S110",
+        "message": "`try`-`except`-`pass` detected, consider logging the exception"
+      },
+      {
+        "path": "backend/api/routes/health.py",
+        "line": 34,
+        "column": 12,
+        "rule": "BLE001",
+        "message": "Do not catch blind exception: `Exception`"
+      },
+      {
+        "path": "backend/api/routes/health.py",
+        "line": 43,
+        "column": 5,
+        "rule": "S110",
+        "message": "`try`-`except`-`pass` detected, consider logging the exception"
+      },
+      {
+        "path": "backend/api/routes/health.py",
+        "line": 43,
+        "column": 12,
+        "rule": "BLE001",
+        "message": "Do not catch blind exception: `Exception`"
+      },
+      {
+        "path": "backend/api/routes/health.py",
+        "line": 51,
+        "column": 35,
+        "rule": "UP017",
+        "message": "Use `datetime.UTC` alias"
+      },
+      {
+        "path": "backend/api/routes/health.py",
+        "line": 65,
+        "column": 12,
+        "rule": "BLE001",
+        "message": "Do not catch blind exception: `Exception`"
+      },
+      {
+        "path": "backend/api/routes/milestones.py",
+        "line": 9,
+        "column": 36,
+        "rule": "F401",
+        "message": "`backend.api.exceptions.EpicNotFound` imported but unused"
+      },
+      {
+        "path": "backend/api/routes/model_settings.py",
+        "line": 3,
+        "column": 1,
+        "rule": "I001",
+        "message": "Import block is un-sorted or un-formatted"
+      },
+      {
+        "path": "backend/api/routes/projects.py",
+        "line": 3,
+        "column": 1,
+        "rule": "I001",
+        "message": "Import block is un-sorted or un-formatted"
+      },
+      {
+        "path": "backend/api/routes/runs.py",
+        "line": 3,
+        "column": 1,
+        "rule": "I001",
+        "message": "Import block is un-sorted or un-formatted"
+      },
+      {
+        "path": "backend/api/routes/tasks.py",
+        "line": 144,
+        "column": 9,
+        "rule": "S110",
+        "message": "`try`-`except`-`pass` detected, consider logging the exception"
+      },
+      {
+        "path": "backend/api/routes/tasks.py",
+        "line": 144,
+        "column": 16,
+        "rule": "BLE001",
+        "message": "Do not catch blind exception: `Exception`"
+      },
+      {
+        "path": "backend/api/routes/tasks.py",
+        "line": 281,
+        "column": 13,
+        "rule": "S110",
+        "message": "`try`-`except`-`pass` detected, consider logging the exception"
+      },
+      {
+        "path": "backend/api/routes/tasks.py",
+        "line": 281,
+        "column": 20,
+        "rule": "BLE001",
+        "message": "Do not catch blind exception: `Exception`"
+      },
+      {
+        "path": "backend/api/routes/user_requests.py",
+        "line": 102,
+        "column": 5,
+        "rule": "S110",
+        "message": "`try`-`except`-`pass` detected, consider logging the exception"
+      },
+      {
+        "path": "backend/api/routes/user_requests.py",
+        "line": 102,
+        "column": 12,
+        "rule": "BLE001",
+        "message": "Do not catch blind exception: `Exception`"
+      },
+      {
+        "path": "backend/api/runtime_dependencies.py",
+        "line": 34,
+        "column": 9,
+        "rule": "TRY004",
+        "message": "Prefer `TypeError` exception for invalid type"
+      },
+      {
+        "path": "backend/api/websocket.py",
+        "line": 97,
+        "column": 20,
+        "rule": "BLE001",
+        "message": "Do not catch blind exception: `Exception`"
+      },
+      {
+        "path": "backend/cli/bootstrap.py",
+        "line": 69,
+        "column": 13,
+        "rule": "I001",
+        "message": "Import block is un-sorted or un-formatted"
+      },
+      {
+        "path": "backend/cli/bootstrap.py",
+        "line": 75,
+        "column": 13,
+        "rule": "I001",
+        "message": "Import block is un-sorted or un-formatted"
+      },
+      {
+        "path": "backend/cli/bootstrap.py",
+        "line": 87,
+        "column": 13,
+        "rule": "I001",
+        "message": "Import block is un-sorted or un-formatted"
+      },
+      {
+        "path": "backend/cli/bootstrap.py",
+        "line": 92,
+        "column": 13,
+        "rule": "I001",
+        "message": "Import block is un-sorted or un-formatted"
+      },
+      {
+        "path": "backend/cli/file_watcher.py",
+        "line": 7,
+        "column": 1,
+        "rule": "I001",
+        "message": "Import block is un-sorted or un-formatted"
+      },
+      {
+        "path": "backend/cli/file_watcher.py",
+        "line": 7,
+        "column": 8,
+        "rule": "F401",
+        "message": "`os` imported but unused"
+      },
+      {
+        "path": "backend/cli/file_watcher.py",
+        "line": 9,
+        "column": 1,
+        "rule": "UP035",
+        "message": "Import from `collections.abc` instead: `Callable`"
+      },
+      {
+        "path": "backend/cli/file_watcher.py",
+        "line": 9,
+        "column": 1,
+        "rule": "UP035",
+        "message": "`typing.Set` is deprecated, use `set` instead"
+      },
+      {
+        "path": "backend/cli/file_watcher.py",
+        "line": 18,
+        "column": 5,
+        "rule": "LOG015",
+        "message": "`warning()` call on root logger"
+      },
+      {
+        "path": "backend/cli/file_watcher.py",
+        "line": 39,
+        "column": 33,
+        "rule": "UP045",
+        "message": "Use `X | None` for type annotations"
+      },
+      {
+        "path": "backend/cli/file_watcher.py",
+        "line": 39,
+        "column": 55,
+        "rule": "UP006",
+        "message": "Use `set` instead of `Set` for type annotation"
+      },
+      {
+        "path": "backend/cli/file_watcher.py",
+        "line": 40,
+        "column": 25,
+        "rule": "UP045",
+        "message": "Use `X | None` for type annotations"
+      },
+      {
+        "path": "backend/cli/file_watcher.py",
+        "line": 59,
+        "column": 29,
+        "rule": "UP045",
+        "message": "Use `X | None` for type annotations"
+      },
+      {
+        "path": "backend/cli/file_watcher.py",
+        "line": 60,
+        "column": 25,
+        "rule": "UP006",
+        "message": "Use `set` instead of `Set` for type annotation"
+      },
+      {
+        "path": "backend/cli/file_watcher.py",
+        "line": 73,
+        "column": 13,
+        "rule": "F841",
+        "message": "Local variable `relative` is assigned to but never used"
+      },
+      {
+        "path": "backend/cli/file_watcher.py",
+        "line": 146,
+        "column": 36,
+        "rule": "BLE001",
+        "message": "Do not catch blind exception: `Exception`"
+      },
+      {
+        "path": "backend/cli/file_watcher.py",
+        "line": 149,
+        "column": 28,
+        "rule": "BLE001",
+        "message": "Do not catch blind exception: `Exception`"
+      },
+      {
+        "path": "backend/cli/file_watcher.py",
+        "line": 152,
+        "column": 16,
+        "rule": "BLE001",
+        "message": "Do not catch blind exception: `Exception`"
+      },
+      {
+        "path": "backend/cli/file_watcher.py",
+        "line": 192,
+        "column": 51,
+        "rule": "UP006",
+        "message": "Use `set` instead of `Set` for type annotation"
+      },
+      {
+        "path": "backend/communication/agent_messages.py",
+        "line": 8,
+        "column": 1,
+        "rule": "I001",
+        "message": "Import block is un-sorted or un-formatted"
+      },
+      {
+        "path": "backend/flows/event_bus.py",
+        "line": 6,
+        "column": 1,
+        "rule": "I001",
+        "message": "Import block is un-sorted or un-formatted"
+      },
+      {
+        "path": "backend/flows/event_bus.py",
+        "line": 12,
+        "column": 1,
+        "rule": "UP035",
+        "message": "Import from `collections.abc` instead: `Callable`"
+      },
+      {
+        "path": "backend/flows/event_bus.py",
+        "line": 31,
+        "column": 46,
+        "rule": "UP017",
+        "message": "Use `datetime.UTC` alias"
+      },
+      {
+        "path": "backend/git/branch_service.py",
+        "line": 107,
+        "column": 38,
+        "rule": "UP017",
+        "message": "Use `datetime.UTC` alias"
+      },
+      {
+        "path": "backend/git/forgejo_client.py",
+        "line": 56,
+        "column": 18,
+        "rule": "PLW1510",
+        "message": "`subprocess.run` without explicit `check` argument"
+      },
+      {
+        "path": "backend/git/local_worktree.py",
+        "line": 79,
+        "column": 17,
+        "rule": "PLW1510",
+        "message": "`subprocess.run` without explicit `check` argument"
+      },
+      {
+        "path": "backend/git/local_worktree.py",
+        "line": 151,
+        "column": 17,
+        "rule": "PLW1510",
+        "message": "`subprocess.run` without explicit `check` argument"
+      },
+      {
+        "path": "backend/git/local_worktree.py",
+        "line": 165,
+        "column": 9,
+        "rule": "PLW1510",
+        "message": "`subprocess.run` without explicit `check` argument"
+      },
+      {
+        "path": "backend/git/pr_service.py",
+        "line": 184,
+        "column": 9,
+        "rule": "FURB188",
+        "message": "Prefer `str.removesuffix()` over conditionally replacing with slice."
+      },
+      {
+        "path": "backend/git/services.py",
+        "line": 10,
+        "column": 11,
+        "rule": "RUF022",
+        "message": "`__all__` is not sorted"
+      },
+      {
+        "path": "backend/git/source_capsule.py",
+        "line": 3,
+        "column": 1,
+        "rule": "I001",
+        "message": "Import block is un-sorted or un-formatted"
+      },
+      {
+        "path": "backend/git/source_capsule.py",
+        "line": 102,
+        "column": 13,
+        "rule": "I001",
+        "message": "Import block is un-sorted or un-formatted"
+      },
+      {
+        "path": "backend/git/source_executor.py",
+        "line": 3,
+        "column": 1,
+        "rule": "I001",
+        "message": "Import block is un-sorted or un-formatted"
+      },
+      {
+        "path": "backend/git/source_executor.py",
+        "line": 5,
+        "column": 25,
+        "rule": "F401",
+        "message": "`dataclasses.asdict` imported but unused"
+      },
+      {
+        "path": "backend/git/source_executor.py",
+        "line": 85,
+        "column": 9,
+        "rule": "SIM117",
+        "message": "Use a single `with` statement with multiple contexts instead of nested `with` statements"
+      },
+      {
+        "path": "backend/git/source_operations.py",
+        "line": 149,
+        "column": 43,
+        "rule": "TRY004",
+        "message": "Prefer `TypeError` exception for invalid type"
+      },
+      {
+        "path": "backend/git/source_operations.py",
+        "line": 275,
+        "column": 9,
+        "rule": "I001",
+        "message": "Import block is un-sorted or un-formatted"
+      },
+      {
+        "path": "backend/git/source_operations.py",
+        "line": 289,
+        "column": 9,
+        "rule": "I001",
+        "message": "Import block is un-sorted or un-formatted"
+      },
+      {
+        "path": "backend/git/source_operations.py",
+        "line": 389,
+        "column": 9,
+        "rule": "I001",
+        "message": "Import block is un-sorted or un-formatted"
+      },
+      {
+        "path": "backend/git/source_registry.py",
+        "line": 3,
+        "column": 1,
+        "rule": "I001",
+        "message": "Import block is un-sorted or un-formatted"
+      },
+      {
+        "path": "backend/git/source_registry.py",
+        "line": 6,
+        "column": 43,
+        "rule": "F401",
+        "message": "`backend.git.source_operations.SourceLease` imported but unused"
+      },
+      {
+        "path": "backend/git/source_repair_program.py",
+        "line": 8,
+        "column": 1,
+        "rule": "I001",
+        "message": "Import block is un-sorted or un-formatted"
+      },
+      {
+        "path": "backend/git/source_repair_program.py",
+        "line": 33,
+        "column": 16,
+        "rule": "PLW1510",
+        "message": "`subprocess.run` without explicit `check` argument"
+      },
+      {
+        "path": "backend/git/source_service.py",
+        "line": 3,
+        "column": 1,
+        "rule": "I001",
+        "message": "Import block is un-sorted or un-formatted"
+      },
+      {
+        "path": "backend/git/source_service.py",
+        "line": 9,
+        "column": 74,
+        "rule": "F401",
+        "message": "`backend.git.source_operations.SourceRequest` imported but unused"
+      },
+      {
+        "path": "backend/git/source_service.py",
+        "line": 194,
+        "column": 16,
+        "rule": "BLE001",
+        "message": "Do not catch blind exception: `Exception`"
+      },
+      {
+        "path": "backend/git/worktree_manager.py",
+        "line": 74,
+        "column": 17,
+        "rule": "PLW1510",
+        "message": "`subprocess.run` without explicit `check` argument"
+      },
+      {
+        "path": "backend/git/worktree_manager.py",
+        "line": 80,
+        "column": 13,
+        "rule": "S110",
+        "message": "`try`-`except`-`pass` detected, consider logging the exception"
+      },
+      {
+        "path": "backend/git/worktree_manager.py",
+        "line": 80,
+        "column": 20,
+        "rule": "BLE001",
+        "message": "Do not catch blind exception: `Exception`"
+      },
+      {
+        "path": "backend/git/worktree_manager.py",
+        "line": 84,
+        "column": 9,
+        "rule": "PLW1510",
+        "message": "`subprocess.run` without explicit `check` argument"
+      },
+      {
+        "path": "backend/git/worktree_manager.py",
+        "line": 115,
+        "column": 21,
+        "rule": "PLW1510",
+        "message": "`subprocess.run` without explicit `check` argument"
+      },
+      {
+        "path": "backend/git/worktree_manager.py",
+        "line": 170,
+        "column": 17,
+        "rule": "PLW1510",
+        "message": "`subprocess.run` without explicit `check` argument"
+      },
+      {
+        "path": "backend/git/worktree_manager.py",
+        "line": 213,
+        "column": 21,
+        "rule": "PLW1510",
+        "message": "`subprocess.run` without explicit `check` argument"
+      },
+      {
+        "path": "backend/git/worktree_manager.py",
+        "line": 335,
+        "column": 22,
+        "rule": "PLW1510",
+        "message": "`subprocess.run` without explicit `check` argument"
+      },
+      {
+        "path": "backend/git/worktree_manager.py",
+        "line": 343,
+        "column": 17,
+        "rule": "PLW1510",
+        "message": "`subprocess.run` without explicit `check` argument"
+      },
+      {
+        "path": "backend/git/worktree_manager.py",
+        "line": 360,
+        "column": 26,
+        "rule": "PLW1510",
+        "message": "`subprocess.run` without explicit `check` argument"
+      },
+      {
+        "path": "backend/git/worktree_manager.py",
+        "line": 368,
+        "column": 21,
+        "rule": "PLW1510",
+        "message": "`subprocess.run` without explicit `check` argument"
+      },
+      {
+        "path": "backend/git/worktree_manager.py",
+        "line": 374,
+        "column": 13,
+        "rule": "S110",
+        "message": "`try`-`except`-`pass` detected, consider logging the exception"
+      },
+      {
+        "path": "backend/git/worktree_manager.py",
+        "line": 374,
+        "column": 20,
+        "rule": "BLE001",
+        "message": "Do not catch blind exception: `Exception`"
+      },
+      {
+        "path": "backend/git/worktree_manager.py",
+        "line": 400,
+        "column": 16,
+        "rule": "BLE001",
+        "message": "Do not catch blind exception: `Exception`"
+      },
+      {
+        "path": "backend/git/worktree_manager.py",
+        "line": 416,
+        "column": 16,
+        "rule": "BLE001",
+        "message": "Do not catch blind exception: `Exception`"
+      },
+      {
+        "path": "backend/git/worktree_manager.py",
+        "line": 441,
+        "column": 16,
+        "rule": "BLE001",
+        "message": "Do not catch blind exception: `Exception`"
+      },
+      {
+        "path": "backend/git/worktree_manager.py",
+        "line": 447,
+        "column": 21,
+        "rule": "PLW1510",
+        "message": "`subprocess.run` without explicit `check` argument"
+      },
+      {
+        "path": "backend/git/worktree_manager.py",
+        "line": 454,
+        "column": 17,
+        "rule": "S110",
+        "message": "`try`-`except`-`pass` detected, consider logging the exception"
+      },
+      {
+        "path": "backend/git/worktree_manager.py",
+        "line": 454,
+        "column": 24,
+        "rule": "BLE001",
+        "message": "Do not catch blind exception: `Exception`"
+      },
+      {
+        "path": "backend/planning/completion.py",
+        "line": 3,
+        "column": 1,
+        "rule": "I001",
+        "message": "Import block is un-sorted or un-formatted"
+      },
+      {
+        "path": "backend/research/context7.py",
+        "line": 44,
+        "column": 23,
+        "rule": "RUF012",
+        "message": "Mutable default value for class attribute"
+      },
+      {
+        "path": "backend/research/provider_http.py",
+        "line": 31,
+        "column": 23,
+        "rule": "RUF012",
+        "message": "Mutable default value for class attribute"
+      },
+      {
+        "path": "backend/research/spider.py",
+        "line": 48,
+        "column": 23,
+        "rule": "RUF012",
+        "message": "Mutable default value for class attribute"
+      },
+      {
+        "path": "backend/research/stdio_server.py",
+        "line": 51,
+        "column": 16,
+        "rule": "BLE001",
+        "message": "Do not catch blind exception: `Exception`"
+      },
+      {
+        "path": "backend/runtime/authority_journal.py",
+        "line": 688,
+        "column": 20,
+        "rule": "BLE001",
+        "message": "Do not catch blind exception: `BaseException`"
+      },
+      {
+        "path": "backend/runtime/branch_inputs.py",
+        "line": 3,
+        "column": 1,
+        "rule": "I001",
+        "message": "Import block is un-sorted or un-formatted"
+      },
+      {
+        "path": "backend/runtime/branch_inputs.py",
+        "line": 5,
+        "column": 8,
+        "rule": "F401",
+        "message": "`json` imported but unused"
+      },
+      {
+        "path": "backend/runtime/business_definitions.py",
+        "line": 7,
+        "column": 1,
+        "rule": "I001",
+        "message": "Import block is un-sorted or un-formatted"
+      },
+      {
+        "path": "backend/runtime/code_carryover.py",
+        "line": 141,
+        "column": 9,
+        "rule": "I001",
+        "message": "Import block is un-sorted or un-formatted"
+      },
+      {
+        "path": "backend/runtime/host_installation.py",
+        "line": 7,
+        "column": 1,
+        "rule": "I001",
+        "message": "Import block is un-sorted or un-formatted"
+      },
+      {
+        "path": "backend/runtime/host_installation.py",
+        "line": 32,
+        "column": 9,
+        "rule": "TRY004",
+        "message": "Prefer `TypeError` exception for invalid type"
+      },
+      {
+        "path": "backend/runtime/host_installation.py",
+        "line": 49,
+        "column": 5,
+        "rule": "I001",
+        "message": "Import block is un-sorted or un-formatted"
+      },
+      {
+        "path": "backend/runtime/host_installation.py",
+        "line": 67,
+        "column": 13,
+        "rule": "TRY004",
+        "message": "Prefer `TypeError` exception for invalid type"
+      },
+      {
+        "path": "backend/runtime/installation_backup.py",
+        "line": 7,
+        "column": 1,
+        "rule": "I001",
+        "message": "Import block is un-sorted or un-formatted"
+      },
+      {
+        "path": "backend/runtime/installation_backup.py",
+        "line": 7,
+        "column": 8,
+        "rule": "F401",
+        "message": "`hashlib` imported but unused"
+      },
+      {
+        "path": "backend/runtime/installation_backup.py",
+        "line": 263,
+        "column": 13,
+        "rule": "SIM117",
+        "message": "Use a single `with` statement with multiple contexts instead of nested `with` statements"
+      },
+      {
+        "path": "backend/runtime/installation_backup.py",
+        "line": 267,
+        "column": 8,
+        "rule": "C401",
+        "message": "Unnecessary generator (rewrite as a set comprehension)"
+      },
+      {
+        "path": "backend/runtime/installation_restore.py",
+        "line": 3,
+        "column": 1,
+        "rule": "I001",
+        "message": "Import block is un-sorted or un-formatted"
+      },
+      {
+        "path": "backend/runtime/legacy_chroma.py",
+        "line": 3,
+        "column": 1,
+        "rule": "I001",
+        "message": "Import block is un-sorted or un-formatted"
+      },
+      {
+        "path": "backend/runtime/legacy_handoff.py",
+        "line": 7,
+        "column": 1,
+        "rule": "I001",
+        "message": "Import block is un-sorted or un-formatted"
+      },
+      {
+        "path": "backend/runtime/legacy_import.py",
+        "line": 7,
+        "column": 1,
+        "rule": "I001",
+        "message": "Import block is un-sorted or un-formatted"
+      },
+      {
+        "path": "backend/runtime/legacy_import.py",
+        "line": 8,
+        "column": 8,
+        "rule": "F401",
+        "message": "`json` imported but unused"
+      },
+      {
+        "path": "backend/runtime/legacy_import.py",
+        "line": 28,
+        "column": 9,
+        "rule": "TRY004",
+        "message": "Prefer `TypeError` exception for invalid type"
+      },
+      {
+        "path": "backend/runtime/model_settings.py",
+        "line": 3,
+        "column": 1,
+        "rule": "I001",
+        "message": "Import block is un-sorted or un-formatted"
+      },
+      {
+        "path": "backend/runtime/owned_runtime.py",
+        "line": 416,
+        "column": 9,
+        "rule": "F841",
+        "message": "Local variable `audit` is assigned to but never used"
+      },
+      {
+        "path": "backend/runtime/owned_runtime.py",
+        "line": 675,
+        "column": 33,
+        "rule": "I001",
+        "message": "Import block is un-sorted or un-formatted"
+      },
+      {
+        "path": "backend/runtime/peer_broker.py",
+        "line": 8,
+        "column": 1,
+        "rule": "I001",
+        "message": "Import block is un-sorted or un-formatted"
+      },
+      {
+        "path": "backend/runtime/reboot_authority.py",
+        "line": 7,
+        "column": 1,
+        "rule": "I001",
+        "message": "Import block is un-sorted or un-formatted"
+      },
+      {
+        "path": "backend/runtime/reboot_authority.py",
+        "line": 112,
+        "column": 20,
+        "rule": "BLE001",
+        "message": "Do not catch blind exception: `BaseException`"
+      },
+      {
+        "path": "backend/runtime/recovery_receipt.py",
+        "line": 61,
+        "column": 9,
+        "rule": "TRY004",
+        "message": "Prefer `TypeError` exception for invalid type"
+      },
+      {
+        "path": "backend/runtime/restored_enrollment.py",
+        "line": 7,
+        "column": 1,
+        "rule": "I001",
+        "message": "Import block is un-sorted or un-formatted"
+      },
+      {
+        "path": "backend/runtime/restored_enrollment.py",
+        "line": 18,
+        "column": 44,
+        "rule": "F401",
+        "message": "`backend.runtime.snapshot_files.relative_name` imported but unused"
+      },
+      {
+        "path": "backend/runtime/snapshot_files.py",
+        "line": 8,
+        "column": 21,
+        "rule": "F401",
+        "message": "`pathlib.Path` imported but unused"
+      },
+      {
+        "path": "backend/runtime/snapshot_files.py",
+        "line": 14,
+        "column": 9,
+        "rule": "TRY004",
+        "message": "Prefer `TypeError` exception for invalid type"
+      },
+      {
+        "path": "backend/runtime/sqlite_runs.py",
+        "line": 968,
+        "column": 13,
+        "rule": "I001",
+        "message": "Import block is un-sorted or un-formatted"
+      },
+      {
+        "path": "backend/state/__init__.py",
+        "line": 12,
+        "column": 11,
+        "rule": "RUF022",
+        "message": "`__all__` is not sorted"
+      },
+      {
+        "path": "backend/tests/api/test_routes.py",
+        "line": 3,
+        "column": 1,
+        "rule": "I001",
+        "message": "Import block is un-sorted or un-formatted"
+      },
+      {
+        "path": "backend/tests/api/test_routes.py",
+        "line": 3,
+        "column": 8,
+        "rule": "F401",
+        "message": "`pytest` imported but unused"
+      },
+      {
+        "path": "backend/tests/cli/test_native_launcher.py",
+        "line": 33,
+        "column": 14,
+        "rule": "PLW1510",
+        "message": "`subprocess.run` without explicit `check` argument"
+      },
+      {
+        "path": "backend/tests/cli/test_native_launcher.py",
+        "line": 35,
+        "column": 15,
+        "rule": "PLW1510",
+        "message": "`subprocess.run` without explicit `check` argument"
+      },
+      {
+        "path": "backend/tests/flows/conftest.py",
+        "line": 5,
+        "column": 8,
+        "rule": "F401",
+        "message": "`os` imported but unused"
+      },
+      {
+        "path": "backend/tests/flows/conftest.py",
+        "line": 7,
+        "column": 8,
+        "rule": "F401",
+        "message": "`tempfile` imported but unused"
+      },
+      {
+        "path": "backend/tests/flows/conftest.py",
+        "line": 9,
+        "column": 38,
+        "rule": "F401",
+        "message": "`unittest.mock.patch` imported but unused"
+      },
+      {
+        "path": "backend/tests/flows/test_failed_status.py",
+        "line": 3,
+        "column": 1,
+        "rule": "I001",
+        "message": "Import block is un-sorted or un-formatted"
+      },
+      {
+        "path": "backend/tests/git/test_native_package_boundary.py",
+        "line": 18,
+        "column": 14,
+        "rule": "PLW1510",
+        "message": "`subprocess.run` without explicit `check` argument"
+      },
+      {
+        "path": "backend/tests/git/test_source_repair_program.py",
+        "line": 3,
+        "column": 1,
+        "rule": "I001",
+        "message": "Import block is un-sorted or un-formatted"
+      },
+      {
+        "path": "backend/tests/git/test_source_repair_program.py",
+        "line": 4,
+        "column": 21,
+        "rule": "F401",
+        "message": "`pathlib.Path` imported but unused"
+      },
+      {
+        "path": "backend/tests/git/test_source_repair_program.py",
+        "line": 17,
+        "column": 5,
+        "rule": "I001",
+        "message": "Import block is un-sorted or un-formatted"
+      },
+      {
+        "path": "backend/tests/git/test_source_repair_program.py",
+        "line": 29,
+        "column": 12,
+        "rule": "PLW1510",
+        "message": "`subprocess.run` without explicit `check` argument"
+      },
+      {
+        "path": "backend/tests/git/test_source_repair_program.py",
+        "line": 33,
+        "column": 12,
+        "rule": "PLW1510",
+        "message": "`subprocess.run` without explicit `check` argument"
+      },
+      {
+        "path": "backend/tests/git/test_worktree_manager.py",
+        "line": 10,
+        "column": 8,
+        "rule": "F401",
+        "message": "`sqlite3` imported but unused"
+      },
+      {
+        "path": "backend/tests/git/test_worktree_manager.py",
+        "line": 116,
+        "column": 18,
+        "rule": "PLW1510",
+        "message": "`subprocess.run` without explicit `check` argument"
+      },
+      {
+        "path": "backend/tests/git/test_worktree_manager.py",
+        "line": 165,
+        "column": 18,
+        "rule": "PLW1510",
+        "message": "`subprocess.run` without explicit `check` argument"
+      },
+      {
+        "path": "backend/tests/research/test_context7.py",
+        "line": 292,
+        "column": 9,
+        "rule": "SIM117",
+        "message": "Use a single `with` statement with multiple contexts instead of nested `with` statements"
+      },
+      {
+        "path": "backend/tests/research/test_knowledge_access.py",
+        "line": 94,
+        "column": 5,
+        "rule": "I001",
+        "message": "Import block is un-sorted or un-formatted"
+      },
+      {
+        "path": "backend/tests/research/test_spider.py",
+        "line": 3,
+        "column": 1,
+        "rule": "I001",
+        "message": "Import block is un-sorted or un-formatted"
+      },
+      {
+        "path": "backend/tests/research/test_spider.py",
+        "line": 260,
+        "column": 9,
+        "rule": "SIM117",
+        "message": "Use a single `with` statement with multiple contexts instead of nested `with` statements"
+      },
+      {
+        "path": "backend/tests/research/test_task_workspace.py",
+        "line": 158,
+        "column": 5,
+        "rule": "I001",
+        "message": "Import block is un-sorted or un-formatted"
+      },
+      {
+        "path": "backend/tests/research/test_task_workspace.py",
+        "line": 207,
+        "column": 9,
+        "rule": "SIM117",
+        "message": "Use a single `with` statement with multiple contexts instead of nested `with` statements"
+      },
+      {
+        "path": "backend/tests/research/test_web_policy.py",
+        "line": 3,
+        "column": 1,
+        "rule": "I001",
+        "message": "Import block is un-sorted or un-formatted"
+      },
+      {
+        "path": "backend/tests/runtime/conftest.py",
+        "line": 41,
+        "column": 5,
+        "rule": "RET501",
+        "message": "Do not explicitly `return None` in function if it is the only possible return value"
+      },
+      {
+        "path": "backend/tests/runtime/test_admission_migration.py",
+        "line": 11,
+        "column": 28,
+        "rule": "F401",
+        "message": "`backend.db.migrations` imported but unused"
+      },
+      {
+        "path": "backend/tests/runtime/test_admission_migration.py",
+        "line": 11,
+        "column": 40,
+        "rule": "F401",
+        "message": "`backend.db.peer_kind_migration` imported but unused"
+      },
+      {
+        "path": "backend/tests/runtime/test_admission_migration.py",
+        "line": 11,
+        "column": 61,
+        "rule": "F401",
+        "message": "`backend.db.wiki_migration` imported but unused"
+      },
+      {
+        "path": "backend/tests/runtime/test_agent_messages.py",
+        "line": 3,
+        "column": 1,
+        "rule": "I001",
+        "message": "Import block is un-sorted or un-formatted"
+      },
+      {
+        "path": "backend/tests/runtime/test_agent_messages.py",
+        "line": 127,
+        "column": 5,
+        "rule": "I001",
+        "message": "Import block is un-sorted or un-formatted"
+      },
+      {
+        "path": "backend/tests/runtime/test_agent_messages.py",
+        "line": 155,
+        "column": 91,
+        "rule": "F811",
+        "message": "Redefinition of unused `workspace_app` from line 6: `workspace_app` redefined here"
+      },
+      {
+        "path": "backend/tests/runtime/test_agent_messages.py",
+        "line": 181,
+        "column": 5,
+        "rule": "I001",
+        "message": "Import block is un-sorted or un-formatted"
+      },
+      {
+        "path": "backend/tests/runtime/test_agent_messages.py",
+        "line": 277,
+        "column": 9,
+        "rule": "SIM117",
+        "message": "Use a single `with` statement with multiple contexts instead of nested `with` statements"
+      },
+      {
+        "path": "backend/tests/runtime/test_check_state.py",
+        "line": 179,
+        "column": 5,
+        "rule": "I001",
+        "message": "Import block is un-sorted or un-formatted"
+      },
+      {
+        "path": "backend/tests/runtime/test_check_state.py",
+        "line": 199,
+        "column": 5,
+        "rule": "I001",
+        "message": "Import block is un-sorted or un-formatted"
+      },
+      {
+        "path": "backend/tests/runtime/test_code_candidate_state.py",
+        "line": 189,
+        "column": 5,
+        "rule": "I001",
+        "message": "Import block is un-sorted or un-formatted"
+      },
+      {
+        "path": "backend/tests/runtime/test_code_candidate_state.py",
+        "line": 236,
+        "column": 5,
+        "rule": "I001",
+        "message": "Import block is un-sorted or un-formatted"
+      },
+      {
+        "path": "backend/tests/runtime/test_code_flow_cutover.py",
+        "line": 3,
+        "column": 8,
+        "rule": "F401",
+        "message": "`importlib` imported but unused"
+      },
+      {
+        "path": "backend/tests/runtime/test_code_flow_cutover.py",
+        "line": 71,
+        "column": 28,
+        "rule": "F401",
+        "message": "`backend.db.migrations` imported but unused"
+      },
+      {
+        "path": "backend/tests/runtime/test_code_review_records.py",
+        "line": 298,
+        "column": 5,
+        "rule": "I001",
+        "message": "Import block is un-sorted or un-formatted"
+      },
+      {
+        "path": "backend/tests/runtime/test_code_review_records.py",
+        "line": 320,
+        "column": 5,
+        "rule": "I001",
+        "message": "Import block is un-sorted or un-formatted"
+      },
+      {
+        "path": "backend/tests/runtime/test_code_review_state.py",
+        "line": 374,
+        "column": 5,
+        "rule": "I001",
+        "message": "Import block is un-sorted or un-formatted"
+      },
+      {
+        "path": "backend/tests/runtime/test_code_review_state.py",
+        "line": 394,
+        "column": 5,
+        "rule": "I001",
+        "message": "Import block is un-sorted or un-formatted"
+      },
+      {
+        "path": "backend/tests/runtime/test_development_state.py",
+        "line": 97,
+        "column": 14,
+        "rule": "C408",
+        "message": "Unnecessary `dict()` call (rewrite as a literal)"
+      },
+      {
+        "path": "backend/tests/runtime/test_finding_review.py",
+        "line": 697,
+        "column": 5,
+        "rule": "I001",
+        "message": "Import block is un-sorted or un-formatted"
+      },
+      {
+        "path": "backend/tests/runtime/test_finding_review.py",
+        "line": 718,
+        "column": 5,
+        "rule": "I001",
+        "message": "Import block is un-sorted or un-formatted"
+      },
+      {
+        "path": "backend/tests/runtime/test_history_budget.py",
+        "line": 88,
+        "column": 5,
+        "rule": "RUF059",
+        "message": "Unpacked variable `run` is never used"
+      },
+      {
+        "path": "backend/tests/runtime/test_host_command_close.py",
+        "line": 17,
+        "column": 36,
+        "rule": "RUF059",
+        "message": "Unpacked variable `storage` is never used"
+      },
+      {
+        "path": "backend/tests/runtime/test_host_installation.py",
+        "line": 29,
+        "column": 5,
+        "rule": "I001",
+        "message": "Import block is un-sorted or un-formatted"
+      },
+      {
+        "path": "backend/tests/runtime/test_host_installation.py",
+        "line": 100,
+        "column": 5,
+        "rule": "I001",
+        "message": "Import block is un-sorted or un-formatted"
+      },
+      {
+        "path": "backend/tests/runtime/test_installation_backup.py",
+        "line": 21,
+        "column": 5,
+        "rule": "I001",
+        "message": "Import block is un-sorted or un-formatted"
+      },
+      {
+        "path": "backend/tests/runtime/test_installation_backup.py",
+        "line": 59,
+        "column": 5,
+        "rule": "I001",
+        "message": "Import block is un-sorted or un-formatted"
+      },
+      {
+        "path": "backend/tests/runtime/test_installation_backup.py",
+        "line": 98,
+        "column": 5,
+        "rule": "I001",
+        "message": "Import block is un-sorted or un-formatted"
+      },
+      {
+        "path": "backend/tests/runtime/test_installation_backup.py",
+        "line": 190,
+        "column": 5,
+        "rule": "I001",
+        "message": "Import block is un-sorted or un-formatted"
+      },
+      {
+        "path": "backend/tests/runtime/test_installation_backup.py",
+        "line": 264,
+        "column": 5,
+        "rule": "I001",
+        "message": "Import block is un-sorted or un-formatted"
+      },
+      {
+        "path": "backend/tests/runtime/test_investigation.py",
+        "line": 313,
+        "column": 28,
+        "rule": "F401",
+        "message": "`backend.db.migrations` imported but unused"
+      },
+      {
+        "path": "backend/tests/runtime/test_kernel_evaluation.py",
+        "line": 32,
+        "column": 5,
+        "rule": "I001",
+        "message": "Import block is un-sorted or un-formatted"
+      },
+      {
+        "path": "backend/tests/runtime/test_legacy_engine_removal.py",
+        "line": 4,
+        "column": 8,
+        "rule": "F401",
+        "message": "`threading` imported but unused"
+      },
+      {
+        "path": "backend/tests/runtime/test_legacy_engine_removal.py",
+        "line": 28,
+        "column": 5,
+        "rule": "I001",
+        "message": "Import block is un-sorted or un-formatted"
+      },
+      {
+        "path": "backend/tests/runtime/test_legacy_import.py",
+        "line": 3,
+        "column": 1,
+        "rule": "I001",
+        "message": "Import block is un-sorted or un-formatted"
+      },
+      {
+        "path": "backend/tests/runtime/test_legacy_import.py",
+        "line": 11,
+        "column": 58,
+        "rule": "F401",
+        "message": "`backend.tests.runtime.test_host_installation.host_assets` imported but unused"
+      },
+      {
+        "path": "backend/tests/runtime/test_legacy_import.py",
+        "line": 50,
+        "column": 84,
+        "rule": "F811",
+        "message": "Redefinition of unused `host_assets` from line 11: `host_assets` redefined here"
+      },
+      {
+        "path": "backend/tests/runtime/test_legacy_import.py",
+        "line": 52,
+        "column": 5,
+        "rule": "I001",
+        "message": "Import block is un-sorted or un-formatted"
+      },
+      {
+        "path": "backend/tests/runtime/test_legacy_import.py",
+        "line": 107,
+        "column": 5,
+        "rule": "I001",
+        "message": "Import block is un-sorted or un-formatted"
+      },
+      {
+        "path": "backend/tests/runtime/test_legacy_import.py",
+        "line": 182,
+        "column": 5,
+        "rule": "I001",
+        "message": "Import block is un-sorted or un-formatted"
+      },
+      {
+        "path": "backend/tests/runtime/test_legacy_import.py",
+        "line": 194,
+        "column": 5,
+        "rule": "I001",
+        "message": "Import block is un-sorted or un-formatted"
+      },
+      {
+        "path": "backend/tests/runtime/test_legacy_import.py",
+        "line": 196,
+        "column": 5,
+        "rule": "SIM117",
+        "message": "Use a single `with` statement with multiple contexts instead of nested `with` statements"
+      },
+      {
+        "path": "backend/tests/runtime/test_legacy_import.py",
+        "line": 246,
+        "column": 5,
+        "rule": "I001",
+        "message": "Import block is un-sorted or un-formatted"
+      },
+      {
+        "path": "backend/tests/runtime/test_legacy_import.py",
+        "line": 261,
+        "column": 12,
+        "rule": "PLW1510",
+        "message": "`subprocess.run` without explicit `check` argument"
+      },
+      {
+        "path": "backend/tests/runtime/test_migration_chain.py",
+        "line": 3,
+        "column": 8,
+        "rule": "F401",
+        "message": "`json` imported but unused"
+      },
+      {
+        "path": "backend/tests/runtime/test_migration_chain.py",
+        "line": 26,
+        "column": 5,
+        "rule": "I001",
+        "message": "Import block is un-sorted or un-formatted"
+      },
+      {
+        "path": "backend/tests/runtime/test_migration_chain.py",
+        "line": 71,
+        "column": 14,
+        "rule": "PLW1510",
+        "message": "`subprocess.run` without explicit `check` argument"
+      },
+      {
+        "path": "backend/tests/runtime/test_model_settings.py",
+        "line": 3,
+        "column": 1,
+        "rule": "I001",
+        "message": "Import block is un-sorted or un-formatted"
+      },
+      {
+        "path": "backend/tests/runtime/test_model_settings.py",
+        "line": 8,
+        "column": 54,
+        "rule": "PLC0414",
+        "message": "Import alias does not rename original package"
+      },
+      {
+        "path": "backend/tests/runtime/test_model_settings.py",
+        "line": 13,
+        "column": 5,
+        "rule": "I001",
+        "message": "Import block is un-sorted or un-formatted"
+      },
+      {
+        "path": "backend/tests/runtime/test_model_settings.py",
+        "line": 34,
+        "column": 5,
+        "rule": "I001",
+        "message": "Import block is un-sorted or un-formatted"
+      },
+      {
+        "path": "backend/tests/runtime/test_model_settings.py",
+        "line": 53,
+        "column": 5,
+        "rule": "I001",
+        "message": "Import block is un-sorted or un-formatted"
+      },
+      {
+        "path": "backend/tests/runtime/test_model_settings.py",
+        "line": 72,
+        "column": 5,
+        "rule": "I001",
+        "message": "Import block is un-sorted or un-formatted"
+      },
+      {
+        "path": "backend/tests/runtime/test_model_settings.py",
+        "line": 111,
+        "column": 20,
+        "rule": "RUF059",
+        "message": "Unpacked variable `app` is never used"
+      },
+      {
+        "path": "backend/tests/runtime/test_native_code_operations.py",
+        "line": 8,
+        "column": 1,
+        "rule": "I001",
+        "message": "Import block is un-sorted or un-formatted"
+      },
+      {
+        "path": "backend/tests/runtime/test_native_code_operations.py",
+        "line": 18,
+        "column": 5,
+        "rule": "PLC0414",
+        "message": "Import alias does not rename original package"
+      },
+      {
+        "path": "backend/tests/runtime/test_native_code_operations.py",
+        "line": 23,
+        "column": 54,
+        "rule": "PLC0414",
+        "message": "Import alias does not rename original package"
+      },
+      {
+        "path": "backend/tests/runtime/test_native_code_operations.py",
+        "line": 154,
+        "column": 18,
+        "rule": "ISC004",
+        "message": "Unparenthesized implicit string concatenation in collection"
+      },
+      {
+        "path": "backend/tests/runtime/test_native_evaluation.py",
+        "line": 76,
+        "column": 5,
+        "rule": "I001",
+        "message": "Import block is un-sorted or un-formatted"
+      },
+      {
+        "path": "backend/tests/runtime/test_native_git_retirement.py",
+        "line": 12,
+        "column": 73,
+        "rule": "F811",
+        "message": "Redefinition of unused `legacy_publication` from line 8: `legacy_publication` redefined here"
+      },
+      {
+        "path": "backend/tests/runtime/test_native_git_retirement.py",
+        "line": 34,
+        "column": 73,
+        "rule": "F811",
+        "message": "Redefinition of unused `legacy_publication` from line 8: `legacy_publication` redefined here"
+      },
+      {
+        "path": "backend/tests/runtime/test_native_git_retirement.py",
+        "line": 50,
+        "column": 74,
+        "rule": "F811",
+        "message": "Redefinition of unused `legacy_publication` from line 8: `legacy_publication` redefined here"
+      },
+      {
+        "path": "backend/tests/runtime/test_native_git_retirement.py",
+        "line": 52,
+        "column": 5,
+        "rule": "I001",
+        "message": "Import block is un-sorted or un-formatted"
+      },
+      {
+        "path": "backend/tests/runtime/test_native_git_retirement.py",
+        "line": 69,
+        "column": 98,
+        "rule": "F811",
+        "message": "Redefinition of unused `legacy_publication` from line 8: `legacy_publication` redefined here"
+      },
+      {
+        "path": "backend/tests/runtime/test_native_git_retirement.py",
+        "line": 91,
+        "column": 71,
+        "rule": "F811",
+        "message": "Redefinition of unused `legacy_publication` from line 8: `legacy_publication` redefined here"
+      },
+      {
+        "path": "backend/tests/runtime/test_native_git_retirement.py",
+        "line": 103,
+        "column": 95,
+        "rule": "F811",
+        "message": "Redefinition of unused `legacy_publication` from line 8: `legacy_publication` redefined here"
+      },
+      {
+        "path": "backend/tests/runtime/test_native_mcp_entry.py",
+        "line": 94,
+        "column": 5,
+        "rule": "SIM117",
+        "message": "Use a single `with` statement with multiple contexts instead of nested `with` statements"
+      },
+      {
+        "path": "backend/tests/runtime/test_native_mcp_entry.py",
+        "line": 155,
+        "column": 9,
+        "rule": "SIM117",
+        "message": "Use a single `with` statement with multiple contexts instead of nested `with` statements"
+      },
+      {
+        "path": "backend/tests/runtime/test_owned_code_dependencies.py",
+        "line": 16,
+        "column": 5,
+        "rule": "I001",
+        "message": "Import block is un-sorted or un-formatted"
+      },
+      {
+        "path": "backend/tests/runtime/test_owned_project_stop.py",
+        "line": 14,
+        "column": 5,
+        "rule": "I001",
+        "message": "Import block is un-sorted or un-formatted"
+      },
+      {
+        "path": "backend/tests/runtime/test_owned_source_setup.py",
+        "line": 5,
+        "column": 21,
+        "rule": "F401",
+        "message": "`pathlib.Path` imported but unused"
+      },
+      {
+        "path": "backend/tests/runtime/test_owned_source_setup.py",
+        "line": 21,
+        "column": 5,
+        "rule": "I001",
+        "message": "Import block is un-sorted or un-formatted"
+      },
+      {
+        "path": "backend/tests/runtime/test_owned_source_setup.py",
+        "line": 61,
+        "column": 5,
+        "rule": "I001",
+        "message": "Import block is un-sorted or un-formatted"
+      },
+      {
+        "path": "backend/tests/runtime/test_owned_source_setup.py",
+        "line": 94,
+        "column": 5,
+        "rule": "I001",
+        "message": "Import block is un-sorted or un-formatted"
+      },
+      {
+        "path": "backend/tests/runtime/test_plan_continuation.py",
+        "line": 323,
+        "column": 5,
+        "rule": "I001",
+        "message": "Import block is un-sorted or un-formatted"
+      },
+      {
+        "path": "backend/tests/runtime/test_predecessor_code_material.py",
+        "line": 3,
+        "column": 1,
+        "rule": "I001",
+        "message": "Import block is un-sorted or un-formatted"
+      },
+      {
+        "path": "backend/tests/runtime/test_prior_branch_input.py",
+        "line": 3,
+        "column": 1,
+        "rule": "I001",
+        "message": "Import block is un-sorted or un-formatted"
+      },
+      {
+        "path": "backend/tests/runtime/test_prior_branch_input.py",
+        "line": 58,
+        "column": 5,
+        "rule": "I001",
+        "message": "Import block is un-sorted or un-formatted"
+      },
+      {
+        "path": "backend/tests/runtime/test_prior_branch_input.py",
+        "line": 99,
+        "column": 5,
+        "rule": "I001",
+        "message": "Import block is un-sorted or un-formatted"
+      },
+      {
+        "path": "backend/tests/runtime/test_prior_branch_input.py",
+        "line": 148,
+        "column": 5,
+        "rule": "I001",
+        "message": "Import block is un-sorted or un-formatted"
+      },
+      {
+        "path": "backend/tests/runtime/test_prior_branch_input.py",
+        "line": 181,
+        "column": 5,
+        "rule": "I001",
+        "message": "Import block is un-sorted or un-formatted"
+      },
+      {
+        "path": "backend/tests/runtime/test_project_completion.py",
+        "line": 3,
+        "column": 1,
+        "rule": "I001",
+        "message": "Import block is un-sorted or un-formatted"
+      },
+      {
+        "path": "backend/tests/runtime/test_project_producer_retirement.py",
+        "line": 3,
+        "column": 1,
+        "rule": "I001",
+        "message": "Import block is un-sorted or un-formatted"
+      },
+      {
+        "path": "backend/tests/runtime/test_project_producer_retirement.py",
+        "line": 3,
+        "column": 8,
+        "rule": "F401",
+        "message": "`importlib` imported but unused"
+      },
+      {
+        "path": "backend/tests/runtime/test_project_producer_retirement.py",
+        "line": 55,
+        "column": 8,
+        "rule": "RUF059",
+        "message": "Unpacked variable `run` is never used"
+      },
+      {
+        "path": "backend/tests/runtime/test_project_producer_retirement.py",
+        "line": 55,
+        "column": 20,
+        "rule": "RUF059",
+        "message": "Unpacked variable `peers` is never used"
+      },
+      {
+        "path": "backend/tests/runtime/test_project_producer_retirement.py",
+        "line": 90,
+        "column": 8,
+        "rule": "RUF059",
+        "message": "Unpacked variable `run` is never used"
+      },
+      {
+        "path": "backend/tests/runtime/test_project_producer_retirement.py",
+        "line": 90,
+        "column": 20,
+        "rule": "RUF059",
+        "message": "Unpacked variable `peers` is never used"
+      },
+      {
+        "path": "backend/tests/runtime/test_project_producer_retirement.py",
+        "line": 109,
+        "column": 8,
+        "rule": "RUF059",
+        "message": "Unpacked variable `run` is never used"
+      },
+      {
+        "path": "backend/tests/runtime/test_project_producer_retirement.py",
+        "line": 109,
+        "column": 20,
+        "rule": "RUF059",
+        "message": "Unpacked variable `peers` is never used"
+      },
+      {
+        "path": "backend/tests/runtime/test_project_producer_retirement.py",
+        "line": 142,
+        "column": 5,
+        "rule": "S102",
+        "message": "Use of `exec` detected"
+      },
+      {
+        "path": "backend/tests/runtime/test_prompt_catalog.py",
+        "line": 2,
+        "column": 1,
+        "rule": "I001",
+        "message": "Import block is un-sorted or un-formatted"
+      },
+      {
+        "path": "backend/tests/runtime/test_prompt_catalog.py",
+        "line": 5,
+        "column": 54,
+        "rule": "PLC0414",
+        "message": "Import alias does not rename original package"
+      },
+      {
+        "path": "backend/tests/runtime/test_prompt_catalog.py",
+        "line": 16,
+        "column": 5,
+        "rule": "I001",
+        "message": "Import block is un-sorted or un-formatted"
+      },
+      {
+        "path": "backend/tests/runtime/test_prompt_catalog.py",
+        "line": 27,
+        "column": 5,
+        "rule": "I001",
+        "message": "Import block is un-sorted or un-formatted"
+      },
+      {
+        "path": "backend/tests/runtime/test_prompt_catalog.py",
+        "line": 35,
+        "column": 5,
+        "rule": "I001",
+        "message": "Import block is un-sorted or un-formatted"
+      },
+      {
+        "path": "backend/tests/runtime/test_prompt_catalog.py",
+        "line": 42,
+        "column": 5,
+        "rule": "I001",
+        "message": "Import block is un-sorted or un-formatted"
+      },
+      {
+        "path": "backend/tests/runtime/test_prompt_catalog.py",
+        "line": 45,
+        "column": 20,
+        "rule": "RUF059",
+        "message": "Unpacked variable `app` is never used"
+      },
+      {
+        "path": "backend/tests/runtime/test_public_development.py",
+        "line": 88,
+        "column": 9,
+        "rule": "I001",
+        "message": "Import block is un-sorted or un-formatted"
+      },
+      {
+        "path": "backend/tests/runtime/test_question_migration.py",
+        "line": 12,
+        "column": 9,
+        "rule": "F401",
+        "message": "`backend.db.migrations` imported but unused"
+      },
+      {
+        "path": "backend/tests/runtime/test_question_migration.py",
+        "line": 13,
+        "column": 9,
+        "rule": "F401",
+        "message": "`backend.db.peer_kind_migration` imported but unused"
+      },
+      {
+        "path": "backend/tests/runtime/test_question_migration.py",
+        "line": 14,
+        "column": 9,
+        "rule": "F401",
+        "message": "`backend.db.question_migration` imported but unused"
+      },
+      {
+        "path": "backend/tests/runtime/test_question_migration.py",
+        "line": 15,
+        "column": 9,
+        "rule": "F401",
+        "message": "`backend.db.wiki_migration` imported but unused"
+      },
+      {
+        "path": "backend/tests/runtime/test_reboot_backup.py",
+        "line": 3,
+        "column": 1,
+        "rule": "I001",
+        "message": "Import block is un-sorted or un-formatted"
+      },
+      {
+        "path": "backend/tests/runtime/test_reboot_backup.py",
+        "line": 10,
+        "column": 60,
+        "rule": "F401",
+        "message": "`backend.tests.runtime.test_installation_backup.installation` imported but unused"
+      },
+      {
+        "path": "backend/tests/runtime/test_reboot_backup.py",
+        "line": 11,
+        "column": 58,
+        "rule": "F401",
+        "message": "`backend.tests.runtime.test_host_installation.host_assets` imported but unused"
+      },
+      {
+        "path": "backend/tests/runtime/test_reboot_backup.py",
+        "line": 24,
+        "column": 78,
+        "rule": "F811",
+        "message": "Redefinition of unused `installation` from line 10: `installation` redefined here"
+      },
+      {
+        "path": "backend/tests/runtime/test_reboot_backup.py",
+        "line": 26,
+        "column": 5,
+        "rule": "I001",
+        "message": "Import block is un-sorted or un-formatted"
+      },
+      {
+        "path": "backend/tests/runtime/test_reboot_backup.py",
+        "line": 31,
+        "column": 5,
+        "rule": "SIM117",
+        "message": "Use a single `with` statement with multiple contexts instead of nested `with` statements"
+      },
+      {
+        "path": "backend/tests/runtime/test_reboot_backup.py",
+        "line": 34,
+        "column": 5,
+        "rule": "SIM117",
+        "message": "Use a single `with` statement with multiple contexts instead of nested `with` statements"
+      },
+      {
+        "path": "backend/tests/runtime/test_reboot_backup.py",
+        "line": 40,
+        "column": 58,
+        "rule": "F811",
+        "message": "Redefinition of unused `installation` from line 10: `installation` redefined here"
+      },
+      {
+        "path": "backend/tests/runtime/test_reboot_backup.py",
+        "line": 40,
+        "column": 95,
+        "rule": "F811",
+        "message": "Redefinition of unused `host_assets` from line 11: `host_assets` redefined here"
+      },
+      {
+        "path": "backend/tests/runtime/test_reboot_backup.py",
+        "line": 42,
+        "column": 5,
+        "rule": "I001",
+        "message": "Import block is un-sorted or un-formatted"
+      },
+      {
+        "path": "backend/tests/runtime/test_reboot_backup.py",
+        "line": 89,
+        "column": 66,
+        "rule": "F811",
+        "message": "Redefinition of unused `installation` from line 10: `installation` redefined here"
+      },
+      {
+        "path": "backend/tests/runtime/test_reboot_backup.py",
+        "line": 91,
+        "column": 5,
+        "rule": "I001",
+        "message": "Import block is un-sorted or un-formatted"
+      },
+      {
+        "path": "backend/tests/runtime/test_reboot_backup.py",
+        "line": 111,
+        "column": 49,
+        "rule": "F811",
+        "message": "Redefinition of unused `installation` from line 10: `installation` redefined here"
+      },
+      {
+        "path": "backend/tests/runtime/test_reboot_backup.py",
+        "line": 113,
+        "column": 5,
+        "rule": "I001",
+        "message": "Import block is un-sorted or un-formatted"
+      },
+      {
+        "path": "backend/tests/runtime/test_reboot_backup.py",
+        "line": 136,
+        "column": 58,
+        "rule": "F811",
+        "message": "Redefinition of unused `installation` from line 10: `installation` redefined here"
+      },
+      {
+        "path": "backend/tests/runtime/test_reboot_backup.py",
+        "line": 138,
+        "column": 5,
+        "rule": "I001",
+        "message": "Import block is un-sorted or un-formatted"
+      },
+      {
+        "path": "backend/tests/runtime/test_reboot_backup.py",
+        "line": 151,
+        "column": 76,
+        "rule": "F811",
+        "message": "Redefinition of unused `installation` from line 10: `installation` redefined here"
+      },
+      {
+        "path": "backend/tests/runtime/test_reboot_backup.py",
+        "line": 153,
+        "column": 5,
+        "rule": "I001",
+        "message": "Import block is un-sorted or un-formatted"
+      },
+      {
+        "path": "backend/tests/runtime/test_reboot_backup.py",
+        "line": 157,
+        "column": 5,
+        "rule": "SIM117",
+        "message": "Use a single `with` statement with multiple contexts instead of nested `with` statements"
+      },
+      {
+        "path": "backend/tests/runtime/test_reboot_backup.py",
+        "line": 173,
+        "column": 57,
+        "rule": "F811",
+        "message": "Redefinition of unused `installation` from line 10: `installation` redefined here"
+      },
+      {
+        "path": "backend/tests/runtime/test_reboot_backup.py",
+        "line": 175,
+        "column": 5,
+        "rule": "I001",
+        "message": "Import block is un-sorted or un-formatted"
+      },
+      {
+        "path": "backend/tests/runtime/test_reboot_backup.py",
+        "line": 180,
+        "column": 5,
+        "rule": "SIM117",
+        "message": "Use a single `with` statement with multiple contexts instead of nested `with` statements"
+      },
+      {
+        "path": "backend/tests/runtime/test_reboot_backup.py",
+        "line": 184,
+        "column": 55,
+        "rule": "F811",
+        "message": "Redefinition of unused `installation` from line 10: `installation` redefined here"
+      },
+      {
+        "path": "backend/tests/runtime/test_recovery_policy.py",
+        "line": 3,
+        "column": 1,
+        "rule": "I001",
+        "message": "Import block is un-sorted or un-formatted"
+      },
+      {
+        "path": "backend/tests/runtime/test_recovery_policy.py",
+        "line": 10,
+        "column": 58,
+        "rule": "F401",
+        "message": "`backend.tests.runtime.test_host_installation.host_assets` imported but unused"
+      },
+      {
+        "path": "backend/tests/runtime/test_recovery_policy.py",
+        "line": 11,
+        "column": 60,
+        "rule": "F401",
+        "message": "`backend.tests.runtime.test_installation_backup.installation` imported but unused"
+      },
+      {
+        "path": "backend/tests/runtime/test_recovery_policy.py",
+        "line": 25,
+        "column": 79,
+        "rule": "F811",
+        "message": "Redefinition of unused `installation` from line 11: `installation` redefined here"
+      },
+      {
+        "path": "backend/tests/runtime/test_recovery_policy.py",
+        "line": 25,
+        "column": 101,
+        "rule": "F811",
+        "message": "Redefinition of unused `host_assets` from line 10: `host_assets` redefined here"
+      },
+      {
+        "path": "backend/tests/runtime/test_recovery_policy.py",
+        "line": 46,
+        "column": 71,
+        "rule": "F811",
+        "message": "Redefinition of unused `installation` from line 11: `installation` redefined here"
+      },
+      {
+        "path": "backend/tests/runtime/test_recovery_policy.py",
+        "line": 46,
+        "column": 93,
+        "rule": "F811",
+        "message": "Redefinition of unused `host_assets` from line 10: `host_assets` redefined here"
+      },
+      {
+        "path": "backend/tests/runtime/test_recovery_policy.py",
+        "line": 96,
+        "column": 63,
+        "rule": "F811",
+        "message": "Redefinition of unused `installation` from line 11: `installation` redefined here"
+      },
+      {
+        "path": "backend/tests/runtime/test_recovery_policy.py",
+        "line": 96,
+        "column": 85,
+        "rule": "F811",
+        "message": "Redefinition of unused `host_assets` from line 10: `host_assets` redefined here"
+      },
+      {
+        "path": "backend/tests/runtime/test_recovery_policy.py",
+        "line": 98,
+        "column": 5,
+        "rule": "I001",
+        "message": "Import block is un-sorted or un-formatted"
+      },
+      {
+        "path": "backend/tests/runtime/test_recovery_policy.py",
+        "line": 132,
+        "column": 62,
+        "rule": "F811",
+        "message": "Redefinition of unused `installation` from line 11: `installation` redefined here"
+      },
+      {
+        "path": "backend/tests/runtime/test_recovery_policy.py",
+        "line": 132,
+        "column": 84,
+        "rule": "F811",
+        "message": "Redefinition of unused `host_assets` from line 10: `host_assets` redefined here"
+      },
+      {
+        "path": "backend/tests/runtime/test_recovery_policy.py",
+        "line": 149,
+        "column": 67,
+        "rule": "F811",
+        "message": "Redefinition of unused `installation` from line 11: `installation` redefined here"
+      },
+      {
+        "path": "backend/tests/runtime/test_recovery_policy.py",
+        "line": 151,
+        "column": 5,
+        "rule": "I001",
+        "message": "Import block is un-sorted or un-formatted"
+      },
+      {
+        "path": "backend/tests/runtime/test_recovery_policy.py",
+        "line": 179,
+        "column": 58,
+        "rule": "F811",
+        "message": "Redefinition of unused `installation` from line 11: `installation` redefined here"
+      },
+      {
+        "path": "backend/tests/runtime/test_recovery_policy.py",
+        "line": 193,
+        "column": 73,
+        "rule": "F811",
+        "message": "Redefinition of unused `installation` from line 11: `installation` redefined here"
+      },
+      {
+        "path": "backend/tests/runtime/test_registered_legacy_workers.py",
+        "line": 5,
+        "column": 8,
+        "rule": "F401",
+        "message": "`pytest` imported but unused"
+      },
+      {
+        "path": "backend/tests/runtime/test_remote_source.py",
+        "line": 9,
+        "column": 54,
+        "rule": "PLC0414",
+        "message": "Import alias does not rename original package"
+      },
+      {
+        "path": "backend/tests/runtime/test_remote_source.py",
+        "line": 10,
+        "column": 63,
+        "rule": "PLC0414",
+        "message": "Import alias does not rename original package"
+      },
+      {
+        "path": "backend/tests/runtime/test_restored_enrollment.py",
+        "line": 10,
+        "column": 58,
+        "rule": "F401",
+        "message": "`backend.tests.runtime.test_host_installation.host_assets` imported but unused"
+      },
+      {
+        "path": "backend/tests/runtime/test_restored_enrollment.py",
+        "line": 11,
+        "column": 60,
+        "rule": "F401",
+        "message": "`backend.tests.runtime.test_installation_backup.installation` imported but unused"
+      },
+      {
+        "path": "backend/tests/runtime/test_restored_enrollment.py",
+        "line": 15,
+        "column": 14,
+        "rule": "F811",
+        "message": "Redefinition of unused `installation` from line 11: `installation` redefined here"
+      },
+      {
+        "path": "backend/tests/runtime/test_restored_enrollment.py",
+        "line": 36,
+        "column": 91,
+        "rule": "F811",
+        "message": "Redefinition of unused `host_assets` from line 10: `host_assets` redefined here"
+      },
+      {
+        "path": "backend/tests/runtime/test_restored_enrollment.py",
+        "line": 38,
+        "column": 5,
+        "rule": "I001",
+        "message": "Import block is un-sorted or un-formatted"
+      },
+      {
+        "path": "backend/tests/runtime/test_restored_enrollment.py",
+        "line": 77,
+        "column": 74,
+        "rule": "F811",
+        "message": "Redefinition of unused `host_assets` from line 10: `host_assets` redefined here"
+      },
+      {
+        "path": "backend/tests/runtime/test_restored_enrollment.py",
+        "line": 79,
+        "column": 5,
+        "rule": "I001",
+        "message": "Import block is un-sorted or un-formatted"
+      },
+      {
+        "path": "backend/tests/runtime/test_restored_enrollment.py",
+        "line": 106,
+        "column": 88,
+        "rule": "F811",
+        "message": "Redefinition of unused `host_assets` from line 10: `host_assets` redefined here"
+      },
+      {
+        "path": "backend/tests/runtime/test_restored_enrollment.py",
+        "line": 130,
+        "column": 5,
+        "rule": "I001",
+        "message": "Import block is un-sorted or un-formatted"
+      },
+      {
+        "path": "backend/tests/runtime/test_restored_enrollment.py",
+        "line": 149,
+        "column": 83,
+        "rule": "F811",
+        "message": "Redefinition of unused `host_assets` from line 10: `host_assets` redefined here"
+      },
+      {
+        "path": "backend/tests/runtime/test_restored_enrollment.py",
+        "line": 151,
+        "column": 5,
+        "rule": "I001",
+        "message": "Import block is un-sorted or un-formatted"
+      },
+      {
+        "path": "backend/tests/runtime/test_restored_enrollment.py",
+        "line": 186,
+        "column": 91,
+        "rule": "F811",
+        "message": "Redefinition of unused `host_assets` from line 10: `host_assets` redefined here"
+      },
+      {
+        "path": "backend/tests/runtime/test_restored_enrollment.py",
+        "line": 201,
+        "column": 93,
+        "rule": "F811",
+        "message": "Redefinition of unused `host_assets` from line 10: `host_assets` redefined here"
+      },
+      {
+        "path": "backend/tests/runtime/test_restored_enrollment.py",
+        "line": 203,
+        "column": 5,
+        "rule": "I001",
+        "message": "Import block is un-sorted or un-formatted"
+      },
+      {
+        "path": "backend/tests/runtime/test_restored_enrollment.py",
+        "line": 219,
+        "column": 13,
+        "rule": "PLW1510",
+        "message": "`subprocess.run` without explicit `check` argument"
+      },
+      {
+        "path": "backend/tests/runtime/test_restored_host_evaluation.py",
+        "line": 20,
+        "column": 5,
+        "rule": "I001",
+        "message": "Import block is un-sorted or un-formatted"
+      },
+      {
+        "path": "backend/tests/runtime/test_run_input_migration.py",
+        "line": 11,
+        "column": 28,
+        "rule": "F401",
+        "message": "`backend.db.migrations` imported but unused"
+      },
+      {
+        "path": "backend/tests/runtime/test_run_input_migration.py",
+        "line": 11,
+        "column": 40,
+        "rule": "F401",
+        "message": "`backend.db.peer_kind_migration` imported but unused"
+      },
+      {
+        "path": "backend/tests/runtime/test_run_input_migration.py",
+        "line": 11,
+        "column": 61,
+        "rule": "F401",
+        "message": "`backend.db.wiki_migration` imported but unused"
+      },
+      {
+        "path": "backend/tests/runtime/test_scientific_research.py",
+        "line": 260,
+        "column": 28,
+        "rule": "F401",
+        "message": "`backend.db.migrations` imported but unused"
+      },
+      {
+        "path": "backend/tests/runtime/test_source_control.py",
+        "line": 53,
+        "column": 5,
+        "rule": "I001",
+        "message": "Import block is un-sorted or un-formatted"
+      },
+      {
+        "path": "backend/tests/runtime/test_source_control.py",
+        "line": 105,
+        "column": 5,
+        "rule": "I001",
+        "message": "Import block is un-sorted or un-formatted"
+      },
+      {
+        "path": "backend/tests/runtime/test_source_history.py",
+        "line": 3,
+        "column": 8,
+        "rule": "F401",
+        "message": "`pytest` imported but unused"
+      },
+      {
+        "path": "backend/tests/runtime/test_source_history.py",
+        "line": 5,
+        "column": 54,
+        "rule": "PLC0414",
+        "message": "Import alias does not rename original package"
+      },
+      {
+        "path": "backend/tests/runtime/test_source_history.py",
+        "line": 10,
+        "column": 5,
+        "rule": "I001",
+        "message": "Import block is un-sorted or un-formatted"
+      },
+      {
+        "path": "backend/tests/runtime/test_source_repair.py",
+        "line": 8,
+        "column": 54,
+        "rule": "PLC0414",
+        "message": "Import alias does not rename original package"
+      },
+      {
+        "path": "backend/tests/runtime/test_source_repair.py",
+        "line": 9,
+        "column": 63,
+        "rule": "PLC0414",
+        "message": "Import alias does not rename original package"
+      },
+      {
+        "path": "backend/tests/runtime/test_source_repair.py",
+        "line": 79,
+        "column": 5,
+        "rule": "I001",
+        "message": "Import block is un-sorted or un-formatted"
+      },
+      {
+        "path": "backend/tests/runtime/test_source_repair.py",
+        "line": 119,
+        "column": 5,
+        "rule": "I001",
+        "message": "Import block is un-sorted or un-formatted"
+      },
+      {
+        "path": "backend/tests/runtime/test_source_reservation.py",
+        "line": 4,
+        "column": 8,
+        "rule": "F401",
+        "message": "`json` imported but unused"
+      },
+      {
+        "path": "backend/tests/runtime/test_source_reservation.py",
+        "line": 8,
+        "column": 54,
+        "rule": "PLC0414",
+        "message": "Import alias does not rename original package"
+      },
+      {
+        "path": "backend/tests/runtime/test_source_reservation.py",
+        "line": 13,
+        "column": 5,
+        "rule": "I001",
+        "message": "Import block is un-sorted or un-formatted"
+      },
+      {
+        "path": "backend/tests/runtime/test_source_reservation.py",
+        "line": 100,
+        "column": 5,
+        "rule": "I001",
+        "message": "Import block is un-sorted or un-formatted"
+      },
+      {
+        "path": "backend/tests/runtime/test_source_shutdown.py",
+        "line": 3,
+        "column": 1,
+        "rule": "I001",
+        "message": "Import block is un-sorted or un-formatted"
+      },
+      {
+        "path": "backend/tests/runtime/test_task_inputs_migration.py",
+        "line": 13,
+        "column": 28,
+        "rule": "F401",
+        "message": "`backend.db.migrations` imported but unused"
+      },
+      {
+        "path": "backend/tests/runtime/test_task_inputs_migration.py",
+        "line": 13,
+        "column": 40,
+        "rule": "F401",
+        "message": "`backend.db.peer_kind_migration` imported but unused"
+      },
+      {
+        "path": "backend/tests/runtime/test_task_inputs_migration.py",
+        "line": 13,
+        "column": 61,
+        "rule": "F401",
+        "message": "`backend.db.wiki_migration` imported but unused"
+      },
+      {
+        "path": "backend/tests/state/test_state_machine.py",
+        "line": 6,
+        "column": 5,
+        "rule": "F401",
+        "message": "`backend.state.machine.TERMINAL_STATUSES` imported but unused"
+      },
+      {
+        "path": "backend/tests/tools/conftest.py",
+        "line": 6,
+        "column": 21,
+        "rule": "F401",
+        "message": "`pathlib.Path` imported but unused"
+      },
+      {
+        "path": "backend/tests/tools/conftest.py",
+        "line": 11,
+        "column": 35,
+        "rule": "F401",
+        "message": "`backend.tools.base.db.get_connection` imported but unused"
+      },
+      {
+        "path": "backend/tests/tools/test_db_layer.py",
+        "line": 5,
+        "column": 8,
+        "rule": "F401",
+        "message": "`tempfile` imported but unused"
+      },
+      {
+        "path": "backend/tests/tools/test_db_layer.py",
+        "line": 6,
+        "column": 8,
+        "rule": "F401",
+        "message": "`threading` imported but unused"
+      },
+      {
+        "path": "backend/tests/tools/test_db_layer.py",
+        "line": 7,
+        "column": 8,
+        "rule": "F401",
+        "message": "`time` imported but unused"
+      },
+      {
+        "path": "backend/tests/tools/test_db_layer.py",
+        "line": 121,
+        "column": 9,
+        "rule": "SIM117",
+        "message": "Use a single `with` statement with multiple contexts instead of nested `with` statements"
+      },
+      {
+        "path": "backend/tools/base/__init__.py",
+        "line": 11,
+        "column": 11,
+        "rule": "RUF022",
+        "message": "`__all__` is not sorted"
+      }
+    ]
+  },
+  "frontend": {
+    "command": "npm run lint",
+    "exit_code": 1,
+    "findings": 9,
+    "items": [
+      {
+        "path": "frontend/src/api/client.ts",
+        "line": 32,
+        "column": 13,
+        "rule": "no-empty",
+        "message": "Empty block statement"
+      },
+      {
+        "path": "frontend/src/api/remotePublications.ts",
+        "line": 37,
+        "column": 6,
+        "rule": "prefer-const",
+        "message": "'keys' is never reassigned. Use 'const' instead"
+      },
+      {
+        "path": "frontend/src/api/session.ts",
+        "line": 83,
+        "column": 57,
+        "rule": "no-control-regex",
+        "message": "Unexpected control character(s) in regular expression: \\x00"
+      },
+      {
+        "path": "frontend/src/components/pages/ProjectsPage.tsx",
+        "line": 9,
+        "column": 232,
+        "rule": "@typescript-eslint/no-unused-vars",
+        "message": "'ProjectWorkspaceState' is defined but never used"
+      },
+      {
+        "path": "frontend/src/components/tasks/RunCommands.tsx",
+        "line": 13,
+        "column": 23,
+        "rule": "no-control-regex",
+        "message": "Unexpected control character(s) in regular expression: \\x00, \\x08, \\x0b, \\x1f"
+      },
+      {
+        "path": "frontend/src/hooks/useProjects.ts",
+        "line": 96,
+        "column": 16,
+        "rule": "@typescript-eslint/no-explicit-any",
+        "message": "Unexpected any. Specify a different type"
+      },
+      {
+        "path": "frontend/src/hooks/useTasks.ts",
+        "line": 152,
+        "column": 16,
+        "rule": "@typescript-eslint/no-explicit-any",
+        "message": "Unexpected any. Specify a different type"
+      },
+      {
+        "path": "frontend/src/stores/loopState.ts",
+        "line": 61,
+        "column": 26,
+        "rule": "@typescript-eslint/no-unused-vars",
+        "message": "'_' is assigned a value but never used"
+      },
+      {
+        "path": "frontend/src/types/api.ts",
+        "line": 279,
+        "column": 10,
+        "rule": "@typescript-eslint/no-explicit-any",
+        "message": "Unexpected any. Specify a different type"
+      }
+    ]
+  },
+  "deferred": "DD080"
+}

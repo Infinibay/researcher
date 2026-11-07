@@ -301,3 +301,100 @@ def test_symlinked_git_metadata_requires_explicit_storage_capture(installation,t
     with pytest.raises(ValueError,match='Git metadata'):
         backup_installation(root,tmp_path/'omitted-git')
     assert not (tmp_path/'omitted-git/manifest.json').exists()
+
+
+@pytest.mark.parametrize('boundary', ['scan', 'probe'])
+@pytest.mark.parametrize('database_name', ['source.db', 'uploads/101/uploads/cache.sqlite'])
+def test_backup_tolerates_transient_sqlite_sidecars_without_losing_committed_rows(
+    installation, tmp_path, monkeypatch, boundary, database_name
+):
+    """Real SQLite closure may remove sidecars before stat or header probing; the snapshot still owns every committed row."""
+    import gc
+    from contextlib import closing
+    from backend.runtime import installation_backup as backups
+    from backend.runtime import snapshot_files
+
+    root, _ = installation
+    gc.collect()
+    keeper = sqlite3.connect(root / database_name)
+    keeper.execute('PRAGMA journal_mode=WAL')
+    keeper.execute('CREATE TABLE snapshot_race_evidence(value TEXT)')
+    keeper.execute("INSERT INTO snapshot_race_evidence VALUES('committed before sidecar removal')")
+    keeper.commit()
+    assert (root / (database_name + '-shm')).exists()
+    parent_identity = (root / database_name).parent.stat().st_ino
+    closed = []
+
+    def close_original():
+        """Let SQLite checkpoint and remove its own transient files, preserving committed contents."""
+        if not closed:
+            keeper.close()
+            closed.append(True)
+            assert not (root / (database_name + '-shm')).exists()
+
+    if boundary == 'scan':
+        original_scan = snapshot_files.os.scandir
+
+        def close_after_listing(path):
+            """Retain actual directory entries and close SQLite before the caller can stat them."""
+            entries = original_scan(path)
+            if isinstance(path, int) and os.fstat(path).st_ino == parent_identity and not closed:
+                with entries:
+                    observed = list(entries)
+                close_original()
+                return iter(observed)
+            return entries
+
+        monkeypatch.setattr(snapshot_files.os, 'scandir', close_after_listing)
+    else:
+        original_inventory = backups.inventory
+
+        def close_after_inventory(*args, **kwargs):
+            """Finish the real initial inventory and then remove sidecars before header inspection."""
+            observed = original_inventory(*args, **kwargs)
+            close_original()
+            return observed
+
+        monkeypatch.setattr(backups, 'inventory', close_after_inventory)
+    try:
+        bundle = tmp_path / 'sidecar-backup'
+        backups.backup_installation(root, bundle)
+        manifest = backups.verify_backup(bundle)
+        entry = next(item for item in manifest['entries'] if item['path'] == database_name)
+        assert not any(item['path'] in {database_name + suffix for suffix in ('-wal', '-shm', '-journal')} for item in manifest['entries'])
+        with closing(sqlite3.connect(bundle / entry['object'])) as snapshot:
+            assert snapshot.execute('SELECT value FROM snapshot_race_evidence').fetchall() == [('committed before sidecar removal',)]
+        assert closed == [True]
+    finally:
+        keeper.close()
+
+
+def test_backup_preserves_ordinary_sidecar_names_and_refuses_their_disappearance(installation, tmp_path, monkeypatch):
+    """A suffix alone cannot authorize omitting an ordinary user file or ignoring its concurrent deletion."""
+    from backend.runtime import installation_backup as backups
+
+    root, _ = installation
+    (root / 'notes').write_text('ordinary document, not SQLite')
+    (root / 'notes-shm').write_text('user evidence with a similar name')
+    (root / 'orphan-wal').write_text('another ordinary file')
+    bundle = tmp_path / 'regular-files'
+    backups.backup_installation(root, bundle)
+    manifest = backups.verify_backup(bundle)
+    for name in ('notes-shm', 'orphan-wal'):
+        entry = next(item for item in manifest['entries'] if item['path'] == name)
+        assert (bundle / entry['object']).read_bytes() == (root / name).read_bytes()
+    original = backups.inventory
+    removed = []
+
+    def remove_user_file(*args, **kwargs):
+        """Delete a real ordinary file after listing to prove the backup still refuses incomplete data."""
+        observed = original(*args, **kwargs)
+        if not removed:
+            (root / 'notes-shm').unlink()
+            removed.append(True)
+        return observed
+
+    monkeypatch.setattr(backups, 'inventory', remove_user_file)
+    with pytest.raises(FileNotFoundError):
+        backups.backup_installation(root, tmp_path / 'refused-user-file')
+    assert not (tmp_path / 'refused-user-file/manifest.json').exists()

@@ -1,0 +1,71 @@
+{
+  "base_commit": "9fb873c",
+  "changed_or_new_definitions_documented": 9,
+  "missing": [],
+  "contracts": [
+    {
+      "path": "backend/runtime/installation_backup.py",
+      "symbol": "_sqlite_sidecar",
+      "line": 72,
+      "docstring": "Recognize a reserved sidecar only through its no-follow SQLite base, never by suffix alone.",
+      "file_sha256": "a2cd857de7d5bbe3d517ea8113155478555deba0d5315ad92daeab304c04a240"
+    },
+    {
+      "path": "backend/runtime/installation_backup.py",
+      "symbol": "_backup_inventory",
+      "line": 85,
+      "docstring": "Ignore proven SQLite sidecars before stat/open because idle connection closure can remove them.",
+      "file_sha256": "a2cd857de7d5bbe3d517ea8113155478555deba0d5315ad92daeab304c04a240"
+    },
+    {
+      "path": "backend/runtime/installation_backup.py",
+      "symbol": "backup_installation",
+      "line": 111,
+      "docstring": "Capture current or explicitly verified prior-kernel data; neither mode transfers old execution authority.",
+      "file_sha256": "a2cd857de7d5bbe3d517ea8113155478555deba0d5315ad92daeab304c04a240"
+    },
+    {
+      "path": "backend/runtime/snapshot_files.py",
+      "symbol": "inventory",
+      "line": 60,
+      "docstring": "List no-follow entries, optionally excluding caller-owned transient names before metadata lookup.",
+      "file_sha256": "ef12626230a13cd2333c1605fc7121a8fa1b853ed59e07f9d8ab93128a5febe9"
+    },
+    {
+      "path": "backend/runtime/snapshot_files.py",
+      "symbol": "inventory.walk",
+      "line": 64,
+      "docstring": "Visit pinned directory entries and capture metadata used to detect concurrent changes.",
+      "file_sha256": "ef12626230a13cd2333c1605fc7121a8fa1b853ed59e07f9d8ab93128a5febe9"
+    },
+    {
+      "path": "backend/tests/runtime/test_installation_backup.py",
+      "symbol": "test_backup_tolerates_transient_sqlite_sidecars_without_losing_committed_rows",
+      "line": 308,
+      "docstring": "Real SQLite closure may remove sidecars before stat or header probing; the snapshot still owns every committed row.",
+      "file_sha256": "ffcbb071049c1d278f9df74e626274d09317b52d126907ef6bfaa95e7b300c64"
+    },
+    {
+      "path": "backend/tests/runtime/test_installation_backup.py",
+      "symbol": "test_backup_tolerates_transient_sqlite_sidecars_without_losing_committed_rows.close_original",
+      "line": 328,
+      "docstring": "Let SQLite checkpoint and remove its own transient files, preserving committed contents.",
+      "file_sha256": "ffcbb071049c1d278f9df74e626274d09317b52d126907ef6bfaa95e7b300c64"
+    },
+    {
+      "path": "backend/tests/runtime/test_installation_backup.py",
+      "symbol": "test_backup_preserves_ordinary_sidecar_names_and_refuses_their_disappearance",
+      "line": 372,
+      "docstring": "A suffix alone cannot authorize omitting an ordinary user file or ignoring its concurrent deletion.",
+      "file_sha256": "ffcbb071049c1d278f9df74e626274d09317b52d126907ef6bfaa95e7b300c64"
+    },
+    {
+      "path": "backend/tests/runtime/test_installation_backup.py",
+      "symbol": "test_backup_preserves_ordinary_sidecar_names_and_refuses_their_disappearance.remove_user_file",
+      "line": 389,
+      "docstring": "Delete a real ordinary file after listing to prove the backup still refuses incomplete data.",
+      "file_sha256": "ffcbb071049c1d278f9df74e626274d09317b52d126907ef6bfaa95e7b300c64"
+    }
+  ],
+  "scope": "New/changed Python definitions and modules in this delivery. Relevant new frontend modules and exported helpers also carry English JSDoc; no claim that all historic project definitions are documented."
+}

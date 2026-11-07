@@ -1,0 +1,132 @@
+{
+  "base_commit": "9fb873c",
+  "started_at": "2026-11-07T06:23:13+00:00",
+  "verified_at": "2026-11-07T06:30:26+00:00",
+  "checkpoint_recorded_at": "2026-11-07T06:31:40+00:00",
+  "elapsed_seconds_to_record": 507,
+  "trigger": "One real global-suite backup failure: source.db-shm disappeared between inventory and header probing. SQLite may remove sidecars when the last idle connection closes.",
+  "reproduction": {
+    "cases": 5,
+    "before_fix_failed": 4,
+    "before_fix_passed": 1,
+    "boundaries": [
+      "after directory enumeration, before stat",
+      "after initial inventory, before header probing"
+    ],
+    "databases": [
+      "source.db",
+      "nested uploads/cache.sqlite"
+    ],
+    "uses_real_sqlite_close_checkpoint": true
+  },
+  "source": {
+    "cases": 38,
+    "passed": 38,
+    "failed": 0,
+    "errors": 0,
+    "seconds": 20.768
+  },
+  "additional_directed_cases": {
+    "cases": 3,
+    "passed": 3,
+    "seconds": 25.193,
+    "scope": "Two shared legacy-inventory compatibility cases and one unchanged native checks case with diagnostic60second test deadline."
+  },
+  "installed_receipt": "docs/modernization/backup-sidecar-packaging.json",
+  "docstrings_receipt": "docs/modernization/backup-sidecar-docstrings.json",
+  "fix": "Exclude a transient name before metadata/header inspection only when its no-follow base has the SQLite header. Unknown bases and suffix-like user files are kept under normal inventory checks; disappearance of ordinary data still refuses completion.",
+  "lint_changed_files": {
+    "findings": 12,
+    "by_rule": {
+      "I001": 7,
+      "F401": 2,
+      "SIM117": 1,
+      "C401": 1,
+      "TRY004": 1
+    },
+    "items": [
+      {
+        "path": "backend/runtime/installation_backup.py",
+        "line": 7,
+        "rule": "I001",
+        "message": "Import block is un-sorted or un-formatted"
+      },
+      {
+        "path": "backend/runtime/installation_backup.py",
+        "line": 7,
+        "rule": "F401",
+        "message": "`hashlib` imported but unused"
+      },
+      {
+        "path": "backend/runtime/installation_backup.py",
+        "line": 281,
+        "rule": "SIM117",
+        "message": "Use a single `with` statement with multiple contexts instead of nested `with` statements"
+      },
+      {
+        "path": "backend/runtime/installation_backup.py",
+        "line": 285,
+        "rule": "C401",
+        "message": "Unnecessary generator (rewrite as a set comprehension)"
+      },
+      {
+        "path": "backend/runtime/snapshot_files.py",
+        "line": 8,
+        "rule": "F401",
+        "message": "`pathlib.Path` imported but unused"
+      },
+      {
+        "path": "backend/runtime/snapshot_files.py",
+        "line": 14,
+        "rule": "TRY004",
+        "message": "Prefer `TypeError` exception for invalid type"
+      },
+      {
+        "path": "backend/tests/runtime/test_installation_backup.py",
+        "line": 21,
+        "rule": "I001",
+        "message": "Import block is un-sorted or un-formatted"
+      },
+      {
+        "path": "backend/tests/runtime/test_installation_backup.py",
+        "line": 59,
+        "rule": "I001",
+        "message": "Import block is un-sorted or un-formatted"
+      },
+      {
+        "path": "backend/tests/runtime/test_installation_backup.py",
+        "line": 98,
+        "rule": "I001",
+        "message": "Import block is un-sorted or un-formatted"
+      },
+      {
+        "path": "backend/tests/runtime/test_installation_backup.py",
+        "line": 190,
+        "rule": "I001",
+        "message": "Import block is un-sorted or un-formatted"
+      },
+      {
+        "path": "backend/tests/runtime/test_installation_backup.py",
+        "line": 264,
+        "rule": "I001",
+        "message": "Import block is un-sorted or un-formatted"
+      },
+      {
+        "path": "backend/tests/runtime/test_installation_backup.py",
+        "line": 312,
+        "rule": "I001",
+        "message": "Import block is un-sorted or un-formatted"
+      }
+    ]
+  },
+  "real_model_turns": 0,
+  "limits": [
+    "This directed correction does not turn the earlier global run green.",
+    "The31failures/1error in current-global-results.json remain the original immutable observation; one product defect is corrected afterward.",
+    "No actual owner-data migration, power-loss recovery, human evaluation, page acceptance or broad-scenario completion.",
+    "The unchanged native check passed in23.614seconds under a diagnostic60second deadline. Its common20second budget is still unchanged and deferred, not a new production timeout."
+  ],
+  "next_main_task": "Context alignment and communication evaluation with separate development/reserved cases, paired prompt comparison and explicit human-observation gaps; not started.",
+  "all_original_tool_handles_terminal": true,
+  "push_merge_deploy": false
+}

@@ -57,8 +57,8 @@ class CopyBudget:
             raise ValueError('Snapshot exceeded its time, byte or file budget')
 
 
-def inventory(root, budget):
-    """List regular files, directories and symlinks without traversing a symlink or special device."""
+def inventory(root, budget, *, exclude=None):
+    """List no-follow entries, optionally excluding caller-owned transient names before metadata lookup."""
     result = {}
 
     def walk(fd, prefix):
@@ -66,6 +66,9 @@ def inventory(root, budget):
         for entry in sorted(os.scandir(fd), key=lambda item: item.name):
             name = prefix + entry.name
             relative_name(name)
+            budget.check()
+            if exclude is not None and exclude(name):
+                continue
             info = entry.stat(follow_symlinks=False)
             item = {'mode': stat.S_IMODE(info.st_mode), 'identity': [info.st_dev, info.st_ino, info.st_size, info.st_mtime_ns, info.st_ctime_ns]}
             if stat.S_ISDIR(info.st_mode):

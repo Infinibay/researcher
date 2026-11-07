@@ -7848,3 +7848,35 @@ acceptances, final details and independent whole-plan review remain. All43 broad
 scenarios stay open. Publish done/current/pending plus measured time at each task
 transition; all macro capabilities before fine details, including after compaction.
 No push/merge/deploy.
+
+
+## 2026-11-07 — current global baseline and SQLite backup race
+
+Previous goal turn PROGRESS at9fb873c. Global/triage block05:55:53–06:23:13UTC,
+27min20s. Serial common suite:2210cases,2178PASS,31FAIL,1fixtureERROR,0skips;
+1425.615s wall time. Original PID926375/session93442 reached terminal exit1.
+776source/test hashes unchanged during the run. Previous100failures map to75not
+collected/1pass/24stillfail, not100fixed. Classified:24old state-contract cases,
+5historical preparation cases,1missing schema_target fixture,1compound check
+exceeding default20s,1real backup transient-sidecar race. No model turn launched.
+Full result is current-global-results.json; global style347backend/9frontend
+findings preserved in current-global-lint.json and DD080/081.
+
+Backup block06:23:13–06:31:40UTC, 8 min 27 s to recorded checkpoint. Four
+real SQLite close/checkpoint reproductions fail before the fix at scan/probe
+boundaries for source/nested databases. Exclude only sidecars whose no-follow
+base has SQLite magic, before metadata access. Ordinary suffix-like files remain
+included and disappearance remains a refusal. Shared inventory default semantics
+preserved.38source core and2legacy-compatibility casesPASS;40installedPASS,
+602source/wheel/installed files match,324product,209backend modules installed.
+9changed/new Python definitions documented. Wheelde9ccda659b9c9aa3feb4c05ba6a670d8c45328496da603d1733895f27adeca1.
+Unchanged native composite check passes in23.614s under diagnostic60s; no product
+limit/default20s setting changed. Original global evidence is retained; no full
+rerun or blanket global-success claim. All original tool handles terminal.
+
+Next principal block: paired context/communication evaluation and human observation
+preparation. Still43broad scenarios and0/12pages accepted; actual owner-data location
+unanswered, broader recovery, other real/scientific eval, security and page
+acceptance remain. All macro capabilities before final details and independent
+whole-plan review. Publish done/current/pending and measured time at every main
+task transition, including after compaction. No push/merge/deploy.

@@ -4,6 +4,17 @@ La implementación del [plan completo](../superpowers/plans/2026-10-31-actualiza
 
 ## Resultados disponibles
 
+- **Suite global actual y defecto de backup corregido:** sobre `9fb873c`,2210 casos:
+  2178 pasan,31 fallan y1 error de fixture; corrida de23min46s. Se clasificaron
+  los fallos y se corrigió la carrera por desaparición normal de temporales SQLite.
+  Cuatro reproducciones fallaban antes; pasan38 casos centrales,2 de compatibilidad
+  y40 instalados después, con602 archivos coincidentes y9 definiciones documentadas.
+  El timeout compuesto pasa en23,614s bajo un límite diagnóstico60s; el presupuesto
+  común20s sigue pendiente. DD080/081 conservan estilo, contratos/pruebas heredados
+  y preparación de fixtures. La suite global no se declara verde.
+  [Clasificación](current-global-review.md), [corrida](current-global-results.json),
+  [arreglo](backup-sidecar-results.json).
+
 - **Eventos y reconexión comprobados:** historial SQLite compartido por HTTP/WS,
   cursores exactos, páginas acotadas, aislamiento de clientes lentos y aviso de
   pérdida de continuidad.116 pruebas de fuente y116 instaladas;136 contratos,

@@ -540,3 +540,40 @@ y `check` implícito de subprocess cuyo código se comprueba. Mantener el aviso
 de tamaño del bundle y Starlette/httpx para la pasada final. No repetir los
 ensayos de488 eventos por ese estilo. Revisar también etiquetas técnicas,
 localización y contadores de actividad en la aceptación del panel.
+
+## DD080 — pasada global de estilo tras el retiro del motor anterior
+
+Sobre `9fb873c`, Ruff informa347 hallazgos y ESLint9 errores. Se conservan las
+ubicaciones/reglas en [current-global-lint.json](current-global-lint.json).
+Predominan imports, fixtures importadas con nombres de parámetros, variables
+sin uso, tipos y forma explícita de excepciones/subprocess. ESLint incluye
+regex de controles, `any` y declaraciones sin uso. Revisar estas guardas antes
+de modificar una expresión para satisfacer el linter; no debilitar contratos.
+
+Resolver durante la pasada final de detalles, después de todas las capacidades
+principales. El lint no está aprobado. Estos hallazgos por sí solos no prueban
+un fallo funcional; la suite global se examina por separado y sus fallos no se
+reclasifican automáticamente como detalles. No repetir la suite global completa
+por cambios puramente de formato/imports que no afecten comportamiento.
+
+
+## DD081 — contratos y preparación de pruebas tras la corrida global
+
+La [clasificación completa](current-global-review.md) conserva30 casos fallidos
+y1 error de fixture que el arreglo del backup no resuelve. Antes de aceptar la
+suite común:
+
+- Alinear el contrato administrativo de estados y24 pruebas heredadas; conservar
+  las guardas independientes de aceptación/control nativo.
+- Preparar esquemas históricos reales en5 casos de migración: prefijos55/56/57/58,
+  sin quitar un marcador bajo versiones futuras ni añadir una inversa59 ficticia.
+- Exponer `schema_target` al fixture del test de terminal y probar su recorrido.
+- Dar un presupuesto acotado suficiente al test compuesto de dos checks nativos:
+  pasó en23,614s bajo60s, excediendo el límite común20s. No tocar plazos de producto.
+
+No llamar verde a la suite por pasar los ensayos dirigidos. Estos pendientes
+siguen siendo controles obligatorios de la entrega, programados después de las
+capacidades principales. Si al resolverlos aparece un fallo funcional, tratarlo
+como tal. El backup sí tenía un defecto funcional y se corrigió en este tramo.
+Los12 avisos de lint del arreglo están en `backup-sidecar-results.json`; aplicar
+el pulido junto con DD080 sin repetir automáticamente una suite de24min.

@@ -1,0 +1,361 @@
+{
+  "base_commit": "9fb873c",
+  "previous_goal_turn": "progress: implemented and committed durable events as9fb873c",
+  "task_started_at": "2026-11-07T05:55:53+00:00",
+  "process": {
+    "base_commit": "9fb873c",
+    "started_at": "2026-11-07T05:56:58.686132+00:00",
+    "pid": 926375,
+    "command": [
+      "/home/andres/.codex/worktrees/b09e/researcher/.superpowers/sdd/2026-10-31-actualizacion-proyecto/native-runtime-env/bin/python",
+      "-m",
+      "pytest",
+      "backend/tests",
+      "-q",
+      "-m",
+      "not live",
+      "--disable-socket",
+      "--allow-unix-socket",
+      "--timeout=20",
+      "--junitxml=/home/andres/.codex/worktrees/b09e/researcher/.superpowers/sdd/2026-10-31-actualizacion-proyecto/current-global.xml"
+    ],
+    "live_excluded": true,
+    "state": "terminal",
+    "exit_code": 1,
+    "ended_at": "2026-11-07T06:20:44.300685+00:00",
+    "seconds": 1425.615
+  },
+  "cases": 2210,
+  "outcomes": {
+    "passed": 2178,
+    "failure": 31,
+    "error": 1
+  },
+  "unchanged_source_test_files_verified": 776,
+  "source_test_tree_sha256": "81d1cc4bc11abeae6133144077b36b49dd06453f5b058ab3042588d5ca250c0a",
+  "junit_sha256": "a851e9a7192c50af9796dc8cd8ce15c4ff16efc2ebd23a6cf1fdc1953cc49c60",
+  "failures": [
+    {
+      "id": "backend.tests.runtime.test_agent_messages::test_migration56_is_atomic_repeatable_and_preserves_historical_messages",
+      "outcome": "failure",
+      "seconds": 0.288,
+      "message": "RuntimeError: Modern migration history is incomplete; inspect or restore the original database"
+    },
+    {
+      "id": "backend.tests.runtime.test_development_session::test_owned_checks_persist_exact_results_and_invalidate_mutated_copy",
+      "outcome": "failure",
+      "seconds": 21.738,
+      "message": "Failed: Timeout (>20.0s) from pytest-timeout."
+    },
+    {
+      "id": "backend.tests.runtime.test_legacy_import::test_chroma_fragments_keep_exact_text_identity_and_explicit_project",
+      "outcome": "failure",
+      "seconds": 0.413,
+      "message": "AssertionError: Regex pattern did not match.\n  Expected regex: 'imported history'\n  Actual message: 'Reference provenance inverse refuses a newer schema'"
+    },
+    {
+      "id": "backend.tests.runtime.test_reboot_backup::test_reboot_backup_restores_live_old_peer_as_history[56]",
+      "outcome": "failure",
+      "seconds": 0.58,
+      "message": "RuntimeError: Reference provenance inverse refuses a newer schema"
+    },
+    {
+      "id": "backend.tests.runtime.test_reboot_backup::test_reboot_backup_restores_live_old_peer_as_history[57]",
+      "outcome": "failure",
+      "seconds": 0.561,
+      "message": "RuntimeError: Reference provenance inverse refuses a newer schema"
+    },
+    {
+      "id": "backend.tests.runtime.test_reboot_backup::test_unused_archive_inverse_and_future_refusal_preserve_data",
+      "outcome": "failure",
+      "seconds": 0.313,
+      "message": "RuntimeError: Reference provenance inverse refuses a newer schema"
+    },
+    {
+      "id": "backend.tests.runtime.test_recovery_policy::test_large_restoration_receipt_can_enroll_without_losing_any_registration",
+      "outcome": "failure",
+      "seconds": 0.595,
+      "message": "FileNotFoundError: [Errno 2] No such file or directory: 'source.db-shm'"
+    },
+    {
+      "id": "backend.tests.state.test_state_machine.TestCanTransition::test_can_transition_invalid[backlog-done]",
+      "outcome": "failure",
+      "seconds": 0.024,
+      "message": "AssertionError: assert True is False\n +  where True = <function TaskStateMachine.can_transition at 0x7f8ea4055760>('backlog', 'done')\n +    where <function TaskStateMachine.can_transition at 0x7f8ea4055760> = TaskStateMachine.can_transition"
+    },
+    {
+      "id": "backend.tests.state.test_state_machine.TestCanTransition::test_can_transition_invalid[backlog-in_progress]",
+      "outcome": "failure",
+      "seconds": 0.026,
+      "message": "AssertionError: assert True is False\n +  where True = <function TaskStateMachine.can_transition at 0x7f8ea4055760>('backlog', 'in_progress')\n +    where <function TaskStateMachine.can_transition at 0x7f8ea4055760> = TaskStateMachine.can_transition"
+    },
+    {
+      "id": "backend.tests.state.test_state_machine.TestCanTransition::test_can_transition_invalid[backlog-review_ready]",
+      "outcome": "failure",
+      "seconds": 0.025,
+      "message": "AssertionError: assert True is False\n +  where True = <function TaskStateMachine.can_transition at 0x7f8ea4055760>('backlog', 'review_ready')\n +    where <function TaskStateMachine.can_transition at 0x7f8ea4055760> = TaskStateMachine.can_transition"
+    },
+    {
+      "id": "backend.tests.state.test_state_machine.TestCanTransition::test_can_transition_invalid[backlog-failed]",
+      "outcome": "failure",
+      "seconds": 0.024,
+      "message": "AssertionError: assert True is False\n +  where True = <function TaskStateMachine.can_transition at 0x7f8ea4055760>('backlog', 'failed')\n +    where <function TaskStateMachine.can_transition at 0x7f8ea4055760> = TaskStateMachine.can_transition"
+    },
+    {
+      "id": "backend.tests.state.test_state_machine.TestCanTransition::test_can_transition_invalid[pending-done]",
+      "outcome": "failure",
+      "seconds": 0.025,
+      "message": "AssertionError: assert True is False\n +  where True = <function TaskStateMachine.can_transition at 0x7f8ea4055760>('pending', 'done')\n +    where <function TaskStateMachine.can_transition at 0x7f8ea4055760> = TaskStateMachine.can_transition"
+    },
+    {
+      "id": "backend.tests.state.test_state_machine.TestCanTransition::test_can_transition_invalid[pending-backlog]",
+      "outcome": "failure",
+      "seconds": 0.025,
+      "message": "AssertionError: assert True is False\n +  where True = <function TaskStateMachine.can_transition at 0x7f8ea4055760>('pending', 'backlog')\n +    where <function TaskStateMachine.can_transition at 0x7f8ea4055760> = TaskStateMachine.can_transition"
+    },
+    {
+      "id": "backend.tests.state.test_state_machine.TestCanTransition::test_can_transition_invalid[in_progress-done]",
+      "outcome": "failure",
+      "seconds": 0.026,
+      "message": "AssertionError: assert True is False\n +  where True = <function TaskStateMachine.can_transition at 0x7f8ea4055760>('in_progress', 'done')\n +    where <function TaskStateMachine.can_transition at 0x7f8ea4055760> = TaskStateMachine.can_transition"
+    },
+    {
+      "id": "backend.tests.state.test_state_machine.TestCanTransition::test_can_transition_invalid[in_progress-pending]",
+      "outcome": "failure",
+      "seconds": 0.025,
+      "message": "AssertionError: assert True is False\n +  where True = <function TaskStateMachine.can_transition at 0x7f8ea4055760>('in_progress', 'pending')\n +    where <function TaskStateMachine.can_transition at 0x7f8ea4055760> = TaskStateMachine.can_transition"
+    },
+    {
+      "id": "backend.tests.state.test_state_machine.TestCanTransition::test_can_transition_invalid[done-pending]",
+      "outcome": "failure",
+      "seconds": 0.026,
+      "message": "AssertionError: assert True is False\n +  where True = <function TaskStateMachine.can_transition at 0x7f8ea4055760>('done', 'pending')\n +    where <function TaskStateMachine.can_transition at 0x7f8ea4055760> = TaskStateMachine.can_transition"
+    },
+    {
+      "id": "backend.tests.state.test_state_machine.TestCanTransition::test_can_transition_invalid[done-backlog]",
+      "outcome": "failure",
+      "seconds": 0.025,
+      "message": "AssertionError: assert True is False\n +  where True = <function TaskStateMachine.can_transition at 0x7f8ea4055760>('done', 'backlog')\n +    where <function TaskStateMachine.can_transition at 0x7f8ea4055760> = TaskStateMachine.can_transition"
+    },
+    {
+      "id": "backend.tests.state.test_state_machine.TestCanTransition::test_can_transition_invalid[done-failed]",
+      "outcome": "failure",
+      "seconds": 0.025,
+      "message": "AssertionError: assert True is False\n +  where True = <function TaskStateMachine.can_transition at 0x7f8ea4055760>('done', 'failed')\n +    where <function TaskStateMachine.can_transition at 0x7f8ea4055760> = TaskStateMachine.can_transition"
+    },
+    {
+      "id": "backend.tests.state.test_state_machine.TestCanTransition::test_can_transition_invalid[cancelled-backlog]",
+      "outcome": "failure",
+      "seconds": 0.025,
+      "message": "AssertionError: assert True is False\n +  where True = <function TaskStateMachine.can_transition at 0x7f8ea4055760>('cancelled', 'backlog')\n +    where <function TaskStateMachine.can_transition at 0x7f8ea4055760> = TaskStateMachine.can_transition"
+    },
+    {
+      "id": "backend.tests.state.test_state_machine.TestCanTransition::test_can_transition_invalid[cancelled-failed]",
+      "outcome": "failure",
+      "seconds": 0.024,
+      "message": "AssertionError: assert True is False\n +  where True = <function TaskStateMachine.can_transition at 0x7f8ea4055760>('cancelled', 'failed')\n +    where <function TaskStateMachine.can_transition at 0x7f8ea4055760> = TaskStateMachine.can_transition"
+    },
+    {
+      "id": "backend.tests.state.test_state_machine.TestCanTransition::test_can_transition_invalid[failed-in_progress]",
+      "outcome": "failure",
+      "seconds": 0.025,
+      "message": "AssertionError: assert True is False\n +  where True = <function TaskStateMachine.can_transition at 0x7f8ea4055760>('failed', 'in_progress')\n +    where <function TaskStateMachine.can_transition at 0x7f8ea4055760> = TaskStateMachine.can_transition"
+    },
+    {
+      "id": "backend.tests.state.test_state_machine.TestCanTransition::test_can_transition_invalid[failed-done]",
+      "outcome": "failure",
+      "seconds": 0.025,
+      "message": "AssertionError: assert True is False\n +  where True = <function TaskStateMachine.can_transition at 0x7f8ea4055760>('failed', 'done')\n +    where <function TaskStateMachine.can_transition at 0x7f8ea4055760> = TaskStateMachine.can_transition"
+    },
+    {
+      "id": "backend.tests.state.test_state_machine.TestValidateTransition::test_validate_transition_raises_on_invalid_move",
+      "outcome": "failure",
+      "seconds": 0.024,
+      "message": "Failed: DID NOT RAISE ValueError"
+    },
+    {
+      "id": "backend.tests.state.test_state_machine.TestGetAllowedTransitions::test_backlog_transitions",
+      "outcome": "failure",
+      "seconds": 0.024,
+      "message": "AssertionError: assert {'blocked', '...pending', ...} == {'cancelled', 'pending'}\n  \n  Extra items in the left set:\n  'blocked'\n  'in_progress'\n  'failed'\n  'review_ready'\n  'done'\n  'rejected'\n  Use -v to get more diff"
+    },
+    {
+      "id": "backend.tests.state.test_state_machine.TestGetAllowedTransitions::test_pending_transitions",
+      "outcome": "failure",
+      "seconds": 0.024,
+      "message": "AssertionError: assert {'backlog', '...rogress', ...} == {'cancelled',...'in_progress'}\n  \n  Extra items in the left set:\n  'blocked'\n  'review_ready'\n  'done'\n  'backlog'\n  'rejected'\n  Use -v to get more diff"
+    },
+    {
+      "id": "backend.tests.state.test_state_machine.TestGetAllowedTransitions::test_in_progress_transitions",
+      "outcome": "failure",
+      "seconds": 0.024,
+      "message": "AssertionError: assert {'backlog', '...pending', ...} == {'cancelled',...review_ready'}\n  \n  Extra items in the left set:\n  'pending'\n  'blocked'\n  'done'\n  'backlog'\n  'rejected'\n  Use -v to get more diff"
+    },
+    {
+      "id": "backend.tests.state.test_state_machine.TestGetAllowedTransitions::test_review_ready_transitions",
+      "outcome": "failure",
+      "seconds": 0.025,
+      "message": "AssertionError: assert {'backlog', '...rogress', ...} == {'cancelled',...', 'rejected'}\n  \n  Extra items in the left set:\n  'blocked'\n  'in_progress'\n  'pending'\n  'backlog'\n  Use -v to get more diff"
+    },
+    {
+      "id": "backend.tests.state.test_state_machine.TestGetAllowedTransitions::test_rejected_transitions",
+      "outcome": "failure",
+      "seconds": 0.025,
+      "message": "AssertionError: assert {'backlog', '...rogress', ...} == {'cancelled',...'in_progress'}\n  \n  Extra items in the left set:\n  'pending'\n  'blocked'\n  'review_ready'\n  'done'\n  'backlog'\n  Use -v to get more diff"
+    },
+    {
+      "id": "backend.tests.state.test_state_machine.TestGetAllowedTransitions::test_done_transitions",
+      "outcome": "failure",
+      "seconds": 0.024,
+      "message": "AssertionError: assert {'backlog', '...pending', ...} == set()\n  \n  Extra items in the left set:\n  'pending'\n  'blocked'\n  'in_progress'\n  'failed'\n  'review_ready'...\n  \n  ...Full output truncated, use '-vv' to show"
+    },
+    {
+      "id": "backend.tests.state.test_state_machine.TestGetAllowedTransitions::test_cancelled_transitions",
+      "outcome": "failure",
+      "seconds": 0.025,
+      "message": "AssertionError: assert {'backlog', '...pending', ...} == set()\n  \n  Extra items in the left set:\n  'pending'\n  'blocked'\n  'in_progress'\n  'failed'\n  'review_ready'...\n  \n  ...Full output truncated, use '-vv' to show"
+    },
+    {
+      "id": "backend.tests.state.test_state_machine.TestGetAllowedTransitions::test_failed_transitions",
+      "outcome": "failure",
+      "seconds": 0.025,
+      "message": "AssertionError: assert {'backlog', '...pending', ...} == {'cancelled', 'pending'}\n  \n  Extra items in the left set:\n  'blocked'\n  'in_progress'\n  'review_ready'\n  'done'\n  'backlog'\n  'rejected'\n  Use -v to get more diff"
+    },
+    {
+      "id": "backend.tests.test_orchestrator::test_terminal_owns_no_engine_and_recovers_exact_work_through_real_owner_http",
+      "outcome": "error",
+      "seconds": 0.026,
+      "message": "failed on setup with \"file /home/andres/.codex/worktrees/b09e/researcher/backend/tests/test_orchestrator.py, line 26\n  @pytest.mark.timeout(220)\n  async def test_terminal_owns_no_engine_and_recovers_exact_work_through_real_owner_http(\n      owned_config, socket_enabled\n  ):\n      \"\"\"One server handles web-equivalent terminal planning/research/private development/review/acceptance; lost execution response and terminal restart never create another turn or auto-merge.\"\"\"\n[+70 more lines; full report in element text]"
+    }
+  ],
+  "slowest": [
+    {
+      "id": "backend.tests.runtime.test_owned_code_dependencies::test_owned_successor_reads_exact_accepted_code_and_input_without_assuming_publication",
+      "outcome": "passed",
+      "seconds": 75.932,
+      "message": null
+    },
+    {
+      "id": "backend.tests.runtime.test_public_development::test_owner_http_develops_checks_reviews_and_accepts_exact_candidate[carryover]",
+      "outcome": "passed",
+      "seconds": 61.159,
+      "message": null
+    },
+    {
+      "id": "backend.tests.runtime.test_owned_remote_transport::test_actual_owned_https_push_pr_merge_and_stop_retire_only_local_clients",
+      "outcome": "passed",
+      "seconds": 35.627,
+      "message": null
+    },
+    {
+      "id": "backend.tests.runtime.test_public_development::test_owner_http_develops_checks_reviews_and_accepts_exact_candidate[legacy-branch]",
+      "outcome": "passed",
+      "seconds": 31.79,
+      "message": null
+    },
+    {
+      "id": "backend.tests.runtime.test_public_development::test_owner_http_develops_checks_reviews_and_accepts_exact_candidate[fresh]",
+      "outcome": "passed",
+      "seconds": 24.25,
+      "message": null
+    },
+    {
+      "id": "backend.tests.runtime.test_public_development::test_owner_http_develops_checks_reviews_and_accepts_exact_candidate[optimization]",
+      "outcome": "passed",
+      "seconds": 24.185,
+      "message": null
+    },
+    {
+      "id": "backend.tests.runtime.test_public_development::test_owner_http_develops_checks_reviews_and_accepts_exact_candidate[legacy-files]",
+      "outcome": "passed",
+      "seconds": 23.881,
+      "message": null
+    },
+    {
+      "id": "backend.tests.runtime.test_native_code_operations::test_native_refactor_updates_callers_and_captures_checked_private_candidate",
+      "outcome": "passed",
+      "seconds": 22.199,
+      "message": null
+    },
+    {
+      "id": "backend.tests.runtime.test_development_session::test_owned_checks_persist_exact_results_and_invalidate_mutated_copy",
+      "outcome": "failure",
+      "seconds": 21.738,
+      "message": "Failed: Timeout (>20.0s) from pytest-timeout."
+    },
+    {
+      "id": "backend.tests.runtime.test_owned_publication::test_owned_recovery_observes_commit_after_lost_response_without_repeating_transaction",
+      "outcome": "passed",
+      "seconds": 21.719,
+      "message": null
+    }
+  ],
+  "previous_baseline": {
+    "commit": "0c8b8d9",
+    "cases": 2148,
+    "failed": 100,
+    "current_outcome_for_previous_failed_cases": {
+      "not_collected": 75,
+      "passed": 1,
+      "failure": 24
+    },
+    "note": "Not-collected is not fixed: many old engine/tool tests were retired along with their implementations."
+  },
+  "classification": [
+    {
+      "group": "backup_sidecar_race",
+      "count": 1,
+      "state": "confirmed_product_defect",
+      "evidence": "installation_backup probes a previously inventoried source.db-shm before excluding transient SQLite files; the file can disappear on connection close. Fix and deterministic reproduction next."
+    },
+    {
+      "group": "historical_migration_preparation",
+      "count": 5,
+      "state": "test_preparation_outdated",
+      "evidence": "One removes56 under later schema markers; four try inverse58 on current59. Forward prefix and inverse guards correctly reject those preparations; retain historical-schema coverage during repair."
+    },
+    {
+      "group": "legacy_state_contract",
+      "count": 24,
+      "state": "existing_contract_disagreement",
+      "evidence": "TaskStateMachine permits every distinct known status while tests expect the old narrow workflow. Native task API independently rejects generic lifecycle edits. Resolve the retained administrative contract and tests; do not broaden native acceptance."
+    },
+    {
+      "group": "terminal_fixture_scope",
+      "count": 1,
+      "state": "missing_test_dependency",
+      "evidence": "Top-level test imports coordination but not its schema_target fixture from the sibling runtime directory; product behavior was never reached."
+    },
+    {
+      "group": "multi_operation_check_timeout",
+      "count": 1,
+      "state": "needs_directed_diagnosis",
+      "evidence": "Default20second test deadline fired during native Git dispatch in an integration case with multiple checks. No product timeout has been changed."
+    }
+  ],
+  "lint_receipt": "docs/modernization/current-global-lint.json",
+  "acceptance_gaps": [
+    "evals/context_alignment/ is absent: paired prompt outcomes and human comprehension remain unmeasured.",
+    "frontend package has no test:e2e script; individual browser trials do not accept all12pages."
+  ],
+  "limits": [
+    "This is the common backend suite using the installed native environment and source code; not a full isolated-wheel suite.",
+    "No global success:31failures and1setup error remain at this checkpoint.",
+    "Live marker excluded, network blocked by default; synthetic native/runtime tests are included.",
+    "No claim of human/scientific evaluation, actual owner-data migration, broad scenario acceptance or full-page acceptance."
+  ],
+  "classification_finished_at": "2026-11-07T06:23:13+00:00",
+  "task_seconds_until_next_main_block": 1640,
+  "subsequent_evidence": {
+    "backup_race": "docs/modernization/backup-sidecar-results.json",
+    "native_timeout_diagnostic": {
+      "same_case_assertions": "passed",
+      "observed_seconds": 23.614,
+      "diagnostic_test_deadline_seconds": 60,
+      "default_test_deadline_seconds": 20,
+      "product_limits_changed": false,
+      "default_suite_success_claimed": false
+    },
+    "remaining_default_gate_failures": "30failed cases plus1fixture error are not resolved by the backup fix; no second global run has been made."
+  }
+}

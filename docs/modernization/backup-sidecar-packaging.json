@@ -1,0 +1,30 @@
+{
+  "base_commit": "9fb873c",
+  "wheel": "researcher-0.1.0-cp312-cp312-linux_x86_64.whl",
+  "wheel_sha256": "de9ccda659b9c9aa3feb4c05ba6a670d8c45328496da603d1733895f27adeca1",
+  "source_files_matching_wheel_and_installation": 602,
+  "product_files_matching": 324,
+  "observed": {
+    "cases": 40,
+    "passed": 40,
+    "failed": 0,
+    "skipped": 0,
+    "backend_modules": 209,
+    "all_backend_imports_from_native_env": true,
+    "seconds": 22.765,
+    "exit_code": 0
+  },
+  "tests": [
+    "backend/tests/runtime/test_installation_backup.py",
+    "backend/tests/runtime/test_recovery_policy.py",
+    "backend/tests/runtime/test_legacy_import.py::test_committed_wal_data_is_captured_without_changing_source_rows",
+    "backend/tests/runtime/test_legacy_import.py::test_staged_legacy_data_preserves_ids_files_and_new_enrollment"
+  ],
+  "real_model_turns": 0,
+  "limits": [
+    "Selected tests, not the global suite",
+    "Synthetic managed installation data, no historical user-data migration",
+    "Backup/restore, real SQLite sidecar disappearance and ordinary-file preservation; no full project acceptance",
+    "Real SQLite, files and local Git; no model calls or remote repositories"
+  ]
+}

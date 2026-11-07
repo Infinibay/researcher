@@ -81,6 +81,14 @@ Los binarios, modelos públicos y archivo de cuenta externos quedan referenciado
 sin copiar sus contenidos. Esto es una copia de datos, no de todos los recursos
 necesarios para reconstruir el host.
 
+Los nombres temporales `-wal`, `-shm` y `-journal` se excluyen antes de consultar
+sus metadatos, únicamente cuando su archivo base se reconoce como SQLite sin
+seguir enlaces. SQLite puede quitarlos al cerrar una conexión inactiva; su
+desaparición normal no debe impedir la copia. Un sufijo por sí solo no autoriza
+omitir un archivo del usuario: se conserva o se rechaza la copia si desaparece.
+Se reprodujeron ambas ventanas de carrera con cierres reales de SQLite y se
+comprobaron las filas confirmadas en el snapshot. [Resultados](../modernization/backup-sidecar-results.json).
+
 Se comparan el inventario inicial/final y los hashes de archivos para detectar
 ediciones ajenas a los bloqueos SQLite. El manifiesto de finalización se publica
 al final, después de sincronizar los objetos. Si falla la operación, se conserva

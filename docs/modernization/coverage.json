@@ -1033,7 +1033,11 @@
         "backend/tests/runtime/test_recovery_policy.py",
         "docs/architecture/migration-recovery-policy.md",
         "docs/modernization/recovery-policy-results.json",
-        "docs/modernization/recovery-policy-packaging.json"
+        "docs/modernization/recovery-policy-packaging.json",
+        "docs/modernization/current-global-results.json",
+        "docs/modernization/backup-sidecar-results.json",
+        "docs/modernization/backup-sidecar-packaging.json",
+        "backend/tests/runtime/test_installation_backup.py"
       ],
       "remaining": [
         "Complete scenario acceptance across durable product runtime, legacy consumers, data recovery and UI where applicable"
@@ -1377,7 +1381,10 @@
         "backend/tests/runtime/migration_fixtures.py",
         "docs/architecture/migration-recovery-policy.md",
         "docs/modernization/recovery-policy-results.json",
-        "docs/modernization/recovery-policy-packaging.json"
+        "docs/modernization/recovery-policy-packaging.json",
+        "docs/modernization/current-global-results.json",
+        "docs/modernization/backup-sidecar-results.json",
+        "docs/modernization/backup-sidecar-packaging.json"
       ],
       "remaining": [
         "Full product runtime/client integration and browser acceptance; HTTP owner guard does not complete the entire scenario"
