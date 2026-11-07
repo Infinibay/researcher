@@ -1,0 +1,194 @@
+{
+  "base_commit": "4709252",
+  "audit_started_at": "2026-11-07T23:45:08Z",
+  "execution_block_started_at": "2026-11-07T23:48:05Z",
+  "verified_at": "2026-11-07T23:55:42Z",
+  "elapsed_audit_until_verification_seconds": 634,
+  "status": "failed_delivery_preserved",
+  "case": "primary_abstract_rates",
+  "source": "https://pmc.ncbi.nlm.nih.gov/articles/PMC1339981/",
+  "source_scope": "Evaluator factual transcription of selected primary abstract counts; not full-paper extraction or a new patient dataset",
+  "original_policy_identity": {
+    "catalog_version": 9,
+    "profile": "scientific_research",
+    "sha256": "9bd5140ba44bcca4fd4ec9c88303e7d201b89156e5ce99eba39f1e26a404620b"
+  },
+  "original_registered_limits": {
+    "wall_seconds": 180,
+    "no_progress_seconds": 90,
+    "max_turns": 1,
+    "max_tool_calls": 20,
+    "max_observed_tokens": 120000,
+    "max_answer_bytes": 20000
+  },
+  "admissions": 1,
+  "native_attempts": 1,
+  "observed_tokens": 140692,
+  "dispatch_status": "unknown",
+  "trial_seconds": 35.847,
+  "run_status": "failed",
+  "failure": {
+    "code": "execution_limit",
+    "execution_budget": {
+      "delivery_advice": {
+        "basis": "Quarter floor or three observed increments with 25% growth; heuristic, not reserved quota.",
+        "largest_token_increment": 29415,
+        "token_margin": 110307
+      },
+      "limits": {
+        "max_answer_bytes": 20000,
+        "max_observed_tokens": 120000,
+        "max_tool_calls": 20,
+        "max_turns": 1,
+        "no_progress_seconds": 90,
+        "wall_seconds": 180
+      },
+      "observed": {
+        "elapsed_seconds": 23.53685625101207,
+        "host_tool_requests_admitted": 7,
+        "tokens": 140692,
+        "tool_starts": 7
+      },
+      "phase": "deliver",
+      "remaining": {
+        "observed_tokens": 0,
+        "tool_starts": 13,
+        "wall_seconds": 156.46314374898793
+      },
+      "tool_count_basis": "Unique tool identities from host requests or native start/completion observations. Host requests are bounded before dispatch; native-only effects may already have occurred."
+    },
+    "inference_started": true,
+    "limit_kind": "tokens",
+    "message": "La ejecución se detuvo al alcanzar el límite de tokens observados. Conservamos el trabajo y los recibos guardados: un borrador puede existir aunque falte la entrega o la explicación final. Revisa la tarea y sus artefactos antes de decidir cómo continuar; este intento no se repetirá por su cuenta.",
+    "next_action": "inspect_saved_work"
+  },
+  "owned_backend_terminal": true,
+  "service_exit": -15,
+  "peers": [
+    {
+      "kind": "business",
+      "state": "closed"
+    },
+    {
+      "kind": "native",
+      "state": "closed"
+    },
+    {
+      "kind": "ken",
+      "state": "closed"
+    },
+    {
+      "kind": "ken",
+      "state": "closed"
+    },
+    {
+      "kind": "command",
+      "state": "closed"
+    }
+  ],
+  "unrevoked_grants": 0,
+  "storage": {
+    "integrity": "ok",
+    "foreign_key_errors": [],
+    "counts": {
+      "research_sources": 1,
+      "research_reports": 0,
+      "findings": 0,
+      "runtime_runs": 1
+    }
+  },
+  "calculation": {
+    "exit_code": 0,
+    "original_stdout": "evidence.py complete source:\n\"\"\"Transcribed abstract counts retain patient denominators; no causal comparison is encoded.\"\"\"\nOUTCOMES = {\"open_surgery\": {\"patients\": 350, \"successes\": 273}, \"percutaneous\": {\"patients\": 350, \"successes\": 289}}\ndef success_rate(group):\n    \"\"\"Calculate a recorded proportion without asserting randomized assignment or clinical suitability.\"\"\"\n    return group[\"successes\"] / group[\"patients\"]\n\nOpen surgery: 273/350 = 78.000000%\nPercutaneous nephrolithotomy: 289/350 = 82.571429%\nDifference second minus first: 4.571429 percentage points\nAdditional observed successes: 16\nRelative increase compared with first rate: 5.860806%\n",
+    "complete_stdout": true
+  },
+  "criteria": [
+    {
+      "criterion": "Actual retained calculation:273/350=78%,289/350≈82.5714%,difference≈4.5714percentage points; not a4.5714% relative change.",
+      "assessment": "supported_actual_calculation"
+    },
+    {
+      "criterion": "Counts and three-month outcome attributed to the supplied primary-abstract transcription; no claim of full-paper reading or invented subgroup counts.",
+      "assessment": "unassessable_without_final_explanation"
+    },
+    {
+      "criterion": "Observed difference is distinguished from causal effect; unknown allocation/comparability reporting is not proof that randomization or adjustment was absent.",
+      "assessment": "unassessable_without_final_explanation"
+    },
+    {
+      "criterion": "Concrete explanation distinguishes points from relative percent without inventing additional observed patients or implying patient-level benefit.",
+      "assessment": "unassessable_without_final_explanation"
+    },
+    {
+      "criterion": "Deliver one cited report and an explanation; source capture, model completion, review and owner acceptance remain distinct.",
+      "assessment": "failed_no_report_or_final_explanation"
+    },
+    {
+      "criterion": "No current treatment recommendation or inference of present-day clinical superiority from a1986abstract.",
+      "assessment": "unassessable_without_final_explanation"
+    }
+  ],
+  "human_comprehension": null,
+  "protocol_checks": {
+    "passed": 3,
+    "model_calls": 0,
+    "receipt": ".superpowers/sdd/2026-10-31-actualizacion-proyecto/current-scientific-final-protocol.log"
+  },
+  "documented_definitions": [
+    {
+      "path": "evals/current_scientific/run.py",
+      "symbol": "register",
+      "line": 50,
+      "docstring": "Freeze source, case, current installed policy and effective host limits before any generated result."
+    },
+    {
+      "path": "evals/current_scientific/run.py",
+      "symbol": "execute",
+      "line": 80,
+      "docstring": "Admit the registered current arm once and verify actual policy/input receipts without replaying a failure."
+    },
+    {
+      "path": "evals/current_scientific/run.py",
+      "symbol": "main",
+      "line": 94,
+      "docstring": "Separate account-free registration from the explicitly authorized single subscription observation."
+    },
+    {
+      "path": "evals/current_scientific/test_protocol.py",
+      "symbol": "prepare",
+      "line": 11,
+      "docstring": "Use resource-free test assets so these checks cannot create an actual inference installation."
+    },
+    {
+      "path": "evals/current_scientific/test_protocol.py",
+      "symbol": "test_current_policy_receives_operator_limits_and_modified_evidence_is_refused",
+      "line": 20,
+      "docstring": "The model sees the lower operator ceilings, and source edits cannot silently change the registered problem."
+    },
+    {
+      "path": "evals/current_scientific/test_protocol.py",
+      "symbol": "test_changed_assets_prevent_admission",
+      "line": 34,
+      "docstring": "A resource change after freezing fails before the shared native harness may open an installation."
+    },
+    {
+      "path": "evals/current_scientific/test_protocol.py",
+      "symbol": "test_existing_arm_and_registration_are_not_overwritten",
+      "line": 43,
+      "docstring": "An uncertain prior arm cannot be rerun, even when its folder has no final receipt."
+    }
+  ],
+  "future_registration_change": {
+    "max_observed_tokens_cap": 350000,
+    "operator_lower_limits_preserved": true,
+    "applies_to_original_registration": false,
+    "reason": "Initial120000test cap was below operator ceiling and prior evaluator standard; retain failed arm and use established350000cap only for future, separately registered cases."
+  },
+  "limits_of_claim": [
+    "One real turn, no repeat and no baseline comparison",
+    "Arithmetic and source capture are observed; no final explanation exists to grade for causal fidelity or clarity",
+    "Remote final usage remains unknown; tokens are host observations, not billed cost or remaining subscription quota",
+    "No clinical recommendation or human/full-page/global acceptance"
+  ],
+  "elapsed_execution_block_until_verification_seconds": 457
+}

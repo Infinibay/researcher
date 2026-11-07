@@ -1,0 +1,52 @@
+{
+  "format": 1,
+  "case": {
+    "id": "primary_abstract_rates",
+    "task_type": "research",
+    "profile": "scientific_research",
+    "request": "El adjunto resume dos grupos de un estudio histórico sobre cálculos renales. Una persona dice: «Como el segundo grupo tiene más éxitos, el segundo tratamiento causa mejores resultados». ¿Es una conclusión justificada con este material? Calcula las dos tasas y su diferencia con una herramienta, entrega un informe breve con citas y explícalo en español. No conozco la diferencia entre porcentaje y puntos porcentuales. Necesito saber qué se observó, qué no queda demostrado y qué información faltaría. Limita tu lectura al material suministrado; no des recomendaciones clínicas actuales ni inventes métodos del artículo completo.",
+    "criteria": [
+      "Actual retained calculation:273/350=78%,289/350≈82.5714%,difference≈4.5714percentage points; not a4.5714% relative change.",
+      "Counts and three-month outcome attributed to the supplied primary-abstract transcription; no claim of full-paper reading or invented subgroup counts.",
+      "Observed difference is distinguished from causal effect; unknown allocation/comparability reporting is not proof that randomization or adjustment was absent.",
+      "Concrete explanation distinguishes points from relative percent without inventing additional observed patients or implying patient-level benefit.",
+      "Deliver one cited report and an explanation; source capture, model completion, review and owner acceptance remain distinct.",
+      "No current treatment recommendation or inference of present-day clinical superiority from a1986abstract."
+    ]
+  },
+  "profile": "scientific_research",
+  "task_type": "research",
+  "task_title": "Interpret a primary scientific abstract",
+  "maximum_model_turns": 1,
+  "policy_identity": {
+    "catalog_version": 9,
+    "profile": "scientific_research",
+    "sha256": "9bd5140ba44bcca4fd4ec9c88303e7d201b89156e5ce99eba39f1e26a404620b"
+  },
+  "limits": {
+    "wall_seconds": 180,
+    "no_progress_seconds": 90,
+    "max_turns": 1,
+    "max_tool_calls": 20,
+    "max_observed_tokens": 120000,
+    "max_answer_bytes": 20000
+  },
+  "files": {
+    "candidate.txt": "9bd5140ba44bcca4fd4ec9c88303e7d201b89156e5ce99eba39f1e26a404620b",
+    "evidence.py": "aeb295fa7c4895555b52bf81a474108c0a418716275eed5e6c4cb5ef75a47ee5",
+    "reference.md": "bddfce1c5e9bcc4f1d5c5cdf7701988787a5d0fbbde2fad756c846f03efef8b3",
+    "case.json": "e4b0c021ca3f4b837a968cbd8c3c0dda4a1d838a93bb55946affb4183813b9fe"
+  },
+  "allowed_model_receipt_variation": [
+    "run_id",
+    "attempt_id",
+    "selected_at"
+  ],
+  "request_prefix": "Evaluación autorizada, sin cambios de código ni publicación. Usa ken_find con consulta en inglés y ken_read include=[\"source\"] para leer evidence.py completo. El adjunto policy.md contiene una transcripción factual del resumen primario. No es una nueva cohorte ni el artículo completo. Usa las herramientas ofrecidas para capturar la fuente, calcular y entregar el informe.\nUsuario: ",
+  "reference_file": "reference.md",
+  "require_complete_source": true,
+  "assets_sha256": "0416aa50f185a0fd28140cca86ef3c69869e601ca776184d822a79368eb6b48f",
+  "human_comprehension": null,
+  "human_effort_seconds": null,
+  "scope": "One development observation on selected real abstract material; no baseline, held-out claim or clinical recommendation."
+}

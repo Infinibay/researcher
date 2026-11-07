@@ -28,7 +28,31 @@ que se pueda comparar el avance; no presentar microajustes como tareas principal
 - Última suite global: `9fb873c`,2210 casos,2178 pasan,31 fallan y1 error de fixture; sin omisiones. La carrera de backup encontrada se corrigió después con40 pruebas instaladas. No se declara una nueva corrida global verde; la referencia `0c8b8d9` queda como evidencia histórica.
 - U01–U07, E01–E12, C01–C09 y D01–D13 quedan comprobados con el alcance de sus matrices; siguen 2 de 43 escenarios amplios sin aceptación completa en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Estado actual: evaluaciones; datos históricos resueltos por confirmación
+## Estado actual: aceptación de páginas preparada; evaluación conservada con fallo
+
+Evaluaciones: **23:45:08–23:55:42 UTC**, **10 min 34 s hasta verificación**,
+base `4709252`. La ejecución de este turno empezó 23:48:05 UTC; el tramo anterior
+incluye selección de fuente y preparación del caso.
+
+- Terminado: **41/43 escenarios**; datos históricos sin migración necesaria por
+  declaración explícita del usuario. Cálculo del caso científico y cierre físico
+  del único intento comprobados, sin informe final entregado.
+- Abierto: U08, C10 y evaluación de explicaciones. El caso actual falló al llegar
+  al techo 120000 del ensayo, menor que el del operador. Conserva 140692 tokens
+  observados, una fuente y cero informes. No se repitió. Futuras inscripciones
+  usan el techo 350000 del harness y límites menores del operador.
+- Siguiente: **aceptación completa de las 12 páginas**, empezando por Proyectos.
+  [Plan preparado](../superpowers/plans/2026-11-07-full-pages-acceptance.md);
+  la implementación de este bloque todavía no empezó.
+- Después: evaluaciones aún abiertas, dependencias y distribución.
+- Al final: detalles aplazados, suite global y revisión independiente.
+
+**0/12 páginas aceptadas integralmente**; existen 12 pilotos y 48 conceptos.
+Tres comprobaciones del nuevo protocolo pasan, siete funciones documentadas,
+backend instalado sin cambios. No se declara una explicación útil porque sólo
+se observó aritmética. [Resultados y límites](current-scientific-review.md).
+
+## Etapa anterior: datos históricos resueltos por confirmación
 
 Datos históricos: bloque **23:43:19–23:45:08 UTC**, **1 min 49 s** de inspección
 y confirmación, base `7da6ff3`. No aparece la base principal en las ubicaciones
@@ -858,7 +882,7 @@ cero inferencias, integridad `ok`, cierre real del servicio y grupo eliminado.
 - Siguiente principal: recorridos integrados restantes y aceptación web.
   **No iniciado en este bloque; registrar la hora real al comenzar.**
 - Pendiente: evaluación humana de comunicación y otros perfiles, aceptación de
-  las12páginas, recursos/recuperación restantes, datos históricos y adopción de
+  las 12 páginas, recursos/recuperación restantes, datos históricos y adopción de
   una versión publicada compatible de Ken.
 - Al final: detalles secundarios (DD105 añadido), validación global, revisión
   independiente y distribución. Los fallos funcionales principales siguen fuera

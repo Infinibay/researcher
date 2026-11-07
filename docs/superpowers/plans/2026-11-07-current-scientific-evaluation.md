@@ -47,3 +47,12 @@ partir de que el resumen no describa ese procedimiento.
 Después: otros perfiles realmente pendientes, páginas completas y distribución.
 No volver a convertir matrices históricas desactualizadas en trabajo que ya se
 comprobó. Mantener los detalles menores para el final.
+
+
+Resultado: un único intento real, cálculo correcto y ninguna entrega final.
+El registro original conserva120000tokens como techo; se observaron140692y el
+host interrumpió la ejecución. Fuente y recibos preservados, cinco peers cerrados
+y ningún grant activo. La evaluación sigue abierta. El techo de inscripciones
+futuras pasa al350000del harness general, manteniendo límites menores del
+operador; no se repite ni se reescribe este caso. Ver
+`docs/modernization/current-scientific-review.md`.

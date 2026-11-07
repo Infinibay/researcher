@@ -8637,3 +8637,20 @@ autoría. El usuario confirma «no, no hay» historial que migrar. Se conserva
 hash de la base auxiliar; no se simula una migración.41/43 escenarios,0/12 páginas.
 Se inicia auditoría de evaluaciones a23:45:08 UTC; documentación y checkpoint
 posteriores a la verificación quedan fuera de esa duración.
+
+
+### 2026-11-07 — caso científico primario actual: entrega fallida conservada
+
+Auditoría23:45:08–23:55:42UTC (10min34s hasta verificar); ejecución de este turno
+desde23:48:05. Una admisión real con catálogo9, suscripción y Ken publicado;
+fuente capturada, código leído y cálculo correcto, pero sin informe ni explicación
+final tras140692tokens observados frente al techo120000del ensayo. Los cinco
+peers y el servidor originales están cerrados;0grants activos, consumo remoto
+final desconocido. No se repitió el caso.
+
+Ruling: el techo artificial era inferior al del operador pese al antecedente
+conocido. Para registros futuros se usa350000del harness general con mínimos
+del operador; no cambia el registro original ni prueba una entrega futura.
+Tres pruebas del protocolo pasan; siete funciones documentadas. Evaluación abierta,
+U08/C10 abiertos,41/43 escenarios y0/12 páginas. Siguiente bloque preparado:
+aceptación integral de páginas, empezando por Proyectos. Detalles menores al final.

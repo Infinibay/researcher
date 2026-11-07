@@ -1,0 +1,14 @@
+{
+  "id": "primary_abstract_rates",
+  "task_type": "research",
+  "profile": "scientific_research",
+  "request": "El adjunto resume dos grupos de un estudio histórico sobre cálculos renales. Una persona dice: «Como el segundo grupo tiene más éxitos, el segundo tratamiento causa mejores resultados». ¿Es una conclusión justificada con este material? Calcula las dos tasas y su diferencia con una herramienta, entrega un informe breve con citas y explícalo en español. No conozco la diferencia entre porcentaje y puntos porcentuales. Necesito saber qué se observó, qué no queda demostrado y qué información faltaría. Limita tu lectura al material suministrado; no des recomendaciones clínicas actuales ni inventes métodos del artículo completo.",
+  "criteria": [
+    "Actual retained calculation:273/350=78%,289/350≈82.5714%,difference≈4.5714percentage points; not a4.5714% relative change.",
+    "Counts and three-month outcome attributed to the supplied primary-abstract transcription; no claim of full-paper reading or invented subgroup counts.",
+    "Observed difference is distinguished from causal effect; unknown allocation/comparability reporting is not proof that randomization or adjustment was absent.",
+    "Concrete explanation distinguishes points from relative percent without inventing additional observed patients or implying patient-level benefit.",
+    "Deliver one cited report and an explanation; source capture, model completion, review and owner acceptance remain distinct.",
+    "No current treatment recommendation or inference of present-day clinical superiority from a1986abstract."
+  ]
+}

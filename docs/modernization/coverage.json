@@ -5698,12 +5698,17 @@
         "evals/profile_communication/README.md",
         "evals/profile_communication/cases.py",
         "evals/profile_communication/run.py",
-        "evals/profile_communication/test_protocol.py"
+        "evals/profile_communication/test_protocol.py",
+        "docs/modernization/current-scientific-review.md",
+        "docs/modernization/current-scientific-results.json",
+        "evals/current_scientific/run.py",
+        "evals/current_scientific/test_protocol.py"
       ],
       "remaining": [
         "Budget-aware final delivery and honest partial-result communication",
         "Faithful examples without inferring individual values from group means",
-        "Other profiles, representative real scientific material and observed human comprehension/effort"
+        "Other profiles, representative real scientific material and observed human comprehension/effort",
+        "Current catalog9 primary-abstract case reached an artificially low120000evaluation cap; source/calculation preserved but no delivered report/explanation. Future registrations use standard350000cap with operator minima; original failed arm not repeated."
       ],
       "limitations": [
         "One purposive synthetic sample per arm/case, not population or causal efficacy",
@@ -5963,6 +5968,20 @@
       "scope": "Explicit owner confirms no historical data to migrate; bounded inventory and read-only auxiliary metadata preserved. No migration fabricated.",
       "evidence": [
         "docs/modernization/historical-data-acceptance.json"
+      ]
+    },
+    "current_primary_scientific_evaluation": {
+      "status": "in_progress",
+      "scope": "One catalog9 real subscription turn and Ken0.18.0; exact source/calculation verified, delivery failed at registered120000cap, closed original peers, unknown remote final usage preserved",
+      "evidence": [
+        "docs/modernization/current-scientific-review.md",
+        "docs/modernization/current-scientific-results.json",
+        "evals/current_scientific/run.py",
+        "evals/current_scientific/test_protocol.py"
+      ],
+      "remaining": [
+        "A delivered explanation must be evaluated in another separately registered case; no replay of original failure",
+        "Other profiles, human comprehension and full-page/global acceptance remain open"
       ]
     }
   }
