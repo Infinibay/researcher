@@ -1,0 +1,196 @@
+{
+  "status": "passed",
+  "journey": "interaction",
+  "backend": "/home/andres/.codex/worktrees/b09e/researcher/.superpowers/sdd/2026-10-31-actualizacion-proyecto/native-runtime-env/lib/python3.12/site-packages/backend/__init__.py",
+  "model_turns": 0,
+  "mocked_api_responses": false,
+  "web_index_sha256": "bee3f711d8ce88d07df8c5905b022b1b26ef101f9cfb368e801e88cbbe9c086b",
+  "browser_exit": 0,
+  "storage": {
+    "projects": [
+      {
+        "id": 1,
+        "name": "Atlas comprobable",
+        "description": "Comparar resultados con fuentes verificables. No presuponer que una propuesta est\u00e1 aceptada."
+      },
+      {
+        "id": 2,
+        "name": "Contexto separado",
+        "description": "No debe heredar las tareas de Atlas."
+      }
+    ],
+    "groups": [
+      {
+        "id": 1,
+        "project_id": 1,
+        "title": "Reunir evidencia"
+      }
+    ],
+    "milestones": [
+      {
+        "id": 1,
+        "epic_id": 1,
+        "title": "Datos contrastados"
+      }
+    ],
+    "tasks": [
+      {
+        "id": 1,
+        "project_id": 1,
+        "epic_id": 1,
+        "title": "Capturar fuente",
+        "status": "backlog"
+      },
+      {
+        "id": 2,
+        "project_id": 1,
+        "epic_id": 1,
+        "title": "Contrastar resultado",
+        "status": "backlog"
+      }
+    ],
+    "dependencies": [
+      {
+        "task_id": 2,
+        "depends_on_task_id": 1
+      }
+    ],
+    "corrections": [
+      {
+        "project_id": 1,
+        "task_id": 2,
+        "version": 2,
+        "statement": "Ejemplo concreto: dos fuentes con el mismo t\u00edtulo pueden describir versiones diferentes. Compara fecha y contenido antes de tratarlas como equivalentes.",
+        "source_kind": "user_example"
+      }
+    ],
+    "files": [],
+    "wiki": [
+      {
+        "id": 1,
+        "project_id": 1,
+        "path": "interaction-example",
+        "title": "Un resultado que puedes corregir",
+        "content": "# Corregir una decisi\u00f3n durante una tarea\n\n**Una correcci\u00f3n guardada se aplica al siguiente intento.** No cambia lo que el intento anterior ya ley\u00f3.\n\nPor ejemplo, pides: \u00abPrepara la migraci\u00f3n a PostgreSQL\u00bb. Mientras el agente trabaja, corriges: \u00abMantengamos SQLite\u00bb.\n\nEl sistema guarda tu cambio y retira la autoridad del intento que trabajaba con PostgreSQL. Una propuesta basada en esa decisi\u00f3n anterior ya no puede completar la tarea como si siguiera vigente.\n\n**Para continuar:** env\u00eda una nueva solicitud para esa tarea. El nuevo intento recibe la correcci\u00f3n de SQLite; guardar la correcci\u00f3n por s\u00ed solo no inicia otro trabajo.\n\n**L\u00edmite:** corregir no deshace autom\u00e1ticamente cambios que ya se guardaron. Tampoco demuestra que la futura soluci\u00f3n funcione: eso requiere sus propias comprobaciones.\n\n```mermaid\nflowchart TD\naccTitle: La correcci\u00f3n separa el trabajo anterior del siguiente\naccDescr: Tras corregir la decisi\u00f3n a SQLite, el intento que recibi\u00f3 PostgreSQL pierde autoridad. La correcci\u00f3n queda guardada para otro intento, que s\u00f3lo comienza cuando env\u00edas una nueva solicitud.\nA[Intento anterior: PostgreSQL] --> B[Corriges: mantener SQLite]\nB --> C[Se retira la autoridad anterior]\nC --> D[Correcci\u00f3n guardada: SQLite]\nD -->|Nueva solicitud tuya| E[Nuevo intento con SQLite]\n```\n\n## Si el dibujo est\u00e1 da\u00f1ado\n\n```mermaid\nflowchart LR\naccTitle: Dibujo incompleto\naccDescr: Este dibujo est\u00e1 incompleto. Conserva la explicaci\u00f3n y permite revisar el original; no demuestra un resultado nuevo.\nA --> [\n```\n\n## Secuencia de revisi\u00f3n\n\n```mermaid\nsequenceDiagram\naccTitle: Una interpretaci\u00f3n corregible\naccDescr: El agente propone comparar las capturas. El usuario corrige la unidad; el agente revisa la comparaci\u00f3n antes de concluir.\nAgente->>Usuario: Propongo comparar las capturas\nUsuario->>Agente: La unidad es distinta\nAgente->>Usuario: Debemos revisar la comparaci\u00f3n\n```"
+      },
+      {
+        "id": 2,
+        "project_id": 1,
+        "path": "interaction-untrusted",
+        "title": "Contenido no confiable",
+        "content": "```mermaid\n%%{init: {\"securityLevel\":\"loose\"}}%%\nflowchart LR\naccDescr: No aceptar la configuraci\u00f3n del documento.\nA --> B\n```\n\n```mermaid\nflowchart LR\naccDescr: No cargar im\u00e1genes externas.\nA@{ img: \"https://diagram-probe.invalid/image.png\" }\n```\n\n```mermaid\nflowchart LR\naccDescr: Una etiqueta no ejecuta HTML.\nA[\"<img src='//diagram-probe.invalid/track' onerror='window.diagramProbe=1'>\"] --> B\n```"
+      }
+    ],
+    "wiki_revisions": [
+      {
+        "page_id": 1,
+        "project_id": 1,
+        "revision": 1,
+        "content": "# Corregir una decisi\u00f3n durante una tarea\n\n**Una correcci\u00f3n guardada se aplica al siguiente intento.** No cambia lo que el intento anterior ya ley\u00f3.\n\nPor ejemplo, pides: \u00abPrepara la migraci\u00f3n a PostgreSQL\u00bb. Mientras el agente trabaja, corriges: \u00abMantengamos SQLite\u00bb.\n\nEl sistema guarda tu cambio y retira la autoridad del intento que trabajaba con PostgreSQL. Una propuesta basada en esa decisi\u00f3n anterior ya no puede completar la tarea como si siguiera vigente.\n\n**Para continuar:** env\u00eda una nueva solicitud para esa tarea. El nuevo intento recibe la correcci\u00f3n de SQLite; guardar la correcci\u00f3n por s\u00ed solo no inicia otro trabajo.\n\n**L\u00edmite:** corregir no deshace autom\u00e1ticamente cambios que ya se guardaron. Tampoco demuestra que la futura soluci\u00f3n funcione: eso requiere sus propias comprobaciones.\n\n```mermaid\nflowchart TD\naccTitle: La correcci\u00f3n separa el trabajo anterior del siguiente\naccDescr: Tras corregir la decisi\u00f3n a SQLite, el intento que recibi\u00f3 PostgreSQL pierde autoridad. La correcci\u00f3n queda guardada para otro intento, que s\u00f3lo comienza cuando env\u00edas una nueva solicitud.\nA[Intento anterior: PostgreSQL] --> B[Corriges: mantener SQLite]\nB --> C[Se retira la autoridad anterior]\nC --> D[Correcci\u00f3n guardada: SQLite]\nD -->|Nueva solicitud tuya| E[Nuevo intento con SQLite]\n```\n\n## Si el dibujo est\u00e1 da\u00f1ado\n\n```mermaid\nflowchart LR\naccTitle: Dibujo incompleto\naccDescr: Este dibujo est\u00e1 incompleto. Conserva la explicaci\u00f3n y permite revisar el original; no demuestra un resultado nuevo.\nA --> [\n```\n\n## Secuencia de revisi\u00f3n\n\n```mermaid\nsequenceDiagram\naccTitle: Una interpretaci\u00f3n corregible\naccDescr: El agente propone comparar las capturas. El usuario corrige la unidad; el agente revisa la comparaci\u00f3n antes de concluir.\nAgente->>Usuario: Propongo comparar las capturas\nUsuario->>Agente: La unidad es distinta\nAgente->>Usuario: Debemos revisar la comparaci\u00f3n\n```"
+      },
+      {
+        "page_id": 2,
+        "project_id": 1,
+        "revision": 1,
+        "content": "```mermaid\n%%{init: {\"securityLevel\":\"loose\"}}%%\nflowchart LR\naccDescr: No aceptar la configuraci\u00f3n del documento.\nA --> B\n```\n\n```mermaid\nflowchart LR\naccDescr: No cargar im\u00e1genes externas.\nA@{ img: \"https://diagram-probe.invalid/image.png\" }\n```\n\n```mermaid\nflowchart LR\naccDescr: Una etiqueta no ejecuta HTML.\nA[\"<img src='//diagram-probe.invalid/track' onerror='window.diagramProbe=1'>\"] --> B\n```"
+      }
+    ],
+    "runs": 0,
+    "dispatches": 0,
+    "integrity": "ok"
+  },
+  "service_exit": 143,
+  "storage_after_close": {
+    "projects": [
+      {
+        "id": 1,
+        "name": "Atlas comprobable",
+        "description": "Comparar resultados con fuentes verificables. No presuponer que una propuesta est\u00e1 aceptada."
+      },
+      {
+        "id": 2,
+        "name": "Contexto separado",
+        "description": "No debe heredar las tareas de Atlas."
+      }
+    ],
+    "groups": [
+      {
+        "id": 1,
+        "project_id": 1,
+        "title": "Reunir evidencia"
+      }
+    ],
+    "milestones": [
+      {
+        "id": 1,
+        "epic_id": 1,
+        "title": "Datos contrastados"
+      }
+    ],
+    "tasks": [
+      {
+        "id": 1,
+        "project_id": 1,
+        "epic_id": 1,
+        "title": "Capturar fuente",
+        "status": "backlog"
+      },
+      {
+        "id": 2,
+        "project_id": 1,
+        "epic_id": 1,
+        "title": "Contrastar resultado",
+        "status": "backlog"
+      }
+    ],
+    "dependencies": [
+      {
+        "task_id": 2,
+        "depends_on_task_id": 1
+      }
+    ],
+    "corrections": [
+      {
+        "project_id": 1,
+        "task_id": 2,
+        "version": 2,
+        "statement": "Ejemplo concreto: dos fuentes con el mismo t\u00edtulo pueden describir versiones diferentes. Compara fecha y contenido antes de tratarlas como equivalentes.",
+        "source_kind": "user_example"
+      }
+    ],
+    "files": [],
+    "wiki": [
+      {
+        "id": 1,
+        "project_id": 1,
+        "path": "interaction-example",
+        "title": "Un resultado que puedes corregir",
+        "content": "# Corregir una decisi\u00f3n durante una tarea\n\n**Una correcci\u00f3n guardada se aplica al siguiente intento.** No cambia lo que el intento anterior ya ley\u00f3.\n\nPor ejemplo, pides: \u00abPrepara la migraci\u00f3n a PostgreSQL\u00bb. Mientras el agente trabaja, corriges: \u00abMantengamos SQLite\u00bb.\n\nEl sistema guarda tu cambio y retira la autoridad del intento que trabajaba con PostgreSQL. Una propuesta basada en esa decisi\u00f3n anterior ya no puede completar la tarea como si siguiera vigente.\n\n**Para continuar:** env\u00eda una nueva solicitud para esa tarea. El nuevo intento recibe la correcci\u00f3n de SQLite; guardar la correcci\u00f3n por s\u00ed solo no inicia otro trabajo.\n\n**L\u00edmite:** corregir no deshace autom\u00e1ticamente cambios que ya se guardaron. Tampoco demuestra que la futura soluci\u00f3n funcione: eso requiere sus propias comprobaciones.\n\n```mermaid\nflowchart TD\naccTitle: La correcci\u00f3n separa el trabajo anterior del siguiente\naccDescr: Tras corregir la decisi\u00f3n a SQLite, el intento que recibi\u00f3 PostgreSQL pierde autoridad. La correcci\u00f3n queda guardada para otro intento, que s\u00f3lo comienza cuando env\u00edas una nueva solicitud.\nA[Intento anterior: PostgreSQL] --> B[Corriges: mantener SQLite]\nB --> C[Se retira la autoridad anterior]\nC --> D[Correcci\u00f3n guardada: SQLite]\nD -->|Nueva solicitud tuya| E[Nuevo intento con SQLite]\n```\n\n## Si el dibujo est\u00e1 da\u00f1ado\n\n```mermaid\nflowchart LR\naccTitle: Dibujo incompleto\naccDescr: Este dibujo est\u00e1 incompleto. Conserva la explicaci\u00f3n y permite revisar el original; no demuestra un resultado nuevo.\nA --> [\n```\n\n## Secuencia de revisi\u00f3n\n\n```mermaid\nsequenceDiagram\naccTitle: Una interpretaci\u00f3n corregible\naccDescr: El agente propone comparar las capturas. El usuario corrige la unidad; el agente revisa la comparaci\u00f3n antes de concluir.\nAgente->>Usuario: Propongo comparar las capturas\nUsuario->>Agente: La unidad es distinta\nAgente->>Usuario: Debemos revisar la comparaci\u00f3n\n```"
+      },
+      {
+        "id": 2,
+        "project_id": 1,
+        "path": "interaction-untrusted",
+        "title": "Contenido no confiable",
+        "content": "```mermaid\n%%{init: {\"securityLevel\":\"loose\"}}%%\nflowchart LR\naccDescr: No aceptar la configuraci\u00f3n del documento.\nA --> B\n```\n\n```mermaid\nflowchart LR\naccDescr: No cargar im\u00e1genes externas.\nA@{ img: \"https://diagram-probe.invalid/image.png\" }\n```\n\n```mermaid\nflowchart LR\naccDescr: Una etiqueta no ejecuta HTML.\nA[\"<img src='//diagram-probe.invalid/track' onerror='window.diagramProbe=1'>\"] --> B\n```"
+      }
+    ],
+    "wiki_revisions": [
+      {
+        "page_id": 1,
+        "project_id": 1,
+        "revision": 1,
+        "content": "# Corregir una decisi\u00f3n durante una tarea\n\n**Una correcci\u00f3n guardada se aplica al siguiente intento.** No cambia lo que el intento anterior ya ley\u00f3.\n\nPor ejemplo, pides: \u00abPrepara la migraci\u00f3n a PostgreSQL\u00bb. Mientras el agente trabaja, corriges: \u00abMantengamos SQLite\u00bb.\n\nEl sistema guarda tu cambio y retira la autoridad del intento que trabajaba con PostgreSQL. Una propuesta basada en esa decisi\u00f3n anterior ya no puede completar la tarea como si siguiera vigente.\n\n**Para continuar:** env\u00eda una nueva solicitud para esa tarea. El nuevo intento recibe la correcci\u00f3n de SQLite; guardar la correcci\u00f3n por s\u00ed solo no inicia otro trabajo.\n\n**L\u00edmite:** corregir no deshace autom\u00e1ticamente cambios que ya se guardaron. Tampoco demuestra que la futura soluci\u00f3n funcione: eso requiere sus propias comprobaciones.\n\n```mermaid\nflowchart TD\naccTitle: La correcci\u00f3n separa el trabajo anterior del siguiente\naccDescr: Tras corregir la decisi\u00f3n a SQLite, el intento que recibi\u00f3 PostgreSQL pierde autoridad. La correcci\u00f3n queda guardada para otro intento, que s\u00f3lo comienza cuando env\u00edas una nueva solicitud.\nA[Intento anterior: PostgreSQL] --> B[Corriges: mantener SQLite]\nB --> C[Se retira la autoridad anterior]\nC --> D[Correcci\u00f3n guardada: SQLite]\nD -->|Nueva solicitud tuya| E[Nuevo intento con SQLite]\n```\n\n## Si el dibujo est\u00e1 da\u00f1ado\n\n```mermaid\nflowchart LR\naccTitle: Dibujo incompleto\naccDescr: Este dibujo est\u00e1 incompleto. Conserva la explicaci\u00f3n y permite revisar el original; no demuestra un resultado nuevo.\nA --> [\n```\n\n## Secuencia de revisi\u00f3n\n\n```mermaid\nsequenceDiagram\naccTitle: Una interpretaci\u00f3n corregible\naccDescr: El agente propone comparar las capturas. El usuario corrige la unidad; el agente revisa la comparaci\u00f3n antes de concluir.\nAgente->>Usuario: Propongo comparar las capturas\nUsuario->>Agente: La unidad es distinta\nAgente->>Usuario: Debemos revisar la comparaci\u00f3n\n```"
+      },
+      {
+        "page_id": 2,
+        "project_id": 1,
+        "revision": 1,
+        "content": "```mermaid\n%%{init: {\"securityLevel\":\"loose\"}}%%\nflowchart LR\naccDescr: No aceptar la configuraci\u00f3n del documento.\nA --> B\n```\n\n```mermaid\nflowchart LR\naccDescr: No cargar im\u00e1genes externas.\nA@{ img: \"https://diagram-probe.invalid/image.png\" }\n```\n\n```mermaid\nflowchart LR\naccDescr: Una etiqueta no ejecuta HTML.\nA[\"<img src='//diagram-probe.invalid/track' onerror='window.diagramProbe=1'>\"] --> B\n```"
+      }
+    ],
+    "runs": 0,
+    "dispatches": 0,
+    "integrity": "ok"
+  }
+}

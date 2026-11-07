@@ -26,9 +26,58 @@ que se pueda comparar el avance; no presentar microajustes como tareas principal
 - Codex por suscripción y Ken publicado ensayados. Fuentes/citas, informes draft y revisión documental independiente conectados. Desarrollo admitido desde Tareas/Conversación con captura y comprobaciones explícitas; revisión independiente solicitada desde Tareas y aceptación del propietario conectada. Publicación local desde aceptación conectada; recuperación local de sólo lectura conectada; transporte remoto configurable conectado; recuperación remota y controles de Tareas conectados; ejecución/activación antiguas por tarea y proyecto retiradas; auxiliares de generación/proveedor, herramientas antiguas y sus cinco bibliotecas retirados. También se retiraron API interna, CLI, servicios/listeners y flows/helpers antiguos. También se retiraron autonomía, plantillas históricas y lectores de proveedor sin consumidores; se conserva el control de parada de trabajadores registrados.
 - Interfaz: doce pilotos, 36/36 conceptos de escritorio y 12/12 móviles; todas las rutas tienen piloto y 0/12 páginas están completamente aceptadas.
 - Última suite global: `9fb873c`,2210 casos,2178 pasan,31 fallan y1 error de fixture; sin omisiones. La carrera de backup encontrada se corrigió después con40 pruebas instaladas. No se declara una nueva corrida global verde; la referencia `0c8b8d9` queda como evidencia histórica.
-- U01–U03/U06, E01–E12, C01–C09 y D01–D13 quedan comprobados con el alcance de sus matrices; siguen 5 de 43 escenarios amplios sin aceptación completa en [coverage.json](coverage.json). No hay un porcentaje global defendible.
+- U01–U07, E01–E12, C01–C09 y D01–D13 quedan comprobados con el alcance de sus matrices; siguen 2 de 43 escenarios amplios sin aceptación completa en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Estado actual: conocimiento U01–U03 comprobado; siguiente interacción
+## Estado actual: U04/U05/U07 comprobados; comunicación U08 abierta
+
+Bloque **2026-11-07 23:08:57–23:38:11 UTC**, desde `4eb15e8`:
+**29 min 14 s hasta la verificación final**, sin documentación/checkpoint posteriores.
+
+- **Terminado:** U01–U07, E01–E12, C01–C09 y D01–D13: **41/43 escenarios**.
+  Las opciones conservan ID/etiqueta y texto libre; preguntas, hilo y contexto se
+  mantienen. Se comprueban continuidad A→B→A, CLI/TUI y arranque limpio.
+- **En revisión:** U08. Diagramas con alternativa textual y fallo visible
+  implementados. El usuario rechazó el primer ejemplo por no permitir interpretar
+  nada; se sustituyó por un caso concreto de corrección durante una tarea.
+  **La nueva explicación no tiene aceptación humana** ni reemplaza evaluar una
+  generación y adaptación reales. [Crítica y revisión](interaction-human-review.json).
+- **Siguiente bloque:** datos históricos reales: localizar fuentes, trabajar en
+  copia, verificar migración y recuperación sin reactivar autoridad anterior.
+  [Plan preparado](../superpowers/plans/2026-11-07-historical-data-acceptance.md).
+  La implementación todavía no comenzó; registrar su hora real al iniciarla.
+- **Después:** evaluaciones restantes, aceptación completa de las **12 páginas**,
+  dependencias y distribución —incluida compatibilidad de clientes antiguos—.
+- **Al final:** detalles aplazados, C10/DD116 (entrega independiente pendiente),
+  DD120, suite global y revisión independiente. DD121 conserva pulido de diagramas.
+
+**116 casos instalados correctos**, entre selecciones disjuntas; un fallo inicial
+por incluir un test que busca `start.sh` del checkout dentro de la rueda permanece
+registrado. Los lanzadores pasan **6 casos** en su ubicación real. Pasan también
+**26 contratos frontend, 13 DOM y el recorrido real de escritorio/móvil**.
+Tras la crítica humana sólo cambia la política común; **17 casos instalados**
+comprueban la versión final y no se suman como casos nuevos a los anteriores.
+675 de 676 fuentes backend permanecen iguales entre ambas ruedas. Cero inferencias.
+[Alcance, crítica, pruebas y límites](interaction-acceptance-review.md).
+
+**Pendientes C10 y U08; 0/12 páginas completamente aceptadas**, con 12 pilotos y
+48 conceptos. No equivalen a porcentaje global ni a una suite completa verde.
+La lista y los tiempos se conservan en cada transición, después de compactar.
+
+## Etapa anterior: inicio de continuidad y comunicación U04/U05/U07/U08
+
+Inicio real **2026-11-07 23:08:57 UTC**, desde `4eb15e8`.
+
+- Terminado: U01–U03/U06, E01–E12, C01–C09 y D01–D13: **38/43 escenarios**.
+- En curso: eventos/proyectos, preguntas/opciones/hilos, acceso CLI/web y
+  explicaciones con fuentes, límites, diagramas y corrección humana.
+- Siguiente: datos históricos, evaluaciones, doce páginas, dependencias y distribución.
+- Al final: detalles, C10/DD116, DD120, suite global y revisión independiente.
+
+El lector actual no representa diagramas: se trata como brecha funcional de U08.
+Preparar un resultado concreto para la comprobación humana; mantener ese escenario
+abierto mientras falte evidencia, continuando con trabajo independiente.
+
+## Etapa anterior: conocimiento U01–U03 comprobado; siguiente interacción
 
 Bloque **2026-11-07 22:47:36–23:04:16 UTC**, desde `f6f0630`:
 **16 min 40 s hasta verificar**, sin documentación/checkpoint posteriores.

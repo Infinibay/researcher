@@ -2,9 +2,10 @@
 import { useRef, useState } from 'react'
 import type { ReactNode } from 'react'
 import { useQuery } from '@tanstack/react-query'
-import { prepareAnswer, prepareInstruction, prepareRecovery, prepareStartRetry, presentRun, recoveryInspection, sourceWindow } from '../../api/runtime'
-import type { AnswerIntent, InstructionIntent, RecoveryIntent, RuntimeQuestion, RuntimeRun, StartRetryIntent, PriorMaterialSelection } from '../../api/runtime'
-import { useAnswer, useCorrection, useInstruction, useRecovery, useStartRetry, useStopRun, useTaskWorkspace } from '../../hooks/useRuntime'
+import { prepareInstruction, prepareRecovery, prepareStartRetry, presentRun, recoveryInspection, sourceWindow } from '../../api/runtime'
+import type { InstructionIntent, RecoveryIntent, RuntimeRun, StartRetryIntent, PriorMaterialSelection } from '../../api/runtime'
+import { useCorrection, useInstruction, useRecovery, useStartRetry, useStopRun, useTaskWorkspace } from '../../hooks/useRuntime'
+import { QuestionCard } from '../chat/QuestionCard'
 import { MarkdownRenderer } from '../common/MarkdownRenderer'
 import { FileImportInput } from './FileImportInput'
 import { PriorCodeInput } from './PriorCodeInput'
@@ -70,39 +71,6 @@ function RecoveryCard({ projectId, taskId, runId }: { projectId: number; taskId:
   </section>
 }
 
-function QuestionCard({ projectId, taskId, question }: { projectId: number; taskId: number; question: RuntimeQuestion }) {
-  const answer = useAnswer()
-  const [values, setValues] = useState<Record<string, string>>({})
-  const [error, setError] = useState('')
-  const intent = useRef<AnswerIntent | null>(null)
-  const pending = question.status === 'pending'
-  const submit = () => {
-    try {
-      if (!intent.current) intent.current = prepareAnswer(projectId, taskId, question.request_id, question.context_version, values)
-      setError('')
-      answer.mutate(intent.current)
-    } catch (failure) { setError(failure instanceof Error ? failure.message : 'Revisa las respuestas.') }
-  }
-  return <section id={`runtime-question-${question.request_id}`} tabIndex={-1} className="space-y-3 rounded-md border border-[var(--work-line)] p-3" aria-label="Preguntas del agente">
-    <h4 className="font-medium text-[var(--work-ink)]">{pending ? 'El agente necesita una aclaración' : question.status === 'responded' ? 'Respuesta registrada' : 'Pregunta del contexto anterior'}</h4>
-    <p className="text-xs text-[var(--work-muted)]">Pregunta bajo contexto {question.context_version}{question.answer_context_version ? ` · respuesta guardada en contexto ${question.answer_context_version}` : ''}</p>
-    {pending && <p className="text-[var(--work-muted)]">{question.ready_for_answer ? 'La ejecución se cerró. Responde con tus palabras o elige una opción.' : 'Se está comprobando el cierre de la ejecución. La respuesta se habilitará cuando esté confirmado.'}</p>}
-    <form className="space-y-4" onSubmit={event => { event.preventDefault(); submit() }}>
-      {question.questions.map(item => <fieldset key={item.id} className="space-y-2" disabled={!pending || !question.ready_for_answer || answer.isPending || intent.current != null}>
-        <legend className="whitespace-pre-wrap text-[var(--work-ink)]">{item.question}</legend>
-        {item.why_needed && <p className="whitespace-pre-wrap text-[var(--work-muted)]">{item.why_needed}</p>}
-        {item.example && <p className="whitespace-pre-wrap text-[var(--work-muted)]">Ejemplo: {item.example}</p>}
-        {pending ? <>
-          {item.options.length > 0 && <div className="flex flex-wrap gap-2">{item.options.map(option => <button type="button" key={option} className={buttonClass} aria-pressed={values[item.id] === option} onClick={() => setValues(previous => ({ ...previous, [item.id]: option }))}>{option}</button>)}</div>}
-          <label className="block text-[var(--work-ink)]">Tu respuesta<textarea className={inputClass} rows={2} value={values[item.id] ?? ''} maxLength={12000} onChange={event => setValues(previous => ({ ...previous, [item.id]: event.target.value }))} /></label>
-        </> : <p className="whitespace-pre-wrap text-[var(--work-ink)]">{question.answers?.[item.id] ?? 'Esta pregunta perdió vigencia; no se envió una respuesta.'}</p>}
-      </fieldset>)}
-      {(error || answer.error) && <div role="alert" className="space-y-2 text-[var(--work-error)]"><p>{error || `No se confirmó el guardado. Reenviar conserva las mismas respuestas. ${answer.error?.message}`}</p></div>}
-      {pending && <button className={buttonClass} disabled={answer.isPending || (!intent.current && (!question.ready_for_answer || question.questions.some(item => !values[item.id]?.trim())))}>{answer.isPending ? 'Guardando…' : intent.current ? 'Reenviar las mismas respuestas' : 'Guardar respuestas'}</button>}
-    </form>
-    {(answer.isSuccess || question.status === 'responded') && <p role="status" className="text-[var(--work-accent)]">Respuesta guardada. Inicia trabajo cuando quieras usar el nuevo contexto; responder no inicia otra ejecución.</p>}
-  </section>
-}
 
 function SourceReader({ projectId, sourceId }: { projectId: number; sourceId: number }) {
   const [offset, setOffset] = useState(0)

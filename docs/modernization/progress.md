@@ -8607,3 +8607,23 @@ Block22:47:36–23:04:16UTC,1000seconds through verification. Semantic matches l
 Installedinitial63347exited1:210pass1failure inhistorical auxiliaryinversefixture (schema68 invokesinverse65). Preserve receipt/logs;DD120defers thattest andrelatedcontinuationinverse identifiedbyreading,notrun, tofullglobalclosure. Productguards unchanged;donotskip/eraseknownfailure. Continuationhandle27547exited0:15pass7.713s,0skip. JUnitidentitiesdisjoint;225pass1failunion,notglobalgreen.675source/wheel/installhashes;wheel94360ca64424411c5151477d744a7f83dff710dbbd6894d785f7acf2ffc6fecf. CurrentpublishedKen0.18.0realrevisionprobe41071exited0;oneindexdirectorypreserved,twopreparations/fourMCPcalls returncurrent137→200andrenamedsymbol;allpeersclosed/domainremoved. Noaccounts/generativecalls. Sourcehelpernowacceptsoptionaloperation/outputidentities;existingdefaultsunchanged. Probeinstalledbackend,syntheticsource;notuniversalindexcoverage. Receipt:knowledge-ken-revisions.json;codeevals/security/run_ken_revisions.py. Allnativeworkserial undertransientCPUQuota800%;allownedhandlesclosedbeforeenvironmentmutation.
 
 U01–U03closed toexplicitmatrices;38/43scenarioscomplete,5openC10,U04,U05,U07,U08.0/12fullpages. Nextinteractionbriefpreparednotstarted;humanU08cannotbeclosedbyautomation. Historicaldata,evaluations,12pages,dependencies/distribution,detailsandfinalglobal/independentreviewremain. Usermacrofirstpolicyandlist/measuredtimeeverytransitionpersist;DD120retainedoutsideknowledgeblockwithremainingglobalobligation.
+
+
+## Interaction block started2026-11-07 23:08:57UTC
+
+Previousturnprogress4eb15e8;38/43scenarioscomplete. CurrentU04/U05/U07/U08:verifyexistingquestion/event/terminalcontracts;actualMarkdownRenderer lacksdiagrams,implementfunctionalrenderingwithtextualfallback andvisibleerrors. HumanU08acceptancerequiresconcretereview andusercorrection,notsyntheticcompletion. Browseraccesshostunavailable(cua.getState);useexistingrepositorybrowserharnessfallbackwithinlocaltestscope. Macrofirst,detailslast,persistlistandtimes;DD120globalknownfailureunchanged.
+
+
+### 2026-11-07 — interacción U04/U05/U07 verificada; U08 recibió crítica humana
+
+Bloque 23:08:57–23:38:11 UTC (29 min 14 s hasta verificar), base4eb15e8.
+Opciones ID/etiqueta frente a texto libre, contexto/hilo/reintento y prioridad de
+la tarea; Mermaid con alternativa textual, fallo conservado y salida inerte.
+116 casos instalados correctos y un fallo de alcance del test de start.sh, seis
+casos de lanzador desde checkout,26 contratos,13 DOM, dos recorridos reales de
+navegador. Política final:17 casos instalados; sólo cambia prompts/native.py
+respecto del primer artefacto y no se suman pruebas repetidas.35 definiciones
+Python documentadas. El usuario rechaza el primer ejemplo; nuevo caso concreto
+comprobado visualmente pero sin aceptación humana.41/43 escenarios;0/12 páginas.
+Siguiente: datos históricos, con plan preparado y comienzo real aún pendiente.
+Se mantiene la lista con tiempos en cada transición y capacidades antes de detalles.

@@ -1,0 +1,10 @@
+{
+  "previous_wheel_sha256": "57292e6351dab4635db4fc3dcbee8aa6aeadc5c26f1dec46f166fd43c2a75c7e",
+  "final_wheel_sha256": "45ac60967d937afa384279298ecd5e082586eb23f0bcd2dd9dc8ceb6ccd757e1",
+  "source_files": 676,
+  "changed_files": [
+    "backend/prompts/native.py"
+  ],
+  "unchanged_files": 675,
+  "reason": "Human feedback required concrete, task-grounded examples. Only common prompt policy changed after the first installed selection; the final policy selection checks actual frozen/sent instructions. Earlier test counts are not added to repeated policy tests."
+}

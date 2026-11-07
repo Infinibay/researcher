@@ -1,5 +1,24 @@
 # Preguntas, pausa y respuestas con procedencia
 
+## Contrato actual: opciones identificadas y texto libre (2026-11-07)
+
+Las opciones nuevas aceptan `{id, label}`. La selección se guarda como
+`{option_id: "mass_kg"}` y se explica usando su etiqueta original, por ejemplo
+«Kilogramos». El texto libre permanece literal aunque coincida con un ID.
+El servidor valida la selección contra la pregunta original; proyecto, solicitud,
+hilo, contexto y reintento mantienen los controles descritos abajo. Las opciones
+históricas de texto conservan su forma; no se les inventan identificadores.
+
+HTTP/MCP, persistencia, contexto y formulario usan este contrato. La bandeja muestra
+la prioridad observada de la tarea, sin deducir urgencia. Los clientes antiguos
+abiertos no quedan declarados compatibles: la distribución debe actualizar backend
+ y frontend conjuntamente. [Verificación actual](../modernization/interaction-acceptance-review.md).
+El catálogo actual es9; las referencias siguientes a catálogos2/3 y sus ensayos
+son historia, no una afirmación de que siga pendiente retirar el motor anterior.
+
+## Primer recorrido y evidencia histórica
+
+
 Estado: recorrido de investigación conectado a HTTP, MCP, coordinador y formulario.
 La prueba por suscripción `questions-709512e4` usa dos turnos explícitos y datos
 temporales. La revisión visual y de comprensión humana sigue pendiente.

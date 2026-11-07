@@ -17,6 +17,8 @@ export function QuestionInbox({ projectId, tasks, onChoose }: { projectId: numbe
       {item.kind === 'native' && item.task_id != null ? <button disabled={!tasks.some(task => task.id === item.task_id)} onClick={() => onChoose(item.task_id!, item.request_id)}>
         <span className="conversation-meta">Tarea #{item.task_id} · contexto {item.context_version}</span>
         <strong>{item.questions?.[0]?.question ?? item.title}</strong>
+        {item.questions && item.questions.length > 1 && <span>{item.questions.length} preguntas en esta solicitud</span>}
+        {item.task_priority != null && <span>Prioridad de la tarea: {item.task_priority}</span>}
         <span>{item.ready_for_answer ? 'Lista para responder' : item.current_context_version !== item.context_version ? 'Requiere revisar el contexto' : 'Confirmando la parada antes de responder'}</span>
       </button> : <details><summary>{item.title || 'Solicitud anterior'}</summary><p>{item.body}</p><p>Solicitud del motor anterior. No tiene un vínculo comprobado con una tarea y versión del nuevo motor.</p></details>}
     </li>)}</ul>

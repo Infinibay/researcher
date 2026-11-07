@@ -980,3 +980,27 @@ modifica esquema, inversas ni almacenamiento del presupuesto. Por la prioridad
 del usuario —capacidades grandes antes de detalles— se conserva este trabajo
 fuera de ese bloque, junto con su fallo explícito. Los contratos de continuación,
 presupuesto, recibos y autoridad restantes sí se verifican sobre el mismo artefacto.
+
+
+## DD121 — presentación y distribución del lector de diagramas
+
+Después de las capacidades principales: ampliar/exportar diagramas cuando ayude,
+mejorar letra de flujos horizontales en móvil y revisar chunks grandes de Mermaid,
+que ya se carga bajo demanda. La alternativa textual es legible; el primer ejemplo
+fue rechazado por su contenido, no debe reclasificarse como un simple detalle visual.
+U08 sigue siendo aceptación funcional pendiente; el ejemplo revisado no la cierra.
+
+Consolidar las113 nuevas entradas npm y los avisos de distribución. `khroma`
+no declara licencia en el lock; su archivo instalado es MIT y queda registrado
+con hash. El backend y la web actuales admiten opciones estructuradas; un bundle
+antiguo abierto no se declara compatible. Resolver su actualización en el bloque
+de distribución, conservando el formato original de preguntas históricas.
+
+La validación inicial incluyó por error un contrato de `start.sh` del checkout
+entre pruebas de la rueda. Se conserva el fallo inicial y la comprobación correcta
+posterior de seis casos de lanzador; no requiere modificar el producto para
+introducir un lanzador de checkout en site-packages. DD120 sigue independiente.
+
+El control de diff staged señaló una línea vacía adicional al final de
+`frontend/src/components/chat/QuestionCard.tsx`. Se registra como detalle de
+formato, sin cambiar comportamiento ni repetir pruebas para ese ajuste menor.

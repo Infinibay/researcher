@@ -1,0 +1,77 @@
+{
+  "base_commit": "4eb15e8",
+  "started_at": "2026-11-07T23:08:57Z",
+  "scope": "U04/U05/U07 current artifact; U08 diagram implementation and synthetic browser example, human comprehension/correction acceptance remains open",
+  "installed_selections": [
+    {
+      "cases": 89,
+      "passed": 88,
+      "failed": 1,
+      "skipped": 0,
+      "backend_modules": 262,
+      "all_backend_imports_from_native_env": true,
+      "seconds": 48.099,
+      "exit_code": 1
+    },
+    {
+      "cases": 28,
+      "passed": 28,
+      "failed": 0,
+      "skipped": 0,
+      "backend_modules": 24,
+      "all_backend_imports_from_native_env": true,
+      "seconds": 1.703,
+      "exit_code": 0
+    }
+  ],
+  "disjoint_installed_passes": 116,
+  "initial_scope_failure": {
+    "test": "test_launcher_startup.py::test_launcher_refuses_uninitialized_database_before_external_work[missing]",
+    "cause": "Repository start.sh is not a Python wheel resource; the unchanged checkout-only test was incorrectly included in installed selection. Original receipt retained; source launcher checks are separate."
+  },
+  "source_launcher": {
+    "cases": 6,
+    "passed": 6,
+    "skipped": 0
+  },
+  "frontend": {
+    "contracts": 26,
+    "dom": 13,
+    "build": "passed",
+    "initial_build_failure": "Object.hasOwn unsupported by configured TS target; replaced with hasOwnProperty.call without changing target",
+    "browser": "passed",
+    "browser_receipt": "docs/modernization/interaction-browser-evidence.json"
+  },
+  "docstrings": "docs/modernization/interaction-acceptance-docstrings.json",
+  "real_model_turns": 0,
+  "human_evaluation": "Initial example rejected by the user; revised concrete example rendered and policy improved, no new human acceptance",
+  "whole_pages_accepted": 0,
+  "limitations": [
+    "Selected validations, not a new green global suite",
+    "Current paired frontend/backend protocol; no promise that older open browser builds understand structured choices",
+    "Synthetic fresh installation and owner-authored example, not actual historical user-data migration or generated explanation comprehension",
+    "Diagram images resize on mobile; zoom/export and bundle tuning deferred. Source limits are not a browser CPU deadline."
+  ],
+  "initial_verified_at": "2026-11-07T23:31:06Z",
+  "initial_elapsed_until_verification_seconds": 1329,
+  "verified_at": "2026-11-07T23:38:11Z",
+  "elapsed_until_verification_seconds": 1754,
+  "final_policy_selection": {
+    "cases": 17,
+    "passed": 17,
+    "failed": 0,
+    "skipped": 0,
+    "backend_modules": 221,
+    "all_backend_imports_from_native_env": true,
+    "seconds": 4.11,
+    "exit_code": 0
+  },
+  "final_artifact_comparison": "docs/modernization/interaction-artifact-comparison.json",
+  "human_review": "docs/modernization/interaction-human-review.json",
+  "staged_diff_check": {
+    "exit_code": 2,
+    "finding": "frontend/src/components/chat/QuestionCard.tsx:53: new blank line at EOF",
+    "classification": "Whitespace-only detail deferred under user macro-first policy",
+    "deferred_item": "DD121"
+  }
+}

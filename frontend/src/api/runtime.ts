@@ -54,13 +54,16 @@ export interface TaskWorkspace {
   runtime: { configured: boolean; supported_task_types: string[]; development_task_types?: string[]; owner_controlled_task_types?: string[]; model: string | null; remote_publication?: boolean }
 }
 
+/** Keep explicit selections distinct from arbitrary user text, including text that happens to match an option ID. */
+export type QuestionAnswer = string | Readonly<{ option_id: string }>
+
 export interface RuntimeQuestion {
   request_id: number
   run_id: string
   context_version: number
-  questions: { id: string; question: string; why_needed: string; options: string[]; example: string }[]
+  questions: { id: string; question: string; why_needed: string; options: (string | { id: string; label: string })[]; example: string }[]
   status: 'pending' | 'responded' | 'expired'
-  answers: Record<string, string> | null
+  answers: Record<string, QuestionAnswer> | null
   answer_context_version: number | null
   ready_for_answer: boolean
 }
@@ -72,6 +75,7 @@ export interface QuestionInboxItem {
   body: string | null
   task_id: number | null
   task_title: string | null
+  task_priority: number | null
   run_id: string | null
   thread_id: string | null
   context_version: number | null
@@ -164,7 +168,7 @@ export interface AnswerIntent {
   readonly projectId: number
   readonly taskId: number
   readonly questionId: number
-  readonly body: Readonly<{ operation_key: string; expected_version: number; answers: Readonly<Record<string, string>> }>
+  readonly body: Readonly<{ operation_key: string; expected_version: number; answers: Readonly<Record<string, QuestionAnswer>> }>
 }
 
 export interface RecoveryInspection {
@@ -212,15 +216,18 @@ export function sendRecovery(intent: RecoveryIntent) {
   )
 }
 
-export function prepareAnswer(projectId: number, taskId: number, questionId: number, expectedVersion: number, answers: Record<string, string>): AnswerIntent {
+/** Freeze the exact observed answer packet, including nested selections, before a possibly uncertain HTTP write. */
+export function prepareAnswer(projectId: number, taskId: number, questionId: number, expectedVersion: number, answers: Record<string, QuestionAnswer>): AnswerIntent {
   if (![projectId, taskId, questionId, expectedVersion].every(x => Number.isSafeInteger(x) && x > 0)
     || Object.keys(answers).length < 1 || Object.keys(answers).length > 3
-    || Object.values(answers).some(value => !value.trim())
+    || Object.values(answers).some(value => typeof value === 'string' ? !value.trim()
+      : !value || Object.keys(value).length !== 1 || !Object.prototype.hasOwnProperty.call(value, 'option_id') || !/^[A-Za-z][A-Za-z0-9_-]{0,63}$/.test(value.option_id))
     || new TextEncoder().encode(JSON.stringify(answers)).length > 12000) {
     throw new Error('Responde las preguntas dentro del límite de 12.000 bytes.')
   }
   return Object.freeze({ projectId, taskId, questionId, body: Object.freeze({
-    operation_key: crypto.randomUUID(), expected_version: expectedVersion, answers: Object.freeze({ ...answers }),
+    operation_key: crypto.randomUUID(), expected_version: expectedVersion,
+    answers: Object.freeze(Object.fromEntries(Object.entries(answers).map(([key, value]) => [key, typeof value === 'string' ? value : Object.freeze({ option_id: value.option_id })]))),
   }) })
 }
 

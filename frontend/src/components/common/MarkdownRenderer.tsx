@@ -1,11 +1,23 @@
 /** Render safe Markdown, optionally nesting document headings within an existing owner panel. @module */
-import { createElement } from 'react'
+import { Children, createElement, isValidElement } from 'react'
+import type { ReactNode } from 'react'
 import ReactMarkdown from 'react-markdown'
 import type { Components } from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import remarkMath from 'remark-math'
 import rehypeKatex from 'rehype-katex'
 import rehypeHighlight from 'rehype-highlight'
+import { Diagram } from './Diagram'
+
+/** Recognize only fenced Mermaid blocks; ordinary and inline code keep their original semantics. */
+function CodeBlock({ children }: { children?: ReactNode }) {
+  const code = Children.toArray(children)[0]
+  if (isValidElement<{ className?: string; children?: ReactNode }>(code)
+    && code.props.className?.split(' ').includes('language-mermaid') && typeof code.props.children === 'string') {
+    return <Diagram source={code.props.children} />
+  }
+  return <pre>{children}</pre>
+}
 
 /** Keep document semantics while allowing embedded reports to respect their surrounding heading hierarchy. */
 export function MarkdownRenderer({ content, headingBase }: { content: string; headingBase?: 1|2|3|4|5|6 }) {
@@ -20,6 +32,7 @@ export function MarkdownRenderer({ content, headingBase }: { content: string; he
         rehypePlugins={[rehypeKatex, rehypeHighlight]}
         components={{
           ...headings,
+          pre: CodeBlock,
           a: ({ href, children, ...props }) => (
             <a
               href={href}

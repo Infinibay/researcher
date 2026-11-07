@@ -1,0 +1,253 @@
+{
+  "base_commit": "4eb15e8",
+  "changed_or_new_definitions_documented": 35,
+  "missing": [],
+  "contracts": [
+    {
+      "path": "backend/api/models/questions.py",
+      "symbol": "HumanOption",
+      "line": 8,
+      "docstring": "A stable machine value and a readable label for a suggested answer.",
+      "file_sha256": "ca55a661bc0c9cbf4ae8dda79f4f23d4a238f6e87d97df1239d2da3b3d2a0565"
+    },
+    {
+      "path": "backend/api/models/questions.py",
+      "symbol": "SelectedOption",
+      "line": 15,
+      "docstring": "An explicit selection; free-text answers remain a separate wire type.",
+      "file_sha256": "ca55a661bc0c9cbf4ae8dda79f4f23d4a238f6e87d97df1239d2da3b3d2a0565"
+    },
+    {
+      "path": "backend/api/models/questions.py",
+      "symbol": "HumanQuestion",
+      "line": 21,
+      "docstring": "Validate native question inputs while accepting persisted text-only choices.",
+      "file_sha256": "ca55a661bc0c9cbf4ae8dda79f4f23d4a238f6e87d97df1239d2da3b3d2a0565"
+    },
+    {
+      "path": "backend/api/models/questions.py",
+      "symbol": "HumanQuestion.domain",
+      "line": 30,
+      "docstring": "Reuse the same domain parser for HTTP, MCP and stored question payloads.",
+      "file_sha256": "ca55a661bc0c9cbf4ae8dda79f4f23d4a238f6e87d97df1239d2da3b3d2a0565"
+    },
+    {
+      "path": "backend/api/models/questions.py",
+      "symbol": "AskUser",
+      "line": 35,
+      "docstring": "Record a grouped information request without granting new runtime authority.",
+      "file_sha256": "ca55a661bc0c9cbf4ae8dda79f4f23d4a238f6e87d97df1239d2da3b3d2a0565"
+    },
+    {
+      "path": "backend/api/models/questions.py",
+      "symbol": "AskUser.domain",
+      "line": 41,
+      "docstring": "Keep every question's original ID and readable content in one durable group.",
+      "file_sha256": "ca55a661bc0c9cbf4ae8dda79f4f23d4a238f6e87d97df1239d2da3b3d2a0565"
+    },
+    {
+      "path": "backend/api/models/questions.py",
+      "symbol": "AskUser.bounded_questions",
+      "line": 46,
+      "docstring": "Apply byte bounds and identity checks after wire-shape validation.",
+      "file_sha256": "ca55a661bc0c9cbf4ae8dda79f4f23d4a238f6e87d97df1239d2da3b3d2a0565"
+    },
+    {
+      "path": "backend/api/models/questions.py",
+      "symbol": "AnswerQuestions",
+      "line": 52,
+      "docstring": "Bind free text or explicit option selections to an observed question context.",
+      "file_sha256": "ca55a661bc0c9cbf4ae8dda79f4f23d4a238f6e87d97df1239d2da3b3d2a0565"
+    },
+    {
+      "path": "backend/api/routes/runs.py",
+      "symbol": "answer_questions",
+      "line": 69,
+      "docstring": "Persist original choice identities and free text in the owner's observed context, without inference.",
+      "file_sha256": "60b91d23b237b00d033bee05305d487b861cc572b87d3a627d23861fa5e560ad"
+    },
+    {
+      "path": "backend/prompts/native.py",
+      "symbol": "instruction_identity",
+      "line": 176,
+      "docstring": "Describe only an actually recorded catalog header and complete text hash; historical unversioned policy stays unknown rather than being retroactively labelled.",
+      "file_sha256": "729e9911f5d70fd0e1f2db3d104049efa83854f761a7d9ea7c33f817c4248b04"
+    },
+    {
+      "path": "backend/runtime/business_definitions.py",
+      "symbol": "ResearchTools",
+      "line": 132,
+      "docstring": "Translate host-owned business tools to scoped HTTP without owning grants or inference.",
+      "file_sha256": "e5243ae48d8c2b33d96efae3c88c7f03126f337c7947704afe7d3b1e9174c8a2"
+    },
+    {
+      "path": "backend/runtime/business_definitions.py",
+      "symbol": "ResearchTools.researcher_ask_user",
+      "line": 299,
+      "docstring": "Record required owner input whenever missing information materially changes the requested result or next action. A prose-only question does not create an answerable request: call this tool after useful independent work, unless current context already answers it. Ask 1\u20133 grouped questions with distinct ids, clear question text, why_needed, optional example and 0 or 2\u20134 options. Prefer {id,label} options with distinct stable IDs and readable labels; historical text-only choices remain supported. Free-text answers remain allowed; a conditional example never confirms an unknown premise. Never request secrets or use this as permission to publish. The host withdraws tool authority and closes this turn before waiting. Reuse operation_key after a lost receipt; do not continue or start another question. An answer records context for a future explicit run, not acceptance or authorization.",
+      "file_sha256": "e5243ae48d8c2b33d96efae3c88c7f03126f337c7947704afe7d3b1e9174c8a2"
+    },
+    {
+      "path": "backend/runtime/questions.py",
+      "symbol": "QuestionOption",
+      "line": 11,
+      "docstring": "Keep a stable selection identity separate from its user-facing label.",
+      "file_sha256": "9d02ea563542312463a750fca9153583e01c8fa907519bcf8b0d6eda397041ab"
+    },
+    {
+      "path": "backend/runtime/questions.py",
+      "symbol": "QuestionOption.__post_init__",
+      "line": 17,
+      "docstring": "Reject ambiguous or unbounded identities before they enter a durable question.",
+      "file_sha256": "9d02ea563542312463a750fca9153583e01c8fa907519bcf8b0d6eda397041ab"
+    },
+    {
+      "path": "backend/runtime/questions.py",
+      "symbol": "Question",
+      "line": 25,
+      "docstring": "One correctable information request, retaining historical text-only choices.",
+      "file_sha256": "9d02ea563542312463a750fca9153583e01c8fa907519bcf8b0d6eda397041ab"
+    },
+    {
+      "path": "backend/runtime/questions.py",
+      "symbol": "Question.__post_init__",
+      "line": 34,
+      "docstring": "Validate bounded question content and distinct identities without rewriting old choices.",
+      "file_sha256": "9d02ea563542312463a750fca9153583e01c8fa907519bcf8b0d6eda397041ab"
+    },
+    {
+      "path": "backend/runtime/questions.py",
+      "symbol": "QuestionSet",
+      "line": 55,
+      "docstring": "A bounded group whose complete answers are correlated by exact question and option identities.",
+      "file_sha256": "9d02ea563542312463a750fca9153583e01c8fa907519bcf8b0d6eda397041ab"
+    },
+    {
+      "path": "backend/runtime/questions.py",
+      "symbol": "QuestionSet.__post_init__",
+      "line": 60,
+      "docstring": "Require a small complete question group before pausing work for human input.",
+      "file_sha256": "9d02ea563542312463a750fca9153583e01c8fa907519bcf8b0d6eda397041ab"
+    },
+    {
+      "path": "backend/runtime/questions.py",
+      "symbol": "QuestionSet.payload",
+      "line": 68,
+      "docstring": "Preserve old string choices and encode new choices as explicit ID/label objects.",
+      "file_sha256": "9d02ea563542312463a750fca9153583e01c8fa907519bcf8b0d6eda397041ab"
+    },
+    {
+      "path": "backend/runtime/questions.py",
+      "symbol": "QuestionSet.validate_answers",
+      "line": 72,
+      "docstring": "Treat free text literally and accept structured selections only from the original options.",
+      "file_sha256": "9d02ea563542312463a750fca9153583e01c8fa907519bcf8b0d6eda397041ab"
+    },
+    {
+      "path": "backend/runtime/questions.py",
+      "symbol": "QuestionSet.message",
+      "line": 88,
+      "docstring": "Describe every question with readable labels while retaining IDs in the saved payload.",
+      "file_sha256": "9d02ea563542312463a750fca9153583e01c8fa907519bcf8b0d6eda397041ab"
+    },
+    {
+      "path": "backend/runtime/questions.py",
+      "symbol": "QuestionSet.answered_statement",
+      "line": 102,
+      "docstring": "Explain selected labels and original IDs without converting typed strings into inferred choices.",
+      "file_sha256": "9d02ea563542312463a750fca9153583e01c8fa907519bcf8b0d6eda397041ab"
+    },
+    {
+      "path": "backend/runtime/questions.py",
+      "symbol": "question_set",
+      "line": 115,
+      "docstring": "Load current or historical question JSON without inventing identities for old text choices.",
+      "file_sha256": "9d02ea563542312463a750fca9153583e01c8fa907519bcf8b0d6eda397041ab"
+    },
+    {
+      "path": "backend/runtime/views.py",
+      "symbol": "OwnerRuntimeView",
+      "line": 50,
+      "docstring": "Read owner-visible execution receipts and captured evidence without issuing agent authority.",
+      "file_sha256": "54b952846ba01a80b942d44e4abaf489bcb2d141d726d51f0040dfa10eef8206"
+    },
+    {
+      "path": "backend/runtime/views.py",
+      "symbol": "OwnerRuntimeView.question_inbox",
+      "line": 136,
+      "docstring": "Page all pending requests with original question identities and their owning task's observed priority.",
+      "file_sha256": "54b952846ba01a80b942d44e4abaf489bcb2d141d726d51f0040dfa10eef8206"
+    },
+    {
+      "path": "backend/tests/runtime/test_human_questions.py",
+      "symbol": "setup_question",
+      "line": 9,
+      "docstring": "Create one bound native question; use a new operation key for a genuinely new request in a later context.",
+      "file_sha256": "4af3a39805fc7841cebf2d0259853032eb125f624596a0c95c88eafb56daa152"
+    },
+    {
+      "path": "backend/tests/runtime/test_prompt_catalog.py",
+      "symbol": "test_every_native_profile_has_one_shared_policy_and_exact_versioned_identity",
+      "line": 14,
+      "docstring": "Selecting a real capability includes common correction/communication policy exactly once and a hash of the complete actual instructions.",
+      "file_sha256": "8da747b0787979820334056a81af5d199bad46f10a5de86068d019b0f5f36a7e"
+    },
+    {
+      "path": "backend/tests/runtime/test_prompt_catalog.py",
+      "symbol": "test_recorded_catalog_identity_survives_new_policy_without_relabeling",
+      "line": 34,
+      "docstring": "A stored older header retains its original version and exact hash after the current catalog advances.",
+      "file_sha256": "8da747b0787979820334056a81af5d199bad46f10a5de86068d019b0f5f36a7e"
+    },
+    {
+      "path": "backend/tests/runtime/test_prompt_catalog.py",
+      "symbol": "test_actual_owned_turn_records_the_exact_versioned_policy_sent_to_native",
+      "line": 53,
+      "docstring": "The real owner/store/broker/Ken path sends catalog policy and freezes its exact bytes; a simulated native answer is not evidence of human comprehension.",
+      "file_sha256": "8da747b0787979820334056a81af5d199bad46f10a5de86068d019b0f5f36a7e"
+    },
+    {
+      "path": "backend/tests/runtime/test_question_choices.py",
+      "symbol": "choices",
+      "line": 10,
+      "docstring": "Use two distinct questions and labels that cannot be substituted for their option identifiers.",
+      "file_sha256": "98146ee5148149f160e67d17d5133346f2caae3223e6fb59d7e9c226a28ec2c6"
+    },
+    {
+      "path": "backend/tests/runtime/test_question_choices.py",
+      "symbol": "test_choices_preserve_ids_without_reinterpreting_free_text_as_an_option",
+      "line": 19,
+      "docstring": "A selected ID and a typed identical string remain different evidence about what the user supplied.",
+      "file_sha256": "98146ee5148149f160e67d17d5133346f2caae3223e6fb59d7e9c226a28ec2c6"
+    },
+    {
+      "path": "backend/tests/runtime/test_question_choices.py",
+      "symbol": "test_http_choice_and_free_answer_keep_request_thread_and_snapshot",
+      "line": 33,
+      "docstring": "One owner answer commits the original question identities and human thread without starting inference.",
+      "file_sha256": "98146ee5148149f160e67d17d5133346f2caae3223e6fb59d7e9c226a28ec2c6"
+    },
+    {
+      "path": "backend/tests/runtime/test_question_choices.py",
+      "symbol": "test_legacy_text_choices_remain_readable_and_new_ids_must_be_unique",
+      "line": 64,
+      "docstring": "Old persisted string choices keep their shape; new labels cannot conceal repeated identity.",
+      "file_sha256": "98146ee5148149f160e67d17d5133346f2caae3223e6fb59d7e9c226a28ec2c6"
+    },
+    {
+      "path": "backend/tests/runtime/test_question_inbox.py",
+      "symbol": "test_inbox_contains_all_native_questions_with_scope_and_readiness",
+      "line": 50,
+      "docstring": "Expose every pending request with its own readiness, thread and observed task priority.",
+      "file_sha256": "fc4a8e7ddddaa72863d7c6ba56f326f7390d036f5230987530d25d8ba7eec967"
+    },
+    {
+      "path": "evals/operation/web_workspace.py",
+      "symbol": "main",
+      "line": 43,
+      "docstring": "Prepare synthetic resources, own the live service/browser, and preserve every result on failure.",
+      "file_sha256": "e3c4bae98462f4d61d8b29ca97f73c9a6ff9be42a028e8ad99bf383a083d2275"
+    }
+  ],
+  "scope": "New/changed Python definitions and modules in this delivery. New frontend modules and exported behavior have English JSDoc; this Python audit does not certify all historical definitions."
+}

@@ -6,7 +6,7 @@ from dataclasses import replace
 import pytest
 
 
-def setup_question(c, *, question_key="ask-base"):
+def setup_question(c, *, question_key="ask-base", draft=None):
     """Create one bound native question; use a new operation key for a genuinely new request in a later context."""
     from backend.runtime.questions import Question, QuestionSet
     from backend.runtime.sqlite_questions import SQLiteQuestionStore
@@ -24,7 +24,7 @@ def setup_question(c, *, question_key="ask-base"):
     scope = c.research.authorize(token)
     c.store.bind_grant(lease, scope.grant_id)
     questions = SQLiteQuestionStore(c.store, c.research)
-    draft = QuestionSet(
+    draft = draft or QuestionSet(
         (
             Question(
                 "base",

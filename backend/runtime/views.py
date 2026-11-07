@@ -134,6 +134,7 @@ class OwnerRuntimeView:
             }
 
     def question_inbox(self, project_id, *, after_id=0, limit=100):
+        """Page all pending requests with original question identities and their owning task's observed priority."""
         identity(project_id)
         if type(after_id) is not int or not 0 <= after_id <= 9223372036854775807:
             raise ValueError("Invalid question cursor")
@@ -155,7 +156,7 @@ class OwnerRuntimeView:
             rows = conn.execute(
                 """SELECT u.id AS request_id,u.title,u.body,u.created_at,u.request_type,
                 q.run_id,q.context_version,q.question_set_json,q.thread_id,
-                r.task_id,r.status AS run_status,t.title AS task_title,
+                r.task_id,r.status AS run_status,t.title AS task_title,t.priority AS task_priority,
                 COALESCE(c.version,1) AS current_context_version
                 FROM user_requests u
                 LEFT JOIN runtime_question_links q ON q.request_id=u.id AND q.project_id=u.project_id
@@ -177,6 +178,7 @@ class OwnerRuntimeView:
                     "created_at": row["created_at"],
                     "task_id": row["task_id"],
                     "task_title": row["task_title"],
+                    "task_priority": row["task_priority"],
                     "run_id": row["run_id"],
                     "thread_id": row["thread_id"],
                     "context_version": row["context_version"],

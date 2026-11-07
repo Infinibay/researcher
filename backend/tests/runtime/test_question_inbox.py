@@ -48,6 +48,7 @@ def pending_question(c, *, project=101, task=1001, park=True):
 
 
 def test_inbox_contains_all_native_questions_with_scope_and_readiness(coordination):
+    """Expose every pending request with its own readiness, thread and observed task priority."""
     from backend.runtime.views import OwnerRuntimeView
 
     c = coordination
@@ -71,6 +72,7 @@ def test_inbox_contains_all_native_questions_with_scope_and_readiness(coordinati
     assert two["run_id"] == second.run_id and two["task_title"] == "Second"
     assert one["questions"][0]["id"] == "folder"
     assert one["questions"][0]["options"] == ["client", "server"]
+    assert one["task_priority"] == c.conn.execute("SELECT priority FROM tasks WHERE id=1001").fetchone()[0]
     assert one["kind"] == "native" and one["thread_id"] == "inbox-thread-1001"
 
 

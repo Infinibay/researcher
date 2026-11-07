@@ -49,7 +49,7 @@ def main():
     parser.add_argument("--assets", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--node", type=Path, required=True)
-    parser.add_argument("--journey", choices=("workspace", "knowledge", "navigation"), default="workspace")
+    parser.add_argument("--journey", choices=("workspace", "knowledge", "navigation", "interaction"), default="workspace")
     args = parser.parse_args()
     if not Path(backend.__file__).resolve().is_relative_to(Path(sys.prefix).resolve()):
         raise RuntimeError("Use the separately installed product Python, without PYTHONPATH")
@@ -85,6 +85,9 @@ def main():
         if args.journey == "navigation":
             script = "workspace"
             env["RESEARCHER_E2E_NAVIGATION"] = "1"
+        if args.journey == "interaction":
+            script = "workspace"
+            env["RESEARCHER_E2E_INTERACTION"] = "1"
         with (output / "browser.log").open("x") as browser_log:
             browser = subprocess.run([str(args.node.resolve(strict=True)), f"tests/{script}.e2e.mjs"],
                                      cwd=ROOT / "frontend", env=env,
@@ -97,7 +100,7 @@ def main():
         assert len(result["storage"]["projects"]) == 2
         browser_evidence = json.loads((output / "browser/evidence.json").read_text())
         ids = browser_evidence["identities"]
-        if args.journey in ("workspace", "navigation"):
+        if args.journey in ("workspace", "navigation", "interaction"):
             assert len(result["storage"]["tasks"]) == 2
             assert len(result["storage"]["groups"]) == len(result["storage"]["milestones"]) == 1
             assert len(result["storage"]["dependencies"]) == 1

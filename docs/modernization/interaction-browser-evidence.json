@@ -1,0 +1,196 @@
+{
+  "status": "passed",
+  "journey": "interaction",
+  "backend": "/home/andres/.codex/worktrees/b09e/researcher/.superpowers/sdd/2026-10-31-actualizacion-proyecto/native-runtime-env/lib/python3.12/site-packages/backend/__init__.py",
+  "model_turns": 0,
+  "mocked_api_responses": false,
+  "web_index_sha256": "bee3f711d8ce88d07df8c5905b022b1b26ef101f9cfb368e801e88cbbe9c086b",
+  "browser_exit": 0,
+  "storage": {
+    "projects": [
+      {
+        "id": 1,
+        "name": "Atlas comprobable",
+        "description": "Comparar resultados con fuentes verificables. No presuponer que una propuesta est\u00e1 aceptada."
+      },
+      {
+        "id": 2,
+        "name": "Contexto separado",
+        "description": "No debe heredar las tareas de Atlas."
+      }
+    ],
+    "groups": [
+      {
+        "id": 1,
+        "project_id": 1,
+        "title": "Reunir evidencia"
+      }
+    ],
+    "milestones": [
+      {
+        "id": 1,
+        "epic_id": 1,
+        "title": "Datos contrastados"
+      }
+    ],
+    "tasks": [
+      {
+        "id": 1,
+        "project_id": 1,
+        "epic_id": 1,
+        "title": "Capturar fuente",
+        "status": "backlog"
+      },
+      {
+        "id": 2,
+        "project_id": 1,
+        "epic_id": 1,
+        "title": "Contrastar resultado",
+        "status": "backlog"
+      }
+    ],
+    "dependencies": [
+      {
+        "task_id": 2,
+        "depends_on_task_id": 1
+      }
+    ],
+    "corrections": [
+      {
+        "project_id": 1,
+        "task_id": 2,
+        "version": 2,
+        "statement": "Ejemplo concreto: dos fuentes con el mismo t\u00edtulo pueden describir versiones diferentes. Compara fecha y contenido antes de tratarlas como equivalentes.",
+        "source_kind": "user_example"
+      }
+    ],
+    "files": [],
+    "wiki": [
+      {
+        "id": 1,
+        "project_id": 1,
+        "path": "interaction-example",
+        "title": "Un resultado que puedes corregir",
+        "content": "# Una diferencia que todav\u00eda no explica la causa\n\n**Ejemplo ficticio.** La captura anterior registra 137 y la nueva, 200: la diferencia es 63.\n\n**L\u00edmite:** esos n\u00fameros no demuestran una mejora ni explican su causa. No conocemos c\u00f3mo se midieron.\n\n**Suposici\u00f3n por comprobar:** ambas capturas usan la misma unidad. Si fueran unidades distintas, restarlas no tendr\u00eda sentido.\n\n**Siguiente paso:** comprobar la unidad y el m\u00e9todo antes de interpretar la diferencia.\n\n```mermaid\nflowchart LR\naccTitle: Comparar dos capturas\naccDescr: La captura anterior conserva 137; la nueva registra 200. Primero se comprueban unidad y m\u00e9todo; s\u00f3lo despu\u00e9s se interpreta la diferencia de 63.\nA[Captura anterior: 137] --> C[Comprobar unidad y m\u00e9todo]\nB[Captura nueva: 200] --> C\nC --> D[Interpretar la diferencia]\n```\n\n## Si el dibujo est\u00e1 da\u00f1ado\n\n```mermaid\nflowchart LR\naccTitle: Dibujo incompleto\naccDescr: Este dibujo est\u00e1 incompleto. Conserva la explicaci\u00f3n y permite revisar el original; no demuestra un resultado nuevo.\nA --> [\n```\n\n## Secuencia de revisi\u00f3n\n\n```mermaid\nsequenceDiagram\naccTitle: Una interpretaci\u00f3n corregible\naccDescr: El agente propone comparar las capturas. El usuario corrige la unidad; el agente revisa la comparaci\u00f3n antes de concluir.\nAgente->>Usuario: Propongo comparar las capturas\nUsuario->>Agente: La unidad es distinta\nAgente->>Usuario: Debemos revisar la comparaci\u00f3n\n```"
+      },
+      {
+        "id": 2,
+        "project_id": 1,
+        "path": "interaction-untrusted",
+        "title": "Contenido no confiable",
+        "content": "```mermaid\n%%{init: {\"securityLevel\":\"loose\"}}%%\nflowchart LR\naccDescr: No aceptar la configuraci\u00f3n del documento.\nA --> B\n```\n\n```mermaid\nflowchart LR\naccDescr: No cargar im\u00e1genes externas.\nA@{ img: \"https://diagram-probe.invalid/image.png\" }\n```\n\n```mermaid\nflowchart LR\naccDescr: Una etiqueta no ejecuta HTML.\nA[\"<img src='//diagram-probe.invalid/track' onerror='window.diagramProbe=1'>\"] --> B\n```"
+      }
+    ],
+    "wiki_revisions": [
+      {
+        "page_id": 1,
+        "project_id": 1,
+        "revision": 1,
+        "content": "# Una diferencia que todav\u00eda no explica la causa\n\n**Ejemplo ficticio.** La captura anterior registra 137 y la nueva, 200: la diferencia es 63.\n\n**L\u00edmite:** esos n\u00fameros no demuestran una mejora ni explican su causa. No conocemos c\u00f3mo se midieron.\n\n**Suposici\u00f3n por comprobar:** ambas capturas usan la misma unidad. Si fueran unidades distintas, restarlas no tendr\u00eda sentido.\n\n**Siguiente paso:** comprobar la unidad y el m\u00e9todo antes de interpretar la diferencia.\n\n```mermaid\nflowchart LR\naccTitle: Comparar dos capturas\naccDescr: La captura anterior conserva 137; la nueva registra 200. Primero se comprueban unidad y m\u00e9todo; s\u00f3lo despu\u00e9s se interpreta la diferencia de 63.\nA[Captura anterior: 137] --> C[Comprobar unidad y m\u00e9todo]\nB[Captura nueva: 200] --> C\nC --> D[Interpretar la diferencia]\n```\n\n## Si el dibujo est\u00e1 da\u00f1ado\n\n```mermaid\nflowchart LR\naccTitle: Dibujo incompleto\naccDescr: Este dibujo est\u00e1 incompleto. Conserva la explicaci\u00f3n y permite revisar el original; no demuestra un resultado nuevo.\nA --> [\n```\n\n## Secuencia de revisi\u00f3n\n\n```mermaid\nsequenceDiagram\naccTitle: Una interpretaci\u00f3n corregible\naccDescr: El agente propone comparar las capturas. El usuario corrige la unidad; el agente revisa la comparaci\u00f3n antes de concluir.\nAgente->>Usuario: Propongo comparar las capturas\nUsuario->>Agente: La unidad es distinta\nAgente->>Usuario: Debemos revisar la comparaci\u00f3n\n```"
+      },
+      {
+        "page_id": 2,
+        "project_id": 1,
+        "revision": 1,
+        "content": "```mermaid\n%%{init: {\"securityLevel\":\"loose\"}}%%\nflowchart LR\naccDescr: No aceptar la configuraci\u00f3n del documento.\nA --> B\n```\n\n```mermaid\nflowchart LR\naccDescr: No cargar im\u00e1genes externas.\nA@{ img: \"https://diagram-probe.invalid/image.png\" }\n```\n\n```mermaid\nflowchart LR\naccDescr: Una etiqueta no ejecuta HTML.\nA[\"<img src='//diagram-probe.invalid/track' onerror='window.diagramProbe=1'>\"] --> B\n```"
+      }
+    ],
+    "runs": 0,
+    "dispatches": 0,
+    "integrity": "ok"
+  },
+  "service_exit": 143,
+  "storage_after_close": {
+    "projects": [
+      {
+        "id": 1,
+        "name": "Atlas comprobable",
+        "description": "Comparar resultados con fuentes verificables. No presuponer que una propuesta est\u00e1 aceptada."
+      },
+      {
+        "id": 2,
+        "name": "Contexto separado",
+        "description": "No debe heredar las tareas de Atlas."
+      }
+    ],
+    "groups": [
+      {
+        "id": 1,
+        "project_id": 1,
+        "title": "Reunir evidencia"
+      }
+    ],
+    "milestones": [
+      {
+        "id": 1,
+        "epic_id": 1,
+        "title": "Datos contrastados"
+      }
+    ],
+    "tasks": [
+      {
+        "id": 1,
+        "project_id": 1,
+        "epic_id": 1,
+        "title": "Capturar fuente",
+        "status": "backlog"
+      },
+      {
+        "id": 2,
+        "project_id": 1,
+        "epic_id": 1,
+        "title": "Contrastar resultado",
+        "status": "backlog"
+      }
+    ],
+    "dependencies": [
+      {
+        "task_id": 2,
+        "depends_on_task_id": 1
+      }
+    ],
+    "corrections": [
+      {
+        "project_id": 1,
+        "task_id": 2,
+        "version": 2,
+        "statement": "Ejemplo concreto: dos fuentes con el mismo t\u00edtulo pueden describir versiones diferentes. Compara fecha y contenido antes de tratarlas como equivalentes.",
+        "source_kind": "user_example"
+      }
+    ],
+    "files": [],
+    "wiki": [
+      {
+        "id": 1,
+        "project_id": 1,
+        "path": "interaction-example",
+        "title": "Un resultado que puedes corregir",
+        "content": "# Una diferencia que todav\u00eda no explica la causa\n\n**Ejemplo ficticio.** La captura anterior registra 137 y la nueva, 200: la diferencia es 63.\n\n**L\u00edmite:** esos n\u00fameros no demuestran una mejora ni explican su causa. No conocemos c\u00f3mo se midieron.\n\n**Suposici\u00f3n por comprobar:** ambas capturas usan la misma unidad. Si fueran unidades distintas, restarlas no tendr\u00eda sentido.\n\n**Siguiente paso:** comprobar la unidad y el m\u00e9todo antes de interpretar la diferencia.\n\n```mermaid\nflowchart LR\naccTitle: Comparar dos capturas\naccDescr: La captura anterior conserva 137; la nueva registra 200. Primero se comprueban unidad y m\u00e9todo; s\u00f3lo despu\u00e9s se interpreta la diferencia de 63.\nA[Captura anterior: 137] --> C[Comprobar unidad y m\u00e9todo]\nB[Captura nueva: 200] --> C\nC --> D[Interpretar la diferencia]\n```\n\n## Si el dibujo est\u00e1 da\u00f1ado\n\n```mermaid\nflowchart LR\naccTitle: Dibujo incompleto\naccDescr: Este dibujo est\u00e1 incompleto. Conserva la explicaci\u00f3n y permite revisar el original; no demuestra un resultado nuevo.\nA --> [\n```\n\n## Secuencia de revisi\u00f3n\n\n```mermaid\nsequenceDiagram\naccTitle: Una interpretaci\u00f3n corregible\naccDescr: El agente propone comparar las capturas. El usuario corrige la unidad; el agente revisa la comparaci\u00f3n antes de concluir.\nAgente->>Usuario: Propongo comparar las capturas\nUsuario->>Agente: La unidad es distinta\nAgente->>Usuario: Debemos revisar la comparaci\u00f3n\n```"
+      },
+      {
+        "id": 2,
+        "project_id": 1,
+        "path": "interaction-untrusted",
+        "title": "Contenido no confiable",
+        "content": "```mermaid\n%%{init: {\"securityLevel\":\"loose\"}}%%\nflowchart LR\naccDescr: No aceptar la configuraci\u00f3n del documento.\nA --> B\n```\n\n```mermaid\nflowchart LR\naccDescr: No cargar im\u00e1genes externas.\nA@{ img: \"https://diagram-probe.invalid/image.png\" }\n```\n\n```mermaid\nflowchart LR\naccDescr: Una etiqueta no ejecuta HTML.\nA[\"<img src='//diagram-probe.invalid/track' onerror='window.diagramProbe=1'>\"] --> B\n```"
+      }
+    ],
+    "wiki_revisions": [
+      {
+        "page_id": 1,
+        "project_id": 1,
+        "revision": 1,
+        "content": "# Una diferencia que todav\u00eda no explica la causa\n\n**Ejemplo ficticio.** La captura anterior registra 137 y la nueva, 200: la diferencia es 63.\n\n**L\u00edmite:** esos n\u00fameros no demuestran una mejora ni explican su causa. No conocemos c\u00f3mo se midieron.\n\n**Suposici\u00f3n por comprobar:** ambas capturas usan la misma unidad. Si fueran unidades distintas, restarlas no tendr\u00eda sentido.\n\n**Siguiente paso:** comprobar la unidad y el m\u00e9todo antes de interpretar la diferencia.\n\n```mermaid\nflowchart LR\naccTitle: Comparar dos capturas\naccDescr: La captura anterior conserva 137; la nueva registra 200. Primero se comprueban unidad y m\u00e9todo; s\u00f3lo despu\u00e9s se interpreta la diferencia de 63.\nA[Captura anterior: 137] --> C[Comprobar unidad y m\u00e9todo]\nB[Captura nueva: 200] --> C\nC --> D[Interpretar la diferencia]\n```\n\n## Si el dibujo est\u00e1 da\u00f1ado\n\n```mermaid\nflowchart LR\naccTitle: Dibujo incompleto\naccDescr: Este dibujo est\u00e1 incompleto. Conserva la explicaci\u00f3n y permite revisar el original; no demuestra un resultado nuevo.\nA --> [\n```\n\n## Secuencia de revisi\u00f3n\n\n```mermaid\nsequenceDiagram\naccTitle: Una interpretaci\u00f3n corregible\naccDescr: El agente propone comparar las capturas. El usuario corrige la unidad; el agente revisa la comparaci\u00f3n antes de concluir.\nAgente->>Usuario: Propongo comparar las capturas\nUsuario->>Agente: La unidad es distinta\nAgente->>Usuario: Debemos revisar la comparaci\u00f3n\n```"
+      },
+      {
+        "page_id": 2,
+        "project_id": 1,
+        "revision": 1,
+        "content": "```mermaid\n%%{init: {\"securityLevel\":\"loose\"}}%%\nflowchart LR\naccDescr: No aceptar la configuraci\u00f3n del documento.\nA --> B\n```\n\n```mermaid\nflowchart LR\naccDescr: No cargar im\u00e1genes externas.\nA@{ img: \"https://diagram-probe.invalid/image.png\" }\n```\n\n```mermaid\nflowchart LR\naccDescr: Una etiqueta no ejecuta HTML.\nA[\"<img src='//diagram-probe.invalid/track' onerror='window.diagramProbe=1'>\"] --> B\n```"
+      }
+    ],
+    "runs": 0,
+    "dispatches": 0,
+    "integrity": "ok"
+  }
+}

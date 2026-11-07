@@ -1,0 +1,37 @@
+{
+  "validation_environment": {
+    "runner_cgroup": "/sys/fs/cgroup/user.slice/user-1000.slice/user@1000.service/app.slice/run-p1283240-i1283241.scope",
+    "parent_controllers_before": "cpu memory pids",
+    "runner_cpu_max": "800000 100000",
+    "purpose": "Transient systemd scope with CPUQuota=800% retains CPU-controller availability during validation; it does not relax any product limit.",
+    "parent_controllers_after": "cpu memory pids"
+  },
+  "base_commit": "4eb15e8",
+  "wheel": "researcher-0.1.0-cp312-cp312-linux_x86_64.whl",
+  "wheel_sha256": "57292e6351dab4635db4fc3dcbee8aa6aeadc5c26f1dec46f166fd43c2a75c7e",
+  "source_files_matching_wheel_and_installation": 676,
+  "product_files_matching": 360,
+  "observed": {
+    "cases": 28,
+    "passed": 28,
+    "failed": 0,
+    "skipped": 0,
+    "backend_modules": 24,
+    "all_backend_imports_from_native_env": true,
+    "seconds": 1.703,
+    "exit_code": 0
+  },
+  "tests": [
+    "backend/tests/cli/test_main.py",
+    "backend/tests/cli/test_startup.py",
+    "backend/tests/cli/test_native_entry.py",
+    "backend/tests/cli/test_owner_client.py",
+    "backend/tests/cli/test_terminal_controller.py"
+  ],
+  "real_model_turns": 0,
+  "limits": [
+    "Selected installed tests, not the global suite",
+    "U04 transport contracts and U08 rendered diagrams checked separately in frontend/browser receipts",
+    "Actual HTTP/SQLite, original question option IDs and human threads, controlled native protocol, no paid inference or human comprehension evidence"
+  ]
+}

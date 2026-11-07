@@ -73,6 +73,7 @@ async def answer_questions(
     body: AnswerQuestions,
     request: Request,
 ):
+    """Persist original choice identities and free text in the owner's observed context, without inference."""
     from backend.runtime.sqlite_questions import SQLiteQuestionStore
 
     runtime = request.app.state.runtime_service
@@ -89,7 +90,7 @@ async def answer_questions(
             request_id=request_id,
             expected_version=body.expected_version,
             operation_key=body.operation_key,
-            answers=body.answers,
+            answers=body.model_dump()['answers'],
         )
     except ValueError as exc:
         raise HTTPException(422, str(exc)) from exc

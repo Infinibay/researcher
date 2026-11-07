@@ -136,6 +136,11 @@ try {
     expect(evidence.navigation.failures.filter(item => item.kind !== 'axe')).toEqual([])
   }
   expect(evidence.errors).toEqual([])
+  if (process.env.RESEARCHER_E2E_INTERACTION === '1') {
+    const { auditInteraction } = await import('./interaction-audit.mjs')
+    evidence.interaction = await auditInteraction(page, output, navigate)
+    expect(evidence.errors).toEqual([])
+  }
   evidence.status = 'passed'
 } catch (error) {
   evidence.status = 'failed'

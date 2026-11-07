@@ -1,0 +1,31 @@
+{
+  "comparison_commit": "f6f0630",
+  "files": [
+    {
+      "path": "backend/api/websocket.py",
+      "sha256": "77563b8f2e410f6f45c4251103b73d08266a89428b5c82fa63bfec2aa2a50435",
+      "same_as_d13": true
+    },
+    {
+      "path": "frontend/src/api/websocket.ts",
+      "sha256": "34ba455612aa4dac69ab74ce47385324998aaf5ad15c0d5b4af4f4c850957b5d",
+      "same_as_d13": true
+    },
+    {
+      "path": "frontend/src/api/events.ts",
+      "sha256": "3b63f176023d538e383a2d553d1a3f909cd542350883e56b8deee55cafe7e89a",
+      "same_as_d13": true
+    },
+    {
+      "path": "frontend/src/stores/activityFeed.ts",
+      "sha256": "3ca94d0c325339b4a76f902726084bdfac1a146a06259838f8e4b75ea9c6e930",
+      "same_as_d13": true
+    },
+    {
+      "path": "frontend/src/hooks/useWebSocketSync.ts",
+      "sha256": "200751a1d6169b8987009e78c423fabb12b7cfd6b4be8f663356aabd73cf6fbf",
+      "same_as_d13": true
+    }
+  ],
+  "scope": "Exact listed event source comparison; current browser transport contracts also pass. No claim for omitted paths."
+}

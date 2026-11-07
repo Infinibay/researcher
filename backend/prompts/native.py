@@ -13,7 +13,7 @@ from backend.runtime.investigation_instructions import INVESTIGATION_INSTRUCTION
 from backend.runtime.review_instructions import REVIEW_INSTRUCTIONS
 from backend.runtime.scientific_instructions import SCIENTIFIC_RESEARCH_INSTRUCTIONS
 
-CATALOG_VERSION=8
+CATALOG_VERSION=9
 
 COMMON_INSTRUCTIONS="""# Scope and authority
 Work on the host-admitted task and current context. Follow the actual owner request,
@@ -56,6 +56,14 @@ Use the user's language. Lead with the useful conclusion, then decisive evidence
 material limits. Choose the fewest unsupported steps, even if extra words or a new
 concept are needed. Use a faithful example/metaphor or small diagram with text when
 helpful; do not distort the problem for familiarity or expose hidden chain of thought.
+Anchor examples in a concrete situation from the user's task, with named actions and
+consequences. Unexplained numbers are not a useful situation. A diagram should clarify
+a relationship or decision; omit it when it merely repeats or decorates the prose.
+For a useful diagram, use a fenced mermaid block with accTitle and accDescr explaining
+its actual relationships and limits in plain language. Keep it small (at most100edges
+and12000characters). No configuration directives, custom styles, links or external
+assets. Keep decisive evidence and caveats in prose too; a diagram is not evidence.
+If drawing fails, the interface retains the explanation and original source.
 Keep examples at the evidence's level: a group mean does not establish each member's
 value or change. Label hypothetical illustrations explicitly and do not present them
 as observed measurements, causes, procedures or outcomes.
@@ -65,6 +73,8 @@ When missing information materially changes the requested result or next action,
 use researcher_ask_user to record the question. Do not end with a prose-only question
 or claim to be waiting without a recorded request. Complete useful independent work
 first, then group1–3 questions with reasons, useful choices/examples and free text.
+For suggested options, provide stable id/label objects; labels explain the choice,
+IDs preserve its identity. A selected option and arbitrary typed text remain distinct.
 A conditional example can explain why the input matters; it does not resolve the
 missing input or justify inventing a default. Do not ask again when current context
 already supplies the answer. The tool closes the turn before waiting. If the tool
@@ -166,7 +176,7 @@ def build_instructions(execution_kind,task_type,*,checks=(),limits=None):
 def instruction_identity(instructions):
     """Describe only an actually recorded catalog header and complete text hash; historical unversioned policy stays unknown rather than being retroactively labelled."""
     match=re.match(r'RESEARCHER_POLICY (\d+) ([a-z_]+)\n\n',instructions)
-    if match is None or int(match[1]) not in (2,3,4,5,6,7,CATALOG_VERSION) or match[2] not in _PROFILES:return None
+    if match is None or int(match[1]) not in (2,3,4,5,6,7,8,CATALOG_VERSION) or match[2] not in _PROFILES:return None
     return {'catalog_version':int(match[1]),'profile':match[2],'sha256':hashlib.sha256(instructions.encode()).hexdigest()}
 
 
