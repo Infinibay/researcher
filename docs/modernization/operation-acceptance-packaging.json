@@ -1,0 +1,42 @@
+{
+  "validation_environment": {
+    "runner_cgroup": "/sys/fs/cgroup/user.slice/user-1000.slice/user@1000.service/app.slice/researcher-operation-final-20261107-2244.scope",
+    "parent_controllers_before": "cpu memory pids",
+    "runner_cpu_max": "800000 100000",
+    "purpose": "Transient systemd scope with CPUQuota=800% retains CPU-controller availability during validation; it does not relax any product limit.",
+    "parent_controllers_after": "cpu memory pids"
+  },
+  "base_commit": "018155d",
+  "wheel": "researcher-0.1.0-cp312-cp312-linux_x86_64.whl",
+  "wheel_sha256": "c329cc1265cebac3a34577c299c407978ee14938365555f2b1a61ef6e91f415b",
+  "source_files_matching_wheel_and_installation": 674,
+  "product_files_matching": 360,
+  "observed": {
+    "cases": 78,
+    "passed": 78,
+    "failed": 0,
+    "skipped": 0,
+    "backend_modules": 247,
+    "all_backend_imports_from_native_env": true,
+    "seconds": 55.287,
+    "exit_code": 0
+  },
+  "tests": [
+    "backend/tests/runtime/test_durable_events.py",
+    "backend/tests/api/test_event_stream.py",
+    "backend/tests/api/test_websocket_lifecycle.py",
+    "backend/tests/runtime/test_installation_backup.py",
+    "backend/tests/runtime/test_restored_enrollment.py",
+    "backend/tests/runtime/test_recovery_policy.py",
+    "backend/tests/runtime/test_reboot_backup.py",
+    "backend/tests/runtime/test_restored_jobs.py",
+    "backend/tests/runtime/test_workspace_retention.py::test_installation_backup_recovers_archive_data_without_replaying_copied_deletion"
+  ],
+  "real_model_turns": 0,
+  "limits": [
+    "Selected tests, not the global suite",
+    "Synthetic managed installation data, no historical user-data migration",
+    "D13: bounded per-client event pages, durable cursor replay and explicit gaps; real SQLite/filesystem/Git backup, another-root restoration, fresh enrollment without replay, preserved copied history and retention. Synthetic data, controlled kernel-identity changes in unit tests; no new reboot/browser/model run or historical-data migration claim.",
+    "No model calls, external accounts or GitHub workflow execution"
+  ]
+}

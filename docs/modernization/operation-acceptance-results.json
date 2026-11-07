@@ -1,0 +1,59 @@
+{
+  "base_commit": "018155d",
+  "status": "verified",
+  "started_at": "2026-11-07T22:37:44Z",
+  "verified_at": "2026-11-07T22:45:25Z",
+  "elapsed_until_verification_seconds": 461,
+  "completed_scenarios": [
+    "D13"
+  ],
+  "initial_installed": {
+    "cases": 61,
+    "passed": 60,
+    "failed": 1,
+    "skipped": 0,
+    "backend_modules": 246,
+    "all_backend_imports_from_native_env": true,
+    "seconds": 44.192,
+    "exit_code": 1
+  },
+  "focused_final": {
+    "passed": 15,
+    "failed": 0,
+    "skipped": 0,
+    "seconds": 8.6
+  },
+  "frontend": {
+    "contracts_passed": 14,
+    "dom_passed": 2,
+    "new_build": false,
+    "new_browser_run": false,
+    "unchanged_modules_against_prior_delivery": 9,
+    "websocket_contracts_passed": 2,
+    "contracts_selections_do_not_overlap": true
+  },
+  "changed_product_python_sql_files": 0,
+  "changed_test_files": 1,
+  "documented_definitions": 5,
+  "real_model_turns": 0,
+  "failure_and_response": "Historical reboot fixture tried inverse58 on current schema68; refused before restoration. Fixture now builds real forward prefixes56/57, plus current68 case, then reenables current migrator. Dedicated used-prefix57 inverse test preserves all peer/archive evidence; unused prefix57 reverses, upgraded schema refuses. Product migration protections unchanged.",
+  "limits": [
+    "Selected current D13 acceptance passes; no global suite or full-page acceptance claim.",
+    "Synthetic data, real filesystem/SQLite/Git/kernel where used; kernel identity controlled in reboot unit tests.",
+    "No new VM reboot, browser, model call, historical data or full-page acceptance."
+  ],
+  "artifact_comparison": "docs/modernization/operation-acceptance-artifact-comparison.json",
+  "final_installed": {
+    "cases": 78,
+    "passed": 78,
+    "failed": 0,
+    "skipped": 0,
+    "backend_modules": 247,
+    "all_backend_imports_from_native_env": true,
+    "seconds": 55.287,
+    "exit_code": 0
+  },
+  "wheel_sha256": "c329cc1265cebac3a34577c299c407978ee14938365555f2b1a61ef6e91f415b",
+  "source_files_matching_wheel_and_installation": 674,
+  "unchanged_product_files": 360
+}

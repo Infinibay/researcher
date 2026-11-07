@@ -26,9 +26,39 @@ que se pueda comparar el avance; no presentar microajustes como tareas principal
 - Codex por suscripción y Ken publicado ensayados. Fuentes/citas, informes draft y revisión documental independiente conectados. Desarrollo admitido desde Tareas/Conversación con captura y comprobaciones explícitas; revisión independiente solicitada desde Tareas y aceptación del propietario conectada. Publicación local desde aceptación conectada; recuperación local de sólo lectura conectada; transporte remoto configurable conectado; recuperación remota y controles de Tareas conectados; ejecución/activación antiguas por tarea y proyecto retiradas; auxiliares de generación/proveedor, herramientas antiguas y sus cinco bibliotecas retirados. También se retiraron API interna, CLI, servicios/listeners y flows/helpers antiguos. También se retiraron autonomía, plantillas históricas y lectores de proveedor sin consumidores; se conserva el control de parada de trabajadores registrados.
 - Interfaz: doce pilotos, 36/36 conceptos de escritorio y 12/12 móviles; todas las rutas tienen piloto y 0/12 páginas están completamente aceptadas.
 - Última suite global: `9fb873c`,2210 casos,2178 pasan,31 fallan y1 error de fixture; sin omisiones. La carrera de backup encontrada se corrigió después con40 pruebas instaladas. No se declara una nueva corrida global verde; la referencia `0c8b8d9` queda como evidencia histórica.
-- U06, E01–E12, C01–C09 y D01–D12 quedan comprobados con el alcance de sus matrices; siguen 9 de 43 escenarios amplios sin aceptación completa en [coverage.json](coverage.json). No hay un porcentaje global defendible.
+- U06, E01–E12, C01–C09 y D01–D13 quedan comprobados con el alcance de sus matrices; siguen 8 de 43 escenarios amplios sin aceptación completa en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Estado actual: D10–D12 comprobados; siguiente D13
+## Estado actual: D13 comprobado; siguiente conocimiento U01–U03
+
+Bloque **2026-11-07 22:37:44–22:45:25 UTC**, desde `018155d`:
+**7 min 41 s hasta verificar**, sin documentación/checkpoint posteriores.
+
+**78 casos instalados, 14 contratos frontend y dos DOM pasan**. 674 fuentes
+coinciden, 247 módulos backend se importan desde la instalación; cinco definiciones
+de prueba documentadas. Los 360 archivos de producto Python/SQL no cambian.
+Se corrige el fixture histórico que intentaba revertir una base actual: prefijos
+reales56/57, esquema actual y conservación del archivo usado; la protección de
+producto permanece intacta. [Matriz, fallo inicial y límites](operation-acceptance-review.md).
+
+- Terminado: **U06, E01–E12, C01–C09 y D01–D13: 35/43 escenarios**.
+  D13 acepta emisores independientes, páginas acotadas, recuperación por cursor,
+  gap explícito y restauración en otra ruta sin reactivar autoridad anterior.
+- En curso al cerrar: guardar evidencia y checkpoint local del bloque comprobado.
+- Siguiente principal: **U01–U03, fuentes, procedencia y vigencia del conocimiento**.
+  [Plan preparado](../superpowers/plans/2026-11-07-knowledge-acceptance.md);
+  bloque no iniciado, registrar hora real al comenzar.
+- Después: **U04/U05/U07/U08**, datos históricos, evaluaciones, aceptación de las
+  **doce páginas**, dependencias y distribución. U08 conserva el requisito de
+  comprensión/corrección humana; los tests no lo sustituyen.
+- Al final: detalles aplazados, C10/DD116, suite global y revisión independiente.
+  DD079 conserva las incidencias de accesibilidad/presentación del panel de actividad.
+
+**Ocho escenarios abiertos; 0/12 páginas completamente aceptadas**, con doce
+pilotos y 48 conceptos. No equivalen a porcentaje global. La última suite global
+conserva fallos históricos; esta selección no la reemplaza. Lista y tiempo medido
+al cambiar de tarea, persistidos tras compactar; primero lo grueso y detalles al final.
+
+## Etapa anterior: D10–D12 comprobados; siguiente D13
 
 Bloque **2026-11-07 22:06:26–22:36:15 UTC**, desde `dd1be91`:
 **29 min 49 s hasta verificar**, sin documentación/checkpoint posteriores.

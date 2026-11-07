@@ -1,0 +1,70 @@
+{
+  "base_commit": "018155d",
+  "scope": "Exact named event and owner-session modules only; not a whole-application/browser equivalence claim. Prior browser evidence remains historical; current contract/DOM and installed tests validate current integration.",
+  "files": [
+    {
+      "path": "backend/api/websocket.py",
+      "prior_commit": "9fb873c",
+      "identical": true,
+      "current_sha256": "77563b8f2e410f6f45c4251103b73d08266a89428b5c82fa63bfec2aa2a50435",
+      "prior_sha256": "77563b8f2e410f6f45c4251103b73d08266a89428b5c82fa63bfec2aa2a50435"
+    },
+    {
+      "path": "backend/runtime/event_history.py",
+      "prior_commit": "9fb873c",
+      "identical": true,
+      "current_sha256": "044d091a94be4af9b1cf1b15d99ade125c6afed78f1bb4b45fcd0687599c1566",
+      "prior_sha256": "044d091a94be4af9b1cf1b15d99ade125c6afed78f1bb4b45fcd0687599c1566"
+    },
+    {
+      "path": "frontend/src/api/events.ts",
+      "prior_commit": "9fb873c",
+      "identical": true,
+      "current_sha256": "3b63f176023d538e383a2d553d1a3f909cd542350883e56b8deee55cafe7e89a",
+      "prior_sha256": "3b63f176023d538e383a2d553d1a3f909cd542350883e56b8deee55cafe7e89a"
+    },
+    {
+      "path": "frontend/src/hooks/useWebSocketSync.ts",
+      "prior_commit": "9fb873c",
+      "identical": true,
+      "current_sha256": "200751a1d6169b8987009e78c423fabb12b7cfd6b4be8f663356aabd73cf6fbf",
+      "prior_sha256": "200751a1d6169b8987009e78c423fabb12b7cfd6b4be8f663356aabd73cf6fbf"
+    },
+    {
+      "path": "frontend/src/stores/activityFeed.ts",
+      "prior_commit": "9fb873c",
+      "identical": true,
+      "current_sha256": "3ca94d0c325339b4a76f902726084bdfac1a146a06259838f8e4b75ea9c6e930",
+      "prior_sha256": "3ca94d0c325339b4a76f902726084bdfac1a146a06259838f8e4b75ea9c6e930"
+    },
+    {
+      "path": "frontend/src/components/chat/ActivityFeed.tsx",
+      "prior_commit": "9fb873c",
+      "identical": true,
+      "current_sha256": "3bbe4c17d0145e33fe8498b69a68c2ebe43be9defd1227fb84a1319a020bde1e",
+      "prior_sha256": "3bbe4c17d0145e33fe8498b69a68c2ebe43be9defd1227fb84a1319a020bde1e"
+    },
+    {
+      "path": "frontend/src/api/session.ts",
+      "prior_commit": "7a0eb31",
+      "identical": true,
+      "current_sha256": "72ec5d838699f872dc0ec79f65f67b61961eb5fa4763e930ef9d01ebc79f948b",
+      "prior_sha256": "72ec5d838699f872dc0ec79f65f67b61961eb5fa4763e930ef9d01ebc79f948b"
+    },
+    {
+      "path": "frontend/src/components/session/OwnerSessionGate.tsx",
+      "prior_commit": "7a0eb31",
+      "identical": true,
+      "current_sha256": "c893b4f10204c4c987d731a673883860e539c23d135d5399f8312c1d61913476",
+      "prior_sha256": "c893b4f10204c4c987d731a673883860e539c23d135d5399f8312c1d61913476"
+    },
+    {
+      "path": "frontend/src/api/websocket.ts",
+      "prior_commit": "9fb873c",
+      "identical": true,
+      "current_sha256": "34ba455612aa4dac69ab74ce47385324998aaf5ad15c0d5b4af4f4c850957b5d",
+      "prior_sha256": "34ba455612aa4dac69ab74ce47385324998aaf5ad15c0d5b4af4f4c850957b5d"
+    }
+  ],
+  "all_identical": true
+}

@@ -2010,7 +2010,7 @@
       ]
     },
     "D13": {
-      "status": "in_progress",
+      "status": "complete",
       "evidence": [
         "docs/architecture/local-owner-access.md",
         "backend/tests/api/test_local_access.py",
@@ -2050,16 +2050,40 @@
         "docs/modernization/recovery-policy-packaging.json",
         "docs/modernization/current-global-results.json",
         "docs/modernization/backup-sidecar-results.json",
-        "docs/modernization/backup-sidecar-packaging.json"
+        "docs/modernization/backup-sidecar-packaging.json",
+        "docs/modernization/operation-acceptance-review.md",
+        "docs/modernization/operation-acceptance-results.json",
+        "docs/modernization/operation-acceptance-packaging.json",
+        "docs/modernization/operation-acceptance-artifact-comparison.json",
+        "docs/modernization/operation-acceptance-source-comparison.json",
+        "docs/modernization/operation-acceptance-docstrings.json",
+        "backend/tests/runtime/test_durable_events.py",
+        "backend/tests/api/test_event_stream.py",
+        "backend/tests/runtime/test_restored_jobs.py",
+        "backend/tests/runtime/test_workspace_retention.py",
+        "frontend/tests/websocket.test.ts",
+        "frontend/tests/events.test.ts",
+        "frontend/tests/activity-feed.test.ts",
+        "frontend/tests/session.test.ts",
+        "frontend/tests/session-load.test.ts",
+        "frontend/tests/ui/activity-feed.test.tsx",
+        "frontend/tests/ui/restored-session.test.tsx"
       ],
-      "remaining": [
-        "Full product runtime/client integration and browser acceptance; HTTP owner guard does not complete the entire scenario"
-      ],
+      "remaining": [],
       "implemented": [
         "Managed installation data backup/verification/another-path restore preserves SQLite, uploads and linked Git worktrees.82source/82installed tests pass; restored execution remains pending enrollment. No production-data or operational recovery acceptance.",
         "Fresh restored-host enrollment, paused copied plans and preserved pending history, exact browser endpoint/intent archival, service restart and abrupt-child recovery:94source/94installed,129frontendcontracts/4DOM,3browserstates. No restored model run, reboot or real-data acceptance.",
         "One fresh installed subscription/Ken run after another-path restoration and enrollment; source-return correlation, calculation200, finding/twoquotes/draft report, fivepeers closed and secondservice startup preservesoutcomes. Originalpendingrequest untouched.12harness testsPASS. Samekernel, syntheticdata; not reboot or historical-data acceptance.",
-        "Explicit prior-kernel archival preserves original peer states without closure claims; schema56-to57 enrollment and unused-only inverse.137source/137installed tests; actual isolated VM reboot, fresh authority, native no-op closure and paired HTTP retained-data reads pass. Syntheticdata, no model call or power-loss/live-agent-during-reboot acceptance."
+        "Explicit prior-kernel archival preserves original peer states without closure claims; schema56-to57 enrollment and unused-only inverse.137source/137installed tests; actual isolated VM reboot, fresh authority, native no-op closure and paired HTTP retained-data reads pass. Syntheticdata, no model call or power-loss/live-agent-during-reboot acceptance.",
+        "78 current installed cases pass0fail0skip with674 source/wheel/install hashes and247 installed backend imports. First60pass1fail was historical fixture misuse of inverse58 on current68; corrected real prefixes56/57 plus current schema and dedicated used-history inverse preservation,15 focused cases pass.360 product files unchanged;5 test definitions documented."
+      ],
+      "verified_at": "2026-11-07",
+      "completion_scope": "Independent bounded per-client durable event replay with explicit gaps; consistent managed-installation manifest, another-path backup restoration preserving hashes, Git links, relations and owner artifact reads; fresh authority without replay or transferred removal authority.",
+      "limitations": [
+        "Synthetic data and controlled kernel-identity changes in current unit tests; no new VM reboot or real historical-data migration.",
+        "Prior browser evidence is historical;9 named modules match exactly,14 current frontend contracts and2 DOM pass. Full-page/a11y and human comprehension remain open.",
+        "Old host closure is not inferred from restoration; prior-schema history gaps, external assets and post-snapshot writes remain explicitly bounded.",
+        "Global suite not rerun; native tests use transient CPUQuota scope to retain required controllers."
       ]
     },
     "U01": {
@@ -2998,7 +3022,13 @@
         "backend/tests/runtime/test_restored_jobs.py",
         "evals/operation/reboot_guest.py",
         "docs/modernization/workspace-retention-review.md",
-        "docs/modernization/workspace-retention-packaging.json"
+        "docs/modernization/workspace-retention-packaging.json",
+        "docs/modernization/operation-acceptance-review.md",
+        "docs/modernization/operation-acceptance-results.json",
+        "docs/modernization/operation-acceptance-packaging.json",
+        "docs/modernization/operation-acceptance-artifact-comparison.json",
+        "docs/modernization/operation-acceptance-source-comparison.json",
+        "docs/modernization/operation-acceptance-docstrings.json"
       ],
       "implemented": [
         "Managed installation data backup/verification/another-path restore preserves SQLite, uploads and linked Git worktrees.82source/82installed tests pass; restored execution remains pending enrollment. No production-data or operational recovery acceptance.",
@@ -3394,7 +3424,13 @@
         "docs/modernization/isolation-acceptance-results.json",
         "docs/modernization/isolation-acceptance-packaging.json",
         "docs/modernization/isolation-acceptance-artifact-comparison.json",
-        "docs/modernization/isolation-acceptance-docstrings.json"
+        "docs/modernization/isolation-acceptance-docstrings.json",
+        "docs/modernization/operation-acceptance-review.md",
+        "docs/modernization/operation-acceptance-results.json",
+        "docs/modernization/operation-acceptance-packaging.json",
+        "docs/modernization/operation-acceptance-artifact-comparison.json",
+        "docs/modernization/operation-acceptance-source-comparison.json",
+        "docs/modernization/operation-acceptance-docstrings.json"
       ],
       "remaining": [
         "Rendered browser and keyboard verification",
@@ -4157,7 +4193,13 @@
         "docs/modernization/isolation-acceptance-results.json",
         "docs/modernization/isolation-acceptance-packaging.json",
         "docs/modernization/isolation-acceptance-artifact-comparison.json",
-        "docs/modernization/isolation-acceptance-docstrings.json"
+        "docs/modernization/isolation-acceptance-docstrings.json",
+        "docs/modernization/operation-acceptance-review.md",
+        "docs/modernization/operation-acceptance-results.json",
+        "docs/modernization/operation-acceptance-packaging.json",
+        "docs/modernization/operation-acceptance-artifact-comparison.json",
+        "docs/modernization/operation-acceptance-source-comparison.json",
+        "docs/modernization/operation-acceptance-docstrings.json"
       ],
       "implemented": [
         "Explicit owned profile selected by real app lifespan and owner HTTP request; no fallback after profile failure.",
@@ -4214,7 +4256,13 @@
         "docs/modernization/isolation-acceptance-results.json",
         "docs/modernization/isolation-acceptance-packaging.json",
         "docs/modernization/isolation-acceptance-artifact-comparison.json",
-        "docs/modernization/isolation-acceptance-docstrings.json"
+        "docs/modernization/isolation-acceptance-docstrings.json",
+        "docs/modernization/operation-acceptance-review.md",
+        "docs/modernization/operation-acceptance-results.json",
+        "docs/modernization/operation-acceptance-packaging.json",
+        "docs/modernization/operation-acceptance-artifact-comparison.json",
+        "docs/modernization/operation-acceptance-source-comparison.json",
+        "docs/modernization/operation-acceptance-docstrings.json"
       ],
       "remaining": [
         "Audit modules/classes/methods and relevant functions added earlier in this branch; add meaningful searchable docstrings/JSDoc where missing or stale.",

@@ -1,0 +1,43 @@
+{
+  "base_commit": "018155d",
+  "changed_or_new_definitions_documented": 5,
+  "missing": [],
+  "contracts": [
+    {
+      "path": "backend/tests/runtime/test_reboot_backup.py",
+      "symbol": "historical_installation",
+      "line": 16,
+      "docstring": "Create the requested real forward schema prefix, then restore the current migrator before exercising backup and enrollment.",
+      "file_sha256": "dd56096cfe183faef6202556aaea796fb4e9d446027b2043792ef11c7cac65f8"
+    },
+    {
+      "path": "backend/tests/runtime/test_reboot_backup.py",
+      "symbol": "historical_installation.initialize_prefix",
+      "line": 22,
+      "docstring": "Restrict only fixture initialization to its explicitly requested historical schema.",
+      "file_sha256": "dd56096cfe183faef6202556aaea796fb4e9d446027b2043792ef11c7cac65f8"
+    },
+    {
+      "path": "backend/tests/runtime/test_reboot_backup.py",
+      "symbol": "test_reboot_backup_restores_live_old_peer_as_history",
+      "line": 60,
+      "docstring": "Historical and current source schemas retain old-peer uncertainty while the restored copy upgrades to the current schema.",
+      "file_sha256": "dd56096cfe183faef6202556aaea796fb4e9d446027b2043792ef11c7cac65f8"
+    },
+    {
+      "path": "backend/tests/runtime/test_reboot_backup.py",
+      "symbol": "test_used_historical_archive_inverse_preserves_original_evidence",
+      "line": 103,
+      "docstring": "A real version57 archive refuses its otherwise eligible inverse and preserves every original peer and archive value.",
+      "file_sha256": "dd56096cfe183faef6202556aaea796fb4e9d446027b2043792ef11c7cac65f8"
+    },
+    {
+      "path": "backend/tests/runtime/test_reboot_backup.py",
+      "symbol": "test_unused_archive_inverse_and_future_refusal_preserve_data",
+      "line": 123,
+      "docstring": "An unused real version57 prefix reverses to56; the fully upgraded installation refuses that historical inverse without losing data.",
+      "file_sha256": "dd56096cfe183faef6202556aaea796fb4e9d446027b2043792ef11c7cac65f8"
+    }
+  ],
+  "scope": "New/changed Python definitions and modules in this delivery. No frontend changes in this delivery; no claim that all historic project definitions are documented."
+}

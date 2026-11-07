@@ -7,8 +7,28 @@ from uuid import uuid4
 
 import pytest
 
+from backend.db.migration_catalog import LATEST_VERSION
 from backend.tests.runtime.test_installation_backup import installation
 from backend.tests.runtime.test_host_installation import host_assets
+
+
+@pytest.fixture
+def historical_installation(request, monkeypatch):
+    """Create the requested real forward schema prefix, then restore the current migrator before exercising backup and enrollment."""
+    from backend.tools.base import db
+
+    migrate = db.ensure_migrations
+
+    def initialize_prefix(db_path=None, **options):
+        """Restrict only fixture initialization to its explicitly requested historical schema."""
+        return migrate(db_path, target_version=request.param, **options)
+
+    with monkeypatch.context() as patch:
+        patch.setattr(db, 'ensure_migrations', initialize_prefix)
+        root, authority = request.getfixturevalue('installation')
+    with sqlite3.connect(root / 'source.db') as connection:
+        assert connection.execute('SELECT MAX(version) FROM schema_migrations').fetchone() == (request.param,)
+    return root, authority, request.param
 
 
 @pytest.fixture
@@ -36,23 +56,17 @@ def test_reboot_archive_requires_a_different_kernel_and_retains_normal_guard(ins
             normal.load()
 
 
-@pytest.mark.parametrize('source_version',[56,57])
-def test_reboot_backup_restores_live_old_peer_as_history(installation,changed_kernel,tmp_path,host_assets,source_version):
-    """Old-kernel peers retain uncertainty and gain explicit archival provenance in the restored copy."""
+@pytest.mark.parametrize('historical_installation',[56,57,LATEST_VERSION],indirect=True)
+def test_reboot_backup_restores_live_old_peer_as_history(historical_installation,changed_kernel,tmp_path,host_assets):
+    """Historical and current source schemas retain old-peer uncertainty while the restored copy upgrades to the current schema."""
     from backend.runtime.peer_process import boot_id, observer_namespace
     from backend.runtime.authority_journal import WitnessedAuthorityJournal
     from backend.runtime.installation_backup import backup_installation, verify_backup
     from backend.runtime.installation_restore import restore_installation
     from backend.runtime.restored_enrollment import enroll_restored_host
     from backend.db.peer_archive_migration import restore_peer_archive_schema
-    from backend.db.reference_provenance_migration import restore_reference_provenance_schema
 
-    root,authority = installation
-    with sqlite3.connect(root/'source.db') as db:
-        restore_reference_provenance_schema(db)
-    if source_version == 56:
-        with sqlite3.connect(root/'source.db') as db:
-            restore_peer_archive_schema(db)
+    root,authority,source_version = historical_installation
     with WitnessedAuthorityJournal(**authority) as journal:
         journal.commit(journal.load(),transition_id='before-reboot',puts={'broker:active':'old-broker'})
     with sqlite3.connect(root/'source.db') as db:
@@ -70,15 +84,14 @@ def test_reboot_backup_restores_live_old_peer_as_history(installation,changed_ke
     restored = tmp_path/'restored'
     restore_installation(tmp_path/'backup',restored)
     result = enroll_restored_host(restored,witness_dir=tmp_path/'fresh-witness',assets=host_assets)
-    assert (result['schema_before'],result['schema_version']) == (source_version,58)
+    assert (result['schema_before'],result['schema_version']) == (source_version,LATEST_VERSION)
     assert result['historical_work']['prior_kernel_peers'] == ['old-peer']
     with sqlite3.connect(restored/'source.db') as db:
         assert db.execute('SELECT state,reason,boot_id,database_identity FROM runtime_peers').fetchone() == ('prepared',None,boot_id(),'original-db')
         assert db.execute('SELECT peer_id,original_state,origin_boot_id FROM runtime_peer_archives').fetchone() == ('old-peer','prepared',boot_id())
         assert db.execute('SELECT status,native_result_json,ended_at FROM runtime_attempts').fetchone() == ('reconciling',None,None)
         assert db.execute('SELECT status FROM runtime_runs').fetchone() == ('superseded',)
-        restore_reference_provenance_schema(db)
-        with pytest.raises(RuntimeError,match='archival history'):
+        with pytest.raises(RuntimeError,match='newer schema'):
             restore_peer_archive_schema(db)
         assert db.execute('SELECT COUNT(*) FROM runtime_peer_archives').fetchone() == (1,)
     with sqlite3.connect(root/'source.db') as db:
@@ -86,25 +99,43 @@ def test_reboot_backup_restores_live_old_peer_as_history(installation,changed_ke
     backup_installation(restored,tmp_path/'next-backup')
 
 
-def test_unused_archive_inverse_and_future_refusal_preserve_data(installation):
-    """An unused latest step can be reversed; a future schema is never silently downgraded."""
+@pytest.mark.parametrize('historical_installation',[57],indirect=True)
+def test_used_historical_archive_inverse_preserves_original_evidence(historical_installation):
+    """A real version57 archive refuses its otherwise eligible inverse and preserves every original peer and archive value."""
     from backend.db.peer_archive_migration import restore_peer_archive_schema
-    from backend.db.reference_provenance_migration import restore_reference_provenance_schema
+    from backend.runtime.peer_process import boot_id, observer_namespace
+    from backend.tests.runtime.migration_fixtures import historical_run
+
+    root,_,_ = historical_installation
+    with sqlite3.connect(root/'source.db') as db:
+        historical_run(db,'historical-peer',status='superseded')
+        db.execute("INSERT INTO runtime_peers(id,attempt_id,kind,protocol_version,state,fence,owner_pid,owner_start_ticks,boot_id,observer_namespace,created_at,database_identity) VALUES('old-peer','historical-peer-attempt','native',1,'prepared',1,999999,1,?,?,1,'original-db')",(boot_id(),observer_namespace()))
+        db.execute("INSERT INTO runtime_peer_archives VALUES('old-peer',?,'prepared',?,?,'original-db',1)",(uuid4().hex,boot_id(),observer_namespace()))
+        db.commit()
+        before = [db.execute('SELECT * FROM '+table).fetchall() for table in ('runtime_peers','runtime_peer_archives')]
+        with pytest.raises(RuntimeError,match='archival history'):
+            restore_peer_archive_schema(db)
+        assert [db.execute('SELECT * FROM '+table).fetchall() for table in ('runtime_peers','runtime_peer_archives')] == before
+        assert db.execute('SELECT MAX(version) FROM schema_migrations').fetchone() == (57,)
+
+
+@pytest.mark.parametrize('historical_installation',[57],indirect=True)
+def test_unused_archive_inverse_and_future_refusal_preserve_data(historical_installation):
+    """An unused real version57 prefix reverses to56; the fully upgraded installation refuses that historical inverse without losing data."""
+    from backend.db.peer_archive_migration import restore_peer_archive_schema
     from backend.tools.base.db import ensure_migrations
 
-    root,_ = installation
+    root,_,_ = historical_installation
     with sqlite3.connect(root/'source.db') as db:
-        restore_reference_provenance_schema(db)
         restore_peer_archive_schema(db)
         assert db.execute('SELECT MAX(version) FROM schema_migrations').fetchone() == (56,)
         assert db.execute('SELECT title FROM tasks WHERE id=1001').fetchone() == ('Retained task',)
     ensure_migrations(str(root/'source.db'),existing_only=True)
     with sqlite3.connect(root/'source.db') as db:
-        db.execute("INSERT INTO schema_migrations(version,name) VALUES(59,'future')")
-        db.commit()
         with pytest.raises(RuntimeError,match='newer schema'):
             restore_peer_archive_schema(db)
-        assert db.execute('SELECT MAX(version) FROM schema_migrations').fetchone() == (59,)
+        assert db.execute('SELECT MAX(version) FROM schema_migrations').fetchone() == (LATEST_VERSION,)
+        assert db.execute('SELECT title FROM tasks WHERE id=1001').fetchone() == ('Retained task',)
 
 
 @pytest.mark.parametrize('damage',['replaced_inode','different_recorded_boot'])
