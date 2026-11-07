@@ -42,6 +42,21 @@ antes de liberar procesos. La memoria y los procesos también se cuentan juntos;
 si la memoria se agota, se termina el grupo. Esto no es una cuota de disco ni un
 límite de todo el servicio Python que lo supervisa. [Alcance y pruebas](../modernization/domain-resources-review.md).
 
+`service_limits` aplica otro presupuesto compartido al API y sus descendientes
+cuando se arrancan con el lanzador nativo. Por defecto: 2 GiB de memoria,
+128 procesos/hilos y CPU equivalente a dos núcleos. Se impone antes de ejecutar
+los servicios; si falla, el arranque se rechaza. Un guardián pequeño permanece
+fuera del grupo para retirarlo si muere el lanzador. `service/service-resources.json`
+conserva identidad, límites, cierre físico y contadores de agotamiento.
+
+Este grupo es independiente de los dominios de agentes y no acredita su cierre
+ni sus resultados. El launcher y el guardián quedan fuera de su presupuesto;
+las operaciones administrativas ejecutadas aparte y el disco necesitan sus
+propios límites. Arrancar directamente uvicorn o usar el modo de inspección sin
+configuración nativa no aplica esta política. Un recibo pendiente impide otro
+arranque: conservarlo e inspeccionar la recuperación, sin borrar controles para
+forzar la continuación. [Pruebas y alcance](../modernization/service-resources-review.md).
+
 ## Inicialización y comprobación
 
 Los directorios padre deben existir. Los dos destinos deben ser nuevos y

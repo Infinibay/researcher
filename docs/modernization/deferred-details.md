@@ -737,6 +737,14 @@ exportaciones/backups y trabajo del padre siguen como pendientes principales.
 examinado. Resolver después de las capacidades principales. No confundirlos con
 la cuota de temporales de Chroma o los recursos del supervisor, aún principales.
 
+## DD101 — Estilo en el grupo de servicios y sus consumidores
+
+26 avisos de Ruff en los archivos revisados:19 I001,2 TRY004,2 F401,2 SIM117
+y1 BLE001. Se conservan en `service-resources-lint.json`; no se mezclan con el
+cierre de la capacidad principal. Ordenar imports, retirar imports sin uso y
+revisar formas de excepción/context managers después de todas las tareas gruesas.
+No se difieren aquí recuperación con disco lleno ni la incertidumbre de recibos.
+
 ## DD100 — Estilo del exportador Chroma
 
 11avisos Ruff (2 I001, 1 F401 y8PLW1510) del exportador y sus fixtures, incluido

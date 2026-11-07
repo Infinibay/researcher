@@ -57,6 +57,14 @@ también que los uploads, repositorios y worktrees activos registrados estén
 incluidos. Las rutas Git que dependen de almacenamiento externo requieren una
 migración explícita de ese almacenamiento; no se omiten silenciosamente.
 
+La copia también mantiene el bloqueo de propiedad del servicio: rechaza un
+lanzador o guardián activo e impide otro arranque durante la captura. Un recibo
+de servicio sin cierre confirmado se rechaza. En el modo explícito tras reinicio,
+puede archivarse si coincide con el kernel y observador anteriores verificados;
+eso no acredita el cierre del host original. Restore conserva `service-owner.lock`
+y `service-resources.json` bajo `.restorations/.../original/service`, como historial.
+El servicio restaurado adquiere controles y grupo nuevos al arrancar.
+
 ### Recuperación explícita tras un cambio de kernel
 
 Si el sistema se reinició, la autoridad anterior rechaza su uso normal. El modo

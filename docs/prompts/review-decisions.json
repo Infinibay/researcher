@@ -3220,23 +3220,8 @@
       "reviewed_at": "2026-11-07",
       "source_base_commit": "035b46c"
     },
-    "backend/cli/launcher.py::main.description@100": {
-      "dependencies_sha256": "d16fef0b321ef18bdeff6833c3532361a8ccd9d0908fb6241e193f55fc5122b1",
-      "decision": "excluded_human_or_input_metadata",
-      "rationale": "Reviewed as CLI/OpenAPI labels, owner-supplied description defaults or response projection, not an agent developer instruction. Preserve literal owner data and validate transport boundaries; do not infer authorization from prose.",
-      "evidence": [
-        "backend/cli/launcher.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "conflicts": [],
-      "revalidation": {
-        "base_commit": "20b3c25",
-        "method": "AST equality of the selected candidate, ignoring source locations; host setup and direct consumer hashes changed. No new semantic review or model efficacy claim."
-      }
-    },
     "backend/runtime/development_policy.py::development_instructions": {
-      "dependencies_sha256": "315717ea33d626f197c5c14e58a045d75b4c67e8576231a9c84e88e335414fed",
+      "dependencies_sha256": "90f438626e22c7f73583b18b4057220e2d63ba43b9d545d4390aeec31456c1ed",
       "decision": "retained",
       "rationale": "Delta review against ab36dc5; preserve the earlier full semantic review below. Read the complete changed common policy and selector, exact owned factory call, native reply mediation and durable issue consumer. Catalog4 adds observed budget/delivery guidance, bounded discovery and faithful examples; exact initial limits enter the frozen instructions. Versions2/3 retain their recorded identity. This candidate source is byte-identical; only the native composition or owned factory consumer changed. Existing capability-specific prerequisites, source windows and permission boundaries still apply, including under delivery pressure. Directed source and installed tests verify budget/provenance/closure contracts, not general model compliance, scientific validity or human comprehension. Three development regressions are evaluated separately; prior reserved results are not replaced. Revalidated 2026-11-07 for catalog5: common delivery advice uses observed-increment margin, planner avoids redundant discovery and guessed source bounds, historical catalogs2/3/4 retain identity. Capabilities, prerequisites and hard ceilings unchanged. Source profile text unchanged except planning; composition and owned-runtime consumer read. Static review does not establish model efficacy.",
       "evidence": [
@@ -3258,7 +3243,7 @@
       ],
       "conflicts": [],
       "consumer_recheck": "2026-11-06: prompt AST identical to 12a1744. Removed legacy launcher consumers; retained owned broker/catalog behavior is covered by test_owned_factory.py and test_broker_inference.py. No new semantic or model evaluation claimed.",
-      "revalidation": "Auxiliary-worker review: host_installation adds a readonly mandatory Landlock capability check and records the observed ABI. Development instruction rendering, check policy, budgets, schemas, model selection and acceptance are unchanged. Read changed consumer and validated host setup; no prompting-efficacy claim.",
+      "revalidation": "Service-resource review: host_installation now validates and records service_limits. Read the changed consumer: development checks, instruction rendering, model selection, budgets and acceptance remain unchanged. No new prompt efficacy claim.",
       "previous_review": {
         "dependencies_sha256": "60ad21edf8aee9b134a66c5b403a0f17e1c12b86e58efe06064b46b16e6f3189",
         "decision": "retained",
@@ -3441,6 +3426,19 @@
       ],
       "conflicts": [],
       "revalidation": "Storage-volume review: API startup checks precede writes; native composition and service admission add a capacity gate without changing generated instructions, task profiles, schemas, model selection or acceptance. OpenAPI/project description literals retain their human-data role. Reviewed changed consumers; no communication efficacy claim."
+    },
+    "backend/cli/launcher.py::main.description@111": {
+      "dependencies_sha256": "cb135652ec9f3feb3eca8031ace1736df0b978a5887557081aac85abf572e2b4",
+      "decision": "excluded_human_or_input_metadata",
+      "rationale": "Reviewed as CLI/OpenAPI labels, owner-supplied description defaults or response projection, not an agent developer instruction. Preserve literal owner data and validate transport boundaries; do not infer authorization from prose.",
+      "evidence": [
+        "backend/cli/launcher.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "conflicts": [],
+      "revalidation": "CLI description unchanged; line moved after bounded service routing. Reviewed as human CLI text, not an agent instruction.",
+      "reviewed_at": "2026-11-07"
     }
   },
   "retired_entries": {

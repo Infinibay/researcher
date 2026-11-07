@@ -51,7 +51,18 @@ def prerequisites(*, api_only: bool, port: int, workspace: Path) -> list[tuple]:
 
 
 def run_services(services: list[tuple], *, grace: float = 15) -> int:
-    """Monitor direct original subprocess handles, close peers on exit/signal and never read PID files, signal unrelated processes or restart effects."""
+    """Bound native services as one kernel group; inspection-only launches retain original child handles without native admission."""
+    if config_path := os.environ.get('INFINIBAY_RUNTIME_CONFIG'):
+        from backend.runtime.host_installation import _read_json
+        from backend.runtime.service_process import DEFAULT_SERVICE_LIMITS, run_bounded_services
+
+        try:
+            config = _read_json(config_path)
+            return run_bounded_services(services,cgroup_parent=config['cgroup_parent'],
+                limits=config.get('service_limits',DEFAULT_SERVICE_LIMITS),state_dir=services[0][2],grace=grace)
+        except (OSError,ValueError,RuntimeError,KeyError,TypeError) as error:
+            print(f'Bounded service launch refused: {error}. Inspect retained service and native recovery state.',file=sys.stderr)
+            return 1
     children = []
     requested = 0
 

@@ -4808,7 +4808,7 @@
     },
     "aggregate_kernel_resources": {
       "status": "in_progress",
-      "implemented": "Shared CPU bandwidth, group OOM policy, scheduler confinement and retained exhaustion observations; owner feedback through controlled generation and actual cgroup exhaustion.120source/66installed tests; installed host probe with actual Codex/Ken assets; zero model calls. Optional dedicated ext4 host volume now binds persistent write roots, verifies original capacity and rejects low-space new work; real128MiB VM exhaustion/Stop/missing-mount/remount plus independent retained-disk inspection.84distinctsource/55installed tests; no model calls. Fixed document/semantic workers now share one slot through physical reaping, enforce mandatory Landlock/seccomp before third-party imports and return explicit HTTP429 on contention.98distinct source and44final installed cases pass, including real offline encoder;614matching files and35documented definitions. Zero generative turns. Administrative CLI backup/verify/restore/legacy staging now runs in a trusted child with1GiB AS,CPU,wall,parent-death and per-file fuses; shared inventories apply entry limits before materialization.90source cases have86passed/4known historical fixture failures;49distinct installed pass after correcting test cwd.616matching packaged files,20documented definitions,zero model turns. Chroma reader now uses one capacity-bound tmpfs for its disposable copy/temp/cache, a readonly root, two pinned per-file-limited output files and a64KiB drained log.8boundary cases plus3overlapping FD probes pass; installed end-to-end export/import preserves105records/104texts/1metadata-only and HTTP reads without models. Global durable-disk and memory/PID quotas remain unproven.",
+      "implemented": "Shared CPU bandwidth, group OOM policy, scheduler confinement and retained exhaustion observations; owner feedback through controlled generation and actual cgroup exhaustion.120source/66installed tests; installed host probe with actual Codex/Ken assets; zero model calls. Optional dedicated ext4 host volume now binds persistent write roots, verifies original capacity and rejects low-space new work; real128MiB VM exhaustion/Stop/missing-mount/remount plus independent retained-disk inspection.84distinctsource/55installed tests; no model calls. Fixed document/semantic workers now share one slot through physical reaping, enforce mandatory Landlock/seccomp before third-party imports and return explicit HTTP429 on contention.98distinct source and44final installed cases pass, including real offline encoder;614matching files and35documented definitions. Zero generative turns. Administrative CLI backup/verify/restore/legacy staging now runs in a trusted child with1GiB AS,CPU,wall,parent-death and per-file fuses; shared inventories apply entry limits before materialization.90source cases have86passed/4known historical fixture failures;49distinct installed pass after correcting test cwd.616matching packaged files,20documented definitions,zero model turns. Chroma reader now uses one capacity-bound tmpfs for its disposable copy/temp/cache, a readonly root, two pinned per-file-limited output files and a64KiB drained log.8boundary cases plus3overlapping FD probes pass; installed end-to-end export/import preserves105records/104texts/1metadata-only and HTTP reads without models. Global durable-disk and memory/PID quotas remain unproven. Native launcher now starts API and descendants atomically inside a separate service cgroup, with a guardian holding ownership through group retirement after launcher death. Offline backup shares the ownership lock; restore archives old service control.56source/55installed cases pass; installed original and restored hosts serve HTTP with observed budgets and143 shutdown;618package files/34documented definitions/83prompt reviews. Zero model calls.",
       "evidence": [
         "docs/modernization/domain-resources-review.md",
         "docs/modernization/domain-resources-results.json",
@@ -4831,11 +4831,16 @@
         "docs/modernization/chroma-capacity-review.md",
         "docs/modernization/chroma-capacity-results.json",
         "docs/modernization/chroma-capacity-import.json",
-        "evals/security/test_chroma_export.py"
+        "evals/security/test_chroma_export.py",
+        "docs/modernization/service-resources-review.md",
+        "docs/modernization/service-resources-results.json",
+        "docs/modernization/service-resources-host.json",
+        "docs/modernization/service-resources-packaging.json",
+        "backend/tests/runtime/test_service_resources.py"
       ],
       "remaining": [
         "Migration/enrollment and restore of existing hosts under the bounded-volume policy; no automatic adoption",
-        "Service-wide supervisor RSS/parent allocations and concurrent administration; aggregate Chroma export and backup/restore temporary, journal and metadata storage beyond cooperative/per-file limits",
+        "Launcher/guardian own resources, concurrent external administration and aggregate export/backup/restore durable temporary, journal and metadata storage beyond per-operation limits; pending service receipt recovery after disk-full remains unproven",
         "Full-disk service/database-write recovery, power loss and inode exhaustion",
         "Integral security and operational acceptance"
       ]

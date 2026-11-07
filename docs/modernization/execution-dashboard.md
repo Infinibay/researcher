@@ -28,7 +28,45 @@ que se pueda comparar el avance; no presentar microajustes como tareas principal
 - Última suite global: `9fb873c`,2210 casos,2178 pasan,31 fallan y1 error de fixture; sin omisiones. La carrera de backup encontrada se corrigió después con40 pruebas instaladas. No se declara una nueva corrida global verde; la referencia `0c8b8d9` queda como evidencia histórica.
 - Los 43 escenarios amplios siguen abiertos en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Etapa actual: temporales Chroma comprobados; siguen recursos globales
+## Etapa actual: grupo de servicios comprobado; sigue recuperación de almacenamiento
+
+Bloque **13:06:07–13:23:38 UTC**, **17 min 31 s** hasta validación. El lanzador
+nativo aplica límites compartidos y un guardián retira el grupo si muere el
+lanzador. Backup excluye al servicio y restore archiva sus controles originales.
+56 pruebas de fuente y55 instaladas pasan. Original y restauración responden
+por HTTP, muestran límites reales y cierran sus grupos; cero llamadas a modelos.
+618 archivos coinciden,34 definiciones documentadas y83 revisiones de prompts
+vigentes. [Informe](service-resources-review.md), [ensayo](service-resources-host.json).
+
+**Lista actualizada al cambiar de tarea:**
+- Implementado y probado en recorridos concretos: backend Codex/Ken, modelos,
+  flujos principales, comunicación, persistencia y varias recuperaciones.
+- Terminado ahora: recursos del API/descendientes, guardián de cierre y
+  coordinación con backup/restore, **17 min 31 s** hasta validar.
+- Siguiente principal: recuperación ante disco lleno y migración a almacenamiento
+  acotado. **Todavía no iniciada en este bloque.**
+- Pendiente principal: cuotas restantes de auxiliares/operaciones simultáneas,
+  seguridad de dependencias, evaluación humana/otros perfiles y datos históricos.
+- Interfaz:12pilotos/48conceptos;0/12páginas completamente aceptadas.
+- Al final de las capacidades principales: detalles acumulados (incluido DD101),
+  validación global, revisión independiente y distribución.
+
+Siguen43escenarios amplios abiertos. No hay nueva suite global verde ni un
+porcentaje global sustentado. Launcher y guardián permanecen fuera de este
+presupuesto; tampoco se acredita el cierre de actores nativos. Lista y tiempos
+se conservan tras compactar; no se hizo push ni despliegue.
+
+## Etapa anterior: grupo de recursos del servicio principal
+
+Inicio **2026-11-07 13:06:07 UTC**. El turno anterior fue progreso, guardado en
+`1c853fb`. En curso: grupo propio de CPU/memoria/procesos para los servicios del
+lanzador preparado, con cierre independiente si muere el lanzador. Este cierre
+no acredita el cierre de actores nativos ni aceptación de sus resultados.
+Último tramo terminado: temporales Chroma, **15 min 4 s** hasta validación.
+Después: cuotas durables, recuperación/migración, seguridad, evaluación humana
+y aceptación de12páginas. Detalles secundarios al final.
+
+## Etapa anterior: temporales Chroma comprobados; siguen recursos globales
 
 Bloque **12:45:45–13:00:49 UTC**, **15 min 4 s** hasta validación. El lector
 usa un tmpfs con capacidad de datos compartida, dos salidas fijadas y log de64KiB;

@@ -92,6 +92,40 @@ def test_backup_restores_original_data_uploads_and_linked_git_at_another_path(in
     assert not any(p.read_bytes() == b'synthetic-external-not-to-copy' for p in (backup / 'objects').iterdir())
 
 
+def test_backup_refuses_owned_service_then_archives_closed_service_control(installation, tmp_path):
+    """Offline backup excludes a running owner; restore preserves its receipt solely as historical evidence."""
+    import fcntl
+    from backend.runtime.installation_backup import backup_installation
+    from backend.runtime.installation_restore import restore_installation
+
+    root,_=installation
+    with (root/'service/service-owner.lock').open('w') as owner:
+        fcntl.flock(owner,fcntl.LOCK_EX|fcntl.LOCK_NB)
+        with pytest.raises(RuntimeError,match='owns'):
+            backup_installation(root,tmp_path/'refused')
+    assert not (tmp_path/'refused').exists()
+    original={'status':'closed','domain_removed':True,'domain_path':'/historical-group'}
+    (root/'service/service-resources.json').write_text(json.dumps(original))
+    backup_installation(root,tmp_path/'bundle')
+    restored=tmp_path/'restored'
+    restore_installation(tmp_path/'bundle',restored)
+    assert not (restored/'service/service-resources.json').exists()
+    assert not (restored/'service/service-owner.lock').exists()
+    history=list((restored/'.restorations').glob('*/original/service/service-resources.json'))
+    assert len(history)==1 and json.loads(history[0].read_text())==original
+
+
+def test_backup_refuses_unconfirmed_service_closure(installation,tmp_path):
+    """An unlocked but pending service receipt does not certify an offline installation."""
+    from backend.runtime.installation_backup import backup_installation
+
+    root,_=installation
+    (root/'service/service-resources.json').write_text(json.dumps({'status':'starting','domain_removed':False}))
+    with pytest.raises(ValueError,match='closure'):
+        backup_installation(root,tmp_path/'refused')
+    assert not (tmp_path/'refused').exists()
+
+
 @pytest.mark.parametrize('obstacle', ['database_writer', 'authority_writer', 'active_grant'])
 def test_backup_refuses_active_writers_or_native_concession(installation, tmp_path, obstacle):
     """A busy source or authority is an explicit refusal, never an inconsistent successful backup."""

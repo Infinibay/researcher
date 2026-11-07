@@ -1,0 +1,210 @@
+{
+  "changed_definitions": 34,
+  "missing": [],
+  "definitions": [
+    {
+      "path": "backend/cli/launcher.py",
+      "definition": "<module>",
+      "line": 1,
+      "documented": true
+    },
+    {
+      "path": "backend/cli/launcher.py",
+      "definition": "run_services",
+      "line": 53,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/host_installation.py",
+      "definition": "<module>",
+      "line": 1,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/host_installation.py",
+      "definition": "_resources",
+      "line": 48,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/installation_backup.py",
+      "definition": "<module>",
+      "line": 1,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/installation_backup.py",
+      "definition": "backup_installation",
+      "line": 111,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/installation_restore.py",
+      "definition": "<module>",
+      "line": 1,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/installation_restore.py",
+      "definition": "restore_installation",
+      "line": 82,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/installation_restore.py",
+      "definition": "target_name",
+      "line": 103,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/service_process.py",
+      "definition": "<module>",
+      "line": 1,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/service_process.py",
+      "definition": "_ownership_lock",
+      "line": 30,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/service_process.py",
+      "definition": "frozen_service_ownership",
+      "line": 46,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/service_process.py",
+      "definition": "write_receipt",
+      "line": 69,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/service_process.py",
+      "definition": "read_receipt",
+      "line": 83,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/service_process.py",
+      "definition": "_forward",
+      "line": 95,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/service_process.py",
+      "definition": "_poll",
+      "line": 106,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/service_process.py",
+      "definition": "_terminate",
+      "line": 112,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/service_process.py",
+      "definition": "run_bounded_services",
+      "line": 122,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/service_process.py",
+      "definition": "guardian_main",
+      "line": 238,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/service_process.py",
+      "definition": "main",
+      "line": 254,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/service_process.py",
+      "definition": "request_stop",
+      "line": 136,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_host_installation.py",
+      "definition": "<module>",
+      "line": 1,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_host_installation.py",
+      "definition": "test_fresh_host_composes_storage_and_configured_product",
+      "line": 27,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_host_installation.py",
+      "definition": "test_invalid_host_setup_creates_no_partial_installation",
+      "line": 68,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_installation_backup.py",
+      "definition": "<module>",
+      "line": 1,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_installation_backup.py",
+      "definition": "test_backup_refuses_owned_service_then_archives_closed_service_control",
+      "line": 95,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_installation_backup.py",
+      "definition": "test_backup_refuses_unconfirmed_service_closure",
+      "line": 118,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_service_resources.py",
+      "definition": "<module>",
+      "line": 1,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_service_resources.py",
+      "definition": "delegated_service_parent",
+      "line": 15,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_service_resources.py",
+      "definition": "test_service_oom_closes_its_group_and_keeps_observed_reason",
+      "line": 24,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_service_resources.py",
+      "definition": "test_service_failure_reaps_peers_but_never_signals_unrelated_process",
+      "line": 45,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_service_resources.py",
+      "definition": "test_launcher_death_closes_forked_service_tree_before_releasing_ownership",
+      "line": 66,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_service_resources.py",
+      "definition": "test_configured_launcher_applies_service_limits",
+      "line": 102,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_service_resources.py",
+      "definition": "test_snapshot_ownership_blocks_new_launcher",
+      "line": 117,
+      "documented": true
+    }
+  ]
+}

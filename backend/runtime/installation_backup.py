@@ -139,6 +139,9 @@ def backup_installation(directory, destination, *, after_reboot=False, **limits)
         else:
             journal = stack.enter_context(WitnessedAuthorityJournal(**authority))
             state = stack.enter_context(journal.frozen_snapshot())
+        from backend.runtime.service_process import frozen_service_ownership
+
+        stack.enter_context(frozen_service_ownership(root/'service',reboot_evidence=reboot_evidence))
         if not after_reboot and (state.records.get('broker:active') is not None or any(
             (key.startswith('broker:grant:') and (value.get('state') != 'retired' or value.get('domain_removed') is not True))
             or (key.startswith('broker:op:') and value.get('execution_closed') is not True)

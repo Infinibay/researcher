@@ -38,6 +38,7 @@ def test_fresh_host_composes_storage_and_configured_product(tmp_path, host_asset
         monkeypatch.setenv(key, value)
     config = json.loads(Path(environment['INFINIBAY_RUNTIME_CONFIG']).read_text())
     assert config['runtime_profile'] == 'owned-codex-v1'
+    assert config['service_limits'] == {'memory_bytes':2*1024**3,'pids':128,'cpu_millis':2000}
     assert Path(config['workspace_root']).is_dir()
     assert not Path(config['authority']['witness']).is_relative_to(root)
     with sqlite3.connect(environment['INFINIBAY_DB']) as db:
@@ -63,7 +64,7 @@ def test_reinitialization_preserves_the_original_host(tmp_path, host_assets):
     assert all(p.read_bytes() == data for p, data in before.items())
 
 
-@pytest.mark.parametrize('case', ['existing', 'nested_witness', 'missing_asset', 'unknown_field'])
+@pytest.mark.parametrize('case', ['existing', 'nested_witness', 'missing_asset', 'unknown_field', 'service_limits'])
 def test_invalid_host_setup_creates_no_partial_installation(tmp_path, host_assets, case):
     """Reject pre-existing destinations, overlapping witness and invalid assets before writes."""
     from backend.runtime.host_installation import initialize_host
@@ -75,6 +76,8 @@ def test_invalid_host_setup_creates_no_partial_installation(tmp_path, host_asset
         witness = root / 'witness'
     elif case == 'missing_asset':
         host_assets['code_mode_host'] = str(tmp_path / 'absent')
+    elif case == 'service_limits':
+        host_assets['service_limits'] = {'memory_bytes':1}
     else:
         host_assets['OPENAI_API_KEY'] = 'not-a-subscription'
     with pytest.raises((OSError, ValueError)):

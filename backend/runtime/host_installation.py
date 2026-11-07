@@ -19,7 +19,7 @@ from backend.runtime.bootstrap import initialize_authority, initialize_database,
 from backend.runtime.storage_volume import StorageVolume, configured_storage
 
 _PATHS = ('codex_binary', 'code_mode_host', 'ken_command', 'model_cache', 'token_file', 'cgroup_parent')
-_OPTIONS = {'model', 'reasoning_effort', 'web_search', 'broker_limits', 'limits', 'static_dir',
+_OPTIONS = {'model', 'reasoning_effort', 'web_search', 'broker_limits', 'service_limits', 'limits', 'static_dir',
             'project_turn_limit', 'project_token_limit', 'resolver', 'ca_bundle', 'development_checks', 'storage'}
 
 
@@ -55,6 +55,7 @@ def _resources(assets):
     from backend.runtime.native_commands import VERSION, _version
     from backend.runtime.native_network import NativeNetwork
     from backend.runtime.peer_broker import BrokerLimits
+    from backend.runtime.service_process import DEFAULT_SERVICE_LIMITS
     from backend.runtime.subscription_auth import ManagedTokenFile
     from backend.research.worker_sandbox import requirements
 
@@ -102,6 +103,7 @@ def _resources(assets):
         raise ValueError('Delegate CPU, memory and pids controllers before initializing the host')
     limits = BrokerLimits(**config.get('broker_limits', {'memory_bytes': 2 * 1024**3, 'pids': 128}))
     config['broker_limits'] = asdict(limits)
+    config['service_limits'] = asdict(BrokerLimits(**config.get('service_limits',DEFAULT_SERVICE_LIMITS)))
     if 'limits' in config:
         ExecutionLimits(**config['limits'])
     parse_development_checks(config.get('development_checks', []))
@@ -110,6 +112,7 @@ def _resources(assets):
                     'code_host_sha256': code_host.sha256, 'ken_version': KEN_VERSION,
                     'ken_artifacts_verified': artifacts, 'credential_snapshot_valid': True,
                     'document_worker_landlock_abi': worker_landlock_abi,
+                    'service_limits_configured': config['service_limits'],
                     'remote_entitlement_verified': False}
 
 

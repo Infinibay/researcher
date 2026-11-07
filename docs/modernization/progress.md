@@ -8447,3 +8447,24 @@ measured time every task transition and retain after compaction. No push/deploy.
 - Initial red lacked --scratch-bytes. First suite6pass/1old symlink expectation; final8pass plus3overlapping FD probes pass. Actual1MiB fill gives ENOSPC; outside/root/dev-shm writes EROFS; pinned-output unlink EBUSY, no inherited directory descriptors;2MiB log becomes64KiB with explicit flag. Changed expectation reflects stronger kernel prevention, not hidden parent validation removal.
 - One actual installed trial passed: Chroma1.5.9 exports105records/2collections, schema17->59 import retains104texts+1metadata-only, scoped HTTP reads pass, original service exits143; no model/embedding calls or real account copied. Script SHA2567c4eba7dd1b62a18cbb12ca0d0f27e1b42f4c36c5f312c67c1d9ebfae287b784. Trial at .superpowers/sdd/2026-10-31-actualizacion-proyecto/chroma-capacity-trial-v1. No live handles. Existing backend wheel9b3392cc... still matches616PythonSQL files; no rebuild.16changed definitions documented,83prompt reviews current, script lock unchanged/verified.11lint deferredDD100. See docs/modernization/chroma-capacity-review/results/import/docstrings/lint.
 - Main resource macro remains active. Next: supervisor process-tree memory/CPU/PIDs; also durable export/backup/restore quotas, bounded-host migration/recovery, Ken/ONNX/Chroma dependency security, human/profile communication, owner data and12page acceptance.43broad scenarios open,0/12pages accepted, no newglobalgreen. All macro tasks before all fine details, updated list+measured time each transition, persistent after compaction. No push/deploy. No launcher/service code was changed this block; investigation found current prepared launcher uses direct Popen outside native cgroup domains. Any next solution must retain original child handles, physical group closure, parent-death behavior, no unrelated process signals, and explicit service resource ownership rather than silently claiming native actor limits cover the API.
+
+## 2026-11-07: bounded native service ownership
+
+Block13:06:07–13:23:38UTC,1051seconds to validation. API and descendants use a
+separate CPU/memory/PID group; an outside guardian retains the shared lock through
+physical group retirement, including launcher death. Backup excludes active
+service ownership; restore archives historical controls and enrolls fresh ones.
+56source and55installed cases pass. Installed original/restored HTTP hosts show
+configured ceilings, reject live backup, exit143 and remove groups. No inference.
+618packaged Python/SQL members match;34changed definitions documented;83prompt
+reviews current.26Ruff findings deferred asDD101. Initial pidfd API failure and
+wrong evaluation HTTP route retained; corrected cases verified, no uncertain replay.
+Evidence:service-resources-review/results/host/packaging/docstrings/lint.
+
+Next principal work: full-disk recovery and migration under bounded storage;
+remaining external resource quotas, dependency security, human communication
+evaluation/other profiles, historical owner data and12page acceptance remain.
+All fine details stay after all macro capabilities.43broad scenarios still open;
+no new global green suite or defensible overall percentage. Task transitions
+continue to publish the current list, measured duration and next start time;
+the persistent dashboard carries this rule through context compaction.

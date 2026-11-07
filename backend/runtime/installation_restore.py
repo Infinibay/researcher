@@ -103,7 +103,7 @@ def restore_installation(backup, destination, **limits):
     def target_name(name):
         """Archive original launch/access authority as evidence instead of activating copied credentials."""
         path = Path(name)
-        if name in ('runtime.json','installation.json') or path.parts[0] in ('authority','auth'):
+        if name in ('runtime.json','installation.json','service/service-resources.json','service/service-owner.lock') or path.parts[0] in ('authority','auth'):
             return evidence / 'original' / path
         return path
 

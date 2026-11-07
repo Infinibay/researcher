@@ -1,0 +1,52 @@
+{
+  "base_commit": "1c853fb",
+  "started_at_utc": "2026-11-07T13:06:07Z",
+  "validation_cutoff_utc": "2026-11-07T13:23:38Z",
+  "elapsed_to_validation_seconds": 1051,
+  "runs": [
+    {
+      "name": "first",
+      "receipt": ".superpowers/sdd/2026-10-31-actualizacion-proyecto/service-resources-first.xml",
+      "sha256": "ed79fdfd453bf6617f0b7accc3bf34b1e0a0e6f54906d32be321122998ea0a43",
+      "tests": 3,
+      "outcomes": {
+        "passed": 2,
+        "failure": 1
+      },
+      "seconds": 1.05,
+      "failures": [
+        "backend.tests.runtime.test_service_resources::test_service_failure_reaps_peers_but_never_signals_unrelated_process"
+      ]
+    },
+    {
+      "name": "source",
+      "receipt": ".superpowers/sdd/2026-10-31-actualizacion-proyecto/service-resources-source.xml",
+      "sha256": "d3d6f51832c1dd653966dfe036e8e78551da994f5ef2c61043712be294208bc5",
+      "tests": 56,
+      "outcomes": {
+        "passed": 56
+      },
+      "seconds": 30.998,
+      "failures": []
+    },
+    {
+      "name": "installed",
+      "receipt": ".superpowers/sdd/2026-10-31-actualizacion-proyecto/service-resources-installed.xml",
+      "sha256": "069c60467be24e84c5c9d9b86cdcd679ef330bc2522bced0fb3a0cc52ecc005c",
+      "tests": 55,
+      "outcomes": {
+        "passed": 55
+      },
+      "seconds": 31.158,
+      "failures": []
+    }
+  ],
+  "integration_red": "Four integration cases failed before launcher/backup/restore wiring; preserved service-resources-integration-red.log.",
+  "installed_excluded": "Only source-checkout start.sh fixture; source run covers it.",
+  "host_trial_initial": "v1 used nonexistent HTTP route; launch succeeded and exact group was closed before corrected fresh synthetic v2.",
+  "model_calls": 0,
+  "global_suite_rerun": false,
+  "broad_scenarios_open": 43,
+  "fully_accepted_pages": 0,
+  "status": "scoped_service_boundary_verified; whole plan remains active"
+}

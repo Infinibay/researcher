@@ -1,0 +1,115 @@
+{
+  "status": "passed",
+  "model_calls": 0,
+  "credential_kind": "synthetic",
+  "trial_started_at": 1794057790.4013627,
+  "services": [
+    {
+      "ready": true,
+      "active_limits": {
+        "cpu.max": "50000 100000",
+        "memory.max": "2147483648",
+        "pids.max": "128"
+      },
+      "scoped_tasks_status": 200,
+      "live_backup_refused": true,
+      "launcher_exit": 143,
+      "closure": {
+        "format": 1,
+        "status": "closed",
+        "domain_path": "/sys/fs/cgroup/user.slice/user-1000.slice/user@1000.service/app.slice/researcher-service-fb21c4dd0e594cc399681ab3cc5f2192",
+        "domain_identity": {
+          "device": 28,
+          "inode": 230943,
+          "boot_id": "76501fdb-12f8-4e41-802a-5d65e9bc7ea6",
+          "observer_namespace": 4026531836,
+          "observer_cgroup_namespace": 4026531835
+        },
+        "limits": {
+          "pids": 128,
+          "memory_bytes": 2147483648,
+          "cpu_millis": 500
+        },
+        "domain_removed": true,
+        "native_actor_closure_proven": false,
+        "reason": "stop_requested",
+        "resources": {
+          "observed": true,
+          "cpu_usage_usec": 1503764,
+          "cpu_throttled_periods": 29,
+          "memory_oom_kills": 0,
+          "memory_group_oom_kills": 0,
+          "pids_denied": 0,
+          "limits": {
+            "cpu_max": "50000 100000",
+            "memory_max": "2147483648",
+            "pids_max": "128"
+          }
+        }
+      },
+      "database": {
+        "runs": [],
+        "dispatches": [],
+        "reports": [],
+        "findings": [],
+        "peers": [],
+        "integrity": "ok"
+      }
+    },
+    {
+      "ready": true,
+      "active_limits": {
+        "cpu.max": "50000 100000",
+        "memory.max": "2147483648",
+        "pids.max": "128"
+      },
+      "scoped_tasks_status": 200,
+      "live_backup_refused": true,
+      "launcher_exit": 143,
+      "closure": {
+        "format": 1,
+        "status": "closed",
+        "domain_path": "/sys/fs/cgroup/user.slice/user-1000.slice/user@1000.service/app.slice/researcher-service-6ec022389dec485cab71e715e9847167",
+        "domain_identity": {
+          "device": 28,
+          "inode": 231008,
+          "boot_id": "76501fdb-12f8-4e41-802a-5d65e9bc7ea6",
+          "observer_namespace": 4026531836,
+          "observer_cgroup_namespace": 4026531835
+        },
+        "limits": {
+          "pids": 128,
+          "memory_bytes": 2147483648,
+          "cpu_millis": 500
+        },
+        "domain_removed": true,
+        "native_actor_closure_proven": false,
+        "reason": "stop_requested",
+        "resources": {
+          "observed": true,
+          "cpu_usage_usec": 1485125,
+          "cpu_throttled_periods": 29,
+          "memory_oom_kills": 0,
+          "memory_group_oom_kills": 0,
+          "pids_denied": 0,
+          "limits": {
+            "cpu_max": "50000 100000",
+            "memory_max": "2147483648",
+            "pids_max": "128"
+          }
+        }
+      },
+      "database": {
+        "runs": [],
+        "dispatches": [],
+        "reports": [],
+        "findings": [],
+        "peers": [],
+        "integrity": "ok"
+      }
+    }
+  ],
+  "original_receipt_archived": true,
+  "restored_ownership_fresh": true,
+  "trial_finished_at": 1794057799.022802
+}

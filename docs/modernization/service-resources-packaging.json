@@ -1,0 +1,7 @@
+{
+  "wheel": ".superpowers/sdd/2026-10-31-actualizacion-proyecto/service-resources-dist/researcher-0.1.0-cp312-cp312-linux_x86_64.whl",
+  "sha256": "1e3fa5f551ed9a156a808e808fee5bc7792fdd53a669da334b167fe984ebb0aa",
+  "python_sql_members": 618,
+  "source_and_installed_differences": [],
+  "method": "Compare each Python/SQL archive member with authoritative source and installed file; excludes intentionally unpackaged source files."
+}
