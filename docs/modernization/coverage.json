@@ -2047,7 +2047,7 @@
         "docs/modernization/context-alignment-human-review.md"
       ],
       "remaining": [
-        "Observed human comprehension and effort; structured material questions and faithful previous-request continuity across task admissions/threads; remaining communication journeys and all-profile evaluation."
+        "Observed human comprehension and effort; remaining communication journeys, representative scientific cases and other-profile evaluation. Material questions and direct-admission continuity have bounded functional evidence in communication-flow-review.md, not full acceptance."
       ],
       "context_comparison_observed": "7 paired cases:2 development/5 reserved;16 Codex subscription turns with actual published Ken, matching substantive inputs/model/catalog and exact delivered policies. Initial no-dispatch context-version failure and development receipt-identity amendment retained.19 directed tests pass; human measures unknown."
     },
@@ -2082,11 +2082,12 @@
         "docs/modernization/communication-flow-review.md",
         "docs/modernization/communication-flow-results.json",
         "docs/modernization/communication-flow-live.json",
-        "docs/modernization/communication-packaging.json"
+        "docs/modernization/communication-packaging.json",
+        "docs/prompts/review-2026-11-07.md",
+        "docs/prompts/revalidation-results.json"
       ],
-      "implemented": "Current owned static inventory83candidates/287files; catalogv3 with required material questions and direct-admission request history.23 source/direct-consumer reviews current,60 stale and requiring explicit revalidation; archived decisions retained. Four new functional turns do not establish general model efficacy or human comprehension.",
+      "implemented": "Catalog3 unchanged;83 candidates/287 files with83 current static decisions after69 explicit revalidations and14 unchanged reviews.516 historical identities preserved. Seven actual profile hashes/sizes verified; evaluator version metadata corrected.45 directed source cases pass, including four initially skipped and then run with existing offline semantic assets. No new LLM evaluation or human acceptance.",
       "remaining": [
-        "Revalidate60 stale source/direct-consumer review decisions without inheriting historical approval.",
         "Before/after efficacy and reserved comparisons for remaining profiles; historical investigation comparison is exploratory.",
         "Actual human comprehension and broader communication/context journeys."
       ],
@@ -4639,7 +4640,6 @@
       ],
       "remaining": [
         "Human comprehension/effort and other profiles/communication journeys",
-        "Revalidate60 stale static prompt review decisions",
         "Representative scientific evaluation and full page acceptance"
       ]
     },

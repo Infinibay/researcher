@@ -8123,3 +8123,34 @@ where they inform reasoning; do not autoapprove hashes. Human/other-profile/
 scientific evaluation remains distinct. Then security/licenses, owner historical
 data, full12-page acceptance and other recovery remain. All macro tasks before
 all details; publish updated done/current/pending and measured start at transition.
+
+
+## 2026-11-07 08:54:33UTC — static prompt revalidation checkpoint
+
+Block08:45:38–08:54:33UTC8min55s to validation cutoff; base035b46c. PROGRESS.
+Latest user reiterated updated done/current/pending and measured time at every
+main task transition; policy confirmed in execution-dashboard.md and chat.
+
+Fresh inventory was83candidates/287files,14current/69stale, not prior23/60.
+Read common/selected-profile policies, exact wire docstrings/signatures, native
+catalog selection/transport, host tool schemas, input renderer and feedback callers.
+Revalidated69explicit decisions, kept14unchanged and preserved previous records;
+archived one old OpenAPI line identity, now516historical identities. Product
+instructions/catalog3 unchanged. measure_profiles incorrectly labelled current
+policies2; use actual CATALOG_VERSION and verified all7hashes/sizes. Updated
+inventory prose separates current evidence from historic cuts. Static coverage
+is heuristic; no exhaustive dynamic-caller or human/model efficacy claim.
+
+First directed source run41PASS/4SKIP15.65s; missing explicit offline semantic
+fixture setting, no failures. Selected only those4using existing prepared assets:
+4PASS14.07s. Both original receipts retained;45unique passes,0unresolved skips.
+No new LLM inference/providers/package/global suite/frontend/page acceptance.
+Changed evaluator has module/function docstrings. Existing Starlette/httpx
+warning retained for later, no dependency micro-work. Inventory --check passes.
+
+Next main block, not started: other-profile/representative scientific communication
+evaluation; human A/B request remains pending. Other macro: Ken/Chroma/licenses,
+owner historical data, remaining recovery and12-page full acceptance.43broad
+scenarios still open;0/12pages accepted. All macro tasks before all fine details;
+publish updated list and measured start at next transition. Do not infer a global
+percentage or completion from static inventory or directed tests.

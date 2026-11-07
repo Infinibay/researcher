@@ -4,6 +4,15 @@ La implementación del [plan completo](../superpowers/plans/2026-10-31-actualiza
 
 ## Resultados disponibles
 
+- **Revisión estática de prompts cerrada en este corte:**83 candidatos/287 archivos
+  con83 decisiones vigentes, tras revalidar69 y conservar14. Catálogo3 y texto
+  productivo sin cambios; corregida la versión que mostraba el evaluador.45 casos
+  distintos pasan; cuatro inicialmente omitidos se ejecutaron después con assets
+  semánticos locales. Cero generaciones nuevas. Bloque8min55s; siguiente principal:
+  comunicación en otros perfiles/material científico. Comprensión humana y eficacia
+  general siguen pendientes. [Informe](../prompts/review-2026-11-07.md),
+  [resultados](../prompts/revalidation-results.json).
+
 - **VM con comando activo comprobada:** reinicio observado con el dueño, el
   namespace del peer y el hijo vivos; cálculo200, instrucción/corrección y estados
   históricos conservados. Se corrigió la reinscripción para presentar como

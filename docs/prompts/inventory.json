@@ -234,7 +234,7 @@
     "backend/runtime/native_network.py": "1bd3201968329f81df232a916b6252cf5f8f2ddae909ac826faa570a25de5778",
     "backend/runtime/native_search.py": "a0661b96d8dfbd7811e8183d00491d19fbce89301a42cbc5ee195fd552cd5092",
     "backend/runtime/native_state.py": "e5cc1b82c97cb9cac06b53c231d0ccef33283980e72195233ef57ca4c232ceaf",
-    "backend/runtime/owned_runtime.py": "16b43f69142dd5af23cc623dcb14118918376c01d5bb87baa34ab37af440a985",
+    "backend/runtime/owned_runtime.py": "3a8372f9c4901801cc2e99967681f403dff5d7bc000f031cf879bdd53072473f",
     "backend/runtime/peer_broker.py": "1a1e605a7cd70313c624014a182cbc1d2d0f64f0aa79777befbb7f21033ffd3c",
     "backend/runtime/peer_guard.py": "82fb8a472a96142d470db4a8af992f4d48faf3b04596be7dde4116f1dfa8b8be",
     "backend/runtime/peer_payload.py": "21d725e1011e447d96ea78b3fb5597a5e7691cebfdb1e46aa5ecb1d14a05d1d7",
@@ -243,7 +243,7 @@
     "backend/runtime/predecessor_tools.py": "f944c7a601c659de1c6f7e3211bb5779f399aaf2a82c25d1771c7977bc909001",
     "backend/runtime/proxy_payload.py": "81ea2e1aa9e872bbb5b5f06b84ca01f35feaa1de9d551c83d250d7db274cbf0d",
     "backend/runtime/publication_capsule.py": "7964699e3b3243e2a4b7771542e3660f2429418fea6dcf582d06424f4ad3f9c4",
-    "backend/runtime/publication_closure.py": "cb97d71a27360b56d4578839f26741861fadf158776f75f7c0641211c5511b20",
+    "backend/runtime/publication_closure.py": "4e76adaf11eab1f3d9043ca048304030d80b3d232ee4110d3443508acce9f1fd",
     "backend/runtime/publication_controller.py": "473ba4155e2ba524e30019290ca97bdf0afd5881cdcf3a517a9efa6cea3f19d7",
     "backend/runtime/publication_executor.py": "a54286f400f8134971f02b1884f622fd40162469d0ef9d5326fc0289ec486c97",
     "backend/runtime/publication_git.py": "ef9e1bfea0e0d81d8d27795b9d192dd21a61070854575f1b4d04819ed53697a6",
@@ -261,11 +261,11 @@
     "backend/runtime/remote_recovery.py": "f466005789688b6211111f77bb55879a160219edb3cbf9786c4cc36c3f018b02",
     "backend/runtime/remote_runtime.py": "082048fd26b62d26798178696a4f6f417caf0bbcc02c91f8b38640c7b60df693",
     "backend/runtime/remote_transport.py": "2dad36df05f2c0e25eca33c11b161d6e1d3ed274f8ef17226858cd623b2dac88",
-    "backend/runtime/restored_enrollment.py": "cff4a99004a3b8eb1bb43a4cdb36eca21a152671e0a6e551f340a3a7651ac4db",
+    "backend/runtime/restored_enrollment.py": "1e0c7cc8ebbf8c17682553e29a992f389ec4aad1e484f6f8ebad8c050c456e97",
     "backend/runtime/review_instructions.py": "592050b6b0dd44ef9026bfcbff78d1989a69473a54de1159bcc09c70f196be24",
     "backend/runtime/run_inputs.py": "51c912385e1c4829f35ba09a7ef1966491cbad7183049a6efe5b3c94b9654526",
     "backend/runtime/scientific_instructions.py": "c63f5637f02b47088399e285fe98df4b7eed99cadff035c21fd7938c384497c9",
-    "backend/runtime/service.py": "96f03134807e46df3e3862db802718d3d13a3b92ba77407716a9ec1251e6eb24",
+    "backend/runtime/service.py": "b09e3aacd33a1ddf25374f24310cc87b5a5e19afaf34294273a5842f2a140b56",
     "backend/runtime/snapshot_files.py": "ef12626230a13cd2333c1605fc7121a8fa1b853ed59e07f9d8ab93128a5febe9",
     "backend/runtime/sqlite_questions.py": "9315a4d6aa01bf82780e4996cddebca689892492a414da5c291d9bfe442b89c1",
     "backend/runtime/sqlite_runs.py": "7cf51e431cfa54babc702ae189c82559486f68bf670e3991085280b81a911e4c",
@@ -585,7 +585,7 @@
       "end_line": 79,
       "owner": "backend.api.routes.projects",
       "family": "other_owned_prompt_candidate",
-      "disposition": "requires_review",
+      "disposition": "excluded_human_or_input_metadata",
       "objective": "Project CRUD and native planning controls; project start never activates legacy agent-loop threads.",
       "source_sha256": "ef446e833412f1b1fa1ff6830af5e9280fe4491a60e30e9f5d4efa6705b1c7a3",
       "source_bytes": 26,
@@ -610,7 +610,16 @@
         "backend/api/main.py": "3b7cfbcdf5e07156edcc3eb567ba66fb7e879a7031fd3594546997811f857d0d"
       },
       "suggested_disposition": "requires_review",
-      "review_status": "stale"
+      "review_status": "reviewed",
+      "review_rationale": "Read the description response projection and FastAPI consumer: owner project text remains input metadata, not native developer instructions. Static contract review only: not exhaustive dynamic-consumer proof, model efficacy, human understanding or whole-system acceptance.",
+      "review_evidence": [
+        "backend/api/routes/projects.py",
+        "docs/prompts/review-2026-11-07.md",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json",
+        "docs/architecture/native-internal-retirement.md"
+      ],
+      "review_conflicts": []
     },
     {
       "id": "backend/cli/bootstrap.py::main.description@12",
@@ -620,7 +629,7 @@
       "end_line": 12,
       "owner": "backend.cli.bootstrap",
       "family": "owner_cli_metadata",
-      "disposition": "requires_review",
+      "disposition": "excluded_human_or_input_metadata",
       "objective": "Explicit inference-free host initialization, data backup/restore and local diagnostics.",
       "source_sha256": "9fed23f0355abe6610ae21f139912dfabdd3000988e0d950f432ab8dc7fef09d",
       "source_bytes": 133,
@@ -641,7 +650,15 @@
       "dependencies_sha256": "aed343268c5e1865cf6795f50b794aa3c4422977cc0c6d1c8f58fa2fb0fdff62",
       "direct_module_consumers": {},
       "suggested_disposition": "excluded_human_interface",
-      "review_status": "stale"
+      "review_status": "reviewed",
+      "review_rationale": "Read the current backup/restore/enrollment CLI description: human help text, not agent instructions. Its changed wording does not grant an agent enrollment authority. Static contract review only: not exhaustive dynamic-consumer proof, model efficacy, human understanding or whole-system acceptance.",
+      "review_evidence": [
+        "backend/cli/bootstrap.py",
+        "docs/prompts/review-2026-11-07.md",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "review_conflicts": []
     },
     {
       "id": "backend/cli/launcher.py::main.description@100",
@@ -689,7 +706,7 @@
       "end_line": 595,
       "owner": "backend.knowledge.reviews",
       "family": "other_owned_prompt_candidate",
-      "disposition": "requires_review",
+      "disposition": "retained_input_renderer",
       "objective": "Freeze review subjects and preserve actual author and evidence provenance.\n\nA historical status, reviewer-looking name or exact quote is not an independent\nreview. Subject fingerprints bind the stored claim and its dependencies; they do\nnot prove scientific correctness or that an agent understood the material.",
       "source_sha256": "10942f0cf9299ff458e5ce0d71ff7249ac0cf84d3473a37b8bfdd5c8d05cfa30",
       "source_bytes": 2044,
@@ -756,7 +773,17 @@
         "backend/runtime/sqlite_runs.py": "7cf51e431cfa54babc702ae189c82559486f68bf670e3991085280b81a911e4c"
       },
       "suggested_disposition": "requires_review",
-      "review_status": "stale"
+      "review_status": "reviewed",
+      "review_rationale": "Read read_feedback and its two exact callers in Findings.reviews and SQLiteResearchStore.read_review: project/finding identity and bounded attributed old subjects survive. The authenticated caller checks findings.read in the same transaction; stored feedback never authorizes a new review. Static contract review only: not exhaustive dynamic-consumer proof, model efficacy, human understanding or whole-system acceptance.",
+      "review_evidence": [
+        "backend/knowledge/reviews.py",
+        "docs/prompts/review-2026-11-07.md",
+        "backend/runtime/run_inputs.py",
+        "backend/runtime/business_definitions.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "review_conflicts": []
     },
     {
       "id": "backend/planning/instructions.py::PLANNING_INSTRUCTIONS",
@@ -766,7 +793,7 @@
       "end_line": 36,
       "owner": "backend.planning.instructions",
       "family": "native_capability_policy",
-      "disposition": "requires_review",
+      "disposition": "reviewed_native",
       "objective": "Native planner instructions: explicit evidence, useful tasks and owner-correctable uncertainty, not another agent execution loop.",
       "source_sha256": "5c8110b9b7c8a34ee8695610ec8ce9478a2f37c43070e76aa014bd1a68fd1128",
       "source_bytes": 2503,
@@ -794,7 +821,16 @@
         "backend/prompts/native.py": "05a6ecd61ce352991a778df42b0d0779a33a24a0121c6b2ab914386a90db99cd"
       },
       "suggested_disposition": "reviewed_native",
-      "review_status": "stale"
+      "review_status": "reviewed",
+      "review_rationale": "Read the full planning policy against PlanningTools, PlanDraft and actual owned-runtime selection. Exact original sources, host_default, assumptions and optional milestones remain explicit; proposal is distinct from graph acceptance or execution. Do not treat profession or a date as owner agreement. Static contract review only: not exhaustive dynamic-consumer proof, model efficacy, human understanding or whole-system acceptance.",
+      "review_evidence": [
+        "backend/planning/instructions.py",
+        "docs/prompts/review-2026-11-07.md",
+        "docs/architecture/native-project-retirement.md",
+        "backend/tests/runtime/test_plan_milestones.py",
+        "backend/tests/research/test_project_structure.py"
+      ],
+      "review_conflicts": []
     },
     {
       "id": "backend/planning/tools.py::PlanningTools.__init__.descriptions@91",
@@ -822,15 +858,16 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "c785cf38c305959fb7d933157d9ec4b18d3acb499c6b62ca0f30c0fe7221f88e",
+      "dependencies_sha256": "3b55e7afd43dab8d38097b94769f9bfd2a859a4cf945136491efefd5cef55c4a",
       "direct_module_consumers": {
-        "backend/runtime/owned_runtime.py": "16b43f69142dd5af23cc623dcb14118918376c01d5bb87baa34ab37af440a985"
+        "backend/runtime/owned_runtime.py": "3a8372f9c4901801cc2e99967681f403dff5d7bc000f031cf879bdd53072473f"
       },
       "suggested_disposition": "requires_review",
       "review_status": "reviewed",
-      "review_rationale": "Reviewed actual planning wire descriptions and schema. A milestone reference stays within its epic, optional dates are proposals, proposal creates no work, exact operation key preserves retries. model_dump(exclude_unset=True) preserves historical payloads. No actor or permission can be model selected.",
+      "review_rationale": "Read both catalog descriptions, PlanDraft/PlanProposal and the host dispatch path: bounded material and a local task DAG proposal, without creation, assignment, acceptance or scheduling permission. Static contract review only: not exhaustive dynamic-consumer proof, model efficacy, human understanding or whole-system acceptance.",
       "review_evidence": [
         "backend/planning/tools.py",
+        "docs/prompts/review-2026-11-07.md",
         "docs/architecture/native-project-retirement.md",
         "backend/tests/runtime/test_plan_milestones.py",
         "backend/tests/research/test_project_structure.py"
@@ -863,15 +900,16 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "44a57ff9cc9c22f54d99a134d8baf05aa61668eddf5207c92aed4d262d219d78",
+      "dependencies_sha256": "c7e1c2f7aacb77fb27219184f8435b4c3931ac1442c47d806b19efd1053516d7",
       "direct_module_consumers": {
-        "backend/runtime/owned_runtime.py": "16b43f69142dd5af23cc623dcb14118918376c01d5bb87baa34ab37af440a985"
+        "backend/runtime/owned_runtime.py": "3a8372f9c4901801cc2e99967681f403dff5d7bc000f031cf879bdd53072473f"
       },
       "suggested_disposition": "rewritten",
       "review_status": "reviewed",
-      "review_rationale": "Explicit review of catalog3 composition and required material-question delivery: historical requests remain data, current corrections control incompatible premises, selected conversations keep their scope. Old catalog2 identities retain their recorded version/hash. Tool arguments, permissions and pause/answer ownership remain unchanged. Source review is not a universal compliance or human-comprehension claim.",
+      "review_rationale": "Read the complete common/source policy, profile selector, version identity and actual CodexSession consumer. Catalog3 composes common rules once, preserves catalog2 frozen identity, uses typed material questions and current corrections, and treats direct admission history as historical data. Source capture instructions are selected only for source-capable profiles. No policy bytes changed in this review. Static contract review only: not exhaustive dynamic-consumer proof, model efficacy, human understanding or whole-system acceptance.",
       "review_evidence": [
         "backend/prompts/native.py",
+        "docs/prompts/review-2026-11-07.md",
         "backend/runtime/business_definitions.py",
         "backend/runtime/run_inputs.py",
         "backend/tests/runtime/test_prompt_catalog.py",
@@ -905,15 +943,16 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "44a57ff9cc9c22f54d99a134d8baf05aa61668eddf5207c92aed4d262d219d78",
+      "dependencies_sha256": "c7e1c2f7aacb77fb27219184f8435b4c3931ac1442c47d806b19efd1053516d7",
       "direct_module_consumers": {
-        "backend/runtime/owned_runtime.py": "16b43f69142dd5af23cc623dcb14118918376c01d5bb87baa34ab37af440a985"
+        "backend/runtime/owned_runtime.py": "3a8372f9c4901801cc2e99967681f403dff5d7bc000f031cf879bdd53072473f"
       },
       "suggested_disposition": "rewritten",
       "review_status": "reviewed",
-      "review_rationale": "Explicit review of catalog3 composition and required material-question delivery: historical requests remain data, current corrections control incompatible premises, selected conversations keep their scope. Old catalog2 identities retain their recorded version/hash. Tool arguments, permissions and pause/answer ownership remain unchanged. Source review is not a universal compliance or human-comprehension claim.",
+      "review_rationale": "Read the complete common/source policy, profile selector, version identity and actual CodexSession consumer. Catalog3 composes common rules once, preserves catalog2 frozen identity, uses typed material questions and current corrections, and treats direct admission history as historical data. Source capture instructions are selected only for source-capable profiles. No policy bytes changed in this review. Static contract review only: not exhaustive dynamic-consumer proof, model efficacy, human understanding or whole-system acceptance.",
       "review_evidence": [
         "backend/prompts/native.py",
+        "docs/prompts/review-2026-11-07.md",
         "backend/runtime/business_definitions.py",
         "backend/runtime/run_inputs.py",
         "backend/tests/runtime/test_prompt_catalog.py",
@@ -956,15 +995,16 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "44a57ff9cc9c22f54d99a134d8baf05aa61668eddf5207c92aed4d262d219d78",
+      "dependencies_sha256": "c7e1c2f7aacb77fb27219184f8435b4c3931ac1442c47d806b19efd1053516d7",
       "direct_module_consumers": {
-        "backend/runtime/owned_runtime.py": "16b43f69142dd5af23cc623dcb14118918376c01d5bb87baa34ab37af440a985"
+        "backend/runtime/owned_runtime.py": "3a8372f9c4901801cc2e99967681f403dff5d7bc000f031cf879bdd53072473f"
       },
       "suggested_disposition": "rewritten",
       "review_status": "reviewed",
-      "review_rationale": "Explicit review of catalog3 composition and required material-question delivery: historical requests remain data, current corrections control incompatible premises, selected conversations keep their scope. Old catalog2 identities retain their recorded version/hash. Tool arguments, permissions and pause/answer ownership remain unchanged. Source review is not a universal compliance or human-comprehension claim.",
+      "review_rationale": "Read the complete common/source policy, profile selector, version identity and actual CodexSession consumer. Catalog3 composes common rules once, preserves catalog2 frozen identity, uses typed material questions and current corrections, and treats direct admission history as historical data. Source capture instructions are selected only for source-capable profiles. No policy bytes changed in this review. Static contract review only: not exhaustive dynamic-consumer proof, model efficacy, human understanding or whole-system acceptance.",
       "review_evidence": [
         "backend/prompts/native.py",
+        "docs/prompts/review-2026-11-07.md",
         "backend/runtime/business_definitions.py",
         "backend/runtime/run_inputs.py",
         "backend/tests/runtime/test_prompt_catalog.py",
@@ -1000,15 +1040,16 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "44a57ff9cc9c22f54d99a134d8baf05aa61668eddf5207c92aed4d262d219d78",
+      "dependencies_sha256": "c7e1c2f7aacb77fb27219184f8435b4c3931ac1442c47d806b19efd1053516d7",
       "direct_module_consumers": {
-        "backend/runtime/owned_runtime.py": "16b43f69142dd5af23cc623dcb14118918376c01d5bb87baa34ab37af440a985"
+        "backend/runtime/owned_runtime.py": "3a8372f9c4901801cc2e99967681f403dff5d7bc000f031cf879bdd53072473f"
       },
       "suggested_disposition": "rewritten",
       "review_status": "reviewed",
-      "review_rationale": "Explicit review of catalog3 composition and required material-question delivery: historical requests remain data, current corrections control incompatible premises, selected conversations keep their scope. Old catalog2 identities retain their recorded version/hash. Tool arguments, permissions and pause/answer ownership remain unchanged. Source review is not a universal compliance or human-comprehension claim.",
+      "review_rationale": "Read the complete common/source policy, profile selector, version identity and actual CodexSession consumer. Catalog3 composes common rules once, preserves catalog2 frozen identity, uses typed material questions and current corrections, and treats direct admission history as historical data. Source capture instructions are selected only for source-capable profiles. No policy bytes changed in this review. Static contract review only: not exhaustive dynamic-consumer proof, model efficacy, human understanding or whole-system acceptance.",
       "review_evidence": [
         "backend/prompts/native.py",
+        "docs/prompts/review-2026-11-07.md",
         "backend/runtime/business_definitions.py",
         "backend/runtime/run_inputs.py",
         "backend/tests/runtime/test_prompt_catalog.py",
@@ -1045,15 +1086,16 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "44a57ff9cc9c22f54d99a134d8baf05aa61668eddf5207c92aed4d262d219d78",
+      "dependencies_sha256": "c7e1c2f7aacb77fb27219184f8435b4c3931ac1442c47d806b19efd1053516d7",
       "direct_module_consumers": {
-        "backend/runtime/owned_runtime.py": "16b43f69142dd5af23cc623dcb14118918376c01d5bb87baa34ab37af440a985"
+        "backend/runtime/owned_runtime.py": "3a8372f9c4901801cc2e99967681f403dff5d7bc000f031cf879bdd53072473f"
       },
       "suggested_disposition": "rewritten",
       "review_status": "reviewed",
-      "review_rationale": "Explicit review of catalog3 composition and required material-question delivery: historical requests remain data, current corrections control incompatible premises, selected conversations keep their scope. Old catalog2 identities retain their recorded version/hash. Tool arguments, permissions and pause/answer ownership remain unchanged. Source review is not a universal compliance or human-comprehension claim.",
+      "review_rationale": "Read the complete common/source policy, profile selector, version identity and actual CodexSession consumer. Catalog3 composes common rules once, preserves catalog2 frozen identity, uses typed material questions and current corrections, and treats direct admission history as historical data. Source capture instructions are selected only for source-capable profiles. No policy bytes changed in this review. Static contract review only: not exhaustive dynamic-consumer proof, model efficacy, human understanding or whole-system acceptance.",
       "review_evidence": [
         "backend/prompts/native.py",
+        "docs/prompts/review-2026-11-07.md",
         "backend/runtime/business_definitions.py",
         "backend/runtime/run_inputs.py",
         "backend/tests/runtime/test_prompt_catalog.py",
@@ -1133,15 +1175,16 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "a47310b9b0d7e77911a5055d9dcef6854ec8d8d8154b4c9d3ef5dcb843eb791b",
+      "dependencies_sha256": "532c1e383146e9515cbd7d9c8f898e7cba0f4b22ab840426ef13b71db487facf",
       "direct_module_consumers": {
-        "backend/runtime/owned_runtime.py": "16b43f69142dd5af23cc623dcb14118918376c01d5bb87baa34ab37af440a985"
+        "backend/runtime/owned_runtime.py": "3a8372f9c4901801cc2e99967681f403dff5d7bc000f031cf879bdd53072473f"
       },
       "suggested_disposition": "requires_review",
       "review_status": "reviewed",
-      "review_rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked.",
+      "review_rationale": "Read _TOOLS, description rendering after _writable_view, command receipts and owned-runtime selection. Private writable wording requires the actual development lease; readonly research remains distinct. Submission, exact output, terminal exit and physical closure are separately represented; credentials/network are not promised. This review does not rerun every command failure mode. Static contract review only: not exhaustive dynamic-consumer proof, model efficacy, human understanding or whole-system acceptance.",
       "review_evidence": [
         "backend/runtime/analysis_tools.py",
+        "docs/prompts/review-2026-11-07.md",
         "backend/runtime/business_mediation.py",
         "backend/runtime/owned_runtime.py",
         "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
@@ -1159,7 +1202,7 @@
       "end_line": 129,
       "owner": "backend.runtime.business_definitions",
       "family": "other_owned_prompt_candidate",
-      "disposition": "requires_review",
+      "disposition": "retained_native_tool_contract",
       "objective": "Shared business-tool wire adapters; rules and authority stay in the API.\n\nThis outer adapter imports the shared HTTP/MCP question DTO. It has no FastMCP,\nSQL, credential issuance, environment discovery or model dependency.",
       "source_sha256": "b1042b7777e533f9558735363a38a53b54e8a80b469f2df59fece9153afcad25",
       "source_bytes": 594,
@@ -1188,7 +1231,20 @@
         "backend/runtime/host_business.py": "6eaae607cff9bfe24f183a907801c50be6f8d9da65cd06297b9335a47cf1fe57"
       },
       "suggested_disposition": "requires_review",
-      "review_status": "stale"
+      "review_status": "reviewed",
+      "review_rationale": "Read stdio server use of these instructions and native host use of definitions. Draft selection is required only for an author with result_propose; stdio uses the default research catalog. This server text is not the native developer policy or owner acceptance. Static contract review only: not exhaustive dynamic-consumer proof, model efficacy, human understanding or whole-system acceptance.",
+      "review_evidence": [
+        "backend/runtime/business_definitions.py",
+        "docs/prompts/review-2026-11-07.md",
+        "backend/runtime/business_mediation.py",
+        "backend/runtime/analysis_tools.py",
+        "backend/runtime/owned_runtime.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "review_conflicts": [
+        "Descriptions document capabilities; they never grant authority or prove a tool was run. Static catalogue text is not a complete live catalogue or a scientific certificate."
+      ]
     },
     {
       "id": "backend/runtime/business_definitions.py::ResearchTools.researcher_notices.wire_description",
@@ -1198,7 +1254,7 @@
       "end_line": 141,
       "owner": "backend.runtime.business_definitions",
       "family": "other_owned_prompt_candidate",
-      "disposition": "requires_review",
+      "disposition": "reviewed_native",
       "objective": "Shared business-tool wire adapters; rules and authority stay in the API.\n\nThis outer adapter imports the shared HTTP/MCP question DTO. It has no FastMCP,\nSQL, credential issuance, environment discovery or model dependency.",
       "source_sha256": "b1042b7777e533f9558735363a38a53b54e8a80b469f2df59fece9153afcad25",
       "source_bytes": 429,
@@ -1227,7 +1283,16 @@
         "backend/runtime/host_business.py": "6eaae607cff9bfe24f183a907801c50be6f8d9da65cd06297b9335a47cf1fe57"
       },
       "suggested_disposition": "requires_review",
-      "review_status": "stale"
+      "review_status": "reviewed",
+      "review_rationale": "Read this exact wire docstring/signature and MESSAGE_NAMES inclusion: admitted recipient/message identity, advisory observations versus assumptions, windows and receipt acknowledgement remain distinct from comprehension or authority. Human input uses its own question tool. Static contract review only: not exhaustive dynamic-consumer proof, model efficacy, human understanding or whole-system acceptance.",
+      "review_evidence": [
+        "backend/runtime/business_definitions.py",
+        "docs/prompts/review-2026-11-07.md",
+        "backend/communication/agent_messages.py",
+        "backend/tests/runtime/test_agent_notices.py",
+        "docs/architecture/native-communication-retirement.md"
+      ],
+      "review_conflicts": []
     },
     {
       "id": "backend/runtime/business_definitions.py::ResearchTools.researcher_notice_read.wire_description",
@@ -1237,7 +1302,7 @@
       "end_line": 145,
       "owner": "backend.runtime.business_definitions",
       "family": "other_owned_prompt_candidate",
-      "disposition": "requires_review",
+      "disposition": "reviewed_native",
       "objective": "Shared business-tool wire adapters; rules and authority stay in the API.\n\nThis outer adapter imports the shared HTTP/MCP question DTO. It has no FastMCP,\nSQL, credential issuance, environment discovery or model dependency.",
       "source_sha256": "b1042b7777e533f9558735363a38a53b54e8a80b469f2df59fece9153afcad25",
       "source_bytes": 368,
@@ -1267,7 +1332,16 @@
         "backend/runtime/host_business.py": "6eaae607cff9bfe24f183a907801c50be6f8d9da65cd06297b9335a47cf1fe57"
       },
       "suggested_disposition": "requires_review",
-      "review_status": "stale"
+      "review_status": "reviewed",
+      "review_rationale": "Read this exact wire docstring/signature and MESSAGE_NAMES inclusion: admitted recipient/message identity, advisory observations versus assumptions, windows and receipt acknowledgement remain distinct from comprehension or authority. Human input uses its own question tool. Static contract review only: not exhaustive dynamic-consumer proof, model efficacy, human understanding or whole-system acceptance.",
+      "review_evidence": [
+        "backend/runtime/business_definitions.py",
+        "docs/prompts/review-2026-11-07.md",
+        "backend/communication/agent_messages.py",
+        "backend/tests/runtime/test_agent_notices.py",
+        "docs/architecture/native-communication-retirement.md"
+      ],
+      "review_conflicts": []
     },
     {
       "id": "backend/runtime/business_definitions.py::ResearchTools.researcher_peer_recipients.wire_description",
@@ -1277,7 +1351,7 @@
       "end_line": 149,
       "owner": "backend.runtime.business_definitions",
       "family": "other_owned_prompt_candidate",
-      "disposition": "requires_review",
+      "disposition": "reviewed_native",
       "objective": "Shared business-tool wire adapters; rules and authority stay in the API.\n\nThis outer adapter imports the shared HTTP/MCP question DTO. It has no FastMCP,\nSQL, credential issuance, environment discovery or model dependency.",
       "source_sha256": "b1042b7777e533f9558735363a38a53b54e8a80b469f2df59fece9153afcad25",
       "source_bytes": 306,
@@ -1305,7 +1379,16 @@
         "backend/runtime/host_business.py": "6eaae607cff9bfe24f183a907801c50be6f8d9da65cd06297b9335a47cf1fe57"
       },
       "suggested_disposition": "requires_review",
-      "review_status": "stale"
+      "review_status": "reviewed",
+      "review_rationale": "Read this exact wire docstring/signature and MESSAGE_NAMES inclusion: admitted recipient/message identity, advisory observations versus assumptions, windows and receipt acknowledgement remain distinct from comprehension or authority. Human input uses its own question tool. Static contract review only: not exhaustive dynamic-consumer proof, model efficacy, human understanding or whole-system acceptance.",
+      "review_evidence": [
+        "backend/runtime/business_definitions.py",
+        "docs/prompts/review-2026-11-07.md",
+        "backend/communication/agent_messages.py",
+        "backend/tests/runtime/test_agent_messages.py",
+        "docs/architecture/native-agent-messaging-design.md"
+      ],
+      "review_conflicts": []
     },
     {
       "id": "backend/runtime/business_definitions.py::ResearchTools.researcher_peer_messages.wire_description",
@@ -1315,7 +1398,7 @@
       "end_line": 153,
       "owner": "backend.runtime.business_definitions",
       "family": "other_owned_prompt_candidate",
-      "disposition": "requires_review",
+      "disposition": "reviewed_native",
       "objective": "Shared business-tool wire adapters; rules and authority stay in the API.\n\nThis outer adapter imports the shared HTTP/MCP question DTO. It has no FastMCP,\nSQL, credential issuance, environment discovery or model dependency.",
       "source_sha256": "b1042b7777e533f9558735363a38a53b54e8a80b469f2df59fece9153afcad25",
       "source_bytes": 369,
@@ -1345,7 +1428,16 @@
         "backend/runtime/host_business.py": "6eaae607cff9bfe24f183a907801c50be6f8d9da65cd06297b9335a47cf1fe57"
       },
       "suggested_disposition": "requires_review",
-      "review_status": "stale"
+      "review_status": "reviewed",
+      "review_rationale": "Read this exact wire docstring/signature and MESSAGE_NAMES inclusion: admitted recipient/message identity, advisory observations versus assumptions, windows and receipt acknowledgement remain distinct from comprehension or authority. Human input uses its own question tool. Static contract review only: not exhaustive dynamic-consumer proof, model efficacy, human understanding or whole-system acceptance.",
+      "review_evidence": [
+        "backend/runtime/business_definitions.py",
+        "docs/prompts/review-2026-11-07.md",
+        "backend/communication/agent_messages.py",
+        "backend/tests/runtime/test_agent_messages.py",
+        "docs/architecture/native-agent-messaging-design.md"
+      ],
+      "review_conflicts": []
     },
     {
       "id": "backend/runtime/business_definitions.py::ResearchTools.researcher_peer_message_read.wire_description",
@@ -1355,7 +1447,7 @@
       "end_line": 157,
       "owner": "backend.runtime.business_definitions",
       "family": "other_owned_prompt_candidate",
-      "disposition": "requires_review",
+      "disposition": "reviewed_native",
       "objective": "Shared business-tool wire adapters; rules and authority stay in the API.\n\nThis outer adapter imports the shared HTTP/MCP question DTO. It has no FastMCP,\nSQL, credential issuance, environment discovery or model dependency.",
       "source_sha256": "b1042b7777e533f9558735363a38a53b54e8a80b469f2df59fece9153afcad25",
       "source_bytes": 363,
@@ -1384,7 +1476,16 @@
         "backend/runtime/host_business.py": "6eaae607cff9bfe24f183a907801c50be6f8d9da65cd06297b9335a47cf1fe57"
       },
       "suggested_disposition": "requires_review",
-      "review_status": "stale"
+      "review_status": "reviewed",
+      "review_rationale": "Read this exact wire docstring/signature and MESSAGE_NAMES inclusion: admitted recipient/message identity, advisory observations versus assumptions, windows and receipt acknowledgement remain distinct from comprehension or authority. Human input uses its own question tool. Static contract review only: not exhaustive dynamic-consumer proof, model efficacy, human understanding or whole-system acceptance.",
+      "review_evidence": [
+        "backend/runtime/business_definitions.py",
+        "docs/prompts/review-2026-11-07.md",
+        "backend/communication/agent_messages.py",
+        "backend/tests/runtime/test_agent_messages.py",
+        "docs/architecture/native-agent-messaging-design.md"
+      ],
+      "review_conflicts": []
     },
     {
       "id": "backend/runtime/business_definitions.py::ResearchTools.researcher_peer_message_send.wire_description",
@@ -1394,7 +1495,7 @@
       "end_line": 165,
       "owner": "backend.runtime.business_definitions",
       "family": "other_owned_prompt_candidate",
-      "disposition": "requires_review",
+      "disposition": "reviewed_native",
       "objective": "Shared business-tool wire adapters; rules and authority stay in the API.\n\nThis outer adapter imports the shared HTTP/MCP question DTO. It has no FastMCP,\nSQL, credential issuance, environment discovery or model dependency.",
       "source_sha256": "b1042b7777e533f9558735363a38a53b54e8a80b469f2df59fece9153afcad25",
       "source_bytes": 615,
@@ -1428,7 +1529,16 @@
         "backend/runtime/host_business.py": "6eaae607cff9bfe24f183a907801c50be6f8d9da65cd06297b9335a47cf1fe57"
       },
       "suggested_disposition": "requires_review",
-      "review_status": "stale"
+      "review_status": "reviewed",
+      "review_rationale": "Read this exact wire docstring/signature and MESSAGE_NAMES inclusion: admitted recipient/message identity, advisory observations versus assumptions, windows and receipt acknowledgement remain distinct from comprehension or authority. Human input uses its own question tool. Static contract review only: not exhaustive dynamic-consumer proof, model efficacy, human understanding or whole-system acceptance.",
+      "review_evidence": [
+        "backend/runtime/business_definitions.py",
+        "docs/prompts/review-2026-11-07.md",
+        "backend/communication/agent_messages.py",
+        "backend/tests/runtime/test_agent_messages.py",
+        "docs/architecture/native-agent-messaging-design.md"
+      ],
+      "review_conflicts": []
     },
     {
       "id": "backend/runtime/business_definitions.py::ResearchTools.researcher_peer_message_acknowledge.wire_description",
@@ -1438,7 +1548,7 @@
       "end_line": 170,
       "owner": "backend.runtime.business_definitions",
       "family": "other_owned_prompt_candidate",
-      "disposition": "requires_review",
+      "disposition": "reviewed_native",
       "objective": "Shared business-tool wire adapters; rules and authority stay in the API.\n\nThis outer adapter imports the shared HTTP/MCP question DTO. It has no FastMCP,\nSQL, credential issuance, environment discovery or model dependency.",
       "source_sha256": "b1042b7777e533f9558735363a38a53b54e8a80b469f2df59fece9153afcad25",
       "source_bytes": 341,
@@ -1467,7 +1577,16 @@
         "backend/runtime/host_business.py": "6eaae607cff9bfe24f183a907801c50be6f8d9da65cd06297b9335a47cf1fe57"
       },
       "suggested_disposition": "requires_review",
-      "review_status": "stale"
+      "review_status": "reviewed",
+      "review_rationale": "Read this exact wire docstring/signature and MESSAGE_NAMES inclusion: admitted recipient/message identity, advisory observations versus assumptions, windows and receipt acknowledgement remain distinct from comprehension or authority. Human input uses its own question tool. Static contract review only: not exhaustive dynamic-consumer proof, model efficacy, human understanding or whole-system acceptance.",
+      "review_evidence": [
+        "backend/runtime/business_definitions.py",
+        "docs/prompts/review-2026-11-07.md",
+        "backend/communication/agent_messages.py",
+        "backend/tests/runtime/test_agent_messages.py",
+        "docs/architecture/native-agent-messaging-design.md"
+      ],
+      "review_conflicts": []
     },
     {
       "id": "backend/runtime/business_definitions.py::ResearchTools.researcher_task_list.wire_description",
@@ -1477,7 +1596,7 @@
       "end_line": 181,
       "owner": "backend.runtime.business_definitions",
       "family": "other_owned_prompt_candidate",
-      "disposition": "requires_review",
+      "disposition": "reviewed_native_tool_contract",
       "objective": "Shared business-tool wire adapters; rules and authority stay in the API.\n\nThis outer adapter imports the shared HTTP/MCP question DTO. It has no FastMCP,\nSQL, credential issuance, environment discovery or model dependency.",
       "source_sha256": "b1042b7777e533f9558735363a38a53b54e8a80b469f2df59fece9153afcad25",
       "source_bytes": 310,
@@ -1510,7 +1629,17 @@
         "backend/runtime/host_business.py": "6eaae607cff9bfe24f183a907801c50be6f8d9da65cd06297b9335a47cf1fe57"
       },
       "suggested_disposition": "requires_review",
-      "review_status": "stale"
+      "review_status": "reviewed",
+      "review_rationale": "Read this exact wire docstring/signature and task read/write capability sets: task metadata and continuity notes remain attributed context, not execution authority; required pages/revisions and stable mutation keys are explicit. Static contract review only: not exhaustive dynamic-consumer proof, model efficacy, human understanding or whole-system acceptance.",
+      "review_evidence": [
+        "backend/runtime/business_definitions.py",
+        "docs/prompts/review-2026-11-07.md",
+        "backend/runtime/business_mediation.py",
+        "backend/api/routes/task_workspace.py",
+        "backend/task_workspace.py",
+        "backend/tests/research/test_task_workspace.py"
+      ],
+      "review_conflicts": []
     },
     {
       "id": "backend/runtime/business_definitions.py::ResearchTools.researcher_project_structure.wire_description",
@@ -1520,7 +1649,7 @@
       "end_line": 185,
       "owner": "backend.runtime.business_definitions",
       "family": "other_owned_prompt_candidate",
-      "disposition": "requires_review",
+      "disposition": "reviewed_native",
       "objective": "Shared business-tool wire adapters; rules and authority stay in the API.\n\nThis outer adapter imports the shared HTTP/MCP question DTO. It has no FastMCP,\nSQL, credential issuance, environment discovery or model dependency.",
       "source_sha256": "b1042b7777e533f9558735363a38a53b54e8a80b469f2df59fece9153afcad25",
       "source_bytes": 365,
@@ -1551,7 +1680,16 @@
         "backend/runtime/host_business.py": "6eaae607cff9bfe24f183a907801c50be6f8d9da65cd06297b9335a47cf1fe57"
       },
       "suggested_disposition": "requires_review",
-      "review_status": "stale"
+      "review_status": "reviewed",
+      "review_rationale": "Read this exact wire docstring/signature and task read/write capability sets: task metadata and continuity notes remain attributed context, not execution authority; required pages/revisions and stable mutation keys are explicit. Static contract review only: not exhaustive dynamic-consumer proof, model efficacy, human understanding or whole-system acceptance.",
+      "review_evidence": [
+        "backend/runtime/business_definitions.py",
+        "docs/prompts/review-2026-11-07.md",
+        "docs/architecture/native-project-retirement.md",
+        "backend/tests/runtime/test_plan_milestones.py",
+        "backend/tests/research/test_project_structure.py"
+      ],
+      "review_conflicts": []
     },
     {
       "id": "backend/runtime/business_definitions.py::ResearchTools.researcher_project_structure_read.wire_description",
@@ -1561,7 +1699,7 @@
       "end_line": 189,
       "owner": "backend.runtime.business_definitions",
       "family": "other_owned_prompt_candidate",
-      "disposition": "requires_review",
+      "disposition": "reviewed_native",
       "objective": "Shared business-tool wire adapters; rules and authority stay in the API.\n\nThis outer adapter imports the shared HTTP/MCP question DTO. It has no FastMCP,\nSQL, credential issuance, environment discovery or model dependency.",
       "source_sha256": "b1042b7777e533f9558735363a38a53b54e8a80b469f2df59fece9153afcad25",
       "source_bytes": 322,
@@ -1592,7 +1730,16 @@
         "backend/runtime/host_business.py": "6eaae607cff9bfe24f183a907801c50be6f8d9da65cd06297b9335a47cf1fe57"
       },
       "suggested_disposition": "requires_review",
-      "review_status": "stale"
+      "review_status": "reviewed",
+      "review_rationale": "Read this exact wire docstring/signature and task read/write capability sets: task metadata and continuity notes remain attributed context, not execution authority; required pages/revisions and stable mutation keys are explicit. Static contract review only: not exhaustive dynamic-consumer proof, model efficacy, human understanding or whole-system acceptance.",
+      "review_evidence": [
+        "backend/runtime/business_definitions.py",
+        "docs/prompts/review-2026-11-07.md",
+        "docs/architecture/native-project-retirement.md",
+        "backend/tests/runtime/test_plan_milestones.py",
+        "backend/tests/research/test_project_structure.py"
+      ],
+      "review_conflicts": []
     },
     {
       "id": "backend/runtime/business_definitions.py::ResearchTools.researcher_task_read.wire_description",
@@ -1602,7 +1749,7 @@
       "end_line": 198,
       "owner": "backend.runtime.business_definitions",
       "family": "other_owned_prompt_candidate",
-      "disposition": "requires_review",
+      "disposition": "reviewed_native_tool_contract",
       "objective": "Shared business-tool wire adapters; rules and authority stay in the API.\n\nThis outer adapter imports the shared HTTP/MCP question DTO. It has no FastMCP,\nSQL, credential issuance, environment discovery or model dependency.",
       "source_sha256": "b1042b7777e533f9558735363a38a53b54e8a80b469f2df59fece9153afcad25",
       "source_bytes": 311,
@@ -1632,7 +1779,17 @@
         "backend/runtime/host_business.py": "6eaae607cff9bfe24f183a907801c50be6f8d9da65cd06297b9335a47cf1fe57"
       },
       "suggested_disposition": "requires_review",
-      "review_status": "stale"
+      "review_status": "reviewed",
+      "review_rationale": "Read this exact wire docstring/signature and task read/write capability sets: task metadata and continuity notes remain attributed context, not execution authority; required pages/revisions and stable mutation keys are explicit. Static contract review only: not exhaustive dynamic-consumer proof, model efficacy, human understanding or whole-system acceptance.",
+      "review_evidence": [
+        "backend/runtime/business_definitions.py",
+        "docs/prompts/review-2026-11-07.md",
+        "backend/runtime/business_mediation.py",
+        "backend/api/routes/task_workspace.py",
+        "backend/task_workspace.py",
+        "backend/tests/research/test_task_workspace.py"
+      ],
+      "review_conflicts": []
     },
     {
       "id": "backend/runtime/business_definitions.py::ResearchTools.researcher_task_dependencies.wire_description",
@@ -1642,7 +1799,7 @@
       "end_line": 207,
       "owner": "backend.runtime.business_definitions",
       "family": "other_owned_prompt_candidate",
-      "disposition": "requires_review",
+      "disposition": "reviewed_native_tool_contract",
       "objective": "Shared business-tool wire adapters; rules and authority stay in the API.\n\nThis outer adapter imports the shared HTTP/MCP question DTO. It has no FastMCP,\nSQL, credential issuance, environment discovery or model dependency.",
       "source_sha256": "b1042b7777e533f9558735363a38a53b54e8a80b469f2df59fece9153afcad25",
       "source_bytes": 289,
@@ -1672,7 +1829,17 @@
         "backend/runtime/host_business.py": "6eaae607cff9bfe24f183a907801c50be6f8d9da65cd06297b9335a47cf1fe57"
       },
       "suggested_disposition": "requires_review",
-      "review_status": "stale"
+      "review_status": "reviewed",
+      "review_rationale": "Read this exact wire docstring/signature and task read/write capability sets: task metadata and continuity notes remain attributed context, not execution authority; required pages/revisions and stable mutation keys are explicit. Static contract review only: not exhaustive dynamic-consumer proof, model efficacy, human understanding or whole-system acceptance.",
+      "review_evidence": [
+        "backend/runtime/business_definitions.py",
+        "docs/prompts/review-2026-11-07.md",
+        "backend/runtime/business_mediation.py",
+        "backend/api/routes/task_workspace.py",
+        "backend/task_workspace.py",
+        "backend/tests/research/test_task_workspace.py"
+      ],
+      "review_conflicts": []
     },
     {
       "id": "backend/runtime/business_definitions.py::ResearchTools.researcher_task_history.wire_description",
@@ -1682,7 +1849,7 @@
       "end_line": 218,
       "owner": "backend.runtime.business_definitions",
       "family": "other_owned_prompt_candidate",
-      "disposition": "requires_review",
+      "disposition": "reviewed_native_tool_contract",
       "objective": "Shared business-tool wire adapters; rules and authority stay in the API.\n\nThis outer adapter imports the shared HTTP/MCP question DTO. It has no FastMCP,\nSQL, credential issuance, environment discovery or model dependency.",
       "source_sha256": "b1042b7777e533f9558735363a38a53b54e8a80b469f2df59fece9153afcad25",
       "source_bytes": 388,
@@ -1715,7 +1882,17 @@
         "backend/runtime/host_business.py": "6eaae607cff9bfe24f183a907801c50be6f8d9da65cd06297b9335a47cf1fe57"
       },
       "suggested_disposition": "requires_review",
-      "review_status": "stale"
+      "review_status": "reviewed",
+      "review_rationale": "Read this exact wire docstring/signature and task read/write capability sets: task metadata and continuity notes remain attributed context, not execution authority; required pages/revisions and stable mutation keys are explicit. Static contract review only: not exhaustive dynamic-consumer proof, model efficacy, human understanding or whole-system acceptance.",
+      "review_evidence": [
+        "backend/runtime/business_definitions.py",
+        "docs/prompts/review-2026-11-07.md",
+        "backend/runtime/business_mediation.py",
+        "backend/api/routes/task_workspace.py",
+        "backend/task_workspace.py",
+        "backend/tests/research/test_task_workspace.py"
+      ],
+      "review_conflicts": []
     },
     {
       "id": "backend/runtime/business_definitions.py::ResearchTools.researcher_task_comment.wire_description",
@@ -1725,7 +1902,7 @@
       "end_line": 226,
       "owner": "backend.runtime.business_definitions",
       "family": "other_owned_prompt_candidate",
-      "disposition": "requires_review",
+      "disposition": "reviewed_native_tool_contract",
       "objective": "Shared business-tool wire adapters; rules and authority stay in the API.\n\nThis outer adapter imports the shared HTTP/MCP question DTO. It has no FastMCP,\nSQL, credential issuance, environment discovery or model dependency.",
       "source_sha256": "b1042b7777e533f9558735363a38a53b54e8a80b469f2df59fece9153afcad25",
       "source_bytes": 423,
@@ -1754,7 +1931,17 @@
         "backend/runtime/host_business.py": "6eaae607cff9bfe24f183a907801c50be6f8d9da65cd06297b9335a47cf1fe57"
       },
       "suggested_disposition": "requires_review",
-      "review_status": "stale"
+      "review_status": "reviewed",
+      "review_rationale": "Read this exact wire docstring/signature and task read/write capability sets: task metadata and continuity notes remain attributed context, not execution authority; required pages/revisions and stable mutation keys are explicit. Static contract review only: not exhaustive dynamic-consumer proof, model efficacy, human understanding or whole-system acceptance.",
+      "review_evidence": [
+        "backend/runtime/business_definitions.py",
+        "docs/prompts/review-2026-11-07.md",
+        "backend/runtime/business_mediation.py",
+        "backend/api/routes/task_workspace.py",
+        "backend/task_workspace.py",
+        "backend/tests/research/test_task_workspace.py"
+      ],
+      "review_conflicts": []
     },
     {
       "id": "backend/runtime/business_definitions.py::ResearchTools.researcher_continuity_read.wire_description",
@@ -1764,7 +1951,7 @@
       "end_line": 232,
       "owner": "backend.runtime.business_definitions",
       "family": "other_owned_prompt_candidate",
-      "disposition": "requires_review",
+      "disposition": "reviewed_native_tool_contract",
       "objective": "Shared business-tool wire adapters; rules and authority stay in the API.\n\nThis outer adapter imports the shared HTTP/MCP question DTO. It has no FastMCP,\nSQL, credential issuance, environment discovery or model dependency.",
       "source_sha256": "b1042b7777e533f9558735363a38a53b54e8a80b469f2df59fece9153afcad25",
       "source_bytes": 362,
@@ -1792,7 +1979,17 @@
         "backend/runtime/host_business.py": "6eaae607cff9bfe24f183a907801c50be6f8d9da65cd06297b9335a47cf1fe57"
       },
       "suggested_disposition": "requires_review",
-      "review_status": "stale"
+      "review_status": "reviewed",
+      "review_rationale": "Read this exact wire docstring/signature and task read/write capability sets: task metadata and continuity notes remain attributed context, not execution authority; required pages/revisions and stable mutation keys are explicit. Static contract review only: not exhaustive dynamic-consumer proof, model efficacy, human understanding or whole-system acceptance.",
+      "review_evidence": [
+        "backend/runtime/business_definitions.py",
+        "docs/prompts/review-2026-11-07.md",
+        "backend/runtime/business_mediation.py",
+        "backend/api/routes/task_workspace.py",
+        "backend/task_workspace.py",
+        "backend/tests/research/test_task_workspace.py"
+      ],
+      "review_conflicts": []
     },
     {
       "id": "backend/runtime/business_definitions.py::ResearchTools.researcher_continuity_save.wire_description",
@@ -1802,7 +1999,7 @@
       "end_line": 242,
       "owner": "backend.runtime.business_definitions",
       "family": "other_owned_prompt_candidate",
-      "disposition": "requires_review",
+      "disposition": "reviewed_native_tool_contract",
       "objective": "Shared business-tool wire adapters; rules and authority stay in the API.\n\nThis outer adapter imports the shared HTTP/MCP question DTO. It has no FastMCP,\nSQL, credential issuance, environment discovery or model dependency.",
       "source_sha256": "b1042b7777e533f9558735363a38a53b54e8a80b469f2df59fece9153afcad25",
       "source_bytes": 540,
@@ -1833,7 +2030,17 @@
         "backend/runtime/host_business.py": "6eaae607cff9bfe24f183a907801c50be6f8d9da65cd06297b9335a47cf1fe57"
       },
       "suggested_disposition": "requires_review",
-      "review_status": "stale"
+      "review_status": "reviewed",
+      "review_rationale": "Read this exact wire docstring/signature and task read/write capability sets: task metadata and continuity notes remain attributed context, not execution authority; required pages/revisions and stable mutation keys are explicit. Static contract review only: not exhaustive dynamic-consumer proof, model efficacy, human understanding or whole-system acceptance.",
+      "review_evidence": [
+        "backend/runtime/business_definitions.py",
+        "docs/prompts/review-2026-11-07.md",
+        "backend/runtime/business_mediation.py",
+        "backend/api/routes/task_workspace.py",
+        "backend/task_workspace.py",
+        "backend/tests/research/test_task_workspace.py"
+      ],
+      "review_conflicts": []
     },
     {
       "id": "backend/runtime/business_definitions.py::ResearchTools.researcher_review_subject.wire_description",
@@ -1843,7 +2050,7 @@
       "end_line": 250,
       "owner": "backend.runtime.business_definitions",
       "family": "other_owned_prompt_candidate",
-      "disposition": "requires_review",
+      "disposition": "retained_native_tool_contract",
       "objective": "Shared business-tool wire adapters; rules and authority stay in the API.\n\nThis outer adapter imports the shared HTTP/MCP question DTO. It has no FastMCP,\nSQL, credential issuance, environment discovery or model dependency.",
       "source_sha256": "b1042b7777e533f9558735363a38a53b54e8a80b469f2df59fece9153afcad25",
       "source_bytes": 313,
@@ -1871,7 +2078,20 @@
         "backend/runtime/host_business.py": "6eaae607cff9bfe24f183a907801c50be6f8d9da65cd06297b9335a47cf1fe57"
       },
       "suggested_disposition": "requires_review",
-      "review_status": "stale"
+      "review_status": "reviewed",
+      "review_rationale": "Read this exact wire docstring/signature against review-only capability selection and stored feedback projection. Immutable subject, exact quotations and original decision identity do not establish current correctness or owner acceptance. Static contract review only: not exhaustive dynamic-consumer proof, model efficacy, human understanding or whole-system acceptance.",
+      "review_evidence": [
+        "backend/runtime/business_definitions.py",
+        "docs/prompts/review-2026-11-07.md",
+        "backend/runtime/business_mediation.py",
+        "backend/runtime/analysis_tools.py",
+        "backend/runtime/owned_runtime.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "review_conflicts": [
+        "Descriptions document capabilities; they never grant authority or prove a tool was run. Static catalogue text is not a complete live catalogue or a scientific certificate."
+      ]
     },
     {
       "id": "backend/runtime/business_definitions.py::ResearchTools.researcher_review_read.wire_description",
@@ -1881,7 +2101,7 @@
       "end_line": 274,
       "owner": "backend.runtime.business_definitions",
       "family": "other_owned_prompt_candidate",
-      "disposition": "requires_review",
+      "disposition": "retained_native_tool_contract",
       "objective": "Shared business-tool wire adapters; rules and authority stay in the API.\n\nThis outer adapter imports the shared HTTP/MCP question DTO. It has no FastMCP,\nSQL, credential issuance, environment discovery or model dependency.",
       "source_sha256": "b1042b7777e533f9558735363a38a53b54e8a80b469f2df59fece9153afcad25",
       "source_bytes": 514,
@@ -1914,7 +2134,20 @@
         "backend/runtime/host_business.py": "6eaae607cff9bfe24f183a907801c50be6f8d9da65cd06297b9335a47cf1fe57"
       },
       "suggested_disposition": "requires_review",
-      "review_status": "stale"
+      "review_status": "reviewed",
+      "review_rationale": "Read this exact wire docstring/signature against review-only capability selection and stored feedback projection. Immutable subject, exact quotations and original decision identity do not establish current correctness or owner acceptance. Static contract review only: not exhaustive dynamic-consumer proof, model efficacy, human understanding or whole-system acceptance.",
+      "review_evidence": [
+        "backend/runtime/business_definitions.py",
+        "docs/prompts/review-2026-11-07.md",
+        "backend/runtime/business_mediation.py",
+        "backend/runtime/analysis_tools.py",
+        "backend/runtime/owned_runtime.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "review_conflicts": [
+        "Descriptions document capabilities; they never grant authority or prove a tool was run. Static catalogue text is not a complete live catalogue or a scientific certificate."
+      ]
     },
     {
       "id": "backend/runtime/business_definitions.py::ResearchTools.researcher_review_decide.wire_description",
@@ -1924,7 +2157,7 @@
       "end_line": 297,
       "owner": "backend.runtime.business_definitions",
       "family": "other_owned_prompt_candidate",
-      "disposition": "requires_review",
+      "disposition": "retained_native_tool_contract",
       "objective": "Shared business-tool wire adapters; rules and authority stay in the API.\n\nThis outer adapter imports the shared HTTP/MCP question DTO. It has no FastMCP,\nSQL, credential issuance, environment discovery or model dependency.",
       "source_sha256": "b1042b7777e533f9558735363a38a53b54e8a80b469f2df59fece9153afcad25",
       "source_bytes": 399,
@@ -1956,7 +2189,20 @@
         "backend/runtime/host_business.py": "6eaae607cff9bfe24f183a907801c50be6f8d9da65cd06297b9335a47cf1fe57"
       },
       "suggested_disposition": "requires_review",
-      "review_status": "stale"
+      "review_status": "reviewed",
+      "review_rationale": "Read this exact wire docstring/signature against review-only capability selection and stored feedback projection. Immutable subject, exact quotations and original decision identity do not establish current correctness or owner acceptance. Static contract review only: not exhaustive dynamic-consumer proof, model efficacy, human understanding or whole-system acceptance.",
+      "review_evidence": [
+        "backend/runtime/business_definitions.py",
+        "docs/prompts/review-2026-11-07.md",
+        "backend/runtime/business_mediation.py",
+        "backend/runtime/analysis_tools.py",
+        "backend/runtime/owned_runtime.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "review_conflicts": [
+        "Descriptions document capabilities; they never grant authority or prove a tool was run. Static catalogue text is not a complete live catalogue or a scientific certificate."
+      ]
     },
     {
       "id": "backend/runtime/business_definitions.py::ResearchTools.researcher_ask_user.wire_description",
@@ -2013,7 +2259,7 @@
       "end_line": 314,
       "owner": "backend.runtime.business_definitions",
       "family": "other_owned_prompt_candidate",
-      "disposition": "requires_review",
+      "disposition": "retained_native_tool_contract",
       "objective": "Shared business-tool wire adapters; rules and authority stay in the API.\n\nThis outer adapter imports the shared HTTP/MCP question DTO. It has no FastMCP,\nSQL, credential issuance, environment discovery or model dependency.",
       "source_sha256": "b1042b7777e533f9558735363a38a53b54e8a80b469f2df59fece9153afcad25",
       "source_bytes": 75,
@@ -2039,7 +2285,20 @@
         "backend/runtime/host_business.py": "6eaae607cff9bfe24f183a907801c50be6f8d9da65cd06297b9335a47cf1fe57"
       },
       "suggested_disposition": "requires_review",
-      "review_status": "stale"
+      "review_status": "reviewed",
+      "review_rationale": "Read this exact wire docstring/signature with source policy and host capability selection. Captured snapshots/provenance, pagination, parser/provider limits and optional separate provider quota are explicit. Discovery/extraction/retrieval scores are not scientific verification; stable operation keys prevent intended replay. Static contract review only: not exhaustive dynamic-consumer proof, model efficacy, human understanding or whole-system acceptance.",
+      "review_evidence": [
+        "backend/runtime/business_definitions.py",
+        "docs/prompts/review-2026-11-07.md",
+        "backend/runtime/business_mediation.py",
+        "backend/runtime/analysis_tools.py",
+        "backend/runtime/owned_runtime.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "review_conflicts": [
+        "Descriptions document capabilities; they never grant authority or prove a tool was run. Static catalogue text is not a complete live catalogue or a scientific certificate."
+      ]
     },
     {
       "id": "backend/runtime/business_definitions.py::ResearchTools.researcher_capture_reference.wire_description",
@@ -2049,7 +2308,7 @@
       "end_line": 327,
       "owner": "backend.runtime.business_definitions",
       "family": "other_owned_prompt_candidate",
-      "disposition": "requires_review",
+      "disposition": "retained_native_tool_contract",
       "objective": "Shared business-tool wire adapters; rules and authority stay in the API.\n\nThis outer adapter imports the shared HTTP/MCP question DTO. It has no FastMCP,\nSQL, credential issuance, environment discovery or model dependency.",
       "source_sha256": "b1042b7777e533f9558735363a38a53b54e8a80b469f2df59fece9153afcad25",
       "source_bytes": 665,
@@ -2077,7 +2336,20 @@
         "backend/runtime/host_business.py": "6eaae607cff9bfe24f183a907801c50be6f8d9da65cd06297b9335a47cf1fe57"
       },
       "suggested_disposition": "requires_review",
-      "review_status": "stale"
+      "review_status": "reviewed",
+      "review_rationale": "Read this exact wire docstring/signature with source policy and host capability selection. Captured snapshots/provenance, pagination, parser/provider limits and optional separate provider quota are explicit. Discovery/extraction/retrieval scores are not scientific verification; stable operation keys prevent intended replay. Static contract review only: not exhaustive dynamic-consumer proof, model efficacy, human understanding or whole-system acceptance.",
+      "review_evidence": [
+        "backend/runtime/business_definitions.py",
+        "docs/prompts/review-2026-11-07.md",
+        "backend/runtime/business_mediation.py",
+        "backend/runtime/analysis_tools.py",
+        "backend/runtime/owned_runtime.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "review_conflicts": [
+        "Descriptions document capabilities; they never grant authority or prove a tool was run. Static catalogue text is not a complete live catalogue or a scientific certificate."
+      ]
     },
     {
       "id": "backend/runtime/business_definitions.py::ResearchTools.researcher_capture_web.wire_description",
@@ -2087,7 +2359,7 @@
       "end_line": 333,
       "owner": "backend.runtime.business_definitions",
       "family": "other_owned_prompt_candidate",
-      "disposition": "requires_review",
+      "disposition": "retained_native_tool_contract",
       "objective": "Shared business-tool wire adapters; rules and authority stay in the API.\n\nThis outer adapter imports the shared HTTP/MCP question DTO. It has no FastMCP,\nSQL, credential issuance, environment discovery or model dependency.",
       "source_sha256": "b1042b7777e533f9558735363a38a53b54e8a80b469f2df59fece9153afcad25",
       "source_bytes": 423,
@@ -2115,7 +2387,20 @@
         "backend/runtime/host_business.py": "6eaae607cff9bfe24f183a907801c50be6f8d9da65cd06297b9335a47cf1fe57"
       },
       "suggested_disposition": "requires_review",
-      "review_status": "stale"
+      "review_status": "reviewed",
+      "review_rationale": "Read this exact wire docstring/signature with source policy and host capability selection. Captured snapshots/provenance, pagination, parser/provider limits and optional separate provider quota are explicit. Discovery/extraction/retrieval scores are not scientific verification; stable operation keys prevent intended replay. Static contract review only: not exhaustive dynamic-consumer proof, model efficacy, human understanding or whole-system acceptance.",
+      "review_evidence": [
+        "backend/runtime/business_definitions.py",
+        "docs/prompts/review-2026-11-07.md",
+        "backend/research/web_fetcher.py",
+        "backend/research/spider.py",
+        "backend/tests/research/test_spider.py",
+        "backend/tests/research/test_html_web.py",
+        "docs/architecture/native-web-retirement.md"
+      ],
+      "review_conflicts": [
+        "Descriptions document capabilities; they never grant authority or prove a tool was run. Static catalogue text is not a complete live catalogue or a scientific certificate."
+      ]
     },
     {
       "id": "backend/runtime/business_definitions.py::ResearchTools.researcher_capture_spider.wire_description",
@@ -2125,7 +2410,7 @@
       "end_line": 339,
       "owner": "backend.runtime.business_definitions",
       "family": "other_owned_prompt_candidate",
-      "disposition": "requires_review",
+      "disposition": "reviewed_native_tool_contract",
       "objective": "Shared business-tool wire adapters; rules and authority stay in the API.\n\nThis outer adapter imports the shared HTTP/MCP question DTO. It has no FastMCP,\nSQL, credential issuance, environment discovery or model dependency.",
       "source_sha256": "b1042b7777e533f9558735363a38a53b54e8a80b469f2df59fece9153afcad25",
       "source_bytes": 726,
@@ -2155,7 +2440,18 @@
         "backend/runtime/host_business.py": "6eaae607cff9bfe24f183a907801c50be6f8d9da65cd06297b9335a47cf1fe57"
       },
       "suggested_disposition": "requires_review",
-      "review_status": "stale"
+      "review_status": "reviewed",
+      "review_rationale": "Read this exact wire docstring/signature with source policy and host capability selection. Captured snapshots/provenance, pagination, parser/provider limits and optional separate provider quota are explicit. Discovery/extraction/retrieval scores are not scientific verification; stable operation keys prevent intended replay. Static contract review only: not exhaustive dynamic-consumer proof, model efficacy, human understanding or whole-system acceptance.",
+      "review_evidence": [
+        "backend/runtime/business_definitions.py",
+        "docs/prompts/review-2026-11-07.md",
+        "backend/research/web_fetcher.py",
+        "backend/research/spider.py",
+        "backend/tests/research/test_spider.py",
+        "backend/tests/research/test_html_web.py",
+        "docs/architecture/native-web-retirement.md"
+      ],
+      "review_conflicts": []
     },
     {
       "id": "backend/runtime/business_definitions.py::ResearchTools.researcher_context7_search.wire_description",
@@ -2165,7 +2461,7 @@
       "end_line": 345,
       "owner": "backend.runtime.business_definitions",
       "family": "other_owned_prompt_candidate",
-      "disposition": "requires_review",
+      "disposition": "reviewed_native_tool_contract",
       "objective": "Shared business-tool wire adapters; rules and authority stay in the API.\n\nThis outer adapter imports the shared HTTP/MCP question DTO. It has no FastMCP,\nSQL, credential issuance, environment discovery or model dependency.",
       "source_sha256": "b1042b7777e533f9558735363a38a53b54e8a80b469f2df59fece9153afcad25",
       "source_bytes": 459,
@@ -2194,7 +2490,18 @@
         "backend/runtime/host_business.py": "6eaae607cff9bfe24f183a907801c50be6f8d9da65cd06297b9335a47cf1fe57"
       },
       "suggested_disposition": "requires_review",
-      "review_status": "stale"
+      "review_status": "reviewed",
+      "review_rationale": "Read this exact wire docstring/signature with source policy and host capability selection. Captured snapshots/provenance, pagination, parser/provider limits and optional separate provider quota are explicit. Discovery/extraction/retrieval scores are not scientific verification; stable operation keys prevent intended replay. Static contract review only: not exhaustive dynamic-consumer proof, model efficacy, human understanding or whole-system acceptance.",
+      "review_evidence": [
+        "backend/runtime/business_definitions.py",
+        "docs/prompts/review-2026-11-07.md",
+        "backend/research/context7.py",
+        "backend/research/service.py",
+        "backend/api/routes/research.py",
+        "backend/tests/research/test_context7.py",
+        "docs/architecture/context7-sources.md"
+      ],
+      "review_conflicts": []
     },
     {
       "id": "backend/runtime/business_definitions.py::ResearchTools.researcher_context7_docs.wire_description",
@@ -2204,7 +2511,7 @@
       "end_line": 351,
       "owner": "backend.runtime.business_definitions",
       "family": "other_owned_prompt_candidate",
-      "disposition": "requires_review",
+      "disposition": "reviewed_native_tool_contract",
       "objective": "Shared business-tool wire adapters; rules and authority stay in the API.\n\nThis outer adapter imports the shared HTTP/MCP question DTO. It has no FastMCP,\nSQL, credential issuance, environment discovery or model dependency.",
       "source_sha256": "b1042b7777e533f9558735363a38a53b54e8a80b469f2df59fece9153afcad25",
       "source_bytes": 531,
@@ -2234,7 +2541,18 @@
         "backend/runtime/host_business.py": "6eaae607cff9bfe24f183a907801c50be6f8d9da65cd06297b9335a47cf1fe57"
       },
       "suggested_disposition": "requires_review",
-      "review_status": "stale"
+      "review_status": "reviewed",
+      "review_rationale": "Read this exact wire docstring/signature with source policy and host capability selection. Captured snapshots/provenance, pagination, parser/provider limits and optional separate provider quota are explicit. Discovery/extraction/retrieval scores are not scientific verification; stable operation keys prevent intended replay. Static contract review only: not exhaustive dynamic-consumer proof, model efficacy, human understanding or whole-system acceptance.",
+      "review_evidence": [
+        "backend/runtime/business_definitions.py",
+        "docs/prompts/review-2026-11-07.md",
+        "backend/research/context7.py",
+        "backend/research/service.py",
+        "backend/api/routes/research.py",
+        "backend/tests/research/test_context7.py",
+        "docs/architecture/context7-sources.md"
+      ],
+      "review_conflicts": []
     },
     {
       "id": "backend/runtime/business_definitions.py::ResearchTools.researcher_capture_paper.wire_description",
@@ -2244,7 +2562,7 @@
       "end_line": 370,
       "owner": "backend.runtime.business_definitions",
       "family": "other_owned_prompt_candidate",
-      "disposition": "requires_review",
+      "disposition": "retained_native_tool_contract",
       "objective": "Shared business-tool wire adapters; rules and authority stay in the API.\n\nThis outer adapter imports the shared HTTP/MCP question DTO. It has no FastMCP,\nSQL, credential issuance, environment discovery or model dependency.",
       "source_sha256": "b1042b7777e533f9558735363a38a53b54e8a80b469f2df59fece9153afcad25",
       "source_bytes": 499,
@@ -2274,7 +2592,20 @@
         "backend/runtime/host_business.py": "6eaae607cff9bfe24f183a907801c50be6f8d9da65cd06297b9335a47cf1fe57"
       },
       "suggested_disposition": "requires_review",
-      "review_status": "stale"
+      "review_status": "reviewed",
+      "review_rationale": "Read this exact wire docstring/signature with source policy and host capability selection. Captured snapshots/provenance, pagination, parser/provider limits and optional separate provider quota are explicit. Discovery/extraction/retrieval scores are not scientific verification; stable operation keys prevent intended replay. Static contract review only: not exhaustive dynamic-consumer proof, model efficacy, human understanding or whole-system acceptance.",
+      "review_evidence": [
+        "backend/runtime/business_definitions.py",
+        "docs/prompts/review-2026-11-07.md",
+        "backend/runtime/business_mediation.py",
+        "backend/runtime/analysis_tools.py",
+        "backend/runtime/owned_runtime.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "review_conflicts": [
+        "Descriptions document capabilities; they never grant authority or prove a tool was run. Static catalogue text is not a complete live catalogue or a scientific certificate."
+      ]
     },
     {
       "id": "backend/runtime/business_definitions.py::ResearchTools.researcher_source_list.wire_description",
@@ -2284,7 +2615,7 @@
       "end_line": 376,
       "owner": "backend.runtime.business_definitions",
       "family": "other_owned_prompt_candidate",
-      "disposition": "requires_review",
+      "disposition": "retained_native_tool_contract",
       "objective": "Shared business-tool wire adapters; rules and authority stay in the API.\n\nThis outer adapter imports the shared HTTP/MCP question DTO. It has no FastMCP,\nSQL, credential issuance, environment discovery or model dependency.",
       "source_sha256": "b1042b7777e533f9558735363a38a53b54e8a80b469f2df59fece9153afcad25",
       "source_bytes": 251,
@@ -2312,7 +2643,20 @@
         "backend/runtime/host_business.py": "6eaae607cff9bfe24f183a907801c50be6f8d9da65cd06297b9335a47cf1fe57"
       },
       "suggested_disposition": "requires_review",
-      "review_status": "stale"
+      "review_status": "reviewed",
+      "review_rationale": "Read this exact wire docstring/signature with source policy and host capability selection. Captured snapshots/provenance, pagination, parser/provider limits and optional separate provider quota are explicit. Discovery/extraction/retrieval scores are not scientific verification; stable operation keys prevent intended replay. Static contract review only: not exhaustive dynamic-consumer proof, model efficacy, human understanding or whole-system acceptance.",
+      "review_evidence": [
+        "backend/runtime/business_definitions.py",
+        "docs/prompts/review-2026-11-07.md",
+        "backend/runtime/business_mediation.py",
+        "backend/runtime/analysis_tools.py",
+        "backend/runtime/owned_runtime.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "review_conflicts": [
+        "Descriptions document capabilities; they never grant authority or prove a tool was run. Static catalogue text is not a complete live catalogue or a scientific certificate."
+      ]
     },
     {
       "id": "backend/runtime/business_definitions.py::ResearchTools.researcher_source_read.wire_description",
@@ -2322,7 +2666,7 @@
       "end_line": 386,
       "owner": "backend.runtime.business_definitions",
       "family": "other_owned_prompt_candidate",
-      "disposition": "requires_review",
+      "disposition": "retained_native_tool_contract",
       "objective": "Shared business-tool wire adapters; rules and authority stay in the API.\n\nThis outer adapter imports the shared HTTP/MCP question DTO. It has no FastMCP,\nSQL, credential issuance, environment discovery or model dependency.",
       "source_sha256": "b1042b7777e533f9558735363a38a53b54e8a80b469f2df59fece9153afcad25",
       "source_bytes": 438,
@@ -2351,7 +2695,20 @@
         "backend/runtime/host_business.py": "6eaae607cff9bfe24f183a907801c50be6f8d9da65cd06297b9335a47cf1fe57"
       },
       "suggested_disposition": "requires_review",
-      "review_status": "stale"
+      "review_status": "reviewed",
+      "review_rationale": "Read this exact wire docstring/signature with source policy and host capability selection. Captured snapshots/provenance, pagination, parser/provider limits and optional separate provider quota are explicit. Discovery/extraction/retrieval scores are not scientific verification; stable operation keys prevent intended replay. Static contract review only: not exhaustive dynamic-consumer proof, model efficacy, human understanding or whole-system acceptance.",
+      "review_evidence": [
+        "backend/runtime/business_definitions.py",
+        "docs/prompts/review-2026-11-07.md",
+        "backend/runtime/business_mediation.py",
+        "backend/runtime/analysis_tools.py",
+        "backend/runtime/owned_runtime.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "review_conflicts": [
+        "Descriptions document capabilities; they never grant authority or prove a tool was run. Static catalogue text is not a complete live catalogue or a scientific certificate."
+      ]
     },
     {
       "id": "backend/runtime/business_definitions.py::ResearchTools.researcher_source_structure.wire_description",
@@ -2361,7 +2718,7 @@
       "end_line": 396,
       "owner": "backend.runtime.business_definitions",
       "family": "other_owned_prompt_candidate",
-      "disposition": "requires_review",
+      "disposition": "retained_native_tool_contract",
       "objective": "Shared business-tool wire adapters; rules and authority stay in the API.\n\nThis outer adapter imports the shared HTTP/MCP question DTO. It has no FastMCP,\nSQL, credential issuance, environment discovery or model dependency.",
       "source_sha256": "b1042b7777e533f9558735363a38a53b54e8a80b469f2df59fece9153afcad25",
       "source_bytes": 430,
@@ -2390,7 +2747,20 @@
         "backend/runtime/host_business.py": "6eaae607cff9bfe24f183a907801c50be6f8d9da65cd06297b9335a47cf1fe57"
       },
       "suggested_disposition": "requires_review",
-      "review_status": "stale"
+      "review_status": "reviewed",
+      "review_rationale": "Read this exact wire docstring/signature with source policy and host capability selection. Captured snapshots/provenance, pagination, parser/provider limits and optional separate provider quota are explicit. Discovery/extraction/retrieval scores are not scientific verification; stable operation keys prevent intended replay. Static contract review only: not exhaustive dynamic-consumer proof, model efficacy, human understanding or whole-system acceptance.",
+      "review_evidence": [
+        "backend/runtime/business_definitions.py",
+        "docs/prompts/review-2026-11-07.md",
+        "backend/runtime/business_mediation.py",
+        "backend/runtime/analysis_tools.py",
+        "backend/runtime/owned_runtime.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "review_conflicts": [
+        "Descriptions document capabilities; they never grant authority or prove a tool was run. Static catalogue text is not a complete live catalogue or a scientific certificate."
+      ]
     },
     {
       "id": "backend/runtime/business_definitions.py::ResearchTools.researcher_source_search.wire_description",
@@ -2400,7 +2770,7 @@
       "end_line": 406,
       "owner": "backend.runtime.business_definitions",
       "family": "other_owned_prompt_candidate",
-      "disposition": "requires_review",
+      "disposition": "retained_native_tool_contract",
       "objective": "Shared business-tool wire adapters; rules and authority stay in the API.\n\nThis outer adapter imports the shared HTTP/MCP question DTO. It has no FastMCP,\nSQL, credential issuance, environment discovery or model dependency.",
       "source_sha256": "b1042b7777e533f9558735363a38a53b54e8a80b469f2df59fece9153afcad25",
       "source_bytes": 208,
@@ -2429,7 +2799,20 @@
         "backend/runtime/host_business.py": "6eaae607cff9bfe24f183a907801c50be6f8d9da65cd06297b9335a47cf1fe57"
       },
       "suggested_disposition": "requires_review",
-      "review_status": "stale"
+      "review_status": "reviewed",
+      "review_rationale": "Read this exact wire docstring/signature with source policy and host capability selection. Captured snapshots/provenance, pagination, parser/provider limits and optional separate provider quota are explicit. Discovery/extraction/retrieval scores are not scientific verification; stable operation keys prevent intended replay. Static contract review only: not exhaustive dynamic-consumer proof, model efficacy, human understanding or whole-system acceptance.",
+      "review_evidence": [
+        "backend/runtime/business_definitions.py",
+        "docs/prompts/review-2026-11-07.md",
+        "backend/runtime/business_mediation.py",
+        "backend/runtime/analysis_tools.py",
+        "backend/runtime/owned_runtime.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "review_conflicts": [
+        "Descriptions document capabilities; they never grant authority or prove a tool was run. Static catalogue text is not a complete live catalogue or a scientific certificate."
+      ]
     },
     {
       "id": "backend/runtime/business_definitions.py::ResearchTools.researcher_source_query.wire_description",
@@ -2439,7 +2822,7 @@
       "end_line": 416,
       "owner": "backend.runtime.business_definitions",
       "family": "other_owned_prompt_candidate",
-      "disposition": "requires_review",
+      "disposition": "retained_native_tool_contract",
       "objective": "Shared business-tool wire adapters; rules and authority stay in the API.\n\nThis outer adapter imports the shared HTTP/MCP question DTO. It has no FastMCP,\nSQL, credential issuance, environment discovery or model dependency.",
       "source_sha256": "b1042b7777e533f9558735363a38a53b54e8a80b469f2df59fece9153afcad25",
       "source_bytes": 576,
@@ -2469,7 +2852,20 @@
         "backend/runtime/host_business.py": "6eaae607cff9bfe24f183a907801c50be6f8d9da65cd06297b9335a47cf1fe57"
       },
       "suggested_disposition": "requires_review",
-      "review_status": "stale"
+      "review_status": "reviewed",
+      "review_rationale": "Read this exact wire docstring/signature with source policy and host capability selection. Captured snapshots/provenance, pagination, parser/provider limits and optional separate provider quota are explicit. Discovery/extraction/retrieval scores are not scientific verification; stable operation keys prevent intended replay. Static contract review only: not exhaustive dynamic-consumer proof, model efficacy, human understanding or whole-system acceptance.",
+      "review_evidence": [
+        "backend/runtime/business_definitions.py",
+        "docs/prompts/review-2026-11-07.md",
+        "backend/runtime/business_mediation.py",
+        "backend/runtime/analysis_tools.py",
+        "backend/runtime/owned_runtime.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "review_conflicts": [
+        "Descriptions document capabilities; they never grant authority or prove a tool was run. Static catalogue text is not a complete live catalogue or a scientific certificate."
+      ]
     },
     {
       "id": "backend/runtime/business_definitions.py::ResearchTools.researcher_capture_command.wire_description",
@@ -2479,7 +2875,7 @@
       "end_line": 420,
       "owner": "backend.runtime.business_definitions",
       "family": "other_owned_prompt_candidate",
-      "disposition": "requires_review",
+      "disposition": "retained_native_tool_contract",
       "objective": "Shared business-tool wire adapters; rules and authority stay in the API.\n\nThis outer adapter imports the shared HTTP/MCP question DTO. It has no FastMCP,\nSQL, credential issuance, environment discovery or model dependency.",
       "source_sha256": "b1042b7777e533f9558735363a38a53b54e8a80b469f2df59fece9153afcad25",
       "source_bytes": 393,
@@ -2507,7 +2903,20 @@
         "backend/runtime/host_business.py": "6eaae607cff9bfe24f183a907801c50be6f8d9da65cd06297b9335a47cf1fe57"
       },
       "suggested_disposition": "requires_review",
-      "review_status": "stale"
+      "review_status": "reviewed",
+      "review_rationale": "Read this exact wire docstring/signature with source policy and host capability selection. Captured snapshots/provenance, pagination, parser/provider limits and optional separate provider quota are explicit. Discovery/extraction/retrieval scores are not scientific verification; stable operation keys prevent intended replay. Static contract review only: not exhaustive dynamic-consumer proof, model efficacy, human understanding or whole-system acceptance.",
+      "review_evidence": [
+        "backend/runtime/business_definitions.py",
+        "docs/prompts/review-2026-11-07.md",
+        "backend/runtime/business_mediation.py",
+        "backend/runtime/analysis_tools.py",
+        "backend/runtime/owned_runtime.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "review_conflicts": [
+        "Descriptions document capabilities; they never grant authority or prove a tool was run. Static catalogue text is not a complete live catalogue or a scientific certificate."
+      ]
     },
     {
       "id": "backend/runtime/business_definitions.py::ResearchTools.researcher_finding_record.wire_description",
@@ -2517,7 +2926,7 @@
       "end_line": 443,
       "owner": "backend.runtime.business_definitions",
       "family": "other_owned_prompt_candidate",
-      "disposition": "requires_review",
+      "disposition": "retained_native_tool_contract",
       "objective": "Shared business-tool wire adapters; rules and authority stay in the API.\n\nThis outer adapter imports the shared HTTP/MCP question DTO. It has no FastMCP,\nSQL, credential issuance, environment discovery or model dependency.",
       "source_sha256": "b1042b7777e533f9558735363a38a53b54e8a80b469f2df59fece9153afcad25",
       "source_bytes": 277,
@@ -2548,7 +2957,20 @@
         "backend/runtime/host_business.py": "6eaae607cff9bfe24f183a907801c50be6f8d9da65cd06297b9335a47cf1fe57"
       },
       "suggested_disposition": "requires_review",
-      "review_status": "stale"
+      "review_status": "reviewed",
+      "review_rationale": "Read this exact wire docstring/signature and findings read/capture capability sets. Historical confidence is not certainty; citations and full body/evidence windows are separate, lexical versus semantic scope is explicit, and source quotations do not automatically support a claim. Static contract review only: not exhaustive dynamic-consumer proof, model efficacy, human understanding or whole-system acceptance.",
+      "review_evidence": [
+        "backend/runtime/business_definitions.py",
+        "docs/prompts/review-2026-11-07.md",
+        "backend/runtime/business_mediation.py",
+        "backend/runtime/analysis_tools.py",
+        "backend/runtime/owned_runtime.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "review_conflicts": [
+        "Descriptions document capabilities; they never grant authority or prove a tool was run. Static catalogue text is not a complete live catalogue or a scientific certificate."
+      ]
     },
     {
       "id": "backend/runtime/business_definitions.py::ResearchTools.researcher_finding_list.wire_description",
@@ -2558,7 +2980,7 @@
       "end_line": 468,
       "owner": "backend.runtime.business_definitions",
       "family": "other_owned_prompt_candidate",
-      "disposition": "requires_review",
+      "disposition": "retained_native_tool_contract",
       "objective": "Shared business-tool wire adapters; rules and authority stay in the API.\n\nThis outer adapter imports the shared HTTP/MCP question DTO. It has no FastMCP,\nSQL, credential issuance, environment discovery or model dependency.",
       "source_sha256": "b1042b7777e533f9558735363a38a53b54e8a80b469f2df59fece9153afcad25",
       "source_bytes": 496,
@@ -2591,7 +3013,20 @@
         "backend/runtime/host_business.py": "6eaae607cff9bfe24f183a907801c50be6f8d9da65cd06297b9335a47cf1fe57"
       },
       "suggested_disposition": "requires_review",
-      "review_status": "stale"
+      "review_status": "reviewed",
+      "review_rationale": "Read this exact wire docstring/signature and findings read/capture capability sets. Historical confidence is not certainty; citations and full body/evidence windows are separate, lexical versus semantic scope is explicit, and source quotations do not automatically support a claim. Static contract review only: not exhaustive dynamic-consumer proof, model efficacy, human understanding or whole-system acceptance.",
+      "review_evidence": [
+        "backend/runtime/business_definitions.py",
+        "docs/prompts/review-2026-11-07.md",
+        "backend/runtime/business_mediation.py",
+        "backend/runtime/analysis_tools.py",
+        "backend/runtime/owned_runtime.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "review_conflicts": [
+        "Descriptions document capabilities; they never grant authority or prove a tool was run. Static catalogue text is not a complete live catalogue or a scientific certificate."
+      ]
     },
     {
       "id": "backend/runtime/business_definitions.py::ResearchTools.researcher_finding_summary.wire_description",
@@ -2601,7 +3036,7 @@
       "end_line": 489,
       "owner": "backend.runtime.business_definitions",
       "family": "other_owned_prompt_candidate",
-      "disposition": "requires_review",
+      "disposition": "retained_native_tool_contract",
       "objective": "Shared business-tool wire adapters; rules and authority stay in the API.\n\nThis outer adapter imports the shared HTTP/MCP question DTO. It has no FastMCP,\nSQL, credential issuance, environment discovery or model dependency.",
       "source_sha256": "b1042b7777e533f9558735363a38a53b54e8a80b469f2df59fece9153afcad25",
       "source_bytes": 360,
@@ -2632,7 +3067,20 @@
         "backend/runtime/host_business.py": "6eaae607cff9bfe24f183a907801c50be6f8d9da65cd06297b9335a47cf1fe57"
       },
       "suggested_disposition": "requires_review",
-      "review_status": "stale"
+      "review_status": "reviewed",
+      "review_rationale": "Read this exact wire docstring/signature and findings read/capture capability sets. Historical confidence is not certainty; citations and full body/evidence windows are separate, lexical versus semantic scope is explicit, and source quotations do not automatically support a claim. Static contract review only: not exhaustive dynamic-consumer proof, model efficacy, human understanding or whole-system acceptance.",
+      "review_evidence": [
+        "backend/runtime/business_definitions.py",
+        "docs/prompts/review-2026-11-07.md",
+        "backend/runtime/business_mediation.py",
+        "backend/runtime/analysis_tools.py",
+        "backend/runtime/owned_runtime.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "review_conflicts": [
+        "Descriptions document capabilities; they never grant authority or prove a tool was run. Static catalogue text is not a complete live catalogue or a scientific certificate."
+      ]
     },
     {
       "id": "backend/runtime/business_definitions.py::ResearchTools.researcher_finding_query.wire_description",
@@ -2642,7 +3090,7 @@
       "end_line": 522,
       "owner": "backend.runtime.business_definitions",
       "family": "other_owned_prompt_candidate",
-      "disposition": "requires_review",
+      "disposition": "retained_native_tool_contract",
       "objective": "Shared business-tool wire adapters; rules and authority stay in the API.\n\nThis outer adapter imports the shared HTTP/MCP question DTO. It has no FastMCP,\nSQL, credential issuance, environment discovery or model dependency.",
       "source_sha256": "b1042b7777e533f9558735363a38a53b54e8a80b469f2df59fece9153afcad25",
       "source_bytes": 830,
@@ -2678,7 +3126,20 @@
         "backend/runtime/host_business.py": "6eaae607cff9bfe24f183a907801c50be6f8d9da65cd06297b9335a47cf1fe57"
       },
       "suggested_disposition": "requires_review",
-      "review_status": "stale"
+      "review_status": "reviewed",
+      "review_rationale": "Read this exact wire docstring/signature and findings read/capture capability sets. Historical confidence is not certainty; citations and full body/evidence windows are separate, lexical versus semantic scope is explicit, and source quotations do not automatically support a claim. Static contract review only: not exhaustive dynamic-consumer proof, model efficacy, human understanding or whole-system acceptance.",
+      "review_evidence": [
+        "backend/runtime/business_definitions.py",
+        "docs/prompts/review-2026-11-07.md",
+        "backend/runtime/business_mediation.py",
+        "backend/runtime/analysis_tools.py",
+        "backend/runtime/owned_runtime.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "review_conflicts": [
+        "Descriptions document capabilities; they never grant authority or prove a tool was run. Static catalogue text is not a complete live catalogue or a scientific certificate."
+      ]
     },
     {
       "id": "backend/runtime/business_definitions.py::ResearchTools.researcher_finding_read.wire_description",
@@ -2688,7 +3149,7 @@
       "end_line": 540,
       "owner": "backend.runtime.business_definitions",
       "family": "other_owned_prompt_candidate",
-      "disposition": "requires_review",
+      "disposition": "retained_native_tool_contract",
       "objective": "Shared business-tool wire adapters; rules and authority stay in the API.\n\nThis outer adapter imports the shared HTTP/MCP question DTO. It has no FastMCP,\nSQL, credential issuance, environment discovery or model dependency.",
       "source_sha256": "b1042b7777e533f9558735363a38a53b54e8a80b469f2df59fece9153afcad25",
       "source_bytes": 412,
@@ -2718,7 +3179,20 @@
         "backend/runtime/host_business.py": "6eaae607cff9bfe24f183a907801c50be6f8d9da65cd06297b9335a47cf1fe57"
       },
       "suggested_disposition": "requires_review",
-      "review_status": "stale"
+      "review_status": "reviewed",
+      "review_rationale": "Read this exact wire docstring/signature and findings read/capture capability sets. Historical confidence is not certainty; citations and full body/evidence windows are separate, lexical versus semantic scope is explicit, and source quotations do not automatically support a claim. Static contract review only: not exhaustive dynamic-consumer proof, model efficacy, human understanding or whole-system acceptance.",
+      "review_evidence": [
+        "backend/runtime/business_definitions.py",
+        "docs/prompts/review-2026-11-07.md",
+        "backend/runtime/business_mediation.py",
+        "backend/runtime/analysis_tools.py",
+        "backend/runtime/owned_runtime.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "review_conflicts": [
+        "Descriptions document capabilities; they never grant authority or prove a tool was run. Static catalogue text is not a complete live catalogue or a scientific certificate."
+      ]
     },
     {
       "id": "backend/runtime/business_definitions.py::ResearchTools.researcher_report_write.wire_description",
@@ -2728,7 +3202,7 @@
       "end_line": 561,
       "owner": "backend.runtime.business_definitions",
       "family": "other_owned_prompt_candidate",
-      "disposition": "requires_review",
+      "disposition": "retained_native_tool_contract",
       "objective": "Shared business-tool wire adapters; rules and authority stay in the API.\n\nThis outer adapter imports the shared HTTP/MCP question DTO. It has no FastMCP,\nSQL, credential issuance, environment discovery or model dependency.",
       "source_sha256": "b1042b7777e533f9558735363a38a53b54e8a80b469f2df59fece9153afcad25",
       "source_bytes": 207,
@@ -2759,7 +3233,20 @@
         "backend/runtime/host_business.py": "6eaae607cff9bfe24f183a907801c50be6f8d9da65cd06297b9335a47cf1fe57"
       },
       "suggested_disposition": "requires_review",
-      "review_status": "stale"
+      "review_status": "reviewed",
+      "review_rationale": "Read this exact wire docstring/signature against author/investigation/reviewer capability subsets. Persisted drafts, explicitly selected delivery, historical origin and bounded source coverage do not imply accepted work or verified claims. Static contract review only: not exhaustive dynamic-consumer proof, model efficacy, human understanding or whole-system acceptance.",
+      "review_evidence": [
+        "backend/runtime/business_definitions.py",
+        "docs/prompts/review-2026-11-07.md",
+        "backend/runtime/business_mediation.py",
+        "backend/runtime/analysis_tools.py",
+        "backend/runtime/owned_runtime.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "review_conflicts": [
+        "Descriptions document capabilities; they never grant authority or prove a tool was run. Static catalogue text is not a complete live catalogue or a scientific certificate."
+      ]
     },
     {
       "id": "backend/runtime/business_definitions.py::ResearchTools.researcher_investigation_summary.wire_description",
@@ -2769,7 +3256,7 @@
       "end_line": 565,
       "owner": "backend.runtime.business_definitions",
       "family": "other_owned_prompt_candidate",
-      "disposition": "requires_review",
+      "disposition": "retained_native_tool_contract",
       "objective": "Shared business-tool wire adapters; rules and authority stay in the API.\n\nThis outer adapter imports the shared HTTP/MCP question DTO. It has no FastMCP,\nSQL, credential issuance, environment discovery or model dependency.",
       "source_sha256": "b1042b7777e533f9558735363a38a53b54e8a80b469f2df59fece9153afcad25",
       "source_bytes": 400,
@@ -2797,7 +3284,20 @@
         "backend/runtime/host_business.py": "6eaae607cff9bfe24f183a907801c50be6f8d9da65cd06297b9335a47cf1fe57"
       },
       "suggested_disposition": "requires_review",
-      "review_status": "stale"
+      "review_status": "reviewed",
+      "review_rationale": "Read this exact wire docstring/signature against author/investigation/reviewer capability subsets. Persisted drafts, explicitly selected delivery, historical origin and bounded source coverage do not imply accepted work or verified claims. Static contract review only: not exhaustive dynamic-consumer proof, model efficacy, human understanding or whole-system acceptance.",
+      "review_evidence": [
+        "backend/runtime/business_definitions.py",
+        "docs/prompts/review-2026-11-07.md",
+        "backend/runtime/business_mediation.py",
+        "backend/runtime/analysis_tools.py",
+        "backend/runtime/owned_runtime.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "review_conflicts": [
+        "Descriptions document capabilities; they never grant authority or prove a tool was run. Static catalogue text is not a complete live catalogue or a scientific certificate."
+      ]
     },
     {
       "id": "backend/runtime/business_definitions.py::ResearchTools.researcher_result_propose.wire_description",
@@ -2807,7 +3307,7 @@
       "end_line": 584,
       "owner": "backend.runtime.business_definitions",
       "family": "other_owned_prompt_candidate",
-      "disposition": "requires_review",
+      "disposition": "retained_native_tool_contract",
       "objective": "Shared business-tool wire adapters; rules and authority stay in the API.\n\nThis outer adapter imports the shared HTTP/MCP question DTO. It has no FastMCP,\nSQL, credential issuance, environment discovery or model dependency.",
       "source_sha256": "b1042b7777e533f9558735363a38a53b54e8a80b469f2df59fece9153afcad25",
       "source_bytes": 381,
@@ -2837,7 +3337,20 @@
         "backend/runtime/host_business.py": "6eaae607cff9bfe24f183a907801c50be6f8d9da65cd06297b9335a47cf1fe57"
       },
       "suggested_disposition": "requires_review",
-      "review_status": "stale"
+      "review_status": "reviewed",
+      "review_rationale": "Read this exact wire docstring/signature against author/investigation/reviewer capability subsets. Persisted drafts, explicitly selected delivery, historical origin and bounded source coverage do not imply accepted work or verified claims. Static contract review only: not exhaustive dynamic-consumer proof, model efficacy, human understanding or whole-system acceptance.",
+      "review_evidence": [
+        "backend/runtime/business_definitions.py",
+        "docs/prompts/review-2026-11-07.md",
+        "backend/runtime/business_mediation.py",
+        "backend/runtime/analysis_tools.py",
+        "backend/runtime/owned_runtime.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "review_conflicts": [
+        "Descriptions document capabilities; they never grant authority or prove a tool was run. Static catalogue text is not a complete live catalogue or a scientific certificate."
+      ]
     },
     {
       "id": "backend/runtime/business_definitions.py::ResearchTools.researcher_knowledge_search.wire_description",
@@ -2847,7 +3360,7 @@
       "end_line": 588,
       "owner": "backend.runtime.business_definitions",
       "family": "other_owned_prompt_candidate",
-      "disposition": "requires_review",
+      "disposition": "reviewed_native",
       "objective": "Shared business-tool wire adapters; rules and authority stay in the API.\n\nThis outer adapter imports the shared HTTP/MCP question DTO. It has no FastMCP,\nSQL, credential issuance, environment discovery or model dependency.",
       "source_sha256": "b1042b7777e533f9558735363a38a53b54e8a80b469f2df59fece9153afcad25",
       "source_bytes": 610,
@@ -2879,7 +3392,17 @@
         "backend/runtime/host_business.py": "6eaae607cff9bfe24f183a907801c50be6f8d9da65cd06297b9335a47cf1fe57"
       },
       "suggested_disposition": "requires_review",
-      "review_status": "stale"
+      "review_status": "reviewed",
+      "review_rationale": "Read this exact wire docstring/signature against author/investigation/reviewer capability subsets. Persisted drafts, explicitly selected delivery, historical origin and bounded source coverage do not imply accepted work or verified claims. Static contract review only: not exhaustive dynamic-consumer proof, model efficacy, human understanding or whole-system acceptance.",
+      "review_evidence": [
+        "backend/runtime/business_definitions.py",
+        "docs/prompts/review-2026-11-07.md",
+        "backend/knowledge/search.py",
+        "backend/research/sqlite_store.py",
+        "backend/tests/research/test_knowledge_access.py",
+        "docs/architecture/native-knowledge-retirement.md"
+      ],
+      "review_conflicts": []
     },
     {
       "id": "backend/runtime/business_definitions.py::ResearchTools.researcher_report_read.wire_description",
@@ -2889,7 +3412,7 @@
       "end_line": 606,
       "owner": "backend.runtime.business_definitions",
       "family": "other_owned_prompt_candidate",
-      "disposition": "requires_review",
+      "disposition": "reviewed_native",
       "objective": "Shared business-tool wire adapters; rules and authority stay in the API.\n\nThis outer adapter imports the shared HTTP/MCP question DTO. It has no FastMCP,\nSQL, credential issuance, environment discovery or model dependency.",
       "source_sha256": "b1042b7777e533f9558735363a38a53b54e8a80b469f2df59fece9153afcad25",
       "source_bytes": 389,
@@ -2919,7 +3442,17 @@
         "backend/runtime/host_business.py": "6eaae607cff9bfe24f183a907801c50be6f8d9da65cd06297b9335a47cf1fe57"
       },
       "suggested_disposition": "requires_review",
-      "review_status": "stale"
+      "review_status": "reviewed",
+      "review_rationale": "Read this exact wire docstring/signature against author/investigation/reviewer capability subsets. Persisted drafts, explicitly selected delivery, historical origin and bounded source coverage do not imply accepted work or verified claims. Static contract review only: not exhaustive dynamic-consumer proof, model efficacy, human understanding or whole-system acceptance.",
+      "review_evidence": [
+        "backend/runtime/business_definitions.py",
+        "docs/prompts/review-2026-11-07.md",
+        "backend/knowledge/search.py",
+        "backend/research/sqlite_store.py",
+        "backend/tests/research/test_knowledge_access.py",
+        "docs/architecture/native-knowledge-retirement.md"
+      ],
+      "review_conflicts": []
     },
     {
       "id": "backend/runtime/business_definitions.py::ResearchTools.researcher_wiki_list.wire_description",
@@ -2929,7 +3462,7 @@
       "end_line": 625,
       "owner": "backend.runtime.business_definitions",
       "family": "other_owned_prompt_candidate",
-      "disposition": "requires_review",
+      "disposition": "retained_native_tool_contract",
       "objective": "Shared business-tool wire adapters; rules and authority stay in the API.\n\nThis outer adapter imports the shared HTTP/MCP question DTO. It has no FastMCP,\nSQL, credential issuance, environment discovery or model dependency.",
       "source_sha256": "b1042b7777e533f9558735363a38a53b54e8a80b469f2df59fece9153afcad25",
       "source_bytes": 318,
@@ -2959,7 +3492,20 @@
         "backend/runtime/host_business.py": "6eaae607cff9bfe24f183a907801c50be6f8d9da65cd06297b9335a47cf1fe57"
       },
       "suggested_disposition": "requires_review",
-      "review_status": "stale"
+      "review_status": "reviewed",
+      "review_rationale": "Read this exact wire docstring/signature and selected capability names. Explicit namespace, observed revision/page identity, full required windows and captured revisions remain distinct from mutable context, broad coverage or publication authority. Static contract review only: not exhaustive dynamic-consumer proof, model efficacy, human understanding or whole-system acceptance.",
+      "review_evidence": [
+        "backend/runtime/business_definitions.py",
+        "docs/prompts/review-2026-11-07.md",
+        "backend/runtime/business_mediation.py",
+        "backend/runtime/analysis_tools.py",
+        "backend/runtime/owned_runtime.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "review_conflicts": [
+        "Descriptions document capabilities; they never grant authority or prove a tool was run. Static catalogue text is not a complete live catalogue or a scientific certificate."
+      ]
     },
     {
       "id": "backend/runtime/business_definitions.py::ResearchTools.researcher_wiki_read.wire_description",
@@ -2969,7 +3515,7 @@
       "end_line": 639,
       "owner": "backend.runtime.business_definitions",
       "family": "other_owned_prompt_candidate",
-      "disposition": "requires_review",
+      "disposition": "retained_native_tool_contract",
       "objective": "Shared business-tool wire adapters; rules and authority stay in the API.\n\nThis outer adapter imports the shared HTTP/MCP question DTO. It has no FastMCP,\nSQL, credential issuance, environment discovery or model dependency.",
       "source_sha256": "b1042b7777e533f9558735363a38a53b54e8a80b469f2df59fece9153afcad25",
       "source_bytes": 300,
@@ -2999,7 +3545,20 @@
         "backend/runtime/host_business.py": "6eaae607cff9bfe24f183a907801c50be6f8d9da65cd06297b9335a47cf1fe57"
       },
       "suggested_disposition": "requires_review",
-      "review_status": "stale"
+      "review_status": "reviewed",
+      "review_rationale": "Read this exact wire docstring/signature and selected capability names. Explicit namespace, observed revision/page identity, full required windows and captured revisions remain distinct from mutable context, broad coverage or publication authority. Static contract review only: not exhaustive dynamic-consumer proof, model efficacy, human understanding or whole-system acceptance.",
+      "review_evidence": [
+        "backend/runtime/business_definitions.py",
+        "docs/prompts/review-2026-11-07.md",
+        "backend/runtime/business_mediation.py",
+        "backend/runtime/analysis_tools.py",
+        "backend/runtime/owned_runtime.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "review_conflicts": [
+        "Descriptions document capabilities; they never grant authority or prove a tool was run. Static catalogue text is not a complete live catalogue or a scientific certificate."
+      ]
     },
     {
       "id": "backend/runtime/business_definitions.py::ResearchTools.researcher_wiki_write.wire_description",
@@ -3009,7 +3568,7 @@
       "end_line": 664,
       "owner": "backend.runtime.business_definitions",
       "family": "other_owned_prompt_candidate",
-      "disposition": "requires_review",
+      "disposition": "retained_native_tool_contract",
       "objective": "Shared business-tool wire adapters; rules and authority stay in the API.\n\nThis outer adapter imports the shared HTTP/MCP question DTO. It has no FastMCP,\nSQL, credential issuance, environment discovery or model dependency.",
       "source_sha256": "b1042b7777e533f9558735363a38a53b54e8a80b469f2df59fece9153afcad25",
       "source_bytes": 421,
@@ -3042,7 +3601,20 @@
         "backend/runtime/host_business.py": "6eaae607cff9bfe24f183a907801c50be6f8d9da65cd06297b9335a47cf1fe57"
       },
       "suggested_disposition": "requires_review",
-      "review_status": "stale"
+      "review_status": "reviewed",
+      "review_rationale": "Read this exact wire docstring/signature and selected capability names. Explicit namespace, observed revision/page identity, full required windows and captured revisions remain distinct from mutable context, broad coverage or publication authority. Static contract review only: not exhaustive dynamic-consumer proof, model efficacy, human understanding or whole-system acceptance.",
+      "review_evidence": [
+        "backend/runtime/business_definitions.py",
+        "docs/prompts/review-2026-11-07.md",
+        "backend/runtime/business_mediation.py",
+        "backend/runtime/analysis_tools.py",
+        "backend/runtime/owned_runtime.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "review_conflicts": [
+        "Descriptions document capabilities; they never grant authority or prove a tool was run. Static catalogue text is not a complete live catalogue or a scientific certificate."
+      ]
     },
     {
       "id": "backend/runtime/business_definitions.py::ResearchTools.researcher_capture_wiki.wire_description",
@@ -3052,7 +3624,7 @@
       "end_line": 683,
       "owner": "backend.runtime.business_definitions",
       "family": "other_owned_prompt_candidate",
-      "disposition": "requires_review",
+      "disposition": "retained_native_tool_contract",
       "objective": "Shared business-tool wire adapters; rules and authority stay in the API.\n\nThis outer adapter imports the shared HTTP/MCP question DTO. It has no FastMCP,\nSQL, credential issuance, environment discovery or model dependency.",
       "source_sha256": "b1042b7777e533f9558735363a38a53b54e8a80b469f2df59fece9153afcad25",
       "source_bytes": 351,
@@ -3082,7 +3654,20 @@
         "backend/runtime/host_business.py": "6eaae607cff9bfe24f183a907801c50be6f8d9da65cd06297b9335a47cf1fe57"
       },
       "suggested_disposition": "requires_review",
-      "review_status": "stale"
+      "review_status": "reviewed",
+      "review_rationale": "Read this exact wire docstring/signature and selected capability names. Explicit namespace, observed revision/page identity, full required windows and captured revisions remain distinct from mutable context, broad coverage or publication authority. Static contract review only: not exhaustive dynamic-consumer proof, model efficacy, human understanding or whole-system acceptance.",
+      "review_evidence": [
+        "backend/runtime/business_definitions.py",
+        "docs/prompts/review-2026-11-07.md",
+        "backend/runtime/business_mediation.py",
+        "backend/runtime/analysis_tools.py",
+        "backend/runtime/owned_runtime.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "review_conflicts": [
+        "Descriptions document capabilities; they never grant authority or prove a tool was run. Static catalogue text is not a complete live catalogue or a scientific certificate."
+      ]
     },
     {
       "id": "backend/runtime/business_definitions.py::ResearchTools.researcher_capture_wiki_collection.wire_description",
@@ -3092,7 +3677,7 @@
       "end_line": 696,
       "owner": "backend.runtime.business_definitions",
       "family": "other_owned_prompt_candidate",
-      "disposition": "requires_review",
+      "disposition": "retained_native_tool_contract",
       "objective": "Shared business-tool wire adapters; rules and authority stay in the API.\n\nThis outer adapter imports the shared HTTP/MCP question DTO. It has no FastMCP,\nSQL, credential issuance, environment discovery or model dependency.",
       "source_sha256": "b1042b7777e533f9558735363a38a53b54e8a80b469f2df59fece9153afcad25",
       "source_bytes": 433,
@@ -3120,7 +3705,20 @@
         "backend/runtime/host_business.py": "6eaae607cff9bfe24f183a907801c50be6f8d9da65cd06297b9335a47cf1fe57"
       },
       "suggested_disposition": "requires_review",
-      "review_status": "stale"
+      "review_status": "reviewed",
+      "review_rationale": "Read this exact wire docstring/signature and selected capability names. Explicit namespace, observed revision/page identity, full required windows and captured revisions remain distinct from mutable context, broad coverage or publication authority. Static contract review only: not exhaustive dynamic-consumer proof, model efficacy, human understanding or whole-system acceptance.",
+      "review_evidence": [
+        "backend/runtime/business_definitions.py",
+        "docs/prompts/review-2026-11-07.md",
+        "backend/runtime/business_mediation.py",
+        "backend/runtime/analysis_tools.py",
+        "backend/runtime/owned_runtime.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "review_conflicts": [
+        "Descriptions document capabilities; they never grant authority or prove a tool was run. Static catalogue text is not a complete live catalogue or a scientific certificate."
+      ]
     },
     {
       "id": "backend/runtime/code_audit_instructions.py::CODE_AUDIT_INSTRUCTIONS",
@@ -3130,7 +3728,7 @@
       "end_line": 16,
       "owner": "backend.runtime.code_audit_instructions",
       "family": "native_capability_policy",
-      "disposition": "requires_review",
+      "disposition": "rewritten",
       "objective": "Standalone code-audit tasks produce read-only attributed reports; their task label never grants exact-candidate review authority.",
       "source_sha256": "2bde9dc48a8e3fba0b47f5ba1b5b29689e235ba5ed14bcb743a871c83d0848cb",
       "source_bytes": 910,
@@ -3158,7 +3756,17 @@
         "backend/prompts/native.py": "05a6ecd61ce352991a778df42b0d0779a33a24a0121c6b2ab914386a90db99cd"
       },
       "suggested_disposition": "reviewed_native",
-      "review_status": "stale"
+      "review_status": "reviewed",
+      "review_rationale": "Read full readonly audit policy and research/review selection. It produces cited reports through source-capable tools; it cannot act as an exact-candidate reviewer or approve changes merely because task.type is review. Static contract review only: not exhaustive dynamic-consumer proof, model efficacy, human understanding or whole-system acceptance.",
+      "review_evidence": [
+        "backend/runtime/code_audit_instructions.py",
+        "docs/prompts/review-2026-11-07.md",
+        "backend/prompts/native.py",
+        "backend/runtime/business_mediation.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "review_conflicts": []
     },
     {
       "id": "backend/runtime/code_mode_payload.py::description@102",
@@ -3206,7 +3814,7 @@
       "end_line": 36,
       "owner": "backend.runtime.code_review_instructions",
       "family": "native_capability_policy",
-      "disposition": "requires_review",
+      "disposition": "rewritten",
       "objective": "Native code reviewer behavior over a frozen candidate with distinct actual author/reviewer provenance.",
       "source_sha256": "d27a049a54fd4a92773ac4c8bb73df5cba69a1f09681c0c82aedc5c28ae50c20",
       "source_bytes": 2345,
@@ -3234,7 +3842,17 @@
         "backend/prompts/native.py": "05a6ecd61ce352991a778df42b0d0779a33a24a0121c6b2ab914386a90db99cd"
       },
       "suggested_disposition": "reviewed_native",
-      "review_status": "stale"
+      "review_status": "reviewed",
+      "review_rationale": "Read full candidate policy against CodeReviewTools and CODE_REVIEW_NAMES. Exact frozen author input, subject/diff windows, source references and supported/concern/not_checked outcomes remain explicit; distinct attempts are operational separation, not independent scientific truth. Static contract review only: not exhaustive dynamic-consumer proof, model efficacy, human understanding or whole-system acceptance.",
+      "review_evidence": [
+        "backend/runtime/code_review_instructions.py",
+        "docs/prompts/review-2026-11-07.md",
+        "backend/prompts/native.py",
+        "backend/runtime/business_mediation.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "review_conflicts": []
     },
     {
       "id": "backend/runtime/code_review_tools.py::_TOOLS",
@@ -3266,15 +3884,16 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "3dc5a931130ffb7bcb544f4588c4158d4592fc786a917b866ad69d65d6fce6b9",
+      "dependencies_sha256": "70cdb75646fb9ebd76c307432e56fa3a916634efabb6fbca00905e9a7e9f11c5",
       "direct_module_consumers": {
-        "backend/runtime/owned_runtime.py": "16b43f69142dd5af23cc623dcb14118918376c01d5bb87baa34ab37af440a985"
+        "backend/runtime/owned_runtime.py": "3a8372f9c4901801cc2e99967681f403dff5d7bc000f031cf879bdd53072473f"
       },
       "suggested_disposition": "requires_review",
       "review_status": "reviewed",
-      "review_rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked.",
+      "review_rationale": "Read all three descriptions, typed material/file/proposal models and host catalog construction. Original candidate hashes and bounded exact quotations are used; the model proposes but cannot confirm, accept or publish. Static contract review only: not exhaustive dynamic-consumer proof, model efficacy, human understanding or whole-system acceptance.",
       "review_evidence": [
         "backend/runtime/code_review_tools.py",
+        "docs/prompts/review-2026-11-07.md",
         "backend/runtime/business_mediation.py",
         "backend/runtime/analysis_tools.py",
         "backend/runtime/owned_runtime.py",
@@ -3343,7 +3962,7 @@
       "end_line": 41,
       "owner": "backend.runtime.development_policy",
       "family": "native_capability_policy",
-      "disposition": "requires_review",
+      "disposition": "retained",
       "objective": "Explicit host check recipes disclosed before development; no inferred test commands or model-selected execution policy.",
       "source_sha256": "d78723c49e3ad3212cdf6a759083c2530b4455dec1b45053166d5c0963cbe5fe",
       "source_bytes": 703,
@@ -3375,7 +3994,17 @@
         "backend/prompts/native.py": "05a6ecd61ce352991a778df42b0d0779a33a24a0121c6b2ab914386a90db99cd"
       },
       "suggested_disposition": "reviewed_native",
-      "review_status": "stale"
+      "review_status": "reviewed",
+      "review_rationale": "Read parse_development_checks and development_instructions with the common catalog and runtime consumer. Only explicit validated check recipes are disclosed; empty checks remain a stated limitation and configured commands are not passing results. Static contract review only: not exhaustive dynamic-consumer proof, model efficacy, human understanding or whole-system acceptance.",
+      "review_evidence": [
+        "backend/runtime/development_policy.py",
+        "docs/prompts/review-2026-11-07.md",
+        "backend/prompts/native.py",
+        "backend/runtime/business_mediation.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "review_conflicts": []
     },
     {
       "id": "backend/runtime/investigation_instructions.py::INVESTIGATION_INSTRUCTIONS",
@@ -3385,7 +4014,7 @@
       "end_line": 18,
       "owner": "backend.runtime.investigation_instructions",
       "family": "native_capability_policy",
-      "disposition": "requires_review",
+      "disposition": "rewritten",
       "objective": "Exploratory investigation behavior uses explicit scope, grouped evidence and correction opportunities without a host-owned LLM loop.",
       "source_sha256": "ceecf2ff65d95086bd4931b758090e6be8d692be89739e5d39610e40429c181a",
       "source_bytes": 1069,
@@ -3413,7 +4042,17 @@
         "backend/prompts/native.py": "05a6ecd61ce352991a778df42b0d0779a33a24a0121c6b2ab914386a90db99cd"
       },
       "suggested_disposition": "reviewed_native",
-      "review_status": "stale"
+      "review_status": "reviewed",
+      "review_rationale": "Read full exploratory policy and INVESTIGATION_NAMES selection: structured investigation_summary replaces report_write, retains result_propose and source tools. Empty areas mean unresolved; exploratory scope does not require invented hypotheses or grades. Static contract review only: not exhaustive dynamic-consumer proof, model efficacy, human understanding or whole-system acceptance.",
+      "review_evidence": [
+        "backend/runtime/investigation_instructions.py",
+        "docs/prompts/review-2026-11-07.md",
+        "backend/prompts/native.py",
+        "backend/runtime/business_mediation.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "review_conflicts": []
     },
     {
       "id": "backend/runtime/predecessor_tools.py::description@33",
@@ -3441,15 +4080,16 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "3dd23c6f44fc7093387ec15f6f69f58b4d64b538a18fc0bff17928e6a5656e00",
+      "dependencies_sha256": "f8fc850de4958a1d0143982219311c7ffb667bb8822715ca28319a22cad0a5f3",
       "direct_module_consumers": {
-        "backend/runtime/owned_runtime.py": "16b43f69142dd5af23cc623dcb14118918376c01d5bb87baa34ab37af440a985"
+        "backend/runtime/owned_runtime.py": "3a8372f9c4901801cc2e99967681f403dff5d7bc000f031cf879bdd53072473f"
       },
       "suggested_disposition": "requires_review",
       "review_status": "reviewed",
-      "review_rationale": "Read actual native description prose and checked its producer: inspect.getdoc for ResearchTools, explicit typed host catalogues otherwise. Descriptions specify scope, original identities, exact evidence/windows, unknown outcomes and no implicit acceptance. Private writable analysis wording is set only after actual development authority is checked.",
+      "review_rationale": "Read the prerequisite description and actual conditional availability in owned_runtime. It exposes only admitted predecessor packet/original input/binary diff with bounded windows; earlier acceptance and old inputs are not current instructions or source edits. Static contract review only: not exhaustive dynamic-consumer proof, model efficacy, human understanding or whole-system acceptance.",
       "review_evidence": [
         "backend/runtime/predecessor_tools.py",
+        "docs/prompts/review-2026-11-07.md",
         "backend/runtime/business_mediation.py",
         "backend/runtime/analysis_tools.py",
         "backend/runtime/owned_runtime.py",
@@ -3468,7 +4108,7 @@
       "end_line": 30,
       "owner": "backend.runtime.review_instructions",
       "family": "native_capability_policy",
-      "disposition": "requires_review",
+      "disposition": "rewritten",
       "objective": "Reviewer behavior for an actually admitted, frozen finding review attempt.",
       "source_sha256": "592050b6b0dd44ef9026bfcbff78d1989a69473a54de1159bcc09c70f196be24",
       "source_bytes": 1846,
@@ -3496,7 +4136,17 @@
         "backend/prompts/native.py": "05a6ecd61ce352991a778df42b0d0779a33a24a0121c6b2ab914386a90db99cd"
       },
       "suggested_disposition": "reviewed_native",
-      "review_status": "stale"
+      "review_status": "reviewed",
+      "review_rationale": "Read full finding-review policy against REVIEW_NAMES: frozen subject, exact existing source quotations, attributed prior feedback and one decision. The profile cannot capture replacement sources or grant task acceptance; discovery is not captured evidence. Static contract review only: not exhaustive dynamic-consumer proof, model efficacy, human understanding or whole-system acceptance.",
+      "review_evidence": [
+        "backend/runtime/review_instructions.py",
+        "docs/prompts/review-2026-11-07.md",
+        "backend/prompts/native.py",
+        "backend/runtime/business_mediation.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "review_conflicts": []
     },
     {
       "id": "backend/runtime/run_inputs.py::conversation_history",
@@ -3506,7 +4156,7 @@
       "end_line": 92,
       "owner": "backend.runtime.run_inputs",
       "family": "attributed_input_renderer",
-      "disposition": "requires_review",
+      "disposition": "retained_input_renderer",
       "objective": "Exact host input composition, historical scope and explicit size boundaries.\n\nThis records what Researcher prepares, not hidden provider instructions, future\noutputs or evidence that a model understood a message. No truncation/LLM summary.",
       "source_sha256": "51c912385e1c4829f35ba09a7ef1966491cbad7183049a6efe5b3c94b9654526",
       "source_bytes": 2836,
@@ -3533,7 +4183,18 @@
         "backend/runtime/views.py": "740317583068e859a0f1df8e5ded26ceb00f3e0c5e93a268b614c9bd28043871"
       },
       "suggested_disposition": "retained",
-      "review_status": "stale"
+      "review_status": "reviewed",
+      "review_rationale": "Read conversation_history, task_request_history and freeze_input, plus the real SQLiteRunStore snapshot caller. Direct same-task admission history has causal row-order cutoff and no renewed authority; selected conversations preserve their reset. Original text/hash and strict size rejection remain, without hidden summarization or invented comprehension. Static contract review only: not exhaustive dynamic-consumer proof, model efficacy, human understanding or whole-system acceptance.",
+      "review_evidence": [
+        "backend/runtime/run_inputs.py",
+        "docs/prompts/review-2026-11-07.md",
+        "backend/runtime/sqlite_runs.py",
+        "backend/tests/runtime/test_run_input.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json",
+        "backend/runtime/views.py"
+      ],
+      "review_conflicts": []
     },
     {
       "id": "backend/runtime/run_inputs.py::freeze_input",
@@ -3543,7 +4204,7 @@
       "end_line": 170,
       "owner": "backend.runtime.run_inputs",
       "family": "attributed_input_renderer",
-      "disposition": "requires_review",
+      "disposition": "retained_input_renderer",
       "objective": "Exact host input composition, historical scope and explicit size boundaries.\n\nThis records what Researcher prepares, not hidden provider instructions, future\noutputs or evidence that a model understood a message. No truncation/LLM summary.",
       "source_sha256": "51c912385e1c4829f35ba09a7ef1966491cbad7183049a6efe5b3c94b9654526",
       "source_bytes": 1730,
@@ -3576,7 +4237,18 @@
         "backend/runtime/views.py": "740317583068e859a0f1df8e5ded26ceb00f3e0c5e93a268b614c9bd28043871"
       },
       "suggested_disposition": "retained",
-      "review_status": "stale"
+      "review_status": "reviewed",
+      "review_rationale": "Read conversation_history, task_request_history and freeze_input, plus the real SQLiteRunStore snapshot caller. Direct same-task admission history has causal row-order cutoff and no renewed authority; selected conversations preserve their reset. Original text/hash and strict size rejection remain, without hidden summarization or invented comprehension. Static contract review only: not exhaustive dynamic-consumer proof, model efficacy, human understanding or whole-system acceptance.",
+      "review_evidence": [
+        "backend/runtime/run_inputs.py",
+        "docs/prompts/review-2026-11-07.md",
+        "backend/runtime/sqlite_runs.py",
+        "backend/tests/runtime/test_run_input.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json",
+        "backend/runtime/views.py"
+      ],
+      "review_conflicts": []
     },
     {
       "id": "backend/runtime/scientific_instructions.py::SCIENTIFIC_RESEARCH_INSTRUCTIONS",
@@ -3586,7 +4258,7 @@
       "end_line": 66,
       "owner": "backend.runtime.scientific_instructions",
       "family": "native_capability_policy",
-      "disposition": "requires_review",
+      "disposition": "retained",
       "objective": "Scientific research preserves question/method/evidence/hypothesis/synthesis outcomes in the existing native runtime without numeric certainty inventions or an automatic review loop.",
       "source_sha256": "c63f5637f02b47088399e285fe98df4b7eed99cadff035c21fd7938c384497c9",
       "source_bytes": 4789,
@@ -3614,7 +4286,17 @@
         "backend/prompts/native.py": "05a6ecd61ce352991a778df42b0d0779a33a24a0121c6b2ab914386a90db99cd"
       },
       "suggested_disposition": "reviewed_native",
-      "review_status": "stale"
+      "review_status": "reviewed",
+      "review_rationale": "Read the complete scientific policy against RESEARCH_NAMES and scientific capture contracts. Distinguishes question/unit, source dependence, confounding, exact quotation versus logical support, reporting versus bias versus certainty, and deterministic calculation versus empirical replication. Optional frameworks require fit, no invented grades or automatic review loop. Human and real-model effectiveness remain unevaluated by this static review. Static contract review only: not exhaustive dynamic-consumer proof, model efficacy, human understanding or whole-system acceptance.",
+      "review_evidence": [
+        "backend/runtime/scientific_instructions.py",
+        "docs/prompts/review-2026-11-07.md",
+        "backend/prompts/native.py",
+        "backend/runtime/business_mediation.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "review_conflicts": []
     },
     {
       "id": "scripts/audit_prompt_inventory.py::PROMPT_NAME",

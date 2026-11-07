@@ -28,7 +28,38 @@ que se pueda comparar el avance; no presentar microajustes como tareas principal
 - Última suite global: `9fb873c`,2210 casos,2178 pasan,31 fallan y1 error de fixture; sin omisiones. La carrera de backup encontrada se corrigió después con40 pruebas instaladas. No se declara una nueva corrida global verde; la referencia `0c8b8d9` queda como evidencia histórica.
 - Los 43 escenarios amplios siguen abiertos en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Etapa actual: VM activa comprobada; prompts siguientes
+## Etapa actual: revisión estática cerrada; evaluación de comunicación siguiente
+
+Bloque **08:45:38–08:54:33 UTC**, **8 min 55 s**, hasta el corte de validación.
+El inventario actual tiene83 candidatos/287 archivos y83 decisiones vigentes:
+69 revalidadas tras leer texto/consumidores y14 con dependencias iguales. Se
+conservaron instrucciones y catálogo3. El evaluador de tamaños etiquetaba2 por
+error; ahora toma la versión real. Se verificaron los siete hashes/tamaños.
+
+Pasan45 casos distintos. La primera ejecución tuvo41 aprobados/4 omitidos por
+configuración del fixture semántico; esos cuatro pasan luego con los assets
+locales ya preparados. Ambos recibos se conservan. Cero generaciones LLM nuevas,
+sin cambio productivo, wheel nuevo ni corrida global. [Informe](../prompts/review-2026-11-07.md),
+[resultados](../prompts/revalidation-results.json).
+
+**Lista actualizada al cambiar de tarea:**
+- Terminado: revisión estática de prompts y consumidores, **8 min 55 s**.
+  No equivale a comprobar su eficacia ni comprensión humana.
+- Terminado previamente: VM con comando activo, **15 min 57 s**;
+  recuperación de servicio, **21 min 39 s**; continuidad/preguntas, **19 min 50 s**.
+- Siguiente principal: evaluación de comunicación en otros perfiles y material
+  científico representativo. No empezó; publicar inicio al comenzar.
+- Pendiente: revisión humana solicitada, seguridad Ken/Chroma/licencias, datos
+  históricos del propietario, demás recuperación y aceptación integral de12 páginas.
+- Después de todas las capacidades principales: detalles acumulados, validación
+  final y revisión independiente. La advertencia Starlette/httpx se conserva en
+  los resultados de este corte; no se cambia una dependencia por ella ahora.
+
+Siguen43 escenarios amplios abiertos y0/12 páginas completamente aceptadas.
+La última suite global sigue sin estar verde. No hay porcentaje global sustentado.
+La política de lista y tiempos por transición permanece guardada tras compactar.
+
+## Etapa anterior: recuperación de VM activa
 
 Bloque medido **08:26:45–08:42:42 UTC**, **15 min 57 s**. Se comprobó el
 reinicio del mismo invitado mientras su dueño, namespace del peer y comando hijo
@@ -51,9 +82,8 @@ instaladas:24 aprobadas/los mismos3 fallos. No se declara suite verde.
   **15 min 57 s**. Alcance distinto de inferencia real o pérdida de energía.
 - Terminado previamente: recuperación de servicio activo, **21 min 39 s**;
   continuidad/preguntas respondibles, **19 min 50 s**.
-- Siguiente principal: revalidación de prompts y consumidores; revisar las60
-  decisiones estáticas desactualizadas del inventario previo. Todavía no comenzó;
-  publicar inicio al comenzar.
+- Siguiente de ese corte: revalidación de prompts y consumidores, realizada en
+  el bloque actual descrito arriba.
 - Pendiente: evaluación humana/otros perfiles/científica, seguridad Ken/Chroma y
   licencias, datos históricos del propietario, aceptación integral de12 páginas
   y demás recuperación.

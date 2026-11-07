@@ -1,0 +1,265 @@
+{
+  "schema_version": 1,
+  "base_commit": "035b46c",
+  "started_utc": "2026-11-07 08:45:38 UTC",
+  "validation_cutoff_utc": "2026-11-07 08:54:33 UTC",
+  "block_seconds_to_cutoff": 535,
+  "scope": "Static owned prompt and consumer review, metadata correction and directed source tests; no product policy change.",
+  "inventory": {
+    "files": 287,
+    "candidates": 83,
+    "before_current": 14,
+    "before_stale": 69,
+    "after_current": 83,
+    "after_stale": 0,
+    "revalidated": 69,
+    "historical_identities": 516,
+    "check_exit_code": 0
+  },
+  "product_policy_version": 3,
+  "measured_profile_hashes_and_sizes_verified": 7,
+  "changed_product_source_files": [],
+  "evaluator_docstrings": {
+    "module": true,
+    "functions": 1,
+    "documented_functions": 1
+  },
+  "test_runs": [
+    {
+      "receipt": ".superpowers/sdd/2026-10-31-actualizacion-proyecto/prompt-revalidation-tests.xml",
+      "sha256": "d75084d94620dfc90c9fc4648ac090826179a144aa0ff14e8313212f9b2f617b",
+      "suite_seconds": 15.591,
+      "counts": {
+        "passed": 41,
+        "failed": 0,
+        "skipped": 4
+      },
+      "cases": [
+        {
+          "id": "backend.tests.runtime.test_prompt_catalog.test_every_native_profile_has_one_shared_policy_and_exact_versioned_identity[research-research-scientific_research]",
+          "outcome": "passed"
+        },
+        {
+          "id": "backend.tests.runtime.test_prompt_catalog.test_every_native_profile_has_one_shared_policy_and_exact_versioned_identity[research-review-code_audit]",
+          "outcome": "passed"
+        },
+        {
+          "id": "backend.tests.runtime.test_prompt_catalog.test_every_native_profile_has_one_shared_policy_and_exact_versioned_identity[research-investigation-investigation]",
+          "outcome": "passed"
+        },
+        {
+          "id": "backend.tests.runtime.test_prompt_catalog.test_every_native_profile_has_one_shared_policy_and_exact_versioned_identity[research-plan-planning]",
+          "outcome": "passed"
+        },
+        {
+          "id": "backend.tests.runtime.test_prompt_catalog.test_every_native_profile_has_one_shared_policy_and_exact_versioned_identity[development-code-development]",
+          "outcome": "passed"
+        },
+        {
+          "id": "backend.tests.runtime.test_prompt_catalog.test_every_native_profile_has_one_shared_policy_and_exact_versioned_identity[code_review-code-code_review]",
+          "outcome": "passed"
+        },
+        {
+          "id": "backend.tests.runtime.test_prompt_catalog.test_every_native_profile_has_one_shared_policy_and_exact_versioned_identity[finding_review-research-finding_review]",
+          "outcome": "passed"
+        },
+        {
+          "id": "backend.tests.runtime.test_prompt_catalog.test_catalog_does_not_relabel_old_instructions_or_admit_host_publication_as_inference",
+          "outcome": "passed"
+        },
+        {
+          "id": "backend.tests.runtime.test_prompt_catalog.test_recorded_catalog_two_identity_survives_new_policy_without_relabeling",
+          "outcome": "passed"
+        },
+        {
+          "id": "backend.tests.runtime.test_prompt_catalog.test_warmup_compatibility_entry_refuses_before_http_or_prompt_rendering",
+          "outcome": "passed"
+        },
+        {
+          "id": "backend.tests.runtime.test_prompt_catalog.test_actual_owned_turn_records_the_exact_versioned_policy_sent_to_native",
+          "outcome": "passed"
+        },
+        {
+          "id": "backend.tests.runtime.test_prompt_inventory.test_inventory_includes_actual_tool_docstrings_and_new_source_candidates",
+          "outcome": "passed"
+        },
+        {
+          "id": "backend.tests.runtime.test_prompt_inventory.test_inventory_never_auto_approves_a_new_or_changed_template",
+          "outcome": "passed"
+        },
+        {
+          "id": "backend.tests.runtime.test_run_input.test_frozen_input_contains_prior_task_exchange_but_not_future_or_other_scope",
+          "outcome": "passed"
+        },
+        {
+          "id": "backend.tests.runtime.test_run_input.test_other_tasks_in_a_legacy_mixed_thread_are_excluded_and_reported",
+          "outcome": "passed"
+        },
+        {
+          "id": "backend.tests.runtime.test_run_input.test_snapshot_survives_message_edits_and_repeat_reservation_never_replays",
+          "outcome": "passed"
+        },
+        {
+          "id": "backend.tests.runtime.test_run_input.test_input_event_failure_rolls_back_dispatch_budget_and_snapshot",
+          "outcome": "passed"
+        },
+        {
+          "id": "backend.tests.runtime.test_run_input.test_oversized_history_is_not_silently_truncated_or_reserved",
+          "outcome": "passed"
+        },
+        {
+          "id": "backend.tests.runtime.test_run_input.test_snapshot_preserves_context_strength_and_excludes_other_projects",
+          "outcome": "passed"
+        },
+        {
+          "id": "backend.tests.runtime.test_run_input.test_product_dispatch_sends_the_recorded_bytes_and_continues_its_product_thread",
+          "outcome": "passed"
+        },
+        {
+          "id": "backend.tests.runtime.test_run_input.test_a_previously_reserved_input_is_unknown_not_permission_to_send_again",
+          "outcome": "passed"
+        },
+        {
+          "id": "backend.tests.runtime.test_run_input.test_input_bytes_limit_keeps_the_final_constraint_or_refuses_the_whole_input",
+          "outcome": "passed"
+        },
+        {
+          "id": "backend.tests.runtime.test_run_input.test_owner_reads_frozen_input_without_reconstructing_historical_runs",
+          "outcome": "passed"
+        },
+        {
+          "id": "backend.tests.runtime.test_business_mediation.test_host_mediation_copies_real_mcp_schema_and_returns_native_result",
+          "outcome": "passed"
+        },
+        {
+          "id": "backend.tests.runtime.test_business_mediation.test_unknown_native_tool_never_reaches_business_peer",
+          "outcome": "passed"
+        },
+        {
+          "id": "backend.tests.runtime.test_business_mediation.test_withdrawn_host_tool_authority_does_not_dispatch_even_a_reader",
+          "outcome": "passed"
+        },
+        {
+          "id": "backend.tests.runtime.test_host_business.test_native_finding_registry_facade_preserves_filters_cursors_and_exact_evidence[False]",
+          "outcome": "passed"
+        },
+        {
+          "id": "backend.tests.runtime.test_host_business.test_native_finding_registry_facade_preserves_filters_cursors_and_exact_evidence[True]",
+          "outcome": "skipped",
+          "reason": "Explicit pinned local semantic model fixture not prepared"
+        },
+        {
+          "id": "backend.tests.runtime.test_host_business.test_host_catalog_keeps_credentials_and_authority_out_of_tool_arguments",
+          "outcome": "passed"
+        },
+        {
+          "id": "backend.tests.runtime.test_host_business.test_business_close_withdraws_server_authority_before_cancelling_io",
+          "outcome": "passed"
+        },
+        {
+          "id": "backend.tests.runtime.test_host_business.test_business_withdrawn_scope_never_starts_another_request",
+          "outcome": "passed"
+        },
+        {
+          "id": "backend.tests.runtime.test_host_business.test_business_wire_schema_is_compact_but_keeps_real_title_field",
+          "outcome": "passed"
+        },
+        {
+          "id": "backend.tests.runtime.test_host_business.test_host_business_uses_real_api_scope_and_persists_one_report[text/plain]",
+          "outcome": "passed"
+        },
+        {
+          "id": "backend.tests.runtime.test_host_business.test_host_business_uses_real_api_scope_and_persists_one_report[application/pdf]",
+          "outcome": "passed"
+        },
+        {
+          "id": "backend.tests.runtime.test_host_business.test_host_business_uses_real_api_scope_and_persists_one_report[application/pdf-url]",
+          "outcome": "passed"
+        },
+        {
+          "id": "backend.tests.runtime.test_host_business.test_host_business_uses_real_api_scope_and_persists_one_report[application/pdf-paper-arxiv]",
+          "outcome": "passed"
+        },
+        {
+          "id": "backend.tests.runtime.test_host_business.test_host_business_uses_real_api_scope_and_persists_one_report[application/pdf-paper-doi]",
+          "outcome": "passed"
+        },
+        {
+          "id": "backend.tests.runtime.test_host_business.test_host_business_uses_real_api_scope_and_persists_one_report[application/pdf-semantic]",
+          "outcome": "skipped",
+          "reason": "Explicit pinned local semantic model fixture not prepared"
+        },
+        {
+          "id": "backend.tests.runtime.test_host_business.test_host_business_uses_real_api_scope_and_persists_one_report[text/csv]",
+          "outcome": "passed"
+        },
+        {
+          "id": "backend.tests.runtime.test_host_business.test_host_business_uses_real_api_scope_and_persists_one_report[application/json]",
+          "outcome": "passed"
+        },
+        {
+          "id": "backend.tests.runtime.test_host_business.test_host_business_uses_real_api_scope_and_persists_one_report[application/xml]",
+          "outcome": "passed"
+        },
+        {
+          "id": "backend.tests.runtime.test_host_business.test_host_business_uses_real_api_scope_and_persists_one_report[application/vnd.openxmlformats-officedocument.wordprocessingml.document]",
+          "outcome": "passed"
+        },
+        {
+          "id": "backend.tests.runtime.test_host_business.test_host_business_uses_real_api_scope_and_persists_one_report[application/json-semantic]",
+          "outcome": "skipped",
+          "reason": "Explicit pinned local semantic model fixture not prepared"
+        },
+        {
+          "id": "backend.tests.runtime.test_host_business.test_native_wiki_facade_keeps_revision_scope_and_exact_report_citations[False]",
+          "outcome": "passed"
+        },
+        {
+          "id": "backend.tests.runtime.test_host_business.test_native_wiki_facade_keeps_revision_scope_and_exact_report_citations[True]",
+          "outcome": "skipped",
+          "reason": "Explicit pinned local semantic model fixture not prepared"
+        }
+      ]
+    },
+    {
+      "receipt": ".superpowers/sdd/2026-10-31-actualizacion-proyecto/prompt-revalidation-semantic-tests.xml",
+      "sha256": "f2fe86fb367ae8e960de8657eec523605de0858e41e982e5db1d57c8cb9c6b2f",
+      "suite_seconds": 14.003,
+      "counts": {
+        "passed": 4,
+        "failed": 0,
+        "skipped": 0
+      },
+      "cases": [
+        {
+          "id": "backend.tests.runtime.test_host_business.test_native_finding_registry_facade_preserves_filters_cursors_and_exact_evidence[True]",
+          "outcome": "passed"
+        },
+        {
+          "id": "backend.tests.runtime.test_host_business.test_host_business_uses_real_api_scope_and_persists_one_report[application/pdf-semantic]",
+          "outcome": "passed"
+        },
+        {
+          "id": "backend.tests.runtime.test_host_business.test_host_business_uses_real_api_scope_and_persists_one_report[application/json-semantic]",
+          "outcome": "passed"
+        },
+        {
+          "id": "backend.tests.runtime.test_host_business.test_native_wiki_facade_keeps_revision_scope_and_exact_report_citations[True]",
+          "outcome": "passed"
+        }
+      ]
+    }
+  ],
+  "unique_passed_cases": 45,
+  "unresolved_skipped_cases": [],
+  "llm_generations": 0,
+  "external_provider_calls": 0,
+  "offline_semantic_assets": "Existing pinned retrieval-assets/prepared; used only to execute the four initially skipped cases.",
+  "limitations": [
+    "Heuristic static inventory, not all dynamic prompts or complete call graph.",
+    "No model efficacy, human comprehension or scientific certainty claim.",
+    "No new installed-package or global suite run; backend/frontend/scripts unchanged.",
+    "43 broad scenarios and 0/12 full page acceptances remain.",
+    "Existing Starlette/httpx deprecation warning retained; no dependency change in this block."
+  ]
+}
