@@ -16,6 +16,10 @@ del plan y separar los pilotos de la aceptación integral. Actualizar también e
 tablero para que esta regla sobreviva a la compactación. No inventar porcentajes
 ni confundir pruebas parciales con progreso global aceptado.
 
+Incluir el tiempo medido del tramo en cada transición. Si no hay fundamento para
+estimar el tiempo restante, indicarlo expresamente; no convertir una impresión
+en porcentaje o plazo. Esta precisión también se conserva después de compactar.
+
 Esta política es una instrucción explícita del usuario y debe recuperarse después
 de compactar el contexto. El diagnóstico histórico de abajo aporta evidencia;
 no desplaza esta prioridad de ejecución.

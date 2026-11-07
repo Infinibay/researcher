@@ -32,6 +32,10 @@ def main(argv=None):
     host.add_argument('--directory', required=True)
     host.add_argument('--witness-dir', required=True)
     host.add_argument('--assets', required=True, help='Operator JSON with native/Ken/account/cache/cgroup paths and model')
+    enroll = commands.add_parser('enroll-restored-host', help='Enable a completed restore with NEW authority; copied unfinished work stays historical')
+    enroll.add_argument('--directory', required=True)
+    enroll.add_argument('--witness-dir', required=True)
+    enroll.add_argument('--assets', required=True, help='Explicit native/Ken/account/cache/cgroup paths and model for the new host')
     check = commands.add_parser('check-host', help='Verify local host resources without inference or downloads')
     check.add_argument('--directory', required=True)
     check.add_argument('--probe', action='store_true', help='Also birth and retire one fixed no-op kernel child')
@@ -64,6 +68,11 @@ def main(argv=None):
             else:
                 manifest = verify_backup(options.backup, **limits)
                 result = {'status':'verified','snapshot_id':manifest['snapshot_id'],'entries':len(manifest['entries']),'bytes':manifest['bytes'],'execution_enrolled':False}
+        elif options.command == 'enroll-restored-host':
+            from backend.runtime.restored_enrollment import enroll_restored_host
+            from backend.runtime.host_installation import _read_json
+
+            result = enroll_restored_host(options.directory, witness_dir=options.witness_dir, assets=_read_json(options.assets))
         elif options.command == 'init-host':
             from backend.runtime.host_installation import initialize_host, _read_json
 

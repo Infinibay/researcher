@@ -4,6 +4,16 @@ La implementación del [plan completo](../superpowers/plans/2026-10-31-actualiza
 
 ## Resultados disponibles
 
+- **Reinscripción de copias y protección del navegador implementadas:** autoridad
+  nueva, planes pausados y trabajo copiado conservado como historial; activación
+  final y recuperación de un proceso interrumpido desde otra restauración nueva.
+  Dos arranques del servicio conservan identidades y no repiten trabajo. El
+  navegador archiva solicitudes/borradores al cambiar la base, con explicación y
+  descarga. Pasan94 casos de fuente y94 instalados,129 contratos frontend y4 DOM;
+  tres estados de navegador comprobados. Siguen un turno de modelo completo en
+  el host restaurado, reboot real, datos históricos y aceptación global.
+  [Resultados](restored-enrollment-results.json), [paquete](restored-enrollment-packaging.json).
+
 - **Copia y restauración de datos disponibles por CLI:** manifiesto/hashes/conteos,
   snapshots SQLite y traslado de adjuntos/repositorios/worktrees. Los lectores
   HTTP conservan el alcance por proyecto. La restauración termina pendiente de

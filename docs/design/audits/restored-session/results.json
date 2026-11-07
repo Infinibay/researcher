@@ -1,0 +1,21 @@
+{
+  "states": [
+    {
+      "name": "desktop",
+      "width": 1440,
+      "axe": 0
+    },
+    {
+      "name": "mobile",
+      "width": 390,
+      "axe": 0
+    },
+    {
+      "name": "storage-refusal",
+      "preserved": true
+    }
+  ],
+  "errors": [],
+  "writes": [],
+  "limits": "Controlled session responses; real browser interaction, no backend, model or full-page acceptance claim."
+}

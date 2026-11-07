@@ -6,7 +6,9 @@ test('a delayed initial status response cannot lock a session paired afterwards'
   let settle!: (response:Response) => void
   globalThis.fetch = () => new Promise(resolve => {settle = resolve})
   const loading = loadOwnerSession()
-  globalThis.fetch = async () => Response.json({authenticated:true, csrf_token:'new-session'})
+  const values = new Map<string,string>()
+  Object.defineProperty(globalThis,'sessionStorage',{value:{length:0,getItem:(key:string)=>values.get(key)??null,setItem:(key:string,value:string)=>values.set(key,value)},configurable:true})
+  globalThis.fetch = async () => Response.json({authenticated:true, csrf_token:'new-session',endpoint_id:'same-installation'})
   await pairOwner('new-owner-code')
   settle(Response.json({authenticated:false}))
   assert.equal(await loading, true)

@@ -24,7 +24,7 @@ try{
   const r=route.request(),u=new URL(r.url()),p=u.pathname;if(!p.startsWith('/api/'))return route.continue()
   if(r.method()!=='GET')evidence.writes.push({method:r.method(),path:p,body:r.postDataJSON()})
   let body={}
-  if(p==='/api/session')body={authenticated:true,csrf_token:'planning-fixture'}
+  if(p==='/api/session')body={authenticated:true,csrf_token:'planning-fixture',endpoint_id:'fixture-planning-installation'}
   else if(p==='/api/projects')body={projects:[project,{...project,id:2,name:'Proyecto vacío'}],total:2}
   else if(p==='/api/projects/1')body=project
   else if(p==='/api/projects/2')body={...project,id:2,name:'Proyecto vacío'}

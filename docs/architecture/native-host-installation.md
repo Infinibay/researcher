@@ -103,4 +103,8 @@ Ver la [guía de copia y restauración](installation-backup.md). La copia incluy
 base, archivos y repositorios/worktrees; las cuentas y herramientas externas
 permanecen como referencias. Restaurar produce datos comprobados en otra ruta,
 con acceso/autoridad originales archivados y ejecución pendiente de reinscripción.
+`enroll-restored-host --directory ... --witness-dir ... --assets ...` crea una
+autoridad nueva, pausa planes copiados y conserva trabajo anterior como historial.
+El navegador conserva/archiva decisiones anteriores antes de entrar en la nueva
+instalación. El comando no adopta procesos ni efectos remotos del host original.
 La recuperación operativa completa tras reboot sigue abierta.

@@ -16,7 +16,7 @@ try{
   const r=route.request(),u=new URL(r.url()),p=u.pathname;if(!p.startsWith('/api/'))return route.continue()
   if(r.method()!=='GET')evidence.writes.push({path:p,method:r.method(),body:r.postDataJSON()})
   let body={}
-  if(p==='/api/session')body={authenticated:true,csrf_token:'controls-fixture'}
+  if(p==='/api/session')body={authenticated:true,csrf_token:'controls-fixture',endpoint_id:'fixture-controls-installation'}
   else if(p==='/api/projects')body={projects,total:2}
   else if(/^\/api\/projects\/[12]$/.test(p))body=projects[Number(p.split('/').at(-1))-1]
   else if(p.endsWith('/workspace')){

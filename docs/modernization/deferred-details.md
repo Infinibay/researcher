@@ -445,3 +445,19 @@ como corrupción de autoridad; los enlaces Git relativos se resuelven desde la
 ubicación original; los destinos con alias no pueden entrar en los originales.
 La reinscripción, conciliación, reboot y migración de datos reales son trabajo
 principal pendiente, no detalles diferidos.
+
+## DD073 — pulido tras reinscripción y aviso de instalación
+
+Se conservan19 avisos Python en `restored-enrollment-lint.json`: orden de imports,
+fixtures importadas que Ruff considera sin uso/redefinidas y `check` implícito en
+el subprocess de prueba. Son convenciones a resolver después de las capacidades
+principales; las fixtures se ejecutan y el retorno del hijo se comprueba.
+Continúan el aviso heredado Starlette/httpx y el aviso de tamaño del bundle.
+ESLint conserva un aviso heredado `no-control-regex` en la expresión que rechaza
+caracteres de control de las rutas; no se elimina esa protección por estilo.
+Un explorador de archivos locales de solicitudes anteriores y el ajuste fino del
+texto/espaciado del aviso pueden esperar; ya existe descarga y conservación exacta.
+
+El reboot real, la aceptación de un turno de modelo en el host restaurado, datos
+históricos y el soporte necesario para sus tamaños/layouts son trabajo principal.
+No se presentan como pequeños detalles resueltos por este tramo.

@@ -7650,3 +7650,14 @@ reconciliation of old runs/graph deliveries without replay or false closure;
 actual reboot, historical data/Chroma/filesystem-only import. Then history/budgets,
 human/scientific/global evaluation, dependency security,12page acceptance, details
 and final whole-plan review.43scenarios open,0acceptedpages. No push/merge/deploy.
+
+
+## 2026-11-07 — Fresh restored-host enrollment and browser endpoint correction
+
+Basef1abb34; full goal remains active, managedb09e only. User checklist/time-at-transition policy remains in dashboard/workflow; all macro before all fine. Historical-data path question stillpending; do notrepeat. No newsubagents,push,merge,deploy or user-data edits.
+
+Found runtime dispatcher can resume active copied plan deliveries at startup; terminal already uses physical DB identity but browser ignored endpoint_id. New enroll-restored-host shares owner lock, validates explicitresources, creates NEW authority/witness, preserves old evidence, pauses graphs and turns unfinished copied work into historical superseded records. No physical/remote closure assertion; pending questions expire, grants revoke, reserved inference becomesunknown. Activation markerlast. Real ownedchild abrupt exit93 proves barrier and fresh-path recovery. Two native HTTPservice startups do not replaycopiedwork. Browser sends endpointproof, guardschanged/legacyunboundstate, archives exactpackets+wiki drafts after explicitchoice; download and storage-failure retentiontested.
+
+94sourcePASS/94installedPASS;583PythonSQLmatch312product,232backendimportsallinstalled. Wheelb87642b6de7afa7a412bf647735cc5bf26255f60e50b974448e208a0104202bc.13Pythondefinitionsdocumented; frontendJSDoc.129frontendcontracts+4DOMPASS/buildPASS. Threebrowserstates, two screenshotsinspected, noJSerrors/writes and noAxeviolations desktop/mobile.19Pythonlint+1inheritedfrontendregexlint+Starlette/bundlewarnings deferredDD073.
+
+Verified interval03:13:16–03:31:46UTC=1110seconds(18m30s). Source29654exit0;installed25724exit0;browserfirst49795exit1(harnessintercept),corrected24012exit0;devserver84442exit130intentionalclosed. No modelcalls. Nextmain:complete model/Ken run onrestoredhost,actualreboot/authorityrecovery;actualdata/import/inverses,history/budgets,evaluations/security,12pageacceptance,finedetails,finalreview allremain.43scenariosopen/0fullyacceptedpages.

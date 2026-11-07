@@ -1,0 +1,99 @@
+{
+  "base_commit": "f1abb34",
+  "changed_or_new_definitions_documented": 13,
+  "missing": [],
+  "contracts": [
+    {
+      "path": "backend/cli/bootstrap.py",
+      "symbol": "main",
+      "line": 9,
+      "docstring": "Run one explicit local administration action; help never reads assets, initializes data or downloads.",
+      "file_sha256": "ae75d68d6edfdeb212320dfbee91ff78501b83d3143ee9f837e52896d6031178"
+    },
+    {
+      "path": "backend/runtime/restored_enrollment.py",
+      "symbol": "_exclusive_owner",
+      "line": 23,
+      "docstring": "Share the runtime's canonical private lock identity without starting owner recovery or dispatch.",
+      "file_sha256": "6def539b695a903fad056f53c3bfd58b0726eac5756f20d980fb7ec3cb5cbc16"
+    },
+    {
+      "path": "backend/runtime/restored_enrollment.py",
+      "symbol": "_retain_as_history",
+      "line": 36,
+      "docstring": "Withdraw copied permissions and pause graphs without fabricating physical or remote closure.",
+      "file_sha256": "6def539b695a903fad056f53c3bfd58b0726eac5756f20d980fb7ec3cb5cbc16"
+    },
+    {
+      "path": "backend/runtime/restored_enrollment.py",
+      "symbol": "enroll_restored_host",
+      "line": 63,
+      "docstring": "Enable a verified pending restore with fresh assets, authority and pairing; publish activation last.\n\nThe original backup remains the recovery source. Existing or partially created\nauthority is never reset, reused or repaired by retrying this operation.",
+      "file_sha256": "6def539b695a903fad056f53c3bfd58b0726eac5756f20d980fb7ec3cb5cbc16"
+    },
+    {
+      "path": "backend/tests/runtime/test_restored_enrollment.py",
+      "symbol": "restored",
+      "line": 15,
+      "docstring": "Copy synthetic pending and accepted history through the real backup/restore path.",
+      "file_sha256": "9a9499e0980469481a153db7bdf753830ce3f89ef44b394510e7356e631b5908"
+    },
+    {
+      "path": "backend/tests/runtime/test_restored_enrollment.py",
+      "symbol": "test_enrollment_preserves_history_and_starts_only_fresh_authority",
+      "line": 36,
+      "docstring": "A new host keeps results and uncertainty but cannot dispatch copied active work.",
+      "file_sha256": "9a9499e0980469481a153db7bdf753830ce3f89ef44b394510e7356e631b5908"
+    },
+    {
+      "path": "backend/tests/runtime/test_restored_enrollment.py",
+      "symbol": "test_enrollment_refusal_never_enables_pending_host",
+      "line": 77,
+      "docstring": "Busy ownership, invalid assets and unsafe witnesses fail before new authority or history changes.",
+      "file_sha256": "9a9499e0980469481a153db7bdf753830ce3f89ef44b394510e7356e631b5908"
+    },
+    {
+      "path": "backend/tests/runtime/test_restored_enrollment.py",
+      "symbol": "test_interruption_retains_partial_authority_with_startup_barrier",
+      "line": 106,
+      "docstring": "A failed final marker preserves evidence; recovery uses the original backup at another NEW path.",
+      "file_sha256": "9a9499e0980469481a153db7bdf753830ce3f89ef44b394510e7356e631b5908"
+    },
+    {
+      "path": "backend/tests/runtime/test_restored_enrollment.py",
+      "symbol": "test_interruption_retains_partial_authority_with_startup_barrier.fail_final",
+      "line": 113,
+      "docstring": "Interrupt only the final activation after durable history and configuration writes.",
+      "file_sha256": "9a9499e0980469481a153db7bdf753830ce3f89ef44b394510e7356e631b5908"
+    },
+    {
+      "path": "backend/tests/runtime/test_restored_enrollment.py",
+      "symbol": "test_copied_active_plan_is_paused_without_rewriting_its_causal_handoff",
+      "line": 128,
+      "docstring": "Apply restoration retirement to an accepted graph with a real durable unissued delivery.",
+      "file_sha256": "9a9499e0980469481a153db7bdf753830ce3f89ef44b394510e7356e631b5908"
+    },
+    {
+      "path": "backend/tests/runtime/test_restored_enrollment.py",
+      "symbol": "test_restored_host_http_restart_does_not_replay_copied_work",
+      "line": 149,
+      "docstring": "Compose the enrolled native service twice, pair afresh and inspect retained history without inference.",
+      "file_sha256": "9a9499e0980469481a153db7bdf753830ce3f89ef44b394510e7356e631b5908"
+    },
+    {
+      "path": "backend/tests/runtime/test_restored_enrollment.py",
+      "symbol": "test_public_enrollment_command_uses_explicit_new_assets_and_witness",
+      "line": 186,
+      "docstring": "The installed administration entry point enables a restore without inference or implicit asset discovery.",
+      "file_sha256": "9a9499e0980469481a153db7bdf753830ce3f89ef44b394510e7356e631b5908"
+    },
+    {
+      "path": "backend/tests/runtime/test_restored_enrollment.py",
+      "symbol": "test_abrupt_enrollment_exit_leaves_original_backup_as_recovery_source",
+      "line": 201,
+      "docstring": "An owned child exits after history/config commits; startup stays blocked and another fresh restore works.",
+      "file_sha256": "9a9499e0980469481a153db7bdf753830ce3f89ef44b394510e7356e631b5908"
+    }
+  ],
+  "scope": "New/changed Python definitions and modules in this delivery. Relevant new frontend modules and exported helpers also carry English JSDoc; no claim that all historic project definitions are documented."
+}

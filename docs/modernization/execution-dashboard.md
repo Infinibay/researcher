@@ -1,6 +1,6 @@
 # Tablero de ejecución de la actualización
 
-Actualizado: 2026-11-06. Objetivo activo: implementar **todo** el [plan](../superpowers/plans/2026-10-31-actualizacion-proyecto.md). Este tablero no reemplaza requisitos ni declara el plan terminado. [Diagnóstico del proceso](workflow-review.md).
+Actualizado: 2026-11-07. Objetivo activo: implementar **todo** el [plan](../superpowers/plans/2026-10-31-actualizacion-proyecto.md). Este tablero no reemplaza requisitos ni declara el plan terminado. [Diagnóstico del proceso](workflow-review.md).
 
 ## Seguimiento al cambiar de tarea
 
@@ -19,7 +19,43 @@ o porcentaje. No reconstruir tiempos históricos a partir de recuerdos del chat.
 - Última suite global completada al retomar `0c8b8d9`: 2148 casos, 2045 pasan, 100 fallan y tres se omiten. Mismos 100 identificadores heredados; no se afirman causas idénticas. Pasan 965 casos del runtime. La política Git añadida después tiene verificación separada.
 - Los 43 escenarios amplios siguen abiertos en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Etapa actual: copia/restauración de datos implementada; sigue reinscripción
+## Etapa actual: reinscripción implementada; sigue recorrido nativo restaurado
+
+`enroll-restored-host` habilita una copia con recursos, autoridad y acceso nuevos.
+Los planes copiados quedan pausados y el trabajo pendiente se conserva como
+historial, sin afirmar cierre de actores/efectos originales. La activación se
+publica al final; un proceso interrumpido conserva el bloqueo y se recupera desde
+la copia original a otra ruta nueva. El navegador reconoce el cambio de base,
+explica un ejemplo concreto y archiva solicitudes/borradores antes de entrar.
+
+Pasan94 pruebas de fuente y94 del paquete instalado;583 archivos Python/SQL
+coinciden,312 productivos. Las13 definiciones Python nuevas/modificadas tienen
+docstrings y la sesión/aviso web tiene JSDoc. Pasan129 contratos frontend y4 DOM;
+build correcto. Tres estados de navegador comprobados, dos capturas revisadas,
+sin errores JS ni hallazgos Axe en escritorio/móvil. Tiempo medido hasta verificar:
+**18 minutos30 segundos** (03:13:16–03:31:46 UTC).
+[Guía](../architecture/installation-backup.md), [resultados](restored-enrollment-results.json),
+[paquete](restored-enrollment-packaging.json), [aviso](../design/audits/restored-session/report.md).
+
+**Lista vigente al cambiar de tarea:**
+- Implementado en este tramo: reinscripción fresca, conservación del historial,
+  pausa de planes, dos arranques del servicio nativo sin replay y protección del
+  navegador ante una instalación distinta. Cero turnos de modelo.
+- Siguiente principal: recorrido de modelo/Ken completo en la instalación
+  restaurada; recuperación/reinscripción tras reboot real. El no-op de kernel y
+  el reinicio de servicio no prueban esas dos obligaciones.
+- Pendiente de ubicación: datos históricos reales; sigue la consulta al dueño.
+  También siguen layouts externos, informes sólo en archivos, documentos sólo en
+  Chroma e inversas/recuperación posteriores.
+- Después: historial/presupuestos; evaluación real, humana, científica y global;
+  seguridad, aceptación integral de12 páginas y revisión final.
+- Al final: detalles secundarios registrados. DD073 conserva19 avisos Python,
+  un aviso frontend heredado, aviso Starlette/httpx y tamaño de bundle.
+
+Los43 escenarios amplios continúan abiertos y0/12 páginas están aceptadas
+integralmente. No hubo cambios en bases del propietario ni push, merge o despliegue.
+
+## Etapa anterior: copia/restauración de datos implementada; sigue reinscripción
 
 Los comandos `backup-host`, `verify-backup` y `restore-host` capturan datos
 consistentes, verifican manifiesto/hashes/conteos y restauran en otra carpeta.

@@ -29,7 +29,7 @@ try {
     if(!p.startsWith('/api/'))return route.continue()
     if(request.method()!=='GET')evidence.writes.push({method:request.method(),path:p})
     let body={}
-    if(p==='/api/session')body={authenticated:true,csrf_token:'browser-fixture'}
+    if(p==='/api/session')body={authenticated:true,csrf_token:'browser-fixture',endpoint_id:'fixture-home-installation'}
     else if(p==='/api/projects')body={projects:[project,{...project,id:2,name:'Proyecto vacío',status:'new'}],total:2}
     else if(p==='/api/projects/1')body=project
     else if(p==='/api/projects/2')body={...project,id:2,name:'Proyecto vacío',status:'new'}
@@ -96,7 +96,7 @@ try {
   await page.evaluate(()=>localStorage.setItem('active-project',JSON.stringify({state:{activeProjectId:null},version:0})))
   // The initialization hook intentionally restores project 1 on reload; a separate page covers no selection.
   const emptyContext=await browser.newContext({viewport:{width:390,height:844}})
-  await emptyContext.route('**/api/session',route=>route.fulfill({status:200,json:{authenticated:true,csrf_token:'fixture'}}))
+  await emptyContext.route('**/api/session',route=>route.fulfill({status:200,json:{authenticated:true,csrf_token:'fixture',endpoint_id:'fixture-home-installation'}}))
   await emptyContext.route('**/api/projects',route=>route.fulfill({status:200,json:{projects:[],total:0}}))
   const emptyPage=await emptyContext.newPage();await emptyPage.goto(origin)
   await expect(emptyPage.getByRole('heading',{name:'Un lugar para retomar el trabajo'})).toBeVisible()

@@ -1341,13 +1341,21 @@
         "backend/tests/runtime/test_installation_backup.py",
         "docs/architecture/installation-backup.md",
         "docs/modernization/installation-backup-results.json",
-        "docs/modernization/installation-backup-packaging.json"
+        "docs/modernization/installation-backup-packaging.json",
+        "backend/runtime/restored_enrollment.py",
+        "backend/tests/runtime/test_restored_enrollment.py",
+        "frontend/src/api/session.ts",
+        "frontend/tests/restored-session.browser.mjs",
+        "docs/modernization/restored-enrollment-results.json",
+        "docs/modernization/restored-enrollment-packaging.json",
+        "docs/design/audits/restored-session/report.md"
       ],
       "remaining": [
         "Full product runtime/client integration and browser acceptance; HTTP owner guard does not complete the entire scenario"
       ],
       "implemented": [
-        "Managed installation data backup/verification/another-path restore preserves SQLite, uploads and linked Git worktrees.82source/82installed tests pass; restored execution remains pending enrollment. No production-data or operational recovery acceptance."
+        "Managed installation data backup/verification/another-path restore preserves SQLite, uploads and linked Git worktrees.82source/82installed tests pass; restored execution remains pending enrollment. No production-data or operational recovery acceptance.",
+        "Fresh restored-host enrollment, paused copied plans and preserved pending history, exact browser endpoint/intent archival, service restart and abrupt-child recovery:94source/94installed,129frontendcontracts/4DOM,3browserstates. No restored model run, reboot or real-data acceptance."
       ]
     },
     "U01": {
@@ -2090,16 +2098,24 @@
         "backend/tests/runtime/test_installation_backup.py",
         "docs/architecture/installation-backup.md",
         "docs/modernization/installation-backup-results.json",
-        "docs/modernization/installation-backup-packaging.json"
+        "docs/modernization/installation-backup-packaging.json",
+        "backend/runtime/restored_enrollment.py",
+        "backend/tests/runtime/test_restored_enrollment.py",
+        "frontend/src/api/session.ts",
+        "frontend/tests/restored-session.browser.mjs",
+        "docs/modernization/restored-enrollment-results.json",
+        "docs/modernization/restored-enrollment-packaging.json",
+        "docs/design/audits/restored-session/report.md"
       ],
       "implemented": [
-        "Managed installation data backup/verification/another-path restore preserves SQLite, uploads and linked Git worktrees.82source/82installed tests pass; restored execution remains pending enrollment. No production-data or operational recovery acceptance."
+        "Managed installation data backup/verification/another-path restore preserves SQLite, uploads and linked Git worktrees.82source/82installed tests pass; restored execution remains pending enrollment. No production-data or operational recovery acceptance.",
+        "Fresh restored-host enrollment, paused copied plans and preserved pending history, exact browser endpoint/intent archival, service restart and abrupt-child recovery:94source/94installed,129frontendcontracts/4DOM,3browserstates. No restored model run, reboot or real-data acceptance."
       ],
       "remaining": [
-        "Explicit restored-host enrollment and reconciliation without replay or rewriting original authority",
+        "Complete model/Ken product run after restored-host enrollment",
         "Actual reboot and independent witness recovery",
         "Historical real-data location/import, filesystem-only reports, Chroma-only documents and external legacy layouts",
-        "Full operational restore acceptance including native runtime after enrollment"
+        "Later inverse/recovery paths and metadata-size support where needed"
       ]
     },
     "design_audit": {

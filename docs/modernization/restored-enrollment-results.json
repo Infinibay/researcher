@@ -1,0 +1,61 @@
+{
+  "base_commit": "f1abb34",
+  "status": "implemented_with_remaining_operational_acceptance",
+  "timing": {
+    "start_utc": "2026-11-07 03:13:16",
+    "verified_utc": "2026-11-07 03:31:46",
+    "elapsed_seconds": 1110
+  },
+  "source": {
+    "cases": 94,
+    "passed": 94,
+    "failed": 0,
+    "skipped": 0,
+    "seconds": 43.901
+  },
+  "installed": {
+    "cases": 94,
+    "passed": 94,
+    "failed": 0,
+    "skipped": 0,
+    "backend_modules": 232,
+    "all_backend_imports_from_native_env": true,
+    "seconds": 44.551,
+    "exit_code": 0
+  },
+  "frontend": {
+    "contract_tests_passed": 129,
+    "dom_tests_passed": 4,
+    "build": "passed",
+    "browser_states": 3,
+    "desktop_mobile_axe_violations": 0,
+    "js_errors": 0
+  },
+  "documented_changed_python_definitions": 13,
+  "real_model_turns": 0,
+  "user_data_modified": false,
+  "implemented": [
+    "Explicit fresh enrollment using validated resources, separate new authority and fresh pairing",
+    "Copied active plans paused; unfinished runs retained as superseded history with original states/events",
+    "Old native evidence, handoffs, receipts and accepted results preserved; original physical or remote closure not asserted",
+    "Two HTTP/native service startups without replay; old endpoint HTTP actions rejected",
+    "Owned abrupt enrollment-child exit before final marker remains inactive; verified backup restored to another NEW path and enrolled",
+    "Browser identity fence, legacy unbound packet guard, exact local archival and download, storage failure retention"
+  ],
+  "remaining": [
+    "Fresh complete native model/Ken run on restored host",
+    "Actual host reboot and independent witness recovery",
+    "Historical user-data location/import and external legacy layouts",
+    "Later inverse/recovery paths and metadata-size support where required",
+    "Current full global, real-model, human and scientific evaluations",
+    "All12 page acceptance, dependency security and final whole-plan review"
+  ],
+  "failures_retained": [
+    "7 initial new tests failed before implementation",
+    "HTTP test fixture initially called endpoint_identity with a path instead of request and later used nonexistent nested tasks route; corrected to actual public contract",
+    "Frontend endpoint tests initially failed before implementation; delayed-session fixture gained current endpoint contract",
+    "First browser harness intercepted /src/api module requests; narrowed to /api/ and reran with original browser closed"
+  ],
+  "deferred_detail": "DD073",
+  "limits": "Synthetic data and controlled browser responses. Kernel no-op is physical; no reboot, power-loss, real user-data migration, restored model-run or full-product acceptance claimed."
+}
