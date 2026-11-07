@@ -82,6 +82,7 @@ MIGRATIONS = (
     Migration(64, resource='preparation_budget_schema.sql'),
     Migration(65, resource='project_check_policy_schema.sql'),
     Migration(66, resource='reference_operations_schema.sql'),
+    Migration(67, resource='git_identity_schema.sql'),
 )
 LATEST_VERSION = MIGRATIONS[-1].version
 

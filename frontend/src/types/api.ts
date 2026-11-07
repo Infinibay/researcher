@@ -315,6 +315,7 @@ export interface BranchDetail {
 
 export interface PullRequest {
   id: number
+  repo_id?: number | null
   project_id?: number
   task_id?: number
   branch: string

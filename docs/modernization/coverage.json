@@ -1655,7 +1655,7 @@
       ]
     },
     "D06": {
-      "status": "in_progress",
+      "status": "complete",
       "evidence": [
         "backend/tests/research",
         "docs/architecture/research-slice.md",
@@ -1680,22 +1680,69 @@
         "backend/tests/research/test_wiki_migration.py",
         "backend/tests/research/test_wiki_collection.py",
         "backend/tests/research/test_wiki_imports.py",
-        "docs/design/audits/2026-11-01-wiki/report.md"
+        "docs/design/audits/2026-11-01-wiki/report.md",
+        "backend/tests/api/test_git_identity.py",
+        "frontend/tests/ui/repository-identity.test.tsx",
+        "backend/tests/runtime/test_prior_branch_input.py",
+        "docs/modernization/git-identity-review.md",
+        "docs/modernization/git-identity-final-packaging.json",
+        "docs/modernization/git-identity-docstrings.json"
       ],
-      "remaining": [
-        "Wiki identity portion covered by scoped/CAS/ABA tests; repository/branch/merge/cleanup identity and complete scenario acceptance remain pending."
+      "remaining": [],
+      "verified_at": "2026-11-07",
+      "completion_scope": "Project/repository IDs replace ambiguous Git labels; migration67 preserves retained rows and ID high-watermarks. Atomic scoped branch/PR annotations, prior-code selection, remote lookup, frontend query/cache identity and scoped wiki coexistence are verified.",
+      "implemented": [
+        "Project/repository IDs replace ambiguous Git labels; migration67 preserves retained rows and ID high-watermarks. Atomic scoped branch/PR annotations, prior-code selection, remote lookup, frontend query/cache identity and scoped wiki coexistence are verified."
+      ],
+      "limitations": [
+        "409 final installed selected cases pass without skips; controlled inference/Forgejo REST with real kernel/Git/TLS, not external owner-account operations or representative model evaluation.",
+        "No new global-suite, full-page acceptance or historical user-data migration claim. D08 quarantine/retention remains open.",
+        "Migration associates preexisting project/name labels once; it does not prove historical physical Git identity. Unresolved rows remain unbound when namesakes are registered later; old history never grants native publication authority."
       ]
     },
     "D07": {
-      "status": "pending",
-      "evidence": []
+      "status": "complete",
+      "evidence": [
+        "backend/tests/runtime/test_publication_git.py",
+        "backend/tests/runtime/test_owned_publication.py",
+        "backend/tests/runtime/test_publication_recovery.py",
+        "backend/tests/runtime/test_owned_remote_transport.py",
+        "backend/tests/git/test_local_worktree.py",
+        "docs/modernization/git-identity-review.md",
+        "docs/modernization/git-identity-final-packaging.json",
+        "docs/modernization/git-identity-docstrings.json"
+      ],
+      "verified_at": "2026-11-07",
+      "completion_scope": "Native publication checks exact repository/base/candidate/destination and uses original-effect observation after uncertain replies. Checkout/source and a namesake branch in another clone remain unchanged. Retired TUI merge and forced worktree effects refuse before execution.",
+      "remaining": [],
+      "implemented": [
+        "Native publication checks exact repository/base/candidate/destination and uses original-effect observation after uncertain replies. Checkout/source and a namesake branch in another clone remain unchanged. Retired TUI merge and forced worktree effects refuse before execution."
+      ],
+      "limitations": [
+        "409 final installed selected cases pass without skips; controlled inference/Forgejo REST with real kernel/Git/TLS, not external owner-account operations or representative model evaluation.",
+        "No new global-suite, full-page acceptance or historical user-data migration claim. D08 quarantine/retention remains open."
+      ]
     },
     "D08": {
-      "status": "pending",
-      "evidence": []
+      "status": "in_progress",
+      "evidence": [
+        "backend/tests/git/test_worktree_manager.py",
+        "backend/tests/git/test_local_worktree.py",
+        "backend/tests/runtime/test_development_workspace.py",
+        "docs/modernization/git-identity-review.md",
+        "docs/modernization/git-identity-final-packaging.json",
+        "docs/modernization/git-identity-docstrings.json",
+        "docs/superpowers/plans/2026-11-07-workspace-retention.md"
+      ],
+      "implemented": [
+        "Per-attempt private copies are preserved; obsolete reset/forced-removal/rmtree worktree entry points now refuse before execution or DB writes. Eleven real dirty/untracked-worktree preservation cases pass."
+      ],
+      "remaining": [
+        "Implement explicit owner quarantine, retention policy, verified recovery archive, original-operation deletion/reconciliation and UI; retaining everything is not completed retention."
+      ]
     },
     "D09": {
-      "status": "in_progress",
+      "status": "complete",
       "evidence": [
         "docs/architecture/source-operations.md",
         "docs/modernization/source-setup-results.json",
@@ -1726,7 +1773,21 @@
         "docs/modernization/source-reservation-results.json",
         "backend/tests/runtime/test_source_reservation.py",
         "frontend/tests/source-reservation.test.ts",
-        "docs/design/audits/2026-11-06-source-reservation/report.md"
+        "docs/design/audits/2026-11-06-source-reservation/report.md",
+        "backend/tests/runtime/test_source_operations.py",
+        "docs/modernization/git-identity-review.md",
+        "docs/modernization/git-identity-final-packaging.json",
+        "docs/modernization/git-identity-docstrings.json"
+      ],
+      "verified_at": "2026-11-07",
+      "completion_scope": "Explicit create/adopt/clone/repair/reservation flows retain original scoped intent, reconcile remote/local/DB outcomes, preserve owner changes and refuse changed preconditions without force push or origin rewriting. Original remote writes are not guessed absent or silently replayed.",
+      "remaining": [],
+      "implemented": [
+        "Explicit create/adopt/clone/repair/reservation flows retain original scoped intent, reconcile remote/local/DB outcomes, preserve owner changes and refuse changed preconditions without force push or origin rewriting. Original remote writes are not guessed absent or silently replayed."
+      ],
+      "limitations": [
+        "409 final installed selected cases pass without skips; controlled inference/Forgejo REST with real kernel/Git/TLS, not external owner-account operations or representative model evaluation.",
+        "No new global-suite, full-page acceptance or historical user-data migration claim. D08 quarantine/retention remains open."
       ]
     },
     "D10": {

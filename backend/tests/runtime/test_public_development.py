@@ -259,7 +259,26 @@ async def test_owner_http_develops_checks_reviews_and_accepts_exact_candidate(
         )
         assert conflict.status_code == 409
         state = (await owner.get(state_path)).json()
-        assert state["review"]["state"] == "confirmed" and state["eligible"]
+        assert state["review"]["state"] == "confirmed", state
+        assert not state["eligible"] and {b['code'] for b in state['blockers']} == {'check_policy_unset'}, state
+        policy = await owner.post('/api/projects/101/check-policy', json={
+            'operation_key': 'public-check-policy',
+            'expected_revision': state['project_check_policy']['revision'],
+            'mode': 'require_tests',
+        })
+        assert policy.status_code == 200, policy.text
+        state = (await owner.get(state_path)).json()
+        assert not state['eligible'] and {b['code'] for b in state['blockers']} == {'tests_required'}, state['blockers']
+        assert {item['code'] for item in state['checks']['limitations']} == {'test_execution_unproven'}
+        policy = await owner.post('/api/projects/101/check-policy', json={
+            'operation_key': 'public-command-only-policy',
+            'expected_revision': state['project_check_policy']['revision'],
+            'mode': 'allow_missing',
+        })
+        assert policy.status_code == 200, policy.text
+        state = (await owner.get(state_path)).json()
+        assert state['eligible'], state
+        assert state['requires_acknowledgement']
         acceptance = await owner.post(
             state_path + "/accept",
             json={
@@ -268,6 +287,7 @@ async def test_owner_http_develops_checks_reviews_and_accepts_exact_candidate(
                 "attempt_id": state["candidate"]["attempt_id"],
                 "subject_sha256": state["subject_sha256"],
                 "review_sha256": state["review_sha256"],
+                "check_policy_revision": state['project_check_policy']['revision'],
                 "acknowledge_limits": True,
                 "note": "Accept the exact independently reviewed candidate; publication remains separate.",
             },

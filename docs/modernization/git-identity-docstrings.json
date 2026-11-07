@@ -1,0 +1,456 @@
+{
+  "base_commit": "564b388",
+  "changed_or_new_definitions_documented": 64,
+  "missing": [],
+  "contracts": [
+    {
+      "path": "backend/api/models/git.py",
+      "symbol": "BranchResponse",
+      "line": 26,
+      "docstring": "Historical branch identity, with an unresolved repository represented explicitly as null.",
+      "file_sha256": "077e7d7f508837fbf74f28650d513e06640ce1265565a9bd91851658729aab00"
+    },
+    {
+      "path": "backend/api/models/git.py",
+      "symbol": "PRResponse",
+      "line": 49,
+      "docstring": "Historical PR metadata whose repository binding is independent of its display name.",
+      "file_sha256": "077e7d7f508837fbf74f28650d513e06640ce1265565a9bd91851658729aab00"
+    },
+    {
+      "path": "backend/api/routes/git.py",
+      "symbol": "close_pr",
+      "line": 142,
+      "docstring": "Close/abandon a pull request.",
+      "file_sha256": "2a4e7692fcd7f86f4bffc9edaef31934fbb4d170ef5a82d38a729e323a94cdaf"
+    },
+    {
+      "path": "backend/api/routes/git.py",
+      "symbol": "list_repo_branches",
+      "line": 172,
+      "docstring": "Read branches from one scoped repository snapshot; a supplied ID takes precedence over its display name.",
+      "file_sha256": "2a4e7692fcd7f86f4bffc9edaef31934fbb4d170ef5a82d38a729e323a94cdaf"
+    },
+    {
+      "path": "backend/api/routes/git.py",
+      "symbol": "get_repo_tree",
+      "line": 201,
+      "docstring": "Get the file tree for a repository at a given ref.\n\n*ref* can be a branch name, tag, or commit SHA (7-40 hex chars).\nUses Forgejo when available, otherwise falls back to local git.",
+      "file_sha256": "2a4e7692fcd7f86f4bffc9edaef31934fbb4d170ef5a82d38a729e323a94cdaf"
+    },
+    {
+      "path": "backend/api/routes/git.py",
+      "symbol": "get_file_contents",
+      "line": 250,
+      "docstring": "Read one file from the selected repository ID and project, using the same registration snapshot for local/remote resolution.",
+      "file_sha256": "2a4e7692fcd7f86f4bffc9edaef31934fbb4d170ef5a82d38a729e323a94cdaf"
+    },
+    {
+      "path": "backend/api/routes/git.py",
+      "symbol": "list_pr_comments",
+      "line": 288,
+      "docstring": "List Forgejo comments on a pull request.",
+      "file_sha256": "2a4e7692fcd7f86f4bffc9edaef31934fbb4d170ef5a82d38a729e323a94cdaf"
+    },
+    {
+      "path": "backend/api/routes/git.py",
+      "symbol": "create_pr_comment",
+      "line": 319,
+      "docstring": "Post a comment on a pull request via Forgejo.",
+      "file_sha256": "2a4e7692fcd7f86f4bffc9edaef31934fbb4d170ef5a82d38a729e323a94cdaf"
+    },
+    {
+      "path": "backend/api/routes/git.py",
+      "symbol": "_require_pr_remote",
+      "line": 514,
+      "docstring": "Resolve historical PR browsing/comments by its bound repository, refusing unresolved labels instead of attaching a later namesake.",
+      "file_sha256": "2a4e7692fcd7f86f4bffc9edaef31934fbb4d170ef5a82d38a729e323a94cdaf"
+    },
+    {
+      "path": "backend/api/routes/git.py",
+      "symbol": "_require_pr_remote.repository",
+      "line": 516,
+      "docstring": "Capture the remote and path only after matching both recorded repository and project IDs.",
+      "file_sha256": "2a4e7692fcd7f86f4bffc9edaef31934fbb4d170ef5a82d38a729e323a94cdaf"
+    },
+    {
+      "path": "backend/api/routes/git.py",
+      "symbol": "_repository_record",
+      "line": 530,
+      "docstring": "Resolve a single project-bound registration, never substitute a same-named source when an explicit ID is missing.",
+      "file_sha256": "2a4e7692fcd7f86f4bffc9edaef31934fbb4d170ef5a82d38a729e323a94cdaf"
+    },
+    {
+      "path": "backend/api/routes/git.py",
+      "symbol": "_repository_record.query",
+      "line": 532,
+      "docstring": "Capture local path and remote URL together so later name reuse cannot split one read across repositories.",
+      "file_sha256": "2a4e7692fcd7f86f4bffc9edaef31934fbb4d170ef5a82d38a729e323a94cdaf"
+    },
+    {
+      "path": "backend/api/routes/git.py",
+      "symbol": "_forgejo_owner",
+      "line": 545,
+      "docstring": "Choose transport from one already-scoped registration snapshot without another name-based database lookup.",
+      "file_sha256": "2a4e7692fcd7f86f4bffc9edaef31934fbb4d170ef5a82d38a729e323a94cdaf"
+    },
+    {
+      "path": "backend/db/git_identity_migration.py",
+      "symbol": "restore_git_identity_schema",
+      "line": 6,
+      "docstring": "Restore schema66 only with no branch/PR history and no later schema; populated installations use forward repair or backup.",
+      "file_sha256": "d9621739cad1cc40f6a9a31d3486d4dc74579813eeda929ce85e4201b0589d4a"
+    },
+    {
+      "path": "backend/git/branch_service.py",
+      "symbol": "BranchService",
+      "line": 16,
+      "docstring": "Read and annotate stored branch history without inferring native ownership, acceptance or permission to mutate Git.",
+      "file_sha256": "441dcadd601b45ab9f05b7bc2a8d36876f1b616bc3ae37842e55ac59a9e8bc39"
+    },
+    {
+      "path": "backend/git/branch_service.py",
+      "symbol": "BranchService.mark_branch_merged",
+      "line": 99,
+      "docstring": "Annotate only a repository-scoped historical branch; this metadata never executes Git or grants native acceptance.",
+      "file_sha256": "441dcadd601b45ab9f05b7bc2a8d36876f1b616bc3ae37842e55ac59a9e8bc39"
+    },
+    {
+      "path": "backend/git/branch_service.py",
+      "symbol": "BranchService.mark_branch_merged._update",
+      "line": 112,
+      "docstring": "Update only the historical row matching the supplied project, repository and branch label.",
+      "file_sha256": "441dcadd601b45ab9f05b7bc2a8d36876f1b616bc3ae37842e55ac59a9e8bc39"
+    },
+    {
+      "path": "backend/git/branch_service.py",
+      "symbol": "BranchService.mark_branch_stale",
+      "line": 128,
+      "docstring": "Annotate one bound historical branch without inferring deletion permission from its age or name.",
+      "file_sha256": "441dcadd601b45ab9f05b7bc2a8d36876f1b616bc3ae37842e55ac59a9e8bc39"
+    },
+    {
+      "path": "backend/git/branch_service.py",
+      "symbol": "BranchService.mark_branch_stale._update",
+      "line": 131,
+      "docstring": "Retain other projects' and repositories' namesakes while recording this explicit annotation.",
+      "file_sha256": "441dcadd601b45ab9f05b7bc2a8d36876f1b616bc3ae37842e55ac59a9e8bc39"
+    },
+    {
+      "path": "backend/git/local_worktree.py",
+      "symbol": "LocalWorktreeManager",
+      "line": 10,
+      "docstring": "Preserve imports without reviving a second executor, unchecked checkout merge or destructive cleanup path.",
+      "file_sha256": "f132d999439b828672910d471dc5bd7d51a58c01ac52b0fc24e0aa34f277a99e"
+    },
+    {
+      "path": "backend/git/local_worktree.py",
+      "symbol": "LocalWorktreeManager.__init__",
+      "line": 13,
+      "docstring": "Accept the historical constructor without resolving paths, discovering Git or creating directories.",
+      "file_sha256": "f132d999439b828672910d471dc5bd7d51a58c01ac52b0fc24e0aa34f277a99e"
+    },
+    {
+      "path": "backend/git/local_worktree.py",
+      "symbol": "LocalWorktreeManager.ensure_base_dir",
+      "line": 17,
+      "docstring": "Refuse legacy workspace setup before mkdir; native allocations are recorded before filesystem work.",
+      "file_sha256": "f132d999439b828672910d471dc5bd7d51a58c01ac52b0fc24e0aa34f277a99e"
+    },
+    {
+      "path": "backend/git/local_worktree.py",
+      "symbol": "LocalWorktreeManager.create_worktree",
+      "line": 21,
+      "docstring": "Refuse reusing an old agent directory or branch as a new execution attempt.",
+      "file_sha256": "f132d999439b828672910d471dc5bd7d51a58c01ac52b0fc24e0aa34f277a99e"
+    },
+    {
+      "path": "backend/git/local_worktree.py",
+      "symbol": "LocalWorktreeManager.remove_worktree",
+      "line": 25,
+      "docstring": "Refuse both ordinary and forced removal without pretending a failed deletion succeeded.",
+      "file_sha256": "f132d999439b828672910d471dc5bd7d51a58c01ac52b0fc24e0aa34f277a99e"
+    },
+    {
+      "path": "backend/git/local_worktree.py",
+      "symbol": "LocalWorktreeManager.get_worktree_path",
+      "line": 29,
+      "docstring": "Refuse inferred filesystem ownership from an agent label; use scoped retained-material controls.",
+      "file_sha256": "f132d999439b828672910d471dc5bd7d51a58c01ac52b0fc24e0aa34f277a99e"
+    },
+    {
+      "path": "backend/git/local_worktree.py",
+      "symbol": "LocalWorktreeManager.list_worktrees",
+      "line": 33,
+      "docstring": "Refuse the obsolete ambient Git reader instead of hiding unavailable history as an empty list.",
+      "file_sha256": "f132d999439b828672910d471dc5bd7d51a58c01ac52b0fc24e0aa34f277a99e"
+    },
+    {
+      "path": "backend/git/local_worktree.py",
+      "symbol": "LocalWorktreeManager.merge_worktree",
+      "line": 37,
+      "docstring": "Refuse unchecked merging into the current checkout; publication requires exact source, destination and receipt.",
+      "file_sha256": "f132d999439b828672910d471dc5bd7d51a58c01ac52b0fc24e0aa34f277a99e"
+    },
+    {
+      "path": "backend/git/local_worktree.py",
+      "symbol": "LocalWorktreeManager.cleanup_worktrees",
+      "line": 41,
+      "docstring": "Refuse bulk cleanup; preservation and retention decisions belong to explicit owner operations.",
+      "file_sha256": "f132d999439b828672910d471dc5bd7d51a58c01ac52b0fc24e0aa34f277a99e"
+    },
+    {
+      "path": "backend/git/local_worktree.py",
+      "symbol": "LocalWorktreeManager.setup_for_agents",
+      "line": 45,
+      "docstring": "Refuse batch allocation through the removed TUI engine before any directory or process is created.",
+      "file_sha256": "f132d999439b828672910d471dc5bd7d51a58c01ac52b0fc24e0aa34f277a99e"
+    },
+    {
+      "path": "backend/git/pr_service.py",
+      "symbol": "PRService",
+      "line": 14,
+      "docstring": "Read and annotate historical PR records without treating status or actor labels as native acceptance/publication authority.",
+      "file_sha256": "9e2bf945764a66dddce6841b49088b5191fd168bcc07f160213c8e881755508d"
+    },
+    {
+      "path": "backend/git/pr_service.py",
+      "symbol": "PRService.close_pr",
+      "line": 131,
+      "docstring": "Annotate one historical PR and its bound branch atomically; names cannot transfer ownership or authorize Git effects.",
+      "file_sha256": "9e2bf945764a66dddce6841b49088b5191fd168bcc07f160213c8e881755508d"
+    },
+    {
+      "path": "backend/git/pr_service.py",
+      "symbol": "PRService.close_pr._abandon",
+      "line": 133,
+      "docstring": "Resolve the original row under the write lock and retain its event with both scoped metadata changes.",
+      "file_sha256": "9e2bf945764a66dddce6841b49088b5191fd168bcc07f160213c8e881755508d"
+    },
+    {
+      "path": "backend/git/pr_service.py",
+      "symbol": "PRService._resolve_owner_repo",
+      "line": 158,
+      "docstring": "Derive ``{owner}/{repo}`` from the repository's ``remote_url``.\n\nParses both HTTPS (``https://host/owner/repo.git``) and SSH\n(``git@host:owner/repo.git``) URL formats.",
+      "file_sha256": "9e2bf945764a66dddce6841b49088b5191fd168bcc07f160213c8e881755508d"
+    },
+    {
+      "path": "backend/git/pr_service.py",
+      "symbol": "PRService._resolve_owner_repo._query",
+      "line": 167,
+      "docstring": "Read the legacy caller's remote inside its explicit project and repository-name scope.",
+      "file_sha256": "9e2bf945764a66dddce6841b49088b5191fd168bcc07f160213c8e881755508d"
+    },
+    {
+      "path": "backend/git/pr_service.py",
+      "symbol": "PRService._remote_owner_repo",
+      "line": 183,
+      "docstring": "Decode a previously selected registration's remote without re-resolving its mutable display name.",
+      "file_sha256": "9e2bf945764a66dddce6841b49088b5191fd168bcc07f160213c8e881755508d"
+    },
+    {
+      "path": "backend/git/worktree_manager.py",
+      "symbol": "WorktreeManager",
+      "line": 11,
+      "docstring": "Keep import compatibility while rejecting obsolete database-backed worktree effects before any IO.",
+      "file_sha256": "a0a351f2bfca10b541759c945f958234d32b5506a150ee217e5dd54dc00a5a4a"
+    },
+    {
+      "path": "backend/git/worktree_manager.py",
+      "symbol": "WorktreeManager.ensure_worktree",
+      "line": 14,
+      "docstring": "Refuse per-agent reuse/reset; native preparation admits an independent allocation for each exact attempt.",
+      "file_sha256": "a0a351f2bfca10b541759c945f958234d32b5506a150ee217e5dd54dc00a5a4a"
+    },
+    {
+      "path": "backend/git/worktree_manager.py",
+      "symbol": "WorktreeManager.remove_worktree",
+      "line": 18,
+      "docstring": "Refuse force removal and false removed-state updates; retained dirty/untracked files remain untouched.",
+      "file_sha256": "a0a351f2bfca10b541759c945f958234d32b5506a150ee217e5dd54dc00a5a4a"
+    },
+    {
+      "path": "backend/git/worktree_manager.py",
+      "symbol": "WorktreeManager.cleanup_stale_worktrees",
+      "line": 22,
+      "docstring": "Refuse age/roster-based disposal and pruning; missing actors do not establish that their work is dispensable.",
+      "file_sha256": "a0a351f2bfca10b541759c945f958234d32b5506a150ee217e5dd54dc00a5a4a"
+    },
+    {
+      "path": "backend/runtime/branch_inputs.py",
+      "symbol": "BranchInputs",
+      "line": 46,
+      "docstring": "Bind admitted selection to one original acquisition receipt; no new persistence table, execution controller or model loop.",
+      "file_sha256": "240a29c7387e365084db3d00d905c7dc19e00261490fad1ea90c97f3c08ab0d0"
+    },
+    {
+      "path": "backend/runtime/branch_inputs.py",
+      "symbol": "BranchInputs.sources",
+      "line": 53,
+      "docstring": "List scoped historical branch records; stored commit hashes are suggestions, not live Git observations.",
+      "file_sha256": "240a29c7387e365084db3d00d905c7dc19e00261490fad1ea90c97f3c08ab0d0"
+    },
+    {
+      "path": "backend/runtime/branch_inputs.py",
+      "symbol": "BranchInputs.select",
+      "line": 67,
+      "docstring": "Freeze only the actual scoped record and owner-chosen immutable commit; original context and bytes are not guessed at admission.",
+      "file_sha256": "240a29c7387e365084db3d00d905c7dc19e00261490fad1ea90c97f3c08ab0d0"
+    },
+    {
+      "path": "backend/runtime/legacy_git.py",
+      "symbol": "pr_owner_entry",
+      "line": 18,
+      "docstring": "Correlate historical PR/task/repository/worktree labels without reading Git, inferring byte availability or transferring old approval to native work.",
+      "file_sha256": "40651bb3d8f58ec54ffcf46c968342a2a289d14ceb3907fe18f40fb294915dc4"
+    },
+    {
+      "path": "backend/tests/api/test_git_identity.py",
+      "symbol": "named_repositories",
+      "line": 8,
+      "docstring": "Seed two independent repositories with deliberately identical human-readable names.",
+      "file_sha256": "963e28dc99683c97eca78c1e58f9f11197147837775f770d7f47effa37b0d8fb"
+    },
+    {
+      "path": "backend/tests/api/test_git_identity.py",
+      "symbol": "test_closing_pr_does_not_abandon_same_named_branch_in_another_project",
+      "line": 19,
+      "docstring": "A PR without a matching branch in its own repository cannot adopt another project's same-named history.",
+      "file_sha256": "963e28dc99683c97eca78c1e58f9f11197147837775f770d7f47effa37b0d8fb"
+    },
+    {
+      "path": "backend/tests/api/test_git_identity.py",
+      "symbol": "test_identical_branch_names_coexist_and_http_closure_is_scoped_atomic_and_idempotent",
+      "line": 30,
+      "docstring": "Two projects may retain app/task/1; owner closure changes exactly one branch and publishes one transactional event.",
+      "file_sha256": "963e28dc99683c97eca78c1e58f9f11197147837775f770d7f47effa37b0d8fb"
+    },
+    {
+      "path": "backend/tests/api/test_git_identity.py",
+      "symbol": "test_close_failure_rolls_back_pr_branch_and_event",
+      "line": 46,
+      "docstring": "A failed durable event cannot leave a closed review or abandoned branch behind.",
+      "file_sha256": "963e28dc99683c97eca78c1e58f9f11197147837775f770d7f47effa37b0d8fb"
+    },
+    {
+      "path": "backend/tests/api/test_git_identity.py",
+      "symbol": "test_repository_rename_and_name_reuse_do_not_rebind_original_history",
+      "line": 59,
+      "docstring": "A later repository named app cannot receive closure, navigation or prior-code selection intended for the original ID.",
+      "file_sha256": "963e28dc99683c97eca78c1e58f9f11197147837775f770d7f47effa37b0d8fb"
+    },
+    {
+      "path": "backend/tests/api/test_git_identity.py",
+      "symbol": "test_repository_reads_keep_original_id_across_rename_and_name_reuse",
+      "line": 82,
+      "docstring": "Actual Git reads use the selected ID even after its name is reused, and never fall back after a foreign or missing ID.",
+      "file_sha256": "963e28dc99683c97eca78c1e58f9f11197147837775f770d7f47effa37b0d8fb"
+    },
+    {
+      "path": "backend/tests/api/test_git_identity.py",
+      "symbol": "test_pr_remote_uses_bound_repository_snapshot_after_name_reuse",
+      "line": 111,
+      "docstring": "Historical remote comments remain bound to the original repository rather than a replacement sharing its old display name.",
+      "file_sha256": "963e28dc99683c97eca78c1e58f9f11197147837775f770d7f47effa37b0d8fb"
+    },
+    {
+      "path": "backend/tests/api/test_git_identity.py",
+      "symbol": "test_unresolved_history_never_adopts_a_repository_registered_later",
+      "line": 125,
+      "docstring": "Absence of an original repository ID remains explicit, including before any legacy remote request.",
+      "file_sha256": "963e28dc99683c97eca78c1e58f9f11197147837775f770d7f47effa37b0d8fb"
+    },
+    {
+      "path": "backend/tests/api/test_git_identity.py",
+      "symbol": "test_unresolved_history_never_adopts_a_repository_registered_later.unexpected",
+      "line": 137,
+      "docstring": "Fail if a missing historical association reaches remote resolution by display name.",
+      "file_sha256": "963e28dc99683c97eca78c1e58f9f11197147837775f770d7f47effa37b0d8fb"
+    },
+    {
+      "path": "backend/tests/api/test_git_identity.py",
+      "symbol": "test_branch_annotations_require_project_and_repository_identity",
+      "line": 147,
+      "docstring": "Old unscoped calls cannot silently mutate every namesake; explicit matching identities affect one row.",
+      "file_sha256": "963e28dc99683c97eca78c1e58f9f11197147837775f770d7f47effa37b0d8fb"
+    },
+    {
+      "path": "backend/tests/api/test_git_identity.py",
+      "symbol": "test_git_identity_migration_preserves_rows_unresolved_history_and_id_high_watermark",
+      "line": 161,
+      "docstring": "Migration67 keeps original rows and deleted-ID history while resolving only existing scoped registrations.",
+      "file_sha256": "963e28dc99683c97eca78c1e58f9f11197147837775f770d7f47effa37b0d8fb"
+    },
+    {
+      "path": "backend/tests/api/test_git_identity.py",
+      "symbol": "test_unused_git_identity_inverse_restores_exact_supported_prefix",
+      "line": 185,
+      "docstring": "An unused schema67 can return to66 without dropping unrelated project data or bypassing later-schema guards.",
+      "file_sha256": "963e28dc99683c97eca78c1e58f9f11197147837775f770d7f47effa37b0d8fb"
+    },
+    {
+      "path": "backend/tests/api/test_reference_recovery.py",
+      "symbol": "test_migration_inverse_refuses_history_and_preserves_legacy_references",
+      "line": 237,
+      "docstring": "Unused schema66 reverses safely; any admitted operation prevents erasing its recovery history.",
+      "file_sha256": "492c39d4a0f6a8d43c2c2b28da783e5a2b5ebdd588e468a1949d7a7eee6dcded"
+    },
+    {
+      "path": "backend/tests/git/test_local_worktree.py",
+      "symbol": "test_retired_tui_worktree_calls_preserve_retained_work_and_never_start_git",
+      "line": 14,
+      "docstring": "Even force cleanup or an explicit merge target refuses before touching a real dirty checkout or launching Git.",
+      "file_sha256": "715164d28fbc72c673e7df00314dd5e29fcd2fec74a708feee00a7604accb928"
+    },
+    {
+      "path": "backend/tests/git/test_local_worktree.py",
+      "symbol": "test_retired_tui_worktree_calls_preserve_retained_work_and_never_start_git.forbidden",
+      "line": 21,
+      "docstring": "Detect ambient execution from an obsolete TUI path, regardless of requested destination.",
+      "file_sha256": "715164d28fbc72c673e7df00314dd5e29fcd2fec74a708feee00a7604accb928"
+    },
+    {
+      "path": "backend/tests/git/test_worktree_manager.py",
+      "symbol": "retained_worktree",
+      "line": 14,
+      "docstring": "Create a real linked checkout with tracked and untracked owner edits before testing retired entry points.",
+      "file_sha256": "89aea7a67afea71be123a79d9def127cca1456288918b98d3ba7bd706a2f2bc0"
+    },
+    {
+      "path": "backend/tests/git/test_worktree_manager.py",
+      "symbol": "test_retired_database_worktree_calls_preserve_files_and_metadata",
+      "line": 28,
+      "docstring": "Every historical mutation refuses before any Git process or database callback, leaving real edits and records intact.",
+      "file_sha256": "89aea7a67afea71be123a79d9def127cca1456288918b98d3ba7bd706a2f2bc0"
+    },
+    {
+      "path": "backend/tests/git/test_worktree_manager.py",
+      "symbol": "test_retired_database_worktree_calls_preserve_files_and_metadata.forbidden",
+      "line": 36,
+      "docstring": "Detect any attempt to reactivate the obsolete process or persistence path.",
+      "file_sha256": "89aea7a67afea71be123a79d9def127cca1456288918b98d3ba7bd706a2f2bc0"
+    },
+    {
+      "path": "backend/tests/runtime/test_legacy_code_publication.py",
+      "symbol": "test_unaccepted_native_code_cannot_publish_through_legacy_merge",
+      "line": 37,
+      "docstring": "Actual Git must stay unchanged despite a legacy approved label or a PR with another task/project identity.",
+      "file_sha256": "45a5f0018d2ebeaf839e46348d80e9a08479e4a99b1338919d675d2bee2b5a69"
+    },
+    {
+      "path": "backend/tests/runtime/test_public_development.py",
+      "symbol": "test_owner_http_develops_checks_reviews_and_accepts_exact_candidate",
+      "line": 21,
+      "docstring": "Fresh authoring and explicit prior-code reuse keep original receipts, independent checks/review and an unchanged source.",
+      "file_sha256": "f98f84f24eaa6ae2cd0e8f88cf8f14e5206d98edf9e95ecd3a74f61f4b715068"
+    },
+    {
+      "path": "backend/tests/runtime/test_publication_git.py",
+      "symbol": "test_actual_ref_publication_is_exact_atomic_and_leaves_checkout_unchanged",
+      "line": 150,
+      "docstring": "Only the accepted candidate head and stable marker enter the source; its checked-out branch/files remain at the original base.",
+      "file_sha256": "b8472e2ba8250f4415f7668b2de2e02ca388dd69bd6c91efc1d7bcf02e8835a8"
+    }
+  ],
+  "scope": "New/changed Python definitions and modules in this delivery. Relevant new frontend modules and exported helpers also carry English JSDoc; no claim that all historic project definitions are documented."
+}

@@ -1,0 +1,50 @@
+{
+  "base_commit": "564b388",
+  "started_at": "2026-11-07T20:43:33Z",
+  "verified_at": "2026-11-07T21:22:33Z",
+  "elapsed_until_verification_seconds": 2340,
+  "initial_installed": {
+    "passed": 358,
+    "failed": 5,
+    "cases": 363
+  },
+  "intermediate_source": {
+    "passed": 21,
+    "failed": 5,
+    "cases": 26,
+    "cause": "Explicit require_tests correctly blocks command-only checks; final test verifies both policies rather than weakening product rules."
+  },
+  "focused_final_source": {
+    "passed": 1
+  },
+  "final_installed": {
+    "cases": 409,
+    "passed": 409,
+    "failed": 0,
+    "skipped": 0,
+    "backend_modules": 329,
+    "all_backend_imports_from_native_env": true,
+    "seconds": 471.036,
+    "exit_code": 0
+  },
+  "frontend": {
+    "dom_passed": 2,
+    "contracts_passed": 6,
+    "build": "passed; inherited chunk-size notice"
+  },
+  "python_definitions_documented": 64,
+  "prompt_candidates_reviewed": 85,
+  "prompt_source_files": 308,
+  "real_model_turns": 0,
+  "completed_scenarios": [
+    "D06",
+    "D07",
+    "D09"
+  ],
+  "D08": "in_progress; quarantine/retention is the next main implementation",
+  "limits": [
+    "Overlapping selections are not added together.",
+    "Selected installed tests, not a global green suite or complete page acceptance.",
+    "Real kernel/Git/TLS with controlled inference and synthetic remote identities."
+  ]
+}

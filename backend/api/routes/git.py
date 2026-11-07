@@ -147,11 +147,6 @@ def close_pr(pr_id: int):
 
     pr_service.close_pr(pr_id)
 
-    _log_event(
-        pr.get("project_id"), "pr_closed", "api", "code_review", pr_id,
-        {"branch": pr["branch"]},
-    )
-
     updated = pr_service.get_pr(pr_id)
     return PRResponse(**updated)
 
@@ -177,10 +172,12 @@ def trigger_cleanup(body: CleanupRequest):
 def list_repo_branches(
     repo_name: str,
     project_id: int = Query(...),
+    repository_id: int | None = Query(None, gt=0),
 ):
-    """List branches for a repository via Forgejo or local git."""
-    if settings.FORGEJO_API_URL and _is_forgejo_remote(project_id, repo_name):
-        owner_repo = _require_forgejo_remote(project_id, repo_name)
+    """Read branches from one scoped repository snapshot; a supplied ID takes precedence over its display name."""
+    record = _repository_record(project_id, repo_name, repository_id)
+    owner_repo = _forgejo_owner(record)
+    if owner_repo is not None:
         branches = forgejo_client.get_branches(owner_repo)
         return [
             BranchDetail(
@@ -196,7 +193,7 @@ def list_repo_branches(
         ]
 
     # Local git fallback
-    local_path = _resolve_repo_path(project_id, repo_name)
+    local_path = record['local_path']
     return _local_branches(local_path)
 
 
@@ -205,14 +202,16 @@ def get_repo_tree(
     repo_name: str,
     project_id: int = Query(...),
     ref: str = Query(default="main"),
+    repository_id: int | None = Query(None, gt=0),
 ):
     """Get the file tree for a repository at a given ref.
 
     *ref* can be a branch name, tag, or commit SHA (7-40 hex chars).
     Uses Forgejo when available, otherwise falls back to local git.
     """
-    if settings.FORGEJO_API_URL and _is_forgejo_remote(project_id, repo_name):
-        owner_repo = _require_forgejo_remote(project_id, repo_name)
+    record = _repository_record(project_id, repo_name, repository_id)
+    owner_repo = _forgejo_owner(record)
+    if owner_repo is not None:
 
         _SHA_RE = re.compile(r"^[0-9a-f]{7,40}$", re.IGNORECASE)
         sha: str | None = None
@@ -243,7 +242,7 @@ def get_repo_tree(
         return result
 
     # Local git fallback
-    local_path = _resolve_repo_path(project_id, repo_name)
+    local_path = record['local_path']
     return _local_tree(local_path, ref)
 
 
@@ -253,10 +252,12 @@ def get_file_contents(
     project_id: int = Query(...),
     path: str = Query(...),
     ref: str = Query(default="main"),
+    repository_id: int | None = Query(None, gt=0),
 ):
-    """Get the decoded contents of a file from Forgejo or local git."""
-    if settings.FORGEJO_API_URL and _is_forgejo_remote(project_id, repo_name):
-        owner_repo = _require_forgejo_remote(project_id, repo_name)
+    """Read one file from the selected repository ID and project, using the same registration snapshot for local/remote resolution."""
+    record = _repository_record(project_id, repo_name, repository_id)
+    owner_repo = _forgejo_owner(record)
+    if owner_repo is not None:
 
         resp = forgejo_client.get_contents(owner_repo, path, ref)
         raw_b64 = resp.get("content", "")
@@ -276,7 +277,7 @@ def get_file_contents(
         )
 
     # Local git fallback
-    local_path = _resolve_repo_path(project_id, repo_name)
+    local_path = record['local_path']
     return _local_file_content(local_path, path, ref)
 
 
@@ -299,7 +300,7 @@ def list_pr_comments(pr_id: int):
             detail="PR has no Forgejo index; was it created via the Forgejo API?",
         )
 
-    owner_repo = _require_forgejo_remote(pr.get("project_id"), pr["repo_name"])
+    owner_repo = _require_pr_remote(pr)
 
     comments = forgejo_client.get_pr_comments(owner_repo, pr_index)
     return [
@@ -330,7 +331,7 @@ def create_pr_comment(pr_id: int, body: PRCommentCreate):
             detail="PR has no Forgejo index; was it created via the Forgejo API?",
         )
 
-    owner_repo = _require_forgejo_remote(pr.get("project_id"), pr["repo_name"])
+    owner_repo = _require_pr_remote(pr)
 
     c = forgejo_client.create_pr_comment(owner_repo, pr_index, body.body)
 
@@ -508,6 +509,49 @@ def _is_forgejo_remote(project_id: int | None, repo_name: str) -> bool:
     api_host = urlparse(settings.FORGEJO_API_URL).netloc
     remote_host = urlparse(remote_url).netloc
     return api_host == remote_host
+
+
+def _require_pr_remote(pr: dict) -> str:
+    """Resolve historical PR browsing/comments by its bound repository, refusing unresolved labels instead of attaching a later namesake."""
+    def repository(conn):
+        """Capture the remote and path only after matching both recorded repository and project IDs."""
+        row = conn.execute('SELECT * FROM repositories WHERE id=? AND project_id=?',(pr.get('repo_id'),pr.get('project_id'))).fetchone()
+        return dict(row) if row else None
+    row = execute_with_retry(repository)
+    if row is None:
+        raise HTTPException(409, 'El PR histórico no tiene un repositorio verificado; no se consulta otro por su nombre.')
+    _require_forgejo()
+    owner = _forgejo_owner(row)
+    if owner is None:
+        raise HTTPException(400, 'El repositorio registrado no tiene un remoto Forgejo disponible.')
+    return owner
+
+
+def _repository_record(project_id, name, repository_id=None):
+    """Resolve a single project-bound registration, never substitute a same-named source when an explicit ID is missing."""
+    def query(conn):
+        """Capture local path and remote URL together so later name reuse cannot split one read across repositories."""
+        if repository_id is not None:
+            row = conn.execute('SELECT * FROM repositories WHERE project_id=? AND id=?',(project_id,repository_id)).fetchone()
+        else:
+            row = conn.execute('SELECT * FROM repositories WHERE project_id=? AND name=?',(project_id,name)).fetchone()
+        return dict(row) if row else None
+    record = execute_with_retry(query)
+    if record is None:
+        raise HTTPException(404, 'El repositorio seleccionado no pertenece a este proyecto o ya no está disponible.')
+    return record
+
+
+def _forgejo_owner(record):
+    """Choose transport from one already-scoped registration snapshot without another name-based database lookup."""
+    from urllib.parse import urlparse
+    remote = record.get('remote_url')
+    if not settings.FORGEJO_API_URL or not remote or urlparse(remote).netloc != urlparse(settings.FORGEJO_API_URL).netloc:
+        return None
+    try:
+        return pr_service._remote_owner_repo(remote)
+    except ValueError as error:
+        raise HTTPException(400, 'No se pudo identificar el remoto del repositorio seleccionado.') from error
 
 
 def _require_forgejo_remote(project_id: int | None, repo_name: str) -> str:

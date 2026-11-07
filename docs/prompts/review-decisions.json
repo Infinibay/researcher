@@ -30,21 +30,6 @@
       "reviewed_at": "2026-11-07",
       "source_base_commit": "6b2f938"
     },
-    "backend/api/models/git.py::BranchCreate.description@42": {
-      "dependencies_sha256": "88c2a3948cea19454ffb6c2b8f62ba6cb97c0099c0a183403af6a756aa93a633",
-      "decision": "excluded_human_or_input_metadata",
-      "rationale": "Reviewed as CLI/OpenAPI labels, owner-supplied description defaults or response projection, not an agent developer instruction. Preserve literal owner data and validate transport boundaries; do not infer authorization from prose. Revalidated unchanged source literal and exact sole consumer diff: web API imports explicit Git service composition, preserving singleton behavior. This is API metadata, not agent authority.",
-      "evidence": [
-        "backend/api/models/git.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json",
-        "docs/modernization/data-boundaries-review.md"
-      ],
-      "conflicts": [],
-      "reviewed_at": "2026-11-07",
-      "source_base_commit": "6b2f938",
-      "revalidation": "Data persistence review: candidate AST/value is unchanged. Reviewed changed API consumers: blocking callbacks now run in bounded ASGI workers, startup validates schema/data, and task events use their existing transaction triggers. No native prompt, source attribution, review-feedback interpretation or execution authority changed; metadata remains owner/API data. read_feedback callers remain unchanged; projects uses only the separate canonical digest helper. Static review, not efficacy or human comprehension."
-    },
     "backend/api/models/milestone.py::MilestoneCreate.description": {
       "dependencies_sha256": "e2648e59964756d947dcda00bd6accafd1b980122cbfb89b201721e75eb843f7",
       "decision": "excluded_human_or_input_metadata",
@@ -3513,6 +3498,22 @@
       },
       "reviewed_at": "2026-11-07",
       "source_base_commit": "adf04f6"
+    },
+    "backend/api/models/git.py::BranchCreate.description@44": {
+      "dependencies_sha256": "e30447e47a2e06617af53bbd7abd44d6f1681d4b09c748a6265a8d27c0256d5a",
+      "decision": "excluded_human_or_input_metadata",
+      "rationale": "Reviewed as CLI/OpenAPI labels, owner-supplied description defaults or response projection, not an agent developer instruction. Preserve literal owner data and validate transport boundaries; do not infer authorization from prose. Revalidated unchanged source literal and exact sole consumer diff: web API imports explicit Git service composition, preserving singleton behavior. This is API metadata, not agent authority.",
+      "evidence": [
+        "backend/api/models/git.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json",
+        "docs/modernization/data-boundaries-review.md",
+        "docs/modernization/git-identity-review.md"
+      ],
+      "conflicts": [],
+      "reviewed_at": "2026-11-07",
+      "source_base_commit": "564b388",
+      "revalidation": "The deprecated repo_path OpenAPI literal is unchanged (AST compared with564b388). Read its sole API consumer diff: repository browsing captures one scoped ID record, remote PR access uses its stored repository ID, and closure plus event is atomic. Branch creation remains retired before effects. This label is not model instruction or effect authority; this review does not establish model efficacy."
     }
   },
   "retired_entries": {

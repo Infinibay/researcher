@@ -60,7 +60,7 @@ class BranchInputs:
                  'recorded_commit_sha': row['last_commit_hash'], 'recorded_task_id': row['task_id'],
                  'recorded_status': row['status'], 'availability': 'not_inspected'}
                 for row in conn.execute(
-                    'SELECT b.*,r.id AS repository_id FROM branches b JOIN repositories r ON r.project_id=b.project_id AND r.name=b.repo_name WHERE b.project_id=? ORDER BY b.id', (project_id,)
+                    'SELECT b.*,r.id AS repository_id FROM branches b JOIN repositories r ON r.project_id=b.project_id AND r.id=b.repo_id WHERE b.project_id=? ORDER BY b.id', (project_id,)
                 )
             ]
 
@@ -68,7 +68,7 @@ class BranchInputs:
         """Freeze only the actual scoped record and owner-chosen immutable commit; original context and bytes are not guessed at admission."""
         self.runs._check_registration(conn, spec.project_id, binding)
         row = conn.execute(
-            'SELECT b.* FROM branches b JOIN repositories r ON r.project_id=b.project_id AND r.name=b.repo_name WHERE b.id=? AND b.project_id=? AND r.id=?',
+            'SELECT b.* FROM branches b JOIN repositories r ON r.project_id=b.project_id AND r.id=b.repo_id WHERE b.id=? AND b.project_id=? AND r.id=?',
             (target.branch_id, spec.project_id, binding.repository_id),
         ).fetchone()
         if row is None:

@@ -158,6 +158,9 @@ async def test_actual_ref_publication_is_exact_atomic_and_leaves_checkout_unchan
 
     s = publication_git
     intent = PublicationRefIntent("pub-1", "refs/heads/reviewed-change", None)
+    other = s.source.parent / 'other-project'
+    await fixture_git(s.source,'clone','-q','--no-hardlinks',str(s.source),str(other))
+    await fixture_git(other,'branch','reviewed-change',s.base)
     result = await publish_candidate_ref(s.view, intent, executor=s.executor)
     assert result.state == "published" and result.target_current
     assert s.executor.transactions == 1
@@ -170,6 +173,8 @@ async def test_actual_ref_publication_is_exact_atomic_and_leaves_checkout_unchan
     assert (await fixture_git(s.source, "rev-parse", "HEAD")).decode().strip() == s.base
     assert (s.source / "value.txt").read_text() == "137\n"
     assert await fixture_git(s.source, "status", "--porcelain") == b""
+    assert (await fixture_git(other,'rev-parse',intent.target_ref)).decode().strip() == s.base
+    assert (other/'value.txt').read_text() == '137\n'
 
 
 async def test_lost_transaction_response_reconciles_without_replaying_effect(

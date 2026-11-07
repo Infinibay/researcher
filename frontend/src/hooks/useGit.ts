@@ -21,12 +21,12 @@ export function useRepos(projectId: number | null) {
 }
 
 /** Read branch observations for one URL-encoded source; its head must be pinned before immutable file reads. */
-export function useRepoBranches(repoName: string | null, projectId: number | null) {
+export function useRepoBranches(repoName: string | null, projectId: number | null, repositoryId: number) {
   return useQuery({
-    queryKey: ['repo-branches', repoName, projectId],
+    queryKey: ['repo-branches', repoName, projectId, repositoryId],
     queryFn: () =>
       fetchApi<BranchDetail[]>(
-        buildUrl(`/api/git/repos/${encodeURIComponent(repoName!)}/branches`, { project_id: projectId! }),
+        buildUrl(`/api/git/repos/${encodeURIComponent(repoName!)}/branches`, { project_id: projectId!, repository_id: repositoryId }),
       ),
     enabled: repoName != null && projectId != null,
   })
@@ -37,13 +37,15 @@ export function useRepoTree(
   repoName: string | null,
   projectId: number | null,
   ref: string | null,
+  repositoryId: number,
 ) {
   return useQuery({
-    queryKey: ['repo-tree', repoName, projectId, ref],
+    queryKey: ['repo-tree', repoName, projectId, repositoryId, ref],
     queryFn: () =>
       fetchApi<RepoTreeEntry[]>(
         buildUrl(`/api/git/repos/${encodeURIComponent(repoName!)}/tree`, {
           project_id: projectId!,
+          repository_id: repositoryId,
           ref: ref!,
         }),
       ),
@@ -57,13 +59,15 @@ export function useFileContent(
   projectId: number | null,
   path: string | null,
   ref: string | null,
+  repositoryId: number,
 ) {
   return useQuery({
-    queryKey: ['file-content', repoName, projectId, path, ref],
+    queryKey: ['file-content', repoName, projectId, repositoryId, path, ref],
     queryFn: () =>
       fetchApi<FileContent>(
         buildUrl(`/api/git/repos/${encodeURIComponent(repoName!)}/contents`, {
           project_id: projectId!,
+          repository_id: repositoryId,
           path: path!,
           ref: ref!,
         }),

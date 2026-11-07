@@ -234,19 +234,23 @@ def test_closing_inflight_upload_never_publishes_late_bytes(uploads, monkeypatch
     assert db_conn.execute('SELECT count(*) FROM reference_files').fetchone()[0] == 0
 
 
-def test_migration_inverse_refuses_history_and_preserves_legacy_references(uploads, db_conn, tmp_path):
+def test_migration_inverse_refuses_history_and_preserves_legacy_references(tmp_path):
     """Unused schema66 reverses safely; any admitted operation prevents erasing its recovery history."""
     from backend.db.reference_operations_migration import restore_reference_operations_schema
     from backend.tools.base.db import ensure_migrations
-    client, _ = uploads
-    assert keyed_upload(client).status_code == 201
-    with pytest.raises(RuntimeError,match='history'): restore_reference_operations_schema(db_conn)
+    used = tmp_path/'used.db'
+    ensure_migrations(used,target_version=66)
+    with sqlite3.connect(used) as conn:
+        conn.execute("INSERT INTO projects(id,name) VALUES(1,'Retained')")
+    operations(used,tmp_path/'uploads').upload(1,'original.txt',b'original','text/plain','',operation_key='original')
+    with sqlite3.connect(used) as conn:
+        with pytest.raises(RuntimeError,match='history'): restore_reference_operations_schema(conn)
     database = tmp_path/'unused.db'
     ensure_migrations(database,target_version=65)
     with sqlite3.connect(database) as conn:
         conn.execute("INSERT INTO projects(id,name) VALUES(1,'Retained')")
         conn.execute("INSERT INTO reference_files(project_id,file_name,file_path) VALUES(1,'legacy.txt','/legacy')")
-    ensure_migrations(database)
+    ensure_migrations(database,target_version=66)
     with sqlite3.connect(database) as conn:
         restore_reference_operations_schema(conn)
         assert conn.execute('SELECT max(version) FROM schema_migrations').fetchone()[0] == 65

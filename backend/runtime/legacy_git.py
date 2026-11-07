@@ -28,11 +28,11 @@ def pr_owner_entry(conn, pr_id: int) -> dict:
         "SELECT id,type,title FROM tasks WHERE project_id=? AND id=?", (pr['project_id'], pr['task_id'])
     ).fetchone()
     repo = conn.execute(
-        "SELECT id FROM repositories WHERE project_id=? AND name=?", (pr['project_id'], pr['repo_name'])
+        "SELECT id FROM repositories WHERE project_id=? AND id=?", (pr['project_id'], pr['repo_id'])
     ).fetchone()
     branch = conn.execute(
-        'SELECT id FROM branches WHERE project_id=? AND repo_name=? AND branch_name=?',
-        (pr['project_id'], pr['repo_name'], pr['branch']),
+        'SELECT id FROM branches WHERE project_id=? AND repo_id=? AND branch_name=?',
+        (pr['project_id'], repo['id'], pr['branch']),
     ).fetchone() if repo is not None else None
     worktrees = []
     if repo is not None:

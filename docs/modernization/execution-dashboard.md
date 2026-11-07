@@ -26,9 +26,40 @@ que se pueda comparar el avance; no presentar microajustes como tareas principal
 - Codex por suscripción y Ken publicado ensayados. Fuentes/citas, informes draft y revisión documental independiente conectados. Desarrollo admitido desde Tareas/Conversación con captura y comprobaciones explícitas; revisión independiente solicitada desde Tareas y aceptación del propietario conectada. Publicación local desde aceptación conectada; recuperación local de sólo lectura conectada; transporte remoto configurable conectado; recuperación remota y controles de Tareas conectados; ejecución/activación antiguas por tarea y proyecto retiradas; auxiliares de generación/proveedor, herramientas antiguas y sus cinco bibliotecas retirados. También se retiraron API interna, CLI, servicios/listeners y flows/helpers antiguos. También se retiraron autonomía, plantillas históricas y lectores de proveedor sin consumidores; se conserva el control de parada de trabajadores registrados.
 - Interfaz: doce pilotos, 36/36 conceptos de escritorio y 12/12 móviles; todas las rutas tienen piloto y 0/12 páginas están completamente aceptadas.
 - Última suite global: `9fb873c`,2210 casos,2178 pasan,31 fallan y1 error de fixture; sin omisiones. La carrera de backup encontrada se corrigió después con40 pruebas instaladas. No se declara una nueva corrida global verde; la referencia `0c8b8d9` queda como evidencia histórica.
-- U06, E01–E12, C01–C09 y D01–D05 quedan comprobados con el alcance de sus matrices; siguen 16 de 43 escenarios amplios sin aceptación completa en [coverage.json](coverage.json). No hay un porcentaje global defendible.
+- U06, E01–E12, C01–C09, D01–D07 y D09 quedan comprobados con el alcance de sus matrices; siguen 13 de 43 escenarios amplios sin aceptación completa en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Estado actual: D05 comprobado; siguiente Git D06–D09
+## Estado actual: D06/D07/D09 comprobados; siguiente retención D08
+
+Bloque **2026-11-07 20:43:33–21:22:33 UTC**, desde `564b388`:
+**39 min hasta verificar**, sin documentación/checkpoint posteriores.
+
+**409 casos instalados finales, 2 DOM y 6 contratos pasan**, junto con la compilación.
+El paquete inicial conserva 5 fallos de un recorrido que no elegía la política de
+comprobaciones; el final prueba el bloqueo y la decisión explícita adecuada a
+comandos sin conteo de tests. No se debilita el backend ni se suman selecciones.
+664 fuentes coinciden, 353 de producto; 64 definiciones documentadas y 85 candidatos
+de prompts revisados. Cero turnos de modelos. [Matriz y límites](git-identity-review.md).
+
+- Terminado: **U06, E01–E12, C01–C09, D01–D07 y D09**: 30de 43 escenarios.
+  Se añade identidad por repositorio desde UI hasta DB, cierre atómico de PR,
+  publicación exacta y recuperación de altas parciales. Entradas antiguas de
+  worktrees/merge rechazan antes de reset o borrado.
+- En curso al cerrar: documentación y checkpoint local del bloque Git comprobado.
+- Siguiente principal: **D08, cuarentena, retención y recuperación del trabajo**.
+  [Plan preparado](../superpowers/plans/2026-11-07-workspace-retention.md) durante
+  esta validación; **implementación no iniciada**. Registrar su inicio real.
+  Conservar todas las copias no equivale a completar una política de retención.
+- Después: D10–D13, conocimiento, datos históricos, evaluaciones, aceptación de
+  las 12 páginas, dependencias y distribución.
+- Al final: detalles aplazados —incluidos DD116/C10 y DD117—, validación global
+  y revisión independiente del plan completo.
+
+**13de 43 escenarios abiertos; 0/12 páginas plenamente aceptadas**, con 12 pilotos y
+48 conceptos. No son porcentajes globales. La última suite global aún conserva
+fallos históricos. Primero capacidades grandes; lista y tiempos al cambiar de
+tarea, en el chat y en este tablero, persistidos tras compactar.
+
+## Etapa anterior: D05 comprobado; siguiente Git D06–D09
 
 Bloque **2026-11-07 20:15:44–20:41:51 UTC**, **26 min 07 s hasta verificar**,
 desde `adf04f6`. Documentación/checkpoint posteriores excluidos.

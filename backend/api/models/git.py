@@ -24,7 +24,9 @@ class RepoResponse(BaseModel):
 
 
 class BranchResponse(BaseModel):
+    """Historical branch identity, with an unresolved repository represented explicitly as null."""
     id: int
+    repo_id: int | None = None
     project_id: int
     task_id: int | None = None
     repo_name: str
@@ -45,7 +47,9 @@ class BranchCreate(BaseModel):
 
 
 class PRResponse(BaseModel):
+    """Historical PR metadata whose repository binding is independent of its display name."""
     id: int
+    repo_id: int | None = None
     project_id: int | None = None
     task_id: int | None = None
     branch: str

@@ -101,17 +101,21 @@ class BranchService:
         branch_name: str,
         repo_name: str,
         merged_at: str | None = None,
+        *,
+        project_id: int,
+        repository_id: int,
     ) -> bool:
-        """Mark a branch as merged in the DB."""
+        """Annotate only a repository-scoped historical branch; this metadata never executes Git or grants native acceptance."""
         if merged_at is None:
             merged_at = datetime.now(timezone.utc).isoformat()
 
         def _update(conn: sqlite3.Connection) -> bool:
+            """Update only the historical row matching the supplied project, repository and branch label."""
             cursor = conn.execute(
                 """UPDATE branches
                    SET status = 'merged', merged_at = ?
-                   WHERE branch_name = ? AND repo_name = ?""",
-                (merged_at, branch_name, repo_name),
+                   WHERE branch_name = ? AND repo_name = ? AND project_id = ? AND repo_id = ?""",
+                (merged_at, branch_name, repo_name, project_id, repository_id),
             )
             conn.commit()
             return cursor.rowcount > 0
@@ -121,15 +125,16 @@ class BranchService:
             logger.info("Marked branch '%s' as merged in repo '%s'", branch_name, repo_name)
         return updated
 
-    def mark_branch_stale(self, branch_name: str, repo_name: str) -> bool:
-        """Mark a branch as stale in the DB."""
+    def mark_branch_stale(self, branch_name: str, repo_name: str, *, project_id: int, repository_id: int) -> bool:
+        """Annotate one bound historical branch without inferring deletion permission from its age or name."""
 
         def _update(conn: sqlite3.Connection) -> bool:
+            """Retain other projects' and repositories' namesakes while recording this explicit annotation."""
             cursor = conn.execute(
                 """UPDATE branches
                    SET status = 'stale'
-                   WHERE branch_name = ? AND repo_name = ?""",
-                (branch_name, repo_name),
+                   WHERE branch_name = ? AND repo_name = ? AND project_id = ? AND repo_id = ?""",
+                (branch_name, repo_name, project_id, repository_id),
             )
             conn.commit()
             return cursor.rowcount > 0

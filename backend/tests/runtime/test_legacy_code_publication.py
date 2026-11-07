@@ -49,8 +49,9 @@ async def test_unaccepted_native_code_cannot_publish_through_legacy_merge(
     if alias == "different_task":
         s.c.conn.execute("UPDATE code_reviews SET task_id=1002 WHERE id=71")
     elif alias == "different_project":
+        s.c.conn.execute("INSERT INTO repositories(id,project_id,name,local_path) VALUES(22,202,'alpha','/unavailable/foreign')")
         s.c.conn.execute(
-            "UPDATE code_reviews SET project_id=202,task_id=2002 WHERE id=71"
+            "UPDATE code_reviews SET project_id=202,task_id=2002,repo_id=22 WHERE id=71"
         )
     elif alias == "no_task":
         s.c.conn.execute("UPDATE code_reviews SET task_id=NULL WHERE id=71")

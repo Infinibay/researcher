@@ -129,30 +129,28 @@ class PRService:
         ))
 
     def close_pr(self, pr_id: int) -> bool:
-        """Close/abandon a pull request.
-
-        Sets PR status to ``'changes_requested'`` and marks the branch
-        as ``'abandoned'`` in the ``branches`` table.
-        """
-        pr = self.get_pr(pr_id)
-        if not pr:
-            raise ValueError(f"PR {pr_id} not found")
-
-        self.update_pr_status(pr_id, "changes_requested")
-
-        # Mark branch as abandoned
-        def _abandon(conn: sqlite3.Connection) -> None:
+        """Annotate one historical PR and its bound branch atomically; names cannot transfer ownership or authorize Git effects."""
+        def _abandon(conn: sqlite3.Connection) -> bool:
+            """Resolve the original row under the write lock and retain its event with both scoped metadata changes."""
+            conn.execute('BEGIN IMMEDIATE')
+            pr = conn.execute('SELECT * FROM code_reviews WHERE id=?',(pr_id,)).fetchone()
+            if pr is None:
+                raise ValueError(f'PR {pr_id} not found')
+            branch = conn.execute('SELECT status FROM branches WHERE project_id=? AND repo_id=? AND branch_name=?',(pr['project_id'],pr['repo_id'],pr['branch'])).fetchone()
+            if pr['status'] == 'changes_requested' and (branch is None or branch['status'] == 'abandoned'):
+                conn.commit()
+                return True
+            conn.execute("UPDATE code_reviews SET status='changes_requested' WHERE id=?",(pr_id,))
             conn.execute(
                 """UPDATE branches SET status = 'abandoned'
-                   WHERE branch_name = ? AND repo_name = ?""",
-                (pr["branch"], pr["repo_name"]),
+                   WHERE branch_name = ? AND project_id = ? AND repo_id = ?""",
+                (pr['branch'],pr['project_id'],pr['repo_id']),
             )
+            import json
+            conn.execute("INSERT INTO events_log(project_id,event_type,event_source,entity_type,entity_id,event_data_json) VALUES(?,'pr_closed','api','code_review',?,?)",(pr['project_id'],pr_id,json.dumps({'branch':pr['branch'],'repository_id':pr['repo_id']})))
             conn.commit()
-
-        execute_with_retry(_abandon)
-
-        logger.info("Closed PR %d, branch '%s' marked abandoned", pr_id, pr["branch"])
-        return True
+            return True
+        return execute_with_retry(_abandon)
 
     # ── Private helpers ────────────────────────────────────────────────
 
@@ -167,6 +165,7 @@ class PRService:
             raise ValueError("Cannot resolve owner/repo without project_id")
 
         def _query(conn: sqlite3.Connection) -> str | None:
+            """Read the legacy caller's remote inside its explicit project and repository-name scope."""
             row = conn.execute(
                 "SELECT remote_url FROM repositories WHERE project_id = ? AND name = ?",
                 (project_id, repo_name),
@@ -178,7 +177,11 @@ class PRService:
             raise ValueError(
                 f"No remote_url configured for repo '{repo_name}' in project {project_id}"
             )
+        return PRService._remote_owner_repo(remote_url)
 
+    @staticmethod
+    def _remote_owner_repo(remote_url: str) -> str:
+        """Decode a previously selected registration's remote without re-resolving its mutable display name."""
         # Strip trailing .git
         url = remote_url.rstrip("/")
         if url.endswith(".git"):

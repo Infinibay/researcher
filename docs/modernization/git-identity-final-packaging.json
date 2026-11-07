@@ -1,0 +1,53 @@
+{
+  "base_commit": "564b388",
+  "wheel": "researcher-0.1.0-cp312-cp312-linux_x86_64.whl",
+  "wheel_sha256": "a5c2a9d59468e5253019a5bd93f0c087a299c22078bb6365fd8170225fa4048d",
+  "source_files_matching_wheel_and_installation": 664,
+  "product_files_matching": 353,
+  "observed": {
+    "cases": 409,
+    "passed": 409,
+    "failed": 0,
+    "skipped": 0,
+    "backend_modules": 329,
+    "all_backend_imports_from_native_env": true,
+    "seconds": 471.036,
+    "exit_code": 0
+  },
+  "tests": [
+    "backend/tests/api",
+    "backend/tests/runtime/test_migration_chain.py",
+    "backend/tests/runtime/test_prior_branch_input.py",
+    "backend/tests/runtime/test_public_development.py",
+    "backend/tests/runtime/test_native_git_retirement.py",
+    "backend/tests/runtime/test_legacy_code_publication.py",
+    "backend/tests/research/test_wiki_identity.py",
+    "backend/tests/runtime/test_publication_git.py",
+    "backend/tests/runtime/test_owned_publication.py",
+    "backend/tests/runtime/test_publication_recovery.py",
+    "backend/tests/runtime/test_remote_publication.py",
+    "backend/tests/runtime/test_forgejo_publication.py",
+    "backend/tests/runtime/test_owned_remote_transport.py",
+    "backend/tests/runtime/test_source_operations.py",
+    "backend/tests/runtime/test_source_service.py",
+    "backend/tests/runtime/test_source_control.py",
+    "backend/tests/runtime/test_remote_source.py",
+    "backend/tests/runtime/test_source_repair.py",
+    "backend/tests/runtime/test_source_history.py",
+    "backend/tests/runtime/test_source_reservation.py",
+    "backend/tests/git/test_source_repair_program.py",
+    "backend/tests/runtime/test_installation_backup.py",
+    "backend/tests/runtime/test_legacy_import.py",
+    "backend/tests/git/test_worktree_manager.py",
+    "backend/tests/git/test_local_worktree.py",
+    "backend/tests/runtime/test_development_workspace.py",
+    "backend/tests/runtime/test_project_check_policy.py"
+  ],
+  "real_model_turns": 0,
+  "limits": [
+    "Selected tests, not the global suite",
+    "Synthetic managed installation data, no historical user-data migration",
+    "D06/D07/D09: repository IDs for retained Git metadata, atomic scoped PR annotations, exact local/remote publication and original-effect recovery, explicit source creation/adoption/repair/release. Native actors and TLS/Git are real; inference and Forgejo REST server are controlled, not an external user account. D08 quarantine/retention remains open.",
+    "No model calls, external accounts or GitHub workflow execution"
+  ]
+}
