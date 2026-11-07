@@ -513,3 +513,14 @@ casos ahora usan esquemas y registros de su época, con relaciones/bytes exactos
 sin que una versión futura o una API moderna enmascare el comportamiento.
 Datos reales, aceptación de recuperación más amplia e integración global siguen
 siendo trabajo principal. El soporte de downgrade genérico no se promete.
+
+## DD078 — pulido tras historial y presupuesto
+
+Un aviso RUF059 en el test nuevo de presupuesto: variable `run` sin uso.
+Resolver con el resto del estilo. Se conserva el aviso de tamaño del bundle.
+En la interfaz, revisar singular/plural de contadores, repetición de explicaciones
+y altura del presupuesto en móvil; las lecturas, paginación y controles funcionan.
+No repetir los ensayos por estos detalles.
+
+Eventos/reconexión/retención, recuperación más amplia, datos reales y aceptación
+integral siguen siendo tareas principales. No se convierten en pulido diferido.

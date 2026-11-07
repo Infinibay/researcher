@@ -7785,3 +7785,28 @@ Final verification05:07:37UTC; block19min53s including this substantive fix.
 No broadened global or real-data acceptance inferred. Same next macro and deferred
 policy as above. All original handles terminal; no inference or env mutation
 while tests were live.
+
+
+## 2026-11-07 — paginated owner history and project work budgets
+
+Base2e2d73d. Task history now crosses the30-run preview without replacing current
+control authority. Original attempts expose their own model/result/observed usage.
+Read-only project work budget shares admission accounting; missing usage remains
+null, holds are included once and reported overruns stay visible. No new schema.
+
+51source and51installedPASS, no skips/failures;129frontend contracts and8DOM tests
+pass, including delayed A→B→A history. Strict build passes.10 controlled browser
+states pass with no Axe/overflow/JavaScript errors. Fixed an outdated browser
+workspace fixture, retaining its failed receipt.4screenshots inspected.598source/
+wheel/installed PythonSQLfiles match,322product;18documented Python definitions
+and English JSDoc on new frontend modules/exported helpers. Wheel e909af53a5f87a17d2c6ad1957e1aace9d072e8ba2ace0b414363d51a520e238.
+
+Started05:09:35UTC; verified05:23:50UTC: 14min15s. All owned
+handles terminal; no models/account calls, actual-data migration, push/merge/deploy.
+DD078 defers one unused test variable, bundle warning and UI wording/compactness.
+Global suite remains the old baseline; no broad scenario or full-page acceptance.
+Next principal block: durable events/reconnect/slow-client/retention; record its
+start when begun. Actual owner-data location, broader recovery, real/human/science/
+global eval, security,12pageacceptance, final details and independent review remain.
+Publish done/current/pending plus measured time at every task transition; user
+policy persists through compaction. All macro capabilities before fine details.

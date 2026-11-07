@@ -3,7 +3,7 @@ import {chromium,expect} from '@playwright/test'
 import AxeBuilder from '@axe-core/playwright'
 import fs from 'node:fs/promises'
 import path from 'node:path'
-const out=path.resolve('../docs/design/audits/2026-11-06-agents')
+const out=path.resolve(process.env.AGENTS_ARTIFACT_DIR??'../docs/design/audits/2026-11-06-agents')
 await fs.mkdir(out,{recursive:true})
 const base={project_id:1,actor_id:'researcher-a',task_id:31,task_title:'Contrastar las fuentes',task_type:'research',execution_kind:'research',context_version:1,status:'running',cancel_requested:false,attempt_id:'attempt-a',attempt_count:1,attempt_status:'running',model:'gpt-5',model_selection:{model:'gpt-5',reasoning_effort:'medium',source:'project:1'},dispatch_status:'reserved',observed_tokens:1240,token_ceiling:12000,peer_count:2,unclosed_peer_count:2,created_at:1793980000,started_at:1793980001}
 let records=[{...base,seq:'3',run_id:'run-a'},{...base,seq:'2',run_id:'run-b',task_id:32,task_title:'Preparar comparación',actor_id:'planner-a',status:'queued',attempt_id:null,attempt_status:null,attempt_count:0,model:null,model_selection:null,dispatch_status:null,observed_tokens:null,token_ceiling:null,peer_count:0,unclosed_peer_count:0}]
@@ -25,10 +25,19 @@ try{
   else if(p==='/api/projects')body={projects:[project,{...project,id:2,name:'Proyecto vacío'}],total:2}
   else if(p==='/api/projects/1')body=project
   else if(p==='/api/projects/2')body={...project,id:2,name:'Proyecto vacío'}
+  else if(/^\/api\/projects\/\d+\/workspace$/.test(p)){
+   const id=Number(p.split('/')[3])
+   body={project_id:id,project:{...project,id,original_description:null},metadata_sha256:'a'.repeat(64),history_present:true,runtime_available:true,workspace_root:'/fixture',sources:[],source_operations:[],activity:[],graphs:[],legacy_registered:false,plans:[],reports:[],report_validity:'not_rechecked',stop:null}
+  }
   else if(p.endsWith('/agent-runs')){
    if(readError)return route.fulfill({status:503,json:{detail:'Consulta interrumpida'}})
    body={project_id:p.includes('/2/')?2:1,total_runs:3,total_actors:2,runtime_configured:true,items:u.searchParams.has('before_seq')?[earlier]:records,next_before_seq:u.searchParams.has('before_seq')?null:'2'}
    if(p.includes('/2/'))body={...body,total_runs:0,total_actors:0,items:[],next_before_seq:null}
+  }else if(p.endsWith('/work-budget')){
+   body={project_id:p.includes('/2/')?2:1,policy:p.includes('/2/')?null:{turn_limit:20,token_limit:4000000},used_turns:2,observed_tokens:1240,unmeasured_dispatches:1,unsettled_dispatches:2,accounted_tokens:24000,held_tokens:24000,remaining_turns:18,remaining_tokens:3976000,overrun_tokens:0}
+  }else if(p.endsWith('/attempts')){
+   const old=u.searchParams.has('before_seq')
+   body={project_id:1,run_id:'run-a',total:2,items:[{seq:old?'1':'2',attempt_id:old?'attempt-before':'attempt-a',is_current:!old,status:old?'finished':'running',model:old?'historical-model':'gpt-5',model_selection:null,observed_tokens:old?null:1240,dispatch_status:old?'unknown':'reserved',result:old?{native_status:'completed',summary:'Resultado del intento anterior'}:null}],next_before_seq:old?null:'2'}
   }else if(p==='/api/projects/1/runs/run-a/stop'){
    if(stopError)return route.fulfill({status:503,json:{detail:'No se pudo confirmar el cierre'}})
    records=records.map(r=>r.run_id==='run-a'?{...r,status:'cancelling',cancel_requested:true}:r);body=records[0]
@@ -40,10 +49,23 @@ try{
  await page.goto((process.env.AGENTS_ORIGIN??'http://127.0.0.1:5179')+'/agents')
  if(process.env.AGENTS_BASELINE==='1'){await page.getByText('No agents yet',{exact:true}).waitFor();await page.screenshot({path:path.join(out,'before.png'),fullPage:true})}
  await expect(page.getByRole('heading',{name:'Agentes',exact:true})).toBeVisible()
+ await page.getByRole('region',{name:'Presupuesto de trabajo del proyecto'}).scrollIntoViewIfNeeded()
+ await capture('00-budget-desktop',1440)
+ await page.setViewportSize({width:390,height:1024})
+ await page.getByRole('region',{name:'Presupuesto de trabajo del proyecto'}).scrollIntoViewIfNeeded()
+ await capture('00-budget-mobile',390)
+ await page.setViewportSize({width:1440,height:1024})
  await page.locator('#agent-run-run-a').click()
  await expect(page.getByRole('heading',{name:'Contrastar las fuentes',exact:true})).toBeVisible()
  await expect(page.getByRole('link',{name:'Abrir tarea e historial'})).toHaveAttribute('href','/tasks?project=1&task=31')
  await expect(page.locator('.agents-detail')).toContainText('1.240')
+ await expect(page.getByRole('region',{name:'Presupuesto de trabajo del proyecto'})).toContainText('24.000')
+ await page.getByText('Intentos guardados',{exact:true}).click()
+ await page.getByRole('button',{name:'Cargar intentos anteriores'}).click()
+ await expect(page.locator('.agents-detail')).toContainText('historical-model')
+ await expect(page.locator('.agents-detail')).toContainText('Resultado del intento anterior')
+ await expect(page.locator('.agents-detail')).toContainText('Tokens observados: No disponible')
+ evidence.checks.push('original-attempt-pagination','budget-holds-distinct-from-observations')
  await capture('01-desktop',1440);await capture('02-mobile',390)
  await page.getByRole('button',{name:'Detener esta ejecución',exact:true}).scrollIntoViewIfNeeded();await capture('02b-mobile-control',390)
  expect(evidence.writes).toEqual([])

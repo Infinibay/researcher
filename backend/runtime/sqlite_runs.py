@@ -38,6 +38,7 @@ from backend.runtime.contracts import (
     validate_correction,
 )
 from backend.runtime.task_profiles import DEVELOPMENT_TASK_TYPES, DOCUMENTARY_TASK_TYPES
+from backend.runtime.work_budget import project_work_usage
 
 
 def _json(value):
@@ -650,14 +651,10 @@ class SQLiteRunStore:
             raise RunConflict(
                 "Project budget policy changed; explicit reconciliation required"
             )
-        used = conn.execute(
-            """SELECT COUNT(*), COALESCE(SUM(CASE WHEN status='settled' AND observed_tokens IS NOT NULL
-            THEN observed_tokens ELSE MAX(token_ceiling,COALESCE(observed_tokens,0)) END),0) FROM runtime_inference_dispatches WHERE project_id=?""",
-            (lease.project_id,),
-        ).fetchone()
+        used = project_work_usage(conn, lease.project_id)
         if (
-            used[0] >= project_turn_limit
-            or used[1] + limits.max_observed_tokens > project_token_limit
+            used["used_turns"] >= project_turn_limit
+            or used["accounted_tokens"] + limits.max_observed_tokens > project_token_limit
         ):
             raise RunConflict("Project work budget exhausted; no native turn was sent")
         conn.execute(

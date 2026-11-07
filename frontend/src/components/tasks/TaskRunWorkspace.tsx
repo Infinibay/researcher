@@ -16,6 +16,7 @@ import { TaskResults } from './ResultDelivery'
 import { TaskCodeResults } from './CodeDelivery'
 import { TaskRemotePublications } from './RemotePublications'
 import { TaskProjectPlan } from './ProjectPlanDelivery'
+import { TaskRunHistory } from './ExecutionHistory'
 
 const inputClass = 'w-full rounded-md border border-[var(--work-line)] bg-[var(--work-paper)] px-3 py-2 text-sm text-[var(--work-ink)] focus:outline-hidden focus:ring-2 focus:ring-[var(--work-accent)]'
 const buttonClass = 'rounded-md border border-[var(--work-line)] px-3 py-2 text-sm text-[var(--work-ink)] hover:bg-[var(--work-wash)] disabled:opacity-50'
@@ -263,7 +264,7 @@ export function TaskRunWorkspace({ projectId, taskId, conversationThreadId, onCo
       <ul className="mt-3 space-y-1">{data.reports.map(report => <li key={report.id}><a href={`/reports?project=${projectId}&artifact=${report.id}`} className="text-[var(--work-accent)] underline">{report.title}</a> <span className="text-xs text-[var(--work-muted)]">· {report.status === 'draft' ? 'borrador' : report.status}</span></li>)}</ul>
       {!data.sources.length && !data.reports.length && <p className="mt-2 text-[var(--work-muted)]">Todavía no hay fuentes capturadas ni borradores para mostrar.</p>}
     </details>
-    {data.runs.length > 0 && <details className="rounded-md border border-[var(--work-line)] p-3"><summary className="cursor-pointer text-[var(--work-ink)]">Historial de ejecuciones</summary><ul className="mt-2 space-y-2">{data.runs.map(run => <li key={run.run_id} className="border-t border-[var(--work-line)] pt-2"><p className="text-[var(--work-ink)]">{presentRun(run.status).title} · contexto {run.context_version}</p><p className="whitespace-pre-wrap text-[var(--work-muted)]">{run.prompt}</p>{run.run_id !== current?.run_id && <RunCommands projectId={projectId} runId={run.run_id} />}</li>)}</ul></details>}
+    <TaskRunHistory projectId={projectId} taskId={taskId}/>
     </aside>
   </section>
 }

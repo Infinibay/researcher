@@ -25,7 +25,39 @@ lista en el documento además de publicarla en el chat, para retomarla tras comp
 - Última suite global completada al retomar `0c8b8d9`: 2148 casos, 2045 pasan, 100 fallan y tres se omiten. Mismos 100 identificadores heredados; no se afirman causas idénticas. Pasan 965 casos del runtime. La política Git añadida después tiene verificación separada.
 - Los 43 escenarios amplios siguen abiertos en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Etapa actual: recuperación después de nuevas escrituras comprobada; sigue historial/presupuestos
+## Etapa actual: historial y presupuesto conectados; siguen eventos y reconexión
+
+Tareas pagina ejecuciones más allá de las30 del resumen. Tareas y Agentes permiten
+inspeccionar intentos anteriores con su propio modelo, resultado y observaciones.
+El presupuesto visible utiliza la misma cuenta que la admisión; distingue reserva,
+medición parcial y ausencia de datos, sin inventar cuota/coste de la suscripción.
+Consultar historia no cambia los controles del trabajo actual.
+
+Pasan51 pruebas de fuente y51 instaladas,129 contratos frontend y8 pruebas DOM;
+build estricto correcto.598 archivos Python/SQL coinciden,322 productivos;
+18 definiciones Python nuevas/modificadas tienen docstrings. El navegador pasa
+10 estados controlados en escritorio/móvil. [Contrato](../architecture/owner-history-budget.md),
+[resultados](history-budget-results.json), [paquete](history-budget-packaging.json).
+
+**Lista vigente al cambiar de tarea:**
+- Terminado: lectura paginada de ejecuciones/intentos y presupuesto visible,
+  con separación entre observaciones y reservas. **14 min 15 s**
+  (05:09:35–05:23:50 UTC); incluye investigación, implementación y verificación.
+- Siguiente principal: eventos durables, reconexión, clientes lentos y retención.
+  Registrar el inicio cuando comience; este tramo todavía no está implementado.
+- Pendiente de ubicación: datos históricos reales del propietario.
+- Después: recuperación ante fallos más amplios/actores activos; evaluaciones
+  real, humana, científica y global; seguridad; aceptación integral de12 páginas.
+- Después de todas las tareas gruesas: detalles secundarios registrados y
+  revisión independiente final del plan completo. DD078 conserva el pulido de
+  este tramo, sin reabrir su capacidad principal.
+
+Siguen43 escenarios amplios y0/12 páginas completamente aceptadas. No hay nueva
+suite global ni porcentaje global defendible. No hubo modelos, migración real,
+push, merge ni despliegue. La política de lista y tiempo en cada transición se
+mantiene después de compactar; el tiempo transcurrido no es una estimación restante.
+
+## Etapa anterior: recuperación después de nuevas escrituras comprobada
 
 La restauración y reinscripción explican que una copia excluye las escrituras
 posteriores; no suponen que el original siga disponible. Se comprobaron una copia

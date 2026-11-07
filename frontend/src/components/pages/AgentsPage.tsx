@@ -5,6 +5,8 @@ import {Link} from 'react-router-dom'
 import {useProjectStore} from '../../stores/project'
 import {agentRuns,type AgentRun} from '../../api/agentRuns'
 import {stopRun} from '../../api/runtime'
+import {RunAttempts} from '../tasks/ExecutionHistory'
+import {WorkBudget} from '../tasks/WorkBudget'
 import '../../styles/tasks.css'
 import '../../styles/agents.css'
 
@@ -31,6 +33,7 @@ function AgentLedger({projectId}:{projectId:number}){
  function back(){const id=selected;setSelected(null);requestAnimationFrame(()=>document.getElementById(`agent-run-${id}`)?.focus())}
  return <section className="task-workbench agents-workbench" data-selected={Boolean(run)}>
   <header className="agents-heading"><p className="task-eyebrow">EQUIPO · REGISTRO NATIVO</p><h1>Agentes</h1><p>Responsabilidad y ejecución observada.</p><p className="agents-muted">Cada fila conserva una ejecución y su agente. El estado guardado no confirma actividad en este instante.</p></header>
+  <WorkBudget projectId={projectId}/>
   {query.error&&<div className="agents-notice" role="alert"><p>No pudimos consultar las ejecuciones. {query.error.message}</p>{records.length>0&&<p>Se conserva la última consulta correcta.</p>}<button onClick={()=>query.refetch()}>Volver a consultar</button></div>}
   <div className="agents-layout"><aside className="agents-index" aria-label="Ejecuciones por agente">
    <div className="agents-index-heading"><h2>Ejecuciones</h2><button onClick={()=>query.refetch()} disabled={query.isFetching}>Actualizar</button></div>
@@ -63,6 +66,7 @@ function AgentDetail({run,configured}:{run:AgentRun;configured:boolean}){
    {stop.error&&<p role="alert">No se confirmó la parada. {stop.error.message} Conservamos la identidad original; consulta su estado antes de repetir.</p>}
    {stop.isSuccess&&<p role="status">Solicitud recibida. El estado guardado y los recibos de cierre se comprueban por separado.</p>}
   </section>
+  <RunAttempts projectId={run.project_id} runId={run.run_id}/>
   <details className="agents-identities"><summary>Identidad y comprobaciones del intento</summary><dl className="agents-facts"><div><dt>Ejecución</dt><dd>{run.run_id}</dd></div><div><dt>Intento</dt><dd>{run.attempt_id??'No registrado'}</dd></div><div><dt>Versión de contexto</dt><dd>{run.context_version}</dd></div><div><dt>Procesos registrados</dt><dd>{run.peer_count===0?'Sin recibos':`${run.peer_count} · ${run.unclosed_peer_count} sin recibo de cierre`}</dd></div></dl><p className="agents-muted">Estos datos describen recibos guardados. Abrir la página no comprueba procesos ni inicia trabajo.</p></details>
  </article>
 }

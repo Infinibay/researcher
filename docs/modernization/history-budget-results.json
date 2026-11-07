@@ -1,0 +1,54 @@
+{
+  "base_commit": "2e2d73d",
+  "started_at": "2026-11-07T05:09:35+00:00",
+  "verified_at": "2026-11-07T05:23:50+00:00",
+  "elapsed_seconds": 855,
+  "source": {
+    "cases": 51,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "seconds": 17.036
+  },
+  "installed_receipt": "docs/modernization/history-budget-packaging.json",
+  "frontend": {
+    "contracts_passed": 129,
+    "dom_passed": 8,
+    "strict_build": "passed",
+    "browser_states": 10,
+    "browser_fixture": "frontend/tests/agents.browser.mjs",
+    "browser_evidence": "docs/design/audits/2026-11-07-history-budget/evidence.json",
+    "visual_inspection": [
+      "00-budget-desktop.png",
+      "00-budget-mobile.png",
+      "01-desktop.png",
+      "02-mobile.png"
+    ]
+  },
+  "docstrings_receipt": "docs/modernization/history-budget-docstrings.json",
+  "changes": [
+    "Paginated task execution history independent from current controls",
+    "Original per-attempt model/result/usage inspection",
+    "Owner project budget projection shares admission accounting",
+    "Unknown usage stays null, holds remain distinct from observations",
+    "Late A response does not replace B; returning to A keeps its own history"
+  ],
+  "retained_failures": [
+    "Initial backend 4 RED: new reader absent and HTTP routes missing",
+    "Initial UI imports absent; then incomplete API mock omitted real measurement formatter, corrected test double",
+    "Browser fixture lacked current project workspace; corrected without weakening checks; original receipt retained"
+  ],
+  "real_model_turns": 0,
+  "deferred": "DD078: one RUF059, bundle-size warning, wording/compactness",
+  "limits": [
+    "Selected checks, not current global suite acceptance",
+    "Synthetic data and controlled browser HTTP; no historical user-data migration",
+    "WebSocket proxy connection refused because no backend was started; events/reconnection not exercised",
+    "Attempt summary and original run input views do not imply provider transcript completeness",
+    "No subscription quota/price or exact physical token accounting",
+    "No full page acceptance; 43 broad scenarios remain open"
+  ],
+  "next_main_task": "Durable events, reconnect catch-up, slow clients and retention; not yet started",
+  "all_owned_processes_closed": true,
+  "push_merge_deploy": false
+}

@@ -4,6 +4,15 @@ La implementación del [plan completo](../superpowers/plans/2026-10-31-actualiza
 
 ## Resultados disponibles
 
+- **Historial y presupuesto conectados:** Tareas pagina más allá de30 ejecuciones;
+  Tareas/Agentes muestran intentos anteriores con sus propios recibos. La vista de
+  presupuesto comparte la cuenta de admisión y distingue reservas/observaciones
+  sin inventar cuota o coste.51 pruebas de fuente y51 instaladas;129 contratos,
+  8 DOM y build frontend pasan.598 archivos coinciden,18 definiciones documentadas;
+  10 estados de navegador controlados. Siguen eventos/reconexión y aceptación
+  integral. [Contrato](../architecture/owner-history-budget.md),
+  [resultados](history-budget-results.json), [paquete](history-budget-packaging.json).
+
 - **Recuperación tras nuevas escrituras y recibos grandes comprobados:** copia43,
   actualización58, cambios nuevos y recuperación separada de las copias vieja y
   actual; limitación explícita y disponibilidad del original sin suponer.

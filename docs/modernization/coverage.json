@@ -844,7 +844,12 @@
         "docs/architecture/legacy-catalog-removal.md",
         "docs/modernization/catalog-removal-results.json",
         "docs/modernization/catalog-removal-packaging.json",
-        "backend/tests/runtime/test_legacy_catalog_removal.py"
+        "backend/tests/runtime/test_legacy_catalog_removal.py",
+        "docs/architecture/owner-history-budget.md",
+        "docs/modernization/history-budget-results.json",
+        "docs/modernization/history-budget-packaging.json",
+        "backend/tests/runtime/test_history_budget.py",
+        "frontend/tests/ui/history-budget.test.tsx"
       ],
       "remaining": [
         "Durable product ownership, API integration and full scenario acceptance"
@@ -1451,7 +1456,12 @@
         "docs/modernization/conversation-evidence.json",
         "backend/tests/runtime/test_run_conversation.py",
         "backend/tests/runtime/test_workspace_delivery.py",
-        "frontend/tests/runtime.test.ts"
+        "frontend/tests/runtime.test.ts",
+        "docs/architecture/owner-history-budget.md",
+        "docs/modernization/history-budget-results.json",
+        "docs/modernization/history-budget-packaging.json",
+        "backend/tests/runtime/test_history_budget.py",
+        "frontend/tests/ui/history-budget.test.tsx"
       ],
       "remaining": [
         "Full product runtime/client integration and browser acceptance; HTTP owner guard does not complete the entire scenario"

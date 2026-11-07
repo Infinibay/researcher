@@ -1,0 +1,31 @@
+{
+  "base_commit": "2e2d73d",
+  "wheel": "researcher-0.1.0-cp312-cp312-linux_x86_64.whl",
+  "wheel_sha256": "e909af53a5f87a17d2c6ad1957e1aace9d072e8ba2ace0b414363d51a520e238",
+  "source_files_matching_wheel_and_installation": 598,
+  "product_files_matching": 322,
+  "observed": {
+    "cases": 51,
+    "passed": 51,
+    "failed": 0,
+    "skipped": 0,
+    "backend_modules": 213,
+    "all_backend_imports_from_native_env": true,
+    "seconds": 16.924,
+    "exit_code": 0
+  },
+  "tests": [
+    "backend/tests/runtime/test_history_budget.py",
+    "backend/tests/runtime/test_inference_journal.py",
+    "backend/tests/runtime/test_agent_runs.py",
+    "backend/tests/runtime/test_workspace_delivery.py",
+    "backend/tests/runtime/test_coordination.py"
+  ],
+  "real_model_turns": 0,
+  "limits": [
+    "Selected tests, not the global suite",
+    "Synthetic managed installation data, no historical user-data migration",
+    "Read-only owner history and admission accounting; no provider quota measurement or event catch-up acceptance",
+    "SQLite and owner HTTP are real; no model calls or remote repositories"
+  ]
+}

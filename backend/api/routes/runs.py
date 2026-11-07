@@ -966,6 +966,47 @@ async def agent_runs(
     return JSONResponse(data, headers={"Cache-Control": "no-store"})
 
 
+@router.get("/{project_id}/tasks/{task_id}/run-history")
+async def task_run_history(
+    project_id: int,
+    task_id: int,
+    request: Request,
+    before_seq: int | None = Query(default=None, ge=1, le=9223372036854775807),
+    limit: int = Query(default=25, ge=1, le=100),
+):
+    """Read older task executions without changing the current workspace or granting execution."""
+    from backend.runtime.history import RuntimeHistory
+
+    data = await asyncio.to_thread(RuntimeHistory(read_store(request).database).task_runs,
+                                   project_id, task_id, before_seq=before_seq, limit=limit)
+    return JSONResponse(data, headers={"Cache-Control": "no-store"})
+
+
+@router.get("/{project_id}/runs/{run_id}/attempts")
+async def run_attempt_history(
+    project_id: int,
+    run_id: str,
+    request: Request,
+    before_seq: int | None = Query(default=None, ge=1, le=9223372036854775807),
+    limit: int = Query(default=25, ge=1, le=100),
+):
+    """Read each attempt's original observations through the authenticated project owner."""
+    from backend.runtime.history import RuntimeHistory
+
+    data = await asyncio.to_thread(RuntimeHistory(read_store(request).database).attempts,
+                                   project_id, run_id, before_seq=before_seq, limit=limit)
+    return JSONResponse(data, headers={"Cache-Control": "no-store"})
+
+
+@router.get("/{project_id}/work-budget")
+async def project_work_budget(project_id: int, request: Request):
+    """Expose recorded admission capacity without representing it as subscription quota or billing."""
+    from backend.runtime.history import RuntimeHistory
+
+    data = await asyncio.to_thread(RuntimeHistory(read_store(request).database).budget, project_id)
+    return JSONResponse(data, headers={"Cache-Control": "no-store"})
+
+
 @router.get("/{project_id}/research-sources/{source_id}")
 async def owner_source(
     project_id: int,

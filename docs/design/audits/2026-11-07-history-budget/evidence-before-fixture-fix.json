@@ -1,0 +1,32 @@
+{
+  "scope": "Controlled HTTP fixtures; no actual model, runtime or user data.",
+  "states": [
+    {
+      "name": "01-desktop",
+      "width": 1440,
+      "axe": 0
+    },
+    {
+      "name": "02-mobile",
+      "width": 390,
+      "axe": 0
+    },
+    {
+      "name": "02b-mobile-control",
+      "width": 390,
+      "axe": 0
+    }
+  ],
+  "writes": [
+    {
+      "method": "POST",
+      "path": "/api/projects/1/runs/run-a/stop"
+    }
+  ],
+  "errors": [],
+  "checks": [
+    "original-attempt-pagination",
+    "budget-holds-distinct-from-observations"
+  ],
+  "failure": "Harness lacked current project-workspace response; a header activity alert made the global Stop-alert locator ambiguous. Add the actual project workspace fixture; do not weaken the alert expectation or modify production behavior."
+}

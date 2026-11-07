@@ -1,0 +1,134 @@
+{
+  "base_commit": "2e2d73d",
+  "changed_or_new_definitions_documented": 18,
+  "missing": [],
+  "contracts": [
+    {
+      "path": "backend/api/routes/runs.py",
+      "symbol": "task_run_history",
+      "line": 970,
+      "docstring": "Read older task executions without changing the current workspace or granting execution.",
+      "file_sha256": "3a26e389904fbf7422346c28c25ee8a8ab09a2e2fa803d30e8bc1261c741d618"
+    },
+    {
+      "path": "backend/api/routes/runs.py",
+      "symbol": "run_attempt_history",
+      "line": 986,
+      "docstring": "Read each attempt's original observations through the authenticated project owner.",
+      "file_sha256": "3a26e389904fbf7422346c28c25ee8a8ab09a2e2fa803d30e8bc1261c741d618"
+    },
+    {
+      "path": "backend/api/routes/runs.py",
+      "symbol": "project_work_budget",
+      "line": 1002,
+      "docstring": "Expose recorded admission capacity without representing it as subscription quota or billing.",
+      "file_sha256": "3a26e389904fbf7422346c28c25ee8a8ab09a2e2fa803d30e8bc1261c741d618"
+    },
+    {
+      "path": "backend/runtime/history.py",
+      "symbol": "_page_arguments",
+      "line": 13,
+      "docstring": "Reject ambiguous cursors and unbounded reads before opening a history snapshot.",
+      "file_sha256": "700a35191166a66d23ad578a0e5d7892417650de3d0bb8232c1edb747221ccbd"
+    },
+    {
+      "path": "backend/runtime/history.py",
+      "symbol": "RuntimeHistory",
+      "line": 21,
+      "docstring": "Read original scoped receipts while current execution controls retain separate authority.",
+      "file_sha256": "700a35191166a66d23ad578a0e5d7892417650de3d0bb8232c1edb747221ccbd"
+    },
+    {
+      "path": "backend/runtime/history.py",
+      "symbol": "RuntimeHistory.__init__",
+      "line": 24,
+      "docstring": "Bind the existing migrated owner database; reads never initialize an installation.",
+      "file_sha256": "700a35191166a66d23ad578a0e5d7892417650de3d0bb8232c1edb747221ccbd"
+    },
+    {
+      "path": "backend/runtime/history.py",
+      "symbol": "RuntimeHistory.task_runs",
+      "line": 28,
+      "docstring": "Page all saved task runs by stable sequence, including equal timestamps and old contexts.",
+      "file_sha256": "700a35191166a66d23ad578a0e5d7892417650de3d0bb8232c1edb747221ccbd"
+    },
+    {
+      "path": "backend/runtime/history.py",
+      "symbol": "RuntimeHistory.attempts",
+      "line": 43,
+      "docstring": "Read each original attempt's model, outcome and usage without substituting current receipts.",
+      "file_sha256": "700a35191166a66d23ad578a0e5d7892417650de3d0bb8232c1edb747221ccbd"
+    },
+    {
+      "path": "backend/runtime/history.py",
+      "symbol": "RuntimeHistory.budget",
+      "line": 72,
+      "docstring": "Explain lifetime project admission accounting; missing subscription quota and price stay unknown.",
+      "file_sha256": "700a35191166a66d23ad578a0e5d7892417650de3d0bb8232c1edb747221ccbd"
+    },
+    {
+      "path": "backend/runtime/sqlite_runs.py",
+      "symbol": "SQLiteRunStore",
+      "line": 67,
+      "docstring": "Own durable admission, fenced attempts and version-bound review requests in SQLite.",
+      "file_sha256": "2b28a4680b51b347cf5834e351bc3df78ac65f799c966cede0607a6920dec5b1"
+    },
+    {
+      "path": "backend/runtime/sqlite_runs.py",
+      "symbol": "SQLiteRunStore._reserve_inference",
+      "line": 582,
+      "docstring": "Reserve inference under current authority, requiring validated code review preflight.",
+      "file_sha256": "2b28a4680b51b347cf5834e351bc3df78ac65f799c966cede0607a6920dec5b1"
+    },
+    {
+      "path": "backend/runtime/work_budget.py",
+      "symbol": "project_work_usage",
+      "line": 4,
+      "docstring": "Aggregate recorded high waters and conservative holds in the caller's transaction.\n\nA settled measured dispatch counts its retained observation. Other dispatches\nhold at least their ceiling, including observed overruns. An absent measurement\nremains None; counted capacity is not a claim about actual tokens or quota.",
+      "file_sha256": "978fd257f1ea4c384828d51469a524bd8f93df4d8ea871da0b7cab7020fa404e"
+    },
+    {
+      "path": "backend/tests/runtime/test_history_budget.py",
+      "symbol": "history",
+      "line": 14,
+      "docstring": "Create the production read adapter against the fixture's real migrated database.",
+      "file_sha256": "f8c80a6d790333ae9f052c3e7305a522bfd2903a4630f0ecb569813e7f66e15b"
+    },
+    {
+      "path": "backend/tests/runtime/test_history_budget.py",
+      "symbol": "saved_runs",
+      "line": 21,
+      "docstring": "Retain sequential cancelled requests sharing a timestamp without dispatching inference.",
+      "file_sha256": "f8c80a6d790333ae9f052c3e7305a522bfd2903a4630f0ecb569813e7f66e15b"
+    },
+    {
+      "path": "backend/tests/runtime/test_history_budget.py",
+      "symbol": "test_task_history_crosses_thirty_with_tied_times_and_new_arrivals",
+      "line": 31,
+      "docstring": "Older pages neither lose tied timestamps nor include new runs or other projects.",
+      "file_sha256": "f8c80a6d790333ae9f052c3e7305a522bfd2903a4630f0ecb569813e7f66e15b"
+    },
+    {
+      "path": "backend/tests/runtime/test_history_budget.py",
+      "symbol": "test_attempt_pages_keep_original_result_model_and_unknown_usage",
+      "line": 53,
+      "docstring": "Earlier attempts retain their own receipts instead of borrowing the current attempt's values.",
+      "file_sha256": "f8c80a6d790333ae9f052c3e7305a522bfd2903a4630f0ecb569813e7f66e15b"
+    },
+    {
+      "path": "backend/tests/runtime/test_history_budget.py",
+      "symbol": "test_budget_matches_conservative_admission_and_preserves_missing_measurements",
+      "line": 82,
+      "docstring": "No measurement is unknown; partial usage retains a ceiling and overruns retain the high water.",
+      "file_sha256": "f8c80a6d790333ae9f052c3e7305a522bfd2903a4630f0ecb569813e7f66e15b"
+    },
+    {
+      "path": "backend/tests/runtime/test_history_budget.py",
+      "symbol": "test_owner_history_routes_are_scoped_readonly_and_available_without_runtime",
+      "line": 111,
+      "docstring": "HTTP history needs the owner session and never starts inference or borrows a foreign scope.",
+      "file_sha256": "f8c80a6d790333ae9f052c3e7305a522bfd2903a4630f0ecb569813e7f66e15b"
+    }
+  ],
+  "scope": "New/changed Python definitions and modules in this delivery. Relevant new frontend modules and exported helpers also carry English JSDoc; no claim that all historic project definitions are documented."
+}
