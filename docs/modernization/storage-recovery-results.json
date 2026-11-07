@@ -1,0 +1,53 @@
+{
+  "base_commit": "0074b74",
+  "previous_goal_turn": "progress: bounded native service committed as0074b74",
+  "started_at_utc": "2026-11-07T13:26:25Z",
+  "validation_cutoff_utc": "2026-11-07T13:34:11Z",
+  "elapsed_to_validation_seconds": 466,
+  "runs": [
+    {
+      "name": "red",
+      "receipt": ".superpowers/sdd/2026-10-31-actualizacion-proyecto/storage-recovery-red.xml",
+      "sha256": "d43f315d402e61d0fbf67463994c05094eb45bfce6340c297ca2dc90a49cfcf0",
+      "tests": 3,
+      "outcomes": {
+        "failure": 3
+      },
+      "seconds": 3.041,
+      "failures": [
+        "backend.tests.runtime.test_storage_volume::test_restore_enrollment_captures_bound_before_publishing[None]",
+        "backend.tests.runtime.test_storage_volume::test_restore_enrollment_captures_bound_before_publishing[outside_witness]",
+        "backend.tests.runtime.test_storage_volume::test_restore_enrollment_captures_bound_before_publishing[no_space]"
+      ]
+    },
+    {
+      "name": "source",
+      "receipt": ".superpowers/sdd/2026-10-31-actualizacion-proyecto/storage-recovery-source.xml",
+      "sha256": "e976d4f735cae22cb9a6afd515355c940476a19f877ddfe99e145a1e317557ca",
+      "tests": 59,
+      "outcomes": {
+        "passed": 59
+      },
+      "seconds": 31.222,
+      "failures": []
+    },
+    {
+      "name": "installed",
+      "receipt": ".superpowers/sdd/2026-10-31-actualizacion-proyecto/storage-recovery-installed.xml",
+      "sha256": "461170d779c773219e1d7d980d2fdef076c1af7f574d4689210ac3ba0834a4c4",
+      "tests": 59,
+      "outcomes": {
+        "passed": 59
+      },
+      "seconds": 31.658,
+      "failures": []
+    }
+  ],
+  "vm": "storage-recovery-vm.json",
+  "independent_disk_inspection": "storage-recovery-disk-inspection.json",
+  "model_calls": 0,
+  "global_suite_rerun": false,
+  "broad_scenarios_open": 43,
+  "fully_accepted_pages": 0,
+  "status": "scoped_storage_migration_and_controlled_full_disk_recovery_verified; whole goal remains active"
+}

@@ -8468,3 +8468,29 @@ All fine details stay after all macro capabilities.43broad scenarios still open;
 no new global green suite or defensible overall percentage. Task transitions
 continue to publish the current list, measured duration and next start time;
 the persistent dashboard carries this rule through context compaction.
+
+## 2026-11-07: bounded restore and controlled full-disk recovery
+
+Previous goal turn was progress, commit0074b74. Block13:26:25–13:34:11UTC,
+466seconds to validation. Restored enrollment accepted storage but omitted its
+receipt; now validates volume/path coverage/headroom before authority/history
+mutation and captures a fresh receipt.3red tests reproduced the missing receipt,
+uncovered witness and admitted exhaustion.59source/59installed cases now pass.
+
+One real VM with128MiB product ext4 volume and a live API reached SQLITE_FULL
+after a small uncommitted write; rollback restored the original data. Physical
+writers/service closure, low-space admission refusal, actual controlled kernel
+restart, explicit fixture-only filler removal and fresh bounded restore all pass.
+The restored API serves HTTP with0runs/dispatches; original/code retained.
+Readonly debugfs extraction after QEMU completion independently checks both DBs,
+code and receipts. Original service receipt DID reachclosed; failure to write
+that receipt, abrupt power loss, inodes and pending active authority remain
+principal cases. No real account, network card or model calls.
+
+618packaged Python/SQL files match;24changed definitions documented;83prompt
+reviews current;19Ruff findings deferred inDD102. Evidence in storage-recovery
+review/results/vm/disk-inspection/packaging/docstrings/lint. Next principal task:
+dependency updates/security, includingKen/ONNX andChroma. Remaining recovery
+cases/resources, human/other-profile evaluation, owner historical data and12page
+acceptance stay open;43broad scenarios not closed. Fine details come after all
+macro capabilities. Dashboard keeps the updated list and measured elapsed time.

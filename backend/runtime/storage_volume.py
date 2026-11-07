@@ -142,7 +142,7 @@ def configured_storage(config, paths=(), *, admission=False):
 
     Older installations have neither field and remain explicitly unbounded.
     Adding a policy to existing data is not enrollment: a new verified receipt
-    must be obtained through explicit host preparation or a future migration.
+    must be obtained through explicit host preparation or restored-host enrollment.
     """
     if 'storage' not in config and 'storage_receipt' not in config:
         return None

@@ -94,7 +94,7 @@ def prepare(args, output):
                 if target.stat().st_size != expected['bytes'] or hashlib.file_digest(stream,'sha256').hexdigest() != expected['sha256']:
                     raise ValueError('Public Ken model bytes differ from the published manifest')
             copied_models += 1
-    for name in ('reboot_guest.py','host_smoke.py', 'storage_guest.py'):
+    for name in ('reboot_guest.py','host_smoke.py', 'storage_guest.py','storage_recovery_guest.py'):
         copy_file(Path(__file__).with_name(name),payload/'eval'/name)
     guest_init = 'storage_guest_init.py' if getattr(args, 'storage_quota', False) else 'reboot_guest_init.py'
     copy_file(Path(__file__).with_name(guest_init),root/'guest_init.py')
@@ -117,7 +117,8 @@ def prepare(args, output):
               'model_cache':'/state/models','token_file':'/state/synthetic-account.json',
               'cgroup_parent':'/sys/fs/cgroup/researcher','project_turn_limit':1,'project_token_limit':1}
     (payload/'assets.json').write_text(json.dumps(config))
-    (payload/'eval-mode.json').write_text(json.dumps({'active_command': args.active_command}))
+    (payload/'eval-mode.json').write_text(json.dumps({'active_command': args.active_command,
+                                                  'storage_recovery':getattr(args,'storage_recovery',False)}))
     disk = output/'disk.raw'
     with disk.open('xb') as stream:
         stream.truncate(4*1024**3)
@@ -190,9 +191,12 @@ def main():
     parser.add_argument('--timeout',type=int,default=240)
     parser.add_argument('--storage-quota', action='store_true',
                         help='Fill a separate bounded durable volume and check retained data after remount; no inference')
+    parser.add_argument('--storage-recovery',action='store_true',
+                        help='Exercise full-disk SQLite rollback, service closure, kernel restart and fresh bounded restore; no inference')
     parser.add_argument('--active-command', action='store_true',
                         help='Keep a real Codex command peer and child alive until the guest kernel restarts; no inference')
     args = parser.parse_args()
+    if args.storage_recovery:args.storage_quota=True
     if args.storage_quota and args.active_command:
         raise ValueError('Storage and active reboot are separate trials')
     for name in ('qemu','kernel','assets','runtime_env'):

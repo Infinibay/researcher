@@ -28,7 +28,47 @@ que se pueda comparar el avance; no presentar microajustes como tareas principal
 - Última suite global: `9fb873c`,2210 casos,2178 pasan,31 fallan y1 error de fixture; sin omisiones. La carrera de backup encontrada se corrigió después con40 pruebas instaladas. No se declara una nueva corrida global verde; la referencia `0c8b8d9` queda como evidencia histórica.
 - Los 43 escenarios amplios siguen abiertos en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Etapa actual: grupo de servicios comprobado; sigue recuperación de almacenamiento
+## Etapa actual: recuperación acotada comprobada; siguen dependencias
+
+Bloque **13:26:25–13:34:11 UTC**, **7 min 46 s** hasta validar. Se corrigió la
+reinscripción de restore con `storage`.59pruebas de fuente y59instaladas pasan.
+En una VM real, SQLite revierte una transacción al llenarse128MiB; el servicio
+cierra, cambia el kernel y se restaura otra instalación acotada que responde por
+HTTP. Inspección independiente del disco confirma bases/código; cero modelos.
+618archivos coinciden,24definiciones documentadas y83revisiones de prompts vigentes.
+[Informe](storage-recovery-review.md), [VM](storage-recovery-vm.json).
+
+**Lista actualizada al cambiar de tarea:**
+- Implementado y probado en recorridos concretos: backend Codex/Ken, modelos,
+  flujos principales, comunicación, persistencia y varias recuperaciones.
+- Terminado ahora: reinscripción con volumen y recorrido de disco lleno,
+  rollback, reinicio controlado y restauración, **7 min 46 s** hasta validar.
+- Siguiente principal: actualización y seguridad de dependencias, incluidos
+  Ken/ONNX y el lector Chroma. **No iniciada en este bloque.**
+- Pendiente principal: recursos externos simultáneos; recuperación con recibo
+  no escribible, pérdida abrupta de energía/inodos; datos históricos del dueño;
+  evaluación humana y otros perfiles.
+- Interfaz:12pilotos/48conceptos;0/12páginas completamente aceptadas.
+- Al final: detalles acumulados (DD102 nuevo), validación global, revisión
+  independiente y distribución.
+
+Siguen43escenarios amplios abiertos. Este ensayo no cierra la aceptación global
+de recuperación ni aporta un porcentaje total fiable. Lista y tiempos persistentes.
+
+## Etapa anterior: recuperación con disco lleno y migración de almacenamiento
+
+Inicio **2026-11-07 13:26:25 UTC**. El bloque anterior fue progreso y quedó
+guardado en `0074b74`. En curso: reparar la reinscripción de una restauración
+con política de volumen y comprobar escritura fallida/recuperación sobre disco
+real desechable. La primera inspección encontró que faltaba capturar el recibo
+de almacenamiento antes de publicar la nueva instalación como preparada.
+
+Lista vigente: terminado grupo del servicio (**17 min 31 s** hasta validar);
+en curso recuperación/migración; después seguridad, evaluación humana/otros
+perfiles, datos históricos y aceptación de12páginas. Cuotas restantes siguen
+abiertas. Todos los detalles secundarios después de las tareas principales.
+
+## Etapa anterior: grupo de servicios comprobado; sigue recuperación de almacenamiento
 
 Bloque **13:06:07–13:23:38 UTC**, **17 min 31 s** hasta validación. El lanzador
 nativo aplica límites compartidos y un guardián retira el grupo si muere el

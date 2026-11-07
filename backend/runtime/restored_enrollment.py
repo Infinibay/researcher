@@ -92,6 +92,13 @@ authority is never reset, reused or repaired by retrying this operation.
         if any(os.path.lexists(p) for p in (root/'authority',witness,root/'enrollment.json',root/'runtime.enrolled.json',root/'installation.enrolled.json')):
             raise FileExistsError('Enrollment requires NEW authority/witness paths; preserve partial state and restore the backup to another NEW directory')
         config, observations = _resources(assets)
+        from backend.runtime.storage_volume import StorageVolume
+
+        volume = StorageVolume.capture(config['storage']) if 'storage' in config else None
+        storage = {'enforced':False,'reason':'No aggregate storage policy configured'}
+        if volume is not None:
+            storage = volume.check([root,witness],admission=True)
+            config['storage_receipt'] = volume.receipt
         from backend.db.migration_catalog import LATEST_VERSION
         from backend.tools.base.db import ensure_migrations
 
@@ -128,6 +135,7 @@ authority is never reset, reused or repaired by retrying this operation.
         result = {'format':1,'status':'prepared','snapshot_id':marker['snapshot_id'],
                   'restoration':marker['restoration'],'environment':_environment(root),
                   'authority_id':authority['authority_id'],'resource_observations':observations,
+                  'storage':storage,
                   'historical_work':historical,'model_turns':0,'old_work_replayed':False,
                   'schema_before':schema_before,'schema_version':LATEST_VERSION,
                   'data_recovery':restoration['data_recovery'],

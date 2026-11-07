@@ -10,6 +10,12 @@ con datos sintéticos; siguen pendientes los datos históricos del propietario.
 No es todavía una aceptación integral de
 recuperación tras un desastre.
 
+También se comprobó una transacción fallida por disco lleno con el API activo,
+su rollback, parada, reinicio controlado del kernel y restore en un volumen
+acotado. El ensayo conserva código y bases y no reejecuta trabajo. No equivale
+a pérdida abrupta de energía ni cubre todos los estados de autoridad pendiente.
+[Evidencia y límites](../modernization/storage-recovery-review.md).
+
 ```bash
 researcher-bootstrap backup-host \
   --directory /ruta/instalacion \
@@ -64,6 +70,35 @@ puede archivarse si coincide con el kernel y observador anteriores verificados;
 eso no acredita el cierre del host original. Restore conserva `service-owner.lock`
 y `service-resources.json` bajo `.restorations/.../original/service`, como historial.
 El servicio restaurado adquiere controles y grupo nuevos al arrancar.
+
+### Migrar a un volumen con capacidad acotada
+
+Usar backup/restore hacia una carpeta nueva del volumen ext4 ya preparado por
+el operador. Al reinscribir, indicar en el archivo de recursos la política
+`storage` del destino y colocar allí también el testigo nuevo. La reinscripción
+comprueba identidad, capacidad, cobertura de ambas rutas y margen libre antes
+de crear autoridad o modificar el historial. Captura un recibo nuevo y lo guarda
+en la configuración; no adopta el recibo archivado de la instalación anterior.
+
+```bash
+researcher-bootstrap restore-host \
+  --backup /ruta/copia-verificada \
+  --destination /srv/researcher-volume/restaurada
+
+researcher-bootstrap enroll-restored-host \
+  --directory /srv/researcher-volume/restaurada \
+  --witness-dir /srv/researcher-volume/testigo-nuevo \
+  --assets /ruta/recursos-con-storage-del-destino.json
+
+researcher-bootstrap check-host --directory /srv/researcher-volume/restaurada --probe
+researcher-start --installation /srv/researcher-volume/restaurada
+```
+
+Si la validación del volumen falla, la copia sigue pendiente de reinscripción.
+Un fallo posterior puede conservar estado parcial: restaurar de nuevo en otra
+carpeta y usar testigo nuevo; no reinicializar la autoridad parcial. Mantener
+original y backup hasta comprobar datos, fuentes, adjuntos, rutas y estado de
+trabajo en la instalación nueva. El historial copiado no se reejecuta por arrancar.
 
 ### Recuperación explícita tras un cambio de kernel
 

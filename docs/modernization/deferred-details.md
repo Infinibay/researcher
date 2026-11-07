@@ -737,6 +737,14 @@ exportaciones/backups y trabajo del padre siguen como pendientes principales.
 examinado. Resolver después de las capacidades principales. No confundirlos con
 la cuota de temporales de Chroma o los recursos del supervisor, aún principales.
 
+## DD102 — Estilo de recuperación y fixtures de volumen
+
+19 avisos de Ruff:9 I001,2 F401,6 F811,1 SIM117 y1 BLE001. Los F811 señalan
+fixtures importadas como parámetros de pruebas. Conservar el comportamiento y
+revisar organización de imports/fixtures/excepciones después de todas las tareas
+principales. [Diagnóstico](storage-recovery-lint.json). No incluye los escenarios
+pendientes de pérdida de energía, inodos o recibos de cierre no escribibles.
+
 ## DD101 — Estilo en el grupo de servicios y sus consumidores
 
 26 avisos de Ruff en los archivos revisados:19 I001,2 TRY004,2 F401,2 SIM117

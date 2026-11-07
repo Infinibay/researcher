@@ -8,6 +8,7 @@ import pytest
 from backend.runtime.contracts import RunConflict
 from backend.runtime.storage_volume import StorageVolume
 from backend.tests.runtime.test_host_installation import host_assets  # noqa: F401
+from backend.tests.runtime.test_installation_backup import installation  # noqa: F401
 
 
 @pytest.fixture
@@ -164,6 +165,38 @@ def test_missing_receipt_never_downgrades_a_configured_bound(observed_volume):
     with pytest.raises(ValueError, match='receipt'):
         configured_storage({'storage': policy})
     assert configured_storage({}) is None
+
+
+@pytest.mark.parametrize('obstacle',[None,'outside_witness','no_space'])
+def test_restore_enrollment_captures_bound_before_publishing(observed_volume,host_assets,installation,tmp_path,obstacle):
+    """Move copied data into a selected volume, rejecting uncovered or exhausted storage before new authority or history writes."""
+    from backend.runtime.installation_backup import backup_installation
+    from backend.runtime.installation_restore import restore_installation
+    from backend.runtime.restored_enrollment import enroll_restored_host
+    from backend.runtime.host_installation import host_environment
+
+    mount,policy,receipt,available=observed_volume
+    original,_=installation
+    backup=tmp_path/'migration-backup';backup_installation(original,backup)
+    restored=mount/'restored';restore_installation(backup,restored)
+    before=(restored/'source.db').read_bytes()
+    witness=(tmp_path if obstacle=='outside_witness' else mount)/'new-witness'
+    if obstacle=='no_space':available['available_bytes']=0
+    if obstacle is not None:
+        with pytest.raises((ValueError,RunConflict)):
+            enroll_restored_host(restored,witness_dir=witness,assets={**host_assets,'storage':policy})
+        assert not witness.exists() and not (restored/'authority').exists()
+        assert (restored/'source.db').read_bytes()==before
+        assert json.loads((restored/'installation.json').read_text())['status']=='restored_pending_enrollment'
+        return
+    result=enroll_restored_host(restored,witness_dir=witness,assets={**host_assets,'storage':policy})
+    assert result['storage']['enforced'] is True
+    config=json.loads((restored/'runtime.json').read_text())
+    assert config['storage_receipt']==receipt
+    assert host_environment(restored)['INFINIBAY_DB']==str(restored/'source.db')
+    receipt['fsid']+=1
+    with pytest.raises(ValueError,match='Original storage'):
+        host_environment(restored)
 
 
 @pytest.mark.asyncio

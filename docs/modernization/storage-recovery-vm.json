@@ -1,0 +1,127 @@
+{
+  "status": "passed",
+  "model_turns": 0,
+  "preparation": {
+    "ken_model_files": 26,
+    "host_dynamic_libraries": 20,
+    "real_account_copied": false,
+    "installed_environment": "/home/andres/.codex/worktrees/b09e/researcher/.superpowers/sdd/2026-10-31-actualizacion-proyecto/native-runtime-env",
+    "kernel_sha256": "c3132370c0d126faf45a97559ca985e254c14f7cb9a7fd5ed2bc9e22ee0c7ddd"
+  },
+  "first_boot_id": "f18d87ec-b876-40f6-abe4-d683caaaaed4",
+  "retained_sha256": "1dee54df23f55d7b867d85f878bde881964e379a6a289aa3045fd1e2c56d4c4a",
+  "original_project_name": "Synthetic prepared-host smoke",
+  "service_group": "/sys/fs/cgroup/researcher/researcher-service-c408d58e877342e1b8921e4080e392b4",
+  "transaction_small_write_completed": true,
+  "writer_receipts": [
+    [
+      28,
+      442
+    ],
+    [
+      28,
+      444
+    ],
+    [
+      28,
+      439
+    ],
+    [
+      28,
+      433
+    ]
+  ],
+  "domain_removed_while_full": true,
+  "sqlite_failure": "SQLITE_FULL",
+  "failed_transaction_rolled_back": true,
+  "new_work_refused": true,
+  "original_launcher_exit": 143,
+  "service_group_removed": true,
+  "original_service_receipt": {
+    "format": 1,
+    "status": "closed",
+    "domain_path": "/sys/fs/cgroup/researcher/researcher-service-c408d58e877342e1b8921e4080e392b4",
+    "domain_identity": {
+      "device": 27,
+      "inode": 188,
+      "boot_id": "f18d87ec-b876-40f6-abe4-d683caaaaed4",
+      "observer_namespace": 4026531836,
+      "observer_cgroup_namespace": 4026531835
+    },
+    "limits": {
+      "pids": 128,
+      "memory_bytes": 2147483648,
+      "cpu_millis": 2000
+    },
+    "domain_removed": true,
+    "native_actor_closure_proven": false,
+    "reason": "stop_requested",
+    "resources": {
+      "observed": true,
+      "cpu_usage_usec": 2678355,
+      "cpu_throttled_periods": 0,
+      "memory_oom_kills": 0,
+      "memory_group_oom_kills": 0,
+      "pids_denied": 0,
+      "limits": {
+        "cpu_max": "200000 100000",
+        "memory_max": "2147483648",
+        "pids_max": "128"
+      }
+    }
+  },
+  "original_service_receipt_sha256": "5a0a16c425c8cee800a7f9c46bb9ec223ec6f8904f45f85b5e2f7aff06f277d1",
+  "service_closure_recorded": true,
+  "before_reboot": {
+    "runs": [],
+    "dispatches": [],
+    "reports": [],
+    "findings": [],
+    "peers": [],
+    "integrity": "ok"
+  },
+  "second_boot_id": "445fee99-2a19-4148-8b10-ce9d3b343d74",
+  "fixture_files_removed_explicitly": 1762,
+  "fresh_storage_receipt": {
+    "policy": {
+      "mount": "/bounded",
+      "max_bytes": 134217728,
+      "admission_free_bytes": 4194304
+    },
+    "device": 65040,
+    "inode": 2,
+    "fsid": 2921055217826068182,
+    "device_bytes": 134217728,
+    "filesystem_bytes": 120015872,
+    "inodes": 32768
+  },
+  "restored_http_read": true,
+  "restored_database": {
+    "runs": [],
+    "dispatches": [],
+    "reports": [],
+    "findings": [],
+    "peers": [],
+    "integrity": "ok"
+  },
+  "restored_launcher_exit": 143,
+  "recovered": true,
+  "old_work_replayed": false,
+  "original_service_receipt_preserved": true,
+  "backup_reboot_evidence": {
+    "source_boot_id": "f18d87ec-b876-40f6-abe4-d683caaaaed4",
+    "observed_boot_id": "445fee99-2a19-4148-8b10-ce9d3b343d74",
+    "source_observer_namespace": 4026531836,
+    "observed_observer_namespace": 4026531836,
+    "history": "committed",
+    "torn_tail": false
+  },
+  "restored_group_removed": true,
+  "original_data_preserved": true,
+  "real_credentials": false,
+  "controlled_kernel_restart": true,
+  "qemu_exit": 0,
+  "network_card": false,
+  "qemu_processes_started": 1,
+  "elapsed_seconds": 30.09
+}

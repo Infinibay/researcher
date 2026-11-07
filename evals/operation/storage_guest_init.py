@@ -4,9 +4,12 @@ This program is a guarded PID1 fixture, never a host administration command.
 """
 
 import ctypes
+import fcntl
 import json
 import os
 from pathlib import Path
+import socket
+import struct
 import subprocess
 import traceback
 
@@ -26,10 +29,10 @@ def mount(source, destination, kind):
     subprocess.run(['/usr/bin/mount', '-n', '-t', kind, source, destination], check=True, timeout=10)
 
 
-def run_phase(phase):
+def run_phase(phase, *, recovery=False):
     """Run the installed product as the unprivileged serving user with no real credentials."""
     subprocess.run(
-        ['/state/env/bin/python', '-I', '/state/eval/storage_guest.py', phase],
+        ['/state/env/bin/python', '-I', '/state/eval/'+('storage_recovery_guest.py' if recovery else 'storage_guest.py'), phase],
         cwd='/state', env={'PATH': '/usr/bin:/bin', 'HOME': '/home/fixture', 'LANG': 'C.UTF-8'},
         user=1000, group=1000, extra_groups=[], check=True, timeout=90,
     )
@@ -59,6 +62,16 @@ def boot():
         for name in ('', 'cgroup.procs', 'cgroup.threads', 'cgroup.subtree_control'):
             os.chown(root/name, 1000, 1000)
     (delegated/'owner/cgroup.procs').write_text(str(os.getpid()))
+    with socket.socket(socket.AF_INET,socket.SOCK_DGRAM) as control:
+        fcntl.ioctl(control,0x8914,struct.pack('16sH14x',b'lo',0x49))
+    if json.loads(Path('/state/eval-mode.json').read_text()).get('storage_recovery'):
+        phase='after' if Path('/state/storage-result.json').exists() else 'before'
+        run_phase(phase,recovery=True)
+        if phase=='before':return True
+        result=json.loads(Path('/state/storage-result.json').read_text())
+        result.update(status='passed',model_turns=0,real_credentials=False,controlled_kernel_restart=True)
+        print('RESEARCHER-REBOOT-RESULT:'+json.dumps(result),flush=True)
+        return False
     run_phase('exercise')
     subprocess.run(['/usr/bin/umount', '/bounded'], check=True, timeout=10)
     run_phase('missing')
@@ -72,15 +85,16 @@ def boot():
 def main():
     """Power off only this marked guest after preserving the original trial's result."""
     require_guest()
+    restart=False
     try:
-        boot()
+        restart=boot()
     except BaseException as error:
         traceback.print_exc()
         print('RESEARCHER-REBOOT-RESULT:' + json.dumps({'status': 'failed', 'error_type': type(error).__name__}), flush=True)
     require_guest()
     os.sync()
     libc = ctypes.CDLL(None, use_errno=True)
-    if libc.reboot(0x4321FEDC):
+    if libc.reboot(0x01234567 if restart else 0x4321FEDC):
         raise OSError(ctypes.get_errno(), 'Disposable guest poweroff failed')
 
 

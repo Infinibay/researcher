@@ -1,0 +1,150 @@
+{
+  "changed_definitions": 24,
+  "missing": [],
+  "definitions": [
+    {
+      "path": "backend/runtime/restored_enrollment.py",
+      "definition": "<module>",
+      "line": 1,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/restored_enrollment.py",
+      "definition": "enroll_restored_host",
+      "line": 68,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/storage_volume.py",
+      "definition": "<module>",
+      "line": 1,
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/storage_volume.py",
+      "definition": "configured_storage",
+      "line": 140,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_storage_volume.py",
+      "definition": "<module>",
+      "line": 1,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_storage_volume.py",
+      "definition": "test_restore_enrollment_captures_bound_before_publishing",
+      "line": 171,
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_storage_volume.py",
+      "definition": "exhausted",
+      "line": 87,
+      "documented": true
+    },
+    {
+      "path": "evals/operation/reboot_vm.py",
+      "definition": "<module>",
+      "line": 1,
+      "documented": true
+    },
+    {
+      "path": "evals/operation/reboot_vm.py",
+      "definition": "prepare",
+      "line": 60,
+      "documented": true
+    },
+    {
+      "path": "evals/operation/reboot_vm.py",
+      "definition": "main",
+      "line": 186,
+      "documented": true
+    },
+    {
+      "path": "evals/operation/storage_guest_init.py",
+      "definition": "<module>",
+      "line": 1,
+      "documented": true
+    },
+    {
+      "path": "evals/operation/storage_guest_init.py",
+      "definition": "run_phase",
+      "line": 32,
+      "documented": true
+    },
+    {
+      "path": "evals/operation/storage_guest_init.py",
+      "definition": "boot",
+      "line": 41,
+      "documented": true
+    },
+    {
+      "path": "evals/operation/storage_guest_init.py",
+      "definition": "main",
+      "line": 85,
+      "documented": true
+    },
+    {
+      "path": "evals/operation/storage_recovery_guest.py",
+      "definition": "<module>",
+      "line": 1,
+      "documented": true
+    },
+    {
+      "path": "evals/operation/storage_recovery_guest.py",
+      "definition": "helpers",
+      "line": 26,
+      "documented": true
+    },
+    {
+      "path": "evals/operation/storage_recovery_guest.py",
+      "definition": "assets",
+      "line": 33,
+      "documented": true
+    },
+    {
+      "path": "evals/operation/storage_recovery_guest.py",
+      "definition": "save",
+      "line": 40,
+      "documented": true
+    },
+    {
+      "path": "evals/operation/storage_recovery_guest.py",
+      "definition": "fill_tail",
+      "line": 46,
+      "documented": true
+    },
+    {
+      "path": "evals/operation/storage_recovery_guest.py",
+      "definition": "fill_volume",
+      "line": 56,
+      "documented": true
+    },
+    {
+      "path": "evals/operation/storage_recovery_guest.py",
+      "definition": "inspect_http",
+      "line": 82,
+      "documented": true
+    },
+    {
+      "path": "evals/operation/storage_recovery_guest.py",
+      "definition": "before",
+      "line": 90,
+      "documented": true
+    },
+    {
+      "path": "evals/operation/storage_recovery_guest.py",
+      "definition": "remove_fixture_fillers",
+      "line": 137,
+      "documented": true
+    },
+    {
+      "path": "evals/operation/storage_recovery_guest.py",
+      "definition": "after",
+      "line": 148,
+      "documented": true
+    }
+  ]
+}

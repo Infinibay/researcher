@@ -1,0 +1,91 @@
+{
+  "method": "Read-only debugfs extraction after original QEMU handle completed; SQLite readonly integrity and content checks.",
+  "disk_sha256": "74459cd1c7b87e034fef04194407c09bbde99254cf1efb15652a79b70cb0603f",
+  "installations": {
+    "installation": {
+      "project_name": "Synthetic prepared-host smoke",
+      "integrity": "ok",
+      "foreign_keys": [],
+      "failed_events": 0,
+      "runs": 0,
+      "dispatches": 0,
+      "retained_sha256": "1dee54df23f55d7b867d85f878bde881964e379a6a289aa3045fd1e2c56d4c4a",
+      "service": {
+        "format": 1,
+        "status": "closed",
+        "domain_path": "/sys/fs/cgroup/researcher/researcher-service-c408d58e877342e1b8921e4080e392b4",
+        "domain_identity": {
+          "device": 27,
+          "inode": 188,
+          "boot_id": "f18d87ec-b876-40f6-abe4-d683caaaaed4",
+          "observer_namespace": 4026531836,
+          "observer_cgroup_namespace": 4026531835
+        },
+        "limits": {
+          "pids": 128,
+          "memory_bytes": 2147483648,
+          "cpu_millis": 2000
+        },
+        "domain_removed": true,
+        "native_actor_closure_proven": false,
+        "reason": "stop_requested",
+        "resources": {
+          "observed": true,
+          "cpu_usage_usec": 2678355,
+          "cpu_throttled_periods": 0,
+          "memory_oom_kills": 0,
+          "memory_group_oom_kills": 0,
+          "pids_denied": 0,
+          "limits": {
+            "cpu_max": "200000 100000",
+            "memory_max": "2147483648",
+            "pids_max": "128"
+          }
+        }
+      }
+    },
+    "restored": {
+      "project_name": "Synthetic prepared-host smoke",
+      "integrity": "ok",
+      "foreign_keys": [],
+      "failed_events": 0,
+      "runs": 0,
+      "dispatches": 0,
+      "retained_sha256": "1dee54df23f55d7b867d85f878bde881964e379a6a289aa3045fd1e2c56d4c4a",
+      "service": {
+        "format": 1,
+        "status": "closed",
+        "domain_path": "/sys/fs/cgroup/researcher/researcher-service-0fdc941e53ad405eac96765db8a73908",
+        "domain_identity": {
+          "device": 27,
+          "inode": 188,
+          "boot_id": "445fee99-2a19-4148-8b10-ce9d3b343d74",
+          "observer_namespace": 4026531836,
+          "observer_cgroup_namespace": 4026531835
+        },
+        "limits": {
+          "pids": 128,
+          "memory_bytes": 2147483648,
+          "cpu_millis": 2000
+        },
+        "domain_removed": true,
+        "native_actor_closure_proven": false,
+        "reason": "stop_requested",
+        "resources": {
+          "observed": true,
+          "cpu_usage_usec": 1933099,
+          "cpu_throttled_periods": 0,
+          "memory_oom_kills": 0,
+          "memory_group_oom_kills": 0,
+          "pids_denied": 0,
+          "limits": {
+            "cpu_max": "200000 100000",
+            "memory_max": "2147483648",
+            "pids_max": "128"
+          }
+        }
+      }
+    }
+  },
+  "status": "passed"
+}
