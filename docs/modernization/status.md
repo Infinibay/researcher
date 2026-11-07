@@ -4,6 +4,16 @@ La implementación del [plan completo](../superpowers/plans/2026-10-31-actualiza
 
 ## Resultados disponibles
 
+- **CPU compartida y agotamiento explicados:**120 pruebas dirigidas de fuente y66
+  instaladas pasan;610 archivos coinciden y37 definiciones documentadas. CPU,
+  memoria y procesos acotados por dominio; agotamiento real conserva contadores,
+  cierra peers y produce un mensaje específico al propietario. El check-host
+  instalado verifica Codex/Ken y un hijo limitado, sin modelos. Bloque15min11s.
+  Quedan almacenamiento agregado durable, operaciones fuera del dominio y seguridad.
+  [Informe](domain-resources-review.md), [resultados](domain-resources-results.json),
+  [host](domain-resources-host-probe.json).
+
+
 - **Plan y explicación entregados juntos:** un único intento real de desarrollo
   entrega con81.685/120.000tokens observados; cierre confirmado, estado nativo
   interrupted conservado y cero aceptaciones.128 pruebas iniciales de fuente/102

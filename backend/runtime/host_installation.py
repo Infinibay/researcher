@@ -95,8 +95,8 @@ def _resources(assets):
     parent = Path(config['cgroup_parent'])
     if not parent.is_relative_to('/sys/fs/cgroup') or not parent.is_dir() or not os.access(parent, os.W_OK):
         raise ValueError('Host requires an existing writable delegated cgroup v2 parent')
-    if not {'memory', 'pids'} <= set((parent / 'cgroup.subtree_control').read_text().split()):
-        raise ValueError('Delegate memory and pids controllers before initializing the host')
+    if not {'cpu', 'memory', 'pids'} <= set((parent / 'cgroup.subtree_control').read_text().split()):
+        raise ValueError('Delegate CPU, memory and pids controllers before initializing the host')
     limits = BrokerLimits(**config.get('broker_limits', {'memory_bytes': 2 * 1024**3, 'pids': 128}))
     config['broker_limits'] = asdict(limits)
     if 'limits' in config:
@@ -184,7 +184,7 @@ def _probe_domain(config):
         retired = closure.removed
         if code != 0 or not closure.removed:
             raise RuntimeError('Host kernel probe did not close successfully')
-        return {'child_exit_code': code, 'domain_removed': closure.removed}
+        return {'child_exit_code': code, 'domain_removed': closure.removed, 'resource_observation': closure.resources}
     finally:
         if domain is not None:
             try:

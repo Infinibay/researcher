@@ -1,0 +1,192 @@
+{
+  "base_commit": "3336803",
+  "changed_definitions": 37,
+  "undocumented": [],
+  "definitions": [
+    {
+      "path": "backend/runtime/broker_profile.py",
+      "symbol": "_syscall_filter",
+      "line": 24
+    },
+    {
+      "path": "backend/runtime/execution_domain.py",
+      "symbol": "DomainClosure",
+      "line": 46
+    },
+    {
+      "path": "backend/runtime/execution_domain.py",
+      "symbol": "ExecutionDomain",
+      "line": 89
+    },
+    {
+      "path": "backend/runtime/execution_domain.py",
+      "symbol": "ExecutionDomain.limit",
+      "line": 200
+    },
+    {
+      "path": "backend/runtime/execution_domain.py",
+      "symbol": "ExecutionDomain._resource_observation",
+      "line": 243
+    },
+    {
+      "path": "backend/runtime/execution_domain.py",
+      "symbol": "ExecutionDomain.spawn",
+      "line": 266
+    },
+    {
+      "path": "backend/runtime/execution_domain.py",
+      "symbol": "ExecutionDomain.retire",
+      "line": 345
+    },
+    {
+      "path": "backend/runtime/host_installation.py",
+      "symbol": "_resources",
+      "line": 47
+    },
+    {
+      "path": "backend/runtime/host_installation.py",
+      "symbol": "_probe_domain",
+      "line": 169
+    },
+    {
+      "path": "backend/runtime/owned_runtime.py",
+      "symbol": "OwnedCodexRuntime",
+      "line": 235
+    },
+    {
+      "path": "backend/runtime/owned_runtime.py",
+      "symbol": "OwnedCodexRuntime.consume_closure",
+      "line": 284
+    },
+    {
+      "path": "backend/runtime/owned_runtime.py",
+      "symbol": "OwnedCodexRuntime.consume_resources",
+      "line": 293
+    },
+    {
+      "path": "backend/runtime/owned_runtime.py",
+      "symbol": "OwnedCodexRuntime.open",
+      "line": 378
+    },
+    {
+      "path": "backend/runtime/peer_broker.py",
+      "symbol": "BrokerLimits",
+      "line": 74
+    },
+    {
+      "path": "backend/runtime/peer_broker.py",
+      "symbol": "BrokerLimits.__post_init__",
+      "line": 81
+    },
+    {
+      "path": "backend/runtime/peer_broker.py",
+      "symbol": "PeerBroker",
+      "line": 133
+    },
+    {
+      "path": "backend/runtime/peer_broker.py",
+      "symbol": "PeerBroker.revoke",
+      "line": 1086
+    },
+    {
+      "path": "backend/runtime/peer_broker.py",
+      "symbol": "PeerBroker.recover",
+      "line": 1314
+    },
+    {
+      "path": "backend/runtime/service.py",
+      "symbol": "RuntimeService",
+      "line": 63
+    },
+    {
+      "path": "backend/runtime/service.py",
+      "symbol": "RuntimeService._note_issue",
+      "line": 803
+    },
+    {
+      "path": "backend/runtime/service.py",
+      "symbol": "RuntimeService._execute",
+      "line": 1074
+    },
+    {
+      "path": "backend/tests/runtime/test_host_installation.py",
+      "symbol": "test_host_probe_observes_and_retires_its_own_domain",
+      "line": 86
+    },
+    {
+      "path": "backend/tests/runtime/test_host_installation.py",
+      "symbol": "test_host_refuses_missing_cpu_controller_before_creating_installation",
+      "line": 118
+    },
+    {
+      "path": "backend/tests/runtime/test_owned_factory.py",
+      "symbol": "test_owned_memory_exhaustion_is_closed_and_explained_to_the_owner",
+      "line": 106
+    },
+    {
+      "path": "backend/tests/runtime/test_domain_resources.py",
+      "symbol": "resource_cgroup",
+      "line": 14
+    },
+    {
+      "path": "backend/tests/runtime/test_domain_resources.py",
+      "symbol": "test_cpu_budget_is_shared_by_forked_workers_and_retained_after_removal",
+      "line": 34
+    },
+    {
+      "path": "backend/tests/runtime/test_domain_resources.py",
+      "symbol": "test_memory_exhaustion_kills_the_whole_owned_group_and_preserves_evidence",
+      "line": 65
+    },
+    {
+      "path": "backend/tests/runtime/test_domain_resources.py",
+      "symbol": "test_missing_resource_observation_does_not_delay_physical_stop",
+      "line": 89
+    },
+    {
+      "path": "backend/tests/runtime/test_domain_resources.py",
+      "symbol": "test_missing_resource_observation_does_not_delay_physical_stop.unavailable",
+      "line": 97
+    },
+    {
+      "path": "backend/tests/runtime/test_domain_resources.py",
+      "symbol": "test_capsule_cannot_change_scheduler_to_escape_cpu_accounting",
+      "line": 109
+    },
+    {
+      "path": "backend/tests/runtime/test_domain_resources.py",
+      "symbol": "test_owner_sees_observed_memory_exhaustion_without_invented_native_completion",
+      "line": 130
+    },
+    {
+      "path": "backend/tests/runtime/test_domain_resources.py",
+      "symbol": "test_owner_sees_observed_memory_exhaustion_without_invented_native_completion.ExhaustedInference",
+      "line": 134
+    },
+    {
+      "path": "backend/tests/runtime/test_domain_resources.py",
+      "symbol": "test_owner_sees_observed_memory_exhaustion_without_invented_native_completion.ExhaustedInference.run",
+      "line": 137
+    },
+    {
+      "path": "backend/tests/runtime/test_domain_resources.py",
+      "symbol": "test_owner_sees_observed_memory_exhaustion_without_invented_native_completion.ExhaustedInference.consume_resources",
+      "line": 142
+    },
+    {
+      "path": "backend/tests/runtime/test_domain_resources.py",
+      "symbol": "test_process_budget_counts_descendants_and_records_denied_births",
+      "line": 159
+    },
+    {
+      "path": "backend/tests/runtime/test_domain_resources.py",
+      "symbol": "test_invalid_cpu_policy_cannot_become_a_broker_reservation",
+      "line": 186
+    },
+    {
+      "path": "backend/tests/runtime/test_domain_resources.py",
+      "symbol": "test_realtime_controller_cannot_birth_a_payload_outside_bandwidth_accounting",
+      "line": 194
+    }
+  ]
+}

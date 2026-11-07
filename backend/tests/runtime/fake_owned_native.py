@@ -1026,7 +1026,12 @@ for line in sys.stdin:
     if "id" in message:
         send({"id": message["id"], "result": result})
     if method == "turn/start":
-        if Path("/run/researcher-source/.ken/hold-turn").exists():
+        if Path("/run/researcher-source/.ken/exhaust-memory").exists():
+            allocation = bytearray(384 * 1024**2)
+            for offset in range(0, len(allocation), 4096):
+                allocation[offset] = 1
+            raise AssertionError("The configured group memory limit did not stop allocation")
+        elif Path("/run/researcher-source/.ken/hold-turn").exists():
             Path("/home/actor/.codex/turn-entered").write_text("entered")
         else:
             next_tool()

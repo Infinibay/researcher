@@ -800,7 +800,7 @@ class RuntimeService:
             finally:
                 self._workers.pop(run_id, None)
 
-    async def _note_issue(self, run, code, *, attempt_id=None, inference_started=False, limit=None):
+    async def _note_issue(self, run, code, *, attempt_id=None, inference_started=False, limit=None, resources=None):
         """Persist a safe, actionable owner explanation for this original run."""
         messages = {
             "legacy_owner_active": (
@@ -831,6 +831,10 @@ class RuntimeService:
                 "La ejecución se detuvo al alcanzar un límite. Conservamos el trabajo y los recibos guardados: un borrador puede existir aunque falte la entrega o la explicación final. Revisa la tarea y sus artefactos antes de decidir cómo continuar; este intento no se repetirá por su cuenta.",
                 "inspect_saved_work",
             ),
+            "resource_exhaustion": (
+                "El sistema registró agotamiento de recursos durante este intento. Conservamos el trabajo y los recibos guardados; revisa los resultados y el límite configurado antes de decidir cómo continuar. No se repetirá automáticamente.",
+                "inspect_saved_work",
+            ),
             "code_review_unconfirmed": (
                 "El revisor terminó su turno, pero no pudimos confirmar la revisión sobre el código observado. Conservamos la propuesta y su evidencia; revisa ese resultado antes de continuar.",
                 "inspect_saved_work",
@@ -858,6 +862,14 @@ class RuntimeService:
         }
         message, action = messages[code]
         details = {}
+        if code == "resource_exhaustion" and resources is not None:
+            observation = (
+                "procesos terminados por falta de memoria"
+                if resources.get("memory_oom_kills", 0) > 0
+                else "creación de procesos rechazada por alcanzar el límite compartido"
+            )
+            message = message.replace("agotamiento de recursos", observation)
+            details["resource_observation"] = resources
         if limit is not None:
             labels = {"tools": "herramientas", "tokens": "tokens observados",
                       "wall": "tiempo total", "progress": "tiempo sin progreso observable",
@@ -1066,6 +1078,7 @@ class RuntimeService:
         lease = heartbeat = token = result = peers = None
         error_type = None
         execution_limit = None
+        resource_observation = None
         dispatch_reserved = native_started = False
         code_review = review_confirmed = False
         development = development_complete = False
@@ -1308,6 +1321,9 @@ class RuntimeService:
                         )
                     runtime_closed = getattr(slot.session, "peers_closed", False)
                     consume_closure = getattr(self.runtime, "consume_closure", None)
+                    consume_resources = getattr(self.runtime, "consume_resources", None)
+                    if consume_resources is not None:
+                        resource_observation = consume_resources(lease)
                     if consume_closure is not None:
                         runtime_closed = (
                             consume_closure(lease) is True or runtime_closed
@@ -1393,6 +1409,17 @@ class RuntimeService:
                         self.store.get, slot.spec.project_id, run_id
                     )
                     if (
+                        resource_observation is not None
+                        and resource_observation.get("observed") is True
+                        and (resource_observation.get("memory_oom_kills", 0) > 0 or resource_observation.get("pids_denied", 0) > 0)
+                        and current.status in ("failed", "reconciling")
+                    ):
+                        await self._note_issue(
+                            current, "resource_exhaustion", attempt_id=lease.attempt_id,
+                            inference_started=True if native_started else None if dispatch_reserved else False,
+                            resources=resource_observation,
+                        )
+                    elif (
                         (
                             (code_review and not review_confirmed)
                             or (development and not development_complete)

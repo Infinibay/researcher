@@ -4805,6 +4805,21 @@
         "docs/modernization/license-artifact-reviews.json",
         "THIRD_PARTY_NOTICES.md"
       ]
+    },
+    "aggregate_kernel_resources": {
+      "status": "in_progress",
+      "implemented": "Shared CPU bandwidth, group OOM policy, scheduler confinement and retained exhaustion observations; owner feedback through controlled generation and actual cgroup exhaustion.120source/66installed tests; installed host probe with actual Codex/Ken assets; zero model calls.",
+      "evidence": [
+        "docs/modernization/domain-resources-review.md",
+        "docs/modernization/domain-resources-results.json",
+        "docs/modernization/domain-resources-packaging.json",
+        "docs/modernization/domain-resources-host-probe.json",
+        "backend/tests/runtime/test_domain_resources.py"
+      ],
+      "remaining": [
+        "Aggregate durable disk quota and trusted operations outside execution domain",
+        "Integral security and operational acceptance"
+      ]
     }
   }
 }

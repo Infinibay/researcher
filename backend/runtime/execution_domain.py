@@ -44,8 +44,11 @@ class DomainIdentity:
 
 @dataclass(frozen=True)
 class DomainClosure:
+    """Exact subtree retirement plus optional kernel counters sampled before removing that identity."""
+
     identity: DomainIdentity
     removed: bool
+    resources: dict | None = None
 
 
 class ContainedChild:
@@ -194,13 +197,15 @@ class ExecutionDomain:
         finally:
             os.close(fd)
 
-    def limit(self, *, pids, memory_bytes):
-        """Bound an empty delegated domain; missing controllers never fall back."""
+    def limit(self, *, pids, memory_bytes, cpu_millis=2000):
+        """Bound all descendants together; CPU milliseconds per second are shared bandwidth, not a per-process allowance."""
         if (
             type(pids) is not int
             or not 1 <= pids <= 1024
             or type(memory_bytes) is not int
             or not 64 * 1024**2 <= memory_bytes <= 8 * 1024**3
+            or type(cpu_millis) is not int
+            or not 100 <= cpu_millis <= 8000
         ):
             raise ValueError("Invalid execution domain resource limits")
         if self._pid != os.getpid():
@@ -218,6 +223,8 @@ class ExecutionDomain:
                 ("pids.max", pids),
                 ("memory.max", memory_bytes),
                 ("memory.swap.max", 0),
+                ("memory.oom.group", 1),
+                ("cpu.max", f"{cpu_millis * 100} 100000"),
             ):
                 fd = os.open(
                     name, os.O_WRONLY | os.O_CLOEXEC | os.O_NOFOLLOW, dir_fd=self._fd
@@ -233,7 +240,33 @@ class ExecutionDomain:
                 finally:
                     os.close(fd)
 
+    def _resource_observation(self):
+        """Read aggregate kernel counters without allowing unavailable telemetry to prevent physical retirement."""
+        try:
+            cpu = dict(line.split() for line in self._read("cpu.stat").splitlines())
+            memory = dict(line.split() for line in self._read("memory.events").splitlines())
+            pids = dict(line.split() for line in self._read("pids.events").splitlines())
+            counters = {
+                "cpu_usage_usec": int(cpu["usage_usec"]),
+                "cpu_throttled_periods": int(cpu["nr_throttled"]),
+                "memory_oom_kills": int(memory["oom_kill"]),
+                "memory_group_oom_kills": int(memory["oom_group_kill"]),
+                "pids_denied": int(pids["max"]),
+            }
+            if any(value < 0 for value in counters.values()):
+                raise ValueError("Invalid kernel counter")
+            return {"observed": True, **counters, "limits": {
+                "cpu_max": self._read("cpu.max").strip(),
+                "memory_max": self._read("memory.max").strip(),
+                "pids_max": self._read("pids.max").strip(),
+            }}
+        except (OSError, ValueError, KeyError):
+            return {"observed": False}
+
     def spawn(self, argv, *, env=None, pass_fds=()):
+        """Birth one child in the exact domain from a fair scheduler; admitted capsules deny subsequent scheduler changes."""
+        if os.sched_getscheduler(0) not in (os.SCHED_OTHER, os.SCHED_BATCH, os.SCHED_IDLE):
+            raise DomainUncertain("Execution requires a scheduler covered by CPU bandwidth control")
         if not isinstance(pass_fds, tuple) or any(
             type(fd) is not int or fd < 3 for fd in pass_fds
         ):
@@ -310,6 +343,7 @@ class ExecutionDomain:
             os.close(pinned)
 
     def retire(self, *, timeout=5):
+        """Withdraw births, kill the exact subtree, retain available counters and remove only after confirmed emptiness."""
         deadline = _deadline(timeout)
         if self._pid != os.getpid():
             raise DomainUncertain("Reopen execution domain after fork")
@@ -339,8 +373,9 @@ class ExecutionDomain:
             self._check()
             # Rmdir refuses a concurrent new birth or descendant cgroup. A
             # removed cgroup FD cannot be reused by a delayed clone3 caller.
+            resources = self._resource_observation()
             os.rmdir(self.path.name, dir_fd=self._parent_fd)
             self._retired = True
-            return DomainClosure(self.identity, True)
+            return DomainClosure(self.identity, True, resources)
         finally:
             self._lock.release()

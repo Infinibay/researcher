@@ -76,13 +76,17 @@ class BrokerLimits:
 
     pids: int = 128
     memory_bytes: int = 512 * 1024**2
+    cpu_millis: int = 2000
 
     def __post_init__(self):
+        """Reject unbounded or malformed aggregate policy before reserving a native or command domain."""
         if (
             type(self.pids) is not int
             or not 1 <= self.pids <= 1024
             or type(self.memory_bytes) is not int
             or not 64 * 1024**2 <= self.memory_bytes <= 8 * 1024**3
+            or type(self.cpu_millis) is not int
+            or not 100 <= self.cpu_millis <= 8000
         ):
             raise ValueError("Finite bounded broker limits required")
 
@@ -1080,6 +1084,7 @@ class PeerBroker:
             return self._physical_closed
 
     def revoke(self):
+        """Stop the physical domain before journal work, then preserve its closure and available kernel observations."""
         self.withdraw()
         with self._retire_lock:
             # Physical closure cannot wait behind local/global SQL publication.
@@ -1117,6 +1122,7 @@ class PeerBroker:
                         **grant,
                         "state": "retired",
                         "domain_removed": True,
+                        "resource_observation": self._physical_closed.resources,
                     },
                     "broker:active": None,
                 }
@@ -1318,7 +1324,7 @@ class PeerBroker:
         with ExecutionDomain.open(
             grant["domain_path"], expected=DomainIdentity(**grant["domain_identity"])
         ) as domain:
-            domain.retire()
+            closure = domain.retire()
         snapshot = journal.load()
         grant = snapshot.records[key]
         if grant["state"] == "retired":
@@ -1326,7 +1332,7 @@ class PeerBroker:
         if snapshot.records.get("broker:active") != grant_id:
             raise AuthorityUncertain("Recovery cannot release another concession")
         puts = {
-            key: {**grant, "state": "retired", "domain_removed": True},
+            key: {**grant, "state": "retired", "domain_removed": True, "resource_observation": closure.resources},
             "broker:active": None,
         }
         for op_key, operation in snapshot.records.items():

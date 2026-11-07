@@ -1,0 +1,63 @@
+{
+  "base_commit": "3336803",
+  "start_utc": "2026-11-07 11:18:23",
+  "validation_cut_utc": "2026-11-07 11:33:34",
+  "elapsed_seconds": 911,
+  "source": [
+    {
+      "cases": 86,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "cases": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "cases": 32,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  ],
+  "installed": {
+    "cases": 66,
+    "passed": 66,
+    "failed": 0,
+    "skipped": 0,
+    "backend_modules": 224,
+    "all_backend_imports_from_native_env": true,
+    "seconds": 34.352,
+    "exit_code": 0
+  },
+  "source_wheel_installed_files": 610,
+  "docstring_definitions": 37,
+  "prompt_candidates_reviewed": 83,
+  "initial_prompt_revalidations": 11,
+  "final_prompt_revalidations": 1,
+  "actual_model_calls": 0,
+  "kernel_cases": [
+    "shared CPU bandwidth across forked children",
+    "whole-group OOM retirement",
+    "aggregate process birth denial",
+    "scheduler change rejected in actual capsule",
+    "unknown counters do not block retirement",
+    "real owned OOM reaches persisted owner feedback",
+    "missing CPU controller rejected before installation"
+  ],
+  "host_probe": "installed CLI success with actual Codex/Ken assets, no model",
+  "global_suite_repeated": false,
+  "pages_fully_accepted": 0,
+  "broad_scenarios_open": 43,
+  "remaining_main": [
+    "aggregate durable disk quota",
+    "trusted host operations outside execution domain",
+    "Ken/ONNX and integral security",
+    "human communication and representative profiles",
+    "historical data and remaining recovery",
+    "integral12page acceptance"
+  ]
+}

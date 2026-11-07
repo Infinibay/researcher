@@ -8,7 +8,7 @@
   "token_file": "/home/you/.codex/auth.json",
   "cgroup_parent": "/sys/fs/cgroup/OPERATOR-DELEGATED-PARENT",
   "static_dir": "/opt/researcher/frontend/dist",
-  "broker_limits": {"memory_bytes": 2147483648, "pids": 128},
+  "broker_limits": {"memory_bytes": 2147483648, "pids": 128, "cpu_millis": 2000},
   "limits": {
     "wall_seconds": 180,
     "no_progress_seconds": 90,

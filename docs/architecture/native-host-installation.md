@@ -16,8 +16,8 @@ todas las rutas por las de esta instalación:
   tamaño y SHA-256 de cada artefacto; no descarga pesos durante el arranque.
 - Archivo de cuenta de la suscripción de Codex, privado y administrado por el
   usuario. Se conserva su ubicación; los tokens no se copian a la configuración.
-- Linux con cgroup v2 delegado al usuario del servicio, controladores `memory`
-  y `pids` habilitados, y soporte de los dominios nativos del proyecto.
+- Linux con cgroup v2 delegado al usuario del servicio, controladores `cpu`,
+  `memory` y `pids` habilitados, y soporte de los dominios nativos del proyecto.
 - Web ya compilada, con `index.html`, si se desea servir la interfaz. Sin
   `static_dir`, el launcher sólo sirve la API.
 
@@ -25,6 +25,14 @@ todas las rutas por las de esta instalación:
 opciones explícitas. Que el archivo de cuenta sea válido localmente no demuestra
 disponibilidad remota del modelo ni saldo/cuota de la suscripción. Se mantiene
 la validación del runtime al admitir una tarea.
+
+`broker_limits.cpu_millis` limita CPU compartida entre todos los procesos del
+dominio:2000 permite el equivalente de dos núcleos, y250 el de un cuarto de núcleo.
+El rango admitido es100–8000; el valor predeterminado es2000, también para una
+configuración anterior que no declare ese campo. El host verifica el límite
+antes de liberar procesos. La memoria y los procesos también se cuentan juntos;
+si la memoria se agota, se termina el grupo. Esto no es una cuota de disco ni un
+límite de todo el servicio Python que lo supervisa. [Alcance y pruebas](../modernization/domain-resources-review.md).
 
 ## Inicialización y comprobación
 

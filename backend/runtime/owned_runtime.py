@@ -258,6 +258,7 @@ class OwnedCodexRuntime:
         default_factory=dict, init=False, repr=False, compare=False
     )
     _model_catalog: dict = field(default_factory=dict, init=False, repr=False, compare=False)
+    _resource_observations: dict = field(default_factory=dict, init=False, repr=False, compare=False)
 
     def __post_init__(self):
         """Reject invalid search configuration before admitting a product attempt."""
@@ -281,12 +282,20 @@ class OwnedCodexRuntime:
             )
 
     def consume_closure(self, lease):
+        """Consume only the physical closure receipt for this exact original attempt and fence."""
         return self._closed_attempts.pop(lease.attempt_id, None) == (
             lease.project_id,
             lease.run_id,
             lease.fence,
             lease.context_version,
         )
+
+    def consume_resources(self, lease):
+        """Return scoped kernel observations without treating missing telemetry as zero or as a closure receipt."""
+        value = self._resource_observations.pop(lease.attempt_id, None)
+        if value is None or value[0] != (lease.project_id, lease.run_id, lease.fence, lease.context_version):
+            return None
+        return value[1]
 
     @property
     def supports_remote_publication(self):
@@ -852,6 +861,11 @@ class OwnedCodexRuntime:
                     else {}
                 )
                 physical = broker._physical_closed if broker is not None else None
+                if physical is not None and physical.resources is not None:
+                    self._resource_observations[lease.attempt_id] = (
+                        (lease.project_id, lease.run_id, lease.fence, lease.context_version),
+                        physical.resources,
+                    )
                 closed = (
                     (peer is None or peer.closed)
                     and (analysis is None or analysis.closed)

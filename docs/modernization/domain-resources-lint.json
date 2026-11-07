@@ -1,0 +1,390 @@
+[
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 97,
+      "row": 18
+    },
+    "filename": "backend/runtime/host_installation.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "import hashlib\nimport json\nimport os\nimport sqlite3\nimport stat\nimport sys\nfrom contextlib import closing\nfrom dataclasses import asdict\nfrom pathlib import Path\nfrom uuid import uuid4\n\nfrom backend.runtime.bootstrap import (\n    _sync_directory,\n    initialize_authority,\n    initialize_database,\n)\n\n",
+          "end_location": {
+            "column": 1,
+            "row": 20
+          },
+          "location": {
+            "column": 1,
+            "row": 7
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 1,
+      "row": 7
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 7,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  },
+  {
+    "cell": null,
+    "code": "TRY004",
+    "end_location": {
+      "column": 65,
+      "row": 32
+    },
+    "filename": "backend/runtime/host_installation.py",
+    "fix": null,
+    "location": {
+      "column": 9,
+      "row": 32
+    },
+    "message": "Prefer `TypeError` exception for invalid type",
+    "name": "type-check-without-type-error",
+    "noqa_row": 32,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/type-check-without-type-error"
+  },
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 67,
+      "row": 57
+    },
+    "filename": "backend/runtime/host_installation.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "    from backend.runtime.broker_profile import CodexAsset\n    from backend.runtime.codex_session import ExecutionLimits\n    from backend.runtime.contracts import text\n    from backend.runtime.development_policy import parse_development_checks\n    from backend.runtime.ken_worker import KEN_VERSION, KenInstallation\n    from backend.runtime.native_commands import VERSION, _version\n    from backend.runtime.native_network import NativeNetwork\n    from backend.runtime.peer_broker import BrokerLimits\n    from backend.runtime.subscription_auth import ManagedTokenFile\n",
+          "end_location": {
+            "column": 1,
+            "row": 58
+          },
+          "location": {
+            "column": 1,
+            "row": 49
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 5,
+      "row": 49
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 49,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  },
+  {
+    "cell": null,
+    "code": "TRY004",
+    "end_location": {
+      "column": 76,
+      "row": 67
+    },
+    "filename": "backend/runtime/host_installation.py",
+    "fix": null,
+    "location": {
+      "column": 13,
+      "row": 67
+    },
+    "message": "Prefer `TypeError` exception for invalid type",
+    "name": "type-check-without-type-error",
+    "noqa_row": 67,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/type-check-without-type-error"
+  },
+  {
+    "cell": null,
+    "code": "F841",
+    "end_location": {
+      "column": 14,
+      "row": 433
+    },
+    "filename": "backend/runtime/owned_runtime.py",
+    "fix": {
+      "applicability": "unsafe",
+      "edits": [
+        {
+          "content": "",
+          "end_location": {
+            "column": 17,
+            "row": 433
+          },
+          "location": {
+            "column": 9,
+            "row": 433
+          }
+        }
+      ],
+      "message": "Remove assignment to unused variable `audit`"
+    },
+    "location": {
+      "column": 9,
+      "row": 433
+    },
+    "message": "Local variable `audit` is assigned to but never used",
+    "name": "unused-variable",
+    "noqa_row": 433,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unused-variable"
+  },
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 95,
+      "row": 693
+    },
+    "filename": "backend/runtime/owned_runtime.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "                                from backend.planning.materials import (\n                                    PredecessorMaterials,\n                                )\n                                from backend.runtime.predecessor_tools import (\n                                    PredecessorTools,\n                                )\n",
+          "end_location": {
+            "column": 1,
+            "row": 694
+          },
+          "location": {
+            "column": 1,
+            "row": 692
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 33,
+      "row": 692
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 692,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  },
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 2,
+      "row": 58
+    },
+    "filename": "backend/runtime/peer_broker.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "import hashlib\nimport json\nimport os\nimport select\nimport threading\nimport time\nfrom dataclasses import asdict, dataclass\nfrom pathlib import Path\nfrom uuid import uuid4\n\nfrom backend.git.source_capsule import SourceGitCapsule, SourceGitLaunch\nfrom backend.runtime.authority_journal import (\n    AuthorityBusy,\n    AuthorityConflict,\n    AuthorityUncertain,\n)\nfrom backend.runtime.broker_profile import (\n    AnalysisCapsule,\n    CodexAsset,\n    KenCapsule,\n    NativeCapsule,\n    NativeCommandCapsule,\n    NativeProxyCapsule,\n)\nfrom backend.runtime.check_capsule import CheckCapsule, CheckLaunch\nfrom backend.runtime.check_registry import CheckExecutionView\nfrom backend.runtime.contracts import command_key, text\nfrom backend.runtime.egress_channel import EgressChannel\nfrom backend.runtime.egress_proxy import EgressPolicy, TunnelProxy\nfrom backend.runtime.execution_domain import DomainIdentity, ExecutionDomain\nfrom backend.runtime.git_capsule import GitCapsule, GitLaunch\nfrom backend.runtime.ken_worker import KenInstallation\nfrom backend.runtime.native_network import NativeNetwork\nfrom backend.runtime.native_state import NativeState\nfrom backend.runtime.peer_process import (\n    NamespaceIdentity,\n    _pidfd,\n    close_namespace,\n    start_ticks,\n)\nfrom backend.runtime.publication_capsule import (\n    PublicationGitCapsule,\n    PublicationGitLaunch,\n    PublicationObservationLaunch,\n)\nfrom backend.runtime.remote_capsule import (\n    RemoteGitCapsule,\n    RemoteGitLaunch,\n    RemoteObservationLaunch,\n)\n\n\n",
+          "end_location": {
+            "column": 1,
+            "row": 61
+          },
+          "location": {
+            "column": 1,
+            "row": 8
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 1,
+      "row": 8
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 8,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  },
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 14,
+      "row": 10
+    },
+    "filename": "backend/tests/runtime/test_domain_resources.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "import json\nimport os\nimport sys\nimport time\nfrom pathlib import Path\nfrom uuid import uuid4\n\nimport pytest\n\n\n",
+          "end_location": {
+            "column": 1,
+            "row": 13
+          },
+          "location": {
+            "column": 1,
+            "row": 3
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 1,
+      "row": 3
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 3,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  },
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 92,
+      "row": 132
+    },
+    "filename": "backend/tests/runtime/test_domain_resources.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "    from backend.tests.runtime.test_runtime_service import (\n        ControlledInference,\n        coordinator,\n    )\n",
+          "end_location": {
+            "column": 1,
+            "row": 133
+          },
+          "location": {
+            "column": 1,
+            "row": 132
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 5,
+      "row": 132
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 132,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  },
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 68,
+      "row": 31
+    },
+    "filename": "backend/tests/runtime/test_host_installation.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "    from backend.api.main import create_app\n    from backend.api.runtime_dependencies import configured_runtime\n    from backend.runtime.host_installation import initialize_host, inspect_host\n",
+          "end_location": {
+            "column": 1,
+            "row": 32
+          },
+          "location": {
+            "column": 1,
+            "row": 29
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 5,
+      "row": 29
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 29,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  },
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 37,
+      "row": 103
+    },
+    "filename": "backend/tests/runtime/test_host_installation.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "    from backend.cli import launcher\n    from backend.runtime.host_installation import initialize_host\n",
+          "end_location": {
+            "column": 1,
+            "row": 104
+          },
+          "location": {
+            "column": 1,
+            "row": 102
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 5,
+      "row": 102
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 102,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  },
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 66,
+      "row": 121
+    },
+    "filename": "backend/tests/runtime/test_host_installation.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "    from uuid import uuid4\n\n    from backend.runtime.host_installation import initialize_host\n",
+          "end_location": {
+            "column": 1,
+            "row": 122
+          },
+          "location": {
+            "column": 1,
+            "row": 120
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 5,
+      "row": 120
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 120,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  }
+]

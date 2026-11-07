@@ -1,0 +1,35 @@
+{
+  "scope": "Fresh synthetic installed host; actual native executable and published Ken asset verification, one fixed kernel probe, no model inference.",
+  "exit_code": 0,
+  "status": "resources_verified",
+  "model_turns": 0,
+  "kernel_probe": {
+    "child_exit_code": 0,
+    "domain_removed": true,
+    "resource_observation": {
+      "observed": true,
+      "cpu_usage_usec": 10263,
+      "cpu_throttled_periods": 0,
+      "memory_oom_kills": 0,
+      "memory_group_oom_kills": 0,
+      "pids_denied": 0,
+      "limits": {
+        "cpu_max": "200000 100000",
+        "memory_max": "2147483648",
+        "pids_max": "128"
+      }
+    }
+  },
+  "resource_observations": {
+    "native_version": "codex-cli 0.166.0",
+    "native_sha256": "b8a11fedf24b2dfb59a70c9e52b030f9a508dcd49cd2dd0d41956f4c785156b8",
+    "code_host_sha256": "657f4e902726e05867c937b583049d5997e057f8cd0ab40450633c9c9ef8d630",
+    "ken_version": "0.18.0",
+    "ken_artifacts_verified": 26,
+    "credential_snapshot_valid": true,
+    "remote_entitlement_verified": false
+  },
+  "installed_module": true,
+  "product_admission_verified": false,
+  "original_service_started": false
+}

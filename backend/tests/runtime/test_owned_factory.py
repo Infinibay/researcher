@@ -102,6 +102,33 @@ def owned_config(
     )
 
 
+@pytest.mark.timeout(180)
+async def test_owned_memory_exhaustion_is_closed_and_explained_to_the_owner(owned_config):
+    """Real cgroup exhaustion crosses broker, runtime and persisted user feedback without a second inference dispatch."""
+    from backend.api.main import create_app
+    from backend.api.runtime_dependencies import configured_runtime
+
+    c = owned_config
+    c.settings["broker_limits"]["memory_bytes"] = 256 * 1024**2
+    c.path.write_text(json.dumps(c.settings))
+    (c.s.workspace / ".ken").mkdir(exist_ok=True)
+    (c.s.workspace / ".ken/exhaust-memory").touch()
+    app = create_app()
+    runtime = configured_runtime(app.state.live_grants, app=app)
+    app.state.runtime_service = runtime
+    async with runtime:
+        run = await runtime.submit(c.s.c.spec)
+        await runtime.wait(run.run_id)
+        saved = runtime.store.get(101, run.run_id)
+        assert saved.status == "failed", saved
+        assert saved.issue["code"] == "resource_exhaustion"
+        assert "memoria" in saved.issue["message"]
+        assert saved.issue["resource_observation"]["memory_oom_kills"] > 0
+        assert c.s.c.conn.execute("SELECT count(*)FROM runtime_peers WHERE state!='closed'").fetchone()[0] == 0
+        assert c.s.c.conn.execute("SELECT count(*)FROM runtime_inference_dispatches").fetchone()[0] == 1
+        assert c.s.c.conn.execute("SELECT count(*)FROM tool_grants WHERE revoked_at IS NULL").fetchone()[0] == 0
+
+
 @pytest.mark.parametrize("task_type", ["research", "review"])
 async def test_configured_owned_product_run_persists_draft_and_analysis_receipts(
     owned_config, task_type,

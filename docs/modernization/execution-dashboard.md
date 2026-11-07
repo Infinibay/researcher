@@ -28,7 +28,41 @@ que se pueda comparar el avance; no presentar microajustes como tareas principal
 - Última suite global: `9fb873c`,2210 casos,2178 pasan,31 fallan y1 error de fixture; sin omisiones. La carrera de backup encontrada se corrigió después con40 pruebas instaladas. No se declara una nueva corrida global verde; la referencia `0c8b8d9` queda como evidencia histórica.
 - Los 43 escenarios amplios siguen abiertos en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Etapa actual: entrega atómica comprobada; sigue seguridad y recursos
+## Etapa actual: CPU y agotamiento comprobados; almacenamiento pendiente
+
+Bloque **11:18:23–11:33:34 UTC**, **15 min 11 s**, hasta validación.
+La CPU se limita de forma compartida entre los hijos del dominio; memoria y
+procesos conservan límites agregados. El OOM retira el grupo y sus contadores
+quedan guardados. Un agotamiento real del runtime llega al mensaje del propietario,
+sin inventar terminación nativa ni repetir inferencia.
+
+Pasan120 pruebas dirigidas de fuente y66 instaladas, sin omisiones.610 archivos
+coinciden;37 definiciones documentadas;83 revisiones de prompts vigentes. El
+comando instalado check-host --probe verifica recursos reales Codex/Ken, limita
+CPU/memoria/procesos y elimina su dominio. Cero llamadas al modelo. No se afirma
+una cuota de disco ni límites para todo el servicio supervisor.
+[Informe](domain-resources-review.md), [validación](domain-resources-results.json),
+[comando instalado](domain-resources-host-probe.json).
+
+**Lista actualizada al cambiar de tarea:**
+- Implementado y comprobado en recorridos concretos: backend Codex/Ken, modelos,
+  flujos principales, comunicación, persistencia y varias recuperaciones.
+- Terminado en este bloque: CPU compartida, retirada del grupo por OOM y explicación
+  del agotamiento, **15 min 11 s** hasta validación.
+- Terminado previamente: entrega atómica del plan y explicación, **18 min 28 s**.
+- Siguiente principal: almacenamiento durable con cuota agregada y recursos de
+  operaciones de confianza fuera del dominio. **No iniciado**; registrar inicio.
+- Pendiente principal: Ken/ONNX y seguridad restante; evaluación humana y otros
+  perfiles; datos históricos y recuperación; aceptación integral de12 páginas.
+- Interfaz:12 pilotos/48 conceptos,0/12 páginas completamente aceptadas.
+- Después de todas las tareas gruesas: detalles acumulados, validación global,
+  revisión independiente y distribución. DD094/095 recogen estilo y telemetría parcial.
+
+Siguen43 escenarios amplios abiertos; no hay nueva suite global verde ni porcentaje
+sustentado. Lista y tiempo en cada transición, persistentes tras compactar. Sin push
+ni despliegue.
+
+## Etapa anterior: entrega atómica comprobada; seguía seguridad y recursos
 
 Bloque **10:56:19–11:14:47 UTC**, **18 min 28 s**, hasta validación.
 El plan y su explicación se guardan juntos; el host cierra el turno sin requerir
@@ -50,8 +84,9 @@ pasan; no se repite el modelo.609 archivos coinciden,35 definiciones documentada
 - Terminado en este bloque: entrega atómica de planificación y explicación,
   **18 min 28 s** hasta validación; aceptación integral del proyecto aún pendiente.
 - Interfaz:12 pilotos y48 conceptos;0/12 páginas completamente aceptadas.
-- Siguiente tarea principal: límites agregados de recursos del engine y seguridad
-  pendiente de Ken/ONNX. **Todavía no iniciada**; registrar su inicio al comenzar.
+- En curso: límites agregados de CPU/memoria/procesos y explicación de agotamiento.
+  Inicio **2026-11-07 11:18:23 UTC**. Disco y seguridad Ken/ONNX siguen pendientes
+  principales; no se consideran resueltos por los límites de cgroup.
 - Pendiente principal: evaluación humana y demás perfiles de comunicación;
   datos históricos y recuperación restante; aceptación integral de las12 páginas.
 - Después de todas las tareas gruesas: detalles acumulados, validación global,

@@ -65,6 +65,8 @@ def _syscall_filter(
         ]
     denied = (
         101,
+        142,  # sched_setparam: retain the scheduler admitted by the host.
+        144,  # sched_setscheduler: no realtime escape from cpu.max.
         155,
         161,
         165,
@@ -73,6 +75,7 @@ def _syscall_filter(
         298,
         304,
         308,
+        314,  # sched_setattr: also excludes deadline/realtime policies.
         321,
         428,
         429,

@@ -8374,3 +8374,46 @@ Other main pending: human/profile communication, owner historical data and remai
 recovery, integral12page acceptance. ALL macro tasks before ALL fine details.
 Publish updated done/current/next/pending list and measured duration every transition;
 record next start when it begins. This policy survives compaction. No push/deploy.
+
+
+## 2026-11-07 — Shared kernel CPU and exhaustion feedback
+
+Authoritative managed worktree b09e, branchcodex/project-modernization, base3336803.
+Previous goal turn was progress. Block11:18:23–11:33:34UTC15m11s to validation.
+BrokerLimits.cpu_millis default2000 (100–8000) applies cpu.max on empty original
+domain, shared by all descendants. Existing memory/pids boundaries retained;
+memory.oom.group1 prevents remaining siblings after group OOM. Fair scheduler
+required at birth; inherited seccomp denies scheduler changes. CPU controller
+required before host init. Policy frozen in authority grant. Existing receipts
+not reinterpreted; missing CPU field receives default on new admission.
+
+Retirement records kernel observations before cgroup removal; missing counters
+remain observedFalse and cannot block Stop. Broker recovery also persists these
+observations. Ownedruntime scopes them to original attempt/fence; failed/reconciling
+runs gain honest resource_exhaustion owner feedback. Memory wording deliberately
+says lack of memory, not proof of which configured limit caused an OOM. CPU
+throttling alone does not imply failed work or permit another inference.
+
+120distinctsource tests(86+2+32) and66installed pass,0skips.610Python/SQLmatch,
+37definitions documented,83promptreviews current;catalog6textunchanged.12RuffDD094;
+partial-counter telemetry improvementDD095. Installed check-host --probe with
+actual Codex0.166/Ken0.18 assets verifies26model artifacts and cpu.max200000100000,
+memory2GiB/pids128;child0/domainremoved. No realmodelcalls or service started.
+Fresh synthetic host retained at .researcher/evaluations/domain-resources-20261107.
+Final wheel domain-resources-dist/researcher-0.1.0-cp312-cp312-linux_x86_64.whl
+SHA c7bc2540b685ebbd7c9a51c7927ad23c1692c515bd27853ca039ab6ec47d3cdd installed.
+See domain-resources-review/results/packaging/host-probe/docstrings/lint.
+
+Scope limitation is important: the domain caps its actors, not the trusted
+Python supervisor or all host operations. Aggregate durable disk quota remains
+MAIN work, not a fine detail. A periodic observer/RLIMIT_FSIZE is not a hard
+aggregate filesystem quota; preserve useful state across crash. Readonly host
+capability observation: btrfs filesystem, btrfs/fusermount3/mkfs.ext4 available,
+/dev/fuse present; fuse2fs/fuse-overlayfs not found. No filesystem/quota/mount
+configuration changed. Do not infer privilege or safe mounting from availability.
+
+Next macro: bounded durable storage and trusted host operations, not started.
+OtherpendingKen/ONNX,integralsecurity,human/profilecommunication,historicaldata/
+remainingrecovery,12pageacceptance.43broads cenariosopen0/12pagesaccepted;no new
+ globalsuitegreen. ALL macro tasks before ALL details; publish updated list and
+measured time every task transition and retain after compaction. No push/deploy.

@@ -688,3 +688,20 @@ Resolver después de todas las capacidades principales, sin repetir inferencia r
 por estilo. La advertencia de tamaño del bundle web sigue presente. El límite
 configurado de bytes de explicación era funcional y sí quedó protegido en este
 bloque; no se difiere como detalle.
+
+
+## DD094 — Estilo del bloque de recursos de ejecución
+
+Doce avisos Ruff (F841, I001 y TRY004), con ubicaciones en
+[domain-resources-lint.json](domain-resources-lint.json). Incluye código/fixtures
+anteriores examinados. Resolver después de todas las capacidades principales;
+no repetir pruebas de modelo por imports u orden de código.
+
+## DD095 — Observaciones parciales de recursos
+
+Si falta un contador o falla su lectura, la observación completa queda como
+`observed:false`; los límites y la parada física siguen funcionando. Conservar
+por separado los contadores disponibles sería una mejora de diagnóstico. No
+suponer ceros ni atribuir una causa concreta al OOM sin evidencia adicional.
+La cuota agregada de disco y los trabajos de confianza fuera del dominio siguen
+como pendientes principales; no están diferidos como detalles.

@@ -93,6 +93,8 @@ def test_host_probe_observes_and_retires_its_own_domain(tmp_path, host_assets):
     assert result['kernel_probe']['child_exit_code'] == 0
     assert result['kernel_probe']['domain_removed'] is True
     assert result['model_turns'] == 0
+    assert result['kernel_probe']['resource_observation']['observed'] is True
+    assert result['kernel_probe']['resource_observation']['limits']['cpu_max'] == '200000 100000'
 
 
 def test_launcher_consumes_prepared_host_without_shell_environment(tmp_path, host_assets, monkeypatch):
@@ -111,3 +113,21 @@ def test_launcher_consumes_prepared_host_without_shell_environment(tmp_path, hos
     assert len(calls) == 1 and calls[0][0] == 'API'
     assert calls[0][2] == root / 'service'
     assert os.environ['INFINIBAY_RUNTIME_CONFIG'] == str(root / 'runtime.json')
+
+
+def test_host_refuses_missing_cpu_controller_before_creating_installation(tmp_path, host_assets):
+    """A delegated memory/process domain cannot silently omit the required shared CPU boundary."""
+    from uuid import uuid4
+    from backend.runtime.host_installation import initialize_host
+
+    leaf = Path(host_assets['cgroup_parent']) / ('researcher-no-cpu-' + uuid4().hex)
+    leaf.mkdir(mode=0o700)
+    try:
+        (leaf / 'cgroup.subtree_control').write_text('+memory +pids')
+        assets = {**host_assets, 'cgroup_parent': str(leaf)}
+        root = tmp_path / 'installation'
+        with pytest.raises(ValueError, match='CPU'):
+            initialize_host(root, witness_dir=tmp_path/'witness', assets=assets)
+        assert not root.exists()
+    finally:
+        leaf.rmdir()
