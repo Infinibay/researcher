@@ -151,6 +151,7 @@ class CodexSession:
         self.turn_id: str | None = None
         self.turns_sent = 0
         self.observed_tokens: int | None = None
+        self._largest_token_increment: int | None = None
         self._active = False
         self._turn_ready = asyncio.Event()
         self._cancel_requested = asyncio.Event()
@@ -161,8 +162,10 @@ class CodexSession:
     def budget_status(self):
         """Report observed session consumption and turn time, never billing or guaranteed remaining quota.
 
-        Native token/item events may lag actual work. The last quarter is an
-        advisory delivery margin, not a reservation or another execution limit.
+        Native token/item events may lag actual work. Reserve an advisory margin
+        for the unreported step, artifact delivery and final explanation, with
+        growth allowance. Update increments are observations, not guaranteed
+        model-step costs; this never reserves quota or changes the hard ceiling.
         """
         elapsed = (
             time.monotonic() - self._started_at
@@ -176,19 +179,34 @@ class CodexSession:
                 0, self.limits.max_observed_tokens - self.observed_tokens
             ),
         }
+        token_margin = max(
+            math.ceil(self.limits.max_observed_tokens * 0.25),
+            math.ceil((self._largest_token_increment or 0) * 3 * 1.25),
+        )
         deliver = (
             remaining["wall_seconds"] <= self.limits.wall_seconds * 0.25
             or remaining["tool_starts"] <= self.limits.max_tool_calls * 0.25
             or (remaining["observed_tokens"] is not None
-                and remaining["observed_tokens"] <= self.limits.max_observed_tokens * 0.25)
+                and remaining["observed_tokens"] <= token_margin)
         )
         return {
             "limits": asdict(self.limits),
             "observed": {"elapsed_seconds": elapsed, "tool_starts": len(self._tool_items),
                          "tokens": self.observed_tokens},
             "remaining": remaining,
+            "delivery_advice": {
+                "largest_token_increment": self._largest_token_increment,
+                "token_margin": token_margin,
+                "basis": "Quarter floor or three observed increments with 25% growth; heuristic, not reserved quota.",
+            },
             "phase": "deliver" if deliver else "work",
         }
+
+    def _observe_tokens(self, total):
+        """Retain the largest positive usage increment; duplicate updates cannot erase measured context cost."""
+        increment = max(0, total - (self.observed_tokens or 0))
+        self._largest_token_increment = max(self._largest_token_increment or 0, increment) or None
+        self.observed_tokens = total
 
     def _exceeded(self, kind, message):
         """Capture bounded host observations at detection, before process teardown changes elapsed time."""
@@ -367,9 +385,9 @@ class CodexSession:
                     if method == "item/completed" and item.get("type") in _TOOL_TYPES:
                         last_progress = time.monotonic()
                     if method == "thread/tokenUsage/updated":
-                        self.observed_tokens = params["tokenUsage"]["total"][
+                        self._observe_tokens(params["tokenUsage"]["total"][
                             "totalTokens"
-                        ]
+                        ])
                         if self.observed_tokens > self.limits.max_observed_tokens:
                             raise self._exceeded("tokens",
                                 "Observed token budget exceeded"

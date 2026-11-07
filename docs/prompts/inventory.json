@@ -118,7 +118,7 @@
     "backend/planning/completion.py": "dd22f2d0c7c951bfcf66eb3c9fe79faeaae8acbf350d84e390648fac4d984bf2",
     "backend/planning/continuations.py": "d91779be508aecb874af9ab1504a1ffe1d4c7bd018b0b7b93cd8deb4285ff1bc",
     "backend/planning/execution.py": "cb0dc0afce814b0dd53f941ae5be5f6010a997ac793243d2648dfb5af8dd59b1",
-    "backend/planning/instructions.py": "5c8110b9b7c8a34ee8695610ec8ce9478a2f37c43070e76aa014bd1a68fd1128",
+    "backend/planning/instructions.py": "03dfeeaadbb90d5461ca11c78ff90a3d94ad266c0299b87f87e30848f1237ac0",
     "backend/planning/materials.py": "55da9f9c88d946d8b854964e1a922e7982e216226ca7d455459ba3f132e30689",
     "backend/planning/models.py": "656a2d10a572cdc795fea38bf8dd5adbaad1ea2c955536a50102a0bd8174f053",
     "backend/planning/project_history.py": "0158a0673730704bad8113cae1ddf421aa27fc5434f4c663f8bbdd0bb6e85fb1",
@@ -128,7 +128,7 @@
     "backend/planning/tools.py": "3e71f24dd7d2b81ae6410a9a53a125215dd776df66872f13c24b50f3dd96a752",
     "backend/project_records.py": "3a2765c13018d7ccd2cd8eb590ec9428c5ebb1edf93fc213185291250a5be016",
     "backend/prompts/__init__.py": "581a39370021a34e2cadea4a9a654a681b34bfdb8047fb7a8e217439b55f89e6",
-    "backend/prompts/native.py": "eacb32e878d7801d56a467bafadef58e39acc91fe0913218b1c0230cfb3582a6",
+    "backend/prompts/native.py": "24d2878d79e4a69eac931ed8ec0a63647ef5308224228eb45cc57c16141d4bc1",
     "backend/research/__init__.py": "75a8b541dec5915760704a03d44432cdbf0bb5cbf7c22e1a8c1c0008536d0649",
     "backend/research/acquisition.py": "3544ba18b252cf36284fa317bbe67427cd919bbfd9dd72f485d556c04040263f",
     "backend/research/async_http_client.py": "36423e84c48c5593218a35ff6413eda1ff5e12e078a2285c2b0b06355aaa9d0b",
@@ -198,7 +198,7 @@
     "backend/runtime/code_review_tools.py": "0e4440f99f93831510b2f4cf2cb04bd4638955e9a03215077ea83226131fa75b",
     "backend/runtime/code_reviews.py": "f6c8fc199135d54d74f283bae4f7b983b3238c07a73df84b5d366cefb01295e4",
     "backend/runtime/codex_rpc.py": "8ec057ae7e55e056c475d5f59651064c112bbfec5aed65ffa6ede1583c4e2767",
-    "backend/runtime/codex_session.py": "5e54d0f465c5afa5e04fa8b0353d566c2f0f4eb6c7d260ada9127859ce842a3f",
+    "backend/runtime/codex_session.py": "1bde448f1dcbb65c542104ffa2b251e3068915e26942f9221d32490ff1c8fcfe",
     "backend/runtime/command_jobs.py": "ce8fb588398e6ab25df6b69dd96ea875e3b89cf3a1b8424d1c71a681b31f3fba",
     "backend/runtime/command_output.py": "581b6f609e59adeeed2688c10c3b94f7a7351e7abb4580c783e987e2f1b0593e",
     "backend/runtime/contracts.py": "4736ef2d36d2812adbb22e9c4264bae94584203487690f5c0a7896587bd02c87",
@@ -286,7 +286,7 @@
     "backend/tools/base/__init__.py": "1601c667e7671b1f0c0da717b87651b1fe4f01b0d59024c293109c4eaec356aa",
     "backend/tools/base/context.py": "e3d49048bb34ce40c9ca8a72d89e71af73be70178678efdb67c02bbf26a03862",
     "backend/tools/base/db.py": "e1e7a5545104f42c12afa275828183e51447e2f6c4099a167d9fd6439229c4d5",
-    "scripts/audit_dependencies.py": "45dfc2ad4cb3cc392b8db6f4ca4150415da11ee2611ff5b7603cbedc166418fc",
+    "scripts/audit_dependencies.py": "03dc24ccbe6a980dc6c4840773af771bfd0ac1905be17fa3e866b2c93d172d50",
     "scripts/audit_prompt_inventory.py": "652d39284cc8aa51739366aea2723aec419e3cd9e3bd38da7b17012837fa47b7",
     "scripts/export_legacy_chroma.py": "113e0f894ff3bd2026a7c3db096f6b6e2f37da8ec90bead8d7e2262bd06a3a0e",
     "scripts/infinibay_mcp_server.py": "63c00560a315a28e57a27f6f2ca723feabcba90f7c375b978b351481b22e3dbb",
@@ -790,14 +790,14 @@
       "path": "backend/planning/instructions.py",
       "symbol": "PLANNING_INSTRUCTIONS",
       "line": 3,
-      "end_line": 36,
+      "end_line": 45,
       "owner": "backend.planning.instructions",
       "family": "native_capability_policy",
       "disposition": "reviewed_native",
       "objective": "Native planner instructions: explicit evidence, useful tasks and owner-correctable uncertainty, not another agent execution loop.",
-      "source_sha256": "5c8110b9b7c8a34ee8695610ec8ce9478a2f37c43070e76aa014bd1a68fd1128",
-      "source_bytes": 2503,
-      "rendered_utf8_bytes": 2497,
+      "source_sha256": "03dfeeaadbb90d5461ca11c78ff90a3d94ad266c0299b87f87e30848f1237ac0",
+      "source_bytes": 3125,
+      "rendered_utf8_bytes": 3119,
       "variables_kind": "referenced_identifiers",
       "variables": [],
       "direct_import_consumers": [
@@ -816,13 +816,13 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "f84378225c92d5472badec64d22f0dbe997e133c9b00c41b0fd090b2dd1f37f5",
+      "dependencies_sha256": "c2691e715f74048ec17585dd1689cc9cb5b6bb04185196551d8810b415772227",
       "direct_module_consumers": {
-        "backend/prompts/native.py": "eacb32e878d7801d56a467bafadef58e39acc91fe0913218b1c0230cfb3582a6"
+        "backend/prompts/native.py": "24d2878d79e4a69eac931ed8ec0a63647ef5308224228eb45cc57c16141d4bc1"
       },
       "suggested_disposition": "reviewed_native",
       "review_status": "reviewed",
-      "review_rationale": "Delta review against ab36dc5; preserve the earlier full semantic review below. Read the complete changed common policy and selector, exact owned factory call, native reply mediation and durable issue consumer. Catalog4 adds observed budget/delivery guidance, bounded discovery and faithful examples; exact initial limits enter the frozen instructions. Versions2/3 retain their recorded identity. This candidate source is byte-identical; only the native composition or owned factory consumer changed. Existing capability-specific prerequisites, source windows and permission boundaries still apply, including under delivery pressure. Directed source and installed tests verify budget/provenance/closure contracts, not general model compliance, scientific validity or human comprehension. Three development regressions are evaluated separately; prior reserved results are not replaced.",
+      "review_rationale": "Delta review against ab36dc5; preserve the earlier full semantic review below. Read the complete changed common policy and selector, exact owned factory call, native reply mediation and durable issue consumer. Catalog4 adds observed budget/delivery guidance, bounded discovery and faithful examples; exact initial limits enter the frozen instructions. Versions2/3 retain their recorded identity. This candidate source is byte-identical; only the native composition or owned factory consumer changed. Existing capability-specific prerequisites, source windows and permission boundaries still apply, including under delivery pressure. Directed source and installed tests verify budget/provenance/closure contracts, not general model compliance, scientific validity or human comprehension. Three development regressions are evaluated separately; prior reserved results are not replaced. Revalidated 2026-11-07 for catalog5: common delivery advice uses observed-increment margin, planner avoids redundant discovery and guessed source bounds, historical catalogs2/3/4 retain identity. Capabilities, prerequisites and hard ceilings unchanged. Source profile text unchanged except planning; composition and owned-runtime consumer read. Static review does not establish model efficacy. Corrected after the retained planning trial: Ken source defaults return selected symbols, not necessarily a complete file. Whole-file requirements still need actual covering ranges. This final wording has no new live efficacy claim.",
       "review_evidence": [
         "backend/planning/instructions.py",
         "docs/prompts/review-2026-11-07.md",
@@ -830,7 +830,8 @@
         "backend/tests/runtime/test_plan_milestones.py",
         "backend/tests/research/test_project_structure.py",
         "backend/tests/runtime/test_delivery_budget.py",
-        "docs/modernization/delivery-budget-review.md"
+        "docs/modernization/delivery-budget-review.md",
+        "docs/modernization/planning-delivery-review.md"
       ],
       "review_conflicts": []
     },
@@ -883,14 +884,14 @@
       "path": "backend/prompts/native.py",
       "symbol": "COMMON_INSTRUCTIONS",
       "line": 18,
-      "end_line": 87,
+      "end_line": 91,
       "owner": "backend.prompts.native",
       "family": "native_common_catalog",
       "disposition": "retained_and_revised",
       "objective": "Versioned native policy composition owns common communication and capability selection; historical role templates never enter this catalog.",
-      "source_sha256": "eacb32e878d7801d56a467bafadef58e39acc91fe0913218b1c0230cfb3582a6",
-      "source_bytes": 5287,
-      "rendered_utf8_bytes": 5281,
+      "source_sha256": "24d2878d79e4a69eac931ed8ec0a63647ef5308224228eb45cc57c16141d4bc1",
+      "source_bytes": 5617,
+      "rendered_utf8_bytes": 5611,
       "variables_kind": "referenced_identifiers",
       "variables": [],
       "direct_import_consumers": [],
@@ -904,13 +905,13 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "8f2ad99873098c626426e104f2c0bcd9a7b89404ac0a64acfee12f229c23c7d7",
+      "dependencies_sha256": "99678754cf605a695e3fec77d908fabc4a15a9af90f775a5ef252154df6adbc9",
       "direct_module_consumers": {
         "backend/runtime/owned_runtime.py": "47bf6e211c1b76a3e11ba5861be62a3f96ab0bd1a4a96c5f1e3fa395c228b77f"
       },
       "suggested_disposition": "rewritten",
       "review_status": "reviewed",
-      "review_rationale": "Delta review against ab36dc5; preserve the earlier full semantic review below. Read the complete changed common policy and selector, exact owned factory call, native reply mediation and durable issue consumer. Catalog4 adds observed budget/delivery guidance, bounded discovery and faithful examples; exact initial limits enter the frozen instructions. Versions2/3 retain their recorded identity. This candidate changed in the common catalog; capability selection and source-specific authority remain unchanged. Directed source and installed tests verify budget/provenance/closure contracts, not general model compliance, scientific validity or human comprehension. Three development regressions are evaluated separately; prior reserved results are not replaced.",
+      "review_rationale": "Delta review against ab36dc5; preserve the earlier full semantic review below. Read the complete changed common policy and selector, exact owned factory call, native reply mediation and durable issue consumer. Catalog4 adds observed budget/delivery guidance, bounded discovery and faithful examples; exact initial limits enter the frozen instructions. Versions2/3 retain their recorded identity. This candidate changed in the common catalog; capability selection and source-specific authority remain unchanged. Directed source and installed tests verify budget/provenance/closure contracts, not general model compliance, scientific validity or human comprehension. Three development regressions are evaluated separately; prior reserved results are not replaced. Revalidated 2026-11-07 for catalog5: common delivery advice uses observed-increment margin, planner avoids redundant discovery and guessed source bounds, historical catalogs2/3/4 retain identity. Capabilities, prerequisites and hard ceilings unchanged. Source profile text unchanged except planning; composition and owned-runtime consumer read. Static review does not establish model efficacy.",
       "review_evidence": [
         "backend/prompts/native.py",
         "docs/prompts/review-2026-11-07.md",
@@ -919,7 +920,8 @@
         "backend/tests/runtime/test_prompt_catalog.py",
         "docs/modernization/communication-flow-review.md",
         "backend/tests/runtime/test_delivery_budget.py",
-        "docs/modernization/delivery-budget-review.md"
+        "docs/modernization/delivery-budget-review.md",
+        "docs/modernization/planning-delivery-review.md"
       ],
       "review_conflicts": []
     },
@@ -927,13 +929,13 @@
       "id": "backend/prompts/native.py::SOURCE_INSTRUCTIONS",
       "path": "backend/prompts/native.py",
       "symbol": "SOURCE_INSTRUCTIONS",
-      "line": 90,
-      "end_line": 128,
+      "line": 94,
+      "end_line": 132,
       "owner": "backend.prompts.native",
       "family": "native_common_catalog",
       "disposition": "retained",
       "objective": "Versioned native policy composition owns common communication and capability selection; historical role templates never enter this catalog.",
-      "source_sha256": "eacb32e878d7801d56a467bafadef58e39acc91fe0913218b1c0230cfb3582a6",
+      "source_sha256": "24d2878d79e4a69eac931ed8ec0a63647ef5308224228eb45cc57c16141d4bc1",
       "source_bytes": 2788,
       "rendered_utf8_bytes": 2782,
       "variables_kind": "referenced_identifiers",
@@ -949,13 +951,13 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "8f2ad99873098c626426e104f2c0bcd9a7b89404ac0a64acfee12f229c23c7d7",
+      "dependencies_sha256": "99678754cf605a695e3fec77d908fabc4a15a9af90f775a5ef252154df6adbc9",
       "direct_module_consumers": {
         "backend/runtime/owned_runtime.py": "47bf6e211c1b76a3e11ba5861be62a3f96ab0bd1a4a96c5f1e3fa395c228b77f"
       },
       "suggested_disposition": "rewritten",
       "review_status": "reviewed",
-      "review_rationale": "Delta review against ab36dc5; preserve the earlier full semantic review below. Read the complete changed common policy and selector, exact owned factory call, native reply mediation and durable issue consumer. Catalog4 adds observed budget/delivery guidance, bounded discovery and faithful examples; exact initial limits enter the frozen instructions. Versions2/3 retain their recorded identity. This candidate changed in the common catalog; capability selection and source-specific authority remain unchanged. Directed source and installed tests verify budget/provenance/closure contracts, not general model compliance, scientific validity or human comprehension. Three development regressions are evaluated separately; prior reserved results are not replaced.",
+      "review_rationale": "Delta review against ab36dc5; preserve the earlier full semantic review below. Read the complete changed common policy and selector, exact owned factory call, native reply mediation and durable issue consumer. Catalog4 adds observed budget/delivery guidance, bounded discovery and faithful examples; exact initial limits enter the frozen instructions. Versions2/3 retain their recorded identity. This candidate changed in the common catalog; capability selection and source-specific authority remain unchanged. Directed source and installed tests verify budget/provenance/closure contracts, not general model compliance, scientific validity or human comprehension. Three development regressions are evaluated separately; prior reserved results are not replaced. Revalidated 2026-11-07 for catalog5: common delivery advice uses observed-increment margin, planner avoids redundant discovery and guessed source bounds, historical catalogs2/3/4 retain identity. Capabilities, prerequisites and hard ceilings unchanged. Source profile text unchanged except planning; composition and owned-runtime consumer read. Static review does not establish model efficacy.",
       "review_evidence": [
         "backend/prompts/native.py",
         "docs/prompts/review-2026-11-07.md",
@@ -964,7 +966,8 @@
         "backend/tests/runtime/test_prompt_catalog.py",
         "docs/modernization/communication-flow-review.md",
         "backend/tests/runtime/test_delivery_budget.py",
-        "docs/modernization/delivery-budget-review.md"
+        "docs/modernization/delivery-budget-review.md",
+        "docs/modernization/planning-delivery-review.md"
       ],
       "review_conflicts": []
     },
@@ -972,13 +975,13 @@
       "id": "backend/prompts/native.py::build_instructions",
       "path": "backend/prompts/native.py",
       "symbol": "build_instructions",
-      "line": 139,
-      "end_line": 152,
+      "line": 143,
+      "end_line": 156,
       "owner": "backend.prompts.native",
       "family": "native_common_catalog",
       "disposition": "retained",
       "objective": "Versioned native policy composition owns common communication and capability selection; historical role templates never enter this catalog.",
-      "source_sha256": "eacb32e878d7801d56a467bafadef58e39acc91fe0913218b1c0230cfb3582a6",
+      "source_sha256": "24d2878d79e4a69eac931ed8ec0a63647ef5308224228eb45cc57c16141d4bc1",
       "source_bytes": 1186,
       "rendered_utf8_bytes": null,
       "variables_kind": "function_parameters",
@@ -1004,13 +1007,13 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "8f2ad99873098c626426e104f2c0bcd9a7b89404ac0a64acfee12f229c23c7d7",
+      "dependencies_sha256": "99678754cf605a695e3fec77d908fabc4a15a9af90f775a5ef252154df6adbc9",
       "direct_module_consumers": {
         "backend/runtime/owned_runtime.py": "47bf6e211c1b76a3e11ba5861be62a3f96ab0bd1a4a96c5f1e3fa395c228b77f"
       },
       "suggested_disposition": "rewritten",
       "review_status": "reviewed",
-      "review_rationale": "Delta review against ab36dc5; preserve the earlier full semantic review below. Read the complete changed common policy and selector, exact owned factory call, native reply mediation and durable issue consumer. Catalog4 adds observed budget/delivery guidance, bounded discovery and faithful examples; exact initial limits enter the frozen instructions. Versions2/3 retain their recorded identity. This candidate changed in the common catalog; capability selection and source-specific authority remain unchanged. Directed source and installed tests verify budget/provenance/closure contracts, not general model compliance, scientific validity or human comprehension. Three development regressions are evaluated separately; prior reserved results are not replaced.",
+      "review_rationale": "Delta review against ab36dc5; preserve the earlier full semantic review below. Read the complete changed common policy and selector, exact owned factory call, native reply mediation and durable issue consumer. Catalog4 adds observed budget/delivery guidance, bounded discovery and faithful examples; exact initial limits enter the frozen instructions. Versions2/3 retain their recorded identity. This candidate changed in the common catalog; capability selection and source-specific authority remain unchanged. Directed source and installed tests verify budget/provenance/closure contracts, not general model compliance, scientific validity or human comprehension. Three development regressions are evaluated separately; prior reserved results are not replaced. Revalidated 2026-11-07 for catalog5: common delivery advice uses observed-increment margin, planner avoids redundant discovery and guessed source bounds, historical catalogs2/3/4 retain identity. Capabilities, prerequisites and hard ceilings unchanged. Source profile text unchanged except planning; composition and owned-runtime consumer read. Static review does not establish model efficacy.",
       "review_evidence": [
         "backend/prompts/native.py",
         "docs/prompts/review-2026-11-07.md",
@@ -1019,7 +1022,8 @@
         "backend/tests/runtime/test_prompt_catalog.py",
         "docs/modernization/communication-flow-review.md",
         "backend/tests/runtime/test_delivery_budget.py",
-        "docs/modernization/delivery-budget-review.md"
+        "docs/modernization/delivery-budget-review.md",
+        "docs/modernization/planning-delivery-review.md"
       ],
       "review_conflicts": []
     },
@@ -1027,14 +1031,14 @@
       "id": "backend/prompts/native.py::instruction_identity",
       "path": "backend/prompts/native.py",
       "symbol": "instruction_identity",
-      "line": 155,
-      "end_line": 159,
+      "line": 159,
+      "end_line": 163,
       "owner": "backend.prompts.native",
       "family": "native_common_catalog",
       "disposition": "retained",
       "objective": "Versioned native policy composition owns common communication and capability selection; historical role templates never enter this catalog.",
-      "source_sha256": "eacb32e878d7801d56a467bafadef58e39acc91fe0913218b1c0230cfb3582a6",
-      "source_bytes": 514,
+      "source_sha256": "24d2878d79e4a69eac931ed8ec0a63647ef5308224228eb45cc57c16141d4bc1",
+      "source_bytes": 516,
       "rendered_utf8_bytes": null,
       "variables_kind": "function_parameters",
       "variables": [
@@ -1051,13 +1055,13 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "8f2ad99873098c626426e104f2c0bcd9a7b89404ac0a64acfee12f229c23c7d7",
+      "dependencies_sha256": "99678754cf605a695e3fec77d908fabc4a15a9af90f775a5ef252154df6adbc9",
       "direct_module_consumers": {
         "backend/runtime/owned_runtime.py": "47bf6e211c1b76a3e11ba5861be62a3f96ab0bd1a4a96c5f1e3fa395c228b77f"
       },
       "suggested_disposition": "rewritten",
       "review_status": "reviewed",
-      "review_rationale": "Delta review against ab36dc5; preserve the earlier full semantic review below. Read the complete changed common policy and selector, exact owned factory call, native reply mediation and durable issue consumer. Catalog4 adds observed budget/delivery guidance, bounded discovery and faithful examples; exact initial limits enter the frozen instructions. Versions2/3 retain their recorded identity. This candidate changed in the common catalog; capability selection and source-specific authority remain unchanged. Directed source and installed tests verify budget/provenance/closure contracts, not general model compliance, scientific validity or human comprehension. Three development regressions are evaluated separately; prior reserved results are not replaced.",
+      "review_rationale": "Delta review against ab36dc5; preserve the earlier full semantic review below. Read the complete changed common policy and selector, exact owned factory call, native reply mediation and durable issue consumer. Catalog4 adds observed budget/delivery guidance, bounded discovery and faithful examples; exact initial limits enter the frozen instructions. Versions2/3 retain their recorded identity. This candidate changed in the common catalog; capability selection and source-specific authority remain unchanged. Directed source and installed tests verify budget/provenance/closure contracts, not general model compliance, scientific validity or human comprehension. Three development regressions are evaluated separately; prior reserved results are not replaced. Revalidated 2026-11-07 for catalog5: common delivery advice uses observed-increment margin, planner avoids redundant discovery and guessed source bounds, historical catalogs2/3/4 retain identity. Capabilities, prerequisites and hard ceilings unchanged. Source profile text unchanged except planning; composition and owned-runtime consumer read. Static review does not establish model efficacy.",
       "review_evidence": [
         "backend/prompts/native.py",
         "docs/prompts/review-2026-11-07.md",
@@ -1066,7 +1070,8 @@
         "backend/tests/runtime/test_prompt_catalog.py",
         "docs/modernization/communication-flow-review.md",
         "backend/tests/runtime/test_delivery_budget.py",
-        "docs/modernization/delivery-budget-review.md"
+        "docs/modernization/delivery-budget-review.md",
+        "docs/modernization/planning-delivery-review.md"
       ],
       "review_conflicts": []
     },
@@ -1074,13 +1079,13 @@
       "id": "backend/prompts/native.py::GENERIC_INSTRUCTIONS",
       "path": "backend/prompts/native.py",
       "symbol": "GENERIC_INSTRUCTIONS",
-      "line": 162,
-      "end_line": 162,
+      "line": 166,
+      "end_line": 166,
       "owner": "backend.prompts.native",
       "family": "native_common_catalog",
       "disposition": "retained",
       "objective": "Versioned native policy composition owns common communication and capability selection; historical role templates never enter this catalog.",
-      "source_sha256": "eacb32e878d7801d56a467bafadef58e39acc91fe0913218b1c0230cfb3582a6",
+      "source_sha256": "24d2878d79e4a69eac931ed8ec0a63647ef5308224228eb45cc57c16141d4bc1",
       "source_bytes": 50,
       "rendered_utf8_bytes": null,
       "variables_kind": "referenced_identifiers",
@@ -1099,13 +1104,13 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "8f2ad99873098c626426e104f2c0bcd9a7b89404ac0a64acfee12f229c23c7d7",
+      "dependencies_sha256": "99678754cf605a695e3fec77d908fabc4a15a9af90f775a5ef252154df6adbc9",
       "direct_module_consumers": {
         "backend/runtime/owned_runtime.py": "47bf6e211c1b76a3e11ba5861be62a3f96ab0bd1a4a96c5f1e3fa395c228b77f"
       },
       "suggested_disposition": "rewritten",
       "review_status": "reviewed",
-      "review_rationale": "Delta review against ab36dc5; preserve the earlier full semantic review below. Read the complete changed common policy and selector, exact owned factory call, native reply mediation and durable issue consumer. Catalog4 adds observed budget/delivery guidance, bounded discovery and faithful examples; exact initial limits enter the frozen instructions. Versions2/3 retain their recorded identity. This candidate changed in the common catalog; capability selection and source-specific authority remain unchanged. Directed source and installed tests verify budget/provenance/closure contracts, not general model compliance, scientific validity or human comprehension. Three development regressions are evaluated separately; prior reserved results are not replaced.",
+      "review_rationale": "Delta review against ab36dc5; preserve the earlier full semantic review below. Read the complete changed common policy and selector, exact owned factory call, native reply mediation and durable issue consumer. Catalog4 adds observed budget/delivery guidance, bounded discovery and faithful examples; exact initial limits enter the frozen instructions. Versions2/3 retain their recorded identity. This candidate changed in the common catalog; capability selection and source-specific authority remain unchanged. Directed source and installed tests verify budget/provenance/closure contracts, not general model compliance, scientific validity or human comprehension. Three development regressions are evaluated separately; prior reserved results are not replaced. Revalidated 2026-11-07 for catalog5: common delivery advice uses observed-increment margin, planner avoids redundant discovery and guessed source bounds, historical catalogs2/3/4 retain identity. Capabilities, prerequisites and hard ceilings unchanged. Source profile text unchanged except planning; composition and owned-runtime consumer read. Static review does not establish model efficacy.",
       "review_evidence": [
         "backend/prompts/native.py",
         "docs/prompts/review-2026-11-07.md",
@@ -1114,7 +1119,8 @@
         "backend/tests/runtime/test_prompt_catalog.py",
         "docs/modernization/communication-flow-review.md",
         "backend/tests/runtime/test_delivery_budget.py",
-        "docs/modernization/delivery-budget-review.md"
+        "docs/modernization/delivery-budget-review.md",
+        "docs/modernization/planning-delivery-review.md"
       ],
       "review_conflicts": []
     },
@@ -3768,13 +3774,13 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "0ea9582a8901d671c12aefe1856d7226a9d7cd9b1a61ac7df9643e472f03854b",
+      "dependencies_sha256": "7348caa29adc1216c84a892fe423d2361a4fcfafe2bfe93c600e53c7782ea5b6",
       "direct_module_consumers": {
-        "backend/prompts/native.py": "eacb32e878d7801d56a467bafadef58e39acc91fe0913218b1c0230cfb3582a6"
+        "backend/prompts/native.py": "24d2878d79e4a69eac931ed8ec0a63647ef5308224228eb45cc57c16141d4bc1"
       },
       "suggested_disposition": "reviewed_native",
       "review_status": "reviewed",
-      "review_rationale": "Delta review against ab36dc5; preserve the earlier full semantic review below. Read the complete changed common policy and selector, exact owned factory call, native reply mediation and durable issue consumer. Catalog4 adds observed budget/delivery guidance, bounded discovery and faithful examples; exact initial limits enter the frozen instructions. Versions2/3 retain their recorded identity. This candidate source is byte-identical; only the native composition or owned factory consumer changed. Existing capability-specific prerequisites, source windows and permission boundaries still apply, including under delivery pressure. Directed source and installed tests verify budget/provenance/closure contracts, not general model compliance, scientific validity or human comprehension. Three development regressions are evaluated separately; prior reserved results are not replaced.",
+      "review_rationale": "Delta review against ab36dc5; preserve the earlier full semantic review below. Read the complete changed common policy and selector, exact owned factory call, native reply mediation and durable issue consumer. Catalog4 adds observed budget/delivery guidance, bounded discovery and faithful examples; exact initial limits enter the frozen instructions. Versions2/3 retain their recorded identity. This candidate source is byte-identical; only the native composition or owned factory consumer changed. Existing capability-specific prerequisites, source windows and permission boundaries still apply, including under delivery pressure. Directed source and installed tests verify budget/provenance/closure contracts, not general model compliance, scientific validity or human comprehension. Three development regressions are evaluated separately; prior reserved results are not replaced. Revalidated 2026-11-07 for catalog5: common delivery advice uses observed-increment margin, planner avoids redundant discovery and guessed source bounds, historical catalogs2/3/4 retain identity. Capabilities, prerequisites and hard ceilings unchanged. Source profile text unchanged except planning; composition and owned-runtime consumer read. Static review does not establish model efficacy.",
       "review_evidence": [
         "backend/runtime/code_audit_instructions.py",
         "docs/prompts/review-2026-11-07.md",
@@ -3783,7 +3789,8 @@
         "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
         "evals/prompts/cases.json",
         "backend/tests/runtime/test_delivery_budget.py",
-        "docs/modernization/delivery-budget-review.md"
+        "docs/modernization/delivery-budget-review.md",
+        "docs/modernization/planning-delivery-review.md"
       ],
       "review_conflicts": []
     },
@@ -3856,13 +3863,13 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "3e0c7e09f4994ecb93fba31dc3b0133e76bf52bb066f0c00670c4971764ff75d",
+      "dependencies_sha256": "52ce02aadc50baa5fbc8fc35c1d45b2a0f45e971fa86ddd8295fd4c4b876aeac",
       "direct_module_consumers": {
-        "backend/prompts/native.py": "eacb32e878d7801d56a467bafadef58e39acc91fe0913218b1c0230cfb3582a6"
+        "backend/prompts/native.py": "24d2878d79e4a69eac931ed8ec0a63647ef5308224228eb45cc57c16141d4bc1"
       },
       "suggested_disposition": "reviewed_native",
       "review_status": "reviewed",
-      "review_rationale": "Delta review against ab36dc5; preserve the earlier full semantic review below. Read the complete changed common policy and selector, exact owned factory call, native reply mediation and durable issue consumer. Catalog4 adds observed budget/delivery guidance, bounded discovery and faithful examples; exact initial limits enter the frozen instructions. Versions2/3 retain their recorded identity. This candidate source is byte-identical; only the native composition or owned factory consumer changed. Existing capability-specific prerequisites, source windows and permission boundaries still apply, including under delivery pressure. Directed source and installed tests verify budget/provenance/closure contracts, not general model compliance, scientific validity or human comprehension. Three development regressions are evaluated separately; prior reserved results are not replaced.",
+      "review_rationale": "Delta review against ab36dc5; preserve the earlier full semantic review below. Read the complete changed common policy and selector, exact owned factory call, native reply mediation and durable issue consumer. Catalog4 adds observed budget/delivery guidance, bounded discovery and faithful examples; exact initial limits enter the frozen instructions. Versions2/3 retain their recorded identity. This candidate source is byte-identical; only the native composition or owned factory consumer changed. Existing capability-specific prerequisites, source windows and permission boundaries still apply, including under delivery pressure. Directed source and installed tests verify budget/provenance/closure contracts, not general model compliance, scientific validity or human comprehension. Three development regressions are evaluated separately; prior reserved results are not replaced. Revalidated 2026-11-07 for catalog5: common delivery advice uses observed-increment margin, planner avoids redundant discovery and guessed source bounds, historical catalogs2/3/4 retain identity. Capabilities, prerequisites and hard ceilings unchanged. Source profile text unchanged except planning; composition and owned-runtime consumer read. Static review does not establish model efficacy.",
       "review_evidence": [
         "backend/runtime/code_review_instructions.py",
         "docs/prompts/review-2026-11-07.md",
@@ -3871,7 +3878,8 @@
         "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
         "evals/prompts/cases.json",
         "backend/tests/runtime/test_delivery_budget.py",
-        "docs/modernization/delivery-budget-review.md"
+        "docs/modernization/delivery-budget-review.md",
+        "docs/modernization/planning-delivery-review.md"
       ],
       "review_conflicts": []
     },
@@ -4010,15 +4018,15 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "304181ebcda6fd5111bfc16797dcc043bbe1438a9ecd2f5d903d7aadd8b66f51",
+      "dependencies_sha256": "8ca5500b9d956176ba7377e627ddf55c08986b39626af435be43eb22ac577421",
       "direct_module_consumers": {
         "backend/api/runtime_dependencies.py": "6ee61c2ddb7d9e2f44632a8c2f1f1b3206a6d42d17cd4c4d10a94501171a5bf2",
         "backend/runtime/host_installation.py": "2d7bd82a7fb74faf66b12dba2d4811b562c5d0fd4c677bac3b5197a5a65a46b1",
-        "backend/prompts/native.py": "eacb32e878d7801d56a467bafadef58e39acc91fe0913218b1c0230cfb3582a6"
+        "backend/prompts/native.py": "24d2878d79e4a69eac931ed8ec0a63647ef5308224228eb45cc57c16141d4bc1"
       },
       "suggested_disposition": "reviewed_native",
       "review_status": "reviewed",
-      "review_rationale": "Delta review against ab36dc5; preserve the earlier full semantic review below. Read the complete changed common policy and selector, exact owned factory call, native reply mediation and durable issue consumer. Catalog4 adds observed budget/delivery guidance, bounded discovery and faithful examples; exact initial limits enter the frozen instructions. Versions2/3 retain their recorded identity. This candidate source is byte-identical; only the native composition or owned factory consumer changed. Existing capability-specific prerequisites, source windows and permission boundaries still apply, including under delivery pressure. Directed source and installed tests verify budget/provenance/closure contracts, not general model compliance, scientific validity or human comprehension. Three development regressions are evaluated separately; prior reserved results are not replaced.",
+      "review_rationale": "Delta review against ab36dc5; preserve the earlier full semantic review below. Read the complete changed common policy and selector, exact owned factory call, native reply mediation and durable issue consumer. Catalog4 adds observed budget/delivery guidance, bounded discovery and faithful examples; exact initial limits enter the frozen instructions. Versions2/3 retain their recorded identity. This candidate source is byte-identical; only the native composition or owned factory consumer changed. Existing capability-specific prerequisites, source windows and permission boundaries still apply, including under delivery pressure. Directed source and installed tests verify budget/provenance/closure contracts, not general model compliance, scientific validity or human comprehension. Three development regressions are evaluated separately; prior reserved results are not replaced. Revalidated 2026-11-07 for catalog5: common delivery advice uses observed-increment margin, planner avoids redundant discovery and guessed source bounds, historical catalogs2/3/4 retain identity. Capabilities, prerequisites and hard ceilings unchanged. Source profile text unchanged except planning; composition and owned-runtime consumer read. Static review does not establish model efficacy.",
       "review_evidence": [
         "backend/runtime/development_policy.py",
         "docs/prompts/review-2026-11-07.md",
@@ -4027,7 +4035,8 @@
         "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
         "evals/prompts/cases.json",
         "backend/tests/runtime/test_delivery_budget.py",
-        "docs/modernization/delivery-budget-review.md"
+        "docs/modernization/delivery-budget-review.md",
+        "docs/modernization/planning-delivery-review.md"
       ],
       "review_conflicts": []
     },
@@ -4062,13 +4071,13 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "fa178687d554f1447a429db504057522861ad14c35784866eac0336456044722",
+      "dependencies_sha256": "2e91471b7b898827a76f6337ada338a30b7e9d38a27973f954619a9ad26142e2",
       "direct_module_consumers": {
-        "backend/prompts/native.py": "eacb32e878d7801d56a467bafadef58e39acc91fe0913218b1c0230cfb3582a6"
+        "backend/prompts/native.py": "24d2878d79e4a69eac931ed8ec0a63647ef5308224228eb45cc57c16141d4bc1"
       },
       "suggested_disposition": "reviewed_native",
       "review_status": "reviewed",
-      "review_rationale": "Delta review against ab36dc5; preserve the earlier full semantic review below. Read the complete changed common policy and selector, exact owned factory call, native reply mediation and durable issue consumer. Catalog4 adds observed budget/delivery guidance, bounded discovery and faithful examples; exact initial limits enter the frozen instructions. Versions2/3 retain their recorded identity. This candidate source is byte-identical; only the native composition or owned factory consumer changed. Existing capability-specific prerequisites, source windows and permission boundaries still apply, including under delivery pressure. Directed source and installed tests verify budget/provenance/closure contracts, not general model compliance, scientific validity or human comprehension. Three development regressions are evaluated separately; prior reserved results are not replaced.",
+      "review_rationale": "Delta review against ab36dc5; preserve the earlier full semantic review below. Read the complete changed common policy and selector, exact owned factory call, native reply mediation and durable issue consumer. Catalog4 adds observed budget/delivery guidance, bounded discovery and faithful examples; exact initial limits enter the frozen instructions. Versions2/3 retain their recorded identity. This candidate source is byte-identical; only the native composition or owned factory consumer changed. Existing capability-specific prerequisites, source windows and permission boundaries still apply, including under delivery pressure. Directed source and installed tests verify budget/provenance/closure contracts, not general model compliance, scientific validity or human comprehension. Three development regressions are evaluated separately; prior reserved results are not replaced. Revalidated 2026-11-07 for catalog5: common delivery advice uses observed-increment margin, planner avoids redundant discovery and guessed source bounds, historical catalogs2/3/4 retain identity. Capabilities, prerequisites and hard ceilings unchanged. Source profile text unchanged except planning; composition and owned-runtime consumer read. Static review does not establish model efficacy.",
       "review_evidence": [
         "backend/runtime/investigation_instructions.py",
         "docs/prompts/review-2026-11-07.md",
@@ -4077,7 +4086,8 @@
         "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
         "evals/prompts/cases.json",
         "backend/tests/runtime/test_delivery_budget.py",
-        "docs/modernization/delivery-budget-review.md"
+        "docs/modernization/delivery-budget-review.md",
+        "docs/modernization/planning-delivery-review.md"
       ],
       "review_conflicts": []
     },
@@ -4160,13 +4170,13 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "f7acea8be016f5b7f105f9a8da5377a7d05c005ea62aaf0d98b32efcb7bb6a8c",
+      "dependencies_sha256": "4456f09eb4e3f943fc8475bf2bb0091f3aef818cdd27f355ffa0b36528e0ed52",
       "direct_module_consumers": {
-        "backend/prompts/native.py": "eacb32e878d7801d56a467bafadef58e39acc91fe0913218b1c0230cfb3582a6"
+        "backend/prompts/native.py": "24d2878d79e4a69eac931ed8ec0a63647ef5308224228eb45cc57c16141d4bc1"
       },
       "suggested_disposition": "reviewed_native",
       "review_status": "reviewed",
-      "review_rationale": "Delta review against ab36dc5; preserve the earlier full semantic review below. Read the complete changed common policy and selector, exact owned factory call, native reply mediation and durable issue consumer. Catalog4 adds observed budget/delivery guidance, bounded discovery and faithful examples; exact initial limits enter the frozen instructions. Versions2/3 retain their recorded identity. This candidate source is byte-identical; only the native composition or owned factory consumer changed. Existing capability-specific prerequisites, source windows and permission boundaries still apply, including under delivery pressure. Directed source and installed tests verify budget/provenance/closure contracts, not general model compliance, scientific validity or human comprehension. Three development regressions are evaluated separately; prior reserved results are not replaced.",
+      "review_rationale": "Delta review against ab36dc5; preserve the earlier full semantic review below. Read the complete changed common policy and selector, exact owned factory call, native reply mediation and durable issue consumer. Catalog4 adds observed budget/delivery guidance, bounded discovery and faithful examples; exact initial limits enter the frozen instructions. Versions2/3 retain their recorded identity. This candidate source is byte-identical; only the native composition or owned factory consumer changed. Existing capability-specific prerequisites, source windows and permission boundaries still apply, including under delivery pressure. Directed source and installed tests verify budget/provenance/closure contracts, not general model compliance, scientific validity or human comprehension. Three development regressions are evaluated separately; prior reserved results are not replaced. Revalidated 2026-11-07 for catalog5: common delivery advice uses observed-increment margin, planner avoids redundant discovery and guessed source bounds, historical catalogs2/3/4 retain identity. Capabilities, prerequisites and hard ceilings unchanged. Source profile text unchanged except planning; composition and owned-runtime consumer read. Static review does not establish model efficacy.",
       "review_evidence": [
         "backend/runtime/review_instructions.py",
         "docs/prompts/review-2026-11-07.md",
@@ -4175,7 +4185,8 @@
         "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
         "evals/prompts/cases.json",
         "backend/tests/runtime/test_delivery_budget.py",
-        "docs/modernization/delivery-budget-review.md"
+        "docs/modernization/delivery-budget-review.md",
+        "docs/modernization/planning-delivery-review.md"
       ],
       "review_conflicts": []
     },
@@ -4312,13 +4323,13 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "f9138b126c21be0568354464da518be3c0a441d635b7fbcba3a08b4ce881e190",
+      "dependencies_sha256": "f4ce0f86ca064a28c3051329e36edc585008ded9549f400f532be41abb48b62c",
       "direct_module_consumers": {
-        "backend/prompts/native.py": "eacb32e878d7801d56a467bafadef58e39acc91fe0913218b1c0230cfb3582a6"
+        "backend/prompts/native.py": "24d2878d79e4a69eac931ed8ec0a63647ef5308224228eb45cc57c16141d4bc1"
       },
       "suggested_disposition": "reviewed_native",
       "review_status": "reviewed",
-      "review_rationale": "Delta review against ab36dc5; preserve the earlier full semantic review below. Read the complete changed common policy and selector, exact owned factory call, native reply mediation and durable issue consumer. Catalog4 adds observed budget/delivery guidance, bounded discovery and faithful examples; exact initial limits enter the frozen instructions. Versions2/3 retain their recorded identity. This candidate source is byte-identical; only the native composition or owned factory consumer changed. Existing capability-specific prerequisites, source windows and permission boundaries still apply, including under delivery pressure. Directed source and installed tests verify budget/provenance/closure contracts, not general model compliance, scientific validity or human comprehension. Three development regressions are evaluated separately; prior reserved results are not replaced.",
+      "review_rationale": "Delta review against ab36dc5; preserve the earlier full semantic review below. Read the complete changed common policy and selector, exact owned factory call, native reply mediation and durable issue consumer. Catalog4 adds observed budget/delivery guidance, bounded discovery and faithful examples; exact initial limits enter the frozen instructions. Versions2/3 retain their recorded identity. This candidate source is byte-identical; only the native composition or owned factory consumer changed. Existing capability-specific prerequisites, source windows and permission boundaries still apply, including under delivery pressure. Directed source and installed tests verify budget/provenance/closure contracts, not general model compliance, scientific validity or human comprehension. Three development regressions are evaluated separately; prior reserved results are not replaced. Revalidated 2026-11-07 for catalog5: common delivery advice uses observed-increment margin, planner avoids redundant discovery and guessed source bounds, historical catalogs2/3/4 retain identity. Capabilities, prerequisites and hard ceilings unchanged. Source profile text unchanged except planning; composition and owned-runtime consumer read. Static review does not establish model efficacy.",
       "review_evidence": [
         "backend/runtime/scientific_instructions.py",
         "docs/prompts/review-2026-11-07.md",
@@ -4327,7 +4338,8 @@
         "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
         "evals/prompts/cases.json",
         "backend/tests/runtime/test_delivery_budget.py",
-        "docs/modernization/delivery-budget-review.md"
+        "docs/modernization/delivery-budget-review.md",
+        "docs/modernization/planning-delivery-review.md"
       ],
       "review_conflicts": []
     },

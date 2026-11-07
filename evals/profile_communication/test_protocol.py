@@ -6,6 +6,28 @@ import json
 import pytest
 
 
+def test_budget_regression_selection_freezes_only_one_attempt_and_honors_lower_operator_limits(tmp_path):
+    """A targeted planning regression cannot silently run other profiles or enlarge the operator's limits."""
+    from evals.profile_communication.delivery_budget import register
+    from evals.context_alignment.protocol import load_registered
+
+    assets = tmp_path / 'assets.json'
+    assets.write_text(json.dumps({'limits': {'wall_seconds': 100, 'max_tool_calls': 12},
+                                 'project_token_limit': 100000}))
+    root = tmp_path / 'single-case'
+    register(root, assets, case_ids=['plan_dependencies'])
+    manifest = json.loads((root / 'registration.json').read_text())
+    assert manifest['maximum_model_turns'] == 1
+    assert [c['id'] for c in manifest['cases']] == ['plan_dependencies']
+    protocol = load_registered(root / 'plan_dependencies')
+    assert protocol['limits']['max_observed_tokens'] == 100000
+    assert protocol['limits']['max_tool_calls'] == 12
+    assert protocol['limits']['wall_seconds'] == 100
+    assert protocol['maximum_model_turns'] == 1
+    assert protocol['human_comprehension'] is None
+    assert not (root / 'skipped_checks').exists()
+
+
 @pytest.mark.parametrize('task_type', ['investigation', 'research', 'plan', 'review'])
 def test_policy_override_is_bound_to_its_original_capability(task_type):
     """An evaluation policy cannot override another task profile or a development/publication turn."""

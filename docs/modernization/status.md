@@ -4,6 +4,17 @@ La implementación del [plan completo](../superpowers/plans/2026-10-31-actualiza
 
 ## Resultados disponibles
 
+- **Margen de entrega corregido; planificación aún falla:**105 pruebas de fuente
+  y82 instaladas para el primer candidato; tras corregir sólo el texto de lectura,
+ 12 de fuente/12 instaladas.608 archivos coinciden y18 definiciones documentadas.
+ Un turno nuevo guarda una propuesta de3 tareas, pero la explicación posterior
+ eleva107804 a137720tokens, superando120000. Servicio/4 peers cerrados y0 grants
+ activos; no hubo repetición ni aceptación. Bloque18min23s. Sigue implementar
+ entrega atómica de plan+explicación, con estado nativo y aceptación separados.
+ [Informe](planning-delivery-review.md), [intento](planning-delivery-live.json),
+ [validación](planning-delivery-results.json).
+
+
 - **Inventario de licencias y avisos comprobados:**164 versiones Python y415
   entradas npm;139 ausencias anteriores resueltas con declaraciones o revisiones
   de artefactos verificados.12 pruebas pasan; build, wheel/sdist e instalación

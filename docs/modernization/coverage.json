@@ -4761,13 +4761,22 @@
     },
     "observed_delivery_budget": {
       "status": "in_progress",
-      "scope": "Budget visibility, preserved partial work and faithful-example policy implemented; two of three development regressions delivered, planning still exhausted its prior token ceiling. Not general communication acceptance.",
+      "scope": "Observed budgets and adaptive delivery advice implemented; one new planning regression still exceeded120000tokens after storing a proposal. Typed atomic plan+explanation delivery remains unimplemented; no general communication acceptance.",
       "evidence": [
         "docs/modernization/delivery-budget-review.md",
         "docs/modernization/delivery-budget-results.json",
         "docs/modernization/delivery-budget-live.json",
         "docs/modernization/delivery-budget-packaging.json",
-        "backend/tests/runtime/test_delivery_budget.py"
+        "backend/tests/runtime/test_delivery_budget.py",
+        "docs/modernization/planning-delivery-review.md",
+        "docs/modernization/planning-delivery-diagnosis.json",
+        "docs/modernization/planning-delivery-live.json",
+        "docs/modernization/planning-delivery-results.json"
+      ],
+      "remaining": [
+        "Atomic typed plan and explanation delivery without a required extra model generation",
+        "Actual peer closure and recorded native state without invented completion",
+        "Same-ceiling fresh validation after implementation, plus human/general communication acceptance"
       ]
     },
     "isolated_legacy_chroma_reader": {

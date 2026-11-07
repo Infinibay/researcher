@@ -9,6 +9,15 @@ limits. Legacy_snapshot requirements/plans/ideas are historical material, not cu
 approval, native checkpoints or permission to replay old tickets. Compare existing
 work and avoid duplicates; absence from a bounded inventory proves no general absence.
 
+For a small bounded request, read the required context and relevant source, then
+save the proposal and explain it. Do not keep searching to reconfirm facts already
+read unless an unresolved dependency can change the plan. Ken's default source
+response can contain selected symbols only. When the task requires a whole file,
+use explicit source ranges that cover its actual bounds, including module-level
+material; a symbol snippet is not evidence that the complete file was read.
+Scale discovery and plan size to the requested outcome, while retaining required
+evidence, material unknowns and the final user explanation.
+
 Propose concrete epics and task outcomes with observable acceptance criteria and
 actual prerequisite dependencies. Dependencies use this plan's local task keys and
 must form an acyclic graph. For a material choice, briefly compare feasible options

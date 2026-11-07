@@ -1,0 +1,303 @@
+{
+  "old_result_sha256": "68947399244ad3127a7b7077d1468e23213c3f92ccbfd0fce7c3d042132c03c8",
+  "native_trace_sha256": "2d5115f4aaa785868f86e1d3592986ba3dd00486ecc4dd07697efcc0ad9e3ae0",
+  "events": [
+    {
+      "kind": "native_tool_call",
+      "name": "exec",
+      "argument_bytes": 315
+    },
+    {
+      "kind": "tool_response",
+      "host_budgets": [
+        {
+          "limits": {
+            "wall_seconds": 180,
+            "no_progress_seconds": 90,
+            "max_turns": 1,
+            "max_tool_calls": 20,
+            "max_observed_tokens": 120000,
+            "max_answer_bytes": 20000
+          },
+          "observed": {
+            "elapsed_seconds": 4.799363308993634,
+            "tool_starts": 1,
+            "tokens": null
+          },
+          "remaining": {
+            "wall_seconds": 175.20063669100637,
+            "tool_starts": 19,
+            "observed_tokens": null
+          },
+          "phase": "work"
+        },
+        {
+          "limits": {
+            "wall_seconds": 180,
+            "no_progress_seconds": 90,
+            "max_turns": 1,
+            "max_tool_calls": 20,
+            "max_observed_tokens": 120000,
+            "max_answer_bytes": 20000
+          },
+          "observed": {
+            "elapsed_seconds": 9.100783097994281,
+            "tool_starts": 2,
+            "tokens": null
+          },
+          "remaining": {
+            "wall_seconds": 170.89921690200572,
+            "tool_starts": 18,
+            "observed_tokens": null
+          },
+          "phase": "work"
+        }
+      ]
+    },
+    {
+      "kind": "usage",
+      "total": {
+        "input_tokens": 25347,
+        "cached_input_tokens": 0,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 126,
+        "reasoning_output_tokens": 0,
+        "total_tokens": 25473
+      },
+      "last": {
+        "input_tokens": 25347,
+        "cached_input_tokens": 0,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 126,
+        "reasoning_output_tokens": 0,
+        "total_tokens": 25473
+      }
+    },
+    {
+      "kind": "native_tool_call",
+      "name": "exec",
+      "argument_bytes": 113
+    },
+    {
+      "kind": "tool_response",
+      "host_budgets": [
+        {
+          "limits": {
+            "wall_seconds": 180,
+            "no_progress_seconds": 90,
+            "max_turns": 1,
+            "max_tool_calls": 20,
+            "max_observed_tokens": 120000,
+            "max_answer_bytes": 20000
+          },
+          "observed": {
+            "elapsed_seconds": 12.136207588016987,
+            "tool_starts": 3,
+            "tokens": 25473
+          },
+          "remaining": {
+            "wall_seconds": 167.863792411983,
+            "tool_starts": 17,
+            "observed_tokens": 94527
+          },
+          "phase": "work"
+        }
+      ]
+    },
+    {
+      "kind": "usage",
+      "total": {
+        "input_tokens": 52109,
+        "cached_input_tokens": 25344,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 168,
+        "reasoning_output_tokens": 0,
+        "total_tokens": 52277
+      },
+      "last": {
+        "input_tokens": 26762,
+        "cached_input_tokens": 25344,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 42,
+        "reasoning_output_tokens": 0,
+        "total_tokens": 26804
+      }
+    },
+    {
+      "kind": "native_tool_call",
+      "name": "exec",
+      "argument_bytes": 182
+    },
+    {
+      "kind": "tool_response",
+      "host_budgets": [
+        {
+          "limits": {
+            "wall_seconds": 180,
+            "no_progress_seconds": 90,
+            "max_turns": 1,
+            "max_tool_calls": 20,
+            "max_observed_tokens": 120000,
+            "max_answer_bytes": 20000
+          },
+          "observed": {
+            "elapsed_seconds": 16.17986168299103,
+            "tool_starts": 4,
+            "tokens": 52277
+          },
+          "remaining": {
+            "wall_seconds": 163.82013831700897,
+            "tool_starts": 16,
+            "observed_tokens": 67723
+          },
+          "phase": "work"
+        },
+        {
+          "limits": {
+            "wall_seconds": 180,
+            "no_progress_seconds": 90,
+            "max_turns": 1,
+            "max_tool_calls": 20,
+            "max_observed_tokens": 120000,
+            "max_answer_bytes": 20000
+          },
+          "observed": {
+            "elapsed_seconds": 16.241516745998524,
+            "tool_starts": 5,
+            "tokens": 52277
+          },
+          "remaining": {
+            "wall_seconds": 163.75848325400148,
+            "tool_starts": 15,
+            "observed_tokens": 67723
+          },
+          "phase": "work"
+        }
+      ]
+    },
+    {
+      "kind": "usage",
+      "total": {
+        "input_tokens": 79102,
+        "cached_input_tokens": 51968,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 265,
+        "reasoning_output_tokens": 39,
+        "total_tokens": 79367
+      },
+      "last": {
+        "input_tokens": 26993,
+        "cached_input_tokens": 26624,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 97,
+        "reasoning_output_tokens": 39,
+        "total_tokens": 27090
+      }
+    },
+    {
+      "kind": "native_tool_call",
+      "name": "exec",
+      "argument_bytes": 109
+    },
+    {
+      "kind": "tool_response",
+      "host_budgets": [
+        {
+          "limits": {
+            "wall_seconds": 180,
+            "no_progress_seconds": 90,
+            "max_turns": 1,
+            "max_tool_calls": 20,
+            "max_observed_tokens": 120000,
+            "max_answer_bytes": 20000
+          },
+          "observed": {
+            "elapsed_seconds": 22.992643035016954,
+            "tool_starts": 6,
+            "tokens": 79367
+          },
+          "remaining": {
+            "wall_seconds": 157.00735696498305,
+            "tool_starts": 14,
+            "observed_tokens": 40633
+          },
+          "phase": "work"
+        }
+      ]
+    },
+    {
+      "kind": "usage",
+      "total": {
+        "input_tokens": 106488,
+        "cached_input_tokens": 78848,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 441,
+        "reasoning_output_tokens": 172,
+        "total_tokens": 106929
+      },
+      "last": {
+        "input_tokens": 27386,
+        "cached_input_tokens": 26880,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 176,
+        "reasoning_output_tokens": 133,
+        "total_tokens": 27562
+      }
+    },
+    {
+      "kind": "native_tool_call",
+      "name": "exec",
+      "argument_bytes": 5142
+    },
+    {
+      "kind": "tool_response",
+      "host_budgets": [
+        {
+          "limits": {
+            "wall_seconds": 180,
+            "no_progress_seconds": 90,
+            "max_turns": 1,
+            "max_tool_calls": 20,
+            "max_observed_tokens": 120000,
+            "max_answer_bytes": 20000
+          },
+          "observed": {
+            "elapsed_seconds": 49.822886467998615,
+            "tool_starts": 7,
+            "tokens": 106929
+          },
+          "remaining": {
+            "wall_seconds": 130.17711353200139,
+            "tool_starts": 13,
+            "observed_tokens": 13071
+          },
+          "phase": "deliver"
+        }
+      ]
+    },
+    {
+      "kind": "usage",
+      "total": {
+        "input_tokens": 134237,
+        "cached_input_tokens": 106240,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 1559,
+        "reasoning_output_tokens": 180,
+        "total_tokens": 135796
+      },
+      "last": {
+        "input_tokens": 27749,
+        "cached_input_tokens": 27392,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 1118,
+        "reasoning_output_tokens": 8,
+        "total_tokens": 28867
+      }
+    }
+  ],
+  "interpretation": "Usage follows tool replies; counter therefore omits the current inference at a tool response. Each observed model step used25-29k total tokens. Nested ProjectTools instrumentation doubles context/propose log records, not native calls. No assistant reasoning text is included.",
+  "catalog_tools": 54,
+  "catalog_serialized_bytes": 63620,
+  "fixed_token_ceiling": 120000,
+  "old_final_observed_tokens": 135796
+}

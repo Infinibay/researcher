@@ -14,12 +14,15 @@ held_start = None
 thread_id = 'thread-' + Path.cwd().name
 
 def send(message):
+    """Emit one complete native protocol frame to the owning test process."""
     print(json.dumps(message), flush=True)
 
 def event(method, **params):
+    """Associate a synthetic observation with this real child peer's thread."""
     send({'method': method, 'params': {'threadId': thread_id, **params}})
 
 def complete(status='completed'):
+    """Report an answer and terminal turn while leaving product acceptance to its owner."""
     event('item/completed', turnId=active, item={'id':'answer','type':'agentMessage','text':Path.cwd().name})
     event('turn/completed', turn={'id':active,'status':status,'error':None})
 
@@ -75,7 +78,7 @@ while True:
                 event('item/started',turnId=active,item=item)  # duplicate delivery
                 event('item/completed',turnId=active,item=item)
             complete()
-        elif scenario in ('budget-host', 'budget-host-unknown'):
+        elif scenario in ('budget-host', 'budget-host-unknown', 'budget-large-context', 'budget-small-context'):
             for n in range(3):
                 item={'id':str(n),'type':'dynamicToolCall'}
                 event('item/started',turnId=active,item=item)
@@ -83,6 +86,11 @@ while True:
                 event('item/completed',turnId=active,item=item)
             if scenario == 'budget-host':
                 event('thread/tokenUsage/updated',turnId=active,tokenUsage={'total':{'totalTokens':80}})
+            elif scenario in ('budget-large-context', 'budget-small-context'):
+                # The next inference has already requested a tool while its usage
+                # is still unreported, as in the retained planning regression.
+                for total in ([25473, 25473] if scenario == 'budget-large-context' else [1000, 2000]):
+                    event('thread/tokenUsage/updated',turnId=active,tokenUsage={'total':{'totalTokens':total}})
             send({'id':'budget-1','method':'item/tool/call','params':{'threadId':thread_id,'turnId':active,'tool':'source'}})
         elif scenario=='tokens':
             event('thread/tokenUsage/updated',turnId=active,tokenUsage={'total':{'totalTokens':101}})

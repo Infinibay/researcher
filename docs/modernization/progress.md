@@ -8311,3 +8311,29 @@ license-inventory.json,license-artifact-reviews.json. Final distribution/source
 availability and compatibility remain open. No global suite, push or deployment.
 Next macro: planning delivery under its previous budget; not started. Preserve
 updated task list and measured times at transitions, all macro work before detail.
+
+
+## Planning delivery diagnosis and observed margin — 2026-11-07
+
+Basebabeaa6;10:33:57–10:52:20UTC,1103seconds to validation. Quarter-only advice
+warned too late because usage follows tool replies and model steps cost25–29k
+observed tokens. Adaptive advisory margin uses three largest positive increments
+plus25%growth, with original quarter floor; hard fuses/tools unchanged. Duplicated
+usage cannot erase measured cost. Protocol reproduction red1/green1 before fix.
+Catalog5 retains2/3/4.105source tests/82installed pass for first candidate.
+One new registered development attempt failed137720/120000tokens after saving
+one3-task proposal. Its proposal step ended107804; a separate final explanation
+caused excess. Native final text exists in trace but was not product-delivered.
+All4registered peers closed, service-15,0unrevoked localgrants,0acceptances;
+usageunknown. No replay. Ken default source selects symbols; the extra whole-file
+read was necessary. Corrected initial default-window advice without another LLM.
+Final only-planning-text change passes12source/12installed tests;608source/wheel/
+installedPythonSQLfiles match,18changeddefinitions documented,83promptreviews
+current after12revalidations.9RuffDD092. Final package/receipt path:
+planning-policy-final-dist andplanning-final-installed.json under SDD directory.
+Next implementation remains functional planning delivery: atomic typed plan and
+user explanation, durable close intent, actual peer closure, preserved native
+status, Stop/context/limit precedence and separate exact owner acceptance. Review
+planning-delivery-review.md for concrete conditions. No task acceptance from
+saved proposal or trace-only text.43broadscenarios/0of12pages still open; no global
+suite/push. Keep macro work before details and publish list/time at transitions.

@@ -1,0 +1,78 @@
+{
+  "base_commit": "babeaa6",
+  "start_utc": "2026-11-07 10:33:57",
+  "validation_cut_utc": "2026-11-07 10:52:20",
+  "elapsed_seconds": 1103,
+  "product_planning_delivery": "still_fails",
+  "first_candidate_source": [
+    {
+      "tests": 74,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "tests": 31,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  ],
+  "first_candidate_installed": {
+    "tests": 82,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "final_policy_source": {
+    "tests": 12,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "final_policy_installed": {
+    "tests": 12,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "initial_installed_receipt": {
+    "exit_code": 0,
+    "seconds": 32.26699299400207,
+    "backend_files_match": 608,
+    "backend_modules": 226,
+    "all_backend_imports_from_installed_package": true,
+    "wheel_sha256": "f3c46e3fe829d9711f84b1d08bb9d8c9c3c843f11e55404cd753e1f63e584e11"
+  },
+  "final_installed_receipt": {
+    "exit_code": 0,
+    "seconds": 5.011325333995046,
+    "backend_files_match": 608,
+    "backend_modules": 217,
+    "all_backend_imports_from_installed_package": true,
+    "only_backend_change_since_live_candidate": [
+      "backend/planning/instructions.py"
+    ],
+    "wheel": ".superpowers/sdd/2026-10-31-actualizacion-proyecto/planning-policy-final-dist/researcher-0.1.0-cp312-cp312-linux_x86_64.whl",
+    "wheel_sha256": "998699730222b4e8e02a252637704a00c5297546ecfc98c41ae3510716747183"
+  },
+  "changed_definitions_documented": 18,
+  "ruff_findings": 9,
+  "prompt_candidates": 83,
+  "prompt_reviews_revalidated": 12,
+  "actual_model_turns": 1,
+  "model_result": "failed_at_token_limit",
+  "initial_reproduction": {
+    "failed": 1,
+    "passed": 1,
+    "log": "planning-margin-before.log"
+  },
+  "whole_test_suite_repeated": false,
+  "pages_fully_accepted": 0,
+  "broad_scenarios_open": 43,
+  "limits": [
+    "Initial live policy included advice to use default Ken windows; corrected final policy explicitly requires whole-file ranges and was not tried live again.",
+    "Early delivery advice was observed but did not solve delivery.",
+    "No retry of the failed attempt, no larger token cap, no owner acceptance, no push or deployment."
+  ]
+}

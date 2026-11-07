@@ -28,7 +28,46 @@ que se pueda comparar el avance; no presentar microajustes como tareas principal
 - Última suite global: `9fb873c`,2210 casos,2178 pasan,31 fallan y1 error de fixture; sin omisiones. La carrera de backup encontrada se corrigió después con40 pruebas instaladas. No se declara una nueva corrida global verde; la referencia `0c8b8d9` queda como evidencia histórica.
 - Los 43 escenarios amplios siguen abiertos en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Etapa actual: inventario de licencias comprobado
+## Etapa actual: planificación requiere una entrega explícita
+
+Bloque **10:33:57–10:52:20 UTC**, **18 min 23 s**, hasta validación. El aviso
+ahora estima margen con incrementos observados y reconoce el retraso del contador.
+La reproducción falla antes y pasa después; catálogo5 conserva identidades2/3/4.
+El primer candidato pasa105 pruebas de fuente y82 instaladas. Tras corregir sólo
+la guía de lectura completa, pasan12 de fuente y12 instaladas;608 archivos
+Python/SQL coinciden.18 definiciones documentadas;83 decisiones de prompts vigentes.
+
+**La entrega aún falla:** un único intento nuevo guarda3 tareas en una propuesta,
+pero el paso posterior de explicación eleva107804 a137720tokens, sobre120000.
+El servicio y sus4 peers cerraron,0 grants locales activos y0 aceptaciones. No se
+repitió el intento. Ken devolvía sólo símbolos por defecto: la lectura adicional
+sí era necesaria. Se corrigió esa recomendación sin otra inferencia.
+[Informe y siguiente contrato](planning-delivery-review.md),
+[intento](planning-delivery-live.json), [validación](planning-delivery-results.json).
+
+**Lista actualizada:**
+- Implementado y comprobado en recorridos concretos: backend Codex/Ken, modelos,
+  flujos principales, comunicación, persistencia y varias recuperaciones.
+- Interfaz:12 pilotos y48 conceptos;0/12 páginas completamente aceptadas.
+- Terminado en este bloque: margen observado y diagnóstico de la entrega,
+  **18 min 23 s**; no equivale a terminar planificación.
+- Terminado previamente: inventario de licencias, **13 min 38 s**; aislamiento
+  del lector Chroma, **19 min 53 s**.
+- En curso, siguiente implementación: guardar plan y explicación juntos y cerrar
+  el turno por un recibo durable, sin inventar terminación nativa ni aceptación.
+  Las condiciones de autoridad/cierre y los casos de fallo están en el informe.
+  Esa implementación todavía no comenzó; registrar su inicio al comenzar.
+- Pendiente principal: seguridad Ken/ONNX y límites agregados; evaluación humana
+  y otros perfiles; datos históricos y recuperación restante; aceptación integral
+  de las12 páginas.
+- Después de todas las tareas gruesas: detalles acumulados, validación global,
+  revisión independiente y distribución. DD092 conserva9 avisos de estilo.
+
+Siguen43 escenarios abiertos, sin nueva suite global verde ni porcentaje global
+sustentado. No hubo push ni despliegue. La lista y tiempos medidos persisten tras
+compactar; no repetir el ensayo fallido para buscar una respuesta favorable.
+
+## Etapa anterior: inventario de licencias comprobado
 
 Bloque **10:16:47–10:30:25 UTC**, **13 min 38 s**, hasta el corte de validación.
 Se resuelven las139 ausencias anteriores:164 versiones Python y415 entradas npm

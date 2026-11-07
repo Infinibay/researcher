@@ -1,0 +1,176 @@
+{
+  "scope": "One fresh development attempt after a code/policy change; not held-out, paired or efficacy evidence. Final guidance was corrected afterwards and not tried live again.",
+  "status": "failed",
+  "actual_turns": 1,
+  "tokens": 137720,
+  "token_limit": 120000,
+  "seconds": 60.207,
+  "usage_status": "unknown",
+  "tool_catalog_count": 54,
+  "model_control": {
+    "model": "gpt-6.1-sol",
+    "reasoning_effort": "low",
+    "source": "host",
+    "revision": 0,
+    "project_id": 101,
+    "actor_id": "researcher",
+    "fence": 1
+  },
+  "registered_policy_sha256": "97e28b92dc59a845b74c30d877b44e2f40e4e3138b4a3bdbc081667e3ce6cbc3",
+  "owned_backend_terminal": true,
+  "service_exit": -15,
+  "peers": [
+    {
+      "kind": "business",
+      "state": "closed"
+    },
+    {
+      "kind": "native",
+      "state": "closed"
+    },
+    {
+      "kind": "ken",
+      "state": "closed"
+    },
+    {
+      "kind": "ken",
+      "state": "closed"
+    }
+  ],
+  "unrevoked_grants": 0,
+  "original_result_sha256": "e188824939711171f90a9beee8a19f597633d9885ce3c374bee367e2ce6ef0dd",
+  "registration_sha256": "b4631ca0b84d5f3c5f8e91fc078b738cba795cc833de94b593a99b1042ef81e2",
+  "source_bytes_unchanged": true,
+  "database": {
+    "proposals": 1,
+    "tasks_in_proposal": 3,
+    "exact_basis_quotes": 2,
+    "acceptances": 0,
+    "integrity_and_foreign_keys": true
+  },
+  "timeline": [
+    {
+      "type": "budget",
+      "observed_tokens": null,
+      "phase": "work",
+      "delivery_advice": {
+        "largest_token_increment": null,
+        "token_margin": 30000,
+        "basis": "Quarter floor or three observed increments with 25% growth; heuristic, not reserved quota."
+      }
+    },
+    {
+      "type": "budget",
+      "observed_tokens": null,
+      "phase": "work",
+      "delivery_advice": {
+        "largest_token_increment": null,
+        "token_margin": 30000,
+        "basis": "Quarter floor or three observed increments with 25% growth; heuristic, not reserved quota."
+      }
+    },
+    {
+      "type": "usage",
+      "usage": {
+        "input_tokens": 25514,
+        "cached_input_tokens": 0,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 97,
+        "reasoning_output_tokens": 0,
+        "total_tokens": 25611
+      }
+    },
+    {
+      "type": "budget",
+      "observed_tokens": 25611,
+      "phase": "deliver",
+      "delivery_advice": {
+        "largest_token_increment": 25611,
+        "token_margin": 96042,
+        "basis": "Quarter floor or three observed increments with 25% growth; heuristic, not reserved quota."
+      }
+    },
+    {
+      "type": "budget",
+      "observed_tokens": 25611,
+      "phase": "deliver",
+      "delivery_advice": {
+        "largest_token_increment": 25611,
+        "token_margin": 96042,
+        "basis": "Quarter floor or three observed increments with 25% growth; heuristic, not reserved quota."
+      }
+    },
+    {
+      "type": "usage",
+      "usage": {
+        "input_tokens": 52195,
+        "cached_input_tokens": 25472,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 144,
+        "reasoning_output_tokens": 0,
+        "total_tokens": 52339
+      }
+    },
+    {
+      "type": "budget",
+      "observed_tokens": 52339,
+      "phase": "deliver",
+      "delivery_advice": {
+        "largest_token_increment": 26728,
+        "token_margin": 100230,
+        "basis": "Quarter floor or three observed increments with 25% growth; heuristic, not reserved quota."
+      }
+    },
+    {
+      "type": "usage",
+      "usage": {
+        "input_tokens": 79280,
+        "cached_input_tokens": 51968,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 180,
+        "reasoning_output_tokens": 0,
+        "total_tokens": 79460
+      }
+    },
+    {
+      "type": "budget",
+      "observed_tokens": 79460,
+      "phase": "deliver",
+      "delivery_advice": {
+        "largest_token_increment": 27121,
+        "token_margin": 101704,
+        "basis": "Quarter floor or three observed increments with 25% growth; heuristic, not reserved quota."
+      }
+    },
+    {
+      "type": "usage",
+      "usage": {
+        "input_tokens": 106626,
+        "cached_input_tokens": 78848,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 1178,
+        "reasoning_output_tokens": 70,
+        "total_tokens": 107804
+      }
+    },
+    {
+      "type": "usage",
+      "usage": {
+        "input_tokens": 136250,
+        "cached_input_tokens": 107008,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 1470,
+        "reasoning_output_tokens": 70,
+        "total_tokens": 137720
+      }
+    }
+  ],
+  "native_final_text_recorded_but_not_delivered": true,
+  "human_comprehension": null,
+  "human_effort_seconds": null,
+  "limits": [
+    "No owner acceptance or automatic replay.",
+    "The high-level evaluator exits0 after retaining a failed terminal arm; product outcome remains failed.",
+    "Observed tokens include repeated/cached input; not billed cost or known subscription quota."
+  ]
+}

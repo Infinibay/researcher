@@ -669,3 +669,12 @@ La metadata npm señala el repositorio `remarkjs/remark-math` y los commits
 `88a9497e1ede93b958237c85edbf5651faeca7af` y
 `d5d0660b150810a535bbb07eac6cc96a4510aa24`, respectivamente. Revalidar esos vínculos
 y el texto al resolverlo. No crear ahora otro sistema general de licencias.
+
+
+## DD092 — Estilo del margen de entrega
+
+Nueve avisos Ruff en los archivos del bloque. Conservar ubicaciones en
+[planning-delivery-lint.json](planning-delivery-lint.json) y resolver después de
+las capacidades principales. No repetir el ensayo real por estilo. La entrega
+fallida a137720/120000tokens es un problema funcional del contrato de entrega,
+no un detalle que pueda ocultarse en esta lista.

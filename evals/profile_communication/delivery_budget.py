@@ -1,4 +1,4 @@
-"""Run three previously observed failures once as development regressions, never as held-out confirmation."""
+"""Run selected previously observed failures once as development regressions, never as held-out confirmation."""
 
 import argparse
 import asyncio
@@ -11,15 +11,19 @@ from evals.context_alignment.protocol import digest, load_registered
 from evals.context_alignment.run import run_arm, save
 from evals.profile_communication.cases import CASES, PREFIX
 
+REGRESSION_CASES = ('plan_dependencies', 'skipped_checks', 'selective_outcomes')
 
-def register(root, assets):
-    """Freeze sources, actual bounded policy and review criteria before any of the three new attempts."""
+
+def register(root, assets, *, case_ids=None):
+    """Freeze selected sources and actual bounded policies before any new attempt; retain operator ceilings."""
+    selected = tuple(case_ids) if case_ids is not None else REGRESSION_CASES
+    if not selected or len(set(selected)) != len(selected) or set(selected) - set(REGRESSION_CASES):
+        raise ValueError('Select distinct known regression cases')
     root.mkdir(mode=0o700, parents=True, exist_ok=False)
     operator = json.loads(assets.read_text())
-    cases = [next(c for c in CASES if c['id'] == name)
-             for name in ('plan_dependencies', 'skipped_checks', 'selective_outcomes')]
+    cases = [next(c for c in CASES if c['id'] == name) for name in selected]
     manifest = {'purpose': 'Development regressions after observed failures; not paired or held-out efficacy evidence.',
-                'maximum_model_turns': 3, 'cases': []}
+                'maximum_model_turns': len(cases), 'cases': []}
     for case in cases:
         folder = root / case['id']
         folder.mkdir(mode=0o700)
@@ -45,9 +49,9 @@ def register(root, assets):
     save(root / 'registration.json', manifest)
 
 
-async def run(root, assets):
+async def run(root, assets, *, case_ids=None):
     """Observe each new original handle serially; never replay a failed or uncertain attempt."""
-    register(root, assets)
+    register(root, assets, case_ids=case_ids)
     manifest = json.loads((root / 'registration.json').read_text())
     for item in manifest['cases']:
         case = next(c for c in CASES if c['id'] == item['id'])
@@ -60,7 +64,7 @@ async def run(root, assets):
             result = json.loads((folder / (case['id'] + '-candidate') / 'result.json').read_text())
             if not result.get('owned_backend_terminal'):
                 raise
-    print('Three original development attempts observed; inspect retained results, including failures.', flush=True)
+    print(f"{len(manifest['cases'])} original development attempts observed; inspect retained results, including failures.", flush=True)
 
 
 def main():
@@ -69,10 +73,11 @@ def main():
     parser.add_argument('--output', type=Path, required=True)
     parser.add_argument('--assets', type=Path, required=True)
     parser.add_argument('--live', action='store_true')
+    parser.add_argument('--case', action='append', choices=REGRESSION_CASES)
     args = parser.parse_args()
     if not args.live:
         parser.error('--live is required')
-    asyncio.run(run(args.output.resolve(), args.assets.resolve()))
+    asyncio.run(run(args.output.resolve(), args.assets.resolve(), case_ids=args.case))
 
 
 if __name__ == '__main__':

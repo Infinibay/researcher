@@ -10,6 +10,27 @@ from backend.tests.runtime.test_owned_factory import owned_config as owned_confi
 from backend.tests.runtime.test_runtime_service import ControlledInference, coordinator
 
 
+@pytest.mark.parametrize('scenario,phase', [('budget-large-context','deliver'), ('budget-small-context','work')])
+async def test_delivery_advice_accounts_for_delayed_expensive_inference_steps(tmp_path, scenario, phase):
+    """A costly context needs delivery advice before the fixed quarter, without turning advice into a hard stop."""
+    async def respond(_request):
+        """Preserve the tool result while the host reports its own lagging consumption."""
+        return {'success': True, 'contentItems': [{'type': 'inputText', 'text': 'Source read completed.'}]}
+
+    async with session(tmp_path, wall_seconds=180, no_progress_seconds=5,
+                       max_tool_calls=20, max_observed_tokens=120000) as native:
+        result = await native.run(scenario, on_request=respond)
+    reply = next(r['result'] for r in requests(tmp_path) if r.get('id') == 'budget-1')
+    budget = json.loads(reply['contentItems'][1]['text'])['researcher_execution_budget']
+    assert budget['phase'] == phase
+    assert budget['limits']['max_observed_tokens'] == 120000
+    assert budget['remaining']['observed_tokens'] > 90000
+    assert result.status == 'completed'
+    if scenario == 'budget-large-context':
+        assert budget['delivery_advice']['largest_token_increment'] == 25473
+        assert budget['delivery_advice']['token_margin'] > budget['remaining']['observed_tokens']
+
+
 @pytest.mark.parametrize('tool_limit,known_tokens,phase', [(4,False,'deliver'),(4,True,'deliver'),(20,False,'work'),(20,True,'deliver')])
 async def test_host_reply_reports_observed_margin_without_changing_tool_data(tmp_path, tool_limit, known_tokens, phase):
     """The model sees deduplicated counts and unknown consumption; source text cannot replace host limits."""
@@ -67,7 +88,7 @@ def test_initial_policy_records_effective_limits_without_relabelling_old_catalog
     budget = json.loads(value.split('RESEARCHER_INITIAL_BUDGET\n', 1)[1])
     assert budget['max_tool_calls'] == 20 and budget['max_observed_tokens'] == 120000
     assert instruction_identity(value)['sha256'] != instruction_identity(build_instructions('research', 'plan'))['sha256']
-    for version in (2, 3):
+    for version in (2, 3, 4):
         recorded = f'RESEARCHER_POLICY {version} planning\n\nEarlier policy.'
         assert instruction_identity(recorded)['catalog_version'] == version
 
