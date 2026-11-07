@@ -28,7 +28,35 @@ que se pueda comparar el avance; no presentar microajustes como tareas principal
 - Última suite global: `9fb873c`,2210 casos,2178 pasan,31 fallan y1 error de fixture; sin omisiones. La carrera de backup encontrada se corrigió después con40 pruebas instaladas. No se declara una nueva corrida global verde; la referencia `0c8b8d9` queda como evidencia histórica.
 - Los 43 escenarios amplios siguen abiertos en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Etapa actual: compatibilidad Ken/ONNX comprobada; sigue revisión de licencias
+## Etapa actual: recorrido web real comprobado; siguen Archivos y Documentos
+
+Bloque **14:09:13–14:16:43 UTC**, **7 min 30 s** hasta validar. Se incorpora una
+prueba E2E reproducible sobre host instalado, API y SQLite reales: dos proyectos,
+un grupo, un hito, dos tareas, una dependencia y una corrección explícita como
+`user_example`, contexto2, conservada tras recargar y separada del otro proyecto.
+Ocho capturas inspeccionadas, cero incidencias Axe en las regiones probadas y cero
+errores JS. Siete escrituras de producto; cero inferencias. Servicio termina143,
+recibo cerrado y grupo eliminado. [Recorrido y límites](../design/audits/2026-11-07-workspace-live/report.md).
+
+La revisión de licencias14:08:03–14:09:13UTC (**1 min 10 s**) comprobó que los siete
+inputs del inventario existente conservan su hash. Se reutilizó esa evidencia,
+sin repetir descargas/tests. Distribución concreta y DD091 siguen pendientes.
+
+**Lista vigente:**
+- Implementado: backend Codex/Ken, flujos principales, comunicación, persistencia
+  y varias recuperaciones, con sus alcances comprobados en los informes.
+- Terminado ahora: recorrido real de Proyectos/Planificación/Tareas y corrección;
+  **7 min 30 s** hasta validar. No acredita comprensión humana ni nueva inferencia.
+- Siguiente principal: Archivos y Documentos con almacenamiento real. **No iniciado.**
+- Pendiente: otros recorridos, aceptación de12páginas, evaluación humana/otros
+  perfiles, recuperación/recursos restantes, datos históricos y Ken publicado actualizado.
+- Al final: detalles secundarios, validación global, revisión independiente y
+  distribución. Los avisos visuales observados se anotan, no se pulen ahora.
+
+Siguen43escenarios amplios abiertos y0/12páginas plenamente aceptadas. La lista y
+los tiempos se conservan y se publican en cada transición, también tras compactar.
+
+## Etapa anterior: compatibilidad Ken/ONNX comprobada; sigue revisión de licencias
 
 Bloque **13:55:32–14:03:54 UTC**, **8 min 22 s** hasta validación funcional y
 auditoría. Variante local `0.18.0+researcher.1` con ONNX1.23.2:72paquetes

@@ -11,6 +11,7 @@
     "preview": "vite preview",
     "test:contracts": "node --test tests/*.test.ts",
     "test:ui": "vitest run",
+    "test:e2e": "node tests/workspace.e2e.mjs",
     "lint": "eslint src tests/ui vite.config.ts vitest.config.ts"
   },
   "dependencies": {

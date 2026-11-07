@@ -1,0 +1,108 @@
+{
+  "status": "passed",
+  "scope": "Real installed HTTP/SQLite; owner forms only; no model requests",
+  "states": [
+    {
+      "name": "01-local-access",
+      "width": 1440,
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "02-created-project",
+      "width": 1440,
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "03-group-and-milestone",
+      "width": 1440,
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "04-original-task",
+      "width": 1440,
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "04b-owner-example-saved",
+      "width": 1440,
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "05-task-after-reload-mobile",
+      "width": 390,
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "06-other-project-mobile",
+      "width": 390,
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "07-real-dependency-mobile",
+      "width": 390,
+      "fits": true,
+      "violations": []
+    }
+  ],
+  "writes": [
+    {
+      "method": "POST",
+      "path": "/api/projects",
+      "status": 201
+    },
+    {
+      "method": "POST",
+      "path": "/api/projects",
+      "status": 201
+    },
+    {
+      "method": "POST",
+      "path": "/api/epics",
+      "status": 201
+    },
+    {
+      "method": "POST",
+      "path": "/api/milestones",
+      "status": 201
+    },
+    {
+      "method": "POST",
+      "path": "/api/tasks",
+      "status": 201
+    },
+    {
+      "method": "POST",
+      "path": "/api/tasks",
+      "status": 201
+    },
+    {
+      "method": "POST",
+      "path": "/api/projects/1/tasks/2/context-corrections",
+      "status": 200
+    }
+  ],
+  "errors": [],
+  "checks": [
+    "UI owner pairing",
+    "two real project creations",
+    "group and milestone persisted",
+    "two tasks with stored dependency",
+    "explicit user example survives reload",
+    "selection after reload",
+    "project isolation",
+    "no API fixtures"
+  ],
+  "identities": {
+    "alpha": 1,
+    "beta": 2,
+    "source": 1,
+    "compare": 2
+  }
+}

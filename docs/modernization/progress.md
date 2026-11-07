@@ -8545,3 +8545,26 @@ Researcher rebuild repeated. Next macro task:license review, not yet started.
 Other resources/recovery, owner data, human/other profiles and12page acceptance
 remain.43broad scenarios open. Fine details follow all macro capabilities;
 updated list and measured time persist and are shown at each task transition.
+
+## 2026-11-07: real owner web workspace journey
+
+Previous goal turn progressed as de83659. License review14:08:03–14:09:13UTC
+reused seven unchanged input hashes from the completed inventory; no redundant
+registry downloads or tests. Actual distribution obligations stay open.
+Main block14:09:13–14:16:43UTC,450seconds to functional/visual validation.
+Added installed-host harness and npm test:e2e entry for real HTTP/SQLite owner
+forms:2projects,group,milestone,2tasks,dependency and explicit user_example at
+context2. Reload preserves original task/correction; changing project does not
+show either.7owner writes excluding pairing,0runs/dispatches,SQLite integrityok.
+Synthetic account only; no operator data. Actual serviceexit143 and verified
+closed receipt/domain removal.8final screenshots inspected,0regionalAxe issues,
+0document horizontal overflow,0JS errors. First attempt functional success had
+transitional screenshots; retained and replaced with actual awaited states, then
+expanded to owner correction. No product logic changes or global rerun.
+
+The browser integration host was unavailable; existing repository Playwright path
+used.3Python definitions and4JShelpers documented. Test driver/script, operation
+README, screenshot report/evidence and dashboard retained. Evidence in
+web-workspace-results.json and docs/design/audits/2026-11-07-workspace-live.
+Nextmacro:Files/Documents on real storage, not yet started.43broad scenarios and
+12page final/human acceptance still open; details after all macro work.

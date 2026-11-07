@@ -2421,7 +2421,9 @@
         "frontend/tests/home.browser.mjs",
         "docs/design/concepts/planning/manifest.json",
         "docs/design/audits/2026-11-06-planning/report.md",
-        "frontend/tests/planning.browser.mjs"
+        "frontend/tests/planning.browser.mjs",
+        "docs/modernization/web-workspace-results.json",
+        "docs/design/audits/2026-11-07-workspace-live/report.md"
       ],
       "notes": [
         "Real desktop/mobile read-only owner capture now passes; full rendered state, keyboard, screen-reader/zoom and human acceptance remain pending. See browser-evidence.json."
@@ -2664,7 +2666,9 @@
         "docs/modernization/repositories-packaging.json",
         "backend/tests/runtime/test_repository_reading.py",
         "frontend/tests/repository-explorer.test.ts",
-        "frontend/tests/repository-file-design.test.ts"
+        "frontend/tests/repository-file-design.test.ts",
+        "docs/modernization/web-workspace-results.json",
+        "docs/design/audits/2026-11-07-workspace-live/report.md"
       ],
       "notes": [
         "Real desktop/mobile read-only owner capture now passes; full rendered state, keyboard, screen-reader/zoom and human acceptance remain pending. See browser-evidence.json."
@@ -2818,7 +2822,9 @@
         "backend/tests/runtime/test_live_grants.py",
         "docs/modernization/pdf-web-results.json",
         "docs/modernization/pdf-web-packaging.json",
-        "backend/tests/research/test_pdf_web.py"
+        "backend/tests/research/test_pdf_web.py",
+        "docs/modernization/web-workspace-results.json",
+        "docs/design/audits/2026-11-07-workspace-live/report.md"
       ],
       "remaining": [
         "Rendered browser and keyboard verification",
@@ -2989,7 +2995,9 @@
         "docs/modernization/run-input-packaging.json",
         "backend/tests/runtime/test_run_input.py",
         "backend/tests/runtime/test_run_input_migration.py",
-        "evals/runtime/run_input_continuity.py"
+        "evals/runtime/run_input_continuity.py",
+        "docs/modernization/web-workspace-results.json",
+        "docs/design/audits/2026-11-07-workspace-live/report.md"
       ],
       "remaining": [
         "Typed editing with concurrency/receipts and verified author provenance.",
@@ -4170,7 +4178,9 @@
         "backend/tests/runtime/test_owned_project_stop.py",
         "docs/design/audits/2026-11-06-projects/evidence.json",
         "frontend/src/api/projectWorkspace.ts",
-        "frontend/tests/project-workspace-actions.test.ts"
+        "frontend/tests/project-workspace-actions.test.ts",
+        "docs/modernization/web-workspace-results.json",
+        "docs/design/audits/2026-11-07-workspace-live/report.md"
       ],
       "implemented": [
         "Actual scope/activity/source/plan/report projection; exact create/start/source/Stop recovery, optimistic edits and protected history deletion",

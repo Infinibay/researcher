@@ -773,3 +773,13 @@ como trabajo principal, separados de este pulido.
 El log acotado conserva el prefijo: después de mucho ruido puede perder el error
 final. Valorar conservar también una cola al hacer la pasada de diagnóstico fino,
 manteniendo el límite total y la indicación explícita de truncamiento.
+
+## DD104 — presentación de foco y cambio de proyecto en el recorrido real
+
+Después de todas las capacidades principales: el contorno de foco de
+`TaskInspector` puede parecer un campo editable; conservar foco perceptible al
+pulir su apariencia. Al cambiar de proyecto con enlace a una tarea del anterior,
+explicar mejor el aviso de enlace ajeno sin abrir datos bajo el proyecto incorrecto.
+La altura de cabecera móvil ya se sigue enDD041. Observado en las capturas05/06 del
+[recorrido real](../design/audits/2026-11-07-workspace-live/report.md); no bloquea
+crear/organizar/corregir/recargar ni supone pérdida de contexto almacenado.

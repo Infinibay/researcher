@@ -1,0 +1,55 @@
+{
+  "base_commit": "de83659",
+  "previous_goal_turn": "progress: isolated Ken candidate verified and committed",
+  "started_at_utc": "2026-11-07T14:09:13Z",
+  "validated_at_utc": "2026-11-07T14:16:43Z",
+  "elapsed_to_validation_seconds": 450,
+  "licenses_reused": {
+    "started_at_utc": "2026-11-07T14:08:03Z",
+    "ended_at_utc": "2026-11-07T14:09:13Z",
+    "elapsed_seconds": 70,
+    "inventory": "docs/modernization/license-inventory.json",
+    "input_hashes_unchanged": 7,
+    "new_downloads": false,
+    "distribution_approval": false
+  },
+  "build_exit": 0,
+  "browser_exit": 0,
+  "real_api_and_sqlite": true,
+  "screenshots_inspected": 8,
+  "axe_violations": 0,
+  "horizontal_document_overflow": 0,
+  "page_errors": 0,
+  "mutations_excluding_pairing": 7,
+  "model_turns": 0,
+  "new_python_definitions_documented": 3,
+  "new_javascript_helpers_documented": 4,
+  "product_backend_unchanged": true,
+  "product_frontend_logic_unchanged": true,
+  "test_e2e_script_added": true,
+  "global_suite_repeated": false,
+  "broad_scenarios_closed": 0,
+  "fully_accepted_pages": 0,
+  "retained_initial_attempt": {
+    "path": ".superpowers/sdd/2026-10-31-actualizacion-proyecto/web-workspace-v1",
+    "functional_status": "passed",
+    "capture_review": "Two captures rejected as transitional; waits strengthened and owner-example persistence added before final run"
+  },
+  "input_sha256": {
+    "frontend/package.json": "11b09da61c93c283b1de9ad2238b743dbdd911ad70c10c7df005ce4c9e483ab4",
+    "frontend/tests/workspace.e2e.mjs": "b1b96691cfda6c6998eacb8c4bccd45a65968c8a8dffeb21c129653ba1ed758a",
+    "evals/operation/web_workspace.py": "3051cb9f99c2158fd173b708dd840fd011694ac5ab11362a22805a3280577339",
+    "frontend/dist/index.html": "427ed6d6444148d5f0f84ad2a317109fc07d6baee011b36c6bc791b31149d65d"
+  },
+  "screenshot_sha256": {
+    "01-local-access.png": "ecc664e8266ba1fb572b98ab69e905e17c537fa7ab9aa94c6f6dbcbbfe9a7fd3",
+    "02-created-project.png": "08aad3d0d740b94a4170f566b9e0597b8864f057a0af81c624ff259e6d4a1d14",
+    "03-group-and-milestone.png": "9fc984184648dae8a21d453e7a6a7588630c8ae8089389d7e5539aed33cac458",
+    "04-original-task.png": "02565ab8414b853eecf54b1c5e7f567dfe8d4ae773b2d7a9d218e3e7a9afc38b",
+    "04b-owner-example-saved.png": "5d49dd8a772e6e71302f7f903c204439a5719ded85b3ef090d13e274c63520dd",
+    "05-task-after-reload-mobile.png": "83d55fdf8a4090de1471dfbe628e77f4143c7536becab8e5ee1ae18e8adcb65e",
+    "06-other-project-mobile.png": "8fa72bb6131e75229c335bdf84a58df5d46ea5d05a869e9747742f30844e1ee3",
+    "07-real-dependency-mobile.png": "d6f77c01ac01d52cce93e8dccbfa8197990a20344224d2ed4225595dc3f7ed2a"
+  },
+  "report": "docs/design/audits/2026-11-07-workspace-live/report.md"
+}

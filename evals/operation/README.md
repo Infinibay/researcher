@@ -1,5 +1,30 @@
 # Ensayos de operación
 
+## Recorrido web con almacenamiento real
+
+`web_workspace.py` crea un host desechable y lo abre desde Chromium: acceso local,
+dos proyectos, grupo/hito, dos tareas con dependencia y corrección como ejemplo
+del usuario. Comprueba recarga y aislamiento y contrasta los registros con SQLite.
+No simula respuestas HTTP. Sustituye la ruta de cuenta de los assets por un archivo
+sintético privado; no utiliza la suscripción ni inicia inferencias.
+
+Construir primero la web con `npm run build`. Con el paquete Researcher instalado
+en otro entorno, Node24 y el navegador de Playwright ya disponibles:
+
+```sh
+<python-del-producto> evals/operation/web_workspace.py \
+  --assets <recursos-host.json> --output <carpeta-nueva> \
+  --node <node24>/bin/node
+```
+
+El directorio de salida conserva el host privado, logs y capturas; no usar una
+instalación existente. El comando rechaza imports del backend desde el checkout.
+Desde `frontend/`, `npm run test:e2e` ejecuta sólo el script de navegador, con `RESEARCHER_E2E_ORIGIN`,
+`RESEARCHER_E2E_OWNER_FILE` y `RESEARCHER_E2E_OUTPUT` de un host desechable nuevo.
+El harness configura esos valores y cierra su proceso original al terminar.
+El resultado no acredita comprensión humana, generación ni accesibilidad completa.
+[Capturas y resultados](../../docs/design/audits/2026-11-07-workspace-live/report.md).
+
 `restored_host.py` prepara una instalación sintética nueva, guarda una solicitud
 pendiente, crea/verifica una copia y la restaura en otra ruta. Reinscribe esa copia
 con autoridad y acceso nuevos; envía una sola solicitud nueva mediante HTTP,
