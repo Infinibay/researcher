@@ -118,17 +118,17 @@
     "backend/planning/completion.py": "dd22f2d0c7c951bfcf66eb3c9fe79faeaae8acbf350d84e390648fac4d984bf2",
     "backend/planning/continuations.py": "d91779be508aecb874af9ab1504a1ffe1d4c7bd018b0b7b93cd8deb4285ff1bc",
     "backend/planning/execution.py": "cb0dc0afce814b0dd53f941ae5be5f6010a997ac793243d2648dfb5af8dd59b1",
-    "backend/planning/instructions.py": "03dfeeaadbb90d5461ca11c78ff90a3d94ad266c0299b87f87e30848f1237ac0",
+    "backend/planning/instructions.py": "31433bf7282182a0d635a028d69564a9b47e121d5c221c2dafaa550a745e4d19",
     "backend/planning/materials.py": "55da9f9c88d946d8b854964e1a922e7982e216226ca7d455459ba3f132e30689",
     "backend/planning/models.py": "656a2d10a572cdc795fea38bf8dd5adbaad1ea2c955536a50102a0bd8174f053",
     "backend/planning/project_history.py": "0158a0673730704bad8113cae1ddf421aa27fc5434f4c663f8bbdd0bb6e85fb1",
     "backend/planning/project_workspace.py": "19cd1b50392e8185623fe7aebe7fbe843a24afd931f31a08138b7744297099f5",
     "backend/planning/reauthorizations.py": "00464b8b2a072097f3dcabcc7067fefbfd4bce92355c03fe2f9503129a6e3658",
-    "backend/planning/store.py": "c2192f805ec0a9922f6811f5e5e54ca691ab0bc66a21a39dbbcdf515619b3b12",
-    "backend/planning/tools.py": "3e71f24dd7d2b81ae6410a9a53a125215dd776df66872f13c24b50f3dd96a752",
+    "backend/planning/store.py": "1f705a41513eadffef8566029ca5eab40eb9d95ca4469584dc0b4383d9128727",
+    "backend/planning/tools.py": "0efb502494147b93dab33a883e865aae946e0250d75c5924b130492c78e34b5d",
     "backend/project_records.py": "3a2765c13018d7ccd2cd8eb590ec9428c5ebb1edf93fc213185291250a5be016",
     "backend/prompts/__init__.py": "581a39370021a34e2cadea4a9a654a681b34bfdb8047fb7a8e217439b55f89e6",
-    "backend/prompts/native.py": "24d2878d79e4a69eac931ed8ec0a63647ef5308224228eb45cc57c16141d4bc1",
+    "backend/prompts/native.py": "6aa1c8662cd5793d7a4e20da1aed4376af70bb4c66a086aff8f5dc77d032c261",
     "backend/research/__init__.py": "75a8b541dec5915760704a03d44432cdbf0bb5cbf7c22e1a8c1c0008536d0649",
     "backend/research/acquisition.py": "3544ba18b252cf36284fa317bbe67427cd919bbfd9dd72f485d556c04040263f",
     "backend/research/async_http_client.py": "36423e84c48c5593218a35ff6413eda1ff5e12e078a2285c2b0b06355aaa9d0b",
@@ -198,10 +198,10 @@
     "backend/runtime/code_review_tools.py": "0e4440f99f93831510b2f4cf2cb04bd4638955e9a03215077ea83226131fa75b",
     "backend/runtime/code_reviews.py": "f6c8fc199135d54d74f283bae4f7b983b3238c07a73df84b5d366cefb01295e4",
     "backend/runtime/codex_rpc.py": "8ec057ae7e55e056c475d5f59651064c112bbfec5aed65ffa6ede1583c4e2767",
-    "backend/runtime/codex_session.py": "1bde448f1dcbb65c542104ffa2b251e3068915e26942f9221d32490ff1c8fcfe",
+    "backend/runtime/codex_session.py": "97322eed64bb96181a43d1c74aa8066ae716e5bcec7d3a0c300a491bf3cbf1ff",
     "backend/runtime/command_jobs.py": "ce8fb588398e6ab25df6b69dd96ea875e3b89cf3a1b8424d1c71a681b31f3fba",
     "backend/runtime/command_output.py": "581b6f609e59adeeed2688c10c3b94f7a7351e7abb4580c783e987e2f1b0593e",
-    "backend/runtime/contracts.py": "4736ef2d36d2812adbb22e9c4264bae94584203487690f5c0a7896587bd02c87",
+    "backend/runtime/contracts.py": "e8289601bacef9a6c7bd54e7fb12d1db54e05699a293b69fa2eb09137778de74",
     "backend/runtime/development_instructions.py": "44cc94a81c09943e7233c8eaa65a9ef88be22e1542209f12f0f8767c3648770a",
     "backend/runtime/development_policy.py": "d78723c49e3ad3212cdf6a759083c2530b4455dec1b45053166d5c0963cbe5fe",
     "backend/runtime/development_state.py": "876ec97e34c01736ecd748301149ca96fe5bd0059579ef01a75ee4d23377a0f3",
@@ -265,7 +265,7 @@
     "backend/runtime/review_instructions.py": "592050b6b0dd44ef9026bfcbff78d1989a69473a54de1159bcc09c70f196be24",
     "backend/runtime/run_inputs.py": "51c912385e1c4829f35ba09a7ef1966491cbad7183049a6efe5b3c94b9654526",
     "backend/runtime/scientific_instructions.py": "c63f5637f02b47088399e285fe98df4b7eed99cadff035c21fd7938c384497c9",
-    "backend/runtime/service.py": "54a5632602d5aaee68c587fa8c760aa95bac19cb4ccee544bc5d03f5bbe70bce",
+    "backend/runtime/service.py": "6f5fc92e308c207c034ccca861d80ebdc5ca0d68ff594840bd3ff6db637d6c89",
     "backend/runtime/snapshot_files.py": "ef12626230a13cd2333c1605fc7121a8fa1b853ed59e07f9d8ab93128a5febe9",
     "backend/runtime/sqlite_questions.py": "9315a4d6aa01bf82780e4996cddebca689892492a414da5c291d9bfe442b89c1",
     "backend/runtime/sqlite_runs.py": "7cf51e431cfa54babc702ae189c82559486f68bf670e3991085280b81a911e4c",
@@ -743,7 +743,7 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "40ff72e20f826495ed2bfba5bb27b54b0851e953abda05e4486ec189eaf4afe1",
+      "dependencies_sha256": "65139e422843417fea1dc89a796ec7ea02c6cfe80190bd91364852a981f8f764",
       "direct_module_consumers": {
         "backend/api/routes/projects.py": "ef446e833412f1b1fa1ff6830af5e9280fe4491a60e30e9f5d4efa6705b1c7a3",
         "backend/communication/owner_notes.py": "27d60b5640960cd647bf3fd4ce8c9fb136e7b614a62326c3cf599336ad35ab51",
@@ -754,7 +754,7 @@
         "backend/planning/execution.py": "cb0dc0afce814b0dd53f941ae5be5f6010a997ac793243d2648dfb5af8dd59b1",
         "backend/planning/project_workspace.py": "19cd1b50392e8185623fe7aebe7fbe843a24afd931f31a08138b7744297099f5",
         "backend/planning/reauthorizations.py": "00464b8b2a072097f3dcabcc7067fefbfd4bce92355c03fe2f9503129a6e3658",
-        "backend/planning/store.py": "c2192f805ec0a9922f6811f5e5e54ca691ab0bc66a21a39dbbcdf515619b3b12",
+        "backend/planning/store.py": "1f705a41513eadffef8566029ca5eab40eb9d95ca4469584dc0b4383d9128727",
         "backend/research/investigation.py": "0d7203a503ad3c28538d472be1f340f06144b97859c03f48207621ea8471ca7f",
         "backend/runtime/code_acceptances.py": "4760c9062a1e76751f28b0c6f0c9fbb42bac74b76c454660fc05d0ed8bf33a82",
         "backend/runtime/code_publications.py": "c12ab69601293c3600681cda9e767328f7849f87759a7d682dd0819b5527f345",
@@ -781,7 +781,9 @@
         "backend/runtime/run_inputs.py",
         "backend/runtime/business_definitions.py",
         "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
+        "evals/prompts/cases.json",
+        "docs/modernization/atomic-planning-review.md",
+        "backend/tests/runtime/test_atomic_planning_delivery.py"
       ],
       "review_conflicts": []
     },
@@ -790,14 +792,14 @@
       "path": "backend/planning/instructions.py",
       "symbol": "PLANNING_INSTRUCTIONS",
       "line": 3,
-      "end_line": 45,
+      "end_line": 48,
       "owner": "backend.planning.instructions",
       "family": "native_capability_policy",
       "disposition": "reviewed_native",
       "objective": "Native planner instructions: explicit evidence, useful tasks and owner-correctable uncertainty, not another agent execution loop.",
-      "source_sha256": "03dfeeaadbb90d5461ca11c78ff90a3d94ad266c0299b87f87e30848f1237ac0",
-      "source_bytes": 3125,
-      "rendered_utf8_bytes": 3119,
+      "source_sha256": "31433bf7282182a0d635a028d69564a9b47e121d5c221c2dafaa550a745e4d19",
+      "source_bytes": 3401,
+      "rendered_utf8_bytes": 3395,
       "variables_kind": "referenced_identifiers",
       "variables": [],
       "direct_import_consumers": [
@@ -816,9 +818,9 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "c2691e715f74048ec17585dd1689cc9cb5b6bb04185196551d8810b415772227",
+      "dependencies_sha256": "3186080609787b15b595e1d798d345d32c89744e78a4300aeea5ab18080d07c4",
       "direct_module_consumers": {
-        "backend/prompts/native.py": "24d2878d79e4a69eac931ed8ec0a63647ef5308224228eb45cc57c16141d4bc1"
+        "backend/prompts/native.py": "6aa1c8662cd5793d7a4e20da1aed4376af70bb4c66a086aff8f5dc77d032c261"
       },
       "suggested_disposition": "reviewed_native",
       "review_status": "reviewed",
@@ -831,22 +833,24 @@
         "backend/tests/research/test_project_structure.py",
         "backend/tests/runtime/test_delivery_budget.py",
         "docs/modernization/delivery-budget-review.md",
-        "docs/modernization/planning-delivery-review.md"
+        "docs/modernization/planning-delivery-review.md",
+        "docs/modernization/atomic-planning-review.md",
+        "backend/tests/runtime/test_atomic_planning_delivery.py"
       ],
       "review_conflicts": []
     },
     {
-      "id": "backend/planning/tools.py::PlanningTools.__init__.descriptions@91",
+      "id": "backend/planning/tools.py::PlanningTools.__init__.descriptions@98",
       "path": "backend/planning/tools.py",
-      "symbol": "PlanningTools.__init__.descriptions@91",
-      "line": 91,
-      "end_line": 94,
+      "symbol": "PlanningTools.__init__.descriptions@98",
+      "line": 98,
+      "end_line": 102,
       "owner": "backend.planning.tools",
       "family": "other_owned_prompt_candidate",
       "disposition": "reviewed_native",
       "objective": "Host-only native planning tools: bounded original context and a typed proposal, with no task creation or execution permission.",
-      "source_sha256": "3e71f24dd7d2b81ae6410a9a53a125215dd776df66872f13c24b50f3dd96a752",
-      "source_bytes": 663,
+      "source_sha256": "0efb502494147b93dab33a883e865aae946e0250d75c5924b130492c78e34b5d",
+      "source_bytes": 1189,
       "rendered_utf8_bytes": null,
       "variables_kind": "referenced_identifiers",
       "variables": [],
@@ -861,7 +865,7 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "79bddd697159a654d0e0dcd6e2592656bc47e6f0c121a6fb13bd4d1f4fb661aa",
+      "dependencies_sha256": "4e2ebdc515ea7d22d1295925a8504a6406cdb34e1ae01e65ff502fdf666859ba",
       "direct_module_consumers": {
         "backend/runtime/owned_runtime.py": "47bf6e211c1b76a3e11ba5861be62a3f96ab0bd1a4a96c5f1e3fa395c228b77f"
       },
@@ -875,7 +879,9 @@
         "backend/tests/runtime/test_plan_milestones.py",
         "backend/tests/research/test_project_structure.py",
         "backend/tests/runtime/test_delivery_budget.py",
-        "docs/modernization/delivery-budget-review.md"
+        "docs/modernization/delivery-budget-review.md",
+        "docs/modernization/atomic-planning-review.md",
+        "backend/tests/runtime/test_atomic_planning_delivery.py"
       ],
       "review_conflicts": []
     },
@@ -889,7 +895,7 @@
       "family": "native_common_catalog",
       "disposition": "retained_and_revised",
       "objective": "Versioned native policy composition owns common communication and capability selection; historical role templates never enter this catalog.",
-      "source_sha256": "24d2878d79e4a69eac931ed8ec0a63647ef5308224228eb45cc57c16141d4bc1",
+      "source_sha256": "6aa1c8662cd5793d7a4e20da1aed4376af70bb4c66a086aff8f5dc77d032c261",
       "source_bytes": 5617,
       "rendered_utf8_bytes": 5611,
       "variables_kind": "referenced_identifiers",
@@ -905,7 +911,7 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "99678754cf605a695e3fec77d908fabc4a15a9af90f775a5ef252154df6adbc9",
+      "dependencies_sha256": "e5b8cb739f8b4f39ee513f272da491501bf5169f6cf5929455945943e9ea7a18",
       "direct_module_consumers": {
         "backend/runtime/owned_runtime.py": "47bf6e211c1b76a3e11ba5861be62a3f96ab0bd1a4a96c5f1e3fa395c228b77f"
       },
@@ -921,7 +927,9 @@
         "docs/modernization/communication-flow-review.md",
         "backend/tests/runtime/test_delivery_budget.py",
         "docs/modernization/delivery-budget-review.md",
-        "docs/modernization/planning-delivery-review.md"
+        "docs/modernization/planning-delivery-review.md",
+        "docs/modernization/atomic-planning-review.md",
+        "backend/tests/runtime/test_atomic_planning_delivery.py"
       ],
       "review_conflicts": []
     },
@@ -935,7 +943,7 @@
       "family": "native_common_catalog",
       "disposition": "retained",
       "objective": "Versioned native policy composition owns common communication and capability selection; historical role templates never enter this catalog.",
-      "source_sha256": "24d2878d79e4a69eac931ed8ec0a63647ef5308224228eb45cc57c16141d4bc1",
+      "source_sha256": "6aa1c8662cd5793d7a4e20da1aed4376af70bb4c66a086aff8f5dc77d032c261",
       "source_bytes": 2788,
       "rendered_utf8_bytes": 2782,
       "variables_kind": "referenced_identifiers",
@@ -951,7 +959,7 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "99678754cf605a695e3fec77d908fabc4a15a9af90f775a5ef252154df6adbc9",
+      "dependencies_sha256": "e5b8cb739f8b4f39ee513f272da491501bf5169f6cf5929455945943e9ea7a18",
       "direct_module_consumers": {
         "backend/runtime/owned_runtime.py": "47bf6e211c1b76a3e11ba5861be62a3f96ab0bd1a4a96c5f1e3fa395c228b77f"
       },
@@ -967,7 +975,9 @@
         "docs/modernization/communication-flow-review.md",
         "backend/tests/runtime/test_delivery_budget.py",
         "docs/modernization/delivery-budget-review.md",
-        "docs/modernization/planning-delivery-review.md"
+        "docs/modernization/planning-delivery-review.md",
+        "docs/modernization/atomic-planning-review.md",
+        "backend/tests/runtime/test_atomic_planning_delivery.py"
       ],
       "review_conflicts": []
     },
@@ -981,7 +991,7 @@
       "family": "native_common_catalog",
       "disposition": "retained",
       "objective": "Versioned native policy composition owns common communication and capability selection; historical role templates never enter this catalog.",
-      "source_sha256": "24d2878d79e4a69eac931ed8ec0a63647ef5308224228eb45cc57c16141d4bc1",
+      "source_sha256": "6aa1c8662cd5793d7a4e20da1aed4376af70bb4c66a086aff8f5dc77d032c261",
       "source_bytes": 1186,
       "rendered_utf8_bytes": null,
       "variables_kind": "function_parameters",
@@ -1007,7 +1017,7 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "99678754cf605a695e3fec77d908fabc4a15a9af90f775a5ef252154df6adbc9",
+      "dependencies_sha256": "e5b8cb739f8b4f39ee513f272da491501bf5169f6cf5929455945943e9ea7a18",
       "direct_module_consumers": {
         "backend/runtime/owned_runtime.py": "47bf6e211c1b76a3e11ba5861be62a3f96ab0bd1a4a96c5f1e3fa395c228b77f"
       },
@@ -1023,7 +1033,9 @@
         "docs/modernization/communication-flow-review.md",
         "backend/tests/runtime/test_delivery_budget.py",
         "docs/modernization/delivery-budget-review.md",
-        "docs/modernization/planning-delivery-review.md"
+        "docs/modernization/planning-delivery-review.md",
+        "docs/modernization/atomic-planning-review.md",
+        "backend/tests/runtime/test_atomic_planning_delivery.py"
       ],
       "review_conflicts": []
     },
@@ -1037,8 +1049,8 @@
       "family": "native_common_catalog",
       "disposition": "retained",
       "objective": "Versioned native policy composition owns common communication and capability selection; historical role templates never enter this catalog.",
-      "source_sha256": "24d2878d79e4a69eac931ed8ec0a63647ef5308224228eb45cc57c16141d4bc1",
-      "source_bytes": 516,
+      "source_sha256": "6aa1c8662cd5793d7a4e20da1aed4376af70bb4c66a086aff8f5dc77d032c261",
+      "source_bytes": 518,
       "rendered_utf8_bytes": null,
       "variables_kind": "function_parameters",
       "variables": [
@@ -1055,7 +1067,7 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "99678754cf605a695e3fec77d908fabc4a15a9af90f775a5ef252154df6adbc9",
+      "dependencies_sha256": "e5b8cb739f8b4f39ee513f272da491501bf5169f6cf5929455945943e9ea7a18",
       "direct_module_consumers": {
         "backend/runtime/owned_runtime.py": "47bf6e211c1b76a3e11ba5861be62a3f96ab0bd1a4a96c5f1e3fa395c228b77f"
       },
@@ -1071,7 +1083,9 @@
         "docs/modernization/communication-flow-review.md",
         "backend/tests/runtime/test_delivery_budget.py",
         "docs/modernization/delivery-budget-review.md",
-        "docs/modernization/planning-delivery-review.md"
+        "docs/modernization/planning-delivery-review.md",
+        "docs/modernization/atomic-planning-review.md",
+        "backend/tests/runtime/test_atomic_planning_delivery.py"
       ],
       "review_conflicts": []
     },
@@ -1085,7 +1099,7 @@
       "family": "native_common_catalog",
       "disposition": "retained",
       "objective": "Versioned native policy composition owns common communication and capability selection; historical role templates never enter this catalog.",
-      "source_sha256": "24d2878d79e4a69eac931ed8ec0a63647ef5308224228eb45cc57c16141d4bc1",
+      "source_sha256": "6aa1c8662cd5793d7a4e20da1aed4376af70bb4c66a086aff8f5dc77d032c261",
       "source_bytes": 50,
       "rendered_utf8_bytes": null,
       "variables_kind": "referenced_identifiers",
@@ -1104,7 +1118,7 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "99678754cf605a695e3fec77d908fabc4a15a9af90f775a5ef252154df6adbc9",
+      "dependencies_sha256": "e5b8cb739f8b4f39ee513f272da491501bf5169f6cf5929455945943e9ea7a18",
       "direct_module_consumers": {
         "backend/runtime/owned_runtime.py": "47bf6e211c1b76a3e11ba5861be62a3f96ab0bd1a4a96c5f1e3fa395c228b77f"
       },
@@ -1120,7 +1134,9 @@
         "docs/modernization/communication-flow-review.md",
         "backend/tests/runtime/test_delivery_budget.py",
         "docs/modernization/delivery-budget-review.md",
-        "docs/modernization/planning-delivery-review.md"
+        "docs/modernization/planning-delivery-review.md",
+        "docs/modernization/atomic-planning-review.md",
+        "backend/tests/runtime/test_atomic_planning_delivery.py"
       ],
       "review_conflicts": []
     },
@@ -3774,9 +3790,9 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "7348caa29adc1216c84a892fe423d2361a4fcfafe2bfe93c600e53c7782ea5b6",
+      "dependencies_sha256": "78d814545c12b8a90d154fc6deb1657d209fc5360c26524a7808b94725589c7c",
       "direct_module_consumers": {
-        "backend/prompts/native.py": "24d2878d79e4a69eac931ed8ec0a63647ef5308224228eb45cc57c16141d4bc1"
+        "backend/prompts/native.py": "6aa1c8662cd5793d7a4e20da1aed4376af70bb4c66a086aff8f5dc77d032c261"
       },
       "suggested_disposition": "reviewed_native",
       "review_status": "reviewed",
@@ -3790,7 +3806,9 @@
         "evals/prompts/cases.json",
         "backend/tests/runtime/test_delivery_budget.py",
         "docs/modernization/delivery-budget-review.md",
-        "docs/modernization/planning-delivery-review.md"
+        "docs/modernization/planning-delivery-review.md",
+        "docs/modernization/atomic-planning-review.md",
+        "backend/tests/runtime/test_atomic_planning_delivery.py"
       ],
       "review_conflicts": []
     },
@@ -3863,9 +3881,9 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "52ce02aadc50baa5fbc8fc35c1d45b2a0f45e971fa86ddd8295fd4c4b876aeac",
+      "dependencies_sha256": "ae5c2d2028f617bd9536f1b3ccdd070625e8402d33437ff422fc6bc908ccfe95",
       "direct_module_consumers": {
-        "backend/prompts/native.py": "24d2878d79e4a69eac931ed8ec0a63647ef5308224228eb45cc57c16141d4bc1"
+        "backend/prompts/native.py": "6aa1c8662cd5793d7a4e20da1aed4376af70bb4c66a086aff8f5dc77d032c261"
       },
       "suggested_disposition": "reviewed_native",
       "review_status": "reviewed",
@@ -3879,7 +3897,9 @@
         "evals/prompts/cases.json",
         "backend/tests/runtime/test_delivery_budget.py",
         "docs/modernization/delivery-budget-review.md",
-        "docs/modernization/planning-delivery-review.md"
+        "docs/modernization/planning-delivery-review.md",
+        "docs/modernization/atomic-planning-review.md",
+        "backend/tests/runtime/test_atomic_planning_delivery.py"
       ],
       "review_conflicts": []
     },
@@ -4018,11 +4038,11 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "8ca5500b9d956176ba7377e627ddf55c08986b39626af435be43eb22ac577421",
+      "dependencies_sha256": "0fcce3baa468e7b24cf5aebe9b31003662a9ce56ead7ab7c20c7348e7bb04dfc",
       "direct_module_consumers": {
         "backend/api/runtime_dependencies.py": "6ee61c2ddb7d9e2f44632a8c2f1f1b3206a6d42d17cd4c4d10a94501171a5bf2",
         "backend/runtime/host_installation.py": "2d7bd82a7fb74faf66b12dba2d4811b562c5d0fd4c677bac3b5197a5a65a46b1",
-        "backend/prompts/native.py": "24d2878d79e4a69eac931ed8ec0a63647ef5308224228eb45cc57c16141d4bc1"
+        "backend/prompts/native.py": "6aa1c8662cd5793d7a4e20da1aed4376af70bb4c66a086aff8f5dc77d032c261"
       },
       "suggested_disposition": "reviewed_native",
       "review_status": "reviewed",
@@ -4036,7 +4056,9 @@
         "evals/prompts/cases.json",
         "backend/tests/runtime/test_delivery_budget.py",
         "docs/modernization/delivery-budget-review.md",
-        "docs/modernization/planning-delivery-review.md"
+        "docs/modernization/planning-delivery-review.md",
+        "docs/modernization/atomic-planning-review.md",
+        "backend/tests/runtime/test_atomic_planning_delivery.py"
       ],
       "review_conflicts": []
     },
@@ -4071,9 +4093,9 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "2e91471b7b898827a76f6337ada338a30b7e9d38a27973f954619a9ad26142e2",
+      "dependencies_sha256": "485f5c3d6d4e3d2a2db95cc9c6a19ce7a48a216dd34d090e8cc5c4735d13364f",
       "direct_module_consumers": {
-        "backend/prompts/native.py": "24d2878d79e4a69eac931ed8ec0a63647ef5308224228eb45cc57c16141d4bc1"
+        "backend/prompts/native.py": "6aa1c8662cd5793d7a4e20da1aed4376af70bb4c66a086aff8f5dc77d032c261"
       },
       "suggested_disposition": "reviewed_native",
       "review_status": "reviewed",
@@ -4087,7 +4109,9 @@
         "evals/prompts/cases.json",
         "backend/tests/runtime/test_delivery_budget.py",
         "docs/modernization/delivery-budget-review.md",
-        "docs/modernization/planning-delivery-review.md"
+        "docs/modernization/planning-delivery-review.md",
+        "docs/modernization/atomic-planning-review.md",
+        "backend/tests/runtime/test_atomic_planning_delivery.py"
       ],
       "review_conflicts": []
     },
@@ -4170,9 +4194,9 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "4456f09eb4e3f943fc8475bf2bb0091f3aef818cdd27f355ffa0b36528e0ed52",
+      "dependencies_sha256": "4e3b240e101f24de4997ee013f5f56e2a4f4d9949d3b7be444c908b7d5142262",
       "direct_module_consumers": {
-        "backend/prompts/native.py": "24d2878d79e4a69eac931ed8ec0a63647ef5308224228eb45cc57c16141d4bc1"
+        "backend/prompts/native.py": "6aa1c8662cd5793d7a4e20da1aed4376af70bb4c66a086aff8f5dc77d032c261"
       },
       "suggested_disposition": "reviewed_native",
       "review_status": "reviewed",
@@ -4186,7 +4210,9 @@
         "evals/prompts/cases.json",
         "backend/tests/runtime/test_delivery_budget.py",
         "docs/modernization/delivery-budget-review.md",
-        "docs/modernization/planning-delivery-review.md"
+        "docs/modernization/planning-delivery-review.md",
+        "docs/modernization/atomic-planning-review.md",
+        "backend/tests/runtime/test_atomic_planning_delivery.py"
       ],
       "review_conflicts": []
     },
@@ -4323,9 +4349,9 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "f4ce0f86ca064a28c3051329e36edc585008ded9549f400f532be41abb48b62c",
+      "dependencies_sha256": "9e0f6c3dfe57d20c561861c24d8aefbdfe8454efcfbce9c95cd31c952abf7260",
       "direct_module_consumers": {
-        "backend/prompts/native.py": "24d2878d79e4a69eac931ed8ec0a63647ef5308224228eb45cc57c16141d4bc1"
+        "backend/prompts/native.py": "6aa1c8662cd5793d7a4e20da1aed4376af70bb4c66a086aff8f5dc77d032c261"
       },
       "suggested_disposition": "reviewed_native",
       "review_status": "reviewed",
@@ -4339,7 +4365,9 @@
         "evals/prompts/cases.json",
         "backend/tests/runtime/test_delivery_budget.py",
         "docs/modernization/delivery-budget-review.md",
-        "docs/modernization/planning-delivery-review.md"
+        "docs/modernization/planning-delivery-review.md",
+        "docs/modernization/atomic-planning-review.md",
+        "backend/tests/runtime/test_atomic_planning_delivery.py"
       ],
       "review_conflicts": []
     },

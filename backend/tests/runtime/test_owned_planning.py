@@ -36,6 +36,11 @@ async def test_owned_project_start_proposes_then_owner_accepts_without_executing
         assert saved.status == "needs_review", saved
         state = ProjectPlans(runtime.store).state(101, run.run_id)
         assert state["eligible"] and state["proposal"], state
+        assert "Primero inspeccionamos" in state["proposal"]["delivery"]["explanation"]
+        native = json.loads(c.s.c.conn.execute("SELECT native_result_json FROM runtime_attempts WHERE id=?", (saved.attempt_id,)).fetchone()[0])
+        assert native["native_status"] == "interrupted"
+        assert native["delivery_kind"] == "project_plan_v1"
+        assert native["summary"] == state["proposal"]["delivery"]["explanation"]
         historic_basis = [item for item in state["proposal"]["draft"]["basis"] if item["source"].endswith(":requirements")]
         assert historic_basis and "137units" in historic_basis[0]["quote"]
         assert state["snapshot"]["source_origins"][historic_basis[0]["source"]] == "legacy_snapshot"
@@ -96,3 +101,27 @@ async def test_owned_project_start_proposes_then_owner_accepts_without_executing
                 == 0
             )
         assert (c.s.workspace / "fact.txt").read_text() == "137"
+
+
+@pytest.mark.timeout(180)
+async def test_delivered_artifact_cannot_mask_late_native_budget_exhaustion(owned_config):
+    """The real owned runtime keeps atomic work but refuses eligibility when delayed native usage trips the fuse."""
+    from backend.api.main import create_app
+    from backend.api.runtime_dependencies import configured_runtime
+    from backend.planning.store import ProjectPlans
+
+    c = owned_config
+    (c.s.workspace / ".ken").mkdir(exist_ok=True)
+    (c.s.workspace / ".ken/delivery-over-budget").touch()
+    app = create_app()
+    runtime = configured_runtime(app.state.live_grants, app=app)
+    app.state.runtime_service = runtime
+    async with runtime:
+        run = await runtime.start_project_plan(101, operation_key="late-budget", prompt="Investigate the issue and propose a plan.", repository_id=11)
+        await runtime.wait(run.run_id)
+        assert runtime.store.get(101, run.run_id).status == "failed"
+        state = ProjectPlans(runtime.store).state(101, run.run_id)
+        assert state["proposal"]["delivery"]["explanation"]
+        assert not state["eligible"] and state["acceptance"] is None
+        assert c.s.c.conn.execute("SELECT count(*)FROM runtime_peers WHERE state!='closed'").fetchone()[0] == 0
+        assert c.s.c.conn.execute("SELECT status FROM runtime_inference_dispatches").fetchone()[0] == "unknown"

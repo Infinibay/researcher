@@ -1,0 +1,52 @@
+{
+  "base_commit": "5f4c1e3",
+  "start_utc": "2026-11-07 10:56:19",
+  "validation_cut_utc": "2026-11-07 11:14:47",
+  "elapsed_seconds": 1108,
+  "initial_source": {
+    "cases": 128,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "initial_installed": {
+    "cases": 102,
+    "passed": 102,
+    "failed": 0,
+    "skipped": 0,
+    "backend_modules": 225,
+    "all_backend_imports_from_native_env": true,
+    "seconds": 34.967,
+    "exit_code": 0
+  },
+  "final_source": {
+    "cases": 50,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "final_installed": {
+    "cases": 50,
+    "passed": 50,
+    "failed": 0,
+    "skipped": 0,
+    "backend_modules": 213,
+    "all_backend_imports_from_native_env": true,
+    "seconds": 12.766,
+    "exit_code": 0
+  },
+  "web_contracts_passed": 136,
+  "web_ui_cases_passed": 1,
+  "web_build": "passed_with_existing_large_chunk_warning",
+  "changed_definitions_documented": 35,
+  "prompt_candidates_reviewed": 83,
+  "initial_prompt_revalidations": 14,
+  "final_prompt_revalidations": 2,
+  "ruff_findings": 8,
+  "real_model_turns": 1,
+  "real_result": "delivered_within_original_observed_token_limit",
+  "post_live_change": "Configured answer-byte fuse added and readiness docstring corrected; tested locally and installed without another model attempt.",
+  "global_suite_repeated": false,
+  "pages_fully_accepted": 0,
+  "broad_scenarios_open": 43
+}

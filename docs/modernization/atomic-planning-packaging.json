@@ -1,0 +1,33 @@
+{
+  "base_commit": "5f4c1e3",
+  "wheel": "researcher-0.1.0-cp312-cp312-linux_x86_64.whl",
+  "wheel_sha256": "6ad38eda70a3814a0cfd1d2332b6dc9462fed96ae4432e5a5bba872ff97f4359",
+  "source_files_matching_wheel_and_installation": 609,
+  "product_files_matching": 324,
+  "observed": {
+    "cases": 102,
+    "passed": 102,
+    "failed": 0,
+    "skipped": 0,
+    "backend_modules": 225,
+    "all_backend_imports_from_native_env": true,
+    "seconds": 34.967,
+    "exit_code": 0
+  },
+  "tests": [
+    "backend/tests/runtime/test_atomic_planning_delivery.py",
+    "backend/tests/runtime/test_owned_planning.py",
+    "backend/tests/runtime/test_project_planning.py",
+    "backend/tests/runtime/test_codex_session.py",
+    "backend/tests/runtime/test_prompt_catalog.py",
+    "backend/tests/runtime/test_runtime_service.py",
+    "backend/tests/runtime/test_run_recovery.py"
+  ],
+  "real_model_turns": 0,
+  "limits": [
+    "Selected tests, not the global suite",
+    "Synthetic managed installation data, no historical user-data migration",
+    "Atomic plan delivery, hard stops, preserved drafts and native policy provenance; no human comprehension claim",
+    "No model calls, external accounts or GitHub workflow execution"
+  ]
+}

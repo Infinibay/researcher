@@ -74,7 +74,7 @@
       "revalidation": "Candidate AST/value unchanged. Direct consumers reviewed after extracting project metadata helpers and removing unused task event import and historical flow consumers; native authority and historical-template exclusion unchanged. See docs/architecture/native-flow-retirement.md."
     },
     "backend/knowledge/reviews.py::read_feedback": {
-      "dependencies_sha256": "40ff72e20f826495ed2bfba5bb27b54b0851e953abda05e4486ec189eaf4afe1",
+      "dependencies_sha256": "65139e422843417fea1dc89a796ec7ea02c6cfe80190bd91364852a981f8f764",
       "decision": "retained_input_renderer",
       "rationale": "Read read_feedback and its two exact callers in Findings.reviews and SQLiteResearchStore.read_review: project/finding identity and bounded attributed old subjects survive. The authenticated caller checks findings.read in the same transaction; stored feedback never authorizes a new review. Static contract review only: not exhaustive dynamic-consumer proof, model efficacy, human understanding or whole-system acceptance.",
       "evidence": [
@@ -83,10 +83,12 @@
         "backend/runtime/run_inputs.py",
         "backend/runtime/business_definitions.py",
         "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
+        "evals/prompts/cases.json",
+        "docs/modernization/atomic-planning-review.md",
+        "backend/tests/runtime/test_atomic_planning_delivery.py"
       ],
       "conflicts": [],
-      "revalidation": "Candidate AST/value unchanged. Direct consumers reviewed after extracting project metadata helpers and removing unused task event import and historical flow consumers; native authority and historical-template exclusion unchanged. See docs/architecture/native-flow-retirement.md.",
+      "revalidation": "Revalidated unchanged capability/communication text and affected direct consumers: catalog6 retains identities2–5; the planning consumer now uses an atomic typed delivery and does not require a later final generation. Other profiles retain their previous behavior. read_feedback implementation is unchanged; planning store continues to use canonical JSON/digest with versioned delivery data. Final boundary review: typed delivery now reports its UTF-8 explanation byte size to the existing native output fuse; over-limit saved work remains ineligible. Readiness docstring distinguishes native interruption from delivery.",
       "previous_review": {
         "dependencies_sha256": "b66b34d5d8b18599bb15a22c72ef7e77a107fa044b9f0d7c36bf45630c3d53af",
         "decision": "retained_input_renderer",
@@ -105,7 +107,7 @@
       "source_base_commit": "035b46c"
     },
     "backend/planning/instructions.py::PLANNING_INSTRUCTIONS": {
-      "dependencies_sha256": "c2691e715f74048ec17585dd1689cc9cb5b6bb04185196551d8810b415772227",
+      "dependencies_sha256": "3186080609787b15b595e1d798d345d32c89744e78a4300aeea5ab18080d07c4",
       "decision": "reviewed_native",
       "rationale": "Delta review against ab36dc5; preserve the earlier full semantic review below. Read the complete changed common policy and selector, exact owned factory call, native reply mediation and durable issue consumer. Catalog4 adds observed budget/delivery guidance, bounded discovery and faithful examples; exact initial limits enter the frozen instructions. Versions2/3 retain their recorded identity. This candidate source is byte-identical; only the native composition or owned factory consumer changed. Existing capability-specific prerequisites, source windows and permission boundaries still apply, including under delivery pressure. Directed source and installed tests verify budget/provenance/closure contracts, not general model compliance, scientific validity or human comprehension. Three development regressions are evaluated separately; prior reserved results are not replaced. Revalidated 2026-11-07 for catalog5: common delivery advice uses observed-increment margin, planner avoids redundant discovery and guessed source bounds, historical catalogs2/3/4 retain identity. Capabilities, prerequisites and hard ceilings unchanged. Source profile text unchanged except planning; composition and owned-runtime consumer read. Static review does not establish model efficacy. Corrected after the retained planning trial: Ken source defaults return selected symbols, not necessarily a complete file. Whole-file requirements still need actual covering ranges. This final wording has no new live efficacy claim.",
       "evidence": [
@@ -116,7 +118,9 @@
         "backend/tests/research/test_project_structure.py",
         "backend/tests/runtime/test_delivery_budget.py",
         "docs/modernization/delivery-budget-review.md",
-        "docs/modernization/planning-delivery-review.md"
+        "docs/modernization/planning-delivery-review.md",
+        "docs/modernization/atomic-planning-review.md",
+        "backend/tests/runtime/test_atomic_planning_delivery.py"
       ],
       "conflicts": [],
       "previous_review": {
@@ -239,10 +243,11 @@
           "reviewed_at": "2026-11-07",
           "source_base_commit": "ab36dc5"
         }
-      ]
+      ],
+      "revalidation": "Use one final typed delivery for graph and explanation. Do not first save an immutable legacy draft. Evidence, unknown assumptions, owner correction, graph acceptance and execution remain separate. Static review does not establish human comprehension."
     },
     "backend/prompts/native.py::COMMON_INSTRUCTIONS": {
-      "dependencies_sha256": "99678754cf605a695e3fec77d908fabc4a15a9af90f775a5ef252154df6adbc9",
+      "dependencies_sha256": "e5b8cb739f8b4f39ee513f272da491501bf5169f6cf5929455945943e9ea7a18",
       "decision": "retained_and_revised",
       "rationale": "Delta review against ab36dc5; preserve the earlier full semantic review below. Read the complete changed common policy and selector, exact owned factory call, native reply mediation and durable issue consumer. Catalog4 adds observed budget/delivery guidance, bounded discovery and faithful examples; exact initial limits enter the frozen instructions. Versions2/3 retain their recorded identity. This candidate changed in the common catalog; capability selection and source-specific authority remain unchanged. Directed source and installed tests verify budget/provenance/closure contracts, not general model compliance, scientific validity or human comprehension. Three development regressions are evaluated separately; prior reserved results are not replaced. Revalidated 2026-11-07 for catalog5: common delivery advice uses observed-increment margin, planner avoids redundant discovery and guessed source bounds, historical catalogs2/3/4 retain identity. Capabilities, prerequisites and hard ceilings unchanged. Source profile text unchanged except planning; composition and owned-runtime consumer read. Static review does not establish model efficacy.",
       "evidence": [
@@ -254,7 +259,9 @@
         "docs/modernization/communication-flow-review.md",
         "backend/tests/runtime/test_delivery_budget.py",
         "docs/modernization/delivery-budget-review.md",
-        "docs/modernization/planning-delivery-review.md"
+        "docs/modernization/planning-delivery-review.md",
+        "docs/modernization/atomic-planning-review.md",
+        "backend/tests/runtime/test_atomic_planning_delivery.py"
       ],
       "conflicts": [],
       "previous_review": {
@@ -345,10 +352,11 @@
           "reviewed_at": "2026-11-07",
           "source_base_commit": "ab36dc5"
         }
-      ]
+      ],
+      "revalidation": "Revalidated unchanged capability/communication text and affected direct consumers: catalog6 retains identities2–5; the planning consumer now uses an atomic typed delivery and does not require a later final generation. Other profiles retain their previous behavior. read_feedback implementation is unchanged; planning store continues to use canonical JSON/digest with versioned delivery data."
     },
     "backend/prompts/native.py::SOURCE_INSTRUCTIONS": {
-      "dependencies_sha256": "99678754cf605a695e3fec77d908fabc4a15a9af90f775a5ef252154df6adbc9",
+      "dependencies_sha256": "e5b8cb739f8b4f39ee513f272da491501bf5169f6cf5929455945943e9ea7a18",
       "decision": "retained",
       "rationale": "Delta review against ab36dc5; preserve the earlier full semantic review below. Read the complete changed common policy and selector, exact owned factory call, native reply mediation and durable issue consumer. Catalog4 adds observed budget/delivery guidance, bounded discovery and faithful examples; exact initial limits enter the frozen instructions. Versions2/3 retain their recorded identity. This candidate changed in the common catalog; capability selection and source-specific authority remain unchanged. Directed source and installed tests verify budget/provenance/closure contracts, not general model compliance, scientific validity or human comprehension. Three development regressions are evaluated separately; prior reserved results are not replaced. Revalidated 2026-11-07 for catalog5: common delivery advice uses observed-increment margin, planner avoids redundant discovery and guessed source bounds, historical catalogs2/3/4 retain identity. Capabilities, prerequisites and hard ceilings unchanged. Source profile text unchanged except planning; composition and owned-runtime consumer read. Static review does not establish model efficacy.",
       "evidence": [
@@ -360,7 +368,9 @@
         "docs/modernization/communication-flow-review.md",
         "backend/tests/runtime/test_delivery_budget.py",
         "docs/modernization/delivery-budget-review.md",
-        "docs/modernization/planning-delivery-review.md"
+        "docs/modernization/planning-delivery-review.md",
+        "docs/modernization/atomic-planning-review.md",
+        "backend/tests/runtime/test_atomic_planning_delivery.py"
       ],
       "conflicts": [],
       "previous_review": {
@@ -451,10 +461,11 @@
           "reviewed_at": "2026-11-07",
           "source_base_commit": "ab36dc5"
         }
-      ]
+      ],
+      "revalidation": "Revalidated unchanged capability/communication text and affected direct consumers: catalog6 retains identities2–5; the planning consumer now uses an atomic typed delivery and does not require a later final generation. Other profiles retain their previous behavior. read_feedback implementation is unchanged; planning store continues to use canonical JSON/digest with versioned delivery data."
     },
     "backend/prompts/native.py::build_instructions": {
-      "dependencies_sha256": "99678754cf605a695e3fec77d908fabc4a15a9af90f775a5ef252154df6adbc9",
+      "dependencies_sha256": "e5b8cb739f8b4f39ee513f272da491501bf5169f6cf5929455945943e9ea7a18",
       "decision": "retained",
       "rationale": "Delta review against ab36dc5; preserve the earlier full semantic review below. Read the complete changed common policy and selector, exact owned factory call, native reply mediation and durable issue consumer. Catalog4 adds observed budget/delivery guidance, bounded discovery and faithful examples; exact initial limits enter the frozen instructions. Versions2/3 retain their recorded identity. This candidate changed in the common catalog; capability selection and source-specific authority remain unchanged. Directed source and installed tests verify budget/provenance/closure contracts, not general model compliance, scientific validity or human comprehension. Three development regressions are evaluated separately; prior reserved results are not replaced. Revalidated 2026-11-07 for catalog5: common delivery advice uses observed-increment margin, planner avoids redundant discovery and guessed source bounds, historical catalogs2/3/4 retain identity. Capabilities, prerequisites and hard ceilings unchanged. Source profile text unchanged except planning; composition and owned-runtime consumer read. Static review does not establish model efficacy.",
       "evidence": [
@@ -466,7 +477,9 @@
         "docs/modernization/communication-flow-review.md",
         "backend/tests/runtime/test_delivery_budget.py",
         "docs/modernization/delivery-budget-review.md",
-        "docs/modernization/planning-delivery-review.md"
+        "docs/modernization/planning-delivery-review.md",
+        "docs/modernization/atomic-planning-review.md",
+        "backend/tests/runtime/test_atomic_planning_delivery.py"
       ],
       "conflicts": [],
       "previous_review": {
@@ -557,10 +570,11 @@
           "reviewed_at": "2026-11-07",
           "source_base_commit": "ab36dc5"
         }
-      ]
+      ],
+      "revalidation": "Revalidated unchanged capability/communication text and affected direct consumers: catalog6 retains identities2–5; the planning consumer now uses an atomic typed delivery and does not require a later final generation. Other profiles retain their previous behavior. read_feedback implementation is unchanged; planning store continues to use canonical JSON/digest with versioned delivery data."
     },
     "backend/prompts/native.py::instruction_identity": {
-      "dependencies_sha256": "99678754cf605a695e3fec77d908fabc4a15a9af90f775a5ef252154df6adbc9",
+      "dependencies_sha256": "e5b8cb739f8b4f39ee513f272da491501bf5169f6cf5929455945943e9ea7a18",
       "decision": "retained",
       "rationale": "Delta review against ab36dc5; preserve the earlier full semantic review below. Read the complete changed common policy and selector, exact owned factory call, native reply mediation and durable issue consumer. Catalog4 adds observed budget/delivery guidance, bounded discovery and faithful examples; exact initial limits enter the frozen instructions. Versions2/3 retain their recorded identity. This candidate changed in the common catalog; capability selection and source-specific authority remain unchanged. Directed source and installed tests verify budget/provenance/closure contracts, not general model compliance, scientific validity or human comprehension. Three development regressions are evaluated separately; prior reserved results are not replaced. Revalidated 2026-11-07 for catalog5: common delivery advice uses observed-increment margin, planner avoids redundant discovery and guessed source bounds, historical catalogs2/3/4 retain identity. Capabilities, prerequisites and hard ceilings unchanged. Source profile text unchanged except planning; composition and owned-runtime consumer read. Static review does not establish model efficacy.",
       "evidence": [
@@ -572,7 +586,9 @@
         "docs/modernization/communication-flow-review.md",
         "backend/tests/runtime/test_delivery_budget.py",
         "docs/modernization/delivery-budget-review.md",
-        "docs/modernization/planning-delivery-review.md"
+        "docs/modernization/planning-delivery-review.md",
+        "docs/modernization/atomic-planning-review.md",
+        "backend/tests/runtime/test_atomic_planning_delivery.py"
       ],
       "conflicts": [],
       "previous_review": {
@@ -663,10 +679,11 @@
           "reviewed_at": "2026-11-07",
           "source_base_commit": "ab36dc5"
         }
-      ]
+      ],
+      "revalidation": "Revalidated unchanged capability/communication text and affected direct consumers: catalog6 retains identities2–5; the planning consumer now uses an atomic typed delivery and does not require a later final generation. Other profiles retain their previous behavior. read_feedback implementation is unchanged; planning store continues to use canonical JSON/digest with versioned delivery data."
     },
     "backend/prompts/native.py::GENERIC_INSTRUCTIONS": {
-      "dependencies_sha256": "99678754cf605a695e3fec77d908fabc4a15a9af90f775a5ef252154df6adbc9",
+      "dependencies_sha256": "e5b8cb739f8b4f39ee513f272da491501bf5169f6cf5929455945943e9ea7a18",
       "decision": "retained",
       "rationale": "Delta review against ab36dc5; preserve the earlier full semantic review below. Read the complete changed common policy and selector, exact owned factory call, native reply mediation and durable issue consumer. Catalog4 adds observed budget/delivery guidance, bounded discovery and faithful examples; exact initial limits enter the frozen instructions. Versions2/3 retain their recorded identity. This candidate changed in the common catalog; capability selection and source-specific authority remain unchanged. Directed source and installed tests verify budget/provenance/closure contracts, not general model compliance, scientific validity or human comprehension. Three development regressions are evaluated separately; prior reserved results are not replaced. Revalidated 2026-11-07 for catalog5: common delivery advice uses observed-increment margin, planner avoids redundant discovery and guessed source bounds, historical catalogs2/3/4 retain identity. Capabilities, prerequisites and hard ceilings unchanged. Source profile text unchanged except planning; composition and owned-runtime consumer read. Static review does not establish model efficacy.",
       "evidence": [
@@ -678,7 +695,9 @@
         "docs/modernization/communication-flow-review.md",
         "backend/tests/runtime/test_delivery_budget.py",
         "docs/modernization/delivery-budget-review.md",
-        "docs/modernization/planning-delivery-review.md"
+        "docs/modernization/planning-delivery-review.md",
+        "docs/modernization/atomic-planning-review.md",
+        "backend/tests/runtime/test_atomic_planning_delivery.py"
       ],
       "conflicts": [],
       "previous_review": {
@@ -769,7 +788,8 @@
           "reviewed_at": "2026-11-07",
           "source_base_commit": "ab36dc5"
         }
-      ]
+      ],
+      "revalidation": "Revalidated unchanged capability/communication text and affected direct consumers: catalog6 retains identities2–5; the planning consumer now uses an atomic typed delivery and does not require a later final generation. Other profiles retain their previous behavior. read_feedback implementation is unchanged; planning store continues to use canonical JSON/digest with versioned delivery data."
     },
     "backend/research/stdio_server.py::main.description@93": {
       "dependencies_sha256": "37d0a82d854ea51389652d84bcc1d95955e0d1e71a446edeb9707aa22a6b6333",
@@ -1830,7 +1850,7 @@
       "source_base_commit": "035b46c"
     },
     "backend/runtime/code_audit_instructions.py::CODE_AUDIT_INSTRUCTIONS": {
-      "dependencies_sha256": "7348caa29adc1216c84a892fe423d2361a4fcfafe2bfe93c600e53c7782ea5b6",
+      "dependencies_sha256": "78d814545c12b8a90d154fc6deb1657d209fc5360c26524a7808b94725589c7c",
       "decision": "rewritten",
       "rationale": "Delta review against ab36dc5; preserve the earlier full semantic review below. Read the complete changed common policy and selector, exact owned factory call, native reply mediation and durable issue consumer. Catalog4 adds observed budget/delivery guidance, bounded discovery and faithful examples; exact initial limits enter the frozen instructions. Versions2/3 retain their recorded identity. This candidate source is byte-identical; only the native composition or owned factory consumer changed. Existing capability-specific prerequisites, source windows and permission boundaries still apply, including under delivery pressure. Directed source and installed tests verify budget/provenance/closure contracts, not general model compliance, scientific validity or human comprehension. Three development regressions are evaluated separately; prior reserved results are not replaced. Revalidated 2026-11-07 for catalog5: common delivery advice uses observed-increment margin, planner avoids redundant discovery and guessed source bounds, historical catalogs2/3/4 retain identity. Capabilities, prerequisites and hard ceilings unchanged. Source profile text unchanged except planning; composition and owned-runtime consumer read. Static review does not establish model efficacy.",
       "evidence": [
@@ -1842,7 +1862,9 @@
         "evals/prompts/cases.json",
         "backend/tests/runtime/test_delivery_budget.py",
         "docs/modernization/delivery-budget-review.md",
-        "docs/modernization/planning-delivery-review.md"
+        "docs/modernization/planning-delivery-review.md",
+        "docs/modernization/atomic-planning-review.md",
+        "backend/tests/runtime/test_atomic_planning_delivery.py"
       ],
       "conflicts": [],
       "previous_review": {
@@ -1925,7 +1947,8 @@
           "reviewed_at": "2026-11-07",
           "source_base_commit": "ab36dc5"
         }
-      ]
+      ],
+      "revalidation": "Revalidated unchanged capability/communication text and affected direct consumers: catalog6 retains identities2–5; the planning consumer now uses an atomic typed delivery and does not require a later final generation. Other profiles retain their previous behavior. read_feedback implementation is unchanged; planning store continues to use canonical JSON/digest with versioned delivery data."
     },
     "backend/runtime/code_mode_payload.py::description@102": {
       "dependencies_sha256": "85eecfee03c57fd02de8c40076c25a3008ef6120ab4bffa623ec79b86f078fc1",
@@ -1939,7 +1962,7 @@
       "conflicts": []
     },
     "backend/runtime/code_review_instructions.py::CODE_REVIEW_INSTRUCTIONS": {
-      "dependencies_sha256": "52ce02aadc50baa5fbc8fc35c1d45b2a0f45e971fa86ddd8295fd4c4b876aeac",
+      "dependencies_sha256": "ae5c2d2028f617bd9536f1b3ccdd070625e8402d33437ff422fc6bc908ccfe95",
       "decision": "rewritten",
       "rationale": "Delta review against ab36dc5; preserve the earlier full semantic review below. Read the complete changed common policy and selector, exact owned factory call, native reply mediation and durable issue consumer. Catalog4 adds observed budget/delivery guidance, bounded discovery and faithful examples; exact initial limits enter the frozen instructions. Versions2/3 retain their recorded identity. This candidate source is byte-identical; only the native composition or owned factory consumer changed. Existing capability-specific prerequisites, source windows and permission boundaries still apply, including under delivery pressure. Directed source and installed tests verify budget/provenance/closure contracts, not general model compliance, scientific validity or human comprehension. Three development regressions are evaluated separately; prior reserved results are not replaced. Revalidated 2026-11-07 for catalog5: common delivery advice uses observed-increment margin, planner avoids redundant discovery and guessed source bounds, historical catalogs2/3/4 retain identity. Capabilities, prerequisites and hard ceilings unchanged. Source profile text unchanged except planning; composition and owned-runtime consumer read. Static review does not establish model efficacy.",
       "evidence": [
@@ -1951,7 +1974,9 @@
         "evals/prompts/cases.json",
         "backend/tests/runtime/test_delivery_budget.py",
         "docs/modernization/delivery-budget-review.md",
-        "docs/modernization/planning-delivery-review.md"
+        "docs/modernization/planning-delivery-review.md",
+        "docs/modernization/atomic-planning-review.md",
+        "backend/tests/runtime/test_atomic_planning_delivery.py"
       ],
       "conflicts": [],
       "previous_review": {
@@ -2034,7 +2059,8 @@
           "reviewed_at": "2026-11-07",
           "source_base_commit": "ab36dc5"
         }
-      ]
+      ],
+      "revalidation": "Revalidated unchanged capability/communication text and affected direct consumers: catalog6 retains identities2–5; the planning consumer now uses an atomic typed delivery and does not require a later final generation. Other profiles retain their previous behavior. read_feedback implementation is unchanged; planning store continues to use canonical JSON/digest with versioned delivery data."
     },
     "backend/runtime/code_review_tools.py::_TOOLS": {
       "dependencies_sha256": "2e2b6cb4b7810c3eec57c110968e9078b79da31d473de05a10822533b01b8b34",
@@ -2109,7 +2135,7 @@
       ]
     },
     "backend/runtime/investigation_instructions.py::INVESTIGATION_INSTRUCTIONS": {
-      "dependencies_sha256": "2e91471b7b898827a76f6337ada338a30b7e9d38a27973f954619a9ad26142e2",
+      "dependencies_sha256": "485f5c3d6d4e3d2a2db95cc9c6a19ce7a48a216dd34d090e8cc5c4735d13364f",
       "decision": "rewritten",
       "rationale": "Delta review against ab36dc5; preserve the earlier full semantic review below. Read the complete changed common policy and selector, exact owned factory call, native reply mediation and durable issue consumer. Catalog4 adds observed budget/delivery guidance, bounded discovery and faithful examples; exact initial limits enter the frozen instructions. Versions2/3 retain their recorded identity. This candidate source is byte-identical; only the native composition or owned factory consumer changed. Existing capability-specific prerequisites, source windows and permission boundaries still apply, including under delivery pressure. Directed source and installed tests verify budget/provenance/closure contracts, not general model compliance, scientific validity or human comprehension. Three development regressions are evaluated separately; prior reserved results are not replaced. Revalidated 2026-11-07 for catalog5: common delivery advice uses observed-increment margin, planner avoids redundant discovery and guessed source bounds, historical catalogs2/3/4 retain identity. Capabilities, prerequisites and hard ceilings unchanged. Source profile text unchanged except planning; composition and owned-runtime consumer read. Static review does not establish model efficacy.",
       "evidence": [
@@ -2121,7 +2147,9 @@
         "evals/prompts/cases.json",
         "backend/tests/runtime/test_delivery_budget.py",
         "docs/modernization/delivery-budget-review.md",
-        "docs/modernization/planning-delivery-review.md"
+        "docs/modernization/planning-delivery-review.md",
+        "docs/modernization/atomic-planning-review.md",
+        "backend/tests/runtime/test_atomic_planning_delivery.py"
       ],
       "conflicts": [],
       "previous_review": {
@@ -2204,7 +2232,8 @@
           "reviewed_at": "2026-11-07",
           "source_base_commit": "ab36dc5"
         }
-      ]
+      ],
+      "revalidation": "Revalidated unchanged capability/communication text and affected direct consumers: catalog6 retains identities2–5; the planning consumer now uses an atomic typed delivery and does not require a later final generation. Other profiles retain their previous behavior. read_feedback implementation is unchanged; planning store continues to use canonical JSON/digest with versioned delivery data."
     },
     "backend/runtime/predecessor_tools.py::description@33": {
       "dependencies_sha256": "a9b29b42e2ac09736ddacc6f9fd985034efcda945d3beac7ca492cf3e0d6bc3a",
@@ -2263,7 +2292,7 @@
       "source_base_commit": "ab36dc5"
     },
     "backend/runtime/review_instructions.py::REVIEW_INSTRUCTIONS": {
-      "dependencies_sha256": "4456f09eb4e3f943fc8475bf2bb0091f3aef818cdd27f355ffa0b36528e0ed52",
+      "dependencies_sha256": "4e3b240e101f24de4997ee013f5f56e2a4f4d9949d3b7be444c908b7d5142262",
       "decision": "rewritten",
       "rationale": "Delta review against ab36dc5; preserve the earlier full semantic review below. Read the complete changed common policy and selector, exact owned factory call, native reply mediation and durable issue consumer. Catalog4 adds observed budget/delivery guidance, bounded discovery and faithful examples; exact initial limits enter the frozen instructions. Versions2/3 retain their recorded identity. This candidate source is byte-identical; only the native composition or owned factory consumer changed. Existing capability-specific prerequisites, source windows and permission boundaries still apply, including under delivery pressure. Directed source and installed tests verify budget/provenance/closure contracts, not general model compliance, scientific validity or human comprehension. Three development regressions are evaluated separately; prior reserved results are not replaced. Revalidated 2026-11-07 for catalog5: common delivery advice uses observed-increment margin, planner avoids redundant discovery and guessed source bounds, historical catalogs2/3/4 retain identity. Capabilities, prerequisites and hard ceilings unchanged. Source profile text unchanged except planning; composition and owned-runtime consumer read. Static review does not establish model efficacy.",
       "evidence": [
@@ -2275,7 +2304,9 @@
         "evals/prompts/cases.json",
         "backend/tests/runtime/test_delivery_budget.py",
         "docs/modernization/delivery-budget-review.md",
-        "docs/modernization/planning-delivery-review.md"
+        "docs/modernization/planning-delivery-review.md",
+        "docs/modernization/atomic-planning-review.md",
+        "backend/tests/runtime/test_atomic_planning_delivery.py"
       ],
       "conflicts": [],
       "previous_review": {
@@ -2358,7 +2389,8 @@
           "reviewed_at": "2026-11-07",
           "source_base_commit": "ab36dc5"
         }
-      ]
+      ],
+      "revalidation": "Revalidated unchanged capability/communication text and affected direct consumers: catalog6 retains identities2–5; the planning consumer now uses an atomic typed delivery and does not require a later final generation. Other profiles retain their previous behavior. read_feedback implementation is unchanged; planning store continues to use canonical JSON/digest with versioned delivery data."
     },
     "backend/runtime/run_inputs.py::conversation_history": {
       "dependencies_sha256": "aaeb6b41862ab181af0c707c77c2f2697bc6a1493dc7c698de1113d186b3d3d8",
@@ -2423,7 +2455,7 @@
       "source_base_commit": "035b46c"
     },
     "backend/runtime/scientific_instructions.py::SCIENTIFIC_RESEARCH_INSTRUCTIONS": {
-      "dependencies_sha256": "f4ce0f86ca064a28c3051329e36edc585008ded9549f400f532be41abb48b62c",
+      "dependencies_sha256": "9e0f6c3dfe57d20c561861c24d8aefbdfe8454efcfbce9c95cd31c952abf7260",
       "decision": "retained",
       "rationale": "Delta review against ab36dc5; preserve the earlier full semantic review below. Read the complete changed common policy and selector, exact owned factory call, native reply mediation and durable issue consumer. Catalog4 adds observed budget/delivery guidance, bounded discovery and faithful examples; exact initial limits enter the frozen instructions. Versions2/3 retain their recorded identity. This candidate source is byte-identical; only the native composition or owned factory consumer changed. Existing capability-specific prerequisites, source windows and permission boundaries still apply, including under delivery pressure. Directed source and installed tests verify budget/provenance/closure contracts, not general model compliance, scientific validity or human comprehension. Three development regressions are evaluated separately; prior reserved results are not replaced. Revalidated 2026-11-07 for catalog5: common delivery advice uses observed-increment margin, planner avoids redundant discovery and guessed source bounds, historical catalogs2/3/4 retain identity. Capabilities, prerequisites and hard ceilings unchanged. Source profile text unchanged except planning; composition and owned-runtime consumer read. Static review does not establish model efficacy.",
       "evidence": [
@@ -2435,7 +2467,9 @@
         "evals/prompts/cases.json",
         "backend/tests/runtime/test_delivery_budget.py",
         "docs/modernization/delivery-budget-review.md",
-        "docs/modernization/planning-delivery-review.md"
+        "docs/modernization/planning-delivery-review.md",
+        "docs/modernization/atomic-planning-review.md",
+        "backend/tests/runtime/test_atomic_planning_delivery.py"
       ],
       "conflicts": [],
       "previous_review": {
@@ -2518,7 +2552,8 @@
           "reviewed_at": "2026-11-07",
           "source_base_commit": "ab36dc5"
         }
-      ]
+      ],
+      "revalidation": "Revalidated unchanged capability/communication text and affected direct consumers: catalog6 retains identities2–5; the planning consumer now uses an atomic typed delivery and does not require a later final generation. Other profiles retain their previous behavior. read_feedback implementation is unchanged; planning store continues to use canonical JSON/digest with versioned delivery data."
     },
     "scripts/audit_prompt_inventory.py::PROMPT_NAME": {
       "dependencies_sha256": "67d88e945331a7ae0b85d8ba93039652cf68914c0cf4c181df25bd8f529bba31",
@@ -3018,53 +3053,6 @@
       "reviewed_at": "2026-11-07",
       "source_base_commit": "035b46c"
     },
-    "backend/planning/tools.py::PlanningTools.__init__.descriptions@91": {
-      "dependencies_sha256": "79bddd697159a654d0e0dcd6e2592656bc47e6f0c121a6fb13bd4d1f4fb661aa",
-      "decision": "reviewed_native",
-      "rationale": "Delta review against ab36dc5; preserve the earlier full semantic review below. Read the complete changed common policy and selector, exact owned factory call, native reply mediation and durable issue consumer. Catalog4 adds observed budget/delivery guidance, bounded discovery and faithful examples; exact initial limits enter the frozen instructions. Versions2/3 retain their recorded identity. This candidate source is byte-identical; only the native composition or owned factory consumer changed. Existing capability-specific prerequisites, source windows and permission boundaries still apply, including under delivery pressure. Directed source and installed tests verify budget/provenance/closure contracts, not general model compliance, scientific validity or human comprehension. Three development regressions are evaluated separately; prior reserved results are not replaced.",
-      "evidence": [
-        "backend/planning/tools.py",
-        "docs/prompts/review-2026-11-07.md",
-        "docs/architecture/native-project-retirement.md",
-        "backend/tests/runtime/test_plan_milestones.py",
-        "backend/tests/research/test_project_structure.py",
-        "backend/tests/runtime/test_delivery_budget.py",
-        "docs/modernization/delivery-budget-review.md"
-      ],
-      "conflicts": [],
-      "previous_id": "backend/planning/tools.py::PlanningTools.__init__.descriptions@82",
-      "previous_review": {
-        "dependencies_sha256": "3b55e7afd43dab8d38097b94769f9bfd2a859a4cf945136491efefd5cef55c4a",
-        "decision": "reviewed_native",
-        "rationale": "Read both catalog descriptions, PlanDraft/PlanProposal and the host dispatch path: bounded material and a local task DAG proposal, without creation, assignment, acceptance or scheduling permission. Static contract review only: not exhaustive dynamic-consumer proof, model efficacy, human understanding or whole-system acceptance.",
-        "evidence": [
-          "backend/planning/tools.py",
-          "docs/prompts/review-2026-11-07.md",
-          "docs/architecture/native-project-retirement.md",
-          "backend/tests/runtime/test_plan_milestones.py",
-          "backend/tests/research/test_project_structure.py"
-        ],
-        "conflicts": [],
-        "previous_id": "backend/planning/tools.py::PlanningTools.__init__.descriptions@82",
-        "previous_review": {
-          "dependencies_sha256": "c785cf38c305959fb7d933157d9ec4b18d3acb499c6b62ca0f30c0fe7221f88e",
-          "decision": "reviewed_native",
-          "rationale": "Reviewed actual planning wire descriptions and schema. A milestone reference stays within its epic, optional dates are proposals, proposal creates no work, exact operation key preserves retries. model_dump(exclude_unset=True) preserves historical payloads. No actor or permission can be model selected.",
-          "evidence": [
-            "backend/planning/tools.py",
-            "docs/architecture/native-project-retirement.md",
-            "backend/tests/runtime/test_plan_milestones.py",
-            "backend/tests/research/test_project_structure.py"
-          ],
-          "conflicts": [],
-          "previous_id": "backend/planning/tools.py::PlanningTools.__init__.descriptions@82"
-        },
-        "reviewed_at": "2026-11-07",
-        "source_base_commit": "035b46c"
-      },
-      "reviewed_at": "2026-11-07",
-      "source_base_commit": "ab36dc5"
-    },
     "backend/runtime/business_definitions.py::ResearchTools.researcher_project_structure.wire_description": {
       "dependencies_sha256": "70e0d0dc608222bac4496bdcf805130ec4081c1567ca591e1aa8ceb401aa1cb8",
       "decision": "reviewed_native",
@@ -3226,7 +3214,7 @@
       }
     },
     "backend/runtime/development_policy.py::development_instructions": {
-      "dependencies_sha256": "8ca5500b9d956176ba7377e627ddf55c08986b39626af435be43eb22ac577421",
+      "dependencies_sha256": "0fcce3baa468e7b24cf5aebe9b31003662a9ce56ead7ab7c20c7348e7bb04dfc",
       "decision": "retained",
       "rationale": "Delta review against ab36dc5; preserve the earlier full semantic review below. Read the complete changed common policy and selector, exact owned factory call, native reply mediation and durable issue consumer. Catalog4 adds observed budget/delivery guidance, bounded discovery and faithful examples; exact initial limits enter the frozen instructions. Versions2/3 retain their recorded identity. This candidate source is byte-identical; only the native composition or owned factory consumer changed. Existing capability-specific prerequisites, source windows and permission boundaries still apply, including under delivery pressure. Directed source and installed tests verify budget/provenance/closure contracts, not general model compliance, scientific validity or human comprehension. Three development regressions are evaluated separately; prior reserved results are not replaced. Revalidated 2026-11-07 for catalog5: common delivery advice uses observed-increment margin, planner avoids redundant discovery and guessed source bounds, historical catalogs2/3/4 retain identity. Capabilities, prerequisites and hard ceilings unchanged. Source profile text unchanged except planning; composition and owned-runtime consumer read. Static review does not establish model efficacy.",
       "evidence": [
@@ -3238,14 +3226,13 @@
         "evals/prompts/cases.json",
         "backend/tests/runtime/test_delivery_budget.py",
         "docs/modernization/delivery-budget-review.md",
-        "docs/modernization/planning-delivery-review.md"
+        "docs/modernization/planning-delivery-review.md",
+        "docs/modernization/atomic-planning-review.md",
+        "backend/tests/runtime/test_atomic_planning_delivery.py"
       ],
       "conflicts": [],
       "consumer_recheck": "2026-11-06: prompt AST identical to 12a1744. Removed legacy launcher consumers; retained owned broker/catalog behavior is covered by test_owned_factory.py and test_broker_inference.py. No new semantic or model evaluation claimed.",
-      "revalidation": {
-        "base_commit": "20b3c25",
-        "method": "AST equality of the selected candidate, ignoring source locations; host setup and direct consumer hashes changed. No new semantic review or model efficacy claim."
-      },
+      "revalidation": "Revalidated unchanged capability/communication text and affected direct consumers: catalog6 retains identities2–5; the planning consumer now uses an atomic typed delivery and does not require a later final generation. Other profiles retain their previous behavior. read_feedback implementation is unchanged; planning store continues to use canonical JSON/digest with versioned delivery data.",
       "previous_review": {
         "dependencies_sha256": "60ad21edf8aee9b134a66c5b403a0f17e1c12b86e58efe06064b46b16e6f3189",
         "decision": "retained",
@@ -3363,6 +3350,56 @@
         "backend/runtime/owned_runtime.py"
       ],
       "conflicts": []
+    },
+    "backend/planning/tools.py::PlanningTools.__init__.descriptions@98": {
+      "dependencies_sha256": "4e2ebdc515ea7d22d1295925a8504a6406cdb34e1ae01e65ff502fdf666859ba",
+      "decision": "reviewed_native",
+      "rationale": "Delta review against ab36dc5; preserve the earlier full semantic review below. Read the complete changed common policy and selector, exact owned factory call, native reply mediation and durable issue consumer. Catalog4 adds observed budget/delivery guidance, bounded discovery and faithful examples; exact initial limits enter the frozen instructions. Versions2/3 retain their recorded identity. This candidate source is byte-identical; only the native composition or owned factory consumer changed. Existing capability-specific prerequisites, source windows and permission boundaries still apply, including under delivery pressure. Directed source and installed tests verify budget/provenance/closure contracts, not general model compliance, scientific validity or human comprehension. Three development regressions are evaluated separately; prior reserved results are not replaced.",
+      "evidence": [
+        "backend/planning/tools.py",
+        "docs/prompts/review-2026-11-07.md",
+        "docs/architecture/native-project-retirement.md",
+        "backend/tests/runtime/test_plan_milestones.py",
+        "backend/tests/research/test_project_structure.py",
+        "backend/tests/runtime/test_delivery_budget.py",
+        "docs/modernization/delivery-budget-review.md",
+        "docs/modernization/atomic-planning-review.md",
+        "backend/tests/runtime/test_atomic_planning_delivery.py"
+      ],
+      "conflicts": [],
+      "previous_id": "backend/planning/tools.py::PlanningTools.__init__.descriptions@82",
+      "previous_review": {
+        "dependencies_sha256": "3b55e7afd43dab8d38097b94769f9bfd2a859a4cf945136491efefd5cef55c4a",
+        "decision": "reviewed_native",
+        "rationale": "Read both catalog descriptions, PlanDraft/PlanProposal and the host dispatch path: bounded material and a local task DAG proposal, without creation, assignment, acceptance or scheduling permission. Static contract review only: not exhaustive dynamic-consumer proof, model efficacy, human understanding or whole-system acceptance.",
+        "evidence": [
+          "backend/planning/tools.py",
+          "docs/prompts/review-2026-11-07.md",
+          "docs/architecture/native-project-retirement.md",
+          "backend/tests/runtime/test_plan_milestones.py",
+          "backend/tests/research/test_project_structure.py"
+        ],
+        "conflicts": [],
+        "previous_id": "backend/planning/tools.py::PlanningTools.__init__.descriptions@82",
+        "previous_review": {
+          "dependencies_sha256": "c785cf38c305959fb7d933157d9ec4b18d3acb499c6b62ca0f30c0fe7221f88e",
+          "decision": "reviewed_native",
+          "rationale": "Reviewed actual planning wire descriptions and schema. A milestone reference stays within its epic, optional dates are proposals, proposal creates no work, exact operation key preserves retries. model_dump(exclude_unset=True) preserves historical payloads. No actor or permission can be model selected.",
+          "evidence": [
+            "backend/planning/tools.py",
+            "docs/architecture/native-project-retirement.md",
+            "backend/tests/runtime/test_plan_milestones.py",
+            "backend/tests/research/test_project_structure.py"
+          ],
+          "conflicts": [],
+          "previous_id": "backend/planning/tools.py::PlanningTools.__init__.descriptions@82"
+        },
+        "reviewed_at": "2026-11-07",
+        "source_base_commit": "035b46c"
+      },
+      "reviewed_at": "2026-11-07",
+      "source_base_commit": "ab36dc5",
+      "revalidation": "Host final delivery has a strict schema, atomic explanation/graph persistence, fenced authority and native interruption without returning a generation-triggering tool reply. Legacy draft remains separate. No owner acceptance or task execution capability added. Final boundary review: typed delivery now reports its UTF-8 explanation byte size to the existing native output fuse; over-limit saved work remains ineligible. Readiness docstring distinguishes native interruption from delivery."
     }
   },
   "retired_entries": {

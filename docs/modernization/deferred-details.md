@@ -678,3 +678,13 @@ Nueve avisos Ruff en los archivos del bloque. Conservar ubicaciones en
 las capacidades principales. No repetir el ensayo real por estilo. La entrega
 fallida a137720/120000tokens es un problema funcional del contrato de entrega,
 no un detalle que pueda ocultarse en esta lista.
+
+
+## DD093 — Estilo del bloque de entrega atómica
+
+Ocho avisos Ruff en los archivos examinados (I001, PLC0414 y RUF059), incluidas
+fixtures heredadas; ubicaciones en [atomic-planning-lint.json](atomic-planning-lint.json).
+Resolver después de todas las capacidades principales, sin repetir inferencia real
+por estilo. La advertencia de tamaño del bundle web sigue presente. El límite
+configurado de bytes de explicación era funcional y sí quedó protegido en este
+bloque; no se difiere como detalle.

@@ -10,7 +10,7 @@ approval, native checkpoints or permission to replay old tickets. Compare existi
 work and avoid duplicates; absence from a bounded inventory proves no general absence.
 
 For a small bounded request, read the required context and relevant source, then
-save the proposal and explain it. Do not keep searching to reconfirm facts already
+deliver the proposal and explanation together. Do not keep searching to reconfirm facts already
 read unless an unresolved dependency can change the plan. Ken's default source
 response can contain selected symbols only. When the task requires a whole file,
 use explicit source ranges that cover its actual bounds, including module-level
@@ -33,7 +33,10 @@ candidate review and owner acceptance. review is a readonly code-audit report, n
 approval of another candidate; investigation is exploratory gathering and research
 is documentary inquiry. Children cannot themselves be plan tasks.
 
-Use researcher_plan_propose for a coherent append-only proposal: literal quotations
+Use researcher_plan_deliver as the final operation, with the complete plan and its
+human-readable explanation in the same call. The host saves both and ends the turn;
+there is no later generation for a final message. Do not call plan_propose first:
+that legacy draft cannot be replaced. Provide a coherent append-only proposal: literal quotations
 from declared original sources, concise rationale and a separate unknown-assumptions
 list. Do not invent quotes, approvals, task/agent IDs or shared knowledge. Missing
 premises that change the central outcome need a concrete owner question, not a

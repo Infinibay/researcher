@@ -8337,3 +8337,40 @@ status, Stop/context/limit precedence and separate exact owner acceptance. Revie
 planning-delivery-review.md for concrete conditions. No task acceptance from
 saved proposal or trace-only text.43broadscenarios/0of12pages still open; no global
 suite/push. Keep macro work before details and publish list/time at transitions.
+
+
+## 2026-11-07 — Atomic planning delivery, one real bounded result
+
+Authoritative branch codex/project-modernization in managed worktree b09e; base5f4c1e3.
+Block10:56:19–11:14:47UTC18m28s to validation. plan_deliver commits graph and human
+explanation with a versioned JSON/hash receipt plus authority withdrawal. A host-only
+DeliveryReady signal interrupts the pending native tool request without releasing
+another generation. Finalization requires actual native terminal observation/peer
+closure and preserves Stop/context/limit precedence. Native interrupted remains
+interrupted; product needs_review is a separately confirmed typed delivery. Unknown
+native/closure retains readable evidence without eligibility. Legacy records unchanged.
+
+128source/102installed initial;50source/50installed final after adding configured
+answer-byte fuse and correcting readiness docstring.609Python/SQL files match final
+wheel/install;35changed definitions have docstrings.136web contracts/1UIcase/build pass.
+83prompt decisions current, catalog6 retains2–5.8RuffDD093. No global suite repeat;
+43broad scenarios still open,12pilots48concepts0/12pages fully accepted.
+
+One fresh original live development attempt at
+.researcher/evaluations/atomic-planning-delivery-20261107/plan_dependencies/plan_dependencies-candidate:
+57.738s,81685/120000observedtokens,needs_review,actualnativeinterrupted,
+3proposedtasks/exactquotes,eligibleownerdecision,0acceptances,sourceunchanged,
+service-15/all4peersclosed/0localgrants. Codexsubscriptiongpt6.1-sol/low and publishedKen.
+Do not replay. Post-live output-byte guard covered by deterministic/installed tests;
+no claim the final wheel was retried against the model. Original live wheelSHA
+6ad38eda70a3814a0cfd1d2332b6dc9462fed96ae4432e5a5bba872ff97f4359.
+Final wheel .superpowers/sdd/2026-10-31-actualizacion-proyecto/atomic-planning-final-dist/
+researcher-0.1.0-cp312-cp312-linux_x86_64.whl SHA
+ d010e08e07cb646c7bc30574f8a4296b52e648e14714414454f2e5a367b008c5.
+See atomic-planning-review/live/results/final-packaging/docstrings/lint for evidence.
+
+Next macro: aggregate engine resources and pending Ken/ONNX security; not started.
+Other main pending: human/profile communication, owner historical data and remaining
+recovery, integral12page acceptance. ALL macro tasks before ALL fine details.
+Publish updated done/current/next/pending list and measured duration every transition;
+record next start when it begins. This policy survives compaction. No push/deploy.

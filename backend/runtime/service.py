@@ -1038,6 +1038,7 @@ class RuntimeService:
                 slot.intent_committed.set()
 
     async def _heartbeat(self, slot, lease):
+        """Renew live authority or retire it, distinguishing a committed delivery fence from an unexpected lease loss."""
         while slot.active:
             await asyncio.sleep(5)
             if not slot.active:
@@ -1049,11 +1050,19 @@ class RuntimeService:
                 )
                 slot.lease_deadline = time.monotonic() + 30
             except Exception:  # noqa: BLE001 — fail closed on loss of lease renewal
-                self._withdraw(slot, "failed")
+                from backend.planning.store import ProjectPlans
+
+                try:
+                    delivered = await asyncio.to_thread(ProjectPlans(self.store).delivery_requested, lease)
+                except Exception:  # noqa: BLE001 -- an unreadable receipt cannot excuse lease loss
+                    delivered = False
+                self._withdraw(slot, slot.outcome if delivered else "failed")
                 return
 
     async def _execute(self, run_id, slot):
         """Own one admitted native turn, then prove peer/tool closure before finalizing it."""
+        from backend.planning.store import ProjectPlans
+
         lease = heartbeat = token = result = peers = None
         error_type = None
         execution_limit = None
@@ -1334,6 +1343,13 @@ class RuntimeService:
                         await asyncio.to_thread(
                             self.store.retire_inference, lease, outcome=slot.outcome
                         )
+                    elif await asyncio.to_thread(ProjectPlans(self.store).delivery_requested, lease):
+                        if result is not None and error_type is None and result.status in ("completed", "interrupted"):
+                            await asyncio.to_thread(ProjectPlans(self.store).finish_delivery, lease, native_status=result.status)
+                        else:
+                            # A saved artifact survives failure, but cannot hide
+                            # a fuse, absent terminal observation or native error.
+                            await asyncio.to_thread(self.store.retire_inference, lease, outcome="failed")
                     elif (
                         (
                             (code_review and not review_confirmed)

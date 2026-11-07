@@ -13,6 +13,15 @@ class RunNotFound(LookupError):
     """The object is absent from the caller's project scope."""
 
 
+class DeliveryReady(RuntimeError):
+    """Host-only signal: a durable delivery revoked authority; interrupt without another model step."""
+
+    def __init__(self, answer_bytes=0):
+        """Carry the host-measured explanation size so typed delivery cannot bypass the native output fuse."""
+        super().__init__("Durable host delivery ready")
+        self.answer_bytes = answer_bytes
+
+
 class StaleAttempt(RunConflict):
     """The attempt no longer has authority to mutate current work."""
 

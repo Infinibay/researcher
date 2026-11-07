@@ -9,8 +9,10 @@ export interface ProposedTask {key:string;epic_key:string;milestone_key?:string|
 export interface ProjectPlanDraft {title:string;rationale:string;assumptions:string[];basis:{source:string;quote:string}[];epics:{key:string;title:string;description:string}[];milestones?:ProposedMilestone[];tasks:ProposedTask[]}
 /** Optional delivery grouping and proposed calendar date; neither schedules nor authorizes execution. */
 export interface ProposedMilestone {key:string;epic_key:string;title:string;description:string;due_date?:string|null}
+/** Explanation committed atomically with the graph; presence alone proves neither closure nor owner acceptance. */
+export interface PlanDelivery {version:1;explanation:string}
 /** Original material, proposal and distinct acceptance remain readable after withdrawal. */
-export interface ProjectPlanState {project_id:number;task_id:number;run_id:string;context_version:number;snapshot:{project:{name:string;description:string|null};owner_request:string;instruction_origin:'owner_message'|'host_default';source_origins?:Record<string,string>;sources:Record<string,string>};proposal:{proposal_sha256:string;draft:ProjectPlanDraft}|null;acceptance:PlanAcceptanceReceipt|null;acceptance_current:boolean;eligible:boolean;blocked_reason:string}
+export interface ProjectPlanState {project_id:number;task_id:number;run_id:string;context_version:number;snapshot:{project:{name:string;description:string|null};owner_request:string;instruction_origin:'owner_message'|'host_default';source_origins?:Record<string,string>;sources:Record<string,string>};proposal:{proposal_sha256:string;draft:ProjectPlanDraft;delivery?:PlanDelivery}|null;acceptance:PlanAcceptanceReceipt|null;acceptance_current:boolean;eligible:boolean;blocked_reason:string}
 /** Owner expansion returns original created IDs and explicitly does not start child work. */
 export interface PlanAcceptanceReceipt {project_id:number;task_id:number;run_id:string;operation_key:string;proposal_sha256:string;context_version:number;epics:Record<string,number>;milestones?:Record<string,number>;tasks:Record<string,number>;execution_started:false}
 /** Persist one exact observed proposal/version before releasing the first acceptance POST. */

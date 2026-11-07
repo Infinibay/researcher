@@ -18,6 +18,7 @@ from pathlib import Path
 from typing import Any, Self
 
 from backend.runtime.codex_rpc import JsonRpcClient, RpcDisconnected, RpcError
+from backend.runtime.contracts import DeliveryReady
 
 
 class SubscriptionRequired(RuntimeError):
@@ -361,7 +362,17 @@ class CodexSession:
                     if "id" in message:
                         if on_request is None:
                             raise NativeInputRequired(message)
-                        completed, decision = await self._callback(on_request(message))
+                        try:
+                            completed, decision = await self._callback(on_request(message))
+                        except DeliveryReady as delivery:
+                            if delivery.answer_bytes > self.limits.max_answer_bytes:
+                                raise self._exceeded("output", "Typed delivery answer exceeds output budget") from delivery
+                            # The durable host operation has already fenced tools.
+                            # Do not release a tool result that would generate more
+                            # text. Consume actual usage/termination observations.
+                            await self.cancel()
+                            last_progress = time.monotonic()
+                            continue
                         if completed:
                             if message["method"] == "item/tool/call":
                                 # Keep source/tool data unchanged. This separate

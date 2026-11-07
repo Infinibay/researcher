@@ -147,11 +147,19 @@ class ProjectPlans:
 
     def propose(self, lease, operation_key, packet):
         """Record one immutable validated DAG under the actual planning lease; this operation creates no task, assignment, acceptance or agent activation."""
+        return self._propose(lease, operation_key, packet)
+
+    def deliver(self, lease, operation_key, packet, explanation):
+        """Atomically retain a graph and human explanation, then fence further work; receipt replay grants no new authority."""
+        text(explanation, "planning explanation", 24000)
+        return self._propose(lease, operation_key, packet, explanation=explanation)
+
+    def _propose(self, lease, operation_key, packet, *, explanation=None):
+        """Share graph validation while keeping historical drafts distinct from versioned final deliveries."""
         command_key(operation_key)
         with self.runs._transaction(write=True) as conn:
-            run = self.runs._authority(conn, lease)
+            self.runs._original_attempt(conn, lease)
             request = self._request(conn, lease.project_id, lease.run_id)
-            self.current(conn, run)
             draft = validate_plan(
                 packet, json.loads(request["snapshot_json"])["sources"]
             )
@@ -162,6 +170,8 @@ class ProjectPlans:
                 "snapshot_sha256": request["snapshot_sha256"],
                 "draft": draft,
             }
+            if explanation is not None:
+                proposal["delivery"] = {"version": 1, "explanation": explanation}
             fingerprint = digest(proposal)
             existing = conn.execute(
                 "SELECT *FROM runtime_project_plan_proposals WHERE attempt_id=? OR (run_id=? AND operation_key=?)",
@@ -179,6 +189,8 @@ class ProjectPlans:
                     **json.loads(existing["proposal_json"]),
                     "proposal_sha256": fingerprint,
                 }
+            run = self.runs._authority(conn, lease)
+            self.current(conn, run)
             conn.execute(
                 "INSERT INTO runtime_project_plan_proposals(id,run_id,attempt_id,operation_key,proposal_sha256,proposal_json,created_at)VALUES(?,?,?,?,?,?,?)",
                 (
@@ -202,10 +214,57 @@ class ProjectPlans:
                     "creates_work": False,
                 },
             )
+            if explanation is not None:
+                self.runs._withdraw(conn, run, "cancelling")
+                self.runs._event(conn, lease.project_id, lease.task_id, "plan.delivery_requested", {
+                    "run_id": lease.run_id, "attempt_id": lease.attempt_id,
+                    "proposal_sha256": fingerprint, "native_completed": False,
+                    "owner_accepted": False,
+                })
             return {**proposal, "proposal_sha256": fingerprint}
 
+    def delivery_requested(self, lease):
+        """Recognize this attempt's committed closure intent after its lease was deliberately fenced."""
+        with self.runs._transaction() as conn:
+            self.runs._original_attempt(conn, lease)
+            row = conn.execute("SELECT proposal_json FROM runtime_project_plan_proposals WHERE attempt_id=?", (lease.attempt_id,)).fetchone()
+            return bool(row and json.loads(row[0]).get("delivery", {}).get("version") == 1)
+
+    def finish_delivery(self, lease, *, native_status):
+        """Expose the exact saved explanation only after observed native termination and closed peers; Stop and changed premises remain authoritative."""
+        with self.runs._transaction(write=True) as conn:
+            self.runs._original_attempt(conn, lease)
+            proposal = conn.execute("SELECT *FROM runtime_project_plan_proposals WHERE attempt_id=?", (lease.attempt_id,)).fetchone()
+            packet = json.loads(proposal["proposal_json"]) if proposal else {}
+            delivery = packet.get("delivery")
+            if not delivery or delivery.get("version") != 1:
+                return None
+            row = self.runs._row(conn, lease.project_id, lease.run_id)
+            self.current(conn, row)
+            if (row["current_attempt_id"] != lease.attempt_id or row["cancel_requested"]
+                or self.runs._context(conn, lease.task_id) != lease.context_version
+                or native_status not in ("completed", "interrupted")):
+                raise RunConflict("Saved plan is not a confirmed current delivery")
+            if row["status"] == "needs_review" and row["attempt_status"] == "finished":
+                return self.runs._view(row)
+            if row["status"] != "cancelling":
+                raise RunConflict("Planning delivery closure requires its original owner")
+            result = {
+                "native_status": native_status, "summary": delivery["explanation"],
+                "delivery_kind": "project_plan_v1", "proposal_sha256": proposal["proposal_sha256"],
+            }
+            # _retire_closed proves peer/job closure in this same transaction.
+            self.runs._retire_closed(conn, row, "needs_review")
+            conn.execute("UPDATE runtime_attempts SET native_result_json=? WHERE id=?", (canonical(result), lease.attempt_id))
+            self.runs._deliver_proposal(conn, lease, delivery["explanation"])
+            self.runs._event(conn, lease.project_id, lease.task_id, "plan.delivered", {
+                "run_id": lease.run_id, "proposal_sha256": proposal["proposal_sha256"],
+                "native_status": native_status, "owner_accepted": False,
+            })
+            return self.runs._view(self.runs._row(conn, lease.project_id, lease.run_id))
+
     def _ready(self, conn, run, proposal):
-        """Require current completed original native authority and actual registered peer closure before owner acceptance can expand work."""
+        """Require a current confirmed delivery and registered peer closure before owner acceptance; native interruption alone proves neither."""
         request = self._request(conn, run["project_id"], run["id"])
         self.current(conn, run)
         if (
@@ -219,10 +278,16 @@ class ProjectPlans:
             raise RunConflict(
                 "Planning proposal is not current, completed and awaiting owner decision"
             )
-        if (
-            not run["native_result_json"]
-            or json.loads(run["native_result_json"])["native_status"] != "completed"
-        ):
+        result = json.loads(run["native_result_json"]) if run["native_result_json"] else {}
+        delivery = json.loads(proposal["proposal_json"]).get("delivery", {})
+        typed_delivery = (
+            delivery.get("version") == 1
+            and result.get("delivery_kind") == "project_plan_v1"
+            and result.get("proposal_sha256") == proposal["proposal_sha256"]
+            and result.get("summary") == delivery.get("explanation")
+            and result.get("native_status") in ("completed", "interrupted")
+        )
+        if (delivery and not typed_delivery) or (not delivery and result.get("native_status") != "completed"):
             raise RunConflict("Original planning turn did not complete")
         if (
             conn.execute(

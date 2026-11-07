@@ -1,0 +1,126 @@
+{
+  "scope": "One fresh development regression using real Codex subscription and published Ken; not paired efficacy or human comprehension evidence.",
+  "status": "observed",
+  "actual_turns": 1,
+  "tokens_observed": 81685,
+  "token_limit": 120000,
+  "seconds": 57.738,
+  "dispatch_status": "settled",
+  "native_status": "interrupted",
+  "product_run_status": "needs_review",
+  "eligible_for_owner_decision": true,
+  "owner_accepted": false,
+  "summary": "Propongo tres tareas: definir el formato → implementar la exportación → verificarla. Cada tarea depende de la anterior, con criterios concretos para comprobar su resultado.\n\nLeí evidence.py completo: sus cuatro líneas sólo ofrecen list_observations, que devuelve los registros en el orden recibido. El inventario observado no contiene tareas existentes.\n\nLas dependencias forman un DAG: un grafo dirigido sin ciclos. Aquí significa que las tareas tienen un orden y ninguna termina dependiendo de sí misma. La cadena anterior expresa todas las dependencias sin necesitar un diagrama.\n\nCSV es una tabla guardada como texto. Por ejemplo hipotético, una observación cuyo texto sea «lluvia, leve» debe conservarse como una sola celda al exportar y volver a leer el archivo. Las pruebas comprobarán ese caso y otros como comillas, Unicode y registros vacíos.\n\nLas columnas y el destino de escritura quedan por concretar en la primera tarea. Podés corregir esas propuestas sin cambiar el objetivo del plan. No fijé fechas: la nota vieja no establece un compromiso actual. Esta entrega sólo propone el plan; no edita código, acepta trabajo ni publica.",
+  "draft": {
+    "assumptions": [
+      "Las columnas, su orden y el tratamiento de claves ausentes y valores complejos aún no están definidos; la primera tarea debe concretarlos antes de implementar.",
+      "Se propone una función local que escriba en un flujo de texto suministrado por quien la llama; una ruta de archivo resulta cómoda, pero añade gestión de apertura y sobrescritura. La primera tarea comprobará qué opción encaja con los consumidores existentes.",
+      "CSV significa valores separados por comas: un formato de tabla en texto. Se propone UTF-8 y encabezado, sujetos a la definición del contrato."
+    ],
+    "basis": [
+      {
+        "quote": "Quiero añadir exportación CSV al registro local de observaciones. Prepará un plan pequeño con criterios verificables y dependencias.",
+        "source": "owner_request"
+      },
+      {
+        "quote": "hoy sólo pido el plan y no acordé una fecha.",
+        "source": "owner_request"
+      }
+    ],
+    "epics": [
+      {
+        "description": "Definir, implementar y verificar una exportación que conserve el orden de las observaciones. Los cambios futuros seguirán desarrollo privado, comprobaciones, revisión independiente del candidato y aceptación del propietario; este plan no ejecuta ni acepta esos cambios.",
+        "key": "csv",
+        "title": "Añadir exportación CSV local"
+      }
+    ],
+    "rationale": "Se leyó evidence.py completo (líneas 1–4) mediante ken_read con include=[\"source\"], después de una búsqueda en inglés con ken_find. list_observations(records) devuelve list(records); su documentación indica que conserva el orden suministrado de los diccionarios. El módulo no contiene una exportación. El inventario observado está completo y vacío (0 tareas), por lo que no muestra trabajo que duplicar. Se propone definir primero el formato, implementarlo después y comprobarlo con casos verificables. No se propone fecha ni publicación.",
+    "tasks": [
+      {
+        "acceptance_criteria": "Existe una especificación revisable con un ejemplo de entrada y CSV esperado; cubre registro vacío, columnas heterogéneas y errores. Define cómo conservar el orden de las filas y cómo evitar modificar los registros. Sus decisiones están justificadas por los consumidores observados o identificadas como propuestas pendientes de aceptación.",
+        "depends_on": [],
+        "description": "Inspeccionar consumidores y ejemplos de observaciones para definir entrada, destino, columnas y orden, encabezado, codificación y tratamiento de datos vacíos, claves ausentes y valores complejos. Documentar la elección entre flujo de texto y ruta de archivo, con sus consecuencias.",
+        "epic_key": "csv",
+        "key": "formato",
+        "priority": 1,
+        "title": "Definir el contrato de exportación",
+        "type": "design"
+      },
+      {
+        "acceptance_criteria": "El candidato produce el CSV del ejemplo acordado, conserva el orden y los datos originales, y trata correctamente comas, comillas y saltos de línea. Incluye comprobaciones locales y documentación de errores; queda disponible para revisión independiente y aceptación del propietario.",
+        "depends_on": [
+          "formato"
+        ],
+        "description": "Implementar en desarrollo privado la función acordada usando un escritor CSV estándar. Mantener el comportamiento existente de list_observations y documentar el uso de la nueva función.",
+        "epic_key": "csv",
+        "key": "exportar",
+        "priority": 2,
+        "title": "Implementar la exportación según el contrato",
+        "type": "code"
+      },
+      {
+        "acceptance_criteria": "Las pruebas verifican encabezado, orden de filas y columnas, Unicode, comas, comillas, saltos de línea, entrada vacía, claves ausentes y errores definidos en el contrato. Confirman que los registros originales y list_observations mantienen su comportamiento. Se registran los resultados reales de pruebas y revisión independiente; los fallos bloqueantes están resueltos antes de presentar el candidato para aceptación del propietario. No se publica automáticamente.",
+        "depends_on": [
+          "exportar"
+        ],
+        "description": "Añadir y ejecutar pruebas de exportación y regresión. Leer el resultado con un lector CSV para comprobar el contenido lógico, y documentar la revisión independiente del candidato y cualquier incidencia pendiente.",
+        "epic_key": "csv",
+        "key": "verificar",
+        "priority": 2,
+        "title": "Verificar casos límite y preparar el candidato revisable",
+        "type": "test"
+      }
+    ],
+    "title": "Exportación CSV del registro local de observaciones"
+  },
+  "model_control": {
+    "model": "gpt-6.1-sol",
+    "reasoning_effort": "low",
+    "source": "host",
+    "revision": 0,
+    "project_id": 101,
+    "actor_id": "researcher",
+    "fence": 1
+  },
+  "catalog_count": 55,
+  "owned_backend_terminal": true,
+  "service_exit": -15,
+  "peers": [
+    {
+      "kind": "business",
+      "state": "closed"
+    },
+    {
+      "kind": "native",
+      "state": "closed"
+    },
+    {
+      "kind": "ken",
+      "state": "closed"
+    },
+    {
+      "kind": "ken",
+      "state": "closed"
+    }
+  ],
+  "unrevoked_grants": 0,
+  "database": {
+    "proposals": 1,
+    "tasks_in_proposal": 3,
+    "exact_basis_quotes": true,
+    "owner_acceptances": 0,
+    "database_tasks": 2,
+    "integrity_ok": true,
+    "foreign_keys_ok": true
+  },
+  "source_bytes_unchanged": true,
+  "original_result_sha256": "461d77bdd745579c023734ca9711be611de740413c69ec77dfba13a720aa508d",
+  "registration_sha256": "c00a9ec2c5303873c9725f91b77acfe42ce42af9ce6478d223407425a23764bc",
+  "policy_sha256": "8b2911d10786dc55df102d938e05f20a04a8eb184c543aecbcaffd18a338694c",
+  "wheel_sha256": "6ad38eda70a3814a0cfd1d2332b6dc9462fed96ae4432e5a5bba872ff97f4359",
+  "post_live_changes": [
+    "Final package adds the configured answer-byte fuse to the host delivery signal and corrects the readiness docstring; covered by directed tests, without another model attempt."
+  ],
+  "human_comprehension": null,
+  "human_effort_seconds": null
+}

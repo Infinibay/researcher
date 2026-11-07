@@ -7,7 +7,7 @@ from typing import Literal
 from pydantic import BaseModel, ConfigDict, Field
 
 from backend.runtime.business_mediation import _failure, catalog_digest
-from backend.runtime.contracts import RunConflict, RunNotFound
+from backend.runtime.contracts import DeliveryReady, RunConflict, RunNotFound
 
 
 class Arguments(BaseModel):
@@ -75,6 +75,12 @@ class PlanProposal(Arguments):
     plan: PlanDraft
 
 
+class PlanDelivery(PlanProposal):
+    """Save the final explanation with its exact graph before the host ends generation."""
+
+    explanation: str = Field(min_length=1, max_length=24000)
+
+
 class PlanningTools:
     """Serialize and drain planning source/proposal operations within the original host-owned attempt."""
 
@@ -87,10 +93,12 @@ class PlanningTools:
         self.models = {
             "researcher_plan_context": ContextWindow,
             "researcher_plan_propose": PlanProposal,
+            "researcher_plan_deliver": PlanDelivery,
         }
         descriptions = {
             "researcher_plan_context": "Read original project and request material in complete explicit windows. Metadata attribution and host_default differ from a direct owner message. Unread material is unknown.",
             "researcher_plan_propose": "Save one justified bounded epic/task DAG with optional milestones, exact source quotes and separate assumptions. A task's milestone_key must name a milestone in its own epic. Optional due_date is a proposed calendar date, not an owner-agreed deadline or execution schedule. Does not create tasks, assign an agent, accept work or start execution. Retain operation_key after uncertain response.",
+            "researcher_plan_deliver": "FINAL operation: atomically save the justified plan and its human-readable explanation, then end this turn without another generation. Use this instead of plan_propose for a complete delivery; an existing immutable draft cannot be replaced. Explain the result, useful example or dependencies, evidence versus assumptions and how the owner can correct it. Saving does not accept or execute the plan. The host confirms closure separately. Retain operation_key after uncertain response.",
         }
         self.catalog = [
             {
@@ -125,7 +133,14 @@ class PlanningTools:
             async with self.lock:
                 if self.closed or not self.active():
                     return _failure("Planning authority ended before dispatch")
-                if isinstance(args, ContextWindow):
+                if isinstance(args, PlanDelivery):
+                    await self.settled(
+                        self.records.deliver, self.lease, args.operation_key,
+                        args.plan.model_dump(exclude_unset=True), args.explanation,
+                    )
+                    self.closed = True
+                    raise DeliveryReady(len(args.explanation.encode("utf-8")))
+                elif isinstance(args, ContextWindow):
                     result = await self.settled(
                         self.records.material, self.lease, **args.model_dump()
                     )

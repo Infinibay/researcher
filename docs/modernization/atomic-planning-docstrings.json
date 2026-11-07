@@ -1,0 +1,182 @@
+{
+  "changed_definitions": 35,
+  "undocumented": [],
+  "definitions": [
+    {
+      "path": "backend/planning/store.py",
+      "symbol": "ProjectPlans",
+      "line": 20
+    },
+    {
+      "path": "backend/planning/store.py",
+      "symbol": "ProjectPlans.propose",
+      "line": 148
+    },
+    {
+      "path": "backend/planning/store.py",
+      "symbol": "ProjectPlans.deliver",
+      "line": 152
+    },
+    {
+      "path": "backend/planning/store.py",
+      "symbol": "ProjectPlans._propose",
+      "line": 157
+    },
+    {
+      "path": "backend/planning/store.py",
+      "symbol": "ProjectPlans.delivery_requested",
+      "line": 226
+    },
+    {
+      "path": "backend/planning/store.py",
+      "symbol": "ProjectPlans.finish_delivery",
+      "line": 233
+    },
+    {
+      "path": "backend/planning/store.py",
+      "symbol": "ProjectPlans._ready",
+      "line": 266
+    },
+    {
+      "path": "backend/planning/tools.py",
+      "symbol": "PlanDelivery",
+      "line": 78
+    },
+    {
+      "path": "backend/planning/tools.py",
+      "symbol": "PlanningTools",
+      "line": 84
+    },
+    {
+      "path": "backend/planning/tools.py",
+      "symbol": "PlanningTools.__init__",
+      "line": 87
+    },
+    {
+      "path": "backend/planning/tools.py",
+      "symbol": "PlanningTools.call",
+      "line": 118
+    },
+    {
+      "path": "backend/prompts/native.py",
+      "symbol": "instruction_identity",
+      "line": 159
+    },
+    {
+      "path": "backend/runtime/codex_session.py",
+      "symbol": "CodexSession",
+      "line": 109
+    },
+    {
+      "path": "backend/runtime/codex_session.py",
+      "symbol": "CodexSession.run",
+      "line": 295
+    },
+    {
+      "path": "backend/runtime/contracts.py",
+      "symbol": "DeliveryReady",
+      "line": 16
+    },
+    {
+      "path": "backend/runtime/contracts.py",
+      "symbol": "DeliveryReady.__init__",
+      "line": 19
+    },
+    {
+      "path": "backend/runtime/service.py",
+      "symbol": "RuntimeService",
+      "line": 63
+    },
+    {
+      "path": "backend/runtime/service.py",
+      "symbol": "RuntimeService._heartbeat",
+      "line": 1040
+    },
+    {
+      "path": "backend/runtime/service.py",
+      "symbol": "RuntimeService._execute",
+      "line": 1062
+    },
+    {
+      "path": "backend/tests/runtime/fake_owned_native.py",
+      "symbol": "next_planning_tool",
+      "line": 800
+    },
+    {
+      "path": "backend/tests/runtime/test_owned_planning.py",
+      "symbol": "test_owned_project_start_proposes_then_owner_accepts_without_executing_children",
+      "line": 9
+    },
+    {
+      "path": "backend/tests/runtime/test_owned_planning.py",
+      "symbol": "test_delivered_artifact_cannot_mask_late_native_budget_exhaustion",
+      "line": 107
+    },
+    {
+      "path": "backend/tests/runtime/test_prompt_catalog.py",
+      "symbol": "test_every_native_profile_has_one_shared_policy_and_exact_versioned_identity",
+      "line": 14
+    },
+    {
+      "path": "backend/tests/runtime/test_prompt_catalog.py",
+      "symbol": "test_actual_owned_turn_records_the_exact_versioned_policy_sent_to_native",
+      "line": 52
+    },
+    {
+      "path": "backend/tests/runtime/test_atomic_planning_delivery.py",
+      "symbol": "close_peers",
+      "line": 14
+    },
+    {
+      "path": "backend/tests/runtime/test_atomic_planning_delivery.py",
+      "symbol": "test_delivery_fences_tools_and_retains_original_receipt_after_lost_response",
+      "line": 20
+    },
+    {
+      "path": "backend/tests/runtime/test_atomic_planning_delivery.py",
+      "symbol": "test_invalid_explanation_never_partially_saves_a_plan",
+      "line": 51
+    },
+    {
+      "path": "backend/tests/runtime/test_atomic_planning_delivery.py",
+      "symbol": "test_artifact_survives_without_eligibility_when_delivery_cannot_be_confirmed",
+      "line": 62
+    },
+    {
+      "path": "backend/tests/runtime/test_atomic_planning_delivery.py",
+      "symbol": "test_legacy_proposal_does_not_become_a_typed_delivery",
+      "line": 82
+    },
+    {
+      "path": "backend/tests/runtime/test_atomic_planning_delivery.py",
+      "symbol": "test_native_delivery_closes_without_returning_a_tool_reply_or_requesting_another_turn",
+      "line": 93
+    },
+    {
+      "path": "backend/tests/runtime/test_atomic_planning_delivery.py",
+      "symbol": "test_native_delivery_closes_without_returning_a_tool_reply_or_requesting_another_turn.delivered",
+      "line": 98
+    },
+    {
+      "path": "backend/tests/runtime/test_atomic_planning_delivery.py",
+      "symbol": "test_closure_intent_failure_rolls_back_plan_and_explanation",
+      "line": 112
+    },
+    {
+      "path": "backend/tests/runtime/test_atomic_planning_delivery.py",
+      "symbol": "test_stop_before_delivery_prevents_any_artifact_commit",
+      "line": 125
+    },
+    {
+      "path": "backend/tests/runtime/test_atomic_planning_delivery.py",
+      "symbol": "test_atomic_delivery_keeps_the_configured_human_output_limit",
+      "line": 134
+    },
+    {
+      "path": "backend/tests/runtime/test_atomic_planning_delivery.py",
+      "symbol": "test_atomic_delivery_keeps_the_configured_human_output_limit.delivered",
+      "line": 140
+    }
+  ],
+  "method": "AST comparison by qualified name against5f4c1e3; enclosing classes included."
+}

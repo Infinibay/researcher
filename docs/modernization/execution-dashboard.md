@@ -28,7 +28,40 @@ que se pueda comparar el avance; no presentar microajustes como tareas principal
 - Última suite global: `9fb873c`,2210 casos,2178 pasan,31 fallan y1 error de fixture; sin omisiones. La carrera de backup encontrada se corrigió después con40 pruebas instaladas. No se declara una nueva corrida global verde; la referencia `0c8b8d9` queda como evidencia histórica.
 - Los 43 escenarios amplios siguen abiertos en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Etapa actual: planificación requiere una entrega explícita
+## Etapa actual: entrega atómica comprobada; sigue seguridad y recursos
+
+Bloque **10:56:19–11:14:47 UTC**, **18 min 28 s**, hasta validación.
+El plan y su explicación se guardan juntos; el host cierra el turno sin requerir
+otra generación. Un único intento real entrega con**81.685/120.000tokens observados**,
+tres tareas propuestas y una explicación con ejemplo. Estado nativo interrupted,
+producto needs_review, propuesta elegible para decisión del propietario y cero
+aceptaciones. Servicio y cuatro peers cerrados, cero grants locales activos.
+
+Primer candidato:128 pruebas desde fuente y102 instaladas. Tras añadir la protección
+del límite de bytes de explicación,50 pruebas finales de fuente y50 instaladas
+pasan; no se repite el modelo.609 archivos coinciden,35 definiciones documentadas,
+83 decisiones de prompts vigentes.136 contratos web y1 caso UI pasan; build terminado.
+[Informe](atomic-planning-review.md), [ensayo](atomic-planning-live.json),
+[resultados](atomic-planning-results.json).
+
+**Lista actualizada al cambiar de tarea:**
+- Implementado y comprobado en recorridos concretos: backend Codex/Ken, modelos,
+  flujos principales, comunicación, persistencia y varias recuperaciones.
+- Terminado en este bloque: entrega atómica de planificación y explicación,
+  **18 min 28 s** hasta validación; aceptación integral del proyecto aún pendiente.
+- Interfaz:12 pilotos y48 conceptos;0/12 páginas completamente aceptadas.
+- Siguiente tarea principal: límites agregados de recursos del engine y seguridad
+  pendiente de Ken/ONNX. **Todavía no iniciada**; registrar su inicio al comenzar.
+- Pendiente principal: evaluación humana y demás perfiles de comunicación;
+  datos históricos y recuperación restante; aceptación integral de las12 páginas.
+- Después de todas las tareas gruesas: detalles acumulados, validación global,
+  revisión independiente y distribución. DD093 conserva8 avisos de estilo del corte.
+
+Siguen43 escenarios abiertos, sin nueva suite global verde ni porcentaje global
+sustentado. Lista y tiempo medido en cada transición, también después de compactar.
+No hubo push ni despliegue.
+
+## Etapa anterior: planificación requería una entrega explícita
 
 Bloque **10:33:57–10:52:20 UTC**, **18 min 23 s**, hasta validación. El aviso
 ahora estima margen con incrementos observados y reconoce el retraso del contador.
@@ -56,7 +89,8 @@ sí era necesaria. Se corrigió esa recomendación sin otra inferencia.
 - En curso, siguiente implementación: guardar plan y explicación juntos y cerrar
   el turno por un recibo durable, sin inventar terminación nativa ni aceptación.
   Las condiciones de autoridad/cierre y los casos de fallo están en el informe.
-  Esa implementación todavía no comenzó; registrar su inicio al comenzar.
+  Inicio del bloque: **2026-11-07 10:56:19 UTC**. Contrato y consumidores en
+  revisión; todavía no hay una entrega atómica implementada ni validada.
 - Pendiente principal: seguridad Ken/ONNX y límites agregados; evaluación humana
   y otros perfiles; datos históricos y recuperación restante; aceptación integral
   de las12 páginas.

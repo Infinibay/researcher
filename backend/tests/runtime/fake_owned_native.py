@@ -814,9 +814,10 @@ def next_planning_tool(response=None):
         call("researcher_plan_context", {})
     elif steps == 3:
         call(
-            "researcher_plan_propose",
+            "researcher_plan_deliver",
             {
                 "operation_key": "controlled-plan-proposal",
+                "explanation": "Primero inspeccionamos el comportamiento y después aplicamos el cambio respaldado. Puedes corregir la premisa sobre el repositorio; aún no se crearon ni ejecutaron tareas.",
                 "plan": {
                     "title": "Understand then improve",
                     "rationale": "Inspect observed behavior before choosing a code change.",
@@ -1029,3 +1030,13 @@ for line in sys.stdin:
             Path("/home/actor/.codex/turn-entered").write_text("entered")
         else:
             next_tool()
+    elif method == "turn/interrupt":
+        if Path("/run/researcher-source/.ken/delivery-over-budget").exists():
+            send({"method": "thread/tokenUsage/updated", "params": {
+                "threadId": native_thread_id, "turnId": native_turn_id,
+                "tokenUsage": {"total": {"totalTokens": 1001}},
+            }})
+        send({"method": "turn/completed", "params": {
+            "threadId": native_thread_id,
+            "turn": {"id": native_turn_id, "status": "interrupted", "error": None},
+        }})

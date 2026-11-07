@@ -4,7 +4,18 @@ La implementación del [plan completo](../superpowers/plans/2026-10-31-actualiza
 
 ## Resultados disponibles
 
-- **Margen de entrega corregido; planificación aún falla:**105 pruebas de fuente
+- **Plan y explicación entregados juntos:** un único intento real de desarrollo
+  entrega con81.685/120.000tokens observados; cierre confirmado, estado nativo
+  interrupted conservado y cero aceptaciones.128 pruebas iniciales de fuente/102
+  instaladas; tras el límite final de bytes,50 de fuente/50 instaladas.609 archivos
+  coinciden,35 definiciones documentadas y83 revisiones de prompts vigentes.
+ 136 contratos web y1 caso UI pasan. Bloque18min28s hasta validación.
+ Siguiente principal: recursos agregados y seguridad pendiente; detalles al final.
+ [Informe](atomic-planning-review.md), [ensayo](atomic-planning-live.json),
+ [validación](atomic-planning-results.json).
+
+
+- **Corte anterior: margen corregido, planificación aún fallaba:**105 pruebas de fuente
   y82 instaladas para el primer candidato; tras corregir sólo el texto de lectura,
  12 de fuente/12 instaladas.608 archivos coinciden y18 definiciones documentadas.
  Un turno nuevo guarda una propuesta de3 tareas, pero la explicación posterior
