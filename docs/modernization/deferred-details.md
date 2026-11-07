@@ -705,3 +705,20 @@ por separado los contadores disponibles sería una mejora de diagnóstico. No
 suponer ceros ni atribuir una causa concreta al OOM sin evidencia adicional.
 La cuota agregada de disco y los trabajos de confianza fuera del dominio siguen
 como pendientes principales; no están diferidos como detalles.
+
+## DD096 — Estilo del bloque de volumen durable
+
+Avisos Ruff de imports, nombres de fixtures y estilo en
+[storage-volume-lint.json](storage-volume-lint.json). Incluyen código anterior
+tocado por la integración. Resolver después de todas las capacidades principales.
+No repetir VM o modelos sólo por esos ajustes. La migración de instalaciones,
+recuperación ante disco lleno y límites de operaciones auxiliares siguen siendo
+trabajo principal, según [el alcance](storage-volume-review.md).
+
+## DD097 — Repetición del diagnóstico de poco espacio
+
+La inspección de `RuntimeService._dispatch_loop` muestra que su sondeo de un
+segundo puede repetir el mismo error de admisión por espacio en el log aunque no
+se inicie trabajo. Consolidar ese diagnóstico por cambio de estado después de las
+capacidades principales. Es una deducción del código, no una medición de volumen
+de logs; no alterar el límite ni permitir un despacho para silenciar el mensaje.

@@ -32,6 +32,9 @@ async def lifespan(app: FastAPI):
         entered = False
         serving = False
         try:
+            from backend.api.runtime_dependencies import configured_storage_guard
+
+            await asyncio.to_thread(configured_storage_guard)
             file_handler = setup_file_logging()
             if file_handler is not None:
                 cleanup.callback(file_handler.close)

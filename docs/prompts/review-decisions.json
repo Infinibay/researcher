@@ -3158,7 +3158,7 @@
       "source_base_commit": "035b46c"
     },
     "backend/api/routes/projects.py::_project_to_response.description@79": {
-      "dependencies_sha256": "f46e9bf0b40e6618d66d42df5a81970ca32a15045d2c34c69cb057bbf21db4b7",
+      "dependencies_sha256": "abd636eae1493ad471b655bbc88aeb6f2b3e11a04e2df4448dfe6475d726a4e1",
       "decision": "excluded_human_or_input_metadata",
       "rationale": "Read the description response projection and FastAPI consumer: owner project text remains input metadata, not native developer instructions. Static contract review only: not exhaustive dynamic-consumer proof, model efficacy, human understanding or whole-system acceptance.",
       "evidence": [
@@ -3166,10 +3166,11 @@
         "docs/prompts/review-2026-11-07.md",
         "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
         "evals/prompts/cases.json",
-        "docs/architecture/native-internal-retirement.md"
+        "docs/architecture/native-internal-retirement.md",
+        "docs/modernization/storage-volume-review.md"
       ],
       "conflicts": [],
-      "revalidation": "Candidate AST/value unchanged. Direct consumers reviewed after obsolete autonomy/role/provider retirement and complete registered-worker shutdown enumeration; no native instruction change. See docs/architecture/native-autonomy-retirement.md.",
+      "revalidation": "Storage-volume review: API startup checks precede writes; native composition and service admission add a capacity gate without changing generated instructions, task profiles, schemas, model selection or acceptance. OpenAPI/project description literals retain their human-data role. Reviewed changed consumers; no communication efficacy claim.",
       "previous_review": {
         "dependencies_sha256": "59a074a1c2498af5b73b93be625e26f59115a6bfe6c4397f8ec01d10aca1a1ba",
         "decision": "excluded_human_or_input_metadata",
@@ -3235,7 +3236,7 @@
       }
     },
     "backend/runtime/development_policy.py::development_instructions": {
-      "dependencies_sha256": "e65a9cfe75644ead249f29d647ca56a59605aba68b3df3b3762881efa5dcaaad",
+      "dependencies_sha256": "b03b2d5105aa4e793f3e7d443304265fe821a49f4b6d6237f8a1fc2518899995",
       "decision": "retained",
       "rationale": "Delta review against ab36dc5; preserve the earlier full semantic review below. Read the complete changed common policy and selector, exact owned factory call, native reply mediation and durable issue consumer. Catalog4 adds observed budget/delivery guidance, bounded discovery and faithful examples; exact initial limits enter the frozen instructions. Versions2/3 retain their recorded identity. This candidate source is byte-identical; only the native composition or owned factory consumer changed. Existing capability-specific prerequisites, source windows and permission boundaries still apply, including under delivery pressure. Directed source and installed tests verify budget/provenance/closure contracts, not general model compliance, scientific validity or human comprehension. Three development regressions are evaluated separately; prior reserved results are not replaced. Revalidated 2026-11-07 for catalog5: common delivery advice uses observed-increment margin, planner avoids redundant discovery and guessed source bounds, historical catalogs2/3/4 retain identity. Capabilities, prerequisites and hard ceilings unchanged. Source profile text unchanged except planning; composition and owned-runtime consumer read. Static review does not establish model efficacy.",
       "evidence": [
@@ -3251,11 +3252,12 @@
         "docs/modernization/atomic-planning-review.md",
         "backend/tests/runtime/test_atomic_planning_delivery.py",
         "docs/modernization/domain-resources-review.md",
-        "backend/tests/runtime/test_domain_resources.py"
+        "backend/tests/runtime/test_domain_resources.py",
+        "docs/modernization/storage-volume-review.md"
       ],
       "conflicts": [],
       "consumer_recheck": "2026-11-06: prompt AST identical to 12a1744. Removed legacy launcher consumers; retained owned broker/catalog behavior is covered by test_owned_factory.py and test_broker_inference.py. No new semantic or model evaluation claimed.",
-      "revalidation": "Prompt source text and catalog6 remain unchanged. Reviewed direct-consumer changes: broker CPU/memory/process limits and post-closure kernel observations; resource_exhaustion is owner feedback, not model authority. Existing tool descriptions and frozen input policy retain their capabilities and exact source attribution. No human comprehension inference.",
+      "revalidation": "Storage-volume review: API startup checks precede writes; native composition and service admission add a capacity gate without changing generated instructions, task profiles, schemas, model selection or acceptance. OpenAPI/project description literals retain their human-data role. Reviewed changed consumers; no communication efficacy claim.",
       "previous_review": {
         "dependencies_sha256": "60ad21edf8aee9b134a66c5b403a0f17e1c12b86e58efe06064b46b16e6f3189",
         "decision": "retained",
@@ -3425,6 +3427,19 @@
       "reviewed_at": "2026-11-07",
       "source_base_commit": "ab36dc5",
       "revalidation": "Prompt source text and catalog6 remain unchanged. Reviewed direct-consumer changes: broker CPU/memory/process limits and post-closure kernel observations; resource_exhaustion is owner feedback, not model authority. Existing tool descriptions and frozen input policy retain their capabilities and exact source attribution. No human comprehension inference."
+    },
+    "backend/api/main.py::create_app.description@114": {
+      "dependencies_sha256": "1afaef24fa54779a05ab6b8bd7c70c16595c7c7cc94210b5bcb314d0cd5e20ea",
+      "decision": "excluded_api_metadata",
+      "rationale": "Read create_app: this literal is the FastAPI documentation description, not the developer policy or inspect.getdoc business-tool catalog sent to native inference. Its line-derived identity shifted; this is an explicit source review, not an inferred semantic approval.",
+      "evidence": [
+        "backend/api/main.py",
+        "backend/runtime/business_definitions.py",
+        "backend/runtime/owned_runtime.py",
+        "docs/modernization/storage-volume-review.md"
+      ],
+      "conflicts": [],
+      "revalidation": "Storage-volume review: API startup checks precede writes; native composition and service admission add a capacity gate without changing generated instructions, task profiles, schemas, model selection or acceptance. OpenAPI/project description literals retain their human-data role. Reviewed changed consumers; no communication efficacy claim."
     }
   },
   "retired_entries": {

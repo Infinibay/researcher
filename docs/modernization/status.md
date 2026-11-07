@@ -4,6 +4,17 @@ La implementación del [plan completo](../superpowers/plans/2026-10-31-actualiza
 
 ## Resultados disponibles
 
+- **Volumen durable acotado comprobado:** una VM con cuatro escritores llena un
+  volumen de128MiB; admisión rechazada, dominio retirado y código/bases íntegros
+  tras remount. Montaje ausente rechazado sin recreación; inspección independiente
+  del disco confirma datos.84 casos distintos de fuente y55 instalados pasan,
+ 612 archivos coinciden,57 definiciones documentadas y83 decisiones de prompts
+ vigentes. Bloque19min23s; cero modelos. Las instalaciones anteriores siguen
+ explícitamente no acotadas. Migración, DB activa con disco lleno, recursos
+ auxiliares y demás seguridad continúan pendientes principales.
+ [Informe](storage-volume-review.md), [VM](storage-volume-vm.json),
+ [validación](storage-volume-results.json).
+
 - **CPU compartida y agotamiento explicados:**120 pruebas dirigidas de fuente y66
   instaladas pasan;610 archivos coinciden y37 definiciones documentadas. CPU,
   memoria y procesos acotados por dominio; agotamiento real conserva contadores,

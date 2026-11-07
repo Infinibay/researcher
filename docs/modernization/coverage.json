@@ -4808,16 +4808,23 @@
     },
     "aggregate_kernel_resources": {
       "status": "in_progress",
-      "implemented": "Shared CPU bandwidth, group OOM policy, scheduler confinement and retained exhaustion observations; owner feedback through controlled generation and actual cgroup exhaustion.120source/66installed tests; installed host probe with actual Codex/Ken assets; zero model calls.",
+      "implemented": "Shared CPU bandwidth, group OOM policy, scheduler confinement and retained exhaustion observations; owner feedback through controlled generation and actual cgroup exhaustion.120source/66installed tests; installed host probe with actual Codex/Ken assets; zero model calls. Optional dedicated ext4 host volume now binds persistent write roots, verifies original capacity and rejects low-space new work; real128MiB VM exhaustion/Stop/missing-mount/remount plus independent retained-disk inspection.84distinctsource/55installed tests; no model calls.",
       "evidence": [
         "docs/modernization/domain-resources-review.md",
         "docs/modernization/domain-resources-results.json",
         "docs/modernization/domain-resources-packaging.json",
         "docs/modernization/domain-resources-host-probe.json",
-        "backend/tests/runtime/test_domain_resources.py"
+        "backend/tests/runtime/test_domain_resources.py",
+        "docs/modernization/storage-volume-review.md",
+        "docs/modernization/storage-volume-results.json",
+        "docs/modernization/storage-volume-vm.json",
+        "docs/modernization/storage-volume-disk-inspection.json",
+        "backend/tests/runtime/test_storage_volume.py"
       ],
       "remaining": [
-        "Aggregate durable disk quota and trusted operations outside execution domain",
+        "Migration/enrollment and restore of existing hosts under the bounded-volume policy; no automatic adoption",
+        "Supervisor auxiliary operations and their temporary/export/backup storage outside the execution domain",
+        "Full-disk service/database-write recovery, power loss and inode exhaustion",
         "Integral security and operational acceptance"
       ]
     }

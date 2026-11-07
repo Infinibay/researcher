@@ -2,7 +2,7 @@
   "schema_version": 1,
   "scope": "Owned backend/ and scripts/ Python, excluding tests. Syntax-selected prompt builders/literals/tool descriptions; external native system prompts and arbitrary owner/source text are outside this static inventory.",
   "coverage": "Candidates are not unique rendered prompts. Dynamic rendering size and non-direct consumers remain unknown. Reviews are explicit declarations bound to source and direct module consumers, not proof of efficacy or complete runtime reachability. requires_review entries are unfinished.",
-  "files_scanned": 287,
+  "files_scanned": 288,
   "source_tree": {
     "backend/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     "backend/api/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
@@ -11,7 +11,7 @@
     "backend/api/exceptions.py": "874b055b3a8aa8c11b96c45adc7f02bfdce80a07ddf2c35e854c96b655f4b585",
     "backend/api/flow_manager.py": "fd260c2a58cd8e282b2e77b479d68b949ec08d5ec502661abd369a3ecb59ca61",
     "backend/api/local_access.py": "114456de477b4248fdc5a8aa2554c3962e0df9fe8675e782ea27e2703048f155",
-    "backend/api/main.py": "3b7cfbcdf5e07156edcc3eb567ba66fb7e879a7031fd3594546997811f857d0d",
+    "backend/api/main.py": "37bc381a54ff05861f94e21986c3167e951e030ceffa445f0b3e48022203aa3a",
     "backend/api/models/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     "backend/api/models/agent.py": "23eb182f59601828bcf0a0c54660e9ee96e4b959b10f5560ec54cb77c03ea6ff",
     "backend/api/models/agent_messages.py": "64cf0fc0b8e8cf432d6fe0900088c7d4a8acd3f5c4fed100b6ed451824a860b1",
@@ -57,7 +57,7 @@
     "backend/api/routes/user_requests.py": "b31bd5c9847f01e51702a7891f3691afdbf5b8f202cf05c59dfbc51456616043",
     "backend/api/routes/wiki.py": "f5f33c8578b78ebb801c4ebe58c7e938c6b55aa0ed3a84923017942574030a31",
     "backend/api/run.py": "431c3f13bd938ec7026f2428b5e198e05ef3d51bc474b38cf21c8ea14e00e9c9",
-    "backend/api/runtime_dependencies.py": "6ee61c2ddb7d9e2f44632a8c2f1f1b3206a6d42d17cd4c4d10a94501171a5bf2",
+    "backend/api/runtime_dependencies.py": "ee0b6b403981f1c41edd4a934a138541f0a53bd487ac805905acf46561caaf30",
     "backend/api/websocket.py": "77563b8f2e410f6f45c4251103b73d08266a89428b5c82fa63bfec2aa2a50435",
     "backend/cli/__init__.py": "2c1ede5c60f0d7defd518afafdeb4cf0f5d26eda8b72c95f8d296d2a560fa457",
     "backend/cli/bootstrap.py": "9fed23f0355abe6610ae21f139912dfabdd3000988e0d950f432ab8dc7fef09d",
@@ -215,7 +215,7 @@
     "backend/runtime/git_capsule.py": "88a251cce03b057a3b37ce70fce2d4de72d0659d750ba9ffebff6990d643e50d",
     "backend/runtime/history.py": "700a35191166a66d23ad578a0e5d7892417650de3d0bb8232c1edb747221ccbd",
     "backend/runtime/host_business.py": "6eaae607cff9bfe24f183a907801c50be6f8d9da65cd06297b9335a47cf1fe57",
-    "backend/runtime/host_installation.py": "02cf7d741132174ca1a2acb847f06efe522dcd96fd0bfd46a0a958d7911d9a13",
+    "backend/runtime/host_installation.py": "862bd60de6aa316973d8b85f35ce27ca15382fc12c64caa2d14f857958ddfdc4",
     "backend/runtime/installation_backup.py": "a2cd857de7d5bbe3d517ea8113155478555deba0d5315ad92daeab304c04a240",
     "backend/runtime/installation_restore.py": "50f25aa391499b4fb2a7cc1f4a16249467be59f8cc882c87b3112a1045fbfc31",
     "backend/runtime/investigation_instructions.py": "ceecf2ff65d95086bd4931b758090e6be8d692be89739e5d39610e40429c181a",
@@ -265,10 +265,11 @@
     "backend/runtime/review_instructions.py": "592050b6b0dd44ef9026bfcbff78d1989a69473a54de1159bcc09c70f196be24",
     "backend/runtime/run_inputs.py": "51c912385e1c4829f35ba09a7ef1966491cbad7183049a6efe5b3c94b9654526",
     "backend/runtime/scientific_instructions.py": "c63f5637f02b47088399e285fe98df4b7eed99cadff035c21fd7938c384497c9",
-    "backend/runtime/service.py": "e06f5e933a06d4e869c4731684e8d09f261a42d3975c8173c83e4817eca8bd0e",
+    "backend/runtime/service.py": "8d458bdd29a1a9d051459027eb8d85bd5c468928400145077a91b7a860952c25",
     "backend/runtime/snapshot_files.py": "ef12626230a13cd2333c1605fc7121a8fa1b853ed59e07f9d8ab93128a5febe9",
     "backend/runtime/sqlite_questions.py": "9315a4d6aa01bf82780e4996cddebca689892492a414da5c291d9bfe442b89c1",
     "backend/runtime/sqlite_runs.py": "7cf51e431cfa54babc702ae189c82559486f68bf670e3991085280b81a911e4c",
+    "backend/runtime/storage_volume.py": "9b393ba012cf3d4652af712ba6c2f33699398d188b69805f188f817dcc8703b5",
     "backend/runtime/subscription_auth.py": "a8405d2833bf5712532ff00163b2b86a21b38aa06051e0fae4e9ae3529d5668b",
     "backend/runtime/subscription_provider.py": "f5c65595fd3b64aede88e3a4a27ce8629804b68796d9a4ca02466480ee1fa813",
     "backend/runtime/task_profiles.py": "5b968d82c810d92ae7b2231d5f9024db019f99ffa3f9d95fa57cf6b8e276ae32",
@@ -332,16 +333,16 @@
       "review_conflicts": []
     },
     {
-      "id": "backend/api/main.py::create_app.description@111",
+      "id": "backend/api/main.py::create_app.description@114",
       "path": "backend/api/main.py",
-      "symbol": "create_app.description@111",
-      "line": 111,
-      "end_line": 111,
+      "symbol": "create_app.description@114",
+      "line": 114,
+      "end_line": 114,
       "owner": "backend.api.main",
       "family": "other_owned_prompt_candidate",
       "disposition": "excluded_api_metadata",
       "objective": "FastAPI application factory for the INFINIBAY API.",
-      "source_sha256": "3b7cfbcdf5e07156edcc3eb567ba66fb7e879a7031fd3594546997811f857d0d",
+      "source_sha256": "37bc381a54ff05861f94e21986c3167e951e030ceffa445f0b3e48022203aa3a",
       "source_bytes": 54,
       "rendered_utf8_bytes": 52,
       "variables_kind": "referenced_identifiers",
@@ -357,7 +358,7 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "33c467d2c801aa49c31173b21927eca92ce1d914e93ffdfd5c9a480fcf54e6b6",
+      "dependencies_sha256": "1afaef24fa54779a05ab6b8bd7c70c16595c7c7cc94210b5bcb314d0cd5e20ea",
       "direct_module_consumers": {},
       "suggested_disposition": "requires_review",
       "review_status": "reviewed",
@@ -365,7 +366,8 @@
       "review_evidence": [
         "backend/api/main.py",
         "backend/runtime/business_definitions.py",
-        "backend/runtime/owned_runtime.py"
+        "backend/runtime/owned_runtime.py",
+        "docs/modernization/storage-volume-review.md"
       ],
       "review_conflicts": []
     },
@@ -605,9 +607,9 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "f46e9bf0b40e6618d66d42df5a81970ca32a15045d2c34c69cb057bbf21db4b7",
+      "dependencies_sha256": "abd636eae1493ad471b655bbc88aeb6f2b3e11a04e2df4448dfe6475d726a4e1",
       "direct_module_consumers": {
-        "backend/api/main.py": "3b7cfbcdf5e07156edcc3eb567ba66fb7e879a7031fd3594546997811f857d0d"
+        "backend/api/main.py": "37bc381a54ff05861f94e21986c3167e951e030ceffa445f0b3e48022203aa3a"
       },
       "suggested_disposition": "requires_review",
       "review_status": "reviewed",
@@ -617,7 +619,8 @@
         "docs/prompts/review-2026-11-07.md",
         "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
         "evals/prompts/cases.json",
-        "docs/architecture/native-internal-retirement.md"
+        "docs/architecture/native-internal-retirement.md",
+        "docs/modernization/storage-volume-review.md"
       ],
       "review_conflicts": []
     },
@@ -4056,10 +4059,10 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "e65a9cfe75644ead249f29d647ca56a59605aba68b3df3b3762881efa5dcaaad",
+      "dependencies_sha256": "b03b2d5105aa4e793f3e7d443304265fe821a49f4b6d6237f8a1fc2518899995",
       "direct_module_consumers": {
-        "backend/api/runtime_dependencies.py": "6ee61c2ddb7d9e2f44632a8c2f1f1b3206a6d42d17cd4c4d10a94501171a5bf2",
-        "backend/runtime/host_installation.py": "02cf7d741132174ca1a2acb847f06efe522dcd96fd0bfd46a0a958d7911d9a13",
+        "backend/api/runtime_dependencies.py": "ee0b6b403981f1c41edd4a934a138541f0a53bd487ac805905acf46561caaf30",
+        "backend/runtime/host_installation.py": "862bd60de6aa316973d8b85f35ce27ca15382fc12c64caa2d14f857958ddfdc4",
         "backend/prompts/native.py": "6aa1c8662cd5793d7a4e20da1aed4376af70bb4c66a086aff8f5dc77d032c261"
       },
       "suggested_disposition": "reviewed_native",
@@ -4078,7 +4081,8 @@
         "docs/modernization/atomic-planning-review.md",
         "backend/tests/runtime/test_atomic_planning_delivery.py",
         "docs/modernization/domain-resources-review.md",
-        "backend/tests/runtime/test_domain_resources.py"
+        "backend/tests/runtime/test_domain_resources.py",
+        "docs/modernization/storage-volume-review.md"
       ],
       "review_conflicts": []
     },

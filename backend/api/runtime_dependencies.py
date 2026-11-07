@@ -17,6 +17,49 @@ def _legacy_project_active(project_id):
     return flow_manager.is_project_running(project_id)
 
 
+def configured_storage_guard(config=None, path=None):
+    """Check every configured write root before startup writes; return a new-work gate.
+
+    Legacy hosts without a storage policy remain explicitly unbounded. A supplied
+    policy must have its original receipt; losing a mount never creates new data.
+    """
+    from backend.api.config import UPLOAD_DIR
+    from backend.runtime.contracts import RunConflict
+    from backend.runtime.storage_volume import configured_storage
+    from backend.tools.base.db import get_db_path
+
+    if config is None:
+        name = os.environ.get('INFINIBAY_RUNTIME_CONFIG')
+        if not name:
+            return None
+        path = Path(name).resolve(strict=True)
+        if path.stat().st_size > 65536:
+            raise ValueError('Runtime configuration is too large')
+        config = json.loads(path.read_text())
+    if 'storage' not in config and 'storage_receipt' not in config:
+        return None
+    if not os.environ.get('INFINIBAY_AUTH_DIR'):
+        raise ValueError('Bounded storage requires an explicit local authentication directory')
+    paths = (
+        path, get_db_path(), config['workspace_root'], config['control_root'], UPLOAD_DIR,
+        os.environ.get('INFINIBAY_DATA', '.data'), os.environ['INFINIBAY_AUTH_DIR'],
+        *[config['authority'][key] for key in ('database', 'witness', 'mutex')],
+    )
+    volume = configured_storage(config, paths)
+
+    def guard():
+        """Reject new work with a useful message while leaving Stop independent of disk headroom."""
+        try:
+            volume.check(paths, admission=True)
+        except (ValueError, OSError) as error:
+            raise RunConflict(
+                'El almacenamiento original no está disponible o cambió. '
+                'No se inició trabajo nuevo; revisa el volumen antes de continuar.'
+            ) from error
+
+    return guard
+
+
 def configured_runtime(live_grants, *, app=None):
     """No environment setting => product reads remain available, admission is 503.
 
@@ -77,6 +120,7 @@ def _configured_owned(config, path, live_grants, app):
     control = Path(config["control_root"]).absolute()
     authority = dict(config["authority"])
     database = Path(get_db_path()).resolve(strict=True)
+    storage_guard = configured_storage_guard(config, path)
     for supplied in (
         path,
         database,
@@ -179,6 +223,7 @@ def _configured_owned(config, path, live_grants, app):
         native,
         workspaces=WorkspaceRegistry(database, source_root),
         legacy_active=_legacy_project_active,
+        storage_guard=storage_guard,
         control_root=control,
         max_concurrent=1,
         limits=ExecutionLimits(

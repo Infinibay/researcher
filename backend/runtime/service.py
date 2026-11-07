@@ -77,6 +77,7 @@ class RuntimeService:
         project_turn_limit=20,
         project_token_limit=4000000,
         legacy_active=None,
+        storage_guard=None,
     ):
         """Compose one journal owner, native worker limits and deterministic authorized-plan dispatch; construction starts no work."""
         self.store = store
@@ -88,6 +89,7 @@ class RuntimeService:
         if legacy_active is not None and not callable(legacy_active):
             raise ValueError("Legacy activity must be an explicit controller observation port")
         self.legacy_active = legacy_active
+        self.storage_guard = storage_guard
         self.workspaces = workspaces
         self.control_root = Path(control_root).absolute()
         self.limits = limits or ExecutionLimits(180, 90, 1, 25, 350000)
@@ -294,9 +296,12 @@ class RuntimeService:
         )
         return await self._schedule(run) if admitted else run
 
-    def _accepting(self):
+    def _accepting(self, *, new_work=True):
+        """Require the live owner and optional storage headroom only for new work, never Stop."""
         if self._lock_fd is None or self._closing:
             raise RunConflict("Runtime owner is not accepting work")
+        if new_work and self.storage_guard is not None:
+            self.storage_guard()
 
     @property
     def supported_task_types(self):
@@ -421,7 +426,7 @@ class RuntimeService:
         """Persist pause before withdrawing linked peers; resume wakes only still-unissued original deliveries."""
         from backend.planning.execution import PlanExecutions
 
-        self._accepting()
+        self._accepting(new_work=command.get('status') != 'paused')
         receipt = await asyncio.to_thread(PlanExecutions(self.store).control, project_id, execution_id, **command)
         if receipt["status"] == "paused":
             def linked():
@@ -746,6 +751,8 @@ class RuntimeService:
         lease = peers = heartbeat = result = None
         reason = "PublicationInterrupted"
         try:
+            if self.storage_guard is not None:
+                await asyncio.to_thread(self.storage_guard)
             run = await asyncio.to_thread(self.store.get, slot.spec.project_id, run_id)
             remote = run.execution_kind == "remote_publication"
             publications = RemotePublications(self.store) if remote else publications
@@ -1083,6 +1090,8 @@ class RuntimeService:
         code_review = review_confirmed = False
         development = development_complete = False
         try:
+            if self.storage_guard is not None:
+                await asyncio.to_thread(self.storage_guard)
             current_run = await asyncio.to_thread(
                 self.store.get, slot.spec.project_id, run_id
             )

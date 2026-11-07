@@ -1,0 +1,89 @@
+{
+  "status": "passed",
+  "model_turns": 0,
+  "preparation": {
+    "ken_model_files": 26,
+    "host_dynamic_libraries": 20,
+    "real_account_copied": false,
+    "installed_environment": "/home/andres/.codex/worktrees/b09e/researcher/.superpowers/sdd/2026-10-31-actualizacion-proyecto/native-runtime-env",
+    "kernel_sha256": "c3132370c0d126faf45a97559ca985e254c14f7cb9a7fd5ed2bc9e22ee0c7ddd"
+  },
+  "storage": {
+    "enforced": true,
+    "kind": "dedicated_ext4_volume",
+    "policy": {
+      "mount": "/bounded",
+      "max_bytes": 134217728,
+      "admission_free_bytes": 4194304
+    },
+    "device": 65040,
+    "inode": 2,
+    "fsid": 13361635953698912043,
+    "device_bytes": 134217728,
+    "filesystem_bytes": 120015872,
+    "inodes": 32768,
+    "available_bytes": 64512,
+    "available_inodes": 30965
+  },
+  "writer_receipts": [
+    [
+      28,
+      439
+    ],
+    [
+      28,
+      441
+    ],
+    [
+      28,
+      441
+    ],
+    [
+      28,
+      437
+    ]
+  ],
+  "admission_rejected": true,
+  "domain_removed_while_full": true,
+  "resources": {
+    "observed": true,
+    "cpu_usage_usec": 244654,
+    "cpu_throttled_periods": 0,
+    "memory_oom_kills": 0,
+    "memory_group_oom_kills": 0,
+    "pids_denied": 0,
+    "limits": {
+      "cpu_max": "25000 100000",
+      "memory_max": "268435456",
+      "pids_max": "16"
+    }
+  },
+  "retained_sha256": "1dee54df23f55d7b867d85f878bde881964e379a6a289aa3045fd1e2c56d4c4a",
+  "kernel_probe": {
+    "child_exit_code": 0,
+    "domain_removed": true,
+    "resource_observation": {
+      "observed": true,
+      "cpu_usage_usec": 8753,
+      "cpu_throttled_periods": 0,
+      "memory_oom_kills": 0,
+      "memory_group_oom_kills": 0,
+      "pids_denied": 0,
+      "limits": {
+        "cpu_max": "200000 100000",
+        "memory_max": "2147483648",
+        "pids_max": "128"
+      }
+    }
+  },
+  "integrity_before_remount": "ok",
+  "missing_mount_rejected": true,
+  "integrity_after_remount": "ok",
+  "unfinished_work_preserved": true,
+  "remounted": true,
+  "real_credentials": false,
+  "qemu_exit": 0,
+  "network_card": false,
+  "qemu_processes_started": 1,
+  "elapsed_seconds": 19.99
+}

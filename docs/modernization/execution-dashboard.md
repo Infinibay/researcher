@@ -28,7 +28,48 @@ que se pueda comparar el avance; no presentar microajustes como tareas principal
 - Última suite global: `9fb873c`,2210 casos,2178 pasan,31 fallan y1 error de fixture; sin omisiones. La carrera de backup encontrada se corrigió después con40 pruebas instaladas. No se declara una nueva corrida global verde; la referencia `0c8b8d9` queda como evidencia histórica.
 - Los 43 escenarios amplios siguen abiertos en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Etapa actual: CPU y agotamiento comprobados; almacenamiento pendiente
+## Etapa actual: volumen durable comprobado; operaciones auxiliares pendientes
+
+Bloque **11:38:40–11:58:03 UTC**, **19 min 23 s**, hasta validación. Una instalación
+nueva puede usar un volumen ext4 dedicado con capacidad agregada verificada.
+Una VM real llena128MiB con cuatro escritores, rechaza trabajo nuevo, retira su
+dominio y conserva código y bases después de desmontar/montar. El montaje ausente
+se rechaza sin recreación. Inspección independiente del disco confirma los datos.
+
+84 casos distintos de fuente y55 instalados pasan;612 archivos coinciden y57
+definiciones documentadas.83 decisiones de prompts vigentes; cero modelos.
+[Informe y límites](storage-volume-review.md), [VM](storage-volume-vm.json),
+[datos extraídos](storage-volume-disk-inspection.json).
+
+**Lista actualizada al cambiar de tarea:**
+- Implementado y comprobado en recorridos concretos: backend Codex/Ken, modelos,
+  flujos principales, comunicación, persistencia y varias recuperaciones.
+- Terminado en este bloque: volumen durable configurado, admisión por espacio y
+  conservación tras llenado/remount, **19 min 23 s** hasta validación.
+- Terminado previamente: CPU compartida y agotamiento, **15 min 11 s**.
+- Siguiente principal: limitar operaciones auxiliares del supervisor y sus
+  temporales/exportaciones fuera de la frontera actual. **No iniciado**.
+- Pendiente principal: migración/recuperación de hosts con volumen acotado;
+  seguridad Ken/ONNX; evaluación humana y otros perfiles; datos históricos;
+  aceptación integral de12páginas. Disco lleno con DB activa y pérdida de energía
+  siguen sin estar demostrados; no se difieren como detalles cosméticos.
+- Interfaz:12 pilotos/48 conceptos,0/12 páginas completamente aceptadas.
+- Después de las capacidades principales: detalles acumulados, validación global,
+  revisión independiente y distribución. DD096 recoge estilo/imports.
+
+No hay nueva suite global verde ni porcentaje global sustentado. Las instalaciones
+anteriores sin política de almacenamiento siguen explícitamente no acotadas.
+Siguen43escenarios amplios abiertos. Lista/tiempo persistentes; sin push/despliegue.
+
+## Etapa anterior: inicio del análisis de almacenamiento
+
+Inicio del bloque de almacenamiento: **2026-11-07 11:38:40 UTC**. Se están
+revisando los directorios que pueden crecer y las opciones para imponer una cuota
+agregada sin perder trabajo tras una caída. Todavía no hay una solución elegida,
+implementada ni validada para esa cuota. La revisión del seguimiento solicitada
+por el usuario forma parte de este bloque y no cuenta como otra tarea principal.
+
+Último bloque cerrado: CPU compartida y explicación del agotamiento.
 
 Bloque **11:18:23–11:33:34 UTC**, **15 min 11 s**, hasta validación.
 La CPU se limita de forma compartida entre los hijos del dominio; memoria y
@@ -50,8 +91,9 @@ una cuota de disco ni límites para todo el servicio supervisor.
 - Terminado en este bloque: CPU compartida, retirada del grupo por OOM y explicación
   del agotamiento, **15 min 11 s** hasta validación.
 - Terminado previamente: entrega atómica del plan y explicación, **18 min 28 s**.
-- Siguiente principal: almacenamiento durable con cuota agregada y recursos de
-  operaciones de confianza fuera del dominio. **No iniciado**; registrar inicio.
+- En curso: almacenamiento durable con cuota agregada; análisis iniciado a las
+  **11:38:40 UTC**. Pendiente también acotar los recursos de las operaciones de
+  confianza que quedan fuera del dominio.
 - Pendiente principal: Ken/ONNX y seguridad restante; evaluación humana y otros
   perfiles; datos históricos y recuperación; aceptación integral de12 páginas.
 - Interfaz:12 pilotos/48 conceptos,0/12 páginas completamente aceptadas.

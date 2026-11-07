@@ -20,6 +20,10 @@ todas las rutas por las de esta instalación:
   `memory` y `pids` habilitados, y soporte de los dominios nativos del proyecto.
 - Web ya compilada, con `index.html`, si se desea servir la interfaz. Sin
   `static_dir`, el launcher sólo sirve la API.
+- Para el límite agregado durable del ejemplo: un volumen ext4 dedicado, ya
+  montado en `/srv/researcher-volume`, propiedad del usuario del servicio y con
+  permisos `0700`. El dispositivo completo debe medir como máximo 32 GiB.
+  El programa comprueba el volumen; no formatea, monta ni redimensiona discos.
 
 `model`, límites de recursos, límites de turno y presupuesto del proyecto son
 opciones explícitas. Que el archivo de cuenta sea válido localmente no demuestra
@@ -38,17 +42,18 @@ límite de todo el servicio Python que lo supervisa. [Alcance y pruebas](../mode
 
 Los directorios padre deben existir. Los dos destinos deben ser nuevos y
 separados; el testigo de autoridad queda fuera del directorio de instalación.
+Con `storage`, ambos destinos deben permanecer dentro del volumen seleccionado.
 
 ```sh
 researcher-bootstrap init-host \
-  --directory /srv/researcher/new-installation \
-  --witness-dir /srv/researcher-witness/new-installation \
+  --directory /srv/researcher-volume/new-installation \
+  --witness-dir /srv/researcher-volume/new-witness \
   --assets /etc/researcher/host-assets.json
 
 researcher-bootstrap check-host \
-  --directory /srv/researcher/new-installation --probe
+  --directory /srv/researcher-volume/new-installation --probe
 
-researcher-start --installation /srv/researcher/new-installation --port 8000
+researcher-start --installation /srv/researcher-volume/new-installation --port 8000
 ```
 
 `init-host` crea una base nueva, autoridad y testigo, directorios de fuentes,
@@ -56,6 +61,28 @@ control, adjuntos, autenticación, logs y servicio. Guarda `runtime.json` y el
 marcador `installation.json` con permisos privados. Las comprobaciones previas
 no llaman a modelos. Un fallo posterior conserva el estado parcial para
 inspección; volver a inicializar sobre ese estado se rechaza.
+
+`storage.max_bytes` es el techo del dispositivo completo, compartido por fuentes,
+índices Ken, copias de desarrollo, datos nativos, bases, testigo, adjuntos y logs
+de esta instalación. El filesystem limita bloques e inodos, aunque un proceso
+cree muchos archivos. `admission_free_bytes` sólo exige espacio libre antes de
+iniciar trabajo; **no reserva** ese espacio. Si el trabajo en curso llena el
+volumen, sus escrituras pueden fallar y los datos parciales se conservan.
+
+Se guarda la identidad y capacidad originales y se comprueban en el arranque y
+antes de trabajo nuevo. Se rechazan montajes anidados, rutas redirigidas, volúmenes
+ausentes/sustituidos y cambios de capacidad. No se crea una instalación vacía al
+perder un montaje. Stop no depende del margen de admisión. Liberar espacio,
+ampliar, migrar o reinscribir datos requiere una operación explícita del operador;
+este cambio no añade borrado automático ni migración de instalaciones antiguas.
+
+Las instalaciones anteriores sin `storage` siguen funcionando, pero `init-host`
+y `check-host` las identifican con `storage.enforced: false`; no tienen una cuota
+agregada acreditada. Añadir sólo el campo a una configuración existente se rechaza
+si falta su recibo. Temporales de operaciones del supervisor, backups/exportaciones
+fuera del volumen y almacenamiento remoto requieren límites propios. El testigo
+es independiente de la DB de autoridad, pero compartir volumen no lo convierte
+en una copia ante pérdida física del dispositivo.
 
 `check-host` verifica recursos, autoridad y base. `--probe` añade un hijo de
 cómputo fijo que termina inmediatamente, dentro de un dominio nuevo con límites;

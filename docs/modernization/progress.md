@@ -8417,3 +8417,11 @@ OtherpendingKen/ONNX,integralsecurity,human/profilecommunication,historicaldata/
 remainingrecovery,12pageacceptance.43broads cenariosopen0/12pagesaccepted;no new
  globalsuitegreen. ALL macro tasks before ALL details; publish updated list and
 measured time every task transition and retain after compaction. No push/deploy.
+
+
+## Durable aggregate volume — 2026-11-07
+
+- Block11:38:40–11:58:03UTC (19min23s) to validation. Optional operator-provisioned private ext4 volume covers persistent host/source/control/Ken/native/upload/log/auth/authority roots, with a verified whole-device ceiling, original identity and no nested mounts. Startup checks precede writes; new work requires headroom; Stop and plan pause bypass the admission margin. No mount/format/delete/repair or automatic migration.
+- One installed VM trial:128MiB volume,4owned writers,1758complete64KiB files then4ENOSPC receipts; admission rejected and domain physically retired. Missing mount rejected without recreation. Remount preserves unfinished code and both databases. Independent readonly raw-disk extraction confirms hash, DB integrity/FKs, original task and0inference dispatches. Not a power-loss or concurrent-DB-write trial.
+- Source84distinct passed; final installed55passed,0skipped.612Python/SQL files match,57changed definitions documented.83prompt decisions current after3consumer reviews; catalog6 unchanged. Final package differs from the VM candidate only in service plan-pause bypass and its additional Stop regression; those are tested without repeating the VM. See storage-volume-review/results/packaging/vm/disk-inspection/docstrings. DD096 defers style/import findings.
+- Current block complete at this scope, full goal active. Next primary: bound auxiliary supervisor operations and temporary/export storage outside the current domain; NOT STARTED. Still primary: bounded-host migration/restore and full-disk service recovery, Ken/ONNX security, human/profile communication evaluation, historical data,12page acceptance.43broad scenarios open,0/12pages accepted; no new global green suite. All macro tasks before all fine details. Publish updated list and measured time at every task transition, persistent after compaction. No push/deploy.

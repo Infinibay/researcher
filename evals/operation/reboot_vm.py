@@ -94,9 +94,10 @@ def prepare(args, output):
                 if target.stat().st_size != expected['bytes'] or hashlib.file_digest(stream,'sha256').hexdigest() != expected['sha256']:
                     raise ValueError('Public Ken model bytes differ from the published manifest')
             copied_models += 1
-    for name in ('reboot_guest.py','host_smoke.py'):
+    for name in ('reboot_guest.py','host_smoke.py', 'storage_guest.py'):
         copy_file(Path(__file__).with_name(name),payload/'eval'/name)
-    copy_file(Path(__file__).with_name('reboot_guest_init.py'),root/'guest_init.py')
+    guest_init = 'storage_guest_init.py' if getattr(args, 'storage_quota', False) else 'reboot_guest_init.py'
+    copy_file(Path(__file__).with_name(guest_init),root/'guest_init.py')
     copy_file(Path(__file__).with_name('reboot_guest_boot.sh'),root/'init')
     (root/'init').chmod(0o755)
     (root/'RESEARCHER_DISPOSABLE_VM').write_text('owned evaluation fixture\n')
@@ -104,7 +105,7 @@ def prepare(args, output):
     (root/'etc/group').write_text('root:x:0:\nfixture:x:1000:\n')
     (root/'etc/resolv.conf').write_text('nameserver 1.1.1.1\n')
     copy_file(Path('/etc/ssl/certs/ca-certificates.crt'),root/'etc/ssl/certs/ca-certificates.crt')
-    tools = [Path(shutil.which(name)) for name in ('git','bwrap','sh','mount')]
+    tools = [Path(shutil.which(name)) for name in ('git','bwrap','sh','mount','umount')]
     for tool in tools:
         copy_file(tool,root/'usr/bin'/tool.name)
     count = libraries(root,[base,args.runtime_env,installation.tool_root],[base/'bin/python3.12',*tools])
@@ -121,6 +122,11 @@ def prepare(args, output):
     with disk.open('xb') as stream:
         stream.truncate(4*1024**3)
     subprocess.run(['mkfs.ext4','-q','-F','-E','lazy_itable_init=0,lazy_journal_init=0','-d',str(payload),str(disk)],check=True,timeout=180)
+    if getattr(args, 'storage_quota', False):
+        quota_disk = output/'capacity.raw'
+        with quota_disk.open('xb') as stream:
+            stream.truncate(128*1024**2)
+        subprocess.run(['mkfs.ext4','-q','-F','-m','0','-E','lazy_itable_init=0,lazy_journal_init=0',str(quota_disk)],check=True,timeout=30)
     names = ['.']+[str(path.relative_to(root)) for path in sorted(root.rglob('*'))]
     listing = output/'initramfs-files.txt'
     listing.write_text('\n'.join(names)+'\n')
@@ -143,6 +149,8 @@ def run(args, output):
                '-kernel',str(args.kernel),'-initrd',str(output/'initramfs.cpio.gz'),
                '-append','rdinit=/init console=ttyS0 loglevel=4 panic=0 researcher_disposable_vm=1',
                '-drive',f'file={output / "disk.raw"},format=raw,if=virtio,cache=none']
+    if getattr(args, 'storage_quota', False):
+        command += ['-drive', f'file={output / "capacity.raw"},format=raw,if=virtio,cache=none']
     environment = {'PATH':os.defpath,'LANG':'C.UTF-8','LD_LIBRARY_PATH':str(prefix/'lib'),
                    'QEMU_MODULE_DIR':str(prefix/'lib/qemu')}
     with (output/'serial.log').open('w') as log:
@@ -180,9 +188,13 @@ def main():
     for name in ('output','qemu','kernel','assets','runtime-env'):
         parser.add_argument('--'+name,type=Path,required=True)
     parser.add_argument('--timeout',type=int,default=240)
+    parser.add_argument('--storage-quota', action='store_true',
+                        help='Fill a separate bounded durable volume and check retained data after remount; no inference')
     parser.add_argument('--active-command', action='store_true',
                         help='Keep a real Codex command peer and child alive until the guest kernel restarts; no inference')
     args = parser.parse_args()
+    if args.storage_quota and args.active_command:
+        raise ValueError('Storage and active reboot are separate trials')
     for name in ('qemu','kernel','assets','runtime_env'):
         setattr(args,name,getattr(args,name).resolve(strict=True))
     if os.getuid() != 1000 or not os.access('/dev/kvm',os.R_OK|os.W_OK):

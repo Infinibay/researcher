@@ -16,10 +16,11 @@ from pathlib import Path
 from uuid import uuid4
 
 from backend.runtime.bootstrap import initialize_authority, initialize_database, _sync_directory
+from backend.runtime.storage_volume import StorageVolume, configured_storage
 
 _PATHS = ('codex_binary', 'code_mode_host', 'ken_command', 'model_cache', 'token_file', 'cgroup_parent')
 _OPTIONS = {'model', 'reasoning_effort', 'web_search', 'broker_limits', 'limits', 'static_dir',
-            'project_turn_limit', 'project_token_limit', 'resolver', 'ca_bundle', 'development_checks'}
+            'project_turn_limit', 'project_token_limit', 'resolver', 'ca_bundle', 'development_checks', 'storage'}
 
 
 def _read_json(path):
@@ -132,6 +133,7 @@ def host_environment(directory):
             raise ValueError('Host state is missing; restore the original installation')
     environment = _environment(root)
     config = _read_json(root / 'runtime.json')
+    configured_storage(config, [root, *[config['authority'][key] for key in ('database', 'witness', 'mutex')]])
     if config.get('static_dir'):
         environment['INFINIBAY_STATIC_DIR'] = config['static_dir']
     return environment
@@ -146,6 +148,11 @@ def initialize_host(directory, *, witness_dir, assets):
     if any(os.path.lexists(p) for p in (root, witness)):
         raise FileExistsError('Host and witness directories must both be NEW; never reinitialize existing state')
     config, evidence = _resources(assets)
+    volume = StorageVolume.capture(config['storage']) if 'storage' in config else None
+    storage = {'enforced': False, 'reason': 'No aggregate storage policy configured'}
+    if volume is not None:
+        storage = volume.check([root, witness], admission=True)
+        config['storage_receipt'] = volume.receipt
     root.mkdir(mode=0o700)
     _sync_directory(root.parent)
     for name in ('sources', 'control', 'uploads', 'auth', 'logs', 'service'):
@@ -159,6 +166,7 @@ def initialize_host(directory, *, witness_dir, assets):
     if config.get('static_dir'):
         environment['INFINIBAY_STATIC_DIR'] = config['static_dir']
     result = {'format': 1, 'status': 'prepared', 'environment': environment,
+              'storage': storage,
               'authority_id': authority['authority_id'], 'resource_observations': evidence,
               'source_database': str(database), 'model_turns': 0,
               'limits': 'Fresh storage and local resources only; no prior-actor adoption, remote entitlement or product admission proven.'}
@@ -217,6 +225,9 @@ def inspect_host(directory, *, probe=False):
     result = {'status': 'resources_verified', 'environment': environment,
               'resource_observations': evidence, 'authority_sequence': state.sequence,
               'model_turns': 0, 'product_admission_verified': False}
+    volume = configured_storage(config, [Path(directory)])
+    result['storage'] = volume.check() if volume is not None else {
+        'enforced': False, 'reason': 'No aggregate storage policy configured'}
     if probe:
         result['kernel_probe'] = _probe_domain(validated)
     return result

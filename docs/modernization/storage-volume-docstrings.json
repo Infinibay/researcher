@@ -1,0 +1,291 @@
+{
+  "definitions": 57,
+  "missing": [],
+  "entries": [
+    {
+      "path": "backend/runtime/storage_volume.py",
+      "symbol": "<module>",
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/storage_volume.py",
+      "symbol": "_unescape",
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/storage_volume.py",
+      "symbol": "_mounts",
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/storage_volume.py",
+      "symbol": "_policy",
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/storage_volume.py",
+      "symbol": "_observe",
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/storage_volume.py",
+      "symbol": "StorageVolume",
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/storage_volume.py",
+      "symbol": "StorageVolume.__init__",
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/storage_volume.py",
+      "symbol": "StorageVolume.capture",
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/storage_volume.py",
+      "symbol": "StorageVolume.check",
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/storage_volume.py",
+      "symbol": "configured_storage",
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/host_installation.py",
+      "symbol": "<module>",
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/host_installation.py",
+      "symbol": "host_environment",
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/host_installation.py",
+      "symbol": "initialize_host",
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/host_installation.py",
+      "symbol": "inspect_host",
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/service.py",
+      "symbol": "<module>",
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/service.py",
+      "symbol": "RuntimeService",
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/service.py",
+      "symbol": "RuntimeService.__init__",
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/service.py",
+      "symbol": "RuntimeService._accepting",
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/service.py",
+      "symbol": "RuntimeService.control_plan_execution",
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/service.py",
+      "symbol": "RuntimeService._execute_publication",
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/service.py",
+      "symbol": "RuntimeService._execute",
+      "documented": true
+    },
+    {
+      "path": "backend/api/runtime_dependencies.py",
+      "symbol": "<module>",
+      "documented": true
+    },
+    {
+      "path": "backend/api/runtime_dependencies.py",
+      "symbol": "configured_storage_guard",
+      "documented": true
+    },
+    {
+      "path": "backend/api/runtime_dependencies.py",
+      "symbol": "configured_storage_guard.guard",
+      "documented": true
+    },
+    {
+      "path": "backend/api/runtime_dependencies.py",
+      "symbol": "_configured_owned",
+      "documented": true
+    },
+    {
+      "path": "backend/api/main.py",
+      "symbol": "<module>",
+      "documented": true
+    },
+    {
+      "path": "backend/api/main.py",
+      "symbol": "lifespan",
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_storage_volume.py",
+      "symbol": "<module>",
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_storage_volume.py",
+      "symbol": "observed_volume",
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_storage_volume.py",
+      "symbol": "test_ordinary_directory_is_not_a_durable_quota",
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_storage_volume.py",
+      "symbol": "test_bound_host_records_volume_and_rechecks_on_open",
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_storage_volume.py",
+      "symbol": "test_bound_host_rejects_uncovered_witness_before_writes",
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_storage_volume.py",
+      "symbol": "test_low_space_rejects_new_work_but_keeps_existing_data_readable",
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_storage_volume.py",
+      "symbol": "test_storage_guard_rejects_before_admission",
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_storage_volume.py",
+      "symbol": "test_storage_guard_rejects_before_admission.exhausted",
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_storage_volume.py",
+      "symbol": "test_symlink_cannot_redirect_mutable_root",
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_storage_volume.py",
+      "symbol": "test_invalid_capacity_policy_is_not_coerced",
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_storage_volume.py",
+      "symbol": "test_configured_factory_keeps_storage_admission_guard",
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_storage_volume.py",
+      "symbol": "test_startup_checks_storage_before_logging_migrations_or_pairing",
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_storage_volume.py",
+      "symbol": "test_missing_receipt_never_downgrades_a_configured_bound",
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_storage_volume.py",
+      "symbol": "test_live_stop_bypasses_exhausted_admission_margin",
+      "documented": true
+    },
+    {
+      "path": "evals/operation/reboot_vm.py",
+      "symbol": "<module>",
+      "documented": true
+    },
+    {
+      "path": "evals/operation/reboot_vm.py",
+      "symbol": "prepare",
+      "documented": true
+    },
+    {
+      "path": "evals/operation/reboot_vm.py",
+      "symbol": "run",
+      "documented": true
+    },
+    {
+      "path": "evals/operation/reboot_vm.py",
+      "symbol": "main",
+      "documented": true
+    },
+    {
+      "path": "evals/operation/storage_guest.py",
+      "symbol": "<module>",
+      "documented": true
+    },
+    {
+      "path": "evals/operation/storage_guest.py",
+      "symbol": "save",
+      "documented": true
+    },
+    {
+      "path": "evals/operation/storage_guest.py",
+      "symbol": "helper",
+      "documented": true
+    },
+    {
+      "path": "evals/operation/storage_guest.py",
+      "symbol": "exercise",
+      "documented": true
+    },
+    {
+      "path": "evals/operation/storage_guest.py",
+      "symbol": "missing",
+      "documented": true
+    },
+    {
+      "path": "evals/operation/storage_guest.py",
+      "symbol": "retained",
+      "documented": true
+    },
+    {
+      "path": "evals/operation/storage_guest_init.py",
+      "symbol": "<module>",
+      "documented": true
+    },
+    {
+      "path": "evals/operation/storage_guest_init.py",
+      "symbol": "require_guest",
+      "documented": true
+    },
+    {
+      "path": "evals/operation/storage_guest_init.py",
+      "symbol": "mount",
+      "documented": true
+    },
+    {
+      "path": "evals/operation/storage_guest_init.py",
+      "symbol": "run_phase",
+      "documented": true
+    },
+    {
+      "path": "evals/operation/storage_guest_init.py",
+      "symbol": "boot",
+      "documented": true
+    },
+    {
+      "path": "evals/operation/storage_guest_init.py",
+      "symbol": "main",
+      "documented": true
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "method": "debugfs read-only extraction from the original stopped VM disk; SQLite read-only integrity/FK checks",
+  "image_bytes": 134217728,
+  "image_sha256": "18dbce4faa68e18572d858ea28232d94e91ef283856ebc1a05270ff8cbfedebb",
+  "retained_sha256": "1dee54df23f55d7b867d85f878bde881964e379a6a289aa3045fd1e2c56d4c4a",
+  "databases": {
+    "source": {
+      "integrity": "ok",
+      "foreign_key_errors": [],
+      "tasks": [
+        [
+          1001,
+          "Explain the synthetic total with evidence"
+        ]
+      ],
+      "inference_dispatches": 0
+    },
+    "authority": {
+      "integrity": "ok",
+      "foreign_key_errors": []
+    }
+  },
+  "models": 0
+}

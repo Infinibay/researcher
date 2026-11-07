@@ -1,0 +1,354 @@
+{
+  "schema_version": 1,
+  "base_commit": "ca019c3",
+  "started_utc": "2026-11-07 11:38:40 UTC",
+  "validation_cutoff_utc": "2026-11-07 11:58:03 UTC",
+  "block_seconds_to_validation": 1163,
+  "initial_red": {
+    "failed": 3,
+    "passed": 7,
+    "receipt": ".superpowers/sdd/2026-10-31-actualizacion-proyecto/storage-volume-red.log"
+  },
+  "source_logs": [
+    {
+      "receipt": ".superpowers/sdd/2026-10-31-actualizacion-proyecto/storage-volume-source.log",
+      "sha256": "5881a127fcc3422a564932c7886f74ac4b0bbd90249f87be1888502ccc67ae97",
+      "passed": 37,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "receipt": ".superpowers/sdd/2026-10-31-actualizacion-proyecto/storage-volume-boundaries.log",
+      "sha256": "a3fa19e2707dc935ae6bb5c587bdcdbfeb1d8f5469faf26335420a1ec60e369a",
+      "passed": 46,
+      "failed": 0,
+      "skipped": 0
+    }
+  ],
+  "source_distinct_passed": 84,
+  "source_distinct_note": "37 initial cases,46 disjoint service/startup/recovery cases; final14 storage cases replace the previous13 storage cases. All passed; zero skips.",
+  "test_runs": [
+    {
+      "receipt": ".superpowers/sdd/2026-10-31-actualizacion-proyecto/storage-volume-final-source.xml",
+      "sha256": "e13d0c203d145a2f8a1590f642f75dddb3806709b10e9cdc626455f060239b0b",
+      "counts": {
+        "passed": 14
+      },
+      "cases": [
+        {
+          "id": "backend.tests.runtime.test_storage_volume::test_ordinary_directory_is_not_a_durable_quota",
+          "outcome": "passed"
+        },
+        {
+          "id": "backend.tests.runtime.test_storage_volume::test_bound_host_records_volume_and_rechecks_on_open",
+          "outcome": "passed"
+        },
+        {
+          "id": "backend.tests.runtime.test_storage_volume::test_bound_host_rejects_uncovered_witness_before_writes",
+          "outcome": "passed"
+        },
+        {
+          "id": "backend.tests.runtime.test_storage_volume::test_low_space_rejects_new_work_but_keeps_existing_data_readable",
+          "outcome": "passed"
+        },
+        {
+          "id": "backend.tests.runtime.test_storage_volume::test_storage_guard_rejects_before_admission",
+          "outcome": "passed"
+        },
+        {
+          "id": "backend.tests.runtime.test_storage_volume::test_symlink_cannot_redirect_mutable_root",
+          "outcome": "passed"
+        },
+        {
+          "id": "backend.tests.runtime.test_storage_volume::test_invalid_capacity_policy_is_not_coerced[max_bytes-True]",
+          "outcome": "passed"
+        },
+        {
+          "id": "backend.tests.runtime.test_storage_volume::test_invalid_capacity_policy_is_not_coerced[max_bytes-1024]",
+          "outcome": "passed"
+        },
+        {
+          "id": "backend.tests.runtime.test_storage_volume::test_invalid_capacity_policy_is_not_coerced[admission_free_bytes-0]",
+          "outcome": "passed"
+        },
+        {
+          "id": "backend.tests.runtime.test_storage_volume::test_invalid_capacity_policy_is_not_coerced[admission_free_bytes-True]",
+          "outcome": "passed"
+        },
+        {
+          "id": "backend.tests.runtime.test_storage_volume::test_configured_factory_keeps_storage_admission_guard",
+          "outcome": "passed"
+        },
+        {
+          "id": "backend.tests.runtime.test_storage_volume::test_startup_checks_storage_before_logging_migrations_or_pairing",
+          "outcome": "passed"
+        },
+        {
+          "id": "backend.tests.runtime.test_storage_volume::test_missing_receipt_never_downgrades_a_configured_bound",
+          "outcome": "passed"
+        },
+        {
+          "id": "backend.tests.runtime.test_storage_volume::test_live_stop_bypasses_exhausted_admission_margin",
+          "outcome": "passed"
+        }
+      ]
+    },
+    {
+      "receipt": ".superpowers/sdd/2026-10-31-actualizacion-proyecto/storage-volume-installed.xml",
+      "sha256": "6a4c645bae54aa088ea9abbfa73a43ff7d68a3cbcef7f04a588ab0fb2fe55fc9",
+      "counts": {
+        "passed": 55
+      },
+      "cases": [
+        {
+          "id": ".superpowers.sdd.2026-10-31-actualizacion-proyecto.native-runtime-env.lib.python3.12.site-packages.backend.tests.runtime.test_storage_volume::test_ordinary_directory_is_not_a_durable_quota",
+          "outcome": "passed"
+        },
+        {
+          "id": ".superpowers.sdd.2026-10-31-actualizacion-proyecto.native-runtime-env.lib.python3.12.site-packages.backend.tests.runtime.test_storage_volume::test_bound_host_records_volume_and_rechecks_on_open",
+          "outcome": "passed"
+        },
+        {
+          "id": ".superpowers.sdd.2026-10-31-actualizacion-proyecto.native-runtime-env.lib.python3.12.site-packages.backend.tests.runtime.test_storage_volume::test_bound_host_rejects_uncovered_witness_before_writes",
+          "outcome": "passed"
+        },
+        {
+          "id": ".superpowers.sdd.2026-10-31-actualizacion-proyecto.native-runtime-env.lib.python3.12.site-packages.backend.tests.runtime.test_storage_volume::test_low_space_rejects_new_work_but_keeps_existing_data_readable",
+          "outcome": "passed"
+        },
+        {
+          "id": ".superpowers.sdd.2026-10-31-actualizacion-proyecto.native-runtime-env.lib.python3.12.site-packages.backend.tests.runtime.test_storage_volume::test_storage_guard_rejects_before_admission",
+          "outcome": "passed"
+        },
+        {
+          "id": ".superpowers.sdd.2026-10-31-actualizacion-proyecto.native-runtime-env.lib.python3.12.site-packages.backend.tests.runtime.test_storage_volume::test_symlink_cannot_redirect_mutable_root",
+          "outcome": "passed"
+        },
+        {
+          "id": ".superpowers.sdd.2026-10-31-actualizacion-proyecto.native-runtime-env.lib.python3.12.site-packages.backend.tests.runtime.test_storage_volume::test_invalid_capacity_policy_is_not_coerced[max_bytes-True]",
+          "outcome": "passed"
+        },
+        {
+          "id": ".superpowers.sdd.2026-10-31-actualizacion-proyecto.native-runtime-env.lib.python3.12.site-packages.backend.tests.runtime.test_storage_volume::test_invalid_capacity_policy_is_not_coerced[max_bytes-1024]",
+          "outcome": "passed"
+        },
+        {
+          "id": ".superpowers.sdd.2026-10-31-actualizacion-proyecto.native-runtime-env.lib.python3.12.site-packages.backend.tests.runtime.test_storage_volume::test_invalid_capacity_policy_is_not_coerced[admission_free_bytes-0]",
+          "outcome": "passed"
+        },
+        {
+          "id": ".superpowers.sdd.2026-10-31-actualizacion-proyecto.native-runtime-env.lib.python3.12.site-packages.backend.tests.runtime.test_storage_volume::test_invalid_capacity_policy_is_not_coerced[admission_free_bytes-True]",
+          "outcome": "passed"
+        },
+        {
+          "id": ".superpowers.sdd.2026-10-31-actualizacion-proyecto.native-runtime-env.lib.python3.12.site-packages.backend.tests.runtime.test_storage_volume::test_configured_factory_keeps_storage_admission_guard",
+          "outcome": "passed"
+        },
+        {
+          "id": ".superpowers.sdd.2026-10-31-actualizacion-proyecto.native-runtime-env.lib.python3.12.site-packages.backend.tests.runtime.test_storage_volume::test_startup_checks_storage_before_logging_migrations_or_pairing",
+          "outcome": "passed"
+        },
+        {
+          "id": ".superpowers.sdd.2026-10-31-actualizacion-proyecto.native-runtime-env.lib.python3.12.site-packages.backend.tests.runtime.test_storage_volume::test_missing_receipt_never_downgrades_a_configured_bound",
+          "outcome": "passed"
+        },
+        {
+          "id": ".superpowers.sdd.2026-10-31-actualizacion-proyecto.native-runtime-env.lib.python3.12.site-packages.backend.tests.runtime.test_storage_volume::test_live_stop_bypasses_exhausted_admission_margin",
+          "outcome": "passed"
+        },
+        {
+          "id": ".superpowers.sdd.2026-10-31-actualizacion-proyecto.native-runtime-env.lib.python3.12.site-packages.backend.tests.runtime.test_host_installation::test_fresh_host_composes_storage_and_configured_product",
+          "outcome": "passed"
+        },
+        {
+          "id": ".superpowers.sdd.2026-10-31-actualizacion-proyecto.native-runtime-env.lib.python3.12.site-packages.backend.tests.runtime.test_host_installation::test_reinitialization_preserves_the_original_host",
+          "outcome": "passed"
+        },
+        {
+          "id": ".superpowers.sdd.2026-10-31-actualizacion-proyecto.native-runtime-env.lib.python3.12.site-packages.backend.tests.runtime.test_host_installation::test_invalid_host_setup_creates_no_partial_installation[existing]",
+          "outcome": "passed"
+        },
+        {
+          "id": ".superpowers.sdd.2026-10-31-actualizacion-proyecto.native-runtime-env.lib.python3.12.site-packages.backend.tests.runtime.test_host_installation::test_invalid_host_setup_creates_no_partial_installation[nested_witness]",
+          "outcome": "passed"
+        },
+        {
+          "id": ".superpowers.sdd.2026-10-31-actualizacion-proyecto.native-runtime-env.lib.python3.12.site-packages.backend.tests.runtime.test_host_installation::test_invalid_host_setup_creates_no_partial_installation[missing_asset]",
+          "outcome": "passed"
+        },
+        {
+          "id": ".superpowers.sdd.2026-10-31-actualizacion-proyecto.native-runtime-env.lib.python3.12.site-packages.backend.tests.runtime.test_host_installation::test_invalid_host_setup_creates_no_partial_installation[unknown_field]",
+          "outcome": "passed"
+        },
+        {
+          "id": ".superpowers.sdd.2026-10-31-actualizacion-proyecto.native-runtime-env.lib.python3.12.site-packages.backend.tests.runtime.test_host_installation::test_host_probe_observes_and_retires_its_own_domain",
+          "outcome": "passed"
+        },
+        {
+          "id": ".superpowers.sdd.2026-10-31-actualizacion-proyecto.native-runtime-env.lib.python3.12.site-packages.backend.tests.runtime.test_host_installation::test_launcher_consumes_prepared_host_without_shell_environment",
+          "outcome": "passed"
+        },
+        {
+          "id": ".superpowers.sdd.2026-10-31-actualizacion-proyecto.native-runtime-env.lib.python3.12.site-packages.backend.tests.runtime.test_host_installation::test_host_refuses_missing_cpu_controller_before_creating_installation",
+          "outcome": "passed"
+        },
+        {
+          "id": ".superpowers.sdd.2026-10-31-actualizacion-proyecto.native-runtime-env.lib.python3.12.site-packages.backend.tests.runtime.test_owned_factory::test_owned_memory_exhaustion_is_closed_and_explained_to_the_owner",
+          "outcome": "passed"
+        },
+        {
+          "id": ".superpowers.sdd.2026-10-31-actualizacion-proyecto.native-runtime-env.lib.python3.12.site-packages.backend.tests.runtime.test_owned_factory::test_configured_owned_product_run_persists_draft_and_analysis_receipts[research]",
+          "outcome": "passed"
+        },
+        {
+          "id": ".superpowers.sdd.2026-10-31-actualizacion-proyecto.native-runtime-env.lib.python3.12.site-packages.backend.tests.runtime.test_owned_factory::test_configured_owned_product_run_persists_draft_and_analysis_receipts[review]",
+          "outcome": "passed"
+        },
+        {
+          "id": ".superpowers.sdd.2026-10-31-actualizacion-proyecto.native-runtime-env.lib.python3.12.site-packages.backend.tests.runtime.test_owned_factory::test_owned_configuration_requires_its_actual_application_controller",
+          "outcome": "passed"
+        },
+        {
+          "id": ".superpowers.sdd.2026-10-31-actualizacion-proyecto.native-runtime-env.lib.python3.12.site-packages.backend.tests.runtime.test_owned_factory::test_owned_configuration_never_initializes_absent_global_authority",
+          "outcome": "passed"
+        },
+        {
+          "id": ".superpowers.sdd.2026-10-31-actualizacion-proyecto.native-runtime-env.lib.python3.12.site-packages.backend.tests.runtime.test_owned_factory::test_unavailable_search_leaves_an_actionable_owner_issue_without_dispatch",
+          "outcome": "passed"
+        },
+        {
+          "id": ".superpowers.sdd.2026-10-31-actualizacion-proyecto.native-runtime-env.lib.python3.12.site-packages.backend.tests.runtime.test_owned_factory::test_owned_stop_withdraws_startup_or_generation_and_preserves_unknown_dispatch[stop-prepare]",
+          "outcome": "passed"
+        },
+        {
+          "id": ".superpowers.sdd.2026-10-31-actualizacion-proyecto.native-runtime-env.lib.python3.12.site-packages.backend.tests.runtime.test_owned_factory::test_owned_stop_withdraws_startup_or_generation_and_preserves_unknown_dispatch[stop-turn]",
+          "outcome": "passed"
+        },
+        {
+          "id": ".superpowers.sdd.2026-10-31-actualizacion-proyecto.native-runtime-env.lib.python3.12.site-packages.backend.tests.runtime.test_owned_factory::test_owned_stop_withdraws_startup_or_generation_and_preserves_unknown_dispatch[correct-prepare]",
+          "outcome": "passed"
+        },
+        {
+          "id": ".superpowers.sdd.2026-10-31-actualizacion-proyecto.native-runtime-env.lib.python3.12.site-packages.backend.tests.runtime.test_owned_factory::test_owned_stop_withdraws_startup_or_generation_and_preserves_unknown_dispatch[correct-turn]",
+          "outcome": "passed"
+        },
+        {
+          "id": ".superpowers.sdd.2026-10-31-actualizacion-proyecto.native-runtime-env.lib.python3.12.site-packages.backend.tests.runtime.test_owned_factory::test_owned_business_source_is_pinned_and_rejects_a_replaced_database",
+          "outcome": "passed"
+        },
+        {
+          "id": ".superpowers.sdd.2026-10-31-actualizacion-proyecto.native-runtime-env.lib.python3.12.site-packages.backend.tests.runtime.test_owned_factory::test_app_lifespan_and_owner_http_entry_use_configured_owned_factory",
+          "outcome": "passed"
+        },
+        {
+          "id": ".superpowers.sdd.2026-10-31-actualizacion-proyecto.native-runtime-env.lib.python3.12.site-packages.backend.tests.runtime.test_plan_execution::test_new_delivery_version_supports_bounded_material_descriptors",
+          "outcome": "passed"
+        },
+        {
+          "id": ".superpowers.sdd.2026-10-31-actualizacion-proyecto.native-runtime-env.lib.python3.12.site-packages.backend.tests.runtime.test_plan_execution::test_prepared_version_two_delivery_retains_its_original_bytes_and_hash",
+          "outcome": "passed"
+        },
+        {
+          "id": ".superpowers.sdd.2026-10-31-actualizacion-proyecto.native-runtime-env.lib.python3.12.site-packages.backend.tests.runtime.test_plan_execution::test_execution_requires_distinct_owner_authorization_and_original_delivery",
+          "outcome": "passed"
+        },
+        {
+          "id": ".superpowers.sdd.2026-10-31-actualizacion-proyecto.native-runtime-env.lib.python3.12.site-packages.backend.tests.runtime.test_plan_execution::test_dependent_handoff_contains_original_accepted_evidence_and_blocks_changed_context",
+          "outcome": "passed"
+        },
+        {
+          "id": ".superpowers.sdd.2026-10-31-actualizacion-proyecto.native-runtime-env.lib.python3.12.site-packages.backend.tests.runtime.test_plan_execution::test_execution_pause_and_resume_never_replay_an_attempted_delivery",
+          "outcome": "passed"
+        },
+        {
+          "id": ".superpowers.sdd.2026-10-31-actualizacion-proyecto.native-runtime-env.lib.python3.12.site-packages.backend.tests.runtime.test_plan_execution::test_changed_dependency_graph_cannot_reuse_owner_execution_manifest",
+          "outcome": "passed"
+        },
+        {
+          "id": ".superpowers.sdd.2026-10-31-actualizacion-proyecto.native-runtime-env.lib.python3.12.site-packages.backend.tests.runtime.test_plan_execution::test_service_recovers_never_started_delivery_and_stop_prevents_refill",
+          "outcome": "passed"
+        },
+        {
+          "id": ".superpowers.sdd.2026-10-31-actualizacion-proyecto.native-runtime-env.lib.python3.12.site-packages.backend.tests.runtime.test_plan_execution::test_changed_prerequisite_blocks_acceptance_of_already_delivered_consumer",
+          "outcome": "passed"
+        },
+        {
+          "id": ".superpowers.sdd.2026-10-31-actualizacion-proyecto.native-runtime-env.lib.python3.12.site-packages.backend.tests.runtime.test_plan_execution::test_execution_http_requires_exact_owner_manifest_and_separate_pause_control",
+          "outcome": "passed"
+        },
+        {
+          "id": ".superpowers.sdd.2026-10-31-actualizacion-proyecto.native-runtime-env.lib.python3.12.site-packages.backend.tests.runtime.test_prompt_catalog::test_every_native_profile_has_one_shared_policy_and_exact_versioned_identity[research-research-scientific_research]",
+          "outcome": "passed"
+        },
+        {
+          "id": ".superpowers.sdd.2026-10-31-actualizacion-proyecto.native-runtime-env.lib.python3.12.site-packages.backend.tests.runtime.test_prompt_catalog::test_every_native_profile_has_one_shared_policy_and_exact_versioned_identity[research-review-code_audit]",
+          "outcome": "passed"
+        },
+        {
+          "id": ".superpowers.sdd.2026-10-31-actualizacion-proyecto.native-runtime-env.lib.python3.12.site-packages.backend.tests.runtime.test_prompt_catalog::test_every_native_profile_has_one_shared_policy_and_exact_versioned_identity[research-investigation-investigation]",
+          "outcome": "passed"
+        },
+        {
+          "id": ".superpowers.sdd.2026-10-31-actualizacion-proyecto.native-runtime-env.lib.python3.12.site-packages.backend.tests.runtime.test_prompt_catalog::test_every_native_profile_has_one_shared_policy_and_exact_versioned_identity[research-plan-planning]",
+          "outcome": "passed"
+        },
+        {
+          "id": ".superpowers.sdd.2026-10-31-actualizacion-proyecto.native-runtime-env.lib.python3.12.site-packages.backend.tests.runtime.test_prompt_catalog::test_every_native_profile_has_one_shared_policy_and_exact_versioned_identity[development-code-development]",
+          "outcome": "passed"
+        },
+        {
+          "id": ".superpowers.sdd.2026-10-31-actualizacion-proyecto.native-runtime-env.lib.python3.12.site-packages.backend.tests.runtime.test_prompt_catalog::test_every_native_profile_has_one_shared_policy_and_exact_versioned_identity[code_review-code-code_review]",
+          "outcome": "passed"
+        },
+        {
+          "id": ".superpowers.sdd.2026-10-31-actualizacion-proyecto.native-runtime-env.lib.python3.12.site-packages.backend.tests.runtime.test_prompt_catalog::test_every_native_profile_has_one_shared_policy_and_exact_versioned_identity[finding_review-research-finding_review]",
+          "outcome": "passed"
+        },
+        {
+          "id": ".superpowers.sdd.2026-10-31-actualizacion-proyecto.native-runtime-env.lib.python3.12.site-packages.backend.tests.runtime.test_prompt_catalog::test_catalog_does_not_relabel_old_instructions_or_admit_host_publication_as_inference",
+          "outcome": "passed"
+        },
+        {
+          "id": ".superpowers.sdd.2026-10-31-actualizacion-proyecto.native-runtime-env.lib.python3.12.site-packages.backend.tests.runtime.test_prompt_catalog::test_recorded_catalog_two_identity_survives_new_policy_without_relabeling",
+          "outcome": "passed"
+        },
+        {
+          "id": ".superpowers.sdd.2026-10-31-actualizacion-proyecto.native-runtime-env.lib.python3.12.site-packages.backend.tests.runtime.test_prompt_catalog::test_warmup_compatibility_entry_refuses_before_http_or_prompt_rendering",
+          "outcome": "passed"
+        },
+        {
+          "id": ".superpowers.sdd.2026-10-31-actualizacion-proyecto.native-runtime-env.lib.python3.12.site-packages.backend.tests.runtime.test_prompt_catalog::test_actual_owned_turn_records_the_exact_versioned_policy_sent_to_native",
+          "outcome": "passed"
+        }
+      ]
+    }
+  ],
+  "vm": "docs/modernization/storage-volume-vm.json",
+  "independent_disk_inspection": "docs/modernization/storage-volume-disk-inspection.json",
+  "docstrings": 57,
+  "prompt_decisions_current": 83,
+  "prompt_consumers_revalidated": 3,
+  "product_catalog_version": 6,
+  "model_turns": 0,
+  "lint_deferred": {
+    "count": 20,
+    "codes": {
+      "I001": 10,
+      "TRY004": 3,
+      "F401": 1,
+      "F811": 4,
+      "SIM117": 1,
+      "BLE001": 1
+    },
+    "item": "DD096"
+  },
+  "global_suite_rerun": false,
+  "broad_scenarios_closed": 0,
+  "fully_accepted_pages": 0,
+  "limitations": [
+    "Optional explicit policy: existing unbounded hosts have not been migrated.",
+    "Kernel ext4 volume provisioning is an operator prerequisite; no changes to the real host mounts.",
+    "VM proves full filesystem and orderly remount, not power loss, inode exhaustion or DB writes during ENOSPC.",
+    "Auxiliary supervisor resources and storage outside the volume remain primary work."
+  ]
+}

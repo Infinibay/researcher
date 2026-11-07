@@ -1,0 +1,13 @@
+{
+  "wheel": ".superpowers/sdd/2026-10-31-actualizacion-proyecto/storage-volume-final-dist/researcher-0.1.0-cp312-cp312-linux_x86_64.whl",
+  "sha256": "92e4fb1792e1485e15780b8885a9254232468ee1fa04aa2d488d6a6fa4d042b2",
+  "matching_python_sql_files": 612,
+  "product_python_sql_files": 325,
+  "mismatches": [],
+  "vm_wheel_sha256": "46cf924f8dbe82bee4e2993b2683cab6210ccd864cacdda272a5629ab92082d0",
+  "changed_after_vm": [
+    "backend/runtime/service.py",
+    "backend/tests/runtime/test_storage_volume.py"
+  ],
+  "after_vm_scope": "Plan pause bypasses the new-work storage margin; added live Stop regression. Storage implementation, setup, API composition/startup identical to the actual VM-tested wheel. No repeat of the VM."
+}
