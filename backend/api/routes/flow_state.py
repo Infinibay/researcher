@@ -36,7 +36,7 @@ class FlowStateResponse(BaseModel):
 
 
 @router.get("/{project_id}", response_model=FlowStateResponse)
-async def get_flow_state(project_id: int) -> FlowStateResponse:
+def get_flow_state(project_id: int) -> FlowStateResponse:
     """Project-scope the old snapshot and expose only its summary without deserializing executable flow state or replaying approval."""
     snapshot = load_snapshot(project_id)
     if snapshot is None:

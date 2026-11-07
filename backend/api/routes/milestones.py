@@ -22,7 +22,7 @@ def _row_to_response(row: dict) -> MilestoneResponse:
 
 
 @router.get("", response_model=list[MilestoneResponse])
-async def list_milestones(
+def list_milestones(
     project_id: int = Query(...),
     epic_id: int | None = Query(default=None),
 ):
@@ -58,7 +58,7 @@ async def list_milestones(
 
 
 @router.post("", response_model=MilestoneResponse, status_code=201)
-async def create_milestone(body: MilestoneCreate):
+def create_milestone(body: MilestoneCreate):
     """Create a new milestone under an epic."""
 
     def _create(conn: sqlite3.Connection) -> dict:
@@ -86,7 +86,7 @@ async def create_milestone(body: MilestoneCreate):
 
 
 @router.get("/{milestone_id}", response_model=MilestoneResponse)
-async def get_milestone(milestone_id: int):
+def get_milestone(milestone_id: int):
     """Get milestone details with task counts."""
 
     def _query(conn: sqlite3.Connection) -> dict | None:
@@ -114,7 +114,7 @@ async def get_milestone(milestone_id: int):
 
 
 @router.put("/{milestone_id}", response_model=MilestoneResponse)
-async def update_milestone(milestone_id: int, body: MilestoneUpdate):
+def update_milestone(milestone_id: int, body: MilestoneUpdate):
     """Update a milestone."""
 
     def _update(conn: sqlite3.Connection) -> dict | None:
@@ -160,7 +160,7 @@ async def update_milestone(milestone_id: int, body: MilestoneUpdate):
 
 
 @router.delete("/{milestone_id}", status_code=204)
-async def delete_milestone(milestone_id: int):
+def delete_milestone(milestone_id: int):
     """Delete a milestone."""
 
     def _delete(conn: sqlite3.Connection) -> bool:

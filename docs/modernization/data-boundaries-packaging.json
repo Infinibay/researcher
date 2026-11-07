@@ -1,0 +1,36 @@
+{
+  "base_commit": "6b2f938",
+  "wheel": "researcher-0.1.0-cp312-cp312-linux_x86_64.whl",
+  "wheel_sha256": "5349adb6610ea07312da324c05c35b8135abd4d6ff0ffc99483db388f2437c4a",
+  "source_files_matching_wheel_and_installation": 657,
+  "product_files_matching": 348,
+  "observed": {
+    "cases": 323,
+    "passed": 323,
+    "failed": 0,
+    "skipped": 0,
+    "backend_modules": 261,
+    "all_backend_imports_from_native_env": true,
+    "seconds": 121.976,
+    "exit_code": 0
+  },
+  "tests": [
+    "backend/tests/api",
+    "backend/tests/runtime/test_migration_chain.py",
+    "backend/tests/runtime/test_coordination.py",
+    "backend/tests/runtime/test_engine_boundaries.py",
+    "backend/tests/runtime/test_runtime_service.py",
+    "backend/tests/runtime/test_data_boundaries.py",
+    "backend/tests/runtime/test_result_acceptance.py",
+    "backend/tests/runtime/test_code_acceptance.py",
+    "backend/tests/tools/test_db_layer.py",
+    "backend/tests/state"
+  ],
+  "real_model_turns": 0,
+  "limits": [
+    "Selected tests, not the global suite",
+    "Synthetic managed installation data, no historical user-data migration",
+    "D01-D04: current migration chain and startup readiness, real writer contention plus responsive owner/WS/Stop controls, task/event crash boundaries and fenced cancellation/reopening. Inference is controlled; no production load or historical-data claim.",
+    "No model calls, external accounts or GitHub workflow execution"
+  ]
+}

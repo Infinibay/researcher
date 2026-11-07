@@ -22,7 +22,7 @@ router = APIRouter(prefix="/api", tags=["artifacts"])
 
 
 @router.get("/artifacts", response_model=list[ArtifactListResponse])
-async def list_artifacts(
+def list_artifacts(
     project_id: int = Query(...),
     type: str | None = Query(default=None),
     limit: int = Query(default=50, ge=1, le=200),
@@ -68,7 +68,7 @@ async def list_artifacts(
 
 
 @router.get("/artifacts/{artifact_id}", response_model=ArtifactDetailResponse)
-async def get_artifact(artifact_id: int, project_id: int = Query(..., gt=0)):
+def get_artifact(artifact_id: int, project_id: int = Query(..., gt=0)):
     """Read the stored body for a matching project, or return 404 without it."""
 
     def _query(conn: sqlite3.Connection) -> dict | None:
@@ -88,7 +88,7 @@ async def get_artifact(artifact_id: int, project_id: int = Query(..., gt=0)):
 @router.get(
     "/artifacts/{artifact_id}/evidence", response_model=ArtifactEvidenceResponse
 )
-async def get_artifact_evidence(
+def get_artifact_evidence(
     artifact_id: int,
     project_id: int = Query(..., gt=0),
     offset: int = Query(default=0, ge=0),

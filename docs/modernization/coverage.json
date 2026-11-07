@@ -1448,7 +1448,7 @@
       ]
     },
     "D01": {
-      "status": "in_progress",
+      "status": "complete",
       "evidence": [
         "backend/tests/tools/test_database_initialization.py",
         "backend/tests/research",
@@ -1488,17 +1488,28 @@
         "docs/modernization/current-global-results.json",
         "docs/modernization/backup-sidecar-results.json",
         "docs/modernization/backup-sidecar-packaging.json",
-        "backend/tests/runtime/test_installation_backup.py"
+        "backend/tests/runtime/test_installation_backup.py",
+        "docs/modernization/data-boundaries-review.md",
+        "docs/modernization/data-boundaries-packaging.json",
+        "docs/modernization/data-boundaries-final-packaging.json",
+        "docs/modernization/data-boundaries-artifact-comparison.json",
+        "backend/tests/api/test_persistence_boundaries.py",
+        "backend/tests/runtime/test_data_boundaries.py"
       ],
-      "remaining": [
-        "Complete scenario acceptance across durable product runtime, legacy consumers, data recovery and UI where applicable"
-      ],
+      "remaining": [],
       "implemented": [
-        "Coherent forward catalog18–56 and explicit staged targets;39 abrupt child-writer interruptions resume original DB, historical fixtures/inverses preserve original data.208 source and127 installed directed cases pass; no real-data/full-restore acceptance."
+        "Coherent forward catalog18–56 and explicit staged targets;39 abrupt child-writer interruptions resume original DB, historical fixtures/inverses preserve original data.208 source and127 installed directed cases pass; no real-data/full-restore acceptance.",
+        "Supported forward catalog18–65 survives all48 interrupted migration writers; startup rejects relational corruption before owner access, required schema history gates readiness, failures propagate without serving partial storage."
+      ],
+      "completion_scope": "Supported forward catalog18–65 survives all48 interrupted migration writers; startup rejects relational corruption before owner access, required schema history gates readiness, failures propagate without serving partial storage.",
+      "verified_at": "2026-11-07",
+      "limitations": [
+        "Synthetic managed data and supported migration baseline17 onward; historical owner-data import remains a separate deliverable.",
+        "Real SQLite/HTTP/WebSocket with controlled inference; no representative load, whole-page, human-comprehension or new global-suite claim."
       ]
     },
     "D02": {
-      "status": "in_progress",
+      "status": "complete",
       "evidence": [
         "docs/architecture/owned-commands.md",
         "backend/tests/runtime/test_command_executor.py",
@@ -1519,11 +1530,27 @@
         "docs/modernization/broker-projection-evidence.json",
         "backend/tests/runtime/test_broker_projection.py",
         "docs/modernization/broker-native-evidence.json",
-        "backend/tests/runtime/test_broker_native.py"
+        "backend/tests/runtime/test_broker_native.py",
+        "docs/modernization/data-boundaries-review.md",
+        "docs/modernization/data-boundaries-packaging.json",
+        "docs/modernization/data-boundaries-final-packaging.json",
+        "docs/modernization/data-boundaries-artifact-comparison.json",
+        "backend/tests/api/test_persistence_boundaries.py",
+        "backend/tests/runtime/test_data_boundaries.py"
+      ],
+      "completion_scope": "Retained blocking CRUD/Git/history handlers execute in bounded ASGI workers; real SQLite writer contention leaves health/WebSocket and native Stop interruption responsive, with durable cancellation only after its commit and no automatic retry after observed row changes.",
+      "verified_at": "2026-11-07",
+      "remaining": [],
+      "limitations": [
+        "Synthetic managed data and supported migration baseline17 onward; historical owner-data import remains a separate deliverable.",
+        "Real SQLite/HTTP/WebSocket with controlled inference; no representative load, whole-page, human-comprehension or new global-suite claim."
+      ],
+      "implemented": [
+        "Retained blocking CRUD/Git/history handlers execute in bounded ASGI workers; real SQLite writer contention leaves health/WebSocket and native Stop interruption responsive, with durable cancellation only after its commit and no automatic retry after observed row changes."
       ]
     },
     "D03": {
-      "status": "in_progress",
+      "status": "complete",
       "evidence": [
         "backend/tests/research",
         "docs/architecture/research-slice.md",
@@ -1539,14 +1566,27 @@
         "docs/modernization/owned-command-evidence.json",
         "docs/modernization/broker-projection-evidence.json",
         "backend/tests/runtime/test_broker_projection.py",
-        "backend/tests/runtime/test_broker_rpc.py"
+        "backend/tests/runtime/test_broker_rpc.py",
+        "docs/modernization/data-boundaries-review.md",
+        "docs/modernization/data-boundaries-packaging.json",
+        "docs/modernization/data-boundaries-final-packaging.json",
+        "docs/modernization/data-boundaries-artifact-comparison.json",
+        "backend/tests/api/test_persistence_boundaries.py",
+        "backend/tests/runtime/test_data_boundaries.py"
       ],
-      "remaining": [
-        "Complete scenario acceptance across durable product runtime, legacy consumers, data recovery and UI where applicable"
+      "remaining": [],
+      "completion_scope": "Task lifecycle audit triggers share the business transaction without a duplicate post-commit API event; physical crash before/after commit preserves zero/zero or one/one task/event, with native cancellation and acceptance rollback covered.",
+      "verified_at": "2026-11-07",
+      "limitations": [
+        "Synthetic managed data and supported migration baseline17 onward; historical owner-data import remains a separate deliverable.",
+        "Real SQLite/HTTP/WebSocket with controlled inference; no representative load, whole-page, human-comprehension or new global-suite claim."
+      ],
+      "implemented": [
+        "Task lifecycle audit triggers share the business transaction without a duplicate post-commit API event; physical crash before/after commit preserves zero/zero or one/one task/event, with native cancellation and acceptance rollback covered."
       ]
     },
     "D04": {
-      "status": "in_progress",
+      "status": "complete",
       "evidence": [
         "backend/tests/research",
         "docs/architecture/research-slice.md",
@@ -1567,10 +1607,23 @@
         "frontend/tests/runtime.test.ts",
         "docs/modernization/broker-projection-evidence.json",
         "backend/tests/runtime/test_broker_projection.py",
-        "backend/tests/runtime/test_broker_rpc.py"
+        "backend/tests/runtime/test_broker_rpc.py",
+        "docs/modernization/data-boundaries-review.md",
+        "docs/modernization/data-boundaries-packaging.json",
+        "docs/modernization/data-boundaries-final-packaging.json",
+        "docs/modernization/data-boundaries-artifact-comparison.json",
+        "backend/tests/api/test_persistence_boundaries.py",
+        "backend/tests/runtime/test_data_boundaries.py"
       ],
-      "remaining": [
-        "Complete scenario acceptance across durable product runtime, legacy consumers, data recovery and UI where applicable"
+      "remaining": [],
+      "completion_scope": "Explicit generic task graph and native lifecycle denial preserve fenced task/run/attempt transitions; Stop/completion and context correction retain historical observations without revival, and accepted work reopens only through versioned owner context and explicit new admission.",
+      "verified_at": "2026-11-07",
+      "limitations": [
+        "Synthetic managed data and supported migration baseline17 onward; historical owner-data import remains a separate deliverable.",
+        "Real SQLite/HTTP/WebSocket with controlled inference; no representative load, whole-page, human-comprehension or new global-suite claim."
+      ],
+      "implemented": [
+        "Explicit generic task graph and native lifecycle denial preserve fenced task/run/attempt transitions; Stop/completion and context correction retain historical observations without revival, and accepted work reopens only through versioned owner context and explicit new admission."
       ]
     },
     "D05": {

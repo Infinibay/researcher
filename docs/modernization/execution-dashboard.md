@@ -26,9 +26,37 @@ que se pueda comparar el avance; no presentar microajustes como tareas principal
 - Codex por suscripción y Ken publicado ensayados. Fuentes/citas, informes draft y revisión documental independiente conectados. Desarrollo admitido desde Tareas/Conversación con captura y comprobaciones explícitas; revisión independiente solicitada desde Tareas y aceptación del propietario conectada. Publicación local desde aceptación conectada; recuperación local de sólo lectura conectada; transporte remoto configurable conectado; recuperación remota y controles de Tareas conectados; ejecución/activación antiguas por tarea y proyecto retiradas; auxiliares de generación/proveedor, herramientas antiguas y sus cinco bibliotecas retirados. También se retiraron API interna, CLI, servicios/listeners y flows/helpers antiguos. También se retiraron autonomía, plantillas históricas y lectores de proveedor sin consumidores; se conserva el control de parada de trabajadores registrados.
 - Interfaz: doce pilotos, 36/36 conceptos de escritorio y 12/12 móviles; todas las rutas tienen piloto y 0/12 páginas están completamente aceptadas.
 - Última suite global: `9fb873c`,2210 casos,2178 pasan,31 fallan y1 error de fixture; sin omisiones. La carrera de backup encontrada se corrigió después con40 pruebas instaladas. No se declara una nueva corrida global verde; la referencia `0c8b8d9` queda como evidencia histórica.
-- U06, E01–E12 y C01–C09 quedan comprobados con el alcance de sus matrices; siguen 21 de 43 escenarios amplios sin aceptación completa en [coverage.json](coverage.json). No hay un porcentaje global defendible.
+- U06, E01–E12, C01–C09 y D01–D04 quedan comprobados con el alcance de sus matrices; siguen 17 de 43 escenarios amplios sin aceptación completa en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Estado actual: C10 observado; siguiente datos y persistencia
+## Estado actual: D01–D04 comprobados; siguiente artefactos y Git
+
+Bloque **2026-11-07 19:56:34–20:12:04 UTC**, **15 min 30 s hasta verificar**,
+desde `6b2f938`. Documentación/checkpoint posteriores excluidos.
+Se corrigen integridad antes de servir, bloqueo del loop en 49 handlers, duplicación
+de eventos/retry posterior a cambios y grafo genérico de tareas.
+
+**323 casos instalados iniciales y 124 finales pasan**, sin fallos ni omisiones;
+son selecciones solapadas de dos artefactos. Sólo los 17 handlers de Git/historial
+difieren en el final; 657 fuentes coinciden, 348 de producto. Cero turnos de modelo.
+[Matriz, resultados, fallos reproducidos y límites](data-boundaries-review.md).
+
+- Terminado: **U06, E01–E12, C01–C09 y D01–D04**: 26 de 43 escenarios.
+- En curso al cerrar: documentación y checkpoint local del bloque verificado.
+- Siguiente principal: **D05–D09, artefactos y Git**: contenido recuperable,
+  identidad por repositorio/proyecto, publicación exacta, conservación de trabajo
+  y creación/reparación explícitas. **No iniciado**; registrar hora real al comenzar.
+- Pendiente después: D10–D13 y conocimiento/superficies restantes, datos históricos,
+  evaluación representativa/comprensión humana, aceptación de 12 páginas,
+  dependencias y distribución.
+- Al final: pendientes aplazados —incluida entrega independiente C10/DD116—,
+  validación global y revisión independiente de todo el plan.
+
+**17 de 43 escenarios abiertos; 0/12 páginas plenamente aceptadas**. Hay 12 pilotos y
+48 conceptos; estos conteos no miden porcentaje de implementación. La última suite
+global conserva fallos históricos. Primero lo grueso, luego lo fino; lista y tiempos
+se publican en cada transición y se conservan tras compactar.
+
+## Etapa anterior: C10 observado; siguiente datos y persistencia
 
 Bloque **2026-11-07 19:42:23–19:54:51 UTC**, **12 min 28 s hasta verificar**,
 desde `4cca5d4`. Documentación y checkpoint posteriores excluidos.

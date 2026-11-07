@@ -1,0 +1,10 @@
+{
+  "initial_wheel_sha256": "5349adb6610ea07312da324c05c35b8135abd4d6ff0ffc99483db388f2437c4a",
+  "final_wheel_sha256": "351ed7a0a06b7ac4d74b02b9a1ccd3cfd7e05412b87e3946cbf53bbaee847deb",
+  "changed_python_sql": [
+    "backend/api/routes/flow_state.py",
+    "backend/api/routes/git.py"
+  ],
+  "final_source_files_matching": 657,
+  "purpose": "Final verification covers the additional17 synchronous Git/history handlers; earlier323installed cases remain evidence of their original artifact."
+}

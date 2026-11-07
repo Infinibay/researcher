@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import json
 import sqlite3
 
 from fastapi import APIRouter, HTTPException, Query, Request
@@ -17,9 +16,9 @@ from backend.api.models.task import (
     TaskResponse,
     TaskUpdate,
 )
-from backend.state.dependency_validator import DependencyValidator
 from backend.state.machine import TaskStateMachine
 from backend.tools.base.db import execute_with_retry
+from starlette.concurrency import run_in_threadpool
 
 router = APIRouter(prefix="/api/tasks", tags=["tasks"])
 
@@ -29,7 +28,7 @@ def _row_to_response(row: dict) -> TaskResponse:
 
 
 @router.get("", response_model=list[TaskResponse])
-async def list_tasks(
+def list_tasks(
     project_id: int = Query(...),
     status: str | None = Query(default=None),
     epic_id: int | None = Query(default=None),
@@ -69,10 +68,11 @@ async def list_tasks(
 
 
 @router.post("", response_model=TaskResponse, status_code=201)
-async def create_task(body: TaskCreate):
-    """Create a new task with optional dependencies."""
+def create_task(body: TaskCreate):
+    """Commit task, dependencies and its single trigger-owned audit event together."""
 
     def _create(conn: sqlite3.Connection) -> dict:
+        """Persist one task and its dependencies; the database trigger owns the matching audit record."""
         project_id = body.project_id
 
         # If no project_id, try to get it from epic or milestone
@@ -132,18 +132,6 @@ async def create_task(body: TaskCreate):
 
         conn.commit()
 
-        # Log event
-        try:
-            conn.execute(
-                """INSERT INTO events_log
-                   (project_id, event_type, event_source, entity_type, entity_id, event_data_json, created_at)
-                   VALUES (?, 'task_created', 'api', 'task', ?, ?, CURRENT_TIMESTAMP)""",
-                (project_id, task_id, json.dumps({"title": body.title})),
-            )
-            conn.commit()
-        except Exception:
-            pass
-
         row = conn.execute("SELECT * FROM tasks WHERE id = ?", (task_id,)).fetchone()
         return dict(row)
 
@@ -152,7 +140,7 @@ async def create_task(body: TaskCreate):
 
 
 @router.get("/{task_id}", response_model=TaskResponse)
-async def get_task(task_id: int, project_id: int | None = Query(default=None, gt=0)):
+def get_task(task_id: int, project_id: int | None = Query(default=None, gt=0)):
     """Read a task, rejecting mismatched project-scoped report/deep links.
 
     Omitting project_id preserves compatibility with existing task consumers.
@@ -176,46 +164,15 @@ async def get_task(task_id: int, project_id: int | None = Query(default=None, gt
 async def update_task(task_id: int, body: TaskUpdate, request: Request):
     """Edit versioned task inputs; native completion requires a separate owner acceptance."""
 
-    # ── Pre-DB validation (Comments 1 & 3) ────────────────────────────
-    # Fetch current status to validate before entering the DB callback.
-    def _fetch_current(conn: sqlite3.Connection) -> dict | None:
-        row = conn.execute(
-            "SELECT id, status FROM tasks WHERE id = ?", (task_id,)
-        ).fetchone()
-        return dict(row) if row else None
-
-    current = execute_with_retry(_fetch_current)
-    if not current:
-        raise TaskNotFound(task_id)
-
-    old_status = current["status"]
-
-    if body.status is not None and body.status != old_status:
-        # Validate state transition — return 400 on invalid transitions
-        try:
-            TaskStateMachine.validate_transition(old_status, body.status)
-        except ValueError as e:
-            raise HTTPException(status_code=400, detail=str(e))
-
-        # Block transition to in_progress if dependencies are not met
-        if body.status == "in_progress" and not DependencyValidator.can_start(task_id):
-            unmet = DependencyValidator.get_unmet_dependencies(task_id)
-            blockers = ", ".join(
-                f"#{d['id']} {d['title']} ({d['status']})" for d in unmet
-            )
-            raise HTTPException(
-                status_code=400,
-                detail=f"Task {task_id} cannot start — blocked by: {blockers}",
-            )
-
-    # ── Apply update ──────────────────────────────────────────────────
     def _update(conn: sqlite3.Connection) -> tuple[dict, bool] | None:
         """Version edited inputs atomically and refuse generic lifecycle overrides for native-owned tasks."""
+        conn.execute("BEGIN IMMEDIATE")
         row = conn.execute("SELECT * FROM tasks WHERE id = ?", (task_id,)).fetchone()
         if not row:
             return None
 
         def context_version():
+            """Read the version under this edit's transaction before notifying the local runtime."""
             context = conn.execute(
                 "SELECT version FROM task_contexts WHERE task_id=?", (task_id,)
             ).fetchone()
@@ -228,6 +185,8 @@ async def update_task(task_id: int, body: TaskUpdate, request: Request):
             or conn.execute("SELECT 1 FROM runtime_runs WHERE task_id=? LIMIT 1", (task_id,)).fetchone()
         ):
             raise HTTPException(409, "Use native task acceptance, stop or context-correction controls to change this task's lifecycle")
+        if body.status is not None and body.status != row["status"]:
+            TaskStateMachine.validate_transition(row["status"], body.status)
         previous_version = context_version()
 
         updates = []
@@ -265,26 +224,10 @@ async def update_task(task_id: int, body: TaskUpdate, request: Request):
             )
             conn.commit()
 
-        # Emit status change event
-        if body.status is not None and body.status != old_status:
-            project_id = row["project_id"]
-            try:
-                conn.execute(
-                    """INSERT INTO events_log
-                       (project_id, event_type, event_source, entity_type,
-                        entity_id, event_data_json, created_at)
-                       VALUES (?, 'task_status_changed', 'api', 'task', ?, ?, CURRENT_TIMESTAMP)""",
-                    (project_id, task_id,
-                     json.dumps({"old_status": old_status, "new_status": body.status})),
-                )
-                conn.commit()
-            except Exception:
-                pass
-
         row = conn.execute("SELECT * FROM tasks WHERE id = ?", (task_id,)).fetchone()
         return dict(row), context_version() != previous_version
 
-    task = execute_with_retry(_update)
+    task = await run_in_threadpool(execute_with_retry, _update)
     if not task:
         raise TaskNotFound(task_id)
     task, inputs_changed = task
@@ -295,7 +238,7 @@ async def update_task(task_id: int, body: TaskUpdate, request: Request):
 
 
 @router.delete("/{task_id}", status_code=204)
-async def delete_task(task_id: int):
+def delete_task(task_id: int):
     """Delete a task (only if backlog, pending, or cancelled)."""
 
     def _delete(conn: sqlite3.Connection) -> bool:
@@ -327,7 +270,7 @@ async def delete_task(task_id: int):
 
 
 @router.get("/{task_id}/comments", response_model=list[TaskCommentResponse])
-async def list_task_comments(task_id: int):
+def list_task_comments(task_id: int):
     """List comments for a task."""
 
     def _query(conn: sqlite3.Connection) -> list[dict]:
@@ -349,7 +292,7 @@ async def list_task_comments(task_id: int):
 
 
 @router.post("/{task_id}/comments", response_model=TaskCommentResponse, status_code=201)
-async def add_task_comment(task_id: int, body: TaskCommentCreate):
+def add_task_comment(task_id: int, body: TaskCommentCreate):
     """Add a comment to a task."""
 
     def _create(conn: sqlite3.Connection) -> dict:
@@ -376,7 +319,7 @@ async def add_task_comment(task_id: int, body: TaskCommentCreate):
 
 
 @router.get("/{task_id}/dependencies", response_model=list[TaskDependencyResponse])
-async def list_task_dependencies(task_id: int):
+def list_task_dependencies(task_id: int):
     """List dependencies for a task."""
 
     def _query(conn: sqlite3.Connection) -> list[dict]:
@@ -393,7 +336,7 @@ async def list_task_dependencies(task_id: int):
 
 
 @router.post("/{task_id}/dependencies", response_model=list[TaskDependencyResponse], status_code=201)
-async def set_task_dependencies(task_id: int, body: TaskDependencyCreate):
+def set_task_dependencies(task_id: int, body: TaskDependencyCreate):
     """Set dependencies for a task."""
 
     def _set(conn: sqlite3.Connection) -> list[dict]:

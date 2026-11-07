@@ -28,6 +28,7 @@ from backend.project_records import (
     update_project_status,
 )
 from backend.tools.base.db import execute_with_retry
+from starlette.concurrency import run_in_threadpool
 
 router = APIRouter(prefix="/api/projects", tags=["projects"])
 
@@ -88,7 +89,7 @@ def _project_to_response(project: dict) -> ProjectResponse:
 
 
 @router.get("", response_model=ProjectList)
-async def list_projects():
+def list_projects():
     """List all projects with task counts."""
 
     def _query(conn: sqlite3.Connection) -> list[dict]:
@@ -115,8 +116,8 @@ async def create_project_endpoint(body: ProjectCreate, request: Request):
         creation = await asyncio.to_thread(_workspace(request).create, **body.model_dump())
         project_id = creation['project_id']
     else:
-        project_id = create_project(name=body.name, description=body.description)
-    state = load_project_state(project_id)
+        project_id = await run_in_threadpool(create_project, name=body.name, description=body.description)
+    state = await run_in_threadpool(load_project_state, project_id)
     if not state:
         raise HTTPException(status_code=500, detail="Failed to create project")
     result = _project_to_response(state)
@@ -128,7 +129,7 @@ async def create_project_endpoint(body: ProjectCreate, request: Request):
 
 
 @router.get("/{project_id}", response_model=ProjectResponse)
-async def get_project(project_id: int):
+def get_project(project_id: int):
     """Get project details by ID."""
     state = load_project_state(project_id)
     if not state:
@@ -137,7 +138,7 @@ async def get_project(project_id: int):
 
 
 @router.get("/{project_id}/progress", response_model=ProjectProgressResponse)
-async def get_project_progress(project_id: int):
+def get_project_progress(project_id: int):
     """Get project progress metrics including task counts, epic/milestone progress."""
     from backend.state.progress import ProgressService
 
@@ -150,7 +151,7 @@ async def get_project_progress(project_id: int):
 
 
 @router.put("/{project_id}", response_model=ProjectResponse)
-async def update_project(project_id: int, body: ProjectUpdate):
+def update_project(project_id: int, body: ProjectUpdate):
     """Update metadata and operational labels; completion requires a separate exact whole-project report decision."""
     state = load_project_state(project_id)
     if not state:
@@ -198,7 +199,7 @@ async def update_project(project_id: int, body: ProjectUpdate):
 
 
 @router.delete("/{project_id}", status_code=204)
-async def delete_project(project_id: int):
+def delete_project(project_id: int):
     """Delete an explicitly selected unused project; execution history and registered workers must be preserved and reconciled instead."""
     state = load_project_state(project_id)
     if not state:

@@ -19,7 +19,7 @@ def _row_to_response(row: dict) -> EpicResponse:
 
 
 @router.get("", response_model=list[EpicResponse])
-async def list_epics(project_id: int = Query(...)):
+def list_epics(project_id: int = Query(...)):
     """List epics for a project with task and milestone counts."""
 
     def _query(conn: sqlite3.Connection) -> list[dict]:
@@ -52,7 +52,7 @@ async def list_epics(project_id: int = Query(...)):
 
 
 @router.post("", response_model=EpicResponse, status_code=201)
-async def create_epic(body: EpicCreate):
+def create_epic(body: EpicCreate):
     """Create a new epic."""
     # Validate project exists
     state = load_project_state(body.project_id)
@@ -75,7 +75,7 @@ async def create_epic(body: EpicCreate):
 
 
 @router.get("/{epic_id}", response_model=EpicResponse)
-async def get_epic(epic_id: int):
+def get_epic(epic_id: int):
     """Get epic details with task and milestone counts."""
 
     def _query(conn: sqlite3.Connection) -> dict | None:
@@ -109,7 +109,7 @@ async def get_epic(epic_id: int):
 
 
 @router.put("/{epic_id}", response_model=EpicResponse)
-async def update_epic(epic_id: int, body: EpicUpdate):
+def update_epic(epic_id: int, body: EpicUpdate):
     """Update an epic."""
 
     def _update(conn: sqlite3.Connection) -> dict | None:
@@ -151,7 +151,7 @@ async def update_epic(epic_id: int, body: EpicUpdate):
 
 
 @router.delete("/{epic_id}", status_code=204)
-async def delete_epic(epic_id: int):
+def delete_epic(epic_id: int):
     """Delete an epic and its milestones."""
 
     def _delete(conn: sqlite3.Connection) -> bool:

@@ -18,7 +18,7 @@ router = APIRouter(prefix="/api/user-requests", tags=["user-requests"])
 
 
 @router.get("/{project_id}/pending", response_model=UserRequestList)
-async def list_pending_requests(project_id: int):
+def list_pending_requests(project_id: int):
     """Return all pending user requests for a project (FIFO order)."""
 
     def _query(conn: sqlite3.Connection) -> list[dict]:
@@ -38,7 +38,7 @@ async def list_pending_requests(project_id: int):
 
 
 @router.post("/{request_id}/respond", response_model=UserRequestResponse)
-async def respond_to_request(request_id: int, body: UserRequestRespond):
+def respond_to_request(request_id: int, body: UserRequestRespond):
     """Submit a response to a pending user request."""
 
     def _respond(conn: sqlite3.Connection) -> dict | None:

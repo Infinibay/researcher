@@ -1,10 +1,15 @@
-"""Canonical task state machine — single source of truth for valid transitions."""
-
-_ALL_STATUSES = {"backlog", "pending", "in_progress", "review_ready",
-                  "rejected", "done", "cancelled", "failed", "blocked"}
+"""Manual task transition vocabulary; native executions require their separately fenced lifecycle controls."""
 
 VALID_TRANSITIONS: dict[str, set[str]] = {
-    status: _ALL_STATUSES - {status} for status in _ALL_STATUSES
+    "backlog": {"pending", "cancelled"},
+    "pending": {"in_progress", "failed", "cancelled"},
+    "in_progress": {"review_ready", "failed", "cancelled"},
+    "review_ready": {"done", "rejected", "failed", "cancelled"},
+    "rejected": {"in_progress", "failed", "cancelled"},
+    "blocked": {"pending", "failed", "cancelled"},
+    "done": set(),
+    "cancelled": set(),
+    "failed": {"pending", "cancelled"},
 }
 
 TASK_STATUSES = list(VALID_TRANSITIONS.keys())
@@ -19,11 +24,13 @@ class TaskStateMachine:
 
     @staticmethod
     def can_transition(current: str, target: str) -> bool:
+        """Check a declared edge without granting native execution or reopening authority."""
         return target in VALID_TRANSITIONS.get(current, set())
 
     @staticmethod
     def get_allowed_transitions(current: str) -> set[str]:
-        return VALID_TRANSITIONS.get(current, set())
+        """Return a copy so callers cannot mutate the shared lifecycle vocabulary."""
+        return set(VALID_TRANSITIONS.get(current, set()))
 
     @staticmethod
     def validate_transition(current: str, target: str) -> None:
@@ -41,4 +48,5 @@ class TaskStateMachine:
 
     @staticmethod
     def is_terminal(status: str) -> bool:
+        """Identify terminal labels without implying that retained work can be silently reopened."""
         return status in TERMINAL_STATUSES

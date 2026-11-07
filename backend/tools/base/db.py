@@ -36,7 +36,13 @@ def execute_with_retry[T](
     max_retries: int | None = None,
     base_delay: float | None = None,
 ) -> T:
-    """Execute fn(conn) with exponential backoff retry on SQLITE_BUSY/LOCKED."""
+    """Retry busy callbacks only before any row change has been observed.
+
+    A callback may commit before its final read fails. Once SQLite reports row
+    changes, propagate uncertainty instead of repeating a possibly committed
+    effect. Connections close/rollback on failure; migrations and external
+    effects require their own journals rather than this row-oriented helper.
+    """
     if db_path is None:
         db_path = get_db_path()
     if max_retries is None:
@@ -53,7 +59,7 @@ def execute_with_retry[T](
         except sqlite3.OperationalError as e:
             last_error = e
             err_msg = str(e).lower()
-            if ("locked" in err_msg or "busy" in err_msg) and attempt < max_retries - 1:
+            if ("locked" in err_msg or "busy" in err_msg) and conn.total_changes == 0 and attempt < max_retries - 1:
                 delay = base_delay * (2 ** attempt) + random.uniform(0, 0.1)
                 logger.warning(
                     "DB busy/locked (attempt %d/%d), retrying in %.2fs: %s",

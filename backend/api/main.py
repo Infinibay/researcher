@@ -25,7 +25,8 @@ logger = logging.getLogger(__name__)
 async def lifespan(app: FastAPI):
     """Initialize before serving and reconcile active work on shutdown."""
     from backend.api.run import setup_file_logging
-    from backend.tools.base.db import ensure_migrations
+    from backend.tools.base.db import ensure_migrations, get_db_path
+    from backend.db.readiness import verify_database
 
     with ExitStack() as cleanup:
         runtime = None
@@ -40,6 +41,7 @@ async def lifespan(app: FastAPI):
                 cleanup.callback(file_handler.close)
                 cleanup.callback(logging.getLogger().removeHandler, file_handler)
             await asyncio.to_thread(ensure_migrations, existing_only=True)
+            await asyncio.to_thread(verify_database, get_db_path())
             # A cancelled to_thread await does not stop the file-creating worker.
             # Drain it before finally removes its pairing file and sessions.
             starting_access = asyncio.create_task(

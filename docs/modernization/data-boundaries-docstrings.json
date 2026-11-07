@@ -1,0 +1,536 @@
+{
+  "documented_nodes": 73,
+  "modules_with_docstrings": [
+    "backend/api/main.py",
+    "backend/api/routes/agents.py",
+    "backend/api/routes/artifacts.py",
+    "backend/api/routes/chat.py",
+    "backend/api/routes/epics.py",
+    "backend/api/routes/flow_state.py",
+    "backend/api/routes/git.py",
+    "backend/api/routes/health.py",
+    "backend/api/routes/milestones.py",
+    "backend/api/routes/projects.py",
+    "backend/api/routes/tasks.py",
+    "backend/api/routes/user_requests.py",
+    "backend/state/machine.py",
+    "backend/tools/base/db.py",
+    "backend/db/readiness.py",
+    "backend/tests/api/test_persistence_boundaries.py",
+    "backend/tests/runtime/test_data_boundaries.py"
+  ],
+  "missing": [],
+  "contracts": [
+    {
+      "path": "backend/api/main.py",
+      "symbol": "lifespan",
+      "line": 25,
+      "docstring": "Initialize before serving and reconcile active work on shutdown.",
+      "file_sha256": "94d5725f783fa3ccf0c0ec6dd4e125e6ca8e2593befacf9f8c8f0f74462031c8"
+    },
+    {
+      "path": "backend/api/routes/agents.py",
+      "symbol": "list_agents",
+      "line": 21,
+      "docstring": "List all agents, optionally filtered by project.\n\nIncludes current running task (if any) and performance metrics.",
+      "file_sha256": "8eb6267dc32039d4ee49a389fa64c0c4977d3473892232f2a4a8f8c9a97792d8"
+    },
+    {
+      "path": "backend/api/routes/artifacts.py",
+      "symbol": "list_artifacts",
+      "line": 25,
+      "docstring": "Page artifact metadata by project, type, review status and literal text.\n\nSearch matches the case-insensitive title/path plus description, not bodies.\nCreation time and ID give deterministic ordering for equal timestamps.",
+      "file_sha256": "e887c0b1189904842393d8631fee77a9051dca4f41b9802985dbd3ff4a0f48b9"
+    },
+    {
+      "path": "backend/api/routes/artifacts.py",
+      "symbol": "get_artifact",
+      "line": 71,
+      "docstring": "Read the stored body for a matching project, or return 404 without it.",
+      "file_sha256": "e887c0b1189904842393d8631fee77a9051dca4f41b9802985dbd3ff4a0f48b9"
+    },
+    {
+      "path": "backend/api/routes/artifacts.py",
+      "symbol": "get_artifact_evidence",
+      "line": 91,
+      "docstring": "Owner-only citation reader. No tool grant, file access or new capture.\n\nAll relations retain project identity, including in legacy inconsistent data.\nOne read transaction keeps header/count/page on the same SQLite snapshot.",
+      "file_sha256": "e887c0b1189904842393d8631fee77a9051dca4f41b9802985dbd3ff4a0f48b9"
+    },
+    {
+      "path": "backend/api/routes/chat.py",
+      "symbol": "list_threads",
+      "line": 100,
+      "docstring": "List conversation threads with last message.",
+      "file_sha256": "a201b3b79c8bf8446e9104ff066f03a30405e2f9575d407c17d09c8e5f326e9a"
+    },
+    {
+      "path": "backend/api/routes/epics.py",
+      "symbol": "list_epics",
+      "line": 22,
+      "docstring": "List epics for a project with task and milestone counts.",
+      "file_sha256": "40e6383124a33e4c8e2898035f28f0b03241440eb08ca202f230767ef416127c"
+    },
+    {
+      "path": "backend/api/routes/epics.py",
+      "symbol": "create_epic",
+      "line": 55,
+      "docstring": "Create a new epic.",
+      "file_sha256": "40e6383124a33e4c8e2898035f28f0b03241440eb08ca202f230767ef416127c"
+    },
+    {
+      "path": "backend/api/routes/epics.py",
+      "symbol": "get_epic",
+      "line": 78,
+      "docstring": "Get epic details with task and milestone counts.",
+      "file_sha256": "40e6383124a33e4c8e2898035f28f0b03241440eb08ca202f230767ef416127c"
+    },
+    {
+      "path": "backend/api/routes/epics.py",
+      "symbol": "update_epic",
+      "line": 112,
+      "docstring": "Update an epic.",
+      "file_sha256": "40e6383124a33e4c8e2898035f28f0b03241440eb08ca202f230767ef416127c"
+    },
+    {
+      "path": "backend/api/routes/epics.py",
+      "symbol": "delete_epic",
+      "line": 154,
+      "docstring": "Delete an epic and its milestones.",
+      "file_sha256": "40e6383124a33e4c8e2898035f28f0b03241440eb08ca202f230767ef416127c"
+    },
+    {
+      "path": "backend/api/routes/flow_state.py",
+      "symbol": "get_flow_state",
+      "line": 39,
+      "docstring": "Project-scope the old snapshot and expose only its summary without deserializing executable flow state or replaying approval.",
+      "file_sha256": "22b6b859eb9f8f3de235f6f324bb3313c02e272e62ffeb0b173682341c160474"
+    },
+    {
+      "path": "backend/api/routes/git.py",
+      "symbol": "list_repos",
+      "line": 49,
+      "docstring": "List active repositories for a project.",
+      "file_sha256": "cbcaeb1be200a4c817826809ed2cad30b1abc97fba46b0404382f8783ddc2592"
+    },
+    {
+      "path": "backend/api/routes/git.py",
+      "symbol": "create_repo",
+      "line": 56,
+      "docstring": "Reject retired implicit setup through the compatibility guard; explicit owner source operations replace initialization, cloning and automatic remote creation.",
+      "file_sha256": "cbcaeb1be200a4c817826809ed2cad30b1abc97fba46b0404382f8783ddc2592"
+    },
+    {
+      "path": "backend/api/routes/git.py",
+      "symbol": "archive_repo",
+      "line": 75,
+      "docstring": "Archive (soft-delete) a repository.",
+      "file_sha256": "cbcaeb1be200a4c817826809ed2cad30b1abc97fba46b0404382f8783ddc2592"
+    },
+    {
+      "path": "backend/api/routes/git.py",
+      "symbol": "list_branches",
+      "line": 91,
+      "docstring": "List branches for a project with optional filters.",
+      "file_sha256": "cbcaeb1be200a4c817826809ed2cad30b1abc97fba46b0404382f8783ddc2592"
+    },
+    {
+      "path": "backend/api/routes/git.py",
+      "symbol": "create_branch",
+      "line": 102,
+      "docstring": "Refuse retired branch mutation before resolving source paths, invoking Git or recording a created event.",
+      "file_sha256": "cbcaeb1be200a4c817826809ed2cad30b1abc97fba46b0404382f8783ddc2592"
+    },
+    {
+      "path": "backend/api/routes/git.py",
+      "symbol": "list_prs",
+      "line": 111,
+      "docstring": "List pull requests for a project.",
+      "file_sha256": "cbcaeb1be200a4c817826809ed2cad30b1abc97fba46b0404382f8783ddc2592"
+    },
+    {
+      "path": "backend/api/routes/git.py",
+      "symbol": "get_pr",
+      "line": 121,
+      "docstring": "Get a single pull request.",
+      "file_sha256": "cbcaeb1be200a4c817826809ed2cad30b1abc97fba46b0404382f8783ddc2592"
+    },
+    {
+      "path": "backend/api/routes/git.py",
+      "symbol": "pr_owner_entry",
+      "line": 130,
+      "docstring": "Expose documentary scope and native next actions, not acceptance, branch availability or a new run.",
+      "file_sha256": "cbcaeb1be200a4c817826809ed2cad30b1abc97fba46b0404382f8783ddc2592"
+    },
+    {
+      "path": "backend/api/routes/git.py",
+      "symbol": "merge_pr",
+      "line": 136,
+      "docstring": "Refuse retired publication before resolving a clone or transport; original history remains intact even when files are unavailable.",
+      "file_sha256": "cbcaeb1be200a4c817826809ed2cad30b1abc97fba46b0404382f8783ddc2592"
+    },
+    {
+      "path": "backend/api/routes/git.py",
+      "symbol": "close_pr",
+      "line": 142,
+      "docstring": "Close/abandon a pull request.",
+      "file_sha256": "cbcaeb1be200a4c817826809ed2cad30b1abc97fba46b0404382f8783ddc2592"
+    },
+    {
+      "path": "backend/api/routes/git.py",
+      "symbol": "trigger_cleanup",
+      "line": 163,
+      "docstring": "Refuse retired cleanup before Git, network or history changes; retained branches are not disposable from a merged label.",
+      "file_sha256": "cbcaeb1be200a4c817826809ed2cad30b1abc97fba46b0404382f8783ddc2592"
+    },
+    {
+      "path": "backend/api/routes/git.py",
+      "symbol": "list_repo_branches",
+      "line": 177,
+      "docstring": "List branches for a repository via Forgejo or local git.",
+      "file_sha256": "cbcaeb1be200a4c817826809ed2cad30b1abc97fba46b0404382f8783ddc2592"
+    },
+    {
+      "path": "backend/api/routes/git.py",
+      "symbol": "get_repo_tree",
+      "line": 204,
+      "docstring": "Get the file tree for a repository at a given ref.\n\n*ref* can be a branch name, tag, or commit SHA (7-40 hex chars).\nUses Forgejo when available, otherwise falls back to local git.",
+      "file_sha256": "cbcaeb1be200a4c817826809ed2cad30b1abc97fba46b0404382f8783ddc2592"
+    },
+    {
+      "path": "backend/api/routes/git.py",
+      "symbol": "get_file_contents",
+      "line": 251,
+      "docstring": "Get the decoded contents of a file from Forgejo or local git.",
+      "file_sha256": "cbcaeb1be200a4c817826809ed2cad30b1abc97fba46b0404382f8783ddc2592"
+    },
+    {
+      "path": "backend/api/routes/git.py",
+      "symbol": "list_pr_comments",
+      "line": 287,
+      "docstring": "List Forgejo comments on a pull request.",
+      "file_sha256": "cbcaeb1be200a4c817826809ed2cad30b1abc97fba46b0404382f8783ddc2592"
+    },
+    {
+      "path": "backend/api/routes/git.py",
+      "symbol": "create_pr_comment",
+      "line": 318,
+      "docstring": "Post a comment on a pull request via Forgejo.",
+      "file_sha256": "cbcaeb1be200a4c817826809ed2cad30b1abc97fba46b0404382f8783ddc2592"
+    },
+    {
+      "path": "backend/api/routes/health.py",
+      "symbol": "health_check",
+      "line": 18,
+      "docstring": "Inspect database access and configured upload storage without creating files.\n\nFor a not-yet-used upload directory, check its nearest existing ancestor.\nThis reports owner API storage health, not native execution admission readiness.\n    ",
+      "file_sha256": "1d5bc70bf89c55b523fd9060b576e6801372f71ed742816dfd3cb0c68019f4c9"
+    },
+    {
+      "path": "backend/api/routes/health.py",
+      "symbol": "readiness_check",
+      "line": 56,
+      "docstring": "Return 503 unless the existing database has the complete current migration history.",
+      "file_sha256": "1d5bc70bf89c55b523fd9060b576e6801372f71ed742816dfd3cb0c68019f4c9"
+    },
+    {
+      "path": "backend/api/routes/milestones.py",
+      "symbol": "list_milestones",
+      "line": 25,
+      "docstring": "List milestones with task counts, optionally filtered by epic.",
+      "file_sha256": "4d940e8a8349e3ab3b497e1647cb3a93a254b30d52a0590ed54c4ad8733c4a22"
+    },
+    {
+      "path": "backend/api/routes/milestones.py",
+      "symbol": "create_milestone",
+      "line": 61,
+      "docstring": "Create a new milestone under an epic.",
+      "file_sha256": "4d940e8a8349e3ab3b497e1647cb3a93a254b30d52a0590ed54c4ad8733c4a22"
+    },
+    {
+      "path": "backend/api/routes/milestones.py",
+      "symbol": "get_milestone",
+      "line": 89,
+      "docstring": "Get milestone details with task counts.",
+      "file_sha256": "4d940e8a8349e3ab3b497e1647cb3a93a254b30d52a0590ed54c4ad8733c4a22"
+    },
+    {
+      "path": "backend/api/routes/milestones.py",
+      "symbol": "update_milestone",
+      "line": 117,
+      "docstring": "Update a milestone.",
+      "file_sha256": "4d940e8a8349e3ab3b497e1647cb3a93a254b30d52a0590ed54c4ad8733c4a22"
+    },
+    {
+      "path": "backend/api/routes/milestones.py",
+      "symbol": "delete_milestone",
+      "line": 163,
+      "docstring": "Delete a milestone.",
+      "file_sha256": "4d940e8a8349e3ab3b497e1647cb3a93a254b30d52a0590ed54c4ad8733c4a22"
+    },
+    {
+      "path": "backend/api/routes/projects.py",
+      "symbol": "list_projects",
+      "line": 92,
+      "docstring": "List all projects with task counts.",
+      "file_sha256": "ecf787fe45ab1c169844d791a27d90dbb077368ad487ccbd668bcd81b45c16a3"
+    },
+    {
+      "path": "backend/api/routes/projects.py",
+      "symbol": "create_project_endpoint",
+      "line": 112,
+      "docstring": "Create metadata once for the original exact owner request; no repository or native work is started.",
+      "file_sha256": "ecf787fe45ab1c169844d791a27d90dbb077368ad487ccbd668bcd81b45c16a3"
+    },
+    {
+      "path": "backend/api/routes/projects.py",
+      "symbol": "get_project",
+      "line": 132,
+      "docstring": "Get project details by ID.",
+      "file_sha256": "ecf787fe45ab1c169844d791a27d90dbb077368ad487ccbd668bcd81b45c16a3"
+    },
+    {
+      "path": "backend/api/routes/projects.py",
+      "symbol": "get_project_progress",
+      "line": 141,
+      "docstring": "Get project progress metrics including task counts, epic/milestone progress.",
+      "file_sha256": "ecf787fe45ab1c169844d791a27d90dbb077368ad487ccbd668bcd81b45c16a3"
+    },
+    {
+      "path": "backend/api/routes/projects.py",
+      "symbol": "update_project",
+      "line": 154,
+      "docstring": "Update metadata and operational labels; completion requires a separate exact whole-project report decision.",
+      "file_sha256": "ecf787fe45ab1c169844d791a27d90dbb077368ad487ccbd668bcd81b45c16a3"
+    },
+    {
+      "path": "backend/api/routes/projects.py",
+      "symbol": "delete_project",
+      "line": 202,
+      "docstring": "Delete an explicitly selected unused project; execution history and registered workers must be preserved and reconciled instead.",
+      "file_sha256": "ecf787fe45ab1c169844d791a27d90dbb077368ad487ccbd668bcd81b45c16a3"
+    },
+    {
+      "path": "backend/api/routes/tasks.py",
+      "symbol": "list_tasks",
+      "line": 31,
+      "docstring": "List tasks with optional filters.",
+      "file_sha256": "895c81c751399be1289c35664139b834e0c0025a88b5a0f4216170a35edea75e"
+    },
+    {
+      "path": "backend/api/routes/tasks.py",
+      "symbol": "create_task",
+      "line": 71,
+      "docstring": "Commit task, dependencies and its single trigger-owned audit event together.",
+      "file_sha256": "895c81c751399be1289c35664139b834e0c0025a88b5a0f4216170a35edea75e"
+    },
+    {
+      "path": "backend/api/routes/tasks.py",
+      "symbol": "create_task._create",
+      "line": 74,
+      "docstring": "Persist one task and its dependencies; the database trigger owns the matching audit record.",
+      "file_sha256": "895c81c751399be1289c35664139b834e0c0025a88b5a0f4216170a35edea75e"
+    },
+    {
+      "path": "backend/api/routes/tasks.py",
+      "symbol": "get_task",
+      "line": 143,
+      "docstring": "Read a task, rejecting mismatched project-scoped report/deep links.\n\nOmitting project_id preserves compatibility with existing task consumers.",
+      "file_sha256": "895c81c751399be1289c35664139b834e0c0025a88b5a0f4216170a35edea75e"
+    },
+    {
+      "path": "backend/api/routes/tasks.py",
+      "symbol": "update_task",
+      "line": 164,
+      "docstring": "Edit versioned task inputs; native completion requires a separate owner acceptance.",
+      "file_sha256": "895c81c751399be1289c35664139b834e0c0025a88b5a0f4216170a35edea75e"
+    },
+    {
+      "path": "backend/api/routes/tasks.py",
+      "symbol": "update_task._update",
+      "line": 167,
+      "docstring": "Version edited inputs atomically and refuse generic lifecycle overrides for native-owned tasks.",
+      "file_sha256": "895c81c751399be1289c35664139b834e0c0025a88b5a0f4216170a35edea75e"
+    },
+    {
+      "path": "backend/api/routes/tasks.py",
+      "symbol": "update_task._update.context_version",
+      "line": 174,
+      "docstring": "Read the version under this edit's transaction before notifying the local runtime.",
+      "file_sha256": "895c81c751399be1289c35664139b834e0c0025a88b5a0f4216170a35edea75e"
+    },
+    {
+      "path": "backend/api/routes/tasks.py",
+      "symbol": "delete_task",
+      "line": 241,
+      "docstring": "Delete a task (only if backlog, pending, or cancelled).",
+      "file_sha256": "895c81c751399be1289c35664139b834e0c0025a88b5a0f4216170a35edea75e"
+    },
+    {
+      "path": "backend/api/routes/tasks.py",
+      "symbol": "list_task_comments",
+      "line": 273,
+      "docstring": "List comments for a task.",
+      "file_sha256": "895c81c751399be1289c35664139b834e0c0025a88b5a0f4216170a35edea75e"
+    },
+    {
+      "path": "backend/api/routes/tasks.py",
+      "symbol": "add_task_comment",
+      "line": 295,
+      "docstring": "Add a comment to a task.",
+      "file_sha256": "895c81c751399be1289c35664139b834e0c0025a88b5a0f4216170a35edea75e"
+    },
+    {
+      "path": "backend/api/routes/tasks.py",
+      "symbol": "list_task_dependencies",
+      "line": 322,
+      "docstring": "List dependencies for a task.",
+      "file_sha256": "895c81c751399be1289c35664139b834e0c0025a88b5a0f4216170a35edea75e"
+    },
+    {
+      "path": "backend/api/routes/tasks.py",
+      "symbol": "set_task_dependencies",
+      "line": 339,
+      "docstring": "Set dependencies for a task.",
+      "file_sha256": "895c81c751399be1289c35664139b834e0c0025a88b5a0f4216170a35edea75e"
+    },
+    {
+      "path": "backend/api/routes/user_requests.py",
+      "symbol": "list_pending_requests",
+      "line": 21,
+      "docstring": "Return all pending user requests for a project (FIFO order).",
+      "file_sha256": "070121bfd38fe675181b6d1e891137e1ec75d1d672359bcd82fa7bb26578ea01"
+    },
+    {
+      "path": "backend/api/routes/user_requests.py",
+      "symbol": "respond_to_request",
+      "line": 41,
+      "docstring": "Submit a response to a pending user request.",
+      "file_sha256": "070121bfd38fe675181b6d1e891137e1ec75d1d672359bcd82fa7bb26578ea01"
+    },
+    {
+      "path": "backend/state/machine.py",
+      "symbol": "TaskStateMachine",
+      "line": 20,
+      "docstring": "Static helpers for task status validation.",
+      "file_sha256": "f6e52a089dc9984396e687052c9e00b5f8ad33e3547dad17c6c5c710c8a8d790"
+    },
+    {
+      "path": "backend/state/machine.py",
+      "symbol": "TaskStateMachine.can_transition",
+      "line": 26,
+      "docstring": "Check a declared edge without granting native execution or reopening authority.",
+      "file_sha256": "f6e52a089dc9984396e687052c9e00b5f8ad33e3547dad17c6c5c710c8a8d790"
+    },
+    {
+      "path": "backend/state/machine.py",
+      "symbol": "TaskStateMachine.get_allowed_transitions",
+      "line": 31,
+      "docstring": "Return a copy so callers cannot mutate the shared lifecycle vocabulary.",
+      "file_sha256": "f6e52a089dc9984396e687052c9e00b5f8ad33e3547dad17c6c5c710c8a8d790"
+    },
+    {
+      "path": "backend/state/machine.py",
+      "symbol": "TaskStateMachine.is_terminal",
+      "line": 50,
+      "docstring": "Identify terminal labels without implying that retained work can be silently reopened.",
+      "file_sha256": "f6e52a089dc9984396e687052c9e00b5f8ad33e3547dad17c6c5c710c8a8d790"
+    },
+    {
+      "path": "backend/tools/base/db.py",
+      "symbol": "execute_with_retry",
+      "line": 33,
+      "docstring": "Retry busy callbacks only before any row change has been observed.\n\nA callback may commit before its final read fails. Once SQLite reports row\nchanges, propagate uncertainty instead of repeating a possibly committed\neffect. Connections close/rollback on failure; migrations and external\neffects require their own journals rather than this row-oriented helper.",
+      "file_sha256": "0f85f0a2a75192d887c2d7e590cb78ffbe4a196301182f44d90a1f3a46f55bec"
+    },
+    {
+      "path": "backend/db/readiness.py",
+      "symbol": "verify_database",
+      "line": 11,
+      "docstring": "Reject incomplete schemas before serving; optionally verify all data without repairing or creating it.\n\nStartup checks integrity and foreign keys before publishing owner access.\nRepeated readiness probes check the complete current history without scanning\nevery business row. Neither check authorizes a migration or repair.",
+      "file_sha256": "c775894af13d0ccb35101093e56e6dba000a8fa0b3f5add52ba63962bc6e392e"
+    },
+    {
+      "path": "backend/tests/api/test_persistence_boundaries.py",
+      "symbol": "test_creation_has_one_transactional_event",
+      "line": 12,
+      "docstring": "A task and its trigger event commit together without a second API audit copy.",
+      "file_sha256": "4f48d2db5283f7871ffec4599ca0ac512b2aebf54cbd8148e9e81deadf65b98f"
+    },
+    {
+      "path": "backend/tests/api/test_persistence_boundaries.py",
+      "symbol": "test_failed_audit_rolls_back_task_and_dependencies",
+      "line": 21,
+      "docstring": "Rejecting the durable event cannot leave a successful orphan business transition.",
+      "file_sha256": "4f48d2db5283f7871ffec4599ca0ac512b2aebf54cbd8148e9e81deadf65b98f"
+    },
+    {
+      "path": "backend/tests/api/test_persistence_boundaries.py",
+      "symbol": "test_writer_contention_leaves_health_and_websocket_responsive",
+      "line": 30,
+      "docstring": "Hold a real writer lock while independent API and WebSocket reads use the same event loop.",
+      "file_sha256": "4f48d2db5283f7871ffec4599ca0ac512b2aebf54cbd8148e9e81deadf65b98f"
+    },
+    {
+      "path": "backend/tests/api/test_persistence_boundaries.py",
+      "symbol": "test_writer_contention_leaves_health_and_websocket_responsive.observed_connection",
+      "line": 37,
+      "docstring": "Observe the original insert reaching SQLite without replacing database execution.",
+      "file_sha256": "4f48d2db5283f7871ffec4599ca0ac512b2aebf54cbd8148e9e81deadf65b98f"
+    },
+    {
+      "path": "backend/tests/api/test_persistence_boundaries.py",
+      "symbol": "test_writer_contention_leaves_health_and_websocket_responsive.read_surfaces",
+      "line": 43,
+      "docstring": "Read both owner surfaces before the blocked writer is allowed to commit.",
+      "file_sha256": "4f48d2db5283f7871ffec4599ca0ac512b2aebf54cbd8148e9e81deadf65b98f"
+    },
+    {
+      "path": "backend/tests/api/test_persistence_boundaries.py",
+      "symbol": "test_startup_refuses_existing_foreign_key_damage",
+      "line": 70,
+      "docstring": "A migrated file with broken relationships cannot acquire owner access and begin serving.",
+      "file_sha256": "4f48d2db5283f7871ffec4599ca0ac512b2aebf54cbd8148e9e81deadf65b98f"
+    },
+    {
+      "path": "backend/tests/api/test_persistence_boundaries.py",
+      "symbol": "test_readiness_requires_current_complete_schema",
+      "line": 84,
+      "docstring": "Reachability alone cannot report readiness after the required schema record disappears.",
+      "file_sha256": "4f48d2db5283f7871ffec4599ca0ac512b2aebf54cbd8148e9e81deadf65b98f"
+    },
+    {
+      "path": "backend/tests/api/test_persistence_boundaries.py",
+      "symbol": "test_busy_after_committed_effect_is_never_automatically_repeated",
+      "line": 91,
+      "docstring": "A lost post-commit observation must not turn a callback retry into duplicate business rows.",
+      "file_sha256": "4f48d2db5283f7871ffec4599ca0ac512b2aebf54cbd8148e9e81deadf65b98f"
+    },
+    {
+      "path": "backend/tests/api/test_persistence_boundaries.py",
+      "symbol": "test_busy_after_committed_effect_is_never_automatically_repeated.committed_then_uncertain",
+      "line": 97,
+      "docstring": "Commit a real row, then inject an uncertain observation from the callback.",
+      "file_sha256": "4f48d2db5283f7871ffec4599ca0ac512b2aebf54cbd8148e9e81deadf65b98f"
+    },
+    {
+      "path": "backend/tests/api/test_persistence_boundaries.py",
+      "symbol": "test_process_loss_preserves_one_atomic_task_event",
+      "line": 112,
+      "docstring": "Kill an owned writer around its original commit; reopen the same file without replaying the create request.",
+      "file_sha256": "4f48d2db5283f7871ffec4599ca0ac512b2aebf54cbd8148e9e81deadf65b98f"
+    },
+    {
+      "path": "backend/tests/runtime/test_data_boundaries.py",
+      "symbol": "test_stop_interrupts_original_worker_before_contended_write_finishes",
+      "line": 15,
+      "docstring": "A real HTTP writer waits on SQLite while the same loop withdraws native authority and serves health.",
+      "file_sha256": "43cc81550304815b50d3401c56dab49ced066508b7f1dab0b1f9ba6dfa7920ce"
+    },
+    {
+      "path": "backend/tests/runtime/test_data_boundaries.py",
+      "symbol": "test_stop_interrupts_original_worker_before_contended_write_finishes.observed_connection",
+      "line": 26,
+      "docstring": "Signal that the original task insert reached SQLite without simulating its lock.",
+      "file_sha256": "43cc81550304815b50d3401c56dab49ced066508b7f1dab0b1f9ba6dfa7920ce"
+    }
+  ]
+}

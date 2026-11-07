@@ -2,7 +2,7 @@
   "schema_version": 1,
   "scope": "Owned backend/ and scripts/ Python, excluding tests. Syntax-selected prompt builders/literals/tool descriptions; external native system prompts and arbitrary owner/source text are outside this static inventory.",
   "coverage": "Candidates are not unique rendered prompts. Dynamic rendering size and non-direct consumers remain unknown. Reviews are explicit declarations bound to source and direct module consumers, not proof of efficacy or complete runtime reachability. requires_review entries are unfinished.",
-  "files_scanned": 304,
+  "files_scanned": 305,
   "source_tree": {
     "backend/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     "backend/api/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
@@ -11,7 +11,7 @@
     "backend/api/exceptions.py": "874b055b3a8aa8c11b96c45adc7f02bfdce80a07ddf2c35e854c96b655f4b585",
     "backend/api/flow_manager.py": "fd260c2a58cd8e282b2e77b479d68b949ec08d5ec502661abd369a3ecb59ca61",
     "backend/api/local_access.py": "114456de477b4248fdc5a8aa2554c3962e0df9fe8675e782ea27e2703048f155",
-    "backend/api/main.py": "37bc381a54ff05861f94e21986c3167e951e030ceffa445f0b3e48022203aa3a",
+    "backend/api/main.py": "94d5725f783fa3ccf0c0ec6dd4e125e6ca8e2593befacf9f8c8f0f74462031c8",
     "backend/api/models/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     "backend/api/models/agent.py": "23eb182f59601828bcf0a0c54660e9ee96e4b959b10f5560ec54cb77c03ea6ff",
     "backend/api/models/agent_messages.py": "64cf0fc0b8e8cf432d6fe0900088c7d4a8acd3f5c4fed100b6ed451824a860b1",
@@ -35,26 +35,26 @@
     "backend/api/research_dependencies.py": "cc8130d458cb84c0cc9b08153ab9cacac263a6a0f39eaa89516f060824bfc44b",
     "backend/api/routes/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     "backend/api/routes/agent_messages.py": "94fc2c1523107bcce05ebd6aa848d2d3720b21f6024128f7f3f2fac1d2ea4c5d",
-    "backend/api/routes/agents.py": "5ba0ef1ef5798f294b4cc449c2612f9686184dbf03e02d0712a8fd66d20f771e",
-    "backend/api/routes/artifacts.py": "39f1c7a9ef32ce6c54285d8dffc46c6b7e82cf2ef26b783be0ddcdda1034a765",
-    "backend/api/routes/chat.py": "ab1e042c0d5df7a452fc658db1700c570f17f4f6ff190206bdd6d19fc16d14ee",
-    "backend/api/routes/epics.py": "3f2f944d9305d26e494b81788d15dce8995fdb9b58d82b1ee0237df26844b87a",
+    "backend/api/routes/agents.py": "8eb6267dc32039d4ee49a389fa64c0c4977d3473892232f2a4a8f8c9a97792d8",
+    "backend/api/routes/artifacts.py": "e887c0b1189904842393d8631fee77a9051dca4f41b9802985dbd3ff4a0f48b9",
+    "backend/api/routes/chat.py": "a201b3b79c8bf8446e9104ff066f03a30405e2f9575d407c17d09c8e5f326e9a",
+    "backend/api/routes/epics.py": "40e6383124a33e4c8e2898035f28f0b03241440eb08ca202f230767ef416127c",
     "backend/api/routes/events.py": "7e5eaadc94696f2fb7900779bf9fee21d28979847af69781be6ddfdc36ed8023",
     "backend/api/routes/files.py": "639882670667c0b8a6749c68377ca0687f677c62f588ec149326d829d3db1e6f",
     "backend/api/routes/findings.py": "c7338637760aea13be2a8f4b33e6aa1c041c3c97ce8819c2d8e1e7256131c32d",
-    "backend/api/routes/flow_state.py": "39a5e1af7052e522e3f6a552825eb8fc482dc167621201a9922c41663cd16e95",
-    "backend/api/routes/git.py": "e7a15d28277c9ff5ffe04fdde5b5e96b044c6559935b8b41f226a91260916077",
-    "backend/api/routes/health.py": "054ed3adfc643d3e143719b77275421a2472f3c484bd6970fb9e482f407ce5e4",
-    "backend/api/routes/milestones.py": "70c239900f8ec0351d94917cdb1715a312cfef4897e6fdd4b5921bcfbf68de98",
+    "backend/api/routes/flow_state.py": "22b6b859eb9f8f3de235f6f324bb3313c02e272e62ffeb0b173682341c160474",
+    "backend/api/routes/git.py": "cbcaeb1be200a4c817826809ed2cad30b1abc97fba46b0404382f8783ddc2592",
+    "backend/api/routes/health.py": "1d5bc70bf89c55b523fd9060b576e6801372f71ed742816dfd3cb0c68019f4c9",
+    "backend/api/routes/milestones.py": "4d940e8a8349e3ab3b497e1647cb3a93a254b30d52a0590ed54c4ad8733c4a22",
     "backend/api/routes/model_settings.py": "7d6efbe85c4a674fd49044d0ed443bf34d5e113aa594fa97bf8194e96a5ad482",
-    "backend/api/routes/projects.py": "ef446e833412f1b1fa1ff6830af5e9280fe4491a60e30e9f5d4efa6705b1c7a3",
+    "backend/api/routes/projects.py": "ecf787fe45ab1c169844d791a27d90dbb077368ad487ccbd668bcd81b45c16a3",
     "backend/api/routes/research.py": "b15128a5c7605bbe1d8cafdb134cdadb19a62deb743b026c659b712e2576260c",
     "backend/api/routes/runs.py": "7566b43be4cec45005b1bf53813d343e1d85fb1d1ddefbdf926edb017719cd02",
     "backend/api/routes/session.py": "d332dda1bb5924b70a5accbfa3582b8d41906a51b8acedcdbd1267141cc34639",
     "backend/api/routes/source_operations.py": "1f9d1881c96368bc08cf9cf5bccf1f6a11e05d97447f451d72ca58e627565255",
     "backend/api/routes/task_workspace.py": "63f542e897b7d9894c5ccdba6f565e84d1ef3aa7339b0cb8ca46697a1668928c",
-    "backend/api/routes/tasks.py": "25396b86b43304b732372f334d149d09be125b916fcccfbaafd8c9a7d65bfec6",
-    "backend/api/routes/user_requests.py": "b31bd5c9847f01e51702a7891f3691afdbf5b8f202cf05c59dfbc51456616043",
+    "backend/api/routes/tasks.py": "895c81c751399be1289c35664139b834e0c0025a88b5a0f4216170a35edea75e",
+    "backend/api/routes/user_requests.py": "070121bfd38fe675181b6d1e891137e1ec75d1d672359bcd82fa7bb26578ea01",
     "backend/api/routes/wiki.py": "f5f33c8578b78ebb801c4ebe58c7e938c6b55aa0ed3a84923017942574030a31",
     "backend/api/run.py": "431c3f13bd938ec7026f2428b5e198e05ef3d51bc474b38cf21c8ea14e00e9c9",
     "backend/api/runtime_dependencies.py": "ee0b6b403981f1c41edd4a934a138541f0a53bd487ac805905acf46561caaf30",
@@ -88,6 +88,7 @@
     "backend/db/project_budget_migration.py": "412d900ecac292fbf14c2aef477be787ed3363145495929b77cf02a50ab4aeb4",
     "backend/db/project_check_policy_migration.py": "b3e2d26950e63aa159d2ffd974ef13e69def2b1ae85fa873ecdf91f4e0c7b024",
     "backend/db/question_migration.py": "65838e422a587199f10697e5c588cc6fb9fb9c5b54ecbe0b420e2363a02f69dd",
+    "backend/db/readiness.py": "c775894af13d0ccb35101093e56e6dba000a8fa0b3f5add52ba63962bc6e392e",
     "backend/db/reference_provenance_migration.py": "540a6caaa3c6562fa7de5f227581addb2187c6fbdaa8a264d86734c0c351ea8c",
     "backend/db/research_migration.py": "f72c7acd4967353e5bc78bbdc1835e5334d03f122889d535182f0cfb8746985c",
     "backend/db/result_migration.py": "54ec40b3f10c7d2c216b5e0a5c7910d31b6a1556ab482d1d9607145ddaaa08ff",
@@ -296,13 +297,13 @@
     "backend/state/__init__.py": "6084aeeb2a453d8553fe9248724a5aac72476f1d212c0de3a350c7bc71bb6b80",
     "backend/state/completion.py": "f7b45ea6fcab233689933d0f9867af0cfa4843019ea4b56908bcef616b5cf63e",
     "backend/state/dependency_validator.py": "61738303dcb801e8e2b7997ef05221f1138cb7860304ad35295b825ecd894da6",
-    "backend/state/machine.py": "bea2818a8b9ad0dede0b2c20510ec2f03ad4328a4fcd5f4712928f1647e39c21",
+    "backend/state/machine.py": "f6e52a089dc9984396e687052c9e00b5f8ad33e3547dad17c6c5c710c8a8d790",
     "backend/state/progress.py": "c4afd69693f079c2edca4cc4bdfa1194cbf450f9e6a14a49ca2fbb06b6d5a2bc",
     "backend/task_workspace.py": "7a5bd36b77fa1416d15998296e80ea34c4e841fd0dffe62fe073781c0fb91fea",
     "backend/tools/__init__.py": "3d0fa2176abdfce1a799856cbd70681d9a24463cc5b0673b27a09958d8b7982d",
     "backend/tools/base/__init__.py": "1601c667e7671b1f0c0da717b87651b1fe4f01b0d59024c293109c4eaec356aa",
     "backend/tools/base/context.py": "e3d49048bb34ce40c9ca8a72d89e71af73be70178678efdb67c02bbf26a03862",
-    "backend/tools/base/db.py": "e1e7a5545104f42c12afa275828183e51447e2f6c4099a167d9fd6439229c4d5",
+    "backend/tools/base/db.py": "0f85f0a2a75192d887c2d7e590cb78ffbe4a196301182f44d90a1f3a46f55bec",
     "scripts/audit_dependencies.py": "03dc24ccbe6a980dc6c4840773af771bfd0ac1905be17fa3e866b2c93d172d50",
     "scripts/audit_prompt_inventory.py": "652d39284cc8aa51739366aea2723aec419e3cd9e3bd38da7b17012837fa47b7",
     "scripts/export_legacy_chroma.py": "cf37f39483e673253ec2309608e06acb26f19d87a6dc1451c1882dbb304adcba",
@@ -349,16 +350,16 @@
       "review_conflicts": []
     },
     {
-      "id": "backend/api/main.py::create_app.description@114",
+      "id": "backend/api/main.py::create_app.description@116",
       "path": "backend/api/main.py",
-      "symbol": "create_app.description@114",
-      "line": 114,
-      "end_line": 114,
+      "symbol": "create_app.description@116",
+      "line": 116,
+      "end_line": 116,
       "owner": "backend.api.main",
       "family": "other_owned_prompt_candidate",
       "disposition": "excluded_api_metadata",
       "objective": "FastAPI application factory for the INFINIBAY API.",
-      "source_sha256": "37bc381a54ff05861f94e21986c3167e951e030ceffa445f0b3e48022203aa3a",
+      "source_sha256": "94d5725f783fa3ccf0c0ec6dd4e125e6ca8e2593befacf9f8c8f0f74462031c8",
       "source_bytes": 54,
       "rendered_utf8_bytes": 52,
       "variables_kind": "referenced_identifiers",
@@ -374,7 +375,7 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "1afaef24fa54779a05ab6b8bd7c70c16595c7c7cc94210b5bcb314d0cd5e20ea",
+      "dependencies_sha256": "c46c5eb07bba19796b1749c2a95081f9d862246da0c996fadcdb08f132937fac",
       "direct_module_consumers": {},
       "suggested_disposition": "requires_review",
       "review_status": "reviewed",
@@ -383,7 +384,8 @@
         "backend/api/main.py",
         "backend/runtime/business_definitions.py",
         "backend/runtime/owned_runtime.py",
-        "docs/modernization/storage-volume-review.md"
+        "docs/modernization/storage-volume-review.md",
+        "docs/modernization/data-boundaries-review.md"
       ],
       "review_conflicts": []
     },
@@ -415,9 +417,9 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "ec42ab0bd76c9adc334a9a0f6c56f04d6e9322ed308bbec0977dc977da480917",
+      "dependencies_sha256": "90f6932f0aee59beac352559a79aaa6c72dfaf736fec243aa23797e8e06eaa6d",
       "direct_module_consumers": {
-        "backend/api/routes/epics.py": "3f2f944d9305d26e494b81788d15dce8995fdb9b58d82b1ee0237df26844b87a"
+        "backend/api/routes/epics.py": "40e6383124a33e4c8e2898035f28f0b03241440eb08ca202f230767ef416127c"
       },
       "suggested_disposition": "requires_review",
       "review_status": "reviewed",
@@ -425,7 +427,8 @@
       "review_evidence": [
         "backend/api/models/epic.py",
         "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
+        "evals/prompts/cases.json",
+        "docs/modernization/data-boundaries-review.md"
       ],
       "review_conflicts": []
     },
@@ -455,9 +458,9 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "428718c0d7c1757e3f9fc73644ad99d18cc97f119453a2c6167c68f7d5aa5422",
+      "dependencies_sha256": "88c2a3948cea19454ffb6c2b8f62ba6cb97c0099c0a183403af6a756aa93a633",
       "direct_module_consumers": {
-        "backend/api/routes/git.py": "e7a15d28277c9ff5ffe04fdde5b5e96b044c6559935b8b41f226a91260916077"
+        "backend/api/routes/git.py": "cbcaeb1be200a4c817826809ed2cad30b1abc97fba46b0404382f8783ddc2592"
       },
       "suggested_disposition": "requires_review",
       "review_status": "reviewed",
@@ -465,7 +468,8 @@
       "review_evidence": [
         "backend/api/models/git.py",
         "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
+        "evals/prompts/cases.json",
+        "docs/modernization/data-boundaries-review.md"
       ],
       "review_conflicts": []
     },
@@ -497,9 +501,9 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "3c3010eb1a8eda741ad069167d1758db72c3822065b73b912dfab87f5a333618",
+      "dependencies_sha256": "e2648e59964756d947dcda00bd6accafd1b980122cbfb89b201721e75eb843f7",
       "direct_module_consumers": {
-        "backend/api/routes/milestones.py": "70c239900f8ec0351d94917cdb1715a312cfef4897e6fdd4b5921bcfbf68de98"
+        "backend/api/routes/milestones.py": "4d940e8a8349e3ab3b497e1647cb3a93a254b30d52a0590ed54c4ad8733c4a22"
       },
       "suggested_disposition": "requires_review",
       "review_status": "reviewed",
@@ -507,7 +511,8 @@
       "review_evidence": [
         "backend/api/models/milestone.py",
         "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
+        "evals/prompts/cases.json",
+        "docs/modernization/data-boundaries-review.md"
       ],
       "review_conflicts": []
     },
@@ -539,9 +544,9 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "ed299f08ec4a77852ef538714e001ae0a304a391e71d3085265abcccdf1178e6",
+      "dependencies_sha256": "92a4d84f6f19b8461c976f9e167857b4853fc406cb51e60ea41c6df13882cace",
       "direct_module_consumers": {
-        "backend/api/routes/projects.py": "ef446e833412f1b1fa1ff6830af5e9280fe4491a60e30e9f5d4efa6705b1c7a3"
+        "backend/api/routes/projects.py": "ecf787fe45ab1c169844d791a27d90dbb077368ad487ccbd668bcd81b45c16a3"
       },
       "suggested_disposition": "requires_review",
       "review_status": "reviewed",
@@ -549,7 +554,8 @@
       "review_evidence": [
         "backend/api/models/project.py",
         "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
+        "evals/prompts/cases.json",
+        "docs/modernization/data-boundaries-review.md"
       ],
       "review_conflicts": []
     },
@@ -581,9 +587,9 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "b1a3c9579b635ded6c8085329f43d4ca2f3ec8152c653ae0acbce2b760bc795f",
+      "dependencies_sha256": "58715aa7904d5c3e75c54be9a9f2f53c22c16e1035a4a141c3370155513723f4",
       "direct_module_consumers": {
-        "backend/api/routes/tasks.py": "25396b86b43304b732372f334d149d09be125b916fcccfbaafd8c9a7d65bfec6"
+        "backend/api/routes/tasks.py": "895c81c751399be1289c35664139b834e0c0025a88b5a0f4216170a35edea75e"
       },
       "suggested_disposition": "requires_review",
       "review_status": "reviewed",
@@ -591,21 +597,22 @@
       "review_evidence": [
         "backend/api/models/task.py",
         "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
+        "evals/prompts/cases.json",
+        "docs/modernization/data-boundaries-review.md"
       ],
       "review_conflicts": []
     },
     {
-      "id": "backend/api/routes/projects.py::_project_to_response.description@79",
+      "id": "backend/api/routes/projects.py::_project_to_response.description@80",
       "path": "backend/api/routes/projects.py",
-      "symbol": "_project_to_response.description@79",
-      "line": 79,
-      "end_line": 79,
+      "symbol": "_project_to_response.description@80",
+      "line": 80,
+      "end_line": 80,
       "owner": "backend.api.routes.projects",
       "family": "other_owned_prompt_candidate",
       "disposition": "excluded_human_or_input_metadata",
       "objective": "Project CRUD and native planning controls; project start never activates legacy agent-loop threads.",
-      "source_sha256": "ef446e833412f1b1fa1ff6830af5e9280fe4491a60e30e9f5d4efa6705b1c7a3",
+      "source_sha256": "ecf787fe45ab1c169844d791a27d90dbb077368ad487ccbd668bcd81b45c16a3",
       "source_bytes": 26,
       "rendered_utf8_bytes": null,
       "variables_kind": "referenced_identifiers",
@@ -623,9 +630,9 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "abd636eae1493ad471b655bbc88aeb6f2b3e11a04e2df4448dfe6475d726a4e1",
+      "dependencies_sha256": "5931168067dd343d9ca0531cd621603c11db09d317835df8a353ce8af8cda523",
       "direct_module_consumers": {
-        "backend/api/main.py": "37bc381a54ff05861f94e21986c3167e951e030ceffa445f0b3e48022203aa3a"
+        "backend/api/main.py": "94d5725f783fa3ccf0c0ec6dd4e125e6ca8e2593befacf9f8c8f0f74462031c8"
       },
       "suggested_disposition": "requires_review",
       "review_status": "reviewed",
@@ -636,7 +643,8 @@
         "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
         "evals/prompts/cases.json",
         "docs/architecture/native-internal-retirement.md",
-        "docs/modernization/storage-volume-review.md"
+        "docs/modernization/storage-volume-review.md",
+        "docs/modernization/data-boundaries-review.md"
       ],
       "review_conflicts": []
     },
@@ -764,9 +772,9 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "427dd69f91f23b6070247f150d4f331d85c7d2570d1b82c118827a101963ad76",
+      "dependencies_sha256": "751219cbffae3c495169d03067c22175339a29da007c9a7672db7e1403330870",
       "direct_module_consumers": {
-        "backend/api/routes/projects.py": "ef446e833412f1b1fa1ff6830af5e9280fe4491a60e30e9f5d4efa6705b1c7a3",
+        "backend/api/routes/projects.py": "ecf787fe45ab1c169844d791a27d90dbb077368ad487ccbd668bcd81b45c16a3",
         "backend/communication/owner_notes.py": "27d60b5640960cd647bf3fd4ce8c9fb136e7b614a62326c3cf599336ad35ab51",
         "backend/git/source_registry.py": "8484f3def877d52c22183a1848dec26529b329e76bdbd4836f04f173fc81628f",
         "backend/knowledge/results.py": "ae6f580a71c2c8606ad474c83c1ebb884d71751b9c5344887ce59a5d782e3a2a",
@@ -817,7 +825,8 @@
         "docs/modernization/preparation-budget-review.md",
         "backend/runtime/project_check_policy.py",
         "backend/tests/runtime/test_project_check_policy.py",
-        "docs/modernization/project-check-policy-review.md"
+        "docs/modernization/project-check-policy-review.md",
+        "docs/modernization/data-boundaries-review.md"
       ],
       "review_conflicts": []
     },

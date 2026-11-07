@@ -46,14 +46,14 @@ router = APIRouter(prefix="/api/git", tags=["git"])
 
 
 @router.get("/repos", response_model=list[RepoResponse])
-async def list_repos(project_id: int = Query(...)):
+def list_repos(project_id: int = Query(...)):
     """List active repositories for a project."""
     repos = repository_manager.list_repos(project_id)
     return [RepoResponse(**r) for r in repos]
 
 
 @router.post("/repos", response_model=RepoResponse, status_code=201)
-async def create_repo(project_id: int = Query(...), body: RepoCreate = ...):
+def create_repo(project_id: int = Query(...), body: RepoCreate = ...):
     """Reject retired implicit setup through the compatibility guard; explicit owner source operations replace initialization, cloning and automatic remote creation."""
     repo = repository_manager.init_repo(
         project_id=project_id,
@@ -72,7 +72,7 @@ async def create_repo(project_id: int = Query(...), body: RepoCreate = ...):
 
 
 @router.delete("/repos/{name}", status_code=204)
-async def archive_repo(name: str, project_id: int = Query(...)):
+def archive_repo(name: str, project_id: int = Query(...)):
     """Archive (soft-delete) a repository."""
     archived = repository_manager.archive_repo(project_id, name)
     if not archived:
@@ -88,7 +88,7 @@ async def archive_repo(name: str, project_id: int = Query(...)):
 
 
 @router.get("/branches", response_model=list[BranchResponse])
-async def list_branches(
+def list_branches(
     project_id: int = Query(...),
     repo_name: str | None = Query(default=None),
     status: str | None = Query(default=None),
@@ -99,7 +99,7 @@ async def list_branches(
 
 
 @router.post("/branches", response_model=BranchResponse, status_code=201)
-async def create_branch(body: BranchCreate):
+def create_branch(body: BranchCreate):
     """Refuse retired branch mutation before resolving source paths, invoking Git or recording a created event."""
     branch_service.create_branch_for_task(body.task_id, "", base_branch=body.base_branch, repo_name=body.repo_name)
 
@@ -108,7 +108,7 @@ async def create_branch(body: BranchCreate):
 
 
 @router.get("/prs", response_model=list[PRResponse])
-async def list_prs(
+def list_prs(
     project_id: int = Query(...),
     status: str | None = Query(default=None),
 ):
@@ -118,7 +118,7 @@ async def list_prs(
 
 
 @router.get("/prs/{pr_id}", response_model=PRResponse)
-async def get_pr(pr_id: int):
+def get_pr(pr_id: int):
     """Get a single pull request."""
     pr = pr_service.get_pr(pr_id)
     if not pr:
@@ -127,19 +127,19 @@ async def get_pr(pr_id: int):
 
 
 @router.get("/prs/{pr_id}/owner-entry")
-async def pr_owner_entry(pr_id: int):
+def pr_owner_entry(pr_id: int):
     """Expose documentary scope and native next actions, not acceptance, branch availability or a new run."""
     return pr_service.owner_entry(pr_id)
 
 
 @router.post("/prs/{pr_id}/merge", response_model=PRResponse)
-async def merge_pr(pr_id: int, body: PRMergeRequest):
+def merge_pr(pr_id: int, body: PRMergeRequest):
     """Refuse retired publication before resolving a clone or transport; original history remains intact even when files are unavailable."""
     pr_service.merge_pr(pr_id, "", merge_message=body.merge_message)
 
 
 @router.post("/prs/{pr_id}/close", response_model=PRResponse)
-async def close_pr(pr_id: int):
+def close_pr(pr_id: int):
     """Close/abandon a pull request."""
     pr = pr_service.get_pr(pr_id)
     if not pr:
@@ -160,7 +160,7 @@ async def close_pr(pr_id: int):
 
 
 @router.post("/cleanup")
-async def trigger_cleanup(body: CleanupRequest):
+def trigger_cleanup(body: CleanupRequest):
     """Refuse retired cleanup before Git, network or history changes; retained branches are not disposable from a merged label."""
     cleaned = cleanup_service.cleanup_merged_branches(
         project_id=body.project_id,
@@ -174,7 +174,7 @@ async def trigger_cleanup(body: CleanupRequest):
 
 
 @router.get("/repos/{repo_name}/branches", response_model=list[BranchDetail])
-async def list_repo_branches(
+def list_repo_branches(
     repo_name: str,
     project_id: int = Query(...),
 ):
@@ -201,7 +201,7 @@ async def list_repo_branches(
 
 
 @router.get("/repos/{repo_name}/tree", response_model=list[RepoTreeEntry])
-async def get_repo_tree(
+def get_repo_tree(
     repo_name: str,
     project_id: int = Query(...),
     ref: str = Query(default="main"),
@@ -248,7 +248,7 @@ async def get_repo_tree(
 
 
 @router.get("/repos/{repo_name}/contents", response_model=FileContent)
-async def get_file_contents(
+def get_file_contents(
     repo_name: str,
     project_id: int = Query(...),
     path: str = Query(...),
@@ -284,7 +284,7 @@ async def get_file_contents(
 
 
 @router.get("/prs/{pr_id}/comments", response_model=list[PRComment])
-async def list_pr_comments(pr_id: int):
+def list_pr_comments(pr_id: int):
     """List Forgejo comments on a pull request."""
     _require_forgejo()
 
@@ -315,7 +315,7 @@ async def list_pr_comments(pr_id: int):
 
 
 @router.post("/prs/{pr_id}/comments", response_model=PRComment, status_code=201)
-async def create_pr_comment(pr_id: int, body: PRCommentCreate):
+def create_pr_comment(pr_id: int, body: PRCommentCreate):
     """Post a comment on a pull request via Forgejo."""
     _require_forgejo()
 

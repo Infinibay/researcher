@@ -97,7 +97,7 @@ async def send_message(project_id: int, body: ChatMessageCreate, request: Reques
 
 
 @router.get("/{project_id}/threads", response_model=list[ChatThreadResponse])
-async def list_threads(project_id: int):
+def list_threads(project_id: int):
     """List conversation threads with last message."""
 
     def _query(conn: sqlite3.Connection) -> list[dict]:

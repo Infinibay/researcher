@@ -1,0 +1,29 @@
+{
+  "base_commit": "6b2f938",
+  "wheel": "researcher-0.1.0-cp312-cp312-linux_x86_64.whl",
+  "wheel_sha256": "351ed7a0a06b7ac4d74b02b9a1ccd3cfd7e05412b87e3946cbf53bbaee847deb",
+  "source_files_matching_wheel_and_installation": 657,
+  "product_files_matching": 348,
+  "observed": {
+    "cases": 124,
+    "passed": 124,
+    "failed": 0,
+    "skipped": 0,
+    "backend_modules": 236,
+    "all_backend_imports_from_native_env": true,
+    "seconds": 63.41,
+    "exit_code": 0
+  },
+  "tests": [
+    "backend/tests/api",
+    "backend/tests/runtime/test_runtime_service.py",
+    "backend/tests/runtime/test_data_boundaries.py"
+  ],
+  "real_model_turns": 0,
+  "limits": [
+    "Selected tests, not the global suite",
+    "Synthetic managed installation data, no historical user-data migration",
+    "D01-D04: current migration chain and startup readiness, real writer contention plus responsive owner/WS/Stop controls, task/event crash boundaries and fenced cancellation/reopening. Inference is controlled; no production load or historical-data claim.",
+    "No model calls, external accounts or GitHub workflow execution"
+  ]
+}

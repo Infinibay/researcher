@@ -18,7 +18,7 @@ router = APIRouter(prefix="/api/agents", tags=["agents"])
 
 
 @router.get("", response_model=AgentList)
-async def list_agents(project_id: int | None = None):
+def list_agents(project_id: int | None = None):
     """List all agents, optionally filtered by project.
 
     Includes current running task (if any) and performance metrics.

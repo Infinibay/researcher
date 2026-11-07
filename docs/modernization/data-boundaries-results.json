@@ -1,0 +1,67 @@
+{
+  "base_commit": "6b2f938",
+  "validation_started": "2026-11-07 19:56:34 UTC",
+  "validation_finished": "2026-11-07 20:12:04 UTC",
+  "validation_seconds": 930,
+  "accepted_scenarios": [
+    "D01",
+    "D02",
+    "D03",
+    "D04"
+  ],
+  "red": {
+    "failed": 29,
+    "passed": 85,
+    "seconds": 6.55,
+    "new_boundary_failures": 5,
+    "existing_graph_failures": 24
+  },
+  "source_directed": {
+    "passed": 62,
+    "failed": 0,
+    "seconds": 4.6
+  },
+  "source_broad": {
+    "passed": 288,
+    "failed": 0,
+    "seconds": 93.66
+  },
+  "source_final_cases": {
+    "passed": 9,
+    "failed": 0,
+    "seconds": 5.25
+  },
+  "initial_installed": {
+    "cases": 323,
+    "passed": 323,
+    "failed": 0,
+    "skipped": 0,
+    "backend_modules": 261,
+    "all_backend_imports_from_native_env": true,
+    "seconds": 121.976,
+    "exit_code": 0
+  },
+  "final_installed": {
+    "cases": 124,
+    "passed": 124,
+    "failed": 0,
+    "skipped": 0,
+    "backend_modules": 236,
+    "all_backend_imports_from_native_env": true,
+    "seconds": 63.41,
+    "exit_code": 0
+  },
+  "counts_overlap": true,
+  "synchronous_handlers_offloaded": 49,
+  "new_test_cases": 9,
+  "asgi_worker_limit_observed": 40,
+  "sqlite_busy_timeout_ms": 5000,
+  "callback_retry_limit_default": 5,
+  "real_model_turns": 0,
+  "global_suite_repeated": false,
+  "fully_accepted_pages": 0,
+  "limitations": [
+    "Initial323installed cases and final124are different artifacts with overlapping cases; final artifact changes only Git/history handler threading.",
+    "No production load, historical owner-data migration, UI acceptance or human-comprehension claim."
+  ]
+}

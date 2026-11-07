@@ -1,4 +1,4 @@
-"""Health check endpoints."""
+"""Read-only health probes run in the bounded ASGI worker pool, outside the native control event loop."""
 
 from __future__ import annotations
 
@@ -15,7 +15,7 @@ router = APIRouter(prefix="/api/health", tags=["health"])
 
 
 @router.get("")
-async def health_check():
+def health_check():
     """Inspect database access and configured upload storage without creating files.
 
 For a not-yet-used upload directory, check its nearest existing ancestor.
@@ -53,14 +53,13 @@ This reports owner API storage health, not native execution admission readiness.
 
 
 @router.get("/ready")
-async def readiness_check():
-    """Readiness probe — returns 503 if not ready."""
+def readiness_check():
+    """Return 503 unless the existing database has the complete current migration history."""
     try:
-        def _ping(conn):
-            """Confirm that the selected source database is reachable."""
-            conn.execute("SELECT 1").fetchone()
-            return True
-        execute_with_retry(_ping)
+        from backend.db.readiness import verify_database
+        from backend.tools.base.db import get_db_path
+
+        verify_database(get_db_path(), integrity=False)
         return {"ready": True}
     except Exception:
         from fastapi.responses import JSONResponse
