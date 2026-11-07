@@ -729,3 +729,10 @@ Imports y avisos Ruff del corte en [aux-workers-lint.json](aux-workers-lint.json
 Incluye código anterior examinado. Resolver al final de las capacidades principales,
 sin repetir encoder/VM por cambios de estilo. Los recursos globales del supervisor,
 exportaciones/backups y trabajo del padre siguen como pendientes principales.
+
+## DD099 — Estilo de las operaciones administrativas
+
+18 avisos Ruff (13 I001, 3 F401, 1 SIM117 y 1 TRY004) en
+[admin-resources-lint.json](admin-resources-lint.json), incluido código anterior
+examinado. Resolver después de las capacidades principales. No confundirlos con
+la cuota de temporales de Chroma o los recursos del supervisor, aún principales.

@@ -28,7 +28,48 @@ que se pueda comparar el avance; no presentar microajustes como tareas principal
 - Última suite global: `9fb873c`,2210 casos,2178 pasan,31 fallan y1 error de fixture; sin omisiones. La carrera de backup encontrada se corrigió después con40 pruebas instaladas. No se declara una nueva corrida global verde; la referencia `0c8b8d9` queda como evidencia histórica.
 - Los 43 escenarios amplios siguen abiertos en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Etapa actual: trabajadores documentales/semánticos comprobados
+## Etapa actual: administración comprobada; siguen recursos agregados
+
+Bloque **12:29:30–12:41:58 UTC**, **12 min 28 s** hasta validación. Backup,
+verificación, restore e importación histórica tienen proceso propio con memoria,
+CPU y plazo acotados; los inventarios aplican su límite durante el recorrido.
+28 pruebas finales dirigidas pasan. En el alcance ampliado,86casos distintos
+pasan y4mantienen fallos históricos de expectativas de migración.49casos distintos
+del paquete instalado pasan tras corregir el cwd del ensayo.616archivos coinciden,
+20definiciones documentadas y83revisiones de prompts vigentes. Cero modelos.
+[Informe](admin-resources-review.md), [corridas](admin-resources-results.json).
+
+**Lista vigente:**
+- Implementado y comprobado en recorridos concretos: backend Codex/Ken, modelos,
+  flujos principales, comunicación, persistencia y varias recuperaciones.
+- Terminado en este tramo: límites por operación administrativa y recorrido
+  acotado de inventarios, **12 min 28 s** hasta validación.
+- En curso como tarea principal: completar los recursos agregados del sistema.
+- Siguiente: cuota de temporales/exportación de Chroma y memoria del supervisor.
+  Este siguiente tramo todavía **no se inició**.
+- Pendiente principal: migración/recuperación bajo volúmenes acotados, seguridad
+  de dependencias, evaluación humana/otros perfiles y datos históricos.
+- Interfaz:12pilotos/48conceptos;0/12páginas completamente aceptadas.
+- Al final de las capacidades principales: detalles, validación global, revisión
+  independiente y distribución. DD099 conserva18avisos de estilo/imports.
+
+Siguen43escenarios amplios abiertos y no hay nueva suite global verde ni un
+porcentaje global sustentado. Lista y tiempos permanecen tras compactar.
+
+## Etapa anterior: inicio de recursos de administración y supervisor
+
+Inicio **2026-11-07 12:29:30 UTC**. El bloque anterior es progreso comprobado
+y quedó en el commit local `68f6b20`. En curso: límites de memoria/CPU/plazo para
+backup, verificación, restauración e importación histórica, y admisión de
+inventarios antes de acumular listas completas. La cuota agregada de temporales
+de Chroma y el conjunto del supervisor siguen pendientes principales.
+
+Lista vigente: terminado el aislamiento documental/semántico (**19 min 16 s**);
+en curso recursos administrativos; después recursos restantes, seguridad de
+dependencias, recuperación/migración, evaluación de comunicación y aceptación
+de12páginas. Todos los detalles secundarios después de las tareas principales.
+
+## Etapa anterior: trabajadores documentales/semánticos comprobados
 
 Bloque **12:02:31–12:21:47 UTC**, **19 min 16 s**, hasta validación. Un cupo común
 conservado hasta reap físico, Landlock/seccomp obligatorios y estado HTTP429 de

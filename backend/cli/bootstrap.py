@@ -6,7 +6,7 @@ import sqlite3
 import sys
 
 
-def main(argv=None):
+def main(argv=None, *, _in_worker=False):
     """Run one explicit local administration action; help never reads assets, initializes data or downloads."""
     parser = argparse.ArgumentParser(
         description="Initialize new storage, inspect resources, or explicitly back up and restore data. Restored execution requires separate enrollment."
@@ -61,6 +61,14 @@ def main(argv=None):
         operation.add_argument('--max-files', type=int, default=200000)
         operation.add_argument('--timeout', type=int, default=300)
     options = parser.parse_args(argv)
+    from backend.runtime.administration_process import COMMANDS, run_administration
+
+    if options.command in COMMANDS and not _in_worker:
+        try:
+            return run_administration(vars(options))
+        except (OSError, ValueError, RuntimeError) as exc:
+            print(f'Administrative operation refused: {exc}. No automatic retry was attempted.', file=sys.stderr)
+            return 1
     # Lazy import: even --help has no database/runtime/credential side effects.
     from backend.runtime.bootstrap import initialize_authority, initialize_database
 
@@ -108,6 +116,10 @@ def main(argv=None):
             result = initialize_authority(
                 database_dir=options.database_dir, witness_dir=options.witness_dir
             )
+    except MemoryError:
+        print('Operation exceeded its memory budget. Keep partial paths and inspect completion '
+              'receipts; no automatic retry or repair was attempted.', file=sys.stderr)
+        return 1
     except (OSError, ValueError, RuntimeError, sqlite3.DatabaseError, KeyError, TypeError) as exc:
         print(
             f"Operation refused/failed: {exc}. Keep any partial paths for inspection; "
@@ -115,6 +127,10 @@ def main(argv=None):
             file=sys.stderr,
         )
         return 1
+    if _in_worker:
+        from backend.runtime.administration_process import observed_limits
+
+        result['execution_limits'] = observed_limits()
     print(json.dumps(result, indent=2))
     return 0
 

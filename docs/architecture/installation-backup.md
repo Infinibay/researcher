@@ -37,6 +37,18 @@ incluidos alias mediante enlaces simbólicos. Cada comando acepta `--max-bytes`,
 entradas y 300 segundos. Un límite agotado produce un error; no se omiten ni
 truncan archivos para declarar éxito.
 
+Los cuatro comandos de copia, verificación, restauración e importación histórica
+usan un hijo con límite de 1 GiB de espacio virtual, CPU acotada por `--timeout`,
+512 descriptores y tamaño máximo por archivo. El padre impone el plazo, espera
+el cierre del proceso original y conserva las rutas parciales. No hay reintento
+automático. Un timeout puede ocurrir después de escribir un recibo: examinarlo
+antes de decidir la siguiente operación. La respuesta satisfactoria incluye
+`execution_limits`. Los inventarios se comprueban durante el recorrido.
+
+Estos límites se aplican al comando, no a llamadas directas de biblioteca ni a
+todas las operaciones simultáneas del host. Tampoco constituyen una cuota agregada
+de disco para metadatos/journals/temporales. [Evidencia y alcance](../modernization/admin-resources-review.md).
+
 Antes de copiar, cerrar el servicio y conciliar los agentes pendientes. La
 operación mantiene congelada la autoridad verificada y bloquea los escritores
 SQLite de la instalación. Rechaza una concesión activa, procesos registrados sin

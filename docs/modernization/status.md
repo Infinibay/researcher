@@ -4,6 +4,15 @@ La implementación del [plan completo](../superpowers/plans/2026-10-31-actualiza
 
 ## Resultados disponibles
 
+- **Administración acotada por operación:** backup, verificación, restauración e
+  importación histórica usan un hijo con memoria/CPU/plazo limitados; inventarios
+  se rechazan antes de acumular directorios completos. 28 pruebas finales dirigidas
+  pasan; conjunto ampliado con86aprobadas y4fallos históricos de migración.
+  49 casos distintos instalados pasan tras corregir el cwd del ensayo.
+  616 archivos coinciden y20definiciones documentadas. Bloque12min28s.
+  [Informe y límites](admin-resources-review.md), [resultados](admin-resources-results.json).
+  Chroma y recursos agregados del supervisor siguen como trabajo principal.
+
 - **Trabajadores documentales y semánticos acotados:** cupo compartido hasta
   cierre físico, Landlock/seccomp obligatorios y saturación explícita HTTP429.
  98casos distintos de fuente y44instalados pasan;614archivos coinciden y35

@@ -282,7 +282,14 @@ def _verify_backup(directory, budget):
                 with closing(sqlite3.connect(f'file:/proc/self/fd/{stream.fileno()}?mode=ro&immutable=1', uri=True, timeout=0)) as db:
                     if database_receipt(db, budget) != entry['database']:
                         raise ValueError('Backup database counts or integrity differ from manifest')
-    if set(p.name for p in (root / 'objects').iterdir()) != {Path(name).name for name in seen}:
+    expected = {Path(name).name for name in seen}
+    with os.scandir(root / 'objects') as objects:
+        for item in objects:
+            budget.check()
+            if item.name not in expected:
+                raise ValueError('Backup contains unlisted or missing content objects')
+            expected.remove(item.name)
+    if expected:
         raise ValueError('Backup contains unlisted or missing content objects')
     if 'reboot_evidence' in manifest:
         witness = next(entry for entry in manifest['authority_evidence']['external'] if entry['role']=='witness')

@@ -63,7 +63,9 @@ def inventory(root, budget, *, exclude=None):
 
     def walk(fd, prefix):
         """Visit pinned directory entries and capture metadata used to detect concurrent changes."""
-        for entry in sorted(os.scandir(fd), key=lambda item: item.name):
+        # Do not sort/materialize an untrusted directory before applying the
+        # budget. Callers can order the resulting bounded inventory if needed.
+        for entry in os.scandir(fd):
             name = prefix + entry.name
             relative_name(name)
             budget.check()

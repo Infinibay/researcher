@@ -233,6 +233,11 @@ def test_public_backup_verify_restore_commands_are_inference_free(installation, 
     receipt=json.loads(restore.stdout)
     assert receipt['status']=='pending_enrollment' and receipt['model_turns']==0
     assert json.loads(verify.stdout)['snapshot_id']==receipt['snapshot_id']
+    for completed in (backup, verify, restore):
+        limits = json.loads(completed.stdout)['execution_limits']
+        assert limits['address_space_bytes'] <= 1024**3
+        assert limits['cpu_seconds'] <= 300
+        assert limits['aggregate_disk_quota'] is False
 
 
 @pytest.mark.parametrize('limit', [{'max_files':1},{'max_bytes':1},{'timeout':0}])

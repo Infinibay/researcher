@@ -1,0 +1,106 @@
+{
+  "definitions": 20,
+  "missing": [],
+  "entries": [
+    {
+      "path": "backend/cli/bootstrap.py",
+      "symbol": "<module>",
+      "documented": true
+    },
+    {
+      "path": "backend/cli/bootstrap.py",
+      "symbol": "main",
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/administration_process.py",
+      "symbol": "<module>",
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/administration_process.py",
+      "symbol": "apply_limits",
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/administration_process.py",
+      "symbol": "observed_limits",
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/administration_process.py",
+      "symbol": "run_administration",
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/administration_process.py",
+      "symbol": "worker_main",
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/snapshot_files.py",
+      "symbol": "<module>",
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/snapshot_files.py",
+      "symbol": "inventory",
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/snapshot_files.py",
+      "symbol": "inventory.walk",
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/installation_backup.py",
+      "symbol": "<module>",
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/installation_backup.py",
+      "symbol": "_verify_backup",
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_administration_resources.py",
+      "symbol": "<module>",
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_administration_resources.py",
+      "symbol": "test_inventory_refuses_while_reading_instead_of_materializing_directory",
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_administration_resources.py",
+      "symbol": "test_inventory_refuses_while_reading_instead_of_materializing_directory.bounded_listing",
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_administration_resources.py",
+      "symbol": "test_administrative_child_has_real_memory_ceiling",
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_administration_resources.py",
+      "symbol": "test_administrative_timeout_reaps_original_child_and_preserves_partial_files",
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_administration_resources.py",
+      "symbol": "test_parent_death_ends_administrative_child_without_replaying_it",
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_installation_backup.py",
+      "symbol": "<module>",
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_installation_backup.py",
+      "symbol": "test_public_backup_verify_restore_commands_are_inference_free",
+      "documented": true
+    }
+  ]
+}

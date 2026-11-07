@@ -1,0 +1,139 @@
+{
+  "base_commit": "68f6b20",
+  "previous_goal_turn": "progress: scoped worker changes committed as 68f6b20",
+  "started_at_utc": "2026-11-07T12:29:30Z",
+  "validation_cutoff_utc": "2026-11-07T12:41:58Z",
+  "elapsed_to_validation_seconds": 748,
+  "runs": [
+    {
+      "name": "first",
+      "receipt": ".superpowers/sdd/2026-10-31-actualizacion-proyecto/admin-resources-first.xml",
+      "sha256": "a78d750229da4bfe4e8c7acf0dbbfbd5ef4f174dc09d0f9d4a871d54aa559578",
+      "tests": 27,
+      "outcomes": {
+        "passed": 27
+      },
+      "seconds": 11.485,
+      "failures": []
+    },
+    {
+      "name": "source",
+      "receipt": ".superpowers/sdd/2026-10-31-actualizacion-proyecto/admin-resources-source.xml",
+      "sha256": "b724182833504d9aba14f6052f6e1ae4c7ccfa5b0323c729e0bae1fb440415c2",
+      "tests": 89,
+      "outcomes": {
+        "passed": 85,
+        "failure": 4
+      },
+      "seconds": 46.978,
+      "failures": [
+        "backend.tests.runtime.test_reboot_backup::test_reboot_backup_restores_live_old_peer_as_history[56]",
+        "backend.tests.runtime.test_reboot_backup::test_reboot_backup_restores_live_old_peer_as_history[57]",
+        "backend.tests.runtime.test_reboot_backup::test_unused_archive_inverse_and_future_refusal_preserve_data",
+        "backend.tests.runtime.test_legacy_import::test_chroma_fragments_keep_exact_text_identity_and_explicit_project"
+      ]
+    },
+    {
+      "name": "final-source",
+      "receipt": ".superpowers/sdd/2026-10-31-actualizacion-proyecto/admin-resources-final-source.xml",
+      "sha256": "5d04c846cd846ae3869e3204a13ff3c64f1ff945d445ef2611eeaf089dbefa02",
+      "tests": 28,
+      "outcomes": {
+        "passed": 28
+      },
+      "seconds": 11.592,
+      "failures": []
+    },
+    {
+      "name": "installed",
+      "receipt": ".superpowers/sdd/2026-10-31-actualizacion-proyecto/admin-resources-installed.xml",
+      "sha256": "1cddba40a6069bfa3ce5526491d87fe0882c8b735c1a3711d627db99338b1148",
+      "tests": 48,
+      "outcomes": {
+        "passed": 47,
+        "failure": 1
+      },
+      "seconds": 26.01,
+      "failures": [
+        "backend.tests.cli.test_bootstrap::test_explicit_cli_database_serves_twice_and_preserves_user_data"
+      ]
+    },
+    {
+      "name": "installed-auth",
+      "receipt": ".superpowers/sdd/2026-10-31-actualizacion-proyecto/admin-resources-installed-auth.xml",
+      "sha256": "afdcd9c4b581b551048c9eb18b86887d81635de2395f74837ec8362aebdc0f81",
+      "tests": 1,
+      "outcomes": {
+        "failure": 1
+      },
+      "seconds": 2.005,
+      "failures": [
+        "backend.tests.cli.test_bootstrap::test_explicit_cli_database_serves_twice_and_preserves_user_data"
+      ]
+    },
+    {
+      "name": "installed-final",
+      "receipt": ".superpowers/sdd/2026-10-31-actualizacion-proyecto/admin-resources-installed-final.xml",
+      "sha256": "b1a2cc6f9bd780e9a2f840b940c68b5f8b0fbccbc91f538aa3c7a3e85445cb45",
+      "tests": 2,
+      "outcomes": {
+        "passed": 2
+      },
+      "seconds": 2.603,
+      "failures": []
+    }
+  ],
+  "source_final_distinct_outcomes": {
+    "passed": 86,
+    "failure": 4
+  },
+  "installed_final_distinct_outcomes": {
+    "passed": 49
+  },
+  "known_source_failures": [
+    "backend.tests.runtime.test_reboot_backup::test_reboot_backup_restores_live_old_peer_as_history[56]",
+    "backend.tests.runtime.test_reboot_backup::test_reboot_backup_restores_live_old_peer_as_history[57]",
+    "backend.tests.runtime.test_reboot_backup::test_unused_archive_inverse_and_future_refusal_preserve_data",
+    "backend.tests.runtime.test_legacy_import::test_chroma_fragments_keep_exact_text_identity_and_explicit_project"
+  ],
+  "source_failure_evidence": "All four identities already appear in docs/modernization/current-global-results.json; expectations refer to schemas before current59.",
+  "installed_fixture_failure": "First installed run from /tmp fails the credential-outside-workspace guard because the autouse fixture places credentials below /tmp. One environment-only attempt still fails because the fixture replaces it. Running the unchanged wheel/test from /tmp/researcher-admin-installed.g164WY passes. No product fix or hidden exclusion.",
+  "packaging": {
+    "wheel": ".superpowers/sdd/2026-10-31-actualizacion-proyecto/admin-resources-dist/researcher-0.1.0-cp312-cp312-linux_x86_64.whl",
+    "sha256": "9b3392ccf5b7caefe4b42c8fe88696ef16599ea021a98712e677827058b3576a",
+    "matching_python_sql_files": 616,
+    "product_python_sql_files": 327,
+    "mismatches": [],
+    "source_only": [
+      "backend/db/seeds/dev_data.sql"
+    ],
+    "source_only_reason": "Existing development seed is outside the declared db/*.sql package-data rule; no serving migration is omitted."
+  },
+  "changed_documented_definitions": 20,
+  "prompt_reviews": {
+    "current": 83,
+    "revalidated": 1,
+    "requires_review": 0
+  },
+  "lint": {
+    "count": 18,
+    "codes": {
+      "I001": 13,
+      "F401": 3,
+      "SIM117": 1,
+      "TRY004": 1
+    },
+    "deferred_detail": "DD099"
+  },
+  "model_turns": 0,
+  "new_global_suite": false,
+  "broad_scenarios_closed": 0,
+  "limits": [
+    "Four administrative CLI commands only; direct library callers and the web supervisor do not acquire these process limits.",
+    "Per-process virtual address space is not a total RSS/cache limit across concurrent operations.",
+    "Per-file and cooperative copy budgets do not impose aggregate filesystem capacity on metadata, journals or temporary files.",
+    "Trusted child program, not a sandbox for arbitrary code.",
+    "An observation timeout does not prove no completion marker was written; inspect receipts before any new operation."
+  ],
+  "next_primary_work": "Chroma temporary/export aggregate capacity and service-wide supervisor resource limits; remain primary, not deferred polish."
+}
