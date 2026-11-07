@@ -8,27 +8,10 @@ import pytest
 def test_migration_preserves_unowned_history_and_refuses_retrospective_binding(
     _isolated_db, db_conn, monkeypatch
 ):
-    from backend.db import migrations
+    """Upgrade a coherent version26 without inventing ownership for old command history."""
     from backend.tools.base.db import ensure_migrations
 
-    apply = migrations.apply_sql_resource
-    with monkeypatch.context() as patch:
-        patch.setattr(
-            migrations,
-            "apply_sql_resource",
-            lambda conn, path: (
-                None
-                if path.name
-                in (
-                    "command_peer_schema.sql",
-                    "admission_schema.sql",
-                    "task_inputs_schema.sql",
-                    "run_input_schema.sql",
-                )
-                else apply(conn, path)
-            ),
-        )
-        ensure_migrations(_isolated_db)
+    ensure_migrations(_isolated_db, target_version=26)
     db_conn.executescript("""
         INSERT INTO projects(id,name) VALUES(101,'Historical');
         INSERT INTO tasks(id,project_id,type,title) VALUES(1001,101,'research','Old');

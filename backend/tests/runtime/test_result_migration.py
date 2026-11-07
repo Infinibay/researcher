@@ -2,6 +2,8 @@
 
 import pytest
 
+pytestmark = pytest.mark.parametrize("schema_target", [42])
+
 
 def test_unused_result_schema_rolls_back_and_reapplies_without_losing_tasks(
     coordination,
@@ -61,8 +63,7 @@ def test_result_downgrade_refuses_live_authority_or_historical_delivery(
 ):
     """A downgrade cannot erase a delivery or remove a capability while its authority remains live."""
     from backend.db.result_migration import restore_result_schema
-    from backend.research.models import ResultDraft
-    from backend.tests.runtime.test_result_acceptance import make_active_result
+    from backend.tests.runtime.migration_fixtures import historical_run
 
     c = coordination
     from backend.db.development_migration import (
@@ -96,13 +97,17 @@ def test_result_downgrade_refuses_live_authority_or_historical_delivery(
             permissions={"results.propose"},
         )
     elif obstacle == "live_run":
-        c.store.admit(c.spec)
+        historical_run(c.conn, "live-run", status="queued")
+        c.conn.commit()
     else:
-        _, lease, scope, _, _, report = make_active_result(c)
-        c.research.propose_result(
-            scope, "deliver", ResultDraft((report,), "Result.", ("Not repeated.",))
+        attempt = historical_run(c.conn, "delivered-run")
+        c.conn.execute(
+            """INSERT INTO runtime_result_proposals(project_id,task_id,run_id,attempt_id,fence,
+            context_version,kind,subject_sha256,snapshot_json,created_at)
+            VALUES(101,1001,'delivered-run',?,1,1,'research_reports',?,'{}',1000)""",
+            (attempt, "a" * 64),
         )
-        c.store.finish(lease, native_status="completed", summary="Ready.")
+        c.conn.commit()
     before = c.conn.execute("SELECT count(*) FROM runtime_result_proposals").fetchone()[
         0
     ]

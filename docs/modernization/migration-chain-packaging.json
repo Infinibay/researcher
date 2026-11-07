@@ -1,0 +1,50 @@
+{
+  "base_commit": "3965297",
+  "wheel": "researcher-0.1.0-cp312-cp312-linux_x86_64.whl",
+  "wheel_sha256": "91396b36eb32b13fbe942ec9aecc8a686d9bfcf4e8c52cd69025467a86c5f787",
+  "source_files_matching_wheel_and_installation": 577,
+  "product_files_matching": 308,
+  "observed": {
+    "cases": 127,
+    "passed": 127,
+    "failed": 0,
+    "skipped": 0,
+    "backend_modules": 251,
+    "all_backend_imports_from_native_env": true,
+    "seconds": 33.067,
+    "exit_code": 0
+  },
+  "tests": [
+    "backend/tests/runtime/test_migration_chain.py",
+    "backend/tests/runtime/test_run_input_migration.py",
+    "backend/tests/runtime/test_question_migration.py",
+    "backend/tests/runtime/test_task_inputs_migration.py",
+    "backend/tests/runtime/test_admission_migration.py",
+    "backend/tests/runtime/test_command_peer_migration.py",
+    "backend/tests/runtime/test_result_migration.py",
+    "backend/tests/runtime/test_development_migration.py",
+    "backend/tests/runtime/test_development_startup.py",
+    "backend/tests/runtime/test_development_rollback.py",
+    "backend/tests/runtime/test_plan_continuation.py::test_delivery_migration_preserves_original_packets_and_rolls_back_whole_rebuild",
+    "backend/tests/runtime/test_plan_reauthorization.py::test_revision_migration_rolls_back_failed_upgrade_and_preserves_original_execution",
+    "backend/tests/runtime/test_code_flow_cutover.py::test_task_cutover_migration_is_atomic_repeatable_and_preserves_history",
+    "backend/tests/runtime/test_investigation.py::test_exploratory_schema_upgrade_is_atomic_and_preserves_historical_task_and_report",
+    "backend/tests/runtime/test_scientific_research.py::test_scientific_owner_guard_upgrade_is_atomic_and_keeps_historical_reports",
+    "backend/tests/runtime/test_code_publications.py::test_publication_request_is_immutable_and_startup_preserves_original_records",
+    "backend/tests/tools/test_database_initialization.py",
+    "backend/tests/config/test_database_paths.py",
+    "backend/tests/research/test_migration.py",
+    "backend/tests/research/test_wiki_migration.py",
+    "backend/tests/runtime/test_ken_peer_migration.py",
+    "backend/tests/api/test_bootstrap_startup.py",
+    "backend/tests/api/test_storage_health.py",
+    "backend/tests/cli/test_bootstrap.py"
+  ],
+  "real_model_turns": 0,
+  "limits": [
+    "Selected tests, not the global suite",
+    "Synthetic historical SQL fixtures, not user-data migration or full installation backup/restore",
+    "Two shell launcher tests need checkout start.sh and passed only in source",
+    "Historical review SQL fixtures verify preservation/refusal; no real Git/model/owner authorization claimed"
+  ]
+}

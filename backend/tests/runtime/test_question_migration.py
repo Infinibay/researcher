@@ -17,40 +17,7 @@ def version23(database, conn, monkeypatch):
     from backend.tools.base.db import ensure_migrations
 
     conn.execute("PRAGMA foreign_keys=ON")
-    apply_resource = migrations.apply_sql_resource
-    with monkeypatch.context() as patch:
-        patch.setattr(question_migration, "apply_question_schema", lambda _conn: None)
-        patch.setattr(peer_kind_migration, "migrate_ken_peers", lambda _conn: None)
-        patch.setattr(wiki_migration, "apply_wiki_schema", lambda _conn: None)
-        # This fixture deliberately represents version 23, not the newest schema.
-        patch.setattr(
-            migrations,
-            "apply_sql_resource",
-            lambda conn, path: (
-                None
-                if path.name
-                in (
-                    "peer_schema.sql",
-                    "peer_origin_schema.sql",
-                    "command_peer_schema.sql",
-                    "admission_schema.sql",
-                    "task_inputs_schema.sql",
-                    "run_input_schema.sql",
-                    "native_state_schema.sql",
-                    "review_schema.sql",
-                    "result_schema.sql",
-                    "development_schema.sql",
-                    "development_workspace_schema.sql",
-                    "code_candidate_schema.sql",
-                    "code_check_schema.sql",
-                    "code_review_schema.sql",
-                    "code_review_record_schema.sql",
-                    "code_acceptance_schema.sql",
-                )
-                else apply_resource(conn, path)
-            ),
-        )
-        ensure_migrations(database)
+    ensure_migrations(database, target_version=23)
     assert (
         conn.execute("SELECT MAX(version) FROM schema_migrations").fetchone()[0] == 23
     )

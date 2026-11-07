@@ -303,8 +303,9 @@ def test_investigation_finding_uses_independent_versioned_review(coordination):
     )
 
 
+@pytest.mark.parametrize("schema_target", [51])
 def test_exploratory_schema_upgrade_is_atomic_and_preserves_historical_task_and_report(
-    request, monkeypatch
+    request, schema_target
 ):
     """A failed schema52 install rolls back its table/guards; a repeatable successful upgrade preserves actual schema51 historical records."""
     import sqlite3
@@ -312,14 +313,6 @@ def test_exploratory_schema_upgrade_is_atomic_and_preserves_historical_task_and_
     from backend.db import migrations
     from backend.tools.base.db import ensure_migrations
 
-    apply = migrations.apply_sql_resource
-
-    def skip_investigation(conn, path):
-        """Prepare exactly schema51 without changing any historical migration resource."""
-        if path.name not in ("investigation_schema.sql", "scientific_schema.sql", "native_task_cutover_schema.sql"):
-            apply(conn, path)
-
-    monkeypatch.setattr(migrations, "apply_sql_resource", skip_investigation)
     c = request.getfixturevalue("coordination")
     assert (
         c.conn.execute("SELECT max(version)FROM schema_migrations").fetchone()[0] == 51
@@ -335,7 +328,6 @@ def test_exploratory_schema_upgrade_is_atomic_and_preserves_historical_task_and_
         "CREATE TRIGGER reject52 BEFORE INSERT ON schema_migrations WHEN new.version=52 BEGIN SELECT RAISE(ABORT,'injected exploration migration failure');END"
     )
     c.conn.commit()
-    monkeypatch.setattr(migrations, "apply_sql_resource", apply)
     with pytest.raises(sqlite3.IntegrityError, match="injected"):
         ensure_migrations(c.database)
     assert (

@@ -315,54 +315,23 @@ def test_successor_result_acceptance_releases_dependent_with_new_author_identity
     assert s.c.store.get(101, run.run_id).status == "cancelled"
 
 
+@pytest.mark.parametrize("schema_target", [49])
 def test_delivery_migration_preserves_original_packets_and_rolls_back_whole_rebuild(
-    request, monkeypatch
+    request, schema_target
 ):
     """A failed migration cannot leave rebuilt half-tables; upgrading an actual schema49 preserves original identities and exact handoff bytes."""
     import sqlite3
 
-    from backend.db import migrations
-    from backend.planning.execution import PlanExecutions
-    from backend.runtime.contracts import RunSpec
+    from backend.tests.runtime.migration_fixtures import historical_plan_execution, historical_run
     from backend.tools.base.db import ensure_migrations
 
-    apply = migrations.apply_sql_resource
-
-    def skip_fifty(conn, path):
-        """Prepare the real pre-upgrade schema without modifying its historical SQL resources."""
-        if path.name not in ("plan_continuation_schema.sql", "plan_reauthorization_schema.sql", "investigation_schema.sql", "scientific_schema.sql"):
-            apply(conn, path)
-
-    monkeypatch.setattr(migrations, "apply_sql_resource", skip_fifty)
     s = request.getfixturevalue("service_setup")
-    s, plan, graph = accepted_plan(s)
-    executions = PlanExecutions(s.c.store)
-    with s.c.store._transaction() as conn:
-        manifest = executions._manifest(conn, 101, plan.run_id)
-    from backend.knowledge.reviews import digest
-
-    authorization = executions.authorize(
-        101, plan.run_id, operation_key="original49", manifest_sha256=digest(manifest)
-    )
-    eid = authorization["execution_id"]
-    task = graph["tasks"]["learn"]
-    native = s.c.store.admit(
-        RunSpec(
-            101,
-            task,
-            "native-researcher",
-            1,
-            "historical-manual",
-            "Read the evidence",
-            "codex",
-        )
-    )
-    did = s.c.conn.execute(
-        "SELECT id FROM runtime_plan_deliveries WHERE task_id=?", (task,)
-    ).fetchone()[0]
+    eid, did = historical_plan_execution(s.c.conn)
+    run_id = "historical-manual"
+    historical_run(s.c.conn, run_id, task_id=1002)
     packet = '{ "original": "bytes, spacing, and order" }'
     s.c.conn.execute(
-        "UPDATE runtime_plan_deliveries SET run_id=? WHERE id=?", (native.run_id, did)
+        "UPDATE runtime_plan_deliveries SET run_id=? WHERE id=?", (run_id, did)
     )
     s.c.conn.execute(
         "INSERT INTO runtime_plan_handoffs VALUES(?,?,?,?)",
@@ -372,7 +341,6 @@ def test_delivery_migration_preserves_original_packets_and_rolls_back_whole_rebu
         "CREATE TRIGGER reject50 BEFORE INSERT ON schema_migrations WHEN new.version=50 BEGIN SELECT RAISE(ABORT,'injected migration failure'); END"
     )
     s.c.conn.commit()
-    monkeypatch.setattr(migrations, "apply_sql_resource", apply)
     with pytest.raises(sqlite3.IntegrityError, match="injected"):
         ensure_migrations(s.c.database)
     assert "predecessor_delivery_id" not in {
@@ -391,7 +359,7 @@ def test_delivery_migration_preserves_original_packets_and_rolls_back_whole_rebu
     old = s.c.conn.execute(
         "SELECT *FROM runtime_plan_deliveries WHERE id=?", (did,)
     ).fetchone()
-    assert old["run_id"] == native.run_id and old["execution_id"] == eid
+    assert old["run_id"] == run_id and old["execution_id"] == eid
     assert old["predecessor_delivery_id"] is None
     assert (
         s.c.conn.execute(

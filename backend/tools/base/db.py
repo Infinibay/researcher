@@ -108,13 +108,18 @@ def db_transaction(db_path: str | None = None):
         yield conn
 
 
-def ensure_migrations(db_path: str | None = None, *, existing_only: bool = False) -> None:
+def ensure_migrations(db_path: str | None = None, *, existing_only: bool = False, target_version: int | None = None) -> None:
     """Run pending schema migrations for existing databases.
 
     Checks the ``schema_migrations`` table and applies any missing
     migrations. Safe to call multiple times. Serving requires an already
     initialized file; explicit installation/legacy callers may create one.
+    Explicit forward targets support staged upgrades; serving always defaults
+    to the latest schema. A target never authorizes an implicit downgrade.
     """
+    from backend.db.migration_catalog import forward_target, validate_history
+
+    target = forward_target(target_version)
     if db_path is None:
         db_path = get_db_path()
 
@@ -164,6 +169,8 @@ def ensure_migrations(db_path: str | None = None, *, existing_only: bool = False
                 "SELECT version FROM schema_migrations"
             ).fetchall()
         }
+
+        validate_history(applied, target)
 
         # Migration 6: add content column to artifacts
         if 6 not in applied:
@@ -284,236 +291,12 @@ def ensure_migrations(db_path: str | None = None, *, existing_only: bool = False
             )
             conn.commit()
             logger.info("Migration 17: added code intelligence tables")
-        if 18 not in applied:
-            from backend.db.research_migration import apply_research_schema
+        from backend.db.migration_catalog import MIGRATIONS
 
-            apply_research_schema(conn)
-            logger.info("Migration 18: research evidence, idempotent operations and scoped grants")
-        if 19 not in applied:
-            from backend.db.migrations import apply_sql_resource
-
-            resource = Path(__file__).resolve().parents[2] / "db/runtime_schema.sql"
-            apply_sql_resource(conn, resource)
-            logger.info("Migration 19: durable runs, attempts, context revisions and grant bindings")
-        if 20 not in applied:
-            from backend.db.migrations import apply_sql_resource
-
-            resource = Path(__file__).resolve().parents[2] / "db/job_schema.sql"
-            apply_sql_resource(conn, resource)
-            logger.info("Migration 20: owned command dispatch and terminal receipts")
-        if 21 not in applied:
-            from backend.db.migrations import apply_sql_resource
-
-            resource = Path(__file__).resolve().parents[2] / "db/inference_schema.sql"
-            apply_sql_resource(conn, resource)
-            logger.info("Migration 21: native dispatch intent and project work budgets")
-        if 22 not in applied:
-            from backend.db.migrations import apply_sql_resource
-
-            resource = Path(__file__).resolve().parents[2] / "db/conversation_schema.sql"
-            apply_sql_resource(conn, resource)
-            logger.info("Migration 22: atomic human conversation delivery")
-        if 23 not in applied:
-            from backend.db.migrations import apply_sql_resource
-
-            resource = Path(__file__).resolve().parents[2] / "db/model_schema.sql"
-            apply_sql_resource(conn, resource)
-            logger.info("Migration 23: model provenance per native dispatch")
-        if 24 not in applied:
-            from backend.db.question_migration import apply_question_schema
-
-            apply_question_schema(conn)
-            logger.info("Migration 24: durable human questions and waiting state")
-        if 25 not in applied:
-            from backend.db.migrations import apply_sql_resource
-
-            resource = Path(__file__).resolve().parents[2] / "db/peer_schema.sql"
-            apply_sql_resource(conn, resource)
-            logger.info("Migration 25: gated PID namespace peer ownership")
-        if 26 not in applied:
-            from backend.db.migrations import apply_sql_resource
-
-            resource = Path(__file__).resolve().parents[2] / "db/peer_origin_schema.sql"
-            apply_sql_resource(conn, resource)
-            logger.info("Migration 26: registered peer database origin")
-        if 27 not in applied:
-            from backend.db.migrations import apply_sql_resource
-
-            resource = Path(__file__).resolve().parents[2] / "db/command_peer_schema.sql"
-            apply_sql_resource(conn, resource)
-            logger.info("Migration 27: command peer ownership and independent closure proof")
-        if 28 not in applied:
-            from backend.db.migrations import apply_sql_resource
-
-            resource = Path(__file__).resolve().parents[2] / "db/admission_schema.sql"
-            apply_sql_resource(conn, resource)
-            logger.info("Migration 28: durable repository/workspace admission")
-        if 29 not in applied:
-            from backend.db.migrations import apply_sql_resource
-
-            resource = Path(__file__).resolve().parents[2] / "db/task_inputs_schema.sql"
-            apply_sql_resource(conn, resource)
-            logger.info("Migration 29: task input versioning and authority withdrawal")
-        if 30 not in applied:
-            from backend.db.migrations import apply_sql_resource
-
-            resource = Path(__file__).resolve().parents[2] / "db/run_input_schema.sql"
-            apply_sql_resource(conn, resource)
-            logger.info("Migration 30: frozen host input and scoped conversation")
-        if 31 not in applied:
-            from backend.db.peer_kind_migration import migrate_ken_peers
-
-            migrate_ken_peers(conn)
-            logger.info("Migration 31: explicit owned Ken peer kind")
-        if 32 not in applied:
-            from backend.db.migrations import apply_sql_resource
-
-            resource = Path(__file__).resolve().parents[2] / "db/native_state_schema.sql"
-            apply_sql_resource(conn, resource)
-            logger.info("Migration 32: retain closed native peers for explicit resume")
-        if 33 not in applied:
-            from backend.db.wiki_migration import apply_wiki_schema
-
-            apply_wiki_schema(conn)
-            logger.info("Migration 33: explicit wiki namespaces, revisions and captured wiki sources")
-        if 34 not in applied:
-            from backend.db.migrations import apply_sql_resource
-
-            resource = Path(__file__).resolve().parents[2] / "db/review_schema.sql"
-            apply_sql_resource(conn, resource)
-            logger.info("Migration 34: immutable version-bound finding reviews")
-        if 35 not in applied:
-            from backend.db.migrations import apply_sql_resource
-
-            resource = Path(__file__).resolve().parents[2] / "db/result_schema.sql"
-            apply_sql_resource(conn, resource)
-            logger.info("Migration 35: explicit research delivery and owner acceptance")
-        if 36 not in applied:
-            from backend.db.migrations import apply_sql_resource
-
-            resource = Path(__file__).resolve().parents[2] / "db/development_schema.sql"
-            apply_sql_resource(conn, resource)
-            logger.info("Migration 36: explicit native development and code review kinds")
-        if 37 not in applied:
-            from backend.db.migrations import apply_sql_resource
-
-            resource = Path(__file__).resolve().parents[2] / "db/development_workspace_schema.sql"
-            apply_sql_resource(conn, resource)
-            logger.info("Migration 37: retained private development preparation identity")
-        if 38 not in applied:
-            from backend.db.migrations import apply_sql_resource
-
-            resource = Path(__file__).resolve().parents[2] / "db/code_candidate_schema.sql"
-            apply_sql_resource(conn, resource)
-            logger.info("Migration 38: retained exact private code candidates")
-        if 39 not in applied:
-            from backend.db.migrations import apply_sql_resource
-
-            resource = Path(__file__).resolve().parents[2] / "db/code_check_schema.sql"
-            apply_sql_resource(conn, resource)
-            logger.info("Migration 39: original-owned exact candidate checks")
-        if 40 not in applied:
-            from backend.db.migrations import apply_sql_resource
-
-            resource = Path(__file__).resolve().parents[2] / "db/code_review_schema.sql"
-            apply_sql_resource(conn, resource)
-            logger.info("Migration 40: immutable independent code review subjects")
-        if 41 not in applied:
-            from backend.db.migrations import apply_sql_resource
-
-            resource = Path(__file__).resolve().parents[2] / "db/code_review_record_schema.sql"
-            apply_sql_resource(conn, resource)
-            logger.info("Migration 41: original-owned native code review records")
-        if 42 not in applied:
-            from backend.db.migrations import apply_sql_resource
-
-            resource = Path(__file__).resolve().parents[2] / "db/code_acceptance_schema.sql"
-            apply_sql_resource(conn, resource)
-            logger.info("Migration 42: exact owner code acceptance")
-        if 43 not in applied:
-            from backend.db.migrations import apply_sql_resource
-
-            resource = Path(__file__).resolve().parents[2] / "db/code_publication_schema.sql"
-            apply_sql_resource(conn, resource)
-            logger.info("Migration 43: acceptance-bound host publication")
-        if 44 not in applied:
-            from backend.db.migrations import apply_sql_resource
-
-            resource = Path(__file__).resolve().parents[2] / "db/publication_recovery_schema.sql"
-            apply_sql_resource(conn, resource)
-            logger.info("Migration 44: readonly publication recovery")
-        if 45 not in applied:
-            from backend.db.migrations import apply_sql_resource
-
-            resource = Path(__file__).resolve().parents[2] / "db/remote_publication_schema.sql"
-            apply_sql_resource(conn, resource)
-            logger.info("Migration 45: durable remote effect ownership")
-        if 46 not in applied:
-            from backend.db.migrations import apply_sql_resource
-
-            resource = Path(__file__).resolve().parents[2] / "db/remote_recovery_schema.sql"
-            apply_sql_resource(conn, resource)
-            logger.info("Migration 46: readonly remote recovery and HTTP ownership")
-        if 47 not in applied:
-            from backend.db.migrations import apply_sql_resource
-
-            resource = Path(__file__).resolve().parents[2] / "db/project_planning_schema.sql"
-            apply_sql_resource(conn, resource)
-            logger.info("Migration 47: native project planning")
-        if 48 not in applied:
-            from backend.db.migrations import apply_sql_resource
-
-            resource = Path(__file__).resolve().parents[2] / "db/plan_execution_schema.sql"
-            apply_sql_resource(conn, resource)
-            logger.info("Migration 48: accepted-plan execution deliveries")
-        if 49 not in applied:
-            from backend.db.migrations import apply_sql_resource
-
-            resource = Path(__file__).resolve().parents[2] / "db/owner_note_schema.sql"
-            apply_sql_resource(conn, resource)
-            logger.info("Migration 49: explanatory owner note receipts")
-        if 50 not in applied:
-            from backend.db.migrations import apply_sql_resource
-
-            resource = Path(__file__).resolve().parents[2] / "db/plan_continuation_schema.sql"
-            apply_sql_resource(conn, resource)
-            logger.info("Migration 50: explicit plan delivery continuations")
-        if 51 not in applied:
-            from backend.db.migrations import apply_sql_resource
-
-            resource = Path(__file__).resolve().parents[2] / "db/plan_reauthorization_schema.sql"
-            apply_sql_resource(conn, resource)
-            logger.info("Migration 51: corrected graph owner reauthorization")
-        if 52 not in applied:
-            from backend.db.migrations import apply_sql_resource
-
-            resource = Path(__file__).resolve().parents[2] / "db/investigation_schema.sql"
-            apply_sql_resource(conn, resource)
-            logger.info("Migration 52: exploratory investigation summaries")
-        if 53 not in applied:
-            from backend.db.migrations import apply_sql_resource
-
-            resource = Path(__file__).resolve().parents[2] / "db/scientific_schema.sql"
-            apply_sql_resource(conn, resource)
-            logger.info("Migration 53: native scientific research ownership")
-        if 54 not in applied:
-            from backend.db.migrations import apply_sql_resource
-
-            resource = Path(__file__).resolve().parents[2] / "db/native_task_cutover_schema.sql"
-            apply_sql_resource(conn, resource)
-            logger.info("Migration 54: native ownership of all task categories")
-        if 55 not in applied:
-            from backend.db.migrations import apply_sql_resource
-
-            resource = Path(__file__).resolve().parents[2] / "db/model_settings_schema.sql"
-            apply_sql_resource(conn, resource)
-            logger.info("Migration 55: owner model settings and immutable attempt selection")
-        if 56 not in applied:
-            from backend.db.migrations import apply_sql_resource
-
-            resource = Path(__file__).resolve().parents[2] / "db/agent_messages_schema.sql"
-            apply_sql_resource(conn, resource)
-            logger.info("Migration 56: attributed native agent conversation")
+        for step in MIGRATIONS:
+            if step.version <= target and step.version not in applied:
+                step.apply(conn)
+                logger.info("Migration %s: %s", step.version, step.resource or step.handler)
     except Exception:
         logger.exception("ensure_migrations failed")
         conn.rollback()

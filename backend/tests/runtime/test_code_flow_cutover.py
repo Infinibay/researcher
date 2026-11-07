@@ -65,19 +65,12 @@ def test_admission_alone_cannot_complete_any_migrated_task(coordination, task_ty
     c.conn.rollback()
 
 
-def test_task_cutover_migration_is_atomic_repeatable_and_preserves_history(request, monkeypatch):
+@pytest.mark.parametrize("schema_target", [53])
+def test_task_cutover_migration_is_atomic_repeatable_and_preserves_history(request, schema_target):
     """A failed schema54 install leaves schema53 and old work intact; retry adds guards without minting native proof."""
     from backend.db import migrations
     from backend.tools.base.db import ensure_migrations
 
-    apply = migrations.apply_sql_resource
-
-    def skip_cutover(conn, path):
-        """Prepare the actual prior schema without modifying historical migration files."""
-        if path.name != "native_task_cutover_schema.sql":
-            apply(conn, path)
-
-    monkeypatch.setattr(migrations, "apply_sql_resource", skip_cutover)
     c = request.getfixturevalue("coordination")
     assert c.conn.execute("SELECT max(version) FROM schema_migrations").fetchone()[0] == 53
     c.conn.execute("UPDATE tasks SET type='code',status='done',assigned_to='old-author',branch_name='old-branch' WHERE id=1002")
@@ -85,7 +78,6 @@ def test_task_cutover_migration_is_atomic_repeatable_and_preserves_history(reque
     original = dict(c.conn.execute("SELECT * FROM tasks WHERE id=1002").fetchone())
     c.conn.execute("CREATE TRIGGER reject54 BEFORE INSERT ON schema_migrations WHEN new.version=54 BEGIN SELECT RAISE(ABORT,'injected cutover failure'); END")
     c.conn.commit()
-    monkeypatch.setattr(migrations, "apply_sql_resource", apply)
     with pytest.raises(sqlite3.IntegrityError, match="injected"):
         ensure_migrations(c.database)
     assert c.conn.execute("SELECT count(*) FROM sqlite_master WHERE name LIKE 'task_cutover_%'").fetchone()[0] == 0

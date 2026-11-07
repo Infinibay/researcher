@@ -11,9 +11,7 @@ def legacy_database(monkeypatch, path):
     from backend.tools.base.db import ensure_migrations
 
     migrate = wiki_migration.apply_wiki_schema
-    with monkeypatch.context() as patch:
-        patch.setattr(wiki_migration, "apply_wiki_schema", lambda conn: None)
-        ensure_migrations(path)
+    ensure_migrations(path, target_version=32)
     conn = sqlite3.connect(path)
     conn.row_factory = sqlite3.Row
     conn.execute("PRAGMA foreign_keys=ON")

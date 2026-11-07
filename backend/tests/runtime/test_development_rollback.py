@@ -5,11 +5,14 @@ from pathlib import Path
 import pytest
 
 from backend.db.migrations import apply_sql_resource
+from backend.tests.runtime.migration_fixtures import historical_run
+
+pytestmark = pytest.mark.parametrize("schema_target", [42])
 
 
 @pytest.fixture
 def expanded(coordination):
-    """Use actual latest startup storage, then explicitly remove unused candidate storage to test the historical inverses."""
+    """Start from the actual version42 prefix and remove only unused later structures before testing inverses."""
     assert (
         coordination.conn.execute(
             "SELECT max(version) FROM schema_migrations"
@@ -41,16 +44,15 @@ def test_unused_inverse_preserves_research_rows_children_and_owner_objects(expan
     )
 
     c = expanded
-    run = c.store.admit(c.spec)
-    lease = c.store.claim(101, run.run_id, "original")
-    c.store.finish(lease, native_status="completed", summary="Historical research")
+    run_id = "historical-research"
+    historical_run(c.conn, run_id)
     c.conn.executescript("""CREATE TABLE owner_notes(body TEXT);
       INSERT INTO owner_notes VALUES('Keep this data');
       CREATE INDEX owner_actor_index ON runtime_runs(actor_id);
       CREATE VIEW owner_run_view AS SELECT id,actor_id FROM runtime_runs;""")
     before = dict(
         c.conn.execute(
-            "SELECT rowid,* FROM runtime_runs WHERE id=?", (run.run_id,)
+            "SELECT rowid,* FROM runtime_runs WHERE id=?", (run_id,)
         ).fetchone()
     )
     attempts = [tuple(row) for row in c.conn.execute("SELECT * FROM runtime_attempts")]
@@ -61,7 +63,7 @@ def test_unused_inverse_preserves_research_rows_children_and_owner_objects(expan
     assert (
         dict(
             c.conn.execute(
-                "SELECT rowid,* FROM runtime_runs WHERE id=?", (run.run_id,)
+                "SELECT rowid,* FROM runtime_runs WHERE id=?", (run_id,)
             ).fetchone()
         )
         == before
@@ -72,14 +74,14 @@ def test_unused_inverse_preserves_research_rows_children_and_owner_objects(expan
     assert (
         c.conn.execute("SELECT body FROM owner_notes").fetchone()[0] == "Keep this data"
     )
-    assert c.conn.execute("SELECT id FROM owner_run_view").fetchone()[0] == run.run_id
+    assert c.conn.execute("SELECT id FROM owner_run_view").fetchone()[0] == run_id
     assert c.conn.execute(
         "SELECT 1 FROM sqlite_master WHERE name='owner_actor_index'"
     ).fetchone()
     assert c.conn.execute("PRAGMA foreign_key_check").fetchall() == []
     for name in ("development_schema.sql", "development_workspace_schema.sql"):
         apply_sql_resource(c.conn, Path(__file__).resolve().parents[2] / "db" / name)
-    assert c.store.get(101, run.run_id).execution_kind == "research"
+    assert c.conn.execute("SELECT execution_kind FROM runtime_runs WHERE id=?", (run_id,)).fetchone()[0] == "research"
 
 
 @pytest.mark.parametrize(
@@ -99,23 +101,18 @@ def test_workspace_inverse_refuses_authority_and_history_without_partial_deletio
         )
         c.conn.commit()
     else:
-        run = c.store.admit(c.spec)
-        if obstacle != "active_run":
-            lease = c.store.claim(101, run.run_id, "original")
-            c.store.finish(lease, native_status="completed", summary="Historical")
-            if obstacle == "new_kind_history":
-                c.conn.execute(
-                    "UPDATE runtime_runs SET execution_kind='development' WHERE id=?",
-                    (run.run_id,),
-                )
-            else:
-                c.conn.execute(
-                    """INSERT INTO runtime_development_workspaces
+        run_id = "historical-obstacle"
+        attempt_id = historical_run(c.conn, run_id, status="queued" if obstacle == "active_run" else "failed")
+        if obstacle == "new_kind_history":
+            c.conn.execute("UPDATE runtime_runs SET execution_kind='development' WHERE id=?", (run_id,))
+        elif obstacle == "preparation_history":
+            c.conn.execute(
+                """INSERT INTO runtime_development_workspaces
                 (attempt_id,run_id,project_id,task_id,context_version,fence,owner_id,source_json,allocation,state,created_at,updated_at)
                 VALUES(?,?,101,1001,1,1,'original','{}','/synthetic/retained','reconciling',1,1)""",
-                    (lease.attempt_id, run.run_id),
-                )
-            c.conn.commit()
+                (attempt_id, run_id),
+            )
+        c.conn.commit()
     before = [
         tuple(row)
         for row in c.conn.execute("SELECT * FROM runtime_development_workspaces")
@@ -147,28 +144,21 @@ def test_kind_inverse_requires_legacy_history_and_closed_peers(expanded, obstacl
         restore_development_kinds,
         restore_development_workspaces,
     )
-    from backend.runtime.peer_registry import PeerRegistry
 
     c = expanded
     restore_development_workspaces(c.conn)
-    run = c.store.admit(c.spec)
-    lease = c.store.claim(101, run.run_id, "original")
+    run_id = "historical-obstacle"
+    attempt_id = historical_run(c.conn, run_id)
     if obstacle == "unclosed_peer":
-        PeerRegistry(c.store).prepare(lease, "native")
-        # A copied/inconsistent DB can report a stopped root while retaining its original peer.
+        # Retained SQL witness only: no host process is created or inspected here.
         c.conn.execute(
-            "UPDATE runtime_runs SET status='needs_review' WHERE id=?", (run.run_id,)
-        )
-        c.conn.execute(
-            "UPDATE runtime_attempts SET status='finished' WHERE id=?",
-            (lease.attempt_id,),
+            """INSERT INTO runtime_peers(id,attempt_id,kind,protocol_version,state,fence,
+            owner_pid,owner_start_ticks,boot_id,observer_namespace,created_at)
+            VALUES('old-peer',?,'native',1,'prepared',1,123,456,'old-boot',789,1000)""",
+            (attempt_id,),
         )
     else:
-        c.store.finish(lease, native_status="completed", summary="Historical")
-        c.conn.execute(
-            "UPDATE runtime_runs SET execution_kind='code_review' WHERE id=?",
-            (run.run_id,),
-        )
+        c.conn.execute("UPDATE runtime_runs SET execution_kind='code_review' WHERE id=?", (run_id,))
     c.conn.commit()
     with pytest.raises(RuntimeError, match="rollback refused"):
         restore_development_kinds(c.conn)

@@ -411,3 +411,20 @@ accesible actual del selector. Se conserva la preparación fallida con 512 MiB:
 no se capturó su código/counters, por lo que OOM es una hipótesis, no un hecho.
 Con los 2 GiB configurados para el host, Ken termina y registra un pico cercano
 a 1,39 GB sin OOM. No se aumenta ningún límite de la instalación del operador.
+
+
+## DD071 — estilo tras verificar la cadena de migraciones
+
+Veintidós avisos de lint en los archivos afectados: imports sin uso/de orden y
+un retorno explícito de `None` y un `subprocess.run` que comprueba el código
+manual sin `check` explícito.
+Se conservan en `migration-chain-lint.json`. Hay además una línea en blanco de
+más al final de `test_development_migration.py` y el aviso deprecado heredado de
+Starlette/httpx en tests. Resolver después de todas las capacidades principales;
+no reconstruir el paquete ni repetir los39 ensayos físicos por estos detalles.
+
+Los preparadores históricos incoherentes sí impedían comprobar migraciones y
+se corrigieron: prefijos completos y registros SQL correspondientes a su época.
+Las inversas con historial siguen rechazándose; no se rebajaron sus guardas.
+Restauración completa, datos reales e inversas/recuperación posteriores siguen
+siendo trabajo principal, no detalles diferidos.

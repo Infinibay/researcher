@@ -134,6 +134,7 @@ def test_publication_request_is_immutable_and_startup_preserves_original_records
     """Normal startup installs the typed publication schema, keeps accepted provenance and prevents retargeting its immutable original request."""
     import sqlite3
 
+    from backend.db.migration_catalog import LATEST_VERSION
     from backend.tools.base.db import ensure_migrations
 
     s, candidate, publications, intent = publication_request
@@ -150,7 +151,7 @@ def test_publication_request_is_immutable_and_startup_preserves_original_records
     assert publications.request(101, run.run_id)["intent"] == intent.__dict__
     assert (
         s.c.conn.execute("SELECT max(version) FROM schema_migrations").fetchone()[0]
-        == 54
+        == LATEST_VERSION
     )
 
 

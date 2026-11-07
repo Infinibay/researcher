@@ -1,0 +1,242 @@
+{
+  "base_commit": "3965297",
+  "changed_or_new_definitions_documented": 39,
+  "modules_documented": 22,
+  "missing": [],
+  "contracts": [
+    {
+      "path": "backend/db/migration_catalog.py",
+      "symbol": "Migration",
+      "line": 15,
+      "docstring": "Identify one packaged SQL step or the specialized atomic rebuild it requires."
+    },
+    {
+      "path": "backend/db/migration_catalog.py",
+      "symbol": "Migration.apply",
+      "line": 22,
+      "docstring": "Apply this trusted catalog step through its original transactional implementation."
+    },
+    {
+      "path": "backend/db/migration_catalog.py",
+      "symbol": "forward_target",
+      "line": 79,
+      "docstring": "Validate the requested supported forward boundary before opening or creating storage."
+    },
+    {
+      "path": "backend/db/migration_catalog.py",
+      "symbol": "validate_history",
+      "line": 88,
+      "docstring": "Refuse future schemas, incomplete modern prefixes and implicit reversal without changing data."
+    },
+    {
+      "path": "backend/tests/research/test_wiki_migration.py",
+      "symbol": "legacy_database",
+      "line": 8,
+      "docstring": "Build the real pre-wiki-migration schema without copying a production database."
+    },
+    {
+      "path": "backend/tests/runtime/conftest.py",
+      "symbol": "schema_target",
+      "line": 39,
+      "docstring": "Default fixtures to current schema; historical tests explicitly select a forward prefix."
+    },
+    {
+      "path": "backend/tests/runtime/conftest.py",
+      "symbol": "coordination",
+      "line": 45,
+      "docstring": "Seed real scoped coordination storage at the explicitly selected supported schema version."
+    },
+    {
+      "path": "backend/tests/runtime/migration_fixtures.py",
+      "symbol": "historical_run",
+      "line": 6,
+      "docstring": "Retain a schema-only run and original attempt using columns present since version34."
+    },
+    {
+      "path": "backend/tests/runtime/migration_fixtures.py",
+      "symbol": "historical_plan_execution",
+      "line": 23,
+      "docstring": "Seed a version49 execution with two task references and retained original JSON bytes."
+    },
+    {
+      "path": "backend/tests/runtime/migration_fixtures.py",
+      "symbol": "historical_code_review",
+      "line": 55,
+      "docstring": "Seed closed version41 author/reviewer references for inverse preservation tests only."
+    },
+    {
+      "path": "backend/tests/runtime/test_admission_migration.py",
+      "symbol": "test_version27_receipt_survives_without_an_inferred_binding",
+      "line": 7,
+      "docstring": "A version27 receipt stays historical after upgrades without inventing admission evidence."
+    },
+    {
+      "path": "backend/tests/runtime/test_code_flow_cutover.py",
+      "symbol": "test_task_cutover_migration_is_atomic_repeatable_and_preserves_history",
+      "line": 69,
+      "docstring": "A failed schema54 install leaves schema53 and old work intact; retry adds guards without minting native proof."
+    },
+    {
+      "path": "backend/tests/runtime/test_code_publications.py",
+      "symbol": "test_publication_request_is_immutable_and_startup_preserves_original_records",
+      "line": 131,
+      "docstring": "Normal startup installs the typed publication schema, keeps accepted provenance and prevents retargeting its immutable original request."
+    },
+    {
+      "path": "backend/tests/runtime/test_command_peer_migration.py",
+      "symbol": "test_migration_preserves_unowned_history_and_refuses_retrospective_binding",
+      "line": 8,
+      "docstring": "Upgrade a coherent version26 without inventing ownership for old command history."
+    },
+    {
+      "path": "backend/tests/runtime/test_development_migration.py",
+      "symbol": "test_expansion_preserves_existing_attempt_references_and_owner_objects",
+      "line": 49,
+      "docstring": "The kind expansion keeps primary identities and foreign keys instead of renaming the runs table."
+    },
+    {
+      "path": "backend/tests/runtime/test_development_migration.py",
+      "symbol": "test_expanded_kind_is_persisted_explicitly_without_inference_from_role_name",
+      "line": 85,
+      "docstring": "Development/review identity is actual stored data; this is schema evidence, not a writable runtime proof."
+    },
+    {
+      "path": "backend/tests/runtime/test_development_migration.py",
+      "symbol": "test_execution_slots_allow_one_author_and_one_independent_review_only",
+      "line": 99,
+      "docstring": "Two different author kinds cannot race for the same task, nor can two review kinds."
+    },
+    {
+      "path": "backend/tests/runtime/test_development_migration.py",
+      "symbol": "test_code_acceptance_inverse_preserves_reviews_and_refuses_owner_history",
+      "line": 116,
+      "docstring": "Version42 removal preserves closed review bytes and rejects retained owner history without deleting it."
+    },
+    {
+      "path": "backend/tests/runtime/test_development_rollback.py",
+      "symbol": "expanded",
+      "line": 14,
+      "docstring": "Start from the actual version42 prefix and remove only unused later structures before testing inverses."
+    },
+    {
+      "path": "backend/tests/runtime/test_development_rollback.py",
+      "symbol": "test_unused_inverse_preserves_research_rows_children_and_owner_objects",
+      "line": 39,
+      "docstring": "Downgrade keeps original identities and schema objects and can be reapplied without loss."
+    },
+    {
+      "path": "backend/tests/runtime/test_development_rollback.py",
+      "symbol": "test_workspace_inverse_refuses_authority_and_history_without_partial_deletion",
+      "line": 91,
+      "docstring": "Even a closed or interrupted preparation is retained evidence, not disposable empty schema."
+    },
+    {
+      "path": "backend/tests/runtime/test_development_rollback.py",
+      "symbol": "test_kind_inverse_requires_legacy_history_and_closed_peers",
+      "line": 141,
+      "docstring": "Removing empty workspace storage does not authorize reinterpretation of an execution or an unclosed scope."
+    },
+    {
+      "path": "backend/tests/runtime/test_development_startup.py",
+      "symbol": "version35",
+      "line": 11,
+      "docstring": "Build the complete version35 prefix through the production migration catalog."
+    },
+    {
+      "path": "backend/tests/runtime/test_development_startup.py",
+      "symbol": "test_repeatable_upgrade_preserves_original_research_and_owner_data",
+      "line": 21,
+      "docstring": "Upgrade actual historical rows and child references without inventing preparation evidence."
+    },
+    {
+      "path": "backend/tests/runtime/test_development_startup.py",
+      "symbol": "test_failed_upgrade_leaves_only_committed_prior_migrations",
+      "line": 71,
+      "docstring": "An invalid new SQL tail cannot publish a partial index, column, table or migration marker."
+    },
+    {
+      "path": "backend/tests/runtime/test_investigation.py",
+      "symbol": "test_exploratory_schema_upgrade_is_atomic_and_preserves_historical_task_and_report",
+      "line": 307,
+      "docstring": "A failed schema52 install rolls back its table/guards; a repeatable successful upgrade preserves actual schema51 historical records."
+    },
+    {
+      "path": "backend/tests/runtime/test_migration_chain.py",
+      "symbol": "logical_snapshot",
+      "line": 13,
+      "docstring": "Compare schema and retained business rows independently of WAL pages and file layout."
+    },
+    {
+      "path": "backend/tests/runtime/test_migration_chain.py",
+      "symbol": "test_forward_targets_form_one_complete_history_and_preserve_seeded_data",
+      "line": 24,
+      "docstring": "Reach every supported post-legacy version, then repeat startup without losing IDs or relations."
+    },
+    {
+      "path": "backend/tests/runtime/test_migration_chain.py",
+      "symbol": "test_writer_crash_before_version_commit_preserves_prior_schema_and_resumes",
+      "line": 49,
+      "docstring": "Abruptly kill only a new migration child before its history insert, then recover that same DB."
+    },
+    {
+      "path": "backend/tests/runtime/test_migration_chain.py",
+      "symbol": "test_invalid_forward_target_never_creates_storage",
+      "line": 83,
+      "docstring": "Unknown targets and booleans cannot create a partial installation as a side effect."
+    },
+    {
+      "path": "backend/tests/runtime/test_migration_chain.py",
+      "symbol": "test_forward_rejects_unsupported_history_without_rewriting_rows",
+      "line": 94,
+      "docstring": "A forward migration cannot hide a future version, fill a fabricated gap or act as downgrade."
+    },
+    {
+      "path": "backend/tests/runtime/test_plan_continuation.py",
+      "symbol": "test_delivery_migration_preserves_original_packets_and_rolls_back_whole_rebuild",
+      "line": 319,
+      "docstring": "A failed migration cannot leave rebuilt half-tables; upgrading an actual schema49 preserves original identities and exact handoff bytes."
+    },
+    {
+      "path": "backend/tests/runtime/test_plan_reauthorization.py",
+      "symbol": "test_revision_migration_rolls_back_failed_upgrade_and_preserves_original_execution",
+      "line": 389,
+      "docstring": "A failed schema51 install cannot change existing manifests or replace the old invalidation view; successful retry retains exact original intent and foreign keys."
+    },
+    {
+      "path": "backend/tests/runtime/test_question_migration.py",
+      "symbol": "version23",
+      "line": 9,
+      "docstring": "Build a version23 fixture without newer rebuilds changing the migration under test."
+    },
+    {
+      "path": "backend/tests/runtime/test_result_migration.py",
+      "symbol": "test_result_downgrade_refuses_live_authority_or_historical_delivery",
+      "line": 61,
+      "docstring": "A downgrade cannot erase a delivery or remove a capability while its authority remains live."
+    },
+    {
+      "path": "backend/tests/runtime/test_run_input_migration.py",
+      "symbol": "test_version29_dispatch_remains_unknown_after_repeatable_upgrade",
+      "line": 7,
+      "docstring": "Retain unknown input on a version29 dispatch across repeatable upgrades."
+    },
+    {
+      "path": "backend/tests/runtime/test_scientific_research.py",
+      "symbol": "test_scientific_owner_guard_upgrade_is_atomic_and_keeps_historical_reports",
+      "line": 254,
+      "docstring": "A failed schema53 install leaves schema52 data/guards intact; a repeatable retry preserves historical scientific completion without inventing acceptance."
+    },
+    {
+      "path": "backend/tests/runtime/test_task_inputs_migration.py",
+      "symbol": "test_version28_migration_preserves_rows_and_only_records_future_edits",
+      "line": 9,
+      "docstring": "Preserve version28 rows and record only future edits after upgrading."
+    },
+    {
+      "path": "backend/tools/base/db.py",
+      "symbol": "ensure_migrations",
+      "line": 111,
+      "docstring": "Run pending schema migrations for existing databases.\n\nChecks the ``schema_migrations`` table and applies any missing\nmigrations. Safe to call multiple times. Serving requires an already\ninitialized file; explicit installation/legacy callers may create one.\nExplicit forward targets support staged upgrades; serving always defaults\nto the latest schema. A target never authorizes an implicit downgrade."
+    }
+  ]
+}

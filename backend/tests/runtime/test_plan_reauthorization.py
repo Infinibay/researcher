@@ -385,45 +385,26 @@ async def test_http_reauthorization_recovers_revision_and_only_resumes_explicitl
         assert len(native.inputs) == 1
 
 
+@pytest.mark.parametrize("schema_target", [50])
 def test_revision_migration_rolls_back_failed_upgrade_and_preserves_original_execution(
-    request, monkeypatch
+    request, schema_target
 ):
     """A failed schema51 install cannot change existing manifests or replace the old invalidation view; successful retry retains exact original intent and foreign keys."""
     import sqlite3
 
-    from backend.db import migrations
-    from backend.knowledge.reviews import digest
-    from backend.planning.execution import PlanExecutions
+    from backend.tests.runtime.migration_fixtures import historical_plan_execution
     from backend.tools.base.db import ensure_migrations
 
-    apply = migrations.apply_sql_resource
-
-    def skip_revision(conn, path):
-        """Prepare the actual schema50 while leaving its historical SQL resources unchanged."""
-        if path.name not in ("plan_reauthorization_schema.sql", "investigation_schema.sql", "scientific_schema.sql"):
-            apply(conn, path)
-
-    monkeypatch.setattr(migrations, "apply_sql_resource", skip_revision)
     s = request.getfixturevalue("service_setup")
-    s, plan, _graph = accepted_plan(s)
-    executions = PlanExecutions(s.c.store)
-    with s.c.store._transaction() as conn:
-        manifest = executions._manifest(conn, 101, plan.run_id)
-    original = executions.authorize(
-        101,
-        plan.run_id,
-        operation_key="schema50-owner",
-        manifest_sha256=digest(manifest),
-    )
+    execution_id, _ = historical_plan_execution(s.c.conn)
     before = s.c.conn.execute(
         "SELECT manifest_json FROM runtime_plan_executions WHERE id=?",
-        (original["execution_id"],),
+        (execution_id,),
     ).fetchone()[0]
     s.c.conn.execute(
         "CREATE TRIGGER reject51 BEFORE INSERT ON schema_migrations WHEN new.version=51 BEGIN SELECT RAISE(ABORT,'injected revision migration failure'); END"
     )
     s.c.conn.commit()
-    monkeypatch.setattr(migrations, "apply_sql_resource", apply)
     with pytest.raises(sqlite3.IntegrityError, match="injected"):
         ensure_migrations(s.c.database)
     assert (
@@ -444,7 +425,7 @@ def test_revision_migration_rolls_back_failed_upgrade_and_preserves_original_exe
     assert s.c.conn.execute("PRAGMA foreign_key_check").fetchall() == []
     current = s.c.conn.execute(
         "SELECT *FROM runtime_plan_effective_executions WHERE id=?",
-        (original["execution_id"],),
+        (execution_id,),
     ).fetchone()
     assert current["manifest_json"] == before and current["authorization_revision"] == 0
     assert (

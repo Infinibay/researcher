@@ -19,7 +19,35 @@ o porcentaje. No reconstruir tiempos históricos a partir de recuerdos del chat.
 - Última suite global completada al retomar `0c8b8d9`: 2148 casos, 2045 pasan, 100 fallan y tres se omiten. Mismos 100 identificadores heredados; no se afirman causas idénticas. Pasan 965 casos del runtime. La política Git añadida después tiene verificación separada.
 - Los 43 escenarios amplios siguen abiertos en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Etapa actual: Ken e inspección migrados; siguen datos y restauración
+## Etapa actual: cadena de migraciones comprobada; sigue restauración
+
+Un catálogo único conserva el orden18–56, permite avances con destino explícito
+sin downgrade y rechaza historial futuro o incompleto. Las39 interrupciones de
+procesos antes del marcador revierten el paso y permiten continuar sobre la misma
+base. Los preparadores históricos usan esquemas completos de su versión; se
+conservan IDs, relaciones, paquetes, revisiones y rechazos de inversas con historial.
+Pasan208 pruebas dirigidas de fuente y127 instaladas;577 archivos Python/SQL
+coinciden (308 productivos).39 definiciones y22 módulos tienen docstrings.
+Tiempo medido hasta verificar este tramo:21 minutos32 segundos
+(02:27:50–02:49:22 UTC). La restauración completa todavía no está cerrada.
+[Contrato](../architecture/forward-migrations.md),
+[resultados](migration-chain-results.json), [paquete](migration-chain-packaging.json).
+
+**Lista vigente:**
+- Cerrado en este tramo: catálogo/avance18–56, recuperación de39 interrupciones,
+  preparadores históricos corregidos y comprobación de inversas existentes.
+- Siguiente principal: copia y restauración completa en otra ubicación; inventario
+  de datos reales, recuperación/inversas posteriores y reboot/re-enrollment.
+- Después: historial/presupuestos; evaluaciones real, humana, científica y global;
+  seguridad de dependencias, aceptación completa de12 páginas y revisión final.
+- Al final: detalles secundarios. DD071 conserva22 avisos de lint, un espacio de
+  fin de archivo y el aviso heredado de Starlette/httpx.
+
+Los43 escenarios amplios siguen abiertos;0/12 páginas aceptadas integralmente.
+No hubo migración de datos del usuario ni nueva suite global. No se cuentan
+los registros SQL de pruebas como ejecuciones o aceptaciones reales.
+
+## Etapa anterior: Ken e inspección migrados; siguen datos y restauración
 
 Ken publicado pasa 12 controles mediante el broker actual, con fuentes/memorias
 separadas, modelos locales y cierre comprobado. La fixture del propietario crea

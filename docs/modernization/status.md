@@ -4,6 +4,16 @@ La implementación del [plan completo](../superpowers/plans/2026-10-31-actualiza
 
 ## Resultados disponibles
 
+- **Cadena de migraciones18–56 comprobada:** catálogo único y destinos de avance
+  explícitos;39 procesos interrumpidos conservan el esquema previo y continúan
+  sobre la misma base. Pasan208 pruebas dirigidas de fuente y127 instaladas;
+  577 archivos Python/SQL coinciden,39 definiciones y22 módulos documentados.
+  Las pruebas históricas ya no saltan pasos ni usan APIs futuras para preparar
+  bases antiguas. Siguen restauración completa, datos reales, inversas/recuperación
+  posteriores y reboot; no hay suite global actual verde.
+  [Contrato](../architecture/forward-migrations.md),
+  [resultados](migration-chain-results.json), [paquete](migration-chain-packaging.json).
+
 - **Ken e inspección usan fixtures actuales:** 12 controles de Ken por el broker,
   HTTP con salida fragmentada y 17 estados reales de Tareas/Conversación en
   escritorio/móvil, sin modelos ni cambios en registros. Pasan 23 pruebas;

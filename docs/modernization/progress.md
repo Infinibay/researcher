@@ -7584,3 +7584,38 @@ real/human/scientific/global eval,dependencysecurity/12pageacceptance,allfinedet
 andfreshfinalreview.43broadscenarios36in_progress/7pending;12pilots48concepts0accepted.
 Historical candidate experiments remain outside current product scenario evidence.
 Keep whole goalactive; no push/merge/deploy. Updated checklist everyprincipaltransition.
+
+
+## 2026-11-06 — coherent migration chain and historical fixtures
+
+Forward versions18–56 now share one catalog; explicit staged targets are forward
+only. Future/gapped histories and implicit downgrades are rejected, while legacy
+pre18 handlers remain.39 owned child exits before the version insert preserve the
+prior logical schema/history/seeded rows and resume the same DB. This does not
+claim exhaustive crash points, concurrency or power-loss durability.
+
+Historical fixtures now use real prefixes, with schema-only SQL run/plan/review
+records instead of current runtime APIs requiring future tables. Original IDs,
+references, wiki search/sequences, handoff/manifest bytes and inverse refusals
+remain asserted. The code acceptance inverse test moved to the historical module;
+its SQL history is not actual actor/owner evidence. Existing runtime acceptance
+tests still run separately.
+
+208 directed source cases pass(150+41+17);127 selected installed cases pass outside
+checkout, with251backend modules imported only from the noneditable environment.
+577 Python/SQL files match source/wheel/installation,308 product files. Built via
+sdist; wheel SHA25691396b36eb32b13fbe942ec9aecc8a686d9bfcf4e8c52cd69025467a86c5f787.
+Two shell launcher cases require source start.sh and pass there.39changed/new
+Python definitions and22modules documented. Original failed fixture/collection
+receipts retained. DD071 records22lint notices, EOF whitespace and inherited
+Starlette/httpx warning; no polish performed.
+
+Measured wall time to verification:1292seconds(21m32s),02:27:50–02:49:22UTC.
+Task transition checklist/time policy remains at the top of execution-dashboard.md.
+Next principal work: full backup/restore elsewhere, real historical data inventory,
+later inverse/recovery policy and reboot/re-enrollment. Then history/budgets,
+current human/scientific/global evaluations, dependency security,12page acceptance,
+final details and whole-plan review.43broad scenarios remain open and0pagesfully
+accepted. No user data changed, model calls, push, merge, deployment or goal
+completion. Contract/results/package evidence: forward-migrations.md and
+migration-chain-{results,packaging,docstrings,lint}.json.

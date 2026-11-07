@@ -337,44 +337,6 @@ def test_code_acceptance_rolls_back_all_changes_when_its_event_cannot_commit(
     )
 
 
-def test_code_acceptance_inverse_preserves_reviews_and_refuses_owner_history(
-    code_result,
-):
-    """An unused downgrade restores research-only guards; a retained owner decision requires forward repair instead of deletion."""
-    import sqlite3
-
-    from backend.db.development_migration import restore_code_acceptances
-    from backend.runtime.code_acceptances import CodeAcceptances
-    from backend.tools.base.db import ensure_migrations
-
-    s, _reviewer, candidate = code_result
-    before = s.c.conn.execute(
-        "SELECT count(*) FROM runtime_code_review_records"
-    ).fetchone()[0]
-    restore_code_acceptances(s.c.conn)
-    assert (
-        s.c.conn.execute("SELECT max(version) FROM schema_migrations").fetchone()[0]
-        == 41
-    )
-    assert (
-        s.c.conn.execute("SELECT count(*) FROM runtime_code_review_records").fetchone()[
-            0
-        ]
-        == before
-    )
-    with pytest.raises(sqlite3.IntegrityError, match="explicit owner acceptance"):
-        s.c.conn.execute("UPDATE tasks SET status='done' WHERE id=1001")
-    s.c.conn.rollback()
-    ensure_migrations(s.c.database)
-    store = CodeAcceptances(s.c.store)
-    state = store.state(101, candidate["run_id"])
-    store.accept(101, candidate["run_id"], owner_intent(state))
-    with pytest.raises(RuntimeError, match="history"):
-        restore_code_acceptances(s.c.conn)
-    assert s.c.conn.execute("PRAGMA foreign_key_check").fetchall() == []
-    assert s.c.conn.execute("PRAGMA integrity_check").fetchone()[0] == "ok"
-
-
 def test_owner_read_of_accepted_code_never_reopens_native_review_admission(code_result):
     """Readonly accepted-author reconstruction is explicit and cannot weaken the default native review precondition."""
     from backend.runtime.code_acceptances import CodeAcceptances

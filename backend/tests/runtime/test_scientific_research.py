@@ -250,8 +250,9 @@ def test_pre_admission_scientific_claim_and_completion_are_owner_guarded(coordin
         c.conn.rollback()
 
 
+@pytest.mark.parametrize("schema_target", [52])
 def test_scientific_owner_guard_upgrade_is_atomic_and_keeps_historical_reports(
-    request, monkeypatch
+    request, schema_target
 ):
     """A failed schema53 install leaves schema52 data/guards intact; a repeatable retry preserves historical scientific completion without inventing acceptance."""
     import sqlite3
@@ -259,14 +260,6 @@ def test_scientific_owner_guard_upgrade_is_atomic_and_keeps_historical_reports(
     from backend.db import migrations
     from backend.tools.base.db import ensure_migrations
 
-    apply = migrations.apply_sql_resource
-
-    def skip_scientific(conn, path):
-        """Prepare exactly the prior schema, without editing historical migration SQL."""
-        if path.name not in ("scientific_schema.sql", "native_task_cutover_schema.sql", "model_settings_schema.sql"):
-            apply(conn, path)
-
-    monkeypatch.setattr(migrations, "apply_sql_resource", skip_scientific)
     c = request.getfixturevalue("coordination")
     assert (
         c.conn.execute("SELECT max(version)FROM schema_migrations").fetchone()[0] == 52
@@ -279,7 +272,6 @@ def test_scientific_owner_guard_upgrade_is_atomic_and_keeps_historical_reports(
         "CREATE TRIGGER reject53 BEFORE INSERT ON schema_migrations WHEN new.version=53 BEGIN SELECT RAISE(ABORT,'injected scientific migration failure');END"
     )
     c.conn.commit()
-    monkeypatch.setattr(migrations, "apply_sql_resource", apply)
     with pytest.raises(sqlite3.IntegrityError, match="injected"):
         ensure_migrations(c.database)
     assert (

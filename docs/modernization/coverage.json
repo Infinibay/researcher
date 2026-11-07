@@ -1015,10 +1015,19 @@
         "docs/architecture/repository-explorer.md",
         "docs/modernization/repositories-results.json",
         "backend/tests/runtime/test_repository_reading.py",
-        "docs/design/audits/2026-11-06-repositories/evidence.json"
+        "docs/design/audits/2026-11-06-repositories/evidence.json",
+        "backend/db/migration_catalog.py",
+        "backend/tests/runtime/test_migration_chain.py",
+        "backend/tests/runtime/migration_fixtures.py",
+        "docs/architecture/forward-migrations.md",
+        "docs/modernization/migration-chain-results.json",
+        "docs/modernization/migration-chain-packaging.json"
       ],
       "remaining": [
         "Complete scenario acceptance across durable product runtime, legacy consumers, data recovery and UI where applicable"
+      ],
+      "implemented": [
+        "Coherent forward catalog18–56 and explicit staged targets;39 abrupt child-writer interruptions resume original DB, historical fixtures/inverses preserve original data.208 source and127 installed directed cases pass; no real-data/full-restore acceptance."
       ]
     },
     "D02": {
@@ -1564,7 +1573,13 @@
         "docs/modernization/operation-image-results.json",
         "evals/operation/container_smoke.py",
         "backend/tests/config/test_api_paths.py",
-        "backend/tests/api/test_storage_health.py"
+        "backend/tests/api/test_storage_health.py",
+        "backend/db/migration_catalog.py",
+        "backend/tests/runtime/test_migration_chain.py",
+        "backend/tests/runtime/migration_fixtures.py",
+        "docs/architecture/forward-migrations.md",
+        "docs/modernization/migration-chain-results.json",
+        "docs/modernization/migration-chain-packaging.json"
       ],
       "remaining": [
         "Historical and real-data migration plus complete restore validation",
@@ -1573,7 +1588,8 @@
         "Explicit restoration/import of registered legacy report artifacts with filesystem-only bytes; native readers expose absent retained DB content rather than opening guessed paths."
       ],
       "implemented": [
-        "Explicit new source/authority storage CLI, existing-only API/CLI/launcher startup and cancellation/failure cleanup; owned product fixture uses production initializer. No complete managed-host enrollment or restore claim."
+        "Explicit new source/authority storage CLI, existing-only API/CLI/launcher startup and cancellation/failure cleanup; owned product fixture uses production initializer. No complete managed-host enrollment or restore claim.",
+        "Coherent forward catalog18–56 and explicit staged targets;39 abrupt child-writer interruptions resume original DB, historical fixtures/inverses preserve original data.208 source and127 installed directed cases pass; no real-data/full-restore acceptance."
       ]
     },
     "runtime_comparison": {
@@ -2010,18 +2026,29 @@
         "backend/tests/runtime/test_broker_ken.py",
         "backend/tests/runtime/test_broker_mcp.py",
         "backend/tests/runtime/test_broker_limits.py",
-        "backend/tests/runtime/test_ken_peer_migration.py"
+        "backend/tests/runtime/test_ken_peer_migration.py",
+        "backend/db/migration_catalog.py",
+        "backend/tests/runtime/test_migration_chain.py",
+        "backend/tests/runtime/migration_fixtures.py",
+        "docs/architecture/forward-migrations.md",
+        "docs/modernization/migration-chain-results.json",
+        "docs/modernization/migration-chain-packaging.json"
       ],
       "remaining": [
-        "Historical migration fixtures and backup/restore",
-        "Legacy data/consumer translation and complete preservation validation",
-        "Rebuild version29 migration fixture/chain verification: same missing-trigger failure at migration43 also occurs in prior installed wheel. Full restore/inverse acceptance remains open."
+        "Complete real-data inventory/migration and full consistent backup/restore, including repos/worktrees/artifact files",
+        "Explicit later-schema inverse/recovery policy without discarding used history",
+        "Legacy source/Chroma-only document export and filesystem-only report import",
+        "Host reboot/re-enrollment and restored authority recovery"
       ],
       "native_adapter_observation": {
         "test": "backend/tests/runtime/test_code_publications.py::test_publication_request_is_immutable_and_startup_preserves_original_records[frozen_author]",
         "observed": "Actual max schema version55 vs expected54, reproduced source and installed. Earlier immutable request/original state assertions pass. Both test and migration source unchanged from1da098e.",
-        "action": "Resolve during comprehensive migration43–55/inverse/restore validation; do not silently update assertion during adapter retirement. Include cache-only Chroma export when original documents are unavailable."
-      }
+        "action": "Resolve during comprehensive migration43–55/inverse/restore validation; do not silently update assertion during adapter retirement. Include cache-only Chroma export when original documents are unavailable.",
+        "resolution": "Known historical version29 and max54 failures resolved by real forward prefixes and a catalog-bound latest-version assertion. Current version56 pinned by full-chain test;208source/127installed cases pass. Original observation remains historical evidence, not a current failure."
+      },
+      "implemented": [
+        "Coherent forward catalog18–56 and explicit staged targets;39 abrupt child-writer interruptions resume original DB, historical fixtures/inverses preserve original data.208 source and127 installed directed cases pass; no real-data/full-restore acceptance."
+      ]
     },
     "backup_restore": {
       "status": "pending",

@@ -36,12 +36,19 @@ def code_host_asset():
 
 
 @pytest.fixture
-def coordination(_isolated_db, db_conn):
+def schema_target():
+    """Default fixtures to current schema; historical tests explicitly select a forward prefix."""
+    return None
+
+
+@pytest.fixture
+def coordination(_isolated_db, db_conn, schema_target):
+    """Seed real scoped coordination storage at the explicitly selected supported schema version."""
     from backend.research.sqlite_store import SQLiteResearchStore
     from backend.runtime import contracts
     from backend.runtime.sqlite_runs import SQLiteRunStore
 
-    ensure_migrations(_isolated_db)
+    ensure_migrations(_isolated_db, target_version=schema_target)
     db_conn.execute("INSERT INTO projects(id,name) VALUES(101,'Alpha'),(202,'Beta')")
     db_conn.execute(
         "INSERT INTO tasks(id,project_id,type,title,status) VALUES(1001,101,'research','Policy','in_progress'),(1002,101,'research','Second','pending'),(2002,202,'research','Policy','in_progress')"

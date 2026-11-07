@@ -5,33 +5,14 @@ from pathlib import Path
 
 import pytest
 
+from backend.db.migration_catalog import LATEST_VERSION
+
 
 def version35(database, conn, monkeypatch):
-    """Build a historical database through the actual migrator while withholding only the new resources."""
-    from backend.db import migrations
+    """Build the complete version35 prefix through the production migration catalog."""
     from backend.tools.base.db import ensure_migrations
 
-    apply = migrations.apply_sql_resource
-    with monkeypatch.context() as patch:
-        patch.setattr(
-            migrations,
-            "apply_sql_resource",
-            lambda conn, path: (
-                None
-                if path.name
-                in (
-                    "development_schema.sql",
-                    "development_workspace_schema.sql",
-                    "code_candidate_schema.sql",
-                    "code_check_schema.sql",
-                    "code_review_schema.sql",
-                    "code_review_record_schema.sql",
-                    "code_acceptance_schema.sql",
-                )
-                else apply(conn, path)
-            ),
-        )
-        ensure_migrations(database)
+    ensure_migrations(database, target_version=35)
     assert (
         conn.execute("SELECT max(version) FROM schema_migrations").fetchone()[0] == 35
     )
@@ -70,7 +51,7 @@ def test_repeatable_upgrade_preserves_original_research_and_owner_data(
     )
     assert (
         db_conn.execute("SELECT max(version) FROM schema_migrations").fetchone()[0]
-        == 42
+        == LATEST_VERSION
     )
     assert db_conn.execute("PRAGMA foreign_key_check").fetchall() == []
 
@@ -162,5 +143,5 @@ def test_failed_upgrade_leaves_only_committed_prior_migrations(
     ensure_migrations(_isolated_db)
     assert (
         db_conn.execute("SELECT max(version) FROM schema_migrations").fetchone()[0]
-        == 42
+        == LATEST_VERSION
     )

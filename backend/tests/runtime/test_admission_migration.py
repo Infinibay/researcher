@@ -13,35 +13,7 @@ def test_version27_receipt_survives_without_an_inferred_binding(
     from backend.runtime.sqlite_runs import SQLiteRunStore, _digest
     from backend.tools.base.db import ensure_migrations
 
-    apply = migrations.apply_sql_resource
-    with monkeypatch.context() as patch:
-        patch.setattr(peer_kind_migration, "migrate_ken_peers", lambda _conn: None)
-        patch.setattr(wiki_migration, "apply_wiki_schema", lambda _conn: None)
-        patch.setattr(
-            migrations,
-            "apply_sql_resource",
-            lambda conn, path: (
-                None
-                if path.name
-                in (
-                    "admission_schema.sql",
-                    "task_inputs_schema.sql",
-                    "run_input_schema.sql",
-                    "native_state_schema.sql",
-                    "review_schema.sql",
-                    "result_schema.sql",
-                    "development_schema.sql",
-                    "development_workspace_schema.sql",
-                    "code_candidate_schema.sql",
-                    "code_check_schema.sql",
-                    "code_review_schema.sql",
-                    "code_review_record_schema.sql",
-                    "code_acceptance_schema.sql",
-                )
-                else apply(conn, path)
-            ),
-        )
-        ensure_migrations(_isolated_db)
+    ensure_migrations(_isolated_db, target_version=27)
     assert (
         db_conn.execute("SELECT MAX(version) FROM schema_migrations").fetchone()[0]
         == 27

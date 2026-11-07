@@ -1,0 +1,128 @@
+{
+  "base_commit": "3965297",
+  "date": "2026-11-06",
+  "scope": "One supported forward migration catalog for versions18–56 after the retained version17 baseline; coherent historical fixtures; abrupt writer-death recovery and original inverse behavior.",
+  "schema": {
+    "base": 17,
+    "latest": 56,
+    "forward_steps": 39,
+    "explicit_target": "int17..56 or None for latest; forward only",
+    "guards": [
+      "invalid target before storage creation",
+      "future schema refused",
+      "modern history gaps refused",
+      "implicit downgrade refused",
+      "each applied step must record its completion"
+    ]
+  },
+  "source_tests": [
+    {
+      "receipt": ".superpowers/sdd/2026-10-31-actualizacion-proyecto/data-chain-fixed-final2.xml",
+      "sha256": "e78f311560e8a030d4538f8f9847091bc21f874a98fd2c77e6646b5b481b04d5",
+      "cases": 150,
+      "passed": 150,
+      "failed": 0,
+      "skipped": 0,
+      "seconds": 60.425
+    },
+    {
+      "receipt": ".superpowers/sdd/2026-10-31-actualizacion-proyecto/data-chain-startup-final.xml",
+      "sha256": "5f3cafa18a78a2cbce752c0680f973d1ced877249902042b0107a328035c04ae",
+      "cases": 41,
+      "passed": 41,
+      "failed": 0,
+      "skipped": 0,
+      "seconds": 7.213
+    },
+    {
+      "receipt": ".superpowers/sdd/2026-10-31-actualizacion-proyecto/data-chain-historical-final.xml",
+      "sha256": "f5ca9eecf85e791c20ebae6ec9c65be7a7ae4341b7a9af091c583597e2594d97",
+      "cases": 17,
+      "passed": 17,
+      "failed": 0,
+      "skipped": 0,
+      "seconds": 3.83
+    }
+  ],
+  "total_directed_source_cases": 208,
+  "crash_tests": {
+    "cases": 39,
+    "mechanism": "Owned child os._exit(91) from SQLite authorizer before INSERT schema_migrations",
+    "observations": [
+      "prior logical schema/history/projects/tasks preserved",
+      "same database reopened and migrated forward",
+      "foreign_key_check empty and integrity_check ok"
+    ],
+    "limit": "One interruption point per step; no claim of exhaustive instruction-level crashes, concurrent migration owners or power-loss/fsync durability"
+  },
+  "historical_fixtures": {
+    "scope": "Actual migration prefixes instead of skipping intermediate resources; direct SQL rows for historical runtime schemas whose current APIs require later tables",
+    "preserved": [
+      "run/attempt identities",
+      "research rows and owner schema objects",
+      "wiki IDs, search, references and autoincrement",
+      "plan handoff and manifest bytes",
+      "review records and refusal to erase acceptance history"
+    ],
+    "model_or_process_execution_claimed": false
+  },
+  "prior_attempts": [
+    {
+      "log": "data-migration-known-red.log",
+      "observed": "Two known failures: incoherent version29 fixture and max54 assertion against actual56"
+    },
+    {
+      "log": "data-chain-red.log",
+      "observed": "Five missing catalog/target API failures before implementation"
+    },
+    {
+      "log": "data-chain-consumers.log",
+      "observed": "94 pass,8 fail,1 error; current runtime builders cannot seed old schemas"
+    },
+    {
+      "log": "data-chain-fixed.log",
+      "observed": "Collection error: inverse test retained module-wide review fixture parameter; historical inverse moved to historical fixture module"
+    },
+    {
+      "log": "data-chain-fixed-final.log",
+      "observed": "Same collection error retained before moving the test"
+    },
+    {
+      "log": "data-chain-startup.log",
+      "observed": "38 pass,3 fail; Wiki fixture suppressed version33 instead of selecting version32"
+    },
+    {
+      "log": "data-chain-historical-red.log",
+      "observed": "8 fail,9 errors; obsolete development startup and inverse fixtures"
+    }
+  ],
+  "docstrings": {
+    "changed_or_new_definitions": 39,
+    "modules": 22,
+    "missing": 0,
+    "receipt": "migration-chain-docstrings.json"
+  },
+  "deferred_details": "DD071:22 lint notices,blank line at EOF and prior Starlette/httpx warning",
+  "real_model_turns": 0,
+  "user_data_changed": false,
+  "remaining_main_work": [
+    "Complete explicit inverse/recovery policy for later schemas, preserving used history",
+    "Consistent full backup and restore at another location, including files/repositories/worktrees",
+    "Historical real-data inventory, source/Chroma-only document export and filesystem-only report import",
+    "Host reboot, re-enrollment and restored-authority recovery",
+    "History/budgets; current human/scientific/global evaluations; dependency security; twelve-page acceptance; final review"
+  ],
+  "limits": [
+    "Not the entire global suite",
+    "No production-user migration or backup/restore performed",
+    "Legacy pre18 handlers retained; exhaustive physical interruption coverage is18–56",
+    "Synthetic review rows cannot demonstrate actual independent review or owner authorization"
+  ],
+  "timing": {
+    "started_utc": "2026-11-07 02:27:50",
+    "verification_cutoff_utc": "2026-11-07 02:49:22",
+    "elapsed_seconds_to_verification": 1292,
+    "interpretation": "Measured wall time for this migration cut, not an estimate of the remaining project"
+  },
+  "package_receipt": "migration-chain-packaging.json"
+}
