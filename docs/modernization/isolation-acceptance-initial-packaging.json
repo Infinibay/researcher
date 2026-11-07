@@ -1,0 +1,50 @@
+{
+  "base_commit": "dd1be91",
+  "wheel": "researcher-0.1.0-cp312-cp312-linux_x86_64.whl",
+  "wheel_sha256": "832a1816d8bd633b7c2b0e460b41568ca8dc2c8d73b0974a8f61d2f852fda0cf",
+  "source_files_matching_wheel_and_installation": 674,
+  "product_files_matching": 360,
+  "observed": {
+    "cases": 83,
+    "passed": 82,
+    "failed": 1,
+    "skipped": 0,
+    "backend_modules": 256,
+    "all_backend_imports_from_native_env": true,
+    "seconds": 43.011,
+    "exit_code": 1
+  },
+  "tests": [
+    "backend/tests/runtime/test_isolation_acceptance.py",
+    "backend/tests/api/test_local_access.py",
+    "backend/tests/api/test_retired_internal_api.py",
+    "backend/tests/research/test_http.py",
+    "backend/tests/research/test_persistence.py",
+    "backend/tests/research/test_acquisition.py",
+    "backend/tests/research/test_knowledge_access.py",
+    "backend/tests/research/test_worker_sandbox.py",
+    "backend/tests/runtime/test_owned_factory.py",
+    "backend/tests/runtime/test_broker_commands.py",
+    "backend/tests/runtime/test_broker_ken.py",
+    "backend/tests/runtime/test_development_session.py",
+    "backend/tests/runtime/test_check_execution.py",
+    "backend/tests/runtime/test_native_proxy.py",
+    "backend/tests/runtime/test_native_proxy_lifecycle.py",
+    "backend/tests/runtime/test_egress_proxy.py",
+    "backend/tests/runtime/test_subscription_provider.py",
+    "backend/tests/runtime/test_subscription_session.py",
+    "backend/tests/runtime/test_private_rpc.py",
+    "backend/tests/runtime/test_native_adapter_retirement.py",
+    "backend/tests/runtime/test_runtime_profile.py",
+    "backend/tests/runtime/test_file_imports.py",
+    "backend/tests/runtime/test_repository_reading.py",
+    "backend/tests/runtime/test_host_business.py::test_host_catalog_keeps_credentials_and_authority_out_of_tool_arguments"
+  ],
+  "real_model_turns": 0,
+  "limits": [
+    "Selected tests, not the global suite",
+    "Synthetic managed installation data, no historical user-data migration",
+    "D10-D12: current owner/tool separation, scoped resources, host-bound attempts, controlled credential lifecycle, actual kernel CI/development/analysis/Ken and private-network profiles. Synthetic data and secrets; controlled inference; no real model turns, external accounts, full-page or general security certification.",
+    "No model calls, external accounts or GitHub workflow execution"
+  ]
+}

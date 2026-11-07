@@ -1808,7 +1808,7 @@
       ]
     },
     "D10": {
-      "status": "in_progress",
+      "status": "complete",
       "evidence": [
         "backend/tests/research",
         "docs/architecture/research-slice.md",
@@ -1861,15 +1861,31 @@
         "docs/modernization/license-results.json",
         "docs/modernization/license-inventory.json",
         "docs/modernization/license-artifact-reviews.json",
-        "THIRD_PARTY_NOTICES.md"
+        "THIRD_PARTY_NOTICES.md",
+        "docs/modernization/isolation-acceptance-review.md",
+        "docs/modernization/isolation-acceptance-results.json",
+        "docs/modernization/isolation-acceptance-packaging.json",
+        "docs/modernization/isolation-acceptance-artifact-comparison.json",
+        "docs/modernization/isolation-acceptance-docstrings.json",
+        "backend/tests/runtime/test_isolation_acceptance.py",
+        "backend/tests/runtime/test_owned_factory.py",
+        "backend/tests/api/test_retired_internal_api.py",
+        "backend/tests/research/test_persistence.py"
       ],
-      "remaining": [
-        "Complete scenario acceptance across durable product runtime, legacy consumers, data recovery and UI where applicable",
-        "Full product runtime/client integration and browser acceptance; HTTP owner guard does not complete the entire scenario"
+      "remaining": [],
+      "verified_at": "2026-11-07",
+      "completion_scope": "Current owner/tool boundary, host-bound grant/DB identity and permission withdrawal; cross-project HTTP/SQL/WS and retired internal access denied.",
+      "limitations": [
+        "Controlled inference, identities, secrets and Ken protocol; actual kernel/filesystem/local transport in their respective cases.",
+        "Trusted single-owner host and admitted assets; no general security certification, historical-data migration, human comprehension or full-page acceptance.",
+        "Native validation requires stable delegated CPU/memory/PID controllers; transient CPUQuota scope used without changing product limits. Initial unlocated FileNotFoundError remains unexplained in DD119."
+      ],
+      "implemented": [
+        "232 current installed cases pass without skips;674 source/wheel/install hashes match,279 backend imports installed,360 product files identical to D08. Three documented test definitions strengthen factory/resource/CI acceptance and bound a full integration deadline; no runtime behavior or limits changed."
       ]
     },
     "D11": {
-      "status": "in_progress",
+      "status": "complete",
       "evidence": [
         "backend/tests/research",
         "docs/architecture/research-slice.md",
@@ -1886,14 +1902,31 @@
         "docs/architecture/repository-explorer.md",
         "docs/modernization/repositories-results.json",
         "backend/tests/runtime/test_repository_reading.py",
-        "docs/design/audits/2026-11-06-repositories/evidence.json"
+        "docs/design/audits/2026-11-06-repositories/evidence.json",
+        "docs/modernization/isolation-acceptance-review.md",
+        "docs/modernization/isolation-acceptance-results.json",
+        "docs/modernization/isolation-acceptance-packaging.json",
+        "docs/modernization/isolation-acceptance-artifact-comparison.json",
+        "docs/modernization/isolation-acceptance-docstrings.json",
+        "backend/tests/runtime/test_isolation_acceptance.py",
+        "backend/tests/research/test_acquisition.py",
+        "backend/tests/research/test_knowledge_access.py",
+        "backend/tests/runtime/test_file_imports.py"
       ],
-      "remaining": [
-        "Complete scenario acceptance across durable product runtime, legacy consumers, data recovery and UI where applicable"
+      "remaining": [],
+      "verified_at": "2026-11-07",
+      "completion_scope": "Project-scoped attached/reference/report/repository access and admitted readonly or private-copy views; homonyms, foreign IDs, path escapes and external symlinks rejected without foreign effects.",
+      "limitations": [
+        "Controlled inference, identities, secrets and Ken protocol; actual kernel/filesystem/local transport in their respective cases.",
+        "Trusted single-owner host and admitted assets; no general security certification, historical-data migration, human comprehension or full-page acceptance.",
+        "Native validation requires stable delegated CPU/memory/PID controllers; transient CPUQuota scope used without changing product limits. Initial unlocated FileNotFoundError remains unexplained in DD119."
+      ],
+      "implemented": [
+        "232 current installed cases pass without skips;674 source/wheel/install hashes match,279 backend imports installed,360 product files identical to D08. Three documented test definitions strengthen factory/resource/CI acceptance and bound a full integration deadline; no runtime behavior or limits changed."
       ]
     },
     "D12": {
-      "status": "in_progress",
+      "status": "complete",
       "evidence": [
         "backend/tests/research",
         "docs/architecture/research-slice.md",
@@ -1953,11 +1986,27 @@
         "docs/modernization/license-results.json",
         "docs/modernization/license-inventory.json",
         "docs/modernization/license-artifact-reviews.json",
-        "THIRD_PARTY_NOTICES.md"
+        "THIRD_PARTY_NOTICES.md",
+        "docs/modernization/isolation-acceptance-review.md",
+        "docs/modernization/isolation-acceptance-results.json",
+        "docs/modernization/isolation-acceptance-packaging.json",
+        "docs/modernization/isolation-acceptance-artifact-comparison.json",
+        "docs/modernization/isolation-acceptance-docstrings.json",
+        "backend/tests/runtime/test_check_execution.py",
+        "backend/tests/runtime/test_development_session.py",
+        "backend/tests/runtime/test_broker_commands.py",
+        "backend/tests/runtime/test_broker_ken.py"
       ],
-      "remaining": [
-        "Complete scenario acceptance across durable product runtime, legacy consumers, data recovery and UI where applicable",
-        "Full product runtime/client integration and browser acceptance; HTTP owner guard does not complete the entire scenario"
+      "remaining": [],
+      "verified_at": "2026-11-07",
+      "completion_scope": "Actual native/code/analysis/CI profiles keep host credentials and unrestricted network out of executed code; subscription and business authority remain in host-mediated transports.",
+      "limitations": [
+        "Controlled inference, identities, secrets and Ken protocol; actual kernel/filesystem/local transport in their respective cases.",
+        "Trusted single-owner host and admitted assets; no general security certification, historical-data migration, human comprehension or full-page acceptance.",
+        "Native validation requires stable delegated CPU/memory/PID controllers; transient CPUQuota scope used without changing product limits. Initial unlocated FileNotFoundError remains unexplained in DD119."
+      ],
+      "implemented": [
+        "232 current installed cases pass without skips;674 source/wheel/install hashes match,279 backend imports installed,360 product files identical to D08. Three documented test definitions strengthen factory/resource/CI acceptance and bound a full integration deadline; no runtime behavior or limits changed."
       ]
     },
     "D13": {
@@ -3340,7 +3389,12 @@
         "docs/modernization/dependency-security-review.md",
         "docs/modernization/dependency-security-results.json",
         "docs/modernization/dependency-audit-results.json",
-        "docs/modernization/security-packaging.json"
+        "docs/modernization/security-packaging.json",
+        "docs/modernization/isolation-acceptance-review.md",
+        "docs/modernization/isolation-acceptance-results.json",
+        "docs/modernization/isolation-acceptance-packaging.json",
+        "docs/modernization/isolation-acceptance-artifact-comparison.json",
+        "docs/modernization/isolation-acceptance-docstrings.json"
       ],
       "remaining": [
         "Rendered browser and keyboard verification",
@@ -3808,7 +3862,12 @@
         "docs/architecture/execution-domain.md",
         "docs/modernization/execution-domain-results.json",
         "docs/modernization/execution-domain-evidence.json",
-        "docs/modernization/execution-domain-packaging.json"
+        "docs/modernization/execution-domain-packaging.json",
+        "docs/modernization/isolation-acceptance-review.md",
+        "docs/modernization/isolation-acceptance-results.json",
+        "docs/modernization/isolation-acceptance-packaging.json",
+        "docs/modernization/isolation-acceptance-artifact-comparison.json",
+        "docs/modernization/isolation-acceptance-docstrings.json"
       ],
       "implemented": [
         "Native clone3 direct birth into real cgroup, no spawn/migrate fallback; SIGCHLD+pidfd, explicit FD map/env, C-only child path and released GIL.",
@@ -3872,7 +3931,12 @@
         "docs/modernization/owned-factory-packaging.json",
         "docs/modernization/runtime-owned.example.json",
         "backend/tests/runtime/test_owned_factory.py",
-        "backend/tests/runtime/test_broker_commands.py"
+        "backend/tests/runtime/test_broker_commands.py",
+        "docs/modernization/isolation-acceptance-review.md",
+        "docs/modernization/isolation-acceptance-results.json",
+        "docs/modernization/isolation-acceptance-packaging.json",
+        "docs/modernization/isolation-acceptance-artifact-comparison.json",
+        "docs/modernization/isolation-acceptance-docstrings.json"
       ],
       "implemented": [
         "Actual real-journal global reserve, contained namespace birth, global identity publication, concrete source PeerRegistry bind and sole pre-start G decision in one host operation.",
@@ -3965,7 +4029,12 @@
         "docs/modernization/owned-factory-packaging.json",
         "docs/modernization/runtime-owned.example.json",
         "backend/tests/runtime/test_owned_factory.py",
-        "backend/tests/runtime/test_broker_commands.py"
+        "backend/tests/runtime/test_broker_commands.py",
+        "docs/modernization/isolation-acceptance-review.md",
+        "docs/modernization/isolation-acceptance-results.json",
+        "docs/modernization/isolation-acceptance-packaging.json",
+        "docs/modernization/isolation-acceptance-artifact-comparison.json",
+        "docs/modernization/isolation-acceptance-docstrings.json"
       ],
       "implemented": [
         "Required-five Ken catalog/JSON schema/argument mediation and shared result/authority boundaries.",
@@ -4009,7 +4078,12 @@
         "docs/modernization/owned-factory-packaging.json",
         "docs/modernization/runtime-owned.example.json",
         "backend/tests/runtime/test_owned_factory.py",
-        "backend/tests/runtime/test_broker_commands.py"
+        "backend/tests/runtime/test_broker_commands.py",
+        "docs/modernization/isolation-acceptance-review.md",
+        "docs/modernization/isolation-acceptance-results.json",
+        "docs/modernization/isolation-acceptance-packaging.json",
+        "docs/modernization/isolation-acceptance-artifact-comparison.json",
+        "docs/modernization/isolation-acceptance-docstrings.json"
       ],
       "implemented": [
         "Shared11 signatures/docs/routes without FastMCP dependency in main runtime.",
@@ -4078,7 +4152,12 @@
         "backend/tests/cli/test_bootstrap.py",
         "backend/tests/cli/test_launcher_startup.py",
         "backend/tests/api/test_bootstrap_startup.py",
-        "docs/modernization/owned-product-live.json"
+        "docs/modernization/owned-product-live.json",
+        "docs/modernization/isolation-acceptance-review.md",
+        "docs/modernization/isolation-acceptance-results.json",
+        "docs/modernization/isolation-acceptance-packaging.json",
+        "docs/modernization/isolation-acceptance-artifact-comparison.json",
+        "docs/modernization/isolation-acceptance-docstrings.json"
       ],
       "implemented": [
         "Explicit owned profile selected by real app lifespan and owner HTTP request; no fallback after profile failure.",
@@ -4130,7 +4209,12 @@
         "docs/modernization/code-operations-docstrings.json",
         "docs/modernization/native-adapters-docstrings.json",
         "docs/modernization/workspace-retention-review.md",
-        "docs/modernization/workspace-retention-packaging.json"
+        "docs/modernization/workspace-retention-packaging.json",
+        "docs/modernization/isolation-acceptance-review.md",
+        "docs/modernization/isolation-acceptance-results.json",
+        "docs/modernization/isolation-acceptance-packaging.json",
+        "docs/modernization/isolation-acceptance-artifact-comparison.json",
+        "docs/modernization/isolation-acceptance-docstrings.json"
       ],
       "remaining": [
         "Audit modules/classes/methods and relevant functions added earlier in this branch; add meaningful searchable docstrings/JSDoc where missing or stale.",

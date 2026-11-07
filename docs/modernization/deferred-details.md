@@ -929,3 +929,30 @@ borrado bloqueada por cambios de identidad necesita política explícita posteri
 no un retoque visual. D08 conserva esos bytes e intención; D13/datos históricos
 mantienen el alcance general de recuperación y restos. No usar una etiqueta de
 «limpieza» para eliminarlos sin evidencia y una decisión aplicable.
+
+## DD119 — entorno de CPU variable durante la validación
+
+La primera selección instalada D10–D12 pasó82casos y falló en el ensayo de
+agotamiento de memoria con `FileNotFoundError` antes de acreditar el agotamiento
+esperado. Aquel log redactado no conservó el archivo. El mismo artefacto pasó
+el caso aislado y la selección previa en el mismo orden (94casos).
+
+La segunda selección pasó106casos y falló durante preparación Git: la traza
+identificó `cpu.max` ausente al configurar el dominio. El padre de cgroups del
+entorno pasó de `cpu memory pids` a `memory pids`;60observaciones consecutivas
+confirmaron CPU ausente. El producto rechaza ejecutar si no puede aplicar el
+límite. Los requisitos de instalación ya exigen los tres controladores.
+
+La validación siguiente usa un ámbito systemd temporal con `CPUQuota=800%`
+para mantener CPU habilitado mientras vive el verificador, sin reducir controles
+del producto ni cambiar configuración persistente del host. El recibo registra
+controladores antes/después. Aplicar esa precondición también a la validación
+global, y conservar trazas acotadas de archivo/ubicación sin argumentos o secretos.
+No se demostró que el primer fallo tuviera la misma causa: queda explícito para
+contrastar si reaparece, sin inventar una corrección ni borrarlo por otra corrida
+correcta. No hay evidencia de acceso fuera de ámbito o éxito falso.
+
+Evidencia: [primer recibo](isolation-acceptance-initial-packaging.json),
+[segundo recibo](isolation-acceptance-before-cpu-scope-packaging.json) y selección
+final. Esto es una condición de validación, no pulido cosmético ni justificación
+para omitir casos. Las verificaciones físicas siguen siendo seriales.

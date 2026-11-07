@@ -606,10 +606,11 @@ async def test_stop_during_sealing_joins_the_seal_task_before_scope_exit(
                 await asyncio.gather(session._session._sealing, return_exceptions=True)
 
 
+@pytest.mark.timeout(120)
 async def test_owned_checks_persist_exact_results_and_invalidate_mutated_copy(
     development_config,
 ):
-    """Actual isolated pytest uses the captured tree; a zero-exit command that edits source is invalidated without touching the candidate."""
+    """Exercise preparation, capture, two isolated checks and closure within a bounded integration deadline; mutation invalidates only its check copy."""
     import sys
 
     from backend.runtime.check_contracts import CheckSpec

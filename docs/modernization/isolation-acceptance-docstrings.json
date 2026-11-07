@@ -1,0 +1,29 @@
+{
+  "base_commit": "dd1be91",
+  "changed_or_new_definitions_documented": 3,
+  "missing": [],
+  "contracts": [
+    {
+      "path": "backend/tests/runtime/test_check_execution.py",
+      "symbol": "test_check_profile_writes_only_copy_and_keeps_metadata_and_network_protected",
+      "line": 75,
+      "docstring": "Actual CI cannot read synthetic host credentials, the host DB or foreign data, write protected Git, inherit secret environment or use exterior networking.",
+      "file_sha256": "39076c7920e68ca2a5d8d5061b240495650765e4191669ebb36cc05048ade0ad"
+    },
+    {
+      "path": "backend/tests/runtime/test_development_session.py",
+      "symbol": "test_owned_checks_persist_exact_results_and_invalidate_mutated_copy",
+      "line": 610,
+      "docstring": "Exercise preparation, capture, two isolated checks and closure within a bounded integration deadline; mutation invalidates only its check copy.",
+      "file_sha256": "38b6f923a8616978e13d19fc975213f009cdba45f6292dd9d8ec49267b09f504"
+    },
+    {
+      "path": "backend/tests/runtime/test_isolation_acceptance.py",
+      "symbol": "test_current_attempt_cannot_inherit_owner_or_foreign_resource_authority",
+      "line": 12,
+      "docstring": "A live grant from the configured factory reads only its project, rejects scope substitution and becomes unusable on withdrawal.",
+      "file_sha256": "2d3e7fe41144433f00d69392751e0430bf70d6a43c00c28f4bb54f7ee0175a89"
+    }
+  ],
+  "scope": "New/changed Python definitions and modules in this delivery. No frontend changes in this delivery; no claim that all historic project definitions are documented."
+}

@@ -1,0 +1,9 @@
+{
+  "prior_base": "437ef3f",
+  "base_commit": "dd1be91",
+  "prior_wheel_sha256": "c93016422c85bb62224404036b97792ddbcf3ea9a88271c686fc38c30f1da1c9",
+  "current_wheel_sha256": "bdb49d77733955932126602256e9cd1c172533c6c732730b62bf88bef9696604",
+  "unchanged_product_python_sql_files": 360,
+  "changed_product_paths": [],
+  "scope": "Product Python/SQL bytes identical to verified D08 artifact; acceptance tests, one integration-test deadline and evidence changed. Runtime limits and behavior did not change."
+}

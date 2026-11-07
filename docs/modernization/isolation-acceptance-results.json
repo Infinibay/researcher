@@ -1,0 +1,92 @@
+{
+  "base_commit": "dd1be91",
+  "status": "verified",
+  "started_at": "2026-11-07T22:06:26Z",
+  "verified_at": "2026-11-07T22:36:15Z",
+  "elapsed_until_verification_seconds": 1789,
+  "focused_initial": {
+    "passed": 1,
+    "failed": 1,
+    "cause": "Historical report fixture omitted required artifacts.file_path; no product defect inferred."
+  },
+  "focused_final": {
+    "passed": 2,
+    "failed": 0,
+    "seconds": 2.62
+  },
+  "changed_product_python_sql_files": 0,
+  "product_files_identical_to_D08": 360,
+  "python_definitions_documented": 3,
+  "real_model_turns": 0,
+  "completed_scenarios": [
+    "D10",
+    "D11",
+    "D12"
+  ],
+  "limits": [
+    "Selected current-boundary acceptance passes; the global suite and full-page acceptance remain separate.",
+    "Controlled inference and synthetic identities/secrets; real kernel and local transports in their respective cases.",
+    "No global suite, complete page, human comprehension or historical-data migration claim."
+  ],
+  "initial_installed": {
+    "cases": 83,
+    "passed": 82,
+    "failed": 1,
+    "skipped": 0,
+    "backend_modules": 256,
+    "all_backend_imports_from_native_env": true,
+    "seconds": 43.011,
+    "exit_code": 1
+  },
+  "second_installed": {
+    "cases": 107,
+    "passed": 106,
+    "failed": 1,
+    "skipped": 0,
+    "backend_modules": 271,
+    "all_backend_imports_from_native_env": true,
+    "seconds": 81.924,
+    "exit_code": 1
+  },
+  "diagnostic_isolated": {
+    "passed": 1,
+    "seconds": 3.12
+  },
+  "diagnostic_original_prefix": {
+    "passed": 94,
+    "seconds": 56.54
+  },
+  "environment_finding": {
+    "observed_failure": "cpu.max missing during ExecutionDomain.limit; CPU controller absent in60 successive parent observations",
+    "response": "Run the final installed selection in a transient systemd CPUQuota=800% scope, verify all required controllers, keep product unchanged",
+    "uncertainty": "Initial FileNotFoundError did not retain a filename; same cause is plausible, not proven."
+  },
+  "stable_cpu_before_check_deadline": {
+    "cases": 117,
+    "passed": 116,
+    "failed": 1,
+    "skipped": 0,
+    "backend_modules": 275,
+    "all_backend_imports_from_native_env": true,
+    "seconds": 193.841,
+    "exit_code": 1
+  },
+  "diagnostic_owned_checks": {
+    "passed": 1,
+    "seconds": 31.12,
+    "observation": "Five-second async stack samples showed ongoing preparation, capture, checks and closure. Full test exceeded the30-second harness deadline; internal runtime limits remained intact.",
+    "change": "Only this multi-stage integration test now declares pytest timeout120 seconds."
+  },
+  "final_installed": {
+    "cases": 232,
+    "passed": 232,
+    "failed": 0,
+    "skipped": 0,
+    "backend_modules": 279,
+    "all_backend_imports_from_native_env": true,
+    "seconds": 288.637,
+    "exit_code": 0
+  },
+  "wheel_sha256": "bdb49d77733955932126602256e9cd1c172533c6c732730b62bf88bef9696604",
+  "source_files_matching_wheel_and_installation": 674
+}

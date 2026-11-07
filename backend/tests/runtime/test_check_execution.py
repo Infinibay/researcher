@@ -73,16 +73,31 @@ def check_profile(broker_setup):
 
 
 async def test_check_profile_writes_only_copy_and_keeps_metadata_and_network_protected(
-    check_profile,
+    check_profile, tmp_path, monkeypatch, service_setup,
 ):
-    """The actual child cannot write its validation Git mount or escape through inherited directory descriptors."""
+    """Actual CI cannot read synthetic host credentials, the host DB or foreign data, write protected Git, inherit secret environment or use exterior networking."""
     from backend.runtime.broker_stdio import AsyncPeerBroker
     from backend.runtime.check_capsule import CheckEnvironment, CheckLaunch
     from backend.runtime.check_contracts import CheckSpec
     from backend.runtime.check_execution import run_check_worker
 
+    credential_root = tmp_path / "synthetic-host-home"
+    credentials = credential_root / ".codex" / "auth.json"
+    credentials.parent.mkdir(parents=True)
+    credentials.write_text('SYNTHETIC_CREDENTIAL_CANARY')
+    foreign = tmp_path / "other-project.txt"
+    foreign.write_text('SYNTHETIC_FOREIGN_CANARY')
+    original_source = service_setup.workspace / "host-only-canary.txt"
+    original_source.write_text('SYNTHETIC_SOURCE_CANARY')
+    monkeypatch.setenv("OPENAI_API_KEY", "SYNTHETIC_ENV_CANARY")
+    blocked_paths = [str(credentials), str(foreign), str(service_setup.c.database), str(original_source)]
+    assert all(Path(path).is_file() for path in blocked_paths)
     code = """import json,os,socket,stat
 from pathlib import Path
+for filename in BLOCKED_PATHS:
+ try:Path(filename).read_bytes()
+ except OSError:pass
+ else:raise AssertionError('CI exposed a host-only resource')
 Path('output.txt').write_text('private')
 blocked=False
 try:Path('.git/config').write_text('unsafe')
@@ -101,7 +116,7 @@ local=socket.socket(socket.AF_UNIX,socket.SOCK_STREAM);local.bind('/tmp/check.so
 assert blocked and network and not leaks
 assert not any('API_KEY' in key or key in ('CODEX_HOME','CODEX_AUTH_FILE') for key in os.environ)
 print('isolated')
-"""
+""".replace('BLOCKED_PATHS', repr(blocked_paths))
     import sysconfig
 
     environment = CheckEnvironment.capture(
@@ -121,6 +136,9 @@ print('isolated')
         assert not (Path(c.prepared.metadata.path) / "config").exists()
         assert (Path(c.prepared.view.workspace) / "output.txt").read_text() == "private"
         assert not (c.s.workspace / "output.txt").exists()
+        assert credentials.read_text() == 'SYNTHETIC_CREDENTIAL_CANARY'
+        assert foreign.read_text() == 'SYNTHETIC_FOREIGN_CANARY'
+        assert original_source.read_text() == 'SYNTHETIC_SOURCE_CANARY'
 
 
 @pytest.mark.parametrize(
