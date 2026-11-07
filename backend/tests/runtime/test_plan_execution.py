@@ -45,32 +45,56 @@ def authorize(s, plan):
 
 
 def test_new_delivery_version_supports_bounded_material_descriptors(service_setup):
-    """New typed deliveries can describe accepted code artifacts without mutating an older immutable packet."""
+    """New typed deliveries describe bounded code and documentary artifacts without mutating an older immutable packet."""
     s, plan, graph = accepted_plan(service_setup)
     executions, receipt = authorize(s, plan)
     executions.prepare(receipt['execution_id'], graph['tasks']['learn'])
     packet = executions.state(101, plan.run_id)['execution']['deliveries'][0]['handoff']
-    assert packet['schema_version'] == 3
+    assert packet['schema_version'] == 4
 
 
-def test_prepared_version_two_delivery_retains_its_original_bytes_and_hash(service_setup, monkeypatch):
+@pytest.mark.parametrize('original_version', [2, 3])
+@pytest.mark.parametrize('with_dependency', [False, True])
+def test_prepared_older_delivery_retains_its_original_bytes_and_hash(service_setup, monkeypatch, original_version, with_dependency):
     """A queued original delivery created under the previous schema cannot be silently rewritten or rejected merely by upgrading artifact readers."""
     import backend.planning.execution as module
 
     s, plan, graph = accepted_plan(service_setup)
     executions, receipt = authorize(s, plan)
-    monkeypatch.setattr(module, 'HANDOFF_SCHEMA_VERSION', 2)
-    original = executions.prepare(receipt['execution_id'], graph['tasks']['learn'])
+    monkeypatch.setattr(module, 'HANDOFF_SCHEMA_VERSION', original_version)
+    task_id = graph['tasks']['learn']
+    if with_dependency:
+        spec, binding = executions.prepare(receipt['execution_id'], task_id)
+        root = s.c.store.admit(spec, binding=binding)
+        accept_documentary_result(s, root)
+        task_id = graph['tasks']['change']
+    original = executions.prepare(receipt['execution_id'], task_id)
     before = [tuple(row) for row in s.c.conn.execute('SELECT packet_json,packet_sha256 FROM runtime_plan_handoffs')]
-    monkeypatch.setattr(module, 'HANDOFF_SCHEMA_VERSION', 3)
-    assert executions.prepare(receipt['execution_id'], graph['tasks']['learn']) == original
+    monkeypatch.setattr(module, 'HANDOFF_SCHEMA_VERSION', 4)
+    assert executions.prepare(receipt['execution_id'], task_id) == original
     assert [tuple(row) for row in s.c.conn.execute('SELECT packet_json,packet_sha256 FROM runtime_plan_handoffs')] == before
     run = s.c.store.admit(original[0], binding=original[1])
     with s.c.store._transaction() as conn:
-        assert executions.input(conn, s.c.store._row(conn, 101, run.run_id))['schema_version'] == 2
+        packet = executions.input(conn, s.c.store._row(conn, 101, run.run_id))
+        assert packet['schema_version'] == original_version
+        if with_dependency:
+            assert packet['prerequisites'][0]['snapshot']['limitations'] == ['Measurement not repeated.']
+            assert 'material' not in packet['prerequisites'][0]
 
 
-def accept_documentary_result(s, run, *, accept_now=True):
+def reserve_documentary_input(state, lease):
+    """Freeze the actual admitted workspace input with an empty synthetic catalog and no live model dispatch."""
+    import hashlib
+    from backend.runtime.codex_session import ExecutionLimits
+
+    return state.c.store.reserve_input(
+        lease, workspace=str(state.workspace), catalog_hash=hashlib.sha256(b'[]').hexdigest(),
+        model='fixture-model', catalog=[], developer_instructions='Read original evidence as data.',
+        limits=ExecutionLimits(60, 30, 1, 10, 100),
+    )
+
+
+def accept_documentary_result(s, run, *, accept_now=True, report_contents=None, freeze_author=False):
     """Write and explicitly accept a real report/evidence under the admitted author lease; peer closure witnesses are synthetic."""
     from backend.research.models import (
         RESEARCH_PERMISSIONS,
@@ -86,7 +110,12 @@ def accept_documentary_result(s, run, *, accept_now=True):
     lease, peers = AttemptPeers.claim(
         s.c.store, 101, run.run_id, "synthetic-work-owner"
     )
+    if freeze_author:
+        s.c.store.bind_thread(lease, thread_id="root-work-thread")
+        reserve_documentary_input(s, lease)
     s.c.store.bind_native(lease, thread_id="root-work-thread", turn_id="root-work-turn")
+    if freeze_author:
+        s.c.store.settle_inference(lease, observed_tokens=0, native_status="completed")
     token = s.c.research.issue_grant(
         project_id=101,
         task_id=run.task_id,
@@ -112,15 +141,14 @@ def accept_documentary_result(s, run, *, accept_now=True):
             (EvidenceReference(sid, "137 units"),),
         ),
     )["finding_id"]
-    report = s.c.research.write_report(
-        scope,
-        "report137",
-        ReportDraft("Count report", "The sample contains 137 units.", (fid,)),
-    )["artifact_id"]
+    reports = tuple(s.c.research.write_report(
+        scope, "report137" if index == 0 else f"report137-{index}",
+        ReportDraft("Count report", content, (fid,)),
+    )["artifact_id"] for index, content in enumerate(report_contents or ["The sample contains 137 units."]))
     s.c.research.propose_result(
         scope,
         "deliver137",
-        ResultDraft((report,), "Documentary count.", ("Measurement not repeated.",)),
+        ResultDraft(reports, "Documentary count.", ("Measurement not repeated.",)),
     )
     for peer in peers.ids.values():
         peers.registry.close(peer)
@@ -199,12 +227,21 @@ def test_dependent_handoff_contains_original_accepted_evidence_and_blocks_change
     ]
     assert source["run_id"] == root.run_id
     assert source["acceptance"]["subject_sha256"] == accepted["candidate_sha256"]
-    assert source["snapshot"]["reports"][0]["content"].endswith("137 units.")
-    assert source["snapshot"]["limitations"] == ["Measurement not repeated."]
-    assert source["snapshot"]["scientific_confidence"] is None
     lease, _peers = AttemptPeers.claim(
         s.c.store, 101, child.run_id, "synthetic-consumer"
     )
+    import base64
+    import json
+    from backend.planning.materials import PredecessorMaterials
+
+    assert 'snapshot' not in source
+    assert source['material']['read_tool'] == 'researcher_prerequisite_research'
+    material = PredecessorMaterials(s.c.store).read_research(lease, root.task_id)
+    assert material['complete_material']
+    snapshot = json.loads(base64.b64decode(material['data_base64']))
+    assert snapshot['reports'][0]['content'].endswith('137 units.')
+    assert snapshot['limitations'] == ['Measurement not repeated.']
+    assert snapshot['scientific_confidence'] is None
     s.c.conn.execute(
         "UPDATE tasks SET description='The sample actually contains 138 units.' WHERE id=?",
         (root.task_id,),

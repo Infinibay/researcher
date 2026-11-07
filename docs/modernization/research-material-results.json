@@ -1,0 +1,84 @@
+{
+  "base_commit": "f0797de",
+  "started_at_utc": "2026-11-07T14:48:21Z",
+  "validation_cutoff_utc": "2026-11-07T15:07:02Z",
+  "elapsed_to_validation_seconds": 1121,
+  "source_distinct_cases_passing": 54,
+  "source_regression": {
+    "cases": 37,
+    "passed": 36,
+    "failed": 1,
+    "seconds": 163.16,
+    "failure": "Physical research fixture incorrectly required two windows for a2790-byte packet; corrected to exact ceil(bytes/4096)."
+  },
+  "final_source": {
+    "cases": 18,
+    "passed": 18,
+    "seconds": 18.11,
+    "scope": "Corrected physical research case,15policy cases and2inventory cases"
+  },
+  "installed": "research-material-packaging.json",
+  "prompt_inventory": {
+    "files": 291,
+    "candidates": 84,
+    "requires_review": 0
+  },
+  "docstrings": {
+    "product_modules": 4,
+    "definitions": 43,
+    "missing": 0
+  },
+  "harness_corrections": [
+    "First red fixture omitted reserve_input; second used a mismatched workspace; third reproduced actual InputTooLarge.",
+    "Attempted accepted-review mutation was correctly rejected by an existing immutability trigger; removed impossible mutation from the new test. Source/context changes remain tested.",
+    "Changed physical fixture assertion to actual required window count."
+  ],
+  "receipts": [
+    {
+      "path": ".superpowers/sdd/2026-10-31-actualizacion-proyecto/research-material-red.log",
+      "sha256": "e55f3d495c52e4fc3fb9faddfb30aa94b72b0accbdb2d4bc552558c0c0988171"
+    },
+    {
+      "path": ".superpowers/sdd/2026-10-31-actualizacion-proyecto/research-material-red-v2.log",
+      "sha256": "da5432fe802a3305c61bca452156c46174ea69750132f692d9d03d45e1b6ca48"
+    },
+    {
+      "path": ".superpowers/sdd/2026-10-31-actualizacion-proyecto/research-material-red-v3.log",
+      "sha256": "aa6b8bd572d14dcb4a7c397f4142c0f047b81cb77096a893753ccba9f58c6ae3"
+    },
+    {
+      "path": ".superpowers/sdd/2026-10-31-actualizacion-proyecto/research-material-unit-v1.log",
+      "sha256": "62c81dc8ff818dbc7cd415a6787d3a3edeedb01f28d4444ad613f170d241bfa0"
+    },
+    {
+      "path": ".superpowers/sdd/2026-10-31-actualizacion-proyecto/research-material-regression-v2.log",
+      "sha256": "e306b35a6c8d3104f49f27cf520cf4a571218e357b60d29aa139fb1c8b932f36"
+    },
+    {
+      "path": ".superpowers/sdd/2026-10-31-actualizacion-proyecto/research-material-final-source.log",
+      "sha256": "edef55f963e0ea98ddd63b2d32482c8577c39b3f440ef162858e6cb24dcb58c8"
+    },
+    {
+      "path": ".superpowers/sdd/2026-10-31-actualizacion-proyecto/research-material-package.xml",
+      "sha256": "d043f371fc131521f127332b56d39fb765c993778268eb7b691eec5812ca228c"
+    },
+    {
+      "path": ".superpowers/sdd/2026-10-31-actualizacion-proyecto/research-material-docstrings.json",
+      "sha256": "758513c1eb046ac711d27828e1cd675dbd44fffd854077c517829c27a9689a21"
+    },
+    {
+      "path": ".superpowers/sdd/2026-10-31-actualizacion-proyecto/research-material-prompt-review.json",
+      "sha256": "6a1a5674477850bcc6440548af6dd83241012eb4c219da9557d63722d39795eb"
+    }
+  ],
+  "model_calls": 0,
+  "broad_scenarios_open": 42,
+  "fully_accepted_pages": 0,
+  "global_suite_rerun": false,
+  "remaining_functional": [
+    "Selective evidence access within actual tool/token budgets",
+    "Oversized original plan and continuation context",
+    "Real-model and human communication evaluation; no inference from controlled generation"
+  ],
+  "status": "bounded_documentary_transport_verified; complete modernization remains active"
+}

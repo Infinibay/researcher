@@ -117,9 +117,9 @@
     "backend/planning/__init__.py": "33c11a9cc548346e983a9505020e094349f871e6fce4c5a14c2cd1eae0015a36",
     "backend/planning/completion.py": "dd22f2d0c7c951bfcf66eb3c9fe79faeaae8acbf350d84e390648fac4d984bf2",
     "backend/planning/continuations.py": "d91779be508aecb874af9ab1504a1ffe1d4c7bd018b0b7b93cd8deb4285ff1bc",
-    "backend/planning/execution.py": "cb0dc0afce814b0dd53f941ae5be5f6010a997ac793243d2648dfb5af8dd59b1",
+    "backend/planning/execution.py": "f084ad067074976c177f27f9d880b1086f212de12fdef8c44bc807670ae6039c",
     "backend/planning/instructions.py": "31433bf7282182a0d635a028d69564a9b47e121d5c221c2dafaa550a745e4d19",
-    "backend/planning/materials.py": "55da9f9c88d946d8b854964e1a922e7982e216226ca7d455459ba3f132e30689",
+    "backend/planning/materials.py": "339efaaa2452152b28983714101d474cc9cdd60acd8b7c99a875523b27bb2474",
     "backend/planning/models.py": "656a2d10a572cdc795fea38bf8dd5adbaad1ea2c955536a50102a0bd8174f053",
     "backend/planning/project_history.py": "0158a0673730704bad8113cae1ddf421aa27fc5434f4c663f8bbdd0bb6e85fb1",
     "backend/planning/project_workspace.py": "19cd1b50392e8185623fe7aebe7fbe843a24afd931f31a08138b7744297099f5",
@@ -128,7 +128,7 @@
     "backend/planning/tools.py": "0efb502494147b93dab33a883e865aae946e0250d75c5924b130492c78e34b5d",
     "backend/project_records.py": "3a2765c13018d7ccd2cd8eb590ec9428c5ebb1edf93fc213185291250a5be016",
     "backend/prompts/__init__.py": "581a39370021a34e2cadea4a9a654a681b34bfdb8047fb7a8e217439b55f89e6",
-    "backend/prompts/native.py": "6aa1c8662cd5793d7a4e20da1aed4376af70bb4c66a086aff8f5dc77d032c261",
+    "backend/prompts/native.py": "6c8923cbee20d471032d939e0b0627edc6036c3fcb8ecd33deb97a19cc3886a4",
     "backend/research/__init__.py": "75a8b541dec5915760704a03d44432cdbf0bb5cbf7c22e1a8c1c0008536d0649",
     "backend/research/acquisition.py": "3544ba18b252cf36284fa317bbe67427cd919bbfd9dd72f485d556c04040263f",
     "backend/research/async_http_client.py": "36423e84c48c5593218a35ff6413eda1ff5e12e078a2285c2b0b06355aaa9d0b",
@@ -242,7 +242,7 @@
     "backend/runtime/peer_payload.py": "21d725e1011e447d96ea78b3fb5597a5e7691cebfdb1e46aa5ecb1d14a05d1d7",
     "backend/runtime/peer_process.py": "6f6bba2b29098b3960814e3bd40a9badbda86e8d508b999935b9e0441097cd34",
     "backend/runtime/peer_registry.py": "fa5080b175d63da114839c7c64b125c619f6cc27a207857a117475a7e5fd67b1",
-    "backend/runtime/predecessor_tools.py": "f944c7a601c659de1c6f7e3211bb5779f399aaf2a82c25d1771c7977bc909001",
+    "backend/runtime/predecessor_tools.py": "1f2acc215047ecbe9a7a7ea67dcb1cb7aa0f8e0dc9f82f5aa3a506536c9d187b",
     "backend/runtime/proxy_payload.py": "81ea2e1aa9e872bbb5b5f06b84ca01f35feaa1de9d551c83d250d7db274cbf0d",
     "backend/runtime/publication_capsule.py": "7964699e3b3243e2a4b7771542e3660f2429418fea6dcf582d06424f4ad3f9c4",
     "backend/runtime/publication_closure.py": "4e76adaf11eab1f3d9043ca048304030d80b3d232ee4110d3443508acce9f1fd",
@@ -751,7 +751,7 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "04e6d22e9ee9847ada6162a8abf5cb256b5653a515e1e6d1043de67df140f0f7",
+      "dependencies_sha256": "9930945cafdab8e1a7d85fb7ee1ae40033f3a3afdb7d02d97a20e7290aa3f3cc",
       "direct_module_consumers": {
         "backend/api/routes/projects.py": "ef446e833412f1b1fa1ff6830af5e9280fe4491a60e30e9f5d4efa6705b1c7a3",
         "backend/communication/owner_notes.py": "27d60b5640960cd647bf3fd4ce8c9fb136e7b614a62326c3cf599336ad35ab51",
@@ -759,7 +759,7 @@
         "backend/knowledge/results.py": "ae6f580a71c2c8606ad474c83c1ebb884d71751b9c5344887ce59a5d782e3a2a",
         "backend/planning/completion.py": "dd22f2d0c7c951bfcf66eb3c9fe79faeaae8acbf350d84e390648fac4d984bf2",
         "backend/planning/continuations.py": "d91779be508aecb874af9ab1504a1ffe1d4c7bd018b0b7b93cd8deb4285ff1bc",
-        "backend/planning/execution.py": "cb0dc0afce814b0dd53f941ae5be5f6010a997ac793243d2648dfb5af8dd59b1",
+        "backend/planning/execution.py": "f084ad067074976c177f27f9d880b1086f212de12fdef8c44bc807670ae6039c",
         "backend/planning/project_workspace.py": "19cd1b50392e8185623fe7aebe7fbe843a24afd931f31a08138b7744297099f5",
         "backend/planning/reauthorizations.py": "00464b8b2a072097f3dcabcc7067fefbfd4bce92355c03fe2f9503129a6e3658",
         "backend/planning/store.py": "1f705a41513eadffef8566029ca5eab40eb9d95ca4469584dc0b4383d9128727",
@@ -773,7 +773,7 @@
         "backend/runtime/remote_recovery.py": "f466005789688b6211111f77bb55879a160219edb3cbf9786c4cc36c3f018b02",
         "backend/runtime/remote_runtime.py": "082048fd26b62d26798178696a4f6f417caf0bbcc02c91f8b38640c7b60df693",
         "backend/git/source_remote.py": "ed6d9fe1bf3f20b1f4b73b73420d84585355d4208307f2f4fd8b3acae609b2d5",
-        "backend/planning/materials.py": "55da9f9c88d946d8b854964e1a922e7982e216226ca7d455459ba3f132e30689",
+        "backend/planning/materials.py": "339efaaa2452152b28983714101d474cc9cdd60acd8b7c99a875523b27bb2474",
         "backend/runtime/forgejo_publication.py": "3e570ba8a669443da65102529f0d81a455190a3b434e94124babd2f4178a090b",
         "backend/runtime/remote_publication.py": "4827e5095b4eb3f627abde15cb63a72719afa3ccd34ea2979aab7138b1c5b30c",
         "backend/knowledge/findings.py": "9178675183309c9e548cdac155af4bcc0ddc34835e25e6d62445fa2a489cbd7b",
@@ -828,9 +828,9 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "3186080609787b15b595e1d798d345d32c89744e78a4300aeea5ab18080d07c4",
+      "dependencies_sha256": "ac7dd7d6ebc4734c63182ec4925ea79a44278d847fd97d6f207d2e750fc2186b",
       "direct_module_consumers": {
-        "backend/prompts/native.py": "6aa1c8662cd5793d7a4e20da1aed4376af70bb4c66a086aff8f5dc77d032c261"
+        "backend/prompts/native.py": "6c8923cbee20d471032d939e0b0627edc6036c3fcb8ecd33deb97a19cc3886a4"
       },
       "suggested_disposition": "reviewed_native",
       "review_status": "reviewed",
@@ -902,14 +902,14 @@
       "path": "backend/prompts/native.py",
       "symbol": "COMMON_INSTRUCTIONS",
       "line": 18,
-      "end_line": 91,
+      "end_line": 94,
       "owner": "backend.prompts.native",
       "family": "native_common_catalog",
       "disposition": "retained_and_revised",
       "objective": "Versioned native policy composition owns common communication and capability selection; historical role templates never enter this catalog.",
-      "source_sha256": "6aa1c8662cd5793d7a4e20da1aed4376af70bb4c66a086aff8f5dc77d032c261",
-      "source_bytes": 5617,
-      "rendered_utf8_bytes": 5611,
+      "source_sha256": "6c8923cbee20d471032d939e0b0627edc6036c3fcb8ecd33deb97a19cc3886a4",
+      "source_bytes": 5841,
+      "rendered_utf8_bytes": 5835,
       "variables_kind": "referenced_identifiers",
       "variables": [],
       "direct_import_consumers": [],
@@ -923,13 +923,13 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "91dc9db2387e7635240249a4c4c942bb6bef14142a9fae39096ad2bc14ef3ade",
+      "dependencies_sha256": "e85e8a518296dc9fdcb3edb1e34d937ccbac245585b6946795420e79bb84d26b",
       "direct_module_consumers": {
         "backend/runtime/owned_runtime.py": "5d28a1b3909b77d9699c0770889a788a0365e25282b7c8eb4b3e13e9048a2145"
       },
       "suggested_disposition": "rewritten",
       "review_status": "reviewed",
-      "review_rationale": "Delta review against ab36dc5; preserve the earlier full semantic review below. Read the complete changed common policy and selector, exact owned factory call, native reply mediation and durable issue consumer. Catalog4 adds observed budget/delivery guidance, bounded discovery and faithful examples; exact initial limits enter the frozen instructions. Versions2/3 retain their recorded identity. This candidate changed in the common catalog; capability selection and source-specific authority remain unchanged. Directed source and installed tests verify budget/provenance/closure contracts, not general model compliance, scientific validity or human comprehension. Three development regressions are evaluated separately; prior reserved results are not replaced. Revalidated 2026-11-07 for catalog5: common delivery advice uses observed-increment margin, planner avoids redundant discovery and guessed source bounds, historical catalogs2/3/4 retain identity. Capabilities, prerequisites and hard ceilings unchanged. Source profile text unchanged except planning; composition and owned-runtime consumer read. Static review does not establish model efficacy.",
+      "review_rationale": "Delta review against ab36dc5; preserve the earlier full semantic review below. Read the complete changed common policy and selector, exact owned factory call, native reply mediation and durable issue consumer. Catalog4 adds observed budget/delivery guidance, bounded discovery and faithful examples; exact initial limits enter the frozen instructions. Versions2/3 retain their recorded identity. This candidate changed in the common catalog; capability selection and source-specific authority remain unchanged. Directed source and installed tests verify budget/provenance/closure contracts, not general model compliance, scientific validity or human comprehension. Three development regressions are evaluated separately; prior reserved results are not replaced. Revalidated 2026-11-07 for catalog5: common delivery advice uses observed-increment margin, planner avoids redundant discovery and guessed source bounds, historical catalogs2/3/4 retain identity. Capabilities, prerequisites and hard ceilings unchanged. Source profile text unchanged except planning; composition and owned-runtime consumer read. Static review does not establish model efficacy. Reviewed documentary windows: packet sources/limitations must be read before relying on reports. Descriptor, unread material, historical input and actual current authority are distinct. Existing correction and scientific-evidence requirements remain intact.",
       "review_evidence": [
         "backend/prompts/native.py",
         "docs/prompts/review-2026-11-07.md",
@@ -951,13 +951,13 @@
       "id": "backend/prompts/native.py::SOURCE_INSTRUCTIONS",
       "path": "backend/prompts/native.py",
       "symbol": "SOURCE_INSTRUCTIONS",
-      "line": 94,
-      "end_line": 132,
+      "line": 97,
+      "end_line": 135,
       "owner": "backend.prompts.native",
       "family": "native_common_catalog",
       "disposition": "retained",
       "objective": "Versioned native policy composition owns common communication and capability selection; historical role templates never enter this catalog.",
-      "source_sha256": "6aa1c8662cd5793d7a4e20da1aed4376af70bb4c66a086aff8f5dc77d032c261",
+      "source_sha256": "6c8923cbee20d471032d939e0b0627edc6036c3fcb8ecd33deb97a19cc3886a4",
       "source_bytes": 2788,
       "rendered_utf8_bytes": 2782,
       "variables_kind": "referenced_identifiers",
@@ -973,7 +973,7 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "91dc9db2387e7635240249a4c4c942bb6bef14142a9fae39096ad2bc14ef3ade",
+      "dependencies_sha256": "e85e8a518296dc9fdcb3edb1e34d937ccbac245585b6946795420e79bb84d26b",
       "direct_module_consumers": {
         "backend/runtime/owned_runtime.py": "5d28a1b3909b77d9699c0770889a788a0365e25282b7c8eb4b3e13e9048a2145"
       },
@@ -1001,13 +1001,13 @@
       "id": "backend/prompts/native.py::build_instructions",
       "path": "backend/prompts/native.py",
       "symbol": "build_instructions",
-      "line": 143,
-      "end_line": 156,
+      "line": 146,
+      "end_line": 159,
       "owner": "backend.prompts.native",
       "family": "native_common_catalog",
       "disposition": "retained",
       "objective": "Versioned native policy composition owns common communication and capability selection; historical role templates never enter this catalog.",
-      "source_sha256": "6aa1c8662cd5793d7a4e20da1aed4376af70bb4c66a086aff8f5dc77d032c261",
+      "source_sha256": "6c8923cbee20d471032d939e0b0627edc6036c3fcb8ecd33deb97a19cc3886a4",
       "source_bytes": 1186,
       "rendered_utf8_bytes": null,
       "variables_kind": "function_parameters",
@@ -1033,7 +1033,7 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "91dc9db2387e7635240249a4c4c942bb6bef14142a9fae39096ad2bc14ef3ade",
+      "dependencies_sha256": "e85e8a518296dc9fdcb3edb1e34d937ccbac245585b6946795420e79bb84d26b",
       "direct_module_consumers": {
         "backend/runtime/owned_runtime.py": "5d28a1b3909b77d9699c0770889a788a0365e25282b7c8eb4b3e13e9048a2145"
       },
@@ -1061,14 +1061,14 @@
       "id": "backend/prompts/native.py::instruction_identity",
       "path": "backend/prompts/native.py",
       "symbol": "instruction_identity",
-      "line": 159,
-      "end_line": 163,
+      "line": 162,
+      "end_line": 166,
       "owner": "backend.prompts.native",
       "family": "native_common_catalog",
       "disposition": "retained",
       "objective": "Versioned native policy composition owns common communication and capability selection; historical role templates never enter this catalog.",
-      "source_sha256": "6aa1c8662cd5793d7a4e20da1aed4376af70bb4c66a086aff8f5dc77d032c261",
-      "source_bytes": 518,
+      "source_sha256": "6c8923cbee20d471032d939e0b0627edc6036c3fcb8ecd33deb97a19cc3886a4",
+      "source_bytes": 520,
       "rendered_utf8_bytes": null,
       "variables_kind": "function_parameters",
       "variables": [
@@ -1085,7 +1085,7 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "91dc9db2387e7635240249a4c4c942bb6bef14142a9fae39096ad2bc14ef3ade",
+      "dependencies_sha256": "e85e8a518296dc9fdcb3edb1e34d937ccbac245585b6946795420e79bb84d26b",
       "direct_module_consumers": {
         "backend/runtime/owned_runtime.py": "5d28a1b3909b77d9699c0770889a788a0365e25282b7c8eb4b3e13e9048a2145"
       },
@@ -1113,13 +1113,13 @@
       "id": "backend/prompts/native.py::GENERIC_INSTRUCTIONS",
       "path": "backend/prompts/native.py",
       "symbol": "GENERIC_INSTRUCTIONS",
-      "line": 166,
-      "end_line": 166,
+      "line": 169,
+      "end_line": 169,
       "owner": "backend.prompts.native",
       "family": "native_common_catalog",
       "disposition": "retained",
       "objective": "Versioned native policy composition owns common communication and capability selection; historical role templates never enter this catalog.",
-      "source_sha256": "6aa1c8662cd5793d7a4e20da1aed4376af70bb4c66a086aff8f5dc77d032c261",
+      "source_sha256": "6c8923cbee20d471032d939e0b0627edc6036c3fcb8ecd33deb97a19cc3886a4",
       "source_bytes": 50,
       "rendered_utf8_bytes": null,
       "variables_kind": "referenced_identifiers",
@@ -1138,7 +1138,7 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "91dc9db2387e7635240249a4c4c942bb6bef14142a9fae39096ad2bc14ef3ade",
+      "dependencies_sha256": "e85e8a518296dc9fdcb3edb1e34d937ccbac245585b6946795420e79bb84d26b",
       "direct_module_consumers": {
         "backend/runtime/owned_runtime.py": "5d28a1b3909b77d9699c0770889a788a0365e25282b7c8eb4b3e13e9048a2145"
       },
@@ -3814,9 +3814,9 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "78d814545c12b8a90d154fc6deb1657d209fc5360c26524a7808b94725589c7c",
+      "dependencies_sha256": "7de8f1d1ccd6ab937b49e5b833c9a756f521252f81773e99f1c6a07222c27329",
       "direct_module_consumers": {
-        "backend/prompts/native.py": "6aa1c8662cd5793d7a4e20da1aed4376af70bb4c66a086aff8f5dc77d032c261"
+        "backend/prompts/native.py": "6c8923cbee20d471032d939e0b0627edc6036c3fcb8ecd33deb97a19cc3886a4"
       },
       "suggested_disposition": "reviewed_native",
       "review_status": "reviewed",
@@ -3905,9 +3905,9 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "ae5c2d2028f617bd9536f1b3ccdd070625e8402d33437ff422fc6bc908ccfe95",
+      "dependencies_sha256": "3df876f259b0c50a08085dc934b0112ad81cd8a68d428f91218649cb6912904d",
       "direct_module_consumers": {
-        "backend/prompts/native.py": "6aa1c8662cd5793d7a4e20da1aed4376af70bb4c66a086aff8f5dc77d032c261"
+        "backend/prompts/native.py": "6c8923cbee20d471032d939e0b0627edc6036c3fcb8ecd33deb97a19cc3886a4"
       },
       "suggested_disposition": "reviewed_native",
       "review_status": "reviewed",
@@ -4064,11 +4064,11 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "90f438626e22c7f73583b18b4057220e2d63ba43b9d545d4390aeec31456c1ed",
+      "dependencies_sha256": "1d532b339c5f299fce6945cb67b2b24e34e0aeda0b292e0cd508b41d16dc91b7",
       "direct_module_consumers": {
         "backend/api/runtime_dependencies.py": "ee0b6b403981f1c41edd4a934a138541f0a53bd487ac805905acf46561caaf30",
         "backend/runtime/host_installation.py": "9ce05aad50d374eaeae6e066ffc37b473ffc44198ca03010b06dfa80860b15f6",
-        "backend/prompts/native.py": "6aa1c8662cd5793d7a4e20da1aed4376af70bb4c66a086aff8f5dc77d032c261"
+        "backend/prompts/native.py": "6c8923cbee20d471032d939e0b0627edc6036c3fcb8ecd33deb97a19cc3886a4"
       },
       "suggested_disposition": "reviewed_native",
       "review_status": "reviewed",
@@ -4123,9 +4123,9 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "485f5c3d6d4e3d2a2db95cc9c6a19ce7a48a216dd34d090e8cc5c4735d13364f",
+      "dependencies_sha256": "e04f9d8557b1dc0a78ccc3a28f2287cf2126c65e772703c4e071a049b2a62791",
       "direct_module_consumers": {
-        "backend/prompts/native.py": "6aa1c8662cd5793d7a4e20da1aed4376af70bb4c66a086aff8f5dc77d032c261"
+        "backend/prompts/native.py": "6c8923cbee20d471032d939e0b0627edc6036c3fcb8ecd33deb97a19cc3886a4"
       },
       "suggested_disposition": "reviewed_native",
       "review_status": "reviewed",
@@ -4146,16 +4146,16 @@
       "review_conflicts": []
     },
     {
-      "id": "backend/runtime/predecessor_tools.py::description@33",
+      "id": "backend/runtime/predecessor_tools.py::description@44",
       "path": "backend/runtime/predecessor_tools.py",
-      "symbol": "description@33",
-      "line": 32,
-      "end_line": 34,
+      "symbol": "description@44",
+      "line": 43,
+      "end_line": 45,
       "owner": "backend.runtime.predecessor_tools",
       "family": "other_owned_prompt_candidate",
-      "disposition": "retained_native_tool_contract",
-      "objective": "Readonly host dynamic capability for exact owner-authorized prerequisite code; no peer activation, source edits, approval or new effect scope.",
-      "source_sha256": "f944c7a601c659de1c6f7e3211bb5779f399aaf2a82c25d1771c7977bc909001",
+      "disposition": "reviewed_native",
+      "objective": "Readonly host capabilities for accepted prerequisite code and research; reads grant no peer activation, source edits, approval or wider scope.",
+      "source_sha256": "1f2acc215047ecbe9a7a7ea67dcb1cb7aa0f8e0dc9f82f5aa3a506536c9d187b",
       "source_bytes": 360,
       "rendered_utf8_bytes": 358,
       "variables_kind": "referenced_identifiers",
@@ -4171,29 +4171,61 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "240fbc3bc244bedf6e37116a038e198629ff3b63fce59e2b76f9da78105427d3",
+      "dependencies_sha256": "2e10ef380fb484ce4aecd71b758d012a7d3cac2275e5302541fe6bf70fcdca6a",
       "direct_module_consumers": {
         "backend/runtime/owned_runtime.py": "5d28a1b3909b77d9699c0770889a788a0365e25282b7c8eb4b3e13e9048a2145"
       },
       "suggested_disposition": "requires_review",
       "review_status": "reviewed",
-      "review_rationale": "Delta review against ab36dc5; preserve the earlier full semantic review below. Read the complete changed common policy and selector, exact owned factory call, native reply mediation and durable issue consumer. Catalog4 adds observed budget/delivery guidance, bounded discovery and faithful examples; exact initial limits enter the frozen instructions. Versions2/3 retain their recorded identity. This candidate source is byte-identical; only the native composition or owned factory consumer changed. Existing capability-specific prerequisites, source windows and permission boundaries still apply, including under delivery pressure. Directed source and installed tests verify budget/provenance/closure contracts, not general model compliance, scientific validity or human comprehension. Three development regressions are evaluated separately; prior reserved results are not replaced.",
+      "review_rationale": "Host-bound readonly predecessor material access. Exact hashes, byte windows and unread coverage remain explicit; reading historical author input grants no instructions, effects, acceptance or scientific validation. Research reports require their accepted packet sources and limitations. Dispatch uses the original lease and withdraws access on retirement.",
       "review_evidence": [
         "backend/runtime/predecessor_tools.py",
-        "docs/prompts/review-2026-11-07.md",
-        "backend/runtime/business_mediation.py",
-        "backend/runtime/analysis_tools.py",
-        "backend/runtime/owned_runtime.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json",
-        "backend/tests/runtime/test_delivery_budget.py",
-        "docs/modernization/delivery-budget-review.md",
-        "docs/modernization/domain-resources-review.md",
-        "backend/tests/runtime/test_domain_resources.py"
+        "backend/planning/materials.py",
+        "backend/tests/runtime/test_predecessor_research_material.py",
+        "backend/tests/runtime/test_owned_plan_execution.py"
       ],
-      "review_conflicts": [
-        "Descriptions document capabilities; they never grant authority or prove a tool was run. Static catalogue text is not a complete live catalogue or a scientific certificate."
-      ]
+      "review_conflicts": []
+    },
+    {
+      "id": "backend/runtime/predecessor_tools.py::description@47",
+      "path": "backend/runtime/predecessor_tools.py",
+      "symbol": "description@47",
+      "line": 46,
+      "end_line": 48,
+      "owner": "backend.runtime.predecessor_tools",
+      "family": "other_owned_prompt_candidate",
+      "disposition": "reviewed_native",
+      "objective": "Readonly host capabilities for accepted prerequisite code and research; reads grant no peer activation, source edits, approval or wider scope.",
+      "source_sha256": "1f2acc215047ecbe9a7a7ea67dcb1cb7aa0f8e0dc9f82f5aa3a506536c9d187b",
+      "source_bytes": 431,
+      "rendered_utf8_bytes": 429,
+      "variables_kind": "referenced_identifiers",
+      "variables": [],
+      "direct_import_consumers": [],
+      "consumer_coverage": "Direct from-imports only; local/dynamic/attribute callers require review. Empty does not prove unused.",
+      "evaluation_cases": [
+        "CTX01",
+        "CTX02",
+        "CTX03",
+        "CTX04",
+        "AUTH01",
+        "COMM01"
+      ],
+      "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
+      "dependencies_sha256": "2e10ef380fb484ce4aecd71b758d012a7d3cac2275e5302541fe6bf70fcdca6a",
+      "direct_module_consumers": {
+        "backend/runtime/owned_runtime.py": "5d28a1b3909b77d9699c0770889a788a0365e25282b7c8eb4b3e13e9048a2145"
+      },
+      "suggested_disposition": "requires_review",
+      "review_status": "reviewed",
+      "review_rationale": "Host-bound readonly predecessor material access. Exact hashes, byte windows and unread coverage remain explicit; reading historical author input grants no instructions, effects, acceptance or scientific validation. Research reports require their accepted packet sources and limitations. Dispatch uses the original lease and withdraws access on retirement.",
+      "review_evidence": [
+        "backend/runtime/predecessor_tools.py",
+        "backend/planning/materials.py",
+        "backend/tests/runtime/test_predecessor_research_material.py",
+        "backend/tests/runtime/test_owned_plan_execution.py"
+      ],
+      "review_conflicts": []
     },
     {
       "id": "backend/runtime/review_instructions.py::REVIEW_INSTRUCTIONS",
@@ -4226,9 +4258,9 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "4e3b240e101f24de4997ee013f5f56e2a4f4d9949d3b7be444c908b7d5142262",
+      "dependencies_sha256": "822f7658fe83a08231880f3a063311b28cc5b850d06b480ee1d6abc05f8673d7",
       "direct_module_consumers": {
-        "backend/prompts/native.py": "6aa1c8662cd5793d7a4e20da1aed4376af70bb4c66a086aff8f5dc77d032c261"
+        "backend/prompts/native.py": "6c8923cbee20d471032d939e0b0627edc6036c3fcb8ecd33deb97a19cc3886a4"
       },
       "suggested_disposition": "reviewed_native",
       "review_status": "reviewed",
@@ -4381,9 +4413,9 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "9e0f6c3dfe57d20c561861c24d8aefbdfe8454efcfbce9c95cd31c952abf7260",
+      "dependencies_sha256": "8e2a3e890b14fca986fd1fdb8d812899e48e44e3ec7eef33620b1f5ce7c3f212",
       "direct_module_consumers": {
-        "backend/prompts/native.py": "6aa1c8662cd5793d7a4e20da1aed4376af70bb4c66a086aff8f5dc77d032c261"
+        "backend/prompts/native.py": "6c8923cbee20d471032d939e0b0627edc6036c3fcb8ecd33deb97a19cc3886a4"
       },
       "suggested_disposition": "reviewed_native",
       "review_status": "reviewed",

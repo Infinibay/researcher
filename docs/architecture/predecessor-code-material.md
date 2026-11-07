@@ -10,10 +10,12 @@ Recibir un hash o el estado «terminada» no proporciona ese contexto.
 
 `PlanExecutions` selecciona el resultado productivo aceptado de cada dependencia.
 Una revisión aceptada más reciente no sustituye a ese resultado. Las entregas
-nuevas usan esquema 3 y describen el candidato, su aceptación y tres materiales:
+nuevas usan esquema 4 (la descripción de código se introdujo en el3) y describen el candidato, su aceptación y tres materiales:
 paquete del candidato, entrada original del autor y diff binario completo.
 Cada descriptor identifica hash y tamaño; no copia recursivamente prompts de
-predecesoras. Las entregas ya preparadas con esquema 2 conservan sus bytes y hash.
+predecesoras. Las entregas ya preparadas con esquema2/3 conservan sus bytes y hash.
+El esquema4 también describe [informes documentales](predecessor-research-material.md)
+sin incrustarlos completos en la entrada del sucesor.
 
 El host ofrece `researcher_prerequisite_code` cuando la entrega original contiene
 código aceptado. El modelo elige solamente `task_id`, sección, offset y tamaño

@@ -224,12 +224,22 @@ async def test_owned_accepted_plan_dispatches_root_then_exact_evidence_to_privat
             )
             source = packet["work_delivery"]["prerequisites"][0]
             assert source["run_id"] == root.run_id
-            assert "137" in json.dumps(source["snapshot"])
+            assert 'snapshot' not in source
+            assert source['material']['read_tool'] == 'researcher_prerequisite_research'
+            receipts = list(c.s.control.glob('native-state/*/home/fixture-research-material.json'))
+            assert len(receipts) == 1
+            read = json.loads(receipts[0].read_text())
+            assert read['sha256'] == source['acceptance']['subject_sha256']
+            assert read['bytes'] == source['material']['sections']['packet']['bytes']
+            assert read['windows'] == (read['bytes'] + 4095) // 4096
+            assert read['authority'] == 'data_only'
+            snapshot = read['snapshot']
+            assert '137' in json.dumps(snapshot)
             if root_type == "investigation":
-                assert source["snapshot"]["reports"][0]["investigation"][
+                assert snapshot["reports"][0]["investigation"][
                     "scope_excludes"
                 ] == ["Repetir la medición original."]
-            assert source["snapshot"]["limitations"] == [
+            assert snapshot["limitations"] == [
                 "La medición original no se repitió; el cálculo es evidencia separada."
             ]
             assert conn.execute(

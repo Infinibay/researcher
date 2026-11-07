@@ -32,6 +32,10 @@ causal_ready = False
 causal_section = 0
 causal_bytes = {}
 causal_resume = None
+research_predecessor = None
+research_material_bytes = bytearray()
+research_material_ready = False
+research_material_windows = 0
 prior_selected_files = None
 code_prior_files = False
 review_subject = None
@@ -66,6 +70,8 @@ def next_tool(response=None):
     """Advance controlled author or reviewer generation while using the real admitted tool bridge."""
     if causal_task is not None and not causal_ready:
         return next_causal_material(response)
+    if research_predecessor is not None and not research_material_ready:
+        return next_research_material(response)
     if planning_mode:
         return next_planning_tool(response)
     if code_review_mode:
@@ -212,6 +218,41 @@ def next_tool(response=None):
                 },
             }
         )
+
+
+def next_research_material(response=None):
+    """Read exact documentary evidence through the real native bridge before development; controlled generation does not prove human or model comprehension."""
+    import hashlib
+
+    global research_material_ready, research_material_windows
+    if response is not None:
+        assert response['success'], response
+        page = json.loads(response['contentItems'][0]['text'])
+        assert page['source']['task_id'] == research_predecessor['task_id']
+        assert page['authority'] == 'data_only' and page['current_task_acceptance'] == 'not_granted'
+        assert page['offset'] == len(research_material_bytes)
+        research_material_bytes.extend(base64.b64decode(page['data_base64'], validate=True))
+        research_material_windows += 1
+        if page['next_offset'] is None:
+            descriptor = research_predecessor['material']['sections']['packet']
+            assert len(research_material_bytes) == page['total_bytes'] == descriptor['bytes']
+            assert hashlib.sha256(research_material_bytes).hexdigest() == page['sha256'] == descriptor['sha256']
+            packet = json.loads(research_material_bytes)
+            assert packet['scope']['task_id'] == research_predecessor['task_id']
+            assert packet['limitations'] and packet['sources'] and '137' in json.dumps(packet)
+            Path('/home/actor/.codex/fixture-research-material.json').write_text(json.dumps({
+                'snapshot': packet, 'sha256': page['sha256'], 'windows': research_material_windows,
+                'bytes': len(research_material_bytes), 'authority': page['authority'],
+            }))
+            research_material_ready = True
+            return next_tool()
+    offset = len(research_material_bytes)
+    identity = f'research-material-{offset}'
+    send({'id': identity, 'method': 'item/tool/call', 'params': {
+        'threadId': native_thread_id, 'turnId': native_turn_id, 'callId': identity,
+        'tool': 'researcher_prerequisite_research',
+        'arguments': {'task_id': research_predecessor['task_id'], 'section': 'packet', 'offset': offset, 'max_bytes': 4096},
+    }})
 
 
 def next_causal_material(response=None):
@@ -1008,6 +1049,9 @@ for line in sys.stdin:
             code_sources = [item for item in (initial.get('work_delivery') or {}).get('prerequisites', []) if item['kind']=='accepted_code_candidate']
             if code_sources:
                 causal_task = code_sources[0]['task_id']
+            research_sources = [item for item in (initial.get('work_delivery') or {}).get('prerequisites', []) if item['kind'] == 'accepted_research_reports' and 'material' in item]
+            if research_sources:
+                research_predecessor = research_sources[0]
             prior = initial.get("prior_code")
             if prior is not None:
                 assert prior["authority"] == "data_only"

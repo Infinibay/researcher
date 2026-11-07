@@ -28,7 +28,36 @@ que se pueda comparar el avance; no presentar microajustes como tareas principal
 - Última suite global: `9fb873c`,2210 casos,2178 pasan,31 fallan y1 error de fixture; sin omisiones. La carrera de backup encontrada se corrigió después con40 pruebas instaladas. No se declara una nueva corrida global verde; la referencia `0c8b8d9` queda como evidencia histórica.
 - U06 (configuración por intento y guardado interrumpido) queda comprobado; siguen42de43escenarios amplios abiertos en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Estado actual: cobertura reconciliada y U06 comprobado
+## Estado actual: entrega documental acotada comprobada
+
+Bloque **2026-11-07 14:48:21–15:07:02 UTC**, **18 min 41 s** hasta validar.
+54casos distintos de fuente y43instalados pasan. Tres informes que juntos
+superan1MiB se recuperan completos, incluida la limitación final; la entrada del
+sucesor queda por debajo de25000bytes. El recorrido nativo controlado recupera
+paquetes reales de investigación/investigación exploratoria/método científico
+mediante1/2/3ventanas. Se conservan bytes de entregas2/3 y políticas2–6.
+619archivos coinciden entre fuente/wheel/instalación,328de producto;
+43definiciones tienen docstring y84decisiones de prompts están vigentes.
+[Resultados, correcciones del ensayo y límites](research-material-review.md).
+
+**Lista vigente:**
+- Terminado: recorridos Proyectos/Tareas, Archivos/Documentos y navegación por
+  las12rutas; contrato U06, reconciliación y entrega documental acotada.
+- En curso al cerrar: registro del bloque y checkpoint local.
+- Siguiente principal: acceso selectivo a evidencias dentro del presupuesto y
+  contextos voluminosos de planes/continuaciones. **Todavía no iniciado**;
+  registrar la hora real cuando comience.
+- Pendiente:42escenarios amplios, recuperación/recursos y datos históricos,
+  evaluaciones representativas/humanas, aceptación integral de12páginas,
+  dependencias publicadas y distribución.
+- Al final: detalles secundarios anotados, validación global y revisión independiente.
+
+La lista se publica con tiempos en cada cambio de tarea y se mantiene después de
+compactar. El transporte acotado no garantiza comprensión ni que leer un paquete
+entero quepa en un intento. Esos límites siguen como trabajo funcional; cero
+modelos consumidos y ninguna nueva suite global verde.
+
+## Etapa anterior: cobertura reconciliada y U06 comprobado
 
 Bloque **2026-11-07 14:38:11–14:44:49 UTC**, **6 min 38 s** hasta validar.
 36pruebas dirigidas pasan, incluidas3caídas de un proceso después de escribir

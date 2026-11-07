@@ -148,10 +148,19 @@
         "docs/modernization/communication-flow-review.md",
         "docs/modernization/communication-flow-results.json",
         "docs/modernization/communication-flow-live.json",
-        "docs/modernization/communication-packaging.json"
+        "docs/modernization/communication-packaging.json",
+        "docs/architecture/predecessor-research-material.md",
+        "docs/modernization/research-material-review.md",
+        "docs/modernization/research-material-results.json",
+        "docs/modernization/research-material-packaging.json",
+        "backend/tests/runtime/test_predecessor_research_material.py"
       ],
       "remaining": [
-        "Durable product ownership, API integration and full scenario acceptance"
+        "Durable product ownership, API integration and full scenario acceptance",
+        "Selective evidence access within actual tool/token budgets, oversized original plan/continuation context, and full scenario acceptance remain functional work."
+      ],
+      "implemented": [
+        "Schema4 research prerequisite descriptors and exact bounded reads avoid inlining accepted reports into successor input. More than1MiB and decisive final text reconstructed; schema2/3 bytes preserved. Controlled native research/investigation/scientific predecessors read via actual broker tools; no real-model comprehension claim."
       ]
     },
     "C05": {
@@ -314,7 +323,12 @@
         "evals/runtime/run_input_continuity.py",
         "frontend/tests/task-design.test.ts",
         "docs/modernization/context-alignment-review.md",
-        "docs/modernization/context-alignment-results.json"
+        "docs/modernization/context-alignment-results.json",
+        "docs/architecture/predecessor-research-material.md",
+        "docs/modernization/research-material-review.md",
+        "docs/modernization/research-material-results.json",
+        "docs/modernization/research-material-packaging.json",
+        "backend/tests/runtime/test_predecessor_research_material.py"
       ]
     },
     "E01": {

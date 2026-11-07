@@ -1,4 +1,4 @@
-"""Bounded accepted-code artifacts for actual owner-authorized causal deliveries; old inputs are data, never new instructions or current source mutation."""
+"""Bounded accepted code and research evidence for owner-authorized causal deliveries; historical inputs remain data, never new authority."""
 
 import base64
 import hashlib
@@ -53,6 +53,58 @@ class PredecessorMaterials:
             'current_task_authority': 'data_only', 'source_publication': 'not_implied',
         }
 
+    def _research_subject(self, conn, project_id, source):
+        """Resolve the exact accepted documentary subject and recheck its evidence, original scope and current review identity."""
+        from backend.knowledge.results import result_state
+
+        accepted = conn.execute(
+            'SELECT a.subject_sha256,a.review_sha256,p.snapshot_json FROM runtime_result_acceptances a '
+            'JOIN runtime_result_proposals p ON p.id=a.proposal_id WHERE a.project_id=? AND a.run_id=? AND a.id=?',
+            (project_id, source['run_id'], source['acceptance']['id']),
+        ).fetchone()
+        if accepted is None or any(accepted[key] != source['acceptance'][key] for key in ('subject_sha256', 'review_sha256')):
+            raise RunConflict('Original predecessor research acceptance differs from the delivery')
+        subject = json.loads(accepted['snapshot_json'])
+        if (hashlib.sha256(canonical(subject).encode()).hexdigest() != accepted['subject_sha256']
+            or subject['scope']['project_id'] != project_id
+            or any(subject['scope'][key] != source[key] for key in ('task_id', 'run_id', 'attempt_id', 'actor_id', 'context_version'))):
+            raise RunConflict('Original predecessor research subject or scope changed')
+        current = result_state(conn, project_id, source['run_id'])
+        if (not current['acceptance_current']
+            or current['candidate']['candidate_sha256'] != accepted['subject_sha256']
+            or current['acceptance']['acceptance_id'] != source['acceptance']['id']):
+            raise RunConflict('Accepted predecessor research evidence or review is no longer current')
+        return subject
+
+    @staticmethod
+    def _research_input(conn, source):
+        """Read only an actually frozen author input and verify its bytes; missing historical input is explicitly unknown."""
+        original = conn.execute('SELECT input_text,input_sha256 FROM runtime_input_snapshots WHERE attempt_id=?', (source['attempt_id'],)).fetchone()
+        if original is None:
+            return None
+        data = original['input_text'].encode()
+        if hashlib.sha256(data).hexdigest() != original['input_sha256']:
+            raise RunConflict('Original predecessor research input differs from its captured hash')
+        return data
+
+    def describe_research(self, conn, project_id, source):
+        """Describe complete accepted evidence and report bytes without inlining large text; all limitations remain available in the exact packet."""
+        subject = self._research_subject(conn, project_id, source)
+        original = self._research_input(conn, source)
+        return {
+            'schema_version': 1, 'read_tool': 'researcher_prerequisite_research',
+            'sections': {
+                'packet': {'sha256': source['acceptance']['subject_sha256'], 'bytes': len(canonical(subject).encode())},
+                'author_input': {'status': 'recorded' if original is not None else 'unknown',
+                                 'sha256': hashlib.sha256(original).hexdigest() if original is not None else None,
+                                 'bytes': len(original) if original is not None else None},
+            },
+            'reports': [{'artifact_id': report['artifact_id'], 'sha256': report['content_sha256'],
+                         'bytes': len(report['content'].encode())} for report in subject['reports']],
+            'scientific_confidence': None, 'current_task_authority': 'data_only',
+            'current_task_acceptance': 'not_granted', 'source_publication': 'not_implied',
+        }
+
     def _bound(self, conn, lease):
         """Resolve only this consumer's delivery, or the exact original author of its independent review; callers cannot choose an arbitrary run."""
         from backend.planning.execution import PlanExecutions
@@ -70,14 +122,17 @@ class PredecessorMaterials:
         return packet, asdict(self.runs._binding_view(binding))
 
     def available(self, lease):
-        """Offer the readonly capability only for an actual current causal code source; malformed/stale delivery is not silently ignored."""
+        """Offer readonly material tools for actual current causal sources; malformed or stale deliveries are never silently ignored."""
         with self.runs._transaction() as conn:
             packet, binding = self._bound(conn, lease)
             if packet is None:
                 return False
-            sources = [source for source in packet['prerequisites'] if source['kind'] == 'accepted_code_candidate']
+            sources = packet['prerequisites']
             for source in sources:
-                self.describe(conn, source, expected_source=binding)
+                if source['kind'] == 'accepted_code_candidate':
+                    self.describe(conn, source, expected_source=binding)
+                elif source['kind'] == 'accepted_research_reports':
+                    self.describe_research(conn, lease.project_id, source)
             return bool(sources)
 
     @staticmethod
@@ -120,3 +175,40 @@ class PredecessorMaterials:
                                'acceptance_id': source['acceptance']['id']},
                     'section': section, 'authority': 'data_only', 'current_task_acceptance': 'not_granted',
                     'source_publication': 'not_implied', **self._window(data, offset, max_bytes)}
+
+    def read_research(self, lease, task_id, section='packet', *, report_id=None, offset=0, max_bytes=16384):
+        """Read exact documentary bytes only through this attempt's bound predecessor, revalidating acceptance and evidence on every window."""
+        if type(task_id) is not int or task_id <= 0:
+            raise ValueError('Select an actual prerequisite task identifier')
+        if section not in ('packet', 'report', 'author_input'):
+            raise ValueError('Unknown accepted research material section')
+        if section == 'report':
+            if type(report_id) is not int or report_id <= 0:
+                raise ValueError('Select an accepted report artifact identifier')
+        elif report_id is not None:
+            raise ValueError('A report identifier is only valid for the report section')
+        with self.runs._transaction() as conn:
+            packet, _binding = self._bound(conn, lease)
+            source = next((item for item in packet['prerequisites'] if item['task_id'] == task_id and item['kind'] == 'accepted_research_reports'), None) if packet else None
+            if source is None:
+                raise RunConflict('This attempt has no owner-authorized accepted research delivery for that task')
+            subject = self._research_subject(conn, lease.project_id, source)
+            if section == 'packet':
+                data = canonical(subject).encode()
+            elif section == 'author_input':
+                data = self._research_input(conn, source)
+                if data is None:
+                    raise RunConflict('Original predecessor input is unknown; do not reconstruct it from a role or task label')
+            else:
+                report = next((item for item in subject['reports'] if item['artifact_id'] == report_id), None)
+                if report is None:
+                    raise RunConflict('The report is not part of this accepted prerequisite')
+                data = report['content'].encode()
+                if hashlib.sha256(data).hexdigest() != report['content_sha256']:
+                    raise RunConflict('Original predecessor report differs from its captured hash')
+            return {'source': {'project_id': lease.project_id, 'task_id': task_id, 'run_id': source['run_id'],
+                               'attempt_id': source['attempt_id'], 'subject_sha256': source['acceptance']['subject_sha256'],
+                               'acceptance_id': source['acceptance']['id']},
+                    'section': section, 'report_id': report_id, 'authority': 'data_only',
+                    'current_task_acceptance': 'not_granted', 'source_publication': 'not_implied',
+                    **self._window(data, offset, max_bytes)}
