@@ -25,7 +25,7 @@ def reader_fixture(tmp_path):
     site = next(environment.glob('lib/python*/site-packages'))
     package = site / 'chromadb'; package.mkdir()
     (package / 'config.py').write_text('class Settings:\n    def __init__(self, **kwargs): pass\n')
-    (package / '__init__.py').write_text('''import atexit,json,os,socket,sqlite3,sys,time
+    (package / '__init__.py').write_text('''import atexit,json,os,socket,sqlite3,stat,sys,time
 from pathlib import Path
 class PersistentClient:
     def __init__(self, path, **kwargs):
@@ -34,20 +34,43 @@ class PersistentClient:
         if mode=='hang':
             time.sleep(30)
             return
+        if mode=='flood-log':
+            for _ in range(32):print('x'*65536,flush=True)
+        if mode=='fill-scratch':
+            blocked={}
+            for name in ('/outside-work', '/dev/shm/outside-work'):
+                try:Path(name).write_bytes(b'escape')
+                except OSError as error:blocked[name]=error.errno
+                else:blocked[name]='unexpectedly_writable'
+            count=0
+            try:
+                for count in range(64):
+                    Path(path,str(count)).write_bytes(b'x'*65536)
+            except OSError as error:
+                blocked['scratch_error']=error.errno
+            blocked['files_attempted']=count+1
+            print('SCRATCH_PROBE:'+json.dumps(blocked),flush=True)
         if mode=='link-output':
             def replace_output():
                 target=Path('/work/out/records.jsonl')
-                target.unlink()
-                target.symlink_to(secret)
+                try:
+                    target.unlink()
+                    target.symlink_to(secret)
+                except OSError as error:
+                    print('OUTPUT_REPLACEMENT_DENIED:'+str(error.errno),flush=True)
             atexit.register(replace_output)
         observations={'environment_secret':os.environ.get('OPENAI_API_KEY'),
                       'host_secret_visible':Path(secret).exists(),'original_visible':Path(original).exists(),
-                      'inherited_input':sys.stdin.read(64)}
+                      'inherited_input':sys.stdin.read(64),'inherited_directory_fds':[]}
+        for descriptor in os.listdir('/proc/self/fd'):
+            try:info=os.fstat(int(descriptor))
+            except OSError:continue
+            if stat.S_ISDIR(info.st_mode):observations['inherited_directory_fds'].append(int(descriptor))
         try:
             with socket.create_connection(('127.0.0.1',port),timeout=.2):pass
             observations['host_network_reachable']=True
         except OSError:observations['host_network_reachable']=False
-        Path(path,'probe.json').write_text(json.dumps(observations))
+        print('READER_PROBE:'+json.dumps(observations),flush=True)
     def list_collections(self):return []
 ''')
     metadata = site / 'chromadb-1.5.9.dist-info'; metadata.mkdir()
@@ -71,8 +94,8 @@ def test_exported_reader_cannot_observe_original_credentials_or_host_network(rea
     result = subprocess.run([str(python),'-I',str(SCRIPT),'--source',str(source),'--output',str(output)],
                             env={**os.environ,'OPENAI_API_KEY':'SYNTHETIC_ENV_SECRET'},input='SYNTHETIC_STDIN_SECRET',capture_output=True,text=True,timeout=15)
     assert result.returncode == 0,result.stderr
-    observed=json.loads((output/'reader/probe.json').read_text())
-    assert observed == {'environment_secret':None,'host_secret_visible':False,'original_visible':False,'host_network_reachable':False,'inherited_input':''}
+    observed=json.loads(next(line.removeprefix('READER_PROBE:') for line in (output/'reader.log').read_text().splitlines() if line.startswith('READER_PROBE:')))
+    assert observed == {'environment_secret':None,'host_secret_visible':False,'original_visible':False,'host_network_reachable':False,'inherited_input':'','inherited_directory_fds':[]}
     assert hashlib.sha256((source/'chroma.sqlite3').read_bytes()).hexdigest()==before
     assert secret.read_text()=='SYNTHETIC_OWNER_SECRET'
     manifest=json.loads((output/'manifest.json').read_text())
@@ -101,9 +124,41 @@ def test_dependency_output_symlink_is_not_followed_by_parent(reader_fixture, tmp
     output=tmp_path/'link-export'
     result=subprocess.run([str(python),'-I',str(SCRIPT),'--source',str(source),'--output',str(output)],
                           capture_output=True,text=True,timeout=10)
-    assert result.returncode!=0 and 'bounded regular file' in result.stderr
-    assert not (output/'manifest.json').exists()
+    assert result.returncode==0,result.stderr
+    assert 'OUTPUT_REPLACEMENT_DENIED:16' in (output/'reader.log').read_text()
+    assert not (output/'records.jsonl').is_symlink()
+    assert (output/'records.jsonl').read_bytes()==b''
     assert secret.read_text()=='SYNTHETIC_OWNER_SECRET'
+
+
+@pytest.mark.enable_socket
+def test_reader_scratch_has_aggregate_capacity_and_cannot_write_elsewhere(reader_fixture, tmp_path):
+    """Many small writes share a real tmpfs ceiling; writable root or shared-memory mounts cannot bypass it."""
+    python,source,_secret=reader_fixture
+    with sqlite3.connect(source/'chroma.sqlite3') as db:db.execute("update probe set mode='fill-scratch'")
+    output=tmp_path/'bounded-export'
+    result=subprocess.run([str(python),'-I',str(SCRIPT),'--source',str(source),'--output',str(output),
+                           '--scratch-bytes',str(1024**2)],capture_output=True,text=True,timeout=15)
+    assert result.returncode==0,result.stderr
+    observed=json.loads(next(line.removeprefix('SCRATCH_PROBE:') for line in (output/'reader.log').read_text().splitlines() if line.startswith('SCRATCH_PROBE:')))
+    assert observed['scratch_error']==28 and observed['files_attempted']<64
+    assert observed['/outside-work']==30 and observed['/dev/shm/outside-work']==30
+    manifest=json.loads((output/'manifest.json').read_text())
+    assert manifest['reader_isolation']['scratch_capacity_bytes']==1024**2
+    assert not (output/'reader').exists()
+
+
+@pytest.mark.enable_socket
+def test_reader_log_is_drained_without_unbounded_disk_growth(reader_fixture, tmp_path):
+    """A noisy dependency cannot block on its pipe or grow the retained diagnostic beyond64KiB."""
+    python,source,_secret=reader_fixture
+    with sqlite3.connect(source/'chroma.sqlite3') as db:db.execute("update probe set mode='flood-log'")
+    output=tmp_path/'noisy-export'
+    result=subprocess.run([str(python),'-I',str(SCRIPT),'--source',str(source),'--output',str(output)],
+                          capture_output=True,text=True,timeout=15)
+    assert result.returncode==0,result.stderr
+    assert (output/'reader.log').stat().st_size==65536
+    assert json.loads((output/'manifest.json').read_text())['reader_isolation']['log_truncated'] is True
 
 
 @pytest.mark.enable_socket

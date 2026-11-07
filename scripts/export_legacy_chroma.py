@@ -25,10 +25,14 @@ import stat
 import subprocess
 import sys
 import time
+import selectors
+
+SCRATCH_BYTES = 256 * 1024**2
+LOG_BYTES = 65536
 
 
-def isolated_reader(reader, output, *, bubblewrap, tenant, database, max_bytes, max_files, deadline):
-    """Run only the disposable reader in a bounded network/filesystem namespace, never inheriting host credentials."""
+def isolated_reader(reader, output, *, bubblewrap, tenant, database, max_bytes, max_files, deadline, scratch_bytes):
+    """Confine all arbitrary reader writes to one capacity-bound tmpfs and two pinned, size-limited output files."""
     stage = output / 'reader-output'
     stage.mkdir(mode=0o700)
     remaining = deadline - time.monotonic()
@@ -39,7 +43,9 @@ def isolated_reader(reader, output, *, bubblewrap, tenant, database, max_bytes, 
     for path in ('/usr', '/bin', '/lib', '/lib64'):
         if Path(path).exists():
             command += ['--ro-bind', path, path]
-    command += ['--proc', '/proc', '--dev', '/dev', '--tmpfs', '/tmp']
+    command += ['--proc', '/proc', '--dev', '/dev', '--size', str(scratch_bytes), '--tmpfs', '/work',
+                '--dir', '/work/tmp', '--dir', '/work/home', '--dir', '/work/cache', '--dir', '/work/out',
+                '--symlink', 'work/tmp', '/tmp']
     roots = {Path(sys.prefix), Path(sys.base_prefix), Path(sys._base_executable).parent.parent,
              Path(sys.executable).resolve().parent.parent}
     for root in sorted(roots):
@@ -49,16 +55,20 @@ def isolated_reader(reader, output, *, bubblewrap, tenant, database, max_bytes, 
             command += ['--ro-bind', str(root), str(root)]
     with ExitStack() as handles:
         fds = []
-        for path, destination, writable in ((reader, '/work/reader', True),
-                                            (stage, '/work/out', True),
+        for name in ('records.jsonl', 'receipt.json'):
+            fd = os.open(stage/name, os.O_CREAT | os.O_EXCL | os.O_WRONLY | os.O_NOFOLLOW, 0o600)
+            os.close(fd)
+        for path, destination, writable in ((reader, '/input', False),
+                                            (stage/'records.jsonl', '/work/out/records.jsonl', True),
+                                            (stage/'receipt.json', '/work/out/receipt.json', True),
                                             (Path(__file__).resolve(), '/exporter.py', False)):
             fd = os.open(path, os.O_RDONLY | os.O_NOFOLLOW | os.O_CLOEXEC)
             handles.callback(os.close, fd)
             fds.append(fd)
             command += ['--bind-fd' if writable else '--ro-bind-fd', str(fd), destination]
-        command += ['--dir', '/tmp/home', '--dir', '/tmp/cache', '--chdir', '/work']
-        environment = {'PATH': os.defpath, 'LANG': 'C.UTF-8', 'HOME': '/tmp/home',
-                       'XDG_CACHE_HOME': '/tmp/cache', 'PYTHONDONTWRITEBYTECODE': '1',
+        command += ['--remount-ro', '/dev', '--remount-ro', '/proc', '--remount-ro', '/', '--chdir', '/work']
+        environment = {'PATH': os.defpath, 'LANG': 'C.UTF-8', 'HOME': '/work/home',
+                       'XDG_CACHE_HOME': '/work/cache', 'TMPDIR': '/work/tmp', 'PYTHONDONTWRITEBYTECODE': '1',
                        'HF_HUB_OFFLINE': '1', 'TRANSFORMERS_OFFLINE': '1',
                        'ANONYMIZED_TELEMETRY': 'False', 'OMP_NUM_THREADS': '1',
                        'OPENBLAS_NUM_THREADS': '1', 'RAYON_NUM_THREADS': '2',
@@ -72,18 +82,38 @@ def isolated_reader(reader, output, *, bubblewrap, tenant, database, max_bytes, 
                     '--source', '/work/reader', '--output', '/work/out',
                     '--tenant', tenant, '--database', database,
                     '--max-bytes', str(max_bytes), '--max-files', str(max_files),
+                    '--scratch-bytes', str(scratch_bytes),
                     '--timeout', str(math.ceil(remaining))]
-        with (output / 'reader.log').open('x') as log:
+        with (output / 'reader.log').open('xb') as log:
             child = subprocess.Popen(command, env={'PATH': os.defpath, 'LANG': 'C.UTF-8'},
                                      pass_fds=fds, stdin=subprocess.DEVNULL,
-                                     stdout=log, stderr=subprocess.STDOUT,
+                                     stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
                                      start_new_session=True)
             try:
-                status = child.wait(timeout=max(0.001, deadline-time.monotonic()))
+                captured = 0
+                log_truncated = False
+                with selectors.DefaultSelector() as selector:
+                    selector.register(child.stdout, selectors.EVENT_READ)
+                    eof = False
+                    while not eof or child.poll() is None:
+                        if time.monotonic() >= deadline:
+                            raise TimeoutError('Chroma reader deadline exceeded')
+                        for key, _ in selector.select(min(.1, max(0, deadline-time.monotonic()))):
+                            chunk = os.read(key.fileobj.fileno(), 65536)
+                            if not chunk:
+                                selector.unregister(key.fileobj)
+                                eof = True
+                            else:
+                                kept = chunk[:max(0, LOG_BYTES-captured)]
+                                log_truncated = log_truncated or len(kept)<len(chunk)
+                                log.write(kept)
+                                captured += len(kept)
+                    status = child.wait()
             finally:
                 if child.poll() is None:
                     os.killpg(child.pid, signal.SIGKILL)
                     child.wait(timeout=10)
+                child.stdout.close()
         if status != 0:
             raise RuntimeError('Isolated Chroma reader failed; preserve this export and inspect reader.log')
     for name, limit in (('receipt.json', min(max_bytes, 16*1024**2)), ('records.jsonl', max_bytes)):
@@ -96,27 +126,36 @@ def isolated_reader(reader, output, *, bubblewrap, tenant, database, max_bytes, 
             or len(receipt['collections']) > max_files):
         raise ValueError('Invalid isolated reader receipt')
     os.replace(stage / 'records.jsonl', output / 'records.jsonl')
-    return receipt['collections'], receipt['count']
+    return receipt['collections'], receipt['count'], log_truncated
 
 
-def digest(path):
-    """Hash one regular snapshot file for the portable export manifest."""
+def digest(path, *, deadline=None):
+    """Stream a snapshot hash while honoring the operation deadline between bounded reads."""
+    hashed=hashlib.sha256();count=0
     with path.open('rb') as stream:
-        return {'bytes':path.stat().st_size,'sha256':hashlib.file_digest(stream,'sha256').hexdigest()}
+        while chunk:=stream.read(1024**2):
+            if deadline is not None and time.monotonic()>deadline:raise TimeoutError('Chroma hashing deadline exceeded')
+            hashed.update(chunk);count+=len(chunk)
+    return {'bytes':count,'sha256':hashed.hexdigest()}
 
 
-def inventory(root, limit):
-    """List raw regular storage without following links or accepting special filesystem entries."""
+def inventory(root, limit, *, deadline=None):
+    """Enforce entry/time bounds while enumerating, before materializing the raw storage tree."""
     result={}
-    for path in sorted(root.rglob('*')):
-        info=path.lstat()
-        if not (stat.S_ISREG(info.st_mode) or stat.S_ISDIR(info.st_mode)):
-            raise ValueError('Chroma source must contain only regular files and directories')
-        name=str(path.relative_to(root))
-        if name in {'chroma.sqlite3-wal','chroma.sqlite3-shm','chroma.sqlite3-journal'}:
-            continue
-        result[name]={'directory':stat.S_ISDIR(info.st_mode),'identity':(info.st_dev,info.st_ino,info.st_size,info.st_mtime_ns,info.st_ctime_ns)}
-        if len(result)>limit:raise ValueError('Chroma export file limit exceeded')
+    def visit(directory):
+        """Reject the first over-budget entry without sorting the rest of its directory."""
+        with os.scandir(directory) as entries:
+            for entry in entries:
+                if deadline is not None and time.monotonic()>deadline:raise TimeoutError('Chroma inventory deadline exceeded')
+                path=Path(entry.path);name=str(path.relative_to(root))
+                info=entry.stat(follow_symlinks=False)
+                if not (stat.S_ISREG(info.st_mode) or stat.S_ISDIR(info.st_mode)):
+                    raise ValueError('Chroma source must contain only regular files and directories')
+                if name in {'chroma.sqlite3-wal','chroma.sqlite3-shm','chroma.sqlite3-journal'}:continue
+                result[name]={'directory':stat.S_ISDIR(info.st_mode),'identity':(info.st_dev,info.st_ino,info.st_size,info.st_mtime_ns,info.st_ctime_ns)}
+                if len(result)>limit:raise ValueError('Chroma export file limit exceeded')
+                if stat.S_ISDIR(info.st_mode):visit(path)
+    visit(root)
     return result
 
 
@@ -127,28 +166,40 @@ def snapshot(source, output, *, max_bytes, max_files, deadline):
     raw=output/'source';raw.mkdir(mode=0o700)
     with closing(sqlite3.connect(database.as_uri()+'?mode=rw',uri=True,timeout=0)) as writer:
         writer.execute('BEGIN IMMEDIATE')
-        first=inventory(source,max_files)
+        first=inventory(source,max_files,deadline=deadline)
         total=0;files=[]
         for name,item in first.items():
             target=raw/name
             if time.monotonic()>deadline:raise TimeoutError('Chroma snapshot deadline exceeded')
             if item['directory']:target.mkdir(parents=True,exist_ok=True,mode=0o700);continue
-            total+=item['identity'][2]
-            if total>max_bytes:raise ValueError('Chroma snapshot byte limit exceeded')
             target.parent.mkdir(parents=True,exist_ok=True,mode=0o700)
             if name=='chroma.sqlite3':
                 with closing(sqlite3.connect(database.as_uri()+'?mode=ro',uri=True)) as reader, closing(sqlite3.connect(target)) as captured:
-                    reader.backup(captured,pages=256,sleep=0)
+                    logical_bytes=reader.execute('PRAGMA page_count').fetchone()[0]*reader.execute('PRAGMA page_size').fetchone()[0]
+                    if total+logical_bytes>max_bytes:raise ValueError('Chroma snapshot byte limit exceeded')
+                    def progress(*_):
+                        """Interrupt SQLite copying when the original snapshot deadline has expired."""
+                        if time.monotonic()>deadline:raise TimeoutError('Chroma database snapshot deadline exceeded')
+                    reader.backup(captured,pages=256,sleep=0,progress=progress)
+                    captured.set_progress_handler(lambda:int(time.monotonic()>deadline),10000)
                     if captured.execute('PRAGMA integrity_check').fetchone()!=('ok',):raise ValueError('Corrupt Chroma snapshot')
                     captured.execute('PRAGMA journal_mode=DELETE')
-            else:shutil.copyfile(source/name,target,follow_symlinks=False)
+                total+=target.stat().st_size
+            else:
+                if total+item['identity'][2]>max_bytes:raise ValueError('Chroma snapshot byte limit exceeded')
+                fd=os.open(source/name,os.O_RDONLY|os.O_NOFOLLOW)
+                with os.fdopen(fd,'rb') as original,target.open('xb') as copied:
+                    while chunk:=original.read(1024**2):
+                        if time.monotonic()>deadline:raise TimeoutError('Chroma file snapshot deadline exceeded')
+                        if total+len(chunk)>max_bytes:raise ValueError('Chroma snapshot byte limit exceeded')
+                        copied.write(chunk);total+=len(chunk)
             target.chmod(0o600)
             with target.open('rb') as stream:os.fsync(stream.fileno())
-            files.append({'path':'source/'+name,**digest(target)})
-        if inventory(source,max_files)!=first:raise ValueError('Chroma source changed while copying')
+            files.append({'path':'source/'+name,**digest(target,deadline=deadline)})
+        if inventory(source,max_files,deadline=deadline)!=first:raise ValueError('Chroma source changed while copying')
         for row in files:
             name=str(Path(row['path']).relative_to('source'))
-            if name!='chroma.sqlite3' and digest(source/name)!={key:row[key] for key in ('bytes','sha256')}:
+            if name!='chroma.sqlite3' and digest(source/name,deadline=deadline)!={key:row[key] for key in ('bytes','sha256')}:
                 raise ValueError('Chroma index bytes changed while copying')
         writer.rollback()
     if sum(row['bytes'] for row in files)>max_bytes:raise ValueError('Chroma snapshot actual size exceeds budget')
@@ -163,7 +214,7 @@ def read_collections(reader, output, *, tenant, database, max_bytes, max_files, 
     client=chromadb.PersistentClient(path=str(reader),tenant=tenant,database=database,settings=Settings(anonymized_telemetry=False))
     collections=[];total=0
     records=output/'records.jsonl'
-    with records.open('x',encoding='utf-8') as stream:
+    with records.open('w',encoding='utf-8') as stream:
         for found in client.list_collections():
             collection=client.get_collection(found.name,embedding_function=None)
             count=collection.count();seen=set()
@@ -189,10 +240,12 @@ def read_collections(reader, output, *, tenant, database, max_bytes, max_files, 
     return collections, total
 
 
-def export(source, output, *, tenant='default_tenant', database='default_database', max_bytes=20*1024**3, max_files=200000, timeout=300):
+def export(source, output, *, tenant='default_tenant', database='default_database', max_bytes=20*1024**3, max_files=200000, timeout=300, scratch_bytes=SCRATCH_BYTES):
     """Preserve raw storage and export every selected collection record with exact text/metadata/identity."""
     if importlib.metadata.version('chromadb')!='1.5.9':raise ValueError('Use the isolated pinned chromadb1.5.9 exporter')
     if any(type(x) is not int or x<=0 for x in (max_bytes,max_files,timeout)):raise ValueError('Positive export limits required')
+    if type(scratch_bytes) is not int or not 1024**2<=scratch_bytes<=2*1024**3:
+        raise ValueError('Reader scratch capacity must be from1MiB to2GiB')
     bubblewrap=shutil.which('bwrap')
     if not bubblewrap:raise ValueError('Chroma export requires bubblewrap; no unsandboxed fallback')
     source=Path(source).resolve(strict=True)
@@ -201,17 +254,18 @@ def export(source, output, *, tenant='default_tenant', database='default_databas
     output.mkdir(mode=0o700)
     deadline=time.monotonic()+timeout
     files=snapshot(source,output,max_bytes=max_bytes,max_files=max_files,deadline=deadline)
-    reader=output/'reader'
-    shutil.copytree(output/'source',reader)
-    collections,total=isolated_reader(reader,output,bubblewrap=bubblewrap,tenant=tenant,database=database,
-                                      max_bytes=max_bytes,max_files=max_files,deadline=deadline)
+    collections,total,log_truncated=isolated_reader(output/'source',output,bubblewrap=bubblewrap,tenant=tenant,database=database,
+                                      max_bytes=max_bytes,max_files=max_files,deadline=deadline,scratch_bytes=scratch_bytes)
     records=output/'records.jsonl'
     manifest={'format':1,'kind':'researcher-chroma-export','status':'complete','reader_version':'1.5.9',
               'source_path':str(source),'tenant':tenant,'database':database,'collections':collections,
               'reader_isolation':{'network':'none','host_environment':'cleared','original_mounted':False,
-                                  'writable':'disposable reader and reader-output only','address_space_bytes':4*1024**3,
-                                  'per_file_byte_limit':max_bytes,'aggregate_disk_quota':False},
-              'records':{'path':'records.jsonl','count':total,**digest(records)},'source_files':files,
+                                  'writable':'capacity-bound scratch and two pinned output files','address_space_bytes':4*1024**3,
+                                  'scratch_capacity_bytes':scratch_bytes,'scratch_filesystem':'tmpfs',
+                                  'per_file_byte_limit':max_bytes,'reader_log_bytes':LOG_BYTES,
+                                  'log_truncated':log_truncated,
+                                  'aggregate_disk_quota':False,'arbitrary_reader_host_directory_writes':False},
+              'records':{'path':'records.jsonl','count':total,**digest(records,deadline=deadline)},'source_files':files,
               'embedding_calls':0,'original_application_rows_modified':False,'sqlite_checkpoint_may_change_files':True}
     for directory,_,_ in os.walk(output,topdown=False):
         fd=os.open(directory,os.O_RDONLY|os.O_DIRECTORY)
@@ -236,6 +290,8 @@ def main():
     parser.add_argument('--max-bytes',type=int,default=20*1024**3)
     parser.add_argument('--max-files',type=int,default=200000)
     parser.add_argument('--timeout',type=int,default=300)
+    parser.add_argument('--scratch-bytes',type=int,default=SCRATCH_BYTES,
+                        help='Kernel tmpfs capacity shared by the disposable reader and all temporary/cache files')
     args=parser.parse_args()
     if args.reader_worker:
         # Sanity check for the private entry, not authentication against an
@@ -250,16 +306,17 @@ def main():
         resource.setrlimit(resource.RLIMIT_FSIZE,(args.max_bytes,args.max_bytes))
         resource.setrlimit(resource.RLIMIT_CPU,(args.timeout,args.timeout))
         resource.setrlimit(resource.RLIMIT_NOFILE,(256,256))
+        shutil.copytree('/input',args.source)
         collections,total=read_collections(Path(args.source),Path(args.output),tenant=args.tenant,
             database=args.database,max_bytes=args.max_bytes,max_files=args.max_files,
             deadline=time.monotonic()+args.timeout)
         encoded=json.dumps({'collections':collections,'count':total},ensure_ascii=True,allow_nan=False)
         if len(encoded.encode())>min(args.max_bytes,16*1024**2):raise ValueError('Reader receipt too large')
-        with (Path(args.output)/'receipt.json').open('x') as stream:
+        with (Path(args.output)/'receipt.json').open('w') as stream:
             stream.write(encoded);stream.flush();os.fsync(stream.fileno())
         return
     print(json.dumps(export(args.source,args.output,tenant=args.tenant,database=args.database,
-                            max_bytes=args.max_bytes,max_files=args.max_files,timeout=args.timeout)))
+                            max_bytes=args.max_bytes,max_files=args.max_files,timeout=args.timeout,scratch_bytes=args.scratch_bytes)))
 
 
 if __name__=='__main__':

@@ -4,6 +4,14 @@ La implementación del [plan completo](../superpowers/plans/2026-10-31-actualiza
 
 ## Resultados disponibles
 
+- **Temporales y salidas de Chroma acotados:** tmpfs con capacidad de datos
+  compartida, raíz de sólo lectura, dos salidas fijadas y log de64KiB.8pruebas
+  finales y3comprobaciones de descriptores pasan. Exportación/importación instalada
+  conserva105registros/104textos/1metadato y lectura HTTP, sin modelos.
+  Bloque15min4s. [Informe y límites](chroma-capacity-review.md),
+  [ensayo instalado](chroma-capacity-import.json). Cuotas durables y recursos
+  globales del supervisor continúan pendientes principales.
+
 - **Administración acotada por operación:** backup, verificación, restauración e
   importación histórica usan un hijo con memoria/CPU/plazo limitados; inventarios
   se rechazan antes de acumular directorios completos. 28 pruebas finales dirigidas

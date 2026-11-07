@@ -1,0 +1,86 @@
+{
+  "definitions": 16,
+  "missing": [],
+  "entries": [
+    {
+      "path": "scripts/export_legacy_chroma.py",
+      "symbol": "<module>",
+      "documented": true
+    },
+    {
+      "path": "scripts/export_legacy_chroma.py",
+      "symbol": "isolated_reader",
+      "documented": true
+    },
+    {
+      "path": "scripts/export_legacy_chroma.py",
+      "symbol": "digest",
+      "documented": true
+    },
+    {
+      "path": "scripts/export_legacy_chroma.py",
+      "symbol": "inventory",
+      "documented": true
+    },
+    {
+      "path": "scripts/export_legacy_chroma.py",
+      "symbol": "inventory.visit",
+      "documented": true
+    },
+    {
+      "path": "scripts/export_legacy_chroma.py",
+      "symbol": "snapshot",
+      "documented": true
+    },
+    {
+      "path": "scripts/export_legacy_chroma.py",
+      "symbol": "snapshot.progress",
+      "documented": true
+    },
+    {
+      "path": "scripts/export_legacy_chroma.py",
+      "symbol": "read_collections",
+      "documented": true
+    },
+    {
+      "path": "scripts/export_legacy_chroma.py",
+      "symbol": "export",
+      "documented": true
+    },
+    {
+      "path": "scripts/export_legacy_chroma.py",
+      "symbol": "main",
+      "documented": true
+    },
+    {
+      "path": "evals/security/test_chroma_export.py",
+      "symbol": "<module>",
+      "documented": true
+    },
+    {
+      "path": "evals/security/test_chroma_export.py",
+      "symbol": "reader_fixture",
+      "documented": true
+    },
+    {
+      "path": "evals/security/test_chroma_export.py",
+      "symbol": "test_exported_reader_cannot_observe_original_credentials_or_host_network",
+      "documented": true
+    },
+    {
+      "path": "evals/security/test_chroma_export.py",
+      "symbol": "test_dependency_output_symlink_is_not_followed_by_parent",
+      "documented": true
+    },
+    {
+      "path": "evals/security/test_chroma_export.py",
+      "symbol": "test_reader_scratch_has_aggregate_capacity_and_cannot_write_elsewhere",
+      "documented": true
+    },
+    {
+      "path": "evals/security/test_chroma_export.py",
+      "symbol": "test_reader_log_is_drained_without_unbounded_disk_growth",
+      "documented": true
+    }
+  ]
+}

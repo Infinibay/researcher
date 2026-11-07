@@ -28,7 +28,44 @@ que se pueda comparar el avance; no presentar microajustes como tareas principal
 - Última suite global: `9fb873c`,2210 casos,2178 pasan,31 fallan y1 error de fixture; sin omisiones. La carrera de backup encontrada se corrigió después con40 pruebas instaladas. No se declara una nueva corrida global verde; la referencia `0c8b8d9` queda como evidencia histórica.
 - Los 43 escenarios amplios siguen abiertos en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Etapa actual: administración comprobada; siguen recursos agregados
+## Etapa actual: temporales Chroma comprobados; siguen recursos globales
+
+Bloque **12:45:45–13:00:49 UTC**, **15 min 4 s** hasta validación. El lector
+usa un tmpfs con capacidad de datos compartida, dos salidas fijadas y log de64KiB;
+ya no recibe carpetas del host para escritura.8pruebas finales y3comprobaciones
+de descriptores pasan. La exportación/importación instalada conserva105registros,
+104adjuntos textuales y1metadato; lectura HTTP comprobada y servicio cerrado.
+Cero modelos. [Informe](chroma-capacity-review.md), [ensayo](chroma-capacity-import.json).
+
+**Lista vigente:**
+- Implementado y comprobado en recorridos concretos: backend Codex/Ken, modelos,
+  flujos principales, comunicación, persistencia y varias recuperaciones.
+- Terminado en este tramo: capacidad de datos temporal y salidas del lector
+  Chroma, **15 min 4 s** hasta validación.
+- En curso como tarea principal: completar los recursos agregados del sistema.
+- Siguiente: memoria/procesos/CPU del supervisor; cuota durable de operaciones
+  auxiliares y migración/recuperación de hosts acotados continúan principales.
+- Pendiente principal: seguridad de dependencias, evaluación humana/otros
+  perfiles y datos históricos del propietario.
+- Interfaz:12pilotos/48conceptos;0/12páginas completamente aceptadas.
+- Al final: detalles acumulados, validación global, revisión independiente y
+  distribución. DD100 recoge11avisos de estilo.
+
+La cuota temporal no prueba una cuota del volumen durable ni de memoria total.
+Siguen43escenarios amplios abiertos, sin nueva suite global verde. La lista y
+tiempos quedan persistentes tras compactar; no se inventa porcentaje restante.
+
+## Etapa anterior: inicio de temporales Chroma y supervisor
+
+Inicio **2026-11-07 12:45:45 UTC**. El turno anterior fue progreso: administración
+comprobada y guardada en `7047b91`. En curso: reemplazar carpetas de escritura
+del lector Chroma por temporales con capacidad de kernel y salidas concretas,
+manteniendo copia original y errores inspeccionables. Siguen recursos del
+supervisor, recuperación/migración, seguridad, evaluación humana y12páginas.
+Último tramo terminado: administración, **12 min 28 s** hasta validación.
+Detalles secundarios al final de todas las capacidades principales.
+
+## Etapa anterior: administración comprobada; siguen recursos agregados
 
 Bloque **12:29:30–12:41:58 UTC**, **12 min 28 s** hasta validación. Backup,
 verificación, restore e importación histórica tienen proceso propio con memoria,

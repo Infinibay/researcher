@@ -1,0 +1,94 @@
+{
+  "base_commit": "7047b91",
+  "previous_goal_turn": "progress: bounded administrative operations committed as7047b91",
+  "started_at_utc": "2026-11-07T12:45:45Z",
+  "validation_cutoff_utc": "2026-11-07T13:00:49Z",
+  "elapsed_to_validation_seconds": 904,
+  "runs": [
+    {
+      "name": "first",
+      "receipt": ".superpowers/sdd/2026-10-31-actualizacion-proyecto/chroma-capacity-first.xml",
+      "sha256": "204ddb6101ad6073c0c089b9fe852251df0bdc1bbf36684e1b0bd931d0733074",
+      "tests": 7,
+      "outcomes": {
+        "passed": 6,
+        "failure": 1
+      },
+      "seconds": 3.271,
+      "failures": [
+        "evals.security.test_chroma_export::test_dependency_output_symlink_is_not_followed_by_parent"
+      ]
+    },
+    {
+      "name": "final",
+      "receipt": ".superpowers/sdd/2026-10-31-actualizacion-proyecto/chroma-capacity-final.xml",
+      "sha256": "cf523d9beb540c6f0a9bebe431d1bd01d83ad293f7cdcba6ef9b59f8912072c7",
+      "tests": 8,
+      "outcomes": {
+        "passed": 8
+      },
+      "seconds": 3.383,
+      "failures": []
+    },
+    {
+      "name": "fds",
+      "receipt": ".superpowers/sdd/2026-10-31-actualizacion-proyecto/chroma-capacity-fds.xml",
+      "sha256": "866a9459dcf92aa50f5665864bcd2d9204d6b0b38fea232cef3c037509357d51",
+      "tests": 3,
+      "outcomes": {
+        "passed": 3
+      },
+      "seconds": 0.485,
+      "failures": []
+    }
+  ],
+  "final_distinct_outcomes": {
+    "passed": 8,
+    "failed": 0,
+    "skipped": 0
+  },
+  "initial_red": "New scratch-capacity test first failed because --scratch-bytes did not exist. First full run retained one old symlink expectation; the kernel now prevents replacing the pinned output, instead of relying on later rejection.",
+  "kernel_observations": [
+    "1MiB shared tmpfs rejects many small writes with ENOSPC.",
+    "Root and /dev/shm writes fail with EROFS.",
+    "Pinned output unlink fails with EBUSY; host secret remains unread.",
+    "No directory descriptors inherited by the controlled reader.",
+    "2MiB diagnostic flood is drained; retained log is64KiB with log_truncated=true."
+  ],
+  "real_export_and_installed_import": {
+    "status": "passed",
+    "exporter_sha256": "7c4eba7dd1b62a18cbb12ca0d0f27e1b42f4c36c5f312c67c1d9ebfae287b784",
+    "preserved_fragments": 105,
+    "text_attachments": 104,
+    "metadata_only_records": 1,
+    "source_schema": 17,
+    "target_schema": 59,
+    "native_http_read_verified": true,
+    "service_exit": 143,
+    "model_turns": 0,
+    "embedding_calls": 0
+  },
+  "backend_package_changed": false,
+  "matching_backend_python_sql_files": 616,
+  "installed_wheel_sha256": "9b3392ccf5b7caefe4b42c8fe88696ef16599ea021a98712e677827058b3576a",
+  "changed_documented_definitions": 16,
+  "prompt_reviews_current": 83,
+  "prompt_reviews_requiring_review": 0,
+  "script_lock_check": "passed",
+  "lint": {
+    "count": 11,
+    "codes": {
+      "I001": 2,
+      "F401": 1,
+      "PLW1510": 8
+    },
+    "deferred_detail": "DD100"
+  },
+  "new_global_suite": false,
+  "broad_scenarios_closed": 0,
+  "remaining": [
+    "Whole supervisor process-tree memory/CPU/PID policy.",
+    "Durable export/backup/restore filesystem quota; tmpfs data capacity is not a total memory/inode or persistent-disk quota.",
+    "Bounded-host migration/recovery, dependency security, human/profile evaluations, owner historical data and12full-page acceptances."
+  ]
+}

@@ -736,3 +736,14 @@ exportaciones/backups y trabajo del padre siguen como pendientes principales.
 [admin-resources-lint.json](admin-resources-lint.json), incluido código anterior
 examinado. Resolver después de las capacidades principales. No confundirlos con
 la cuota de temporales de Chroma o los recursos del supervisor, aún principales.
+
+## DD100 — Estilo del exportador Chroma
+
+11avisos Ruff (2 I001, 1 F401 y8PLW1510) del exportador y sus fixtures, incluido
+código anterior revisado. [Recibo](chroma-capacity-lint.json). Resolver después de
+las capacidades principales; cuotas durables y memoria/PIDs agregados continúan
+como trabajo principal, separados de este pulido.
+
+El log acotado conserva el prefijo: después de mucho ruido puede perder el error
+final. Valorar conservar también una cola al hacer la pasada de diagnóstico fino,
+manteniendo el límite total y la indicación explícita de truncamiento.

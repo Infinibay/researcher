@@ -63,25 +63,37 @@ al servidor. Ejecutarlo sobre datos detenidos y conservar su salida completa:
 ```bash
 uv run --locked scripts/export_legacy_chroma.py \
   --source /datos/antiguos/chroma \
-  --output /datos/exportacion-chroma
+  --output /datos/exportacion-chroma \
+  --scratch-bytes 268435456
 ```
 
 Primero copia SQLite y los índices; abre con Chroma una segunda copia desechable.
 Cualquier actualización de formato afecta esa copia. El lector requiere Linux y
 bubblewrap con soporte `--bind-fd`; si no están disponibles, no hay ejecución sin
 aislamiento. El proceso recibe sólo el intérprete y sus bibliotecas, el script,
-la copia de lectura y su salida temporal. No recibe el directorio original,
+la copia cruda de sólo lectura y dos archivos de salida fijados por descriptor.
+La copia que Chroma puede migrar, sus temporales, HOME y caché comparten un tmpfs
+con capacidad de datos fijada por el kernel:256MiB por defecto, configurable de
+1MiB a2GiB con `--scratch-bytes`. Si no cabe, se conserva la copia cruda y falla
+la exportación; no cambia automáticamente de almacenamiento ni omite registros.
+El resto de la raíz, `/dev` y `/proc` se monta de sólo lectura. No recibe el directorio original,
 credenciales del entorno, entrada estándar ni la red del host. Los namespaces
 separan también procesos y montajes. El proceso principal supervisa su tiempo;
-al vencerlo conserva la copia y no publica `manifest.json` completo.
+al vencerlo conserva la copia cruda y no publica `manifest.json` completo.
+La copia temporal desaparece al cerrar su namespace. El log conserva como máximo
+64KiB; se sigue drenando la salida para no bloquear al hijo y el manifiesto informa
+si se truncó el diagnóstico. No se truncan los documentos exportados.
 
 El lector limita espacio de direcciones a4GiB, CPU, descriptores y tamaño por
-archivo. Esto **no** impone una cuota agregada de disco ni límites de memoria/PIDs
-para todo un árbol de procesos. Sigue siendo necesario detener los escritores
+archivo. La capacidad del tmpfs **no** es una cuota del volumen durable completo
+ni de toda la memoria/inodos/PIDs del árbol de procesos. La copia cruda y el
+manifiesto permanecen en el host, y los dos archivos de salida tienen su límite
+individual. Sigue siendo necesario detener los escritores
 originales antes de copiar; la prueba del lector no certifica cambios hostiles
 concurrentes durante el snapshot. No se ha eliminado el aviso de Chroma ni se
 consideran seguros todos los formatos por haber añadido una barrera de proceso.
-[Evidencia y alcance](../modernization/chroma-isolation-review.md).
+[Aislamiento inicial](../modernization/chroma-isolation-review.md),
+[capacidad y salida acotadas](../modernization/chroma-capacity-review.md).
 
 Exporta colecciones, IDs,
 texto y metadatos mediante `get`, paginados, sin generar embeddings. La API
