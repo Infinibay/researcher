@@ -28,7 +28,51 @@ que se pueda comparar el avance; no presentar microajustes como tareas principal
 - Última suite global: `9fb873c`,2210 casos,2178 pasan,31 fallan y1 error de fixture; sin omisiones. La carrera de backup encontrada se corrigió después con40 pruebas instaladas. No se declara una nueva corrida global verde; la referencia `0c8b8d9` queda como evidencia histórica.
 - Los 43 escenarios amplios siguen abiertos en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Etapa actual: volumen durable comprobado; operaciones auxiliares pendientes
+## Etapa actual: trabajadores documentales/semánticos comprobados
+
+Bloque **12:02:31–12:21:47 UTC**, **19 min 16 s**, hasta validación. Un cupo común
+conservado hasta reap físico, Landlock/seccomp obligatorios y estado HTTP429 de
+ocupado cubren los programas fijos de documentos y encoder local.98casos distintos
+de fuente y44instalados pasan;614archivos coinciden y35definiciones documentadas.
+83revisiones de prompts vigentes. Encoder local real; cero turnos generativos.
+[Informe y límites](aux-workers-review.md), [pruebas](aux-workers-results.json).
+
+**Lista actualizada al cambiar de tarea:**
+- Implementado y comprobado en recorridos concretos: backend Codex/Ken, modelos,
+  flujos principales, comunicación, persistencia y varias recuperaciones.
+- Terminado en este bloque: frontera común documental/semántica y explicación
+  de saturación, **19 min 16 s** hasta validación.
+- Terminado previamente: volumen durable (**19 min 23 s**) y CPU/agotamiento
+  del dominio (**15 min 11 s**).
+- Siguiente principal: exportaciones/backup/restore y recursos restantes del
+  supervisor, incluido trabajo del padre. **No iniciado**.
+- Pendiente principal: migración/recuperación de hosts acotados; seguridad
+  Ken/ONNX/Chroma; evaluación humana y otros perfiles; datos históricos;
+  aceptación integral de12páginas.
+- Interfaz:12pilotos/48conceptos,0/12páginas completamente aceptadas.
+- Después de las capacidades principales: detalles acumulados, validación global,
+  revisión independiente y distribución. DD098 recoge estilo/imports.
+
+No hay nueva suite global verde ni porcentaje global sustentado. Siguen43escenarios
+amplios abiertos. Lista y tiempos persistentes tras compactar; sin push/despliegue.
+
+## Etapa anterior: inicio de la frontera de trabajadores
+
+Inicio **2026-11-07 12:02:31 UTC**. Se está cerrando la frontera compartida de
+extracción documental y búsqueda semántica: un solo trabajador concurrente por
+proceso supervisor, restricciones obligatorias de lectura/escritura/red y
+creación de procesos, conservación de límites CPU/AS/plazo y cierre por pidfd.
+Las primeras pruebas pasan; formatos y encoder local real están en validación.
+Todavía no se declara cerrado el conjunto de recursos auxiliares, exportaciones,
+backups ni memoria del proceso supervisor.
+
+**Lista actualizada:** terminado el volumen durable (**19 min 23 s** hasta
+validación); en curso trabajadores documentales/semánticos; después recursos
+auxiliares restantes, seguridad Ken/ONNX, comunicación humana/otros perfiles,
+datos históricos y recuperación, aceptación de12páginas. Todos los detalles
+secundarios permanecen para después de las capacidades principales.
+
+## Etapa anterior: volumen durable comprobado
 
 Bloque **11:38:40–11:58:03 UTC**, **19 min 23 s**, hasta validación. Una instalación
 nueva puede usar un volumen ext4 dedicado con capacidad agregada verificada.

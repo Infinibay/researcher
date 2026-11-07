@@ -46,6 +46,7 @@ from backend.research.models import (
     ReviewDecision,
     SourceTooLarge,
     SourceUnavailable,
+    WorkerBusy,
 )
 from backend.research.provenance import (
     intersecting_units,
@@ -121,6 +122,7 @@ def install_research_errors(app: FastAPI):
     for error, status, code in [
         (RetrievalUnavailable, 503, "retrieval_unavailable"),
         (RetrievalBusy, 429, "retrieval_busy"),
+        (WorkerBusy, 429, "processing_busy"),
         (ResearchForbidden, 403, "scope_forbidden"),
         (ResearchNotFound, 404, "research_not_found"),
         (OperationConflict, 409, "operation_conflict"),

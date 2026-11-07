@@ -20,6 +20,7 @@ from backend.research.models import (
     ResearchInputError,
     SourceTooLarge,
     SourceUnavailable,
+    WorkerBusy,
 )
 from backend.research.provenance import intersecting_units
 from backend.research.retrieval_assets import (
@@ -245,6 +246,8 @@ class SemanticRetriever:
                     "wall_limit_seconds": self.limits.wall_seconds,
                 },
             }
+        except WorkerBusy as exc:
+            raise RetrievalBusy(str(exc)) from exc
         except SourceUnavailable as exc:
             raise RetrievalUnavailable(
                 "Local semantic worker could not complete safely"

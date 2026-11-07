@@ -722,3 +722,10 @@ segundo puede repetir el mismo error de admisión por espacio en el log aunque n
 se inicie trabajo. Consolidar ese diagnóstico por cambio de estado después de las
 capacidades principales. Es una deducción del código, no una medición de volumen
 de logs; no alterar el límite ni permitir un despacho para silenciar el mensaje.
+
+## DD098 — Estilo de trabajadores documentales y semánticos
+
+Imports y avisos Ruff del corte en [aux-workers-lint.json](aux-workers-lint.json).
+Incluye código anterior examinado. Resolver al final de las capacidades principales,
+sin repetir encoder/VM por cambios de estilo. Los recursos globales del supervisor,
+exportaciones/backups y trabajo del padre siguen como pendientes principales.

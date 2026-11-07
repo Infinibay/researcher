@@ -1,0 +1,181 @@
+{
+  "definitions": 35,
+  "missing": [],
+  "entries": [
+    {
+      "path": "backend/research/worker_sandbox.py",
+      "symbol": "<module>",
+      "documented": true
+    },
+    {
+      "path": "backend/research/worker_sandbox.py",
+      "symbol": "_Ruleset",
+      "documented": true
+    },
+    {
+      "path": "backend/research/worker_sandbox.py",
+      "symbol": "_PathRule",
+      "documented": true
+    },
+    {
+      "path": "backend/research/worker_sandbox.py",
+      "symbol": "_Filter",
+      "documented": true
+    },
+    {
+      "path": "backend/research/worker_sandbox.py",
+      "symbol": "_checked",
+      "documented": true
+    },
+    {
+      "path": "backend/research/worker_sandbox.py",
+      "symbol": "requirements",
+      "documented": true
+    },
+    {
+      "path": "backend/research/worker_sandbox.py",
+      "symbol": "install",
+      "documented": true
+    },
+    {
+      "path": "backend/research/worker_limits.py",
+      "symbol": "<module>",
+      "documented": true
+    },
+    {
+      "path": "backend/research/worker_limits.py",
+      "symbol": "apply_limits",
+      "documented": true
+    },
+    {
+      "path": "backend/research/worker_limits.py",
+      "symbol": "observed_limits",
+      "documented": true
+    },
+    {
+      "path": "backend/research/worker_transport.py",
+      "symbol": "<module>",
+      "documented": true
+    },
+    {
+      "path": "backend/research/worker_transport.py",
+      "symbol": "exchange",
+      "documented": true
+    },
+    {
+      "path": "backend/research/worker_transport.py",
+      "symbol": "_exchange",
+      "documented": true
+    },
+    {
+      "path": "backend/research/parser_worker.py",
+      "symbol": "<module>",
+      "documented": true
+    },
+    {
+      "path": "backend/research/parser_worker.py",
+      "symbol": "main",
+      "documented": true
+    },
+    {
+      "path": "backend/research/models.py",
+      "symbol": "<module>",
+      "documented": true
+    },
+    {
+      "path": "backend/research/models.py",
+      "symbol": "WorkerBusy",
+      "documented": true
+    },
+    {
+      "path": "backend/research/semantic.py",
+      "symbol": "<module>",
+      "documented": true
+    },
+    {
+      "path": "backend/research/semantic.py",
+      "symbol": "SemanticRetriever",
+      "documented": true
+    },
+    {
+      "path": "backend/research/semantic.py",
+      "symbol": "SemanticRetriever.query",
+      "documented": true
+    },
+    {
+      "path": "backend/api/routes/research.py",
+      "symbol": "<module>",
+      "documented": true
+    },
+    {
+      "path": "backend/api/routes/research.py",
+      "symbol": "install_research_errors",
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/host_installation.py",
+      "symbol": "<module>",
+      "documented": true
+    },
+    {
+      "path": "backend/runtime/host_installation.py",
+      "symbol": "_resources",
+      "documented": true
+    },
+    {
+      "path": "backend/tests/research/test_worker_sandbox.py",
+      "symbol": "<module>",
+      "documented": true
+    },
+    {
+      "path": "backend/tests/research/test_worker_sandbox.py",
+      "symbol": "test_parser_dependency_cannot_read_host_secret_write_or_open_network",
+      "documented": true
+    },
+    {
+      "path": "backend/tests/research/test_worker_sandbox.py",
+      "symbol": "test_unavailable_sandbox_never_falls_back_to_parser_execution",
+      "documented": true
+    },
+    {
+      "path": "backend/tests/research/test_worker_sandbox.py",
+      "symbol": "test_all_worker_kinds_share_capacity_until_original_child_closes",
+      "documented": true
+    },
+    {
+      "path": "backend/tests/research/test_worker_sandbox.py",
+      "symbol": "test_busy_processing_is_not_an_invalid_document_http_error",
+      "documented": true
+    },
+    {
+      "path": "backend/tests/research/test_worker_sandbox.py",
+      "symbol": "test_busy_processing_is_not_an_invalid_document_http_error.busy",
+      "documented": true
+    },
+    {
+      "path": "backend/tests/research/test_parser_process.py",
+      "symbol": "<module>",
+      "documented": true
+    },
+    {
+      "path": "backend/tests/research/test_parser_process.py",
+      "symbol": "worker_fault",
+      "documented": true
+    },
+    {
+      "path": "backend/tests/research/test_parser_process.py",
+      "symbol": "test_withdrawal_stops_the_live_worker_and_waits_for_physical_exit",
+      "documented": true
+    },
+    {
+      "path": "backend/tests/research/test_semantic_worker.py",
+      "symbol": "<module>",
+      "documented": true
+    },
+    {
+      "path": "backend/tests/research/test_semantic_worker.py",
+      "symbol": "fixed_fault",
+      "documented": true
+    }
+  ]
+}

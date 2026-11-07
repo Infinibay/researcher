@@ -4808,7 +4808,7 @@
     },
     "aggregate_kernel_resources": {
       "status": "in_progress",
-      "implemented": "Shared CPU bandwidth, group OOM policy, scheduler confinement and retained exhaustion observations; owner feedback through controlled generation and actual cgroup exhaustion.120source/66installed tests; installed host probe with actual Codex/Ken assets; zero model calls. Optional dedicated ext4 host volume now binds persistent write roots, verifies original capacity and rejects low-space new work; real128MiB VM exhaustion/Stop/missing-mount/remount plus independent retained-disk inspection.84distinctsource/55installed tests; no model calls.",
+      "implemented": "Shared CPU bandwidth, group OOM policy, scheduler confinement and retained exhaustion observations; owner feedback through controlled generation and actual cgroup exhaustion.120source/66installed tests; installed host probe with actual Codex/Ken assets; zero model calls. Optional dedicated ext4 host volume now binds persistent write roots, verifies original capacity and rejects low-space new work; real128MiB VM exhaustion/Stop/missing-mount/remount plus independent retained-disk inspection.84distinctsource/55installed tests; no model calls. Fixed document/semantic workers now share one slot through physical reaping, enforce mandatory Landlock/seccomp before third-party imports and return explicit HTTP429 on contention.98distinct source and44final installed cases pass, including real offline encoder;614matching files and35documented definitions. Zero generative turns.",
       "evidence": [
         "docs/modernization/domain-resources-review.md",
         "docs/modernization/domain-resources-results.json",
@@ -4819,11 +4819,15 @@
         "docs/modernization/storage-volume-results.json",
         "docs/modernization/storage-volume-vm.json",
         "docs/modernization/storage-volume-disk-inspection.json",
-        "backend/tests/runtime/test_storage_volume.py"
+        "backend/tests/runtime/test_storage_volume.py",
+        "docs/modernization/aux-workers-review.md",
+        "docs/modernization/aux-workers-results.json",
+        "docs/modernization/aux-workers-packaging.json",
+        "backend/tests/research/test_worker_sandbox.py"
       ],
       "remaining": [
         "Migration/enrollment and restore of existing hosts under the bounded-volume policy; no automatic adoption",
-        "Supervisor auxiliary operations and their temporary/export/backup storage outside the execution domain",
+        "Parent/supervisor allocations and remaining auxiliary operations, Chroma exports, backup/restore and their aggregate temporary/output storage outside the execution domain",
         "Full-disk service/database-write recovery, power loss and inode exhaustion",
         "Integral security and operational acceptance"
       ]

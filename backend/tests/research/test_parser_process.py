@@ -25,7 +25,7 @@ def test_pdf_worker_returns_text_and_observed_hard_limits():
 
 
 def worker_fault(monkeypatch, tmp_path, body):
-    """Inject a parser dependency failure after the real worker has applied OS limits."""
+    """Mark trusted bootstrap before sandboxing, then inject a dependency failure after real limits."""
     import backend.research.parser_process as module
 
     original = module.WORKER
@@ -33,12 +33,12 @@ def worker_fault(monkeypatch, tmp_path, body):
     marker = tmp_path / "running.json"
     probe.write_text(
         """import builtins, json, os, runpy
+os.mkdir(MARKER); os.mkdir(MARKER + '/' + str(os.getpid()))
 original_import = builtins.__import__
 def substituted_import(name, *args, **kwargs):
     module = original_import(name, *args, **kwargs)
     if name == 'backend.research.pdf_text':
         def dependency(data):
-            os.mkdir(MARKER); os.mkdir(MARKER + '/' + str(os.getpid()))
             BODY
         module.extract_pdf = dependency
     return module
@@ -87,7 +87,7 @@ def test_withdrawal_stops_the_live_worker_and_waits_for_physical_exit(
         deadline = time.monotonic() + 3
         while not marker.exists() and time.monotonic() < deadline:
             time.sleep(0.01)
-        assert marker.exists(), "worker never reached the actual parser dependency"
+        assert marker.exists(), "worker never reached its trusted bootstrap"
         pid = int(next(marker.iterdir()).name)
         gate.withdraw("attempt-a")
         gate.wait_closed("attempt-a", timeout=2)

@@ -31,9 +31,9 @@ def fixed_fault(monkeypatch, tmp_path, body):
     program.write_text(
         """import json,sys,os,time
 options=json.loads(sys.argv[1]);sys.path.insert(0,options['package_root'])
+os.mkdir(MARKER);os.mkdir(MARKER+'/'+str(os.getpid()))
 from backend.research.worker_limits import apply_limits
 apply_limits(options)
-os.mkdir(MARKER);os.mkdir(MARKER+'/'+str(os.getpid()))
 BODY
 """.replace("MARKER", repr(str(marker))).replace("BODY", body)
     )

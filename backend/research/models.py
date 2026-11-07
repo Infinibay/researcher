@@ -293,6 +293,10 @@ class SourceUnavailable(RuntimeError):
     """A source cannot be safely acquired or decoded; do not fabricate content."""
 
 
+class WorkerBusy(SourceUnavailable):
+    """Shared processing capacity is occupied; the document itself has not failed validation."""
+
+
 class SourceTooLarge(ResearchInputError):
     """Acquisition refused its size bound rather than silently truncating."""
 

@@ -56,6 +56,7 @@ def _resources(assets):
     from backend.runtime.native_network import NativeNetwork
     from backend.runtime.peer_broker import BrokerLimits
     from backend.runtime.subscription_auth import ManagedTokenFile
+    from backend.research.worker_sandbox import requirements
 
     if not isinstance(assets, dict) or set(assets) - (set(_PATHS) | _OPTIONS):
         raise ValueError('Unknown host asset configuration fields')
@@ -63,6 +64,7 @@ def _resources(assets):
         raise ValueError('Explicit model and all native host asset paths are required')
     text(assets['model'], 'native model', 128)
     config = dict(assets)
+    worker_landlock_abi = requirements()
     for key in _PATHS:
         if not isinstance(assets[key], str):
             raise ValueError(f'{key} must be an absolute host path string')
@@ -107,6 +109,7 @@ def _resources(assets):
     return config, {'native_version': VERSION, 'native_sha256': native.sha256,
                     'code_host_sha256': code_host.sha256, 'ken_version': KEN_VERSION,
                     'ken_artifacts_verified': artifacts, 'credential_snapshot_valid': True,
+                    'document_worker_landlock_abi': worker_landlock_abi,
                     'remote_entitlement_verified': False}
 
 

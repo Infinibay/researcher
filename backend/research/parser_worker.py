@@ -13,7 +13,7 @@ def main():
     """Constrain this child, decode one bounded snapshot and emit one redacted receipt."""
     options = json.loads(sys.argv[1])
     sys.path.insert(0, options["package_root"])
-    from backend.research.worker_limits import apply_limits
+    from backend.research.worker_limits import apply_limits, observed_limits
 
     apply_limits(options)
     from backend.research.models import SourceTooLarge, SourceUnavailable
@@ -34,11 +34,7 @@ def main():
             from backend.research.structured_text import extract_structured
 
             content, provenance = extract_structured(data, options["format"])
-        provenance["execution"] = {
-            "cpu_limit_seconds": resource.getrlimit(resource.RLIMIT_CPU)[0],
-            "cpu_hard_limit_seconds": resource.getrlimit(resource.RLIMIT_CPU)[1],
-            "address_space_limit_bytes": resource.getrlimit(resource.RLIMIT_AS)[1],
-        }
+        provenance["execution"] = observed_limits()
         result = {"ok": True, "content": content, "provenance": provenance}
     except (MemoryError, SourceTooLarge):
         result = {

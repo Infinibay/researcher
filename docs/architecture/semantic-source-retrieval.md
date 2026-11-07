@@ -112,12 +112,16 @@ verificación de assets. Hay límites adicionales de FD/procesos/escritura y mue
 El proceso usa sólo CPU y un thread de ejecución por pool. Los máximos son validables
 por configuración de host; los argumentos MCP no pueden ampliarlos.
 
-La aplicación admite un worker semántico concurrente; la saturación retorna429
+La aplicación admite un worker semántico concurrente y comparte con los parsers
+documentales un único cupo físico por proceso supervisor; la saturación retorna429
 `retrieval_busy`, sin lanzar otro ni formar una cola oculta. Stop/corrección retira
 la autoridad y conserva el registro hasta reap físico. Retirada de permisos después
 del cálculo también impide divulgar la respuesta. Se registra pico RSS/CPU observados
 por hijo, no memoria total del proyecto ni cuota global. Los límites de AS no son un
-límite agregado de RSS, y este worker fijo no es un sandbox general de filesystem/red.
+límite agregado de RSS. El worker fijo aplica ahora Landlock para lecturas públicas
+seleccionadas y ausencia de escrituras, más seccomp para impedir red, ejecución,
+procesos/threads y controles del host. Estas barreras son obligatorias; algunos
+metadatos siguen observables. [Pruebas y límites](../modernization/aux-workers-review.md).
 La inscripción completa de actores/cgroups y presupuestos globales mantiene su trabajo
 pendiente en el plan. Un I/O bloqueado de kernel puede conservar reconciliación; no se
 promete cierre físico instantáneo.

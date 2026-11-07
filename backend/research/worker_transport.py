@@ -11,13 +11,32 @@ import signal
 import subprocess
 import sys
 import time
+from threading import BoundedSemaphore
 
-from backend.research.models import ResearchForbidden, SourceTooLarge, SourceUnavailable
+from backend.research.models import ResearchForbidden, SourceTooLarge, SourceUnavailable, WorkerBusy
 from backend.runtime.peer_process import _pidfd, _signal
+
+_CAPACITY = BoundedSemaphore(1)
 
 
 def exchange(data, *, worker, options, limits, cancelled, label="PDF", pass_fds=()):
-    """Exchange one bounded payload and reap before returning, even after cancellation/failure."""
+    """Admit at most one document or semantic child per host process, through physical closure."""
+    if cancelled.is_set():
+        raise ResearchForbidden(f'{label} operation authority was withdrawn before worker admission')
+    if not _CAPACITY.acquire(blocking=False):
+        raise WorkerBusy(
+            'El procesamiento de documentos y búsquedas está ocupado. '
+            'No se inició otro proceso; vuelve a intentarlo cuando termine el actual.'
+        )
+    try:
+        return _exchange(data, worker=worker, options=options, limits=limits,
+                         cancelled=cancelled, label=label, pass_fds=pass_fds)
+    finally:
+        _CAPACITY.release()
+
+
+def _exchange(data, *, worker, options, limits, cancelled, label, pass_fds):
+    """Hold the shared slot through bounded IPC and actual child reaping on every return path."""
     wall_seconds = options["wall_seconds"]
     deadline = time.monotonic() + wall_seconds
     try:

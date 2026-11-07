@@ -7,6 +7,8 @@ import resource
 import signal
 import sys
 
+_SANDBOX = None
+
 
 def apply_limits(options):
     """Set parent-death, CPU/AS/wall/FD/process/write bounds before third-party imports."""
@@ -25,10 +27,14 @@ def apply_limits(options):
     resource.setrlimit(resource.RLIMIT_NPROC, (0, 0))
     signal.alarm(math.ceil(options["wall_seconds"]) + 1)
     sys.path[:0] = [options["package_root"], options["dependencies"]]
+    from backend.research.worker_sandbox import install
+
+    global _SANDBOX
+    _SANDBOX = install(options)
 
 
 def observed_limits():
-    """Report observed execution fuses; these are not a general filesystem/network sandbox."""
+    """Report worker fuses and the successfully installed mandatory sandbox policy."""
     usage = resource.getrusage(resource.RUSAGE_SELF)
     return {
         "peak_rss_kib": usage.ru_maxrss,
@@ -36,4 +42,5 @@ def observed_limits():
         "cpu_limit_seconds": resource.getrlimit(resource.RLIMIT_CPU)[0],
         "cpu_hard_limit_seconds": resource.getrlimit(resource.RLIMIT_CPU)[1],
         "address_space_limit_bytes": resource.getrlimit(resource.RLIMIT_AS)[1],
+        "sandbox": _SANDBOX,
     }

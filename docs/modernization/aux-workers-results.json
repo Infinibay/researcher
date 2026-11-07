@@ -1,0 +1,975 @@
+{
+  "base_commit": "24490b9",
+  "started_at_utc": "2026-11-07T12:02:31Z",
+  "validation_cutoff_utc": "2026-11-07T12:21:47Z",
+  "elapsed_to_validation_seconds": 1156,
+  "scope": "Fixed document and local semantic workers: mandatory Landlock/seccomp, one shared process slot through physical reaping and explicit HTTP busy status.",
+  "runs": [
+    {
+      "name": "source",
+      "receipt": ".superpowers/sdd/2026-10-31-actualizacion-proyecto/aux-workers-source.xml",
+      "tests": 66,
+      "outcomes": {
+        "passed": 66
+      },
+      "duration_seconds": 32.733,
+      "cases": [
+        {
+          "case": "backend.tests.research.test_worker_sandbox::test_parser_dependency_cannot_read_host_secret_write_or_open_network",
+          "outcome": "passed"
+        },
+        {
+          "case": "backend.tests.research.test_worker_sandbox::test_all_worker_kinds_share_capacity_until_original_child_closes",
+          "outcome": "passed"
+        },
+        {
+          "case": "backend.tests.research.test_parser_process::test_pdf_worker_returns_text_and_observed_hard_limits",
+          "outcome": "passed"
+        },
+        {
+          "case": "backend.tests.research.test_parser_process::test_worker_cpu_and_memory_exhaustion_are_bounded_failures[while True: pass]",
+          "outcome": "passed"
+        },
+        {
+          "case": "backend.tests.research.test_parser_process::test_worker_cpu_and_memory_exhaustion_are_bounded_failures[return bytearray(1024 * 1024 * 1024)]",
+          "outcome": "passed"
+        },
+        {
+          "case": "backend.tests.research.test_parser_process::test_withdrawal_stops_the_live_worker_and_waits_for_physical_exit",
+          "outcome": "passed"
+        },
+        {
+          "case": "backend.tests.research.test_parser_process::test_wall_deadline_closes_a_parser_that_consumes_no_cpu",
+          "outcome": "passed"
+        },
+        {
+          "case": "backend.tests.research.test_parser_process::test_worker_does_not_inherit_credentials_or_open_host_descriptors",
+          "outcome": "passed"
+        },
+        {
+          "case": "backend.tests.research.test_parser_process::test_excess_output_is_killed_without_buffering_an_unbounded_receipt",
+          "outcome": "passed"
+        },
+        {
+          "case": "backend.tests.research.test_parser_process::test_worker_launch_failure_is_a_source_error",
+          "outcome": "passed"
+        },
+        {
+          "case": "backend.tests.research.test_parser_process::test_worker_exits_when_its_api_owner_process_is_killed",
+          "outcome": "passed"
+        },
+        {
+          "case": "backend.tests.research.test_parser_process::test_callers_remaining_deadline_restricts_the_worker_budget",
+          "outcome": "passed"
+        },
+        {
+          "case": "backend.tests.research.test_semantic_worker::test_semantic_withdrawal_reaps_worker_before_releasing_capacity",
+          "outcome": "passed"
+        },
+        {
+          "case": "backend.tests.research.test_semantic_worker::test_semantic_cpu_or_output_exhaustion_never_returns_partial_results[while True: pass-limits0]",
+          "outcome": "passed"
+        },
+        {
+          "case": "backend.tests.research.test_semantic_worker::test_semantic_cpu_or_output_exhaustion_never_returns_partial_results[os.write(1,b'X'*4096)-limits1]",
+          "outcome": "passed"
+        },
+        {
+          "case": "backend.tests.research.test_semantic_worker::test_semantic_missing_interpreter_is_an_explicit_availability_failure",
+          "outcome": "passed"
+        },
+        {
+          "case": "backend.tests.research.test_semantic_retrieval::test_semantic_unavailable_is_explicit_and_does_not_fall_back_to_literal_or_remote",
+          "outcome": "passed"
+        },
+        {
+          "case": "backend.tests.research.test_semantic_retrieval::test_invalid_semantic_query_is_rejected_before_model_work[]",
+          "outcome": "passed"
+        },
+        {
+          "case": "backend.tests.research.test_semantic_retrieval::test_invalid_semantic_query_is_rejected_before_model_work[   ]",
+          "outcome": "passed"
+        },
+        {
+          "case": "backend.tests.research.test_semantic_retrieval::test_invalid_semantic_query_is_rejected_before_model_work[query2]",
+          "outcome": "passed"
+        },
+        {
+          "case": "backend.tests.research.test_semantic_retrieval::test_foreign_project_source_is_rejected_before_model_availability",
+          "outcome": "passed"
+        },
+        {
+          "case": "backend.tests.research.test_semantic_retrieval::test_real_multilingual_query_recovers_tail_evidence_with_exact_offsets",
+          "outcome": "passed"
+        },
+        {
+          "case": "backend.tests.research.test_semantic_retrieval::test_changed_or_missing_model_asset_fails_without_a_partial_semantic_result",
+          "outcome": "passed"
+        },
+        {
+          "case": "backend.tests.research.test_semantic_retrieval::test_real_pdf_semantic_result_maps_the_exact_excerpt_to_captured_pages",
+          "outcome": "passed"
+        },
+        {
+          "case": "backend.tests.research.test_semantic_retrieval::test_semantic_host_budgets_cannot_disable_the_worker_fuses[options0]",
+          "outcome": "passed"
+        },
+        {
+          "case": "backend.tests.research.test_semantic_retrieval::test_semantic_host_budgets_cannot_disable_the_worker_fuses[options1]",
+          "outcome": "passed"
+        },
+        {
+          "case": "backend.tests.research.test_semantic_retrieval::test_semantic_host_budgets_cannot_disable_the_worker_fuses[options2]",
+          "outcome": "passed"
+        },
+        {
+          "case": "backend.tests.research.test_semantic_retrieval::test_semantic_host_budgets_cannot_disable_the_worker_fuses[options3]",
+          "outcome": "passed"
+        },
+        {
+          "case": "backend.tests.research.test_semantic_retrieval::test_invalid_semantic_worker_receipts_are_explicit_unavailable_errors[[]]",
+          "outcome": "passed"
+        },
+        {
+          "case": "backend.tests.research.test_semantic_retrieval::test_invalid_semantic_worker_receipts_are_explicit_unavailable_errors[null]",
+          "outcome": "passed"
+        },
+        {
+          "case": "backend.tests.research.test_semantic_retrieval::test_invalid_semantic_worker_receipts_are_explicit_unavailable_errors[not-json]",
+          "outcome": "passed"
+        },
+        {
+          "case": "backend.tests.research.test_semantic_retrieval::test_semantic_api_revalidates_grant_before_disclosing_results",
+          "outcome": "passed"
+        },
+        {
+          "case": "backend.tests.research.test_semantic_retrieval::test_source_catalog_reports_unconfigured_semantics_without_loading_a_model",
+          "outcome": "passed"
+        },
+        {
+          "case": "backend.tests.research.test_structured_capture::test_structured_capture_keeps_units_original_hash_and_retry_snapshot[csv-text/csv-name,result\\ncontrol,\"No improvement\"\\n]",
+          "outcome": "passed"
+        },
+        {
+          "case": "backend.tests.research.test_structured_capture::test_structured_capture_keeps_units_original_hash_and_retry_snapshot[json-application/json-{\"trials\":[{\"result\":\"No improvement\",\"rate\":0.10000000000000001}]}]",
+          "outcome": "passed"
+        },
+        {
+          "case": "backend.tests.research.test_structured_capture::test_structured_capture_keeps_units_original_hash_and_retry_snapshot[xml-application/xml-<trials><trial id=\"control\"><result>No improvement</result></trial></trials>]",
+          "outcome": "passed"
+        },
+        {
+          "case": "backend.tests.research.test_structured_capture::test_structured_capture_keeps_units_original_hash_and_retry_snapshot[docx-application/vnd.openxmlformats-officedocument.wordprocessingml.document-data3]",
+          "outcome": "passed"
+        },
+        {
+          "case": "backend.tests.research.test_structured_capture::test_invalid_structured_documents_do_not_commit_partial_sources[application/json-{\"x\":1,\"x\":2}]",
+          "outcome": "passed"
+        },
+        {
+          "case": "backend.tests.research.test_structured_capture::test_invalid_structured_documents_do_not_commit_partial_sources[application/json-{\"x\":NaN}]",
+          "outcome": "passed"
+        },
+        {
+          "case": "backend.tests.research.test_structured_capture::test_invalid_structured_documents_do_not_commit_partial_sources[application/json-{]",
+          "outcome": "passed"
+        },
+        {
+          "case": "backend.tests.research.test_structured_capture::test_invalid_structured_documents_do_not_commit_partial_sources[application/xml-<!DOCTYPE root [<!ENTITY x \"replaced\">]><root>&x;</root>]",
+          "outcome": "passed"
+        },
+        {
+          "case": "backend.tests.research.test_structured_capture::test_invalid_structured_documents_do_not_commit_partial_sources[application/xml-data4]",
+          "outcome": "passed"
+        },
+        {
+          "case": "backend.tests.research.test_structured_capture::test_invalid_structured_documents_do_not_commit_partial_sources[application/xml-<root>]",
+          "outcome": "passed"
+        },
+        {
+          "case": "backend.tests.research.test_structured_capture::test_invalid_structured_documents_do_not_commit_partial_sources[application/vnd.openxmlformats-officedocument.wordprocessingml.document-not a ZIP]",
+          "outcome": "passed"
+        },
+        {
+          "case": "backend.tests.research.test_structured_capture::test_invalid_structured_documents_do_not_commit_partial_sources[application/vnd.openxmlformats-officedocument.wordprocessingml.document-data7]",
+          "outcome": "passed"
+        },
+        {
+          "case": "backend.tests.research.test_structured_capture::test_invalid_structured_documents_do_not_commit_partial_sources[text/csv-name,result\\ncontrol,\"unclosed]",
+          "outcome": "passed"
+        },
+        {
+          "case": "backend.tests.research.test_structured_capture::test_csv_preserves_duplicate_header_context_extra_and_missing_cells",
+          "outcome": "passed"
+        },
+        {
+          "case": "backend.tests.research.test_structured_capture::test_structured_depth_and_expansion_are_limits_not_truncation",
+          "outcome": "passed"
+        },
+        {
+          "case": "backend.tests.research.test_structured_capture::test_docx_keeps_late_table_counterevidence_and_labels_extraction_scope",
+          "outcome": "passed"
+        },
+        {
+          "case": "backend.tests.research.test_structured_capture::test_format_selection_keeps_host_withdrawal_and_cpu_authority[csv-text/csv-name,result\\ncontrol,\"No improvement\"\\n]",
+          "outcome": "passed"
+        },
+        {
+          "case": "backend.tests.research.test_structured_capture::test_format_selection_keeps_host_withdrawal_and_cpu_authority[json-application/json-{\"trials\":[{\"result\":\"No improvement\",\"rate\":0.10000000000000001}]}]",
+          "outcome": "passed"
+        },
+        {
+          "case": "backend.tests.research.test_structured_capture::test_format_selection_keeps_host_withdrawal_and_cpu_authority[xml-application/xml-<trials><trial id=\"control\"><result>No improvement</result></trial></trials>]",
+          "outcome": "passed"
+        },
+        {
+          "case": "backend.tests.research.test_structured_capture::test_format_selection_keeps_host_withdrawal_and_cpu_authority[docx-application/vnd.openxmlformats-officedocument.wordprocessingml.document-data3]",
+          "outcome": "passed"
+        },
+        {
+          "case": "backend.tests.research.test_structured_capture::test_json_pointer_namespace_xml_and_csv_multiline_identity_are_not_flattened_away",
+          "outcome": "passed"
+        },
+        {
+          "case": "backend.tests.research.test_structured_capture::test_csv_field_budget_is_reported_as_a_limit_without_a_partial_capture",
+          "outcome": "passed"
+        },
+        {
+          "case": "backend.tests.research.test_html_web::test_html_capture_keeps_links_tables_and_closed_parser_provenance",
+          "outcome": "passed"
+        },
+        {
+          "case": "backend.tests.research.test_html_web::test_html_without_readable_content_does_not_return_a_successful_partial_source",
+          "outcome": "passed"
+        },
+        {
+          "case": "backend.tests.runtime.test_host_installation::test_fresh_host_composes_storage_and_configured_product",
+          "outcome": "passed"
+        },
+        {
+          "case": "backend.tests.runtime.test_host_installation::test_reinitialization_preserves_the_original_host",
+          "outcome": "passed"
+        },
+        {
+          "case": "backend.tests.runtime.test_host_installation::test_invalid_host_setup_creates_no_partial_installation[existing]",
+          "outcome": "passed"
+        },
+        {
+          "case": "backend.tests.runtime.test_host_installation::test_invalid_host_setup_creates_no_partial_installation[nested_witness]",
+          "outcome": "passed"
+        },
+        {
+          "case": "backend.tests.runtime.test_host_installation::test_invalid_host_setup_creates_no_partial_installation[missing_asset]",
+          "outcome": "passed"
+        },
+        {
+          "case": "backend.tests.runtime.test_host_installation::test_invalid_host_setup_creates_no_partial_installation[unknown_field]",
+          "outcome": "passed"
+        },
+        {
+          "case": "backend.tests.runtime.test_host_installation::test_host_probe_observes_and_retires_its_own_domain",
+          "outcome": "passed"
+        },
+        {
+          "case": "backend.tests.runtime.test_host_installation::test_launcher_consumes_prepared_host_without_shell_environment",
+          "outcome": "passed"
+        },
+        {
+          "case": "backend.tests.runtime.test_host_installation::test_host_refuses_missing_cpu_controller_before_creating_installation",
+          "outcome": "passed"
+        }
+      ]
+    },
+    {
+      "name": "consumers",
+      "receipt": ".superpowers/sdd/2026-10-31-actualizacion-proyecto/aux-workers-consumers.xml",
+      "tests": 30,
+      "outcomes": {
+        "passed": 30
+      },
+      "duration_seconds": 28.716,
+      "cases": [
+        {
+          "case": "backend.tests.runtime.test_host_business::test_native_finding_registry_facade_preserves_filters_cursors_and_exact_evidence[False]",
+          "outcome": "passed"
+        },
+        {
+          "case": "backend.tests.runtime.test_host_business::test_native_finding_registry_facade_preserves_filters_cursors_and_exact_evidence[True]",
+          "outcome": "passed"
+        },
+        {
+          "case": "backend.tests.runtime.test_host_business::test_host_catalog_keeps_credentials_and_authority_out_of_tool_arguments",
+          "outcome": "passed"
+        },
+        {
+          "case": "backend.tests.runtime.test_host_business::test_business_close_withdraws_server_authority_before_cancelling_io",
+          "outcome": "passed"
+        },
+        {
+          "case": "backend.tests.runtime.test_host_business::test_business_withdrawn_scope_never_starts_another_request",
+          "outcome": "passed"
+        },
+        {
+          "case": "backend.tests.runtime.test_host_business::test_business_wire_schema_is_compact_but_keeps_real_title_field",
+          "outcome": "passed"
+        },
+        {
+          "case": "backend.tests.runtime.test_host_business::test_host_business_uses_real_api_scope_and_persists_one_report[text/plain]",
+          "outcome": "passed"
+        },
+        {
+          "case": "backend.tests.runtime.test_host_business::test_host_business_uses_real_api_scope_and_persists_one_report[application/pdf]",
+          "outcome": "passed"
+        },
+        {
+          "case": "backend.tests.runtime.test_host_business::test_host_business_uses_real_api_scope_and_persists_one_report[application/pdf-url]",
+          "outcome": "passed"
+        },
+        {
+          "case": "backend.tests.runtime.test_host_business::test_host_business_uses_real_api_scope_and_persists_one_report[application/pdf-paper-arxiv]",
+          "outcome": "passed"
+        },
+        {
+          "case": "backend.tests.runtime.test_host_business::test_host_business_uses_real_api_scope_and_persists_one_report[application/pdf-paper-doi]",
+          "outcome": "passed"
+        },
+        {
+          "case": "backend.tests.runtime.test_host_business::test_host_business_uses_real_api_scope_and_persists_one_report[application/pdf-semantic]",
+          "outcome": "passed"
+        },
+        {
+          "case": "backend.tests.runtime.test_host_business::test_host_business_uses_real_api_scope_and_persists_one_report[text/csv]",
+          "outcome": "passed"
+        },
+        {
+          "case": "backend.tests.runtime.test_host_business::test_host_business_uses_real_api_scope_and_persists_one_report[application/json]",
+          "outcome": "passed"
+        },
+        {
+          "case": "backend.tests.runtime.test_host_business::test_host_business_uses_real_api_scope_and_persists_one_report[application/xml]",
+          "outcome": "passed"
+        },
+        {
+          "case": "backend.tests.runtime.test_host_business::test_host_business_uses_real_api_scope_and_persists_one_report[application/vnd.openxmlformats-officedocument.wordprocessingml.document]",
+          "outcome": "passed"
+        },
+        {
+          "case": "backend.tests.runtime.test_host_business::test_host_business_uses_real_api_scope_and_persists_one_report[application/json-semantic]",
+          "outcome": "passed"
+        },
+        {
+          "case": "backend.tests.runtime.test_host_business::test_native_wiki_facade_keeps_revision_scope_and_exact_report_citations[False]",
+          "outcome": "passed"
+        },
+        {
+          "case": "backend.tests.runtime.test_host_business::test_native_wiki_facade_keeps_revision_scope_and_exact_report_citations[True]",
+          "outcome": "passed"
+        },
+        {
+          "case": "backend.tests.research.test_finding_consumers::test_native_and_retained_semantic_instances_share_one_process_slot",
+          "outcome": "passed"
+        },
+        {
+          "case": "backend.tests.research.test_finding_semantic::test_finding_semantic_unavailable_stays_explicit_instead_of_falling_back_to_lexical",
+          "outcome": "passed"
+        },
+        {
+          "case": "backend.tests.research.test_finding_semantic::test_finding_corpus_rejects_excess_size_and_missing_selected_members_without_sampling",
+          "outcome": "passed"
+        },
+        {
+          "case": "backend.tests.research.test_finding_semantic::test_native_finding_query_revalidates_authority_and_exact_corpus_after_worker[revoke]",
+          "outcome": "passed"
+        },
+        {
+          "case": "backend.tests.research.test_finding_semantic::test_native_finding_query_revalidates_authority_and_exact_corpus_after_worker[edit]",
+          "outcome": "passed"
+        },
+        {
+          "case": "backend.tests.research.test_finding_semantic::test_native_finding_query_revalidates_authority_and_exact_corpus_after_worker[insert]",
+          "outcome": "passed"
+        },
+        {
+          "case": "backend.tests.research.test_finding_semantic::test_native_finding_query_revalidates_authority_and_exact_corpus_after_worker[withdraw]",
+          "outcome": "passed"
+        },
+        {
+          "case": "backend.tests.research.test_finding_semantic::test_real_local_finding_query_reaches_late_body_text_and_does_not_create_a_source_or_confidence",
+          "outcome": "passed"
+        },
+        {
+          "case": "backend.tests.research.test_finding_semantic::test_finding_corpus_counts_exact_normalized_bytes_and_keeps_the_complete_historical_title",
+          "outcome": "passed"
+        },
+        {
+          "case": "backend.tests.research.test_finding_semantic::test_semantic_continuation_requires_the_same_observed_corpus_before_starting_a_worker[False]",
+          "outcome": "passed"
+        },
+        {
+          "case": "backend.tests.research.test_finding_semantic::test_semantic_continuation_requires_the_same_observed_corpus_before_starting_a_worker[True]",
+          "outcome": "passed"
+        }
+      ]
+    },
+    {
+      "name": "final-source",
+      "receipt": ".superpowers/sdd/2026-10-31-actualizacion-proyecto/aux-workers-final-source.xml",
+      "tests": 25,
+      "outcomes": {
+        "passed": 24,
+        "failure": 1
+      },
+      "duration_seconds": 16.122,
+      "cases": [
+        {
+          "case": "backend.tests.research.test_worker_sandbox::test_parser_dependency_cannot_read_host_secret_write_or_open_network",
+          "outcome": "passed"
+        },
+        {
+          "case": "backend.tests.research.test_worker_sandbox::test_unavailable_sandbox_never_falls_back_to_parser_execution",
+          "outcome": "passed"
+        },
+        {
+          "case": "backend.tests.research.test_worker_sandbox::test_all_worker_kinds_share_capacity_until_original_child_closes",
+          "outcome": "passed"
+        },
+        {
+          "case": "backend.tests.research.test_worker_sandbox::test_busy_processing_is_not_an_invalid_document_http_error",
+          "outcome": "failure"
+        },
+        {
+          "case": "backend.tests.research.test_semantic_worker::test_semantic_withdrawal_reaps_worker_before_releasing_capacity",
+          "outcome": "passed"
+        },
+        {
+          "case": "backend.tests.research.test_semantic_worker::test_semantic_cpu_or_output_exhaustion_never_returns_partial_results[while True: pass-limits0]",
+          "outcome": "passed"
+        },
+        {
+          "case": "backend.tests.research.test_semantic_worker::test_semantic_cpu_or_output_exhaustion_never_returns_partial_results[os.write(1,b'X'*4096)-limits1]",
+          "outcome": "passed"
+        },
+        {
+          "case": "backend.tests.research.test_semantic_worker::test_semantic_missing_interpreter_is_an_explicit_availability_failure",
+          "outcome": "passed"
+        },
+        {
+          "case": "backend.tests.research.test_semantic_retrieval::test_semantic_unavailable_is_explicit_and_does_not_fall_back_to_literal_or_remote",
+          "outcome": "passed"
+        },
+        {
+          "case": "backend.tests.research.test_semantic_retrieval::test_invalid_semantic_query_is_rejected_before_model_work[]",
+          "outcome": "passed"
+        },
+        {
+          "case": "backend.tests.research.test_semantic_retrieval::test_invalid_semantic_query_is_rejected_before_model_work[   ]",
+          "outcome": "passed"
+        },
+        {
+          "case": "backend.tests.research.test_semantic_retrieval::test_invalid_semantic_query_is_rejected_before_model_work[query2]",
+          "outcome": "passed"
+        },
+        {
+          "case": "backend.tests.research.test_semantic_retrieval::test_foreign_project_source_is_rejected_before_model_availability",
+          "outcome": "passed"
+        },
+        {
+          "case": "backend.tests.research.test_semantic_retrieval::test_real_multilingual_query_recovers_tail_evidence_with_exact_offsets",
+          "outcome": "passed"
+        },
+        {
+          "case": "backend.tests.research.test_semantic_retrieval::test_changed_or_missing_model_asset_fails_without_a_partial_semantic_result",
+          "outcome": "passed"
+        },
+        {
+          "case": "backend.tests.research.test_semantic_retrieval::test_real_pdf_semantic_result_maps_the_exact_excerpt_to_captured_pages",
+          "outcome": "passed"
+        },
+        {
+          "case": "backend.tests.research.test_semantic_retrieval::test_semantic_host_budgets_cannot_disable_the_worker_fuses[options0]",
+          "outcome": "passed"
+        },
+        {
+          "case": "backend.tests.research.test_semantic_retrieval::test_semantic_host_budgets_cannot_disable_the_worker_fuses[options1]",
+          "outcome": "passed"
+        },
+        {
+          "case": "backend.tests.research.test_semantic_retrieval::test_semantic_host_budgets_cannot_disable_the_worker_fuses[options2]",
+          "outcome": "passed"
+        },
+        {
+          "case": "backend.tests.research.test_semantic_retrieval::test_semantic_host_budgets_cannot_disable_the_worker_fuses[options3]",
+          "outcome": "passed"
+        },
+        {
+          "case": "backend.tests.research.test_semantic_retrieval::test_invalid_semantic_worker_receipts_are_explicit_unavailable_errors[[]]",
+          "outcome": "passed"
+        },
+        {
+          "case": "backend.tests.research.test_semantic_retrieval::test_invalid_semantic_worker_receipts_are_explicit_unavailable_errors[null]",
+          "outcome": "passed"
+        },
+        {
+          "case": "backend.tests.research.test_semantic_retrieval::test_invalid_semantic_worker_receipts_are_explicit_unavailable_errors[not-json]",
+          "outcome": "passed"
+        },
+        {
+          "case": "backend.tests.research.test_semantic_retrieval::test_semantic_api_revalidates_grant_before_disclosing_results",
+          "outcome": "passed"
+        },
+        {
+          "case": "backend.tests.research.test_semantic_retrieval::test_source_catalog_reports_unconfigured_semantics_without_loading_a_model",
+          "outcome": "passed"
+        }
+      ]
+    },
+    {
+      "name": "http-source",
+      "receipt": ".superpowers/sdd/2026-10-31-actualizacion-proyecto/aux-workers-http-source.xml",
+      "tests": 4,
+      "outcomes": {
+        "passed": 4
+      },
+      "duration_seconds": 0.797,
+      "cases": [
+        {
+          "case": "backend.tests.research.test_worker_sandbox::test_parser_dependency_cannot_read_host_secret_write_or_open_network",
+          "outcome": "passed"
+        },
+        {
+          "case": "backend.tests.research.test_worker_sandbox::test_unavailable_sandbox_never_falls_back_to_parser_execution",
+          "outcome": "passed"
+        },
+        {
+          "case": "backend.tests.research.test_worker_sandbox::test_all_worker_kinds_share_capacity_until_original_child_closes",
+          "outcome": "passed"
+        },
+        {
+          "case": "backend.tests.research.test_worker_sandbox::test_busy_processing_is_not_an_invalid_document_http_error",
+          "outcome": "passed"
+        }
+      ]
+    },
+    {
+      "name": "installed",
+      "receipt": ".superpowers/sdd/2026-10-31-actualizacion-proyecto/aux-workers-installed.xml",
+      "tests": 43,
+      "outcomes": {
+        "passed": 43
+      },
+      "duration_seconds": 26.343,
+      "cases": [
+        {
+          "case": ".superpowers.sdd.2026-10-31-actualizacion-proyecto.native-runtime-env.lib.python3.12.site-packages.backend.tests.research.test_worker_sandbox::test_parser_dependency_cannot_read_host_secret_write_or_open_network",
+          "outcome": "passed"
+        },
+        {
+          "case": ".superpowers.sdd.2026-10-31-actualizacion-proyecto.native-runtime-env.lib.python3.12.site-packages.backend.tests.research.test_worker_sandbox::test_unavailable_sandbox_never_falls_back_to_parser_execution",
+          "outcome": "passed"
+        },
+        {
+          "case": ".superpowers.sdd.2026-10-31-actualizacion-proyecto.native-runtime-env.lib.python3.12.site-packages.backend.tests.research.test_worker_sandbox::test_all_worker_kinds_share_capacity_until_original_child_closes",
+          "outcome": "passed"
+        },
+        {
+          "case": ".superpowers.sdd.2026-10-31-actualizacion-proyecto.native-runtime-env.lib.python3.12.site-packages.backend.tests.research.test_parser_process::test_pdf_worker_returns_text_and_observed_hard_limits",
+          "outcome": "passed"
+        },
+        {
+          "case": ".superpowers.sdd.2026-10-31-actualizacion-proyecto.native-runtime-env.lib.python3.12.site-packages.backend.tests.research.test_parser_process::test_worker_cpu_and_memory_exhaustion_are_bounded_failures[while True: pass]",
+          "outcome": "passed"
+        },
+        {
+          "case": ".superpowers.sdd.2026-10-31-actualizacion-proyecto.native-runtime-env.lib.python3.12.site-packages.backend.tests.research.test_parser_process::test_worker_cpu_and_memory_exhaustion_are_bounded_failures[return bytearray(1024 * 1024 * 1024)]",
+          "outcome": "passed"
+        },
+        {
+          "case": ".superpowers.sdd.2026-10-31-actualizacion-proyecto.native-runtime-env.lib.python3.12.site-packages.backend.tests.research.test_parser_process::test_withdrawal_stops_the_live_worker_and_waits_for_physical_exit",
+          "outcome": "passed"
+        },
+        {
+          "case": ".superpowers.sdd.2026-10-31-actualizacion-proyecto.native-runtime-env.lib.python3.12.site-packages.backend.tests.research.test_parser_process::test_wall_deadline_closes_a_parser_that_consumes_no_cpu",
+          "outcome": "passed"
+        },
+        {
+          "case": ".superpowers.sdd.2026-10-31-actualizacion-proyecto.native-runtime-env.lib.python3.12.site-packages.backend.tests.research.test_parser_process::test_worker_does_not_inherit_credentials_or_open_host_descriptors",
+          "outcome": "passed"
+        },
+        {
+          "case": ".superpowers.sdd.2026-10-31-actualizacion-proyecto.native-runtime-env.lib.python3.12.site-packages.backend.tests.research.test_parser_process::test_excess_output_is_killed_without_buffering_an_unbounded_receipt",
+          "outcome": "passed"
+        },
+        {
+          "case": ".superpowers.sdd.2026-10-31-actualizacion-proyecto.native-runtime-env.lib.python3.12.site-packages.backend.tests.research.test_parser_process::test_worker_launch_failure_is_a_source_error",
+          "outcome": "passed"
+        },
+        {
+          "case": ".superpowers.sdd.2026-10-31-actualizacion-proyecto.native-runtime-env.lib.python3.12.site-packages.backend.tests.research.test_parser_process::test_worker_exits_when_its_api_owner_process_is_killed",
+          "outcome": "passed"
+        },
+        {
+          "case": ".superpowers.sdd.2026-10-31-actualizacion-proyecto.native-runtime-env.lib.python3.12.site-packages.backend.tests.research.test_parser_process::test_callers_remaining_deadline_restricts_the_worker_budget",
+          "outcome": "passed"
+        },
+        {
+          "case": ".superpowers.sdd.2026-10-31-actualizacion-proyecto.native-runtime-env.lib.python3.12.site-packages.backend.tests.research.test_semantic_worker::test_semantic_withdrawal_reaps_worker_before_releasing_capacity",
+          "outcome": "passed"
+        },
+        {
+          "case": ".superpowers.sdd.2026-10-31-actualizacion-proyecto.native-runtime-env.lib.python3.12.site-packages.backend.tests.research.test_semantic_worker::test_semantic_cpu_or_output_exhaustion_never_returns_partial_results[while True: pass-limits0]",
+          "outcome": "passed"
+        },
+        {
+          "case": ".superpowers.sdd.2026-10-31-actualizacion-proyecto.native-runtime-env.lib.python3.12.site-packages.backend.tests.research.test_semantic_worker::test_semantic_cpu_or_output_exhaustion_never_returns_partial_results[os.write(1,b'X'*4096)-limits1]",
+          "outcome": "passed"
+        },
+        {
+          "case": ".superpowers.sdd.2026-10-31-actualizacion-proyecto.native-runtime-env.lib.python3.12.site-packages.backend.tests.research.test_semantic_worker::test_semantic_missing_interpreter_is_an_explicit_availability_failure",
+          "outcome": "passed"
+        },
+        {
+          "case": ".superpowers.sdd.2026-10-31-actualizacion-proyecto.native-runtime-env.lib.python3.12.site-packages.backend.tests.research.test_semantic_retrieval::test_semantic_unavailable_is_explicit_and_does_not_fall_back_to_literal_or_remote",
+          "outcome": "passed"
+        },
+        {
+          "case": ".superpowers.sdd.2026-10-31-actualizacion-proyecto.native-runtime-env.lib.python3.12.site-packages.backend.tests.research.test_semantic_retrieval::test_invalid_semantic_query_is_rejected_before_model_work[]",
+          "outcome": "passed"
+        },
+        {
+          "case": ".superpowers.sdd.2026-10-31-actualizacion-proyecto.native-runtime-env.lib.python3.12.site-packages.backend.tests.research.test_semantic_retrieval::test_invalid_semantic_query_is_rejected_before_model_work[   ]",
+          "outcome": "passed"
+        },
+        {
+          "case": ".superpowers.sdd.2026-10-31-actualizacion-proyecto.native-runtime-env.lib.python3.12.site-packages.backend.tests.research.test_semantic_retrieval::test_invalid_semantic_query_is_rejected_before_model_work[query2]",
+          "outcome": "passed"
+        },
+        {
+          "case": ".superpowers.sdd.2026-10-31-actualizacion-proyecto.native-runtime-env.lib.python3.12.site-packages.backend.tests.research.test_semantic_retrieval::test_foreign_project_source_is_rejected_before_model_availability",
+          "outcome": "passed"
+        },
+        {
+          "case": ".superpowers.sdd.2026-10-31-actualizacion-proyecto.native-runtime-env.lib.python3.12.site-packages.backend.tests.research.test_semantic_retrieval::test_real_multilingual_query_recovers_tail_evidence_with_exact_offsets",
+          "outcome": "passed"
+        },
+        {
+          "case": ".superpowers.sdd.2026-10-31-actualizacion-proyecto.native-runtime-env.lib.python3.12.site-packages.backend.tests.research.test_semantic_retrieval::test_changed_or_missing_model_asset_fails_without_a_partial_semantic_result",
+          "outcome": "passed"
+        },
+        {
+          "case": ".superpowers.sdd.2026-10-31-actualizacion-proyecto.native-runtime-env.lib.python3.12.site-packages.backend.tests.research.test_semantic_retrieval::test_real_pdf_semantic_result_maps_the_exact_excerpt_to_captured_pages",
+          "outcome": "passed"
+        },
+        {
+          "case": ".superpowers.sdd.2026-10-31-actualizacion-proyecto.native-runtime-env.lib.python3.12.site-packages.backend.tests.research.test_semantic_retrieval::test_semantic_host_budgets_cannot_disable_the_worker_fuses[options0]",
+          "outcome": "passed"
+        },
+        {
+          "case": ".superpowers.sdd.2026-10-31-actualizacion-proyecto.native-runtime-env.lib.python3.12.site-packages.backend.tests.research.test_semantic_retrieval::test_semantic_host_budgets_cannot_disable_the_worker_fuses[options1]",
+          "outcome": "passed"
+        },
+        {
+          "case": ".superpowers.sdd.2026-10-31-actualizacion-proyecto.native-runtime-env.lib.python3.12.site-packages.backend.tests.research.test_semantic_retrieval::test_semantic_host_budgets_cannot_disable_the_worker_fuses[options2]",
+          "outcome": "passed"
+        },
+        {
+          "case": ".superpowers.sdd.2026-10-31-actualizacion-proyecto.native-runtime-env.lib.python3.12.site-packages.backend.tests.research.test_semantic_retrieval::test_semantic_host_budgets_cannot_disable_the_worker_fuses[options3]",
+          "outcome": "passed"
+        },
+        {
+          "case": ".superpowers.sdd.2026-10-31-actualizacion-proyecto.native-runtime-env.lib.python3.12.site-packages.backend.tests.research.test_semantic_retrieval::test_invalid_semantic_worker_receipts_are_explicit_unavailable_errors[[]]",
+          "outcome": "passed"
+        },
+        {
+          "case": ".superpowers.sdd.2026-10-31-actualizacion-proyecto.native-runtime-env.lib.python3.12.site-packages.backend.tests.research.test_semantic_retrieval::test_invalid_semantic_worker_receipts_are_explicit_unavailable_errors[null]",
+          "outcome": "passed"
+        },
+        {
+          "case": ".superpowers.sdd.2026-10-31-actualizacion-proyecto.native-runtime-env.lib.python3.12.site-packages.backend.tests.research.test_semantic_retrieval::test_invalid_semantic_worker_receipts_are_explicit_unavailable_errors[not-json]",
+          "outcome": "passed"
+        },
+        {
+          "case": ".superpowers.sdd.2026-10-31-actualizacion-proyecto.native-runtime-env.lib.python3.12.site-packages.backend.tests.research.test_semantic_retrieval::test_semantic_api_revalidates_grant_before_disclosing_results",
+          "outcome": "passed"
+        },
+        {
+          "case": ".superpowers.sdd.2026-10-31-actualizacion-proyecto.native-runtime-env.lib.python3.12.site-packages.backend.tests.research.test_semantic_retrieval::test_source_catalog_reports_unconfigured_semantics_without_loading_a_model",
+          "outcome": "passed"
+        },
+        {
+          "case": ".superpowers.sdd.2026-10-31-actualizacion-proyecto.native-runtime-env.lib.python3.12.site-packages.backend.tests.runtime.test_host_installation::test_fresh_host_composes_storage_and_configured_product",
+          "outcome": "passed"
+        },
+        {
+          "case": ".superpowers.sdd.2026-10-31-actualizacion-proyecto.native-runtime-env.lib.python3.12.site-packages.backend.tests.runtime.test_host_installation::test_reinitialization_preserves_the_original_host",
+          "outcome": "passed"
+        },
+        {
+          "case": ".superpowers.sdd.2026-10-31-actualizacion-proyecto.native-runtime-env.lib.python3.12.site-packages.backend.tests.runtime.test_host_installation::test_invalid_host_setup_creates_no_partial_installation[existing]",
+          "outcome": "passed"
+        },
+        {
+          "case": ".superpowers.sdd.2026-10-31-actualizacion-proyecto.native-runtime-env.lib.python3.12.site-packages.backend.tests.runtime.test_host_installation::test_invalid_host_setup_creates_no_partial_installation[nested_witness]",
+          "outcome": "passed"
+        },
+        {
+          "case": ".superpowers.sdd.2026-10-31-actualizacion-proyecto.native-runtime-env.lib.python3.12.site-packages.backend.tests.runtime.test_host_installation::test_invalid_host_setup_creates_no_partial_installation[missing_asset]",
+          "outcome": "passed"
+        },
+        {
+          "case": ".superpowers.sdd.2026-10-31-actualizacion-proyecto.native-runtime-env.lib.python3.12.site-packages.backend.tests.runtime.test_host_installation::test_invalid_host_setup_creates_no_partial_installation[unknown_field]",
+          "outcome": "passed"
+        },
+        {
+          "case": ".superpowers.sdd.2026-10-31-actualizacion-proyecto.native-runtime-env.lib.python3.12.site-packages.backend.tests.runtime.test_host_installation::test_host_probe_observes_and_retires_its_own_domain",
+          "outcome": "passed"
+        },
+        {
+          "case": ".superpowers.sdd.2026-10-31-actualizacion-proyecto.native-runtime-env.lib.python3.12.site-packages.backend.tests.runtime.test_host_installation::test_launcher_consumes_prepared_host_without_shell_environment",
+          "outcome": "passed"
+        },
+        {
+          "case": ".superpowers.sdd.2026-10-31-actualizacion-proyecto.native-runtime-env.lib.python3.12.site-packages.backend.tests.runtime.test_host_installation::test_host_refuses_missing_cpu_controller_before_creating_installation",
+          "outcome": "passed"
+        }
+      ]
+    },
+    {
+      "name": "final-installed",
+      "receipt": ".superpowers/sdd/2026-10-31-actualizacion-proyecto/aux-workers-final-installed.xml",
+      "tests": 44,
+      "outcomes": {
+        "passed": 44
+      },
+      "duration_seconds": 26.554,
+      "cases": [
+        {
+          "case": ".superpowers.sdd.2026-10-31-actualizacion-proyecto.native-runtime-env.lib.python3.12.site-packages.backend.tests.research.test_worker_sandbox::test_parser_dependency_cannot_read_host_secret_write_or_open_network",
+          "outcome": "passed"
+        },
+        {
+          "case": ".superpowers.sdd.2026-10-31-actualizacion-proyecto.native-runtime-env.lib.python3.12.site-packages.backend.tests.research.test_worker_sandbox::test_unavailable_sandbox_never_falls_back_to_parser_execution",
+          "outcome": "passed"
+        },
+        {
+          "case": ".superpowers.sdd.2026-10-31-actualizacion-proyecto.native-runtime-env.lib.python3.12.site-packages.backend.tests.research.test_worker_sandbox::test_all_worker_kinds_share_capacity_until_original_child_closes",
+          "outcome": "passed"
+        },
+        {
+          "case": ".superpowers.sdd.2026-10-31-actualizacion-proyecto.native-runtime-env.lib.python3.12.site-packages.backend.tests.research.test_worker_sandbox::test_busy_processing_is_not_an_invalid_document_http_error",
+          "outcome": "passed"
+        },
+        {
+          "case": ".superpowers.sdd.2026-10-31-actualizacion-proyecto.native-runtime-env.lib.python3.12.site-packages.backend.tests.research.test_parser_process::test_pdf_worker_returns_text_and_observed_hard_limits",
+          "outcome": "passed"
+        },
+        {
+          "case": ".superpowers.sdd.2026-10-31-actualizacion-proyecto.native-runtime-env.lib.python3.12.site-packages.backend.tests.research.test_parser_process::test_worker_cpu_and_memory_exhaustion_are_bounded_failures[while True: pass]",
+          "outcome": "passed"
+        },
+        {
+          "case": ".superpowers.sdd.2026-10-31-actualizacion-proyecto.native-runtime-env.lib.python3.12.site-packages.backend.tests.research.test_parser_process::test_worker_cpu_and_memory_exhaustion_are_bounded_failures[return bytearray(1024 * 1024 * 1024)]",
+          "outcome": "passed"
+        },
+        {
+          "case": ".superpowers.sdd.2026-10-31-actualizacion-proyecto.native-runtime-env.lib.python3.12.site-packages.backend.tests.research.test_parser_process::test_withdrawal_stops_the_live_worker_and_waits_for_physical_exit",
+          "outcome": "passed"
+        },
+        {
+          "case": ".superpowers.sdd.2026-10-31-actualizacion-proyecto.native-runtime-env.lib.python3.12.site-packages.backend.tests.research.test_parser_process::test_wall_deadline_closes_a_parser_that_consumes_no_cpu",
+          "outcome": "passed"
+        },
+        {
+          "case": ".superpowers.sdd.2026-10-31-actualizacion-proyecto.native-runtime-env.lib.python3.12.site-packages.backend.tests.research.test_parser_process::test_worker_does_not_inherit_credentials_or_open_host_descriptors",
+          "outcome": "passed"
+        },
+        {
+          "case": ".superpowers.sdd.2026-10-31-actualizacion-proyecto.native-runtime-env.lib.python3.12.site-packages.backend.tests.research.test_parser_process::test_excess_output_is_killed_without_buffering_an_unbounded_receipt",
+          "outcome": "passed"
+        },
+        {
+          "case": ".superpowers.sdd.2026-10-31-actualizacion-proyecto.native-runtime-env.lib.python3.12.site-packages.backend.tests.research.test_parser_process::test_worker_launch_failure_is_a_source_error",
+          "outcome": "passed"
+        },
+        {
+          "case": ".superpowers.sdd.2026-10-31-actualizacion-proyecto.native-runtime-env.lib.python3.12.site-packages.backend.tests.research.test_parser_process::test_worker_exits_when_its_api_owner_process_is_killed",
+          "outcome": "passed"
+        },
+        {
+          "case": ".superpowers.sdd.2026-10-31-actualizacion-proyecto.native-runtime-env.lib.python3.12.site-packages.backend.tests.research.test_parser_process::test_callers_remaining_deadline_restricts_the_worker_budget",
+          "outcome": "passed"
+        },
+        {
+          "case": ".superpowers.sdd.2026-10-31-actualizacion-proyecto.native-runtime-env.lib.python3.12.site-packages.backend.tests.research.test_semantic_worker::test_semantic_withdrawal_reaps_worker_before_releasing_capacity",
+          "outcome": "passed"
+        },
+        {
+          "case": ".superpowers.sdd.2026-10-31-actualizacion-proyecto.native-runtime-env.lib.python3.12.site-packages.backend.tests.research.test_semantic_worker::test_semantic_cpu_or_output_exhaustion_never_returns_partial_results[while True: pass-limits0]",
+          "outcome": "passed"
+        },
+        {
+          "case": ".superpowers.sdd.2026-10-31-actualizacion-proyecto.native-runtime-env.lib.python3.12.site-packages.backend.tests.research.test_semantic_worker::test_semantic_cpu_or_output_exhaustion_never_returns_partial_results[os.write(1,b'X'*4096)-limits1]",
+          "outcome": "passed"
+        },
+        {
+          "case": ".superpowers.sdd.2026-10-31-actualizacion-proyecto.native-runtime-env.lib.python3.12.site-packages.backend.tests.research.test_semantic_worker::test_semantic_missing_interpreter_is_an_explicit_availability_failure",
+          "outcome": "passed"
+        },
+        {
+          "case": ".superpowers.sdd.2026-10-31-actualizacion-proyecto.native-runtime-env.lib.python3.12.site-packages.backend.tests.research.test_semantic_retrieval::test_semantic_unavailable_is_explicit_and_does_not_fall_back_to_literal_or_remote",
+          "outcome": "passed"
+        },
+        {
+          "case": ".superpowers.sdd.2026-10-31-actualizacion-proyecto.native-runtime-env.lib.python3.12.site-packages.backend.tests.research.test_semantic_retrieval::test_invalid_semantic_query_is_rejected_before_model_work[]",
+          "outcome": "passed"
+        },
+        {
+          "case": ".superpowers.sdd.2026-10-31-actualizacion-proyecto.native-runtime-env.lib.python3.12.site-packages.backend.tests.research.test_semantic_retrieval::test_invalid_semantic_query_is_rejected_before_model_work[   ]",
+          "outcome": "passed"
+        },
+        {
+          "case": ".superpowers.sdd.2026-10-31-actualizacion-proyecto.native-runtime-env.lib.python3.12.site-packages.backend.tests.research.test_semantic_retrieval::test_invalid_semantic_query_is_rejected_before_model_work[query2]",
+          "outcome": "passed"
+        },
+        {
+          "case": ".superpowers.sdd.2026-10-31-actualizacion-proyecto.native-runtime-env.lib.python3.12.site-packages.backend.tests.research.test_semantic_retrieval::test_foreign_project_source_is_rejected_before_model_availability",
+          "outcome": "passed"
+        },
+        {
+          "case": ".superpowers.sdd.2026-10-31-actualizacion-proyecto.native-runtime-env.lib.python3.12.site-packages.backend.tests.research.test_semantic_retrieval::test_real_multilingual_query_recovers_tail_evidence_with_exact_offsets",
+          "outcome": "passed"
+        },
+        {
+          "case": ".superpowers.sdd.2026-10-31-actualizacion-proyecto.native-runtime-env.lib.python3.12.site-packages.backend.tests.research.test_semantic_retrieval::test_changed_or_missing_model_asset_fails_without_a_partial_semantic_result",
+          "outcome": "passed"
+        },
+        {
+          "case": ".superpowers.sdd.2026-10-31-actualizacion-proyecto.native-runtime-env.lib.python3.12.site-packages.backend.tests.research.test_semantic_retrieval::test_real_pdf_semantic_result_maps_the_exact_excerpt_to_captured_pages",
+          "outcome": "passed"
+        },
+        {
+          "case": ".superpowers.sdd.2026-10-31-actualizacion-proyecto.native-runtime-env.lib.python3.12.site-packages.backend.tests.research.test_semantic_retrieval::test_semantic_host_budgets_cannot_disable_the_worker_fuses[options0]",
+          "outcome": "passed"
+        },
+        {
+          "case": ".superpowers.sdd.2026-10-31-actualizacion-proyecto.native-runtime-env.lib.python3.12.site-packages.backend.tests.research.test_semantic_retrieval::test_semantic_host_budgets_cannot_disable_the_worker_fuses[options1]",
+          "outcome": "passed"
+        },
+        {
+          "case": ".superpowers.sdd.2026-10-31-actualizacion-proyecto.native-runtime-env.lib.python3.12.site-packages.backend.tests.research.test_semantic_retrieval::test_semantic_host_budgets_cannot_disable_the_worker_fuses[options2]",
+          "outcome": "passed"
+        },
+        {
+          "case": ".superpowers.sdd.2026-10-31-actualizacion-proyecto.native-runtime-env.lib.python3.12.site-packages.backend.tests.research.test_semantic_retrieval::test_semantic_host_budgets_cannot_disable_the_worker_fuses[options3]",
+          "outcome": "passed"
+        },
+        {
+          "case": ".superpowers.sdd.2026-10-31-actualizacion-proyecto.native-runtime-env.lib.python3.12.site-packages.backend.tests.research.test_semantic_retrieval::test_invalid_semantic_worker_receipts_are_explicit_unavailable_errors[[]]",
+          "outcome": "passed"
+        },
+        {
+          "case": ".superpowers.sdd.2026-10-31-actualizacion-proyecto.native-runtime-env.lib.python3.12.site-packages.backend.tests.research.test_semantic_retrieval::test_invalid_semantic_worker_receipts_are_explicit_unavailable_errors[null]",
+          "outcome": "passed"
+        },
+        {
+          "case": ".superpowers.sdd.2026-10-31-actualizacion-proyecto.native-runtime-env.lib.python3.12.site-packages.backend.tests.research.test_semantic_retrieval::test_invalid_semantic_worker_receipts_are_explicit_unavailable_errors[not-json]",
+          "outcome": "passed"
+        },
+        {
+          "case": ".superpowers.sdd.2026-10-31-actualizacion-proyecto.native-runtime-env.lib.python3.12.site-packages.backend.tests.research.test_semantic_retrieval::test_semantic_api_revalidates_grant_before_disclosing_results",
+          "outcome": "passed"
+        },
+        {
+          "case": ".superpowers.sdd.2026-10-31-actualizacion-proyecto.native-runtime-env.lib.python3.12.site-packages.backend.tests.research.test_semantic_retrieval::test_source_catalog_reports_unconfigured_semantics_without_loading_a_model",
+          "outcome": "passed"
+        },
+        {
+          "case": ".superpowers.sdd.2026-10-31-actualizacion-proyecto.native-runtime-env.lib.python3.12.site-packages.backend.tests.runtime.test_host_installation::test_fresh_host_composes_storage_and_configured_product",
+          "outcome": "passed"
+        },
+        {
+          "case": ".superpowers.sdd.2026-10-31-actualizacion-proyecto.native-runtime-env.lib.python3.12.site-packages.backend.tests.runtime.test_host_installation::test_reinitialization_preserves_the_original_host",
+          "outcome": "passed"
+        },
+        {
+          "case": ".superpowers.sdd.2026-10-31-actualizacion-proyecto.native-runtime-env.lib.python3.12.site-packages.backend.tests.runtime.test_host_installation::test_invalid_host_setup_creates_no_partial_installation[existing]",
+          "outcome": "passed"
+        },
+        {
+          "case": ".superpowers.sdd.2026-10-31-actualizacion-proyecto.native-runtime-env.lib.python3.12.site-packages.backend.tests.runtime.test_host_installation::test_invalid_host_setup_creates_no_partial_installation[nested_witness]",
+          "outcome": "passed"
+        },
+        {
+          "case": ".superpowers.sdd.2026-10-31-actualizacion-proyecto.native-runtime-env.lib.python3.12.site-packages.backend.tests.runtime.test_host_installation::test_invalid_host_setup_creates_no_partial_installation[missing_asset]",
+          "outcome": "passed"
+        },
+        {
+          "case": ".superpowers.sdd.2026-10-31-actualizacion-proyecto.native-runtime-env.lib.python3.12.site-packages.backend.tests.runtime.test_host_installation::test_invalid_host_setup_creates_no_partial_installation[unknown_field]",
+          "outcome": "passed"
+        },
+        {
+          "case": ".superpowers.sdd.2026-10-31-actualizacion-proyecto.native-runtime-env.lib.python3.12.site-packages.backend.tests.runtime.test_host_installation::test_host_probe_observes_and_retires_its_own_domain",
+          "outcome": "passed"
+        },
+        {
+          "case": ".superpowers.sdd.2026-10-31-actualizacion-proyecto.native-runtime-env.lib.python3.12.site-packages.backend.tests.runtime.test_host_installation::test_launcher_consumes_prepared_host_without_shell_environment",
+          "outcome": "passed"
+        },
+        {
+          "case": ".superpowers.sdd.2026-10-31-actualizacion-proyecto.native-runtime-env.lib.python3.12.site-packages.backend.tests.runtime.test_host_installation::test_host_refuses_missing_cpu_controller_before_creating_installation",
+          "outcome": "passed"
+        }
+      ]
+    }
+  ],
+  "source_distinct_final_outcomes": {
+    "tests": 98,
+    "passed": 98,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "final_installed_outcomes": {
+    "passed": 44
+  },
+  "intermediate_failure": "The HTTP fixture expected the code in error. Existing response contract stores processing_busy in code and the human explanation in error/detail. Only the test assertion changed; final HTTP and installed runs pass.",
+  "packaging": {
+    "wheel": ".superpowers/sdd/2026-10-31-actualizacion-proyecto/aux-workers-final-dist/researcher-0.1.0-cp312-cp312-linux_x86_64.whl",
+    "sha256": "d203972cb2aa057b62ca2527e3a09a633ed517534604b224865af0a3080f9790",
+    "matching_python_sql_files": 614,
+    "product_python_sql_files": 326,
+    "mismatches": []
+  },
+  "changed_documented_definitions": 35,
+  "prompt_reviews": {
+    "current": 83,
+    "revalidated_consumer_entries": 1,
+    "native_catalog_entries": 6,
+    "requires_review": 0
+  },
+  "lint": {
+    "count": 9,
+    "codes": {
+      "F401": 1,
+      "I001": 6,
+      "TRY004": 2
+    },
+    "deferred_detail": "DD098"
+  },
+  "real_offline_encoder_executed": true,
+  "generative_model_turns": 0,
+  "new_global_suite": false,
+  "limits": [
+    "Shared slot is per Python host process, not fleet-wide.",
+    "Worker address-space limits do not cap all supervisor RSS or allocations in the parent.",
+    "Public code/dependency roots are operator-trusted and must not contain secrets; some filesystem metadata remains visible.",
+    "Test markers establish trusted bootstrap birth, not entry into the parser dependency."
+  ],
+  "remaining_primary_work": [
+    "Parent/supervisor allocations, exports, backups and restore resources.",
+    "Bounded-host migration and full-disk service/database recovery.",
+    "Ken/ONNX/Chroma version security.",
+    "Human/profile communication evaluation, historical owner data and acceptance of all 12 pages."
+  ],
+  "broad_scenarios_closed_by_this_block": 0,
+  "next_primary_task": "Exports/backups/restore and remaining supervisor resources; not started."
+}

@@ -18,6 +18,10 @@ todas las rutas por las de esta instalación:
   usuario. Se conserva su ubicación; los tokens no se copian a la configuración.
 - Linux con cgroup v2 delegado al usuario del servicio, controladores `cpu`,
   `memory` y `pids` habilitados, y soporte de los dominios nativos del proyecto.
+- Linux x86_64 con Landlock ABI3 o superior, para los trabajadores documentales
+  y semánticos. `init-host`/`check-host` comprueban su disponibilidad sin aplicar
+  la restricción al proceso supervisor. Los trabajadores la aplican antes de
+  importar parsers o el encoder, junto con seccomp y sus límites existentes.
 - Web ya compilada, con `index.html`, si se desea servir la interfaz. Sin
   `static_dir`, el launcher sólo sirve la API.
 - Para el límite agregado durable del ejemplo: un volumen ext4 dedicado, ya

@@ -85,7 +85,19 @@ límite duro3s), `RLIMIT_AS`256MiB, core/tamaño de archivo cero,32 descriptores
 límite de creación de procesos. El host impone5s de plazo de pared,1MB de entrada
 y2MB de salida acumulada, leyendo/escribiendo ventanas de pipe sin buffer ilimitado.
 Estos valores son configuración del host. **AS limita espacio virtual; no es una
-cuota cgroup de RSS agregado ni un sandbox general de filesystem/red.** El programa
+cuota cgroup de RSS agregado.** Documentos y búsquedas semánticas comparten ahora
+un único cupo por proceso supervisor, conservado hasta reap físico. La saturación
+se declara como `processing_busy` (HTTP429), sin atribuir un defecto al documento.
+
+Antes de importar dependencias se aplica Landlock ABI3 o superior: sólo lecturas
+de intérprete, paquetes y recursos públicos elegidos, sin escrituras de filesystem.
+Seccomp impide red, ejecución, nuevos procesos/threads, IPC compartida y operaciones
+de metadatos que Landlock no cubre. Una plataforma sin esas barreras se rechaza,
+sin fallback al parser libre. No son namespaces: algunos metadatos del filesystem
+siguen observables. El host y sus operaciones administrativas tienen otros límites.
+[Implementación, pruebas y alcance](../modernization/aux-workers-review.md).
+
+El programa
 fijo no ejecuta scripts del PDF ni conversores. No se amplía con ello el catálogo
 de comandos que puede ejecutar un agente.
 

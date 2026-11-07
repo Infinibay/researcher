@@ -3236,7 +3236,7 @@
       }
     },
     "backend/runtime/development_policy.py::development_instructions": {
-      "dependencies_sha256": "b03b2d5105aa4e793f3e7d443304265fe821a49f4b6d6237f8a1fc2518899995",
+      "dependencies_sha256": "315717ea33d626f197c5c14e58a045d75b4c67e8576231a9c84e88e335414fed",
       "decision": "retained",
       "rationale": "Delta review against ab36dc5; preserve the earlier full semantic review below. Read the complete changed common policy and selector, exact owned factory call, native reply mediation and durable issue consumer. Catalog4 adds observed budget/delivery guidance, bounded discovery and faithful examples; exact initial limits enter the frozen instructions. Versions2/3 retain their recorded identity. This candidate source is byte-identical; only the native composition or owned factory consumer changed. Existing capability-specific prerequisites, source windows and permission boundaries still apply, including under delivery pressure. Directed source and installed tests verify budget/provenance/closure contracts, not general model compliance, scientific validity or human comprehension. Three development regressions are evaluated separately; prior reserved results are not replaced. Revalidated 2026-11-07 for catalog5: common delivery advice uses observed-increment margin, planner avoids redundant discovery and guessed source bounds, historical catalogs2/3/4 retain identity. Capabilities, prerequisites and hard ceilings unchanged. Source profile text unchanged except planning; composition and owned-runtime consumer read. Static review does not establish model efficacy.",
       "evidence": [
@@ -3253,11 +3253,12 @@
         "backend/tests/runtime/test_atomic_planning_delivery.py",
         "docs/modernization/domain-resources-review.md",
         "backend/tests/runtime/test_domain_resources.py",
-        "docs/modernization/storage-volume-review.md"
+        "docs/modernization/storage-volume-review.md",
+        "docs/modernization/aux-workers-review.md"
       ],
       "conflicts": [],
       "consumer_recheck": "2026-11-06: prompt AST identical to 12a1744. Removed legacy launcher consumers; retained owned broker/catalog behavior is covered by test_owned_factory.py and test_broker_inference.py. No new semantic or model evaluation claimed.",
-      "revalidation": "Storage-volume review: API startup checks precede writes; native composition and service admission add a capacity gate without changing generated instructions, task profiles, schemas, model selection or acceptance. OpenAPI/project description literals retain their human-data role. Reviewed changed consumers; no communication efficacy claim.",
+      "revalidation": "Auxiliary-worker review: host_installation adds a readonly mandatory Landlock capability check and records the observed ABI. Development instruction rendering, check policy, budgets, schemas, model selection and acceptance are unchanged. Read changed consumer and validated host setup; no prompting-efficacy claim.",
       "previous_review": {
         "dependencies_sha256": "60ad21edf8aee9b134a66c5b403a0f17e1c12b86e58efe06064b46b16e6f3189",
         "decision": "retained",

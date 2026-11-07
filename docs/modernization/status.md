@@ -4,6 +4,14 @@ La implementación del [plan completo](../superpowers/plans/2026-10-31-actualiza
 
 ## Resultados disponibles
 
+- **Trabajadores documentales y semánticos acotados:** cupo compartido hasta
+  cierre físico, Landlock/seccomp obligatorios y saturación explícita HTTP429.
+ 98casos distintos de fuente y44instalados pasan;614archivos coinciden y35
+ definiciones documentadas. Encoder local real; cero turnos generativos.
+ Bloque19min16s. Exportaciones/backups, trabajo en el padre y recursos globales
+ del supervisor siguen pendientes principales; no se declara seguridad integral.
+ [Informe](aux-workers-review.md), [validación](aux-workers-results.json).
+
 - **Volumen durable acotado comprobado:** una VM con cuatro escritores llena un
   volumen de128MiB; admisión rechazada, dominio retirado y código/bases íntegros
   tras remount. Montaje ausente rechazado sin recreación; inspección independiente
