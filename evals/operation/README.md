@@ -83,3 +83,27 @@ Un timeout del observador externo requiere seguir el mismo handle. Este ensayo
 no cubre pérdida de energía, datos reales del propietario, un agente nativo
 ejecutándose durante el reboot ni prueba de cierre del host original.
 [Resultado y alcance del ensayo actual](../../docs/modernization/reboot-recovery-results.json).
+
+## Importación de SQL, archivos y Chroma reales sobre datos sintéticos
+
+`legacy_import.py` usa el backend instalado y un entorno separado con
+`chromadb==1.5.9`. Crea dos colecciones con105 registros, incluido uno sin texto;
+exporta en páginas de100 y ejecuta el comando público de importación. Comprueba
+la captura de texto con procedencia histórica, un informe sólo en archivo y
+lecturas HTTP del host reinscrito, incluido rechazo desde otro proyecto.
+
+```bash
+/ruta/al/entorno/bin/python -I evals/operation/legacy_import.py \
+  --output /ruta/privada/ensayo-importacion-nuevo \
+  --legacy-python /ruta/al/entorno-chroma/bin/python \
+  --assets /ruta/privada/recursos-host.json
+```
+
+El entorno de compatibilidad se puede preparar exportando el lock de
+`scripts/export_legacy_chroma.py` e instalándolo en un virtualenv separado.
+Fixture y exportador corren con bubblewrap sin red; usan vectores explícitos y
+no generan embeddings. El host usa recursos reales, pero una cuenta sintética
+y cero solicitudes de inferencia. El archivo de cuenta real no se copia.
+El proceso original conserva `result.json` incluso ante fallo; no reintenta.
+[Guía del operador](../../docs/architecture/legacy-import.md),
+[resultados y límites](../../docs/modernization/legacy-import-results.json).

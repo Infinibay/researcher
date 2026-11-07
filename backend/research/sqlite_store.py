@@ -568,11 +568,12 @@ class SQLiteResearchStore:
             ]
 
     def get_reference(self, scope, reference_id):
+        """Resolve a project-scoped upload with any original imported identity and its expected byte hash."""
         positive_id(reference_id)
         with self._transaction() as conn:
             self._check_scope(conn, scope, "sources.capture")
             row = conn.execute(
-                "SELECT id,project_id,file_name,file_path,file_type FROM reference_files WHERE id=? AND project_id=?",
+                "SELECT f.id,f.project_id,f.file_name,f.file_path,f.file_type,p.content_sha256,p.provenance_json FROM reference_files f LEFT JOIN reference_import_provenance p ON p.reference_file_id=f.id WHERE f.id=? AND f.project_id=?",
                 (reference_id, scope.project_id),
             ).fetchone()
             if row is None:
@@ -583,6 +584,7 @@ class SQLiteResearchStore:
                 row["file_name"],
                 row["file_path"],
                 row["file_type"] or "application/octet-stream",
+                None if row['provenance_json'] is None else {'sha256':row['content_sha256'],'details':json.loads(row['provenance_json'])},
             )
 
     def list_references(self, scope):

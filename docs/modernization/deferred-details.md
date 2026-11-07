@@ -485,3 +485,16 @@ su HOME deliberadamente inexistente. El aprovisionador de VM está limitado a
 Linux/KVM, UID1000 y Python3.12 portable; generalizar esa herramienta de evaluación
 puede esperar. Datos reales, importadores, soporte de metadatos necesario y
 aceptación integral siguen siendo trabajo principal, no detalles diferidos.
+
+
+## DD076 — pulido tras importación histórica
+
+Se conservan48 avisos en `legacy-import-lint.json`: orden de imports, imports
+sin uso, fixtures reutilizadas, contextos combinables, tipo de excepción y
+`check` implícito en subprocess de pruebas cuyo retorno ya se comprueba.
+Resolver después de todas las capacidades principales. Persisten los avisos
+heredados Starlette/httpx y HOME inexistente al inspeccionar la versión de Codex.
+
+La compatibilidad de versiones de Chroma reales, inventario/migración de los
+datos del propietario e inversas/recuperación posteriores siguen siendo tareas
+principales. No se convierten en detalles diferidos por pasar un ensayo sintético.

@@ -4,6 +4,16 @@ La implementación del [plan completo](../superpowers/plans/2026-10-31-actualiza
 
 ## Resultados disponibles
 
+- **Importación histórica implementada y ensayada:** SQL y archivos en rutas
+  externas, informes sin cuerpo en base, adjuntos/Git y exportación aislada de
+  Chroma.105 registros reales de Chroma sintético conservados,104 con texto y uno
+  sólo con metadatos; procedencia ligada al hash llega a la captura de fuentes.
+  CLI instalado, reinscripción y lectura HTTP por proyecto pasan.139 pruebas de
+  fuente y139 instaladas;593 archivos coincidentes,43 definiciones documentadas.
+  Cero inferencias y sin cuenta real. Siguen datos del propietario e inversas/
+  recuperación restantes; no hay aceptación global. [Guía](../architecture/legacy-import.md),
+  [resultados](legacy-import-results.json), [paquete](legacy-import-packaging.json).
+
 - **Recuperación tras reinicio real de una VM comprobada:** se conserva la
   autoridad anterior como evidencia y el estado original de procesos registrados;
   la copia recibe autoridad nueva. Pasan el proceso no-op y lecturas HTTP de datos

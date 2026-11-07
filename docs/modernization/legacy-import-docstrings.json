@@ -1,0 +1,309 @@
+{
+  "base_commit": "df701f4",
+  "changed_or_new_definitions_documented": 43,
+  "missing": [],
+  "contracts": [
+    {
+      "path": "backend/cli/bootstrap.py",
+      "symbol": "main",
+      "line": 9,
+      "docstring": "Run one explicit local administration action; help never reads assets, initializes data or downloads.",
+      "file_sha256": "9fed23f0355abe6610ae21f139912dfabdd3000988e0d950f432ab8dc7fef09d"
+    },
+    {
+      "path": "backend/db/reference_provenance_migration.py",
+      "symbol": "restore_reference_provenance_schema",
+      "line": 4,
+      "docstring": "Remove unused latest migration58 with the service stopped; used history requires forward repair.",
+      "file_sha256": "540a6caaa3c6562fa7de5f227581addb2187c6fbdaa8a264d86734c0c351ea8c"
+    },
+    {
+      "path": "backend/research/acquisition.py",
+      "symbol": "BoundedReferenceReader",
+      "line": 27,
+      "docstring": "Read bounded, stable files under one project upload root; never arbitrary paths.",
+      "file_sha256": "3544ba18b252cf36284fa317bbe67427cd919bbfd9dd72f485d556c04040263f"
+    },
+    {
+      "path": "backend/research/acquisition.py",
+      "symbol": "BoundedReferenceReader.read",
+      "line": 38,
+      "docstring": "Acquire one stable byte snapshot, then extract supported text with provenance.",
+      "file_sha256": "3544ba18b252cf36284fa317bbe67427cd919bbfd9dd72f485d556c04040263f"
+    },
+    {
+      "path": "backend/research/models.py",
+      "symbol": "ReferenceRecord",
+      "line": 301,
+      "docstring": "Identify an upload and optional byte-bound historical provenance preserved during capture.",
+      "file_sha256": "ea8433733eee8a8510f8e0d0d1ce7b80899030e6f702babfefbba63ae7d1ce1c"
+    },
+    {
+      "path": "backend/research/sqlite_store.py",
+      "symbol": "SQLiteResearchStore",
+      "line": 50,
+      "docstring": "Own scoped source/finding/report/wiki transactions, revocable grants and atomic effect receipts.",
+      "file_sha256": "5b2cf93c021b0d477b09e112b9d6cb2caadc32c0cd24cf3b8d3dffd860ca77d2"
+    },
+    {
+      "path": "backend/research/sqlite_store.py",
+      "symbol": "SQLiteResearchStore.get_reference",
+      "line": 570,
+      "docstring": "Resolve a project-scoped upload with any original imported identity and its expected byte hash.",
+      "file_sha256": "5b2cf93c021b0d477b09e112b9d6cb2caadc32c0cd24cf3b8d3dffd860ca77d2"
+    },
+    {
+      "path": "backend/runtime/installation_restore.py",
+      "symbol": "_git_metadata",
+      "line": 23,
+      "docstring": "Repair only Git administrative path files, preserving commits, branches, indexes and dirty worktrees.",
+      "file_sha256": "22171c97eaac2ea7af376ce5f2bb0223a5014227b158cfaf886b26186742bab5"
+    },
+    {
+      "path": "backend/runtime/legacy_chroma.py",
+      "symbol": "_object",
+      "line": 12,
+      "docstring": "Read one bounded JSON manifest through the same no-follow path contract as copied data.",
+      "file_sha256": "6facf7d3f2960d393af691ecd2aa6c8f22061c0f1a5d9ecee60ef73b890d7c7d"
+    },
+    {
+      "path": "backend/runtime/legacy_chroma.py",
+      "symbol": "import_chroma_exports",
+      "line": 20,
+      "docstring": "Copy raw export evidence and retain each exact text fragment under an explicit owner project.\n\nMetadata-only records remain in the export/provenance receipt. No complete\ndocument, citation, task association or reviewed finding is inferred.",
+      "file_sha256": "6facf7d3f2960d393af691ecd2aa6c8f22061c0f1a5d9ecee60ef73b890d7c7d"
+    },
+    {
+      "path": "backend/runtime/legacy_import.py",
+      "symbol": "_storage",
+      "line": 23,
+      "docstring": "Validate explicit disjoint source roots and logical prefixes before creating any output.",
+      "file_sha256": "0bacdd3dab0bef59a03d151996839d7e7dc1a76c679e58c8cfc6d932eddce373"
+    },
+    {
+      "path": "backend/runtime/legacy_import.py",
+      "symbol": "_mapped",
+      "line": 51,
+      "docstring": "Resolve an exact stored or actual absolute path through one unambiguous operator mapping.",
+      "file_sha256": "0bacdd3dab0bef59a03d151996839d7e7dc1a76c679e58c8cfc6d932eddce373"
+    },
+    {
+      "path": "backend/runtime/legacy_import.py",
+      "symbol": "_copy_storage",
+      "line": 66,
+      "docstring": "Copy raw trees with stable inventories and hashes, then repair only copied Git path metadata.",
+      "file_sha256": "0bacdd3dab0bef59a03d151996839d7e7dc1a76c679e58c8cfc6d932eddce373"
+    },
+    {
+      "path": "backend/runtime/legacy_import.py",
+      "symbol": "_hydrate_reports",
+      "line": 99,
+      "docstring": "Read only exact mapped UTF8 reports missing database content; preserve existing bodies and IDs.",
+      "file_sha256": "0bacdd3dab0bef59a03d151996839d7e7dc1a76c679e58c8cfc6d932eddce373"
+    },
+    {
+      "path": "backend/runtime/legacy_import.py",
+      "symbol": "_registrations",
+      "line": 118,
+      "docstring": "Normalize uploads and relocate current repositories/worktrees, preserving their IDs and old paths in receipts.",
+      "file_sha256": "0bacdd3dab0bef59a03d151996839d7e7dc1a76c679e58c8cfc6d932eddce373"
+    },
+    {
+      "path": "backend/runtime/legacy_import.py",
+      "symbol": "stage_legacy_host",
+      "line": 138,
+      "docstring": "Create one pending managed installation from a locked legacy snapshot and explicitly mapped files.\n\nNative databases require backup-host and their independent authority evidence.\nPartial failures never publish installation.json; retry only at a NEW path.",
+      "file_sha256": "0bacdd3dab0bef59a03d151996839d7e7dc1a76c679e58c8cfc6d932eddce373"
+    },
+    {
+      "path": "backend/tests/runtime/test_legacy_import.py",
+      "symbol": "legacy",
+      "line": 16,
+      "docstring": "Prepare schema17 with container paths, same-named reports and cross-root linked Git storage.",
+      "file_sha256": "6fbb56a2d05d4e0e1d0a60d9ddd013a4bd77b24ebb201de0f80137461ded7232"
+    },
+    {
+      "path": "backend/tests/runtime/test_legacy_import.py",
+      "symbol": "test_staged_legacy_data_preserves_ids_files_and_new_enrollment",
+      "line": 50,
+      "docstring": "Actual Git/SQLite migration retains old data and remains blocked until explicit fresh enrollment.",
+      "file_sha256": "6fbb56a2d05d4e0e1d0a60d9ddd013a4bd77b24ebb201de0f80137461ded7232"
+    },
+    {
+      "path": "backend/tests/runtime/test_legacy_import.py",
+      "symbol": "test_invalid_legacy_import_never_activates_or_changes_original",
+      "line": 85,
+      "docstring": "Ambiguous/outside/missing bytes and native installations cannot bypass preservation or authority rules.",
+      "file_sha256": "6fbb56a2d05d4e0e1d0a60d9ddd013a4bd77b24ebb201de0f80137461ded7232"
+    },
+    {
+      "path": "backend/tests/runtime/test_legacy_import.py",
+      "symbol": "test_imported_report_and_upload_have_real_owner_http_scope",
+      "line": 105,
+      "docstring": "The normal readers serve hydrated content by original ID and reject a different project's access.",
+      "file_sha256": "6fbb56a2d05d4e0e1d0a60d9ddd013a4bd77b24ebb201de0f80137461ded7232"
+    },
+    {
+      "path": "backend/tests/runtime/test_legacy_import.py",
+      "symbol": "test_public_legacy_import_command_keeps_execution_pending",
+      "line": 130,
+      "docstring": "The installed administrative command stages data without credentials or automatic enrollment.",
+      "file_sha256": "6fbb56a2d05d4e0e1d0a60d9ddd013a4bd77b24ebb201de0f80137461ded7232"
+    },
+    {
+      "path": "backend/tests/runtime/test_legacy_import.py",
+      "symbol": "chroma_export",
+      "line": 142,
+      "docstring": "Build a portable-format fixture; the separate integration trial uses the real pinned Chroma reader.",
+      "file_sha256": "6fbb56a2d05d4e0e1d0a60d9ddd013a4bd77b24ebb201de0f80137461ded7232"
+    },
+    {
+      "path": "backend/tests/runtime/test_legacy_import.py",
+      "symbol": "chroma_export.descriptor",
+      "line": 151,
+      "docstring": "Bind each fixture file to its exact raw bytes rather than claimed record counts alone.",
+      "file_sha256": "6fbb56a2d05d4e0e1d0a60d9ddd013a4bd77b24ebb201de0f80137461ded7232"
+    },
+    {
+      "path": "backend/tests/runtime/test_legacy_import.py",
+      "symbol": "test_chroma_fragments_keep_exact_text_identity_and_explicit_project",
+      "line": 162,
+      "docstring": "Same IDs in separate collections and misleading metadata cannot override an explicit project assignment.",
+      "file_sha256": "6fbb56a2d05d4e0e1d0a60d9ddd013a4bd77b24ebb201de0f80137461ded7232"
+    },
+    {
+      "path": "backend/tests/runtime/test_legacy_import.py",
+      "symbol": "test_bad_chroma_export_preserves_partial_import_without_activation",
+      "line": 205,
+      "docstring": "Unassigned, corrupt or incomplete legacy text cannot become a completed native installation.",
+      "file_sha256": "6fbb56a2d05d4e0e1d0a60d9ddd013a4bd77b24ebb201de0f80137461ded7232"
+    },
+    {
+      "path": "backend/tests/runtime/test_legacy_import.py",
+      "symbol": "test_committed_wal_data_is_captured_without_changing_source_rows",
+      "line": 228,
+      "docstring": "A consistent SQLite snapshot includes committed WAL rows even while the original connection stays open.",
+      "file_sha256": "6fbb56a2d05d4e0e1d0a60d9ddd013a4bd77b24ebb201de0f80137461ded7232"
+    },
+    {
+      "path": "backend/tests/runtime/test_legacy_import.py",
+      "symbol": "test_interrupted_legacy_stage_stays_inactive_and_recovers_at_new_path",
+      "line": 244,
+      "docstring": "An owned child exit after data commits cannot publish a usable host or erase the recovery source.",
+      "file_sha256": "6fbb56a2d05d4e0e1d0a60d9ddd013a4bd77b24ebb201de0f80137461ded7232"
+    },
+    {
+      "path": "backend/tests/runtime/test_migration_chain.py",
+      "symbol": "test_forward_targets_form_one_complete_history_and_preserve_seeded_data",
+      "line": 24,
+      "docstring": "Reach every supported post-legacy version, then repeat startup without losing IDs or relations.",
+      "file_sha256": "8598a99246815b363028f1f8dd2cb85dd94f7ecb8a85b2139907fb08073fb5ae"
+    },
+    {
+      "path": "backend/tests/runtime/test_migration_chain.py",
+      "symbol": "test_writer_crash_before_version_commit_preserves_prior_schema_and_resumes",
+      "line": 49,
+      "docstring": "Abruptly kill only a new migration child before its history insert, then recover that same DB.",
+      "file_sha256": "8598a99246815b363028f1f8dd2cb85dd94f7ecb8a85b2139907fb08073fb5ae"
+    },
+    {
+      "path": "backend/tests/runtime/test_migration_chain.py",
+      "symbol": "test_invalid_forward_target_never_creates_storage",
+      "line": 83,
+      "docstring": "Unknown targets and booleans cannot create a partial installation as a side effect.",
+      "file_sha256": "8598a99246815b363028f1f8dd2cb85dd94f7ecb8a85b2139907fb08073fb5ae"
+    },
+    {
+      "path": "backend/tests/runtime/test_migration_chain.py",
+      "symbol": "test_forward_rejects_unsupported_history_without_rewriting_rows",
+      "line": 94,
+      "docstring": "A forward migration cannot hide a future version, fill a fabricated gap or act as downgrade.",
+      "file_sha256": "8598a99246815b363028f1f8dd2cb85dd94f7ecb8a85b2139907fb08073fb5ae"
+    },
+    {
+      "path": "backend/tests/runtime/test_reboot_backup.py",
+      "symbol": "test_reboot_backup_restores_live_old_peer_as_history",
+      "line": 40,
+      "docstring": "Old-kernel peers retain uncertainty and gain explicit archival provenance in the restored copy.",
+      "file_sha256": "d70c40aead841167ddef6bad0067b2a8c661ac38f4fee80623d086b64ac98098"
+    },
+    {
+      "path": "backend/tests/runtime/test_reboot_backup.py",
+      "symbol": "test_unused_archive_inverse_and_future_refusal_preserve_data",
+      "line": 89,
+      "docstring": "An unused latest step can be reversed; a future schema is never silently downgraded.",
+      "file_sha256": "d70c40aead841167ddef6bad0067b2a8c661ac38f4fee80623d086b64ac98098"
+    },
+    {
+      "path": "evals/operation/legacy_import.py",
+      "symbol": "isolated",
+      "line": 30,
+      "docstring": "Run the pinned legacy reader with no network namespace and writes confined to this fixture root.",
+      "file_sha256": "2b3eafb246ff50249c335f2870bcdaf724a3981ce663b0acde3ea602db37d776"
+    },
+    {
+      "path": "evals/operation/legacy_import.py",
+      "symbol": "seed",
+      "line": 42,
+      "docstring": "Create an original schema17 database and a report whose body exists only at a mapped host path.",
+      "file_sha256": "2b3eafb246ff50249c335f2870bcdaf724a3981ce663b0acde3ea602db37d776"
+    },
+    {
+      "path": "evals/operation/legacy_import.py",
+      "symbol": "inspect_product",
+      "line": 60,
+      "docstring": "Capture one imported fragment through normal source APIs and verify its preserved identity and text.",
+      "file_sha256": "2b3eafb246ff50249c335f2870bcdaf724a3981ce663b0acde3ea602db37d776"
+    },
+    {
+      "path": "evals/operation/legacy_import.py",
+      "symbol": "native_http",
+      "line": 88,
+      "docstring": "Enroll with synthetic account material, start the installed native API and read retained scoped data.",
+      "file_sha256": "2b3eafb246ff50249c335f2870bcdaf724a3981ce663b0acde3ea602db37d776"
+    },
+    {
+      "path": "evals/operation/legacy_import.py",
+      "symbol": "main",
+      "line": 119,
+      "docstring": "Run one NEW synthetic compatibility trial with installed backend and an isolated pinned export environment.",
+      "file_sha256": "2b3eafb246ff50249c335f2870bcdaf724a3981ce663b0acde3ea602db37d776"
+    },
+    {
+      "path": "scripts/export_legacy_chroma.py",
+      "symbol": "digest",
+      "line": 26,
+      "docstring": "Hash one regular snapshot file for the portable export manifest.",
+      "file_sha256": "6028b23f3d8a3b12667cbab535823ca0d5aef2433bf50355238792b7493863fa"
+    },
+    {
+      "path": "scripts/export_legacy_chroma.py",
+      "symbol": "inventory",
+      "line": 32,
+      "docstring": "List raw regular storage without following links or accepting special filesystem entries.",
+      "file_sha256": "6028b23f3d8a3b12667cbab535823ca0d5aef2433bf50355238792b7493863fa"
+    },
+    {
+      "path": "scripts/export_legacy_chroma.py",
+      "symbol": "snapshot",
+      "line": 47,
+      "docstring": "Capture consistent SQLite and stable index files while retaining the original application rows.",
+      "file_sha256": "6028b23f3d8a3b12667cbab535823ca0d5aef2433bf50355238792b7493863fa"
+    },
+    {
+      "path": "scripts/export_legacy_chroma.py",
+      "symbol": "export",
+      "line": 82,
+      "docstring": "Preserve raw storage and export every selected collection record with exact text/metadata/identity.",
+      "file_sha256": "6028b23f3d8a3b12667cbab535823ca0d5aef2433bf50355238792b7493863fa"
+    },
+    {
+      "path": "scripts/export_legacy_chroma.py",
+      "symbol": "main",
+      "line": 140,
+      "docstring": "Run one explicit new-copy compatibility export without loading serving credentials or providers.",
+      "file_sha256": "6028b23f3d8a3b12667cbab535823ca0d5aef2433bf50355238792b7493863fa"
+    }
+  ],
+  "scope": "All new/changed Python definitions and affected modules in this delivery carry English docstrings. No claim that all historical project definitions are documented."
+}

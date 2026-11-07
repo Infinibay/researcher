@@ -2078,13 +2078,24 @@
         "backend/tests/runtime/test_installation_backup.py",
         "docs/architecture/installation-backup.md",
         "docs/modernization/installation-backup-results.json",
-        "docs/modernization/installation-backup-packaging.json"
+        "docs/modernization/installation-backup-packaging.json",
+        "backend/runtime/legacy_import.py",
+        "backend/runtime/legacy_chroma.py",
+        "backend/db/reference_provenance_schema.sql",
+        "backend/db/reference_provenance_migration.py",
+        "backend/research/acquisition.py",
+        "backend/tests/runtime/test_legacy_import.py",
+        "scripts/export_legacy_chroma.py",
+        "scripts/export_legacy_chroma.py.lock",
+        "evals/operation/legacy_import.py",
+        "docs/architecture/legacy-import.md",
+        "docs/modernization/legacy-import-results.json",
+        "docs/modernization/legacy-import-packaging.json"
       ],
       "remaining": [
-        "Complete real-data inventory/migration and full consistent backup/restore, including repos/worktrees/artifact files",
-        "Explicit later-schema inverse/recovery policy without discarding used history",
-        "Legacy source/Chroma-only document export and filesystem-only report import",
-        "Host reboot/re-enrollment and restored authority recovery"
+        "Historical real-data location, inventory and migration acceptance; validate actual layouts and Chroma-version compatibility",
+        "Complete later inverse/recovery policy without discarding used history; metadata-size support where needed",
+        "Broader destructive-failure/active-actor disaster acceptance remains distinct from controlled synthetic recovery/import rehearsals"
       ],
       "native_adapter_observation": {
         "test": "backend/tests/runtime/test_code_publications.py::test_publication_request_is_immutable_and_startup_preserves_original_records[frozen_author]",
@@ -2094,7 +2105,8 @@
       },
       "implemented": [
         "Coherent forward catalog18\u201356 and explicit staged targets;39 abrupt child-writer interruptions resume original DB, historical fixtures/inverses preserve original data.208 source and127 installed directed cases pass; no real-data/full-restore acceptance.",
-        "Managed installation data backup/verification/another-path restore preserves SQLite, uploads and linked Git worktrees.82source/82installed tests pass; restored execution remains pending enrollment. No production-data or operational recovery acceptance."
+        "Managed installation data backup/verification/another-path restore preserves SQLite, uploads and linked Git worktrees.82source/82installed tests pass; restored execution remains pending enrollment. No production-data or operational recovery acceptance.",
+        "Explicit legacy SQL/files staging and isolated pinned Chroma export, byte-bound provenance through source capture, no fabricated full documents/review.139source/139installed tests; real Chroma105records/104text/1metadata-only plus installed CLI/fresh enrollment/scoped native HTTP pass. Synthetic data, no inference or real-data acceptance; schema58 and41 forward interruption boundaries."
       ]
     },
     "backup_restore": {
@@ -2129,18 +2141,31 @@
         "backend/tests/runtime/test_reboot_backup.py",
         "evals/operation/reboot_vm.py",
         "docs/modernization/reboot-recovery-results.json",
-        "docs/modernization/reboot-recovery-packaging.json"
+        "docs/modernization/reboot-recovery-packaging.json",
+        "backend/runtime/legacy_import.py",
+        "backend/runtime/legacy_chroma.py",
+        "backend/db/reference_provenance_schema.sql",
+        "backend/db/reference_provenance_migration.py",
+        "backend/research/acquisition.py",
+        "backend/tests/runtime/test_legacy_import.py",
+        "scripts/export_legacy_chroma.py",
+        "scripts/export_legacy_chroma.py.lock",
+        "evals/operation/legacy_import.py",
+        "docs/architecture/legacy-import.md",
+        "docs/modernization/legacy-import-results.json",
+        "docs/modernization/legacy-import-packaging.json"
       ],
       "implemented": [
         "Managed installation data backup/verification/another-path restore preserves SQLite, uploads and linked Git worktrees.82source/82installed tests pass; restored execution remains pending enrollment. No production-data or operational recovery acceptance.",
         "Fresh restored-host enrollment, paused copied plans and preserved pending history, exact browser endpoint/intent archival, service restart and abrupt-child recovery:94source/94installed,129frontendcontracts/4DOM,3browserstates. No restored model run, reboot or real-data acceptance.",
         "One fresh installed subscription/Ken run after another-path restoration and enrollment; source-return correlation, calculation200, finding/twoquotes/draft report, fivepeers closed and secondservice startup preservesoutcomes. Originalpendingrequest untouched.12harness testsPASS. Samekernel, syntheticdata; not reboot or historical-data acceptance.",
-        "Explicit prior-kernel archival preserves original peer states without closure claims; schema56-to57 enrollment and unused-only inverse.137source/137installed tests; actual isolated VM reboot, fresh authority, native no-op closure and paired HTTP retained-data reads pass. Syntheticdata, no model call or power-loss/live-agent-during-reboot acceptance."
+        "Explicit prior-kernel archival preserves original peer states without closure claims; schema56-to57 enrollment and unused-only inverse.137source/137installed tests; actual isolated VM reboot, fresh authority, native no-op closure and paired HTTP retained-data reads pass. Syntheticdata, no model call or power-loss/live-agent-during-reboot acceptance.",
+        "Explicit legacy SQL/files staging and isolated pinned Chroma export, byte-bound provenance through source capture, no fabricated full documents/review.139source/139installed tests; real Chroma105records/104text/1metadata-only plus installed CLI/fresh enrollment/scoped native HTTP pass. Synthetic data, no inference or real-data acceptance; schema58 and41 forward interruption boundaries."
       ],
       "remaining": [
-        "Historical real-data location/import, filesystem-only reports, Chroma-only documents and external legacy layouts",
-        "Later inverse/recovery paths and metadata-size support where needed",
-        "Broader destructive-failure/active-actor disaster acceptance remains distinct from this controlled synthetic reboot rehearsal"
+        "Historical real-data location, inventory and migration acceptance; validate actual layouts and Chroma-version compatibility",
+        "Complete later inverse/recovery policy without discarding used history; metadata-size support where needed",
+        "Broader destructive-failure/active-actor disaster acceptance remains distinct from controlled synthetic recovery/import rehearsals"
       ]
     },
     "design_audit": {

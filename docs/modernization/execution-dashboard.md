@@ -25,7 +25,41 @@ lista en el documento además de publicarla en el chat, para retomarla tras comp
 - Última suite global completada al retomar `0c8b8d9`: 2148 casos, 2045 pasan, 100 fallan y tres se omiten. Mismos 100 identificadores heredados; no se afirman causas idénticas. Pasan 965 casos del runtime. La política Git añadida después tiene verificación separada.
 - Los 43 escenarios amplios siguen abiertos en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Etapa actual: recuperación tras reboot comprobada; siguen datos históricos
+## Etapa actual: importación histórica comprobada; siguen recuperación e inversas
+
+Los comandos públicos preparan una instalación nueva desde SQL histórico y rutas
+externas explícitas. Conservan informes sólo en archivos, adjuntos y Git/worktrees.
+Un exportador aislado recupera texto/metadatos de Chroma; el servidor conserva
+fragmentos con procedencia y hash, sin inventar documentos completos ni aceptación.
+El ensayo real de Chroma recupera105 registros:104 adjuntos de texto y uno sólo
+con metadatos. Captura como fuente y lecturas HTTP por proyecto pasan tras
+reinscripción; el servicio termina, con cero turnos de modelo y sin cuenta real.
+
+Pasan **139 pruebas de fuente y139 instaladas**.593 archivos Python/SQL coinciden,
+319 productivos;43 definiciones nuevas/modificadas tienen docstrings en inglés.
+El esquema58 incluye procedencia inmutable, rechazo de inversa con historial y
+41 fronteras de interrupción18–58. Tiempo hasta verificar: **24 min 10 s**,
+desde04:21:30 UTC. [Guía](../architecture/legacy-import.md),
+[resultados y límites](legacy-import-results.json), [paquete](legacy-import-packaging.json).
+
+**Lista vigente al cambiar de tarea:**
+- Terminado en este tramo: importador de layouts externos, informes/adjuntos/Git,
+  exportación Chroma paginada y procedencia hasta la captura de fuentes.
+- Siguiente principal: política y rutas restantes de inversa/recuperación sin
+  borrar historial utilizado. Revisar tamaños reales cuando exista su inventario.
+- Pendiente de ubicación: datos históricos del propietario; la consulta sigue
+  abierta. El ensayo sintético no cuenta como migración de esos datos.
+- Después: historial/presupuestos; evaluaciones real, humana, científica y global;
+  seguridad de dependencias; aceptación completa de12 páginas; revisión final.
+- Al final de todas las tareas gruesas: detalles secundarios. DD076 conserva48
+  avisos de lint; no repetir el ensayo por esos ajustes.
+
+Los43 escenarios amplios y las12 aceptaciones integrales siguen abiertos. No se
+promete compatibilidad con toda versión histórica de Chroma, ni coherencia con
+escritores antiguos activos. No hubo push, merge ni despliegue. El siguiente bloque
+aún no tiene hora de inicio: registrarla al comenzar, sin atribuirle esta espera.
+
+## Etapa anterior: recuperación tras reboot comprobada; siguen datos históricos
 
 Un proceso QEMU completa dos arranques con identificadores de kernel diferentes.
 La autoridad anterior rechaza su uso; los comandos públicos capturan su evidencia,

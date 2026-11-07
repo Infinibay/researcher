@@ -47,6 +47,10 @@ class BoundedReferenceReader:
         data = ReferenceStorage(self.upload_root).snapshot(
             reference, max_bytes=self.max_bytes
         )
+        byte_hash=hashlib.sha256(data).hexdigest()
+        imported=getattr(reference,'imported_provenance',None)
+        if imported is not None and byte_hash!=imported['sha256']:
+            raise SourceUnavailable('Imported fragment bytes changed; its historical provenance cannot describe this revision')
         if reference.mime_type in STRUCTURED_MIMES:
             from backend.research.parser_process import DocumentParser
 
@@ -75,9 +79,10 @@ class BoundedReferenceReader:
             content=content,
             provenance={
                 "reference_file_id": reference.id,
-                "byte_sha256": hashlib.sha256(data).hexdigest(),
+                "byte_sha256": byte_hash,
                 "file_size_bytes": len(data),
                 "mime_type": reference.mime_type,
                 **extraction,
+                **({'imported_history':imported['details']} if imported is not None else {}),
             },
         )

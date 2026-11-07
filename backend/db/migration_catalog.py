@@ -73,6 +73,7 @@ MIGRATIONS = (
     Migration(55, resource='model_settings_schema.sql'),
     Migration(56, resource='agent_messages_schema.sql'),
     Migration(57, resource='peer_archive_schema.sql'),
+    Migration(58, resource='reference_provenance_schema.sql'),
 )
 LATEST_VERSION = MIGRATIONS[-1].version
 

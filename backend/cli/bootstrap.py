@@ -39,6 +39,13 @@ def main(argv=None):
     check = commands.add_parser('check-host', help='Verify local host resources without inference or downloads')
     check.add_argument('--directory', required=True)
     check.add_argument('--probe', action='store_true', help='Also birth and retire one fixed no-op kernel child')
+    legacy = commands.add_parser('stage-legacy-host',help='Copy legacy SQL/files into a NEW pending host using explicit storage mappings')
+    legacy.add_argument('--database',required=True)
+    legacy.add_argument('--storage-manifest',required=True)
+    legacy.add_argument('--destination',required=True)
+    legacy.add_argument('--max-bytes',type=int,default=20*1024**3)
+    legacy.add_argument('--max-files',type=int,default=200000)
+    legacy.add_argument('--timeout',type=int,default=300)
     for command, description in (
         ('backup-host', 'Capture consistent installation data after closing native work'),
         ('verify-backup', 'Verify every backup object, path, database and manifest'),
@@ -58,7 +65,13 @@ def main(argv=None):
     from backend.runtime.bootstrap import initialize_authority, initialize_database
 
     try:
-        if options.command in ('backup-host', 'verify-backup', 'restore-host'):
+        if options.command == 'stage-legacy-host':
+            from backend.runtime.legacy_import import stage_legacy_host
+            from backend.runtime.host_installation import _read_json
+
+            result=stage_legacy_host(options.database,options.destination,manifest=_read_json(options.storage_manifest),
+                                     **{key:getattr(options,key) for key in ('max_bytes','max_files','timeout')})
+        elif options.command in ('backup-host', 'verify-backup', 'restore-host'):
             from backend.runtime.installation_backup import backup_installation, verify_backup
             from backend.runtime.installation_restore import restore_installation
 

@@ -1,0 +1,105 @@
+{
+  "base_commit": "df701f4",
+  "verified_at": "2026-11-07T04:45:39.568251+00:00",
+  "block_started_at": "2026-11-07T04:21:30+00:00",
+  "block_elapsed_seconds_to_verification": 1450,
+  "wheel_sha256": "9308011bd5e198aef61e0a44b74c02a71578ff1c86e39f4c6f4c3c8c178679cc",
+  "source_tests": {
+    "cases": 139,
+    "passed": 139,
+    "failed": 0,
+    "skipped": 0,
+    "seconds": 56.704
+  },
+  "installed_tests": {
+    "cases": 139,
+    "passed": 139,
+    "failed": 0,
+    "skipped": 0,
+    "backend_modules": 231,
+    "all_backend_imports_from_native_env": true,
+    "seconds": 57.704,
+    "exit_code": 0
+  },
+  "source_files_matching_wheel_and_installation": 593,
+  "product_files_matching": 319,
+  "documented_python_definitions": 43,
+  "synthetic_real_chroma_trial": {
+    "status": "passed",
+    "model_turns": 0,
+    "embedding_calls": 0,
+    "legacy_network_namespace": "none",
+    "real_account_copied": false,
+    "installed_backend": true,
+    "reference_id": 2,
+    "source_id": 1,
+    "preserved_fragments": 105,
+    "text_attachments": 104,
+    "metadata_only_records": 1,
+    "exact_capture_and_historical_provenance": true,
+    "legacy_report_unverified": true,
+    "service_exit": 143,
+    "native_http_read_verified": true
+  },
+  "import": {
+    "format": 1,
+    "status": "pending_enrollment",
+    "kind": "legacy-import",
+    "snapshot_id": "1bef1bb25d3c47d391f7de7e1a95171b",
+    "import_manifest": ".imports/1bef1bb25d3c47d391f7de7e1a95171b/manifest.json",
+    "import_manifest_sha256": "767b36d450af24ef862227e7fb2ac8f1b5abbc26ce84fc669075289f72b14977",
+    "model_turns": 0,
+    "old_work_replayed": false,
+    "reports_hydrated": 1,
+    "chroma_records": 105,
+    "source_schema": 17,
+    "schema_version": 58
+  },
+  "resource_observations": {
+    "native_version": "codex-cli 0.166.0",
+    "native_sha256": "b8a11fedf24b2dfb59a70c9e52b030f9a508dcd49cd2dd0d41956f4c785156b8",
+    "code_host_sha256": "657f4e902726e05867c937b583049d5997e057f8cd0ab40450633c9c9ef8d630",
+    "ken_version": "0.18.0",
+    "ken_artifacts_verified": 26,
+    "credential_snapshot_valid": true,
+    "remote_entitlement_verified": false
+  },
+  "verified_behaviors": [
+    "Explicit original schema17 SQL plus external filesystem reports, uploads and linked Git worktree relocation; preserve IDs and original application rows",
+    "Committed WAL capture and inactive partial output after actual child interruption, retry at new path",
+    "Real pinned Chroma1.5.9 export in no-network namespace: two collections, paginated105records,104text attachments,1metadata-only record",
+    "Same record ID across distinct collections preserved; operator project assignment independent of historical project_id metadata",
+    "Source capture preserves exact text and historical provenance; changed attachment bytes rejected",
+    "Schema58 immutable reference provenance; used-history inverse refused; full forward18-58 and41 child-interruption boundaries",
+    "Public installed CLI staging, fresh enrollment, paired native HTTP report/upload reads and wrong-project404; original service terminated",
+    "Legacy report remains unverified, no research_reports acceptance invented"
+  ],
+  "earlier_failures": [
+    {
+      "scope": "initial legacy import tests",
+      "result": "8 failing tests before implementation"
+    },
+    {
+      "scope": "first implementation trial",
+      "result": "4 passed,4 failed",
+      "cause": "Three byte-identity assertions used an unclosed SQLite fixture; one HTTP fixture used a mismatching pairing key. Fixture closure/key corrected; original-row preservation distinguished from SQLite checkpoint file changes."
+    },
+    {
+      "scope": "provenance source-capture regression",
+      "result": "Missing imported_history reproduced before producer/consumer change"
+    }
+  ],
+  "limits": [
+    "Synthetic data; actual owner data location remains unanswered and no owner data migrated",
+    "No live inference or embedding generation; no real account copied; Ken public resources checked but ranking not invoked in this trial",
+    "Compatibility demonstrated with Chroma1.5.9 fixture, not every historical storage version; stopped source writers required",
+    "Selected tests, not current global evaluation; all43 broad scenarios and12 full-page acceptances remain open",
+    "Exporter does not claim hostile filesystem race resistance or coherent live Chroma writes; copying requires extra disk space",
+    "Later migration inverse/recovery policy and actual-data acceptance remain separate macro work"
+  ],
+  "lint": {
+    "issues": 48,
+    "deferred_as": "DD076",
+    "receipt": "legacy-import-lint.json"
+  }
+}

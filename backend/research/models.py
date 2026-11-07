@@ -299,11 +299,14 @@ class SourceTooLarge(ResearchInputError):
 
 @dataclass(frozen=True)
 class ReferenceRecord:
+    """Identify an upload and optional byte-bound historical provenance preserved during capture."""
+
     id: int
     project_id: int
     filename: str
     path: str
     mime_type: str
+    imported_provenance: dict | None = None
 
 
 def validate_report_finding(finding: dict, evidence: list[dict]) -> None:

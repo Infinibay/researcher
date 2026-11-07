@@ -7712,3 +7712,31 @@ acceptance remains distinct from this controlled rehearsal. All43 scenarios rema
 open and0of12pages fullyaccepted. Next principal task: historical-data/import
 formats and later recovery/inverses; then history/budgets, current human/scientific/
 global evaluations, dependency security,12page acceptance, details and final review.
+
+
+## 2026-11-07 — legacy import and provenance checkpoint
+
+Started04:21:30 UTC, verified2026-11-07T04:45:39.568251+00:00; measured24 min 10 s to
+verification. Base df701f4. Implemented explicit schema<=17 staging into a new
+pending installation, mapped reports/uploads/Git, isolated locked Chroma1.5.9
+export and schema58 immutable byte-bound imported provenance through normal
+source capture. Original application rows preserved; SQLite checkpoint may
+change physical files. Full import evidence is separate from the small enrollment
+receipt. No old task replay or fabricated full-document/review claims.
+
+139 source and139 installed selected tests pass;593 Python/SQL files match,
+319 productive,43 new/changed definitions documented.41 migration-interruption
+boundaries covered. Live installed trial: two actual Chroma collections,
+105 records/104text/1metadata-only, page boundary100, exact source capture and
+scoped native HTTP after fresh enrollment. Service exit143; no inference,
+embedding generation or real account. Wheel9308011bd5e198aef61e0a44b74c02a71578ff1c86e39f4c6f4c3c8c178679cc.
+Earlier fixture/pairing/provenance failures retained in legacy-import-results.json.
+48 lint findings deferred as DD076; no global-suite claim.
+
+User transition policy remains authoritative in execution-dashboard.md: publish
+done/current/pending plus measured time at each principal-task transition; all
+macro capabilities before fine details, retained after compaction. Next main
+block: remaining inverse/recovery policy without deleting used history. Actual
+owner data location unanswered; all43 broad scenarios/12 full-page acceptances
+remain open, followed by history/budgets, real/human/scientific/global evaluation,
+dependency security and final independent review. No push/merge/deploy.

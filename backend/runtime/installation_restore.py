@@ -20,7 +20,7 @@ def relocated(value, original, destination):
         return value
 
 
-def _git_metadata(root, entries, original, *, write=True):
+def _git_metadata(root, entries, original, *, write=True, remap=None):
     """Repair only Git administrative path files, preserving commits, branches, indexes and dirty worktrees."""
     changes = []
     for entry in entries:
@@ -50,9 +50,9 @@ def _git_metadata(root, entries, original, *, write=True):
             old = value.removeprefix(prefix)
             base = original / path.parent.parent if is_alternates else original / path.parent
             referenced = Path(os.path.normpath(base / old))
-            if not referenced.is_relative_to(original):
+            if remap is None and not referenced.is_relative_to(original):
                 raise ValueError('Git metadata references storage outside the captured installation')
-            new = relocated(old, original, root)
+            new = str(remap(referenced)) if remap is not None else relocated(old, original, root)
             lines.append(prefix + new + newline)
         updated = ''.join(lines).encode()
         if updated != raw and write:

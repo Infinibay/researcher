@@ -1,0 +1,34 @@
+{
+  "base_commit": "df701f4",
+  "wheel": "researcher-0.1.0-cp312-cp312-linux_x86_64.whl",
+  "wheel_sha256": "9308011bd5e198aef61e0a44b74c02a71578ff1c86e39f4c6f4c3c8c178679cc",
+  "source_files_matching_wheel_and_installation": 593,
+  "product_files_matching": 319,
+  "observed": {
+    "cases": 139,
+    "passed": 139,
+    "failed": 0,
+    "skipped": 0,
+    "backend_modules": 231,
+    "all_backend_imports_from_native_env": true,
+    "seconds": 57.704,
+    "exit_code": 0
+  },
+  "tests": [
+    "backend/tests/runtime/test_legacy_import.py",
+    "backend/tests/runtime/test_installation_backup.py",
+    "backend/tests/runtime/test_restored_enrollment.py",
+    "backend/tests/runtime/test_reboot_backup.py",
+    "backend/tests/runtime/test_migration_chain.py",
+    "backend/tests/cli/test_bootstrap.py",
+    "backend/tests/research/test_persistence.py",
+    "backend/tests/research/test_acquisition.py"
+  ],
+  "real_model_turns": 0,
+  "limits": [
+    "Selected tests, not the global suite",
+    "Synthetic managed installation data, no historical user-data migration",
+    "Legacy staging, provenance and related recovery tests; real Chroma/native HTTP trial is recorded separately",
+    "Local Git, HTTP and SQLite are real; no model calls or remote repositories"
+  ]
+}

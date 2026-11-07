@@ -1,0 +1,1442 @@
+[
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 69,
+      "row": 70
+    },
+    "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/cli/bootstrap.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "            from backend.runtime.host_installation import _read_json\n            from backend.runtime.legacy_import import stage_legacy_host\n",
+          "end_location": {
+            "column": 1,
+            "row": 71
+          },
+          "location": {
+            "column": 1,
+            "row": 69
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 13,
+      "row": 69
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 69,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  },
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 82,
+      "row": 76
+    },
+    "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/cli/bootstrap.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "            from backend.runtime.installation_backup import (\n                backup_installation,\n                verify_backup,\n            )\n            from backend.runtime.installation_restore import restore_installation\n",
+          "end_location": {
+            "column": 1,
+            "row": 77
+          },
+          "location": {
+            "column": 1,
+            "row": 75
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 13,
+      "row": 75
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 75,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  },
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 69,
+      "row": 88
+    },
+    "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/cli/bootstrap.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "            from backend.runtime.host_installation import _read_json\n            from backend.runtime.restored_enrollment import enroll_restored_host\n",
+          "end_location": {
+            "column": 1,
+            "row": 89
+          },
+          "location": {
+            "column": 1,
+            "row": 87
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 13,
+      "row": 87
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 87,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  },
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 86,
+      "row": 92
+    },
+    "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/cli/bootstrap.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "            from backend.runtime.host_installation import _read_json, initialize_host\n",
+          "end_location": {
+            "column": 1,
+            "row": 93
+          },
+          "location": {
+            "column": 1,
+            "row": 92
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 13,
+      "row": 92
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 92,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  },
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 79,
+      "row": 12
+    },
+    "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/runtime/installation_restore.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "import os\nimport sqlite3\nfrom contextlib import closing\nfrom pathlib import Path\nfrom uuid import uuid4\n\nfrom backend.runtime.bootstrap import _sync_directory\nfrom backend.runtime.host_installation import _write_new\nfrom backend.runtime.installation_backup import (\n    _verify_backup,\n    database_receipt,\n    new_directory,\n)\nfrom backend.runtime.snapshot_files import CopyBudget, copy_regular, open_file\n\n\n",
+          "end_location": {
+            "column": 1,
+            "row": 15
+          },
+          "location": {
+            "column": 1,
+            "row": 3
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 1,
+      "row": 3
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 3,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  },
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 82,
+      "row": 9
+    },
+    "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/runtime/legacy_chroma.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "import hashlib\nimport json\nfrom collections import Counter\nfrom pathlib import Path\n\nfrom backend.research.reference_storage import ReferenceStorage\nfrom backend.runtime.snapshot_files import copy_regular, open_file, relative_name\n\n\n",
+          "end_location": {
+            "column": 1,
+            "row": 12
+          },
+          "location": {
+            "column": 1,
+            "row": 3
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 1,
+      "row": 3
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 3,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  },
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 103,
+      "row": 20
+    },
+    "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/runtime/legacy_import.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "import hashlib\nimport json\nimport os\nimport re\nimport sqlite3\nfrom contextlib import closing\nfrom pathlib import Path\nfrom uuid import uuid4\n\nfrom backend.runtime.bootstrap import _sync_directory\nfrom backend.runtime.host_installation import _write_new\nfrom backend.runtime.installation_backup import (\n    _database_copy,\n    database_receipt,\n    new_directory,\n)\nfrom backend.runtime.installation_restore import _git_metadata\nfrom backend.runtime.snapshot_files import (\n    CopyBudget,\n    copy_regular,\n    digest_file,\n    inventory,\n    open_file,\n)\n\n\n",
+          "end_location": {
+            "column": 1,
+            "row": 23
+          },
+          "location": {
+            "column": 1,
+            "row": 7
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 1,
+      "row": 7
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 7,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  },
+  {
+    "cell": null,
+    "code": "F401",
+    "end_location": {
+      "column": 12,
+      "row": 8
+    },
+    "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/runtime/legacy_import.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "",
+          "end_location": {
+            "column": 1,
+            "row": 9
+          },
+          "location": {
+            "column": 1,
+            "row": 8
+          }
+        }
+      ],
+      "message": "Remove unused import: `json`"
+    },
+    "location": {
+      "column": 8,
+      "row": 8
+    },
+    "message": "`json` imported but unused",
+    "name": "unused-import",
+    "noqa_row": 8,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unused-import"
+  },
+  {
+    "cell": null,
+    "code": "TRY004",
+    "end_location": {
+      "column": 69,
+      "row": 28
+    },
+    "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/runtime/legacy_import.py",
+    "fix": null,
+    "location": {
+      "column": 9,
+      "row": 28
+    },
+    "message": "Prefer `TypeError` exception for invalid type",
+    "name": "type-check-without-type-error",
+    "noqa_row": 28,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/type-check-without-type-error"
+  },
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 63,
+      "row": 12
+    },
+    "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/tests/runtime/test_legacy_import.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "import hashlib\nimport json\nimport sqlite3\nfrom contextlib import closing\nfrom pathlib import Path\n\nimport pytest\n\nfrom backend.tests.runtime.test_host_installation import host_assets\nfrom backend.tests.runtime.test_installation_backup import git\n\n\n",
+          "end_location": {
+            "column": 1,
+            "row": 15
+          },
+          "location": {
+            "column": 1,
+            "row": 3
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 1,
+      "row": 3
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 3,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  },
+  {
+    "cell": null,
+    "code": "F401",
+    "end_location": {
+      "column": 69,
+      "row": 11
+    },
+    "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/tests/runtime/test_legacy_import.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "",
+          "end_location": {
+            "column": 1,
+            "row": 12
+          },
+          "location": {
+            "column": 1,
+            "row": 11
+          }
+        }
+      ],
+      "message": "Remove unused import: `backend.tests.runtime.test_host_installation.host_assets`"
+    },
+    "location": {
+      "column": 58,
+      "row": 11
+    },
+    "message": "`backend.tests.runtime.test_host_installation.host_assets` imported but unused",
+    "name": "unused-import",
+    "noqa_row": 11,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unused-import"
+  },
+  {
+    "cell": null,
+    "code": "F811",
+    "end_location": {
+      "column": 95,
+      "row": 50
+    },
+    "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/tests/runtime/test_legacy_import.py",
+    "fix": null,
+    "location": {
+      "column": 84,
+      "row": 50
+    },
+    "message": "Redefinition of unused `host_assets` from line 11: `host_assets` redefined here",
+    "name": "redefined-while-unused",
+    "noqa_row": 50,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/redefined-while-unused"
+  },
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 72,
+      "row": 55
+    },
+    "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/tests/runtime/test_legacy_import.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "    from backend.runtime.host_installation import host_environment\n    from backend.runtime.installation_backup import backup_installation\n    from backend.runtime.legacy_import import stage_legacy_host\n    from backend.runtime.restored_enrollment import enroll_restored_host\n",
+          "end_location": {
+            "column": 1,
+            "row": 56
+          },
+          "location": {
+            "column": 1,
+            "row": 52
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 5,
+      "row": 52
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 52,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  },
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 75,
+      "row": 111
+    },
+    "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/tests/runtime/test_legacy_import.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "    from backend.api import config\n    from backend.api.local_access import LocalAccess\n    from backend.api.main import create_app\n    from backend.runtime.legacy_import import stage_legacy_host\n    from backend.tests.runtime.test_workspace_delivery import owner_client\n",
+          "end_location": {
+            "column": 1,
+            "row": 112
+          },
+          "location": {
+            "column": 1,
+            "row": 107
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 5,
+      "row": 107
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 107,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  },
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 57,
+      "row": 184
+    },
+    "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/tests/runtime/test_legacy_import.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "    from backend.research.acquisition import BoundedReferenceReader\n    from backend.research.service import ResearchService\n    from backend.research.sqlite_store import SQLiteResearchStore\n",
+          "end_location": {
+            "column": 1,
+            "row": 185
+          },
+          "location": {
+            "column": 1,
+            "row": 182
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 5,
+      "row": 182
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 182,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  },
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 58,
+      "row": 195
+    },
+    "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/tests/runtime/test_legacy_import.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "    from backend.db.reference_provenance_migration import (\n        restore_reference_provenance_schema,\n    )\n    from backend.research.models import SourceUnavailable\n",
+          "end_location": {
+            "column": 1,
+            "row": 196
+          },
+          "location": {
+            "column": 1,
+            "row": 194
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 5,
+      "row": 194
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 194,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  },
+  {
+    "cell": null,
+    "code": "SIM117",
+    "end_location": {
+      "column": 67,
+      "row": 197
+    },
+    "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/tests/runtime/test_legacy_import.py",
+    "fix": null,
+    "location": {
+      "column": 5,
+      "row": 196
+    },
+    "message": "Use a single `with` statement with multiple contexts instead of nested `with` statements",
+    "name": "multiple-with-statements",
+    "noqa_row": 196,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/multiple-with-statements"
+  },
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 67,
+      "row": 249
+    },
+    "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/tests/runtime/test_legacy_import.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "    import subprocess\n    import sys\n\n    from backend.runtime.host_installation import host_environment\n    from backend.runtime.legacy_import import stage_legacy_host\n",
+          "end_location": {
+            "column": 1,
+            "row": 250
+          },
+          "location": {
+            "column": 1,
+            "row": 246
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 5,
+      "row": 246
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 246,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  },
+  {
+    "cell": null,
+    "code": "PLW1510",
+    "end_location": {
+      "column": 26,
+      "row": 261
+    },
+    "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/tests/runtime/test_legacy_import.py",
+    "fix": {
+      "applicability": "displayonly",
+      "edits": [
+        {
+          "content": "check=False, ",
+          "end_location": {
+            "column": 116,
+            "row": 261
+          },
+          "location": {
+            "column": 116,
+            "row": 261
+          }
+        }
+      ],
+      "message": "Add explicit `check=False`"
+    },
+    "location": {
+      "column": 12,
+      "row": 261
+    },
+    "message": "`subprocess.run` without explicit `check` argument",
+    "name": "subprocess-run-without-check",
+    "noqa_row": 261,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/subprocess-run-without-check"
+  },
+  {
+    "cell": null,
+    "code": "F401",
+    "end_location": {
+      "column": 12,
+      "row": 3
+    },
+    "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/tests/runtime/test_migration_chain.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "",
+          "end_location": {
+            "column": 1,
+            "row": 4
+          },
+          "location": {
+            "column": 1,
+            "row": 3
+          }
+        }
+      ],
+      "message": "Remove unused import: `json`"
+    },
+    "location": {
+      "column": 8,
+      "row": 3
+    },
+    "message": "`json` imported but unused",
+    "name": "unused-import",
+    "noqa_row": 3,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unused-import"
+  },
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 72,
+      "row": 27
+    },
+    "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/tests/runtime/test_migration_chain.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "    from backend.db.migration_catalog import LATEST_VERSION, MIGRATIONS\n    from backend.tools.base.db import ensure_migrations\n",
+          "end_location": {
+            "column": 1,
+            "row": 28
+          },
+          "location": {
+            "column": 1,
+            "row": 26
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 5,
+      "row": 26
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 26,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  },
+  {
+    "cell": null,
+    "code": "PLW1510",
+    "end_location": {
+      "column": 28,
+      "row": 71
+    },
+    "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/tests/runtime/test_migration_chain.py",
+    "fix": {
+      "applicability": "displayonly",
+      "edits": [
+        {
+          "content": "check=False, ",
+          "end_location": {
+            "column": 29,
+            "row": 72
+          },
+          "location": {
+            "column": 29,
+            "row": 72
+          }
+        }
+      ],
+      "message": "Add explicit `check=False`"
+    },
+    "location": {
+      "column": 14,
+      "row": 71
+    },
+    "message": "`subprocess.run` without explicit `check` argument",
+    "name": "subprocess-run-without-check",
+    "noqa_row": 71,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/subprocess-run-without-check"
+  },
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 69,
+      "row": 11
+    },
+    "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/tests/runtime/test_reboot_backup.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "import json\nimport sqlite3\nfrom pathlib import Path\nfrom uuid import uuid4\n\nimport pytest\n\nfrom backend.tests.runtime.test_host_installation import host_assets\nfrom backend.tests.runtime.test_installation_backup import installation\n\n\n",
+          "end_location": {
+            "column": 1,
+            "row": 14
+          },
+          "location": {
+            "column": 1,
+            "row": 3
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 1,
+      "row": 3
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 3,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  },
+  {
+    "cell": null,
+    "code": "F401",
+    "end_location": {
+      "column": 72,
+      "row": 10
+    },
+    "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/tests/runtime/test_reboot_backup.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "",
+          "end_location": {
+            "column": 1,
+            "row": 11
+          },
+          "location": {
+            "column": 1,
+            "row": 10
+          }
+        }
+      ],
+      "message": "Remove unused import: `backend.tests.runtime.test_installation_backup.installation`"
+    },
+    "location": {
+      "column": 60,
+      "row": 10
+    },
+    "message": "`backend.tests.runtime.test_installation_backup.installation` imported but unused",
+    "name": "unused-import",
+    "noqa_row": 10,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unused-import"
+  },
+  {
+    "cell": null,
+    "code": "F401",
+    "end_location": {
+      "column": 69,
+      "row": 11
+    },
+    "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/tests/runtime/test_reboot_backup.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "",
+          "end_location": {
+            "column": 1,
+            "row": 12
+          },
+          "location": {
+            "column": 1,
+            "row": 11
+          }
+        }
+      ],
+      "message": "Remove unused import: `backend.tests.runtime.test_host_installation.host_assets`"
+    },
+    "location": {
+      "column": 58,
+      "row": 11
+    },
+    "message": "`backend.tests.runtime.test_host_installation.host_assets` imported but unused",
+    "name": "unused-import",
+    "noqa_row": 11,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unused-import"
+  },
+  {
+    "cell": null,
+    "code": "F811",
+    "end_location": {
+      "column": 90,
+      "row": 24
+    },
+    "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/tests/runtime/test_reboot_backup.py",
+    "fix": null,
+    "location": {
+      "column": 78,
+      "row": 24
+    },
+    "message": "Redefinition of unused `installation` from line 10: `installation` redefined here",
+    "name": "redefined-while-unused",
+    "noqa_row": 24,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/redefined-while-unused"
+  },
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 50,
+      "row": 28
+    },
+    "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/tests/runtime/test_reboot_backup.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "    from backend.runtime import authority_journal\n    from backend.runtime.authority_journal import (\n        AuthorityUncertain,\n        WitnessedAuthorityJournal,\n    )\n    from backend.runtime.reboot_authority import frozen_reboot_evidence\n",
+          "end_location": {
+            "column": 1,
+            "row": 29
+          },
+          "location": {
+            "column": 1,
+            "row": 26
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 5,
+      "row": 26
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 26,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  },
+  {
+    "cell": null,
+    "code": "SIM117",
+    "end_location": {
+      "column": 48,
+      "row": 32
+    },
+    "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/tests/runtime/test_reboot_backup.py",
+    "fix": null,
+    "location": {
+      "column": 5,
+      "row": 31
+    },
+    "message": "Use a single `with` statement with multiple contexts instead of nested `with` statements",
+    "name": "multiple-with-statements",
+    "noqa_row": 31,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/multiple-with-statements"
+  },
+  {
+    "cell": null,
+    "code": "SIM117",
+    "end_location": {
+      "column": 63,
+      "row": 35
+    },
+    "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/tests/runtime/test_reboot_backup.py",
+    "fix": null,
+    "location": {
+      "column": 5,
+      "row": 34
+    },
+    "message": "Use a single `with` statement with multiple contexts instead of nested `with` statements",
+    "name": "multiple-with-statements",
+    "noqa_row": 34,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/multiple-with-statements"
+  },
+  {
+    "cell": null,
+    "code": "F811",
+    "end_location": {
+      "column": 70,
+      "row": 40
+    },
+    "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/tests/runtime/test_reboot_backup.py",
+    "fix": null,
+    "location": {
+      "column": 58,
+      "row": 40
+    },
+    "message": "Redefinition of unused `installation` from line 10: `installation` redefined here",
+    "name": "redefined-while-unused",
+    "noqa_row": 40,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/redefined-while-unused"
+  },
+  {
+    "cell": null,
+    "code": "F811",
+    "end_location": {
+      "column": 106,
+      "row": 40
+    },
+    "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/tests/runtime/test_reboot_backup.py",
+    "fix": null,
+    "location": {
+      "column": 95,
+      "row": 40
+    },
+    "message": "Redefinition of unused `host_assets` from line 11: `host_assets` redefined here",
+    "name": "redefined-while-unused",
+    "noqa_row": 40,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/redefined-while-unused"
+  },
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 94,
+      "row": 48
+    },
+    "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/tests/runtime/test_reboot_backup.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "    from backend.db.peer_archive_migration import restore_peer_archive_schema\n    from backend.db.reference_provenance_migration import (\n        restore_reference_provenance_schema,\n    )\n    from backend.runtime.authority_journal import WitnessedAuthorityJournal\n    from backend.runtime.installation_backup import backup_installation, verify_backup\n    from backend.runtime.installation_restore import restore_installation\n    from backend.runtime.peer_process import boot_id, observer_namespace\n    from backend.runtime.restored_enrollment import enroll_restored_host\n",
+          "end_location": {
+            "column": 1,
+            "row": 49
+          },
+          "location": {
+            "column": 1,
+            "row": 42
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 5,
+      "row": 42
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 42,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  },
+  {
+    "cell": null,
+    "code": "F811",
+    "end_location": {
+      "column": 78,
+      "row": 89
+    },
+    "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/tests/runtime/test_reboot_backup.py",
+    "fix": null,
+    "location": {
+      "column": 66,
+      "row": 89
+    },
+    "message": "Redefinition of unused `installation` from line 10: `installation` redefined here",
+    "name": "redefined-while-unused",
+    "noqa_row": 89,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/redefined-while-unused"
+  },
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 56,
+      "row": 93
+    },
+    "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/tests/runtime/test_reboot_backup.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "    from backend.db.peer_archive_migration import restore_peer_archive_schema\n    from backend.db.reference_provenance_migration import (\n        restore_reference_provenance_schema,\n    )\n    from backend.tools.base.db import ensure_migrations\n",
+          "end_location": {
+            "column": 1,
+            "row": 94
+          },
+          "location": {
+            "column": 1,
+            "row": 91
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 5,
+      "row": 91
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 91,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  },
+  {
+    "cell": null,
+    "code": "F811",
+    "end_location": {
+      "column": 61,
+      "row": 111
+    },
+    "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/tests/runtime/test_reboot_backup.py",
+    "fix": null,
+    "location": {
+      "column": 49,
+      "row": 111
+    },
+    "message": "Redefinition of unused `installation` from line 10: `installation` redefined here",
+    "name": "redefined-while-unused",
+    "noqa_row": 111,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/redefined-while-unused"
+  },
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 69,
+      "row": 114
+    },
+    "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/tests/runtime/test_reboot_backup.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "    from backend.runtime.authority_journal import AuthorityUncertain\n    from backend.runtime.installation_backup import backup_installation, verify_backup\n",
+          "end_location": {
+            "column": 1,
+            "row": 115
+          },
+          "location": {
+            "column": 1,
+            "row": 113
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 5,
+      "row": 113
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 113,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  },
+  {
+    "cell": null,
+    "code": "F811",
+    "end_location": {
+      "column": 70,
+      "row": 136
+    },
+    "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/tests/runtime/test_reboot_backup.py",
+    "fix": null,
+    "location": {
+      "column": 58,
+      "row": 136
+    },
+    "message": "Redefinition of unused `installation` from line 10: `installation` redefined here",
+    "name": "redefined-while-unused",
+    "noqa_row": 136,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/redefined-while-unused"
+  },
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 92,
+      "row": 138
+    },
+    "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/tests/runtime/test_reboot_backup.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "    from backend.runtime.reboot_authority import (\n        frozen_reboot_evidence,\n        prior_kernel_peers,\n    )\n",
+          "end_location": {
+            "column": 1,
+            "row": 139
+          },
+          "location": {
+            "column": 1,
+            "row": 138
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 5,
+      "row": 138
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 138,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  },
+  {
+    "cell": null,
+    "code": "F811",
+    "end_location": {
+      "column": 88,
+      "row": 151
+    },
+    "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/tests/runtime/test_reboot_backup.py",
+    "fix": null,
+    "location": {
+      "column": 76,
+      "row": 151
+    },
+    "message": "Redefinition of unused `installation` from line 10: `installation` redefined here",
+    "name": "redefined-while-unused",
+    "noqa_row": 151,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/redefined-while-unused"
+  },
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 72,
+      "row": 154
+    },
+    "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/tests/runtime/test_reboot_backup.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "    from backend.runtime.authority_journal import (\n        WitnessedAuthorityJournal,\n        _apply,\n        _hash,\n    )\n    from backend.runtime.reboot_authority import frozen_reboot_evidence\n",
+          "end_location": {
+            "column": 1,
+            "row": 155
+          },
+          "location": {
+            "column": 1,
+            "row": 153
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 5,
+      "row": 153
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 153,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  },
+  {
+    "cell": null,
+    "code": "SIM117",
+    "end_location": {
+      "column": 43,
+      "row": 158
+    },
+    "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/tests/runtime/test_reboot_backup.py",
+    "fix": null,
+    "location": {
+      "column": 5,
+      "row": 157
+    },
+    "message": "Use a single `with` statement with multiple contexts instead of nested `with` statements",
+    "name": "multiple-with-statements",
+    "noqa_row": 157,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/multiple-with-statements"
+  },
+  {
+    "cell": null,
+    "code": "F811",
+    "end_location": {
+      "column": 69,
+      "row": 173
+    },
+    "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/tests/runtime/test_reboot_backup.py",
+    "fix": null,
+    "location": {
+      "column": 57,
+      "row": 173
+    },
+    "message": "Redefinition of unused `installation` from line 10: `installation` redefined here",
+    "name": "redefined-while-unused",
+    "noqa_row": 173,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/redefined-while-unused"
+  },
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 69,
+      "row": 176
+    },
+    "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/tests/runtime/test_reboot_backup.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "    from backend.runtime.authority_journal import AuthorityUncertain\n    from backend.runtime.reboot_authority import frozen_reboot_evidence\n",
+          "end_location": {
+            "column": 1,
+            "row": 177
+          },
+          "location": {
+            "column": 1,
+            "row": 175
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 5,
+      "row": 175
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 175,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  },
+  {
+    "cell": null,
+    "code": "SIM117",
+    "end_location": {
+      "column": 48,
+      "row": 181
+    },
+    "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/tests/runtime/test_reboot_backup.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "    with pytest.raises(AuthorityUncertain), frozen_reboot_evidence(authority):pass",
+          "end_location": {
+            "column": 52,
+            "row": 181
+          },
+          "location": {
+            "column": 1,
+            "row": 180
+          }
+        }
+      ],
+      "message": "Combine `with` statements"
+    },
+    "location": {
+      "column": 5,
+      "row": 180
+    },
+    "message": "Use a single `with` statement with multiple contexts instead of nested `with` statements",
+    "name": "multiple-with-statements",
+    "noqa_row": 180,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/multiple-with-statements"
+  },
+  {
+    "cell": null,
+    "code": "F811",
+    "end_location": {
+      "column": 67,
+      "row": 184
+    },
+    "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/tests/runtime/test_reboot_backup.py",
+    "fix": null,
+    "location": {
+      "column": 55,
+      "row": 184
+    },
+    "message": "Redefinition of unused `installation` from line 10: `installation` redefined here",
+    "name": "redefined-while-unused",
+    "noqa_row": 184,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/redefined-while-unused"
+  },
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 13,
+      "row": 15
+    },
+    "filename": "/home/andres/.codex/worktrees/b09e/researcher/evals/operation/legacy_import.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "import argparse\nimport hashlib\nimport importlib.util\nimport json\nimport os\nimport socket\nimport sqlite3\nimport subprocess\nimport sys\nfrom contextlib import closing\nfrom pathlib import Path\n\nimport httpx\n\n",
+          "end_location": {
+            "column": 1,
+            "row": 18
+          },
+          "location": {
+            "column": 1,
+            "row": 3
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 1,
+      "row": 3
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 3,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  },
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 57,
+      "row": 64
+    },
+    "filename": "/home/andres/.codex/worktrees/b09e/researcher/evals/operation/legacy_import.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "    from backend.research.acquisition import BoundedReferenceReader\n    from backend.research.service import ResearchService\n    from backend.research.sqlite_store import SQLiteResearchStore\n",
+          "end_location": {
+            "column": 1,
+            "row": 65
+          },
+          "location": {
+            "column": 1,
+            "row": 62
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 5,
+      "row": 62
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 62,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  },
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 12,
+      "row": 23
+    },
+    "filename": "/home/andres/.codex/worktrees/b09e/researcher/scripts/export_legacy_chroma.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "import argparse\nimport hashlib\nimport importlib.metadata\nimport json\nimport os\nimport shutil\nimport sqlite3\nimport stat\nimport time\nfrom contextlib import closing\nfrom pathlib import Path\n\n\n",
+          "end_location": {
+            "column": 1,
+            "row": 26
+          },
+          "location": {
+            "column": 1,
+            "row": 13
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 1,
+      "row": 13
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 13,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  }
+]
