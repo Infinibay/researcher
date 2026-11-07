@@ -1,0 +1,53 @@
+{
+  "native_status": "failed",
+  "issue": {
+    "code": "execution_limit",
+    "execution_budget": {
+      "delivery_advice": {
+        "basis": "Quarter floor or three observed increments with 25% growth; heuristic, not reserved quota.",
+        "largest_token_increment": null,
+        "token_margin": 250
+      },
+      "limits": {
+        "max_answer_bytes": 200000,
+        "max_observed_tokens": 1000,
+        "max_tool_calls": 6,
+        "max_turns": 1,
+        "no_progress_seconds": 10,
+        "wall_seconds": 30
+      },
+      "observed": {
+        "elapsed_seconds": 0.3761594929965213,
+        "host_tool_requests_admitted": 6,
+        "tokens": null,
+        "tool_starts": 7
+      },
+      "phase": "deliver",
+      "remaining": {
+        "observed_tokens": null,
+        "tool_starts": 0,
+        "wall_seconds": 29.62384050700348
+      },
+      "tool_count_basis": "Unique tool identities from host requests or native start/completion observations. Host requests are bounded before dispatch; native-only effects may already have occurred."
+    },
+    "inference_started": true,
+    "limit_kind": "tools",
+    "message": "La ejecución se detuvo al alcanzar el límite de herramientas. Conservamos el trabajo y los recibos guardados: un borrador puede existir aunque falte la entrega o la explicación final. Revisa la tarea y sus artefactos antes de decidir cómo continuar; este intento no se repetirá por su cuenta.",
+    "next_action": "inspect_saved_work"
+  },
+  "counts": {
+    "research_sources": 1,
+    "findings": 1,
+    "research_reports": 1,
+    "runtime_result_proposals": 0,
+    "runtime_result_acceptances": 0,
+    "runtime_inference_dispatches": 1,
+    "nonclosed_peers": 0,
+    "active_grants": 0
+  },
+  "tool_request_count": 7,
+  "generation": "controlled_native_without_item_started_notifications",
+  "ken": "controlled_mcp",
+  "actual_kernel_broker_sqlite": true,
+  "model_calls": 0
+}

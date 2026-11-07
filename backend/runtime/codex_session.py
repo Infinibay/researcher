@@ -1,8 +1,9 @@
 """Candidate native session/control boundary, independent of the legacy engine.
 
-Native completion describes a turn, never acceptance of a product task. Tool
-and token bounds are observation-triggered fuses: they cannot revoke an action
-already dispatched by the native runtime or predict unreported consumption.
+Native completion describes a turn, never acceptance of a product task. Host
+tool requests consume allowance before dispatch. Native-owned tool/token bounds
+remain observation fuses: they cannot revoke an already dispatched native action
+or predict unreported consumption.
 """
 
 from __future__ import annotations
@@ -17,7 +18,7 @@ from dataclasses import asdict, dataclass
 from pathlib import Path
 from typing import Any, Self
 
-from backend.runtime.codex_rpc import JsonRpcClient, RpcDisconnected, RpcError
+from backend.runtime.codex_rpc import JsonRpcClient, RpcDisconnected, RpcError, RpcProtocolError
 from backend.runtime.contracts import DeliveryReady
 
 
@@ -39,6 +40,7 @@ class NativeInputRequired(RuntimeError):
     """A request needs an explicit host decision before execution can continue."""
 
     def __init__(self, request: dict[str, Any]) -> None:
+        """Retain the exact native request for reconciliation without granting a host decision or silently dispatching work."""
         super().__init__("Native runtime requested input; execution was interrupted")
         self.request = request
 
@@ -83,6 +85,8 @@ class ExecutionLimits:
 
 @dataclass(frozen=True)
 class NativeTurnResult:
+    """Record a scoped native outcome and observed session usage, independently of product review, acceptance or publication."""
+
     thread_id: str
     turn_id: str
     status: str
@@ -157,12 +161,16 @@ class CodexSession:
         self._turn_ready = asyncio.Event()
         self._cancel_requested = asyncio.Event()
         self._cancellation: asyncio.Task[None] | None = None
-        self._tool_items: set[tuple[str, str]] = set()
+        self._tool_items: dict[tuple[str, str], str] = {}
+        self._host_tool_calls: set[tuple[str, str]] = set()
+        self._completed_tool_items: set[tuple[str, str]] = set()
         self._started_at: float | None = None
 
     def budget_status(self):
         """Report observed session consumption and turn time, never billing or guaranteed remaining quota.
 
+        The historical tool_starts field now counts unique tool identities from
+        host requests or native lifecycle observations, not only start events.
         Native token/item events may lag actual work. Reserve an advisory margin
         for the unreported step, artifact delivery and final explanation, with
         growth allowance. Update increments are observations, not guaranteed
@@ -193,7 +201,9 @@ class CodexSession:
         return {
             "limits": asdict(self.limits),
             "observed": {"elapsed_seconds": elapsed, "tool_starts": len(self._tool_items),
+                         "host_tool_requests_admitted": len(self._host_tool_calls),
                          "tokens": self.observed_tokens},
+            "tool_count_basis": "Unique tool identities from host requests or native start/completion observations. Host requests are bounded before dispatch; native-only effects may already have occurred.",
             "remaining": remaining,
             "delivery_advice": {
                 "largest_token_increment": self._largest_token_increment,
@@ -213,7 +223,31 @@ class CodexSession:
         """Capture bounded host observations at detection, before process teardown changes elapsed time."""
         return ExecutionLimitExceeded(message, kind=kind, budget=self.budget_status())
 
+    def _record_tool(self, identifier, kind):
+        """Deduplicate one native tool identity across request/start/completion and retain the first over-limit observation without authorizing another host effect."""
+        if not isinstance(identifier, str) or not identifier:
+            raise RpcProtocolError('Native tool activity requires an original nonempty item identity')
+        key = (self.turn_id, identifier)
+        previous = self._tool_items.get(key)
+        if previous is not None and previous != kind:
+            raise RpcProtocolError('Native tool identity changed its tool kind')
+        self._tool_items[key] = kind
+        if len(self._tool_items) > self.limits.max_tool_calls:
+            raise self._exceeded('tools', 'Session tool budget exceeded before any further host dispatch')
+        return key
+
+    def _reserve_host_tool(self, params):
+        """Require original turn/call identity and consume its allowance before invoking the host; repeated RPCs never repeat an uncertain effect."""
+        if params.get('turnId') != self.turn_id:
+            raise RpcProtocolError('Host tool request requires its original active turn identity')
+        identifier = params.get('callId')
+        if isinstance(identifier, str) and (self.turn_id, identifier) in self._host_tool_calls:
+            raise RpcProtocolError('Repeated host tool call identity; reconcile the original receipt without replay')
+        key = self._record_tool(identifier, 'dynamicToolCall')
+        self._host_tool_calls.add(key)
+
     async def __aenter__(self) -> Self:
+        """Open the owned RPC peer, require the selected subscription provider and freeze thread configuration before any turn."""
         if self.resume_thread_id and self.dynamic_tools is not None:
             raise ValueError(
                 "Native resume restores its catalog; dynamic tools cannot replace it"
@@ -286,6 +320,7 @@ class CodexSession:
             raise
 
     async def __aexit__(self, exc_type, exc, traceback) -> None:
+        """Close the owned connection and subscription bridge without replaying an uncertain native turn."""
         try:
             await self.rpc.aclose()
         finally:
@@ -355,6 +390,18 @@ class CodexSession:
                     )
                     if event_turn is not None and event_turn != self.turn_id:
                         continue
+                    method = message['method']
+                    if 'id' in message and method == 'item/tool/call':
+                        self._reserve_host_tool(params)
+                    item = params.get('item', {})
+                    completed_tool = False
+                    if method in ('item/started', 'item/completed') and item.get('type') in _TOOL_TYPES:
+                        if params.get('turnId') != self.turn_id:
+                            raise RpcProtocolError('Native tool observation requires its original active turn identity')
+                        key = self._record_tool(item.get('id'), item['type'])
+                        if method == 'item/completed' and key not in self._completed_tool_items:
+                            self._completed_tool_items.add(key)
+                            completed_tool = True
                     if on_event:
                         observing = on_event(message)
                         if inspect.isawaitable(observing):
@@ -386,14 +433,7 @@ class CodexSession:
                             await self.rpc.respond(message["id"], decision)
                             last_progress = time.monotonic()
                         continue
-                    method = message["method"]
-                    item = params.get("item", {})
-                    item_key = (self.turn_id, item.get("id", ""))
-                    if method == "item/started" and item.get("type") in _TOOL_TYPES:
-                        self._tool_items.add(item_key)
-                        if len(self._tool_items) > self.limits.max_tool_calls:
-                            raise self._exceeded("tools", "Session tool budget exceeded")
-                    if method == "item/completed" and item.get("type") in _TOOL_TYPES:
+                    if completed_tool:
                         last_progress = time.monotonic()
                     if method == "thread/tokenUsage/updated":
                         self._observe_tokens(params["tokenUsage"]["total"][
@@ -500,6 +540,7 @@ class CodexSession:
         await asyncio.shield(self._cancellation)
 
     async def _cancel_active(self) -> None:
+        """Wait briefly for the original turn identity, then interrupt that turn or retire the peer when start remains uncertain."""
         try:
             await asyncio.wait_for(self._turn_ready.wait(), timeout=2)
         except TimeoutError:
@@ -526,6 +567,7 @@ class CodexSession:
         )
 
     async def _abort(self) -> None:
+        """Attempt original-turn cancellation and always close the owned peer; a missing receipt never authorizes another dispatch."""
         try:
             await self.cancel()
         except (TimeoutError, RpcDisconnected, RpcError):

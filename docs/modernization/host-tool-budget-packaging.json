@@ -1,0 +1,32 @@
+{
+  "base_commit": "e809b97",
+  "wheel": "researcher-0.1.0-cp312-cp312-linux_x86_64.whl",
+  "wheel_sha256": "f744f7e47e6d84df9c899ae2f97197d0cf842a644800ac3593a33180880aa523",
+  "source_files_matching_wheel_and_installation": 624,
+  "product_files_matching": 329,
+  "observed": {
+    "cases": 84,
+    "passed": 84,
+    "failed": 0,
+    "skipped": 0,
+    "backend_modules": 233,
+    "all_backend_imports_from_native_env": true,
+    "seconds": 31.602,
+    "exit_code": 0
+  },
+  "tests": [
+    "backend/tests/runtime/test_host_tool_budget.py",
+    "backend/tests/runtime/test_codex_session.py",
+    "backend/tests/runtime/test_delivery_budget.py",
+    "backend/tests/runtime/test_codex_rpc.py",
+    "backend/tests/runtime/test_owned_tool_budget.py",
+    "backend/tests/runtime/test_owned_selective_material.py"
+  ],
+  "real_model_turns": 0,
+  "limits": [
+    "Selected tests, not the global suite",
+    "Synthetic managed installation data, no historical user-data migration",
+    "Host requests are bounded before dispatch; native-only effects can precede observed lifecycle events, and missing token observations do not prove unused quota",
+    "No model calls, external accounts or GitHub workflow execution"
+  ]
+}

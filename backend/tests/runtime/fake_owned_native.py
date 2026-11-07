@@ -62,14 +62,15 @@ def send(message):
 
 def call(name, arguments):
     """Emit a controlled tool request attributed to this fixture's native thread and turn."""
+    identity = 'tool-' + str(controlled_tool_requests + 1)
     send(
         {
-            "id": "tool-" + str(steps),
+            "id": identity,
             "method": "item/tool/call",
             "params": {
                 "threadId": native_thread_id,
                 "turnId": native_turn_id,
-                "callId": "tool-" + str(steps),
+                "callId": identity,
                 "tool": name,
                 "arguments": arguments,
             },

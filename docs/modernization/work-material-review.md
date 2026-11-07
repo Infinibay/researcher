@@ -44,6 +44,11 @@ El fallo inicial y su recibo se conservan; no se cuenta como defecto productivo 
 
 ## Siguiente trabajo funcional del engine
 
+**Actualización posterior:** el fallo se reprodujo y corrigió en el
+[bloque de presupuesto de herramientas](host-tool-budget-review.md). El texto
+siguiente conserva el hallazgo que originó ese trabajo; ya no es un pendiente
+de implementación. La aceptación completa de E07/E08 sigue abierta.
+
 **Observado:** `CodexSession` cuenta inicios en`item/started`, mientras atiende
 `item/tool/call`por otra rama. El generador controlado de estos ensayos emite las
 peticiones, pero no esos avisos. Por eso se agregó un contador independiente de

@@ -1,0 +1,81 @@
+{
+  "base_commit": "e809b97",
+  "started_at_utc": "2026-11-07T15:27:51Z",
+  "validation_cutoff_utc": "2026-11-07T15:44:08Z",
+  "elapsed_to_validation_seconds": 977,
+  "red": {
+    "cases": 11,
+    "failed": 9
+  },
+  "source_distinct_cases_passing": 101,
+  "source_runs": [
+    {
+      "receipt": ".superpowers/sdd/2026-10-31-actualizacion-proyecto/host-tool-budget-source-v1.xml",
+      "cases": 80,
+      "seconds": 12.878
+    },
+    {
+      "receipt": ".superpowers/sdd/2026-10-31-actualizacion-proyecto/host-tool-budget-native.xml",
+      "cases": 32,
+      "seconds": 142.754
+    }
+  ],
+  "docstrings": {
+    "modules": [
+      "backend/runtime/codex_session.py"
+    ],
+    "definitions": 24,
+    "missing": []
+  },
+  "installed": "host-tool-budget-packaging.json",
+  "native_observations": "host-tool-budget-native-observations.json",
+  "prompt_inventory": {
+    "files": 292,
+    "candidates": 85,
+    "requires_review": 0
+  },
+  "protocol_identity_evidence": {
+    "repository": "openai/codex",
+    "commit": "6ff1e1ca3b30fc8b914720681fcf5fe62e95f856",
+    "conclusion": "DynamicToolCallParams.callId equals native dynamicToolCall item.id in the pinned runtime source and protocol tests. Recheck on runtime upgrade.",
+    "files": [
+      {
+        "path": "codex-rs/app-server/src/bespoke_event_handling.rs",
+        "blob_sha": "a4130d93fd98a6fc887dcaa193cae7a8266d7ece"
+      },
+      {
+        "path": "codex-rs/app-server/tests/suite/v2/dynamic_tools.rs",
+        "blob_sha": "0875bedc172e4d3db7a927b75d5df6f11fe5f6ac"
+      }
+    ]
+  },
+  "evidence": [
+    {
+      "path": ".superpowers/sdd/2026-10-31-actualizacion-proyecto/host-tool-budget-red.xml",
+      "sha256": "37ec46be1b9ddf40e7a124b94d880b9f24ba4c0b0fa15c3edb9983091cd42fe4"
+    },
+    {
+      "path": ".superpowers/sdd/2026-10-31-actualizacion-proyecto/host-tool-budget-source-v1.xml",
+      "sha256": "1d107d64e966c1c9e66d35527f2c7b3572c1218e347528ebf076e746581db86d"
+    },
+    {
+      "path": ".superpowers/sdd/2026-10-31-actualizacion-proyecto/host-tool-budget-native.xml",
+      "sha256": "b76a03fb4bcb33dbdd62e77fbdcde62d7a1fde683337b6dbf77c9825eacf95bb"
+    },
+    {
+      "path": ".superpowers/sdd/2026-10-31-actualizacion-proyecto/host-tool-budget-package.xml",
+      "sha256": "9b8f3e0cafcba9a84e54a8443d788e679b9a13b05a12c0995193e56259ee2366"
+    }
+  ],
+  "model_calls": 0,
+  "global_suite_rerun": false,
+  "broad_scenarios_open": 42,
+  "fully_accepted_pages": 0,
+  "limits": [
+    "Controlled native generation and Ken; kernel, broker, SQLite and host dispatch are real.",
+    "Host effects bounded before dispatch; native-owned effects can precede observations.",
+    "Project/attempt aggregate accounting and full E07/E08 acceptance remain open.",
+    "Token observations can be absent; no claim of billing accuracy or guaranteed remaining quota."
+  ],
+  "status": "host_tool_allowance_before_dispatch_verified; complete modernization remains active"
+}
