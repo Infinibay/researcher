@@ -77,12 +77,44 @@ permite inspeccionar los artefactos de ese mismo ensayo sin arrancar otro turno;
 conserva el resultado original, incluso si el harness había fallado. También
 reconoce el formato histórico para inspeccionar recibos anteriores.
 
+### Comandos y recuperación sin modelos
+
+Estos tres runners usan `kernel_trial.py`, almacenamiento sintético nuevo y el
+broker/dominio actual. Requieren el ejecutable Codex compatible y un cgroup v2
+delegado con los controladores `memory` y `pids`. No abren una cuenta ni llaman
+a un modelo. Ejecutarlos en serie:
+
+```sh
+python evals/runtime/run_analysis_tools.py --codex-binary /ruta/codex --cgroup-parent /sys/fs/cgroup/ruta/delegada
+python evals/runtime/run_commands.py --live --peer-loss --db-contention --codex-binary /ruta/codex --cgroup-parent /sys/fs/cgroup/ruta/delegada
+python evals/runtime/run_parent_loss.py --live --codex-binary /ruta/codex --cgroup-parent /sys/fs/cgroup/ruta/delegada
+```
+
+`--live` habilita procesos locales reales, incluida la muerte del proceso hijo
+original en el escenario de pérdida del padre. La preparación no reutiliza una
+autoridad ni un workspace anterior. El código del evaluador y del backend se
+carga desde el checkout con las dependencias y extensión nativa instaladas.
+
+Análisis comprueba cálculo, lectura, rechazo de escritura, acceso a otra fuente,
+escape por symlink, red y credenciales. Comandos comprueba Stop de descendientes,
+otro propietario que sigue trabajando, cierre físico con SQLite bloqueado y
+pérdida del canal RPC con revocación. Los propietarios tienen autoridades
+independientes: esto no demuestra concurrencia dentro de una única instalación.
+La prueba de contención usa un intento propio, porque un resultado incierto
+invalida la autorización para despachar más comandos.
+
+Pérdida del padre comprueba retiro global aun con el escritor de la base local
+bloqueado, proyección posterior y reconciliación repetible sin repetir el trabajo.
+Los resultados sin recibo de salida permanecen `unknown`, con `exit_code=null`;
+haber cerrado los procesos no convierte el trabajo en exitoso. La preparación
+se observa mediante stdout original; el cierre mediante pidfd y estado del
+cgroup. [Resultados e intentos fallidos](../../docs/modernization/kernel-evaluation-runners-results.json).
+
 ### Escenarios restantes
 
 | Runner conservado | Alcance que falta comprobar con el runtime vigente |
 | --- | --- |
 | `run_research.py`, `serve_infinidev_research.py` | Comparación directa de candidatos, entorno y política de herramientas; no aceptación del producto nativo |
-| `run_commands.py`, `run_parent_loss.py`, `run_analysis_tools.py` | Sustituir la ejecución directa del prototipo por el broker/dominio nativo y volver a observar efectos y cierre |
 | `../security/run_ken_isolation.py` | Revalidar Ken publicado y aislamiento en la composición vigente |
 | `run_owner_command_inspection.py`, `../ui/run_owner_capture.py` | Lectura de recibos y navegación sobre fixture sintético actual, portable y reproducible; hoy dependen de un ensayo anterior específico |
 

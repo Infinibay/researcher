@@ -7516,3 +7516,32 @@ real/human/scientific/global evaluation, security and12page acceptance, all fine
 details and finalwholeplanreview. Checklist at every principal transition; all
 macro capabilities before all fine details. Task measured from01:25:46UTC;
 no global percentage or ETA inferred. Overall goal remains active.
+
+
+## Kernel evaluation runners — 2026-11-06
+
+Migrate analysis, commands and parent-loss to the current broker/domain with
+fresh synthetic sources, authority/witness and explicit binary/cgroup resources.
+No account file or model turn. Source backend is unchanged; no wheel rebuild.
+Shared KernelTrial validates resources, prepares storage, closes original domains
+and records lifecycle. Stdout is the readiness barrier; pinned pidfd and actual
+cgroup population prove closure. All 27 module/class/function definitions have
+English docstrings. Seven distinct directed tests pass (8.06 seconds).
+
+Three real runners pass: seven analysis cases, detached Stop/unrelated-owner
+continuation/source-writer contention/RPC loss, and owned-parent death/global
+recovery under locked source writer followed by local idempotent reconciliation.
+Unknown exits remain unknown/null; recovery does not replay a job or accept its
+task. Separate owners have separate authorities, not concurrent concessions in
+one installation. Four harness failures retained: old CODEX_HOME expectation,
+missing os.pidfd_open wrapper, reuse of an invalidated attempt and checking an
+empty cgroup before it drained. Reuse product _pidfd; isolate contention attempt;
+wait for actual populated=0. All failed trial lifecycles close their peers/domains.
+
+Current source tests and real runners are terminal; no live actors left. Four
+lint findings deferred DD069. No global, reboot/restore, human/scientific, Ken
+isolation or full-page acceptance claimed. 43 broad scenarios remain open;
+12 pilots/48 concepts/0 fully accepted pages. Next Ken isolation and owner
+inspection/UI runners, then remaining macro capabilities. All fine details last.
+User policy persists: updated done/current/pending list at each principal task
+transition, with measured time and explicit uncertainty; no invented percentage.

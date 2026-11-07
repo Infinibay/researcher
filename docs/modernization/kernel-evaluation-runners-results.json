@@ -1,0 +1,265 @@
+{
+  "base_commit": "d9c61dc",
+  "date": "2026-11-06",
+  "scope": "Three account-free real kernel evaluation runners using the current source broker/domain; no model, account file, installed-wheel rebuild, global or page acceptance.",
+  "composition": "broker_command_executor",
+  "resources": "Explicit pinned Codex executable and delegated cgroup v2 parent; fresh synthetic source databases and independent authorities",
+  "tests": {
+    "distinct_cases": 7,
+    "passed": 7,
+    "failed": 0,
+    "skipped": 0,
+    "files": [
+      "backend/tests/runtime/test_kernel_evaluation.py",
+      "backend/tests/runtime/test_host_command_close.py"
+    ],
+    "regressions_observed": [
+      "missing helper",
+      "lease cap rejected before actors",
+      "portable Python lacks os.pidfd_open"
+    ]
+  },
+  "docstrings": {
+    "modules_classes_functions": 27,
+    "missing": []
+  },
+  "lint": {
+    "findings": 4,
+    "codes": {
+      "I001": 3,
+      "C408": 1
+    },
+    "deferred": "DD069"
+  },
+  "analysis": {
+    "status": "passed",
+    "receipt_sha256": "05584db3464867ee6fdb1bc98b352329dc5464652de3f74a442f71fde3e71063",
+    "cases": [
+      {
+        "key": "calculate",
+        "status": "exited",
+        "exit_code": 0,
+        "local_execution_closed": true
+      },
+      {
+        "key": "read",
+        "status": "exited",
+        "exit_code": 0,
+        "local_execution_closed": true
+      },
+      {
+        "key": "write",
+        "status": "exited",
+        "exit_code": 1,
+        "local_execution_closed": true
+      },
+      {
+        "key": "outside",
+        "status": "exited",
+        "exit_code": 1,
+        "local_execution_closed": true
+      },
+      {
+        "key": "symlink",
+        "status": "exited",
+        "exit_code": 1,
+        "local_execution_closed": true
+      },
+      {
+        "key": "network",
+        "status": "exited",
+        "exit_code": 1,
+        "local_execution_closed": true
+      },
+      {
+        "key": "environment",
+        "status": "exited",
+        "exit_code": 0,
+        "local_execution_closed": true
+      }
+    ],
+    "source_unchanged": true,
+    "lifecycle": {
+      "domain_removed": true,
+      "all_peers_closed": true,
+      "model_turns": 0,
+      "run_status": "failed"
+    }
+  },
+  "commands": {
+    "status": "passed",
+    "receipt_sha256": "5fc4ccd3018582b99be586fbc7e822afbd6a9cd7b1319873a53bcea29c38ec8e",
+    "base_cases": [
+      {
+        "key": "alpha-inside",
+        "status": "exited",
+        "exit_code": 0,
+        "local_execution_closed": false
+      },
+      {
+        "key": "beta-inside",
+        "status": "exited",
+        "exit_code": 0,
+        "local_execution_closed": false
+      },
+      {
+        "key": "outside",
+        "status": "exited",
+        "exit_code": 1,
+        "local_execution_closed": false
+      },
+      {
+        "key": "network",
+        "status": "exited",
+        "exit_code": 1,
+        "local_execution_closed": false
+      }
+    ],
+    "database_contention": {
+      "namespace_closed_before_database_unlock": true,
+      "domain_empty_before_database_unlock": true,
+      "lifecycle": {
+        "domain_removed": true,
+        "all_peers_closed": true,
+        "model_turns": 0,
+        "run_status": "failed"
+      },
+      "job": {
+        "status": "unknown",
+        "exit_code": null,
+        "local_execution_closed": true
+      }
+    },
+    "stop": {
+      "seconds": 1.1512505599966971,
+      "detached_child_observed_ready": true,
+      "original_namespace_closed": true,
+      "other_owner_survived_until_release": true,
+      "stopped": {
+        "status": "unknown",
+        "exit_code": null,
+        "local_execution_closed": true
+      },
+      "unaffected": {
+        "status": "exited",
+        "exit_code": 0,
+        "local_execution_closed": false
+      }
+    },
+    "peer_loss": {
+      "rpc_read_channel_lost": true,
+      "original_namespace_closed": true,
+      "business_grant_revoked": true,
+      "job": {
+        "status": "unknown",
+        "exit_code": null,
+        "local_execution_closed": true
+      }
+    },
+    "alpha_lifecycle": {
+      "domain_removed": true,
+      "all_peers_closed": true,
+      "model_turns": 0,
+      "run_status": "cancelled"
+    },
+    "beta_lifecycle": {
+      "domain_removed": true,
+      "all_peers_closed": true,
+      "model_turns": 0,
+      "run_status": "failed"
+    },
+    "independent_authorities": true
+  },
+  "parent_loss": {
+    "status": "passed",
+    "model_turns_submitted": 0,
+    "global_closed_with_source_writer_locked": true,
+    "holder_exit": -9,
+    "original_namespace_closed": true,
+    "original_domain_removed": true,
+    "detached_child_observed_ready": true,
+    "job": {
+      "status": "unknown",
+      "exit_code": null,
+      "local_execution_closed": true
+    },
+    "repeated_recovery_same_receipt": true,
+    "jobs_not_replayed": true,
+    "receipt_sha256": "5adb101758acfd382b94bb7f54c9b695adb7a0fe956ccd08980f53cb6604fca3",
+    "recovery": {
+      "status": "failed",
+      "local_execution_closed": true,
+      "inference_started": false,
+      "task_accepted": false
+    }
+  },
+  "preserved_failed_attempts": [
+    {
+      "receipt_sha256": "68f1ab620a5bbad138920298953927c075e63cad73acdacc7c6524434ab6821a",
+      "status": "failed",
+      "reason": "Harness incorrectly required CODEX_HOME to be absent rather than the fixed private broker home",
+      "lifecycles": [
+        {
+          "domain_removed": true,
+          "all_peers_closed": true,
+          "model_turns": 0
+        }
+      ]
+    },
+    {
+      "receipt_sha256": "9f36b4e34bbc827de27171a76e5b77ec2da6655e0692c0170fe3c9f7807d256d",
+      "status": "failed",
+      "reason": "Portable Python has no os.pidfd_open; reuse the product ctypes-backed _pidfd helper",
+      "lifecycles": [
+        {
+          "domain_removed": true,
+          "all_peers_closed": true,
+          "model_turns": 0
+        },
+        {
+          "domain_removed": true,
+          "all_peers_closed": true,
+          "model_turns": 0
+        }
+      ]
+    },
+    {
+      "receipt_sha256": "4d72893be1815f5036fdfe3f80bd89a6d30d137144154a88e2438c2f3e877cef",
+      "status": "failed",
+      "reason": "Harness attempted to reuse a fenced attempt after an uncertain cancellation; separate database-contention trial",
+      "lifecycles": [
+        {
+          "domain_removed": true,
+          "all_peers_closed": true,
+          "model_turns": 0
+        },
+        {
+          "domain_removed": true,
+          "all_peers_closed": true,
+          "model_turns": 0
+        }
+      ]
+    },
+    {
+      "receipt_sha256": "360212da290461999488f8ab36c224110905d7c1d8eedc90445be452ba6eb2a7",
+      "status": "failed",
+      "reason": "Namespace-init death was observed before the entire cgroup drained; wait for actual populated=0",
+      "lifecycles": [
+        {
+          "domain_removed": true,
+          "all_peers_closed": true,
+          "model_turns": 0
+        }
+      ]
+    }
+  ],
+  "model_turns_submitted": 0,
+  "limitations": [
+    "Linux host/cgroup resources required; no portable deployment claim",
+    "Independent owners have separate authorities; does not authorize concurrent runs in a single-installation max_concurrent=1 policy",
+    "Command receipts observed before peer closure can report local_execution_closed=false; final lifecycles prove closure",
+    "Lost command exits remain unknown/null; physical closure is not a successful job result",
+    "No model, subscription, reboot, data restore, Ken-isolation, human/scientific/global or full-page acceptance in this cut",
+    "Evaluation code imports backend from checkout; product source unchanged, no wheel/image rebuild"
+  ]
+}

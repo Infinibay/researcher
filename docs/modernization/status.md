@@ -4,6 +4,15 @@ La implementación del [plan completo](../superpowers/plans/2026-10-31-actualiza
 
 ## Resultados disponibles
 
+- **Tres evaluaciones de procesos migradas al broker actual:** análisis pasa sus
+  siete controles; comandos comprueba cancelación, aislamiento, cierre con SQLite
+  bloqueado y pérdida de RPC; pérdida del padre comprueba recuperación sin
+  repetir trabajo. Cero modelos o cuentas; siete tests dirigidos pasan y 27
+  módulos/clases/funciones tienen docstrings. Se conservan cuatro fallos previos
+  del evaluador y sus causas. Siguen aislamiento de Ken y captura/inspección del
+  propietario. [Uso](../../evals/runtime/README.md),
+  [evidencia y límites](kernel-evaluation-runners-results.json).
+
 - **Seis escenarios de evaluación usan instalaciones nativas nuevas:**
   investigación/corrección, Conversación, preguntas, Stop, continuidad y cálculo;
   nueve admisiones por suscripción. Cinco harnesses terminan correctamente. En

@@ -378,3 +378,16 @@ visible, con verificación de sus artefactos y recuperación HTTP del mismo reci
 sin nueva generación. Siguen siendo trabajo principal los demás runners, la
 evaluación humana/científica/global y la aceptación integral de las páginas.
 
+## DD069 — estilo de las evaluaciones de procesos
+
+Cuatro avisos de lint: tres de orden de imports y uno de construcción de dict.
+Se conservan en `kernel-evaluation-runners-lint.json` para después de todas las
+capacidades principales. Considerar también que el probe de entorno informe
+presencia/ausencia sin imprimir valores si detectase una regresión; en el ensayo
+actual no se expuso ninguna credencial. No repetir escenarios por estos detalles.
+
+Se resolvieron los problemas que impedían validar el escenario: wrapper pidfd
+ausente en Python portable, reutilización de un intento invalidado y observación
+prematura de cgroup vacío. Sus recibos fallidos se conservan. El directorio
+CODEX_HOME privado forma parte del perfil actual y no equivale a heredar cuenta.
+

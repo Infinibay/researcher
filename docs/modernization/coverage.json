@@ -4234,7 +4234,7 @@
     },
     "evaluation_runner_migration": {
       "status": "in_progress",
-      "scope": "Current business MCP/HTTP harness plus six installed native scenarios: research/correction, chat receipts, questions, Stop, input continuity and calculation. Remaining runner scenarios stay open.",
+      "scope": "Current business MCP/HTTP harness, six installed native interaction scenarios and three real account-free broker command/analysis/parent-loss runners. Ken-isolation and owner inspection/UI runner scenarios stay open.",
       "evidence": [
         "evals/runtime/README.md",
         "evals/runtime/run_research.py",
@@ -4243,11 +4243,15 @@
         "evals/runtime/native_trial.py",
         "backend/tests/runtime/test_native_evaluation.py",
         "backend/tests/runtime/test_native_analysis_evidence.py",
-        "docs/modernization/native-evaluation-runners-results.json"
+        "docs/modernization/native-evaluation-runners-results.json",
+        "evals/runtime/kernel_trial.py",
+        "backend/tests/runtime/test_kernel_evaluation.py",
+        "docs/modernization/kernel-evaluation-runners-results.json"
       ],
       "limitations": [
         "Five live native harnesses pass; calculation original harness failed on45vs54catalog mismatch. Corrected checker, original artifacts and original HTTP receipt recovery pass with zero new dispatches.",
-        "No current global suite, human/scientific benchmark, full-page acceptance or acceptance of remaining command/parent-loss/Ken-isolation/owner-UI runners."
+        "No current global suite, human/scientific benchmark, full-page acceptance or acceptance of remaining Ken-isolation/owner-UI runners.",
+        "Kernel scenarios use source backend and separate authorities; zero model turns. Physical closure preserves unknown command results; no additional concurrency authorization."
       ]
     }
   }

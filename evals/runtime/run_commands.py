@@ -1,13 +1,12 @@
-"""Explicit real native command integration; zero model turns or provider keys."""
+"""Exercise current broker commands, containment, cancellation and lost RPC; zero model turns."""
 
 import argparse
 import asyncio
 import json
-import shutil
+import os
 import sqlite3
 import sys
 import time
-from contextlib import AsyncExitStack
 from pathlib import Path
 from uuid import uuid4
 
@@ -15,267 +14,178 @@ REPO = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(REPO))
 
 
-async def main(args):
-    from backend.runtime.contracts import CommandSpec, RunSpec
-    from backend.runtime.native_commands import command_executor
-    from backend.runtime.peer_registry import AttemptPeers
-    from backend.runtime.sqlite_runs import SQLiteRunStore
-    from backend.tools.base.db import ensure_migrations
+def waiting_child(marker, gate):
+    """Create a detached child whose next observable output requires an explicit host-controlled input."""
+    child = (
+        "from pathlib import Path;import time\n"
+        f"print({marker!r},flush=True)\n"
+        f"while not Path({gate!r}).exists():time.sleep(.01)\n"
+        "print('FORBIDDEN_LATE_EFFECT',flush=True)\n"
+    )
+    return ("import subprocess,sys,time\n"
+            f"subprocess.Popen([sys.executable,'-I','-S','-c',{child!r}],start_new_session=True)\n"
+            "time.sleep(30)")
 
-    root = (
-        REPO / ".researcher/evaluations" / ("command-integration-" + uuid4().hex[:8])
-    ).resolve()
-    root.mkdir(parents=True)
-    database = root / "research.db"
-    ensure_migrations(str(database))
-    alpha, beta = root / "alpha", root / "beta"
-    for directory, value in [(alpha, "ALPHA_ONLY"), (beta, "BETA_ONLY")]:
-        directory.mkdir()
-        (directory / "private.txt").write_text(value)
-    # Workspace-local configuration must not broaden the command peer's scope.
-    (alpha / ".codex").mkdir()
-    (alpha / ".codex/config.toml").write_text(
-        "[permissions.researcher_jobs.filesystem]\n"
-        + json.dumps(str(beta))
-        + ' = "read"\n[permissions.researcher_jobs.network]\nenabled = true\n'
-    )
-    with sqlite3.connect(database) as conn:
-        conn.execute("INSERT INTO projects(id,name) VALUES(101,'Alpha'),(202,'Beta')")
-        conn.execute(
-            "INSERT INTO tasks(id,project_id,type,title,status) VALUES(1001,101,'research','Commands','in_progress'),(2002,202,'research','Commands','in_progress')"
-        )
-    store = SQLiteRunStore(database)
-    run_a = store.admit(
-        RunSpec(101, 1001, "worker-a", 1, "request-a", "Command integration", "codex")
-    )
-    run_b = store.admit(
-        RunSpec(202, 2002, "worker-b", 1, "request-b", "Command integration", "codex")
-    )
-    lease_a, peers_a = AttemptPeers.claim(
-        store, 101, run_a.run_id, "owner-a", lease_seconds=120
-    )
-    lease_b, peers_b = AttemptPeers.claim(
-        store, 202, run_b.run_id, "owner-b", lease_seconds=120
-    )
-    results = {"model_turns_submitted": 0, "root": str(root), "commands": []}
-    print("Command integration:", root, flush=True)
+
+def receipt(key, job):
+    """Retain the actual terminal command result without confusing closure with a successful exit."""
+    return {'key': key, 'job_id': job.job_id, 'status': job.status,
+            'exit_code': job.exit_code, 'cancel_requested': job.cancel_requested,
+            'local_execution_closed': job.local_execution_closed,
+            'stdout': job.stdout.decode(errors='replace'), 'stderr': job.stderr.decode(errors='replace')}
+
+
+async def database_contention(root, args):
+    """Close a detached command before releasing its locked source database, using its own attempt."""
+    from backend.runtime.contracts import CommandSpec
+    from evals.runtime.kernel_trial import prepare, pin_peer, wait_closed, wait_empty, wait_output
+
+    trial = prepare(root / 'database-contention', args.codex_binary, args.cgroup_parent)
+    python = str(Path(sys.executable).resolve())
+    result = {}
+    async with trial.open(), trial.commands() as worker:
+        handle = await worker.start(trial.lease, 'busy-database', CommandSpec(
+            (python, '-I', '-S', '-c', waiting_child('BUSY_READY', 'release-busy')), '.', 30, 4096))
+        await wait_output(worker, handle, b'BUSY_READY')
+        pinned = pin_peer(worker)
+        lock = sqlite3.connect(trial.database)
+        cancellation = None
+        try:
+            lock.execute('BEGIN IMMEDIATE')
+            cancellation = asyncio.create_task(handle.cancel())
+            await wait_closed(pinned, timeout=5)
+            await wait_empty(trial.domain_path)
+            assert not (trial.domain_path / 'cgroup.procs').read_text().strip()
+            result.update(namespace_closed_before_database_unlock=True,
+                                               domain_empty_before_database_unlock=True)
+        finally:
+            lock.rollback()
+            lock.close()
+            os.close(pinned)
+        stopped = await asyncio.wait_for(cancellation, 10)
+        assert stopped.local_execution_closed and stopped.cancel_requested and stopped.exit_code != 0
+        (trial.workspace / 'release-busy').touch()
+        assert b'FORBIDDEN_LATE_EFFECT' not in stopped.stdout
+        result['job'] = receipt('busy-database', stopped)
+    result['lifecycle'] = json.loads((trial.root / 'lifecycle.json').read_text())
+    assert result['lifecycle']['domain_removed'] and result['lifecycle']['all_peers_closed']
+    return result
+
+
+async def main(args):
+    """Run two independently provisioned owners so stopping one must preserve the other's active work."""
+    from backend.runtime.contracts import CommandSpec
+    from evals.runtime.kernel_trial import prepare, pin_peer, wait_closed, wait_output
+
+    root = REPO / '.researcher/evaluations' / ('command-integration-' + uuid4().hex[:8])
+    root.mkdir(mode=0o700, parents=True)
+    alpha = prepare(root / 'alpha', args.codex_binary, args.cgroup_parent)
+    beta = prepare(root / 'beta', args.codex_binary, args.cgroup_parent, project_id=202, task_id=2002)
+    python = str(Path(sys.executable).resolve())
+    for trial, marker in ((alpha, 'ALPHA_ONLY'), (beta, 'BETA_ONLY')):
+        (trial.workspace / 'private.txt').write_text(marker)
+    (alpha.workspace / '.codex').mkdir()
+    (alpha.workspace / '.codex/config.toml').write_text(
+        '[permissions.researcher_jobs.filesystem]\n' + json.dumps(str(beta.workspace)) +
+        '="read"\n[permissions.researcher_jobs.network]\nenabled=true\n')
+    results = {'status': 'starting', 'model_turns_submitted': 0, 'commands': [],
+               'composition': 'broker_command_executor', 'independent_authorities': True}
+    print('Command integration:', root, flush=True)
     try:
-        async with (
-            AsyncExitStack() as replacements,
-            command_executor(
-                journal=store,
-                lease=lease_a,
-                workspace=alpha,
-                control_root=root / "controls",
-                codex_binary=Path(args.codex_binary),
-            ) as worker_a,
-            command_executor(
-                journal=store,
-                lease=lease_b,
-                workspace=beta,
-                control_root=root / "controls",
-                codex_binary=Path(args.codex_binary),
-            ) as worker_b,
-        ):
-            for worker, lease, key, argv in [
-                (worker_a, lease_a, "inside", ("/bin/cat", str(alpha / "private.txt"))),
-                (worker_b, lease_b, "inside", ("/bin/cat", str(beta / "private.txt"))),
-                (worker_a, lease_a, "outside", ("/bin/cat", str(beta / "private.txt"))),
-                (
-                    worker_a,
-                    lease_a,
-                    "network",
-                    ("/usr/bin/python3", "-c", "import socket; socket.socket()"),
-                ),
-            ]:
-                handle = await worker.start(lease, key, CommandSpec(argv))
-                result = await handle.wait()
-                results["commands"].append(
-                    {
-                        "key": key,
-                        "project_id": lease.project_id,
-                        "job_id": handle.job_id,
-                        "status": result.status,
-                        "exit_code": result.exit_code,
-                        "stdout": result.stdout.decode(errors="replace"),
-                        "stderr": result.stderr.decode(errors="replace"),
-                    }
-                )
-            assert results["commands"][0]["stdout"] == "ALPHA_ONLY"
-            assert results["commands"][1]["stdout"] == "BETA_ONLY"
-            assert (
-                results["commands"][2]["exit_code"] != 0
-                and "BETA_ONLY" not in results["commands"][2]["stdout"]
-            )
-            assert "PermissionError" in results["commands"][3]["stderr"]
-            if args.db_contention:
-                blocked = await worker_a.start(
-                    lease_a,
-                    "busy-database",
-                    CommandSpec(
-                        (
-                            "/usr/bin/python3",
-                            "-c",
-                            "from pathlib import Path; import time; Path('busy-started').write_text('yes'); time.sleep(0.6); Path('busy-delayed').write_text('must not happen')",
-                        )
-                    ),
-                )
-                async with asyncio.timeout(3):
-                    while not (alpha / "busy-started").exists():
-                        await asyncio.sleep(0.02)
-                lock = sqlite3.connect(database)
-                lock.execute("BEGIN IMMEDIATE")
-                cancellation = asyncio.create_task(blocked.cancel())
-                try:
-                    await asyncio.sleep(0.8)
-                    assert not (alpha / "busy-delayed").exists()
-                finally:
-                    lock.rollback()
-                    lock.close()
-                persisted = await asyncio.wait_for(cancellation, 3)
-                assert (
-                    persisted.status == "exited"
-                    and persisted.exit_code != 0
-                    and persisted.cancel_requested
-                )
-                results["database_contention"] = {
-                    "physical_stop_preceded_database_unlock": True,
-                    "exit_code": persisted.exit_code,
-                    "cancellation_intent_persisted": True,
-                }
-                worker_a = await replacements.enter_async_context(
-                    command_executor(
-                        journal=store,
-                        lease=lease_a,
-                        workspace=alpha,
-                        control_root=root / "controls",
-                        codex_binary=Path(args.codex_binary),
-                    )
-                )
-            child = "from pathlib import Path; import time; Path('child-started').write_text('yes'); time.sleep(2); Path('delayed').write_text('must not happen')"
-            parent = (
-                "import subprocess,sys,time; subprocess.Popen([sys.executable,'-c',"
-                + repr(child)
-                + "],start_new_session=True); time.sleep(10)"
-            )
-            a = await worker_a.start(
-                lease_a,
-                "cancel-detached",
-                CommandSpec(("/usr/bin/python3", "-c", parent)),
-            )
-            b = await worker_b.start(
-                lease_b,
-                "other-owner",
-                CommandSpec(
-                    (
-                        "/usr/bin/python3",
-                        "-c",
-                        "from pathlib import Path; import time; Path('other-started').write_text('yes'); time.sleep(0.5); Path('other-complete').write_text('yes')",
-                    )
-                ),
-            )
-            async with asyncio.timeout(3):
-                while (
-                    not (alpha / "child-started").exists()
-                    or not (beta / "other-started").exists()
-                ):
-                    await asyncio.sleep(0.02)
-            started = time.monotonic()
-            await asyncio.to_thread(store.cancel, 101, run_a.run_id)
-            stopped = await asyncio.wait_for(a.wait(), 3)
-            stop_seconds = time.monotonic() - started
-            untouched = await b.wait()
-            assert (
-                stopped.status == "exited"
-                and stopped.exit_code != 0
-                and stopped.cancel_requested
-            )
+        if args.db_contention:
+            results['database_contention'] = await database_contention(root, args)
+        async with alpha.open(), beta.open(), alpha.commands() as worker_a, beta.commands() as worker_b:
+            for worker, trial, key, argv in (
+                (worker_a, alpha, 'alpha-inside', ('/bin/cat', 'private.txt')),
+                (worker_b, beta, 'beta-inside', ('/bin/cat', 'private.txt')),
+                (worker_a, alpha, 'outside', ('/bin/cat', str(beta.workspace / 'private.txt'))),
+                (worker_a, alpha, 'network', (python, '-I', '-S', '-c', 'import socket;socket.socket()')),
+            ):
+                job = await (await worker.start(trial.lease, key, CommandSpec(argv, '.', 5, 4096))).wait()
+                results['commands'].append(receipt(key, job))
+            assert results['commands'][0]['stdout'] == 'ALPHA_ONLY'
+            assert results['commands'][1]['stdout'] == 'BETA_ONLY'
+            assert results['commands'][2]['exit_code'] != 0 and 'BETA_ONLY' not in results['commands'][2]['stdout']
+            assert results['commands'][3]['exit_code'] != 0 and 'PermissionError' in results['commands'][3]['stderr']
+
+
+            a = await worker_a.start(alpha.lease, 'cancel-detached', CommandSpec(
+                (python, '-I', '-S', '-c', waiting_child('DETACHED_READY', 'release-detached')), '.', 30, 4096))
+            other_code = "from pathlib import Path;import time\nprint('OTHER_READY',flush=True)\nwhile not Path('release-other').exists():time.sleep(.01)\nprint('OTHER_COMPLETED',flush=True)"
+            b = await worker_b.start(beta.lease, 'other-owner', CommandSpec((python, '-I', '-S', '-c', other_code), '.', 30, 4096))
+            await wait_output(worker_a, a, b'DETACHED_READY')
+            await wait_output(worker_b, b, b'OTHER_READY')
+            pinned = pin_peer(worker_a)
+            try:
+                started = time.monotonic()
+                await asyncio.to_thread(alpha.store.cancel, 101, alpha.run.run_id)
+                stopped = await asyncio.wait_for(a.wait(), 10)
+                await wait_closed(pinned)
+                elapsed = time.monotonic() - started
+            finally:
+                os.close(pinned)
+            assert stopped.local_execution_closed and stopped.cancel_requested and stopped.exit_code != 0
+            (alpha.workspace / 'release-detached').touch()
+            assert b'FORBIDDEN_LATE_EFFECT' not in stopped.stdout
+            assert not worker_b._commands[b.job_id].task.done(), 'Other owner did not survive until its explicit release'
+            (beta.workspace / 'release-other').touch()
+            untouched = await asyncio.wait_for(b.wait(), 10)
             assert untouched.exit_code == 0 and not untouched.cancel_requested
-            results["stop"] = {
-                "seconds": stop_seconds,
-                "job_id": a.job_id,
-                "exit_code": stopped.exit_code,
-                "other_job_exit_code": untouched.exit_code,
-            }
+            assert b'OTHER_COMPLETED' in untouched.stdout
+            results['stop'] = {'seconds': elapsed, 'detached_child_observed_ready': True,
+                               'original_namespace_closed': True, 'other_owner_survived_until_release': True,
+                               'stopped': receipt('cancel-detached', stopped), 'unaffected': receipt('other-owner', untouched)}
+
             if args.peer_loss:
                 from backend.research.models import ResearchForbidden
                 from backend.research.sqlite_store import SQLiteResearchStore
-
-                research = SQLiteResearchStore(database)
-                token = research.issue_grant(
-                    project_id=202,
-                    task_id=2002,
-                    agent_id="worker-b",
-                    permissions={"sources.read", "sources.capture"},
-                )
-                store.bind_grant(lease_b, research.authorize(token).grant_id)
-                loss_child = "from pathlib import Path; import time; Path('loss-started').write_text('yes'); time.sleep(2); Path('loss-delayed').write_text('must not happen')"
-                loss_parent = (
-                    "import subprocess,sys,time; subprocess.Popen([sys.executable,'-c',"
-                    + repr(loss_child)
-                    + "],start_new_session=True); time.sleep(10)"
-                )
-                loss = await worker_b.start(
-                    lease_b,
-                    "connection-loss",
-                    CommandSpec(("/usr/bin/python3", "-c", loss_parent)),
-                )
-                async with asyncio.timeout(3):
-                    while not (beta / "loss-started").exists():
-                        await asyncio.sleep(0.02)
-                # This is the local child handle we created, never a PID reported
-                # by a shell in another namespace.
-                worker_b.rpc._process.kill()
-                uncertain = await asyncio.wait_for(loss.wait(), 3)
-                assert uncertain.status == "unknown" and uncertain.exit_code is None
-                assert store.get(202, run_b.run_id).status == "reconciling"
+                research = SQLiteResearchStore(beta.database)
+                token = research.issue_grant(project_id=202, task_id=2002, agent_id='diagnostic',
+                                             permissions={'sources.read', 'sources.capture'})
+                beta.store.bind_grant(beta.lease, research.authorize(token).grant_id)
+                loss = await worker_b.start(beta.lease, 'connection-loss', CommandSpec(
+                    (python, '-I', '-S', '-c', waiting_child('LOSS_READY', 'release-loss')), '.', 30, 4096))
+                await wait_output(worker_b, loss, b'LOSS_READY')
+                pinned = pin_peer(worker_b)
+                try:
+                    # Break this original RPC read channel; never signal a PID from inside a namespace.
+                    worker_b.rpc._endpoint._transports[0].close()
+                    uncertain = await asyncio.wait_for(loss.wait(), 10)
+                    await wait_closed(pinned)
+                finally:
+                    os.close(pinned)
+                assert uncertain.status == 'unknown' and uncertain.exit_code is None and uncertain.local_execution_closed
+                assert beta.store.get(202, beta.run.run_id).status == 'reconciling'
                 try:
                     research.authorize(token)
                 except ResearchForbidden:
                     pass
                 else:
-                    raise AssertionError(
-                        "Lost command connection retained its business grant"
-                    )
-                results["peer_loss"] = {
-                    "job_id": loss.job_id,
-                    "status": uncertain.status,
-                    "run_status": "reconciling",
-                    "business_grant_revoked": True,
-                }
-        await peers_a.aclose()
-        await peers_b.aclose()
-        results["all_registered_peers_closed"] = peers_a.closed() and peers_b.closed()
-        assert results["all_registered_peers_closed"]
-        await asyncio.sleep(2.1)
-        assert not (alpha / "delayed").exists()
-        assert (beta / "other-complete").read_text() == "yes"
-        if args.peer_loss:
-            assert not (beta / "loss-delayed").exists()
-            results["peer_loss"]["detached_delayed_effect_present"] = False
-        results["detached_child_confirmed_started"] = True
-        results["delayed_effect_present"] = False
-        results["other_owner_effect_preserved"] = True
-        results["status"] = "passed"
-    except BaseException as exc:
-        results.update(status="failed", error_type=type(exc).__name__, error=str(exc))
+                    raise AssertionError('Lost command RPC retained its business grant')
+                (beta.workspace / 'release-loss').touch()
+                assert b'FORBIDDEN_LATE_EFFECT' not in uncertain.stdout
+                results['peer_loss'] = {'rpc_read_channel_lost': True, 'original_namespace_closed': True,
+                                        'business_grant_revoked': True, 'job': receipt('connection-loss', uncertain)}
+        for name, trial in (('alpha', alpha), ('beta', beta)):
+            lifecycle = json.loads((trial.root / 'lifecycle.json').read_text())
+            assert lifecycle['domain_removed'] and lifecycle['all_peers_closed']
+            results[name + '_lifecycle'] = lifecycle
+        assert (alpha.workspace / 'private.txt').read_text() == 'ALPHA_ONLY'
+        assert (beta.workspace / 'private.txt').read_text() == 'BETA_ONLY'
+        results['status'] = 'passed'
+    except BaseException as error:
+        results.update(status='failed', error_type=type(error).__name__)
         raise
     finally:
-        (root / "result.json").write_text(json.dumps(results, indent=2))
-    print(
-        json.dumps({"status": results["status"], "model_turns_submitted": 0}),
-        flush=True,
-    )
+        (root / 'result.json').write_text(json.dumps(results, indent=2) + '\n')
+    print(json.dumps({'status': results['status'], 'model_turns_submitted': 0}), flush=True)
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
+    from evals.runtime.kernel_trial import arguments
+
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--live", action="store_true", required=True)
-    parser.add_argument("--peer-loss", action="store_true")
-    parser.add_argument("--db-contention", action="store_true")
-    parser.add_argument(
-        "--codex-binary",
-        default=shutil.which("codex"),
-        required=shutil.which("codex") is None,
-    )
-    asyncio.run(main(parser.parse_args()))
+    parser.add_argument('--live', action='store_true', required=True, help='Run real local processes; no model calls')
+    parser.add_argument('--peer-loss', action='store_true')
+    parser.add_argument('--db-contention', action='store_true')
+    asyncio.run(main(arguments(parser)))

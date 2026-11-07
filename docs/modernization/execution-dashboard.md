@@ -19,7 +19,32 @@ o porcentaje. No reconstruir tiempos históricos a partir de recuerdos del chat.
 - Última suite global completada al retomar `0c8b8d9`: 2148 casos, 2045 pasan, 100 fallan y tres se omiten. Mismos 100 identificadores heredados; no se afirman causas idénticas. Pasan 965 casos del runtime. La política Git añadida después tiene verificación separada.
 - Los 43 escenarios amplios siguen abiertos en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Etapa actual: seis escenarios nativos migrados; siguen los demás runners
+## Etapa actual: tres evaluaciones de procesos migradas; siguen Ken e inspección
+
+Análisis, comandos y pérdida del padre usan el broker/dominio actual, bases
+sintéticas y autoridades nuevas. Pasan los siete controles de análisis, Stop
+de descendientes, aislamiento entre propietarios, cierre con SQLite bloqueado,
+pérdida de RPC y recuperación sin repetir trabajo. Cero turnos de modelo.
+Siete tests dirigidos pasan y 27 módulos/clases/funciones están documentados.
+Tiempo medido del bloque: unos 23 minutos (01:49:44–02:12 UTC).
+[Uso](../../evals/runtime/README.md), [recibos y fallos previos](kernel-evaluation-runners-results.json).
+
+**Lista vigente:**
+- Cerrado en este grupo: tres runners de procesos y sus pruebas reales. Se
+  conservan resultados inciertos como tales y cuatro fallos del evaluador.
+- Siguiente: aislamiento de Ken e inspección/captura del propietario con fixtures
+  actuales. Los experimentos de candidatos siguen siendo históricos.
+- Después: migraciones/inversas/restauración real y reboot; historial/presupuestos;
+  evaluaciones real, humana, científica y global; seguridad de dependencias,
+  aceptación completa de las 12 páginas y revisión final.
+- Al final: detalles secundarios, incluidos los cuatro avisos DD069. Siguen
+  abiertos los 43 escenarios amplios y 0/12 páginas tienen aceptación integral.
+
+El cierre de un proceso padre se observa separado del vaciado de todo su cgroup.
+Cada propietario independiente tiene su propia autoridad; no se amplía la
+política de concurrencia de una instalación. Sin nueva suite global ni rebuild.
+
+## Etapa anterior: seis escenarios nativos migrados
 
 Investigación/corrección, Conversación, preguntas/respuestas, Stop, continuidad
 y cálculo usan instalaciones sintéticas nuevas con autoridad propia y recursos

@@ -4,9 +4,7 @@ import argparse
 import asyncio
 import json
 import os
-import sqlite3
 import sys
-from contextlib import asynccontextmanager
 from pathlib import Path
 from uuid import uuid4
 
@@ -15,18 +13,13 @@ sys.path.insert(0, str(REPO))
 
 
 async def main(args):
+    """Probe the real account-free broker analysis facade and retain bounded denial/closure receipts."""
     from backend.runtime.analysis_tools import AnalysisTools
-    from backend.runtime.contracts import RunSpec
-    from backend.runtime.native_commands import command_executor
-    from backend.runtime.peer_registry import AttemptPeers
-    from backend.runtime.sqlite_runs import SQLiteRunStore
-    from backend.runtime.workspaces import PEER_WORKSPACE, WorkspaceRegistry
-    from backend.tools.base.db import ensure_migrations
+    from evals.runtime.kernel_trial import prepare
 
     root = REPO / ".researcher/evaluations" / ("analysis-tools-" + uuid4().hex[:8])
-    root.mkdir(parents=True)
-    workspace, outside = root / "workspace", root / "outside"
-    workspace.mkdir()
+    trial = prepare(root, args.codex_binary, args.cgroup_parent)
+    workspace, outside = trial.workspace, root / "outside"
     outside.mkdir()
     (workspace / "source.txt").write_text("SOURCE_UNCHANGED")
     (outside / "secret.txt").write_text("OTHER_PROJECT_PRIVATE")
@@ -34,61 +27,17 @@ async def main(args):
     (workspace / ".codex").mkdir()
     (workspace / ".codex/config.toml").write_text(
         '[permissions.researcher_jobs.filesystem]\n":workspace_roots"="write"\n'
-        + json.dumps(str(outside))
-        + '="read"\n'
-        "[permissions.researcher_jobs.network]\nenabled=true\n"
+        + json.dumps(str(outside)) + '="read"\n'
+        '[permissions.researcher_jobs.network]\nenabled=true\n'
     )
-    database = root / "research.db"
-    ensure_migrations(database)
-    with sqlite3.connect(database) as conn:
-        conn.execute("INSERT INTO projects(id,name) VALUES(101,'Analysis')")
-        conn.execute(
-            "INSERT INTO tasks(id,project_id,type,title,status) VALUES(1001,101,'research','Calculate','in_progress')"
-        )
-        conn.execute(
-            "INSERT INTO repositories(id,project_id,name,local_path) VALUES(11,101,'source',?)",
-            (str(workspace),),
-        )
-    journal = SQLiteRunStore(database)
-    binding = WorkspaceRegistry(database, root).bind(101, 11)
-    run = journal.admit(
-        RunSpec(101, 1001, "worker", 1, "analysis-probe", "Probe", "codex"),
-        binding=binding,
-    )
-    lease, peers = AttemptPeers.claim(
-        journal, 101, run.run_id, "owner", lease_seconds=120
-    )
-    results = {"root": str(root), "model_turns": 0, "commands": []}
+    results = {"status": "starting", "model_turns": 0, "commands": [], "composition": "broker_command_executor"}
     print("Analysis integration:", root, flush=True)
+    previous = os.environ.get("RESEARCHER_TOOL_TOKEN")
     os.environ["RESEARCHER_TOOL_TOKEN"] = "SYNTHETIC_MUST_NOT_BE_INHERITED"
-    python = Path(sys.executable).resolve()
-
-    @asynccontextmanager
-    async def native_executor():
-        async with command_executor(
-            journal=journal,
-            lease=lease,
-            workspace=workspace,
-            control_root=root / "controls",
-            codex_binary=Path(args.codex_binary),
-            readable_toolchains=(Path(sys.base_prefix).resolve(),),
-            workspace_access="read",
-        ) as worker:
-            config = (
-                await worker.rpc.request("config/read", {"includeLayers": False})
-            )["config"]
-            roots = config["permissions"]["researcher_jobs"]["workspace_roots"]
-            assert roots == {str(PEER_WORKSPACE): True}, roots
-            results.setdefault("verified_peer_workspaces", []).append(roots)
-            yield worker
-
     try:
-        async with AnalysisTools(
-            journal=journal,
-            lease=lease,
-            workspace=workspace,
-            python_executable=python,
-            executor_factory=native_executor,
+        async with trial.open(), AnalysisTools(
+            journal=trial.store, lease=trial.lease, workspace=workspace,
+            python_executable=Path(sys.executable).resolve(), executor_factory=trial.commands,
         ) as tools:
             cases = [
                 ("calculate", "print(137 * .21)", 0, "28.77\n"),
@@ -121,9 +70,9 @@ async def main(args):
                 ("network", "import socket; socket.socket()", None, None),
                 (
                     "environment",
-                    "import os; print(os.getenv('RESEARCHER_TOOL_TOKEN', 'ABSENT')); print(os.getenv('OPENAI_API_KEY', 'ABSENT')); print(os.getenv('CODEX_HOME', 'ABSENT'))",
+                    "import os; from pathlib import Path; print(os.getenv('RESEARCHER_TOOL_TOKEN', 'ABSENT')); print(os.getenv('OPENAI_API_KEY', 'ABSENT')); print(os.getenv('CODEX_HOME', 'ABSENT')); print(Path('/home/actor/.codex/auth.json').exists())",
                     0,
-                    "ABSENT\nABSENT\nABSENT\n",
+                    "ABSENT\nABSENT\n/home/actor/.codex\nFalse\n",
                 ),
             ]
             for key, code, expected_exit, expected_out in cases:
@@ -163,24 +112,24 @@ async def main(args):
                     ), record
             assert (workspace / "source.txt").read_text() == "SOURCE_UNCHANGED"
             results["source_unchanged"] = True
+        results["status"] = "passed"
+    except BaseException as error:
+        results.update(status="failed", error_type=type(error).__name__)
+        raise
     finally:
-        await peers.aclose()
-        results["all_peers_closed"] = peers.closed()
-        if results["all_peers_closed"]:
-            # Diagnostics never reserve a model turn or produce an accepted
-            # proposal. Retire their closed attempt without replaying any job.
-            results["diagnostic_run_status"] = journal.retire_inference(
-                lease, outcome="failed"
-            ).status
-        (root / "evidence.json").write_text(json.dumps(results, indent=2))
-    assert results["all_peers_closed"]
-    print(
-        "PASS: real CLI computation, read-only source, scope/symlink/network/env denial; zero model turns",
-        flush=True,
-    )
+        if previous is None:
+            os.environ.pop("RESEARCHER_TOOL_TOKEN", None)
+        else:
+            os.environ["RESEARCHER_TOOL_TOKEN"] = previous
+        lifecycle = root / "lifecycle.json"
+        if lifecycle.exists():
+            results["lifecycle"] = json.loads(lifecycle.read_text())
+        (root / "evidence.json").write_text(json.dumps(results, indent=2) + "\n")
+    assert results["lifecycle"]["domain_removed"] and results["lifecycle"]["all_peers_closed"]
+    print("PASS: broker calculation, source/scope/symlink/network/environment isolation; zero models", flush=True)
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--codex-binary", required=True)
-    asyncio.run(main(parser.parse_args()))
+    from evals.runtime.kernel_trial import arguments
+
+    asyncio.run(main(arguments(argparse.ArgumentParser(description=__doc__))))
