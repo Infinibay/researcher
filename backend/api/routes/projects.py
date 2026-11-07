@@ -216,7 +216,7 @@ def delete_project(project_id: int):
         if not conn.in_transaction:
             conn.execute('BEGIN IMMEDIATE')
         metadata = conn.execute('SELECT metadata_json FROM projects WHERE id=?', (project_id,)).fetchone()
-        if (metadata is not None and SourceOperations.has_history(metadata[0])) or any(conn.execute(f'SELECT 1 FROM {table} WHERE project_id=? LIMIT 1', (project_id,)).fetchone() for table in ('runtime_runs','agent_runs','flow_snapshots','agent_events')):
+        if (metadata is not None and SourceOperations.has_history(metadata[0])) or any(conn.execute(f'SELECT 1 FROM {table} WHERE project_id=? LIMIT 1', (project_id,)).fetchone() for table in ('runtime_runs','agent_runs','flow_snapshots','agent_events','reference_file_operations')):
             raise RunConflict('El proyecto conserva historia de ejecución. No se elimina desde este control; conserva sus informes, intentos y fuentes.')
         # Delete in dependency order — explicit deletes for all referencing
         # tables so the delete succeeds even if the DB lacks ON DELETE CASCADE

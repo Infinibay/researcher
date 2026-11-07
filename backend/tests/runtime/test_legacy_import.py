@@ -159,13 +159,22 @@ def chroma_export(tmp_path):
     return root
 
 
-def test_chroma_fragments_keep_exact_text_identity_and_explicit_project(legacy,chroma_export,tmp_path):
+@pytest.mark.parametrize('migration_target', [58, None])
+def test_chroma_fragments_keep_exact_text_identity_and_explicit_project(legacy,chroma_export,tmp_path,monkeypatch,migration_target):
     """Same IDs in separate collections and misleading metadata cannot override an explicit project assignment."""
     from backend.runtime.legacy_import import stage_legacy_host
 
     database,manifest=legacy
     manifest['chroma_exports']=[{'path':str(chroma_export),'projects':{'alpha':101,'beta':202}}]
-    target=tmp_path/'imported';receipt=stage_legacy_host(database,target,manifest=manifest)
+    from backend.tools.base import db as migrations
+    migrate = migrations.ensure_migrations
+    def historical_prefix(path, **kwargs):
+        """Build a genuine schema58 fixture for its inverse, while retaining a separate current-import case."""
+        return migrate(path, **{**kwargs, 'target_version':58})
+    target=tmp_path/'imported'
+    with monkeypatch.context() as patch:
+        if migration_target is not None: patch.setattr(migrations,'ensure_migrations',historical_prefix)
+        receipt=stage_legacy_host(database,target,manifest=manifest)
     assert receipt['chroma_records']==3
     evidence=json.loads((target/receipt['import_manifest']).read_text())
     fragments=evidence['chroma_chunks']
@@ -194,7 +203,7 @@ def test_chroma_fragments_keep_exact_text_identity_and_explicit_project(legacy,c
     from backend.db.reference_provenance_migration import restore_reference_provenance_schema
     from backend.research.models import SourceUnavailable
     with sqlite3.connect(target/'source.db') as db:
-        with pytest.raises(RuntimeError,match='imported history'):
+        with pytest.raises(RuntimeError,match='imported history' if migration_target==58 else 'newer schema'):
             restore_reference_provenance_schema(db)
     Path(saved[0][1]).write_text('Later replacement must not inherit original page attribution.')
     with pytest.raises(SourceUnavailable,match='historical provenance'):

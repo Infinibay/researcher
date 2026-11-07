@@ -32,6 +32,7 @@ from backend.research.models import ReferenceRecord, SourceTooLarge
 from backend.research.parser_process import PDFParser
 from backend.research.provenance import provenance_summary
 from backend.research.reference_storage import ReferenceStorage
+from backend.research.reference_operations import ReferenceOperations
 
 router = APIRouter(prefix="/api/files", tags=["files"])
 MAX_UPLOAD = 1000000
@@ -96,31 +97,32 @@ def list_files(
         ]
 
 
-def _save_upload(request, project_id, filename, content, mime_type, description):
-    """Commit metadata after a private file is durable; preserve bytes on uncertain commit."""
-    storage = ReferenceStorage(Path(api_config.UPLOAD_DIR))
-    with _connection(request) as conn:
-        conn.execute("BEGIN IMMEDIATE")
-        if (
-            conn.execute("SELECT id FROM projects WHERE id=?", (project_id,)).fetchone()
-            is None
-        ):
-            raise HTTPException(404, "Project not found")
-        path = storage.save(project_id, content)
-        try:
-            cursor = conn.execute(
-                "INSERT INTO reference_files(project_id,file_name,file_path,file_size,file_type,description) VALUES(?,?,?,?,?,?)",
-                (project_id, filename, str(path), len(content), mime_type, description),
-            )
-            row = _get(conn, cursor.lastrowid, project_id)
-        except sqlite3.Error:
-            storage.remove(
-                ReferenceRecord(1, project_id, filename, str(path), mime_type)
-            )
-            raise
-        # A commit failure can be uncertain: do not remove bytes already referenced
-        # by a possibly durable row. The API must not report successful upload.
-    return row
+def _operations(request):
+    """Bind attachment history to the same serving database and upload root as existing readers."""
+    return ReferenceOperations(lambda: _connection(request), ReferenceStorage(Path(api_config.UPLOAD_DIR)))
+
+
+def _save_upload(request, project_id, filename, content, mime_type, description, operation_key=None):
+    """Persist the original upload intent before filesystem work, returning only its confirmed receipt."""
+    return _operations(request).upload(project_id, filename, content, mime_type, description, operation_key=operation_key)
+
+
+@router.get('/operations')
+def file_operations(request: Request, project_id: int = Query(..., gt=0), limit: int = Query(50, ge=1, le=100), offset: int = Query(0, ge=0)):
+    """Inspect scoped operation history without starting recovery or repeating an upload."""
+    return _operations(request).history(project_id, limit=limit, offset=offset)
+
+
+@router.post('/operations/{operation_key}/reconcile')
+def reconcile_file_operation(operation_key: str, request: Request, project_id: int = Query(..., gt=0)):
+    """Recover the original published/deleted receipt, or complete only its verified original intent."""
+    return _operations(request).reconcile(project_id, operation_key)
+
+
+@router.post('/operations/{operation_key}/abandon')
+def abandon_file_operation(operation_key: str, request: Request, project_id: int = Query(..., gt=0)):
+    """Explicitly close an unpublished upload while preserving uncertain bytes and history."""
+    return _operations(request).abandon(project_id, operation_key)
 
 
 @router.post("", response_model=ReferenceFileResponse, status_code=201)
@@ -129,8 +131,11 @@ async def upload_file(
     file: Annotated[UploadFile, File()],
     project_id: int = Query(..., gt=0),
     description: str = Form("", max_length=2000),
+    operation_key: str | None = Form(None, max_length=128),
 ):
     """Store one bounded multipart attachment; uploading never starts inference or capture."""
+    if operation_key is None and 'operation_key' in await request.form():
+        raise HTTPException(400, 'Invalid empty attachment operation key')
     raw = (file.filename or "upload").replace("\\", "/")
     filename = "".join(c for c in Path(raw).name if c.isprintable())
     if not filename or filename in (".", "..") or len(filename) > 255:
@@ -146,7 +151,7 @@ async def upload_file(
     elif mime_type == "application/octet-stream":
         mime_type = mimetypes.guess_type(filename)[0] or mime_type
     return await asyncio.to_thread(
-        _save_upload, request, project_id, filename, content, mime_type, description
+        _save_upload, request, project_id, filename, content, mime_type, description, operation_key
     )
 
 
@@ -234,9 +239,8 @@ def download_file(
 def delete_file(
     file_id: int, request: Request, project_id: int | None = Query(None, gt=0)
 ):
-    """Remove a scoped upload and its metadata; existing captured sources/reports survive."""
-    with _connection(request) as conn:
-        conn.execute("BEGIN IMMEDIATE")
-        row = _get(conn, file_id, project_id)
-        ReferenceStorage(Path(api_config.UPLOAD_DIR)).remove(_reference(row))
-        conn.execute("DELETE FROM reference_files WHERE id=?", (file_id,))
+    """Journal a scoped deletion before unlinking; retries recover its receipt and captured sources survive."""
+    if project_id is None:
+        with _connection(request) as conn:
+            project_id = _get(conn, file_id)['project_id']
+    _operations(request).delete(project_id, file_id)

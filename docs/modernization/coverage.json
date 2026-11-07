@@ -1627,14 +1627,31 @@
       ]
     },
     "D05": {
-      "status": "in_progress",
+      "status": "complete",
       "evidence": [
         "backend/tests/research",
         "docs/architecture/research-slice.md",
-        "docs/modernization/research-mcp-evidence.json"
+        "docs/modernization/research-mcp-evidence.json",
+        "backend/tests/api/test_reference_recovery.py",
+        "backend/tests/api/test_reference_files.py",
+        "backend/tests/research/test_persistence.py",
+        "backend/tests/runtime/test_migration_chain.py",
+        "backend/tests/runtime/test_legacy_import.py",
+        "frontend/tests/ui/file-recovery.test.tsx",
+        "docs/modernization/reference-operations-review.md",
+        "docs/modernization/reference-operations-final-packaging.json",
+        "docs/modernization/reference-operations-docstrings.json"
       ],
-      "remaining": [
-        "Complete scenario acceptance across durable product runtime, legacy consumers, data recovery and UI where applicable"
+      "verified_at": "2026-11-07",
+      "implemented": [
+        "Canonical report content, finding relationships and receipts commit together; rejected writes leave no partial report.",
+        "Migration66 records original scoped attachment intent before filesystem work. Upload publication verifies complete size/hash and fsync; deletion records intent/removes metadata atomically before unlink. Original replay never duplicates or resurrects a file.",
+        "Owner history, explicit reconciliation and incomplete-upload closure retain uncertain bytes. Real child crashes, disk/fsync/DB failures, concurrency, owner scope, original receipts and relocated pending uploads are checked."
+      ],
+      "limitations": [
+        "Synthetic managed data and current post-migration operations; historical unjournaled orphans require the separate historical-data reconciliation.",
+        "Restored or changed file identity cannot inherit an old delete authorization; bytes and pending intent remain for explicit retention/review in D08/D13. No automatic orphan deletion or physical power-loss test.",
+        "DOM interactions, contracts and build do not accept the complete Files page; no global-suite or model-quality claim."
       ]
     },
     "D06": {

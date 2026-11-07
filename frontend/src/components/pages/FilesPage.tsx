@@ -8,6 +8,7 @@ import type { ReferenceFile } from '../../types/api'
 import { scopedEntityId } from '../../utils/projectSelection'
 import { formatFileSize } from '../../utils/file'
 import { reportTimestamp } from '../reports/presentation'
+import { FileOperations } from '../files/FileOperations'
 import '../../styles/tasks.css'
 import '../../styles/files.css'
 
@@ -46,6 +47,7 @@ function ProjectFiles({ projectId }: { projectId: number }) {
   return <div className="task-workbench files-workbench" data-has-selection={selectedId != null}>
     <header className="files-heading"><div><h1>Archivos de referencia</h1><p>Adjuntos de este proyecto. Subir un archivo no inicia una investigación.</p></div><Link to={`/tasks?project=${projectId}`}>Ver tareas del proyecto</Link></header>
     <div className="files-uploader"><FileUpload projectId={projectId} onUploaded={file => choose(file.id)} /></div>
+    <FileOperations projectId={projectId} />
     {foreignLink && <p role="status" className="files-warning">Este enlace corresponde a otro proyecto. Elige ese proyecto en la cabecera o abre un adjunto de la lista actual.</p>}
     <div className="files-layout">
       <section className="files-index" aria-label="Archivos del proyecto">
@@ -71,9 +73,11 @@ function ProjectFiles({ projectId }: { projectId: number }) {
 function FileUpload({ projectId, onUploaded }: { projectId: number; onUploaded: (file: ReferenceFile) => void }) {
   const upload = useUploadFile()
   const input = useRef<HTMLInputElement>(null)
+  const operationKey = useRef('')
   const [file, setFile] = useState<File | null>(null), [description, setDescription] = useState(''), [error, setError] = useState(''), [notice, setNotice] = useState(''), [dragging, setDragging] = useState(false)
   /** Validate the entire selection rather than silently uploading its first item. */
   const select = (list: FileList | null) => {
+    operationKey.current = ''
     setError(''); setNotice(''); upload.reset()
     if (!list?.length) return
     if (list.length !== 1) { setFile(null); setError('Selecciona un solo archivo por subida.'); return }
@@ -84,7 +88,8 @@ function FileUpload({ projectId, onUploaded }: { projectId: number; onUploaded: 
   const submit = (event: FormEvent) => {
     event.preventDefault()
     if (!file || upload.isPending) return
-    upload.mutate({ projectId, file, description: description.trim() || undefined }, { onSuccess: result => { setFile(null); setDescription(''); if (input.current) input.current.value = ''; setNotice(`Adjunto guardado: ${result.filename}.`); onUploaded(result) } })
+    operationKey.current ||= crypto.randomUUID()
+    upload.mutate({ projectId, file, operationKey: operationKey.current, description: description.trim() || undefined }, { onSuccess: result => { setFile(null); setDescription(''); operationKey.current = ''; if (input.current) input.current.value = ''; setNotice(`Carga registrada: ${result.filename}. Su disponibilidad actual se muestra en la lista.`); onUploaded(result) } })
   }
   return <form onSubmit={submit} aria-labelledby="file-upload-title"><h2 id="file-upload-title" tabIndex={-1}>Subir archivo</h2><div className="files-upload-fields">
     <div className="files-drop" data-dragging={dragging} onDragOver={event => { event.preventDefault(); if (!upload.isPending) setDragging(true) }} onDragLeave={() => setDragging(false)} onDrop={event => { event.preventDefault(); setDragging(false); if (!upload.isPending) select(event.dataTransfer.files) }}>
@@ -93,8 +98,8 @@ function FileUpload({ projectId, onUploaded }: { projectId: number; onUploaded: 
       <p className="files-muted">Un archivo por vez · hasta 1.000.000 bytes. Previa disponible para texto UTF-8, PDF con texto, DOCX, CSV, JSON y XML.</p>
       {file && <p className="files-picked">{file.name} · {formatFileSize(file.size)}</p>}
     </div>
-    <div className="files-upload-submit"><label>Descripción (opcional)<input value={description} maxLength={2000} disabled={upload.isPending} onChange={event => setDescription(event.target.value)} placeholder="Para qué servirá este adjunto" /></label><button className="files-primary" disabled={!file || upload.isPending} type="submit">{upload.isPending ? 'Guardando adjunto…' : 'Subir archivo'}</button></div>
-  </div>{(error || upload.isError) && <p className="files-error" role="alert">{error || upload.error?.message} {upload.isError && 'Consulta la lista antes de repetir una subida cuyo resultado sea incierto.'}</p>}{notice && <p role="status">{notice}</p>}</form>
+    <div className="files-upload-submit"><label>Descripción (opcional)<input value={description} maxLength={2000} disabled={upload.isPending} onChange={event => { operationKey.current = ''; setDescription(event.target.value) }} placeholder="Para qué servirá este adjunto" /></label><button className="files-primary" disabled={!file || upload.isPending} type="submit">{upload.isPending ? 'Guardando adjunto…' : 'Subir archivo'}</button></div>
+  </div>{(error || upload.isError) && <p className="files-error" role="alert">{error || upload.error?.message} {upload.isError && 'Consulta «Cargas y borrados» para recuperar este intento. Repetir el mismo envío conserva su identidad.'}</p>}{notice && <p role="status">{notice}</p>}</form>
 }
 
 /** Explain the attachment/preview/source distinction using a concrete citation example. */

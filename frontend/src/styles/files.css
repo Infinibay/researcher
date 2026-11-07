@@ -94,6 +94,15 @@
 }
 
 .files-detail-heading h2:focus,.files-uploader h2:focus { outline: none; }
+.files-operations { border-block: 1px solid var(--work-line); padding: 1.25rem 0; margin-bottom: 1.5rem; }
+.files-operations header { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; align-items: start; }
+.files-operations h2 { font-size: 1.2rem; margin-bottom: .35rem; }
+.files-operations ul { list-style: none; padding: 0; margin: 1rem 0 0; }
+.files-operations li { border-top: 1px solid var(--work-line); padding: 1rem 0; overflow-wrap: anywhere; }
+.files-operations li > div:first-child { display: flex; justify-content: space-between; gap: .75rem; flex-wrap: wrap; }
+.files-operations li span { color: var(--work-muted); font-size: .85rem; }
+.files-operation-actions { display: flex; flex-wrap: wrap; gap: .5rem; }
+.files-operation-actions p { flex-basis: 100%; }
 .files-workbench .files-danger:not(:disabled):hover { background: #7d1f2b; }
 @media (max-width: 700px) {
  /* Keep the page heading available to assistive technology in mobile detail. */

@@ -1,0 +1,379 @@
+{
+  "base_commit": "adf04f6",
+  "changed_or_new_definitions_documented": 53,
+  "missing": [],
+  "contracts": [
+    {
+      "path": "backend/api/routes/files.py",
+      "symbol": "_operations",
+      "line": 100,
+      "docstring": "Bind attachment history to the same serving database and upload root as existing readers.",
+      "file_sha256": "ca3bf53c33f0d6821e9ea305b37041d4c8a5f4e25a90b1308d9f95bb661085e5"
+    },
+    {
+      "path": "backend/api/routes/files.py",
+      "symbol": "_save_upload",
+      "line": 105,
+      "docstring": "Persist the original upload intent before filesystem work, returning only its confirmed receipt.",
+      "file_sha256": "ca3bf53c33f0d6821e9ea305b37041d4c8a5f4e25a90b1308d9f95bb661085e5"
+    },
+    {
+      "path": "backend/api/routes/files.py",
+      "symbol": "file_operations",
+      "line": 111,
+      "docstring": "Inspect scoped operation history without starting recovery or repeating an upload.",
+      "file_sha256": "ca3bf53c33f0d6821e9ea305b37041d4c8a5f4e25a90b1308d9f95bb661085e5"
+    },
+    {
+      "path": "backend/api/routes/files.py",
+      "symbol": "reconcile_file_operation",
+      "line": 117,
+      "docstring": "Recover the original published/deleted receipt, or complete only its verified original intent.",
+      "file_sha256": "ca3bf53c33f0d6821e9ea305b37041d4c8a5f4e25a90b1308d9f95bb661085e5"
+    },
+    {
+      "path": "backend/api/routes/files.py",
+      "symbol": "abandon_file_operation",
+      "line": 123,
+      "docstring": "Explicitly close an unpublished upload while preserving uncertain bytes and history.",
+      "file_sha256": "ca3bf53c33f0d6821e9ea305b37041d4c8a5f4e25a90b1308d9f95bb661085e5"
+    },
+    {
+      "path": "backend/api/routes/files.py",
+      "symbol": "upload_file",
+      "line": 129,
+      "docstring": "Store one bounded multipart attachment; uploading never starts inference or capture.",
+      "file_sha256": "ca3bf53c33f0d6821e9ea305b37041d4c8a5f4e25a90b1308d9f95bb661085e5"
+    },
+    {
+      "path": "backend/api/routes/files.py",
+      "symbol": "delete_file",
+      "line": 239,
+      "docstring": "Journal a scoped deletion before unlinking; retries recover its receipt and captured sources survive.",
+      "file_sha256": "ca3bf53c33f0d6821e9ea305b37041d4c8a5f4e25a90b1308d9f95bb661085e5"
+    },
+    {
+      "path": "backend/api/routes/projects.py",
+      "symbol": "delete_project",
+      "line": 202,
+      "docstring": "Delete an explicitly selected unused project; execution history and registered workers must be preserved and reconciled instead.",
+      "file_sha256": "40bcd939312f048aa22eea9f47967115638effe831ec75786e29a4e1749689e3"
+    },
+    {
+      "path": "backend/api/routes/projects.py",
+      "symbol": "delete_project._delete",
+      "line": 211,
+      "docstring": "Hold the admission write lock while checking history and removing only an unused project's metadata; source files are never deleted here.",
+      "file_sha256": "40bcd939312f048aa22eea9f47967115638effe831ec75786e29a4e1749689e3"
+    },
+    {
+      "path": "backend/db/reference_operations_migration.py",
+      "symbol": "restore_reference_operations_schema",
+      "line": 4,
+      "docstring": "Restore schema65 only when no operation has been admitted and no newer schema exists.",
+      "file_sha256": "7d1b47b03fbbb3f7fe11ab82d742989c93d2fb47c9da8bc3ff18fb48e8b00aeb"
+    },
+    {
+      "path": "backend/research/reference_operations.py",
+      "symbol": "_json",
+      "line": 17,
+      "docstring": "Encode exact intent and receipt data deterministically for duplicate-request comparison.",
+      "file_sha256": "c849d1e42b903c23f9b69dd0235c9f3fc17f505f73b5ab760adcea93ed20f45b"
+    },
+    {
+      "path": "backend/research/reference_operations.py",
+      "symbol": "ReferenceOperations",
+      "line": 22,
+      "docstring": "Own durable upload/delete receipts while preserving the existing scoped file readers.",
+      "file_sha256": "c849d1e42b903c23f9b69dd0235c9f3fc17f505f73b5ab760adcea93ed20f45b"
+    },
+    {
+      "path": "backend/research/reference_operations.py",
+      "symbol": "ReferenceOperations.__init__",
+      "line": 25,
+      "docstring": "Bind the serving connection context and confined storage without creating directories.",
+      "file_sha256": "c849d1e42b903c23f9b69dd0235c9f3fc17f505f73b5ab760adcea93ed20f45b"
+    },
+    {
+      "path": "backend/research/reference_operations.py",
+      "symbol": "ReferenceOperations._row",
+      "line": 31,
+      "docstring": "Resolve an operation only inside its original project; keys are never global authority.",
+      "file_sha256": "c849d1e42b903c23f9b69dd0235c9f3fc17f505f73b5ab760adcea93ed20f45b"
+    },
+    {
+      "path": "backend/research/reference_operations.py",
+      "symbol": "ReferenceOperations._view",
+      "line": 39,
+      "docstring": "Expose owner-readable history without treating a pending operation as a published attachment.",
+      "file_sha256": "c849d1e42b903c23f9b69dd0235c9f3fc17f505f73b5ab760adcea93ed20f45b"
+    },
+    {
+      "path": "backend/research/reference_operations.py",
+      "symbol": "ReferenceOperations.history",
+      "line": 47,
+      "docstring": "Read bounded, stable operation history; inspection never completes or repeats an effect.",
+      "file_sha256": "c849d1e42b903c23f9b69dd0235c9f3fc17f505f73b5ab760adcea93ed20f45b"
+    },
+    {
+      "path": "backend/research/reference_operations.py",
+      "symbol": "ReferenceOperations._reference",
+      "line": 55,
+      "docstring": "Resolve a relative operation path against the current configured root, including a restored installation.",
+      "file_sha256": "c849d1e42b903c23f9b69dd0235c9f3fc17f505f73b5ab760adcea93ed20f45b"
+    },
+    {
+      "path": "backend/research/reference_operations.py",
+      "symbol": "ReferenceOperations.upload",
+      "line": 63,
+      "docstring": "Admit the exact owner upload before writing bytes; duplicate keys recover without writing again.",
+      "file_sha256": "c849d1e42b903c23f9b69dd0235c9f3fc17f505f73b5ab760adcea93ed20f45b"
+    },
+    {
+      "path": "backend/research/reference_operations.py",
+      "symbol": "ReferenceOperations.delete",
+      "line": 94,
+      "docstring": "Commit the original delete intent and metadata removal together before touching file bytes.",
+      "file_sha256": "c849d1e42b903c23f9b69dd0235c9f3fc17f505f73b5ab760adcea93ed20f45b"
+    },
+    {
+      "path": "backend/research/reference_operations.py",
+      "symbol": "ReferenceOperations.reconcile",
+      "line": 115,
+      "docstring": "Complete only verified original bytes or the original deletion; completed receipts never resurrect references.",
+      "file_sha256": "c849d1e42b903c23f9b69dd0235c9f3fc17f505f73b5ab760adcea93ed20f45b"
+    },
+    {
+      "path": "backend/research/reference_operations.py",
+      "symbol": "ReferenceOperations.abandon",
+      "line": 135,
+      "docstring": "Close an unpublished upload without deleting its uncertain retained bytes or permitting later publication.",
+      "file_sha256": "c849d1e42b903c23f9b69dd0235c9f3fc17f505f73b5ab760adcea93ed20f45b"
+    },
+    {
+      "path": "backend/research/reference_storage.py",
+      "symbol": "ReferenceStorage",
+      "line": 18,
+      "docstring": "Own project upload traversal, bounded snapshots and immutable new file creation.",
+      "file_sha256": "bd20aeaf2cc48d03d4d29f680378782be736d022cb2736c27fab9503e8f03e53"
+    },
+    {
+      "path": "backend/research/reference_storage.py",
+      "symbol": "ReferenceStorage._directory",
+      "line": 26,
+      "docstring": "Pin each directory FD, optionally creating private upload directories.",
+      "file_sha256": "bd20aeaf2cc48d03d4d29f680378782be736d022cb2736c27fab9503e8f03e53"
+    },
+    {
+      "path": "backend/research/reference_storage.py",
+      "symbol": "ReferenceStorage.save",
+      "line": 132,
+      "docstring": "Create/fsync one private file; an admitted journal may supply its unique name, never overwrite it.",
+      "file_sha256": "bd20aeaf2cc48d03d4d29f680378782be736d022cb2736c27fab9503e8f03e53"
+    },
+    {
+      "path": "backend/research/reference_storage.py",
+      "symbol": "ReferenceStorage._identity",
+      "line": 165,
+      "docstring": "Describe the exact regular-file revision observed before an owner deletion.",
+      "file_sha256": "bd20aeaf2cc48d03d4d29f680378782be736d022cb2736c27fab9503e8f03e53"
+    },
+    {
+      "path": "backend/research/reference_storage.py",
+      "symbol": "ReferenceStorage.identity",
+      "line": 169,
+      "docstring": "Observe a confined file revision; a missing file is distinct from an unavailable root.",
+      "file_sha256": "bd20aeaf2cc48d03d4d29f680378782be736d022cb2736c27fab9503e8f03e53"
+    },
+    {
+      "path": "backend/research/reference_storage.py",
+      "symbol": "ReferenceStorage.confirm",
+      "line": 182,
+      "docstring": "Verify and fsync the complete original upload before publishing a database reference.",
+      "file_sha256": "bd20aeaf2cc48d03d4d29f680378782be736d022cb2736c27fab9503e8f03e53"
+    },
+    {
+      "path": "backend/research/reference_storage.py",
+      "symbol": "ReferenceStorage.remove",
+      "line": 205,
+      "docstring": "Remove a confined regular file only if its admitted revision still matches; absence is idempotent.",
+      "file_sha256": "bd20aeaf2cc48d03d4d29f680378782be736d022cb2736c27fab9503e8f03e53"
+    },
+    {
+      "path": "backend/tests/api/test_reference_recovery.py",
+      "symbol": "keyed_upload",
+      "line": 21,
+      "docstring": "Submit a stable owner intent so a lost HTTP reply can be retried without another upload.",
+      "file_sha256": "0d4f397145a2f5f8e3e33f987a7cb5a33b0d8b295e5bc76a149f14495298a2ab"
+    },
+    {
+      "path": "backend/tests/api/test_reference_recovery.py",
+      "symbol": "history",
+      "line": 26,
+      "docstring": "Read real project-scoped operation history without completing a pending effect.",
+      "file_sha256": "0d4f397145a2f5f8e3e33f987a7cb5a33b0d8b295e5bc76a149f14495298a2ab"
+    },
+    {
+      "path": "backend/tests/api/test_reference_recovery.py",
+      "symbol": "recover",
+      "line": 33,
+      "docstring": "Request explicit recovery of a known original operation, including owner CSRF checks.",
+      "file_sha256": "0d4f397145a2f5f8e3e33f987a7cb5a33b0d8b295e5bc76a149f14495298a2ab"
+    },
+    {
+      "path": "backend/tests/api/test_reference_recovery.py",
+      "symbol": "operations",
+      "line": 38,
+      "docstring": "Bind the real durable service to a synthetic existing database and confined root.",
+      "file_sha256": "0d4f397145a2f5f8e3e33f987a7cb5a33b0d8b295e5bc76a149f14495298a2ab"
+    },
+    {
+      "path": "backend/tests/api/test_reference_recovery.py",
+      "symbol": "operations.connection",
+      "line": 42,
+      "docstring": "Commit on success and roll back interrupted mutations using production connection settings.",
+      "file_sha256": "0d4f397145a2f5f8e3e33f987a7cb5a33b0d8b295e5bc76a149f14495298a2ab"
+    },
+    {
+      "path": "backend/tests/api/test_reference_recovery.py",
+      "symbol": "test_failed_delete_commit_preserves_downloadable_original",
+      "line": 49,
+      "docstring": "A rejected metadata deletion must not erase the file that its rolled-back row still references.",
+      "file_sha256": "0d4f397145a2f5f8e3e33f987a7cb5a33b0d8b295e5bc76a149f14495298a2ab"
+    },
+    {
+      "path": "backend/tests/api/test_reference_recovery.py",
+      "symbol": "test_original_receipt_replays_without_recreating_deleted_attachment",
+      "line": 63,
+      "docstring": "A lost reply reuses one ID; later replay never resurrects a deleted reference or overwrites intent.",
+      "file_sha256": "0d4f397145a2f5f8e3e33f987a7cb5a33b0d8b295e5bc76a149f14495298a2ab"
+    },
+    {
+      "path": "backend/tests/api/test_reference_recovery.py",
+      "symbol": "test_recovery_scope_authentication_and_history_do_not_grant_authority",
+      "line": 80,
+      "docstring": "Known keys grant no cross-project access and inspection cannot perform owner writes.",
+      "file_sha256": "0d4f397145a2f5f8e3e33f987a7cb5a33b0d8b295e5bc76a149f14495298a2ab"
+    },
+    {
+      "path": "backend/tests/api/test_reference_recovery.py",
+      "symbol": "test_failed_upload_retains_original_operation_and_never_returns_false_success",
+      "line": 100,
+      "docstring": "Disk-full, fsync and DB-publication failures preserve identifiable bytes for recovery or explicit closure.",
+      "file_sha256": "0d4f397145a2f5f8e3e33f987a7cb5a33b0d8b295e5bc76a149f14495298a2ab"
+    },
+    {
+      "path": "backend/tests/api/test_reference_recovery.py",
+      "symbol": "test_process_death_recovers_original_filesystem_effect_once",
+      "line": 150,
+      "docstring": "Kill a real child after fsync/unlink; recover its committed operation through HTTP without rerunning its effect.",
+      "file_sha256": "0d4f397145a2f5f8e3e33f987a7cb5a33b0d8b295e5bc76a149f14495298a2ab"
+    },
+    {
+      "path": "backend/tests/api/test_reference_recovery.py",
+      "symbol": "test_pending_delete_preserves_changed_file_and_unavailable_root",
+      "line": 191,
+      "docstring": "An admitted delete can recover once; changed revisions or lost storage never authorize another file's removal.",
+      "file_sha256": "0d4f397145a2f5f8e3e33f987a7cb5a33b0d8b295e5bc76a149f14495298a2ab"
+    },
+    {
+      "path": "backend/tests/api/test_reference_recovery.py",
+      "symbol": "test_pending_delete_preserves_changed_file_and_unavailable_root.fail",
+      "line": 195,
+      "docstring": "Reproduce storage loss after durable deletion intent, before unlink.",
+      "file_sha256": "0d4f397145a2f5f8e3e33f987a7cb5a33b0d8b295e5bc76a149f14495298a2ab"
+    },
+    {
+      "path": "backend/tests/api/test_reference_recovery.py",
+      "symbol": "test_closing_inflight_upload_never_publishes_late_bytes",
+      "line": 212,
+      "docstring": "Owner closure wins even while an already-admitted upload finishes its filesystem write.",
+      "file_sha256": "0d4f397145a2f5f8e3e33f987a7cb5a33b0d8b295e5bc76a149f14495298a2ab"
+    },
+    {
+      "path": "backend/tests/api/test_reference_recovery.py",
+      "symbol": "test_closing_inflight_upload_never_publishes_late_bytes.delayed",
+      "line": 219,
+      "docstring": "Hold only the owned upload after its durable intent so the owner can close it.",
+      "file_sha256": "0d4f397145a2f5f8e3e33f987a7cb5a33b0d8b295e5bc76a149f14495298a2ab"
+    },
+    {
+      "path": "backend/tests/api/test_reference_recovery.py",
+      "symbol": "test_migration_inverse_refuses_history_and_preserves_legacy_references",
+      "line": 237,
+      "docstring": "Unused schema66 reverses safely; any admitted operation prevents erasing its recovery history.",
+      "file_sha256": "0d4f397145a2f5f8e3e33f987a7cb5a33b0d8b295e5bc76a149f14495298a2ab"
+    },
+    {
+      "path": "backend/tests/api/test_reference_recovery.py",
+      "symbol": "test_backup_restore_retains_pending_upload_and_refuses_old_delete_identity",
+      "line": 256,
+      "docstring": "Restore relocates recoverable uploads but never substitutes a new inode into an old deletion authorization.",
+      "file_sha256": "0d4f397145a2f5f8e3e33f987a7cb5a33b0d8b295e5bc76a149f14495298a2ab"
+    },
+    {
+      "path": "backend/tests/api/test_reference_recovery.py",
+      "symbol": "test_backup_restore_retains_pending_upload_and_refuses_old_delete_identity.stop",
+      "line": 262,
+      "docstring": "Retain a committed intent after real bytes are present and before publication or unlink.",
+      "file_sha256": "0d4f397145a2f5f8e3e33f987a7cb5a33b0d8b295e5bc76a149f14495298a2ab"
+    },
+    {
+      "path": "backend/tests/research/test_persistence.py",
+      "symbol": "test_report_failure_rolls_back_canonical_text_relationships_and_receipt",
+      "line": 237,
+      "docstring": "A rejected report write never leaves a successful receipt or partial canonical artifact; original retry commits once.",
+      "file_sha256": "5c269cc2e8466f49c4cd32960367c4cc7e5e4942352ff56a00305e4326c96ff6"
+    },
+    {
+      "path": "backend/tests/runtime/test_legacy_import.py",
+      "symbol": "test_chroma_fragments_keep_exact_text_identity_and_explicit_project",
+      "line": 163,
+      "docstring": "Same IDs in separate collections and misleading metadata cannot override an explicit project assignment.",
+      "file_sha256": "c0abd4daf2019a5437fbf9b7beb145e60402e808cb3930d5cd997a6a96116f50"
+    },
+    {
+      "path": "backend/tests/runtime/test_legacy_import.py",
+      "symbol": "test_chroma_fragments_keep_exact_text_identity_and_explicit_project.historical_prefix",
+      "line": 171,
+      "docstring": "Build a genuine schema58 fixture for its inverse, while retaining a separate current-import case.",
+      "file_sha256": "c0abd4daf2019a5437fbf9b7beb145e60402e808cb3930d5cd997a6a96116f50"
+    },
+    {
+      "path": "backend/tests/runtime/test_migration_chain.py",
+      "symbol": "test_forward_targets_form_one_complete_history_and_preserve_seeded_data",
+      "line": 25,
+      "docstring": "Reach every supported post-legacy version, then repeat startup without losing IDs or relations.",
+      "file_sha256": "a0dc711f684a967a1c1b72b18e3c3e256a15cf274dad77f649d2d55ee30a6745"
+    },
+    {
+      "path": "backend/tests/runtime/test_migration_chain.py",
+      "symbol": "test_writer_crash_before_version_commit_preserves_prior_schema_and_resumes",
+      "line": 49,
+      "docstring": "Abruptly kill only a new migration child before its history insert, then recover that same DB.",
+      "file_sha256": "a0dc711f684a967a1c1b72b18e3c3e256a15cf274dad77f649d2d55ee30a6745"
+    },
+    {
+      "path": "backend/tests/runtime/test_migration_chain.py",
+      "symbol": "test_invalid_forward_target_never_creates_storage",
+      "line": 83,
+      "docstring": "Unknown targets and booleans cannot create a partial installation as a side effect.",
+      "file_sha256": "a0dc711f684a967a1c1b72b18e3c3e256a15cf274dad77f649d2d55ee30a6745"
+    },
+    {
+      "path": "backend/tests/runtime/test_migration_chain.py",
+      "symbol": "test_forward_rejects_unsupported_history_without_rewriting_rows",
+      "line": 94,
+      "docstring": "A forward migration cannot hide a future version, fill a fabricated gap or act as downgrade.",
+      "file_sha256": "a0dc711f684a967a1c1b72b18e3c3e256a15cf274dad77f649d2d55ee30a6745"
+    },
+    {
+      "path": "backend/tests/runtime/test_project_check_policy.py",
+      "symbol": "test_policy_migration_preserves_existing_history_and_inverse_refuses_decisions",
+      "line": 138,
+      "docstring": "An unused inverse restores schema64, but an owner decision cannot be silently erased by rollback.",
+      "file_sha256": "7b39b9992239fb868d8086384a42b48ee3d1821ed31d00923c20436d91138d1f"
+    }
+  ],
+  "scope": "New/changed Python definitions and modules in this delivery. Relevant new frontend modules and exported helpers also carry English JSDoc; no claim that all historic project definitions are documented."
+}

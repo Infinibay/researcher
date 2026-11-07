@@ -134,6 +134,7 @@ async def test_policy_http_owner_csrf_and_read_only_recovery(code_result):
     assert s.c.conn.execute('SELECT count(*) FROM runtime_runs').fetchone()[0] == before
 
 
+@pytest.mark.parametrize('schema_target', [65])
 def test_policy_migration_preserves_existing_history_and_inverse_refuses_decisions(code_result):
     """An unused inverse restores schema64, but an owner decision cannot be silently erased by rollback."""
     import sqlite3
@@ -151,7 +152,7 @@ def test_policy_migration_preserves_existing_history_and_inverse_refuses_decisio
     ensure_migrations(database,target_version=64)
     with sqlite3.connect(database) as conn:
         conn.execute("INSERT INTO projects(id,name) VALUES(101,'Retained')")
-    ensure_migrations(database)
+    ensure_migrations(database, target_version=65)
     with sqlite3.connect(database) as conn:
         assert conn.execute('SELECT count(*) FROM runtime_project_check_policies').fetchone()[0] == 0
         restore_project_check_policy_schema(conn)

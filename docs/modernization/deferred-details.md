@@ -903,3 +903,13 @@ ve el resultado independiente sin tomar el volumen ambiguo como resuelto. Es una
 brecha funcional acotada, no sólo pulido de texto: C10 sigue abierto hasta validarla.
 No generar ahora nuevas respuestas para sustituir el fallo observado. Evidencia:
 [handoff-communication-review.md](handoff-communication-review.md).
+
+## DD117 — presentación del historial de archivos
+
+Después de las capacidades principales, compactar visualmente operaciones ya
+terminadas cuando el historial crezca y ajustar el mensaje genérico de borrado
+de proyecto para distinguir historia de archivos e historia de ejecución.
+La recuperación paginada, los controles explícitos y la conservación de bytes ya
+están conectados; esto no sustituye la aceptación completa de la página.
+La eliminación de restos inciertos y la decisión sobre archivos cuya identidad
+cambió siguen siendo política de retención D08/D13, no un ajuste cosmético.

@@ -233,6 +233,26 @@ def test_report_cannot_import_foreign_or_superseded_findings(
     assert db_conn.execute("SELECT COUNT(*) FROM artifacts").fetchone()[0] == 0
 
 
+@pytest.mark.parametrize('table', ['artifacts','research_reports','tool_operations'])
+def test_report_failure_rolls_back_canonical_text_relationships_and_receipt(research_store, research_scope, db_conn, table):
+    """A rejected report write never leaves a successful receipt or partial canonical artifact; original retry commits once."""
+    import sqlite3
+    from backend.research.models import ReportDraft
+    finding = record(research_store,research_scope)
+    draft = ReportDraft(title='Atomic report',content='Preserve the complete canonical text.',finding_ids=(finding['finding_id'],))
+    db_conn.execute(f"CREATE TRIGGER reject_report BEFORE INSERT ON {table} BEGIN SELECT RAISE(ABORT,'report write rejected'); END")
+    db_conn.commit()
+    with pytest.raises(sqlite3.IntegrityError,match='report write rejected'):
+        research_store.write_report(research_scope,'original-report',draft)
+    assert db_conn.execute('SELECT count(*) FROM artifacts').fetchone()[0] == 0
+    assert db_conn.execute('SELECT count(*) FROM research_reports').fetchone()[0] == 0
+    db_conn.execute('DROP TRIGGER reject_report');db_conn.commit()
+    receipt = research_store.write_report(research_scope,'original-report',draft)
+    assert research_store.write_report(research_scope,'original-report',draft) == receipt
+    assert research_store.read_report(research_scope,receipt['artifact_id'])['content'] == '# Atomic report\n\nPreserve the complete canonical text.'
+    assert db_conn.execute('SELECT count(*) FROM artifacts').fetchone()[0] == 1
+
+
 def test_new_finding_is_provisional_and_does_not_invent_numeric_confidence(
     research_store, research_scope, db_conn
 ):

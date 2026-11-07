@@ -26,9 +26,39 @@ que se pueda comparar el avance; no presentar microajustes como tareas principal
 - Codex por suscripción y Ken publicado ensayados. Fuentes/citas, informes draft y revisión documental independiente conectados. Desarrollo admitido desde Tareas/Conversación con captura y comprobaciones explícitas; revisión independiente solicitada desde Tareas y aceptación del propietario conectada. Publicación local desde aceptación conectada; recuperación local de sólo lectura conectada; transporte remoto configurable conectado; recuperación remota y controles de Tareas conectados; ejecución/activación antiguas por tarea y proyecto retiradas; auxiliares de generación/proveedor, herramientas antiguas y sus cinco bibliotecas retirados. También se retiraron API interna, CLI, servicios/listeners y flows/helpers antiguos. También se retiraron autonomía, plantillas históricas y lectores de proveedor sin consumidores; se conserva el control de parada de trabajadores registrados.
 - Interfaz: doce pilotos, 36/36 conceptos de escritorio y 12/12 móviles; todas las rutas tienen piloto y 0/12 páginas están completamente aceptadas.
 - Última suite global: `9fb873c`,2210 casos,2178 pasan,31 fallan y1 error de fixture; sin omisiones. La carrera de backup encontrada se corrigió después con40 pruebas instaladas. No se declara una nueva corrida global verde; la referencia `0c8b8d9` queda como evidencia histórica.
-- U06, E01–E12, C01–C09 y D01–D04 quedan comprobados con el alcance de sus matrices; siguen 17 de 43 escenarios amplios sin aceptación completa en [coverage.json](coverage.json). No hay un porcentaje global defendible.
+- U06, E01–E12, C01–C09 y D01–D05 quedan comprobados con el alcance de sus matrices; siguen 16 de 43 escenarios amplios sin aceptación completa en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Estado actual: D01–D04 comprobados; siguiente artefactos y Git
+## Estado actual: D05 comprobado; siguiente Git D06–D09
+
+Bloque **2026-11-07 20:15:44–20:41:51 UTC**, **26 min 07 s hasta verificar**,
+desde `adf04f6`. Documentación/checkpoint posteriores excluidos.
+Se corrige la pérdida de bytes en borrados rechazados y se conectan intención
+durable, recuperación explícita y cierre de cargas incompletas en Archivos.
+
+**296 casos instalados finales, 3 DOM y 5 contratos frontend pasan**, junto con
+la compilación. El paquete inicial conservó un fallo de fixture histórico,
+corregido separando prefijo58 e instalación actual; no se oculta ni se suman
+selecciones solapadas. 661 fuentes coinciden, 351 de producto; 53 definiciones
+Python documentadas y 85 candidatos de prompts revisados. Cero turnos de modelo.
+[Matriz y límites](reference-operations-review.md).
+
+- Terminado: **U06, E01–E12, C01–C09 y D01–D05**: 27 de 43 escenarios.
+- En curso al cerrar: documentación y checkpoint local de D05.
+- Siguiente principal: **D06–D09**, identidad/publicación/conservación de trabajo y
+  altas parciales Git. Contraste preliminar realizado; siguiente tramo **no iniciado**.
+  Registrar su hora real al comenzar y reutilizar evidencia válida.
+- Después: D10–D13, conocimiento, datos históricos, evaluaciones, aceptación de
+  las 12 páginas, dependencias y distribución.
+- Al final: pendientes aplazados —incluidos DD116/C10 y presentación DD117—,
+  validación global y revisión independiente del plan completo.
+
+**16 de 43 escenarios abiertos; 0/12 páginas plenamente aceptadas**, con 12 pilotos
+y 48 conceptos. Estos conteos no equivalen a porcentaje global. Una identidad de
+archivo cambiada conserva bytes e intención pendiente; su retención/revisión sigue
+en D08/D13. La última suite global conserva fallos históricos. Primero capacidades
+grandes; lista y tiempos en cada transición, persistidos después de compactar.
+
+## Etapa anterior: D01–D04 comprobados; siguiente artefactos y Git
 
 Bloque **2026-11-07 19:56:34–20:12:04 UTC**, **15 min 30 s hasta verificar**,
 desde `6b2f938`. Documentación/checkpoint posteriores excluidos.

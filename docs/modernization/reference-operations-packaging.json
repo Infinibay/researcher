@@ -1,0 +1,36 @@
+{
+  "base_commit": "adf04f6",
+  "wheel": "researcher-0.1.0-cp312-cp312-linux_x86_64.whl",
+  "wheel_sha256": "ab96a23c27efc9b672c54a31956ffe62122de8e3f36783f2951a3b952193aacb",
+  "source_files_matching_wheel_and_installation": 661,
+  "product_files_matching": 351,
+  "observed": {
+    "cases": 292,
+    "passed": 291,
+    "failed": 1,
+    "skipped": 0,
+    "backend_modules": 274,
+    "all_backend_imports_from_native_env": true,
+    "seconds": 121.145,
+    "exit_code": 1
+  },
+  "tests": [
+    "backend/tests/api",
+    "backend/tests/runtime/test_migration_chain.py",
+    "backend/tests/runtime/test_project_check_policy.py",
+    "backend/tests/runtime/test_installation_backup.py",
+    "backend/tests/runtime/test_code_review_files.py",
+    "backend/tests/runtime/test_legacy_import.py",
+    "backend/tests/research/test_acquisition.py",
+    "backend/tests/research/test_pdf_acquisition.py",
+    "backend/tests/research/test_structured_capture.py",
+    "backend/tests/research/test_persistence.py"
+  ],
+  "real_model_turns": 0,
+  "limits": [
+    "Selected tests, not the global suite",
+    "Synthetic managed installation data, no historical user-data migration",
+    "D05: original file-operation journal, durable byte verification, interrupted upload/delete recovery, retained partial data, immutable scoped receipts, migration66 and offline restore. Changed delete identity remains pending for owner review; no physical cleanup of uncertain files.",
+    "No model calls, external accounts or GitHub workflow execution"
+  ]
+}
