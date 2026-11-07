@@ -8246,3 +8246,50 @@ Human A/B stillpending, otherprofiles/realscience, ownerhistoricalDB (locationno
 supplied), remainingrecovery and12pageacceptance remain. Allfine detailsAFTER all
 macrocapabilities. Lists/timesattransition persistentaftercompaction. Localcommitonly;
 no push/merge/deploy. Alllivehandles fromthisblock terminal, no processesleft.
+
+
+## 2026-11-07 — Chroma reader isolation checkpoint
+
+Base68fd706; block09:51:10–10:11:03UTC19m53s to validation cutoff.
+Product change only scripts/export_legacy_chroma.py: parent snapshot stays separate,
+real Chroma loads in bubblewrap --unshare-all with only trusted interpreter/libs,
+scriptFD, disposable reader and stage mounted. Environment cleared, stdinDEVNULL,
+no original/hostnetwork/credentials, parentdeadline/killgroup, childAS4GiB/CPU/FSIZE/
+NOFILE limits. No fallback. Internal worker entry verifies distinct namespace IDs
+as sanity check, not operator authentication. Parent rejects nonregular/oversized
+outputs before promotion. Original import shape remainscompatible, newisolationreceipt.
+No aggregate diskquota or cgroup-wide memory/PID limits; snapshot still assumes
+stopped originalwriters, hostile concurrentmutation notcertified. Do not callglobal
+securityaccepted or assumeCVEfixed. PublishedKen0.18.0 stillpinsONNX1.20.1; latest
+ONNX1.23.2; Chroma1.5.9stilllatest. Two fresh lockaudits vulnerable19entries12IDsKen,
+5entries4IDsChroma,0skips, individualauditors exit1. Privatecollectionwrapperexit0
+only meansreportcollection completed. No pins/overrides/otherrepo/releaseschanged.
+
+6finalboundarytestsPASS0skip, including inheritedstdin regression and outputsymlink.
+Initialfixtures wrong: socketsblocked, then venvcopylostlibpython; corrected to
+localtestsocket permission/symlinkedvenv. Valid oldcode reproduction exposedenv,
+original/hostfile/network andignoredtimeout. Internalworker initialbypass andstdin
+inheritance independentlyreproduced andfixed; retainallprivate redlogs.
+Combinedsource21cases20PASS1historicalfailure test_chroma_fragments_keep_exact_text_
+identity_and_explicit_project expected importedhistory but rejectsnewschema59first.
+Same failure alreadyin docs/modernization/current-global-results.json; backend/test
+unchanged. Do notfixfixturemicrodetailnow or claimallgreen.
+
+Three synthetic wholeimport rehearsals (beforeguard, afterguard, finalafterstdin),
+allpass; finalusesinstalledbackend, schema17to59,105records104textattachments1metadata
+only, explicitprojectmapping, exactprovenance, HTTPread,0modelturns/serviceexit143.
+Finalexporterhash113e0f894ff3bd2026a7c3db096f6b6e2f37da8ec90bead8d7e2262bd06a3a0e
+recordedbefore/after in evaluator; outputS/chroma-isolated-import-final/result.json.
+Publicchroma-isolation-{review,results,import,advisories,upstream,lint} inmodernization.
+19definitions documented;11Ruff DD089. Scriptuvlockcheck andpromptinventory83current
+pass. No backendchanges/newwheel; installeddelivery-budget wheel remainsddd0e542...
+No newglobalrun/ownerhistoricaldata/pageacceptance. Alltoolhandles terminal; no
+liveinference/service/VM fromthisblock.
+
+NextprincipalNOTSTARTED: resolve139missinglicensedeclarations with exactartifact
+andprimarysource evidence, obligationsvscompatibility separate. ExistingLICENSE.md
+isAGPL3orLater andhistoricalInfinibaycopyright; do notsilentlyrelicense/reassign.
+Kenfixneedscoherentdistribution, notforceddependencyoverride. Othersecurity/resource
+limits/recovery, planningdeliverycap, humanA/B/otherprofiles/realscience, ownerDBlocation,
+12pageacceptance remain43broad0of12. Allfine detailsafterallmacro. Publishlist/timeat
+nexttransition andrecordstart; persistaftercompaction. Localcommitonly,no push/merge/deploy.

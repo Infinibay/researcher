@@ -4754,6 +4754,17 @@
         "docs/modernization/delivery-budget-packaging.json",
         "backend/tests/runtime/test_delivery_budget.py"
       ]
+    },
+    "isolated_legacy_chroma_reader": {
+      "status": "in_progress",
+      "scope": "Reader boundary and synthetic export/import implemented and checked. Known package advisories, aggregate resource limits, concurrent-source threat and owner historical data remain open.",
+      "evidence": [
+        "scripts/export_legacy_chroma.py",
+        "evals/security/test_chroma_export.py",
+        "docs/modernization/chroma-isolation-review.md",
+        "docs/modernization/chroma-isolation-results.json",
+        "docs/modernization/chroma-isolation-import.json"
+      ]
     }
   }
 }

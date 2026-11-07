@@ -1,0 +1,38 @@
+{
+  "scripts/export_legacy_chroma.py.lock": {
+    "status": "vulnerable",
+    "exit_code": 1,
+    "advisory_entries": 5,
+    "advisory_ids": [
+      "PYSEC-2026-311",
+      "PYSEC-2026-3813",
+      "PYSEC-2026-3814",
+      "PYSEC-2026-3815"
+    ],
+    "skipped": [],
+    "input_sha256": "c58002cb830c32611ff7fc0926cd0b03ea3d2aa019bd3f970e6d96080f1815e6",
+    "packages": 87
+  },
+  "requirements-ken.txt": {
+    "status": "vulnerable",
+    "exit_code": 1,
+    "advisory_entries": 19,
+    "advisory_ids": [
+      "CVE-2026-115919",
+      "CVE-2026-115920",
+      "CVE-2026-115921",
+      "CVE-2026-115922",
+      "PYSEC-2026-103",
+      "PYSEC-2026-104",
+      "PYSEC-2026-2239",
+      "PYSEC-2026-2240",
+      "PYSEC-2026-2241",
+      "PYSEC-2026-2689",
+      "PYSEC-2026-3587",
+      "PYSEC-2026-3876"
+    ],
+    "skipped": [],
+    "input_sha256": "4516cc7c71ed86c7b670e13ac3a50128cba399f4ad9b0978e8a15c822311fef4",
+    "packages": 72
+  }
+}

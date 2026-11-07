@@ -4,6 +4,18 @@ La implementación del [plan completo](../superpowers/plans/2026-10-31-actualiza
 
 ## Resultados disponibles
 
+- **Lector Chroma aislado y migración comprobada:** namespaces propios, entorno
+  limpio, sin original/credenciales/entrada estándar/red del host, plazo externo
+  y rechazo de enlaces de salida.6 pruebas de barrera pasan; conjunto del
+  importador20 aprobadas/1 fallo histórico de esquema. La prueba completa instalada
+  conserva105 registros y104 adjuntos textuales, con procedencia y acceso HTTP;
+  servicio cerrado y cero modelos.19 definiciones documentadas. Bloque19min53s.
+  Chroma y Ken/ONNX siguen con avisos; límites agregados, datos reales y seguridad
+  integral pendientes. Siguiente principal: licencias.
+  [Informe](chroma-isolation-review.md), [resultados](chroma-isolation-results.json),
+  [importación](chroma-isolation-import.json).
+
+
 - **Presupuesto visible y trabajo parcial comprobados:** catálogo4 con límites
   efectivos congelados y consumo observado en las respuestas del host; límites
   duros intactos y aviso específico de interrupción.132 pruebas de fuente y80

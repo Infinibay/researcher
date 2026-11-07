@@ -1,0 +1,43 @@
+{
+  "status": "passed",
+  "model_turns": 0,
+  "embedding_calls": 0,
+  "legacy_network_namespace": "none",
+  "real_account_copied": false,
+  "installed_backend": true,
+  "exporter_sha256": "113e0f894ff3bd2026a7c3db096f6b6e2f37da8ec90bead8d7e2262bd06a3a0e",
+  "import": {
+    "format": 1,
+    "status": "pending_enrollment",
+    "kind": "legacy-import",
+    "snapshot_id": "32480649f69c49a19432029557e695ec",
+    "restored_root": "/home/andres/.codex/worktrees/b09e/researcher/.superpowers/sdd/2026-10-31-actualizacion-proyecto/chroma-isolated-import-final/imported",
+    "source_database": "/home/andres/.codex/worktrees/b09e/researcher/.superpowers/sdd/2026-10-31-actualizacion-proyecto/chroma-isolated-import-final/old/legacy.db",
+    "import_manifest": ".imports/32480649f69c49a19432029557e695ec/manifest.json",
+    "import_manifest_sha256": "bce75162bdcd97e366d17efcf7ba80142b7d7ac5fe0955ecb01a3948bbc72d0e",
+    "model_turns": 0,
+    "old_work_replayed": false,
+    "reports_hydrated": 1,
+    "chroma_records": 105,
+    "source_schema": 17,
+    "schema_version": 59
+  },
+  "reference_id": 2,
+  "source_id": 1,
+  "preserved_fragments": 105,
+  "text_attachments": 104,
+  "metadata_only_records": 1,
+  "exact_capture_and_historical_provenance": true,
+  "legacy_report_unverified": true,
+  "service_exit": 143,
+  "native_http_read_verified": true,
+  "resources": {
+    "native_version": "codex-cli 0.166.0",
+    "native_sha256": "b8a11fedf24b2dfb59a70c9e52b030f9a508dcd49cd2dd0d41956f4c785156b8",
+    "code_host_sha256": "657f4e902726e05867c937b583049d5997e057f8cd0ab40450633c9c9ef8d630",
+    "ken_version": "0.18.0",
+    "ken_artifacts_verified": 26,
+    "credential_snapshot_valid": true,
+    "remote_entitlement_verified": false
+  }
+}

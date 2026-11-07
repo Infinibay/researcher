@@ -641,3 +641,12 @@ no se corrigen antes de terminar las capacidades principales. Ubicaciones en
 [delivery-budget-lint.json](delivery-budget-lint.json). No volver a ejecutar los
 tres turnos reales por estilo. El fallo de entrega de planificación bajo su
 límite anterior es funcional y sigue pendiente, separado de estos detalles.
+
+## DD089 — Estilo del exportador histórico
+
+Once avisos Ruff en el exportador y sus evaluadores; conservar sus ubicaciones en
+[chroma-isolation-lint.json](chroma-isolation-lint.json) y corregirlos después de
+todas las capacidades principales. El fallo histórico del fixture de inversión
+del esquema sigue registrado en la suite global. Los límites agregados de recursos,
+Ken/ONNX, licencias y datos históricos pendientes pertenecen a trabajo funcional,
+no a esta lista de estilo. No repetir ensayos reales sólo por ordenar imports.

@@ -1,0 +1,160 @@
+{
+  "base_commit": "68fd706",
+  "block_started_utc": "2026-11-07 09:51:10",
+  "validation_cutoff_utc": "2026-11-07 10:11:03",
+  "elapsed_seconds_to_validation": 1193,
+  "final_exporter_sha256": "113e0f894ff3bd2026a7c3db096f6b6e2f37da8ec90bead8d7e2262bd06a3a0e",
+  "boundary_tests": {
+    "cases": 6,
+    "passed": 6,
+    "failures": [],
+    "skipped": 0,
+    "seconds": 3.16
+  },
+  "source_scope": {
+    "cases": 21,
+    "passed": 20,
+    "failures": [
+      "backend.tests.runtime.test_legacy_import::test_chroma_fragments_keep_exact_text_identity_and_explicit_project"
+    ],
+    "skipped": 0,
+    "seconds": 10.777
+  },
+  "known_unchanged_fixture_failure": "test_chroma_fragments_keep_exact_text_identity_and_explicit_project expects imported history, but the inverse first refuses the newer schema59; also recorded in current-global-results.json.",
+  "real_chroma_export_and_installed_import": "passed",
+  "source_rows_and_index_hashes_unchanged_in_stationary_fixture": true,
+  "model_turns": 0,
+  "wheel_rebuilt": false,
+  "installed_product_wheel_sha256": "ddd0e54279470a0d46adbd2988d198a7be8d477364b136832c9254d0ec3251af",
+  "script_lock_check": "passed",
+  "prompt_inventory_check": "passed",
+  "documented_definitions": 19,
+  "docstrings": [
+    {
+      "path": "scripts/export_legacy_chroma.py",
+      "name": "isolated_reader",
+      "line": 30,
+      "documented": true
+    },
+    {
+      "path": "scripts/export_legacy_chroma.py",
+      "name": "digest",
+      "line": 102,
+      "documented": true
+    },
+    {
+      "path": "scripts/export_legacy_chroma.py",
+      "name": "inventory",
+      "line": 108,
+      "documented": true
+    },
+    {
+      "path": "scripts/export_legacy_chroma.py",
+      "name": "snapshot",
+      "line": 123,
+      "documented": true
+    },
+    {
+      "path": "scripts/export_legacy_chroma.py",
+      "name": "read_collections",
+      "line": 158,
+      "documented": true
+    },
+    {
+      "path": "scripts/export_legacy_chroma.py",
+      "name": "export",
+      "line": 192,
+      "documented": true
+    },
+    {
+      "path": "scripts/export_legacy_chroma.py",
+      "name": "main",
+      "line": 228,
+      "documented": true
+    },
+    {
+      "path": "evals/security/test_chroma_export.py",
+      "name": "reader_fixture",
+      "line": 21,
+      "documented": true
+    },
+    {
+      "path": "evals/security/test_chroma_export.py",
+      "name": "test_exported_reader_cannot_observe_original_credentials_or_host_network",
+      "line": 66,
+      "documented": true
+    },
+    {
+      "path": "evals/security/test_chroma_export.py",
+      "name": "test_blocked_reader_times_out_without_publishing_a_complete_manifest",
+      "line": 84,
+      "documented": true
+    },
+    {
+      "path": "evals/security/test_chroma_export.py",
+      "name": "test_dependency_output_symlink_is_not_followed_by_parent",
+      "line": 97,
+      "documented": true
+    },
+    {
+      "path": "evals/security/test_chroma_export.py",
+      "name": "test_internal_worker_entry_refuses_accidental_unsandboxed_invocation",
+      "line": 110,
+      "documented": true
+    },
+    {
+      "path": "evals/security/test_chroma_export.py",
+      "name": "test_missing_isolation_refuses_before_reading_or_creating_storage",
+      "line": 120,
+      "documented": true
+    },
+    {
+      "path": "evals/security/test_chroma_export.py",
+      "name": "test_real_chroma_export_retains_all_pages_and_metadata",
+      "line": 131,
+      "documented": true
+    },
+    {
+      "path": "evals/operation/legacy_import.py",
+      "name": "isolated",
+      "line": 30,
+      "documented": true
+    },
+    {
+      "path": "evals/operation/legacy_import.py",
+      "name": "seed",
+      "line": 42,
+      "documented": true
+    },
+    {
+      "path": "evals/operation/legacy_import.py",
+      "name": "inspect_product",
+      "line": 60,
+      "documented": true
+    },
+    {
+      "path": "evals/operation/legacy_import.py",
+      "name": "native_http",
+      "line": 88,
+      "documented": true
+    },
+    {
+      "path": "evals/operation/legacy_import.py",
+      "name": "main",
+      "line": 119,
+      "documented": true
+    }
+  ],
+  "lint_deferred": {
+    "count": 11,
+    "item": "DD089"
+  },
+  "audit_scope": "Ken lock and Chroma script lock only; both still vulnerable, no advisory ignored",
+  "limits": [
+    "Linux bubblewrap is mandatory; no unsandboxed fallback.",
+    "Resource controls are per-process address space/CPU, per-file bytes and parent wall time; no aggregate disk quota or cgroup-wide memory/PID limit.",
+    "Snapshot still requires stopped original writers; hostile concurrent source mutation is not certified by this reader-boundary test.",
+    "Synthetic migration, not owner historical data; no general security or page acceptance.",
+    "Existing global suite not rerun; known historic fixture failure remains."
+  ]
+}

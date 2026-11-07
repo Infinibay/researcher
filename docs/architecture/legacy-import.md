@@ -67,7 +67,23 @@ uv run --locked scripts/export_legacy_chroma.py \
 ```
 
 Primero copia SQLite y los índices; abre con Chroma una segunda copia desechable.
-Cualquier actualización de formato afecta esa copia. Exporta colecciones, IDs,
+Cualquier actualización de formato afecta esa copia. El lector requiere Linux y
+bubblewrap con soporte `--bind-fd`; si no están disponibles, no hay ejecución sin
+aislamiento. El proceso recibe sólo el intérprete y sus bibliotecas, el script,
+la copia de lectura y su salida temporal. No recibe el directorio original,
+credenciales del entorno, entrada estándar ni la red del host. Los namespaces
+separan también procesos y montajes. El proceso principal supervisa su tiempo;
+al vencerlo conserva la copia y no publica `manifest.json` completo.
+
+El lector limita espacio de direcciones a4GiB, CPU, descriptores y tamaño por
+archivo. Esto **no** impone una cuota agregada de disco ni límites de memoria/PIDs
+para todo un árbol de procesos. Sigue siendo necesario detener los escritores
+originales antes de copiar; la prueba del lector no certifica cambios hostiles
+concurrentes durante el snapshot. No se ha eliminado el aviso de Chroma ni se
+consideran seguros todos los formatos por haber añadido una barrera de proceso.
+[Evidencia y alcance](../modernization/chroma-isolation-review.md).
+
+Exporta colecciones, IDs,
 texto y metadatos mediante `get`, paginados, sin generar embeddings. La API
 [Get de Chroma](https://docs.trychroma.com/docs/querying-collections/query-and-get)
 recupera registros directamente; el

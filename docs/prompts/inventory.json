@@ -288,7 +288,7 @@
     "backend/tools/base/db.py": "e1e7a5545104f42c12afa275828183e51447e2f6c4099a167d9fd6439229c4d5",
     "scripts/audit_dependencies.py": "45dfc2ad4cb3cc392b8db6f4ca4150415da11ee2611ff5b7603cbedc166418fc",
     "scripts/audit_prompt_inventory.py": "652d39284cc8aa51739366aea2723aec419e3cd9e3bd38da7b17012837fa47b7",
-    "scripts/export_legacy_chroma.py": "6028b23f3d8a3b12667cbab535823ca0d5aef2433bf50355238792b7493863fa",
+    "scripts/export_legacy_chroma.py": "113e0f894ff3bd2026a7c3db096f6b6e2f37da8ec90bead8d7e2262bd06a3a0e",
     "scripts/infinibay_mcp_server.py": "63c00560a315a28e57a27f6f2ca723feabcba90f7c375b978b351481b22e3dbb",
     "scripts/researcher_mcp_server.py": "18b24a3c795cb38226eea4fd338d5d423ba9ab5ee2d5b91a737a6a612c099f92"
   },

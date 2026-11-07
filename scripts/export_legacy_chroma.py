@@ -11,16 +11,92 @@ is changed. Keep this compatibility dependency outside the serving environment.
 """
 
 import argparse
-from contextlib import closing
+from contextlib import ExitStack, closing
 import hashlib
 import importlib.metadata
 import json
+import math
 import os
 from pathlib import Path
 import shutil
+import signal
 import sqlite3
 import stat
+import subprocess
+import sys
 import time
+
+
+def isolated_reader(reader, output, *, bubblewrap, tenant, database, max_bytes, max_files, deadline):
+    """Run only the disposable reader in a bounded network/filesystem namespace, never inheriting host credentials."""
+    stage = output / 'reader-output'
+    stage.mkdir(mode=0o700)
+    remaining = deadline - time.monotonic()
+    if remaining <= 0:
+        raise TimeoutError('Chroma reader deadline exhausted before dispatch')
+    command = [bubblewrap, '--unshare-all', '--new-session', '--die-with-parent',
+               '--cap-drop', 'ALL', '--clearenv']
+    for path in ('/usr', '/bin', '/lib', '/lib64'):
+        if Path(path).exists():
+            command += ['--ro-bind', path, path]
+    command += ['--proc', '/proc', '--dev', '/dev', '--tmpfs', '/tmp']
+    roots = {Path(sys.prefix), Path(sys.base_prefix), Path(sys._base_executable).parent.parent,
+             Path(sys.executable).resolve().parent.parent}
+    for root in sorted(roots):
+        if root in {Path('/'), Path.home()}:
+            raise ValueError('Reader interpreter must not expose host root or home')
+        if not root.is_relative_to('/usr'):
+            command += ['--ro-bind', str(root), str(root)]
+    with ExitStack() as handles:
+        fds = []
+        for path, destination, writable in ((reader, '/work/reader', True),
+                                            (stage, '/work/out', True),
+                                            (Path(__file__).resolve(), '/exporter.py', False)):
+            fd = os.open(path, os.O_RDONLY | os.O_NOFOLLOW | os.O_CLOEXEC)
+            handles.callback(os.close, fd)
+            fds.append(fd)
+            command += ['--bind-fd' if writable else '--ro-bind-fd', str(fd), destination]
+        command += ['--dir', '/tmp/home', '--dir', '/tmp/cache', '--chdir', '/work']
+        environment = {'PATH': os.defpath, 'LANG': 'C.UTF-8', 'HOME': '/tmp/home',
+                       'XDG_CACHE_HOME': '/tmp/cache', 'PYTHONDONTWRITEBYTECODE': '1',
+                       'HF_HUB_OFFLINE': '1', 'TRANSFORMERS_OFFLINE': '1',
+                       'ANONYMIZED_TELEMETRY': 'False', 'OMP_NUM_THREADS': '1',
+                       'OPENBLAS_NUM_THREADS': '1', 'RAYON_NUM_THREADS': '2',
+                       'TOKIO_WORKER_THREADS': '2'}
+        environment['RESEARCHER_READER_PARENT_NAMESPACES'] = json.dumps({
+            name: os.stat('/proc/self/ns/' + name).st_ino for name in ('mnt', 'net', 'pid')
+        })
+        for key, value in environment.items():
+            command += ['--setenv', key, value]
+        command += ['--', sys.executable, '-I', '/exporter.py', '--reader-worker',
+                    '--source', '/work/reader', '--output', '/work/out',
+                    '--tenant', tenant, '--database', database,
+                    '--max-bytes', str(max_bytes), '--max-files', str(max_files),
+                    '--timeout', str(math.ceil(remaining))]
+        with (output / 'reader.log').open('x') as log:
+            child = subprocess.Popen(command, env={'PATH': os.defpath, 'LANG': 'C.UTF-8'},
+                                     pass_fds=fds, stdin=subprocess.DEVNULL,
+                                     stdout=log, stderr=subprocess.STDOUT,
+                                     start_new_session=True)
+            try:
+                status = child.wait(timeout=max(0.001, deadline-time.monotonic()))
+            finally:
+                if child.poll() is None:
+                    os.killpg(child.pid, signal.SIGKILL)
+                    child.wait(timeout=10)
+        if status != 0:
+            raise RuntimeError('Isolated Chroma reader failed; preserve this export and inspect reader.log')
+    for name, limit in (('receipt.json', min(max_bytes, 16*1024**2)), ('records.jsonl', max_bytes)):
+        info = (stage / name).lstat()
+        if not stat.S_ISREG(info.st_mode) or info.st_size > limit:
+            raise ValueError('Reader output must be a bounded regular file')
+    receipt = json.loads((stage / 'receipt.json').read_text())
+    if (type(receipt.get('count')) is not int or not 0 <= receipt['count'] <= max_files
+            or not isinstance(receipt.get('collections'), list)
+            or len(receipt['collections']) > max_files):
+        raise ValueError('Invalid isolated reader receipt')
+    os.replace(stage / 'records.jsonl', output / 'records.jsonl')
+    return receipt['collections'], receipt['count']
 
 
 def digest(path):
@@ -79,19 +155,8 @@ def snapshot(source, output, *, max_bytes, max_files, deadline):
     return files
 
 
-def export(source, output, *, tenant='default_tenant', database='default_database', max_bytes=20*1024**3, max_files=200000, timeout=300):
-    """Preserve raw storage and export every selected collection record with exact text/metadata/identity."""
-    if importlib.metadata.version('chromadb')!='1.5.9':raise ValueError('Use the isolated pinned chromadb1.5.9 exporter')
-    if any(type(x) is not int or x<=0 for x in (max_bytes,max_files,timeout)):raise ValueError('Positive export limits required')
-    source=Path(source).resolve(strict=True)
-    supplied=Path(output).absolute();output=supplied.parent.resolve(strict=True)/supplied.name
-    if source.is_relative_to(output) or output.is_relative_to(source):raise ValueError('Export must not overlap the original Chroma directory')
-    output.mkdir(mode=0o700)
-    deadline=time.monotonic()+timeout
-    files=snapshot(source,output,max_bytes=max_bytes,max_files=max_files,deadline=deadline)
-    reader=output/'reader'
-    shutil.copytree(output/'source',reader)
-    # Only this copy is opened by Chroma; compatibility upgrades cannot touch source.
+def read_collections(reader, output, *, tenant, database, max_bytes, max_files, deadline):
+    """Read documents and metadata only inside the disposable worker; never access configuration properties or generate embeddings."""
     import chromadb
     from chromadb.config import Settings
 
@@ -121,8 +186,31 @@ def export(source, output, *, tenant='default_tenant', database='default_databas
             collections.append({'name':collection.name,'id':str(collection.id),'metadata':collection.metadata,'count':count})
             total+=count
         stream.flush();os.fsync(stream.fileno())
+    return collections, total
+
+
+def export(source, output, *, tenant='default_tenant', database='default_database', max_bytes=20*1024**3, max_files=200000, timeout=300):
+    """Preserve raw storage and export every selected collection record with exact text/metadata/identity."""
+    if importlib.metadata.version('chromadb')!='1.5.9':raise ValueError('Use the isolated pinned chromadb1.5.9 exporter')
+    if any(type(x) is not int or x<=0 for x in (max_bytes,max_files,timeout)):raise ValueError('Positive export limits required')
+    bubblewrap=shutil.which('bwrap')
+    if not bubblewrap:raise ValueError('Chroma export requires bubblewrap; no unsandboxed fallback')
+    source=Path(source).resolve(strict=True)
+    supplied=Path(output).absolute();output=supplied.parent.resolve(strict=True)/supplied.name
+    if source.is_relative_to(output) or output.is_relative_to(source):raise ValueError('Export must not overlap the original Chroma directory')
+    output.mkdir(mode=0o700)
+    deadline=time.monotonic()+timeout
+    files=snapshot(source,output,max_bytes=max_bytes,max_files=max_files,deadline=deadline)
+    reader=output/'reader'
+    shutil.copytree(output/'source',reader)
+    collections,total=isolated_reader(reader,output,bubblewrap=bubblewrap,tenant=tenant,database=database,
+                                      max_bytes=max_bytes,max_files=max_files,deadline=deadline)
+    records=output/'records.jsonl'
     manifest={'format':1,'kind':'researcher-chroma-export','status':'complete','reader_version':'1.5.9',
               'source_path':str(source),'tenant':tenant,'database':database,'collections':collections,
+              'reader_isolation':{'network':'none','host_environment':'cleared','original_mounted':False,
+                                  'writable':'disposable reader and reader-output only','address_space_bytes':4*1024**3,
+                                  'per_file_byte_limit':max_bytes,'aggregate_disk_quota':False},
               'records':{'path':'records.jsonl','count':total,**digest(records)},'source_files':files,
               'embedding_calls':0,'original_application_rows_modified':False,'sqlite_checkpoint_may_change_files':True}
     for directory,_,_ in os.walk(output,topdown=False):
@@ -140,6 +228,7 @@ def export(source, output, *, tenant='default_tenant', database='default_databas
 def main():
     """Run one explicit new-copy compatibility export without loading serving credentials or providers."""
     parser=argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--reader-worker',action='store_true',help=argparse.SUPPRESS)
     parser.add_argument('--source',required=True)
     parser.add_argument('--output',required=True)
     parser.add_argument('--tenant',default='default_tenant')
@@ -148,6 +237,27 @@ def main():
     parser.add_argument('--max-files',type=int,default=200000)
     parser.add_argument('--timeout',type=int,default=300)
     args=parser.parse_args()
+    if args.reader_worker:
+        # Sanity check for the private entry, not authentication against an
+        # operator who can already alter this executable or its environment.
+        original=json.loads(os.environ.get('RESEARCHER_READER_PARENT_NAMESPACES','{}'))
+        if (set(original)!={'mnt','net','pid'} or any(type(value) is not int or value<=0
+                or os.stat('/proc/self/ns/'+name).st_ino==value for name,value in original.items())):
+            raise ValueError('Internal reader requires the host-created namespaces')
+        import resource
+        resource.setrlimit(resource.RLIMIT_CORE,(0,0))
+        resource.setrlimit(resource.RLIMIT_AS,(4*1024**3,4*1024**3))
+        resource.setrlimit(resource.RLIMIT_FSIZE,(args.max_bytes,args.max_bytes))
+        resource.setrlimit(resource.RLIMIT_CPU,(args.timeout,args.timeout))
+        resource.setrlimit(resource.RLIMIT_NOFILE,(256,256))
+        collections,total=read_collections(Path(args.source),Path(args.output),tenant=args.tenant,
+            database=args.database,max_bytes=args.max_bytes,max_files=args.max_files,
+            deadline=time.monotonic()+args.timeout)
+        encoded=json.dumps({'collections':collections,'count':total},ensure_ascii=True,allow_nan=False)
+        if len(encoded.encode())>min(args.max_bytes,16*1024**2):raise ValueError('Reader receipt too large')
+        with (Path(args.output)/'receipt.json').open('x') as stream:
+            stream.write(encoded);stream.flush();os.fsync(stream.fileno())
+        return
     print(json.dumps(export(args.source,args.output,tenant=args.tenant,database=args.database,
                             max_bytes=args.max_bytes,max_files=args.max_files,timeout=args.timeout)))
 

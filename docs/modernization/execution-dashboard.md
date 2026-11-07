@@ -28,7 +28,46 @@ que se pueda comparar el avance; no presentar microajustes como tareas principal
 - Última suite global: `9fb873c`,2210 casos,2178 pasan,31 fallan y1 error de fixture; sin omisiones. La carrera de backup encontrada se corrigió después con40 pruebas instaladas. No se declara una nueva corrida global verde; la referencia `0c8b8d9` queda como evidencia histórica.
 - Los 43 escenarios amplios siguen abiertos en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Etapa actual: presupuesto visible y trabajo parcial comprobados
+## Etapa actual: lector Chroma aislado y migración comprobada
+
+Bloque **09:51:10–10:11:03 UTC**, **19 min 53 s**, hasta el corte de validación.
+El exportador separado requiere bubblewrap y abre Chroma sólo sobre una copia,
+en namespaces propios, con entorno limpio y sin entrada estándar ni red del host.
+El padre supervisa el plazo y rechaza enlaces en la salida; un fallo conserva la
+copia parcial y no publica un manifiesto completo. No cambian los pins de paquetes.
+
+Seis pruebas de la barrera pasan. El conjunto con el importador da20 aprobadas
+ y1 fallo histórico de expectativa de esquema59, ya registrado anteriormente.
+La comprobación completa final exporta105 registros, importa104 adjuntos textuales
+más1 registro sin texto y verifica procedencia/acceso HTTP desde el backend instalado.
+Cero turnos de modelo. Servicio original cerrado con salida143.19 definiciones
+relevantes tienen docstrings. Lock e inventario de83 decisiones verificados.
+[Informe](chroma-isolation-review.md), [pruebas](chroma-isolation-results.json),
+[importación final](chroma-isolation-import.json).
+
+**Lista actualizada al cambiar de tarea:**
+- Terminado: aislamiento del lector Chroma y comprobación de su importación,
+  **19 min 53 s**. Esto no declara corregida la biblioteca ni aceptada toda la seguridad.
+- Terminado previamente: presupuesto visible/trabajo parcial, **18 min 56 s**;
+  evaluación por perfiles, **29 min 48 s**; revisión estática, **8 min 55 s**.
+- Siguiente principal: resolver las declaraciones de licencia pendientes y
+  documentar las obligaciones según artefactos/versiones concretos. No empezó;
+  registrar inicio al comenzar. El inventario anterior tiene139 ausencias.
+- Pendiente funcional: distribución coherente de Ken con ONNX corregido;
+  recursos agregados y demás seguridad/recuperación; entrega de planificación
+  bajo su límite anterior; evaluación humana/otros perfiles/material científico;
+  datos históricos del propietario y aceptación integral de12 páginas.
+- Después de todas las capacidades principales: detalles acumulados, validación
+  final y revisión independiente. DD089 conserva11 avisos de estilo.
+
+Las auditorías renovadas siguen señalando19 entradas/12IDs en Ken/ONNX y5/4 en
+Chroma, sin omisiones ni exclusiones. Siguen43 escenarios amplios abiertos y0/12
+páginas completamente aceptadas. No se reconstruyó el wheel ni se repitió la suite
+ global. Los límites del lector no son cuotas de disco/cgroup para un árbol entero;
+el snapshot aún requiere escritores originales detenidos. La política de lista y
+ tiempo medido en cada transición permanece tras compactar; detalles al final.
+
+## Etapa anterior: presupuesto visible y trabajo parcial comprobados
 
 Bloque **09:29:55–09:48:51 UTC**, **18 min 56 s**, hasta el corte de validación.
 El catálogo4 conserva los presupuestos efectivos en las instrucciones y la
@@ -54,8 +93,8 @@ Todos los servicios y peers registrados cerraron. Ningún intento se repitió.
   calidad integral de comunicación ni se declara resuelta planificación.
 - Terminado previamente: evaluación de otros perfiles, **29 min 48 s**;
   revisión estática de prompts, **8 min 55 s**; VM activa, **15 min 57 s**.
-- Siguiente principal: pendientes de seguridad de Ken/Chroma y licencias.
-  Aún no empezó; registrar inicio al comenzar.
+- Siguiente de ese corte: seguridad Ken/Chroma/licencias. El bloque actual
+  comprueba el aislamiento del lector; Ken y licencias siguen pendientes.
 - Pendiente funcional: entrega de planificación dentro del presupuesto anterior;
   evaluación humana, otros perfiles/material científico real, datos históricos,
   demás recuperación y aceptación integral de12 páginas.

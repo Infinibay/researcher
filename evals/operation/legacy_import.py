@@ -133,7 +133,9 @@ def main():
         before=hashlib.sha256(database.read_bytes()).hexdigest()
         isolated(legacy,root,'-c',CHROMA_FIXTURE,root/'old/chroma',log_name='chroma-fixture.log')
         script=Path(__file__).resolve().parents[2]/'scripts/export_legacy_chroma.py'
+        result['exporter_sha256']=hashlib.sha256(script.read_bytes()).hexdigest()
         isolated(legacy,root,script,'--source',root/'old/chroma','--output',root/'export',log_name='chroma-export.log')
+        assert hashlib.sha256(script.read_bytes()).hexdigest()==result['exporter_sha256']
         mapping=root/'mapping.json';mapping.write_text(json.dumps(manifest))
         completed=subprocess.run([sys.executable,'-I','-m','backend.cli.bootstrap','stage-legacy-host',
             '--database',str(database),'--storage-manifest',str(mapping),'--destination',str(root/'imported')],
