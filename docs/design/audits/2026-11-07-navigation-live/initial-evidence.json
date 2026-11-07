@@ -1,0 +1,373 @@
+{
+  "scope": "Real keyboard/HTTP navigation; 320 CSS px tests reflow, not browser zoom or a screen reader",
+  "states": [
+    {
+      "name": "1440-overview",
+      "route": "/",
+      "width": 1440,
+      "tabs": 4,
+      "layout": {
+        "documentFits": true,
+        "contentFits": true,
+        "width": 1248,
+        "height": 948.21875
+      },
+      "violations": [
+        {
+          "id": "label-content-name-mismatch",
+          "impact": "serious",
+          "tags": [
+            "cat.semantics",
+            "wcag21a",
+            "wcag253",
+            "EN-301-549",
+            "EN-9.2.5.3",
+            "RGAAv4",
+            "RGAA-6.1.5"
+          ],
+          "description": "Ensure that elements labelled through their content must have their visible text as part of their accessible name",
+          "help": "Elements must have their visible text as part of their accessible name",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.14/label-content-name-mismatch?application=playwright",
+          "nodes": [
+            {
+              "any": [
+                {
+                  "id": "label-content-name-mismatch",
+                  "data": null,
+                  "relatedNodes": [],
+                  "impact": "serious",
+                  "message": "Text inside the element is not included in the accessible name"
+                }
+              ],
+              "all": [],
+              "none": [],
+              "impact": "serious",
+              "html": "<button aria-label=\"Actividad del proyecto\" aria-pressed=\"false\" class=\"relative rounded-md p-1.5 text-slate-400 hover:bg-surface-800 hover:text-slate-200 \" title=\"Toggle activity feed\">",
+              "target": [
+                ".p-1\\.5"
+              ],
+              "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "1440-projects",
+      "route": "/projects",
+      "width": 1440,
+      "tabs": 10,
+      "layout": {
+        "documentFits": true,
+        "contentFits": true,
+        "width": 1248,
+        "height": 948.21875
+      },
+      "violations": [
+        {
+          "id": "label-content-name-mismatch",
+          "impact": "serious",
+          "tags": [
+            "cat.semantics",
+            "wcag21a",
+            "wcag253",
+            "EN-301-549",
+            "EN-9.2.5.3",
+            "RGAAv4",
+            "RGAA-6.1.5"
+          ],
+          "description": "Ensure that elements labelled through their content must have their visible text as part of their accessible name",
+          "help": "Elements must have their visible text as part of their accessible name",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.14/label-content-name-mismatch?application=playwright",
+          "nodes": [
+            {
+              "any": [
+                {
+                  "id": "label-content-name-mismatch",
+                  "data": null,
+                  "relatedNodes": [],
+                  "impact": "serious",
+                  "message": "Text inside the element is not included in the accessible name"
+                }
+              ],
+              "all": [],
+              "none": [],
+              "impact": "serious",
+              "html": "<button aria-label=\"Actividad del proyecto\" aria-pressed=\"false\" class=\"relative rounded-md p-1.5 text-slate-400 hover:bg-surface-800 hover:text-slate-200 \" title=\"Toggle activity feed\">",
+              "target": [
+                ".p-1\\.5"
+              ],
+              "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "1440-epics",
+      "route": "/epics",
+      "width": 1440,
+      "tabs": 14,
+      "layout": {
+        "documentFits": true,
+        "contentFits": true,
+        "width": 1248,
+        "height": 948.21875
+      },
+      "violations": [
+        {
+          "id": "label-content-name-mismatch",
+          "impact": "serious",
+          "tags": [
+            "cat.semantics",
+            "wcag21a",
+            "wcag253",
+            "EN-301-549",
+            "EN-9.2.5.3",
+            "RGAAv4",
+            "RGAA-6.1.5"
+          ],
+          "description": "Ensure that elements labelled through their content must have their visible text as part of their accessible name",
+          "help": "Elements must have their visible text as part of their accessible name",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.14/label-content-name-mismatch?application=playwright",
+          "nodes": [
+            {
+              "any": [
+                {
+                  "id": "label-content-name-mismatch",
+                  "data": null,
+                  "relatedNodes": [],
+                  "impact": "serious",
+                  "message": "Text inside the element is not included in the accessible name"
+                }
+              ],
+              "all": [],
+              "none": [],
+              "impact": "serious",
+              "html": "<button aria-label=\"Actividad del proyecto\" aria-pressed=\"false\" class=\"relative rounded-md p-1.5 text-slate-400 hover:bg-surface-800 hover:text-slate-200 \" title=\"Toggle activity feed\">",
+              "target": [
+                ".p-1\\.5"
+              ],
+              "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "1440-tasks",
+      "route": "/tasks",
+      "width": 1440,
+      "tabs": 10,
+      "layout": {
+        "documentFits": true,
+        "contentFits": true,
+        "width": 1248,
+        "height": 948.21875
+      },
+      "violations": [
+        {
+          "id": "label-content-name-mismatch",
+          "impact": "serious",
+          "tags": [
+            "cat.semantics",
+            "wcag21a",
+            "wcag253",
+            "EN-301-549",
+            "EN-9.2.5.3",
+            "RGAAv4",
+            "RGAA-6.1.5"
+          ],
+          "description": "Ensure that elements labelled through their content must have their visible text as part of their accessible name",
+          "help": "Elements must have their visible text as part of their accessible name",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.14/label-content-name-mismatch?application=playwright",
+          "nodes": [
+            {
+              "any": [
+                {
+                  "id": "label-content-name-mismatch",
+                  "data": null,
+                  "relatedNodes": [],
+                  "impact": "serious",
+                  "message": "Text inside the element is not included in the accessible name"
+                }
+              ],
+              "all": [],
+              "none": [],
+              "impact": "serious",
+              "html": "<button aria-label=\"Actividad del proyecto\" aria-pressed=\"false\" class=\"relative rounded-md p-1.5 text-slate-400 hover:bg-surface-800 hover:text-slate-200 \" title=\"Toggle activity feed\">",
+              "target": [
+                ".p-1\\.5"
+              ],
+              "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "1440-agents",
+      "route": "/agents",
+      "width": 1440,
+      "tabs": 17,
+      "layout": {
+        "documentFits": true,
+        "contentFits": true,
+        "width": 1248,
+        "height": 948.21875
+      },
+      "violations": [
+        {
+          "id": "label-content-name-mismatch",
+          "impact": "serious",
+          "tags": [
+            "cat.semantics",
+            "wcag21a",
+            "wcag253",
+            "EN-301-549",
+            "EN-9.2.5.3",
+            "RGAAv4",
+            "RGAA-6.1.5"
+          ],
+          "description": "Ensure that elements labelled through their content must have their visible text as part of their accessible name",
+          "help": "Elements must have their visible text as part of their accessible name",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.14/label-content-name-mismatch?application=playwright",
+          "nodes": [
+            {
+              "any": [
+                {
+                  "id": "label-content-name-mismatch",
+                  "data": null,
+                  "relatedNodes": [],
+                  "impact": "serious",
+                  "message": "Text inside the element is not included in the accessible name"
+                }
+              ],
+              "all": [],
+              "none": [],
+              "impact": "serious",
+              "html": "<button aria-label=\"Actividad del proyecto\" aria-pressed=\"false\" class=\"relative rounded-md p-1.5 text-slate-400 hover:bg-surface-800 hover:text-slate-200 \" title=\"Toggle activity feed\">",
+              "target": [
+                ".p-1\\.5"
+              ],
+              "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "1440-chat",
+      "route": "/chat",
+      "width": 1440,
+      "tabs": 11,
+      "layout": {
+        "documentFits": true,
+        "contentFits": true,
+        "width": 1248,
+        "height": 948.21875
+      },
+      "violations": [
+        {
+          "id": "label-content-name-mismatch",
+          "impact": "serious",
+          "tags": [
+            "cat.semantics",
+            "wcag21a",
+            "wcag253",
+            "EN-301-549",
+            "EN-9.2.5.3",
+            "RGAAv4",
+            "RGAA-6.1.5"
+          ],
+          "description": "Ensure that elements labelled through their content must have their visible text as part of their accessible name",
+          "help": "Elements must have their visible text as part of their accessible name",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.14/label-content-name-mismatch?application=playwright",
+          "nodes": [
+            {
+              "any": [
+                {
+                  "id": "label-content-name-mismatch",
+                  "data": null,
+                  "relatedNodes": [],
+                  "impact": "serious",
+                  "message": "Text inside the element is not included in the accessible name"
+                }
+              ],
+              "all": [],
+              "none": [],
+              "impact": "serious",
+              "html": "<button aria-label=\"Actividad del proyecto\" aria-pressed=\"false\" class=\"relative rounded-md p-1.5 text-slate-400 hover:bg-surface-800 hover:text-slate-200 \" title=\"Toggle activity feed\">",
+              "target": [
+                ".p-1\\.5"
+              ],
+              "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "controls": [
+    {
+      "width": 1440,
+      "action": "skip-link",
+      "passed": true
+    }
+  ],
+  "failures": [
+    {
+      "route": "/",
+      "width": 1440,
+      "kind": "axe",
+      "ids": [
+        "label-content-name-mismatch"
+      ]
+    },
+    {
+      "route": "/projects",
+      "width": 1440,
+      "kind": "axe",
+      "ids": [
+        "label-content-name-mismatch"
+      ]
+    },
+    {
+      "route": "/epics",
+      "width": 1440,
+      "kind": "axe",
+      "ids": [
+        "label-content-name-mismatch"
+      ]
+    },
+    {
+      "route": "/tasks",
+      "width": 1440,
+      "kind": "axe",
+      "ids": [
+        "label-content-name-mismatch"
+      ]
+    },
+    {
+      "route": "/agents",
+      "width": 1440,
+      "kind": "axe",
+      "ids": [
+        "label-content-name-mismatch"
+      ]
+    },
+    {
+      "route": "/chat",
+      "width": 1440,
+      "kind": "axe",
+      "ids": [
+        "label-content-name-mismatch"
+      ]
+    },
+    {
+      "kind": "interaction",
+      "error": "Error: expect(locator).toBeFocused() failed\n\nLocator:  locator('#main-content')\nExpected: focused\nReceived: inactive\nTimeout:  5000ms\n\nCall log:\n  - Expect \"toBeFocused\" locator('#main-content') with timeout 5000ms\n  - waiting for locator('#main-content')\n    14 × locator resolved to <main tabindex=\"-1\" id=\"main-content\" class=\"workspace-content min-w-0 flex-1 overflow-auto p-6\">…</main>\n       - unexpected value \"inactive\"\n"
+    }
+  ],
+  "apiErrors": []
+}

@@ -28,7 +28,27 @@ que se pueda comparar el avance; no presentar microajustes como tareas principal
 - Última suite global: `9fb873c`,2210 casos,2178 pasan,31 fallan y1 error de fixture; sin omisiones. La carrera de backup encontrada se corrigió después con40 pruebas instaladas. No se declara una nueva corrida global verde; la referencia `0c8b8d9` queda como evidencia histórica.
 - Los 43 escenarios amplios siguen abiertos en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Estado actual: recorrido de Archivos y Documentos comprobado
+## Estado actual: navegación transversal comprobada, ajustes conservados
+
+Bloque **2026-11-07 14:30:24–14:36:09 UTC**, **5 min 45 s** hasta inspeccionar
+resultados y las doce capturas estrechas.24transiciones por teclado y3controles
+compartidos pasan en el host instalado; cero erroresHTTP/JS o inferencias.
+La prueba completa conserva **exit1** por desbordamientos internos en4rutas;
+Axe registra contador/nombre accesible y H1 móvil. DD106/DD107 quedan para la
+pasada final. No se modifica el producto para pulirlos ahora ni se declara
+aceptación de páginas. [Evidencia y límites](../design/audits/2026-11-07-navigation-live/report.md).
+
+**Lista al cerrar el bloque:**
+- Terminado: recorridos reales de Proyectos/Tareas, Archivos/Documentos y
+  navegación por teclado de las12rutas; el reflow tiene cuatro pendientes.
+- Siguiente: contrastar los pendientes de cobertura con las migraciones ya
+  realizadas para evitar repetir trabajo. Todavía no iniciado en este cierre.
+- Pendiente principal: comunicación humana y otros perfiles, aceptación integral,
+  recuperación/recursos restantes, datos históricos y Ken publicado actualizado.
+- Al final: detalles secundarios, validación global, revisión independiente y
+  distribución. Siguen43escenarios amplios abiertos y0/12páginas aceptadas.
+
+## Etapa anterior: recorrido de Archivos y Documentos comprobado
 
 Bloque **2026-11-07 14:20:47–14:27:51 UTC**, **7 min 4 s** hasta validar
 resultados y seis capturas. La subida real de Atlas recibe su respuesta con Beta

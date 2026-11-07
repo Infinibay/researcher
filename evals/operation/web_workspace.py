@@ -49,7 +49,7 @@ def main():
     parser.add_argument("--assets", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--node", type=Path, required=True)
-    parser.add_argument("--journey", choices=("workspace", "knowledge"), default="workspace")
+    parser.add_argument("--journey", choices=("workspace", "knowledge", "navigation"), default="workspace")
     args = parser.parse_args()
     if not Path(backend.__file__).resolve().is_relative_to(Path(sys.prefix).resolve()):
         raise RuntimeError("Use the separately installed product Python, without PYTHONPATH")
@@ -81,8 +81,12 @@ def main():
             raise RuntimeError("Expected one private pairing file for the new host")
         env = {**os.environ, "RESEARCHER_E2E_ORIGIN": f"http://127.0.0.1:{port}",
                "RESEARCHER_E2E_OWNER_FILE": str(keys[0]), "RESEARCHER_E2E_OUTPUT": str(output / "browser")}
+        script = args.journey
+        if args.journey == "navigation":
+            script = "workspace"
+            env["RESEARCHER_E2E_NAVIGATION"] = "1"
         with (output / "browser.log").open("x") as browser_log:
-            browser = subprocess.run([str(args.node.resolve(strict=True)), f"tests/{args.journey}.e2e.mjs"],
+            browser = subprocess.run([str(args.node.resolve(strict=True)), f"tests/{script}.e2e.mjs"],
                                      cwd=ROOT / "frontend", env=env,
                                      stdout=browser_log, stderr=subprocess.STDOUT, check=False)
         result["browser_exit"] = browser.returncode
@@ -93,7 +97,7 @@ def main():
         assert len(result["storage"]["projects"]) == 2
         browser_evidence = json.loads((output / "browser/evidence.json").read_text())
         ids = browser_evidence["identities"]
-        if args.journey == "workspace":
+        if args.journey in ("workspace", "navigation"):
             assert len(result["storage"]["tasks"]) == 2
             assert len(result["storage"]["groups"]) == len(result["storage"]["milestones"]) == 1
             assert len(result["storage"]["dependencies"]) == 1

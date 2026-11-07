@@ -2427,7 +2427,10 @@
         "docs/design/audits/2026-11-07-knowledge-live/report.md",
         "docs/modernization/web-knowledge-results.json",
         "frontend/tests/knowledge.e2e.mjs",
-        "evals/operation/web_workspace.py"
+        "evals/operation/web_workspace.py",
+        "docs/design/audits/2026-11-07-navigation-live/report.md",
+        "docs/modernization/web-navigation-results.json",
+        "frontend/tests/navigation-audit.mjs"
       ],
       "notes": [
         "Real desktop/mobile read-only owner capture now passes; full rendered state, keyboard, screen-reader/zoom and human acceptance remain pending. See browser-evidence.json."
@@ -2623,7 +2626,10 @@
         "docs/design/concepts/flow/manifest.json",
         "docs/design/audits/2026-11-06-flow/report.md",
         "docs/design/concept-artifact-audit.json",
-        "frontend/tests/flow.browser.mjs"
+        "frontend/tests/flow.browser.mjs",
+        "docs/design/audits/2026-11-07-navigation-live/report.md",
+        "docs/modernization/web-navigation-results.json",
+        "frontend/tests/navigation-audit.mjs"
       ],
       "remaining": [
         "All12routes have selected implemented pilots. Complete integral interaction/accessibility/human and real-runtime acceptance for every page and shared component.",
@@ -2631,7 +2637,7 @@
       ]
     },
     "accessibility_e2e": {
-      "status": "pending",
+      "status": "in_progress",
       "evidence": [
         "design-qa.md",
         "docs/design/audits/2026-11-01-owner-workspace/report.md",
@@ -2676,10 +2682,14 @@
         "docs/design/audits/2026-11-07-knowledge-live/report.md",
         "docs/modernization/web-knowledge-results.json",
         "frontend/tests/knowledge.e2e.mjs",
-        "evals/operation/web_workspace.py"
+        "evals/operation/web_workspace.py",
+        "docs/design/audits/2026-11-07-navigation-live/report.md",
+        "docs/modernization/web-navigation-results.json",
+        "frontend/tests/navigation-audit.mjs"
       ],
       "notes": [
-        "Real desktop/mobile read-only owner capture now passes; full rendered state, keyboard, screen-reader/zoom and human acceptance remain pending. See browser-evidence.json."
+        "Real desktop/mobile read-only owner capture now passes; full rendered state, keyboard, screen-reader/zoom and human acceptance remain pending. See browser-evidence.json.",
+        "2026-11-07:24 keyboard route transitions and3shared keyboard controls pass against real installed host; whole-document Axe finds counter naming/H1 issues, and4routes overflow the main at320CSSpx. Harness remains exit1; DD106/DD107 deferred until all macro work. Not screen reader, real zoom or human acceptance."
       ]
     },
     "legacy_removal": {

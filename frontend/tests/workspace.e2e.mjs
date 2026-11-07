@@ -129,6 +129,12 @@ try {
   evidence.identities = { alpha, beta, source, compare }
   evidence.checks.push('UI owner pairing', 'two real project creations', 'group and milestone persisted',
     'two tasks with stored dependency', 'explicit user example survives reload', 'selection after reload', 'project isolation', 'no API fixtures')
+  if (process.env.RESEARCHER_E2E_NAVIGATION === '1') {
+    const { auditNavigation } = await import('./navigation-audit.mjs')
+    evidence.navigation = await auditNavigation(page, output)
+    // Automatic accessibility findings remain explicit review obligations; they do not erase completed navigation evidence.
+    expect(evidence.navigation.failures.filter(item => item.kind !== 'axe')).toEqual([])
+  }
   expect(evidence.errors).toEqual([])
   evidence.status = 'passed'
 } catch (error) {

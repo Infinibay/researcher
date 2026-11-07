@@ -793,3 +793,24 @@ y SQLite, pero el aviso puede interpretarse como confirmación de la página act
 Después de todas las capacidades principales, vincular visualmente el recibo a
 su documento/ámbito o retirarlo al navegar. No perder la confirmación de una
 operación tardía. La altura de cabecera móvil sigue en DD041.
+
+## DD106 — nombre accesible del contador y encabezado de Informes
+
+En el [recorrido real de las doce rutas](../design/audits/2026-11-07-navigation-live/report.md),
+Axe detecta `label-content-name-mismatch` (`serious`) en el contador visible del
+botón de actividad en24estados; su nombre accesible no incluye el contador.
+También `page-has-heading-one` (`moderate`) en el índice móvil de Informes.
+Resolver en la pasada final de accesibilidad, conservando un nombre comprensible
+y el valor visible. La navegación por teclado pasó; esto no acredita conformidad
+ni reduce la severidad del hallazgo. No modificar ahora todos los selectores por
+un ajuste de nombre compartido; revisar sus consumidores al corregirlo.
+
+## DD107 — desbordamiento interior en cuatro índices a320px
+
+Documentos, Hallazgos, Informes y Archivos tienen `main.scrollWidth` mayor que
+`main.clientWidth`, aunque el documento exterior no desborda. Las acciones de las
+capturas siguen legibles. Resolver tras las capacidades principales y antes de
+aceptación responsive. Los márgenes negativos de1.5rem frente al padding móvil
+de1rem son una hipótesis del origen, no una medición causal ya demostrada.
+El harness conserva exit1 por estos cuatro casos. Revalidar los contenedores y
+sus controles, además de `document.documentElement.scrollWidth`.

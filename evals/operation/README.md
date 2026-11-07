@@ -39,6 +39,14 @@ homónimos y documentos con igual ruta en dos proyectos y biblioteca global.
 `npm run test:e2e:knowledge` ejecuta sólo el navegador con las mismas variables.
 [Capturas y límites](../../docs/design/audits/2026-11-07-knowledge-live/report.md).
 
+`--journey navigation` reutiliza la preparación por formularios de `workspace`
+y recorre las12rutas con Tab/Enter a1440y320px CSS. Mide el contenido interior,
+captura cada estado, ejecuta Axe sobre la página completa y comprueba salto al
+contenido/cierre del menú móvil. Conserva hallazgos de accesibilidad sin borrar
+la evidencia funcional; falla si hay un fallo de navegación, HTTP o reflow.
+El ancho estrecho no equivale a probar zoom real o un lector de pantalla.
+[Resultado con pendientes conservados](../../docs/design/audits/2026-11-07-navigation-live/report.md).
+
 `restored_host.py` prepara una instalación sintética nueva, guarda una solicitud
 pendiente, crea/verifica una copia y la restaura en otra ruta. Reinscribe esa copia
 con autoridad y acceso nuevos; envía una sola solicitud nueva mediante HTTP,
