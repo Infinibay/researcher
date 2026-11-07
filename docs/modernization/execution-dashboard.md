@@ -28,7 +28,34 @@ que se pueda comparar el avance; no presentar microajustes como tareas principal
 - Última suite global: `9fb873c`,2210 casos,2178 pasan,31 fallan y1 error de fixture; sin omisiones. La carrera de backup encontrada se corrigió después con40 pruebas instaladas. No se declara una nueva corrida global verde; la referencia `0c8b8d9` queda como evidencia histórica.
 - Los 43 escenarios amplios siguen abiertos en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Etapa actual: lector Chroma acotado; continúa compatibilidad Ken/ONNX
+## Etapa actual: compatibilidad Ken/ONNX comprobada; sigue revisión de licencias
+
+Bloque **13:55:32–14:03:54 UTC**, **8 min 22 s** hasta validación funcional y
+auditoría. Variante local `0.18.0+researcher.1` con ONNX1.23.2:72paquetes
+compatibles, otras70versiones iguales,425archivos de Ken coincidentes entre
+fuente/wheel/instalación. Dos preparaciones y12comprobaciones MCP pasan; cierre
+real de ambos grupos, cero turnos generativos.71dependencias de PyPI sin avisos
+conocidos en la auditoría. El producto conserva los pins publicados anteriores;
+la adopción exige una distribución publicada compatible y su integración.
+[Informe y procedimiento](ken-onnx-candidate-review.md).
+
+**Lista vigente al terminar este tramo:**
+- Implementado y comprobado en recorridos concretos: backend Codex/Ken, modelos,
+  flujos principales, comunicación, persistencia y varias recuperaciones.
+- Terminado ahora: compatibilidad aislada Ken/ONNX y propuesta revisable,
+  **8 min 22 s** hasta validar. No es adopción productiva ni cierre de seguridad.
+- Siguiente principal: revisión de licencias. **Todavía no iniciada.**
+- Pendiente: adoptar Ken publicado compatible, recursos/recuperación restantes,
+  datos históricos del dueño y evaluación humana/otros perfiles.
+- Interfaz:12pilotos/48conceptos;0/12páginas completamente aceptadas.
+- Al final: detalles secundarios, validación global, revisión independiente y
+  distribución. No se repiten pruebas globales por esta propuesta aislada.
+
+Siguen43escenarios amplios abiertos. Sin porcentaje total sustentado. La lista
+actualizada y los tiempos se publican en cada transición y permanecen guardados
+para recuperarlos tras compactar el chat.
+
+## Etapa anterior: lector Chroma acotado; continúa compatibilidad Ken/ONNX
 
 Bloque **13:37:40–13:50:53 UTC**, **13 min 13 s** hasta validar. El lector
 desactiva descriptores de embeddings sólo en su copia desechable y conserva la

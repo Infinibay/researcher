@@ -1,0 +1,18 @@
+--- a/pyproject.toml
++++ b/pyproject.toml
+@@ -37,7 +37,7 @@
+     "model2vec==0.9.0",
+     "tokenizers==0.22.2",
+     "huggingface-hub>=0.36.2,<1",
+-    "onnx==1.20.1",
++    "onnx==1.23.2",
+     "ctranslate2==4.8.2",
+     "sentencepiece==0.2.1",
+     # Small CPU-only morphological normalization for source feature ranking.
+--- a/src/ken/__init__.py
++++ b/src/ken/__init__.py
+@@ -9,3 +9,3 @@
+ # The single source of truth for the version. pyproject.toml declares
+ # `dynamic = ["version"]` and points hatchling here, so a release is one edit.
+-__version__ = "0.18.0"
++__version__ = "0.18.0+researcher.1"

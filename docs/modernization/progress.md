@@ -8522,3 +8522,26 @@ compatibility and a coherent reviewable distribution proposal; no publication
 or sibling changes. Broader resources/recovery, owner data, human/other-profile
 evaluation and12page acceptance remain.43broad scenarios open. Details only
 after macro capabilities; dashboard continues list/time at task transitions.
+
+## 2026-11-07: isolated Ken/ONNX compatibility candidate
+
+Previous goal turn progressed as e150d7c. Block13:55:32–14:03:54UTC,
+502seconds through functional validation/audit. Verified public Ken0.18.0 sdist;
+separate two-line patch identifies0.18.0+researcher.1 and requiresONNX1.23.2.
+Original generatedPKG-INFO had to be archived before rebuilding; first artifact
+with stale version metadata was retained but NEVERinstalled. Final425Ken files
+match source/wheel/installation. All72packages satisfy metadata, other70versions
+unchanged.71registry dependencies audited without known findings or omissions;
+localKen itself is not claimed registry-audited. Published source includes no
+tests; upstream suite not run. Two cold preparations and12realMCPchecks pass,
+foreign paths/memories isolated, sources unchanged, both original domains and
+peers closed. Local retrieval models run; no subscription or generative calls.
+
+Production code/locks/installations and sibling repository unchanged. Public
+compatible Ken release, host integration and full security acceptance remain
+pending. Evidence:ken-onnx-candidate-review/results/audit; reproducible patch and
+evaluation helper.2new relevant definitions have docstrings. No global suite or
+Researcher rebuild repeated. Next macro task:license review, not yet started.
+Other resources/recovery, owner data, human/other profiles and12page acceptance
+remain.43broad scenarios open. Fine details follow all macro capabilities;
+updated list and measured time persist and are shown at each task transition.

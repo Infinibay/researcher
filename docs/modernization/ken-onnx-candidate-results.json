@@ -1,0 +1,194 @@
+{
+  "base_commit": "e150d7c",
+  "started_at_utc": "2026-11-07T13:55:32Z",
+  "validation_cutoff_utc": "2026-11-07T14:03:54Z",
+  "elapsed_to_validation_seconds": 502,
+  "public_source": {
+    "url": "https://files.pythonhosted.org/packages/0f/43/d9431865f60140629c706523142aeba7444dd54756a57ea2dec1fcf7b865/ken_rank-0.18.0.tar.gz",
+    "sha256": "177490d5b3904a3b817fc21e64c088de7db9751ae3afb873f1062990328cc335"
+  },
+  "source_differences": [
+    "src/ken/__init__.py",
+    "pyproject.toml",
+    "PKG-INFO"
+  ],
+  "generated_metadata_action": "Original PKG-INFO archived outside source; rebuilt after patch to regenerate dynamic version. First inconsistent artifact retained privately and never installed.",
+  "candidate_version": "0.18.0+researcher.1",
+  "onnx": "1.23.2",
+  "wheel_sha256": "3964924745db1613a8ae1da06bb87fe764e994f9cb0edf40298c4dd567bdb25b",
+  "source_distribution_sha256": "6a0e477eda09a9e811b27c0a6a76e39e2a42291e5aa4321e7c01f81e8eed8e96",
+  "patch_sha256": "216a2caa4030bde80dbcdfeedb02067a6a09386e7c7f60897c5fe267207128c9",
+  "wheel_source_installed_files_equal": 425,
+  "documented_definitions": 2,
+  "evaluation_sha256": "66521ff71e6853fc5d30c8d0139436f9cdf06a888dfd489dc23ac919e5ca57f1",
+  "probe": {
+    "status": "passed",
+    "model_turns_submitted": 0,
+    "ken_version": "0.18.0+researcher.1",
+    "local_embeddings": true,
+    "composition": "owner.ken/broker_mcp",
+    "checks": [
+      {
+        "check": "own-source-positive-control",
+        "status": "passed"
+      },
+      {
+        "check": "own-semantic-search",
+        "status": "passed"
+      },
+      {
+        "check": "own-text-search",
+        "status": "passed"
+      },
+      {
+        "check": "own-structure-search",
+        "status": "passed"
+      },
+      {
+        "tool": "ken_read",
+        "arguments": {
+          "path": "/home/andres/.codex/worktrees/b09e/researcher/.researcher/evaluations/ken-isolation-55f53937/beta/sources/workspace/invoice.py",
+          "include": [
+            "source"
+          ],
+          "start_line": 1,
+          "end_line": 6
+        },
+        "is_error": true,
+        "foreign_secret_present": false
+      },
+      {
+        "tool": "ken_read",
+        "arguments": {
+          "path": "escape.py",
+          "include": [
+            "source"
+          ],
+          "start_line": 1,
+          "end_line": 6
+        },
+        "is_error": true,
+        "foreign_secret_present": false
+      },
+      {
+        "tool": "ken_read",
+        "arguments": {
+          "path": "owner.key",
+          "include": [
+            "source"
+          ],
+          "start_line": 1,
+          "end_line": 6
+        },
+        "is_error": true,
+        "foreign_secret_present": false
+      },
+      {
+        "tool": "ken_find",
+        "arguments": {
+          "scope": "text",
+          "query": "return",
+          "literal": true,
+          "path": "/home/andres/.codex/worktrees/b09e/researcher/.researcher/evaluations/ken-isolation-55f53937/beta/sources/workspace"
+        },
+        "is_error": false,
+        "foreign_secret_present": false
+      },
+      {
+        "tool": "ken_find",
+        "arguments": {
+          "scope": "structure",
+          "path": "/home/andres/.codex/worktrees/b09e/researcher/.researcher/evaluations/ken-isolation-55f53937/beta/sources/workspace",
+          "query": "language \"kql/2\"; module isolation; query q { callable $f { name: \"marker\"; } select $f.name, $f.path; }",
+          "query_language": "kql/2",
+          "limit": 1,
+          "timeout_ms": 500
+        },
+        "is_error": true,
+        "foreign_secret_present": false
+      },
+      {
+        "tool": "ken_related",
+        "arguments": {
+          "relation": "imports",
+          "target": "/home/andres/.codex/worktrees/b09e/researcher/.researcher/evaluations/ken-isolation-55f53937/beta/sources/workspace/invoice.py"
+        },
+        "is_error": true,
+        "foreign_secret_present": false
+      },
+      {
+        "tool": "ken_recall",
+        "arguments": {
+          "topic": "shared-topic"
+        },
+        "is_error": false,
+        "foreign_secret_present": false
+      },
+      {
+        "tool": "ken_recall",
+        "arguments": {
+          "path": "/home/andres/.codex/worktrees/b09e/researcher/.researcher/evaluations/ken-isolation-55f53937/beta/sources/workspace/invoice.py"
+        },
+        "is_error": false,
+        "foreign_secret_present": false
+      }
+    ],
+    "memory_limit_bytes": 4294967296,
+    "original_sources_unchanged": true,
+    "independent_memories": true,
+    "lifecycles": [
+      {
+        "domain_removed": true,
+        "all_peers_closed": true,
+        "model_turns": 0,
+        "run_status": "failed"
+      },
+      {
+        "domain_removed": true,
+        "all_peers_closed": true,
+        "model_turns": 0,
+        "run_status": "failed"
+      }
+    ]
+  },
+  "preparations": {
+    "alpha": {
+      "receipt": {
+        "exit_code": 0,
+        "memory_peak_bytes": 1517498368,
+        "memory_events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0\n"
+      },
+      "preparation_output": {
+        "indexed_files": 1,
+        "owners": 2,
+        "profile_version": "de062954041c79074114971ac3a0d9e8e92900da0df1c31fa7d45569e61ca1b1"
+      },
+      "stdout_sha256": "fdbb93872eb4606dfb65b231bdd28157aaf2f6b0ad6a0bc0436b2188c56cea5d",
+      "receipt_sha256": "0a5e932cfb6ba8eca902cffb1017001a8884243999e72ce08c0609f54c60cb70"
+    },
+    "beta": {
+      "receipt": {
+        "exit_code": 0,
+        "memory_peak_bytes": 1537273856,
+        "memory_events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0\n"
+      },
+      "preparation_output": {
+        "indexed_files": 1,
+        "owners": 2,
+        "profile_version": "de062954041c79074114971ac3a0d9e8e92900da0df1c31fa7d45569e61ca1b1"
+      },
+      "stdout_sha256": "fdbb93872eb4606dfb65b231bdd28157aaf2f6b0ad6a0bc0436b2188c56cea5d",
+      "receipt_sha256": "e766e6943748e66919925a1a15fd4d7c4bfea745242ec19fb619718ea828cf1a"
+    }
+  },
+  "probe_exit_code": 0,
+  "product_code_changed": false,
+  "product_locks_changed": false,
+  "sibling_repository_changed": false,
+  "published": false,
+  "production_adoption": "pending published compatible Ken release and host integration",
+  "upstream_test_suite": "not included in published source archive; not run",
+  "security_scope": "Candidate compatibility and 71 installed registry dependencies; not full security acceptance",
+  "global_scenarios_closed": 0,
+  "global_suite_rerun": false
+}
