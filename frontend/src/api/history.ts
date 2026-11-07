@@ -15,7 +15,7 @@ export interface RunAttempt {
 }
 /** Lifetime admission capacity, not physical token consumption or subscription billing. */
 export interface ProjectWorkBudget {
- project_id:number;policy:{turn_limit:number;token_limit:number}|null
+ project_id:number;policy:{turn_limit:number;token_limit:number;revision:number}|null
  used_turns:number;observed_tokens:number|null;unmeasured_dispatches:number;unsettled_dispatches:number
  accounted_tokens:number;held_tokens:number;remaining_turns:number|null;remaining_tokens:number|null;overrun_tokens:number|null
 }

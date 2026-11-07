@@ -1,6 +1,7 @@
 /** Explain recorded project capacity without implying knowledge of subscription billing. @module */
 import {useQuery} from '@tanstack/react-query'
 import {measuredTokens,workBudget} from '../../api/history'
+import {BudgetPolicyEditor} from './BudgetPolicyEditor'
 
 /** Observe lifetime admission limits, held capacity and partial measurements in the actual project. */
 export function WorkBudget({projectId}:{projectId:number}){
@@ -24,6 +25,7 @@ export function WorkBudget({projectId}:{projectId:number}){
    <dl><dt>Tokens observados en los recibos disponibles</dt><dd>{measuredTokens(budget.observed_tokens)}</dd></dl>
    <p>{budget.unmeasured_dispatches} solicitudes sin medición y {budget.unsettled_dispatches} sin recibo final. Las observaciones pueden ser parciales, incluso en un recibo cerrado.</p>
    <details><summary className="min-h-11 cursor-pointer">Cómo interpretar la reserva</summary><p>Por ejemplo: con una reserva de 100 tokens y 40 observados durante el trabajo, se mantienen contabilizados 100. Si el consumo queda desconocido, la reserva se conserva. Este registro acumula la historia del proyecto; no se reinicia al cambiar de página.</p></details>
+   <BudgetPolicyEditor key={projectId} budget={budget} fresh={!query.error}/>
   </>}
  </section>
 }

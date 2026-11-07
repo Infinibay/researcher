@@ -1,0 +1,23 @@
+{
+  "policy": {
+    "project_id": 101,
+    "turn_limit": 2,
+    "token_limit": 50,
+    "revision": 2
+  },
+  "receipts": 2,
+  "dispatches": [
+    {
+      "status": "unknown",
+      "observed_tokens": null,
+      "token_ceiling": 100
+    }
+  ],
+  "runs": [
+    {
+      "status": "cancelled"
+    }
+  ],
+  "real_model_calls": 0,
+  "fixture_explanation": "The single unknown dispatch and cancelled run were seeded before browser work. Browser writes only the two budget decisions."
+}

@@ -1,0 +1,102 @@
+{
+  "scope": "Real compiled frontend, owner HTTP/CSRF API and synthetic SQLite; no configured runtime or model calls.",
+  "states": [
+    {
+      "name": "01-edit-desktop",
+      "width": 1440,
+      "axe_violations": 0
+    },
+    {
+      "name": "02-edit-mobile",
+      "width": 390,
+      "axe_violations": 0
+    },
+    {
+      "name": "03-response-lost",
+      "width": 390,
+      "axe_violations": 0
+    },
+    {
+      "name": "04-lower-below-reservation",
+      "width": 390,
+      "axe_violations": 0
+    }
+  ],
+  "writes": [
+    {
+      "request": {
+        "operation_key": "dee216b3-0b45-45fc-a413-ceb5388feb70",
+        "expected_revision": 0,
+        "turn_limit": 2,
+        "token_limit": 500,
+        "reason": "Ampliar la comparación sin borrar la reserva anterior."
+      },
+      "receipt": {
+        "project_id": 101,
+        "operation_key": "dee216b3-0b45-45fc-a413-ceb5388feb70",
+        "expected_revision": 0,
+        "turn_limit": 2,
+        "token_limit": 500,
+        "reason": "Ampliar la comparación sin borrar la reserva anterior.",
+        "revision": 1,
+        "previous_policy": {
+          "turn_limit": 2,
+          "token_limit": 200,
+          "revision": 0
+        },
+        "usage_at_decision": {
+          "used_turns": 1,
+          "observed_tokens": null,
+          "unmeasured_dispatches": 1,
+          "unsettled_dispatches": 1,
+          "accounted_tokens": 100,
+          "held_tokens": 100
+        },
+        "recorded_at": 1794067813.1240664,
+        "inference_started": false
+      }
+    },
+    {
+      "request": {
+        "operation_key": "ae2a07e1-53f1-433f-882c-515266e16656",
+        "expected_revision": 1,
+        "turn_limit": 2,
+        "token_limit": 50,
+        "reason": ""
+      },
+      "receipt": {
+        "project_id": 101,
+        "operation_key": "ae2a07e1-53f1-433f-882c-515266e16656",
+        "expected_revision": 1,
+        "turn_limit": 2,
+        "token_limit": 50,
+        "reason": "",
+        "revision": 2,
+        "previous_policy": {
+          "turn_limit": 2,
+          "token_limit": 500,
+          "revision": 1
+        },
+        "usage_at_decision": {
+          "used_turns": 1,
+          "observed_tokens": null,
+          "unmeasured_dispatches": 1,
+          "unsettled_dispatches": 1,
+          "accounted_tokens": 100,
+          "held_tokens": 100
+        },
+        "recorded_at": 1794067813.9568715,
+        "inference_started": false
+      }
+    }
+  ],
+  "checks": [
+    "owner-session-csrf-real-api",
+    "committed-response-loss-reload-read-only-recovery",
+    "exactly-two-explicit-policy-writes",
+    "unknown-consumption-held",
+    "lower-total-retains-overrun",
+    "save-does-not-dispatch"
+  ],
+  "errors": []
+}

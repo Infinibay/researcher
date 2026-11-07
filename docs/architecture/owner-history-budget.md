@@ -44,10 +44,10 @@ genérico de cierre. Por ejemplo: una solicitud necesita reservar100tokens y el
 presupuesto del proyecto permite99; no se envía un turno. Cambios posteriores
 en la historia no reescriben el motivo original.
 
-La política sigue fijada por la primera reserva. Una configuración distinta no
-la reemplaza; falta una operación del propietario para revisarla explícitamente,
-con control de concurrencia y sin borrar consumo ni reanudar trabajo por sí sola.
-Este es trabajo funcional pendiente, no pulido. Ver
+La configuración del host siembra la política inicial en revisión0. El propietario
+puede revisarla explícitamente mediante el [control de presupuesto](project-budget-policy.md),
+con versión esperada y recibo, sin borrar consumo ni despachar un turno por guardar.
+Las autorizaciones existentes no cambian. Ver también los
 [ensayos de presupuesto y falta de progreso](../modernization/aggregate-budget-review.md).
 
 Verificación: [resultados](../modernization/history-budget-results.json),

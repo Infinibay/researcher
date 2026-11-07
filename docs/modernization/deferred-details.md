@@ -814,3 +814,14 @@ aceptación responsive. Los márgenes negativos de1.5rem frente al padding móvi
 de1rem son una hipótesis del origen, no una medición causal ya demostrada.
 El harness conserva exit1 por estos cuatro casos. Revalidar los contenedores y
 sus controles, además de `document.documentElement.scrollWidth`.
+
+## DD108 — densidad y captura móvil del presupuesto
+
+El nuevo editor de presupuesto es operable a390px: guardar, recuperar el recibo
+tras recarga y reducir por debajo del consumo funcionan contra API/SQLite reales.
+La captura del elemento completo no muestra el formulario móvil entero porque
+atraviesa un contenedor con scroll; no acredita revisión visual de todos sus
+controles. Compactar la explicación secundaria y mejorar el encuadre de capturas
+por posición de scroll en la pasada final. El escritorio sí se inspeccionó completo;
+Axe del panel y desbordamiento exterior pasan. No declarar aceptación responsive
+global ni repetir ahora el backend por este detalle de densidad/evidencia visual.

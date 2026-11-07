@@ -1,0 +1,32 @@
+{
+  "base_commit": "ca9a7ad",
+  "wheel": "researcher-0.1.0-cp312-cp312-linux_x86_64.whl",
+  "wheel_sha256": "62a43c9cafd1bbebfe8d157be9d52c6a7d109b1cd4efed5483455d7670e576d6",
+  "source_files_matching_wheel_and_installation": 629,
+  "product_files_matching": 332,
+  "observed": {
+    "cases": 47,
+    "passed": 47,
+    "failed": 0,
+    "skipped": 0,
+    "backend_modules": 227,
+    "all_backend_imports_from_native_env": true,
+    "seconds": 22.721,
+    "exit_code": 0
+  },
+  "tests": [
+    "backend/tests/runtime/test_project_budget_policy.py",
+    "backend/tests/runtime/test_inference_journal.py",
+    "backend/tests/runtime/test_history_budget.py",
+    "backend/tests/runtime/test_run_input.py",
+    "backend/tests/runtime/test_aggregate_execution_budget.py",
+    "backend/tests/runtime/test_migration_chain.py::test_writer_crash_before_version_commit_preserves_prior_schema_and_resumes[60]"
+  ],
+  "real_model_turns": 0,
+  "limits": [
+    "Selected tests, not the global suite",
+    "Synthetic managed installation data, no historical user-data migration",
+    "Owner changes affect future admission and retain prior usage/attempt limits. They do not revoke existing plan authorizations or provide physical billing/subscription quota guarantees",
+    "No model calls, external accounts or GitHub workflow execution"
+  ]
+}

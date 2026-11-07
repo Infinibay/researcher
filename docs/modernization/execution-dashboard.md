@@ -28,7 +28,37 @@ que se pueda comparar el avance; no presentar microajustes como tareas principal
 - Última suite global: `9fb873c`,2210 casos,2178 pasan,31 fallan y1 error de fixture; sin omisiones. La carrera de backup encontrada se corrigió después con40 pruebas instaladas. No se declara una nueva corrida global verde; la referencia `0c8b8d9` queda como evidencia histórica.
 - U06 (configuración por intento y guardado interrumpido) queda comprobado; siguen42de43escenarios amplios abiertos en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Estado actual: presupuesto coherente y falta de progreso comprobados
+## Estado actual: revisión explícita del presupuesto comprobada
+
+Bloque **2026-11-07 15:57:53–16:15:50 UTC**, **17 min 57 s hasta validar**.
+Pasan97casos distintos de backend,47instalados,8DOM y2contratos del cliente.
+Migración60 conserva políticas históricas; versión/recibo impiden sobrescritura
+entre editores y permiten recuperar respuestas perdidas. La caída de un proceso
+antes del commit revierte política y recibo. El host usa la nueva capacidad sólo
+al admitir trabajo posterior; guardar no envía turnos ni reanuda tareas detenidas.
+629archivos coinciden,332de producto.13módulos/definiciones Python documentados;
+85candidatos de prompts revisados. Cuatro estados web contra API/SQLite reales,
+dos escrituras explícitas y consumo anterior intacto; móvil denso/captura parcial
+anotados enDD108para el final. [Resultados y límites](project-budget-policy-review.md).
+
+**Lista vigente:**
+- Terminado: recorridos principales, U06, evidencia selectiva, contabilidad/cupos
+  y revisión explícita del presupuesto por el propietario desde la web.
+- En curso al cerrar: documentación y checkpoint local del bloque.
+- Siguiente principal: contrastar aceptación completa deE07/E08 con evidencia
+  vigente, especialmente cadenas de revisión y consumo de auxiliares. **No iniciado**;
+  registrar hora real. Evitar reimplementar capacidades ya verificadas.
+- Pendiente:42escenarios amplios, recuperación/recursos, datos históricos,
+  evaluación humana/modelos, aceptación integral de12páginas, dependencias
+  publicadas y distribución.
+- Al final: detalles secundarios, validación global y revisión independiente.
+
+Las autorizaciones existentes no cambian por editar el presupuesto; un plan ya
+autorizado puede usar la nueva capacidad en admisiones posteriores. Cero modelos
+consumidos; sin nueva suite global verde ni porcentaje global defendible. Lista
+y tiempos se publican en cada transición y persisten tras compactar.
+
+## Etapa anterior: presupuesto coherente y falta de progreso comprobados
 
 Bloque **2026-11-07 15:46:39–15:56:22 UTC**, **9 min 43 s hasta validar**.
 Pasan113casos distintos de fuente y65instalados;625archivos coinciden,329de producto.

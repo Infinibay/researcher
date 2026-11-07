@@ -638,20 +638,23 @@ class SQLiteRunStore:
                 raise RunConflict("Attempt already reserved another inference intent")
             return False
         conn.execute(
-            "INSERT OR IGNORE INTO runtime_project_budgets VALUES(?,?,?)",
+            "INSERT OR IGNORE INTO runtime_project_budgets(project_id,turn_limit,token_limit) VALUES(?,?,?)",
             (lease.project_id, project_turn_limit, project_token_limit),
         )
         policy = conn.execute(
             "SELECT * FROM runtime_project_budgets WHERE project_id=?",
             (lease.project_id,),
         ).fetchone()
-        if (policy["turn_limit"], policy["token_limit"]) != (
+        if policy["revision"] == 0 and (policy["turn_limit"], policy["token_limit"]) != (
             project_turn_limit,
             project_token_limit,
         ):
             raise RunConflict(
                 "Project budget policy changed; explicit reconciliation required"
             )
+        # An explicit owner revision governs future admission. Existing dispatch
+        # limits and cumulative usage remain untouched by policy changes.
+        project_turn_limit, project_token_limit = policy["turn_limit"], policy["token_limit"]
         used = project_work_usage(conn, lease.project_id)
         blocked_by = []
         if used["used_turns"] >= project_turn_limit:

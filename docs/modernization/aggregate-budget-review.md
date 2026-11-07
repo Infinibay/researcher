@@ -55,6 +55,10 @@ actualizó la justificación. No se inventa una nueva evaluación con modelos.
 
 ## Siguiente capacidad principal
 
+**Actualización posterior:** la capacidad se implementó y verificó en
+[revisión explícita del presupuesto](project-budget-policy-review.md). El texto
+siguiente conserva el hallazgo original; ya no representa trabajo sin implementar.
+
 La búsqueda de `runtime_project_budgets` en Python del backend muestra una lectura
 de historia y la inserción/comprobación de la primera reserva. No hay una operación
 para cambiar explícitamente una política ya fijada. Cambiar la configuración del

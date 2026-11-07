@@ -76,7 +76,7 @@ class RuntimeHistory:
             conn.execute("BEGIN")
             if conn.execute("SELECT 1 FROM projects WHERE id=?", (project_id,)).fetchone() is None:
                 raise RunNotFound("Project not found")
-            policy = conn.execute("SELECT turn_limit,token_limit FROM runtime_project_budgets WHERE project_id=?", (project_id,)).fetchone()
+            policy = conn.execute("SELECT turn_limit,token_limit,revision FROM runtime_project_budgets WHERE project_id=?", (project_id,)).fetchone()
             usage = project_work_usage(conn, project_id)
         return {"project_id": project_id, "policy": dict(policy) if policy else None, **usage,
                 "remaining_turns": max(0, policy["turn_limit"] - usage["used_turns"]) if policy else None,

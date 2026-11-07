@@ -1,0 +1,72 @@
+{
+  "source_database": "/tmp/pytest-of-andres/pytest-834/test_owned_explicit_budget_cha0/test_infinibay.db",
+  "generation": "controlled_native",
+  "ken": "controlled_mcp",
+  "real_kernel_broker_sqlite": true,
+  "model_calls": 0,
+  "runs": [
+    {
+      "operation_key": "request-1",
+      "status": "failed",
+      "issue": {
+        "code": "project_budget_exhausted",
+        "inference_started": false,
+        "message": "No se inició un turno nuevo: el proyecto tiene 0 de 20 turnos reservados y 0 de 999 tokens contabilizados; esta solicitud necesita reservar 1000 tokens. Revisa el presupuesto del proyecto y sus intentos anteriores antes de continuar. Las mediciones ausentes conservan su reserva; esto no indica la cuota restante de la suscripción.",
+        "next_action": "inspect_project_budget",
+        "project_budget": {
+          "accounted_tokens": 0,
+          "basis": "Recorded lifetime project admission, not provider billing or remaining subscription quota.",
+          "blocked_by": [
+            "tokens"
+          ],
+          "held_tokens": 0,
+          "observed_tokens": null,
+          "project_id": 101,
+          "requested_tokens": 1000,
+          "requested_turns": 1,
+          "token_limit": 999,
+          "turn_limit": 20,
+          "unmeasured_dispatches": 0,
+          "unsettled_dispatches": 0,
+          "used_turns": 0
+        }
+      }
+    },
+    {
+      "operation_key": "new-authorized-work",
+      "status": "needs_review",
+      "issue": null
+    }
+  ],
+  "policy": {
+    "project_id": 101,
+    "turn_limit": 2,
+    "token_limit": 2000,
+    "revision": 1
+  },
+  "changes": [
+    {
+      "project_id": 101,
+      "operation_key": "owner-extension",
+      "expected_revision": 0,
+      "turn_limit": 2,
+      "token_limit": 2000,
+      "reason": "",
+      "revision": 1,
+      "previous_policy": null,
+      "usage_at_decision": {
+        "used_turns": 0,
+        "observed_tokens": null,
+        "unmeasured_dispatches": 0,
+        "unsettled_dispatches": 0,
+        "accounted_tokens": 0,
+        "held_tokens": 0
+      },
+      "recorded_at": 1794067642.819131,
+      "inference_started": false
+    }
+  ],
+  "dispatches": 1,
+  "acceptances": 0,
+  "nonclosed_peers": 0
+}

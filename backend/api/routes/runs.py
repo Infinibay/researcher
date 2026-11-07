@@ -1007,6 +1007,41 @@ async def project_work_budget(project_id: int, request: Request):
     return JSONResponse(data, headers={"Cache-Control": "no-store"})
 
 
+class ProjectBudgetChange(BaseModel):
+    """One explicit owner decision over total project capacity, never a request to resume or spend."""
+
+    model_config = ConfigDict(extra='forbid', strict=True)
+    operation_key: str = Field(min_length=1, max_length=128, pattern=r'^[A-Za-z0-9_.:-]+$')
+    expected_revision: int = Field(ge=0, le=9007199254740991)
+    turn_limit: int = Field(ge=1, le=9007199254740991)
+    token_limit: int = Field(ge=1, le=9007199254740991)
+    reason: str = Field(default='', max_length=2000)
+
+
+@router.post("/{project_id}/work-budget")
+async def change_project_work_budget(project_id: int, body: ProjectBudgetChange, request: Request):
+    """Record owner-authorized total limits with revision/idempotency checks, even without a configured runtime; never dispatch work."""
+    from backend.runtime.project_budget import ProjectBudgetPolicies
+
+    try:
+        receipt = await asyncio.to_thread(ProjectBudgetPolicies(read_store(request)).update, project_id, **body.model_dump())
+    except ValueError as exc:
+        raise HTTPException(422, str(exc)) from exc
+    return JSONResponse(receipt, headers={"Cache-Control": "no-store"})
+
+
+@router.get("/{project_id}/work-budget/changes/{operation_key}")
+async def project_budget_change_receipt(project_id: int, operation_key: str, request: Request):
+    """Read the original scoped budget decision without resending it or reinterpreting later policy as its receipt."""
+    from backend.runtime.project_budget import ProjectBudgetPolicies
+
+    try:
+        receipt = await asyncio.to_thread(ProjectBudgetPolicies(read_store(request)).receipt, project_id, operation_key)
+    except ValueError as exc:
+        raise HTTPException(422, str(exc)) from exc
+    return JSONResponse(receipt, headers={"Cache-Control": "no-store"})
+
+
 @router.get("/{project_id}/research-sources/{source_id}")
 async def owner_source(
     project_id: int,

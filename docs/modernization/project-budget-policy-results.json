@@ -1,0 +1,198 @@
+{
+  "base_commit": "ca9a7ad",
+  "previous_goal_turn": "progress: committed consistent cumulative budgets and typed refusal",
+  "started_at_utc": "2026-11-07T15:57:53Z",
+  "validation_cutoff_utc": "2026-11-07T16:15:50Z",
+  "elapsed_to_validation_seconds": 1077,
+  "source_distinct_cases_passing": 97,
+  "source_runs": [
+    {
+      "receipt": ".superpowers/sdd/2026-10-31-actualizacion-proyecto/project-budget-policy-final-source.xml",
+      "cases": 35,
+      "seconds": 14.399
+    },
+    {
+      "receipt": ".superpowers/sdd/2026-10-31-actualizacion-proyecto/project-budget-owned-final.xml",
+      "cases": 1,
+      "seconds": 3.586
+    },
+    {
+      "receipt": ".superpowers/sdd/2026-10-31-actualizacion-proyecto/project-budget-migration-final.xml",
+      "cases": 61,
+      "seconds": 21.931
+    }
+  ],
+  "installed": "project-budget-policy-packaging.json",
+  "native_observations": "project-budget-policy-native-observations.json",
+  "frontend": {
+    "dom_cases_passed": 8,
+    "contract_cases_passed": 2,
+    "build_passed": true,
+    "real_api_browser_states": 4,
+    "explicit_policy_writes": 2,
+    "model_calls": 0,
+    "browser_evidence": "docs/design/audits/2026-11-07-project-budget/browser-evidence.json",
+    "database_evidence": "docs/design/audits/2026-11-07-project-budget/database-evidence.json",
+    "visual_limit": "Desktop panel fully inspected. Mobile interactions pass, but full-element screenshot crosses an internal scroll boundary and does not show every control; DD108 deferred."
+  },
+  "docstrings": {
+    "checked": [
+      {
+        "path": "backend/runtime/project_budget.py",
+        "symbol": "module",
+        "documented": true
+      },
+      {
+        "path": "backend/runtime/project_budget.py",
+        "symbol": "ProjectBudgetPolicies",
+        "documented": true
+      },
+      {
+        "path": "backend/runtime/project_budget.py",
+        "symbol": "__init__",
+        "documented": true
+      },
+      {
+        "path": "backend/runtime/project_budget.py",
+        "symbol": "_project",
+        "documented": true
+      },
+      {
+        "path": "backend/runtime/project_budget.py",
+        "symbol": "receipt",
+        "documented": true
+      },
+      {
+        "path": "backend/runtime/project_budget.py",
+        "symbol": "update",
+        "documented": true
+      },
+      {
+        "path": "backend/db/project_budget_migration.py",
+        "symbol": "module",
+        "documented": true
+      },
+      {
+        "path": "backend/db/project_budget_migration.py",
+        "symbol": "restore_project_budget_schema",
+        "documented": true
+      },
+      {
+        "path": "backend/api/routes/runs.py",
+        "symbol": "ProjectBudgetChange",
+        "documented": true
+      },
+      {
+        "path": "backend/api/routes/runs.py",
+        "symbol": "change_project_work_budget",
+        "documented": true
+      },
+      {
+        "path": "backend/api/routes/runs.py",
+        "symbol": "project_budget_change_receipt",
+        "documented": true
+      },
+      {
+        "path": "backend/runtime/history.py",
+        "symbol": "budget",
+        "documented": true
+      },
+      {
+        "path": "backend/runtime/sqlite_runs.py",
+        "symbol": "_reserve_inference",
+        "documented": true
+      }
+    ],
+    "missing": []
+  },
+  "prompt_inventory": {
+    "files": 294,
+    "candidates": 85,
+    "requires_review": 0,
+    "unchanged_candidates_revalidated": 3
+  },
+  "evidence": [
+    {
+      "path": ".superpowers/sdd/2026-10-31-actualizacion-proyecto/project-budget-policy-red.xml",
+      "sha256": "9d3a503fbe8aeb495e8c31443d914e4424cac3f13af5412471ceacefc3ba4578"
+    },
+    {
+      "path": ".superpowers/sdd/2026-10-31-actualizacion-proyecto/project-budget-policy-source.xml",
+      "sha256": "5b2cb1d85ed3477118dc8c75d307f4fef5795ba0deacc6a35dd3fa70fdf14cb4"
+    },
+    {
+      "path": ".superpowers/sdd/2026-10-31-actualizacion-proyecto/project-budget-policy-final-source.xml",
+      "sha256": "60a6bfc32e7904b5dbad2c833a9fe51d9fa186085f27cc42783c550335e0c9c2"
+    },
+    {
+      "path": ".superpowers/sdd/2026-10-31-actualizacion-proyecto/project-budget-owned.xml",
+      "sha256": "e733b51de08691d4a43e806598f5e0e26181d0f8503b39088df156b61b369755"
+    },
+    {
+      "path": ".superpowers/sdd/2026-10-31-actualizacion-proyecto/project-budget-owned-final.xml",
+      "sha256": "df4ea78b4b6d0aaa5161b56060d91dafbb591a9461041e685c2d7a1c7eea64f3"
+    },
+    {
+      "path": ".superpowers/sdd/2026-10-31-actualizacion-proyecto/project-budget-migration-regression.xml",
+      "sha256": "577ec36635ffc79b507a1c7389a32a98ac3e351c0c93e2c1a63ffdcad283eb02"
+    },
+    {
+      "path": ".superpowers/sdd/2026-10-31-actualizacion-proyecto/project-budget-migration-final.xml",
+      "sha256": "5e34f9d9e948a64319d156e9ee4fae8049299a15719690fa215ecd6c56c13ab6"
+    },
+    {
+      "path": ".superpowers/sdd/2026-10-31-actualizacion-proyecto/project-budget-policy-package.xml",
+      "sha256": "7a4c6c1dede314f072f3c3b9a20f80dee74c1b3ecbad3735ea6bed63ac5b20f5"
+    },
+    {
+      "path": ".superpowers/sdd/2026-10-31-actualizacion-proyecto/project-budget-api-red.log",
+      "sha256": "91792b780a36de4e8f4866316cece3b42b65bd396cbc1ee399c78a33a5a7211a"
+    },
+    {
+      "path": ".superpowers/sdd/2026-10-31-actualizacion-proyecto/project-budget-ui-red.log",
+      "sha256": "fe11f9f97d259379230db03ef6e33781b8cea003b4eb49ae7ee1eb32a6dee5bf"
+    },
+    {
+      "path": ".superpowers/sdd/2026-10-31-actualizacion-proyecto/project-budget-ui.log",
+      "sha256": "d5c3acccb41091de7bf2f5bd770b42985312a43e6793cc17e1a93e456a6d9cf7"
+    },
+    {
+      "path": ".superpowers/sdd/2026-10-31-actualizacion-proyecto/project-budget-ui-complete.log",
+      "sha256": "bdb7207b664b0a6c0e7cfefe93fb92097000f95811a265079952ddcf99b4746c"
+    },
+    {
+      "path": ".superpowers/sdd/2026-10-31-actualizacion-proyecto/project-budget-contract.log",
+      "sha256": "3dc75c22f94583d7f4f1385af994cb5c341f74e2c48e068789f2ee9ffcaaf21d"
+    },
+    {
+      "path": ".superpowers/sdd/2026-10-31-actualizacion-proyecto/project-budget-frontend-final-build.log",
+      "sha256": "cd72288915b9d10ed0044a454929d059841239084019827b24ab60f1ba84e4b2"
+    },
+    {
+      "path": ".superpowers/sdd/2026-10-31-actualizacion-proyecto/project-budget-prompt-review.json",
+      "sha256": "bdc1eef083827be9c4778174b6e09d30b2314b10b527b83c737122b56c34d1e2"
+    },
+    {
+      "path": ".superpowers/sdd/2026-10-31-actualizacion-proyecto/project-budget-docstrings.json",
+      "sha256": "94f6c0e948f34a7794c5073ba26733a7a490519baf2cbb190f46161be775d0c9"
+    }
+  ],
+  "model_calls": 0,
+  "global_suite_rerun": false,
+  "broad_scenarios_open": 42,
+  "fully_accepted_pages": 0,
+  "test_corrections": [
+    "Historical fixture parameter did not select schema59; test now builds explicit historical DB before migration.",
+    "Actual documentary native outcome is needs_review, not proposed; assertion corrected without production relaxation.",
+    "New receipt TypeScript declaration changed from unsupported interface indexed extension to type intersection.",
+    "Migration-chain expected highest/unsupported versions updated from59/60 to60/61 and crash coverage extended through60."
+  ],
+  "limits": [
+    "Owner policy writes do not dispatch or resume work, but existing plan authorizations remain valid for later admission.",
+    "Cumulative accounting is not exact billing or subscription quota.",
+    "Controlled native/Ken generation; browser uses real API and synthetic SQLite without configured runtime.",
+    "No full scenario/page acceptance or new global green claim."
+  ],
+  "next_main_task": "Audit full E07/E08 acceptance against retained evidence, including bounded review chains and observable auxiliary inference.",
+  "status": "owner_project_budget_revision_verified; complete modernization remains active"
+}

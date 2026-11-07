@@ -953,12 +953,19 @@
         "docs/modernization/aggregate-budget-review.md",
         "docs/modernization/aggregate-budget-results.json",
         "docs/modernization/aggregate-budget-packaging.json",
-        "docs/modernization/aggregate-budget-native-observations.json"
+        "docs/modernization/aggregate-budget-native-observations.json",
+        "docs/architecture/project-budget-policy.md",
+        "docs/modernization/project-budget-policy-review.md",
+        "docs/modernization/project-budget-policy-results.json",
+        "docs/modernization/project-budget-policy-packaging.json",
+        "docs/modernization/project-budget-policy-native-observations.json",
+        "backend/tests/runtime/test_project_budget_policy.py",
+        "frontend/tests/ui/project-budget.test.tsx",
+        "docs/design/audits/2026-11-07-project-budget/report.md"
       ],
       "remaining": [
         "Durable product ownership, API integration and full scenario acceptance",
-        "Session cumulative high water, concurrent project admission, retained unknown usage after restart, typed pre-dispatch budget refusal, and actual owned reasoning-only no-progress closure are verified. Full scenario acceptance still needs the remaining integration and review-chain audit.",
-        "Implement an explicit owner operation for frozen project-budget policy revision with expected version and durable receipt; preserve consumption and never automatically resume or replay attempts. Current host configuration change only rejects a mismatch. See aggregate-budget-review.md."
+        "Session cumulative high water, concurrent project admission, retained unknown usage after restart, typed pre-dispatch budget refusal, and actual owned reasoning-only no-progress closure are verified. Full scenario acceptance still needs the remaining integration and review-chain audit."
       ]
     },
     "E09": {
@@ -5017,6 +5024,23 @@
         "Historical owner data migration/restore; full-disk closure receipt persistence failure, abrupt power loss, inode exhaustion and pending active authority beyond the controlled committed-authority trial",
         "Launcher/guardian own resources, concurrent external administration and aggregate export/backup/restore durable temporary, journal and metadata storage beyond per-operation limits; pending service receipt recovery after disk-full remains unproven",
         "Integral security and operational acceptance"
+      ]
+    },
+    "owner_project_budget_revision": {
+      "status": "verified",
+      "scope": "Explicit owner revision of lifetime admission limits, preserving usage and existing attempt limits, recovering original receipts and neither dispatching nor resuming work by saving. Existing plan authorizations remain valid. Full E07/E08 acceptance remains separate.",
+      "evidence": [
+        "docs/architecture/project-budget-policy.md",
+        "docs/modernization/project-budget-policy-review.md",
+        "docs/modernization/project-budget-policy-results.json",
+        "docs/modernization/project-budget-policy-packaging.json",
+        "docs/modernization/project-budget-policy-native-observations.json",
+        "backend/tests/runtime/test_project_budget_policy.py",
+        "frontend/tests/ui/project-budget.test.tsx",
+        "docs/design/audits/2026-11-07-project-budget/report.md"
+      ],
+      "remaining": [
+        "Panel density/mobile capture in DD108 after main capabilities; not whole-page acceptance."
       ]
     }
   }
