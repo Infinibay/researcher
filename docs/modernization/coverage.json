@@ -3045,10 +3045,10 @@
         "backend/tests/research/test_wiki_migration.py",
         "docs/modernization/recovery-policy-before-wiki-fix-packaging.json",
         "docs/modernization/workspace-retention-review.md",
-        "docs/modernization/workspace-retention-packaging.json"
+        "docs/modernization/workspace-retention-packaging.json",
+        "docs/modernization/historical-data-acceptance.json"
       ],
       "remaining": [
-        "Historical real-data location, inventory and migration acceptance; validate actual layouts and Chroma-version compatibility",
         "Broader destructive-failure/active-actor disaster acceptance remains distinct from controlled synthetic recovery/import rehearsals",
         "Final integrated acceptance and operator recovery review; no generic in-place downgrade promised for schemas18-32/43-56"
       ],
@@ -3063,7 +3063,8 @@
         "Managed installation data backup/verification/another-path restore preserves SQLite, uploads and linked Git worktrees.82source/82installed tests pass; restored execution remains pending enrollment. No production-data or operational recovery acceptance.",
         "Explicit legacy SQL/files staging and isolated pinned Chroma export, byte-bound provenance through source capture, no fabricated full documents/review.139source/139installed tests; real Chroma105records/104text/1metadata-only plus installed CLI/fresh enrollment/scoped native HTTP pass. Synthetic data, no inference or real-data acceptance; schema58 and41 forward interruption boundaries.",
         "Explicit snapshot limits after new writes; compact hash-bound restoration metadata permits321attachments and refuses damaged/path-redirected evidence. Actual interrupted metadata writer recovery and schema43->58post-write old/current snapshots verified.130source core plus28corrected historical inverse cases pass;160final installed pass,595matching files. Wiki inverse now refuses later schemas34/58before any rewrite;15directed migration/identity tests pass. Conditional inverse policy documented; no generic downgrade claim or owner-data acceptance."
-      ]
+      ],
+      "owner_historical_data": "No migration required: explicit owner statement \u201cno, no hay\u201d, 2026-11-07. Auxiliary CrewAI state left unattributed and unchanged."
     },
     "backup_restore": {
       "status": "in_progress",
@@ -5955,6 +5956,13 @@
       "remaining": [
         "Initial example rejected by the user as unhelpful; revised task-grounded example has no human acceptance yet",
         "Evaluate actual generated explanations and correction/adaptation under final policy; rendering and scripted tests do not establish understanding"
+      ]
+    },
+    "owner_historical_data_acceptance": {
+      "status": "verified",
+      "scope": "Explicit owner confirms no historical data to migrate; bounded inventory and read-only auxiliary metadata preserved. No migration fabricated.",
+      "evidence": [
+        "docs/modernization/historical-data-acceptance.json"
       ]
     }
   }

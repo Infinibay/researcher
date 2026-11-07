@@ -1,0 +1,65 @@
+{
+  "started_at": "2026-11-07T23:43:19Z",
+  "verified_at": "2026-11-07T23:45:08Z",
+  "elapsed_seconds": 109,
+  "base_commit": "7da6ff3",
+  "source_workspace": "/home/andres/Proyects/researcher",
+  "main_candidates": [
+    {
+      "path": "/home/andres/Proyects/researcher/.data/infinibay.db",
+      "exists": false,
+      "kind": null
+    },
+    {
+      "path": "/home/andres/Proyects/researcher/.researcher/researcher.db",
+      "exists": false,
+      "kind": null
+    },
+    {
+      "path": "/research/infinibay.db",
+      "exists": false,
+      "kind": null
+    },
+    {
+      "path": "/home/andres/Proyects/researcher/.data/artifacts",
+      "exists": false,
+      "kind": null
+    },
+    {
+      "path": "/home/andres/Proyects/researcher/.data/uploads",
+      "exists": false,
+      "kind": null
+    },
+    {
+      "path": "/home/andres/Proyects/researcher/.data/chroma",
+      "exists": false,
+      "kind": null
+    }
+  ],
+  "discovery_scope": "Known configuration candidates, bounded project database search excluding generated trials/environments, standard application data directories; no machine-wide search or credential reads",
+  "project_database_files_found": [
+    ".ken/ken.db",
+    ".ken/search-context/vectors.db"
+  ],
+  "ken_databases_are_project_code_intelligence_not_application_history": true,
+  "auxiliary_crewai": {
+    "path": "/home/andres/.local/share/researcher/flow_states.db",
+    "sha256": "e4772ffe749c8e9a94edafe391be2b0e7ffa12375541a7d124642d2eb15e610e",
+    "table_counts": {
+      "flow_states": 16,
+      "pending_feedback": 0
+    },
+    "row_contents_read": false,
+    "original_hash_unchanged": true,
+    "ownership": "unknown; not adopted or migrated"
+  },
+  "owner_confirmation": {
+    "literal": "no, no hay",
+    "question": "Whether historical data exists to preserve and migrate",
+    "interpretation": "No owner historical-data migration is required",
+    "kind": "explicit_user_statement"
+  },
+  "owner_data_migration": "not_applicable_owner_confirmed",
+  "copies_or_migrations_performed": false,
+  "remaining": "Synthetic compatibility and recovery evidence retains its own scope; no claim that actual owner history was migrated."
+}

@@ -4079,7 +4079,7 @@ Checkpoint:7033259 is the committed structured-source delivery (1748total/1645pa
 - Independent next-slice visual prep only in private scratch: Findings before desktop/
  mobile captured9contrast nodes each. findings-next-brief.md and findings-prompts.json
  record observed constraints and next criteria. Three built-in ImageGen desktop jobs
- live in functions cell g127:2738 (evidence-ledger/claim-register/research-dossier),
+ live in functions cell g127: 2738 (evidence-ledger/claim-register/research-dossier),
  each receiving actual Wiki style + actual Findings before images. Do not restart them.
  Do not count these as delivered or stage Findings artifacts in the Wiki commit.
 
@@ -8627,3 +8627,13 @@ Python documentadas. El usuario rechaza el primer ejemplo; nuevo caso concreto
 comprobado visualmente pero sin aceptación humana.41/43 escenarios;0/12 páginas.
 Siguiente: datos históricos, con plan preparado y comienzo real aún pendiente.
 Se mantiene la lista con tiempos en cada transición y capacidades antes de detalles.
+
+
+### 2026-11-07 — datos históricos sin migración necesaria
+
+23:43:19–23:45:08 UTC,1 min49s. Inspección acotada de rutas configuradas y
+metadatos de una base auxiliar CrewAI con16 estados, sin leer sus filas ni atribuir
+autoría. El usuario confirma «no, no hay» historial que migrar. Se conserva
+hash de la base auxiliar; no se simula una migración.41/43 escenarios,0/12 páginas.
+Se inicia auditoría de evaluaciones a23:45:08 UTC; documentación y checkpoint
+posteriores a la verificación quedan fuera de esa duración.

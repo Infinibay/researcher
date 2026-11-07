@@ -28,7 +28,31 @@ que se pueda comparar el avance; no presentar microajustes como tareas principal
 - Última suite global: `9fb873c`,2210 casos,2178 pasan,31 fallan y1 error de fixture; sin omisiones. La carrera de backup encontrada se corrigió después con40 pruebas instaladas. No se declara una nueva corrida global verde; la referencia `0c8b8d9` queda como evidencia histórica.
 - U01–U07, E01–E12, C01–C09 y D01–D13 quedan comprobados con el alcance de sus matrices; siguen 2 de 43 escenarios amplios sin aceptación completa en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Estado actual: U04/U05/U07 comprobados; comunicación U08 abierta
+## Estado actual: evaluaciones; datos históricos resueltos por confirmación
+
+Datos históricos: bloque **23:43:19–23:45:08 UTC**, **1 min 49 s** de inspección
+y confirmación, base `7da6ff3`. No aparece la base principal en las ubicaciones
+conocidas. Una base auxiliar CrewAI conserva16 estados, procedencia desconocida y
+hash intacto. El usuario respondió literalmente **«no, no hay»** a la pregunta
+por historial que migrar. No se requiere migración del historial del propietario.
+[Inventario y declaración explícita](historical-data-acceptance.json).
+
+- Terminado: **41/43 escenarios**, y necesidad de migración de datos del usuario
+  resuelta por confirmación explícita de que no existe ese historial.
+- En curso: auditoría de evaluaciones desde **23:45:08 UTC**. Reusar evidencia
+  vigente y preparar una evaluación de política actual con material científico
+  real; no repetir comparaciones históricas para conseguir respuestas mejores.
+  [Caso y criterio preparados](../superpowers/plans/2026-11-07-current-scientific-evaluation.md):
+  resumen primario de un estudio histórico, con límites de lectura explícitos.
+  La generación del caso nuevo todavía no comenzó.
+- Abierto: U08 (primer ejemplo rechazado; revisión sin aceptación humana) y C10.
+- Después: aceptación de las **12 páginas**, dependencias y distribución.
+- Al final: detalles aplazados, cierre global y revisión independiente.
+
+Persisten **0/12 páginas completamente aceptadas**. No se atribuye una migración
+ni un porcentaje global. Se mantiene lista y tiempo en cada transición.
+
+## Etapa anterior: U04/U05/U07 comprobados; comunicación U08 abierta
 
 Bloque **2026-11-07 23:08:57–23:38:11 UTC**, desde `4eb15e8`:
 **29 min 14 s hasta la verificación final**, sin documentación/checkpoint posteriores.
@@ -1442,7 +1466,7 @@ transición persistentes después de compactar.
 Bloque **08:45:38–08:54:33 UTC**, **8 min 55 s**, hasta el corte de validación.
 El inventario actual tiene83 candidatos/287 archivos y83 decisiones vigentes:
 69 revalidadas tras leer texto/consumidores y14 con dependencias iguales. Se
-conservaron instrucciones y catálogo3. El evaluador de tamaños etiquetaba2 por
+conservaron instrucciones y catálogo 3. El evaluador de tamaños etiquetaba2 por
 error; ahora toma la versión real. Se verificaron los siete hashes/tamaños.
 
 Pasan45 casos distintos. La primera ejecución tuvo41 aprobados/4 omitidos por
@@ -1543,7 +1567,7 @@ Siguen43 escenarios amplios abiertos y0/12 páginas completamente aceptadas.
 
 ## Etapa anterior: preguntas y continuidad comprobadas; calidad integral pendiente
 
-El catálogo3 exige registrar preguntas materiales mediante la herramienta. Las
+El catálogo 3 exige registrar preguntas materiales mediante la herramienta. Las
 admisiones directas sin hilo reciben pedidos anteriores de la misma tarea con
 texto/hash y procedencia histórica sin autorización vigente. Tareas y Conversación
 ya usaban hilo: conservan el alcance elegido y el reinicio explícito sin historial.

@@ -1,7 +1,7 @@
 # Datos históricos: aceptación pendiente
 
-Preparado al cerrar el bloque de interacción. **La implementación de este bloque
-no empezó**; registrar hora real al comenzar y publicar la lista actualizada.
+Inicio real: **2026-11-07 23:43:19 UTC**, base `7da6ff3`.
+Inspección de fuentes históricas y aceptación, manteniendo lista y tiempos.
 
 El plan principal exige conservar datos reales, procedencia y recuperación.
 Exportar105 registros de un ensayo Chroma o migrar una base sintética no equivale
@@ -26,3 +26,10 @@ a aceptar la migración del historial del usuario.
 Después: evaluaciones —incluida comunicación U08, que recibió una evaluación
 humana negativa—, aceptación de12 páginas, dependencias/distribución. Al final:
 detalles aplazados, C10/DD116, DD120, suite global y revisión independiente.
+
+
+Resultado: el usuario confirmó literalmente «no, no hay» al preguntar por
+historial que conservar. No se requiere migración de datos del propietario.
+Inventario acotado verificado en 109 segundos; la base auxiliar CrewAI tiene
+16 estados, procedencia desconocida y hash conservado. No se adopta como historial
+ni se migra. Las pruebas sintéticas previas conservan su alcance y límites.
