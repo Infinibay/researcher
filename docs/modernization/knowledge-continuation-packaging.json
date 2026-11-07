@@ -1,0 +1,52 @@
+{
+  "validation_environment": {
+    "runner_cgroup": "/sys/fs/cgroup/user.slice/user-1000.slice/user@1000.service/app.slice/researcher-knowledge-continuation-20261107-2303.scope",
+    "parent_controllers_before": "cpu memory pids",
+    "runner_cpu_max": "800000 100000",
+    "purpose": "Transient systemd scope with CPUQuota=800% retains CPU-controller availability during validation; it does not relax any product limit.",
+    "parent_controllers_after": "cpu memory pids"
+  },
+  "base_commit": "f6f0630",
+  "wheel": "researcher-0.1.0-cp312-cp312-linux_x86_64.whl",
+  "wheel_sha256": "94360ca64424411c5151477d744a7f83dff710dbbd6894d785f7acf2ffc6fecf",
+  "source_files_matching_wheel_and_installation": 675,
+  "product_files_matching": 360,
+  "observed": {
+    "cases": 15,
+    "passed": 15,
+    "failed": 0,
+    "skipped": 0,
+    "backend_modules": 217,
+    "all_backend_imports_from_native_env": true,
+    "seconds": 7.713,
+    "exit_code": 0
+  },
+  "tests": [
+    "backend/tests/runtime/test_auxiliary_continuation.py::test_closed_failure_has_one_explicit_successor_and_original_receipt",
+    "backend/tests/runtime/test_auxiliary_continuation.py::test_live_owner_and_unfinished_callback_cannot_be_repeated",
+    "backend/tests/runtime/test_auxiliary_continuation.py::test_real_owner_death_allows_new_calculation_without_erasing_pending_hold",
+    "backend/tests/runtime/test_auxiliary_continuation.py::test_permission_does_not_override_budget_or_allow_two_successors",
+    "backend/tests/runtime/test_auxiliary_continuation.py::test_missing_identity_never_claims_closure",
+    "backend/tests/runtime/test_auxiliary_continuation.py::test_changed_observer_and_permission_failure_are_unknown",
+    "backend/tests/runtime/test_auxiliary_continuation.py::test_new_permission_still_requires_current_native_grant",
+    "backend/tests/runtime/test_auxiliary_continuation.py::test_owner_api_recovers_exact_receipt_and_excludes_tool_bearer",
+    "backend/tests/runtime/test_auxiliary_continuation.py::test_actual_worker_is_bound_before_input_and_explicit_successor_reuses_new_result",
+    "backend/tests/runtime/test_auxiliary_continuation.py::test_dead_owner_with_live_worker_is_blocked_until_exact_worker_ends",
+    "backend/tests/runtime/test_auxiliary_continuation.py::test_crash_during_unbound_creation_remains_explicitly_uncertain",
+    "backend/tests/runtime/test_auxiliary_continuation.py::test_pagination_and_second_generation_keep_every_original",
+    "backend/tests/runtime/test_auxiliary_continuation.py::test_closed_worker_with_receipt_still_being_saved_cannot_be_repeated",
+    "backend/tests/runtime/test_auxiliary_continuation.py::test_forward_upgrade_preserves_unknown_legacy_work_without_inventing_process_identity",
+    "backend/tests/runtime/test_auxiliary_continuation.py::test_competing_requests_consume_the_same_permission_only_once"
+  ],
+  "real_model_turns": 0,
+  "deferred_global_checks": [
+    "DD120: test_auxiliary_budget.py::test_unused_auxiliary_inverse_preserves_old_schema_and_refuses_work failed before the recovery exercise because fixture68 invokes inverse65",
+    "DD120: test_auxiliary_continuation.py::test_unused_inverse_and_used_history_guard uses the same outdated prefix construction; not executed in this continuation selection"
+  ],
+  "limits": [
+    "Selected tests, not the global suite",
+    "Synthetic managed installation data, no historical user-data migration",
+    "U01-U03: actual source/receipt transactions, versioned captures and exact quotations, claim status/provenance in lexical and semantic reads, complete corpus/model fingerprints, stale/partial failure, real offline encoders and current Ken lifecycle with controlled MCP protocol. Published Ken live evidence separate; no generative calls, external accounts, human/full-page/global acceptance.",
+    "No model calls, external accounts or GitHub workflow execution"
+  ]
+}

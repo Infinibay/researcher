@@ -1,0 +1,113 @@
+{
+  "base_commit": "f6f0630",
+  "changed_or_new_definitions_documented": 15,
+  "missing": [],
+  "contracts": [
+    {
+      "path": "backend/knowledge/findings.py",
+      "symbol": "finding_corpus",
+      "line": 390,
+      "docstring": "Freeze complete selected titles/bodies and bounded claim attribution in one snapshot, without creating a source or validating a claim.",
+      "file_sha256": "7af6d8e2bf6a268666dbc75728ff9fa67493757a6537ebad8ee927b85474f221"
+    },
+    {
+      "path": "backend/knowledge/findings.py",
+      "symbol": "finding_matches",
+      "line": 485,
+      "docstring": "Return exact ranked text with its observed claim state and provenance; stored confidence and review presence never imply scientific validity or current review.",
+      "file_sha256": "7af6d8e2bf6a268666dbc75728ff9fa67493757a6537ebad8ee927b85474f221"
+    },
+    {
+      "path": "backend/tests/research/test_finding_semantic.py",
+      "symbol": "test_semantic_matches_preserve_claim_status_and_attributed_provenance",
+      "line": 16,
+      "docstring": "Owner and agent similarity results carry the observed claim's status, kind and attribution without promoting declared confidence into validation.",
+      "file_sha256": "e24aa07f15660fdea4f5f62b9e7e71827eb1c89c664045892ffd3c9913ffd2e1"
+    },
+    {
+      "path": "backend/tests/research/test_finding_semantic.py",
+      "symbol": "test_semantic_matches_preserve_claim_status_and_attributed_provenance.ExactChunkRetriever",
+      "line": 22,
+      "docstring": "Supply a controlled exact text window so the test measures API provenance rather than encoder quality.",
+      "file_sha256": "e24aa07f15660fdea4f5f62b9e7e71827eb1c89c664045892ffd3c9913ffd2e1"
+    },
+    {
+      "path": "backend/tests/research/test_finding_semantic.py",
+      "symbol": "test_semantic_matches_preserve_claim_status_and_attributed_provenance.ExactChunkRetriever.query",
+      "line": 25,
+      "docstring": "Return one complete corpus chunk while leaving all finding metadata to the production projection.",
+      "file_sha256": "e24aa07f15660fdea4f5f62b9e7e71827eb1c89c664045892ffd3c9913ffd2e1"
+    },
+    {
+      "path": "backend/tests/research/test_finding_semantic.py",
+      "symbol": "test_native_finding_query_revalidates_authority_and_exact_corpus_after_worker",
+      "line": 84,
+      "docstring": "Late text, status, matching rows or authority changes cannot disclose a stale semantic receipt or its previous attribution.",
+      "file_sha256": "e24aa07f15660fdea4f5f62b9e7e71827eb1c89c664045892ffd3c9913ffd2e1"
+    },
+    {
+      "path": "backend/tests/research/test_finding_semantic.py",
+      "symbol": "test_native_finding_query_revalidates_authority_and_exact_corpus_after_worker.ChangingRetriever",
+      "line": 92,
+      "docstring": "Model only the intervening commit/withdrawal, not the actual semantic ranking quality.",
+      "file_sha256": "e24aa07f15660fdea4f5f62b9e7e71827eb1c89c664045892ffd3c9913ffd2e1"
+    },
+    {
+      "path": "backend/tests/research/test_finding_semantic.py",
+      "symbol": "test_native_finding_query_revalidates_authority_and_exact_corpus_after_worker.ChangingRetriever.query",
+      "line": 95,
+      "docstring": "Change one observed precondition after admission but before the route discloses results.",
+      "file_sha256": "e24aa07f15660fdea4f5f62b9e7e71827eb1c89c664045892ffd3c9913ffd2e1"
+    },
+    {
+      "path": "backend/tests/research/test_knowledge_acceptance.py",
+      "symbol": "test_failed_capture_cannot_claim_saved_evidence_and_original_retry_can_succeed",
+      "line": 11,
+      "docstring": "A real receipt-transaction failure returns HTTP failure with no source; retrying the same intent after recovery commits exactly one source and receipt.",
+      "file_sha256": "0a839292fa7ade262b8dc1bc2413f9f4ed59433c535f1c5f5fbf62e01da5018b"
+    },
+    {
+      "path": "backend/tests/research/test_knowledge_acceptance.py",
+      "symbol": "test_changed_web_page_keeps_old_quote_and_superseded_claim_attributed_to_its_capture",
+      "line": 36,
+      "docstring": "Two versions of one URL retain distinct hashes and exact original quotes; an owner sees the older superseded claim as captured history, not current web evidence.",
+      "file_sha256": "0a839292fa7ade262b8dc1bc2413f9f4ed59433c535f1c5f5fbf62e01da5018b"
+    },
+    {
+      "path": "backend/tests/research/test_knowledge_acceptance.py",
+      "symbol": "test_changed_web_page_keeps_old_quote_and_superseded_claim_attributed_to_its_capture.fetch",
+      "line": 42,
+      "docstring": "Change only the external document bytes while production HTTP authorization and SQLite persistence stay real.",
+      "file_sha256": "0a839292fa7ade262b8dc1bc2413f9f4ed59433c535f1c5f5fbf62e01da5018b"
+    },
+    {
+      "path": "evals/security/run_ken_isolation.py",
+      "symbol": "prepare_index",
+      "line": 16,
+      "docstring": "Prepare retrieval through its original broker, with distinct operation/output identities when validating multiple source revisions.",
+      "file_sha256": "49eaa6213b17e06561351c3f4394d0e204c9c3fcd347a6c8f2337697e4360a6c"
+    },
+    {
+      "path": "evals/security/run_ken_isolation.py",
+      "symbol": "visit",
+      "line": 40,
+      "docstring": "Use the MCP SDK on the original broker pipes with an explicit operation identity, without a secondary launcher.",
+      "file_sha256": "49eaa6213b17e06561351c3f4394d0e204c9c3fcd347a6c8f2337697e4360a6c"
+    },
+    {
+      "path": "evals/security/run_ken_revisions.py",
+      "symbol": "main",
+      "line": 22,
+      "docstring": "Keep one real index directory across two source revisions, prove current semantic/read results and retain original physical closure.",
+      "file_sha256": "d38ec6b97d685f81e65a7bd337e2b788f851d0d8a3c1b9ce297994c322cd3d28"
+    },
+    {
+      "path": "evals/security/run_ken_revisions.py",
+      "symbol": "main.query",
+      "line": 60,
+      "docstring": "Require current source and semantic owners, never interpret a missing match as proof of absence.",
+      "file_sha256": "d38ec6b97d685f81e65a7bd337e2b788f851d0d8a3c1b9ce297994c322cd3d28"
+    }
+  ],
+  "scope": "New/changed Python definitions and modules in this delivery. No frontend changes in this delivery; no claim that all historic project definitions are documented."
+}

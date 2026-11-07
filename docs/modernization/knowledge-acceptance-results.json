@@ -1,0 +1,78 @@
+{
+  "base_commit": "f6f0630",
+  "status": "scenario_contracts_verified_with_global_fixture_failure_retained",
+  "started_at": "2026-11-07T22:47:36Z",
+  "verified_at": "2026-11-07T23:04:16Z",
+  "elapsed_until_verification_seconds": 1000,
+  "completed_scenarios": [
+    "U01",
+    "U02",
+    "U03"
+  ],
+  "red": {
+    "failed": 4,
+    "reason": "Semantic matches omitted observed finding attribution."
+  },
+  "focused": {
+    "attribution_and_concurrent_invalidation_passed": 9,
+    "source_capture_acceptance_passed": 2
+  },
+  "initial_installed": {
+    "cases": 211,
+    "passed": 210,
+    "failed": 1,
+    "skipped": 0,
+    "backend_modules": 276,
+    "all_backend_imports_from_native_env": true,
+    "seconds": 141.539,
+    "exit_code": 1
+  },
+  "continuation_installed": {
+    "cases": 15,
+    "passed": 15,
+    "failed": 0,
+    "skipped": 0,
+    "backend_modules": 217,
+    "all_backend_imports_from_native_env": true,
+    "seconds": 7.713,
+    "exit_code": 0
+  },
+  "disjoint_installed_union": {
+    "passed": 225,
+    "failed": 1,
+    "skipped": 0,
+    "identities_disjoint": true,
+    "known_failure": "DD120: old inverse fixture starts at current schema68; no global-green claim"
+  },
+  "deferred_global_checks": [
+    "DD120: test_auxiliary_budget.py::test_unused_auxiliary_inverse_preserves_old_schema_and_refuses_work failed before the recovery exercise because fixture68 invokes inverse65",
+    "DD120: test_auxiliary_continuation.py::test_unused_inverse_and_used_history_guard uses the same outdated prefix construction; not executed in this continuation selection"
+  ],
+  "wheel_sha256": "94360ca64424411c5151477d744a7f83dff710dbbd6894d785f7acf2ffc6fecf",
+  "source_files_matching_wheel_and_installation": 675,
+  "changed_product_files": [
+    "backend/knowledge/findings.py"
+  ],
+  "changed_test_files": [
+    "backend/tests/research/test_finding_semantic.py",
+    "backend/tests/research/test_knowledge_acceptance.py"
+  ],
+  "documented_definitions": 15,
+  "published_ken": {
+    "receipt": "docs/modernization/knowledge-ken-revisions.json",
+    "version": "0.18.0",
+    "revisions": 2,
+    "real_mcp_calls": 4,
+    "same_index_directory": true,
+    "original_domain_removed": true,
+    "all_peers_closed": true
+  },
+  "real_generative_model_turns": 0,
+  "frontend_changed": false,
+  "prompts_changed": false,
+  "limits": [
+    "Current scenario contracts, not complete global suite: one executed historical-fixture failure and one related unexecuted inverse case remain DD120.",
+    "Controlled web acquisition and race injection; actual SQLite/HTTP/encoders/kernel/published Ken in their stated cases.",
+    "No new browser, human comprehension, historical-data migration, full-page or scientific-validation acceptance."
+  ]
+}

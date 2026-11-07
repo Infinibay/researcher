@@ -1,0 +1,48 @@
+{
+  "status": "passed",
+  "ken_version": "0.18.0",
+  "model_turns_submitted": 0,
+  "backend_module": "/home/andres/.codex/worktrees/b09e/researcher/.superpowers/sdd/2026-10-31-actualizacion-proyecto/native-runtime-env/lib/python3.12/site-packages/backend/__init__.py",
+  "revisions": [
+    {
+      "revision": 1,
+      "source_sha256": "923f7dfca9f821a903582795c40198efecff0de5bca277110f8da6d9865963dd",
+      "index_directory_identity": [
+        53,
+        9013614
+      ],
+      "preparation": {
+        "indexed_files": 1,
+        "owners": 2,
+        "profile_version": "de062954041c79074114971ac3a0d9e8e92900da0df1c31fa7d45569e61ca1b1"
+      },
+      "read_sha256": "d9e0c57d208ae34bdf77f9881a239f723bae57557e3ce29cb9a150a3c6ef0c17",
+      "semantic_sha256": "c14320dbef22f624fd4ab2e55b10767d96e36827a8ff70b1f47bae080a4e4273"
+    },
+    {
+      "revision": 2,
+      "source_sha256": "a30732f09f3325d1ef3ab6ff5f5ea0498ffe7c918306a8f480e84e12e94587df",
+      "index_directory_identity": [
+        53,
+        9013614
+      ],
+      "preparation": {
+        "indexed_files": 1,
+        "owners": 2,
+        "profile_version": "de062954041c79074114971ac3a0d9e8e92900da0df1c31fa7d45569e61ca1b1"
+      },
+      "read_sha256": "aa0b4e97eb815f0f236d2b1484129f9ac1eefbf0faea33985d17e668c949b281",
+      "semantic_sha256": "8303164767fa25ac03d47c02c760ac15fae72eeb25b193db4d7954e1d733760e"
+    }
+  ],
+  "scope": "One synthetic Python module, retained index, sequential closed preparation/MCP peers; no general index completeness or concurrent-foreign-writer claim.",
+  "lifecycle": {
+    "domain_removed": true,
+    "all_peers_closed": true,
+    "model_turns": 0,
+    "run_status": "failed"
+  },
+  "harness_sha256": "d38ec6b97d685f81e65a7bd337e2b788f851d0d8a3c1b9ce297994c322cd3d28",
+  "shared_harness_sha256": "49eaa6213b17e06561351c3f4394d0e204c9c3fcd347a6c8f2337697e4360a6c",
+  "source_receipt": ".researcher/evaluations/ken-revisions-e0c41b8a/result.json"
+}

@@ -2087,15 +2087,36 @@
       ]
     },
     "U01": {
-      "status": "in_progress",
+      "status": "complete",
       "evidence": [
         "docs/architecture/capability-matrix.md",
         "docs/architecture/inference-inventory.md",
-        "docs/modernization/research-runtime-evidence.json"
+        "docs/modernization/research-runtime-evidence.json",
+        "docs/modernization/knowledge-acceptance-review.md",
+        "docs/modernization/knowledge-acceptance-results.json",
+        "docs/modernization/knowledge-acceptance-initial-packaging.json",
+        "docs/modernization/knowledge-continuation-packaging.json",
+        "docs/modernization/knowledge-acceptance-artifact-comparison.json",
+        "docs/modernization/knowledge-acceptance-docstrings.json",
+        "docs/modernization/knowledge-ken-revisions.json",
+        "backend/tests/research/test_knowledge_acceptance.py",
+        "backend/tests/research/test_persistence.py",
+        "backend/tests/research/test_http.py"
+      ],
+      "remaining": [],
+      "verified_at": "2026-11-07",
+      "completion_scope": "Captured source and original receipt commit atomically under authenticated project scope; failed persistence cannot announce saved evidence, and exact original retries preserve one effect.",
+      "limitations": [
+        "Controlled web acquisition and concurrency injection; real storage/HTTP/offline encoder/kernel/published Ken where explicitly exercised.",
+        "Installed knowledge contracts pass;225 passed and1 historical fixture failed across disjoint selections. DD120 remains for full global migration acceptance, with another related inverse test not run in this selection.",
+        "No scientific validity, universal index completeness, real historical-data migration, human comprehension, new browser or full-page acceptance claim."
+      ],
+      "implemented": [
+        "Semantic matches now retain observed finding state/type/attribution and unknown scientific confidence; four failing API cases turned green, and status changes during ranking reject stale output. Real source transaction/revision acceptance and published Ken two-revision retained-index probe pass;675 matching installed sources,15 documented definitions,0 generative turns. Known unrelated historical-fixture failure retained asDD120."
       ]
     },
     "U02": {
-      "status": "in_progress",
+      "status": "complete",
       "evidence": [
         "backend/tests/research",
         "docs/architecture/research-slice.md",
@@ -2112,14 +2133,34 @@
         "docs/architecture/legacy-catalog-removal.md",
         "docs/modernization/catalog-removal-results.json",
         "docs/modernization/catalog-removal-packaging.json",
-        "backend/tests/runtime/test_legacy_catalog_removal.py"
+        "backend/tests/runtime/test_legacy_catalog_removal.py",
+        "docs/modernization/knowledge-acceptance-review.md",
+        "docs/modernization/knowledge-acceptance-results.json",
+        "docs/modernization/knowledge-acceptance-initial-packaging.json",
+        "docs/modernization/knowledge-continuation-packaging.json",
+        "docs/modernization/knowledge-acceptance-artifact-comparison.json",
+        "docs/modernization/knowledge-acceptance-docstrings.json",
+        "docs/modernization/knowledge-ken-revisions.json",
+        "backend/knowledge/findings.py",
+        "backend/tests/research/test_finding_semantic.py",
+        "backend/tests/research/test_finding_registry.py",
+        "backend/tests/runtime/test_finding_review.py",
+        "backend/tests/research/test_knowledge_acceptance.py"
       ],
-      "remaining": [
-        "Complete scenario acceptance across durable product runtime, legacy consumers, data recovery and UI where applicable"
+      "remaining": [],
+      "verified_at": "2026-11-07",
+      "completion_scope": "Current and captured source versions remain distinct; exact citations, claim type/status/attribution, declared confidence and review currentness survive lexical/semantic retrieval and bounded readers without scientific promotion.",
+      "limitations": [
+        "Controlled web acquisition and concurrency injection; real storage/HTTP/offline encoder/kernel/published Ken where explicitly exercised.",
+        "Installed knowledge contracts pass;225 passed and1 historical fixture failed across disjoint selections. DD120 remains for full global migration acceptance, with another related inverse test not run in this selection.",
+        "No scientific validity, universal index completeness, real historical-data migration, human comprehension, new browser or full-page acceptance claim."
+      ],
+      "implemented": [
+        "Semantic matches now retain observed finding state/type/attribution and unknown scientific confidence; four failing API cases turned green, and status changes during ranking reject stale output. Real source transaction/revision acceptance and published Ken two-revision retained-index probe pass;675 matching installed sources,15 documented definitions,0 generative turns. Known unrelated historical-fixture failure retained asDD120."
       ]
     },
     "U03": {
-      "status": "in_progress",
+      "status": "complete",
       "evidence": [
         "docs/architecture/capability-matrix.md",
         "docs/architecture/inference-inventory.md",
@@ -2138,7 +2179,31 @@
         "docs/architecture/legacy-catalog-removal.md",
         "docs/modernization/catalog-removal-results.json",
         "docs/modernization/catalog-removal-packaging.json",
-        "backend/tests/runtime/test_legacy_catalog_removal.py"
+        "backend/tests/runtime/test_legacy_catalog_removal.py",
+        "docs/modernization/knowledge-acceptance-review.md",
+        "docs/modernization/knowledge-acceptance-results.json",
+        "docs/modernization/knowledge-acceptance-initial-packaging.json",
+        "docs/modernization/knowledge-continuation-packaging.json",
+        "docs/modernization/knowledge-acceptance-artifact-comparison.json",
+        "docs/modernization/knowledge-acceptance-docstrings.json",
+        "docs/modernization/knowledge-ken-revisions.json",
+        "backend/tests/research/test_semantic_retrieval.py",
+        "backend/tests/research/test_retrieval_assets.py",
+        "backend/tests/research/test_finding_semantic.py",
+        "backend/tests/research/test_knowledge_access.py",
+        "backend/tests/runtime/test_development_session.py",
+        "evals/security/run_ken_revisions.py"
+      ],
+      "remaining": [],
+      "verified_at": "2026-11-07",
+      "completion_scope": "Pinned offline encoder identity/dimension/asset hashes, complete bounded corpus and metadata fingerprints, explicit unavailable/partial coverage, revision-bound continuation and owned Ken preparation/refreshed code queries without project leakage or concurrent-writer adoption.",
+      "limitations": [
+        "Controlled web acquisition and concurrency injection; real storage/HTTP/offline encoder/kernel/published Ken where explicitly exercised.",
+        "Installed knowledge contracts pass;225 passed and1 historical fixture failed across disjoint selections. DD120 remains for full global migration acceptance, with another related inverse test not run in this selection.",
+        "No scientific validity, universal index completeness, real historical-data migration, human comprehension, new browser or full-page acceptance claim."
+      ],
+      "implemented": [
+        "Semantic matches now retain observed finding state/type/attribution and unknown scientific confidence; four failing API cases turned green, and status changes during ranking reject stale output. Real source transaction/revision acceptance and published Ken two-revision retained-index probe pass;675 matching installed sources,15 documented definitions,0 generative turns. Known unrelated historical-fixture failure retained asDD120."
       ]
     },
     "U04": {
@@ -2435,7 +2500,14 @@
         "docs/architecture/native-code-operations.md",
         "docs/modernization/code-operations-results.json",
         "docs/modernization/code-operations-packaging.json",
-        "backend/tests/runtime/test_native_code_operations.py"
+        "backend/tests/runtime/test_native_code_operations.py",
+        "docs/modernization/knowledge-acceptance-review.md",
+        "docs/modernization/knowledge-acceptance-results.json",
+        "docs/modernization/knowledge-acceptance-initial-packaging.json",
+        "docs/modernization/knowledge-continuation-packaging.json",
+        "docs/modernization/knowledge-acceptance-artifact-comparison.json",
+        "docs/modernization/knowledge-acceptance-docstrings.json",
+        "docs/modernization/knowledge-ken-revisions.json"
       ],
       "remaining": [
         "Full comparative/product scenarios and failure acceptance"
@@ -3749,7 +3821,14 @@
         "docs/modernization/native-adapters-retirement.json",
         "docs/modernization/native-adapters-results.json",
         "docs/modernization/native-adapters-packaging.json",
-        "backend/tests/runtime/test_native_adapter_retirement.py"
+        "backend/tests/runtime/test_native_adapter_retirement.py",
+        "docs/modernization/knowledge-acceptance-review.md",
+        "docs/modernization/knowledge-acceptance-results.json",
+        "docs/modernization/knowledge-acceptance-initial-packaging.json",
+        "docs/modernization/knowledge-continuation-packaging.json",
+        "docs/modernization/knowledge-acceptance-artifact-comparison.json",
+        "docs/modernization/knowledge-acceptance-docstrings.json",
+        "docs/modernization/knowledge-ken-revisions.json"
       ],
       "remaining": [
         "Migrate retained legacy shell/flow consumers and full code-interpreter capabilities.",
@@ -4262,7 +4341,14 @@
         "docs/modernization/operation-acceptance-packaging.json",
         "docs/modernization/operation-acceptance-artifact-comparison.json",
         "docs/modernization/operation-acceptance-source-comparison.json",
-        "docs/modernization/operation-acceptance-docstrings.json"
+        "docs/modernization/operation-acceptance-docstrings.json",
+        "docs/modernization/knowledge-acceptance-review.md",
+        "docs/modernization/knowledge-acceptance-results.json",
+        "docs/modernization/knowledge-acceptance-initial-packaging.json",
+        "docs/modernization/knowledge-continuation-packaging.json",
+        "docs/modernization/knowledge-acceptance-artifact-comparison.json",
+        "docs/modernization/knowledge-acceptance-docstrings.json",
+        "docs/modernization/knowledge-ken-revisions.json"
       ],
       "remaining": [
         "Audit modules/classes/methods and relevant functions added earlier in this branch; add meaningful searchable docstrings/JSDoc where missing or stale.",
@@ -4296,7 +4382,14 @@
         "docs/architecture/native-autonomy-retirement.md",
         "docs/architecture/native-legacy-dependencies.md",
         "docs/modernization/coverage-reconciliation.md",
-        "docs/modernization/coverage-reconciliation-results.json"
+        "docs/modernization/coverage-reconciliation-results.json",
+        "docs/modernization/knowledge-acceptance-review.md",
+        "docs/modernization/knowledge-acceptance-results.json",
+        "docs/modernization/knowledge-acceptance-initial-packaging.json",
+        "docs/modernization/knowledge-continuation-packaging.json",
+        "docs/modernization/knowledge-acceptance-artifact-comparison.json",
+        "docs/modernization/knowledge-acceptance-docstrings.json",
+        "docs/modernization/knowledge-ken-revisions.json"
       ],
       "remaining": [
         "Representative complex-document retrieval and human comprehension evaluation; normalized body scope is not full document review."
@@ -4353,7 +4446,14 @@
         "docs/architecture/native-autonomy-retirement.md",
         "docs/architecture/native-legacy-dependencies.md",
         "docs/modernization/coverage-reconciliation.md",
-        "docs/modernization/coverage-reconciliation-results.json"
+        "docs/modernization/coverage-reconciliation-results.json",
+        "docs/modernization/knowledge-acceptance-review.md",
+        "docs/modernization/knowledge-acceptance-results.json",
+        "docs/modernization/knowledge-acceptance-initial-packaging.json",
+        "docs/modernization/knowledge-continuation-packaging.json",
+        "docs/modernization/knowledge-acceptance-artifact-comparison.json",
+        "docs/modernization/knowledge-acceptance-docstrings.json",
+        "docs/modernization/knowledge-ken-revisions.json"
       ],
       "remaining": [
         "Complete dependent-knowledge invalidation and retained lifecycle acceptance. Independently admitted version-bound review already exists; it does not establish scientific validity.",
@@ -4417,7 +4517,14 @@
         "docs/architecture/native-autonomy-retirement.md",
         "docs/architecture/native-legacy-dependencies.md",
         "docs/modernization/coverage-reconciliation.md",
-        "docs/modernization/coverage-reconciliation-results.json"
+        "docs/modernization/coverage-reconciliation-results.json",
+        "docs/modernization/knowledge-acceptance-review.md",
+        "docs/modernization/knowledge-acceptance-results.json",
+        "docs/modernization/knowledge-acceptance-initial-packaging.json",
+        "docs/modernization/knowledge-continuation-packaging.json",
+        "docs/modernization/knowledge-acceptance-artifact-comparison.json",
+        "docs/modernization/knowledge-acceptance-docstrings.json",
+        "docs/modernization/knowledge-ken-revisions.json"
       ],
       "implemented": [
         "Canonical retained finding metadata/body/summary/semantic and feedback reads",

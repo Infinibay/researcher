@@ -13,22 +13,22 @@ REPO = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(REPO))
 
 
-async def prepare_index(trial, installation, model_cache):
-    """Prepare local retrieval through an owned broker endpoint and retain its original close proof."""
+async def prepare_index(trial, installation, model_cache, *, operation_key='prepare', output_prefix='prepare'):
+    """Prepare retrieval through its original broker, with distinct operation/output identities when validating multiple source revisions."""
     peer = await asyncio.to_thread(trial.peers.registry.prepare, trial.lease, 'ken')
-    endpoint = trial.owner.ken(trial.peers.registry, peer, operation_key='prepare',
+    endpoint = trial.owner.ken(trial.peers.registry, peer, operation_key=operation_key,
                                installation=installation, model_cache=model_cache, mode='prepare')
     async with asyncio.timeout(90):
         try:
             await endpoint.open(limit=65536)
             stdout, stderr = await asyncio.gather(endpoint.stdout.read(), endpoint.stderr.read())
-            (trial.root / 'prepare.stdout').write_bytes(stdout)
-            (trial.root / 'prepare.stderr').write_bytes(stderr)
+            (trial.root / (output_prefix + '.stdout')).write_bytes(stdout)
+            (trial.root / (output_prefix + '.stderr')).write_bytes(stderr)
             native_exit = await asyncio.to_thread(endpoint._raw.wait, timeout=3)
             receipt = {'exit_code': native_exit,
                        'memory_peak_bytes': int((trial.domain_path / 'memory.peak').read_text()),
                        'memory_events': (trial.domain_path / 'memory.events').read_text()}
-            (trial.root / 'prepare-receipt.json').write_text(json.dumps(receipt, indent=2) + '\n')
+            (trial.root / (output_prefix + '-receipt.json')).write_text(json.dumps(receipt, indent=2) + '\n')
             assert native_exit == 0, 'Ken preparation failed; inspect private receipt/log'
         finally:
             closed = await endpoint.aclose(timeout=5)
@@ -37,12 +37,12 @@ async def prepare_index(trial, installation, model_cache):
     return closed
 
 
-async def visit(trial, installation, model_cache, operation):
-    """Use the MCP SDK on the original broker pipes, without a secondary process launcher."""
+async def visit(trial, installation, model_cache, operation, *, operation_key='mcp'):
+    """Use the MCP SDK on the original broker pipes with an explicit operation identity, without a secondary launcher."""
     from backend.runtime.broker_mcp import broker_mcp
 
     peer = await asyncio.to_thread(trial.peers.registry.prepare, trial.lease, 'ken')
-    endpoint = trial.owner.ken(trial.peers.registry, peer, operation_key='mcp',
+    endpoint = trial.owner.ken(trial.peers.registry, peer, operation_key=operation_key,
                                installation=installation, model_cache=model_cache)
     async with broker_mcp(endpoint, request_timeout=30) as session:
         await operation(session)

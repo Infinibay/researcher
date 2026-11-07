@@ -11,6 +11,42 @@ from backend.tests.research.test_http import credentials, research_client
 __all__ = ["research_client"]
 
 
+@pytest.mark.parametrize('audience', ['owner', 'agent'])
+@pytest.mark.parametrize('status', ['provisional', 'superseded'])
+def test_semantic_matches_preserve_claim_status_and_attributed_provenance(
+    research_client, research_store, db_conn, audience, status,
+):
+    """Owner and agent similarity results carry the observed claim's status, kind and attribution without promoting declared confidence into validation."""
+    identity = legacy_finding(db_conn, status=status, finding_type='hypothesis', confidence=0.8)
+
+    class ExactChunkRetriever:
+        """Supply a controlled exact text window so the test measures API provenance rather than encoder quality."""
+
+        def query(self, corpus, query, **options):
+            """Return one complete corpus chunk while leaving all finding metadata to the production projection."""
+            return {'source_id':corpus['id'], 'sha256':corpus['sha256'], 'search_kind':'semantic_cosine',
+                    'full_coverage':True, 'matches':[{'start_offset':0, 'end_offset':len(corpus['content']), 'rank':0, 'score':0.9}]}
+
+    research_client.app.state.retrieval = ExactChunkRetriever()
+    path = '/api/findings-query' if audience == 'owner' else '/api/research-tools/findings-query'
+    params = {'query':'tax policy', **({'project_id':101} if audience == 'owner' else {})}
+    response = research_client.get(path, params=params, headers=credentials(research_store) if audience == 'agent' else {})
+    assert response.status_code == 200, response.text
+    result = response.json()
+    assert result['scientific_confidence'] is None
+    match = result['matches'][0]
+    assert match['finding_id'] == identity
+    finding = match['finding']
+    assert (finding['id'], finding['project_id'], finding['task_id']) == (identity, 101, 1001)
+    assert (finding['status'], finding['finding_type'], finding['agent_id']) == (status, 'hypothesis', 'legacy-author')
+    assert finding['created_at']
+    assert finding['confidence'] == 0.8 and finding['confidence_origin'] == 'stored_declaration'
+    assert finding['scientific_confidence'] is None and finding['review'] is None
+    assert finding['review_status'] == ('unverified_legacy' if status == 'superseded' else 'not_recorded')
+    assert finding['evidence_count'] == 0
+    assert 'content' not in finding and 'full_topic' not in finding
+
+
 def test_finding_semantic_unavailable_stays_explicit_instead_of_falling_back_to_lexical(
     research_client, research_store, db_conn
 ):
@@ -44,11 +80,11 @@ def test_finding_corpus_rejects_excess_size_and_missing_selected_members_without
     assert two not in small["finding_ids"]
 
 
-@pytest.mark.parametrize("change", ["revoke", "edit", "insert", "withdraw"])
+@pytest.mark.parametrize("change", ["revoke", "edit", "insert", "status", "withdraw"])
 def test_native_finding_query_revalidates_authority_and_exact_corpus_after_worker(
     research_client, research_store, db_conn, change
 ):
-    """Late text, matching rows or authority changes cannot disclose a stale semantic receipt."""
+    """Late text, status, matching rows or authority changes cannot disclose a stale semantic receipt or its previous attribution."""
     finding = legacy_finding(db_conn)
     headers = credentials(research_store)
     scope = research_store.authorize(headers["Authorization"].split()[1])
@@ -71,6 +107,8 @@ def test_native_finding_query_revalidates_authority_and_exact_corpus_after_worke
                             "UPDATE findings SET content='Changed evidence' WHERE id=?",
                             (finding,),
                         )
+                    elif change == "status":
+                        conn.execute("UPDATE findings SET status='superseded' WHERE id=?", (finding,))
                     else:
                         conn.execute(
                             "INSERT INTO findings(project_id,task_id,topic,content,agent_id) VALUES(101,1001,'New','New','other')"

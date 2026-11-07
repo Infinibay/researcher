@@ -26,9 +26,44 @@ que se pueda comparar el avance; no presentar microajustes como tareas principal
 - Codex por suscripción y Ken publicado ensayados. Fuentes/citas, informes draft y revisión documental independiente conectados. Desarrollo admitido desde Tareas/Conversación con captura y comprobaciones explícitas; revisión independiente solicitada desde Tareas y aceptación del propietario conectada. Publicación local desde aceptación conectada; recuperación local de sólo lectura conectada; transporte remoto configurable conectado; recuperación remota y controles de Tareas conectados; ejecución/activación antiguas por tarea y proyecto retiradas; auxiliares de generación/proveedor, herramientas antiguas y sus cinco bibliotecas retirados. También se retiraron API interna, CLI, servicios/listeners y flows/helpers antiguos. También se retiraron autonomía, plantillas históricas y lectores de proveedor sin consumidores; se conserva el control de parada de trabajadores registrados.
 - Interfaz: doce pilotos, 36/36 conceptos de escritorio y 12/12 móviles; todas las rutas tienen piloto y 0/12 páginas están completamente aceptadas.
 - Última suite global: `9fb873c`,2210 casos,2178 pasan,31 fallan y1 error de fixture; sin omisiones. La carrera de backup encontrada se corrigió después con40 pruebas instaladas. No se declara una nueva corrida global verde; la referencia `0c8b8d9` queda como evidencia histórica.
-- U06, E01–E12, C01–C09 y D01–D13 quedan comprobados con el alcance de sus matrices; siguen 8 de 43 escenarios amplios sin aceptación completa en [coverage.json](coverage.json). No hay un porcentaje global defendible.
+- U01–U03/U06, E01–E12, C01–C09 y D01–D13 quedan comprobados con el alcance de sus matrices; siguen 5 de 43 escenarios amplios sin aceptación completa en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Estado actual: D13 comprobado; siguiente conocimiento U01–U03
+## Estado actual: conocimiento U01–U03 comprobado; siguiente interacción
+
+Bloque **2026-11-07 22:47:36–23:04:16 UTC**, desde `f6f0630`:
+**16 min 40 s hasta verificar**, sin documentación/checkpoint posteriores.
+
+La búsqueda semántica conserva ahora estado, tipo, autor, fecha y procedencia
+observados en cada coincidencia; no promueve similitud/confianza declarada a
+validación. La captura fallida no anuncia evidencia guardada; dos revisiones de
+una URL conservan hashes y citas originales. Ken publicado0.18.0 verifica dos
+revisiones sobre el mismo índice con cuatro llamadas MCP y cierre real.
+[Matriz y límites](knowledge-acceptance-review.md).
+
+**225 casos instalados correctos y un fallo histórico pendiente**, entre dos
+selecciones disjuntas del mismo artefacto; no es una suite completa verde.
+DD120 conserva el fixture que aplica inversa65 sobre schema68 y otro caso
+relacionado aún no ejecutado. Resolverlos en el cierre global, sin skips ni
+relajar el producto. 675 fuentes coinciden; cambia un módulo de producto y dos
+de pruebas. Quince definiciones documentadas. Cero llamadas generativas.
+
+- Terminado: **U01–U03/U06, E01–E12, C01–C09 y D01–D13: 38/43 escenarios**.
+- En curso al cerrar: documentación y checkpoint local del bloque comprobado.
+- Siguiente principal: **U04/U05/U07/U08, continuidad y comunicación humana**:
+  eventos/proyectos, preguntas/opciones/hilos, CLI/web y explicación/corrección.
+  [Plan preparado](../superpowers/plans/2026-11-07-interaction-acceptance.md);
+  bloque no iniciado. Registrar su comienzo real. U08 conserva el requisito
+  de evaluación humana; un test automático o el juicio del agente no lo sustituyen.
+- Después: datos históricos, evaluaciones restantes, aceptación de las **doce
+  páginas**, dependencias y distribución.
+- Al final: detalles aplazados, C10/DD116, DD120 y cierre global/independiente.
+
+**Cinco escenarios abiertos: C10, U04, U05, U07 y U08; 0/12 páginas completamente
+aceptadas**, con doce pilotos y 48 conceptos. No equivalen a porcentaje global.
+Primero lo grueso y detalles al final; lista y tiempos en cada transición,
+conservados después de compactar el chat.
+
+## Etapa anterior: D13 comprobado; siguiente conocimiento U01–U03
 
 Bloque **2026-11-07 22:37:44–22:45:25 UTC**, desde `018155d`:
 **7 min 41 s hasta verificar**, sin documentación/checkpoint posteriores.

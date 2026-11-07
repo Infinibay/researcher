@@ -1,0 +1,55 @@
+{
+  "validation_environment": {
+    "runner_cgroup": "/sys/fs/cgroup/user.slice/user-1000.slice/user@1000.service/app.slice/researcher-knowledge-acceptance-20261107-2300.scope",
+    "parent_controllers_before": "cpu memory pids",
+    "runner_cpu_max": "800000 100000",
+    "purpose": "Transient systemd scope with CPUQuota=800% retains CPU-controller availability during validation; it does not relax any product limit.",
+    "parent_controllers_after": "cpu memory pids"
+  },
+  "base_commit": "f6f0630",
+  "wheel": "researcher-0.1.0-cp312-cp312-linux_x86_64.whl",
+  "wheel_sha256": "94360ca64424411c5151477d744a7f83dff710dbbd6894d785f7acf2ffc6fecf",
+  "source_files_matching_wheel_and_installation": 675,
+  "product_files_matching": 360,
+  "observed": {
+    "cases": 211,
+    "passed": 210,
+    "failed": 1,
+    "skipped": 0,
+    "backend_modules": 276,
+    "all_backend_imports_from_native_env": true,
+    "seconds": 141.539,
+    "exit_code": 1
+  },
+  "tests": [
+    "backend/tests/research/test_knowledge_acceptance.py",
+    "backend/tests/research/test_persistence.py",
+    "backend/tests/research/test_acquisition.py",
+    "backend/tests/research/test_http.py",
+    "backend/tests/research/test_structured_capture.py",
+    "backend/tests/research/test_source_structure.py",
+    "backend/tests/research/test_semantic_retrieval.py",
+    "backend/tests/research/test_semantic_worker.py",
+    "backend/tests/research/test_retrieval_assets.py",
+    "backend/tests/research/test_finding_semantic.py",
+    "backend/tests/research/test_finding_registry.py",
+    "backend/tests/research/test_finding_consumers.py",
+    "backend/tests/research/test_knowledge_access.py",
+    "backend/tests/runtime/test_finding_review.py",
+    "backend/tests/runtime/test_ken_mediation.py",
+    "backend/tests/runtime/test_broker_ken.py",
+    "backend/tests/runtime/test_broker_inference.py",
+    "backend/tests/runtime/test_development_session.py::test_unchanged_code_and_metadata_do_not_reprepare_ken",
+    "backend/tests/runtime/test_development_session.py::test_active_writer_blocks_query_and_uncertain_cancel_requires_reconciliation",
+    "backend/tests/runtime/test_development_session.py::test_stop_during_reindex_closes_original_owner_without_reopening_ken",
+    "backend/tests/runtime/test_auxiliary_budget.py",
+    "backend/tests/runtime/test_auxiliary_continuation.py"
+  ],
+  "real_model_turns": 0,
+  "limits": [
+    "Selected tests, not the global suite",
+    "Synthetic managed installation data, no historical user-data migration",
+    "U01-U03: actual source/receipt transactions, versioned captures and exact quotations, claim status/provenance in lexical and semantic reads, complete corpus/model fingerprints, stale/partial failure, real offline encoders and current Ken lifecycle with controlled MCP protocol. Published Ken live evidence separate; no generative calls, external accounts, human/full-page/global acceptance.",
+    "No model calls, external accounts or GitHub workflow execution"
+  ]
+}

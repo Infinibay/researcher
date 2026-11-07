@@ -388,7 +388,7 @@ def selected_ids(value):
 
 
 def finding_corpus(conn, project_id, *, finding_ids=None, **selection):
-    """Freeze every matching title/body within explicit row/byte budgets, without creating a source."""
+    """Freeze complete selected titles/bodies and bounded claim attribution in one snapshot, without creating a source or validating a claim."""
     from backend.research.structured_text import Units
 
     where, params = filters(project_id, **selection)
@@ -449,7 +449,13 @@ def finding_corpus(conn, project_id, *, finding_ids=None, **selection):
             "finding", str(row["id"]), row["full_topic"] + "\n\n" + row["content"]
         )
         units.units[-1].update(
-            finding_id=row["id"], topic=row["topic"], record_sha256=snapshot
+            finding_id=row["id"], topic=row["topic"], record_sha256=snapshot,
+            finding={key: item.get(key) for key in (
+                "id", "project_id", "task_id", "agent_id", "created_at", "status",
+                "finding_type", "confidence", "confidence_origin", "confidence_invalid",
+                "scientific_confidence", "review_status", "legacy_review_status", "review",
+                "evidence_count",
+            )},
         )
         snapshots.append(snapshot)
     text, provenance = units.finish("finding_registry", record_snapshots=snapshots)
@@ -477,7 +483,7 @@ def corpus_unchanged(before, after):
 
 
 def finding_matches(corpus, result):
-    """Map ranked corpus chunks to exact title/body slices; cosine is not scientific confidence."""
+    """Return exact ranked text with its observed claim state and provenance; stored confidence and review presence never imply scientific validity or current review."""
     matches = []
     for chunk in result["matches"]:
         for unit in corpus["provenance"]["units"]:
@@ -488,6 +494,7 @@ def finding_matches(corpus, result):
             matches.append(
                 {
                     "finding_id": unit["finding_id"],
+                    "finding": unit["finding"],
                     "topic": unit["topic"],
                     "record_sha256": unit["record_sha256"],
                     "rank": chunk["rank"],

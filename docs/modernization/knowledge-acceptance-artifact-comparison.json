@@ -1,0 +1,12 @@
+{
+  "base_commit": "f6f0630",
+  "prior_wheel_sha256": "c329cc1265cebac3a34577c299c407978ee14938365555f2b1a61ef6e91f415b",
+  "current_wheel_sha256": "94360ca64424411c5151477d744a7f83dff710dbbd6894d785f7acf2ffc6fecf",
+  "source_files_matching_final_wheel": 675,
+  "changed_backend_paths": [
+    "backend/knowledge/findings.py",
+    "backend/tests/research/test_finding_semantic.py",
+    "backend/tests/research/test_knowledge_acceptance.py"
+  ],
+  "scope": "One product module gains attributed semantic-match metadata; two test modules add provenance/transaction acceptance. Database migrations, worker encoder, cached raw worker bytes, prompts and frontend unchanged."
+}

@@ -956,3 +956,27 @@ Evidencia: [primer recibo](isolation-acceptance-initial-packaging.json),
 [segundo recibo](isolation-acceptance-before-cpu-scope-packaging.json) y selección
 final. Esto es una condición de validación, no pulido cosmético ni justificación
 para omitir casos. Las verificaciones físicas siguen siendo seriales.
+
+## DD120 — fixtures históricos de presupuesto auxiliar en el cierre global
+
+La selección instalada U01–U03 pasó **210 casos** y falló en
+`test_auxiliary_budget.py::test_unused_auxiliary_inverse_preserves_old_schema_and_refuses_work`.
+El fixture `coordination` crea schema68 y el caso empieza aplicando la inversa65;
+el producto rechaza correctamente un esquema posterior antes de probar el
+contrato histórico. [Recibo conservado](knowledge-acceptance-initial-packaging.json).
+
+La lectura de `test_auxiliary_continuation.py::test_unused_inverse_and_used_history_guard`
+encontró la misma construcción: también empieza por inversa65 sobre el fixture
+actual. Este segundo caso **no se ejecutó** en la selección de continuación;
+la observación de código no se presenta como un fallo de ejecución comprobado.
+
+Resolver ambos con prefijos reales y casos actuales separados, preservando
+también el rechazo cuando ya existe trabajo/historia. No retirar las guardas del
+producto, borrar registros de migración ni convertir estos casos en skips.
+La validación global no puede declararse verde hasta resolverlos y ejecutarlos.
+
+El cambio de U01–U03 añade procedencia a la proyección de coincidencias y no
+modifica esquema, inversas ni almacenamiento del presupuesto. Por la prioridad
+del usuario —capacidades grandes antes de detalles— se conserva este trabajo
+fuera de ese bloque, junto con su fallo explícito. Los contratos de continuación,
+presupuesto, recibos y autoridad restantes sí se verifican sobre el mismo artefacto.
