@@ -1,0 +1,51 @@
+{
+  "base_commit": "cde632a",
+  "wheel": "researcher-0.1.0-cp312-cp312-linux_x86_64.whl",
+  "wheel_sha256": "b4b41aea3bfde14ea75242888243f389e83dc28f0eb95b53884c6a27ecc52c2a",
+  "source_files_matching_wheel_and_installation": 595,
+  "product_files_matching": 320,
+  "observed": {
+    "cases": 160,
+    "passed": 160,
+    "failed": 0,
+    "skipped": 0,
+    "backend_modules": 246,
+    "all_backend_imports_from_native_env": true,
+    "seconds": 66.835,
+    "exit_code": 0
+  },
+  "tests": [
+    "backend/tests/runtime/test_recovery_policy.py",
+    "backend/tests/runtime/test_installation_backup.py",
+    "backend/tests/runtime/test_restored_enrollment.py",
+    "backend/tests/runtime/test_reboot_backup.py",
+    "backend/tests/runtime/test_legacy_import.py",
+    "backend/tests/runtime/test_migration_chain.py",
+    "backend/tests/cli/test_bootstrap.py",
+    "backend/tests/research/test_wiki_migration.py",
+    "backend/tests/runtime/test_result_migration.py",
+    "backend/tests/runtime/test_development_rollback.py::test_unused_inverse_preserves_research_rows_children_and_owner_objects",
+    "backend/tests/runtime/test_development_rollback.py::test_workspace_inverse_refuses_authority_and_history_without_partial_deletion",
+    "backend/tests/runtime/test_development_rollback.py::test_kind_inverse_requires_later_storage_to_be_removed_first",
+    "backend/tests/runtime/test_development_rollback.py::test_kind_inverse_requires_legacy_history_and_closed_peers",
+    "backend/tests/runtime/test_development_rollback.py::test_inverse_failure_rolls_back_marker_index_and_column",
+    "backend/tests/runtime/test_code_review_records.py::test_unused_native_review_inverse_preserves_existing_packet",
+    "backend/tests/runtime/test_code_review_records.py::test_retained_native_reservation_blocks_inverse_even_after_failure",
+    "backend/tests/runtime/test_development_migration.py::test_code_acceptance_inverse_preserves_reviews_and_refuses_owner_history",
+    "backend/tests/runtime/test_code_candidate_state.py::test_normal_startup_installs_candidate_storage_and_unused_inverse_is_repeatable",
+    "backend/tests/runtime/test_code_candidate_state.py::test_candidate_inverse_refuses_retained_history",
+    "backend/tests/runtime/test_code_review_state.py::test_unused_review_inverse_preserves_closed_author_and_candidate",
+    "backend/tests/runtime/test_code_review_state.py::test_review_history_prevents_inverse_even_after_the_reviewer_finishes",
+    "backend/tests/runtime/test_finding_review.py::test_review_schema_can_rollback_without_losing_original_work",
+    "backend/tests/runtime/test_finding_review.py::test_review_schema_rollback_refuses_new_admissions",
+    "backend/tests/runtime/test_check_state.py::test_unused_check_inverse_preserves_older_candidate_history",
+    "backend/tests/runtime/test_check_state.py::test_check_inverse_refuses_a_reserved_or_historical_check"
+  ],
+  "real_model_turns": 0,
+  "limits": [
+    "Selected recovery/migration tests, not the global suite",
+    "Synthetic managed/historical SQL and files; no owner data migrated",
+    "Real SQLite, local Git, native executables/cgroups and HTTP; controlled Ken fixtures and synthetic credentials",
+    "No model calls, real Chroma export rerun, remote repositories or disaster-wide acceptance"
+  ]
+}

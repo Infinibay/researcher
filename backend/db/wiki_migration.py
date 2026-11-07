@@ -181,8 +181,10 @@ def apply_wiki_schema(conn):
 
 
 def restore_legacy_wiki_schema(conn):
-    """Restore pre-write schema only; refuse a lossy rollback after wiki changes/captures."""
+    """Reverse only latest version33 before wiki writes; refuse later schemas and lossy changes/captures."""
     with _schema_transaction(conn):
+        if conn.execute('SELECT max(version) FROM schema_migrations').fetchone()[0] != 33:
+            raise ValueError('Wiki rollback requires latest version33; preserve later schemas and use compatible forward repair or explicit restore')
         row = conn.execute(
             "SELECT payload FROM wiki_migration_state WHERE id=1"
         ).fetchone()

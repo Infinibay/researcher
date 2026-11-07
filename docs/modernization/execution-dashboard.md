@@ -25,7 +25,47 @@ lista en el documento además de publicarla en el chat, para retomarla tras comp
 - Última suite global completada al retomar `0c8b8d9`: 2148 casos, 2045 pasan, 100 fallan y tres se omiten. Mismos 100 identificadores heredados; no se afirman causas idénticas. Pasan 965 casos del runtime. La política Git añadida después tiene verificación separada.
 - Los 43 escenarios amplios siguen abiertos en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Etapa actual: importación histórica comprobada; siguen recuperación e inversas
+## Etapa actual: recuperación después de nuevas escrituras comprobada; sigue historial/presupuestos
+
+La restauración y reinscripción explican que una copia excluye las escrituras
+posteriores; no suponen que el original siga disponible. Se comprobaron una copia
+43, actualización58, escrituras nuevas y restauraciones separadas de la copia
+vieja y actual, conservando los cambios en el original. El downgrade implícito
+se rechaza. La política distingue inversas condicionadas de versiones sin inversa
+publicada; no se afirma una vuelta atrás universal después de usar funciones nuevas.
+
+Los recibos completos ya no bloquean la reinscripción al superar64KiB: un sobre
+pequeño referencia detalles por hash/tamaño/identidad, hasta128MiB. Pasan321adjuntos,
+recibos dañados/enlazados, formato1 y salida abrupta entre archivos. Las seis
+pruebas antiguas fallidas y cuatro rechazos ambiguos se corrigieron usando
+esquemas históricos reales, sin rebajar las guardas del producto. La inspección final detectó además que la
+inversa wiki podía borrar33 bajo34/58: ahora exige33 como última versión y
+conserva íntegra la base al rechazar. Pasan15 pruebas dirigidas de wiki, además
+de la comprobación del paquete final.
+
+**Verificación:**130 casos centrales de fuente y28 casos históricos corregidos;
+160 casos del paquete instalado pasan, sin fallos ni omisiones.595 archivos
+Python/SQL coinciden,320 productivos;31 definiciones nuevas/modificadas tienen
+docstrings. Tiempo hasta verificar: **19 min 53 s** (04:47:44–05:07:37 UTC).
+[Política y ejemplo](../architecture/migration-recovery-policy.md),
+[resultados](recovery-policy-results.json), [paquete](recovery-policy-packaging.json).
+
+**Lista vigente al cambiar de tarea:**
+- Terminado en este tramo: recuperación con límites explícitos después de nuevas
+  escrituras, metadatos grandes y pruebas de inversas preparadas correctamente.
+- Siguiente principal: historial y presupuestos, contrastando UI/API y persistencia.
+  El siguiente bloque todavía no comenzó; registrar su inicio al hacerlo.
+- Pendiente de ubicación: datos reales del propietario y sus formatos/versiones.
+- Después: evaluaciones real, humana, científica y global; seguridad; aceptación
+  integral de12 páginas; revisión final de todo el plan.
+- Al final: detalles secundarios. DD077 registra30 avisos de lint y dos líneas
+  en blanco al final de archivos de prueba; no justifican repetir estos ensayos.
+
+Los43 escenarios y las12 aceptaciones integrales siguen abiertos. La recuperación
+ante fallos destructivos más amplios y actores activos conserva su alcance
+pendiente. No hubo modelos, datos reales migrados, push, merge ni despliegue.
+
+## Etapa anterior: importación histórica comprobada; siguen recuperación e inversas
 
 Los comandos públicos preparan una instalación nueva desde SQL histórico y rutas
 externas explícitas. Conservan informes sólo en archivos, adjuntos y Git/worktrees.

@@ -5,6 +5,26 @@ import sqlite3
 import pytest
 
 
+@pytest.mark.parametrize('later_version', [34,58])
+def test_wiki_inverse_refuses_later_schemas_without_creating_a_history_gap(monkeypatch,_isolated_db,later_version):
+    """An untouched wiki does not authorize deleting migration33 underneath later applied schemas."""
+    from backend.db.wiki_migration import restore_legacy_wiki_schema
+    from backend.tools.base.db import ensure_migrations
+
+    conn,migrate=legacy_database(monkeypatch,_isolated_db)
+    try:
+        migrate(conn)
+        ensure_migrations(_isolated_db,target_version=later_version)
+        before=list(conn.iterdump())
+        with pytest.raises(ValueError,match='version33'):
+            restore_legacy_wiki_schema(conn)
+        assert list(conn.iterdump())==before
+        assert conn.execute('PRAGMA foreign_keys').fetchone()[0]==1
+        assert conn.execute('PRAGMA foreign_key_check').fetchall()==[]
+    finally:
+        conn.close()
+
+
 def legacy_database(monkeypatch, path):
     """Build the real pre-wiki-migration schema without copying a production database."""
     from backend.db import wiki_migration

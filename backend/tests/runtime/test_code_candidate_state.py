@@ -183,35 +183,25 @@ def test_candidate_scope_is_immutable_even_before_completion(candidate_state):
     s.c.conn.rollback()
 
 
-def test_normal_startup_installs_candidate_storage_and_unused_inverse_is_repeatable(
-    coordination,
-):
-    """The packaged migration runs normally, and removing unused storage does not discard task rows."""
-    from backend.db.development_migration import (
-        restore_code_acceptances,
-        restore_code_candidates,
-        restore_code_checks,
-        restore_code_reviews,
-        restore_native_code_reviews,
-    )
+@pytest.mark.parametrize("schema_target", [38])
+def test_normal_startup_installs_candidate_storage_and_unused_inverse_is_repeatable(coordination):
+    """A real version38 prefix can remove unused candidate storage and reapply it while preserving older research rows."""
+    from backend.db.development_migration import restore_code_candidates
+    from backend.tests.runtime.migration_fixtures import historical_run,historical_rows
     from backend.tools.base.db import ensure_migrations
 
-    c = coordination
-    assert (
-        c.conn.execute("SELECT max(version) FROM schema_migrations").fetchone()[0] == 42
-    )
-    restore_code_acceptances(c.conn)
-    restore_native_code_reviews(c.conn)
-    restore_code_reviews(c.conn)
-    restore_code_checks(c.conn)
+    c=coordination
+    historical_run(c.conn,'retained-research');c.conn.commit()
+    before=historical_rows(c.conn,'tasks','runtime_runs','runtime_attempts')
     restore_code_candidates(c.conn)
     restore_code_candidates(c.conn)
-    assert c.conn.execute("SELECT count(*) FROM tasks").fetchone()[0] == 3
-    ensure_migrations(c.database)
-    assert (
-        c.conn.execute("SELECT count(*) FROM runtime_code_candidates").fetchone()[0]
-        == 0
-    )
+    assert c.conn.execute('SELECT max(version) FROM schema_migrations').fetchone()[0]==37
+    assert historical_rows(c.conn,*before)==before
+    ensure_migrations(c.database,target_version=38)
+    assert historical_rows(c.conn,*before)==before
+    assert c.conn.execute('SELECT count(*) FROM runtime_code_candidates').fetchone()[0]==0
+    assert c.conn.execute('PRAGMA foreign_key_check').fetchall()==[]
+
 
 
 @pytest.mark.parametrize("proof", [{}, {"grant_id": "f" * 64, "operations": []}])
@@ -240,17 +230,19 @@ def test_sql_ready_row_requires_a_domain_and_nonempty_closure_proof(
     s.c.conn.rollback()
 
 
-def test_candidate_inverse_refuses_retained_history(candidate_state):
-    """A reserved or interrupted capture is execution evidence, even before a commit is available."""
-    from backend.db.development_migration import (
-        restore_code_candidates,
-    )
+@pytest.mark.parametrize("schema_target", [38])
+def test_candidate_inverse_refuses_retained_history(service_setup):
+    """A retained development reservation blocks the actual version38 inverse without a future-version guard."""
+    from backend.db.development_migration import restore_code_candidates
+    from backend.tests.runtime.migration_fixtures import historical_candidate,historical_rows
 
-    s, lease, _binding, _copies, candidates = candidate_state
-    planned, _ = candidates.plan(lease)
-    with pytest.raises(RuntimeError, match="rollback refused"):
-        restore_code_candidates(s.c.conn)
-    assert candidates.inspect(lease.project_id, lease.run_id) == planned
+    c=service_setup.c
+    historical_candidate(c.conn)
+    before=historical_rows(c.conn,'runtime_code_candidates','runtime_development_workspaces','runtime_runs','runtime_attempts')
+    with pytest.raises(RuntimeError,match='rollback refused'):restore_code_candidates(c.conn)
+    assert historical_rows(c.conn,*before)==before
+    assert c.conn.execute('PRAGMA foreign_key_check').fetchall()==[]
+
 
 
 def test_owner_reads_of_preparing_code_return_explicit_unavailability(candidate_state):

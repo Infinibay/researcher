@@ -292,55 +292,39 @@ async def test_review_tool_scope_drains_original_host_work_before_closing(
     await asyncio.wait_for(closed, 2)
 
 
-def test_unused_native_review_inverse_preserves_existing_packet(review_state):
-    """Removing unused native-stage storage must retain an older completed review request and its frozen author context."""
-    from backend.db.development_migration import (
-        restore_code_acceptances,
-        restore_native_code_reviews,
-    )
+@pytest.mark.parametrize("schema_target", [41])
+def test_unused_native_review_inverse_preserves_existing_packet(service_setup):
+    """Remove unused version41 while retaining exact historical version40 request and candidate bytes."""
+    from backend.db.development_migration import restore_native_code_reviews
+    from backend.tests.runtime.migration_fixtures import historical_review_request,historical_rows
     from backend.tools.base.db import ensure_migrations
 
-    s, _author, _candidate, reviews = review_state
-    spec, target = review_request(review_state)
-    run, _ = reviews.admit_once(spec, target)
-    lease = s.c.store.claim(101, run.run_id, "old-review-fixture")
-    s.c.store.bind_native(
-        lease, thread_id="old-review-thread", turn_id="old-review-turn"
-    )
-    s.c.store.finish(
-        lease, native_status="completed", summary="Synthetic completed storage request"
-    )
-    before = reviews.request(101, run.run_id)
-    restore_code_acceptances(s.c.conn)
-    restore_native_code_reviews(s.c.conn)
-    restore_code_acceptances(s.c.conn)
-    restore_native_code_reviews(s.c.conn)
-    assert reviews.request(101, run.run_id) == before
-    ensure_migrations(s.c.database)
-    assert (
-        s.c.conn.execute("SELECT count(*) FROM runtime_code_review_records").fetchone()[
-            0
-        ]
-        == 0
-    )
+    c=service_setup.c
+    historical_review_request(c.conn)
+    tables=('runtime_code_review_requests','runtime_code_candidates','runtime_runs','runtime_attempts')
+    before=historical_rows(c.conn,*tables)
+    restore_native_code_reviews(c.conn)
+    restore_native_code_reviews(c.conn)
+    assert historical_rows(c.conn,*tables)==before
+    assert c.conn.execute('SELECT max(version) FROM schema_migrations').fetchone()[0]==40
+    ensure_migrations(c.database,target_version=41)
+    assert historical_rows(c.conn,*tables)==before
+    assert c.conn.execute('SELECT count(*) FROM runtime_code_review_records').fetchone()[0]==0
+    assert c.conn.execute('PRAGMA foreign_key_check').fetchall()==[]
 
 
-@pytest.mark.parametrize("review_state", ["frozen_author"], indirect=True)
-def test_retained_native_reservation_blocks_inverse_even_after_failure(review_records):
-    """An attempt that failed before any model call still retains its non-replayable reservation and evidence."""
-    from backend.db.development_migration import (
-        restore_code_acceptances,
-        restore_native_code_reviews,
-    )
 
-    s, lease, _target, records, _files, _witness = review_records
-    row, _ = records.reserve(lease)
-    s.c.store.finish(
-        lease,
-        native_status="failed",
-        summary="Synthetic failure before native preparation",
-    )
-    with pytest.raises(RuntimeError, match="rollback refused"):
-        restore_code_acceptances(s.c.conn)
-        restore_native_code_reviews(s.c.conn)
-    assert records.get(101, lease.attempt_id) == row
+@pytest.mark.parametrize("schema_target", [41])
+def test_retained_native_reservation_blocks_inverse_even_after_failure(service_setup):
+    """At version41 itself, retained native review history blocks removal without relying on a newer schema."""
+    from backend.db.development_migration import restore_native_code_reviews
+    from backend.tests.runtime.migration_fixtures import historical_code_review,historical_rows
+
+    c=service_setup.c
+    historical_code_review(c.conn)
+    tables=('runtime_code_review_requests','runtime_code_review_records','runtime_runs','runtime_attempts')
+    before=historical_rows(c.conn,*tables)
+    with pytest.raises(RuntimeError,match='rollback refused'):restore_native_code_reviews(c.conn)
+    assert historical_rows(c.conn,*tables)==before
+    assert c.conn.execute('PRAGMA foreign_key_check').fetchall()==[]
+

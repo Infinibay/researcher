@@ -123,9 +123,19 @@ Un fallo deja los directorios parciales para inspección; el comando no los
 reinicializa al repetirse. Para recuperar una reinscripción interrumpida antes de
 la activación, conservar esa evidencia y restaurar la misma copia verificada en
 **otra carpeta nueva**, con otro testigo nuevo. La prueba incluye salida abrupta
-de un proceso propio después de guardar configuración/historial. La lectura de
-metadatos administrativos usa el límite actual de64KiB; una instalación cuyo
-recibo lo supere se rechaza explícitamente y requiere ampliar ese soporte.
+de un proceso propio después de guardar configuración/historial. Las nuevas
+restauraciones separan un recibo de activación pequeño de `details.json`, que
+contiene todas las reubicaciones y conteos. El primero mantiene64KiB; el segundo
+admite hasta128MiB, con tamaño/hash exactos e identidad comprobados antes de
+crear autoridad, sin seguir enlaces. Los recibos pequeños de formato1 siguen
+admitidos. Un fallo entre los dos archivos no publica la instalación terminada.
+
+La salida de restauración y reinscripción incluye `data_recovery`: las escrituras
+posteriores al snapshot no están incluidas, no se comparó el original y tampoco
+se comprobó que siga disponible. El comando no lo reemplaza. Conservar una copia
+actual cuando sea posible; restaurar una copia anterior no equivale a deshacer
+una migración conservando los cambios nuevos.
+[Política, ejemplos e inversas admitidas](migration-recovery-policy.md).
 
 Al emparejar el navegador, la identidad incluye la base física. Si cambia, aparece
 una explicación con un ejemplo y una descarga de las solicitudes y borradores
@@ -173,7 +183,9 @@ Los cinco fallos de preparación previos y sus causas quedan registrados junto
 al resultado exitoso. No simula pérdida de energía ni un agente nativo ejecutándose
 durante el reboot. [Evidencia](../modernization/reboot-recovery-results.json).
 
-Siguen siendo tareas principales el inventario/migración de datos históricos, documentos conservados
-sólo en Chroma, informes guardados sólo en archivos y despliegues antiguos con
-almacenamiento fuera de una instalación administrada. Restaurar una copia
-anterior tampoco conserva escrituras realizadas después de aquella copia.
+La [importación histórica](legacy-import.md) ya tiene un recorrido comprobado
+para Chroma, informes sólo en archivos y rutas externas explícitas. Siguen
+pendientes el inventario/migración de los datos del propietario, la compatibilidad
+con sus formatos/versiones reales y la aceptación integral de recuperación.
+Restaurar una copia anterior tampoco conserva escrituras realizadas después de
+aquella copia.

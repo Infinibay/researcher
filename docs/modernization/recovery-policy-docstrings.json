@@ -1,0 +1,225 @@
+{
+  "base_commit": "cde632a",
+  "changed_or_new_definitions_documented": 31,
+  "missing": [],
+  "contracts": [
+    {
+      "path": "backend/db/wiki_migration.py",
+      "symbol": "restore_legacy_wiki_schema",
+      "line": 183,
+      "docstring": "Reverse only latest version33 before wiki writes; refuse later schemas and lossy changes/captures.",
+      "file_sha256": "df756594ffb6f7eeae36fcab1abe0d0ea44e0d0a8b7afd9a0a482d4fff2a14bd"
+    },
+    {
+      "path": "backend/runtime/installation_restore.py",
+      "symbol": "restore_installation",
+      "line": 82,
+      "docstring": "Verify first, then restore new private storage with an explicit pending-enrollment barrier.\n\nFailure retains inspectable partial paths. Completion preserves data and\nhistorical evidence but does not authorize the new host to run old work.",
+      "file_sha256": "50f25aa391499b4fb2a7cc1f4a16249467be59f8cc882c87b3112a1045fbfc31"
+    },
+    {
+      "path": "backend/runtime/recovery_receipt.py",
+      "symbol": "snapshot_boundary",
+      "line": 14,
+      "docstring": "State what a snapshot cannot recover without claiming that later writes were observed or compared.",
+      "file_sha256": "a23eb368d2ac1a0d4114f04a450301bd21fa8c6c529a8d21acb7268535e13cd4"
+    },
+    {
+      "path": "backend/runtime/recovery_receipt.py",
+      "symbol": "write_restoration_receipt",
+      "line": 28,
+      "docstring": "Publish complete relocation evidence and a small hash-bound receipt before the final installation marker.",
+      "file_sha256": "a23eb368d2ac1a0d4114f04a450301bd21fa8c6c529a8d21acb7268535e13cd4"
+    },
+    {
+      "path": "backend/runtime/recovery_receipt.py",
+      "symbol": "_bounded_bytes",
+      "line": 47,
+      "docstring": "Read one regular metadata file through pinned no-follow parents without truncating oversized evidence.",
+      "file_sha256": "a23eb368d2ac1a0d4114f04a450301bd21fa8c6c529a8d21acb7268535e13cd4"
+    },
+    {
+      "path": "backend/runtime/recovery_receipt.py",
+      "symbol": "read_restoration_receipt",
+      "line": 56,
+      "docstring": "Accept legacy receipts or verify bounded format2 evidence before creating any execution authority.",
+      "file_sha256": "a23eb368d2ac1a0d4114f04a450301bd21fa8c6c529a8d21acb7268535e13cd4"
+    },
+    {
+      "path": "backend/runtime/restored_enrollment.py",
+      "symbol": "enroll_restored_host",
+      "line": 64,
+      "docstring": "Enable a verified pending restore with fresh assets, authority and pairing; publish activation last.\n\nThe original backup remains the recovery source. Existing or partially created\nauthority is never reset, reused or repaired by retrying this operation.",
+      "file_sha256": "cff4a99004a3b8eb1bb43a4cdb36eca21a152671e0a6e551f340a3a7651ac4db"
+    },
+    {
+      "path": "backend/tests/research/test_wiki_migration.py",
+      "symbol": "test_wiki_inverse_refuses_later_schemas_without_creating_a_history_gap",
+      "line": 9,
+      "docstring": "An untouched wiki does not authorize deleting migration33 underneath later applied schemas.",
+      "file_sha256": "d639f92fed498c9593cc5f5e62604f7957501dbed15a1b602efddb35760ba63b"
+    },
+    {
+      "path": "backend/tests/runtime/migration_fixtures.py",
+      "symbol": "historical_candidate",
+      "line": 55,
+      "docstring": "Seed retained version38 development records without invoking a newer runtime or claiming physical execution.",
+      "file_sha256": "824b9886cc4d291752633dca3e68f0022bb1815abf4a02d2cdbb2d62b8153497"
+    },
+    {
+      "path": "backend/tests/runtime/migration_fixtures.py",
+      "symbol": "historical_review_request",
+      "line": 74,
+      "docstring": "Seed a version40 frozen review request whose author/candidate remain independently recoverable.",
+      "file_sha256": "824b9886cc4d291752633dca3e68f0022bb1815abf4a02d2cdbb2d62b8153497"
+    },
+    {
+      "path": "backend/tests/runtime/migration_fixtures.py",
+      "symbol": "historical_code_review",
+      "line": 87,
+      "docstring": "Seed retained version41 author/reviewer references for inverse preservation tests only.",
+      "file_sha256": "824b9886cc4d291752633dca3e68f0022bb1815abf4a02d2cdbb2d62b8153497"
+    },
+    {
+      "path": "backend/tests/runtime/migration_fixtures.py",
+      "symbol": "historical_rows",
+      "line": 101,
+      "docstring": "Capture complete historical row values, including exact JSON/BLOB evidence, for preservation assertions.",
+      "file_sha256": "824b9886cc4d291752633dca3e68f0022bb1815abf4a02d2cdbb2d62b8153497"
+    },
+    {
+      "path": "backend/tests/runtime/migration_fixtures.py",
+      "symbol": "historical_research_result",
+      "line": 106,
+      "docstring": "Seed version34 finding/source/report relationships without a later model-selection or grant writer API.",
+      "file_sha256": "824b9886cc4d291752633dca3e68f0022bb1815abf4a02d2cdbb2d62b8153497"
+    },
+    {
+      "path": "backend/tests/runtime/test_check_state.py",
+      "symbol": "test_unused_check_inverse_preserves_older_candidate_history",
+      "line": 177,
+      "docstring": "Removing unused version39 preserves all older candidate and task/run values exactly.",
+      "file_sha256": "132650908ed857f9b8825500f79bdb93768749fd2e5934da13dcba153055c09e"
+    },
+    {
+      "path": "backend/tests/runtime/test_check_state.py",
+      "symbol": "test_check_inverse_refuses_a_reserved_or_historical_check",
+      "line": 197,
+      "docstring": "A retained version39 check reservation is itself the blocker, independently of later schema or active actors.",
+      "file_sha256": "132650908ed857f9b8825500f79bdb93768749fd2e5934da13dcba153055c09e"
+    },
+    {
+      "path": "backend/tests/runtime/test_code_candidate_state.py",
+      "symbol": "test_normal_startup_installs_candidate_storage_and_unused_inverse_is_repeatable",
+      "line": 187,
+      "docstring": "A real version38 prefix can remove unused candidate storage and reapply it while preserving older research rows.",
+      "file_sha256": "50527f4fc45fc8b44208924d703968294bdcee2e726f8414fc1711eb8420abf1"
+    },
+    {
+      "path": "backend/tests/runtime/test_code_candidate_state.py",
+      "symbol": "test_candidate_inverse_refuses_retained_history",
+      "line": 234,
+      "docstring": "A retained development reservation blocks the actual version38 inverse without a future-version guard.",
+      "file_sha256": "50527f4fc45fc8b44208924d703968294bdcee2e726f8414fc1711eb8420abf1"
+    },
+    {
+      "path": "backend/tests/runtime/test_code_review_records.py",
+      "symbol": "test_unused_native_review_inverse_preserves_existing_packet",
+      "line": 296,
+      "docstring": "Remove unused version41 while retaining exact historical version40 request and candidate bytes.",
+      "file_sha256": "dd70a97a701322ff1394bed35415e967f992c45db9377555ce483891cf43c159"
+    },
+    {
+      "path": "backend/tests/runtime/test_code_review_records.py",
+      "symbol": "test_retained_native_reservation_blocks_inverse_even_after_failure",
+      "line": 318,
+      "docstring": "At version41 itself, retained native review history blocks removal without relying on a newer schema.",
+      "file_sha256": "dd70a97a701322ff1394bed35415e967f992c45db9377555ce483891cf43c159"
+    },
+    {
+      "path": "backend/tests/runtime/test_code_review_state.py",
+      "symbol": "test_unused_review_inverse_preserves_closed_author_and_candidate",
+      "line": 372,
+      "docstring": "Removing unused version40 preserves older author/candidate records without invoking current review APIs.",
+      "file_sha256": "db4a30d2eebd6d55bcd4fbe5595e2c8ebcdddb2c26aaa9f3c9b7ece7ed6e0530"
+    },
+    {
+      "path": "backend/tests/runtime/test_code_review_state.py",
+      "symbol": "test_review_history_prevents_inverse_even_after_the_reviewer_finishes",
+      "line": 392,
+      "docstring": "A retained version40 request blocks removal even when its historical runs are terminal.",
+      "file_sha256": "db4a30d2eebd6d55bcd4fbe5595e2c8ebcdddb2c26aaa9f3c9b7ece7ed6e0530"
+    },
+    {
+      "path": "backend/tests/runtime/test_finding_review.py",
+      "symbol": "test_review_schema_can_rollback_without_losing_original_work",
+      "line": 695,
+      "docstring": "A version34 inverse preserves historical finding/source/report identities and relationships before reapplication.",
+      "file_sha256": "40123c584eacfab3354c0f788f01fa55eb2c1a9fd9fe3a65aa106af5af8426b5"
+    },
+    {
+      "path": "backend/tests/runtime/test_finding_review.py",
+      "symbol": "test_review_schema_rollback_refuses_new_admissions",
+      "line": 716,
+      "docstring": "An actual version34 request blocks its inverse without relying on a newer migration marker.",
+      "file_sha256": "40123c584eacfab3354c0f788f01fa55eb2c1a9fd9fe3a65aa106af5af8426b5"
+    },
+    {
+      "path": "backend/tests/runtime/test_recovery_policy.py",
+      "symbol": "add_references",
+      "line": 14,
+      "docstring": "Create enough actual attachments and registrations to exceed a configuration-sized relocation receipt.",
+      "file_sha256": "642842a58a985910b0f332a3442d76307fb7b1b80bed2591df18116252cde4ef"
+    },
+    {
+      "path": "backend/tests/runtime/test_recovery_policy.py",
+      "symbol": "test_large_restoration_receipt_can_enroll_without_losing_any_registration",
+      "line": 25,
+      "docstring": "Many retained references must not turn a successful data restore into an unenrollable host.",
+      "file_sha256": "642842a58a985910b0f332a3442d76307fb7b1b80bed2591df18116252cde4ef"
+    },
+    {
+      "path": "backend/tests/runtime/test_recovery_policy.py",
+      "symbol": "test_snapshot_receipts_explain_that_later_writes_are_not_included",
+      "line": 46,
+      "docstring": "An old snapshot preserves its boundary and current source; a fresh snapshot preserves post-upgrade writes.",
+      "file_sha256": "642842a58a985910b0f332a3442d76307fb7b1b80bed2591df18116252cde4ef"
+    },
+    {
+      "path": "backend/tests/runtime/test_recovery_policy.py",
+      "symbol": "test_damaged_restoration_evidence_never_creates_authority",
+      "line": 96,
+      "docstring": "Missing, changed or redirected metadata cannot cross the fresh-enrollment boundary.",
+      "file_sha256": "642842a58a985910b0f332a3442d76307fb7b1b80bed2591df18116252cde4ef"
+    },
+    {
+      "path": "backend/tests/runtime/test_recovery_policy.py",
+      "symbol": "test_original_format1_restoration_receipt_remains_usable",
+      "line": 132,
+      "docstring": "Previously completed small receipts still enroll, gaining an explicit snapshot limitation in the result.",
+      "file_sha256": "642842a58a985910b0f332a3442d76307fb7b1b80bed2591df18116252cde4ef"
+    },
+    {
+      "path": "backend/tests/runtime/test_recovery_policy.py",
+      "symbol": "test_abrupt_exit_after_details_keeps_partial_restore_inactive",
+      "line": 149,
+      "docstring": "A real child dies between metadata files; recovery preserves that path and uses another verified restore.",
+      "file_sha256": "642842a58a985910b0f332a3442d76307fb7b1b80bed2591df18116252cde4ef"
+    },
+    {
+      "path": "backend/tests/runtime/test_recovery_policy.py",
+      "symbol": "test_public_restore_output_discloses_snapshot_limits",
+      "line": 179,
+      "docstring": "The actual admin command exposes the loss boundary instead of requiring operators to read internal files.",
+      "file_sha256": "642842a58a985910b0f332a3442d76307fb7b1b80bed2591df18116252cde4ef"
+    },
+    {
+      "path": "backend/tests/runtime/test_recovery_policy.py",
+      "symbol": "test_snapshot_restoration_does_not_claim_original_host_still_exists",
+      "line": 193,
+      "docstring": "A portable backup remains restorable when its original path is absent, without inventing its availability.",
+      "file_sha256": "642842a58a985910b0f332a3442d76307fb7b1b80bed2591df18116252cde4ef"
+    }
+  ],
+  "scope": "All new/changed Python definitions and affected modules in this delivery have English docstrings; no whole-project documentation claim."
+}

@@ -173,65 +173,40 @@ def test_never_released_peer_cannot_be_recorded_as_a_successful_check(check_stat
         )
 
 
-def test_unused_check_inverse_preserves_older_candidate_history(check_state):
-    """Removing unused version39 must preserve a completed version38 candidate and all original task/run data."""
-    from backend.db.development_migration import (
-        restore_code_acceptances,
-        restore_code_checks,
-        restore_code_reviews,
-        restore_native_code_reviews,
-    )
-    from backend.runtime.candidate_state import CodeCandidates
-    from backend.runtime.peer_registry import PeerRegistry
+@pytest.mark.parametrize("schema_target", [39])
+def test_unused_check_inverse_preserves_older_candidate_history(service_setup):
+    """Removing unused version39 preserves all older candidate and task/run values exactly."""
+    from backend.db.development_migration import restore_code_checks
+    from backend.tests.runtime.migration_fixtures import historical_candidate,historical_rows
     from backend.tools.base.db import ensure_migrations
 
-    s, lease, _checks = check_state
-    before = CodeCandidates(s.c.store).inspect(101, lease.run_id)
-    registry = PeerRegistry(s.c.store)
-    for kind in ("native", "business"):
-        registry.close(registry.prepare(lease, kind))
-    s.c.store.finish(
-        lease, native_status="completed", summary="Historical storage fixture"
-    )
-    restore_code_acceptances(s.c.conn)
-    restore_native_code_reviews(s.c.conn)
-    restore_code_reviews(s.c.conn)
-    restore_code_checks(s.c.conn)
-    restore_code_acceptances(s.c.conn)
-    restore_native_code_reviews(s.c.conn)
-    restore_code_reviews(s.c.conn)
-    restore_code_checks(s.c.conn)
-    assert CodeCandidates(s.c.store).inspect(101, lease.run_id) == before
-    assert s.c.store.get(101, lease.run_id).status == "needs_review"
-    ensure_migrations(s.c.database)
-    assert (
-        s.c.conn.execute("SELECT count(*) FROM runtime_code_checks").fetchone()[0] == 0
-    )
-    assert s.c.conn.execute("PRAGMA foreign_key_check").fetchall() == []
+    c=service_setup.c
+    historical_candidate(c.conn)
+    before=historical_rows(c.conn,'runtime_code_candidates','runtime_development_workspaces','runtime_runs','runtime_attempts','tasks')
+    restore_code_checks(c.conn)
+    restore_code_checks(c.conn)
+    assert historical_rows(c.conn,*before)==before
+    ensure_migrations(c.database,target_version=39)
+    assert c.conn.execute('SELECT count(*) FROM runtime_code_checks').fetchone()[0]==0
+    assert historical_rows(c.conn,*before)==before
+    assert c.conn.execute('PRAGMA foreign_key_check').fetchall()==[]
 
 
-def test_check_inverse_refuses_a_reserved_or_historical_check(check_state):
-    """An interrupted reservation is retained evidence even before a worker or result exists."""
-    from backend.db.development_migration import (
-        restore_code_acceptances,
-        restore_code_checks,
-        restore_code_reviews,
-        restore_native_code_reviews,
-    )
-    from backend.runtime.check_contracts import CheckSpec
-    from backend.runtime.peer_registry import PeerRegistry
 
-    s, lease, checks = check_state
-    row, _ = checks.plan(lease, "retained", CheckSpec(("/usr/bin/true",), "command"))
-    registry = PeerRegistry(s.c.store)
-    for kind in ("native", "business"):
-        registry.close(registry.prepare(lease, kind))
-    s.c.store.finish(
-        lease, native_status="completed", summary="Retained check reservation"
-    )
-    restore_code_acceptances(s.c.conn)
-    restore_native_code_reviews(s.c.conn)
-    restore_code_reviews(s.c.conn)
-    with pytest.raises(RuntimeError, match="rollback refused"):
-        restore_code_checks(s.c.conn)
-    assert checks.inspect(101, row["id"]) == row
+@pytest.mark.parametrize("schema_target", [39])
+def test_check_inverse_refuses_a_reserved_or_historical_check(service_setup):
+    """A retained version39 check reservation is itself the blocker, independently of later schema or active actors."""
+    from backend.db.development_migration import restore_code_checks
+    from backend.tests.runtime.migration_fixtures import historical_candidate,historical_rows
+
+    c=service_setup.c
+    attempt=historical_candidate(c.conn)
+    c.conn.execute("""INSERT INTO runtime_code_checks(id,attempt_id,run_id,project_id,task_id,context_version,
+        fence,owner_id,operation_key,subject_json,spec_json,spec_sha256,allocation,state,created_at,updated_at)
+        VALUES('retained-check',?,'historical-author',101,1001,1,1,'historical-owner','check','{}','{}',?,'old-check','preparing',1000,1000)""",(attempt,'d'*64))
+    c.conn.commit()
+    before=historical_rows(c.conn,'runtime_code_checks','runtime_code_candidates','runtime_runs','runtime_attempts')
+    with pytest.raises(RuntimeError,match='rollback refused'):restore_code_checks(c.conn)
+    assert historical_rows(c.conn,*before)==before
+    assert c.conn.execute('PRAGMA foreign_key_check').fetchall()==[]
+

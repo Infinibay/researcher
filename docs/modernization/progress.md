@@ -7740,3 +7740,48 @@ block: remaining inverse/recovery policy without deleting used history. Actual
 owner data location unanswered; all43 broad scenarios/12 full-page acceptances
 remain open, followed by history/budgets, real/human/scientific/global evaluation,
 dependency security and final independent review. No push/merge/deploy.
+
+
+## 2026-11-07 — snapshot recovery boundaries and large metadata
+
+Previous turn PROGRESS, cde632a. Started04:47:44UTC, verified05:02:41UTC,
+14min57s. Plan4.3/acceptance8 require preserving new writes or explicitly stating
+an old snapshot excludes them, not an invented universal down migration.
+
+Implemented format2 small restore receipts binding full details by SHA256/size/
+identity, bounded128MiB and no-follow paths; small format1 remains supported.
+Public restore/enrollment disclose post-snapshot omissions, no automatic source
+comparison and unknown original availability.321attachments, corrupt metadata,
+actual child exit95between detail/receipt, and43->58post-write old/current snapshots
+verified. Original/latest data remains separate; implicit downgrade refused.
+
+Broadening found6obsolete inverse fixtures (152PASS/6FAIL). Ten cases now use
+real historical34/38/39/40/41 schemas, raw evidence and actual targeted inverse
+preconditions; four formerly passing rejection cases no longer rely on future
+schema guards. One intermediate finding fixture omitted required agent_id
+(26PASS/2FAIL), corrected without product guard changes. Final historical28PASS;
+core130PASS from the earlier disjoint source scope. Installed final158PASS in
+66.666s, no skips;595matching Python/SQL files,320product,29documented definitions.
+Wheel a845efc6b63beb7e28be954975b4814bcd7a3e795c319c9e55d6c3e7604cc03f.
+No global-suite claim, model calls, real-data migration or new real Chroma trial.
+30lint notices and2EOFblank lines deferred DD077.
+
+Next macro: history/budgets. Actual-data location unanswered, broader disaster/
+active-actor acceptance and43scenarios/12full-page acceptances still open; real/
+human/scientific/global evaluations, dependency security and final independent
+review remain. All macro work before details; publish updated done/current/pending
+plus measured time on each principal-task transition, including after compaction.
+No push/merge/deploy. Current source and installed code are authoritative.
+
+
+Final correction within the same recovery block: inspection found wiki inverse33
+could remove its marker beneath34/58. Two RED regressions confirmed no refusal;
+latest-version33 guard now prevents a history gap without changing original rows
+or foreign-key configuration.15source wiki migration/identity cases pass. Rebuilt
+through sdist and verified final160installed casesPASS, no skips,66.835s;
+595matching files/320product/31documented definitions. Earlier158installed receipt
+kept separately. Final wheel b4b41aea3bfde14ea75242888243f389e83dc28f0eb95b53884c6a27ecc52c2a.
+Final verification05:07:37UTC; block19min53s including this substantive fix.
+No broadened global or real-data acceptance inferred. Same next macro and deferred
+policy as above. All original handles terminal; no inference or env mutation
+while tests were live.

@@ -4,6 +4,17 @@ La implementación del [plan completo](../superpowers/plans/2026-10-31-actualiza
 
 ## Resultados disponibles
 
+- **Recuperación tras nuevas escrituras y recibos grandes comprobados:** copia43,
+  actualización58, cambios nuevos y recuperación separada de las copias vieja y
+  actual; limitación explícita y disponibilidad del original sin suponer.
+  Metadatos completos ligados por hash y recibo pequeño permiten321adjuntos;
+  corrupción y salida abrupta mantienen el bloqueo.130 casos centrales de fuente
+  y28 inversas históricas corregidas;160 instalados pasan,595 archivos coinciden
+  y31 definiciones documentadas. Siguen datos reales y aceptación integral;
+  La inversa wiki rechaza versiones posteriores sin dejar huecos;15 pruebas
+  dirigidas de wiki pasan. No existe un downgrade universal. [Política](../architecture/migration-recovery-policy.md),
+  [resultados](recovery-policy-results.json), [paquete](recovery-policy-packaging.json).
+
 - **Importación histórica implementada y ensayada:** SQL y archivos en rutas
   externas, informes sin cuerpo en base, adjuntos/Git y exportación aislada de
   Chroma.105 registros reales de Chroma sintético conservados,104 con texto y uno

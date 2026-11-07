@@ -10,6 +10,7 @@ from backend.runtime.bootstrap import _sync_directory
 from backend.runtime.host_installation import _write_new
 from backend.runtime.installation_backup import database_receipt, new_directory, _verify_backup
 from backend.runtime.snapshot_files import CopyBudget, copy_regular, open_file
+from backend.runtime.recovery_receipt import write_restoration_receipt
 
 
 def relocated(value, original, destination):
@@ -141,7 +142,7 @@ def restore_installation(backup, destination, **limits):
                'model_turns':0,'old_work_replayed':False}
     if 'reboot_evidence' in manifest:
         receipt['reboot_evidence'] = manifest['reboot_evidence']
-    _write_new(root / evidence / 'restoration.json', receipt)
+    write_restoration_receipt(root, evidence, receipt, budget)
     for target, mode in reversed(directories):
         os.chmod(target, mode)
         _sync_directory(target)

@@ -368,57 +368,39 @@ def test_context_correction_between_publication_and_gate_prevents_review_payload
     )
 
 
-def test_unused_review_inverse_preserves_closed_author_and_candidate(review_state):
-    """Removing unused version40 keeps older candidate/check history and can be repeated and reapplied."""
-    from backend.db.development_migration import (
-        restore_code_acceptances,
-        restore_code_reviews,
-        restore_native_code_reviews,
-    )
+@pytest.mark.parametrize("schema_target", [40])
+def test_unused_review_inverse_preserves_closed_author_and_candidate(service_setup):
+    """Removing unused version40 preserves older author/candidate records without invoking current review APIs."""
+    from backend.db.development_migration import restore_code_reviews
+    from backend.tests.runtime.migration_fixtures import historical_candidate,historical_rows
     from backend.tools.base.db import ensure_migrations
 
-    s, author, _candidate, reviews = review_state
-    before = reviews.subject(101, author.attempt_id)
-    restore_code_acceptances(s.c.conn)
-    restore_native_code_reviews(s.c.conn)
-    restore_code_reviews(s.c.conn)
-    restore_code_acceptances(s.c.conn)
-    restore_native_code_reviews(s.c.conn)
-    restore_code_reviews(s.c.conn)
-    assert reviews.subject(101, author.attempt_id) == before
-    assert (
-        s.c.conn.execute("SELECT max(version) FROM schema_migrations").fetchone()[0]
-        == 39
-    )
-    ensure_migrations(s.c.database)
-    spec, target = review_request(review_state)
-    run, _ = reviews.admit_once(spec, target)
-    assert reviews.request(101, run.run_id)["subject_sha256"] == target.subject_sha256
-    assert s.c.conn.execute("PRAGMA foreign_key_check").fetchall() == []
+    c=service_setup.c
+    historical_candidate(c.conn)
+    before=historical_rows(c.conn,'runtime_code_candidates','runtime_development_workspaces','runtime_runs','runtime_attempts')
+    restore_code_reviews(c.conn)
+    restore_code_reviews(c.conn)
+    assert historical_rows(c.conn,*before)==before
+    assert c.conn.execute('SELECT max(version) FROM schema_migrations').fetchone()[0]==39
+    ensure_migrations(c.database,target_version=40)
+    assert historical_rows(c.conn,*before)==before
+    assert c.conn.execute('PRAGMA foreign_key_check').fetchall()==[]
 
 
-def test_review_history_prevents_inverse_even_after_the_reviewer_finishes(review_state):
-    """A completed review reservation is retained history, independent of the active-authority guard."""
-    from backend.db.development_migration import (
-        restore_code_acceptances,
-        restore_code_reviews,
-        restore_native_code_reviews,
-    )
 
-    s, _author, _candidate, reviews = review_state
-    spec, target = review_request(review_state)
-    run, _ = reviews.admit_once(spec, target)
-    reviewer = s.c.store.claim(101, run.run_id, "review-host")
-    s.c.store.bind_native(reviewer, thread_id="review-thread", turn_id="review-turn")
-    s.c.store.finish(
-        reviewer, native_status="completed", summary="Synthetic storage fixture"
-    )
-    before = reviews.request(101, run.run_id)
-    with pytest.raises(RuntimeError, match="rollback refused"):
-        restore_code_acceptances(s.c.conn)
-        restore_native_code_reviews(s.c.conn)
-        restore_code_reviews(s.c.conn)
-    assert reviews.request(101, run.run_id) == before
+@pytest.mark.parametrize("schema_target", [40])
+def test_review_history_prevents_inverse_even_after_the_reviewer_finishes(service_setup):
+    """A retained version40 request blocks removal even when its historical runs are terminal."""
+    from backend.db.development_migration import restore_code_reviews
+    from backend.tests.runtime.migration_fixtures import historical_review_request,historical_rows
+
+    c=service_setup.c
+    historical_review_request(c.conn)
+    before=historical_rows(c.conn,'runtime_code_review_requests','runtime_code_candidates','runtime_runs','runtime_attempts')
+    with pytest.raises(RuntimeError,match='rollback refused'):restore_code_reviews(c.conn)
+    assert historical_rows(c.conn,*before)==before
+    assert c.conn.execute('PRAGMA foreign_key_check').fetchall()==[]
+
 
 
 @pytest.mark.parametrize("review_state", ["pending_check"], indirect=True)

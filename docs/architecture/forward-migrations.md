@@ -50,7 +50,9 @@ instaladas, con593 archivos Python/SQL coincidentes; no es una suite global.
 [Recibo actual](../modernization/legacy-import-packaging.json).
 La [restauración administrada](installation-backup.md), la recuperación tras
 reboot controlado y la [importación histórica](legacy-import.md) tienen evidencia
-separada. Siguen pendientes el inventario/migración de datos reales y la política
-completa de inversas/recuperación posteriores sin borrar historial utilizado.
+separada. La [política de recuperación](migration-recovery-policy.md) distingue
+inversas administrativas condicionadas, versiones sin downgrade publicado y
+restauración después de nuevas escrituras. Siguen pendientes el inventario y
+migración de los datos reales y la aceptación integral de recuperación.
 Ninguna base del propietario fue migrada en estos ensayos. El pulido DD071 y
 posteriores permanece para después de las capacidades principales.

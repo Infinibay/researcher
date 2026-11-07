@@ -1,0 +1,82 @@
+{
+  "base_commit": "cde632a",
+  "started_at": "2026-11-07T04:47:44Z",
+  "verified_at": "2026-11-07T05:07:37Z",
+  "elapsed_seconds_to_verification": 1193,
+  "wheel_sha256": "b4b41aea3bfde14ea75242888243f389e83dc28f0eb95b53884c6a27ecc52c2a",
+  "source_verification": {
+    "core_cases": 130,
+    "core_passed": 130,
+    "historical_inverse_cases_after_fixture_correction": 28,
+    "historical_inverse_passed": 28,
+    "scope": "Core passed within the158-case run that exposed6obsolete inverse fixtures; all28inverse cases rerun after correcting10fixture contracts. These are disjoint scopes, not a new all-green global source run.",
+    "wiki_migration_and_identity_after_latest_version_guard": {
+      "cases": 15,
+      "passed": 15,
+      "scope": "Overlaps the3earlier wiki inverse cases; includes2new future-version regressions and10identity cases. Not an extra disjoint15."
+    }
+  },
+  "installed_verification": {
+    "cases": 160,
+    "passed": 160,
+    "failed": 0,
+    "skipped": 0,
+    "backend_modules": 246,
+    "all_backend_imports_from_native_env": true,
+    "seconds": 66.835,
+    "exit_code": 0
+  },
+  "source_files_matching_wheel_and_installation": 595,
+  "product_files_matching": 320,
+  "documented_new_or_changed_python_definitions": 31,
+  "behaviors": [
+    "321actual registered attachments restore with complete relocation metadata exceeding64KiB, then enroll with new authority",
+    "Format2 small receipt binds bounded details by exact hash/size/identity with no-follow paths; legacy small format1 retained",
+    "Missing/corrupt/oversize/symlink/escaped/unknown/identity-mismatched metadata refused before authority",
+    "Actual owned child exits95after durable details but before receipt/completion marker; original backup verifies and another path restores",
+    "Schema43 snapshot, upgrade58, changed task/file plus new report/model-setting row: old and current snapshots remain distinct; latest source unchanged",
+    "In-place forward-target downgrade refused; current snapshot preserves new writes; original availability remains explicitly unknown",
+    "Restore CLI and enrollment expose post-snapshot limitations; no transparent rollback or original-host availability claim",
+    "Ten historic inverse cases now use real target schemas34,38,39,40,41 and retained SQL evidence rather than current APIs on future schemas",
+    "Existing33-42/57-58 guarded inverses retained; no invented generic inverse for18-32/43-56; used history remains protected",
+    "Wiki inverse rejects schemas34/58before rewriting tables/marker, preserving full SQL dump and foreign-key setting;15directed source migration/identity cases pass"
+  ],
+  "earlier_failures": [
+    {
+      "stage": "two initial product regressions",
+      "observed": "2fail: oversized restoration receipt prevented enrollment; missing snapshot limitation field"
+    },
+    {
+      "stage": "broadened source verification",
+      "observed": "152passed,6failed out of158",
+      "cause": "Historic inverse tests used schema58/current runtime fixtures instead of the actual historical version; four additional refusal cases could pass through a future-version guard rather than their intended used-history guard"
+    },
+    {
+      "stage": "historical SQL fixture correction",
+      "observed": "26passed,2failed",
+      "cause": "New finding fixture omitted required agent_id; fixture corrected, product guards unchanged"
+    },
+    {
+      "stage": "final policy/source inspection",
+      "observed": "2future-version inverse regressions failed before product fix",
+      "cause": "Wiki inverse removed migration33 from34/58without later-version rejection, leaving a modern history gap; added latest33guard and verified full-dump preservation"
+    }
+  ],
+  "limits": [
+    "No owner data migrated; location remains unanswered",
+    "Native execution/HTTP use synthetic data/credentials and controlled Ken fixtures; no model calls or real Chroma export in this delivery",
+    "No universal downgrade or compatibility guarantee for old binaries after new feature writes",
+    "No full power-loss/disaster or active-agent-during-reboot acceptance",
+    "All43broad scenarios and12full-page acceptances remain open; no new global suite"
+  ],
+  "deferred": {
+    "id": "DD077",
+    "lint_issues": 30,
+    "diff_check": "Two added blank lines at EOF in test_check_state.py and test_code_review_records.py; style deferred"
+  },
+  "prior_installed_checkpoint": {
+    "cases": 158,
+    "receipt": "recovery-policy-before-wiki-fix-packaging.json",
+    "scope": "Before substantive final wiki guard; not attributed to final wheel"
+  }
+}

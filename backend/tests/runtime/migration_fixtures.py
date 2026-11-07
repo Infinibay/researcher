@@ -52,10 +52,9 @@ def historical_plan_execution(conn):
     return "historical-execution", "delivery-1002"
 
 
-def historical_code_review(conn):
-    """Seed closed version41 author/reviewer references for inverse preservation tests only."""
+def historical_candidate(conn):
+    """Seed retained version38 development records without invoking a newer runtime or claiming physical execution."""
     author = historical_run(conn, "historical-author", kind="development")
-    reviewer = historical_run(conn, "historical-review", kind="code_review")
     conn.execute(
         """INSERT INTO runtime_development_workspaces(attempt_id,run_id,project_id,task_id,
         context_version,fence,owner_id,source_json,allocation,state,created_at,updated_at)
@@ -68,11 +67,26 @@ def historical_code_review(conn):
         VALUES(?,'historical-author',101,1001,11,1,1,'historical-owner','{}','{}',?,?,'old-candidate','reconciling',1000,1000)""",
         (author, "a" * 40, "b" * 40),
     )
+    conn.commit()
+    return author
+
+
+def historical_review_request(conn):
+    """Seed a version40 frozen review request whose author/candidate remain independently recoverable."""
+    author = historical_candidate(conn)
+    reviewer = historical_run(conn, "historical-review", kind="code_review")
     conn.execute(
         """INSERT INTO runtime_code_review_requests VALUES
         ('historical-review',101,1001,1,?,'{}','historical-author',?,'historical-fixture',
          'historical-thread','/historical/fixture',1,1,1000)""", ("c" * 64, author),
     )
+    conn.commit()
+    return author, reviewer
+
+
+def historical_code_review(conn):
+    """Seed retained version41 author/reviewer references for inverse preservation tests only."""
+    author, reviewer = historical_review_request(conn)
     conn.execute(
         """INSERT INTO runtime_code_review_records(attempt_id,run_id,project_id,task_id,
         context_version,fence,owner_id,subject_sha256,state,proposal_key,proposal_json,
@@ -82,3 +96,24 @@ def historical_code_review(conn):
     )
     conn.commit()
     return author
+
+
+def historical_rows(conn, *tables):
+    """Capture complete historical row values, including exact JSON/BLOB evidence, for preservation assertions."""
+    return {table:[dict(row) for row in conn.execute(f'SELECT * FROM {table} ORDER BY rowid')] for table in tables}
+
+
+def historical_research_result(conn):
+    """Seed version34 finding/source/report relationships without a later model-selection or grant writer API."""
+    import hashlib
+
+    historical_run(conn,'historical-research',status='needs_review')
+    body='The sample contains 137 units.'
+    digest=hashlib.sha256(body.encode()).hexdigest()
+    conn.execute("INSERT INTO research_sources(id,project_id,task_id,kind,locator,title,content,sha256,provenance_json,captured_at) VALUES(71,101,1001,'web','https://example.org/historical','Historical source',?,?,'{}',1000)",(body,digest))
+    conn.execute("INSERT INTO findings(id,project_id,task_id,agent_id,topic,content) VALUES(72,101,1001,'historical-fixture','Historical sample',?)",(body,))
+    conn.execute("INSERT INTO finding_sources VALUES(101,72,71,'137 units')")
+    conn.execute("INSERT INTO artifacts(id,project_id,task_id,type,file_path,content) VALUES(73,101,1001,'report','historical.md',?)",(body,))
+    conn.execute("INSERT INTO research_reports VALUES(73,'Historical report','research','draft',?)",(digest,))
+    conn.execute('INSERT INTO report_findings VALUES(101,73,72)')
+    conn.commit()

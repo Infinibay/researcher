@@ -691,92 +691,45 @@ def test_reviewer_cannot_reuse_the_authors_native_thread(authored_finding, binde
     )
 
 
-def test_review_schema_can_rollback_without_losing_original_work(authored_finding):
-    """An unused additive review schema can be removed and upgraded without id loss."""
+@pytest.mark.parametrize("schema_target", [34])
+def test_review_schema_can_rollback_without_losing_original_work(coordination):
+    """A version34 inverse preserves historical finding/source/report identities and relationships before reapplication."""
     from backend.db.review_migration import restore_review_schema
+    from backend.tests.runtime.migration_fixtures import historical_research_result,historical_rows
     from backend.tools.base.db import ensure_migrations
 
-    c, author, fid, sid, rid = authored_finding
-    original = tuple(
-        c.conn.execute(
-            "SELECT id,topic,content,status FROM findings WHERE id=?", (fid,)
-        ).fetchone()
-    )
-    from backend.db.development_migration import (
-        restore_code_acceptances,
-        restore_code_candidates,
-        restore_code_checks,
-        restore_code_reviews,
-        restore_development_kinds,
-        restore_development_workspaces,
-        restore_native_code_reviews,
-    )
-    from backend.db.result_migration import restore_result_schema
-
-    restore_code_acceptances(c.conn)
-
-    restore_native_code_reviews(c.conn)
-    restore_code_reviews(c.conn)
-    restore_code_checks(c.conn)
-    restore_code_candidates(c.conn)
-    restore_development_workspaces(c.conn)
-    restore_development_kinds(c.conn)
-    restore_result_schema(c.conn)
+    c=coordination
+    historical_research_result(c.conn)
+    before=historical_rows(c.conn,'findings','research_sources','finding_sources','artifacts','research_reports','report_findings','runtime_attempts')
     restore_review_schema(c.conn)
-    assert (
-        c.conn.execute(
-            "SELECT COUNT(*) FROM schema_migrations WHERE version=34"
-        ).fetchone()[0]
-        == 0
-    )
-    assert "execution_kind" not in {
-        r[1] for r in c.conn.execute("PRAGMA table_info(runtime_runs)")
-    }
-    assert (
-        tuple(
-            c.conn.execute(
-                "SELECT id,topic,content,status FROM findings WHERE id=?", (fid,)
-            ).fetchone()
-        )
-        == original
-    )
-    assert (
-        c.conn.execute("SELECT id FROM research_sources WHERE id=?", (sid,)).fetchone()[
-            0
-        ]
-        == sid
-    )
-    assert (
-        c.conn.execute(
-            "SELECT artifact_id FROM research_reports WHERE artifact_id=?", (rid,)
-        ).fetchone()[0]
-        == rid
-    )
-    ensure_migrations(c.database)
-    assert c.store.get(101, author.run_id).status == "needs_review"
-    assert c.conn.execute("PRAGMA foreign_key_check").fetchall() == []
+    assert c.conn.execute('SELECT max(version) FROM schema_migrations').fetchone()[0]==33
+    assert 'execution_kind' not in {r[1] for r in c.conn.execute('PRAGMA table_info(runtime_runs)')}
+    assert historical_rows(c.conn,*before)==before
+    ensure_migrations(c.database,target_version=34)
+    assert historical_rows(c.conn,*before)==before
+    assert c.conn.execute("SELECT status,execution_kind FROM runtime_runs WHERE id='historical-research'").fetchone()[:]==('needs_review','research')
+    assert c.conn.execute('PRAGMA foreign_key_check').fetchall()==[]
 
 
-def test_review_schema_rollback_refuses_new_admissions(admitted_review):
-    """A downgrade cannot erase a request merely because no decision exists yet."""
+
+@pytest.mark.parametrize("schema_target", [34])
+def test_review_schema_rollback_refuses_new_admissions(coordination):
+    """An actual version34 request blocks its inverse without relying on a newer migration marker."""
     from backend.db.review_migration import restore_review_schema
+    from backend.tests.runtime.migration_fixtures import historical_research_result,historical_run,historical_rows
 
-    c, _, lease, _, _, _, _, _ = admitted_review
-    with pytest.raises(RuntimeError, match="review"):
-        restore_review_schema(c.conn)
-    assert (
-        c.conn.execute(
-            "SELECT COUNT(*) FROM finding_review_requests WHERE run_id=?",
-            (lease.run_id,),
-        ).fetchone()[0]
-        == 1
-    )
-    assert (
-        c.conn.execute(
-            "SELECT COUNT(*) FROM schema_migrations WHERE version=34"
-        ).fetchone()[0]
-        == 1
-    )
+    c=coordination
+    historical_research_result(c.conn)
+    historical_run(c.conn,'historical-review',kind='finding_review')
+    c.conn.execute("""INSERT INTO finding_review_requests(run_id,project_id,task_id,finding_id,context_version,subject_sha256,
+        snapshot_json,author_run_id,author_attempt_id,author_actor_id,created_at)
+        VALUES('historical-review',101,1001,72,1,?,'{}','historical-research','historical-research-attempt','historical-fixture',1000)""",('e'*64,))
+    c.conn.commit()
+    before=historical_rows(c.conn,'finding_review_requests','findings','research_sources','runtime_runs','runtime_attempts')
+    with pytest.raises(RuntimeError,match='rollback refused'):restore_review_schema(c.conn)
+    assert historical_rows(c.conn,*before)==before
+    assert c.conn.execute('PRAGMA foreign_key_check').fetchall()==[]
+
 
 
 def test_review_evidence_owner_window_checks_saved_and_expected_hash(authored_finding):

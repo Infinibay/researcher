@@ -17,6 +17,7 @@ from backend.runtime.bootstrap import initialize_authority, _sync_directory
 from backend.runtime.host_installation import _environment, _read_json, _resources, _write_new
 from backend.runtime.snapshot_files import relative_name
 from backend.runtime.sqlite_runs import SQLiteRunStore
+from backend.runtime.recovery_receipt import read_restoration_receipt
 
 
 @contextmanager
@@ -81,10 +82,7 @@ authority is never reset, reused or repaired by retrying this operation.
         marker = _read_json(root/'installation.json')
         if marker.get('format') != 1 or marker.get('status') != 'restored_pending_enrollment':
             raise ValueError('Enrollment requires a completed restore with pending enrollment')
-        receipt_path = root / relative_name(marker['restoration'])
-        if not receipt_path.resolve(strict=True).is_relative_to(root):
-            raise ValueError('Restoration receipt must belong to this installation')
-        restoration = _read_json(receipt_path)
+        restoration = read_restoration_receipt(root, marker['restoration'])
         if restoration.get('snapshot_id') != marker['snapshot_id'] or restoration.get('restored_root') != str(root):
             raise ValueError('Restoration identity changed; preserve evidence and restore to a NEW path')
         if any(os.path.lexists(p) for p in (root/'authority',witness,root/'enrollment.json',root/'runtime.enrolled.json',root/'installation.enrolled.json')):
@@ -128,6 +126,7 @@ authority is never reset, reused or repaired by retrying this operation.
                   'authority_id':authority['authority_id'],'resource_observations':observations,
                   'historical_work':historical,'model_turns':0,'old_work_replayed':False,
                   'schema_before':schema_before,'schema_version':LATEST_VERSION,
+                  'data_recovery':restoration['data_recovery'],
                   'original_host_closure_proven':False,
                   'limits':'Fresh local authority only. Copied pending work is history; original actors and remote effects are not adopted or declared closed.'}
         if config.get('static_dir'):

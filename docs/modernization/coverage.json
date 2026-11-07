@@ -1021,7 +1021,14 @@
         "backend/tests/runtime/migration_fixtures.py",
         "docs/architecture/forward-migrations.md",
         "docs/modernization/migration-chain-results.json",
-        "docs/modernization/migration-chain-packaging.json"
+        "docs/modernization/migration-chain-packaging.json",
+        "backend/runtime/recovery_receipt.py",
+        "backend/runtime/installation_restore.py",
+        "backend/runtime/restored_enrollment.py",
+        "backend/tests/runtime/test_recovery_policy.py",
+        "docs/architecture/migration-recovery-policy.md",
+        "docs/modernization/recovery-policy-results.json",
+        "docs/modernization/recovery-policy-packaging.json"
       ],
       "remaining": [
         "Complete scenario acceptance across durable product runtime, legacy consumers, data recovery and UI where applicable"
@@ -1359,7 +1366,13 @@
         "backend/tests/runtime/test_reboot_backup.py",
         "evals/operation/reboot_vm.py",
         "docs/modernization/reboot-recovery-results.json",
-        "docs/modernization/reboot-recovery-packaging.json"
+        "docs/modernization/reboot-recovery-packaging.json",
+        "backend/runtime/recovery_receipt.py",
+        "backend/tests/runtime/test_recovery_policy.py",
+        "backend/tests/runtime/migration_fixtures.py",
+        "docs/architecture/migration-recovery-policy.md",
+        "docs/modernization/recovery-policy-results.json",
+        "docs/modernization/recovery-policy-packaging.json"
       ],
       "remaining": [
         "Full product runtime/client integration and browser acceptance; HTTP owner guard does not complete the entire scenario"
@@ -2090,12 +2103,21 @@
         "evals/operation/legacy_import.py",
         "docs/architecture/legacy-import.md",
         "docs/modernization/legacy-import-results.json",
-        "docs/modernization/legacy-import-packaging.json"
+        "docs/modernization/legacy-import-packaging.json",
+        "backend/runtime/recovery_receipt.py",
+        "backend/runtime/restored_enrollment.py",
+        "backend/tests/runtime/test_recovery_policy.py",
+        "docs/architecture/migration-recovery-policy.md",
+        "docs/modernization/recovery-policy-results.json",
+        "docs/modernization/recovery-policy-packaging.json",
+        "backend/db/wiki_migration.py",
+        "backend/tests/research/test_wiki_migration.py",
+        "docs/modernization/recovery-policy-before-wiki-fix-packaging.json"
       ],
       "remaining": [
         "Historical real-data location, inventory and migration acceptance; validate actual layouts and Chroma-version compatibility",
-        "Complete later inverse/recovery policy without discarding used history; metadata-size support where needed",
-        "Broader destructive-failure/active-actor disaster acceptance remains distinct from controlled synthetic recovery/import rehearsals"
+        "Broader destructive-failure/active-actor disaster acceptance remains distinct from controlled synthetic recovery/import rehearsals",
+        "Final integrated acceptance and operator recovery review; no generic in-place downgrade promised for schemas18-32/43-56"
       ],
       "native_adapter_observation": {
         "test": "backend/tests/runtime/test_code_publications.py::test_publication_request_is_immutable_and_startup_preserves_original_records[frozen_author]",
@@ -2106,7 +2128,8 @@
       "implemented": [
         "Coherent forward catalog18\u201356 and explicit staged targets;39 abrupt child-writer interruptions resume original DB, historical fixtures/inverses preserve original data.208 source and127 installed directed cases pass; no real-data/full-restore acceptance.",
         "Managed installation data backup/verification/another-path restore preserves SQLite, uploads and linked Git worktrees.82source/82installed tests pass; restored execution remains pending enrollment. No production-data or operational recovery acceptance.",
-        "Explicit legacy SQL/files staging and isolated pinned Chroma export, byte-bound provenance through source capture, no fabricated full documents/review.139source/139installed tests; real Chroma105records/104text/1metadata-only plus installed CLI/fresh enrollment/scoped native HTTP pass. Synthetic data, no inference or real-data acceptance; schema58 and41 forward interruption boundaries."
+        "Explicit legacy SQL/files staging and isolated pinned Chroma export, byte-bound provenance through source capture, no fabricated full documents/review.139source/139installed tests; real Chroma105records/104text/1metadata-only plus installed CLI/fresh enrollment/scoped native HTTP pass. Synthetic data, no inference or real-data acceptance; schema58 and41 forward interruption boundaries.",
+        "Explicit snapshot limits after new writes; compact hash-bound restoration metadata permits321attachments and refuses damaged/path-redirected evidence. Actual interrupted metadata writer recovery and schema43->58post-write old/current snapshots verified.130source core plus28corrected historical inverse cases pass;160final installed pass,595matching files. Wiki inverse now refuses later schemas34/58before any rewrite;15directed migration/identity tests pass. Conditional inverse policy documented; no generic downgrade claim or owner-data acceptance."
       ]
     },
     "backup_restore": {
@@ -2153,19 +2176,29 @@
         "evals/operation/legacy_import.py",
         "docs/architecture/legacy-import.md",
         "docs/modernization/legacy-import-results.json",
-        "docs/modernization/legacy-import-packaging.json"
+        "docs/modernization/legacy-import-packaging.json",
+        "backend/runtime/recovery_receipt.py",
+        "backend/tests/runtime/test_recovery_policy.py",
+        "backend/tests/runtime/migration_fixtures.py",
+        "docs/architecture/migration-recovery-policy.md",
+        "docs/modernization/recovery-policy-results.json",
+        "docs/modernization/recovery-policy-packaging.json",
+        "backend/db/wiki_migration.py",
+        "backend/tests/research/test_wiki_migration.py",
+        "docs/modernization/recovery-policy-before-wiki-fix-packaging.json"
       ],
       "implemented": [
         "Managed installation data backup/verification/another-path restore preserves SQLite, uploads and linked Git worktrees.82source/82installed tests pass; restored execution remains pending enrollment. No production-data or operational recovery acceptance.",
         "Fresh restored-host enrollment, paused copied plans and preserved pending history, exact browser endpoint/intent archival, service restart and abrupt-child recovery:94source/94installed,129frontendcontracts/4DOM,3browserstates. No restored model run, reboot or real-data acceptance.",
         "One fresh installed subscription/Ken run after another-path restoration and enrollment; source-return correlation, calculation200, finding/twoquotes/draft report, fivepeers closed and secondservice startup preservesoutcomes. Originalpendingrequest untouched.12harness testsPASS. Samekernel, syntheticdata; not reboot or historical-data acceptance.",
         "Explicit prior-kernel archival preserves original peer states without closure claims; schema56-to57 enrollment and unused-only inverse.137source/137installed tests; actual isolated VM reboot, fresh authority, native no-op closure and paired HTTP retained-data reads pass. Syntheticdata, no model call or power-loss/live-agent-during-reboot acceptance.",
-        "Explicit legacy SQL/files staging and isolated pinned Chroma export, byte-bound provenance through source capture, no fabricated full documents/review.139source/139installed tests; real Chroma105records/104text/1metadata-only plus installed CLI/fresh enrollment/scoped native HTTP pass. Synthetic data, no inference or real-data acceptance; schema58 and41 forward interruption boundaries."
+        "Explicit legacy SQL/files staging and isolated pinned Chroma export, byte-bound provenance through source capture, no fabricated full documents/review.139source/139installed tests; real Chroma105records/104text/1metadata-only plus installed CLI/fresh enrollment/scoped native HTTP pass. Synthetic data, no inference or real-data acceptance; schema58 and41 forward interruption boundaries.",
+        "Explicit snapshot limits after new writes; compact hash-bound restoration metadata permits321attachments and refuses damaged/path-redirected evidence. Actual interrupted metadata writer recovery and schema43->58post-write old/current snapshots verified.130source core plus28corrected historical inverse cases pass;160final installed pass,595matching files. Wiki inverse now refuses later schemas34/58before any rewrite;15directed migration/identity tests pass. Conditional inverse policy documented; no generic downgrade claim or owner-data acceptance."
       ],
       "remaining": [
         "Historical real-data location, inventory and migration acceptance; validate actual layouts and Chroma-version compatibility",
-        "Complete later inverse/recovery policy without discarding used history; metadata-size support where needed",
-        "Broader destructive-failure/active-actor disaster acceptance remains distinct from controlled synthetic recovery/import rehearsals"
+        "Broader destructive-failure/active-actor disaster acceptance remains distinct from controlled synthetic recovery/import rehearsals",
+        "Final integrated acceptance and operator recovery review; no generic in-place downgrade promised for schemas18-32/43-56"
       ]
     },
     "design_audit": {

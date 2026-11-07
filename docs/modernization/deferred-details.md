@@ -498,3 +498,18 @@ heredados Starlette/httpx y HOME inexistente al inspeccionar la versión de Code
 La compatibilidad de versiones de Chroma reales, inventario/migración de los
 datos del propietario e inversas/recuperación posteriores siguen siendo tareas
 principales. No se convierten en detalles diferidos por pasar un ensayo sintético.
+
+
+## DD077 — pulido tras recuperación y pruebas históricas
+
+Treinta avisos de lint en `recovery-policy-lint.json`: orden/imports sin uso,
+fixtures reutilizadas y tipo de excepción. Hay dos líneas en blanco de más al
+final de `test_check_state.py` y `test_code_review_records.py`. Conservarlas hasta
+la pasada final de estilo; los bytes actuales coinciden con el paquete probado.
+Continúa el aviso heredado Starlette/httpx. No repetir160casos por este pulido.
+
+Los fallos de preparación histórica sí impedían comprobar las inversas: diez
+casos ahora usan esquemas y registros de su época, con relaciones/bytes exactos,
+sin que una versión futura o una API moderna enmascare el comportamiento.
+Datos reales, aceptación de recuperación más amplia e integración global siguen
+siendo trabajo principal. El soporte de downgrade genérico no se promete.
