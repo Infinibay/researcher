@@ -1,0 +1,38 @@
+{
+  "base_commit": "294943d",
+  "wheel": "researcher-0.1.0-cp312-cp312-linux_x86_64.whl",
+  "wheel_sha256": "70083e4496f78d722ca8fb0a7fb5e07b20f4e616b104a1dece952e16fb75ac12",
+  "source_files_matching_wheel_and_installation": 629,
+  "product_files_matching": 332,
+  "observed": {
+    "cases": 91,
+    "passed": 91,
+    "failed": 0,
+    "skipped": 0,
+    "backend_modules": 248,
+    "all_backend_imports_from_native_env": true,
+    "seconds": 81.82,
+    "exit_code": 0
+  },
+  "tests": [
+    "backend/tests/runtime/test_codex_session.py",
+    "backend/tests/runtime/test_host_tool_budget.py",
+    "backend/tests/runtime/test_inference_journal.py",
+    "backend/tests/runtime/test_aggregate_execution_budget.py",
+    "backend/tests/runtime/test_subscription_session.py",
+    "backend/tests/runtime/test_legacy_engine_removal.py",
+    "backend/tests/runtime/test_native_adapter_retirement.py",
+    "backend/tests/runtime/test_legacy_catalog_removal.py",
+    "backend/tests/runtime/test_code_review_session.py::test_coordinator_schedules_native_review_and_does_not_finish_unconfirmed_work",
+    "backend/tests/runtime/test_code_acceptance.py::test_later_supported_review_cannot_hide_an_earlier_current_rejection",
+    "backend/tests/runtime/test_code_acceptance.py::test_review_history_overflow_is_explicit_and_cannot_silently_authorize_acceptance",
+    "backend/tests/runtime/test_plan_execution.py::test_service_recovers_never_started_delivery_and_stop_prevents_refill"
+  ],
+  "real_model_turns": 0,
+  "limits": [
+    "Selected tests, not the global suite",
+    "Synthetic managed installation data, no historical user-data migration",
+    "Source-level call inventory and controlled native tests do not observe provider-internal retries or quota. Local auxiliary usage is not yet durably aggregated per project; E08 remains open",
+    "No model calls, external accounts or GitHub workflow execution"
+  ]
+}

@@ -847,7 +847,7 @@
       ]
     },
     "E07": {
-      "status": "in_progress",
+      "status": "complete",
       "evidence": [
         "backend/runtime/codex_session.py",
         "backend/tests/runtime/test_codex_session.py",
@@ -887,11 +887,22 @@
         "docs/modernization/aggregate-budget-review.md",
         "docs/modernization/aggregate-budget-results.json",
         "docs/modernization/aggregate-budget-packaging.json",
-        "docs/modernization/aggregate-budget-native-observations.json"
+        "docs/modernization/aggregate-budget-native-observations.json",
+        "docs/modernization/engine-acceptance-review.md",
+        "docs/modernization/engine-acceptance-results.json",
+        "docs/modernization/engine-acceptance-packaging.json",
+        "docs/modernization/engine-acceptance-inventory.json",
+        "backend/tests/runtime/test_code_review_session.py",
+        "backend/tests/runtime/test_code_acceptance.py",
+        "backend/tests/runtime/test_plan_execution.py"
       ],
-      "remaining": [
-        "Durable product ownership, API integration and full scenario acceptance",
-        "Session cumulative high water, concurrent project admission, retained unknown usage after restart, typed pre-dispatch budget refusal, and actual owned reasoning-only no-progress closure are verified. Full scenario acceptance still needs the remaining integration and review-chain audit."
+      "remaining": [],
+      "completion_scope": "Retired unbounded think/rework loops; owned no-progress/deadline/resource limits, explicit review rejection without automatic refill, bounded retained review history and non-replayable owner continuation.",
+      "verified_at": "2026-11-07",
+      "limitations": [
+        "Controlled generation establishes host behavior, not real-model judgment quality or human comprehension.",
+        "Native internal consumption/retry/quota is only observed as exposed; no billing guarantee.",
+        "Whole-product recovery/resource acceptance and other scenarios remain separate."
       ]
     },
     "E08": {
@@ -961,11 +972,18 @@
         "docs/modernization/project-budget-policy-native-observations.json",
         "backend/tests/runtime/test_project_budget_policy.py",
         "frontend/tests/ui/project-budget.test.tsx",
-        "docs/design/audits/2026-11-07-project-budget/report.md"
+        "docs/design/audits/2026-11-07-project-budget/report.md",
+        "docs/modernization/engine-acceptance-review.md",
+        "docs/modernization/engine-acceptance-results.json",
+        "docs/modernization/engine-acceptance-packaging.json",
+        "docs/modernization/engine-acceptance-inventory.json",
+        "backend/tests/runtime/test_code_review_session.py",
+        "backend/tests/runtime/test_code_acceptance.py",
+        "backend/tests/runtime/test_plan_execution.py"
       ],
       "remaining": [
-        "Durable product ownership, API integration and full scenario acceptance",
-        "Session cumulative high water, concurrent project admission, retained unknown usage after restart, typed pre-dispatch budget refusal, and actual owned reasoning-only no-progress closure are verified. Full scenario acceptance still needs the remaining integration and review-chain audit."
+        "Generative turn accounting and owner policy revision are verified; local semantic/extraction auxiliary work still needs durable per-operation/attempt/project reservation and measured/unknown accounting, shared between owner and agent entry points.",
+        "Verify competing requests for the last local auxiliary slot/allowance, lost response and restart without refunded usage or automatic replay, cancellation through physical closure, and owner-visible policy/consumption. Do not equate local batches/vectors/CPU with generative tokens."
       ]
     },
     "E09": {
@@ -1982,10 +2000,16 @@
         "docs/modernization/finding-consumers-packaging.json",
         "backend/tests/research/test_finding_consumers.py",
         "backend/tests/research/test_legacy_context_scope.py",
-        "backend/tests/knowledge/test_finding_memory_retirement.py"
+        "backend/tests/knowledge/test_finding_memory_retirement.py",
+        "docs/architecture/inference-inventory.md",
+        "docs/modernization/engine-acceptance-review.md",
+        "docs/modernization/engine-acceptance-results.json",
+        "docs/modernization/engine-acceptance-packaging.json",
+        "docs/modernization/engine-acceptance-inventory.json"
       ],
       "remaining": [
-        "Recheck transitive/dynamic consumers as they migrate; route/remove every retained inference path."
+        "Complete E08 durable local auxiliary admission/accounting; current source inventory distinguishes this gap from retired inference providers.",
+        "Provider-internal and unknown dynamic/transitive behavior is not exhaustively observed; recheck inventory when integrations or dependencies change."
       ]
     },
     "engine_redesign": {

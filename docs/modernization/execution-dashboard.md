@@ -26,9 +26,37 @@ que se pueda comparar el avance; no presentar microajustes como tareas principal
 - Codex por suscripción y Ken publicado ensayados. Fuentes/citas, informes draft y revisión documental independiente conectados. Desarrollo admitido desde Tareas/Conversación con captura y comprobaciones explícitas; revisión independiente solicitada desde Tareas y aceptación del propietario conectada. Publicación local desde aceptación conectada; recuperación local de sólo lectura conectada; transporte remoto configurable conectado; recuperación remota y controles de Tareas conectados; ejecución/activación antiguas por tarea y proyecto retiradas; auxiliares de generación/proveedor, herramientas antiguas y sus cinco bibliotecas retirados. También se retiraron API interna, CLI, servicios/listeners y flows/helpers antiguos. También se retiraron autonomía, plantillas históricas y lectores de proveedor sin consumidores; se conserva el control de parada de trabajadores registrados.
 - Interfaz: doce pilotos, 36/36 conceptos de escritorio y 12/12 móviles; todas las rutas tienen piloto y 0/12 páginas están completamente aceptadas.
 - Última suite global: `9fb873c`,2210 casos,2178 pasan,31 fallan y1 error de fixture; sin omisiones. La carrera de backup encontrada se corrigió después con40 pruebas instaladas. No se declara una nueva corrida global verde; la referencia `0c8b8d9` queda como evidencia histórica.
-- U06 (configuración por intento y guardado interrumpido) queda comprobado; siguen42de43escenarios amplios abiertos en [coverage.json](coverage.json). No hay un porcentaje global defendible.
+- U06 (configuración por intento y guardado interrumpido) y E07 (loop acotado y rechazo sin rework automático) quedan comprobados; siguen41de43escenarios amplios abiertos en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Estado actual: revisión explícita del presupuesto comprobada
+## Estado actual: E07 comprobado; pendiente concreto de E08 identificado
+
+Bloque **2026-11-07 16:18:09–16:30:03 UTC**, **11 min 54 s hasta validar**.
+Pasan91casos instalados; los3casos de revisión desde fuente están incluidos en
+ese total. Un rechazo real en el recorrido controlado no genera rework ni otra
+revisión; notas sin avance terminan honestamente. La historia conserva objeciones
+y bloquea desbordamiento.629archivos coinciden,332de producto. Se corrige el
+inventario histórico y se verifica el AST de289módulos productivos. Cuatro nodos
+relevantes del ensayo documentados; no cambiaron producto ni prompts.
+[Resultados, errores del ensayo y límites](engine-acceptance-review.md).
+
+**Lista vigente:**
+- Terminado: recorridos principales, U06, evidencia selectiva, contabilidad/cupos
+  y revisión explícita del presupuesto por el propietario desde la web; E07.
+- En curso al cerrar: documentación y checkpoint local de la aceptación.
+- Siguiente principal: presupuesto durable acumulado de auxiliares locales
+  (E08), compartido entre consultas humanas y agentes, con reserva anterior al
+  trabajo y consumo conservado ante reinicio/respuesta perdida. **No iniciado**;
+  registrar su hora real. Es la brecha concreta hallada por esta auditoría.
+- Pendiente:41escenarios amplios, recuperación, datos históricos, evaluación humana/modelos,
+  aceptación integral de 12 páginas, dependencias publicadas y distribución.
+- Al final: detalles secundarios, validación global y revisión independiente.
+
+Los límites por worker/servicio y sus contadores no son un cupo acumulado por
+proyecto. E08 sigue abierto por esa integración. Cero modelos consumidos; la
+selección dirigida no reemplaza la última suite global con fallos. La lista y
+los tiempos se publican al cambiar de tarea y persisten después de compactar.
+
+## Etapa anterior: revisión explícita del presupuesto comprobada
 
 Bloque **2026-11-07 15:57:53–16:15:50 UTC**, **17 min 57 s hasta validar**.
 Pasan97casos distintos de backend,47instalados,8DOM y2contratos del cliente.

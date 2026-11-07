@@ -292,11 +292,11 @@ async def test_stop_during_review_confirmation_closes_original_owner_and_joins_w
         assert grant["state"] == "retired" and grant["domain_removed"]
 
 
-@pytest.mark.parametrize("changed", [False, True])
+@pytest.mark.parametrize("changed,rejected", [(False, False), (True, False), (False, True)])
 async def test_coordinator_schedules_native_review_and_does_not_finish_unconfirmed_work(
-    development_config, monkeypatch, changed
+    development_config, monkeypatch, changed, rejected
 ):
-    """The actual product owner selects readonly review grants and classifies failed confirmation independently of native turn completion."""
+    """Actual owned review preserves rejection or uncertain confirmation without automatic rework, another dispatch or task acceptance."""
     from backend.runtime.code_review_records import CodeReviewRecords
     from backend.runtime.code_reviews import CodeReviews, CodeReviewTarget
 
@@ -330,7 +330,7 @@ async def test_coordinator_schedules_native_review_and_does_not_finish_unconfirm
                     actor_id="product-code-reviewer",
                     operation_key="product-code-review",
                     context_version=d.lease.context_version,
-                    prompt="Review this exact candidate and state the observed evidence and limits.",
+                    prompt="Review this exact candidate and state the observed evidence and limits." + (" Controlled test: request changes." if rejected else ""),
                 ),
                 CodeReviewTarget(d.lease.attempt_id, packet["subject_sha256"]),
             )
@@ -357,7 +357,17 @@ async def test_coordinator_schedules_native_review_and_does_not_finish_unconfirm
             )
             assert (c.s.workspace / "fact.txt").read_text() == "137"
             owner_state = d.coordinator.store.code_result_state(101, d.run.run_id)
-            if changed:
+            if rejected:
+                assert json.loads(row["proposal_json"])["verdict"] == "needs_revision"
+                assert not owner_state["eligible"] and owner_state["acceptance"] is None
+                # Exercise the actual dispatcher rather than waiting for silence.
+                for _ in range(3):
+                    await d.coordinator.dispatch_planned_work()
+                assert c.s.c.conn.execute("SELECT count(*) FROM runtime_runs").fetchone()[0] == 2
+                assert c.s.c.conn.execute("SELECT count(*) FROM runtime_inference_dispatches").fetchone()[0] == 2
+                assert not d.coordinator._workers
+                assert c.s.c.conn.execute("SELECT count(*) FROM tool_grants WHERE revoked_at IS NULL").fetchone()[0] == 0
+            elif changed:
                 assert not owner_state["eligible"] and owner_state["acceptance"] is None
             else:
                 assert (

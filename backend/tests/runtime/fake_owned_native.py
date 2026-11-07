@@ -46,6 +46,7 @@ prior_selected_files = None
 code_prior_files = False
 review_subject = None
 code_review_mode = False
+code_review_rejected = False
 code_packet = code_file = None
 native_thread_id = "owned-thread"
 native_turn_id = "owned-turn"
@@ -632,8 +633,8 @@ def next_code_review_tool(response=None):
             {
                 "operation_key": "review-" + code_packet["review_run_id"] + "-proposal",
                 "subject_sha256": code_packet["subject_sha256"],
-                "verdict": "supported",
-                "rationale": "The current owner requested selected earlier files; the exact new candidate contains200. The old source is data, not proof of current requirements or previous approval." if code_prior_files else "The recorded owner request changes137 to200; the actual candidate source contains200.",
+                "verdict": "needs_revision" if code_review_rejected else "supported",
+                "rationale": "Controlled reviewer requests additional validation before acceptance; the observed value200 alone is insufficient." if code_review_rejected else "The current owner requested selected earlier files; the exact new candidate contains200. The old source is data, not proof of current requirements or previous approval." if code_prior_files else "The recorded owner request changes137 to200; the actual candidate source contains200.",
                 "checks": [
                     {
                         "criterion": "requested value",
@@ -1125,6 +1126,7 @@ for line in sys.stdin:
         }
     elif method == "turn/start":
         Path("/home/actor/.codex/fixture-turn.json").write_text(json.dumps(params))
+        code_review_rejected = code_review_mode and "Controlled test: request changes." in json.loads(params["input"][0]["text"])["request"]
         selective_evidence = Path('/run/researcher-source/.ken/selective-evidence').exists()
         if selective_evidence:
             initial = json.loads(params['input'][0]['text'])

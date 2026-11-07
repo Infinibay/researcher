@@ -1,0 +1,42 @@
+{
+  "base_commit": "294943d",
+  "started_at": "2026-11-07T16:18:09Z",
+  "validated_at": "2026-11-07T16:30:03Z",
+  "validation_elapsed_seconds": 714,
+  "E07": "complete",
+  "E08": "in_progress",
+  "source_review_cases": 3,
+  "source_review_seconds": 51.135,
+  "installed": {
+    "cases": 91,
+    "passed": 91,
+    "failed": 0,
+    "skipped": 0,
+    "backend_modules": 248,
+    "all_backend_imports_from_native_env": true,
+    "seconds": 81.82,
+    "exit_code": 0
+  },
+  "distinct_successful_cases": 91,
+  "counts_note": "The3source review cases are included in the91installed cases; do not sum them.",
+  "product_code_changes": false,
+  "model_turns": 0,
+  "docstrings_verified": [
+    "backend/tests/runtime/fake_owned_native.py::<module>",
+    "backend/tests/runtime/fake_owned_native.py::next_code_review_tool",
+    "backend/tests/runtime/test_code_review_session.py::<module>",
+    "backend/tests/runtime/test_code_review_session.py::test_coordinator_schedules_native_review_and_does_not_finish_unconfirmed_work"
+  ],
+  "source_failures": [
+    "Missing marker directory in the new test setup",
+    "Source dirtiness correctly refused by production Git admission; replaced marker with explicit controlled-test request",
+    "Existing controlled reviewer emitted supported before the new rejection mode was added"
+  ],
+  "inventory_correction": "Retained warmup compatibility stub is inert, not an active provider route.",
+  "remaining_E08": "Durable pre-execution reservation, measured/unknown usage and shared per-project admission for local auxiliary work, with owner visibility and lost-reply/restart behavior.",
+  "evidence": [
+    "docs/modernization/engine-acceptance-inventory.json",
+    "docs/modernization/engine-acceptance-packaging.json",
+    "backend/tests/runtime/test_code_review_session.py"
+  ]
+}
