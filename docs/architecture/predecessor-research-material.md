@@ -2,9 +2,10 @@
 
 Un resultado documental aceptado puede ocupar hasta2MiB. Incrustarlo en la
 entrada del siguiente agente, cuyo límite completo es1MiB, impedía iniciar una
-tarea válida. Las entregas nuevas usan esquema4: conservan identidades de tarea,
+tarea válida. Desde el esquema4 se conservan identidades de tarea,
 intento, contexto y aceptación, y describen los materiales mediante hash y tamaño.
 Los informes y sus fuentes siguen guardados completos; no se resumen ni truncan.
+El esquema5 incorpora [selección de evidencia y referencias al contexto histórico](selective-work-material.md).
 
 `researcher_prerequisite_research` permite leer el paquete completo aceptado,
 un informe incluido en él o la entrada original del autor. Cada ventana contiene
@@ -34,9 +35,10 @@ Se preservan las identidades de políticas2–6 y los bytes de entregas2/3 exist
 - La generación y Ken del ensayo son dobles controlados. No se acredita calidad
   de un modelo real ni comprensión humana; no se consumen turnos de suscripción.
 - El acceso por ventanas no garantiza que leer todo un paquete grande quepa en
-  el presupuesto del intento. Lectura selectiva de fuentes/limitaciones, tamaño
-  del contexto original del plan y continuaciones voluminosas siguen pendientes
-  funcionales. No se aumenta ningún presupuesto ni se declara cierre global deC04.
+  el presupuesto del intento. La selección de fuentes/limitaciones y referencias
+  al contexto original/continuaciones se implementan en el esquema5; la suficiencia
+  de cada selección sigue requiriendo evaluación. No se aumenta ningún presupuesto
+  ni se declara cierre global deC04.
 - Una entrega histórica grande conserva su identidad; no se reescribe en silencio.
   Puede seguir excediendo el límite hasta una nueva entrega explícitamente autorizada.
 

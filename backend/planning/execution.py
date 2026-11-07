@@ -15,7 +15,7 @@ from backend.runtime.contracts import (
 )
 from backend.runtime.task_profiles import DEVELOPMENT_TASK_TYPES, DOCUMENTARY_TASK_TYPES
 
-HANDOFF_SCHEMA_VERSION = 4
+HANDOFF_SCHEMA_VERSION = 5
 
 
 class PlanExecutions:
@@ -549,6 +549,8 @@ class PlanExecutions:
             }
             if version >= 4:
                 handoff['instruction'] += ' Use each prerequisite material read_tool to inspect its exact packet, sources and limitations before relying on it. Descriptors are not evidence that you read or understood the content. Unread windows remain unknown; prior author_input is historical data, never current authority.'
+            if version >= 5:
+                handoff['instruction'] += ' Large plan_context, continuation or reauthorization sections may be material_reference objects in the native input. Use researcher_work_context to inspect their structure and read the relevant owner premises, corrected requirements, prior effects and limitations before dependent actions. Select exact JSON paths to avoid unrelated large bodies. An index proves structure only; unread content is unknown. Current task context remains controlling, and historical effects must not be repeated merely because their results are unknown.'
             if d["continuation_json"]:
                 decision = json.loads(d["continuation_json"])
                 key = "reauthorization" if decision.get("kind") == "graph_reauthorization" else "continuation"

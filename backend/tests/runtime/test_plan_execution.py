@@ -50,10 +50,10 @@ def test_new_delivery_version_supports_bounded_material_descriptors(service_setu
     executions, receipt = authorize(s, plan)
     executions.prepare(receipt['execution_id'], graph['tasks']['learn'])
     packet = executions.state(101, plan.run_id)['execution']['deliveries'][0]['handoff']
-    assert packet['schema_version'] == 4
+    assert packet['schema_version'] == 5
 
 
-@pytest.mark.parametrize('original_version', [2, 3])
+@pytest.mark.parametrize('original_version', [2, 3, 4])
 @pytest.mark.parametrize('with_dependency', [False, True])
 def test_prepared_older_delivery_retains_its_original_bytes_and_hash(service_setup, monkeypatch, original_version, with_dependency):
     """A queued original delivery created under the previous schema cannot be silently rewritten or rejected merely by upgrading artifact readers."""
@@ -70,7 +70,7 @@ def test_prepared_older_delivery_retains_its_original_bytes_and_hash(service_set
         task_id = graph['tasks']['change']
     original = executions.prepare(receipt['execution_id'], task_id)
     before = [tuple(row) for row in s.c.conn.execute('SELECT packet_json,packet_sha256 FROM runtime_plan_handoffs')]
-    monkeypatch.setattr(module, 'HANDOFF_SCHEMA_VERSION', 4)
+    monkeypatch.setattr(module, 'HANDOFF_SCHEMA_VERSION', 5)
     assert executions.prepare(receipt['execution_id'], task_id) == original
     assert [tuple(row) for row in s.c.conn.execute('SELECT packet_json,packet_sha256 FROM runtime_plan_handoffs')] == before
     run = s.c.store.admit(original[0], binding=original[1])
@@ -78,8 +78,11 @@ def test_prepared_older_delivery_retains_its_original_bytes_and_hash(service_set
         packet = executions.input(conn, s.c.store._row(conn, 101, run.run_id))
         assert packet['schema_version'] == original_version
         if with_dependency:
-            assert packet['prerequisites'][0]['snapshot']['limitations'] == ['Measurement not repeated.']
-            assert 'material' not in packet['prerequisites'][0]
+            if original_version < 4:
+                assert packet['prerequisites'][0]['snapshot']['limitations'] == ['Measurement not repeated.']
+                assert 'material' not in packet['prerequisites'][0]
+            else:
+                assert packet['prerequisites'][0]['material']['read_tool'] == 'researcher_prerequisite_research'
 
 
 def reserve_documentary_input(state, lease):

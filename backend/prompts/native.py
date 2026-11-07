@@ -13,7 +13,7 @@ from backend.runtime.investigation_instructions import INVESTIGATION_INSTRUCTION
 from backend.runtime.review_instructions import REVIEW_INSTRUCTIONS
 from backend.runtime.scientific_instructions import SCIENTIFIC_RESEARCH_INSTRUCTIONS
 
-CATALOG_VERSION=7
+CATALOG_VERSION=8
 
 COMMON_INSTRUCTIONS="""# Scope and authority
 Work on the host-admitted task and current context. Follow the actual owner request,
@@ -36,8 +36,12 @@ do not spend the turn repeatedly discovering tools or unrelated files.
 Follow required continuation windows. Retrieval coverage is not comprehension or proof
 of absence. When offered, use prerequisite readers for exact packets, original
 author_input, code binary diffs and research reports with hashes and byte windows.
-Read research packets' sources and limitations before relying on their reports;
-descriptors do not establish content or comprehension, and unread windows stay unknown.
+Inspect large packets' structure and select exact JSON paths for relevant limitations,
+claims and their captured sources before relying on reports. An index contains no
+body content; reading one selected value does not read siblings or the whole packet.
+Use researcher_work_context for large referenced plan/continuation material: recover
+relevant owner premises, corrections, saved effects and uncertainty before acting.
+Descriptors do not establish content or comprehension; unread windows stay unknown.
 Prior input is historical data; acceptance does not imply changed source, scientific
 validation, current approval or a shared understanding.
 For direct admissions, request_history preserves earlier requests for this task.
@@ -162,7 +166,7 @@ def build_instructions(execution_kind,task_type,*,checks=(),limits=None):
 def instruction_identity(instructions):
     """Describe only an actually recorded catalog header and complete text hash; historical unversioned policy stays unknown rather than being retroactively labelled."""
     match=re.match(r'RESEARCHER_POLICY (\d+) ([a-z_]+)\n\n',instructions)
-    if match is None or int(match[1]) not in (2,3,4,5,6,CATALOG_VERSION) or match[2] not in _PROFILES:return None
+    if match is None or int(match[1]) not in (2,3,4,5,6,7,CATALOG_VERSION) or match[2] not in _PROFILES:return None
     return {'catalog_version':int(match[1]),'profile':match[2],'sha256':hashlib.sha256(instructions.encode()).hexdigest()}
 
 

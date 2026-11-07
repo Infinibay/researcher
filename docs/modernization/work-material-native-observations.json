@@ -1,0 +1,160 @@
+{
+  "generation": "controlled_native_fixture",
+  "ken": "controlled_mcp_fixture",
+  "real_kernel_broker_git_sqlite": true,
+  "subscription_turns": 0,
+  "configured_max_tool_calls": 25,
+  "tool_count_source": "Actual emitted item/tool/call requests recorded independently by the controlled child; optional item/started events are not emitted by this fixture. This is not a budget enforcement proof.",
+  "runs": [
+    {
+      "task_id": 2003,
+      "input_bytes": 4262,
+      "tool_requests": 11,
+      "plan_reference": {
+        "authority": "attributed_context",
+        "bytes": 82630,
+        "content_read": false,
+        "kind": "object",
+        "read_before_reliance": true,
+        "read_tool": "researcher_work_context",
+        "section": "plan_context",
+        "sha256": "b16843769008396d06f733266f17496d07956f171aca311f246371ebc900a32e"
+      },
+      "reads": {
+        "work": {
+          "calls": 4,
+          "received_bytes": 665,
+          "selections": [
+            {
+              "path": [
+                "original_material",
+                "owner_request"
+              ],
+              "mode": "read",
+              "whole_section_read": false
+            },
+            {
+              "path": [
+                "original_material",
+                "project"
+              ],
+              "mode": "inspect",
+              "whole_section_read": false
+            },
+            {
+              "path": [
+                "original_material",
+                "project",
+                "description"
+              ],
+              "mode": "read",
+              "whole_section_read": false
+            },
+            {
+              "path": [
+                "accepted_plan",
+                "assumptions"
+              ],
+              "mode": "read",
+              "whole_section_read": false
+            }
+          ],
+          "receipt_sha256": "669d86b3b62d84fc4c9361129714e2dbe3e93fc1e59662860b8faeea719cd687"
+        }
+      }
+    },
+    {
+      "task_id": 2004,
+      "input_bytes": 5326,
+      "tool_requests": 12,
+      "plan_reference": {
+        "authority": "attributed_context",
+        "bytes": 82630,
+        "content_read": false,
+        "kind": "object",
+        "read_before_reliance": true,
+        "read_tool": "researcher_work_context",
+        "section": "plan_context",
+        "sha256": "b16843769008396d06f733266f17496d07956f171aca311f246371ebc900a32e"
+      },
+      "reads": {
+        "work": {
+          "calls": 4,
+          "received_bytes": 665,
+          "selections": [
+            {
+              "path": [
+                "original_material",
+                "owner_request"
+              ],
+              "mode": "read",
+              "whole_section_read": false
+            },
+            {
+              "path": [
+                "original_material",
+                "project"
+              ],
+              "mode": "inspect",
+              "whole_section_read": false
+            },
+            {
+              "path": [
+                "original_material",
+                "project",
+                "description"
+              ],
+              "mode": "read",
+              "whole_section_read": false
+            },
+            {
+              "path": [
+                "accepted_plan",
+                "assumptions"
+              ],
+              "mode": "read",
+              "whole_section_read": false
+            }
+          ],
+          "receipt_sha256": "db27f27efd7ed0cfd026613baf277f814ea61ed82bf545e32f581876bdb956c2"
+        },
+        "research": {
+          "calls": 4,
+          "received_bytes": 3072,
+          "selections": [
+            {
+              "path": [],
+              "mode": "inspect",
+              "whole_section_read": false
+            },
+            {
+              "path": [
+                "limitations"
+              ],
+              "mode": "read",
+              "whole_section_read": false
+            },
+            {
+              "path": [
+                "findings",
+                0
+              ],
+              "mode": "read",
+              "whole_section_read": false
+            },
+            {
+              "path": [
+                "sources",
+                0
+              ],
+              "mode": "read",
+              "whole_section_read": false
+            }
+          ],
+          "receipt_sha256": "9c3302d29d87654aa562b9fa357a5f8ccaa8ba4feeaceef2d96b61d078139980",
+          "reports_bytes": 399538
+        }
+      }
+    }
+  ]
+}

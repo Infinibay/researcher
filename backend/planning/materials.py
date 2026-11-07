@@ -133,7 +133,7 @@ class PredecessorMaterials:
                     self.describe(conn, source, expected_source=binding)
                 elif source['kind'] == 'accepted_research_reports':
                     self.describe_research(conn, lease.project_id, source)
-            return bool(sources)
+            return bool(sources) or packet['schema_version'] >= 5
 
     @staticmethod
     def _window(data, offset, max_bytes):
@@ -176,8 +176,10 @@ class PredecessorMaterials:
                     'section': section, 'authority': 'data_only', 'current_task_acceptance': 'not_granted',
                     'source_publication': 'not_implied', **self._window(data, offset, max_bytes)}
 
-    def read_research(self, lease, task_id, section='packet', *, report_id=None, offset=0, max_bytes=16384):
+    def read_research(self, lease, task_id, section='packet', *, report_id=None, path=(), mode='read', child_offset=0, offset=0, max_bytes=16384):
         """Read exact documentary bytes only through this attempt's bound predecessor, revalidating acceptance and evidence on every window."""
+        from backend.planning.material_views import select_material
+
         if type(task_id) is not int or task_id <= 0:
             raise ValueError('Select an actual prerequisite task identifier')
         if section not in ('packet', 'report', 'author_input'):
@@ -187,6 +189,8 @@ class PredecessorMaterials:
                 raise ValueError('Select an accepted report artifact identifier')
         elif report_id is not None:
             raise ValueError('A report identifier is only valid for the report section')
+        if section != 'packet' and (path or mode != 'read' or child_offset):
+            raise ValueError('JSON selection and inspection apply only to the accepted packet section')
         with self.runs._transaction() as conn:
             packet, _binding = self._bound(conn, lease)
             source = next((item for item in packet['prerequisites'] if item['task_id'] == task_id and item['kind'] == 'accepted_research_reports'), None) if packet else None
@@ -194,7 +198,7 @@ class PredecessorMaterials:
                 raise RunConflict('This attempt has no owner-authorized accepted research delivery for that task')
             subject = self._research_subject(conn, lease.project_id, source)
             if section == 'packet':
-                data = canonical(subject).encode()
+                data = select_material(subject, path=path, mode=mode, child_offset=child_offset)
             elif section == 'author_input':
                 data = self._research_input(conn, source)
                 if data is None:
@@ -206,9 +210,34 @@ class PredecessorMaterials:
                 data = report['content'].encode()
                 if hashlib.sha256(data).hexdigest() != report['content_sha256']:
                     raise RunConflict('Original predecessor report differs from its captured hash')
+            window = self._window(data, offset, max_bytes)
             return {'source': {'project_id': lease.project_id, 'task_id': task_id, 'run_id': source['run_id'],
                                'attempt_id': source['attempt_id'], 'subject_sha256': source['acceptance']['subject_sha256'],
                                'acceptance_id': source['acceptance']['id']},
                     'section': section, 'report_id': report_id, 'authority': 'data_only',
                     'current_task_acceptance': 'not_granted', 'source_publication': 'not_implied',
-                    **self._window(data, offset, max_bytes)}
+                    'selection': {'path': list(path), 'mode': mode, 'whole_section_read': not path and mode == 'read' and window['complete_material']},
+                    **window}
+
+    def read_work(self, lease, section, *, path=(), mode='read', child_offset=0, offset=0, max_bytes=16384):
+        """Read selected original plan or continuation evidence from this consumer's immutable delivery, rechecking owner decisions and closure before every read."""
+        from backend.planning.material_views import WORK_SECTIONS, describe_value, select_material
+
+        if section not in WORK_SECTIONS:
+            raise ValueError('Select plan_context, continuation or reauthorization')
+        with self.runs._transaction() as conn:
+            packet, _binding = self._bound(conn, lease)
+            if packet is None or section not in packet:
+                raise RunConflict('This attempt has no owner-authorized delivery section of that kind')
+            value = packet[section]
+            data = select_material(value, path=path, mode=mode, child_offset=child_offset)
+            window = self._window(data, offset, max_bytes)
+            return {
+                'source': {'project_id': lease.project_id, 'delivery_id': packet['delivery_id'],
+                           'execution_id': packet['execution_id'], 'target': packet['target'],
+                           'delivery_packet_sha256': describe_value(packet)['sha256'],
+                           'section_sha256': describe_value(value)['sha256']},
+                'section': section, 'authority': 'attributed_context', 'current_task_acceptance': 'not_granted',
+                'selection': {'path': list(path), 'mode': mode, 'whole_section_read': not path and mode == 'read' and window['complete_material']},
+                **window,
+            }

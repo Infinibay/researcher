@@ -36,6 +36,11 @@ research_predecessor = None
 research_material_bytes = bytearray()
 research_material_ready = False
 research_material_windows = 0
+selective_evidence = False
+work_reference = None
+work_pages = []
+work_ready = False
+research_selected_pages = []
 prior_selected_files = None
 code_prior_files = False
 review_subject = None
@@ -43,9 +48,15 @@ code_review_mode = False
 code_packet = code_file = None
 native_thread_id = "owned-thread"
 native_turn_id = "owned-turn"
+controlled_tool_requests = 0
 
 
 def send(message):
+    """Emit the controlled native protocol and retain the actual number of outgoing tool requests independently of optional start notifications."""
+    global controlled_tool_requests
+    if message.get('method') == 'item/tool/call':
+        controlled_tool_requests += 1
+        Path('/home/actor/.codex/fixture-tool-count.json').write_text(json.dumps({'requests': controlled_tool_requests}))
     print(json.dumps(message), flush=True)
 
 
@@ -68,6 +79,8 @@ def call(name, arguments):
 
 def next_tool(response=None):
     """Advance controlled author or reviewer generation while using the real admitted tool bridge."""
+    if work_reference is not None and not work_ready:
+        return next_work_context(response)
     if causal_task is not None and not causal_ready:
         return next_causal_material(response)
     if research_predecessor is not None and not research_material_ready:
@@ -174,7 +187,7 @@ def next_tool(response=None):
             {
                 "operation_key": "report",
                 "title": "Fixture inspection",
-                "content": "Inspección y cálculo acotado. El informe sigue siendo un borrador.",
+                "content": ("x" * 399000 + "\nFinal report qualification: do not infer individual measurements.") if selective_evidence else "Inspección y cálculo acotado. El informe sigue siendo un borrador.",
                 "finding_ids": [finding],
             },
         )
@@ -220,11 +233,77 @@ def next_tool(response=None):
         )
 
 
+def next_work_context(response=None):
+    """Exercise selective original-plan reads through real native calls, including an unread-prefix tail; this controlled fixture does not claim comprehension."""
+    global work_ready
+    requests = [
+        {'path': ['original_material', 'owner_request']},
+        {'path': ['original_material', 'project'], 'mode': 'inspect'},
+        {'path': ['original_material', 'project', 'description']},
+        {'path': ['accepted_plan', 'assumptions']},
+    ]
+    if response is not None:
+        assert response['success'], response
+        page = json.loads(response['contentItems'][0]['text'])
+        assert page['source']['section_sha256'] == work_reference['sha256']
+        assert page['selection']['whole_section_read'] is False
+        work_pages.append(page)
+        if len(work_pages) == 1:
+            assert 'Investigate the issue' in json.loads(base64.b64decode(page['data_base64']))
+        elif len(work_pages) == 3:
+            assert not page['complete_material'] and page['next_offset'] is None
+            assert b'do not modify the source repository' in base64.b64decode(page['data_base64'])
+        elif len(work_pages) == 4:
+            assert json.loads(base64.b64decode(page['data_base64']))
+            Path('/home/actor/.codex/fixture-selected-work.json').write_text(json.dumps(work_pages))
+            work_ready = True
+            return next_tool()
+    position = len(work_pages)
+    request = requests[position]
+    if position == 2:
+        index = json.loads(base64.b64decode(work_pages[1]['data_base64']))
+        descriptor = next(item for item in index['children'] if item['key'] == 'description')
+        request = {**request, 'offset': descriptor['bytes'] - 128}
+    identity = f'select-work-{position}'
+    send({'id': identity, 'method': 'item/tool/call', 'params': {
+        'threadId': native_thread_id, 'turnId': native_turn_id, 'callId': identity,
+        'tool': 'researcher_work_context', 'arguments': {'section': 'plan_context', **request},
+    }})
+
+
+def next_selected_research(response=None):
+    """Retrieve limitations and exact linked evidence without copying the large report body or raising this attempt's tool budget."""
+    global research_material_ready
+    requests = [{'mode': 'inspect'}, {'path': ['limitations']}, {'path': ['findings', 0]}, {'path': ['sources', 0]}]
+    if response is not None:
+        assert response['success'], response
+        page = json.loads(response['contentItems'][0]['text'])
+        assert page['complete_material'] and not page['selection']['whole_section_read']
+        assert page['source']['subject_sha256'] == research_predecessor['acceptance']['subject_sha256']
+        research_selected_pages.append(page)
+        if len(research_selected_pages) == len(requests):
+            values = [json.loads(base64.b64decode(item['data_base64'])) for item in research_selected_pages]
+            assert values[0]['content_read'] is False and values[1]
+            assert values[2]['evidence'][0]['source_id'] == values[3]['source']['id']
+            assert values[2]['evidence'][0]['quote'] in values[3]['source']['content']
+            Path('/home/actor/.codex/fixture-selected-research.json').write_text(json.dumps(research_selected_pages))
+            research_material_ready = True
+            return next_tool()
+    identity = f'select-research-{len(research_selected_pages)}'
+    send({'id': identity, 'method': 'item/tool/call', 'params': {
+        'threadId': native_thread_id, 'turnId': native_turn_id, 'callId': identity,
+        'tool': 'researcher_prerequisite_research',
+        'arguments': {'task_id': research_predecessor['task_id'], **requests[len(research_selected_pages)]},
+    }})
+
+
 def next_research_material(response=None):
     """Read exact documentary evidence through the real native bridge before development; controlled generation does not prove human or model comprehension."""
     import hashlib
 
     global research_material_ready, research_material_windows
+    if selective_evidence:
+        return next_selected_research(response)
     if response is not None:
         assert response['success'], response
         page = json.loads(response['contentItems'][0]['text'])
@@ -1044,6 +1123,10 @@ for line in sys.stdin:
         }
     elif method == "turn/start":
         Path("/home/actor/.codex/fixture-turn.json").write_text(json.dumps(params))
+        selective_evidence = Path('/run/researcher-source/.ken/selective-evidence').exists()
+        if selective_evidence:
+            initial = json.loads(params['input'][0]['text'])
+            work_reference = ((initial.get('work_delivery') or {}).get('plan_context') or {}).get('material_reference')
         if development_mode:
             initial = json.loads(params["input"][0]["text"])
             code_sources = [item for item in (initial.get('work_delivery') or {}).get('prerequisites', []) if item['kind']=='accepted_code_candidate']

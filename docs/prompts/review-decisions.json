@@ -74,7 +74,7 @@
       "revalidation": "Candidate AST/value unchanged. Direct consumers reviewed after extracting project metadata helpers and removing unused task event import and historical flow consumers; native authority and historical-template exclusion unchanged. See docs/architecture/native-flow-retirement.md."
     },
     "backend/knowledge/reviews.py::read_feedback": {
-      "dependencies_sha256": "9930945cafdab8e1a7d85fb7ee1ae40033f3a3afdb7d02d97a20e7290aa3f3cc",
+      "dependencies_sha256": "bfb0bbdb2e309a4cad3adbb107286508c9c7378494314b4dac47f9f322a3dc56",
       "decision": "retained_input_renderer",
       "rationale": "Read read_feedback and its two exact callers in Findings.reviews and SQLiteResearchStore.read_review: project/finding identity and bounded attributed old subjects survive. The authenticated caller checks findings.read in the same transaction; stored feedback never authorizes a new review. Static contract review only: not exhaustive dynamic-consumer proof, model efficacy, human understanding or whole-system acceptance.",
       "evidence": [
@@ -90,7 +90,7 @@
         "backend/tests/runtime/test_domain_resources.py"
       ],
       "conflicts": [],
-      "revalidation": "Candidate AST/value unchanged. Reviewed changed direct consumers: new research-material validation reuses existing canonical/result acceptance checks; native common policy adds bounded research reads without changing profile selection, feedback, authority or archived-prompt exclusion.",
+      "revalidation": "Selective-material review: candidate AST unchanged; changed consumers preserve prior authority/profile/feedback behavior while adding exact original context projections and selective reads.",
       "previous_review": {
         "dependencies_sha256": "b66b34d5d8b18599bb15a22c72ef7e77a107fa044b9f0d7c36bf45630c3d53af",
         "decision": "retained_input_renderer",
@@ -109,7 +109,7 @@
       "source_base_commit": "035b46c"
     },
     "backend/planning/instructions.py::PLANNING_INSTRUCTIONS": {
-      "dependencies_sha256": "ac7dd7d6ebc4734c63182ec4925ea79a44278d847fd97d6f207d2e750fc2186b",
+      "dependencies_sha256": "953e1c5d32a73417e6d671006b51b3bf0273f3986d1ccdfcd8ca55dbe9ec9473",
       "decision": "reviewed_native",
       "rationale": "Delta review against ab36dc5; preserve the earlier full semantic review below. Read the complete changed common policy and selector, exact owned factory call, native reply mediation and durable issue consumer. Catalog4 adds observed budget/delivery guidance, bounded discovery and faithful examples; exact initial limits enter the frozen instructions. Versions2/3 retain their recorded identity. This candidate source is byte-identical; only the native composition or owned factory consumer changed. Existing capability-specific prerequisites, source windows and permission boundaries still apply, including under delivery pressure. Directed source and installed tests verify budget/provenance/closure contracts, not general model compliance, scientific validity or human comprehension. Three development regressions are evaluated separately; prior reserved results are not replaced. Revalidated 2026-11-07 for catalog5: common delivery advice uses observed-increment margin, planner avoids redundant discovery and guessed source bounds, historical catalogs2/3/4 retain identity. Capabilities, prerequisites and hard ceilings unchanged. Source profile text unchanged except planning; composition and owned-runtime consumer read. Static review does not establish model efficacy. Corrected after the retained planning trial: Ken source defaults return selected symbols, not necessarily a complete file. Whole-file requirements still need actual covering ranges. This final wording has no new live efficacy claim.",
       "evidence": [
@@ -246,12 +246,12 @@
           "source_base_commit": "ab36dc5"
         }
       ],
-      "revalidation": "Candidate AST/value unchanged. Reviewed changed direct consumers: new research-material validation reuses existing canonical/result acceptance checks; native common policy adds bounded research reads without changing profile selection, feedback, authority or archived-prompt exclusion. Follow-up: instruction_identity explicitly retains historical catalog6 while new output uses7; other candidate ASTs unchanged from the documentary-window review. Five historical versions are parametrized in test_prompt_catalog."
+      "revalidation": "Selective-material review: candidate AST unchanged; changed consumers preserve prior authority/profile/feedback behavior while adding exact original context projections and selective reads."
     },
     "backend/prompts/native.py::COMMON_INSTRUCTIONS": {
-      "dependencies_sha256": "e85e8a518296dc9fdcb3edb1e34d937ccbac245585b6946795420e79bb84d26b",
+      "dependencies_sha256": "28ee48cf81b459e44fff5d4777569c8d45127329c5bcacfcd219a8aa6e0df269",
       "decision": "retained_and_revised",
-      "rationale": "Delta review against ab36dc5; preserve the earlier full semantic review below. Read the complete changed common policy and selector, exact owned factory call, native reply mediation and durable issue consumer. Catalog4 adds observed budget/delivery guidance, bounded discovery and faithful examples; exact initial limits enter the frozen instructions. Versions2/3 retain their recorded identity. This candidate changed in the common catalog; capability selection and source-specific authority remain unchanged. Directed source and installed tests verify budget/provenance/closure contracts, not general model compliance, scientific validity or human comprehension. Three development regressions are evaluated separately; prior reserved results are not replaced. Revalidated 2026-11-07 for catalog5: common delivery advice uses observed-increment margin, planner avoids redundant discovery and guessed source bounds, historical catalogs2/3/4 retain identity. Capabilities, prerequisites and hard ceilings unchanged. Source profile text unchanged except planning; composition and owned-runtime consumer read. Static review does not establish model efficacy. Reviewed documentary windows: packet sources/limitations must be read before relying on reports. Descriptor, unread material, historical input and actual current authority are distinct. Existing correction and scientific-evidence requirements remain intact.",
+      "rationale": "Delta review against ab36dc5; preserve the earlier full semantic review below. Read the complete changed common policy and selector, exact owned factory call, native reply mediation and durable issue consumer. Catalog4 adds observed budget/delivery guidance, bounded discovery and faithful examples; exact initial limits enter the frozen instructions. Versions2/3 retain their recorded identity. This candidate changed in the common catalog; capability selection and source-specific authority remain unchanged. Directed source and installed tests verify budget/provenance/closure contracts, not general model compliance, scientific validity or human comprehension. Three development regressions are evaluated separately; prior reserved results are not replaced. Revalidated 2026-11-07 for catalog5: common delivery advice uses observed-increment margin, planner avoids redundant discovery and guessed source bounds, historical catalogs2/3/4 retain identity. Capabilities, prerequisites and hard ceilings unchanged. Source profile text unchanged except planning; composition and owned-runtime consumer read. Static review does not establish model efficacy. Reviewed documentary windows: packet sources/limitations must be read before relying on reports. Descriptor, unread material, historical input and actual current authority are distinct. Existing correction and scientific-evidence requirements remain intact. Selective-material review: inspected changed candidate: schema5 large historical sections become explicit retrievable references; selective reads do not claim whole-body comprehension. Catalog8 preserves original identities2–7. Current task input/history is unchanged and older deliveries keep their original shape.",
       "evidence": [
         "backend/prompts/native.py",
         "docs/prompts/review-2026-11-07.md",
@@ -357,10 +357,10 @@
           "source_base_commit": "ab36dc5"
         }
       ],
-      "revalidation": "Reviewed documentary windows: packet sources/limitations must be read before relying on reports. Descriptor, unread material, historical input and actual current authority are distinct. Existing correction and scientific-evidence requirements remain intact. Follow-up: instruction_identity explicitly retains historical catalog6 while new output uses7; other candidate ASTs unchanged from the documentary-window review. Five historical versions are parametrized in test_prompt_catalog."
+      "revalidation": "Selective-material review: inspected changed candidate: schema5 large historical sections become explicit retrievable references; selective reads do not claim whole-body comprehension. Catalog8 preserves original identities2–7. Current task input/history is unchanged and older deliveries keep their original shape."
     },
     "backend/prompts/native.py::SOURCE_INSTRUCTIONS": {
-      "dependencies_sha256": "e85e8a518296dc9fdcb3edb1e34d937ccbac245585b6946795420e79bb84d26b",
+      "dependencies_sha256": "28ee48cf81b459e44fff5d4777569c8d45127329c5bcacfcd219a8aa6e0df269",
       "decision": "retained",
       "rationale": "Delta review against ab36dc5; preserve the earlier full semantic review below. Read the complete changed common policy and selector, exact owned factory call, native reply mediation and durable issue consumer. Catalog4 adds observed budget/delivery guidance, bounded discovery and faithful examples; exact initial limits enter the frozen instructions. Versions2/3 retain their recorded identity. This candidate changed in the common catalog; capability selection and source-specific authority remain unchanged. Directed source and installed tests verify budget/provenance/closure contracts, not general model compliance, scientific validity or human comprehension. Three development regressions are evaluated separately; prior reserved results are not replaced. Revalidated 2026-11-07 for catalog5: common delivery advice uses observed-increment margin, planner avoids redundant discovery and guessed source bounds, historical catalogs2/3/4 retain identity. Capabilities, prerequisites and hard ceilings unchanged. Source profile text unchanged except planning; composition and owned-runtime consumer read. Static review does not establish model efficacy.",
       "evidence": [
@@ -468,10 +468,10 @@
           "source_base_commit": "ab36dc5"
         }
       ],
-      "revalidation": "Candidate AST/value unchanged. Reviewed changed direct consumers: new research-material validation reuses existing canonical/result acceptance checks; native common policy adds bounded research reads without changing profile selection, feedback, authority or archived-prompt exclusion. Follow-up: instruction_identity explicitly retains historical catalog6 while new output uses7; other candidate ASTs unchanged from the documentary-window review. Five historical versions are parametrized in test_prompt_catalog."
+      "revalidation": "Selective-material review: candidate AST unchanged; changed consumers preserve prior authority/profile/feedback behavior while adding exact original context projections and selective reads."
     },
     "backend/prompts/native.py::build_instructions": {
-      "dependencies_sha256": "e85e8a518296dc9fdcb3edb1e34d937ccbac245585b6946795420e79bb84d26b",
+      "dependencies_sha256": "28ee48cf81b459e44fff5d4777569c8d45127329c5bcacfcd219a8aa6e0df269",
       "decision": "retained",
       "rationale": "Delta review against ab36dc5; preserve the earlier full semantic review below. Read the complete changed common policy and selector, exact owned factory call, native reply mediation and durable issue consumer. Catalog4 adds observed budget/delivery guidance, bounded discovery and faithful examples; exact initial limits enter the frozen instructions. Versions2/3 retain their recorded identity. This candidate changed in the common catalog; capability selection and source-specific authority remain unchanged. Directed source and installed tests verify budget/provenance/closure contracts, not general model compliance, scientific validity or human comprehension. Three development regressions are evaluated separately; prior reserved results are not replaced. Revalidated 2026-11-07 for catalog5: common delivery advice uses observed-increment margin, planner avoids redundant discovery and guessed source bounds, historical catalogs2/3/4 retain identity. Capabilities, prerequisites and hard ceilings unchanged. Source profile text unchanged except planning; composition and owned-runtime consumer read. Static review does not establish model efficacy.",
       "evidence": [
@@ -579,12 +579,12 @@
           "source_base_commit": "ab36dc5"
         }
       ],
-      "revalidation": "Candidate AST/value unchanged. Reviewed changed direct consumers: new research-material validation reuses existing canonical/result acceptance checks; native common policy adds bounded research reads without changing profile selection, feedback, authority or archived-prompt exclusion. Follow-up: instruction_identity explicitly retains historical catalog6 while new output uses7; other candidate ASTs unchanged from the documentary-window review. Five historical versions are parametrized in test_prompt_catalog."
+      "revalidation": "Selective-material review: candidate AST unchanged; changed consumers preserve prior authority/profile/feedback behavior while adding exact original context projections and selective reads."
     },
     "backend/prompts/native.py::instruction_identity": {
-      "dependencies_sha256": "e85e8a518296dc9fdcb3edb1e34d937ccbac245585b6946795420e79bb84d26b",
+      "dependencies_sha256": "28ee48cf81b459e44fff5d4777569c8d45127329c5bcacfcd219a8aa6e0df269",
       "decision": "retained",
-      "rationale": "Delta review against ab36dc5; preserve the earlier full semantic review below. Read the complete changed common policy and selector, exact owned factory call, native reply mediation and durable issue consumer. Catalog4 adds observed budget/delivery guidance, bounded discovery and faithful examples; exact initial limits enter the frozen instructions. Versions2/3 retain their recorded identity. This candidate changed in the common catalog; capability selection and source-specific authority remain unchanged. Directed source and installed tests verify budget/provenance/closure contracts, not general model compliance, scientific validity or human comprehension. Three development regressions are evaluated separately; prior reserved results are not replaced. Revalidated 2026-11-07 for catalog5: common delivery advice uses observed-increment margin, planner avoids redundant discovery and guessed source bounds, historical catalogs2/3/4 retain identity. Capabilities, prerequisites and hard ceilings unchanged. Source profile text unchanged except planning; composition and owned-runtime consumer read. Static review does not establish model efficacy.",
+      "rationale": "Delta review against ab36dc5; preserve the earlier full semantic review below. Read the complete changed common policy and selector, exact owned factory call, native reply mediation and durable issue consumer. Catalog4 adds observed budget/delivery guidance, bounded discovery and faithful examples; exact initial limits enter the frozen instructions. Versions2/3 retain their recorded identity. This candidate changed in the common catalog; capability selection and source-specific authority remain unchanged. Directed source and installed tests verify budget/provenance/closure contracts, not general model compliance, scientific validity or human comprehension. Three development regressions are evaluated separately; prior reserved results are not replaced. Revalidated 2026-11-07 for catalog5: common delivery advice uses observed-increment margin, planner avoids redundant discovery and guessed source bounds, historical catalogs2/3/4 retain identity. Capabilities, prerequisites and hard ceilings unchanged. Source profile text unchanged except planning; composition and owned-runtime consumer read. Static review does not establish model efficacy. Selective-material review: inspected changed candidate: schema5 large historical sections become explicit retrievable references; selective reads do not claim whole-body comprehension. Catalog8 preserves original identities2–7. Current task input/history is unchanged and older deliveries keep their original shape.",
       "evidence": [
         "backend/prompts/native.py",
         "docs/prompts/review-2026-11-07.md",
@@ -690,10 +690,10 @@
           "source_base_commit": "ab36dc5"
         }
       ],
-      "revalidation": "Candidate AST/value unchanged. Reviewed changed direct consumers: new research-material validation reuses existing canonical/result acceptance checks; native common policy adds bounded research reads without changing profile selection, feedback, authority or archived-prompt exclusion. Follow-up: instruction_identity explicitly retains historical catalog6 while new output uses7; other candidate ASTs unchanged from the documentary-window review. Five historical versions are parametrized in test_prompt_catalog."
+      "revalidation": "Selective-material review: inspected changed candidate: schema5 large historical sections become explicit retrievable references; selective reads do not claim whole-body comprehension. Catalog8 preserves original identities2–7. Current task input/history is unchanged and older deliveries keep their original shape."
     },
     "backend/prompts/native.py::GENERIC_INSTRUCTIONS": {
-      "dependencies_sha256": "e85e8a518296dc9fdcb3edb1e34d937ccbac245585b6946795420e79bb84d26b",
+      "dependencies_sha256": "28ee48cf81b459e44fff5d4777569c8d45127329c5bcacfcd219a8aa6e0df269",
       "decision": "retained",
       "rationale": "Delta review against ab36dc5; preserve the earlier full semantic review below. Read the complete changed common policy and selector, exact owned factory call, native reply mediation and durable issue consumer. Catalog4 adds observed budget/delivery guidance, bounded discovery and faithful examples; exact initial limits enter the frozen instructions. Versions2/3 retain their recorded identity. This candidate changed in the common catalog; capability selection and source-specific authority remain unchanged. Directed source and installed tests verify budget/provenance/closure contracts, not general model compliance, scientific validity or human comprehension. Three development regressions are evaluated separately; prior reserved results are not replaced. Revalidated 2026-11-07 for catalog5: common delivery advice uses observed-increment margin, planner avoids redundant discovery and guessed source bounds, historical catalogs2/3/4 retain identity. Capabilities, prerequisites and hard ceilings unchanged. Source profile text unchanged except planning; composition and owned-runtime consumer read. Static review does not establish model efficacy.",
       "evidence": [
@@ -801,7 +801,7 @@
           "source_base_commit": "ab36dc5"
         }
       ],
-      "revalidation": "Candidate AST/value unchanged. Reviewed changed direct consumers: new research-material validation reuses existing canonical/result acceptance checks; native common policy adds bounded research reads without changing profile selection, feedback, authority or archived-prompt exclusion. Follow-up: instruction_identity explicitly retains historical catalog6 while new output uses7; other candidate ASTs unchanged from the documentary-window review. Five historical versions are parametrized in test_prompt_catalog."
+      "revalidation": "Selective-material review: candidate AST unchanged; changed consumers preserve prior authority/profile/feedback behavior while adding exact original context projections and selective reads."
     },
     "backend/research/stdio_server.py::main.description@93": {
       "dependencies_sha256": "37d0a82d854ea51389652d84bcc1d95955e0d1e71a446edeb9707aa22a6b6333",
@@ -1865,7 +1865,7 @@
       "source_base_commit": "035b46c"
     },
     "backend/runtime/code_audit_instructions.py::CODE_AUDIT_INSTRUCTIONS": {
-      "dependencies_sha256": "7de8f1d1ccd6ab937b49e5b833c9a756f521252f81773e99f1c6a07222c27329",
+      "dependencies_sha256": "894ae33e93269e4f5103180ab5072e0e33fac348abaf3e3cf232ba260ced6193",
       "decision": "rewritten",
       "rationale": "Delta review against ab36dc5; preserve the earlier full semantic review below. Read the complete changed common policy and selector, exact owned factory call, native reply mediation and durable issue consumer. Catalog4 adds observed budget/delivery guidance, bounded discovery and faithful examples; exact initial limits enter the frozen instructions. Versions2/3 retain their recorded identity. This candidate source is byte-identical; only the native composition or owned factory consumer changed. Existing capability-specific prerequisites, source windows and permission boundaries still apply, including under delivery pressure. Directed source and installed tests verify budget/provenance/closure contracts, not general model compliance, scientific validity or human comprehension. Three development regressions are evaluated separately; prior reserved results are not replaced. Revalidated 2026-11-07 for catalog5: common delivery advice uses observed-increment margin, planner avoids redundant discovery and guessed source bounds, historical catalogs2/3/4 retain identity. Capabilities, prerequisites and hard ceilings unchanged. Source profile text unchanged except planning; composition and owned-runtime consumer read. Static review does not establish model efficacy.",
       "evidence": [
@@ -1963,7 +1963,7 @@
           "source_base_commit": "ab36dc5"
         }
       ],
-      "revalidation": "Candidate AST/value unchanged. Reviewed changed direct consumers: new research-material validation reuses existing canonical/result acceptance checks; native common policy adds bounded research reads without changing profile selection, feedback, authority or archived-prompt exclusion. Follow-up: instruction_identity explicitly retains historical catalog6 while new output uses7; other candidate ASTs unchanged from the documentary-window review. Five historical versions are parametrized in test_prompt_catalog."
+      "revalidation": "Selective-material review: candidate AST unchanged; changed consumers preserve prior authority/profile/feedback behavior while adding exact original context projections and selective reads."
     },
     "backend/runtime/code_mode_payload.py::description@102": {
       "dependencies_sha256": "85eecfee03c57fd02de8c40076c25a3008ef6120ab4bffa623ec79b86f078fc1",
@@ -1977,7 +1977,7 @@
       "conflicts": []
     },
     "backend/runtime/code_review_instructions.py::CODE_REVIEW_INSTRUCTIONS": {
-      "dependencies_sha256": "3df876f259b0c50a08085dc934b0112ad81cd8a68d428f91218649cb6912904d",
+      "dependencies_sha256": "5254330215c9f2b5517f1c1b9b05aae2c94436fe3ad7af75425758ad762bfeb1",
       "decision": "rewritten",
       "rationale": "Delta review against ab36dc5; preserve the earlier full semantic review below. Read the complete changed common policy and selector, exact owned factory call, native reply mediation and durable issue consumer. Catalog4 adds observed budget/delivery guidance, bounded discovery and faithful examples; exact initial limits enter the frozen instructions. Versions2/3 retain their recorded identity. This candidate source is byte-identical; only the native composition or owned factory consumer changed. Existing capability-specific prerequisites, source windows and permission boundaries still apply, including under delivery pressure. Directed source and installed tests verify budget/provenance/closure contracts, not general model compliance, scientific validity or human comprehension. Three development regressions are evaluated separately; prior reserved results are not replaced. Revalidated 2026-11-07 for catalog5: common delivery advice uses observed-increment margin, planner avoids redundant discovery and guessed source bounds, historical catalogs2/3/4 retain identity. Capabilities, prerequisites and hard ceilings unchanged. Source profile text unchanged except planning; composition and owned-runtime consumer read. Static review does not establish model efficacy.",
       "evidence": [
@@ -2075,7 +2075,7 @@
           "source_base_commit": "ab36dc5"
         }
       ],
-      "revalidation": "Candidate AST/value unchanged. Reviewed changed direct consumers: new research-material validation reuses existing canonical/result acceptance checks; native common policy adds bounded research reads without changing profile selection, feedback, authority or archived-prompt exclusion. Follow-up: instruction_identity explicitly retains historical catalog6 while new output uses7; other candidate ASTs unchanged from the documentary-window review. Five historical versions are parametrized in test_prompt_catalog."
+      "revalidation": "Selective-material review: candidate AST unchanged; changed consumers preserve prior authority/profile/feedback behavior while adding exact original context projections and selective reads."
     },
     "backend/runtime/code_review_tools.py::_TOOLS": {
       "dependencies_sha256": "1c80a8aa65700c7fcc361d74e1c81c9784a8400a7797730bf4ae1691ffd26375",
@@ -2153,7 +2153,7 @@
       ]
     },
     "backend/runtime/investigation_instructions.py::INVESTIGATION_INSTRUCTIONS": {
-      "dependencies_sha256": "e04f9d8557b1dc0a78ccc3a28f2287cf2126c65e772703c4e071a049b2a62791",
+      "dependencies_sha256": "7311eb978d6e020aa8bf96e33c297d27467431124098221f28a848a0be94bf73",
       "decision": "rewritten",
       "rationale": "Delta review against ab36dc5; preserve the earlier full semantic review below. Read the complete changed common policy and selector, exact owned factory call, native reply mediation and durable issue consumer. Catalog4 adds observed budget/delivery guidance, bounded discovery and faithful examples; exact initial limits enter the frozen instructions. Versions2/3 retain their recorded identity. This candidate source is byte-identical; only the native composition or owned factory consumer changed. Existing capability-specific prerequisites, source windows and permission boundaries still apply, including under delivery pressure. Directed source and installed tests verify budget/provenance/closure contracts, not general model compliance, scientific validity or human comprehension. Three development regressions are evaluated separately; prior reserved results are not replaced. Revalidated 2026-11-07 for catalog5: common delivery advice uses observed-increment margin, planner avoids redundant discovery and guessed source bounds, historical catalogs2/3/4 retain identity. Capabilities, prerequisites and hard ceilings unchanged. Source profile text unchanged except planning; composition and owned-runtime consumer read. Static review does not establish model efficacy.",
       "evidence": [
@@ -2251,10 +2251,10 @@
           "source_base_commit": "ab36dc5"
         }
       ],
-      "revalidation": "Candidate AST/value unchanged. Reviewed changed direct consumers: new research-material validation reuses existing canonical/result acceptance checks; native common policy adds bounded research reads without changing profile selection, feedback, authority or archived-prompt exclusion. Follow-up: instruction_identity explicitly retains historical catalog6 while new output uses7; other candidate ASTs unchanged from the documentary-window review. Five historical versions are parametrized in test_prompt_catalog."
+      "revalidation": "Selective-material review: candidate AST unchanged; changed consumers preserve prior authority/profile/feedback behavior while adding exact original context projections and selective reads."
     },
     "backend/runtime/review_instructions.py::REVIEW_INSTRUCTIONS": {
-      "dependencies_sha256": "822f7658fe83a08231880f3a063311b28cc5b850d06b480ee1d6abc05f8673d7",
+      "dependencies_sha256": "0c052f5e9fff7de8939bf06591e413284b45bc78210afbcb14d1dd691e0f43c9",
       "decision": "rewritten",
       "rationale": "Delta review against ab36dc5; preserve the earlier full semantic review below. Read the complete changed common policy and selector, exact owned factory call, native reply mediation and durable issue consumer. Catalog4 adds observed budget/delivery guidance, bounded discovery and faithful examples; exact initial limits enter the frozen instructions. Versions2/3 retain their recorded identity. This candidate source is byte-identical; only the native composition or owned factory consumer changed. Existing capability-specific prerequisites, source windows and permission boundaries still apply, including under delivery pressure. Directed source and installed tests verify budget/provenance/closure contracts, not general model compliance, scientific validity or human comprehension. Three development regressions are evaluated separately; prior reserved results are not replaced. Revalidated 2026-11-07 for catalog5: common delivery advice uses observed-increment margin, planner avoids redundant discovery and guessed source bounds, historical catalogs2/3/4 retain identity. Capabilities, prerequisites and hard ceilings unchanged. Source profile text unchanged except planning; composition and owned-runtime consumer read. Static review does not establish model efficacy.",
       "evidence": [
@@ -2352,10 +2352,10 @@
           "source_base_commit": "ab36dc5"
         }
       ],
-      "revalidation": "Candidate AST/value unchanged. Reviewed changed direct consumers: new research-material validation reuses existing canonical/result acceptance checks; native common policy adds bounded research reads without changing profile selection, feedback, authority or archived-prompt exclusion. Follow-up: instruction_identity explicitly retains historical catalog6 while new output uses7; other candidate ASTs unchanged from the documentary-window review. Five historical versions are parametrized in test_prompt_catalog."
+      "revalidation": "Selective-material review: candidate AST unchanged; changed consumers preserve prior authority/profile/feedback behavior while adding exact original context projections and selective reads."
     },
     "backend/runtime/run_inputs.py::conversation_history": {
-      "dependencies_sha256": "aaeb6b41862ab181af0c707c77c2f2697bc6a1493dc7c698de1113d186b3d3d8",
+      "dependencies_sha256": "a038798d899f4ad98081c2cd4e15abaae147ff3b15799fe24c1a02868e926a8c",
       "decision": "retained_input_renderer",
       "rationale": "Read conversation_history, task_request_history and freeze_input, plus the real SQLiteRunStore snapshot caller. Direct same-task admission history has causal row-order cutoff and no renewed authority; selected conversations preserve their reset. Original text/hash and strict size rejection remain, without hidden summarization or invented comprehension. Static contract review only: not exhaustive dynamic-consumer proof, model efficacy, human understanding or whole-system acceptance.",
       "evidence": [
@@ -2383,12 +2383,13 @@
         "conflicts": []
       },
       "reviewed_at": "2026-11-07",
-      "source_base_commit": "035b46c"
+      "source_base_commit": "035b46c",
+      "revalidation": "Selective-material review: candidate AST unchanged; changed consumers preserve prior authority/profile/feedback behavior while adding exact original context projections and selective reads."
     },
     "backend/runtime/run_inputs.py::freeze_input": {
-      "dependencies_sha256": "aaeb6b41862ab181af0c707c77c2f2697bc6a1493dc7c698de1113d186b3d3d8",
+      "dependencies_sha256": "a038798d899f4ad98081c2cd4e15abaae147ff3b15799fe24c1a02868e926a8c",
       "decision": "retained_input_renderer",
-      "rationale": "Read conversation_history, task_request_history and freeze_input, plus the real SQLiteRunStore snapshot caller. Direct same-task admission history has causal row-order cutoff and no renewed authority; selected conversations preserve their reset. Original text/hash and strict size rejection remain, without hidden summarization or invented comprehension. Static contract review only: not exhaustive dynamic-consumer proof, model efficacy, human understanding or whole-system acceptance.",
+      "rationale": "Read conversation_history, task_request_history and freeze_input, plus the real SQLiteRunStore snapshot caller. Direct same-task admission history has causal row-order cutoff and no renewed authority; selected conversations preserve their reset. Original text/hash and strict size rejection remain, without hidden summarization or invented comprehension. Static contract review only: not exhaustive dynamic-consumer proof, model efficacy, human understanding or whole-system acceptance. Selective-material review: inspected changed candidate: schema5 large historical sections become explicit retrievable references; selective reads do not claim whole-body comprehension. Catalog8 preserves original identities2–7. Current task input/history is unchanged and older deliveries keep their original shape.",
       "evidence": [
         "backend/runtime/run_inputs.py",
         "docs/prompts/review-2026-11-07.md",
@@ -2414,10 +2415,11 @@
         "conflicts": []
       },
       "reviewed_at": "2026-11-07",
-      "source_base_commit": "035b46c"
+      "source_base_commit": "035b46c",
+      "revalidation": "Selective-material review: inspected changed candidate: schema5 large historical sections become explicit retrievable references; selective reads do not claim whole-body comprehension. Catalog8 preserves original identities2–7. Current task input/history is unchanged and older deliveries keep their original shape."
     },
     "backend/runtime/scientific_instructions.py::SCIENTIFIC_RESEARCH_INSTRUCTIONS": {
-      "dependencies_sha256": "8e2a3e890b14fca986fd1fdb8d812899e48e44e3ec7eef33620b1f5ce7c3f212",
+      "dependencies_sha256": "4c754c3273c23d23b4ecc1b2e69828aa948ab1b3b2c1ee62501a0f86aa513a22",
       "decision": "retained",
       "rationale": "Delta review against ab36dc5; preserve the earlier full semantic review below. Read the complete changed common policy and selector, exact owned factory call, native reply mediation and durable issue consumer. Catalog4 adds observed budget/delivery guidance, bounded discovery and faithful examples; exact initial limits enter the frozen instructions. Versions2/3 retain their recorded identity. This candidate source is byte-identical; only the native composition or owned factory consumer changed. Existing capability-specific prerequisites, source windows and permission boundaries still apply, including under delivery pressure. Directed source and installed tests verify budget/provenance/closure contracts, not general model compliance, scientific validity or human comprehension. Three development regressions are evaluated separately; prior reserved results are not replaced. Revalidated 2026-11-07 for catalog5: common delivery advice uses observed-increment margin, planner avoids redundant discovery and guessed source bounds, historical catalogs2/3/4 retain identity. Capabilities, prerequisites and hard ceilings unchanged. Source profile text unchanged except planning; composition and owned-runtime consumer read. Static review does not establish model efficacy.",
       "evidence": [
@@ -2515,7 +2517,7 @@
           "source_base_commit": "ab36dc5"
         }
       ],
-      "revalidation": "Candidate AST/value unchanged. Reviewed changed direct consumers: new research-material validation reuses existing canonical/result acceptance checks; native common policy adds bounded research reads without changing profile selection, feedback, authority or archived-prompt exclusion. Follow-up: instruction_identity explicitly retains historical catalog6 while new output uses7; other candidate ASTs unchanged from the documentary-window review. Five historical versions are parametrized in test_prompt_catalog."
+      "revalidation": "Selective-material review: candidate AST unchanged; changed consumers preserve prior authority/profile/feedback behavior while adding exact original context projections and selective reads."
     },
     "scripts/audit_prompt_inventory.py::PROMPT_NAME": {
       "dependencies_sha256": "67d88e945331a7ae0b85d8ba93039652cf68914c0cf4c181df25bd8f529bba31",
@@ -3162,7 +3164,7 @@
       "source_base_commit": "035b46c"
     },
     "backend/runtime/development_policy.py::development_instructions": {
-      "dependencies_sha256": "1d532b339c5f299fce6945cb67b2b24e34e0aeda0b292e0cd508b41d16dc91b7",
+      "dependencies_sha256": "7df9c8391d608db68b7affad990aa8a87ec9e54975075d173f9e9f1fb1af92f5",
       "decision": "retained",
       "rationale": "Delta review against ab36dc5; preserve the earlier full semantic review below. Read the complete changed common policy and selector, exact owned factory call, native reply mediation and durable issue consumer. Catalog4 adds observed budget/delivery guidance, bounded discovery and faithful examples; exact initial limits enter the frozen instructions. Versions2/3 retain their recorded identity. This candidate source is byte-identical; only the native composition or owned factory consumer changed. Existing capability-specific prerequisites, source windows and permission boundaries still apply, including under delivery pressure. Directed source and installed tests verify budget/provenance/closure contracts, not general model compliance, scientific validity or human comprehension. Three development regressions are evaluated separately; prior reserved results are not replaced. Revalidated 2026-11-07 for catalog5: common delivery advice uses observed-increment margin, planner avoids redundant discovery and guessed source bounds, historical catalogs2/3/4 retain identity. Capabilities, prerequisites and hard ceilings unchanged. Source profile text unchanged except planning; composition and owned-runtime consumer read. Static review does not establish model efficacy.",
       "evidence": [
@@ -3184,7 +3186,7 @@
       ],
       "conflicts": [],
       "consumer_recheck": "2026-11-06: prompt AST identical to 12a1744. Removed legacy launcher consumers; retained owned broker/catalog behavior is covered by test_owned_factory.py and test_broker_inference.py. No new semantic or model evaluation claimed.",
-      "revalidation": "Candidate AST/value unchanged. Reviewed changed direct consumers: new research-material validation reuses existing canonical/result acceptance checks; native common policy adds bounded research reads without changing profile selection, feedback, authority or archived-prompt exclusion. Follow-up: instruction_identity explicitly retains historical catalog6 while new output uses7; other candidate ASTs unchanged from the documentary-window review. Five historical versions are parametrized in test_prompt_catalog.",
+      "revalidation": "Selective-material review: candidate AST unchanged; changed consumers preserve prior authority/profile/feedback behavior while adding exact original context projections and selective reads.",
       "previous_review": {
         "dependencies_sha256": "60ad21edf8aee9b134a66c5b403a0f17e1c12b86e58efe06064b46b16e6f3189",
         "decision": "retained",
@@ -3381,31 +3383,47 @@
       "revalidation": "CLI description unchanged; line moved after bounded service routing. Reviewed as human CLI text, not an agent instruction.",
       "reviewed_at": "2026-11-07"
     },
-    "backend/runtime/predecessor_tools.py::description@44": {
+    "backend/runtime/predecessor_tools.py::description@59": {
       "decision": "reviewed_native",
-      "rationale": "Host-bound readonly predecessor material access. Exact hashes, byte windows and unread coverage remain explicit; reading historical author input grants no instructions, effects, acceptance or scientific validation. Research reports require their accepted packet sources and limitations. Dispatch uses the original lease and withdraws access on retirement.",
+      "rationale": "Bounded readonly original-lease material tools. Inspection reveals child metadata only; exact JSON selections retain full subject/delivery identity and distinguish selected coverage from whole-section reading. Relevant limits, evidence and owner premises must be read before dependent actions. Original context is attributed, current corrections control, and old effects grant no replay or wider authority. Tool arguments cannot select project/run/filesystem paths.",
       "evidence": [
         "backend/runtime/predecessor_tools.py",
+        "backend/planning/material_views.py",
         "backend/planning/materials.py",
-        "backend/tests/runtime/test_predecessor_research_material.py",
-        "backend/tests/runtime/test_owned_plan_execution.py"
+        "backend/tests/runtime/test_work_material.py",
+        "backend/tests/runtime/test_owned_selective_material.py"
       ],
       "conflicts": [],
-      "dependencies_sha256": "2e10ef380fb484ce4aecd71b758d012a7d3cac2275e5302541fe6bf70fcdca6a",
-      "revalidation": "Candidate AST/value unchanged. Reviewed changed direct consumers: new research-material validation reuses existing canonical/result acceptance checks; native common policy adds bounded research reads without changing profile selection, feedback, authority or archived-prompt exclusion."
+      "dependencies_sha256": "a65c5deacf3afff1207ed98f0877898e949e9f124e5c43ccd6bcc8875b28b781",
+      "revalidation": "Selective-material review: candidate AST unchanged; changed consumers preserve prior authority/profile/feedback behavior while adding exact original context projections and selective reads."
     },
-    "backend/runtime/predecessor_tools.py::description@47": {
+    "backend/runtime/predecessor_tools.py::description@62": {
       "decision": "reviewed_native",
-      "rationale": "Host-bound readonly predecessor material access. Exact hashes, byte windows and unread coverage remain explicit; reading historical author input grants no instructions, effects, acceptance or scientific validation. Research reports require their accepted packet sources and limitations. Dispatch uses the original lease and withdraws access on retirement.",
+      "rationale": "Bounded readonly original-lease material tools. Inspection reveals child metadata only; exact JSON selections retain full subject/delivery identity and distinguish selected coverage from whole-section reading. Relevant limits, evidence and owner premises must be read before dependent actions. Original context is attributed, current corrections control, and old effects grant no replay or wider authority. Tool arguments cannot select project/run/filesystem paths.",
       "evidence": [
         "backend/runtime/predecessor_tools.py",
+        "backend/planning/material_views.py",
         "backend/planning/materials.py",
-        "backend/tests/runtime/test_predecessor_research_material.py",
-        "backend/tests/runtime/test_owned_plan_execution.py"
+        "backend/tests/runtime/test_work_material.py",
+        "backend/tests/runtime/test_owned_selective_material.py"
       ],
       "conflicts": [],
-      "dependencies_sha256": "2e10ef380fb484ce4aecd71b758d012a7d3cac2275e5302541fe6bf70fcdca6a",
-      "revalidation": "Reviewed documentary windows: packet sources/limitations must be read before relying on reports. Descriptor, unread material, historical input and actual current authority are distinct. Existing correction and scientific-evidence requirements remain intact."
+      "dependencies_sha256": "a65c5deacf3afff1207ed98f0877898e949e9f124e5c43ccd6bcc8875b28b781",
+      "revalidation": "Selective-material review: inspected changed candidate: schema5 large historical sections become explicit retrievable references; selective reads do not claim whole-body comprehension. Catalog8 preserves original identities2–7. Current task input/history is unchanged and older deliveries keep their original shape."
+    },
+    "backend/runtime/predecessor_tools.py::description@65": {
+      "decision": "reviewed_native",
+      "rationale": "Bounded readonly original-lease material tools. Inspection reveals child metadata only; exact JSON selections retain full subject/delivery identity and distinguish selected coverage from whole-section reading. Relevant limits, evidence and owner premises must be read before dependent actions. Original context is attributed, current corrections control, and old effects grant no replay or wider authority. Tool arguments cannot select project/run/filesystem paths.",
+      "evidence": [
+        "backend/runtime/predecessor_tools.py",
+        "backend/planning/material_views.py",
+        "backend/planning/materials.py",
+        "backend/tests/runtime/test_work_material.py",
+        "backend/tests/runtime/test_owned_selective_material.py"
+      ],
+      "conflicts": [],
+      "dependencies_sha256": "a65c5deacf3afff1207ed98f0877898e949e9f124e5c43ccd6bcc8875b28b781",
+      "revalidation": "Selective-material review: inspected changed candidate: schema5 large historical sections become explicit retrievable references; selective reads do not claim whole-body comprehension. Catalog8 preserves original identities2–7. Current task input/history is unchanged and older deliveries keep their original shape."
     }
   },
   "retired_entries": {

@@ -28,7 +28,34 @@ que se pueda comparar el avance; no presentar microajustes como tareas principal
 - Última suite global: `9fb873c`,2210 casos,2178 pasan,31 fallan y1 error de fixture; sin omisiones. La carrera de backup encontrada se corrigió después con40 pruebas instaladas. No se declara una nueva corrida global verde; la referencia `0c8b8d9` queda como evidencia histórica.
 - U06 (configuración por intento y guardado interrumpido) queda comprobado; siguen42de43escenarios amplios abiertos en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Estado actual: entrega documental acotada comprobada
+## Estado actual: evidencia selectiva y antecedentes grandes comprobados
+
+Bloque **2026-11-07 15:09:37–15:25:17 UTC**, **15 min 40 s** hasta validar.
+87casos distintos de fuente y62instalados pasan. Entradas nativas de4262/5326bytes
+referencian82630bytes de contexto original; autor/desarrollador recuperan665bytes
+relevantes cada uno. El desarrollador recibe3072bytes de limitaciones/afirmación/
+fuente en vez de copiar399538bytes de informes.11/12solicitudes reales de
+herramientas con límite configurado25; no es prueba de enforcement ante avisos
+faltantes.622archivos coinciden entre fuente/wheel/instalación,329de producto;
+51definiciones documentadas y85decisiones de prompts vigentes.
+[Resultados y límites](work-material-review.md).
+
+**Lista vigente:**
++- Terminado: recorridos web principales, configuración U06, entrega documental
++  acotada, selección de evidencia y referencias al contexto histórico grande.
++- En curso al cerrar: documentación y checkpoint local del bloque.
++- Siguiente principal: presupuesto de herramientas del engine cuando faltan,
++  se repiten o se reordenan avisos nativos. **No iniciado**; registrar hora real.
++- Pendiente:42escenarios amplios, recuperación/recursos, datos históricos,
++  evaluación humana/modelos representativos, aceptación integral de12páginas,
++  dependencias publicadas y distribución.
++- Al final: detalles secundarios registrados, validación global y revisión independiente.
++
++La lista y los tiempos se publican en cada cambio de tarea y se conservan tras
++compactar. Cero modelos consumidos; no hay nueva suite global verde ni porcentaje
++total sustentado. Selección accesible no equivale a selección suficiente o comprendida.
++
+## Etapa anterior: entrega documental acotada comprobada
 
 Bloque **2026-11-07 14:48:21–15:07:02 UTC**, **18 min 41 s** hasta validar.
 54casos distintos de fuente y43instalados pasan. Tres informes que juntos

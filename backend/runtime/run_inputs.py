@@ -130,7 +130,9 @@ def task_request_history(conn, row, conversation):
 
 
 def freeze_input(conn, row, context):
-    """Freeze complete original task/history and typed prerequisite delivery; reject oversize material without hidden omission."""
+    """Freeze current task/history and versioned causal evidence; new large historical sections use exact retrievable references, never silent truncation."""
+    from backend.planning.material_views import project_delivery
+
     # Input validation belongs to the owning store before this renderer; reading
     # its immutable packet here preserves the exact original causal material.
     delivery = conn.execute("SELECT h.packet_json FROM runtime_plan_handoffs h JOIN runtime_plan_deliveries d ON d.id=h.delivery_id WHERE d.run_id=?", (row["id"],)).fetchone()
@@ -151,7 +153,7 @@ def freeze_input(conn, row, context):
         },
         "conversation": conversation,
         "request_history": task_request_history(conn, row, conversation),
-        "work_delivery": json.loads(delivery["packet_json"]) if delivery else None,
+        "work_delivery": project_delivery(json.loads(delivery["packet_json"])) if delivery else None,
     }
     from backend.runtime.code_carryover import CodeCarryovers
 

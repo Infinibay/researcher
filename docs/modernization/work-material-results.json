@@ -1,0 +1,90 @@
+{
+  "base_commit": "e358b7c",
+  "started_at_utc": "2026-11-07T15:09:37Z",
+  "validation_cutoff_utc": "2026-11-07T15:25:17Z",
+  "elapsed_to_validation_seconds": 940,
+  "source_distinct_cases_passing": 87,
+  "source_runs": [
+    {
+      "receipt": ".superpowers/sdd/2026-10-31-actualizacion-proyecto/work-material-storage-v1.xml",
+      "cases": 50,
+      "seconds": 33.844
+    },
+    {
+      "receipt": ".superpowers/sdd/2026-10-31-actualizacion-proyecto/work-material-selection.xml",
+      "cases": 8,
+      "seconds": 3.354
+    },
+    {
+      "receipt": ".superpowers/sdd/2026-10-31-actualizacion-proyecto/work-material-native-v1.xml",
+      "cases": 35,
+      "seconds": 166.862
+    },
+    {
+      "receipt": ".superpowers/sdd/2026-10-31-actualizacion-proyecto/work-material-native-final.xml",
+      "cases": 1,
+      "seconds": 16.654
+    }
+  ],
+  "docstrings": {
+    "modules": [
+      "backend/planning/material_views.py",
+      "backend/planning/materials.py",
+      "backend/planning/execution.py",
+      "backend/runtime/run_inputs.py",
+      "backend/runtime/predecessor_tools.py",
+      "backend/prompts/native.py"
+    ],
+    "definitions": 51,
+    "missing": []
+  },
+  "installed": "work-material-packaging.json",
+  "native_observations": "work-material-native-observations.json",
+  "prompt_inventory": {
+    "files": 292,
+    "candidates": 85,
+    "requires_review": 0
+  },
+  "test_preparation_correction": "Initial physical fixture left an untracked .ken/selective-evidence marker in canonical Git source; native development requires clean source and stopped with RunConflict before a child turn. Fixture mode moved into its controlled native process; source and installed reruns pass. No product gate was relaxed.",
+  "evidence": [
+    {
+      "path": ".superpowers/sdd/2026-10-31-actualizacion-proyecto/work-material-red.log",
+      "sha256": "cb6e1d7bd91198e058c2943b8bd1dcc5ddb114fc762013f90c68481eb0efaabe"
+    },
+    {
+      "path": ".superpowers/sdd/2026-10-31-actualizacion-proyecto/work-material-storage-v1.xml",
+      "sha256": "3d73d843662d28869ffd3da61375a489bfc82188858c4e9c5723ab5561543aac"
+    },
+    {
+      "path": ".superpowers/sdd/2026-10-31-actualizacion-proyecto/work-material-selection.xml",
+      "sha256": "561e202bc3446643e7702843384bd8a6c9dd6df520bc4084fc7af5acd31dc833"
+    },
+    {
+      "path": ".superpowers/sdd/2026-10-31-actualizacion-proyecto/work-material-native-v1.xml",
+      "sha256": "8a7ee8ef9e70a09b3a47b4adb38a98533944282fd20cdaf865440ab8274de184"
+    },
+    {
+      "path": ".superpowers/sdd/2026-10-31-actualizacion-proyecto/work-material-native-final.xml",
+      "sha256": "ddfa3df0c9f3801cd1c6f24499627ed5c2b6cb62c8e7edadcd63c728f71f6c3c"
+    },
+    {
+      "path": ".superpowers/sdd/2026-10-31-actualizacion-proyecto/work-material-package.xml",
+      "sha256": "4a97a94ac6c358962e6ff72113117b0290ae70672aec5af3141a024d0afecba0"
+    },
+    {
+      "path": ".superpowers/sdd/2026-10-31-actualizacion-proyecto/work-material-prompt-review.json",
+      "sha256": "93251091722548d995a77fa14f1743698161383b0e3906ea9cd4fc974e80250a"
+    }
+  ],
+  "model_calls": 0,
+  "global_suite_rerun": false,
+  "broad_scenarios_open": 42,
+  "fully_accepted_pages": 0,
+  "limits": [
+    "Actual native protocol is controlled; no real-model selection quality or human comprehension claim.",
+    "Stored whole handoff is unchanged; only new schema5 native input projects large historical sections into exact references.",
+    "Current task/history retains explicit limits; selective reads do not prove enough context was read.",
+    "Controlled requests counted independently; missing/duplicate item-start event enforcement remains next functional engine investigation."
+  ],
+  "status": "selective_work_and_research_transport_verified; complete modernization remains active"
+}

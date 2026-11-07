@@ -153,14 +153,22 @@
         "docs/modernization/research-material-review.md",
         "docs/modernization/research-material-results.json",
         "docs/modernization/research-material-packaging.json",
-        "backend/tests/runtime/test_predecessor_research_material.py"
+        "backend/tests/runtime/test_predecessor_research_material.py",
+        "docs/architecture/selective-work-material.md",
+        "docs/modernization/work-material-review.md",
+        "docs/modernization/work-material-results.json",
+        "docs/modernization/work-material-packaging.json",
+        "docs/modernization/work-material-native-observations.json",
+        "backend/tests/runtime/test_work_material.py",
+        "backend/tests/runtime/test_owned_selective_material.py"
       ],
       "remaining": [
         "Durable product ownership, API integration and full scenario acceptance",
-        "Selective evidence access within actual tool/token budgets, oversized original plan/continuation context, and full scenario acceptance remain functional work."
+        "Selective retrieval and large historical context references implemented; representative real-model selection quality and whole-scenario/human acceptance remain unproven. Current task/conversation history retains explicit admission limits."
       ],
       "implemented": [
-        "Schema4 research prerequisite descriptors and exact bounded reads avoid inlining accepted reports into successor input. More than1MiB and decisive final text reconstructed; schema2/3 bytes preserved. Controlled native research/investigation/scientific predecessors read via actual broker tools; no real-model comprehension claim."
+        "Schema4 research prerequisite descriptors and exact bounded reads avoid inlining accepted reports into successor input. More than1MiB and decisive final text reconstructed; schema2/3 bytes preserved. Controlled native research/investigation/scientific predecessors read via actual broker tools; no real-model comprehension claim.",
+        "Schema5 native projection retains current task inputs and references historical sections above32768bytes. Selective JSON indexes/reads preserve original hashes and explicit unread coverage. Controlled native author/developer use11/12 actual tool requests;665bytes original context each and3072bytes selected evidence from399538bytes reports.87distinct source and62installed cases pass; no model/comprehension claim."
       ]
     },
     "C05": {
@@ -328,7 +336,14 @@
         "docs/modernization/research-material-review.md",
         "docs/modernization/research-material-results.json",
         "docs/modernization/research-material-packaging.json",
-        "backend/tests/runtime/test_predecessor_research_material.py"
+        "backend/tests/runtime/test_predecessor_research_material.py",
+        "docs/architecture/selective-work-material.md",
+        "docs/modernization/work-material-review.md",
+        "docs/modernization/work-material-results.json",
+        "docs/modernization/work-material-packaging.json",
+        "docs/modernization/work-material-native-observations.json",
+        "backend/tests/runtime/test_work_material.py",
+        "backend/tests/runtime/test_owned_selective_material.py"
       ]
     },
     "E01": {
@@ -863,7 +878,8 @@
         "backend/tests/runtime/test_legacy_engine_removal.py"
       ],
       "remaining": [
-        "Durable product ownership, API integration and full scenario acceptance"
+        "Durable product ownership, API integration and full scenario acceptance",
+        "Verify tool-request accounting and hard-stop behavior when item/started notifications are missing, duplicated or reordered. Current source counts starts separately from host RPC calls; controlled fixture emits actual calls without those notifications. See work-material-review.md; this is functional engine work, not deferred polish."
       ]
     },
     "E08": {
@@ -916,7 +932,8 @@
         "frontend/tests/ui/history-budget.test.tsx"
       ],
       "remaining": [
-        "Durable product ownership, API integration and full scenario acceptance"
+        "Durable product ownership, API integration and full scenario acceptance",
+        "Verify tool-request accounting and hard-stop behavior when item/started notifications are missing, duplicated or reordered. Current source counts starts separately from host RPC calls; controlled fixture emits actual calls without those notifications. See work-material-review.md; this is functional engine work, not deferred polish."
       ]
     },
     "E09": {
