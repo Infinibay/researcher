@@ -7353,3 +7353,56 @@ historical config/runners, migration/inverse/restore and reboot recovery,
 history/budgets, real/human/scientific/global evaluation,12-page acceptance and
 whole-plan review remain open.43 scenarios still36in_progress/7pending. All
 macro capabilities before fine details; updated checklist at task transitions.
+
+## 2026-11-06 — compatible frontend dependency migration, based on 0c4e305
+
+Previous goal turn made progress (native container and restart). This cut updates
+React/DOM19.3.1, Query/devtools5.107.1, Router7.18.5, Zustand5.1.0,
+ReactMarkdown10.1, Vite8.3.6/Reactplugin6.2.1, TypeScript6.0.3 and
+Tailwind4.3.5/Viteplugin/typography0.5.20. Removes unused Recharts and the old
+PostCSS pipeline. Node24.22.2/npm11.19.1; Node>=24.15<25 is explicit. TS strict
+is unchanged; Vite asset declarations fix the new CSS side-effect checks.
+TypeScript7 is outside the selected ESLint parser's supported range. KaTeX
+0.16.47 is shared by CSS and runtime consumers; @types/katex0.16.8 is only types,
+not a second renderer. No forced incompatible overrides. Playwright1.64.1 kept.
+
+Baseline126contracts/build pass. Updated and clean-install126contracts plus
+3DOM Markdown interaction/safety cases pass; build passes. npm ci installs373
+packages and npm ls exits0. ESLint reports the same12 findings before/after,
+without suppressions. Audit exits1 with16package entries/3unique advisories,
+12moderate/4low/0high/0critical. Security acceptance remains explicitly pending:
+minimatch10 constraints, typography's selector-parser6.0.10 pin and KaTeX0.16
+consumers prevent automatic compatible upgrades to the corrected ranges.
+The conditional KaTeX prototype-pollution prerequisite was not demonstrated;
+ordinary hostile-document tests do not prove its absence.
+
+Browser fixtures: Resumen5states pass before/after; Ejecución10states pass after
+scoping an ambiguous alert selector to its region. Both header and graph alerts
+were correctly present; no application change was needed. Owner access has two
+normal Axe-clean states and a forced-colors state with passing keyboard/outline
+assertions. The final forced-colors Axe contrast assertion fails: recorded author
+colors differ from visible black text in the screenshot. Preserve the exit1 and
+receipt; no rule disabled, no full accessibility claim. First access attempt
+needed an explicit BrowserContext for Axe, corrected. Initial browser launch
+pointed to a cache without headless-shell; browser installation completed and
+all fixture jobs are terminal. Total18postmigration captures,17without Axe
+violations,1with the contrast discrepancy; no observed JS exceptions. HTTP is
+controlled, no backend/model/WebSocket correctness or human acceptance inferred.
+
+All23screens (including5baseline) and receipts are under
+`docs/design/audits/frontend-dependencies/`. Public decisions/results/audit/lint
+are linked from the dashboard. DD066 defers lint, bundle-size warning, SSR esbuild
+compatibility settings, tracked generated TS metadata and forced-colors diagnosis.
+Security acceptance is separate, not cosmetic. No native-image rebuild; its
+prior receipt still covers the old frontend. No owned backend/scripts changed,
+so prior prompt83/272/0pending evidence is reused. New configuration/test modules
+have English documentation; focus-only class edits retain module documentation.
+
+Measured resumption interval started21:51Argentina (00:51:16UTC), about10minutes
+to record receipts; earlier preparation is not included. No global percentage or
+ETA inferred. User policy persists: updated done/current/pending at principal
+transitions; report measured time when available; all macro capabilities before
+all fine details. Next: historical configuration/evaluation runners, then data
+migration/inverse/real restore/reboot recovery. History/budgets, broad evaluation,
+12page/security acceptance and final review remain open.43scenarios remain
+36in_progress/7pending,0fullyacceptedpages. No push/merge/deploy in this cut.

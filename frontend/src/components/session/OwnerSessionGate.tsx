@@ -67,7 +67,7 @@ export function OwnerSessionGate({children}: {children:ReactNode}) {
             <p className="text-sm leading-6 text-slate-300">Introduce el código del archivo privado cuya ruta indica el servidor al arrancar. Este acceso es independiente de tu cuenta de OpenAI.</p>
             <div>
               <label htmlFor="owner-code" className="mb-2 block text-sm font-medium">Código de acceso local</label>
-              <input id="owner-code" type="password" autoComplete="off" value={code} onChange={(event) => setCode(event.target.value)} required maxLength={256} disabled={pending} aria-describedby="owner-hint" className="w-full rounded-md border border-surface-600 bg-surface-950 px-3 py-2 outline-none focus-visible:ring-2 focus-visible:ring-sky-400" />
+              <input id="owner-code" type="password" autoComplete="off" value={code} onChange={(event) => setCode(event.target.value)} required maxLength={256} disabled={pending} aria-describedby="owner-hint" className="w-full rounded-md border border-surface-600 bg-surface-950 px-3 py-2 outline-hidden focus-visible:ring-2 focus-visible:ring-sky-400" />
               <p id="owner-hint" className="mt-2 text-xs text-slate-400">El código cambia al reiniciar el servidor. No uses una clave de API.</p>
             </div>
             {error && <p role="alert" className="text-sm text-red-300">{error}</p>}

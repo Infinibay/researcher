@@ -3,7 +3,7 @@ import {chromium,expect} from '@playwright/test'
 import AxeBuilder from '@axe-core/playwright'
 import fs from 'node:fs/promises'
 import path from 'node:path'
-const out=path.resolve('../docs/design/audits/2026-11-06-flow')
+const out=path.resolve(process.env.BROWSER_AUDIT_OUT ?? '../docs/design/audits/2026-11-06-flow')
 await fs.mkdir(out,{recursive:true})
 const hash='a'.repeat(64),project={id:1,name:'Atlas',status:'planning'}
 const plans=[{run_id:'plan-a',task_id:30,title:'Contrastar el buscador',status:'accepted',accepted:1,proposed:1,context_current:true},{run_id:'plan-old',task_id:20,title:'Plan anterior',status:'accepted',accepted:1,proposed:1,context_current:false},{run_id:'plan-new',task_id:40,title:'Plan por ejecutar',status:'accepted',accepted:1,proposed:1,context_current:true}]
@@ -81,7 +81,7 @@ try{
  await page.getByRole('button',{name:'Seleccionar proyecto: Atlas'}).click();await page.getByRole('button',{name:'Proyecto vacío',exact:true}).click()
  await expect(page.getByText('Todavía no hay planes aceptados en este proyecto.')).toBeVisible();await expect(page.locator('.flow-workbench')).not.toContainText('Contrastar el buscador')
  await capture('07-project-switch',390)
- failRead=true;await page.reload();await expect(page.getByRole('alert')).toContainText('No pudimos consultar el recorrido')
+ failRead=true;await page.reload();await expect(page.locator('.flow-workbench').getByRole('alert')).toContainText('No pudimos consultar el recorrido')
  await expect(page.getByText('Todavía no hay planes aceptados en este proyecto.')).toHaveCount(0)
  await capture('08-read-error',390)
  evidence.checks.push('actual-dependencies','current-deliveries-exclude-history','issue-and-original-recovery','reading-does-not-execute','lost-pause-retains-packet-across-reload','stale-context-is-not-progress','accepted-plan-is-not-authorization','project-isolation','read-error-is-not-empty')

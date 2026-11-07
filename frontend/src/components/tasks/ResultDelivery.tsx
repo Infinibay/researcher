@@ -7,7 +7,7 @@ import type { RuntimeRun } from '../../api/runtime'
 import { MarkdownRenderer } from '../common/MarkdownRenderer'
 
 const buttonClass='rounded-md border border-[var(--work-line)] px-3 py-2 text-sm hover:bg-[var(--work-wash)] disabled:opacity-50'
-const inputClass='w-full rounded-md border border-[var(--work-line)] bg-[var(--work-paper)] px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[var(--work-accent)]'
+const inputClass='w-full rounded-md border border-[var(--work-line)] bg-[var(--work-paper)] px-3 py-2 text-sm focus:outline-hidden focus:ring-2 focus:ring-[var(--work-accent)]'
 
 /** Page the original selected report; never show a current draft as the delivered version. */
 function FrozenReport({projectId,runId,candidate,report}:{projectId:number;runId:string;candidate:DeliveredCandidate;report:DeliveredReport}) {

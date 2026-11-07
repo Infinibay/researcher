@@ -1,0 +1,87 @@
+{
+  "scope": "Controlled HTTP fixtures; no model, process recovery or user data affected.",
+  "states": [
+    {
+      "name": "01-desktop-inspector",
+      "width": 1440,
+      "axe": 0
+    },
+    {
+      "name": "02-mobile-inspector",
+      "width": 390,
+      "axe": 0
+    },
+    {
+      "name": "02b-mobile-intervention",
+      "width": 390,
+      "axe": 0
+    },
+    {
+      "name": "02c-mobile-history",
+      "width": 390,
+      "axe": 0
+    },
+    {
+      "name": "03-uncertain-pause",
+      "width": 390,
+      "axe": 0
+    },
+    {
+      "name": "04-original-pause-recovered",
+      "width": 390,
+      "axe": 0
+    },
+    {
+      "name": "05-stale-context",
+      "width": 390,
+      "axe": 0
+    },
+    {
+      "name": "06-not-authorized",
+      "width": 390,
+      "axe": 0
+    },
+    {
+      "name": "07-project-switch",
+      "width": 390,
+      "axe": 0
+    },
+    {
+      "name": "08-read-error",
+      "width": 390,
+      "axe": 0
+    }
+  ],
+  "writes": [
+    {
+      "path": "/api/projects/1/plan-executions/graph-a/control",
+      "method": "POST",
+      "body": {
+        "operation_key": "9b0bf1df-a0b4-457f-9e8c-fad950bda760",
+        "manifest_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "status": "paused"
+      }
+    },
+    {
+      "path": "/api/projects/1/plan-executions/graph-a/control",
+      "method": "POST",
+      "body": {
+        "operation_key": "9b0bf1df-a0b4-457f-9e8c-fad950bda760",
+        "manifest_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "status": "paused"
+      }
+    }
+  ],
+  "errors": [],
+  "checks": [
+    "actual-dependencies",
+    "current-deliveries-exclude-history",
+    "issue-and-original-recovery",
+    "reading-does-not-execute",
+    "lost-pause-retains-packet-across-reload",
+    "stale-context-is-not-progress",
+    "accepted-plan-is-not-authorization",
+    "project-isolation",
+    "read-error-is-not-empty"
+  ]
+}

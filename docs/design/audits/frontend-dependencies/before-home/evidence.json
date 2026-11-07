@@ -1,0 +1,40 @@
+{
+  "scope": "Browser with controlled API fixtures; no backend/model claims.",
+  "states": [
+    {
+      "file": "01-desktop.png",
+      "width": 1440,
+      "axe_violations": 0
+    },
+    {
+      "file": "02-mobile.png",
+      "width": 390,
+      "axe_violations": 0
+    },
+    {
+      "file": "02b-mobile-context.png",
+      "width": 390,
+      "axe_violations": 0
+    },
+    {
+      "file": "03-partial-error.png",
+      "width": 390,
+      "axe_violations": 0
+    },
+    {
+      "file": "04-empty-other-project.png",
+      "width": 390,
+      "axe_violations": 0
+    }
+  ],
+  "errors": [],
+  "writes": [],
+  "checks": [
+    "question-pagination-and-original-navigation",
+    "all-done-is-not-project-acceptance",
+    "partial-error-retry",
+    "project-switch-isolation-and-empty-state",
+    "no-selection-navigation"
+  ],
+  "status": "passed"
+}

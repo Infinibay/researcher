@@ -21,7 +21,7 @@ do not configure the native subscription runtime.
   requires cgroup v2, `clone3(CLONE_INTO_CGROUP)`, `close_range(CLOEXEC)` and
   `cgroup.kill` (Linux 5.14 or newer). No spawn-then-migrate fallback is provided.
 - **OpenSSL CLI** for ephemeral local TLS certificates in the test suite
-- **Node.js 24 LTS** (for the frontend; version in `frontend/.node-version`)
+- **Node.js 24 LTS, at least 24.15** (verified 24.22.2 in `frontend/.node-version`, npm 11.19.1)
 - **Podman** or **Docker** only for the retained Forgejo/container deployment.
 - The native backend uses the separately configured Codex toolchain, subscription
   authentication and the required published `ken-rank` installation. See
@@ -34,8 +34,13 @@ uv sync --locked
 uv run --locked pytest backend/tests/api/test_startup.py backend/tests/cli/test_bootstrap.py
 cd frontend
 npm ci
+npm test
 npm run build
 ```
+
+Frontend migration choices, browser checks and outstanding lint/security findings
+are recorded in [the frontend dependency report](docs/architecture/frontend-dependencies.md).
+`npm run lint` currently reports 12 existing findings; it is not a clean release gate yet.
 
 The Python installation uses the native runtime. CrewAI, crewai-tools, LiteLLM,
 Ollama and Chroma, their old tool wrappers and the `legacy` extra have been removed.

@@ -17,7 +17,7 @@ import { TaskCodeResults } from './CodeDelivery'
 import { TaskRemotePublications } from './RemotePublications'
 import { TaskProjectPlan } from './ProjectPlanDelivery'
 
-const inputClass = 'w-full rounded-md border border-[var(--work-line)] bg-[var(--work-paper)] px-3 py-2 text-sm text-[var(--work-ink)] focus:outline-none focus:ring-2 focus:ring-[var(--work-accent)]'
+const inputClass = 'w-full rounded-md border border-[var(--work-line)] bg-[var(--work-paper)] px-3 py-2 text-sm text-[var(--work-ink)] focus:outline-hidden focus:ring-2 focus:ring-[var(--work-accent)]'
 const buttonClass = 'rounded-md border border-[var(--work-line)] px-3 py-2 text-sm text-[var(--work-ink)] hover:bg-[var(--work-wash)] disabled:opacity-50'
 
 function QueuedStart({ projectId, taskId, run }: { projectId: number; taskId: number; run: RuntimeRun }) {

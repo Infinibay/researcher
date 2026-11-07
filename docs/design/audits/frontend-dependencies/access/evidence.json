@@ -1,0 +1,238 @@
+{
+  "scope": "Compiled web with a locked session fixture; no pairing, backend or model calls.",
+  "states": [
+    {
+      "name": "desktop-focus",
+      "width": 1440,
+      "forcedColors": "none",
+      "style": {
+        "outline": "none",
+        "width": "1px",
+        "color": "rgb(16, 16, 16)",
+        "shadow": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, oklch(0.746 0.16 232.661) 0px 0px 0px 2px, rgba(0, 0, 0, 0) 0px 0px 0px 0px"
+      },
+      "axe_violations": 0,
+      "violations": []
+    },
+    {
+      "name": "mobile-focus",
+      "width": 390,
+      "forcedColors": "none",
+      "style": {
+        "outline": "none",
+        "width": "1px",
+        "color": "rgb(16, 16, 16)",
+        "shadow": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, oklch(0.746 0.16 232.661) 0px 0px 0px 2px, rgba(0, 0, 0, 0) 0px 0px 0px 0px"
+      },
+      "axe_violations": 0,
+      "violations": []
+    },
+    {
+      "name": "mobile-forced-colors",
+      "width": 390,
+      "forcedColors": "active",
+      "style": {
+        "outline": "solid",
+        "width": "2px",
+        "color": "rgba(5, 0, 73, 0.8)",
+        "shadow": "none"
+      },
+      "axe_violations": 1,
+      "violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "tags": [
+            "cat.color",
+            "wcag2aa",
+            "wcag143",
+            "TTv5",
+            "TT13.c",
+            "EN-301-549",
+            "EN-9.1.4.3",
+            "ACT",
+            "RGAAv4",
+            "RGAA-3.2.1"
+          ],
+          "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+          "help": "Elements must meet minimum color contrast ratio thresholds",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.14/color-contrast?application=playwright",
+          "nodes": [
+            {
+              "any": [
+                {
+                  "id": "color-contrast",
+                  "data": {
+                    "fgColor": "#90a1b9",
+                    "bgColor": "#ffffff",
+                    "contrastRatio": 2.63,
+                    "fontSize": "9.0pt (12px)",
+                    "fontWeight": "normal",
+                    "messageKey": null,
+                    "expectedContrastRatio": "4.5:1"
+                  },
+                  "relatedNodes": [
+                    {
+                      "html": "<section class=\"w-full max-w-md rounded-xl border border-surface-700 bg-surface-900 p-8\" aria-labelledby=\"owner-title\">",
+                      "target": [
+                        "section"
+                      ]
+                    }
+                  ],
+                  "impact": "serious",
+                  "message": "Element has insufficient color contrast of 2.63 (foreground color: #90a1b9, background color: #ffffff, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+                }
+              ],
+              "all": [],
+              "none": [],
+              "impact": "serious",
+              "html": "<p class=\"mb-3 text-xs font-medium uppercase tracking-widest text-slate-400\">Researcher · acceso local</p>",
+              "target": [
+                ".mb-3"
+              ],
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.63 (foreground color: #90a1b9, background color: #ffffff, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "any": [
+                {
+                  "id": "color-contrast",
+                  "data": {
+                    "fgColor": "#f1f5f9",
+                    "bgColor": "#ffffff",
+                    "contrastRatio": 1.09,
+                    "fontSize": "18.0pt (24px)",
+                    "fontWeight": "normal",
+                    "messageKey": null,
+                    "expectedContrastRatio": "3:1"
+                  },
+                  "relatedNodes": [
+                    {
+                      "html": "<section class=\"w-full max-w-md rounded-xl border border-surface-700 bg-surface-900 p-8\" aria-labelledby=\"owner-title\">",
+                      "target": [
+                        "section"
+                      ]
+                    }
+                  ],
+                  "impact": "serious",
+                  "message": "Element has insufficient color contrast of 1.09 (foreground color: #f1f5f9, background color: #ffffff, font size: 18.0pt (24px), font weight: normal). Expected contrast ratio of 3:1"
+                }
+              ],
+              "all": [],
+              "none": [],
+              "impact": "serious",
+              "html": "<h1 id=\"owner-title\" class=\"text-2xl font-semibold\">Abre tu espacio de trabajo</h1>",
+              "target": [
+                "#owner-title"
+              ],
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 1.09 (foreground color: #f1f5f9, background color: #ffffff, font size: 18.0pt (24px), font weight: normal). Expected contrast ratio of 3:1"
+            },
+            {
+              "any": [
+                {
+                  "id": "color-contrast",
+                  "data": {
+                    "fgColor": "#cad5e2",
+                    "bgColor": "#ffffff",
+                    "contrastRatio": 1.48,
+                    "fontSize": "10.5pt (14px)",
+                    "fontWeight": "normal",
+                    "messageKey": null,
+                    "expectedContrastRatio": "4.5:1"
+                  },
+                  "relatedNodes": [
+                    {
+                      "html": "<section class=\"w-full max-w-md rounded-xl border border-surface-700 bg-surface-900 p-8\" aria-labelledby=\"owner-title\">",
+                      "target": [
+                        "section"
+                      ]
+                    }
+                  ],
+                  "impact": "serious",
+                  "message": "Element has insufficient color contrast of 1.48 (foreground color: #cad5e2, background color: #ffffff, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+                }
+              ],
+              "all": [],
+              "none": [],
+              "impact": "serious",
+              "html": "<p class=\"text-sm leading-6 text-slate-300\">Introduce el código del archivo privado cuya ruta indica el servidor al arrancar. Este acceso es independiente de tu cuenta de OpenAI.</p>",
+              "target": [
+                ".leading-6"
+              ],
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 1.48 (foreground color: #cad5e2, background color: #ffffff, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "any": [
+                {
+                  "id": "color-contrast",
+                  "data": {
+                    "fgColor": "#f1f5f9",
+                    "bgColor": "#ffffff",
+                    "contrastRatio": 1.09,
+                    "fontSize": "10.5pt (14px)",
+                    "fontWeight": "normal",
+                    "messageKey": null,
+                    "expectedContrastRatio": "4.5:1"
+                  },
+                  "relatedNodes": [
+                    {
+                      "html": "<section class=\"w-full max-w-md rounded-xl border border-surface-700 bg-surface-900 p-8\" aria-labelledby=\"owner-title\">",
+                      "target": [
+                        "section"
+                      ]
+                    }
+                  ],
+                  "impact": "serious",
+                  "message": "Element has insufficient color contrast of 1.09 (foreground color: #f1f5f9, background color: #ffffff, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+                }
+              ],
+              "all": [],
+              "none": [],
+              "impact": "serious",
+              "html": "<label for=\"owner-code\" class=\"mb-2 block text-sm font-medium\">Código de acceso local</label>",
+              "target": [
+                "label"
+              ],
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 1.09 (foreground color: #f1f5f9, background color: #ffffff, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "any": [
+                {
+                  "id": "color-contrast",
+                  "data": {
+                    "fgColor": "#90a1b9",
+                    "bgColor": "#ffffff",
+                    "contrastRatio": 2.63,
+                    "fontSize": "9.0pt (12px)",
+                    "fontWeight": "normal",
+                    "messageKey": null,
+                    "expectedContrastRatio": "4.5:1"
+                  },
+                  "relatedNodes": [
+                    {
+                      "html": "<section class=\"w-full max-w-md rounded-xl border border-surface-700 bg-surface-900 p-8\" aria-labelledby=\"owner-title\">",
+                      "target": [
+                        "section"
+                      ]
+                    }
+                  ],
+                  "impact": "serious",
+                  "message": "Element has insufficient color contrast of 2.63 (foreground color: #90a1b9, background color: #ffffff, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+                }
+              ],
+              "all": [],
+              "none": [],
+              "impact": "serious",
+              "html": "<p id=\"owner-hint\" class=\"mt-2 text-xs text-slate-400\">El código cambia al reiniciar el servidor. No uses una clave de API.</p>",
+              "target": [
+                "#owner-hint"
+              ],
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.63 (foreground color: #90a1b9, background color: #ffffff, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "writes": []
+}

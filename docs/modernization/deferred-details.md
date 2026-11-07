@@ -318,3 +318,28 @@ observador eran requisitos funcionales; están resueltos en la configuración
 comprobada. Reboot/re-enrollment, restauración real y otros entornos continúan
 como límites principales, no como detalles de estilo.
 
+## DD066 — detalles tras actualizar el frontend
+
+El lint incorporado informa12incidencias idénticas antes y después de la
+migración, conservadas en `frontend-dependencies-lint.json`: cinco `any`, dos
+bloques vacíos, dos regex con controles, dos imports/variables sin uso y un
+`prefer-const`. Revisar la intención de las regex; no eliminarlas para silenciar
+el linter. Conservar el chequeo estricto y resolver al final de todas las
+capacidades principales.
+
+También quedan el bundle mayor de500kB, las opciones `esbuild` de fixtures SSR
+que Vite8 convierte por compatibilidad, y el artefacto de build TypeScript
+versionado. No rehacer builds o recorridos sólo por pulido de estos detalles.
+
+En `tests/access.browser.mjs` los estados normales y las aserciones de foco en
+colores forzados pasan. Axe informa contraste insuficiente en este último estado
+usando colores de autor, mientras la captura muestra texto negro; se conserva
+la discrepancia y el exit1 sin desactivar reglas. Comprobar emulación/cálculo y
+accesibilidad real en la pasada final. Evidencia completa en
+`docs/design/audits/frontend-dependencies/access/`.
+
+Los16avisos del audit, correspondientes a3problemas únicos en dependencias,
+se registran aparte como **aceptación de seguridad pendiente**, no como cosmética.
+No usar versiones incompatibles ni `audit fix --force` para ocultarlos. Tampoco
+quedan aceptadas las12páginas, otros navegadores o la nueva imagen de despliegue.
+

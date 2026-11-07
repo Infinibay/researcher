@@ -1,0 +1,74 @@
+[
+  {
+    "path": "frontend/src/api/client.ts",
+    "line": 32,
+    "rule": "no-empty",
+    "message": "Empty block statement."
+  },
+  {
+    "path": "frontend/src/api/remotePublications.ts",
+    "line": 37,
+    "rule": "prefer-const",
+    "message": "'keys' is never reassigned. Use 'const' instead."
+  },
+  {
+    "path": "frontend/src/api/session.ts",
+    "line": 23,
+    "rule": "no-control-regex",
+    "message": "Unexpected control character(s) in regular expression: \\x00."
+  },
+  {
+    "path": "frontend/src/api/websocket.ts",
+    "line": 71,
+    "rule": "no-empty",
+    "message": "Empty block statement."
+  },
+  {
+    "path": "frontend/src/components/pages/ProjectsPage.tsx",
+    "line": 9,
+    "rule": "@typescript-eslint/no-unused-vars",
+    "message": "'ProjectWorkspaceState' is defined but never used."
+  },
+  {
+    "path": "frontend/src/components/tasks/RunCommands.tsx",
+    "line": 13,
+    "rule": "no-control-regex",
+    "message": "Unexpected control character(s) in regular expression: \\x00, \\x08, \\x0b, \\x1f."
+  },
+  {
+    "path": "frontend/src/hooks/useProjects.ts",
+    "line": 96,
+    "rule": "@typescript-eslint/no-explicit-any",
+    "message": "Unexpected any. Specify a different type."
+  },
+  {
+    "path": "frontend/src/hooks/useTasks.ts",
+    "line": 152,
+    "rule": "@typescript-eslint/no-explicit-any",
+    "message": "Unexpected any. Specify a different type."
+  },
+  {
+    "path": "frontend/src/hooks/useWebSocketSync.ts",
+    "line": 57,
+    "rule": "@typescript-eslint/no-explicit-any",
+    "message": "Unexpected any. Specify a different type."
+  },
+  {
+    "path": "frontend/src/hooks/useWebSocketSync.ts",
+    "line": 142,
+    "rule": "@typescript-eslint/no-explicit-any",
+    "message": "Unexpected any. Specify a different type."
+  },
+  {
+    "path": "frontend/src/stores/loopState.ts",
+    "line": 61,
+    "rule": "@typescript-eslint/no-unused-vars",
+    "message": "'_' is assigned a value but never used."
+  },
+  {
+    "path": "frontend/src/types/api.ts",
+    "line": 278,
+    "rule": "@typescript-eslint/no-explicit-any",
+    "message": "Unexpected any. Specify a different type."
+  }
+]

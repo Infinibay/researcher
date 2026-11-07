@@ -4,6 +4,15 @@ La implementación del [plan completo](../superpowers/plans/2026-10-31-actualiza
 
 ## Resultados disponibles
 
+- **Dependencias frontend migradas:** React19.3, Vite8, TypeScript6 y Tailwind4;
+  instalación limpia,126contratos y3pruebas DOM pasan, build estricto correcto.
+  Resumen/Ejecución pasan15estados controlados de navegador; acceso añade dos
+  estados normales sin avisos y un fallo Axe de contraste en colores forzados,
+  con foco visible comprobado. Lint conserva12hallazgos previos; audit conserva
+  16entradas de tres avisos únicos, sin altos/críticos. No se acepta seguridad,
+  todas las páginas ni el despliegue final. [Informe](../architecture/frontend-dependencies.md),
+  [resultados](frontend-dependencies-results.json).
+
 - **Contenedor nativo con Ken y reinicio comprobados:** imagen instalada con
   entornos separados y 308 archivos productivos Python/SQL coincidentes. El
   recorrido por HTTP usa la suscripción y Ken, calcula, guarda hallazgo/informe y

@@ -5,7 +5,7 @@ import fs from 'node:fs/promises'
 import path from 'node:path'
 
 const origin = process.env.OVERVIEW_ORIGIN ?? 'http://127.0.0.1:5179'
-const out = path.resolve('../docs/design/audits/2026-11-06-home')
+const out = path.resolve(process.env.BROWSER_AUDIT_OUT ?? '../docs/design/audits/2026-11-06-home')
 await fs.mkdir(out, {recursive:true})
 const project = {id:1,name:'Atlas',description:'Comprender el buscador y contrastar sus resultados.',status:'completed'}
 const tasks = [

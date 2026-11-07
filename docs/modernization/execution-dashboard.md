@@ -8,6 +8,9 @@ En cada transición de tarea principal, publicar en el chat la lista actualizada
 implementado con su alcance, tarea en curso y tareas pendientes. Decir qué se cerró
 y cuál empieza. Política explícita del usuario del6noviembre; se mantiene después
 de compactar. Primero todas las tareas gruesas; todos los detalles secundarios al final.
+Indicar el tiempo medido del tramo cuando se disponga de él; si una estimación
+del trabajo restante no está sustentada, decirlo en lugar de inventar un plazo
+o porcentaje. No reconstruir tiempos históricos a partir de recuerdos del chat.
 
 ## Estado comprobado
 
@@ -16,7 +19,35 @@ de compactar. Primero todas las tareas gruesas; todos los detalles secundarios a
 - Última suite global completada al retomar `0c8b8d9`: 2148 casos, 2045 pasan, 100 fallan y tres se omiten. Mismos 100 identificadores heredados; no se afirman causas idénticas. Pasan 965 casos del runtime. La política Git añadida después tiene verificación separada.
 - Los 43 escenarios amplios siguen abiertos en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Etapa actual: contenedor nativo comprobado; siguen dependencias frontend
+## Etapa actual: frontend migrado; sigue configuración histórica
+
+React19.3, Vite8, TypeScript6, Tailwind4 y el stack de documentos actualizado
+compilan desde una instalación limpia. Pasan126 contratos y3pruebas DOM;
+Resumen y Ejecución completan15estados controlados de navegador. Se conserva
+el foco por teclado también en colores forzados. El acceso suma2estados normales
+sin avisos Axe y1con una discrepancia de contraste pendiente; ese runner sigue
+saliendo1. [Decisiones y límites](../architecture/frontend-dependencies.md),
+[resultados](frontend-dependencies-results.json).
+
+**Lista vigente al cambiar de tarea:**
+- Cerrado en su alcance: migración compatible del frontend, instalación limpia,
+  pruebas DOM y configuración de lint. No acepta todas las páginas ni seguridad.
+- Siguiente: configuración y runners históricos restantes; después migraciones,
+  inversas, restauración real y recuperación tras reboot.
+- Pendiente principal: historial/presupuestos; evaluación real, humana,
+  científica y global; aceptación de12páginas, seguridad de dependencias y
+  revisión final. Siguen43escenarios abiertos y0páginas aceptadas integralmente.
+- Al final: detalles secundarios. DD066 conserva12incidencias de lint,
+  bundle grande, configuración SSR deprecada y discrepancia Axe en colores
+  forzados. Los3avisos de seguridad únicos (16entradas de dependencias) quedan
+  explícitamente abiertos antes de aceptar el producto.
+
+Tiempo medido en este tramo de reanudación: aproximadamente10minutos hasta
+guardar los recibos, desde21:51Argentina; no incluye la preparación anterior
+al resumen de contexto. No hay estimación global fiable ni porcentaje nuevo.
+La imagen nativa anterior todavía contiene las dependencias frontend anteriores.
+
+## Etapa anterior: contenedor nativo comprobado
 
 La imagen incluye Ken publicado en un entorno separado, con dependencias fijadas
 por hashes, y bubblewrap con las capacidades requeridas. El recorrido real desde

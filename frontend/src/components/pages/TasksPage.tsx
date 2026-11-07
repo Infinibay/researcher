@@ -197,7 +197,7 @@ function ProjectTaskWorkbench({ projectId }: { projectId: number }) {
             value={fTitle}
             onChange={(e) => setFTitle(e.target.value)}
             id="task-new-title" placeholder="Qué necesitas comprobar o construir"
-            className="w-full rounded-md border border-[var(--work-line)] bg-[var(--work-paper)] px-3 py-2 text-sm text-[var(--work-ink)] placeholder-slate-600 focus:border-sky-500/50 focus:outline-none"
+            className="w-full rounded-md border border-[var(--work-line)] bg-[var(--work-paper)] px-3 py-2 text-sm text-[var(--work-ink)] placeholder-slate-600 focus:border-sky-500/50 focus:outline-hidden"
             autoFocus
           />
           <label htmlFor="task-new-description" className="block text-sm">Descripción</label>
@@ -206,7 +206,7 @@ function ProjectTaskWorkbench({ projectId }: { projectId: number }) {
             onChange={(e) => setFDesc(e.target.value)}
             id="task-new-description" placeholder="Contexto, ejemplo y resultado esperado"
             rows={3}
-            className="w-full rounded-md border border-[var(--work-line)] bg-[var(--work-paper)] px-3 py-2 text-sm text-[var(--work-ink)] placeholder-slate-600 focus:border-sky-500/50 focus:outline-none"
+            className="w-full rounded-md border border-[var(--work-line)] bg-[var(--work-paper)] px-3 py-2 text-sm text-[var(--work-ink)] placeholder-slate-600 focus:border-sky-500/50 focus:outline-hidden"
           />
           <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
             <div>

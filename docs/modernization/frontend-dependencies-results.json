@@ -1,0 +1,113 @@
+{
+  "date": "2026-11-06",
+  "base_commit": "0c4e305",
+  "status": "implemented_with_open_acceptance_findings",
+  "scope": "Compatible frontend dependency migration; no backend/model or complete page acceptance.",
+  "dependencies": {
+    "@tanstack/react-query": "5.107.1",
+    "katex": "0.16.47",
+    "react": "19.3.1",
+    "react-dom": "19.3.1",
+    "react-markdown": "10.1.0",
+    "react-router-dom": "7.18.5",
+    "rehype-highlight": "^7.0.2",
+    "rehype-katex": "^7.0.1",
+    "remark-gfm": "^4.0.1",
+    "remark-math": "^6.0.0",
+    "zustand": "5.1.0"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "4.14.0",
+    "@eslint/js": "10.0.1",
+    "@playwright/test": "1.64.1",
+    "@tailwindcss/typography": "0.5.20",
+    "@tailwindcss/vite": "4.3.5",
+    "@tanstack/react-query-devtools": "5.107.1",
+    "@testing-library/dom": "10.4.2",
+    "@testing-library/jest-dom": "7.0.1",
+    "@testing-library/react": "16.3.3",
+    "@testing-library/user-event": "14.6.8",
+    "@types/node": "24.19.2",
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "@vitejs/plugin-react": "6.2.1",
+    "eslint": "10.14.0",
+    "jsdom": "31.0.0",
+    "tailwindcss": "4.3.5",
+    "typescript": "6.0.3",
+    "typescript-eslint": "8.72.1",
+    "vite": "8.3.6",
+    "vitest": "5.1.0"
+  },
+  "node": "24.22.2",
+  "npm": "11.19.1",
+  "baseline": {
+    "contract_tests": 126,
+    "build": "pass"
+  },
+  "clean_install": {
+    "command": "npm ci --no-audit --no-fund",
+    "exit_code": 0,
+    "packages": 373,
+    "npm_ls_exit_code": 0
+  },
+  "tests": {
+    "contract_pass": 126,
+    "dom_pass": 3,
+    "failed": 0,
+    "build_exit_code": 0,
+    "typescript_strict": true
+  },
+  "browser": {
+    "home_exit_code": 0,
+    "home_states": 5,
+    "flow_first_exit_code": 1,
+    "flow_first_failure": "Ambiguous global alert selector; both header and graph displayed alerts. Scoped to graph, no product behavior changed.",
+    "flow_corrected_exit_code": 0,
+    "flow_corrected_states": 10,
+    "access_exit_code": 1,
+    "access_states": 3,
+    "access_finding": "Normal desktop/mobile Axe checks pass. Forced-colors focus assertions pass; Axe color-contrast reports author foreground colors different from the black text visible in the screenshot. Diagnosis deferred without rule suppression.",
+    "observed_js_errors": 0,
+    "completed_page_acceptances": 0,
+    "engine": "Chromium 156.0.8078.4, controlled HTTP responses",
+    "receipt_root": "docs/design/audits/frontend-dependencies"
+  },
+  "lint": {
+    "exit_code": 1,
+    "count": 12,
+    "identical_to_pre_migration_baseline": true,
+    "receipt": "docs/modernization/frontend-dependencies-lint.json"
+  },
+  "audit": {
+    "exit_code": 1,
+    "vulnerabilities": {
+      "info": 0,
+      "low": 4,
+      "moderate": 12,
+      "high": 0,
+      "critical": 0,
+      "total": 16
+    },
+    "unique_advisories": 3,
+    "acceptance": "open",
+    "receipt": "docs/modernization/frontend-dependencies-audit.json"
+  },
+  "source_sha256": {
+    "frontend/package.json": "c3df8bfacc023ea95dbe21f64bd2108132bfc680762bc1f9735117e1ef1b49c0",
+    "frontend/package-lock.json": "54d736e328a13fad160c79aeca261961af321d951adfa5161aa126e181fde707",
+    "frontend/vite.config.ts": "ed632ad3b1b434ab7696fea753c539e2cee5dfddf4bec91ea3adac0a82a2bd9a",
+    "frontend/src/index.css": "8e4e358ad2df0df278b70a5ff7fadfd37dda75cb66b0de1316b00249866ae7a6",
+    "frontend/src/vite-env.d.ts": "c7bc85d91b38b27a81b1f3122ff42d5202c8a2d2044a39259e7edd851d9a25b7",
+    "frontend/tests/ui/markdown-interaction.test.tsx": "96a443fd15cd0e3f56861f817d9c25be068be78d88140179ee281e0876213a2f",
+    "frontend/tests/access.browser.mjs": "d99af3dfa281f1163bb26188fda248d28af4c8fc942776dcd0aca9d01dab33ef"
+  },
+  "limitations": [
+    "No new global backend suite, native image rebuild or model evaluation.",
+    "No full acceptance of any of the 12 pages.",
+    "No cross-browser or minimum-version product acceptance.",
+    "16 dependency audit entries remain; no forced incompatible overrides.",
+    "12 existing lint errors and the forced-colors Axe discrepancy remain open.",
+    "Bundle-size warning and deprecated SSR esbuild fixture settings deferred."
+  ]
+}

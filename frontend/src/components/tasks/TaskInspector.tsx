@@ -92,7 +92,7 @@ export function TaskInspector({
                     value={task.status}
                     onChange={(e) => handleStatusChange(e.target.value)}
                     disabled={!lifecycleEditable || updateTask.isPending}
-                    className={`cursor-pointer rounded-full border-none px-2 py-0.5 text-xs font-medium focus:outline-none focus:ring-1 focus:ring-[var(--work-accent)] task-status`}
+                    className={`cursor-pointer rounded-full border-none px-2 py-0.5 text-xs font-medium focus:outline-hidden focus:ring-1 focus:ring-[var(--work-accent)] task-status`}
                   >
                     {taskStatuses.map((s) => (
                       <option key={s} value={s} className="bg-[var(--work-paper)] text-[var(--work-ink)]">
@@ -117,7 +117,7 @@ export function TaskInspector({
                         }
                         if (e.key === 'Escape') setEditingTitle(false)
                       }}
-                      className="flex-1 rounded-md border border-[var(--work-line)] bg-[var(--work-paper)] px-2 py-1 text-lg font-semibold text-[var(--work-ink)] focus:border-sky-500/50 focus:outline-none"
+                      className="flex-1 rounded-md border border-[var(--work-line)] bg-[var(--work-paper)] px-2 py-1 text-lg font-semibold text-[var(--work-ink)] focus:border-sky-500/50 focus:outline-hidden"
                     />
                     <button
                       onClick={saveTitle} disabled={!draftTitle.trim() || updateTask.isPending}
@@ -179,7 +179,7 @@ export function TaskInspector({
                         value={draftDesc}
                         onChange={(e) => setDraftDesc(e.target.value)}
                         rows={8}
-                        className="w-full rounded-md border border-[var(--work-line)] bg-[var(--work-paper)] px-3 py-2 text-sm text-[var(--work-ink)] placeholder-slate-600 focus:border-sky-500/50 focus:outline-none"
+                        className="w-full rounded-md border border-[var(--work-line)] bg-[var(--work-paper)] px-3 py-2 text-sm text-[var(--work-ink)] placeholder-slate-600 focus:border-sky-500/50 focus:outline-hidden"
                       />
                       <div className="flex gap-2">
                         <button
@@ -330,7 +330,7 @@ export function TaskInspector({
                       onChange={(e) => setCommentText(e.target.value)}
                       placeholder="Añade un comentario…"
                       rows={3}
-                      className="w-full rounded-md border border-[var(--work-line)] bg-[var(--work-paper)] px-3 py-2 text-sm text-[var(--work-ink)] placeholder-slate-600 focus:border-sky-500/50 focus:outline-none"
+                      className="w-full rounded-md border border-[var(--work-line)] bg-[var(--work-paper)] px-3 py-2 text-sm text-[var(--work-ink)] placeholder-slate-600 focus:border-sky-500/50 focus:outline-hidden"
                     />
                     <button
                       onClick={handleAddComment}
