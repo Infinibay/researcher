@@ -396,6 +396,7 @@ class BrokerEndpoint:
         self._transports = []
 
     async def open(self, *, limit):
+        """Transfer independent pipe descriptors to the loop and release the originals."""
         if self._opened:
             raise RuntimeError("Broker endpoint cannot reopen")
         self._opened = True
@@ -411,7 +412,12 @@ class BrokerEndpoint:
             for name in ("stdout", "stderr"):
                 reader = asyncio.StreamReader(limit=limit)
                 protocol = asyncio.StreamReaderProtocol(reader)
-                stream = getattr(self._raw, name)
+                # Loop transports own their descriptors until asynchronous close
+                # completes. Owner retirement must not close those same numbers:
+                # uvloop can otherwise close an unrelated, newly reused FD.
+                original = getattr(self._raw, name)
+                stream = os.fdopen(os.dup(original.fileno()), 'rb')
+                original.close()
                 os.set_blocking(stream.fileno(), False)
                 transport, _ = await loop.connect_read_pipe(
                     lambda p=protocol: p, stream
@@ -419,9 +425,12 @@ class BrokerEndpoint:
                 self._transports.append(transport)
                 setattr(self, name, reader)
             protocol = _WriteProtocol()
-            os.set_blocking(self._raw.stdin.fileno(), False)
+            input_stream = os.fdopen(os.dup(self._raw.stdin.fileno()), 'wb')
+            # Keeping the original writer alive would prevent EOF at the peer.
+            self._raw.stdin.close()
+            os.set_blocking(input_stream.fileno(), False)
             transport, _ = await loop.connect_write_pipe(
-                lambda: protocol, self._raw.stdin
+                lambda: protocol, input_stream
             )
             self._transports.append(transport)
             transport.set_write_buffer_limits(high=limit, low=max(1, limit // 2))
@@ -432,6 +441,7 @@ class BrokerEndpoint:
             raise
 
     def _close_io(self):
+        """Close loop-owned pipes and separate owner handles without descriptor reuse races."""
         transports, self._transports = self._transports, []
         for transport in transports:
             if transport.is_closing():

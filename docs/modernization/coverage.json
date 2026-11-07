@@ -4145,6 +4145,27 @@
         "38old testfunctions including three skipped pod cases retired, not repaired.",
         "No global suite/model evaluation;host provisioning/container admission/restore and broad scenarios remain open."
       ]
+    },
+    "native_host_installation": {
+      "status": "complete",
+      "scope": "Explicit fresh native host preparation/check/start from installed package, and complete synthetic HTTP subscription admission with restart. Portable provisioning and containerized admission remain separate.",
+      "evidence": [
+        "docs/architecture/native-host-installation.md",
+        "docs/modernization/host-installation-results.json",
+        "backend/runtime/host_installation.py",
+        "backend/runtime/broker_stdio.py",
+        "backend/tests/runtime/test_host_installation.py",
+        "backend/tests/runtime/test_host_command_close.py",
+        "evals/operation/host_smoke.py"
+      ],
+      "limitations": [
+        "Portable asset provisioning/cgroup delegation, prior-actor enrollment/recovery and full native container admission.",
+        "Historical configuration/evaluation runners, frontend dependencies, migrations/inverses/real-data restoration.",
+        "History/budgets, real/human/scientific/global evaluation, all12page acceptance and finalreview.",
+        "Nine style warnings and existing TestClient/Codex version warnings tracked in DD064, after macro capabilities.",
+        "Installed suite retains one source-only shell check failure; that check passes in checkout.",
+        "Earlier uncertain admission is preserved; no global/human/scientific acceptance claimed."
+      ]
     }
   }
 }

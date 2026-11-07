@@ -296,3 +296,15 @@ repetir pruebas de procesos o builds por estos detalles. Los fallos iniciales
 de la aserción de fixture fueron corregidos y comprobados de nuevo; el artefacto con caché
 antigua fue descartado y reconstruido desde sdist. No son pendientes de estilo.
 
+## DD064 — detalles tras preparar el host nativo
+
+Nueve avisos de lint en CLI, preparación del host y fixtures/runner quedan para
+después de todas las capacidades principales: I001, TRY004, RUF059 y F401.
+También quedan el aviso benigno de Codex `--version` al usar un HOME inexistente
+para evitar leer la cuenta y la deprecación heredada de TestClient/httpx. No
+reconstruir ni repetir admisiones reales sólo por este pulido.
+
+El fallo de descriptores al cerrar comandos y la entrega de EOF eran bloqueos
+funcionales; se corrigieron y comprobaron con ambos loops. La admisión desde
+contenedor, recursos portables y restauración real siguen como trabajo principal.
+

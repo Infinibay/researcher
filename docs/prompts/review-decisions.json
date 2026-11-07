@@ -73,28 +73,6 @@
       "conflicts": [],
       "revalidation": "Candidate AST/value unchanged. Direct consumers reviewed after extracting project metadata helpers and removing unused task event import and historical flow consumers; native authority and historical-template exclusion unchanged. See docs/architecture/native-flow-retirement.md."
     },
-    "backend/cli/bootstrap.py::main.description@12": {
-      "dependencies_sha256": "2f107945cc6b67749da7d2cea588dce5cf62466f5b2a9a8f6a96681308830e71",
-      "decision": "excluded_human_or_input_metadata",
-      "rationale": "Reviewed as CLI/OpenAPI labels, owner-supplied description defaults or response projection, not an agent developer instruction. Preserve literal owner data and validate transport boundaries; do not infer authorization from prose.",
-      "evidence": [
-        "backend/cli/bootstrap.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "conflicts": []
-    },
-    "backend/cli/launcher.py::main.description@100": {
-      "dependencies_sha256": "068e31275c52851bb8658a080231266021af3e05f4e9a1451a26be846f6b911c",
-      "decision": "excluded_human_or_input_metadata",
-      "rationale": "Reviewed as CLI/OpenAPI labels, owner-supplied description defaults or response projection, not an agent developer instruction. Preserve literal owner data and validate transport boundaries; do not infer authorization from prose.",
-      "evidence": [
-        "backend/cli/launcher.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "conflicts": []
-    },
     "backend/knowledge/reviews.py::read_feedback": {
       "dependencies_sha256": "b66b34d5d8b18599bb15a22c72ef7e77a107fa044b9f0d7c36bf45630c3d53af",
       "decision": "retained_input_renderer",
@@ -753,20 +731,6 @@
         "Controlled composition proof does not evaluate model quality, multi-language refactoring reliability or human comprehension."
       ]
     },
-    "backend/runtime/development_policy.py::development_instructions": {
-      "dependencies_sha256": "168c5fccdc937305f1934a5ae5b02c8b6a60d075907c210622f165f149b8a849",
-      "decision": "retained",
-      "rationale": "Reviewed capability-specific procedure against its bound typed tools and host ownership. Shared policy is composed by native catalog; historical role hierarchy, imaginary scientific certainty and automatic acceptance are excluded. Host checks are disclosed as configuration, not passing results.",
-      "evidence": [
-        "backend/runtime/development_policy.py",
-        "backend/prompts/native.py",
-        "backend/runtime/business_mediation.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
-        "evals/prompts/cases.json"
-      ],
-      "conflicts": [],
-      "consumer_recheck": "2026-11-06: prompt AST identical to 12a1744. Removed legacy launcher consumers; retained owned broker/catalog behavior is covered by test_owned_factory.py and test_broker_inference.py. No new semantic or model evaluation claimed."
-    },
     "backend/runtime/investigation_instructions.py::INVESTIGATION_INSTRUCTIONS": {
       "dependencies_sha256": "84b004a0dec9f6a8be6e289ff11c15499197099bf0e612d6f8f112028c175d40",
       "decision": "rewritten",
@@ -1156,6 +1120,54 @@
       ],
       "conflicts": [],
       "revalidation": "Candidate AST/value unchanged. Direct consumers reviewed after obsolete autonomy/role/provider retirement and complete registered-worker shutdown enumeration; no native instruction change. See docs/architecture/native-autonomy-retirement.md."
+    },
+    "backend/cli/bootstrap.py::main.description@12": {
+      "dependencies_sha256": "92c2df18aa2d8d9782a5e220ab93b87291855121aa5970bbb35df873f787928a",
+      "decision": "excluded_human_or_input_metadata",
+      "rationale": "Reviewed as CLI/OpenAPI labels, owner-supplied description defaults or response projection, not an agent developer instruction. Preserve literal owner data and validate transport boundaries; do not infer authorization from prose.",
+      "evidence": [
+        "backend/cli/bootstrap.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "conflicts": [],
+      "revalidation": {
+        "base_commit": "20b3c25",
+        "method": "AST equality of the selected candidate, ignoring source locations; host setup and direct consumer hashes changed. No new semantic review or model efficacy claim."
+      }
+    },
+    "backend/cli/launcher.py::main.description@100": {
+      "dependencies_sha256": "d16fef0b321ef18bdeff6833c3532361a8ccd9d0908fb6241e193f55fc5122b1",
+      "decision": "excluded_human_or_input_metadata",
+      "rationale": "Reviewed as CLI/OpenAPI labels, owner-supplied description defaults or response projection, not an agent developer instruction. Preserve literal owner data and validate transport boundaries; do not infer authorization from prose.",
+      "evidence": [
+        "backend/cli/launcher.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "conflicts": [],
+      "revalidation": {
+        "base_commit": "20b3c25",
+        "method": "AST equality of the selected candidate, ignoring source locations; host setup and direct consumer hashes changed. No new semantic review or model efficacy claim."
+      }
+    },
+    "backend/runtime/development_policy.py::development_instructions": {
+      "dependencies_sha256": "b80708b81fc6dea4173bcc82885b75669c6ea44cd85e814d6b4afc85faf1eafb",
+      "decision": "retained",
+      "rationale": "Reviewed capability-specific procedure against its bound typed tools and host ownership. Shared policy is composed by native catalog; historical role hierarchy, imaginary scientific certainty and automatic acceptance are excluded. Host checks are disclosed as configuration, not passing results.",
+      "evidence": [
+        "backend/runtime/development_policy.py",
+        "backend/prompts/native.py",
+        "backend/runtime/business_mediation.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md",
+        "evals/prompts/cases.json"
+      ],
+      "conflicts": [],
+      "consumer_recheck": "2026-11-06: prompt AST identical to 12a1744. Removed legacy launcher consumers; retained owned broker/catalog behavior is covered by test_owned_factory.py and test_broker_inference.py. No new semantic or model evaluation claimed.",
+      "revalidation": {
+        "base_commit": "20b3c25",
+        "method": "AST equality of the selected candidate, ignoring source locations; host setup and direct consumer hashes changed. No new semantic review or model efficacy claim."
+      }
     }
   },
   "retired_entries": {

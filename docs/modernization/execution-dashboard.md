@@ -16,7 +16,37 @@ de compactar. Primero todas las tareas gruesas; todos los detalles secundarios a
 - Última suite global completada al retomar `0c8b8d9`: 2148 casos, 2045 pasan, 100 fallan y tres se omiten. Mismos 100 identificadores heredados; no se afirman causas idénticas. Pasan 965 casos del runtime. La política Git añadida después tiene verificación separada.
 - Los 43 escenarios amplios siguen abiertos en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Etapa actual: sandbox y launcher retirados; sigue el aprovisionamiento nativo
+## Etapa actual: host nativo preparado y recorrido real comprobado
+
+Se añaden `init-host`, `check-host --probe` y `researcher-start --installation`.
+Usan recursos explícitos ya instalados, crean almacenamiento nuevo y conservan
+separado el testigo de autoridad. El modelo queda en configuración. El recorrido
+del paquete instalado sirve web/API, exige emparejamiento y usa la suscripción:
+Ken lee código, un comando calcula 200, se guardan hallazgo provisional e informe
+borrador y ambos sobreviven al reinicio. Los cinco peers quedan cerrados y los
+dos cierres del servicio se observan. [Guía](../architecture/native-host-installation.md),
+[evidencia y límites](host-installation-results.json).
+
+Se corrigió un fallo reproducido bajo uvloop al cerrar pipes, conservando la
+entrega de EOF. Pasan 23 pruebas de preparación/CLI y 35 de transporte/Git; las
+tres regresiones de cierre pasan también con asyncio. El paquete pasa 55 casos;
+un check requiere `start.sh` del checkout y pasa allí. Coinciden 571 archivos
+Python/SQL, con 27 definiciones nuevas/modificadas documentadas. El primer intento
+real incierto se conserva; el éxito corresponde a otra instalación sintética,
+sin repetir esa admisión. No hay suite global nueva ni restauración real aceptada.
+
+**Lista vigente al cambiar de tarea:**
+- Cerrado en esta etapa: preparación/arranque del host con recursos existentes,
+  corrección del transporte y recorrido real por HTTP con reinicio.
+- Siguiente en operación: admisión nativa desde el contenedor y aprovisionamiento
+  portable; revisar configuración y runners históricos restantes.
+- Pendiente principal: dependencias frontend; migraciones/inversas/restauración
+  real; historial/presupuestos; evaluación real, humana, científica y global;
+  aceptación integral de 12 páginas y revisión final. Siguen 43 escenarios abiertos.
+- Al final: todos los detalles secundarios. DD064 conserva nueve avisos de estilo
+  y avisos heredados; no se repiten admisiones reales por ese pulido.
+
+## Etapa anterior: sandbox y launcher retirados; sigue el aprovisionamiento nativo
 
 El producto exige el perfil explícito `owned-codex-v1`. Se retiraron pods,
 imagen histórica, helper de archivos y launcher anterior; la sesión compartida

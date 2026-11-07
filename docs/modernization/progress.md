@@ -7224,3 +7224,66 @@ history/budgets,real/human/scientific/global evaluation,12page acceptance/finalr
 sandbox-profile-tests.xml,sandbox-installed-tests.xml,sandbox-installed-startup-tests.xml,
 sandbox-retirement-audit.json,sandbox-wheel-check.json,sandbox-installed-byte-check.json.
 No newpush/deploy, no newmodelturn, no global completion claim.
+
+## 2026-11-06 — fresh native host installation and real HTTP admission, based on 20b3c25
+
+Added explicit init-host/check-host and launcher --installation. Existing trusted
+native/Ken/account/model-cache/network/delegated-cgroup resources are validated
+before new private storage is created. The external authority witness remains
+separate; existing or partial installations are never reinitialized. Local
+checks make no inference calls. A fixed no-op kernel probe observes retirement.
+This prepares supplied resources; it is not portable automatic provisioning,
+prior-actor enrollment, container admission or real-data restore.
+
+Source host/bootstrap/launcher selection: 23 PASS after correcting probe double
+retirement and a test environment leak. First real harness failed readiness
+before admission (wrong health path); corrected to /api/health/ready. Second
+fixture admitted one real turn: Ken/read and calculation succeeded, but command
+closure became PeerUncertain. Original run remains reconciling and dispatch
+unknown, with all five peers physically closed. No replay or status rewriting.
+The failed snapshot query was corrected observationally; private original logs
+and history are retained, never committed.
+
+An account-free reproducer passed with asyncio but failed under the installed
+server's uvloop with EBADF during process identity reading. Transferring separate
+FDs to loop transports prevents deferred close from closing a reused descriptor;
+releasing original writers also preserves EOF. The EOF regression first failed
+with timeout, then passed. Final uvloop commands/RPC/MCP/Git selection: 35 PASS;
+three closure cases also PASS with asyncio. The original live stack was not
+persisted, so the reproducible defect is established without claiming it was
+the sole possible cause of that original interruption.
+
+Clean uv build via sdist yields wheel SHA
+f3df8f5d0fd70b5a0c7a3dbd86ca24e58634d4a6eeec8219599d9a6d10515e06.
+571 Python/SQL files match source, wheel and installed files; 223 backend imports
+are installed, 83 distributions compatible. Isolated installed selection:
+55 PASS, one source-only start.sh check fails because checkout files are absent
+from wheel; that exact check then PASS from source. No disguised green receipt,
+no need to rerun the passing selection. Current service image was not rebuilt.
+
+A third, independent fresh installation completes one bounded subscription turn
+through installed launcher/HTTP: Ken find/read, reference capture, one Python
+calculation exits zero with stdout200, provisional finding and draft report,
+native completed/settled and run needs_review. All five peers close; original
+service and restart exit143 after orderly shutdown. State and SQLite integrity
+match after restart. The report distinguishes code inspection from execution
+and uses a simple example; human comprehension/conciseness remains unevaluated.
+Observed token high-water is280482, not an isolated prompt benchmark or billing
+measurement. Two real admissions total in this cut (one uncertain, one completed).
+
+27 new/changed definitions and seven modules documented. Prompt inventory:
+83 candidates/272 files,515 archived; three AST-unchanged candidates rebound to
+changed source/direct-consumer hashes, zero pending static reviews. No new
+prompt efficacy claim. Nine lint issues and inherited benign warnings recorded
+in DD064; all fine work remains after macro capabilities.
+
+Public evidence: native-host-installation.md, host-assets.example.json and
+host-installation-results.json. Raw task-local evidence: host-installation-final-tests.xml,
+host-transport-uvloop-final.xml, host-transport-asyncio-final.xml,
+host-source-shell-test.xml, host-installed-tests.xml and host-installation-smoke-v3/result.json.
+No new push, merge or deployment. Next principal work remains native container
+admission/portable provisioning, remaining historical configuration/runners,
+frontend dependencies, data migrations/restore, history/budgets, broad evaluations
+and 12-page acceptance/final review. All43 broad scenarios remain open. User
+policy is persistent: show done/current/pending at each principal-task transition,
+finish all macro capabilities before all fine details.

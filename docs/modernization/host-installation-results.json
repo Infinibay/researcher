@@ -1,0 +1,305 @@
+{
+  "date": "2026-11-06",
+  "base_commit": "20b3c25",
+  "scope": "Explicit fresh native host preparation/check/start from installed package, and complete synthetic HTTP subscription admission with restart. Portable provisioning and containerized admission remain separate.",
+  "behavior": [
+    "init-host validates explicit native/Ken/account/cache/network/cgroup assets before creating new private storage; rejects existing and overlapping roots.",
+    "check-host observes local resources and authority/database; optional fixed no-op kernel child is retired. No inference or downloads.",
+    "--installation consumes prepared paths and uses a service cwd outside private owner credentials; optional compiled web shares API origin.",
+    "BrokerEndpoint gives loop transports independent FDs and releases originals immediately: deferred uvloop close cannot affect reused owner descriptors, and stdin EOF remains observable."
+  ],
+  "local_resources": {
+    "native_version": "codex-cli 0.166.0",
+    "native_sha256": "b8a11fedf24b2dfb59a70c9e52b030f9a508dcd49cd2dd0d41956f4c785156b8",
+    "code_host_sha256": "657f4e902726e05867c937b583049d5997e057f8cd0ab40450633c9c9ef8d630",
+    "ken_version": "0.18.0",
+    "ken_artifacts_verified": 26,
+    "credential_snapshot_valid": true,
+    "remote_entitlement_verified": false
+  },
+  "failure_history": [
+    {
+      "stage": "initial host tests",
+      "outcome": "Probe double-retire and test environment restoration were corrected; final23PASS."
+    },
+    {
+      "stage": "smoke-v1",
+      "admissions": 0,
+      "outcome": "Wrong harness readiness path returned401; corrected to /api/health/ready. Original service closed."
+    },
+    {
+      "stage": "smoke-v2",
+      "admissions": 1,
+      "outcome": "Ken and calculation succeeded; per-command closure raised PeerUncertain. Original run remains reconciling/dispatchunknown, all peers closed. Snapshot schema mistake corrected observationally; no replay. Exact original exception detail was not persisted."
+    },
+    {
+      "stage": "account-free reproducer",
+      "outcome": "Default asyncio2PASS; uvloop1FAIL1PASS, PeerUncertain wrapping EBADF while reading process boot identity. Independent FD ownership corrected this reproducible transport defect. A new EOF regression initially timed out, then passed after original writers were released. This does not establish that the FD race was the only cause of the original live interruption."
+    }
+  ],
+  "tests": {
+    "receipts": {
+      "host-installation-final-tests": {
+        "tests": 23,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "seconds": 9.923,
+        "sha256": "3805f6e0c52eabf332bc259dc0679516e39c70ef3c65818edaa653baf4352189"
+      },
+      "host-transport-uvloop-final": {
+        "tests": 35,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "seconds": 43.624,
+        "sha256": "73d265578e4fcd925affe993785b7d4a7c3ace4667b854089a22a272fd5393d0"
+      },
+      "host-transport-asyncio-final": {
+        "tests": 3,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "seconds": 6.485,
+        "sha256": "68e9029855d9600aabc8d18d90c5b97ac4c1fceeef2457e2c83d1904ead0ace4"
+      },
+      "host-source-shell-test": {
+        "tests": 1,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "seconds": 0.132,
+        "sha256": "e72c62a4713be256771ec0458b5f355e2149b20b9fc0d51faa3e9d62f9a19a38"
+      },
+      "host-installed-tests": {
+        "tests": 56,
+        "failures": 1,
+        "errors": 0,
+        "skipped": 0,
+        "seconds": 53.575,
+        "sha256": "69864f802752178aa3ad4e36a7a1daed6dca5ba66f32c84278a0bec50eb250aa"
+      }
+    },
+    "source_final_selections": "23host/bootstrap/launcher +35transport/Git under uvloop;3closure regressions also passed asyncio;1source shell check. Selections overlap, not a global suite.",
+    "installed_passed": 55,
+    "source_only_test": "test_actual_script_help_and_check_do_not_source_env_or_run_setup needs checkout start.sh absent from wheel; passes from source. Installed receipt retains this one failure rather than relabeling it green.",
+    "global_suite": false
+  },
+  "package": {
+    "sha256": "f3df8f5d0fd70b5a0c7a3dbd86ca24e58634d4a6eeec8219599d9a6d10515e06",
+    "python_sql_files": 571,
+    "build": "uv build from sdist",
+    "installed_exit_code": 1,
+    "all_backend_imports_installed": true,
+    "backend_modules": 223,
+    "extra_files": [],
+    "byte_mismatches": [],
+    "exit_code": 1,
+    "loop": "uvloop",
+    "compatible_distributions": 83
+  },
+  "live": {
+    "status": "passed",
+    "admissions_sent": 1,
+    "service_exits": [
+      143,
+      143
+    ],
+    "before_restart": {
+      "runs": [
+        [
+          "b872bb55-0c62-450c-95f3-64daf08f2c42",
+          "needs_review"
+        ]
+      ],
+      "dispatches": [
+        [
+          "gpt-6.1-sol",
+          "settled",
+          "completed"
+        ]
+      ],
+      "reports": [
+        [
+          1,
+          "draft"
+        ]
+      ],
+      "findings": [
+        [
+          1,
+          "provisional"
+        ]
+      ],
+      "peers": [
+        [
+          "business",
+          "closed"
+        ],
+        [
+          "native",
+          "closed"
+        ],
+        [
+          "ken",
+          "closed"
+        ],
+        [
+          "ken",
+          "closed"
+        ],
+        [
+          "command",
+          "closed"
+        ]
+      ],
+      "integrity": "ok"
+    },
+    "after_restart_matches": true,
+    "tool_references_in_executed_native_code": {
+      "ken_find": 1,
+      "researcher_reference_list": 1,
+      "researcher_capture_reference": 1,
+      "ken_read": 1,
+      "researcher_source_read": 2,
+      "researcher_python": 1,
+      "researcher_command_read": 1,
+      "researcher_capture_command": 1,
+      "researcher_finding_record": 1,
+      "researcher_report_write": 1,
+      "researcher_report_read": 1,
+      "researcher_result_propose": 1
+    },
+    "awaited_native_calls": {
+      "Promise.allSettled": 2,
+      "tools.researcher_capture_reference": 1,
+      "tools.researcher_command_read": 1,
+      "tools.researcher_capture_command": 1,
+      "tools.researcher_source_read": 1,
+      "tools.researcher_finding_record": 1,
+      "tools.researcher_report_write": 1,
+      "tools.researcher_report_read": 1,
+      "tools.researcher_result_propose": 1
+    },
+    "jobs": [
+      {
+        "id": "0e39f843-1c85-40d7-8d6b-e9797a8dbdb1",
+        "status": "exited",
+        "exit_code": 0,
+        "stdout": "200\n",
+        "stderr": "",
+        "output_limited": false
+      }
+    ],
+    "observed_token_highwater": 280482,
+    "report_has_simple_example": true,
+    "report_distinguishes_inspection_from_execution": true,
+    "human_comprehension_evaluation": false,
+    "independent_new_synthetic_installation": true,
+    "earlier_unknown_attempt_replayed": false,
+    "real_admissions_total_in_cut": 2,
+    "source_data": "synthetic only",
+    "remote_entitlement_scope": "Successful bounded turn with configured subscription/model, not all models or future entitlement/refresh."
+  },
+  "docstrings": [
+    {
+      "path": "backend/cli/bootstrap.py",
+      "module_documented": true,
+      "changed_definitions": [
+        "main"
+      ],
+      "undocumented_changed_definitions": []
+    },
+    {
+      "path": "backend/cli/launcher.py",
+      "module_documented": true,
+      "changed_definitions": [
+        "main"
+      ],
+      "undocumented_changed_definitions": []
+    },
+    {
+      "path": "backend/runtime/broker_stdio.py",
+      "module_documented": true,
+      "changed_definitions": [
+        "BrokerEndpoint",
+        "BrokerEndpoint.open",
+        "BrokerEndpoint._close_io"
+      ],
+      "undocumented_changed_definitions": []
+    },
+    {
+      "path": "backend/runtime/host_installation.py",
+      "module_documented": true,
+      "changed_definitions": [
+        "_read_json",
+        "_write_new",
+        "_resources",
+        "_environment",
+        "host_environment",
+        "initialize_host",
+        "_probe_domain",
+        "inspect_host"
+      ],
+      "undocumented_changed_definitions": []
+    },
+    {
+      "path": "backend/tests/runtime/test_host_command_close.py",
+      "module_documented": true,
+      "changed_definitions": [
+        "test_completed_command_remains_closeable_after_owner_reads",
+        "test_closing_endpoint_input_delivers_eof_to_original_peer"
+      ],
+      "undocumented_changed_definitions": []
+    },
+    {
+      "path": "backend/tests/runtime/test_host_installation.py",
+      "module_documented": true,
+      "changed_definitions": [
+        "host_assets",
+        "test_fresh_host_composes_storage_and_configured_product",
+        "test_reinitialization_preserves_the_original_host",
+        "test_invalid_host_setup_creates_no_partial_installation",
+        "test_host_probe_observes_and_retires_its_own_domain",
+        "test_launcher_consumes_prepared_host_without_shell_environment"
+      ],
+      "undocumented_changed_definitions": []
+    },
+    {
+      "path": "evals/operation/host_smoke.py",
+      "module_documented": true,
+      "changed_definitions": [
+        "snapshot",
+        "start",
+        "stop",
+        "pair",
+        "seed",
+        "main"
+      ],
+      "undocumented_changed_definitions": []
+    }
+  ],
+  "prompts": {
+    "candidates": 83,
+    "files": 272,
+    "archived": 515,
+    "unchanged_ast_revalidations": 3,
+    "pending_static_reviews": 0,
+    "new_prompt_efficacy_evaluation": false
+  },
+  "remaining": [
+    "Portable asset provisioning/cgroup delegation, prior-actor enrollment/recovery and full native container admission.",
+    "Historical configuration/evaluation runners, frontend dependencies, migrations/inverses/real-data restoration.",
+    "History/budgets, real/human/scientific/global evaluation, all12page acceptance and finalreview.",
+    "Nine style warnings and existing TestClient/Codex version warnings tracked in DD064, after macro capabilities."
+  ],
+  "source_sha256": {
+    "backend/runtime/host_installation.py": "2d7bd82a7fb74faf66b12dba2d4811b562c5d0fd4c677bac3b5197a5a65a46b1",
+    "backend/runtime/broker_stdio.py": "1e32653cabce48d74f916ceee6f4804a32d99000dd0e66e24cc079e61ebd8ee3",
+    "backend/cli/bootstrap.py": "18df1894e54a4f1b244259d1692b724165ac73fa8fbb7876d42bb3b286a87087",
+    "backend/cli/launcher.py": "c65543e061c03856814f07f4d77e0d28836b0a392835f99a7e1db48b8d1c4dd3",
+    "backend/tests/runtime/test_host_installation.py": "b512854d8448545d3b3900f5f56c4831469fd17a20287aa3f70bbb5ca555d3b7",
+    "backend/tests/runtime/test_host_command_close.py": "ab2d0be128ae6682fc30adc8862d276f1f075004389810e70dad32502d5daf0c",
+    "evals/operation/host_smoke.py": "064a80eadee8077fa1d31400c9b0dd54b294f743b7da67916b3980e73fcc94e7"
+  }
+}

@@ -101,9 +101,18 @@ def main(argv=None) -> int:
     parser.add_argument("--api-only", action="store_true", help="Run only the API; no source frontend or Node needed")
     parser.add_argument("--check", action="store_true", help="Read-only prerequisite inspection; does not prove host/account/Ken/runtime readiness")
     parser.add_argument("--port", type=int, default=8000, help="API loopback port; a different port requires --api-only")
+    parser.add_argument('--installation', type=Path, help='Run a prepared native host installation; serves compiled web assets through the API')
     options = parser.parse_args(argv)
     try:
-        services = prerequisites(api_only=options.api_only, port=options.port, workspace=Path.cwd())
+        workspace = Path.cwd()
+        if options.installation is not None:
+            from backend.runtime.host_installation import host_environment
+
+            os.environ.update(host_environment(options.installation))
+            workspace = options.installation.resolve(strict=True) / 'service'
+            if not workspace.is_dir():
+                raise ValueError('Prepared service directory is missing; inspect the installation')
+        services = prerequisites(api_only=options.api_only or options.installation is not None, port=options.port, workspace=workspace)
     except (OSError, ValueError, RuntimeError) as error:
         print(f"Startup refused: {error}", file=sys.stderr)
         return 1

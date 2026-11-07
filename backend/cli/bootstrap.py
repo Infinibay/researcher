@@ -1,4 +1,4 @@
-"""Explicit inference-free storage initialization and pinned local retrieval preparation."""
+"""Explicit inference-free storage/host initialization and local resource diagnostics."""
 
 import argparse
 import json
@@ -28,12 +28,27 @@ def main(argv=None):
     retrieval.add_argument("--directory", required=True)
     retrieval.add_argument("--cache-dir", required=True)
     retrieval.add_argument("--offline", action="store_true")
+    host = commands.add_parser('init-host', help='Prepare a NEW native installation using explicit existing host assets')
+    host.add_argument('--directory', required=True)
+    host.add_argument('--witness-dir', required=True)
+    host.add_argument('--assets', required=True, help='Operator JSON with native/Ken/account/cache/cgroup paths and model')
+    check = commands.add_parser('check-host', help='Verify local host resources without inference or downloads')
+    check.add_argument('--directory', required=True)
+    check.add_argument('--probe', action='store_true', help='Also birth and retire one fixed no-op kernel child')
     options = parser.parse_args(argv)
     # Lazy import: even --help has no database/runtime/credential side effects.
     from backend.runtime.bootstrap import initialize_authority, initialize_database
 
     try:
-        if options.command == "prepare-retrieval":
+        if options.command == 'init-host':
+            from backend.runtime.host_installation import initialize_host, _read_json
+
+            result = initialize_host(options.directory, witness_dir=options.witness_dir, assets=_read_json(options.assets))
+        elif options.command == 'check-host':
+            from backend.runtime.host_installation import inspect_host
+
+            result = inspect_host(options.directory, probe=options.probe)
+        elif options.command == "prepare-retrieval":
             from backend.research.retrieval_assets import prepare
 
             result = prepare(

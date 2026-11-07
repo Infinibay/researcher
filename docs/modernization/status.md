@@ -4,6 +4,18 @@ La implementación del [plan completo](../superpowers/plans/2026-10-31-actualiza
 
 ## Resultados disponibles
 
+- **Preparación y arranque del host nativo comprobados:** inicialización nueva,
+  diagnóstico de recursos y launcher instalado; modelo configurable. Un recorrido
+  real por HTTP con la suscripción usa Ken, calcula, guarda hallazgo/informe y
+  conserva el estado tras reiniciar, con todos sus peers cerrados. Se corrigió el
+  fallo de cierre de descriptores reproducido bajo uvloop, conservando EOF.
+  Pasan 23 pruebas de preparación/CLI, 35 de transporte/Git y 55 instaladas; un
+  check de `start.sh` es sólo de fuente y pasa allí. 571 archivos coinciden y
+  27 definiciones están documentadas. El intento real incierto anterior sigue
+  registrado; no fue repetido. Siguen aprovisionamiento portable, admisión desde
+  contenedor y restauración real. [Guía](../architecture/native-host-installation.md),
+  [resultados](host-installation-results.json).
+
 - **Sandbox y launcher antiguos retirados:** 18 archivos eliminados y una sola fábrica productiva, con perfil `owned-codex-v1` explícito. Se conservan archivos y adjuntos. 164 casos de fuente y 162 del paquete instalado pasan en las selecciones documentadas; dos comprobaciones de manifiestos son sólo de fuente. Wheel limpio: 568 archivos Python/SQL idénticos, sin archivos retirados. 38 funciones de test históricas retiradas, no reparadas; host/admisión integral siguen pendientes. [Migración](../architecture/native-sandbox-retirement.md), [resultados](sandbox-retirement-results.json).
 
 - **Forgejo15.0.11, TLS y restauración ensayados:** manifiesto fijado, puerto local, directorios explícitos y mapeo rootless. Upgrade real9.0.3→15.0.11 con cuenta/token/repositorio/ramas/PR conservados; clone/push TLS y cliente nativo de PR comprobados. Backup restaurado en otra carpeta, copia actualizada conservada. Doctor28checks/exit0 con aviso heredado DD062. No migra la instancia del usuario ni completa el host nativo. [Guía](../architecture/forgejo-upgrade.md), [resultados](forgejo-upgrade-results.json).

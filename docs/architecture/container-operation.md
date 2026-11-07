@@ -83,8 +83,10 @@ These resources must be mounted and enrolled consistently; do not mount broad
 host directories or remove native admission checks to make the container start.
 
 Without that configuration the service explicitly runs in inspection mode.
-Containerized native admission, host provisioning and real-data restore remain
-open deployment work. The separate [Forgejo upgrade rehearsal](forgejo-upgrade.md)
+The [native host preparation guide](native-host-installation.md) now provides
+explicit initialization and diagnostics for an installed host with existing
+resources. Containerized native admission, portable resource provisioning and
+real-data restore remain open deployment work. The separate [Forgejo upgrade rehearsal](forgejo-upgrade.md)
 now covers the pinned service configuration, TLS and synthetic backup/restore. A passing HTTP smoke test does not
 close those requirements or the twelve-page visual/functional acceptance.
 
