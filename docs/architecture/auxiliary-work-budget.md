@@ -71,15 +71,74 @@ La inversa de61 sólo se admite sin políticas ni trabajo registrados y sin
 migraciones posteriores. Una instalación usada necesita reparación hacia delante
 o restauración verificada; no se descarta historial para simular una reversión.
 
-## Alcance pendiente
+## Diagnóstico y continuación explícita
 
 Si la reserva no tiene resultado recuperable, se informa incertidumbre y no se
-recalcula automáticamente. Falta una acción explícita y revisable de diagnóstico/
-continuación para ese caso; no debe habilitarse un botón que repita el cálculo
-sin comprobar su dueño anterior. E08 conserva ese pendiente de recuperación.
+recalcula automáticamente. La migración62 registra la identidad del dueño en la
+misma transacción que la reserva. El transporte marca la creación antes de
+Popen, guarda la identidad del hijo antes de entregar datos y registra su cierre
+después de esperar su salida física. No crea otro proceso dueño.
+
+La identidad incluye PID, inicio del proceso, kernel y namespace del observador.
+Se reutilizan las primitivas pidfd del runtime; no se aplica la prueba de cierre
+de namespace-init a un parser ordinario. Estos workers son procesos confiables
+fijos; el contrato no cubre ejecutar programas arbitrarios ni hijos no registrados.
+
+El propietario consulta `GET /api/projects/{project_id}/local-work`, con páginas
+acotadas. El diagnóstico distingue resultado completo, proceso activo, permiso
+ya guardado, cierre comprobado e identidad/cierre inciertos. No devuelve blobs
+de resultados ni identidades privadas del host. Una fase `closed` con recibo
+todavía pendiente y dueño vivo no permite continuar: aún puede llegar el
+resultado original.
+
+`POST .../local-work/continuations` nombra una operación original exacta y una
+clave de decisión. Se vuelve a comprobar el cierre dentro de la transacción.
+Una operación admite una sola sucesora; reenviar la misma clave recupera el
+recibo, mientras cambiar su contenido se rechaza. `GET .../continuations/{key}`
+recupera una respuesta perdida sin otra escritura.
+
+La autorización no inicia trabajo ni almacena otra copia del documento. La
+próxima solicitud con el mismo contenido, productor y política consume esa
+sucesora, revalidando permisos y reservando otra operación/CPU. Usuario o agente
+con autoridad vigente pueden presentar la solicitud. No se reanuda un intento
+nativo detenido ni se restaura un grant retirado. Si falta cupo, la autorización
+permanece disponible; el rechazo no consume una operación nueva.
+
+Ejemplo: quedaron3000ms desconocidos. Autorizar no cambia esa cifra. Al iniciar
+la sucesora se reservan otros3000ms; si termina con10ms medidos, el total queda
+3010ms. La primera operación conserva su estado y registro originales.
+
+```mermaid
+flowchart LR
+  A[Sin resultado] --> B{Cierre comprobado}
+  B -->|No| C[Mostrar activo o incierto]
+  B -->|Sí| D[Decisión explícita del usuario]
+  D --> E[Permiso para una sucesora]
+  E --> F[Solicitud idéntica con permisos vigentes]
+  F --> G[Nueva reserva y cálculo]
+  G --> H[Resultado recuperable]
+```
+
+La web explica el alcance antes de guardar, persiste la decisión antes del POST
+y permite consultar el recibo tras recargar. Los resultados completos siguen
+recuperándose sin otra autorización. Una segunda interrupción requiere una
+nueva decisión sobre la sucesora exacta, conservando toda la cadena anterior.
+
+La inversa de62 sólo elimina tablas vacías. Tener una ejecución o autorización
+registrada exige reparación hacia delante o restauración verificada.
+
+## Alcance pendiente
+
+Los registros anteriores sin identidad y los cambios de kernel/namespace no
+permiten deducir cierre por ausencia del PID. Morir entre marcar creación y
+guardar la identidad del hijo tampoco demuestra que no exista un trabajador.
+Se explican estos casos y se rechaza la continuación desde esta pantalla.
+Conectar una reconciliación basada en la autoridad de instalación/restore
+existente permanece pendiente funcional, no pulido. E08 continúa abierto.
 
 La CPU medida corresponde al worker, no a toda la CPU del servicio, verificación
 de activos, transporte de red, preparación de Ken o administración. Los límites
 de estos servicios tienen contratos propios. Tampoco se declara aceptación
 integral de storage, datos históricos, interfaz o comprensión del usuario.
-[Validación del bloque](../modernization/auxiliary-budget-review.md).
+[Validación del presupuesto](../modernization/auxiliary-budget-review.md) y
+[continuación explícita](../modernization/auxiliary-continuation-review.md).

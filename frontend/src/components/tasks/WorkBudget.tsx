@@ -2,6 +2,7 @@
 import {useQuery} from '@tanstack/react-query'
 import {measuredTokens,workBudget} from '../../api/history'
 import {BudgetPolicyEditor} from './BudgetPolicyEditor'
+import {LocalWork} from './LocalWork'
 
 /** Observe lifetime admission limits, held capacity and partial measurements in the actual project. */
 export function WorkBudget({projectId}:{projectId:number}){
@@ -31,6 +32,7 @@ export function WorkBudget({projectId}:{projectId:number}){
     <dl className="grid gap-3 sm:grid-cols-2"><div><dt>Cálculos reservados</dt><dd>{budget.auxiliary.used_operations} de {budget.auxiliary.policy.operation_limit}</dd></div><div><dt>CPU contabilizada (ms)</dt><dd>{measuredTokens(budget.auxiliary.accounted_cpu_ms)} de {measuredTokens(budget.auxiliary.policy.cpu_ms_limit)}</dd></div><div><dt>CPU observada (ms)</dt><dd>{measuredTokens(budget.auxiliary.observed_cpu_ms)}</dd></div><div><dt>Capacidad local restante (ms)</dt><dd>{measuredTokens(budget.auxiliary.remaining_cpu_ms)}</dd></div></dl>
     <p>{budget.auxiliary.unknown_operations} cálculos sin medición; conservan {measuredTokens(budget.auxiliary.held_cpu_ms)} ms reservados, ya incluidos en el total. {budget.auxiliary.pending_operations} sin recibo final.</p>
     <p>Por ejemplo: si se reservan 3.000 ms para extraer un documento y se pierde la medición, esos 3.000 ms siguen contabilizados. Un resultado completo guardado puede recuperarse sin recalcular. Ampliar el cupo no repite cálculos inciertos.</p>
+    <LocalWork key={projectId} projectId={projectId}/>
    </div>}
    <BudgetPolicyEditor key={projectId} budget={budget} fresh={!query.error}/>
   </>}

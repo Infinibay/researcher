@@ -26,7 +26,7 @@ La inspección AST citada al final conserva su fecha/base original.
 
 | Servicio | Qué hace y cómo se acota | Límite o pendiente |
 | --- | --- | --- |
-| Encoder local | `research/semantic.py` y `semantic_worker.py`: pesos/tokenizer fijados, trabajo offline y lotes/vectores observados. El transporte reserva operación/CPU por proyecto e intento antes del worker. | Resultado original recuperable con identidad y origen de medición explícitos. Cálculos sin resultado conservan la reserva; falta su diagnóstico/continuación explícitos. |
+| Encoder local | `research/semantic.py` y `semantic_worker.py`: pesos/tokenizer fijados, trabajo offline y lotes/vectores observados. El transporte reserva operación/CPU por proyecto e intento antes del worker. | Resultado original recuperable con identidad y origen de medición explícitos. Cálculos sin resultado conservan la reserva. Diagnóstico y autorización explícita de una sucesora implementados cuando hay prueba de cierre; identidad ausente/cierre incierto requieren reconciliación de instalación. |
 | PDF y extracción | `research/worker_transport.py`: IPC, salida y plazos acotados; cancelación/cierre físico antes de liberar la plaza compartida. Parsers y semántica usan el mismo presupuesto durable. | Bytes, vectores y CPU no son tokens generativos. La CPU medida es la del worker; no equivale a toda la CPU del servicio. |
 | Ken obligatorio | Herramientas Ken mediante MCP con ámbito de workspace. `ken-rank` publicado fue ensayado; versión y activos del host son explícitos. | Preparación, calidad y compatibilidad publicada tienen requisitos propios. Un candidato local de compatibilidad no equivale a una publicación adoptada. |
 | Web pública | `research/web_fetcher.py`: HTTPS público con límites/procedencia, sin cookies, proxy o Authorization heredados. Búsqueda nativa con política explícita. | Capturar una fuente no prueba comprensión. Búsquedas internas del runtime sólo se contabilizan según su telemetría. |
@@ -73,6 +73,10 @@ calidad generativa o facturación.
 
 La migración61 y el transporte común cubren reserva previa, consumo conocido/
 desconocido y resultados recuperables para las entradas humanas y nativas.
-El propietario ve y revisa los totales con recibo/versionado. Sigue pendiente
-diagnosticar y continuar explícitamente un cálculo cuyo resultado no se guardó,
-sin repetirlo automáticamente ni borrar su consumo. [Evidencia actual](../modernization/auxiliary-budget-review.md).
+El propietario ve y revisa los totales con recibo/versionado. La migración62
+añade diagnóstico de identidad/cierre y autorización de una única sucesora,
+sin iniciarla al guardar ni borrar consumo anterior. Se revalida autoridad y
+capacidad al presentar la próxima solicitud idéntica. Registros sin identidad,
+cambio de kernel/namespace y creación interrumpida sin identidad del hijo
+requieren reconciliación de instalación pendiente. [Presupuesto](../modernization/auxiliary-budget-review.md)
+y [continuación comprobada](../modernization/auxiliary-continuation-review.md).

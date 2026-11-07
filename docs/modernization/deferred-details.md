@@ -835,3 +835,5 @@ ese refresco evitará interpretar fugazmente el contador anterior como la nueva
 política. El recorrido real comprobó el valor final exacto sin repetir escrituras.
 No bloquea el control durable y no implica rehacer ahora el panel; DD108 conserva
 su limitación de encuadre móvil. Véase la auditoría de presupuesto auxiliar.
+
+| DD-110 | El historial local muestra hashes completos, formato/fecha/CPU con locale del navegador y el error de red original (`Failed to fetch`). Afinar etiquetas de cálculo/nuevo cálculo, densidad, traducción de error y asociación visual con su intento. Tres capturas completas del componente y controles/recibos comprobados; no repetir procesos por estos detalles. | `LocalWork.tsx`, `localWork.ts`, auditoría `2026-11-07-local-continuation` | Pasada final después de todas las capacidades principales. Reconciliar identidad ausente/cambio de kernel/hueco de creación sigue siendo trabajo funcional, no DD110. |

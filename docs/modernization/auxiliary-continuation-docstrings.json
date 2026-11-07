@@ -1,0 +1,377 @@
+{
+  "scope": "new local recovery modules/tests, shared local budget and worker transport, four new API declarations",
+  "documented_nodes": 74,
+  "missing": [],
+  "nodes": [
+    {
+      "path": "backend/runtime/auxiliary_budget.py",
+      "name": "<module>",
+      "line": 1
+    },
+    {
+      "path": "backend/runtime/auxiliary_budget.py",
+      "name": "AuxiliaryBudgetExceeded",
+      "line": 22
+    },
+    {
+      "path": "backend/runtime/auxiliary_budget.py",
+      "name": "AuxiliaryWorkUncertain",
+      "line": 26
+    },
+    {
+      "path": "backend/runtime/auxiliary_budget.py",
+      "name": "auxiliary_usage",
+      "line": 30
+    },
+    {
+      "path": "backend/runtime/auxiliary_budget.py",
+      "name": "auxiliary_summary",
+      "line": 43
+    },
+    {
+      "path": "backend/runtime/auxiliary_budget.py",
+      "name": "AuxiliaryBudget",
+      "line": 54
+    },
+    {
+      "path": "backend/runtime/auxiliary_budget.py",
+      "name": "__init__",
+      "line": 57
+    },
+    {
+      "path": "backend/runtime/auxiliary_budget.py",
+      "name": "bound",
+      "line": 66
+    },
+    {
+      "path": "backend/runtime/auxiliary_budget.py",
+      "name": "_authority",
+      "line": 72
+    },
+    {
+      "path": "backend/runtime/auxiliary_budget.py",
+      "name": "summary",
+      "line": 80
+    },
+    {
+      "path": "backend/runtime/auxiliary_budget.py",
+      "name": "execute",
+      "line": 86
+    },
+    {
+      "path": "backend/runtime/auxiliary_budget.py",
+      "name": "_measurement",
+      "line": 140
+    },
+    {
+      "path": "backend/runtime/auxiliary_budget.py",
+      "name": "_finish",
+      "line": 149
+    },
+    {
+      "path": "backend/runtime/auxiliary_execution.py",
+      "name": "<module>",
+      "line": 1
+    },
+    {
+      "path": "backend/runtime/auxiliary_execution.py",
+      "name": "process_identity",
+      "line": 18
+    },
+    {
+      "path": "backend/runtime/auxiliary_execution.py",
+      "name": "process_state",
+      "line": 23
+    },
+    {
+      "path": "backend/runtime/auxiliary_execution.py",
+      "name": "LocalExecution",
+      "line": 41
+    },
+    {
+      "path": "backend/runtime/auxiliary_execution.py",
+      "name": "__init__",
+      "line": 44
+    },
+    {
+      "path": "backend/runtime/auxiliary_execution.py",
+      "name": "register",
+      "line": 48
+    },
+    {
+      "path": "backend/runtime/auxiliary_execution.py",
+      "name": "bound",
+      "line": 54
+    },
+    {
+      "path": "backend/runtime/auxiliary_execution.py",
+      "name": "spawning",
+      "line": 60
+    },
+    {
+      "path": "backend/runtime/auxiliary_execution.py",
+      "name": "bind",
+      "line": 66
+    },
+    {
+      "path": "backend/runtime/auxiliary_execution.py",
+      "name": "closed",
+      "line": 73
+    },
+    {
+      "path": "backend/runtime/auxiliary_execution.py",
+      "name": "callback_finished",
+      "line": 78
+    },
+    {
+      "path": "backend/runtime/auxiliary_recovery.py",
+      "name": "<module>",
+      "line": 1
+    },
+    {
+      "path": "backend/runtime/auxiliary_recovery.py",
+      "name": "AuxiliaryRecovery",
+      "line": 11
+    },
+    {
+      "path": "backend/runtime/auxiliary_recovery.py",
+      "name": "__init__",
+      "line": 14
+    },
+    {
+      "path": "backend/runtime/auxiliary_recovery.py",
+      "name": "_project",
+      "line": 19
+    },
+    {
+      "path": "backend/runtime/auxiliary_recovery.py",
+      "name": "_diagnosis",
+      "line": 25
+    },
+    {
+      "path": "backend/runtime/auxiliary_recovery.py",
+      "name": "_columns",
+      "line": 49
+    },
+    {
+      "path": "backend/runtime/auxiliary_recovery.py",
+      "name": "list",
+      "line": 53
+    },
+    {
+      "path": "backend/runtime/auxiliary_recovery.py",
+      "name": "_key",
+      "line": 64
+    },
+    {
+      "path": "backend/runtime/auxiliary_recovery.py",
+      "name": "receipt",
+      "line": 68
+    },
+    {
+      "path": "backend/runtime/auxiliary_recovery.py",
+      "name": "authorize",
+      "line": 77
+    },
+    {
+      "path": "backend/runtime/auxiliary_recovery.py",
+      "name": "result",
+      "line": 27
+    },
+    {
+      "path": "backend/research/worker_transport.py",
+      "name": "<module>",
+      "line": 1
+    },
+    {
+      "path": "backend/research/worker_transport.py",
+      "name": "_receipt_fingerprint",
+      "line": 25
+    },
+    {
+      "path": "backend/research/worker_transport.py",
+      "name": "exchange",
+      "line": 39
+    },
+    {
+      "path": "backend/research/worker_transport.py",
+      "name": "_exchange",
+      "line": 72
+    },
+    {
+      "path": "backend/research/worker_transport.py",
+      "name": "run_worker",
+      "line": 51
+    },
+    {
+      "path": "backend/db/auxiliary_continuation_migration.py",
+      "name": "<module>",
+      "line": 1
+    },
+    {
+      "path": "backend/db/auxiliary_continuation_migration.py",
+      "name": "restore_auxiliary_continuation_schema",
+      "line": 4
+    },
+    {
+      "path": "backend/tests/runtime/test_auxiliary_continuation.py",
+      "name": "<module>",
+      "line": 1
+    },
+    {
+      "path": "backend/tests/runtime/test_auxiliary_continuation.py",
+      "name": "failed",
+      "line": 19
+    },
+    {
+      "path": "backend/tests/runtime/test_auxiliary_continuation.py",
+      "name": "decide",
+      "line": 27
+    },
+    {
+      "path": "backend/tests/runtime/test_auxiliary_continuation.py",
+      "name": "test_closed_failure_has_one_explicit_successor_and_original_receipt",
+      "line": 32
+    },
+    {
+      "path": "backend/tests/runtime/test_auxiliary_continuation.py",
+      "name": "test_live_owner_and_unfinished_callback_cannot_be_repeated",
+      "line": 50
+    },
+    {
+      "path": "backend/tests/runtime/test_auxiliary_continuation.py",
+      "name": "test_real_owner_death_allows_new_calculation_without_erasing_pending_hold",
+      "line": 67
+    },
+    {
+      "path": "backend/tests/runtime/test_auxiliary_continuation.py",
+      "name": "test_permission_does_not_override_budget_or_allow_two_successors",
+      "line": 82
+    },
+    {
+      "path": "backend/tests/runtime/test_auxiliary_continuation.py",
+      "name": "test_missing_identity_never_claims_closure",
+      "line": 101
+    },
+    {
+      "path": "backend/tests/runtime/test_auxiliary_continuation.py",
+      "name": "test_changed_observer_and_permission_failure_are_unknown",
+      "line": 110
+    },
+    {
+      "path": "backend/tests/runtime/test_auxiliary_continuation.py",
+      "name": "test_new_permission_still_requires_current_native_grant",
+      "line": 125
+    },
+    {
+      "path": "backend/tests/runtime/test_auxiliary_continuation.py",
+      "name": "test_unused_inverse_and_used_history_guard",
+      "line": 141
+    },
+    {
+      "path": "backend/tests/runtime/test_auxiliary_continuation.py",
+      "name": "test_owner_api_recovers_exact_receipt_and_excludes_tool_bearer",
+      "line": 152
+    },
+    {
+      "path": "backend/tests/runtime/test_auxiliary_continuation.py",
+      "name": "test_actual_worker_is_bound_before_input_and_explicit_successor_reuses_new_result",
+      "line": 179
+    },
+    {
+      "path": "backend/tests/runtime/test_auxiliary_continuation.py",
+      "name": "test_dead_owner_with_live_worker_is_blocked_until_exact_worker_ends",
+      "line": 222
+    },
+    {
+      "path": "backend/tests/runtime/test_auxiliary_continuation.py",
+      "name": "test_crash_during_unbound_creation_remains_explicitly_uncertain",
+      "line": 264
+    },
+    {
+      "path": "backend/tests/runtime/test_auxiliary_continuation.py",
+      "name": "test_pagination_and_second_generation_keep_every_original",
+      "line": 281
+    },
+    {
+      "path": "backend/tests/runtime/test_auxiliary_continuation.py",
+      "name": "test_closed_worker_with_receipt_still_being_saved_cannot_be_repeated",
+      "line": 294
+    },
+    {
+      "path": "backend/tests/runtime/test_auxiliary_continuation.py",
+      "name": "test_forward_upgrade_preserves_unknown_legacy_work_without_inventing_process_identity",
+      "line": 314
+    },
+    {
+      "path": "backend/tests/runtime/test_auxiliary_continuation.py",
+      "name": "test_competing_requests_consume_the_same_permission_only_once",
+      "line": 327
+    },
+    {
+      "path": "backend/tests/runtime/test_auxiliary_continuation.py",
+      "name": "lose",
+      "line": 21
+    },
+    {
+      "path": "backend/tests/runtime/test_auxiliary_continuation.py",
+      "name": "busy",
+      "line": 53
+    },
+    {
+      "path": "backend/tests/runtime/test_auxiliary_continuation.py",
+      "name": "compete",
+      "line": 86
+    },
+    {
+      "path": "backend/tests/runtime/test_auxiliary_continuation.py",
+      "name": "denied",
+      "line": 118
+    },
+    {
+      "path": "backend/tests/runtime/test_auxiliary_continuation.py",
+      "name": "bind_before_input",
+      "line": 197
+    },
+    {
+      "path": "backend/tests/runtime/test_auxiliary_continuation.py",
+      "name": "invoke",
+      "line": 206
+    },
+    {
+      "path": "backend/tests/runtime/test_auxiliary_continuation.py",
+      "name": "delayed_finish",
+      "line": 297
+    },
+    {
+      "path": "backend/tests/runtime/test_auxiliary_continuation.py",
+      "name": "worker",
+      "line": 332
+    },
+    {
+      "path": "backend/tests/runtime/test_auxiliary_continuation.py",
+      "name": "request",
+      "line": 335
+    },
+    {
+      "path": "backend/api/routes/runs.py",
+      "name": "AuxiliaryContinuation",
+      "line": 1047
+    },
+    {
+      "path": "backend/api/routes/runs.py",
+      "name": "local_work_history",
+      "line": 1057
+    },
+    {
+      "path": "backend/api/routes/runs.py",
+      "name": "authorize_local_continuation",
+      "line": 1068
+    },
+    {
+      "path": "backend/api/routes/runs.py",
+      "name": "local_continuation_receipt",
+      "line": 1078
+    }
+  ]
+}

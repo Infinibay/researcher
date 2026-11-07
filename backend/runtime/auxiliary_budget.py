@@ -90,13 +90,15 @@ class AuxiliaryBudget:
         if type(cpu_ceiling_ms) is not int or cpu_ceiling_ms<1 or len(fingerprint)!=64:
             raise ValueError('Invalid local operation policy')
         digest=hashlib.sha256(data).hexdigest()
-        operation_id=hashlib.sha256(json.dumps([kind,fingerprint,digest,cpu_ceiling_ms]).encode()).hexdigest()
+        root_id=hashlib.sha256(json.dumps([kind,fingerprint,digest,cpu_ceiling_ms]).encode()).hexdigest()
         with self.runs._transaction(write=True) as conn:
             attempt=self._authority(conn)
+            successor=conn.execute('SELECT successor_operation_id FROM runtime_auxiliary_continuations WHERE project_id=? AND root_operation_id=? ORDER BY generation DESC LIMIT 1',(self.project_id,root_id)).fetchone()
+            operation_id=successor['successor_operation_id'] if successor else root_id
             prior=conn.execute('SELECT * FROM runtime_auxiliary_work WHERE project_id=? AND operation_id=?',(self.project_id,operation_id)).fetchone()
             if prior:
                 if prior['output'] is None:
-                    raise AuxiliaryWorkUncertain('Este cálculo local conserva consumo desconocido y no tiene resultado recuperable. No se repitió; conserva su registro para revisar la interrupción.')
+                    raise AuxiliaryWorkUncertain('Este cálculo local conserva consumo desconocido y no tiene resultado recuperable. No se repitió; revisa el cálculo en Presupuesto de trabajo para comprobar su cierre y autorizar una sucesora.')
                 raw=bytes(prior['output'])
                 if hashlib.sha256(raw).hexdigest()!=prior['output_sha256']:
                     raise AuxiliaryWorkUncertain('El resultado local guardado cambió; no se repitió el cálculo.')
@@ -113,8 +115,14 @@ class AuxiliaryBudget:
             conn.execute('INSERT OR IGNORE INTO runtime_auxiliary_policies VALUES(?,?,?)',(self.project_id,*DEFAULT_POLICY.values()))
             conn.execute('''INSERT INTO runtime_auxiliary_work(project_id,operation_id,kind,fingerprint,input_sha256,input_bytes,attempt_id,grant_id,cpu_ceiling_ms,status,created_at)
                 VALUES(?,?,?,?,?,?,?,?,?,'reserved',?)''',(self.project_id,operation_id,kind,fingerprint,digest,len(data),attempt,self.scope.grant_id if self.scope else None,cpu_ceiling_ms,self.runs.clock()))
+            from backend.runtime.auxiliary_execution import LocalExecution
+
+            execution=LocalExecution(self.runs,self.project_id,operation_id)
+            execution.register(conn)
         try:
-            raw=execute()
+            try:
+                with execution.bound():raw=execute()
+            finally:execution.callback_finished()
             if not isinstance(raw,bytes) or len(raw)>10000000:
                 raise ValueError('Invalid local worker receipt')
             measured=self._measurement(raw)

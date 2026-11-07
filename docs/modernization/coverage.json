@@ -988,11 +988,15 @@
         "backend/runtime/auxiliary_budget.py",
         "backend/tests/runtime/test_auxiliary_budget.py",
         "backend/tests/research/test_auxiliary_http.py",
-        "docs/design/audits/2026-11-07-auxiliary-budget/report.md"
+        "docs/design/audits/2026-11-07-auxiliary-budget/report.md",
+        "docs/modernization/auxiliary-continuation-review.md",
+        "docs/modernization/auxiliary-continuation-results.json",
+        "docs/modernization/auxiliary-continuation-packaging.json",
+        "docs/design/audits/2026-11-07-local-continuation/report.md"
       ],
       "remaining": [
-        "Durable local worker admission/accounting and exact completed-result recovery are implemented across owner/native entrypoints. Add explicit diagnosis/continuation for an original calculation without saved output, preserving its unknown hold and preventing unverified replay.",
-        "Full scenario acceptance must recheck that recovery and distinguish worker CPU from unobserved whole-service/provider/Ken/administrative consumption."
+        "Durable local admission and exact-result recovery now include explicit diagnosis and one owner-authorized successor after verified closure. Connect original installation/restore closure evidence for legacy identity, changed kernel/observer and interrupted creation before child identity was bound; these remain functional recovery requirements, not polish.",
+        "Full scenario acceptance must distinguish local worker CPU from unobserved whole-service/provider/Ken/administrative consumption and exercise remaining recovery."
       ]
     },
     "E09": {
@@ -5096,8 +5100,24 @@
         "docs/design/audits/2026-11-07-auxiliary-budget/report.md"
       ],
       "remaining": [
-        "Explicit diagnosis/continuation of local calculations without saved output stays a separate primary E08 recovery task.",
-        "DD108/DD109 and whole-page/human acceptance remain open."
+        "Explicit diagnosis and one successor permission are verified separately below; installation-level reconciliation for missing/foreign/unbound process identity remains open.",
+        "DD108/DD109/DD110 and whole-page/human acceptance remain open."
+      ]
+    },
+    "explicit_local_auxiliary_continuation": {
+      "status": "verified",
+      "scope": "Migration62 physical owner/worker identity before input release, readonly paginated diagnosis, one exact owner-authorized successor, immutable original receipts, current authority/capacity rechecks and web response-loss recovery. No automatic replay or consumption refund.",
+      "evidence": [
+        "docs/architecture/auxiliary-work-budget.md",
+        "docs/modernization/auxiliary-continuation-review.md",
+        "docs/modernization/auxiliary-continuation-results.json",
+        "docs/modernization/auxiliary-continuation-packaging.json",
+        "docs/design/audits/2026-11-07-local-continuation/report.md"
+      ],
+      "remaining": [
+        "Connect existing installation/restore closure authority for legacy records, foreign kernel/observer and unbound creation gaps; no bypass is implemented.",
+        "Whole-service/provider/Ken/administrative accounting and broad E08 acceptance remain separate.",
+        "DD110 and human/full-page acceptance remain open."
       ]
     }
   }

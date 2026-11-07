@@ -1,0 +1,35 @@
+{
+  "base_commit": "f65ed71",
+  "wheel": "researcher-0.1.0-cp312-cp312-linux_x86_64.whl",
+  "wheel_sha256": "5bc25d05918d2f8cc44434e44b1504db8a256977c3c7d2ebf9054950f8fc6cd7",
+  "source_files_matching_wheel_and_installation": 639,
+  "product_files_matching": 339,
+  "observed": {
+    "cases": 136,
+    "passed": 136,
+    "failed": 0,
+    "skipped": 0,
+    "backend_modules": 241,
+    "all_backend_imports_from_native_env": true,
+    "seconds": 63.543,
+    "exit_code": 0
+  },
+  "tests": [
+    "backend/tests/runtime/test_auxiliary_continuation.py",
+    "backend/tests/runtime/test_auxiliary_budget.py",
+    "backend/tests/research/test_auxiliary_http.py",
+    "backend/tests/runtime/test_project_budget_policy.py",
+    "backend/tests/research/test_parser_process.py",
+    "backend/tests/research/test_semantic_retrieval.py",
+    "backend/tests/research/test_finding_semantic.py",
+    "backend/tests/runtime/test_history_budget.py",
+    "backend/tests/runtime/test_migration_chain.py"
+  ],
+  "real_model_turns": 0,
+  "limits": [
+    "Selected tests, not the global suite",
+    "Synthetic managed installation data, no historical user-data migration",
+    "Local-work continuation requires verified closure and explicit owner permission. Legacy identity, cross-kernel observations and unbound creation gaps remain unknown. No whole-service CPU or billing guarantee",
+    "No model calls, external accounts or GitHub workflow execution"
+  ]
+}

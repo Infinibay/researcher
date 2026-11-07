@@ -1,0 +1,55 @@
+{
+  "base_commit": "f65ed71",
+  "started_at_utc": "2026-11-07 17:08:08",
+  "validated_and_server_closed_at_utc": "2026-11-07 17:24:28",
+  "measured_seconds": 980,
+  "time_scope": "Recorded continuation through validation/server closure; earlier untimed exploration and later documentation/checkpoint excluded",
+  "distinct_source_cases": 105,
+  "source_receipts": [
+    "auxiliary-continuation-core.xml",
+    "auxiliary-continuation-integration.xml",
+    "auxiliary-continuation-physical.xml",
+    "auxiliary-continuation-final-source.xml"
+  ],
+  "installed": {
+    "cases": 136,
+    "passed": 136,
+    "failed": 0,
+    "skipped": 0,
+    "backend_modules": 241,
+    "all_backend_imports_from_native_env": true,
+    "seconds": 63.543,
+    "exit_code": 0
+  },
+  "ui_cases_passed": 12,
+  "typescript_contracts_passed": 2,
+  "frontend_build": "passed",
+  "browser": {
+    "states": 3,
+    "writes": 1,
+    "checks": 7,
+    "scope": "compiled frontend and installed API; original permission response lost after commit and recovered by GET"
+  },
+  "documented_python_nodes": 74,
+  "prompt_inventory": {
+    "files": 299,
+    "candidates": 85,
+    "reviewed": 85,
+    "pending": 0
+  },
+  "model_turns": 0,
+  "remaining_scenarios": 41,
+  "accepted_scenarios": [
+    "U06",
+    "E07"
+  ],
+  "full_pages_accepted": 0,
+  "limitations": [
+    "Selected tests, not the global suite",
+    "Synthetic managed installation data, no historical user-data migration",
+    "Local-work continuation requires verified closure and explicit owner permission. Legacy identity, cross-kernel observations and unbound creation gaps remain unknown. No whole-service CPU or billing guarantee",
+    "No model calls, external accounts or GitHub workflow execution",
+    "Original installation/restore closure reconciliation remains a functional pending item",
+    "No global suite rerun; no human comprehension or whole-page acceptance"
+  ]
+}

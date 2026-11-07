@@ -77,6 +77,7 @@ MIGRATIONS = (
     Migration(59, resource='event_retention_schema.sql'),
     Migration(60, resource='project_budget_schema.sql'),
     Migration(61, resource='auxiliary_budget_schema.sql'),
+    Migration(62, resource='auxiliary_continuation_schema.sql'),
 )
 LATEST_VERSION = MIGRATIONS[-1].version
 

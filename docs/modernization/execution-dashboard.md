@@ -28,7 +28,39 @@ que se pueda comparar el avance; no presentar microajustes como tareas principal
 - Última suite global: `9fb873c`,2210 casos,2178 pasan,31 fallan y1 error de fixture; sin omisiones. La carrera de backup encontrada se corrigió después con40 pruebas instaladas. No se declara una nueva corrida global verde; la referencia `0c8b8d9` queda como evidencia histórica.
 - U06 (configuración por intento y guardado interrumpido) y E07 (loop acotado y rechazo sin rework automático) quedan comprobados; siguen41de43escenarios amplios abiertos en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Estado actual: presupuesto de auxiliares locales comprobado
+## Estado actual: continuación local con cierre comprobado validada
+
+Bloque registrado: **2026-11-07 17:08:08–17:24:28 UTC**, **16 min 20 s hasta
+validar y cerrar el servidor**. Lectura exploratoria anterior sin inicio medido;
+documentación/checkpoint posteriores fuera de ese tramo. No se inventa su duración.
+
+105 casos distintos de fuente;136 instalados,12DOM,2contratos y build pasan.
+Identidad de dueño/hijo guardada antes de entregar datos; diagnóstico y una
+sucesora autorizada explícitamente, sin borrar consumo ni iniciar al guardar.
+Dueño muerto con trabajador vivo sigue bloqueado; respuesta perdida se recupera
+desde la web sin otro POST.639archivos coinciden,339de producto;74nodos Python
+documentados y85prompts revisados. [Resultados y límites](auxiliary-continuation-review.md).
+
+**Lista vigente, actualizada al cambiar de tarea:**
+- Terminado: recorridos principales, U06/E07, evidencia selectiva y presupuesto
+  generativo/local revisable desde la web, con reserva durable compartida y
+  recuperación de resultados locales completos. Ahora también diagnóstico y
+  continuación explícita de cálculos interrumpidos con cierre comprobado.
+- En curso al cerrar: documentación y checkpoint local de este bloque.
+- Siguiente principal: conectar evidencia de cierre de instalación/restauración
+  para registros sin identidad, kernel/namespace distinto y creación interrumpida
+  antes de registrar el hijo. **No iniciado**; registrar hora real al comenzar.
+- Pendiente después: datos históricos, evaluaciones humanas/modelos, aceptación
+  integral de las 12 páginas, dependencias publicadas y distribución.
+- Al final: detalles registrados, validación global y revisión independiente.
+
+El tiempo medido no es una estimación de lo que falta. E08 sigue abierto por la
+reconciliación anterior y el alcance de consumos no observados; no es pulido.
+Siguen41de43escenarios amplios abiertos y0/12páginas aceptadas por completo.
+Cero turnos de modelo. No hay una nueva suite global verde ni porcentaje global
+sustentado. Lista y tiempos persisten después de compactar.
+
+## Etapa anterior: presupuesto de auxiliares locales comprobado
 
 Bloque **2026-11-07 16:34:39–17:00:19 UTC**, **25 min 40 s hasta validar**.
 105casos distintos de fuente a lo largo del bloque y119instalados pasan;

@@ -71,8 +71,12 @@ def exchange(data, *, worker, options, limits, cancelled, label="PDF", pass_fds=
 
 def _exchange(data, *, worker, options, limits, cancelled, label, pass_fds):
     """Hold the shared slot through bounded IPC and actual child reaping on every return path."""
+    from backend.runtime.auxiliary_execution import CURRENT_AUXILIARY_EXECUTION
+
+    execution=CURRENT_AUXILIARY_EXECUTION.get()
     wall_seconds = options["wall_seconds"]
     deadline = time.monotonic() + wall_seconds
+    if execution:execution.spawning()
     try:
         process = subprocess.Popen(
             [sys.executable, "-I", "-S", str(worker), json.dumps(options)],
@@ -92,11 +96,13 @@ def _exchange(data, *, worker, options, limits, cancelled, label, pass_fds):
             bufsize=0,
         )
     except OSError as exc:
+        if execution:execution.closed()
         raise SourceUnavailable(f"{label} worker could not be started") from exc
     pidfd = None
     output = bytearray()
     try:
         pidfd = _pidfd(process.pid)
+        if execution:execution.bind(process.pid)
         with selectors.DefaultSelector() as selector:
             for stream, event in (
                 (process.stdin, selectors.EVENT_WRITE),
@@ -167,3 +173,4 @@ def _exchange(data, *, worker, options, limits, cancelled, label, pass_fds):
             stream.close()
         if pidfd is not None:
             os.close(pidfd)
+        if execution:execution.closed()

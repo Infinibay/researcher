@@ -1,0 +1,95 @@
+{
+  "states": [
+    {
+      "name": "01-local-authorization-desktop",
+      "width": 1440,
+      "height": 2200,
+      "axe_violations": 0
+    },
+    {
+      "name": "02-local-response-lost-mobile",
+      "width": 390,
+      "height": 2200,
+      "axe_violations": 0
+    },
+    {
+      "name": "03-original-authorization-recovered",
+      "width": 1440,
+      "height": 2200,
+      "axe_violations": 0
+    }
+  ],
+  "writes": [
+    {
+      "request": {
+        "operation_key": "6226337d-a943-4a28-b8be-179868f35a4f",
+        "source_operation_id": "ef6e3c7c9cf8c68a1adec351c059a80e2639d5c30e56a5070b848b678e284b3f",
+        "reason": "Volver a calcular después del cierre comprobado."
+      },
+      "receipt": {
+        "operation_key": "6226337d-a943-4a28-b8be-179868f35a4f",
+        "source_operation_id": "ef6e3c7c9cf8c68a1adec351c059a80e2639d5c30e56a5070b848b678e284b3f",
+        "reason": "Volver a calcular después del cierre comprobado.",
+        "project_id": 101,
+        "root_operation_id": "ef6e3c7c9cf8c68a1adec351c059a80e2639d5c30e56a5070b848b678e284b3f",
+        "successor_operation_id": "4288af4480a5b0a83397e85c039a98b90d8a899fdc7e8256e3a6a4f13c84779b",
+        "generation": 1,
+        "work_started": false,
+        "prior_cpu_ceiling_ms": 3000,
+        "diagnosis_at_decision": {
+          "code": "ready",
+          "message": "El trabajador terminó sin resultado recuperable. Puedes autorizar un nuevo cálculo conservando el consumo anterior.",
+          "can_continue": true
+        },
+        "created_at": 1794072206.0135767
+      }
+    }
+  ],
+  "checks": [
+    "actual-owner-api",
+    "unknown-cpu-preserved",
+    "explicit-explanation-before-save",
+    "lost-post-response-after-commit",
+    "reload-recovers-original-receipt-without-post",
+    "permission-does-not-start-work",
+    "foreign-project-receipt-excluded"
+  ],
+  "errors": [],
+  "budget": {
+    "project_id": 101,
+    "policy": {
+      "turn_limit": 2,
+      "token_limit": 200,
+      "revision": 0
+    },
+    "used_turns": 1,
+    "observed_tokens": null,
+    "unmeasured_dispatches": 1,
+    "unsettled_dispatches": 1,
+    "accounted_tokens": 100,
+    "held_tokens": 100,
+    "auxiliary": {
+      "policy": {
+        "operation_limit": 200,
+        "cpu_ms_limit": 600000
+      },
+      "policy_origin": "recorded",
+      "used_operations": 1,
+      "observed_cpu_ms": null,
+      "unknown_operations": 1,
+      "pending_operations": 0,
+      "input_bytes": 13,
+      "accounted_cpu_ms": 3000,
+      "held_cpu_ms": 3000,
+      "remaining_operations": 199,
+      "remaining_cpu_ms": 597000,
+      "attempt_policy": {
+        "operation_limit": 50,
+        "cpu_ms_limit": 120000
+      }
+    },
+    "remaining_turns": 1,
+    "remaining_tokens": 100,
+    "overrun_tokens": 0
+  }
+}

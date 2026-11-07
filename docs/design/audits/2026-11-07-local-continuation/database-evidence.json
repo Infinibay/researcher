@@ -1,0 +1,22 @@
+{
+  "schema": 62,
+  "operations": [
+    {
+      "project_id": 101,
+      "operation_id": "ef6e3c7c9cf8c68a1adec351c059a80e2639d5c30e56a5070b848b678e284b3f",
+      "status": "unknown",
+      "cpu_ceiling_ms": 3000,
+      "observed_cpu_ms": null
+    }
+  ],
+  "executions": [
+    {
+      "phase": "closed",
+      "closure_recorded": 1
+    }
+  ],
+  "permissions": 1,
+  "runs": 1,
+  "dispatches": 1,
+  "integrity": "ok"
+}

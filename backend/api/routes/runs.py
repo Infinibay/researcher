@@ -1044,6 +1044,46 @@ async def project_budget_change_receipt(project_id: int, operation_key: str, req
     return JSONResponse(receipt, headers={"Cache-Control": "no-store"})
 
 
+class AuxiliaryContinuation(BaseModel):
+    """Freeze the exact interrupted calculation and owner command; no input replay is part of this request."""
+
+    model_config = ConfigDict(extra='forbid', strict=True)
+    operation_key: str = Field(min_length=1, max_length=128, pattern=r'^[A-Za-z0-9_.:-]+$')
+    source_operation_id: str = Field(pattern=r'^[0-9a-f]{64}$')
+    reason: str = Field(default='', max_length=2000)
+
+
+@router.get('/{project_id}/local-work')
+async def local_work_history(project_id: int, request: Request,
+                             before: int | None = Query(None, ge=1, le=9007199254740991),
+                             limit: int = Query(20, ge=1, le=100)):
+    """Show owner-scoped local calculations and observed closure without fetching result blobs or starting work."""
+    from backend.runtime.auxiliary_recovery import AuxiliaryRecovery
+
+    data=await asyncio.to_thread(AuxiliaryRecovery(read_store(request)).list,project_id,before=before,limit=limit)
+    return JSONResponse(data,headers={'Cache-Control':'no-store'})
+
+
+@router.post('/{project_id}/local-work/continuations')
+async def authorize_local_continuation(project_id: int, body: AuxiliaryContinuation, request: Request):
+    """Authorize one identical future calculation after fresh closure verification, without dispatch or refund."""
+    from backend.runtime.auxiliary_recovery import AuxiliaryRecovery
+
+    try:data=await asyncio.to_thread(AuxiliaryRecovery(read_store(request)).authorize,project_id,**body.model_dump())
+    except ValueError as exc:raise HTTPException(422,str(exc)) from exc
+    return JSONResponse(data,headers={'Cache-Control':'no-store'})
+
+
+@router.get('/{project_id}/local-work/continuations/{operation_key}')
+async def local_continuation_receipt(project_id: int, operation_key: str, request: Request):
+    """Recover the original local continuation decision without repeating its write or the worker calculation."""
+    from backend.runtime.auxiliary_recovery import AuxiliaryRecovery
+
+    try:data=await asyncio.to_thread(AuxiliaryRecovery(read_store(request)).receipt,project_id,operation_key)
+    except ValueError as exc:raise HTTPException(422,str(exc)) from exc
+    return JSONResponse(data,headers={'Cache-Control':'no-store'})
+
+
 @router.get("/{project_id}/research-sources/{source_id}")
 async def owner_source(
     project_id: int,
