@@ -168,6 +168,7 @@ def test_failed_input_freeze_retains_preparation_without_fabricating_dispatch(co
 
 def test_migration_preserves_old_dispatches_and_refuses_inverse_after_preparation(coordination):
     """Upgrade and unused inverse retain historical dispatch bytes without inventing preparation receipts."""
+    from backend.db.project_check_policy_migration import restore_project_check_policy_schema
     from backend.db.preparation_budget_migration import restore_preparation_budget_schema
     from backend.tools.base.db import ensure_migrations
 
@@ -177,7 +178,7 @@ def test_migration_preserves_old_dispatches_and_refuses_inverse_after_preparatio
     c.store.bind_thread(lease, thread_id='historical')
     c.store.reserve_inference(lease, workspace='/host/alpha', catalog_hash='a'*64, limits=LIMITS)
     original = [tuple(row) for row in c.conn.execute('SELECT * FROM runtime_inference_dispatches')]
-    restore_preparation_budget_schema(c.conn)
+    restore_project_check_policy_schema(c.conn);restore_preparation_budget_schema(c.conn)
     ensure_migrations(c.database)
     assert [tuple(row) for row in c.conn.execute('SELECT * FROM runtime_inference_dispatches')] == original
     budget = RuntimeHistory(c.database).budget(101)
@@ -186,5 +187,5 @@ def test_migration_preserves_old_dispatches_and_refuses_inverse_after_preparatio
     lease = c.store.claim(101, run.run_id, 'host-a')
     c.store.reserve_preparation(lease, limits=LIMITS)
     with pytest.raises(RuntimeError, match='recorded'):
-        restore_preparation_budget_schema(c.conn)
+        restore_project_check_policy_schema(c.conn);restore_preparation_budget_schema(c.conn)
     assert RuntimeHistory(c.database).budget(101)['used_turns'] == 2

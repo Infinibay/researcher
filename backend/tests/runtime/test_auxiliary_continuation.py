@@ -141,14 +141,15 @@ def test_new_permission_still_requires_current_native_grant(coordination):
 def test_unused_inverse_and_used_history_guard(coordination):
     """Empty latest metadata can reverse, but recorded execution cannot be erased through a downgrade."""
     from backend.db.auxiliary_continuation_migration import restore_auxiliary_continuation_schema
+    from backend.db.project_check_policy_migration import restore_project_check_policy_schema
     from backend.db.preparation_budget_migration import restore_preparation_budget_schema
     from backend.db.auxiliary_origin_migration import restore_auxiliary_origin_schema
     from backend.tools.base.db import ensure_migrations
 
-    c=coordination;restore_preparation_budget_schema(c.conn);restore_auxiliary_origin_schema(c.conn);restore_auxiliary_continuation_schema(c.conn)
+    c=coordination;restore_project_check_policy_schema(c.conn);restore_preparation_budget_schema(c.conn);restore_auxiliary_origin_schema(c.conn);restore_auxiliary_continuation_schema(c.conn)
     assert c.conn.execute('SELECT max(version) FROM schema_migrations').fetchone()[0]==61
     ensure_migrations(c.database);failed(AuxiliaryBudget(c.database,101))
-    restore_preparation_budget_schema(c.conn);restore_auxiliary_origin_schema(c.conn)
+    restore_project_check_policy_schema(c.conn);restore_preparation_budget_schema(c.conn);restore_auxiliary_origin_schema(c.conn)
     with pytest.raises(RuntimeError,match='recorded'):restore_auxiliary_continuation_schema(c.conn)
 
 

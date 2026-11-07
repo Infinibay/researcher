@@ -74,7 +74,7 @@
       "revalidation": "Candidate AST/value unchanged. Direct consumers reviewed after extracting project metadata helpers and removing unused task event import and historical flow consumers; native authority and historical-template exclusion unchanged. See docs/architecture/native-flow-retirement.md."
     },
     "backend/knowledge/reviews.py::read_feedback": {
-      "dependencies_sha256": "116971b6b2cbb4102fae35dd8f01a8dd8c142fbc17986639a909eae2a6985975",
+      "dependencies_sha256": "427dd69f91f23b6070247f150d4f331d85c7d2570d1b82c118827a101963ad76",
       "decision": "retained_input_renderer",
       "rationale": "Read read_feedback and its two exact callers in Findings.reviews and SQLiteResearchStore.read_review: project/finding identity and bounded attributed old subjects survive. The authenticated caller checks findings.read in the same transaction; stored feedback never authorizes a new review. Static contract review only: not exhaustive dynamic-consumer proof, model efficacy, human understanding or whole-system acceptance.",
       "evidence": [
@@ -93,10 +93,13 @@
         "docs/modernization/project-budget-policy-review.md",
         "backend/tests/runtime/test_project_budget_policy.py",
         "backend/tests/runtime/test_preparation_budget.py",
-        "docs/modernization/preparation-budget-review.md"
+        "docs/modernization/preparation-budget-review.md",
+        "backend/runtime/project_check_policy.py",
+        "backend/tests/runtime/test_project_check_policy.py",
+        "docs/modernization/project-check-policy-review.md"
       ],
       "conflicts": [],
-      "revalidation": "Preparation admission review: candidate source and its prompt-building call sites are unchanged. The SQLiteRunStore consumer now reserves project capacity before runtime startup; the later exact input snapshot consumes the same reservation. Original feedback, attribution, size rejection and no-replay behavior are preserved. Static contract review only; no efficacy or comprehension claim.",
+      "revalidation": "Project CI policy review: read_feedback source and both exact callers are unchanged. The newly importing project_check_policy uses only canonical JSON; code_acceptances adds owner policy revision checks and preserves historical acceptance semantics. Neither changed module calls read_feedback or turns feedback into execution authority. Static contract review only; no model efficacy or human comprehension claim.",
       "previous_review": {
         "dependencies_sha256": "b66b34d5d8b18599bb15a22c72ef7e77a107fa044b9f0d7c36bf45630c3d53af",
         "decision": "retained_input_renderer",
@@ -112,7 +115,7 @@
         "revalidation": "Candidate AST/value unchanged. Direct consumers reviewed after extracting project metadata helpers and removing unused task event import and historical flow consumers; native authority and historical-template exclusion unchanged. See docs/architecture/native-flow-retirement.md."
       },
       "reviewed_at": "2026-11-07",
-      "source_base_commit": "fe3da17"
+      "source_base_commit": "ff1e70f"
     },
     "backend/planning/instructions.py::PLANNING_INSTRUCTIONS": {
       "dependencies_sha256": "953e1c5d32a73417e6d671006b51b3bf0273f3986d1ccdfcd8ca55dbe9ec9473",

@@ -1,0 +1,27 @@
+{
+  "base_commit": "ff1e70f",
+  "wheel": "researcher-0.1.0-cp312-cp312-linux_x86_64.whl",
+  "wheel_sha256": "d0b4b3cce6eb66192f5e0236b29737968346d751633d0976b724a46003043ee9",
+  "source_files_matching_wheel_and_installation": 653,
+  "product_files_matching": 347,
+  "observed": {
+    "cases": 3,
+    "passed": 3,
+    "failed": 0,
+    "skipped": 0,
+    "backend_modules": 231,
+    "all_backend_imports_from_native_env": true,
+    "seconds": 52.693,
+    "exit_code": 0
+  },
+  "tests": [
+    "backend/tests/runtime/test_code_review_session.py::test_coordinator_schedules_native_review_and_does_not_finish_unconfirmed_work"
+  ],
+  "real_model_turns": 0,
+  "limits": [
+    "Selected tests, not the global suite",
+    "Synthetic managed installation data, no historical user-data migration",
+    "Project check policy, version-bound owner acceptance, migration/inverse, real owned check failures and publication compatibility. Controlled generation and provider HTTP; not external model quality, whole-product browser acceptance or global regression suite.",
+    "No model calls, external accounts or GitHub workflow execution"
+  ]
+}

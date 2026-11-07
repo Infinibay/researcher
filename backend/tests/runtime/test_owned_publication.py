@@ -32,6 +32,8 @@ async def test_owned_publication_runs_after_acceptance_without_another_model_tur
         native_status="completed",
         summary="Controlled confirmed review before explicit owner acceptance",
     )
+    from backend.tests.runtime.test_code_acceptance import choose_fixture_check_policy
+    choose_fixture_check_policy(runtime.store)
     owner = CodeAcceptances(runtime.store)
     state = owner.state(101, candidate["run_id"])
     acceptance = owner.accept(101, candidate["run_id"], owner_intent(state))
@@ -108,6 +110,8 @@ async def test_owned_recovery_observes_commit_after_lost_response_without_repeat
         native_status="completed",
         summary="Controlled review before lost-response recovery",
     )
+    from backend.tests.runtime.test_code_acceptance import choose_fixture_check_policy
+    choose_fixture_check_policy(runtime.store)
     owner = CodeAcceptances(runtime.store)
     state = owner.state(101, candidate["run_id"])
     acceptance = owner.accept(101, candidate["run_id"], owner_intent(state))

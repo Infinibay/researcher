@@ -280,3 +280,25 @@ async def test_command_deadline_is_durable_infrastructure_error_with_closed_peer
         )
         assert ready["state"] == "finished" and ready["issue"] == "deadline_exceeded"
         assert json.loads(ready["result_json"])["status"] == "infrastructure_error"
+
+
+async def test_broken_check_command_is_infrastructure_error_not_no_tests(check_profile):
+    """Absent binaries fail before launch; a broken actual pytest command yields infrastructure error with no invented tests."""
+    from backend.runtime.broker_stdio import AsyncPeerBroker
+    from backend.runtime.check_capsule import CheckEnvironment, CheckLaunch
+    from backend.runtime.check_contracts import CandidateSubject, CheckObservation, CheckSpec
+    from backend.runtime.check_execution import run_check_worker
+
+    spec = CheckSpec((str(Path(sys.executable).resolve()), '-m', 'researcher_fixture_missing_test_runner'), 'pytest')
+    c = check_profile(spec)
+    with pytest.raises(FileNotFoundError):
+        CheckLaunch(c.row['id'], CheckSpec(('/usr/bin/researcher-fixture-missing-ci-tool',), 'command'), c.prepared.metadata, CheckEnvironment.system())
+    async with AsyncPeerBroker(c.broker) as owner:
+        result = await run_check_worker(owner, c.registry, c.peer, CheckLaunch(c.row['id'], spec, c.prepared.metadata, CheckEnvironment.system()))
+        assert result.execution_closed and result.payload['exit_code'] == 1
+        subject = CandidateSubject(**json.loads(c.row['subject_json']))
+        observed = CheckObservation(subject, spec.sha256, result.payload['exit_code'], result.execution_closed, result.payload['output_complete'], True)
+        ready = c.checks.complete(c.lease, c.row['id'], observed, operation_id=result.operation_id, stdout=result.stdout, stderr=result.stderr, collector_issue=result.payload['error'])
+        verdict = json.loads(ready['result_json'])
+        assert verdict['status'] == 'infrastructure_error' and verdict['tests'] is None
+        assert verdict['reason'] == 'report_absent_or_oversized'

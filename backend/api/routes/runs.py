@@ -187,6 +187,7 @@ class AcceptCodeResult(BaseModel):
     review_sha256: str = Field(pattern=r"^[0-9a-f]{64}$")
     acknowledge_limits: bool
     note: str | None = Field(default=None, min_length=1, max_length=4000)
+    check_policy_revision: int | None = Field(default=None, gt=0, le=9007199254740991)
 
 
 class StartCodePublication(BaseModel):
@@ -1042,6 +1043,45 @@ async def project_budget_change_receipt(project_id: int, operation_key: str, req
     except ValueError as exc:
         raise HTTPException(422, str(exc)) from exc
     return JSONResponse(receipt, headers={"Cache-Control": "no-store"})
+
+
+class ProjectCheckPolicyChange(BaseModel):
+    """Owner choice for future code acceptance, bound to the observed project revision."""
+
+    model_config = ConfigDict(extra='forbid', strict=True)
+    operation_key: str = Field(pattern=r'^[A-Za-z0-9_.:-]{1,128}$')
+    expected_revision: int = Field(ge=0, lt=9007199254740991)
+    mode: Literal['require_tests', 'allow_missing']
+
+
+@router.get('/{project_id}/check-policy')
+async def project_check_policy(project_id: int, request: Request):
+    """Read the explicit project decision without requiring a configured model runtime."""
+    from backend.runtime.project_check_policy import ProjectCheckPolicies
+
+    data = await asyncio.to_thread(ProjectCheckPolicies(read_store(request)).state, project_id)
+    return JSONResponse(data, headers={'Cache-Control': 'no-store'})
+
+
+@router.post('/{project_id}/check-policy')
+async def change_project_check_policy(project_id: int, body: ProjectCheckPolicyChange, request: Request):
+    """Record an owner/CSRF decision; it neither reruns checks nor accepts or publishes code."""
+    from backend.runtime.project_check_policy import ProjectCheckPolicies
+
+    data = await asyncio.to_thread(ProjectCheckPolicies(read_store(request)).update, project_id, **body.model_dump())
+    return JSONResponse(data, headers={'Cache-Control': 'no-store'})
+
+
+@router.get('/{project_id}/check-policy/changes/{operation_key}')
+async def project_check_policy_receipt(project_id: int, operation_key: str, request: Request):
+    """Recover the original decision after a lost response, without repeating a write."""
+    from backend.runtime.project_check_policy import ProjectCheckPolicies
+
+    try:
+        data = await asyncio.to_thread(ProjectCheckPolicies(read_store(request)).receipt, project_id, operation_key)
+    except ValueError as exc:
+        raise HTTPException(422, str(exc)) from exc
+    return JSONResponse(data, headers={'Cache-Control': 'no-store'})
 
 
 class AuxiliaryContinuation(BaseModel):

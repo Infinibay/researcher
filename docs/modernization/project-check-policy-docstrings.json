@@ -1,0 +1,345 @@
+{
+  "base_commit": "ff1e70f",
+  "changed_or_new_definitions_documented": 45,
+  "modules": [
+    "backend/api/routes/runs.py",
+    "backend/db/migration_catalog.py",
+    "backend/db/project_check_policy_migration.py",
+    "backend/runtime/code_acceptance_policy.py",
+    "backend/runtime/code_acceptances.py",
+    "backend/runtime/project_check_policy.py",
+    "backend/tests/runtime/test_auxiliary_budget.py",
+    "backend/tests/runtime/test_auxiliary_continuation.py",
+    "backend/tests/runtime/test_auxiliary_restoration.py",
+    "backend/tests/runtime/test_check_execution.py",
+    "backend/tests/runtime/test_check_workspace.py",
+    "backend/tests/runtime/test_code_acceptance.py",
+    "backend/tests/runtime/test_migration_chain.py",
+    "backend/tests/runtime/test_owned_code_dependencies.py",
+    "backend/tests/runtime/test_owned_publication.py",
+    "backend/tests/runtime/test_owned_remote_transport.py",
+    "backend/tests/runtime/test_preparation_budget.py",
+    "backend/tests/runtime/test_project_budget_policy.py",
+    "backend/tests/runtime/test_project_check_policy.py",
+    "backend/tests/runtime/test_code_review_session.py"
+  ],
+  "missing": [],
+  "contracts": [
+    {
+      "path": "backend/api/routes/runs.py",
+      "symbol": "AcceptCodeResult",
+      "line": 179,
+      "docstring": "Owner-only exact candidate/review observation; agent identity and publication authority cannot be supplied.",
+      "file_sha256": "7566b43be4cec45005b1bf53813d343e1d85fb1d1ddefbdf926edb017719cd02"
+    },
+    {
+      "path": "backend/api/routes/runs.py",
+      "symbol": "ProjectCheckPolicyChange",
+      "line": 1048,
+      "docstring": "Owner choice for future code acceptance, bound to the observed project revision.",
+      "file_sha256": "7566b43be4cec45005b1bf53813d343e1d85fb1d1ddefbdf926edb017719cd02"
+    },
+    {
+      "path": "backend/api/routes/runs.py",
+      "symbol": "project_check_policy",
+      "line": 1058,
+      "docstring": "Read the explicit project decision without requiring a configured model runtime.",
+      "file_sha256": "7566b43be4cec45005b1bf53813d343e1d85fb1d1ddefbdf926edb017719cd02"
+    },
+    {
+      "path": "backend/api/routes/runs.py",
+      "symbol": "change_project_check_policy",
+      "line": 1067,
+      "docstring": "Record an owner/CSRF decision; it neither reruns checks nor accepts or publishes code.",
+      "file_sha256": "7566b43be4cec45005b1bf53813d343e1d85fb1d1ddefbdf926edb017719cd02"
+    },
+    {
+      "path": "backend/api/routes/runs.py",
+      "symbol": "project_check_policy_receipt",
+      "line": 1076,
+      "docstring": "Recover the original decision after a lost response, without repeating a write.",
+      "file_sha256": "7566b43be4cec45005b1bf53813d343e1d85fb1d1ddefbdf926edb017719cd02"
+    },
+    {
+      "path": "backend/db/project_check_policy_migration.py",
+      "symbol": "restore_project_check_policy_schema",
+      "line": 4,
+      "docstring": "Remove latest migration65 only before any project policy was recorded.",
+      "file_sha256": "b3e2d26950e63aa159d2ffd974ef13e69def2b1ae85fa873ecdf91f4e0c7b024"
+    },
+    {
+      "path": "backend/runtime/code_acceptance_policy.py",
+      "symbol": "CodeAcceptanceIntent",
+      "line": 14,
+      "docstring": "One explicit owner observation, retained unchanged after an uncertain response.",
+      "file_sha256": "55891b5ed0732028d54f32d05820f3587e35e19316cf2d54b004b0d6443a9834"
+    },
+    {
+      "path": "backend/runtime/code_acceptance_policy.py",
+      "symbol": "CodeAcceptanceIntent.__post_init__",
+      "line": 26,
+      "docstring": "Reject coercion, incomplete fingerprints and implicit acknowledgement before effects.",
+      "file_sha256": "55891b5ed0732028d54f32d05820f3587e35e19316cf2d54b004b0d6443a9834"
+    },
+    {
+      "path": "backend/runtime/code_acceptance_policy.py",
+      "symbol": "assess_code_checks",
+      "line": 45,
+      "docstring": "Apply explicit project test requirements; absent mode retains historical receipt semantics without inventing test execution.",
+      "file_sha256": "55891b5ed0732028d54f32d05820f3587e35e19316cf2d54b004b0d6443a9834"
+    },
+    {
+      "path": "backend/runtime/code_acceptances.py",
+      "symbol": "CodeAcceptances",
+      "line": 24,
+      "docstring": "Keep exact owner observations and historical receipts separate from native turn completion.",
+      "file_sha256": "8f964c6f49453e5f62efd67eb844070101f0018e656bf04225203fb3c969dd39"
+    },
+    {
+      "path": "backend/runtime/code_acceptances.py",
+      "symbol": "CodeAcceptances._state",
+      "line": 41,
+      "docstring": "Derive current eligibility from original scoped evidence while retaining stale receipts as history.",
+      "file_sha256": "8f964c6f49453e5f62efd67eb844070101f0018e656bf04225203fb3c969dd39"
+    },
+    {
+      "path": "backend/runtime/code_acceptances.py",
+      "symbol": "CodeAcceptances.accept",
+      "line": 388,
+      "docstring": "Atomically record one paired-owner observation and close author/reviewer states; never publish code.",
+      "file_sha256": "8f964c6f49453e5f62efd67eb844070101f0018e656bf04225203fb3c969dd39"
+    },
+    {
+      "path": "backend/runtime/project_check_policy.py",
+      "symbol": "ProjectCheckPolicies",
+      "line": 12,
+      "docstring": "Serialize project policy revisions with acceptance transactions; never run checks or change accepted history.",
+      "file_sha256": "1750bed758ab59cf7ed60ba148a3547ee02a207b86173d1d951e2864d5fcffd7"
+    },
+    {
+      "path": "backend/runtime/project_check_policy.py",
+      "symbol": "ProjectCheckPolicies.__init__",
+      "line": 15,
+      "docstring": "Reuse the owner store's scoped database transactions and durable events.",
+      "file_sha256": "1750bed758ab59cf7ed60ba148a3547ee02a207b86173d1d951e2864d5fcffd7"
+    },
+    {
+      "path": "backend/runtime/project_check_policy.py",
+      "symbol": "ProjectCheckPolicies.current",
+      "line": 20,
+      "docstring": "Return the explicit policy, or revision zero without implying an owner choice.",
+      "file_sha256": "1750bed758ab59cf7ed60ba148a3547ee02a207b86173d1d951e2864d5fcffd7"
+    },
+    {
+      "path": "backend/runtime/project_check_policy.py",
+      "symbol": "ProjectCheckPolicies.state",
+      "line": 28,
+      "docstring": "Inspect a project decision without starting execution or altering task state.",
+      "file_sha256": "1750bed758ab59cf7ed60ba148a3547ee02a207b86173d1d951e2864d5fcffd7"
+    },
+    {
+      "path": "backend/runtime/project_check_policy.py",
+      "symbol": "ProjectCheckPolicies.receipt",
+      "line": 33,
+      "docstring": "Recover only the exact original decision, independently of newer policy revisions.",
+      "file_sha256": "1750bed758ab59cf7ed60ba148a3547ee02a207b86173d1d951e2864d5fcffd7"
+    },
+    {
+      "path": "backend/runtime/project_check_policy.py",
+      "symbol": "ProjectCheckPolicies.update",
+      "line": 43,
+      "docstring": "Commit a revision-checked choice and immutable receipt; identical retries preserve the original result.",
+      "file_sha256": "1750bed758ab59cf7ed60ba148a3547ee02a207b86173d1d951e2864d5fcffd7"
+    },
+    {
+      "path": "backend/tests/runtime/test_auxiliary_budget.py",
+      "symbol": "test_unused_auxiliary_inverse_preserves_old_schema_and_refuses_work",
+      "line": 122,
+      "docstring": "Only unused latest schema can reverse; source data and recorded work remain authoritative.",
+      "file_sha256": "47ad6b0c3ba01940faa05fbb41d6803bb403025e68a7b2d265514437c13cd02d"
+    },
+    {
+      "path": "backend/tests/runtime/test_auxiliary_continuation.py",
+      "symbol": "test_unused_inverse_and_used_history_guard",
+      "line": 141,
+      "docstring": "Empty latest metadata can reverse, but recorded execution cannot be erased through a downgrade.",
+      "file_sha256": "b0de9490feff6ec6b4e8f503d470fca4e50fc296f1c531fa9f2a3ef7fda630ba"
+    },
+    {
+      "path": "backend/tests/runtime/test_auxiliary_restoration.py",
+      "symbol": "test_origin_inverse_requires_unused_permission_and_archival",
+      "line": 154,
+      "docstring": "The unused latest schema reverses without deleting work; recorded permissions prevent loss of their physical origin.",
+      "file_sha256": "9862bf2d39871058383a04c203c312becd28bbe48ee318cb59370f38c39e4b4a"
+    },
+    {
+      "path": "backend/tests/runtime/test_check_execution.py",
+      "symbol": "test_broken_check_command_is_infrastructure_error_not_no_tests",
+      "line": 285,
+      "docstring": "Absent binaries fail before launch; a broken actual pytest command yields infrastructure error with no invented tests.",
+      "file_sha256": "04c50fb2d63654a3b96f54f4a5f3075d9224434712310c701ffc6fbc84f1eeb3"
+    },
+    {
+      "path": "backend/tests/runtime/test_check_workspace.py",
+      "symbol": "test_missing_candidate_repository_never_becomes_an_empty_test_success",
+      "line": 112,
+      "docstring": "Removing the exact source blocks preparation before a check copy or zero-test result exists.",
+      "file_sha256": "7e05b953cac3ac11a8ff134dbea5c5eca39149dc126f76483fa40ec98d448d3e"
+    },
+    {
+      "path": "backend/tests/runtime/test_code_acceptance.py",
+      "symbol": "code_result",
+      "line": 25,
+      "docstring": "Close an attributed reviewer over synthetic Git/owner witnesses, with verdict selected before immutable persistence.",
+      "file_sha256": "fa6e82a082ff11857e3c6cd7e3ee2bff73bbae2b260b5c0c014ff7e3587bbbcb"
+    },
+    {
+      "path": "backend/tests/runtime/test_code_acceptance.py",
+      "symbol": "choose_fixture_check_policy",
+      "line": 32,
+      "docstring": "Explicitly authorize missing tests in acceptance fixtures; production migrations make no such choice.",
+      "file_sha256": "fa6e82a082ff11857e3c6cd7e3ee2bff73bbae2b260b5c0c014ff7e3587bbbcb"
+    },
+    {
+      "path": "backend/tests/runtime/test_code_acceptance.py",
+      "symbol": "owner_intent",
+      "line": 104,
+      "docstring": "Prepare one exact neutral owner observation; retries preserve every field.",
+      "file_sha256": "fa6e82a082ff11857e3c6cd7e3ee2bff73bbae2b260b5c0c014ff7e3587bbbcb"
+    },
+    {
+      "path": "backend/tests/runtime/test_migration_chain.py",
+      "symbol": "test_forward_targets_form_one_complete_history_and_preserve_seeded_data",
+      "line": 24,
+      "docstring": "Reach every supported post-legacy version, then repeat startup without losing IDs or relations.",
+      "file_sha256": "0e6e6fe02feecff2cc2e2640ecae001befdaaa8866bc2ea3f17cb88763cf5776"
+    },
+    {
+      "path": "backend/tests/runtime/test_migration_chain.py",
+      "symbol": "test_writer_crash_before_version_commit_preserves_prior_schema_and_resumes",
+      "line": 49,
+      "docstring": "Abruptly kill only a new migration child before its history insert, then recover that same DB.",
+      "file_sha256": "0e6e6fe02feecff2cc2e2640ecae001befdaaa8866bc2ea3f17cb88763cf5776"
+    },
+    {
+      "path": "backend/tests/runtime/test_migration_chain.py",
+      "symbol": "test_invalid_forward_target_never_creates_storage",
+      "line": 83,
+      "docstring": "Unknown targets and booleans cannot create a partial installation as a side effect.",
+      "file_sha256": "0e6e6fe02feecff2cc2e2640ecae001befdaaa8866bc2ea3f17cb88763cf5776"
+    },
+    {
+      "path": "backend/tests/runtime/test_owned_code_dependencies.py",
+      "symbol": "test_owned_successor_reads_exact_accepted_code_and_input_without_assuming_publication",
+      "line": 14,
+      "docstring": "Real kernel/broker/Git/SQLite prove causal authors/checks/reviews and exact owner project closure with explicit unpublished acknowledgement, without semantic-success or real-model claims.",
+      "file_sha256": "a7e057560c587102bce8fe06073a59311e1a3041959ede4169f52a05d0d18dde"
+    },
+    {
+      "path": "backend/tests/runtime/test_owned_publication.py",
+      "symbol": "test_owned_publication_runs_after_acceptance_without_another_model_turn",
+      "line": 14,
+      "docstring": "A separate host attempt publishes the exact accepted head, keeps source files/task acceptance intact and recovers the original admission receipt.",
+      "file_sha256": "50ae9ad60ba5c66854589510e1b69be48d307887e5566799d404285c9893a816"
+    },
+    {
+      "path": "backend/tests/runtime/test_owned_publication.py",
+      "symbol": "test_owned_recovery_observes_commit_after_lost_response_without_repeating_transaction",
+      "line": 92,
+      "docstring": "Real owned publication commits then loses its response; a fresh readonly observer recovers the marker with no second write or model turn.",
+      "file_sha256": "50ae9ad60ba5c66854589510e1b69be48d307887e5566799d404285c9893a816"
+    },
+    {
+      "path": "backend/tests/runtime/test_owned_remote_transport.py",
+      "symbol": "test_actual_owned_https_push_pr_merge_and_stop_retire_only_local_clients",
+      "line": 289,
+      "docstring": "The configured owner performs exact Git/REST effects under real TLS, persists stages, keeps secrets out of evidence and retires a blocked original client without claiming server termination.",
+      "file_sha256": "7910a73c139f1b984d4da1b51910a32814e91926dc1ba53398f940ea41a1a770"
+    },
+    {
+      "path": "backend/tests/runtime/test_preparation_budget.py",
+      "symbol": "test_migration_preserves_old_dispatches_and_refuses_inverse_after_preparation",
+      "line": 169,
+      "docstring": "Upgrade and unused inverse retain historical dispatch bytes without inventing preparation receipts.",
+      "file_sha256": "b649cb085a800dd48b19125e8d63ec12e8da1bb2ebcb0b5b2eebbb3ffe45bfcb"
+    },
+    {
+      "path": "backend/tests/runtime/test_project_budget_policy.py",
+      "symbol": "test_upgrade_preserves_old_policy_and_unused_inverse_preserves_it",
+      "line": 112,
+      "docstring": "Migration60 adds revision0 without inventing owner decisions; an unused inverse restores59 and refuses used owner history.",
+      "file_sha256": "a0d58d6df6f5cb468453993aa309ac02ff4dcac04b133559ad326338da4291e7"
+    },
+    {
+      "path": "backend/tests/runtime/test_project_check_policy.py",
+      "symbol": "change",
+      "line": 23,
+      "docstring": "Record one owner's explicit project choice without creating model or publication work.",
+      "file_sha256": "93edfa591c00982018475bd8d8763d479d9257eea3514bb6c8295e1f416358c2"
+    },
+    {
+      "path": "backend/tests/runtime/test_project_check_policy.py",
+      "symbol": "test_unconfigured_project_requires_explicit_policy",
+      "line": 29,
+      "docstring": "A fully reviewed candidate still needs a project decision; migration must not invent one.",
+      "file_sha256": "93edfa591c00982018475bd8d8763d479d9257eea3514bb6c8295e1f416358c2"
+    },
+    {
+      "path": "backend/tests/runtime/test_project_check_policy.py",
+      "symbol": "test_policy_revision_binds_new_acceptance_and_preserves_old_decision",
+      "line": 37,
+      "docstring": "Stale observations cannot accept under a changed policy; accepted receipts retain the decision that actually governed them.",
+      "file_sha256": "93edfa591c00982018475bd8d8763d479d9257eea3514bb6c8295e1f416358c2"
+    },
+    {
+      "path": "backend/tests/runtime/test_project_check_policy.py",
+      "symbol": "test_policy_history_scope_and_atomic_conflict",
+      "line": 60,
+      "docstring": "Project isolation, immutable replay and rollback protect decisions even after later owner changes.",
+      "file_sha256": "93edfa591c00982018475bd8d8763d479d9257eea3514bb6c8295e1f416358c2"
+    },
+    {
+      "path": "backend/tests/runtime/test_project_check_policy.py",
+      "symbol": "test_policy_history_scope_and_atomic_conflict.event_failure",
+      "line": 73,
+      "docstring": "Inject failure at the shared transaction boundary after staged writes.",
+      "file_sha256": "93edfa591c00982018475bd8d8763d479d9257eea3514bb6c8295e1f416358c2"
+    },
+    {
+      "path": "backend/tests/runtime/test_project_check_policy.py",
+      "symbol": "test_project_policy_distinguishes_commands_and_executed_tests",
+      "line": 90,
+      "docstring": "A successful generic command never stands in for collected tests; partial skips stay visible.",
+      "file_sha256": "93edfa591c00982018475bd8d8763d479d9257eea3514bb6c8295e1f416358c2"
+    },
+    {
+      "path": "backend/tests/runtime/test_project_check_policy.py",
+      "symbol": "test_no_project_policy_overrides_failed_or_unknown_checks",
+      "line": 100,
+      "docstring": "Acknowledging missing evidence never overrides a failed, stale or unconfirmed check.",
+      "file_sha256": "93edfa591c00982018475bd8d8763d479d9257eea3514bb6c8295e1f416358c2"
+    },
+    {
+      "path": "backend/tests/runtime/test_project_check_policy.py",
+      "symbol": "test_policy_http_owner_csrf_and_read_only_recovery",
+      "line": 107,
+      "docstring": "Actual HTTP enforces owner/CSRF scope and returns the original decision after a lost reply; saving creates no work.",
+      "file_sha256": "93edfa591c00982018475bd8d8763d479d9257eea3514bb6c8295e1f416358c2"
+    },
+    {
+      "path": "backend/tests/runtime/test_project_check_policy.py",
+      "symbol": "test_policy_migration_preserves_existing_history_and_inverse_refuses_decisions",
+      "line": 137,
+      "docstring": "An unused inverse restores schema64, but an owner decision cannot be silently erased by rollback.",
+      "file_sha256": "93edfa591c00982018475bd8d8763d479d9257eea3514bb6c8295e1f416358c2"
+    },
+    {
+      "path": "backend/tests/runtime/test_code_review_session.py",
+      "symbol": "test_coordinator_schedules_native_review_and_does_not_finish_unconfirmed_work",
+      "line": 296,
+      "docstring": "Actual owned review preserves rejection or uncertain confirmation without automatic rework, another dispatch or task acceptance.",
+      "file_sha256": "11f1c737ea36c40d845a3dd58e29eec47d367d646eb00846831c66c28c00a12c"
+    }
+  ],
+  "scope": "Changed/new Python definitions and module documentation; new frontend API/component modules and relevant helpers also carry English JSDoc. Historical docstrings outside this change are not certified."
+}

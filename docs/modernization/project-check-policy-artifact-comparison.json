@@ -1,0 +1,17 @@
+{
+  "previous_wheel_sha256": "12cb0c726928dbb4e1783e5d4be09a23f879c4e6b79d77bae6b2d6d92dc6a17c",
+  "final_wheel_sha256": "d0b4b3cce6eb66192f5e0236b29737968346d751633d0976b724a46003043ee9",
+  "changed_backend_entries": [
+    "backend/runtime/_domain_spawn.cpython-312-x86_64-linux-gnu.so",
+    "backend/tests/runtime/test_code_review_session.py"
+  ],
+  "product_python_sql_identical": true,
+  "normalization": "objcopy --strip-debug --remove-section=.note.gnu.build-id, only for differing native binaries",
+  "normalized_binaries": [
+    {
+      "path": "backend/runtime/_domain_spawn.cpython-312-x86_64-linux-gnu.so",
+      "normalized_sha256": "cda31a9cdaa75cab62c2b820e162c06010c637316b8fe9941e75579c60e9bba8"
+    }
+  ],
+  "meaning": "The earlier installed suite applies to unchanged product Python/SQL and equivalent native executable bytes; the updated review test is verified separately against the final wheel."
+}

@@ -1186,7 +1186,7 @@
       ]
     },
     "E11": {
-      "status": "in_progress",
+      "status": "complete",
       "evidence": [
         "docs/modernization/code-checks.md",
         "backend/tests/runtime/test_check_results.py",
@@ -1223,7 +1223,24 @@
         "docs/modernization/native-git-packaging.json",
         "docs/architecture/prior-branch-input.md",
         "docs/modernization/prior-branch-results.json",
-        "docs/modernization/prior-branch-packaging.json"
+        "docs/modernization/prior-branch-packaging.json",
+        "docs/architecture/project-check-policy.md",
+        "docs/modernization/project-check-policy-review.md",
+        "docs/modernization/project-check-policy-results.json",
+        "docs/modernization/project-check-policy-packaging.json",
+        "docs/modernization/project-check-policy-final-packaging.json",
+        "docs/modernization/project-check-policy-artifact-comparison.json",
+        "docs/modernization/project-check-policy-legacy.json",
+        "backend/tests/runtime/test_project_check_policy.py",
+        "frontend/tests/ui/check-policy.test.tsx",
+        "frontend/tests/check-policy-actions.test.ts"
+      ],
+      "remaining": [],
+      "completion_scope": "Distinct captured CI outcomes, explicit project owner policy, no invented test success, current revision-bound acceptance, preserved original history and no automatic approval after rejected/exhausted work.",
+      "verified_at": "2026-11-07",
+      "limitations": [
+        "Controlled generation/provider HTTP; real Git/SQLite/kernel where specified. No model quality or human comprehension claim.",
+        "No whole-page acceptance or new global regression-suite claim."
       ]
     },
     "E12": {
@@ -5281,6 +5298,26 @@
       "remaining": [
         "E09-E12 and the rest of the full plan remain open.",
         "No new global suite, external-account or whole-page/human acceptance."
+      ]
+    },
+    "project_check_policy": {
+      "status": "verified",
+      "scope": "Distinct captured CI outcomes, explicit project owner policy, no invented test success, current revision-bound acceptance, preserved original history and no automatic approval after rejected/exhausted work.",
+      "evidence": [
+        "docs/architecture/project-check-policy.md",
+        "docs/modernization/project-check-policy-review.md",
+        "docs/modernization/project-check-policy-results.json",
+        "docs/modernization/project-check-policy-packaging.json",
+        "docs/modernization/project-check-policy-final-packaging.json",
+        "docs/modernization/project-check-policy-artifact-comparison.json",
+        "docs/modernization/project-check-policy-legacy.json",
+        "backend/tests/runtime/test_project_check_policy.py",
+        "frontend/tests/ui/check-policy.test.tsx",
+        "frontend/tests/check-policy-actions.test.ts"
+      ],
+      "remaining": [
+        "E09, E10, E12 and the rest of the full plan remain open.",
+        "DD113 joins final polish. No whole-page or new global-suite acceptance."
       ]
     }
   }

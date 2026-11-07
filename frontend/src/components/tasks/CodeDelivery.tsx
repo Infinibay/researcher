@@ -5,6 +5,7 @@ import { ApiError } from '../../api/client'
 import { codeActions,codeResultDiff,codeResultState,matchesCodeReceipt,prepareCodeAcceptance,sendCodeAcceptance,type CodeAcceptanceAction } from '../../api/codeResults'
 import type { RuntimeRun } from '../../api/runtime'
 import { codeReviewActions } from '../../api/codeReviews'
+import { CheckPolicyEditor } from './CheckPolicyEditor'
 import { CodeReviewRequest } from './CodeReviewRequest'
 import { CodePublicationRequest } from './CodePublicationRequest'
 import { CodePublicationRecovery } from './CodePublicationRecovery'
@@ -49,7 +50,7 @@ export function CodeDelivery({projectId,taskId,runId,contextVersion,readOnly=fal
     try {setSaved(codeActions.load(window.sessionStorage,projectId,taskId,runId));setReady(true)}
     catch(error) {setStorageError(error instanceof Error?error.message:'No se pudo recuperar la decisión guardada.')}
   },[projectId,taskId,runId])
-  useEffect(()=>{if(!saved) setAcknowledged(false)},[state.data?.subject_sha256,state.data?.review_sha256,saved])
+  useEffect(()=>{if(!saved) setAcknowledged(false)},[state.data?.subject_sha256,state.data?.review_sha256,state.data?.project_check_policy?.revision,saved])
 
   /** Clear only confirmed local history; an unavailable storage service cannot create another intent. */
   function resolved(action:CodeAcceptanceAction) {
@@ -72,8 +73,8 @@ export function CodeDelivery({projectId,taskId,runId,contextVersion,readOnly=fal
       let action=saved
       if(!action) {
         const data=state.data
-        if(!data?.eligible || !data.subject_sha256) throw new Error('Consulta un candidato actual y elegible antes de aceptarlo.')
-        action=prepareCodeAcceptance(projectId,taskId,runId,{attemptId:data.candidate.attempt_id,contextVersion:data.candidate.context_version,subjectSha:data.subject_sha256,reviewSha:data.review_sha256,acknowledgeLimits:acknowledged,note:note.trim()||null})
+        if(!data?.eligible || !data.subject_sha256 || !data.project_check_policy?.revision) throw new Error('Consulta un candidato actual y elegible antes de aceptarlo.')
+        action=prepareCodeAcceptance(projectId,taskId,runId,{checkPolicyRevision:data.project_check_policy!.revision,attemptId:data.candidate.attempt_id,contextVersion:data.candidate.context_version,subjectSha:data.subject_sha256,reviewSha:data.review_sha256,acknowledgeLimits:acknowledged,note:note.trim()||null})
         codeActions.save(window.sessionStorage,action)
         setSaved(action);onPending?.(runId)
       }
@@ -91,6 +92,7 @@ export function CodeDelivery({projectId,taskId,runId,contextVersion,readOnly=fal
       <p className="text-sm text-[var(--work-muted)]">{data.publication.message}</p>
       {data.packet && <details><summary className="cursor-pointer text-sm text-[var(--work-ink)]">Petición original del propietario</summary><p className="mt-2 whitespace-pre-wrap text-sm text-[var(--work-muted)]">{data.packet.author_request.text}</p></details>}
       <details onToggle={event=>setShowDiff(event.currentTarget.open)}><summary className="cursor-pointer text-sm text-[var(--work-ink)]">Ver diff capturado</summary>{showDiff && <CodeDiff key={data.candidate.diff_sha256} projectId={projectId} runId={runId} sha={data.candidate.diff_sha256}/>}</details>
+      {data.project_check_policy && <CheckPolicyEditor key={projectId} projectId={projectId} policy={data.project_check_policy} readOnly={readOnly || !!saved || !!state.error}/>}
       <section className="space-y-2" aria-label="Comprobaciones del candidato"><h4 className="text-sm font-medium text-[var(--work-ink)]">Comprobaciones</h4>
         {data.packet?.checks.map(check=><div key={check.id} className="text-sm text-[var(--work-muted)]"><p>{check.result?.status==='passed' && check.spec.framework==='command'?'Comando terminado con éxito; no acredita por sí solo que se ejecutaran pruebas':check.result?outcomes[check.result.status]??'Resultado sin clasificar':'Resultado pendiente o desconocido'}</p><details><summary className="cursor-pointer">Qué se comprobó</summary><code className="mt-1 block break-all">{check.spec.argv.join(' ')}</code></details></div>)}
         {data.checks.limitations.map((item,index)=><p key={`${item.code}:${index}`} className="text-sm text-[var(--work-muted)]">{item.message}</p>)}
@@ -104,7 +106,7 @@ export function CodeDelivery({projectId,taskId,runId,contextVersion,readOnly=fal
       </section>
       {!!data.review_issues?.length && <section className="space-y-2 text-sm" aria-label="Revisiones anteriores del mismo candidato"><h4 className="font-medium text-[var(--work-ink)]">Revisiones anteriores del mismo candidato</h4>{data.review_issues.map(issue=><details key={issue.run_id}><summary className="cursor-pointer text-[var(--work-ink)]">{issue.blocking?'Objeción confirmada sin resolver':issue.state==='confirmed'?'Revisión anterior con límites':'Propuesta anterior sin confirmar'}</summary><p className="mt-2 text-[var(--work-muted)]">{issue.message}</p><p className="mt-1 whitespace-pre-wrap text-[var(--work-ink)]">{issue.rationale}</p><p className="mt-1 break-all font-mono text-xs text-[var(--work-muted)]">{issue.run_id}</p></details>)}</section>}
       {data.blockers.length>0 && <div className="space-y-2 border-l-2 border-[var(--work-line)] pl-3 text-sm text-[var(--work-ink)]"><p>No se puede aceptar esta versión todavía.</p><ul className="list-disc space-y-1 pl-5">{data.blockers.map((item,index)=><li key={`${item.code}:${index}`}>{item.message}</li>)}</ul></div>}
-      {data.acceptance && <div role="status" className="space-y-1 text-sm text-[var(--work-ink)]"><p>{data.acceptance_current?'Aceptación registrada':'Aceptación histórica; ya no acredita el contexto actual'}</p>{data.acceptance.note && <p className="whitespace-pre-wrap text-[var(--work-muted)]">{data.acceptance.note}</p>}</div>}
+      {data.acceptance && <div role="status" className="space-y-1 text-sm text-[var(--work-ink)]"><p>{data.acceptance_current?'Aceptación registrada':'Aceptación histórica; ya no acredita el contexto actual'}</p><p>{data.acceptance.check_policy?`Política aplicada al aceptar: ${data.acceptance.check_policy.mode==='require_tests'?'pruebas exigidas':'límites reconocidos'} (revisión ${data.acceptance.check_policy.revision}).`:'Esta aceptación es anterior a las políticas por proyecto; se conserva su decisión original.'}</p>{data.acceptance.note && <p className="whitespace-pre-wrap text-[var(--work-muted)]">{data.acceptance.note}</p>}</div>}
       <CodePublicationRecovery data={data} readOnly={readOnly} onPending={onPending}/><CodePublicationRequest data={data} available={reviewAvailable} readOnly={readOnly || !!saved} onPending={onPending}/>
       {saved && <p className="text-sm text-[var(--work-muted)]">Hay una aceptación pendiente de confirmar. Reenviarla conserva la versión y el contexto {saved.body.context_version} originales.</p>}
       {(data.eligible || saved) && !data.acceptance && <form className="space-y-3" onSubmit={event=>{event.preventDefault();submit()}}>

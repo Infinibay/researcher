@@ -1,0 +1,16 @@
+{
+  "from_schema": 64,
+  "to_schema": 65,
+  "fixture_created_by": "engine-boundaries-final installed package from ff1e70f",
+  "fixture_database_sha256": "1620d20b48739b42f3d818ea23372e8f639c58169a5c2a14dce586726a79eef2",
+  "old_acceptance_bytes_unchanged": true,
+  "original_retry_fingerprint_preserved": true,
+  "new_project_policy_not_invented": true,
+  "later_strict_policy_preserves_historical_acceptance": true,
+  "integrity": "ok",
+  "foreign_key_violations": 0,
+  "limits": [
+    "Synthetic stored review/closure witnesses from existing acceptance fixture; no model call or user data.",
+    "Checks actual old-package DB migration and request replay; not all historical installation versions."
+  ]
+}

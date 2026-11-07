@@ -325,6 +325,8 @@ async def test_actual_owned_https_push_pr_merge_and_stop_retire_only_local_clien
         native_status="completed",
         summary="Controlled review before actual HTTPS remote publication",
     )
+    from backend.tests.runtime.test_code_acceptance import choose_fixture_check_policy
+    choose_fixture_check_policy(runtime.store)
     owner = CodeAcceptances(runtime.store)
     state = owner.state(101, candidate["run_id"])
     acceptance = owner.accept(101, candidate["run_id"], owner_intent(state))

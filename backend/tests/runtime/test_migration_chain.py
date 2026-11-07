@@ -26,8 +26,8 @@ def test_forward_targets_form_one_complete_history_and_preserve_seeded_data(tmp_
     from backend.tools.base.db import ensure_migrations
     from backend.db.migration_catalog import LATEST_VERSION, MIGRATIONS
 
-    assert [step.version for step in MIGRATIONS] == list(range(18, 65))
-    assert LATEST_VERSION == 64
+    assert [step.version for step in MIGRATIONS] == list(range(18, 66))
+    assert LATEST_VERSION == 65
     database = tmp_path / 'chain.db'
     ensure_migrations(str(database), target_version=17)
     with closing(sqlite3.connect(database)) as db, db:
@@ -45,7 +45,7 @@ def test_forward_targets_form_one_complete_history_and_preserve_seeded_data(tmp_
             assert db.execute('PRAGMA integrity_check').fetchone() == ('ok',)
 
 
-@pytest.mark.parametrize('version', range(18, 65))
+@pytest.mark.parametrize('version', range(18, 66))
 def test_writer_crash_before_version_commit_preserves_prior_schema_and_resumes(tmp_path, version):
     """Abruptly kill only a new migration child before its history insert, then recover that same DB."""
     from backend.tools.base.db import ensure_migrations
@@ -79,7 +79,7 @@ migrations.ensure_migrations(sys.argv[1],existing_only=True,target_version=int(s
         assert db.execute('PRAGMA integrity_check').fetchone() == ('ok',)
 
 
-@pytest.mark.parametrize('target', [True,16,65,'29'])
+@pytest.mark.parametrize('target', [True,16,66,'29'])
 def test_invalid_forward_target_never_creates_storage(tmp_path, target):
     """Unknown targets and booleans cannot create a partial installation as a side effect."""
     from backend.tools.base.db import ensure_migrations

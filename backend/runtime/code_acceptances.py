@@ -18,6 +18,7 @@ from backend.runtime.code_acceptance_policy import (
 )
 from backend.runtime.code_reviews import CodeReviews
 from backend.runtime.contracts import RunConflict
+from backend.runtime.project_check_policy import ProjectCheckPolicies
 
 
 class CodeAcceptances:
@@ -40,6 +41,10 @@ class CodeAcceptances:
     def _state(self, conn, project_id, run_id):
         """Derive current eligibility from original scoped evidence while retaining stale receipts as history."""
         run = self.runs._row(conn, project_id, run_id)
+        receipt = self._receipt(conn, project_id, run_id)
+        project_policy = ProjectCheckPolicies.current(conn, project_id)
+        # Accepted history keeps its original rule; old receipts predate project policies.
+        applied_policy = receipt.get("check_policy") if receipt else project_policy
         if run["execution_kind"] != "development":
             raise RunConflict("This run is not a code development result")
         candidate = CodeCandidates._row(conn, project_id, run["current_attempt_id"])
@@ -185,7 +190,7 @@ class CodeAcceptances:
                 if issue["blocking"]
             )
         check_policy = (
-            assess_code_checks(packet["snapshot"]["checks"])
+            assess_code_checks(packet["snapshot"]["checks"], policy_mode=(applied_policy or {}).get("mode"))
             if packet
             else {
                 "blockers": [
@@ -198,6 +203,8 @@ class CodeAcceptances:
             }
         )
         blockers.extend(check_policy["blockers"])
+        if not receipt and not project_policy["mode"]:
+            blockers.append({"code": "check_policy_unset", "message": "Elige la política de comprobaciones del proyecto antes de aceptar código."})
         from backend.runtime.code_publications import CodePublications
 
         owned_publications = CodePublications.linked_runs(
@@ -316,6 +323,7 @@ class CodeAcceptances:
             "review_issues": prior_issues,
             "review_sha256": review_sha,
             "checks": check_policy,
+            "project_check_policy": project_policy,
             "blockers": blockers,
             "eligible": bool(eligible),
             "requires_acknowledgement": bool(
@@ -381,9 +389,10 @@ class CodeAcceptances:
         """Atomically record one paired-owner observation and close author/reviewer states; never publish code."""
         if not isinstance(intent, CodeAcceptanceIntent):
             raise TypeError("An explicit typed owner code acceptance is required")
-        fingerprint = digest(
-            {"project_id": project_id, "run_id": run_id, **asdict(intent)}
-        )
+        observed = asdict(intent)
+        if intent.check_policy_revision is None:
+            del observed["check_policy_revision"]  # Preserve pre-migration retry fingerprints.
+        fingerprint = digest({"project_id": project_id, "run_id": run_id, **observed})
         with self.runs._transaction(write=True) as conn:
             run = self.runs._row(conn, project_id, run_id)
             previous = conn.execute(
@@ -403,6 +412,8 @@ class CodeAcceptances:
                     + ",".join(item["code"] for item in state["blockers"])
                 )
             candidate = state["candidate"]
+            if intent.check_policy_revision != state["project_check_policy"]["revision"]:
+                raise RunConflict("Check policy changed or was not observed before acceptance")
             if (
                 candidate["attempt_id"],
                 candidate["context_version"],
@@ -426,7 +437,8 @@ class CodeAcceptances:
                 "project_id": project_id,
                 "task_id": run["task_id"],
                 "run_id": run_id,
-                **asdict(intent),
+                **observed,
+                "check_policy": state["project_check_policy"],
                 "review_run_id": state["review"]["run_id"],
                 "actor_source": "paired_owner_action",
                 "accepted_at": now,

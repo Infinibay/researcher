@@ -356,6 +356,8 @@ async def test_coordinator_schedules_native_review_and_does_not_finish_unconfirm
                 != "done"
             )
             assert (c.s.workspace / "fact.txt").read_text() == "137"
+            from backend.tests.runtime.test_code_acceptance import choose_fixture_check_policy
+            choose_fixture_check_policy(d.coordinator.store)
             owner_state = d.coordinator.store.code_result_state(101, d.run.run_id)
             if rejected:
                 assert json.loads(row["proposal_json"])["verdict"] == "needs_revision"
@@ -381,6 +383,7 @@ async def test_coordinator_schedules_native_review_and_does_not_finish_unconfirm
                     context_version=d.lease.context_version,
                     subject_sha256=owner_state["subject_sha256"],
                     review_sha256=owner_state["review_sha256"],
+                    check_policy_revision=owner_state["project_check_policy"]["revision"],
                     acknowledge_limits=True,
                     note="Owner accepts this exact controlled candidate with its displayed limitations.",
                 )

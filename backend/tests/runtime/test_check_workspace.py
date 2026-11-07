@@ -107,3 +107,16 @@ async def test_check_refuses_a_different_candidate_before_exposing_copy(
             tree_sha=candidate.tree_sha,
             executor=RealGitExecutor(),
         )
+
+
+async def test_missing_candidate_repository_never_becomes_an_empty_test_success(check_candidate):
+    """Removing the exact source blocks preparation before a check copy or zero-test result exists."""
+    from backend.runtime.check_workspace import prepare_check_workspace
+    from backend.runtime.contracts import WorkspaceChanged
+
+    _, candidate, binding, root = check_candidate
+    Path(candidate.workspace).rename(root/'removed-candidate')
+    destination = root/'check-missing'
+    with pytest.raises(WorkspaceChanged):
+        await prepare_check_workspace(binding, destination, head_sha=candidate.head_sha, tree_sha=candidate.tree_sha, executor=RealGitExecutor())
+    assert not destination.exists()

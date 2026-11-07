@@ -153,12 +153,13 @@ def test_migration_preserves_legacy_receipt_without_inventing_permission_origin(
 
 def test_origin_inverse_requires_unused_permission_and_archival(coordination):
     """The unused latest schema reverses without deleting work; recorded permissions prevent loss of their physical origin."""
+    from backend.db.project_check_policy_migration import restore_project_check_policy_schema
     from backend.db.preparation_budget_migration import restore_preparation_budget_schema
     from backend.db.auxiliary_origin_migration import restore_auxiliary_origin_schema
     from backend.tools.base.db import ensure_migrations
 
-    c=coordination;restore_preparation_budget_schema(c.conn);restore_auxiliary_origin_schema(c.conn)
+    c=coordination;restore_project_check_policy_schema(c.conn);restore_preparation_budget_schema(c.conn);restore_auxiliary_origin_schema(c.conn)
     assert c.conn.execute('SELECT max(version) FROM schema_migrations').fetchone()[0]==62
     ensure_migrations(c.database);failed(AuxiliaryBudget(c.database,101))
     recovery=AuxiliaryRecovery(c.store);decide(recovery,recovery.list(101)['items'][0]['operation_id'])
-    with pytest.raises(RuntimeError,match='recorded'):restore_preparation_budget_schema(c.conn);restore_auxiliary_origin_schema(c.conn)
+    with pytest.raises(RuntimeError,match='recorded'):restore_project_check_policy_schema(c.conn);restore_preparation_budget_schema(c.conn);restore_auxiliary_origin_schema(c.conn)

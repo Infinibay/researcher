@@ -21,6 +21,7 @@ class CodeAcceptanceIntent:
     review_sha256: str
     acknowledge_limits: bool
     note: str | None = None
+    check_policy_revision: int | None = None
 
     def __post_init__(self):
         """Reject coercion, incomplete fingerprints and implicit acknowledgement before effects."""
@@ -36,10 +37,13 @@ class CodeAcceptanceIntent:
             raise ValueError("Code acceptance requires explicit owner acknowledgement")
         if self.note is not None:
             text(self.note, "Owner note", 4000)
+        if self.check_policy_revision is not None:
+            if type(self.check_policy_revision) is not int or not 1 <= self.check_policy_revision <= 9007199254740991:
+                raise ValueError("Code acceptance requires an observed check policy revision")
 
 
-def assess_code_checks(checks):
-    """Block failed/unfinished/unknown results; require acknowledgement of absent or skipped tests without relabeling them."""
+def assess_code_checks(checks, *, policy_mode=None):
+    """Apply explicit project test requirements; absent mode retains historical receipt semantics without inventing test execution."""
     blockers, limitations = [], []
     if not checks:
         limitations.append(
@@ -74,6 +78,17 @@ def assess_code_checks(checks):
                     else "Se omitieron pruebas o comprobaciones.",
                 }
             )
+        elif policy_mode and (check.get("result") or {}).get("skipped", 0):
+            limitations.append({"code": "check_partially_skipped", "check_id": check.get("id"),
+                                "message": "Se ejecutaron pruebas, pero algunas se omitieron."})
+    if policy_mode and checks and not blockers and not limitations and not any(
+        type((c.get("result") or {}).get("tests")) is int
+        and c["result"]["tests"] > (c["result"].get("skipped") or 0)
+        for c in checks
+    ):
+        limitations.append({"code": "test_execution_unproven", "message": "Los comandos terminaron, pero no acreditan pruebas ejecutadas."})
+    if policy_mode == "require_tests" and limitations:
+        blockers.append({"code": "tests_required", "message": "Este proyecto exige pruebas ejecutadas y satisfactorias, sin omisiones."})
     return {"blockers": blockers, "limitations": limitations}
 
 

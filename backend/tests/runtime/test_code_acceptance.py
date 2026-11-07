@@ -24,7 +24,18 @@ pytestmark = pytest.mark.parametrize("review_state", ["frozen_author"], indirect
 @pytest.fixture
 def code_result(review_records, request):
     """Close an attributed reviewer over synthetic Git/owner witnesses, with verdict selected before immutable persistence."""
-    return finish_owner_review(review_records, getattr(request, "param", "supported"))
+    result = finish_owner_review(review_records, getattr(request, "param", "supported"))
+    choose_fixture_check_policy(result[0].c.store)
+    return result
+
+
+def choose_fixture_check_policy(store):
+    """Explicitly authorize missing tests in acceptance fixtures; production migrations make no such choice."""
+    from backend.runtime.project_check_policy import ProjectCheckPolicies
+
+    policies = ProjectCheckPolicies(store)
+    if policies.state(101)['revision'] == 0:
+        policies.update(101, operation_key='fixture-check-policy', expected_revision=0, mode='allow_missing')
 
 
 def finish_owner_review(review_records, verdict="supported"):
@@ -103,6 +114,7 @@ def owner_intent(state, **changes):
             "review_sha256": state["review_sha256"],
             "acknowledge_limits": True,
             "note": "Accept this exact fixture with displayed limits.",
+            "check_policy_revision": state["project_check_policy"]["revision"],
             **changes,
         }
     )

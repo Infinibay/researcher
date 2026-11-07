@@ -1,0 +1,54 @@
+{
+  "base_commit": "ff1e70f",
+  "started_at": "2026-11-07T18:39:36Z",
+  "validated_at": "2026-11-07T19:02:40Z",
+  "elapsed_seconds_until_validation": 1384,
+  "duration_scope": "E09-E12 audit, demonstrated E11 gap, implementation and validation; later documentation/checkpoint excluded.",
+  "installed_first": {
+    "cases": 215,
+    "passed": 215,
+    "failed": 0,
+    "skipped": 0,
+    "backend_modules": 296,
+    "all_backend_imports_from_native_env": true,
+    "seconds": 242.618,
+    "exit_code": 0
+  },
+  "installed_final": {
+    "cases": 3,
+    "passed": 3,
+    "failed": 0,
+    "skipped": 0,
+    "backend_modules": 231,
+    "all_backend_imports_from_native_env": true,
+    "seconds": 52.693,
+    "exit_code": 0
+  },
+  "distinct_installed_cases": 218,
+  "artifact_comparison": "docs/modernization/project-check-policy-artifact-comparison.json",
+  "legacy_migration": "docs/modernization/project-check-policy-legacy.json",
+  "frontend": {
+    "dom_passed": 3,
+    "contract_passed": 4,
+    "build": "passed",
+    "whole_page_acceptance": false
+  },
+  "new_source_cases_latest_passed": 17,
+  "intermediate_failures": [
+    "Expected RED: missing project policy requirement and policy adapter before implementation.",
+    "Two fixture errors corrected: pairing key shorter than32characters and treating a string database path as Path.",
+    "Missing executable test corrected: launch validation rejects it before creating a worker; broken command separately executes and records infrastructure_error."
+  ],
+  "changed_python_definitions_documented": 45,
+  "prompts": {
+    "files": 304,
+    "reviewed": 85,
+    "pending": 0
+  },
+  "real_model_turns": 0,
+  "scenarios_completed": [
+    "E11"
+  ],
+  "whole_plan": "in_progress",
+  "global_suite": "Historical failures remain; no new global-suite claim."
+}

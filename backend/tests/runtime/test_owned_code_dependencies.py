@@ -89,6 +89,8 @@ async def test_owned_successor_reads_exact_accepted_code_and_input_without_assum
             reviewed = runtime.store.get(101, reviewer.run_id)
             assert reviewed.status == 'needs_review', reviewed
             assert reviewed.actor_id != author.actor_id and reviewed.thread_id != author.thread_id
+            from backend.tests.runtime.test_code_acceptance import choose_fixture_check_policy
+            choose_fixture_check_policy(runtime.store)
             owner = CodeAcceptances(runtime.store)
             state = owner.state(101, author.run_id)
             assert state['eligible'] and state['acceptance'] is None, state

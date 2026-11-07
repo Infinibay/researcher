@@ -851,3 +851,14 @@ texto del proveedor ni asumir una clase de error a partir de una palabra. Preser
 no-replay/no-fallback. Evidencia: test_budget_acceptance.py, CodexSession.run y
 RuntimeService._run. No repetir ahora ensayos de cuota ni rediseñar el motor por el
 texto; la aceptación amplia de comunicación y los demás escenarios siguen aparte.
+
+
+## DD113 — presentación de la política de pruebas
+
+El control funcional está en Código entregado, con revisión observada, ejemplo y
+recuperación del recibo. En la pasada final, unificar mensajes de conflicto de
+aceptación todavía en inglés, revisar densidad/ubicación entre los ajustes del
+proyecto y realizar la revisión visual integral de Tareas. No reabrir ahora
+almacenamiento, CI o publicación por esos ajustes. Las pruebas DOM y HTTP no
+constituyen aceptación completa de la página ni evaluación de comprensión humana.
+Ubicación: CheckPolicyEditor.tsx, CodeDelivery.tsx, CodeAcceptances.accept.

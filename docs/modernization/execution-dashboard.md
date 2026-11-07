@@ -26,9 +26,43 @@ que se pueda comparar el avance; no presentar microajustes como tareas principal
 - Codex por suscripción y Ken publicado ensayados. Fuentes/citas, informes draft y revisión documental independiente conectados. Desarrollo admitido desde Tareas/Conversación con captura y comprobaciones explícitas; revisión independiente solicitada desde Tareas y aceptación del propietario conectada. Publicación local desde aceptación conectada; recuperación local de sólo lectura conectada; transporte remoto configurable conectado; recuperación remota y controles de Tareas conectados; ejecución/activación antiguas por tarea y proyecto retiradas; auxiliares de generación/proveedor, herramientas antiguas y sus cinco bibliotecas retirados. También se retiraron API interna, CLI, servicios/listeners y flows/helpers antiguos. También se retiraron autonomía, plantillas históricas y lectores de proveedor sin consumidores; se conserva el control de parada de trabajadores registrados.
 - Interfaz: doce pilotos, 36/36 conceptos de escritorio y 12/12 móviles; todas las rutas tienen piloto y 0/12 páginas están completamente aceptadas.
 - Última suite global: `9fb873c`,2210 casos,2178 pasan,31 fallan y1 error de fixture; sin omisiones. La carrera de backup encontrada se corrigió después con40 pruebas instaladas. No se declara una nueva corrida global verde; la referencia `0c8b8d9` queda como evidencia histórica.
-- U06 y E01–E08 quedan comprobados con el alcance de sus matrices; siguen34de43escenarios amplios sin aceptación completa en [coverage.json](coverage.json). No hay un porcentaje global defendible.
+- U06, E01–E08 y E11 quedan comprobados con el alcance de sus matrices; siguen33de43escenarios amplios sin aceptación completa en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Estado actual: E01–E06 comprobados
+## Estado actual: E11 comprobado; política de pruebas por proyecto
+
+Bloque **2026-11-07 18:39:36–19:02:40 UTC**, **23 min 04 s hasta validar**.
+Incluye el contraste inicial E09–E12 y la brecha funcional E11. Documentación y
+checkpoint posteriores quedan fuera de ese tramo.
+
+El propietario ya elige por proyecto exigir pruebas o admitir ausencia/omisiones
+con reconocimiento explícito. Fallos, infraestructura incierta y revisión rechazada
+siguen bloqueando. Nuevas aceptaciones incluyen la revisión observada; las antiguas
+conservan su política original y su recibo. Guardar no ejecuta ni acepta trabajo.
+
+215 casos instalados amplios y 3 finales pasan: **218 distintos**, sin fallos ni
+omisiones. **3 DOM, 4 contratos frontend y build** pasan. Migración real desde el
+paquete anterior conserva bytes/huella del recibo y no inventa elección. 653 archivos
+Python/SQL coinciden con el paquete final; 347 de producto. 45 definiciones Python
+documentadas y 85 prompts revisados. [Evidencia y límites](project-check-policy-review.md).
+
+- Terminado: U06, E01–E08 y ahora E11 —resultados de CI y política explícita por proyecto—.
+- En curso al cerrar: documentación y checkpoint local de este resultado.
+- Siguiente principal: E09, E10 y E12 —evidencia vigente, correspondencia exacta
+  candidato/revisión/publicación y captura completa de cambios—. El contraste ya
+  empezó en este bloque; **el siguiente tramo no está iniciado**. Registrar hora
+  real al retomarlo y reutilizar las comprobaciones válidas.
+- Pendiente después: comunicación humano–agente, otros escenarios/datos históricos,
+  evaluaciones, aceptación completa de las 12 páginas, dependencias y distribución.
+- Al final: detalles registrados —incluido DD113—, validación global y revisión
+  independiente de todo el plan.
+
+Quedan **33 de 43 escenarios** sin aceptación completa y **0/12 páginas** plenamente
+aceptadas; hay 12 pilotos y 48 conceptos. Los conteos no son porcentajes de
+implementación. Cero turnos reales en este bloque. La última suite global conserva
+fallos históricos; no se declara una nueva corrida global verde ni un plazo total.
+Esta lista y los tiempos se publican en cada transición y persisten tras compactar.
+
+## Etapa anterior: E01–E06 comprobados
 
 Bloque **2026-11-07 18:21:28–18:35:37 UTC**, **14min09s hasta validar**.
 Documentación/checkpoint posteriores fuera del tramo. Matriz de atribución,
