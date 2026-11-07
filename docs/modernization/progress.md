@@ -7406,3 +7406,53 @@ all fine details. Next: historical configuration/evaluation runners, then data
 migration/inverse/real restore/reboot recovery. History/budgets, broad evaluation,
 12page/security acceptance and final review remain open.43scenarios remain
 36in_progress/7pending,0fullyacceptedpages. No push/merge/deploy in this cut.
+
+## 2026-11-06 — retained configuration and evaluation harness repair, based on 38c08eb
+
+Previous goal turn made progress (frontend migration committed). This cut reduces
+Settings85fields to10 actually consumed by DB/retry, retrieval/web policy and
+owner Forgejo views.75unused provider/loop/autonomy/tool options and embedding
+provider derivation removed; unused user_settings global JSON writer removed.
+Historical user files and DB/preferences are untouched. Native owned profile and
+versioned model settings remain separate.10obsolete JSON-writer test functions
+removed, not counted as repaired failures. Flow fixture no longer patches the
+retired autonomy flag. New direct-option contract checks were4FAIL/1PASS before
+and pass afterward; old JSON bytes preserved and no DB created by reading config.
+
+Source selection157PASS/2SKIP(explicit semantic assets absent), plus38PASS for
+runtime-profile/actual MCP/shared evaluation guards. The3new profile guards were
+first observed failing: old helper reached socket creation instead of rejecting
+before effects. They now reject obsolete/malformed profiles before storage.
+Catalog runner's exact11assertion reproduced failure against the actual process;
+now it verifies RESEARCH_NAMES and question/finding/report schemas,45toolsPASS.
+HTTP helper uses the invoking installed Python with-I, explicit upload/static
+environment, no checkout injection, no obsolete provider/sandbox/telemetry flags,
+and no incidental inherited runtime config. Actual local_access probe53c66694
+PASS,0modelturns, owner/tool separation, Host/origin, CSRF, WebSocket logout and
+observed original backend closure. Other live runners still require migration/
+revalidation; README now distinguishes current commands from historical scenarios.
+
+uv build via sdist produced wheel SHA
+dcc629467cd6663704d5094ec08b673f16c72a1b3e97b901a7e9fc6316d4ac0d,
+installed in native-runtime-env after prior tests were terminal.570Python/SQL
+files identical source/wheel/install; retired module absent. Initial manual file
+comparison included db/seeds/dev_data.sql outside declared db/*.sql package-data;
+corrected comparison follows the unchanged package manifest.83distributions pass
+pip check. Installed initial selection142PASS/15FAIL/2SKIP:2manifest-only checks
+require checkout and13fail because cwd/tmp contains the credential fixtures.
+No product boundary relaxed. A first corrected-cwd42PASS found parent checkout
+pytest configuration and is NOT counted as installed verification. Final rerun
+forces-c/dev/null with importlib mode and asserts196backend module origins all
+inside site-packages:42PASS including all13failures. Comparable installed union
+155PASS/2SKIP;2manifest checks pass only in the source selection. No globalgreen.
+
+Seven new/changed definitions documented. Prompt inventory83/271/0pending, no
+instruction changes/reviews invalidated. Four lint findings deferredDD067, plus
+existing TestClient and isolated pytest asyncio-scope warnings. No images/models,
+no native-image rebuild, no user-data migration or restore, no new fullpage
+acceptance. Public contract/result/lint and runner status preserve these limits.
+Measured continuation began22:03:58Argentina; no global ETA or percent inferred.
+Next within current macro: port/revalidate remaining native evaluation scenarios;
+then migrations/inverses/real restore/reboot, history/budgets, broad evaluation,
+security/12page acceptance and finalreview.43scenarios remain36in_progress7pending.
+All macro capabilities before all fine details; checklist at task transitions.

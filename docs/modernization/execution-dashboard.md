@@ -19,7 +19,35 @@ o porcentaje. No reconstruir tiempos históricos a partir de recuerdos del chat.
 - Última suite global completada al retomar `0c8b8d9`: 2148 casos, 2045 pasan, 100 fallan y tres se omiten. Mismos 100 identificadores heredados; no se afirman causas idénticas. Pasan 965 casos del runtime. La política Git añadida después tiene verificación separada.
 - Los 43 escenarios amplios siguen abiertos en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Etapa actual: frontend migrado; sigue configuración histórica
+## Etapa actual: configuración retirada; runners todavía en migración
+
+Se retiran 75 opciones sin consumidores, la derivación de embeddings por proveedor
+y el escritor global de settings.json. Quedan diez ajustes usados por DB,
+recuperación de fuentes y vistas de Git; modelos y autoridad siguen en la
+configuración nativa versionada. No se borran ni importan datos del usuario.
+[Contrato y migración](../architecture/retained-configuration.md),
+[resultados](configuration-retirement-results.json).
+
+Pasan 157 casos de configuración/consumidores y 38 de perfiles/MCP; dos requieren
+assets semánticos explícitos y se omiten. El paquete coincide en 570 archivos y
+sus 155 casos comparables pasan entre las ejecuciones documentadas. Dos checks
+son sólo del checkout. La corrección del entorno instalado verifica 196 imports
+del paquete. Catálogo MCP real de 45 herramientas y recorrido HTTP/WebSocket
+completos, sin turnos de modelo. No hay suite global nueva.
+
+**Lista vigente:**
+- Hecho: migración frontend; ahora retirada de configuración sin consumidores y
+  del escritor global. Se conservan modelo configurable y datos históricos.
+- En curso: migración de runners. Se recuperaron catálogo y helper HTTP
+  instalado; la [tabla de escenarios restantes](../../evals/runtime/README.md)
+  no se cuenta como aceptación actual.
+- Después: migraciones/inversas/restauración real y reboot; historial/presupuestos;
+  evaluaciones real, humana, científica y global; seguridad de dependencias,
+  aceptación completa de 12 páginas y revisión final.
+- Al final: detalles secundarios DD067 (cuatro avisos de estilo y avisos del
+  harness). Siguen 43 escenarios abiertos y ninguna página aceptada integralmente.
+
+## Etapa anterior: frontend migrado
 
 React19.3, Vite8, TypeScript6, Tailwind4 y el stack de documentos actualizado
 compilan desde una instalación limpia. Pasan126 contratos y3pruebas DOM;

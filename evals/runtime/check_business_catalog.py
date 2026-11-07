@@ -12,7 +12,8 @@ sys.path.insert(0, str(REPO))
 
 
 async def main():
-    from backend.runtime.business_mediation import BusinessTools, business_peer
+    """Compare the actual MCP process against the current research capability contract and key human-facing schemas."""
+    from backend.runtime.business_mediation import RESEARCH_NAMES, BusinessTools, business_peer
 
     with TemporaryDirectory(prefix="researcher-catalog-") as temporary:
         async with business_peer(
@@ -25,7 +26,7 @@ async def main():
         ) as peer:
             tools = await BusinessTools.connect(peer)
             schemas = {tool["name"]: tool["inputSchema"] for tool in tools.catalog}
-            assert len(schemas) == 11
+            assert set(schemas) == set(RESEARCH_NAMES)
             ask = schemas["researcher_ask_user"]
             assert set(ask["properties"]) == {"operation_key", "questions"}
             question = ask["properties"]["questions"]["items"]

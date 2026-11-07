@@ -2,7 +2,7 @@
   "schema_version": 1,
   "scope": "Owned backend/ and scripts/ Python, excluding tests. Syntax-selected prompt builders/literals/tool descriptions; external native system prompts and arbitrary owner/source text are outside this static inventory.",
   "coverage": "Candidates are not unique rendered prompts. Dynamic rendering size and non-direct consumers remain unknown. Reviews are explicit declarations bound to source and direct module consumers, not proof of efficacy or complete runtime reachability. requires_review entries are unfinished.",
-  "files_scanned": 272,
+  "files_scanned": 271,
   "source_tree": {
     "backend/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     "backend/api/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
@@ -73,8 +73,7 @@
     "backend/communication/ownership.py": "72bb624195447fd39133f5d491c0a7c33b03e6f4e7056abd2f8567542b4b21cb",
     "backend/config/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     "backend/config/paths.py": "fe6b8c12d09eb2d38636a687750e731f34b5cc15b0467a40b92e9688036f0e18",
-    "backend/config/settings.py": "9f2b1cfac4fa96df3bd9eeffd8a770daeb3703faba1b7ec63851f2a628244d58",
-    "backend/config/user_settings.py": "6808c27200ab5c52de970c257a463f8f05fdc553babc69192397cf89447a7dd6",
+    "backend/config/settings.py": "13c5522ecbc036efc26d22a80318b4a3635add3c2c7479a3264330f953e23fb3",
     "backend/db/__init__.py": "7ba3d0ee146291d15ebdc396460e2f6156374c922a20f3dacfd5f424310996e4",
     "backend/db/connection.py": "1439101f51745e81ff34780a4f6ee477c7b4ac7fbda0cb27dcf76bc177c08888",
     "backend/db/development_migration.py": "2e06b8a83bf8cc5ccf78bfde2067d7f2b037a58a55657acf5a675404c81d3d17",

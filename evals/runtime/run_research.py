@@ -123,6 +123,18 @@ async def ready(client, process, path):
 
 @asynccontextmanager
 async def backend(root, env, *, runtime_settings=None, seed_data=True):
+    """Serve an isolated trial from the invoking installed Python; only explicit owned runtime profiles may execute.
+
+    Without runtime_settings this fixture provides read/owner HTTP checks and
+    never configures inference. Old model-only profiles fail before storage or
+    a server is created. Native configuration still needs its real authority,
+    resources and workspace binding; this helper does not fabricate them.
+    """
+    if runtime_settings is not None and (
+        not isinstance(runtime_settings, dict)
+        or runtime_settings.get("runtime_profile") != "owned-codex-v1"
+    ):
+        raise ValueError("Live product trials require an explicit owned-codex-v1 installation; use evals/operation/host_smoke.py or migrate the historical scenario first")
     from backend.tools.base.db import ensure_migrations
 
     database = root / "research.db"
@@ -153,7 +165,7 @@ async def backend(root, env, *, runtime_settings=None, seed_data=True):
                 )
     sock = listener()
     api = f"http://127.0.0.1:{sock.getsockname()[1]}"
-    program = "import sys;sys.path.insert(0,sys.argv[1]);from backend.api import config;config.UPLOAD_DIR=sys.argv[2];config.STATIC_DIR=sys.argv[3];from backend.api.main import create_app;import uvicorn;uvicorn.run(create_app(),fd=int(sys.argv[4]),access_log=False,log_level='warning')"
+    program = "import sys;from backend.api.main import create_app;import uvicorn;uvicorn.run(create_app(),fd=int(sys.argv[1]),access_log=False,log_level='warning')"
     log = (root / "backend.log").open("w")
     owner_control = TemporaryDirectory(prefix="researcher-eval-owner-")
     child_env = {
@@ -161,23 +173,21 @@ async def backend(root, env, *, runtime_settings=None, seed_data=True):
         "INFINIBAY_AUTH_DIR": owner_control.name,
         "INFINIBAY_DB": str(database),
         "INFINIBAY_DATA": str(root / "logs"),
-        "INFINIBAY_LLM_MODEL": "",
-        "INFINIBAY_SANDBOX_ENABLED": "false",
-        "CREWAI_TELEMETRY_DISABLED": "true",
+        "INFINIBAY_UPLOAD_BASE_DIR": str(uploads),
+        "INFINIBAY_STATIC_DIR": str(REPO / "frontend/dist"),
         "OTEL_SDK_DISABLED": "true",
         "DO_NOT_TRACK": "1",
     }
+    child_env.pop("INFINIBAY_RUNTIME_CONFIG", None)
     if runtime_settings is not None:
         settings_path = root / "runtime-settings.json"
         settings_path.write_text(json.dumps({**runtime_settings, "api_url": api}))
         child_env["INFINIBAY_RUNTIME_CONFIG"] = str(settings_path)
     process = await asyncio.create_subprocess_exec(
-        str(REPO / ".venv/bin/python"),
+        sys.executable,
+        "-I",
         "-c",
         program,
-        str(REPO),
-        str(uploads),
-        str(REPO / "frontend/dist"),
         str(sock.fileno()),
         cwd=root,
         env=child_env,

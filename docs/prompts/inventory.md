@@ -1,10 +1,13 @@
 # Inventario y revisión de prompts
 
-Catálogo nativo versión2; revisión inicial sobre `85f7acd`, actualizada después de
-retirar el sandbox y el launcher históricos sobre `12a1744`. El [inventario detallado](inventory.json)
+Catálogo nativo versión2; revisión inicial sobre `85f7acd`, actualizado tras
+retirar configuración sin consumidores sobre `38c08eb`. El [inventario detallado](inventory.json)
 contiene 83 entradas candidatas de 271 archivos Python. **No son 83 prompts distintos
 ni 83 evaluaciones con modelos.** Se archivan 515 entradas de los módulos eliminados,
 conservando sus decisiones históricas en `retired_entries`.
+La retirada de `user_settings.py` y de opciones obsoletas mantiene los 83
+candidatos y sus decisiones vigentes; no cambian instrucciones nativas ni se
+repite evaluación con modelos por ese ajuste de configuración.
 El corte de sandbox revalida siete candidatos con AST idéntico ante la retirada
 del launcher anterior y el cambio de consumidores; no modifica instrucciones.
 El corte de autonomía archiva 144 candidatos de las plantillas históricas y

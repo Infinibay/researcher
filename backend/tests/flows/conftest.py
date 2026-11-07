@@ -27,16 +27,6 @@ def _isolated_db(tmp_path, monkeypatch):
     yield db_path
 
 
-@pytest.fixture(autouse=True)
-def _disable_autonomy(monkeypatch):
-    """Disable autonomy layer so flow tests use the original centralized loop."""
-    monkeypatch.setattr(
-        "backend.config.settings.settings.AUTONOMY_ENABLED", False,
-    )
-
-
-
-
 @pytest.fixture()
 def db_conn(_isolated_db):
     """Return a connection to the test database."""

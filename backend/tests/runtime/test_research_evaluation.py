@@ -9,6 +9,16 @@ import pytest
 from evals.runtime import run_research as runner
 
 
+@pytest.mark.parametrize("configuration", [{"model": "historical"}, {"runtime_profile": "legacy-codex"}, []])
+async def test_http_trial_rejects_old_runtime_profiles_before_creating_storage(tmp_path, configuration):
+    """An obsolete experiment must fail before DB, credentials, server or model work begins."""
+    root = tmp_path / "uncreated-trial"
+    with pytest.raises(ValueError, match="owned-codex-v1"):
+        async with runner.backend(root, {}, runtime_settings=configuration):
+            raise AssertionError("An obsolete profile started a service")
+    assert not root.exists()
+
+
 def git(workspace: Path, *args: str) -> str:
     return subprocess.check_output(
         ["git", "-C", str(workspace), *args], text=True

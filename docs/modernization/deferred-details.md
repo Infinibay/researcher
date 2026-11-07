@@ -343,3 +343,23 @@ se registran aparte como **aceptación de seguridad pendiente**, no como cosmét
 No usar versiones incompatibles ni `audit fix --force` para ocultarlos. Tampoco
 quedan aceptadas las12páginas, otros navegadores o la nueva imagen de despliegue.
 
+## DD067 — detalles tras retirar configuración sin consumidores
+
+Cuatro avisos de lint en el alcance: tres imports sin uso heredados de la
+fixture de flows y uno de orden de imports en el runner de catálogo. Véase
+`configuration-retirement-lint.json`. Conservar para después de todas las
+capacidades principales; no repetir catálogos, HTTP o builds por este estilo.
+
+Se conserva la deprecación de TestClient/httpx y el aviso de scope asyncio en
+la ejecución instalada con configuración pytest aislada. Dos tests de manifiestos
+requieren el checkout y no deben presentarse como comprobaciones del wheel.
+Los fallos por credenciales bajo el cwd del ensayo y la carga accidental de
+pytest.ini_options del checkout se diagnosticaron y corrigieron en el harness,
+sin cambiar la frontera de credenciales. La ejecución final comprueba el origen
+de todos los imports backend.
+
+Migrar los demás runners al perfil nativo y comprobar sus escenarios es trabajo
+principal aún abierto, no pulido. Lo mismo vale para restauración y evaluaciones
+integrales. Retirar diez funciones de tests del escritor global no repara fallos
+de esas capacidades ni demuestra una suite global verde.
+

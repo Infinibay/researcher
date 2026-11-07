@@ -1,149 +1,74 @@
-# Runtime comparison fixtures
+# Evaluaciones de runtime: estado actual e historia
 
-> Estado de migración, 2026-11-06: el producto sólo admite `owned-codex-v1`.
-> Los ensayos anteriores y sus recibos se conservan como evidencia histórica,
-> no como validación del despliegue vigente. Los tres diagnósticos ligados al
-> launcher retirado (`run_native_boundary.py`, `run_ken_identity.py`,
-> `run_crash_recovery.py`) se eliminaron. Los demás runners de esta carpeta
-> necesitan comprobarse con el perfil vigente antes de atribuirles resultados
-> actuales. [Migración y pruebas del reemplazo](../../docs/architecture/native-sandbox-retirement.md).
+El producto exige `owned-codex-v1`. Un script conservado y un recibo histórico
+no prueban el comportamiento de la instalación actual. Esta carpeta contiene
+escenarios anteriores cuya migración completa sigue pendiente; no ejecutarlos
+como una suite de aceptación vigente.
 
+## Comprobaciones vigentes
 
-These fixtures contain an **intentional invoice defect** and two tests expected
-to fail before the correction scenario. They are synthetic, not product source
-or a financial policy. Common backend tests never launch a model.
-
-`manifest.json` preserves candidate versions, original source hashes, prompts,
-bounds and evaluation limitations. Result excerpts live in
-`docs/modernization/*-evidence.json`; the narrative and failed trial analysis are
-in `docs/modernization/runtime-evaluation.md`.
-
-For a manual trial, copy the fixture into a new temporary Git repository outside
-product data, record a baseline commit, then prepare that exact directory with
-published `ken-rank==0.18.0` (`ken retrieval prepare --path <fixture> --json`).
-Initialize one candidate process per workspace. Check subscription auth and Ken
-readiness before submitting the manifest's prompt. Disable unrelated MCP/apps,
-remove inherited API keys/base URL overrides, and enforce the manifest's bounds
-outside the model. Infinidev needs explicit MCP prewarm in its web harness.
-
-The original code/control probes remain in the plan's scratch workspace. The
-attachment/web → finding → report scenario now has an explicit portable runner,
-`run_research.py`, with its separate `research_manifest.json` and the same prompt
-for both candidates. This is not a completed benchmark or a prompt experiment.
-Never run the slow tool or a model task as part of the common test suite.
-
-From the managed project environment, install published `ken-rank==0.18.0` into
-an isolated tool environment and pass its absolute executable path. Codex CLI
-0.166.0 must already have a managed ChatGPT login. Run one candidate at a time:
+Desde el Python instalado del proyecto, con sus dependencias bloqueadas:
 
 ```sh
-.venv/bin/python evals/runtime/run_research.py --live --candidate codex \
-  --ken-command /absolute/path/to/ken
-
-.venv/bin/python evals/runtime/run_research.py --live --candidate infinidev \
-  --ken-command /absolute/path/to/ken \
-  --infinidev-python /absolute/path/to/isolated-infinidev-env/bin/python
+python evals/runtime/check_business_catalog.py
+python evals/security/run_local_access.py --live
 ```
 
-For Infinidev, the supplied environment must contain the evaluated 0.30.0
-release. Its test shim prewarms both MCPs, enforces the subscription completion
-route and supplies the business grant privately to the MCP child. It does not
-modify Infinidev source or inherit a paid provider key. Runtime-version checks
-occur before the model task; `--live` is mandatory. Output defaults to an ignored
-`.researcher/evaluations/<unique-trial>/` directory, with manifest, native
-events, temporary SQLite database, logs and result. Keep failed trials too.
+El primero abre el MCP real y compara sus 45 herramientas con el contrato actual
+`RESEARCH_NAMES`, además de comprobar preguntas, hallazgos e informes. No concede
+una autoridad real ni llama al modelo o al backend.
 
-The runner creates synthetic projects and files, runs the real backend and
-locked business MCP, and serializes campaigns under an OS lock. Each trial has
-a 180-second task wall deadline, a 90-second no-tool-progress fuse, one native
-turn, 25 observed tool items and 350,000 observed tokens. Infinidev also has a
-32-completion-call fuse. These fuses do not imply equivalent internal request
-counts or known remaining quota. Unreported token usage stays unknown.
+El segundo inicia un backend instalado con datos sintéticos, comprueba separación
+entre acceso anónimo, propietario y herramientas, CSRF, origen/Host, WebSocket y
+revocación al cerrar sesión. Cierra su servidor original. Su `--live` habilita
+HTTP local: este recorrido envía cero turnos de modelo.
 
-The host independently checks persisted sources/citations, provisional finding,
-draft report, numeric markers and the actual artifact HTTP response. It also
-checks tracked file hashes, Git index/HEAD and unexpected output paths. Known
-runtime state (`.ken/`, `.infinidev/`, `.mcp.json`) is excluded from the output
-check. These checks prove final fixture state, not OS isolation or absence of
-transient effects. Human explanation quality, rendered `/reports`, full task
-acceptance and all product-level cancellation/recovery remain separate gates.
+El helper HTTP compartido usa `sys.executable -I`, requiere que el paquete esté
+instalado y configura adjuntos/web mediante variables explícitas. Ya no depende
+de `.venv/bin/python`, no inserta el checkout en el proceso hijo y no activa
+flags de CrewAI/sandbox/LLM retirados. Sin configuración de runtime no configura
+inferencia. Un perfil antiguo se rechaza antes de crear DB, credenciales o servidor.
+Una configuración nativa sigue necesitando autoridad, recursos y workspace
+válidos: el helper no los inventa ni migra instalaciones por sí mismo.
 
-Do not restart a live trial after an observation timeout. Re-poll its process
-handle, inspect the same unique trial and reconcile terminal state first. Reuse
-an operation key after an uncertain business-tool receipt rather than creating
-a fresh key. At teardown the runner revokes the business grant and reaps its
-owned server processes. Raw trial directories may contain native conversation
-data; durable excerpts belong in `docs/modernization/` after inspection.
+Para investigación nativa con Ken, la ruta comprobada de instalación y reinicio
+está en [host nativo](../../docs/architecture/native-host-installation.md) y
+[contenedor nativo](../../docs/architecture/native-container-operation.md).
+`evals/operation/host_smoke.py` y `native_container.py` requieren una instalación
+sintética nueva; el turno por suscripción es explícito y acotado con `--live`.
+Estos recorridos no sustituyen la evaluación completa de los escenarios de abajo.
 
-For code corrections, independently run `python -B -m unittest -v` and inspect
-Git diff against the baseline; model claims are not verification. For
-cancellation, `slow_tool.py` deliberately writes a marker before a 60-second wait
-and a delayed effect. A PID inside that execution environment is not necessarily
-a host PID. Correlate native identity and terminal status, retire the connection
-and reconcile before another attempt; never replay solely because observation
-expired. Researcher's product-level cancellation acceptance is broader than
-this fixture.
+## Escenarios que aún deben migrarse o revalidarse
 
-The command-only lifecycle probe does not submit model turns or need an account:
+| Runner conservado | Alcance que falta comprobar con el runtime vigente |
+| --- | --- |
+| `run_research.py`, `serve_infinidev_research.py` | Comparación directa de candidatos, entorno y política de herramientas; no aceptación del producto nativo |
+| `run_product.py` | Dos turnos de investigación y corrección; su configuración construida corresponde al prototipo y ahora falla temprano |
+| `run_product_stop.py`, `run_conversation.py`, `run_questions.py` | Stop, instrucciones y preguntas con recursos/autoridad de una instalación nueva |
+| `run_analysis_inference.py`, `run_input_continuity.py` | Cálculo y continuidad atribuida entre turnos; no copiar una autoridad anterior para construir otra instalación |
+| `run_commands.py`, `run_parent_loss.py`, `run_analysis_tools.py` | Sustituir la ejecución directa del prototipo por el broker/dominio nativo y volver a observar efectos y cierre |
+| `../security/run_ken_isolation.py` | Revalidar Ken publicado y aislamiento en la composición vigente |
+| `run_owner_command_inspection.py`, `../ui/run_owner_capture.py` | Lectura de recibos y navegación sobre fixture sintético actual, portable y reproducible; hoy dependen de un ensayo anterior específico |
 
-```sh
-.venv/bin/python evals/runtime/run_commands.py --live --peer-loss --db-contention
-```
+Las pruebas ordinarias del producto cubren contratos de estas capacidades,
+pero no se cuentan como ejecución de estos runners ni como comprensión humana.
+Las pruebas de procesos/cgroups se ejecutan en serie. La configuración y los
+resultados de esta revisión están en [retirada de configuración](../../docs/architecture/retained-configuration.md).
 
-It uses the installed Codex CLI 0.166.0 command API in private account-free peers,
-real SQLite migrations and synthetic workspaces. The optional fault cases kill
-only its directly owned RPC process and hold its temporary DB writer. It checks
-physical Stop before DB unlock, detached-child readiness, other-owner survival,
-cross-project access denial, disabled sockets and uncertain-result fencing.
-Results remain under a unique ignored evaluation directory; do not replay a
-live or uncertain job. See `docs/architecture/owned-commands.md` for scope.
+## Evidencia y fixtures históricos
 
-Product artifact read-back now uses a separate paired owner session in the
-backend runner. Its random code lives in a private temporary control directory,
-never in candidate prompts/configuration or the business MCP environment.
-Business grants remain restricted to `research-tools`; do not solve legacy
-client authentication by passing the human cookie into a model process.
+`manifest.json` y `research_manifest.json` conservan versiones, prompts, límites
+y restricciones del experimento original. `fixture/invoice.py` tiene un defecto
+intencional y sus dos pruebas deben fallar antes de la corrección. Es material
+sintético; no es código productivo ni una política financiera.
 
-## Primer recorrido por la API del producto
+Los resultados anteriores están en `docs/modernization/*-evidence.json` y en
+[runtime-evaluation.md](../../docs/modernization/runtime-evaluation.md). Se
+conservan también los intentos fallidos. No trasladar sus aprobaciones al estado
+actual ni interpretar tamaño de texto como calidad de prompts o consumo facturado.
 
-`run_product.py --live --workspace ... --ken-command ... --model-cache ...`
-crea DB/uploads de ensayo, servidor propio y configuración del coordinador.
-Envía dos turnos limitados por la suscripción: fuente → cita → draft, luego
-corrección de ejemplo y nuevo draft. Comprueba DB/recibos independientemente
-de la respuesta del modelo. No verifica el navegador. Los casos reales,
-incluida la primera ejecución fallida, están en `product-runtime-evidence.json`.
-
-`run_product_stop.py --live --config /ruta/runtime.json --workspace ...`
-usa un único turno, solicita Stop después de vincular su identidad y espera
-cierre confirmado, grants revocados y estado cancelado. Usa datos nuevos y
-sobrescribe api_url/control_root para su servidor propio. No equivale a probar
-un tool de negocio lento ni a medir la cuota restante.
-
-`check_business_catalog.py` valida el catálogo real del
-MCP con su entorno uv bloqueado, sin HTTP ni modelos. `run_parent_loss.py --live`
-mata sólo su holder propio y comprueba peer y efecto demorado; usa pidfds de libc
-porque este Python no expone los wrappers Linux. Ninguno toca datos del usuario.
-
-Los ensayos de modelo dejan sus threads sintéticos en el historial administrado
-de Codex; se conservan sus IDs y no se borran sesiones ajenas. Las pruebas
-ordinarias no ejecutan estos runners. Requisitos/configuración del producto:
-`docs/architecture/native-runtime-boundary.md` y `docs/config/runtime.example.json`.
-
-`run_conversation.py --live --config /ruta/runtime.json --workspace ...` usa un
-único turno por suscripción y comprueba la ruta de instrucciones del chat,
-mensajes y run atómicos, reenvío sin duplicado, lectura humana de evidencia y
-recuperación del recibo original después de corregir contexto. Una captura de
-su DB de ensayo permitió comprobar la migración 23 sin inferir modelos históricos.
-Estos ensayos no comprueban el navegador ni reemplazan las 48 referencias visuales.
-
-
-### Vista de fuente admitida en el peer
-
-`run_analysis_tools.py --codex-binary /ruta/codex` crea una admisión durable,
-comprueba que los siete peers de comandos usan `/run/researcher-source` como raíz
-lógica, y prueba cálculo/lectura y denegación de escritura, escape, red y entorno.
-No envía turnos de modelo. Conserva la identidad del host en el journal.
-
-La identidad de Ken y la fuente del runtime vigente se comprueban en
-`backend/tests/runtime/test_broker_ken.py` y `test_ken_worker.py`. Los recibos
-anteriores del diagnóstico retirado quedan en la documentación histórica.
+Las pruebas comunes no requieren login, red ni suscripción. Una evaluación real
+usa la suscripción autorizada, nunca una API facturada como fallback, con Ken
+publicado, directorio nuevo, límites y comprobación independiente de artefactos.
+No repetir una admisión incierta por un timeout de observación: volver al mismo
+proceso/recibo y resolver su estado antes de una decisión posterior.

@@ -4,6 +4,16 @@ La implementación del [plan completo](../superpowers/plans/2026-10-31-actualiza
 
 ## Resultados disponibles
 
+- **Configuración antigua retirada; runners en migración:** se retiran 75
+  opciones y el escritor global sin consumidores, conservando diez ajustes
+  activos y los datos históricos. Pasan 195 casos de fuente; dos casos requieren
+  assets explícitos. Paquete con 570 archivos coincidentes y 155 casos
+  comparables aprobados; dos checks son sólo de checkout. Catálogo MCP de 45
+  herramientas y HTTP/WebSocket reales pasan sin modelos. Los otros runners
+  siguen pendientes, sin atribuirles sus recibos históricos como aceptación
+  actual. [Contrato](../architecture/retained-configuration.md),
+  [resultados y límites](configuration-retirement-results.json).
+
 - **Dependencias frontend migradas:** React19.3, Vite8, TypeScript6 y Tailwind4;
   instalación limpia,126contratos y3pruebas DOM pasan, build estricto correcto.
   Resumen/Ejecución pasan15estados controlados de navegador; acceso añade dos

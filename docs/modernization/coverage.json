@@ -4215,6 +4215,35 @@
         "Current ordinary Markdown tests do not prove absence of prototype pollution.",
         "Do not use audit --force or suppress findings to manufacture a green receipt."
       ]
+    },
+    "retained_application_configuration": {
+      "status": "complete",
+      "scope": "Retire75 unused settings, provider-derived embedding defaults and unused global JSON writer; preserve the10 consumed host settings and historical data.",
+      "evidence": [
+        "backend/config/settings.py",
+        "backend/tests/config/test_application_settings.py",
+        "docs/architecture/retained-configuration.md",
+        "docs/modernization/configuration-retirement-results.json"
+      ],
+      "limitations": [
+        "Live model/candidate, Stop, questions, continuity, parent-loss and historical-trial UI runners still require current native fixtures and revalidation.",
+        "No actual user settings/data were migrated, restored or deleted.",
+        "Native model selection remains separately configured and versioned; removed settings do not choose it.",
+        "No model invocation, native-image rebuild, global evaluation or full12page acceptance in this cut."
+      ]
+    },
+    "evaluation_runner_migration": {
+      "status": "in_progress",
+      "scope": "Repair installed HTTP harness and actual business MCP catalog; port/revalidate historical live scenarios against owned-codex-v1.",
+      "evidence": [
+        "evals/runtime/README.md",
+        "evals/runtime/run_research.py",
+        "evals/runtime/check_business_catalog.py",
+        "docs/modernization/configuration-retirement-results.json"
+      ],
+      "limitations": [
+        "Current catalog45 and zero-model HTTP/WebSocket probe pass; this is not acceptance of the other retained runners."
+      ]
     }
   }
 }
