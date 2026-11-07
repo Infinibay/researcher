@@ -1,0 +1,54 @@
+{
+  "base_commit": "e9120e8",
+  "started_at": "2026-11-07T18:21:28Z",
+  "validated_at": "2026-11-07T18:35:37Z",
+  "elapsed_seconds_until_validation": 849,
+  "duration_scope": "Audit, added acceptance cases and validation; later documentation/checkpoint excluded.",
+  "source_new_cases": {
+    "distinct": 5,
+    "latest_passed": 5,
+    "intermediate_failure": "Restart test incorrectly expected admission receipt lookup to start queued work. Corrected to explicit retry_start; product unchanged."
+  },
+  "installed_first": {
+    "cases": 203,
+    "passed": 203,
+    "failed": 0,
+    "skipped": 0,
+    "backend_modules": 265,
+    "all_backend_imports_from_native_env": true,
+    "seconds": 168.001,
+    "exit_code": 0
+  },
+  "installed_final": {
+    "cases": 20,
+    "passed": 20,
+    "failed": 0,
+    "skipped": 0,
+    "backend_modules": 214,
+    "all_backend_imports_from_native_env": true,
+    "seconds": 12.621,
+    "exit_code": 0
+  },
+  "distinct_installed_cases": 219,
+  "all_latest_observations_pass": true,
+  "artifact_comparison": "docs/modernization/engine-boundaries-artifact-comparison.json",
+  "new_python_definitions_documented": 7,
+  "prompts": {
+    "files": 302,
+    "reviewed": 85,
+    "pending": 0
+  },
+  "real_model_turns": 0,
+  "frontend_changes": false,
+  "browser_audit": "not repeated",
+  "scenarios_completed": [
+    "E01",
+    "E02",
+    "E03",
+    "E04",
+    "E05",
+    "E06"
+  ],
+  "whole_plan": "in_progress",
+  "global_suite": "Historical failures remain; no new global suite claim."
+}

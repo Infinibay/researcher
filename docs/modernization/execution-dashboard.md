@@ -26,9 +26,38 @@ que se pueda comparar el avance; no presentar microajustes como tareas principal
 - Codex por suscripción y Ken publicado ensayados. Fuentes/citas, informes draft y revisión documental independiente conectados. Desarrollo admitido desde Tareas/Conversación con captura y comprobaciones explícitas; revisión independiente solicitada desde Tareas y aceptación del propietario conectada. Publicación local desde aceptación conectada; recuperación local de sólo lectura conectada; transporte remoto configurable conectado; recuperación remota y controles de Tareas conectados; ejecución/activación antiguas por tarea y proyecto retiradas; auxiliares de generación/proveedor, herramientas antiguas y sus cinco bibliotecas retirados. También se retiraron API interna, CLI, servicios/listeners y flows/helpers antiguos. También se retiraron autonomía, plantillas históricas y lectores de proveedor sin consumidores; se conserva el control de parada de trabajadores registrados.
 - Interfaz: doce pilotos, 36/36 conceptos de escritorio y 12/12 móviles; todas las rutas tienen piloto y 0/12 páginas están completamente aceptadas.
 - Última suite global: `9fb873c`,2210 casos,2178 pasan,31 fallan y1 error de fixture; sin omisiones. La carrera de backup encontrada se corrigió después con40 pruebas instaladas. No se declara una nueva corrida global verde; la referencia `0c8b8d9` queda como evidencia histórica.
-- U06 (configuración por intento), E07 (loop acotado) y E08 (presupuesto del trabajo observable) quedan comprobados; siguen40de43escenarios amplios sin aceptación completa en [coverage.json](coverage.json). No hay un porcentaje global defendible.
+- U06 y E01–E08 quedan comprobados con el alcance de sus matrices; siguen34de43escenarios amplios sin aceptación completa en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Estado actual: E08 comprobado
+## Estado actual: E01–E06 comprobados
+
+Bloque **2026-11-07 18:21:28–18:35:37 UTC**, **14min09s hasta validar**.
+Documentación/checkpoint posteriores fuera del tramo. Matriz de atribución,
+estados, Stop, respuestas tardías, reinicio y efecto aplicado con respuesta perdida.
+
+203casos instalados amplios y20finales pasan, con4solapados:219distintos.
+649fuentes Python/SQL coinciden con el paquete final;344de producto. Código previo
+sin cambios, extensión C idéntica tras quitar sólo debug/build-id. Cinco casos
+nuevos pasan; el ensayo de reinicio corrigió su expectativa para distinguir
+recibo de admisión de comando explícito de inicio. Siete nodos documentados,
+85prompts revisados. [Evidencia y límites](engine-boundaries-review.md).
+
+- Terminado: U06 y E01–E08; candidatos separados, aceptación independiente,
+  Stop local comprobado, resultados tardíos conservados, reinicio sin pérdida
+  y efectos inciertos recuperados sin repetición.
+- En curso al cerrar: documentación y checkpoint local.
+- Siguiente principal: E09–E12 —evidencia vigente, candidato/revisión/publicación,
+  resultados de CI y cambios por shell—. **No iniciado**; registrar hora real.
+  Reusar comprobaciones válidas y resolver sólo brechas funcionales demostradas.
+- Pendiente después: comunicación, otros escenarios/datos históricos,
+  evaluaciones, aceptación de12páginas, dependencias y distribución.
+- Al final: detalles registrados, validación global y revisión independiente.
+
+Quedan34de43escenarios sin aceptación completa;0/12páginas plenamente aceptadas.
+No son porcentajes de implementación. Cero turnos reales, sin nueva auditoría
+web ni suite global; sus fallos históricos siguen visibles. Lista y tiempos
+se publican al cambiar de tarea y se conservan tras compactar.
+
+## Etapa anterior: E08 comprobado
 
 Bloque **2026-11-07 18:09:42–18:17:59 UTC**, **8min17s hasta validar**.
 Documentación/checkpoint posteriores fuera del tramo. La matriz de requisitos

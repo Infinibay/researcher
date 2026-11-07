@@ -1,0 +1,20 @@
+{
+  "prior_installed_cases": 203,
+  "unchanged_backend_entries": 649,
+  "raw_changed_entries": [
+    "backend/runtime/_domain_spawn.cpython-312-x86_64-linux-gnu.so"
+  ],
+  "added": [
+    "backend/tests/runtime/test_engine_restart_context.py"
+  ],
+  "native_extension_comparison": {
+    "normalization": [
+      "objcopy --strip-debug",
+      "remove .note.gnu.build-id"
+    ],
+    "runtime_sha256_before": "cda31a9cdaa75cab62c2b820e162c06010c637316b8fe9941e75579c60e9bba8",
+    "runtime_sha256_after": "cda31a9cdaa75cab62c2b820e162c06010c637316b8fe9941e75579c60e9bba8",
+    "identical_after_metadata_removal": true
+  },
+  "scope": "Every prior backend Python/SQL/test entry is byte-identical. Rebuilt native extension differs only in debug/build-id metadata after the stated normalization; executable runtime bytes match. Only the new restart-context test is added."
+}

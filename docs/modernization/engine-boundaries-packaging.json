@@ -1,0 +1,46 @@
+{
+  "base_commit": "e9120e8",
+  "wheel": "researcher-0.1.0-cp312-cp312-linux_x86_64.whl",
+  "wheel_sha256": "de6019b6d2ea2e23532d3d3730f2675dae02e9cef91e0be6d58b89d32bb689d1",
+  "source_files_matching_wheel_and_installation": 648,
+  "product_files_matching": 344,
+  "observed": {
+    "cases": 203,
+    "passed": 203,
+    "failed": 0,
+    "skipped": 0,
+    "backend_modules": 265,
+    "all_backend_imports_from_native_env": true,
+    "seconds": 168.001,
+    "exit_code": 0
+  },
+  "tests": [
+    "backend/tests/runtime/test_engine_boundaries.py",
+    "backend/tests/runtime/test_coordination.py",
+    "backend/tests/runtime/test_code_candidate.py",
+    "backend/tests/runtime/test_code_candidate_state.py",
+    "backend/tests/runtime/test_code_review_state.py",
+    "backend/tests/runtime/test_result_acceptance.py",
+    "backend/tests/runtime/test_code_acceptance.py",
+    "backend/tests/runtime/test_run_recovery.py",
+    "backend/tests/runtime/test_runtime_service.py",
+    "backend/tests/runtime/test_owned_project_stop.py",
+    "backend/tests/runtime/test_owned_publication.py",
+    "backend/tests/runtime/test_remote_publication.py",
+    "backend/tests/runtime/test_remote_recovery.py",
+    "backend/tests/runtime/test_forgejo_publication.py",
+    "backend/tests/runtime/test_publication_recovery.py",
+    "backend/tests/runtime/test_development_session.py::test_stop_during_reindex_closes_original_owner_without_reopening_ken",
+    "backend/tests/runtime/test_development_session.py::test_check_result_after_context_correction_is_retained_without_approval",
+    "backend/tests/runtime/test_development_session.py::test_stop_during_owned_check_closes_writer_and_retains_original_record",
+    "backend/tests/research/test_persistence.py",
+    "backend/tests/research/test_parser_process.py"
+  ],
+  "real_model_turns": 0,
+  "limits": [
+    "Selected tests, not the global suite",
+    "Synthetic managed installation data, no historical user-data migration",
+    "E01-E06 engine boundaries: original candidate ownership, independent acceptance, physical Stop, stale outcomes, restart and original-effect recovery. Real Git/SQLite/kernel plus controlled generation/provider HTTP, not external account acceptance, abrupt host power loss or whole-product browser validation.",
+    "No model calls, external accounts or GitHub workflow execution"
+  ]
+}

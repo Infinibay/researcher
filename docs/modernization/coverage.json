@@ -347,7 +347,7 @@
       ]
     },
     "E01": {
-      "status": "in_progress",
+      "status": "complete",
       "evidence": [
         "backend/runtime/contracts.py",
         "backend/runtime/sqlite_runs.py",
@@ -373,11 +373,28 @@
         "docs/architecture/legacy-catalog-removal.md",
         "docs/modernization/catalog-removal-results.json",
         "docs/modernization/catalog-removal-packaging.json",
-        "backend/tests/runtime/test_legacy_catalog_removal.py"
+        "backend/tests/runtime/test_legacy_catalog_removal.py",
+        "docs/modernization/engine-boundaries-review.md",
+        "docs/modernization/engine-boundaries-results.json",
+        "docs/modernization/engine-boundaries-packaging.json",
+        "docs/modernization/engine-boundaries-final-packaging.json",
+        "docs/modernization/engine-boundaries-artifact-comparison.json",
+        "backend/tests/runtime/test_engine_boundaries.py",
+        "backend/tests/runtime/test_code_candidate.py",
+        "backend/tests/runtime/test_code_candidate_state.py",
+        "backend/tests/runtime/test_code_review_state.py"
+      ],
+      "remaining": [],
+      "completion_scope": "Original project/run/attempt ownership of immutable exact Git candidates, concurrent inverse reads, scoped review identity and no global last-result slot.",
+      "verified_at": "2026-11-07",
+      "limitations": [
+        "Controlled generation/provider HTTP; not model quality, external account acceptance or human comprehension.",
+        "Local physical ownership does not prove hidden provider computation stopped or uncertain remote effects absent.",
+        "Other scenarios, operational power-loss requirements, full-page acceptance and global suite remain separate."
       ]
     },
     "E02": {
-      "status": "in_progress",
+      "status": "complete",
       "evidence": [
         "backend/runtime/codex_session.py",
         "backend/tests/runtime/test_codex_session.py",
@@ -426,14 +443,27 @@
         "docs/architecture/legacy-engine-removal.md",
         "docs/modernization/engine-removal-results.json",
         "docs/modernization/engine-removal-packaging.json",
-        "backend/tests/runtime/test_legacy_engine_removal.py"
+        "backend/tests/runtime/test_legacy_engine_removal.py",
+        "docs/modernization/engine-boundaries-review.md",
+        "docs/modernization/engine-boundaries-results.json",
+        "docs/modernization/engine-boundaries-packaging.json",
+        "docs/modernization/engine-boundaries-final-packaging.json",
+        "docs/modernization/engine-boundaries-artifact-comparison.json",
+        "backend/tests/runtime/test_engine_boundaries.py",
+        "backend/tests/runtime/test_result_acceptance.py",
+        "backend/tests/runtime/test_code_acceptance.py"
       ],
-      "remaining": [
-        "Durable product ownership, API integration and full scenario acceptance"
+      "remaining": [],
+      "completion_scope": "Typed native outcomes and product acceptance remain separate; free-form blocked/exhausted/invalid text cannot complete a task, and failed/rejected evidence cannot authorize acceptance.",
+      "verified_at": "2026-11-07",
+      "limitations": [
+        "Controlled generation/provider HTTP; not model quality, external account acceptance or human comprehension.",
+        "Local physical ownership does not prove hidden provider computation stopped or uncertain remote effects absent.",
+        "Other scenarios, operational power-loss requirements, full-page acceptance and global suite remain separate."
       ]
     },
     "E03": {
-      "status": "in_progress",
+      "status": "complete",
       "evidence": [
         "backend/tests/flows/test_listener_lifecycle.py",
         "backend/tests/runtime/test_codex_session.py",
@@ -574,15 +604,24 @@
         "docs/modernization/active-reboot-disk-inspection.json",
         "docs/modernization/active-reboot-packaging.json",
         "backend/tests/runtime/test_restored_jobs.py",
-        "evals/operation/reboot_guest.py"
+        "evals/operation/reboot_guest.py",
+        "docs/modernization/engine-boundaries-review.md",
+        "docs/modernization/engine-boundaries-results.json",
+        "docs/modernization/engine-boundaries-packaging.json",
+        "docs/modernization/engine-boundaries-final-packaging.json",
+        "docs/modernization/engine-boundaries-artifact-comparison.json"
       ],
-      "remaining": [
-        "Durable product startup/shutdown and all tool lifecycle integration; old flows are not covered by owned command evidence",
-        "Full product runtime/client integration and browser acceptance; HTTP owner guard does not complete the entire scenario"
+      "remaining": [],
+      "completion_scope": "Owned local generation/tools/Ken/CI shutdown retains ownership until proven closure; immediate Stop acknowledgement and timeout are not completion proofs; uncertain remote effects remain uncertain.",
+      "verified_at": "2026-11-07",
+      "limitations": [
+        "Controlled generation/provider HTTP; not model quality, external account acceptance or human comprehension.",
+        "Local physical ownership does not prove hidden provider computation stopped or uncertain remote effects absent.",
+        "Other scenarios, operational power-loss requirements, full-page acceptance and global suite remain separate."
       ]
     },
     "E04": {
-      "status": "in_progress",
+      "status": "complete",
       "evidence": [
         "backend/runtime/contracts.py",
         "backend/runtime/sqlite_runs.py",
@@ -625,11 +664,25 @@
         "docs/modernization/code-reviews.md",
         "docs/modernization/code-review-state-results.json",
         "docs/modernization/code-review-state-packaging.json",
-        "backend/tests/runtime/test_code_review_state.py"
+        "backend/tests/runtime/test_code_review_state.py",
+        "docs/modernization/engine-boundaries-review.md",
+        "docs/modernization/engine-boundaries-results.json",
+        "docs/modernization/engine-boundaries-packaging.json",
+        "docs/modernization/engine-boundaries-final-packaging.json",
+        "docs/modernization/engine-boundaries-artifact-comparison.json",
+        "backend/tests/runtime/test_code_candidate_state.py"
+      ],
+      "remaining": [],
+      "completion_scope": "Lease/fence/context controls reject expired or superseded writes; late observations remain original history without accepting current work or restoring authority.",
+      "verified_at": "2026-11-07",
+      "limitations": [
+        "Controlled generation/provider HTTP; not model quality, external account acceptance or human comprehension.",
+        "Local physical ownership does not prove hidden provider computation stopped or uncertain remote effects absent.",
+        "Other scenarios, operational power-loss requirements, full-page acceptance and global suite remain separate."
       ]
     },
     "E05": {
-      "status": "in_progress",
+      "status": "complete",
       "evidence": [
         "backend/runtime/contracts.py",
         "backend/runtime/sqlite_runs.py",
@@ -737,11 +790,25 @@
         "docs/modernization/active-reboot-disk-inspection.json",
         "docs/modernization/active-reboot-packaging.json",
         "backend/tests/runtime/test_restored_jobs.py",
-        "evals/operation/reboot_guest.py"
+        "evals/operation/reboot_guest.py",
+        "docs/modernization/engine-boundaries-review.md",
+        "docs/modernization/engine-boundaries-results.json",
+        "docs/modernization/engine-boundaries-packaging.json",
+        "docs/modernization/engine-boundaries-final-packaging.json",
+        "docs/modernization/engine-boundaries-artifact-comparison.json",
+        "backend/tests/runtime/test_engine_restart_context.py"
+      ],
+      "remaining": [],
+      "completion_scope": "A fresh coordinator preserves queued requests, pending questions, evidenced corrections and unknown reservations; receipt lookup/answer does not dispatch, and explicit original start commands are idempotent.",
+      "verified_at": "2026-11-07",
+      "limitations": [
+        "Controlled generation/provider HTTP; not model quality, external account acceptance or human comprehension.",
+        "Local physical ownership does not prove hidden provider computation stopped or uncertain remote effects absent.",
+        "Other scenarios, operational power-loss requirements, full-page acceptance and global suite remain separate."
       ]
     },
     "E06": {
-      "status": "in_progress",
+      "status": "complete",
       "evidence": [
         "backend/runtime/contracts.py",
         "backend/runtime/sqlite_runs.py",
@@ -817,7 +884,6 @@
         "docs/architecture/code-publication.md",
         "docs/modernization/publication-policy-results.json",
         "docs/modernization/publication-recovery-results.json",
-        "docs/architecture/code-publication.md",
         "docs/architecture/remote-publication.md",
         "docs/modernization/remote-publication-results.json",
         "docs/architecture/remote-runtime.md",
@@ -843,7 +909,25 @@
         "docs/modernization/active-reboot-disk-inspection.json",
         "docs/modernization/active-reboot-packaging.json",
         "backend/tests/runtime/test_restored_jobs.py",
-        "evals/operation/reboot_guest.py"
+        "evals/operation/reboot_guest.py",
+        "docs/modernization/engine-boundaries-review.md",
+        "docs/modernization/engine-boundaries-results.json",
+        "docs/modernization/engine-boundaries-packaging.json",
+        "docs/modernization/engine-boundaries-final-packaging.json",
+        "docs/modernization/engine-boundaries-artifact-comparison.json",
+        "backend/tests/runtime/test_owned_publication.py",
+        "backend/tests/runtime/test_remote_publication.py",
+        "backend/tests/runtime/test_remote_recovery.py",
+        "backend/tests/runtime/test_publication_recovery.py",
+        "backend/tests/runtime/test_forgejo_publication.py"
+      ],
+      "remaining": [],
+      "completion_scope": "Original operation/receipt identity and post-effect readonly observation prevent replay after lost local/remote responses; remote absence is not negative proof.",
+      "verified_at": "2026-11-07",
+      "limitations": [
+        "Controlled generation/provider HTTP; not model quality, external account acceptance or human comprehension.",
+        "Local physical ownership does not prove hidden provider computation stopped or uncertain remote effects absent.",
+        "Other scenarios, operational power-loss requirements, full-page acceptance and global suite remain separate."
       ]
     },
     "E07": {
@@ -5182,6 +5266,21 @@
       "remaining": [
         "Forty other broad scenarios remain without complete acceptance; this is not whole-plan completion.",
         "DD112 provider-error explanation joins final polish; full-page/human/global acceptance remains separate."
+      ]
+    },
+    "engine_boundaries_acceptance": {
+      "status": "verified",
+      "scope": "E01-E06 original ownership, independent acceptance, physical local Stop, stale outcomes, durable restart and non-replaying effect recovery.",
+      "evidence": [
+        "docs/modernization/engine-boundaries-review.md",
+        "docs/modernization/engine-boundaries-results.json",
+        "docs/modernization/engine-boundaries-packaging.json",
+        "docs/modernization/engine-boundaries-final-packaging.json",
+        "docs/modernization/engine-boundaries-artifact-comparison.json"
+      ],
+      "remaining": [
+        "E09-E12 and the rest of the full plan remain open.",
+        "No new global suite, external-account or whole-page/human acceptance."
       ]
     }
   }

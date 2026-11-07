@@ -1,0 +1,29 @@
+{
+  "base_commit": "e9120e8",
+  "wheel": "researcher-0.1.0-cp312-cp312-linux_x86_64.whl",
+  "wheel_sha256": "d7f9f477dc5d41efb7b06003265ec34756db6b446b74490e009b44281f2da6b8",
+  "source_files_matching_wheel_and_installation": 649,
+  "product_files_matching": 344,
+  "observed": {
+    "cases": 20,
+    "passed": 20,
+    "failed": 0,
+    "skipped": 0,
+    "backend_modules": 214,
+    "all_backend_imports_from_native_env": true,
+    "seconds": 12.621,
+    "exit_code": 0
+  },
+  "tests": [
+    "backend/tests/runtime/test_engine_boundaries.py",
+    "backend/tests/runtime/test_engine_restart_context.py",
+    "backend/tests/runtime/test_admission_binding.py"
+  ],
+  "real_model_turns": 0,
+  "limits": [
+    "Selected tests, not the global suite",
+    "Synthetic managed installation data, no historical user-data migration",
+    "E01-E06 engine boundaries: original candidate ownership, independent acceptance, physical Stop, stale outcomes, restart and original-effect recovery. Real Git/SQLite/kernel plus controlled generation/provider HTTP, not external account acceptance, abrupt host power loss or whole-product browser validation.",
+    "No model calls, external accounts or GitHub workflow execution"
+  ]
+}

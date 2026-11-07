@@ -1,0 +1,57 @@
+{
+  "base_commit": "e9120e8",
+  "changed_or_new_definitions_documented": 7,
+  "missing": [],
+  "contracts": [
+    {
+      "path": "backend/tests/runtime/test_engine_boundaries.py",
+      "symbol": "test_two_real_homonymous_candidates_keep_original_scope_under_reverse_concurrent_reads",
+      "line": 22,
+      "docstring": "Concurrent actual Git capture plus scoped SQLite reads cannot exchange two authors' value.py; trusted closure proof is synthetic, with physical ownership covered separately.",
+      "file_sha256": "8503f6efa69c6f4b7ad2d9345e0d16d7bbb6a2253eec5c32397d6f523c53939f"
+    },
+    {
+      "path": "backend/tests/runtime/test_engine_boundaries.py",
+      "symbol": "test_two_real_homonymous_candidates_keep_original_scope_under_reverse_concurrent_reads.read",
+      "line": 65,
+      "docstring": "Open an independent read connection against the caller's exact project/run, never a global last-result slot.",
+      "file_sha256": "8503f6efa69c6f4b7ad2d9345e0d16d7bbb6a2253eec5c32397d6f523c53939f"
+    },
+    {
+      "path": "backend/tests/runtime/test_engine_boundaries.py",
+      "symbol": "TextOnlyOutcome",
+      "line": 83,
+      "docstring": "Return free-form native completion text without claiming an accepted product result.",
+      "file_sha256": "8503f6efa69c6f4b7ad2d9345e0d16d7bbb6a2253eec5c32397d6f523c53939f"
+    },
+    {
+      "path": "backend/tests/runtime/test_engine_boundaries.py",
+      "symbol": "TextOnlyOutcome.__init__",
+      "line": 86,
+      "docstring": "Retain the chosen untrusted result body while using the real host coordinator contract.",
+      "file_sha256": "8503f6efa69c6f4b7ad2d9345e0d16d7bbb6a2253eec5c32397d6f523c53939f"
+    },
+    {
+      "path": "backend/tests/runtime/test_engine_boundaries.py",
+      "symbol": "TextOnlyOutcome.run",
+      "line": 92,
+      "docstring": "Complete the native turn normally so the host must still keep task acceptance separate.",
+      "file_sha256": "8503f6efa69c6f4b7ad2d9345e0d16d7bbb6a2253eec5c32397d6f523c53939f"
+    },
+    {
+      "path": "backend/tests/runtime/test_engine_boundaries.py",
+      "symbol": "test_free_form_terminal_text_cannot_complete_or_accept_a_task",
+      "line": 98,
+      "docstring": "Even completed native transport carrying failure-like text is only a proposal; it cannot imply accepted work or trigger a new attempt.",
+      "file_sha256": "8503f6efa69c6f4b7ad2d9345e0d16d7bbb6a2253eec5c32397d6f523c53939f"
+    },
+    {
+      "path": "backend/tests/runtime/test_engine_restart_context.py",
+      "symbol": "test_new_coordinator_retains_pending_work_question_and_correction_without_native_replay",
+      "line": 17,
+      "docstring": "Reopen real SQLite under a fresh host owner, reconcile an unbound historical question and deliver only the explicitly reselected corrected request; historical native identities are synthetic.",
+      "file_sha256": "184848ac6e0b91cf18658855f706dc3527d58c4230235dd1d62c95248e62b0da"
+    }
+  ],
+  "scope": "New/changed Python definitions and modules in this delivery. Relevant new frontend modules and exported helpers also carry English JSDoc; no claim that all historic project definitions are documented."
+}
