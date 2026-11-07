@@ -4,6 +4,19 @@ La implementación del [plan completo](../superpowers/plans/2026-10-31-actualiza
 
 ## Resultados disponibles
 
+- **Comparación de contexto ejecutada, calidad aún sin aceptar:** siete pares,
+  dos de desarrollo/cinco reservados,16 turnos por suscripción con Ken real.
+  Coinciden contexto/modelo/catálogo y políticas entregadas. La corrección activa
+  invalida el primer intento; ambos siguientes responden20/220. Los14 servicios
+  y sus peers quedan cerrados. Pasan19 pruebas dirigidas;51 definiciones tienen
+  docstrings y324 archivos productivos coinciden con la instalación.
+  Se conservan el rechazo inicial sin inferencia y la enmienda de comparación
+  de UUID. Siguen revisión humana, preguntas estructuradas y continuidad del
+  pedido entre admisiones, además de los demás perfiles/recorridos.12 avisos de
+  estilo van a DD082. [Informe y límites](context-alignment-review.md),
+  [respuestas anónimas](context-alignment-human-review.md),
+  [resultados](context-alignment-results.json).
+
 - **Suite global actual y defecto de backup corregido:** sobre `9fb873c`,2210 casos:
   2178 pasan,31 fallan y1 error de fixture; corrida de23min46s. Se clasificaron
   los fallos y se corrigió la carrera por desaparición normal de temporales SQLite.

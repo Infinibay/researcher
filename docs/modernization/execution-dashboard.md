@@ -17,6 +17,9 @@ en orden / detalles al final**. Añadir duración medida del bloque que termina 
 hora de inicio del siguiente; durante un bloque, etiquetar el tiempo transcurrido
 como tal, sin confundirlo con una estimación del trabajo restante. Mantener esta
 lista en el documento además de publicarla en el chat, para retomarla tras compactar.
+El usuario reiteró esta política en su último mensaje: acompañar cada cambio de
+tarea con la lista y el tiempo. Actualizar el mismo resumen de capacidades para
+que se pueda comparar el avance; no presentar microajustes como tareas principales.
 
 ## Estado comprobado
 
@@ -25,7 +28,42 @@ lista en el documento además de publicarla en el chat, para retomarla tras comp
 - Última suite global: `9fb873c`,2210 casos,2178 pasan,31 fallan y1 error de fixture; sin omisiones. La carrera de backup encontrada se corrigió después con40 pruebas instaladas. No se declara una nueva corrida global verde; la referencia `0c8b8d9` queda como evidencia histórica.
 - Los 43 escenarios amplios siguen abiertos en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Etapa actual: diagnóstico global cerrado y carrera del backup corregida
+## Etapa actual: comparación de contexto ejecutada; revisión humana pendiente
+
+Se observaron **7 pares**,2 de desarrollo y5 reservados, con16 turnos reales por
+suscripción y Ken. Modelo/esfuerzo, catálogo e inputs sustantivos coinciden;
+los hashes comprueban las políticas efectivamente entregadas. La corrección activa
+invalida el intento anterior y las dos respuestas siguientes dan20/220. Los14
+servicios y sus peers están cerrados. Pasan19 pruebas dirigidas;51 definiciones
+tienen docstrings y324 archivos productivos coinciden con la instalación.
+[Resultados y límites](context-alignment-review.md),
+[respuestas anónimas](context-alignment-human-review.md).
+
+**Lista vigente al cerrar el bloque y preparar el siguiente:**
+- Terminado en este tramo: evaluador, siete comparaciones reales, controles de
+  procedencia/corrección y material para revisión humana. **36 min 43 s**
+  (06:34:27–07:11:10 UTC), incluyendo preparación, diagnóstico, ejecución y registro.
+  La suma de los14 brazos fue7min35s; no confundirla con la duración total.
+- Pendiente dentro de comunicación: observación humana; preguntas materiales que
+  quedaron sólo en prosa; continuidad del pedido entre admisiones; demás perfiles,
+  recorridos y evaluación científica. No hay aceptación integral de comunicación.
+- Siguiente principal: revisión de seguridad y dependencias. Todavía no comenzó;
+  registrar su inicio al comenzar, sin sumar el intervalo de espera a esa tarea.
+- Pendiente: ubicación/migración de datos históricos reales del propietario;
+  recuperación ante fallos más amplios y actores activos; evaluaciones restantes;
+  aceptación integral de12 páginas.
+- Al final de todas las tareas gruesas: detalles acumulados, comprobaciones
+  finales y revisión independiente de todo el plan. DD082 conserva12 avisos de
+  estilo; los límites funcionales de comunicación permanecen en su evaluación.
+
+Se conservan el rechazo de preparación sin modelo y la enmienda explícita del
+comparador de UUID antes de los reservados. No se repitieron respuestas ni se
+ajustaron prompts a los casos reservados. La revisión humana solicitada sigue
+sin respuesta: no se inventan comprensión, esfuerzo o superioridad de una política.
+Siguen43 escenarios amplios abiertos,0/12 páginas completamente aceptadas y una
+suite global sin aprobar. No hay porcentaje global defendible.
+
+## Etapa anterior: diagnóstico global cerrado y carrera del backup corregida
 
 La suite común sobre `9fb873c` terminó: **2210 casos,2178 pasan,31 fallan y1 error
 al preparar una prueba**, sin omisiones;23min46s de ejecución. Los776 archivos de

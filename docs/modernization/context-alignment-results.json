@@ -1,0 +1,481 @@
+{
+  "registration_sha256": "04d70f95201f53d0875f813c151714f3b1779900d3daa24c25e84be97f10fb70",
+  "analysis_amendment_sha256": "4b8c83f738364b39f77b936744af75a46df1e66c6c4e1b4d757463e46cd34030",
+  "profile": "investigation",
+  "controlled_pairs_observed": 7,
+  "planned_pairs": 7,
+  "planned_maximum_model_turns": 16,
+  "cases": [
+    {
+      "id": "profession",
+      "split": "development",
+      "arms": {
+        "baseline": {
+          "status": "observed",
+          "seconds": 30.95,
+          "model_turns": 1,
+          "observed_tokens": [
+            73827
+          ],
+          "usage_status": [
+            "settled"
+          ],
+          "models": [
+            "gpt-6.1-sol"
+          ],
+          "run_statuses": [
+            "needs_review"
+          ],
+          "actual_tool_calls": [
+            "ken_find",
+            "ken_read"
+          ],
+          "successful_ken_source_read": true,
+          "frozen_policy_verified": true,
+          "owned_backend_terminal": true,
+          "peers_closed": true,
+          "unrevoked_grants": 0,
+          "receipt_sha256": "9a80ab85688393d90af18be8188c6b8a244aa8dad766ff8ed46334c142160271"
+        },
+        "candidate": {
+          "status": "observed",
+          "seconds": 29.084,
+          "model_turns": 1,
+          "observed_tokens": [
+            74431
+          ],
+          "usage_status": [
+            "settled"
+          ],
+          "models": [
+            "gpt-6.1-sol"
+          ],
+          "run_statuses": [
+            "needs_review"
+          ],
+          "actual_tool_calls": [
+            "ken_find",
+            "ken_read"
+          ],
+          "successful_ken_source_read": true,
+          "frozen_policy_verified": true,
+          "owned_backend_terminal": true,
+          "peers_closed": true,
+          "unrevoked_grants": 0,
+          "receipt_sha256": "15487c85e2bfe0a695a3ba1a738a27dc3395c986da00f643b3903a7e066c6f1f"
+        }
+      },
+      "controls_matched": true,
+      "controlled_pair_observed": true,
+      "human_comprehension": null,
+      "human_effort_seconds": null,
+      "quality_acceptance": "pending"
+    },
+    {
+      "id": "example",
+      "split": "development",
+      "arms": {
+        "baseline": {
+          "status": "observed",
+          "seconds": 29.951,
+          "model_turns": 1,
+          "observed_tokens": [
+            73925
+          ],
+          "usage_status": [
+            "settled"
+          ],
+          "models": [
+            "gpt-6.1-sol"
+          ],
+          "run_statuses": [
+            "needs_review"
+          ],
+          "actual_tool_calls": [
+            "ken_find",
+            "ken_read"
+          ],
+          "successful_ken_source_read": true,
+          "frozen_policy_verified": true,
+          "owned_backend_terminal": true,
+          "peers_closed": true,
+          "unrevoked_grants": 0,
+          "receipt_sha256": "e49dce36cc20adb1deb7a73a38ff52f5138328d8a170b0ae9eabe60fe1b90be4"
+        },
+        "candidate": {
+          "status": "observed",
+          "seconds": 28.023,
+          "model_turns": 1,
+          "observed_tokens": [
+            74451
+          ],
+          "usage_status": [
+            "settled"
+          ],
+          "models": [
+            "gpt-6.1-sol"
+          ],
+          "run_statuses": [
+            "needs_review"
+          ],
+          "actual_tool_calls": [
+            "ken_find",
+            "ken_read"
+          ],
+          "successful_ken_source_read": true,
+          "frozen_policy_verified": true,
+          "owned_backend_terminal": true,
+          "peers_closed": true,
+          "unrevoked_grants": 0,
+          "receipt_sha256": "d29b07d5cddea7ee6b4daf8299eda6828459663c80f51e431f4120ec424cc50f"
+        }
+      },
+      "controls_matched": true,
+      "controlled_pair_observed": true,
+      "human_comprehension": null,
+      "human_effort_seconds": null,
+      "quality_acceptance": "pending"
+    },
+    {
+      "id": "correction",
+      "split": "reserved",
+      "arms": {
+        "baseline": {
+          "status": "observed",
+          "seconds": 29.494,
+          "model_turns": 1,
+          "observed_tokens": [
+            74103
+          ],
+          "usage_status": [
+            "settled"
+          ],
+          "models": [
+            "gpt-6.1-sol"
+          ],
+          "run_statuses": [
+            "needs_review"
+          ],
+          "actual_tool_calls": [
+            "ken_find",
+            "ken_read"
+          ],
+          "successful_ken_source_read": true,
+          "frozen_policy_verified": true,
+          "owned_backend_terminal": true,
+          "peers_closed": true,
+          "unrevoked_grants": 0,
+          "receipt_sha256": "4afb93bef6aa21efba219cf7d659b3b940aafccc4499f4835d931edea97e743b"
+        },
+        "candidate": {
+          "status": "observed",
+          "seconds": 28.115,
+          "model_turns": 1,
+          "observed_tokens": [
+            74701
+          ],
+          "usage_status": [
+            "settled"
+          ],
+          "models": [
+            "gpt-6.1-sol"
+          ],
+          "run_statuses": [
+            "needs_review"
+          ],
+          "actual_tool_calls": [
+            "ken_find",
+            "ken_read"
+          ],
+          "successful_ken_source_read": true,
+          "frozen_policy_verified": true,
+          "owned_backend_terminal": true,
+          "peers_closed": true,
+          "unrevoked_grants": 0,
+          "receipt_sha256": "eae408c44f5c94c8e691af77dacbe491356b416a5dbd52d8df8a2a86a5133676"
+        }
+      },
+      "controls_matched": true,
+      "controlled_pair_observed": true,
+      "human_comprehension": null,
+      "human_effort_seconds": null,
+      "quality_acceptance": "pending"
+    },
+    {
+      "id": "memory",
+      "split": "reserved",
+      "arms": {
+        "baseline": {
+          "status": "observed",
+          "seconds": 30.306,
+          "model_turns": 1,
+          "observed_tokens": [
+            73982
+          ],
+          "usage_status": [
+            "settled"
+          ],
+          "models": [
+            "gpt-6.1-sol"
+          ],
+          "run_statuses": [
+            "needs_review"
+          ],
+          "actual_tool_calls": [
+            "ken_find",
+            "ken_read"
+          ],
+          "successful_ken_source_read": true,
+          "frozen_policy_verified": true,
+          "owned_backend_terminal": true,
+          "peers_closed": true,
+          "unrevoked_grants": 0,
+          "receipt_sha256": "54ba34d4f7bcb8d940013ab60a3445ffa89e0d05d51045bcfdd53edb3be6300f"
+        },
+        "candidate": {
+          "status": "observed",
+          "seconds": 29.891,
+          "model_turns": 1,
+          "observed_tokens": [
+            74634
+          ],
+          "usage_status": [
+            "settled"
+          ],
+          "models": [
+            "gpt-6.1-sol"
+          ],
+          "run_statuses": [
+            "needs_review"
+          ],
+          "actual_tool_calls": [
+            "ken_find",
+            "ken_read"
+          ],
+          "successful_ken_source_read": true,
+          "frozen_policy_verified": true,
+          "owned_backend_terminal": true,
+          "peers_closed": true,
+          "unrevoked_grants": 0,
+          "receipt_sha256": "7bb2857fdc50907d51abfd2126198fe053c83a865e11dc39a9f619c977438d50"
+        }
+      },
+      "controls_matched": true,
+      "controlled_pair_observed": true,
+      "human_comprehension": null,
+      "human_effort_seconds": null,
+      "quality_acceptance": "pending"
+    },
+    {
+      "id": "analogy",
+      "split": "reserved",
+      "arms": {
+        "baseline": {
+          "status": "observed",
+          "seconds": 33.184,
+          "model_turns": 1,
+          "observed_tokens": [
+            74016
+          ],
+          "usage_status": [
+            "settled"
+          ],
+          "models": [
+            "gpt-6.1-sol"
+          ],
+          "run_statuses": [
+            "needs_review"
+          ],
+          "actual_tool_calls": [
+            "ken_find",
+            "ken_read"
+          ],
+          "successful_ken_source_read": true,
+          "frozen_policy_verified": true,
+          "owned_backend_terminal": true,
+          "peers_closed": true,
+          "unrevoked_grants": 0,
+          "receipt_sha256": "002bde5fedb2ced51ff2e82a2a2b7f445a273075a3ca15db4ac2fe38667c758d"
+        },
+        "candidate": {
+          "status": "observed",
+          "seconds": 29.917,
+          "model_turns": 1,
+          "observed_tokens": [
+            74667
+          ],
+          "usage_status": [
+            "settled"
+          ],
+          "models": [
+            "gpt-6.1-sol"
+          ],
+          "run_statuses": [
+            "needs_review"
+          ],
+          "actual_tool_calls": [
+            "ken_find",
+            "ken_read"
+          ],
+          "successful_ken_source_read": true,
+          "frozen_policy_verified": true,
+          "owned_backend_terminal": true,
+          "peers_closed": true,
+          "unrevoked_grants": 0,
+          "receipt_sha256": "6d0314e83e23cd062800c5de550e500218827ee2954c516f6ff98ad7b3c9200e"
+        }
+      },
+      "controls_matched": true,
+      "controlled_pair_observed": true,
+      "human_comprehension": null,
+      "human_effort_seconds": null,
+      "quality_acceptance": "pending"
+    },
+    {
+      "id": "delegation",
+      "split": "reserved",
+      "arms": {
+        "baseline": {
+          "status": "observed",
+          "seconds": 31.005,
+          "model_turns": 1,
+          "observed_tokens": [
+            73954
+          ],
+          "usage_status": [
+            "settled"
+          ],
+          "models": [
+            "gpt-6.1-sol"
+          ],
+          "run_statuses": [
+            "needs_review"
+          ],
+          "actual_tool_calls": [
+            "ken_find",
+            "ken_read"
+          ],
+          "successful_ken_source_read": true,
+          "frozen_policy_verified": true,
+          "owned_backend_terminal": true,
+          "peers_closed": true,
+          "unrevoked_grants": 0,
+          "receipt_sha256": "b631170922efc5ef37b47322b6af826b88b938c76671b1fe9ff86e69120164b4"
+        },
+        "candidate": {
+          "status": "observed",
+          "seconds": 29.099,
+          "model_turns": 1,
+          "observed_tokens": [
+            74627
+          ],
+          "usage_status": [
+            "settled"
+          ],
+          "models": [
+            "gpt-6.1-sol"
+          ],
+          "run_statuses": [
+            "needs_review"
+          ],
+          "actual_tool_calls": [
+            "ken_find",
+            "ken_read"
+          ],
+          "successful_ken_source_read": true,
+          "frozen_policy_verified": true,
+          "owned_backend_terminal": true,
+          "peers_closed": true,
+          "unrevoked_grants": 0,
+          "receipt_sha256": "415b9908a486d0865bb3041fb842bc787373bf127b01cd9a0e3d77b79f508f7f"
+        }
+      },
+      "controls_matched": true,
+      "controlled_pair_observed": true,
+      "human_comprehension": null,
+      "human_effort_seconds": null,
+      "quality_acceptance": "pending"
+    },
+    {
+      "id": "live_correction",
+      "split": "reserved",
+      "arms": {
+        "baseline": {
+          "status": "observed",
+          "seconds": 49.042,
+          "model_turns": 2,
+          "observed_tokens": [
+            24196,
+            74186
+          ],
+          "usage_status": [
+            "unknown",
+            "settled"
+          ],
+          "models": [
+            "gpt-6.1-sol"
+          ],
+          "run_statuses": [
+            "superseded",
+            "needs_review"
+          ],
+          "actual_tool_calls": [
+            "ken_find",
+            "ken_read",
+            "ken_find",
+            "ken_read"
+          ],
+          "successful_ken_source_read": true,
+          "frozen_policy_verified": true,
+          "owned_backend_terminal": true,
+          "peers_closed": true,
+          "unrevoked_grants": 0,
+          "receipt_sha256": "4f34434574cfe2ab8760d193654443f44dab297e953cc253ce4bb3f8606067f2"
+        },
+        "candidate": {
+          "status": "observed",
+          "seconds": 47.159,
+          "model_turns": 2,
+          "observed_tokens": [
+            24434,
+            74844
+          ],
+          "usage_status": [
+            "unknown",
+            "settled"
+          ],
+          "models": [
+            "gpt-6.1-sol"
+          ],
+          "run_statuses": [
+            "superseded",
+            "needs_review"
+          ],
+          "actual_tool_calls": [
+            "ken_find",
+            "ken_read",
+            "ken_find",
+            "ken_read"
+          ],
+          "successful_ken_source_read": true,
+          "frozen_policy_verified": true,
+          "owned_backend_terminal": true,
+          "peers_closed": true,
+          "unrevoked_grants": 0,
+          "receipt_sha256": "49373de2df22149cf1121dafad34c63f411fd1107895ef85665ea3292103c158"
+        }
+      },
+      "controls_matched": true,
+      "controlled_pair_observed": true,
+      "human_comprehension": null,
+      "human_effort_seconds": null,
+      "quality_acceptance": "pending"
+    }
+  ],
+  "limits": [
+    "One observation per arm and case; not a representative user sample.",
+    "Only the investigation profile; no general prompt or causal superiority claim.",
+    "Original profession pair required an explicit development-stage receipt-identity amendment.",
+    "Human comprehension, effort and explanation quality remain unaccepted."
+  ]
+}

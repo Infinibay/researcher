@@ -27,8 +27,8 @@ class NativeTrial:
     fixture: Path = FIXTURE
 
 
-def _seed(trial):
-    """Populate only fresh evaluation storage with two distinguishable synthetic projects."""
+def _seed(trial, *, task_type='research', task_title='Fictional policy explanation', task_context=None):
+    """Insert initial synthetic context without creating a timestamped metadata-correction history."""
     trial.workspace.mkdir(mode=0o700)
     for name in ('invoice.py', 'test_invoice.py'):
         (trial.workspace / name).write_bytes((FIXTURE / name).read_bytes())
@@ -37,7 +37,7 @@ def _seed(trial):
             raise ValueError('Native evaluation requires an empty synthetic database')
         for project, task, marker in ((101, 1001, 'ALPHA_ONLY'), (202, 2002, 'BETA_ONLY')):
             db.execute('INSERT INTO projects(id,name) VALUES(?,?)', (project, 'Synthetic research ' + marker))
-            db.execute("INSERT INTO tasks(id,project_id,type,title,status,created_by) VALUES(?,?,'research','Fictional policy explanation','in_progress','user')", (task, project))
+            db.execute("INSERT INTO tasks(id,project_id,type,title,status,created_by,context_json) VALUES(?,?,?,?,'in_progress','user',?)", (task, project, task_type, task_title, json.dumps(task_context) if task_context is not None else None))
             folder = trial.installation / 'uploads' / str(project) / 'uploads'
             folder.mkdir(parents=True, mode=0o700)
             source = folder / 'policy.md'
@@ -46,7 +46,8 @@ def _seed(trial):
         db.execute("INSERT INTO repositories(id,project_id,name,local_path) VALUES(11,101,'synthetic-invoice',?)", (str(trial.workspace),))
 
 
-def prepare(root, assets_path, *, live, turns, wall_seconds=180, no_progress_seconds=90):
+def prepare(root, assets_path, *, live, turns, wall_seconds=180, no_progress_seconds=90,
+            task_type='research', task_title='Fictional policy explanation', task_context=None):
     """Create one private synthetic installation, preserving operator limits and partial failures.
 
     --live authorizes this bounded scenario; assets must permit its turn count.
@@ -78,7 +79,7 @@ def prepare(root, assets_path, *, live, turns, wall_seconds=180, no_progress_sec
     result = {'status': 'preparing', 'generation_limit': turns, 'model': assets['model']}
     try:
         initialize_host(installation, witness_dir=root / 'witness', assets=assets)
-        _seed(trial)
+        _seed(trial, task_type=task_type, task_title=task_title, task_context=task_context)
         result['status'] = 'prepared'
         return trial
     except BaseException as error:
@@ -89,8 +90,8 @@ def prepare(root, assets_path, *, live, turns, wall_seconds=180, no_progress_sec
 
 
 @asynccontextmanager
-async def backend(trial, evidence):
-    """Serve this fresh installation and record closure of the original supervisor even on failure."""
+async def backend(trial, evidence, *, starter=None):
+    """Serve fresh storage with the normal or explicit evaluation starter; always record original process closure."""
     from evals.operation import host_smoke
     from backend.research.sqlite_store import SQLiteResearchStore
 
@@ -101,7 +102,7 @@ async def backend(trial, evidence):
     process = log = None
     lifecycle = {'owned_backend_terminal': False}
     try:
-        process, log = host_smoke.start(trial.installation, trial.root, port, 1)
+        process, log = (starter or host_smoke.start)(trial.installation, trial.root, port, 1)
         async with httpx.AsyncClient(base_url=api, timeout=15, trust_env=False) as owner:
             keys = list((trial.installation / 'auth').glob('owner-*.key'))
             if len(keys) != 1:

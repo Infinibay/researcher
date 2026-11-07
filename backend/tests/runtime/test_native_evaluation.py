@@ -98,3 +98,18 @@ async def test_scenario_failure_records_original_service_closure(tmp_path, evalu
     receipt = json.loads((trial.root / 'service-lifecycle.json').read_text())
     assert receipt == {'service_exit': 143, 'owned_backend_terminal': True}
     assert evidence['owned_backend_terminal'] is True
+
+
+def test_initial_case_context_does_not_fabricate_a_metadata_correction(tmp_path, evaluation_assets):
+    """A paired case starts at version one with no differing timestamped preparation history."""
+    from evals.runtime.native_trial import prepare
+    from backend.runtime.sqlite_runs import SQLiteRunStore
+
+    trial = prepare(tmp_path / 'case', evaluation_assets, live=True, turns=1,
+                    task_type='investigation', task_title='Context alignment',
+                    task_context={'assumption': 'unconfirmed'})
+    context = SQLiteRunStore(trial.database).context_snapshot(101, 1001)
+    assert context['context_version'] == 1
+    assert context['task_changes'] == []
+    assert context['task']['type'] == 'investigation'
+    assert json.loads(context['task']['context_json']) == {'assumption': 'unconfirmed'}

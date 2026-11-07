@@ -1,0 +1,55 @@
+{
+  "python_files": [
+    "evals/context_alignment/protocol.py",
+    "evals/context_alignment/report.py",
+    "evals/context_alignment/run.py",
+    "evals/context_alignment/worker.py",
+    "evals/runtime/native_trial.py",
+    "backend/tests/runtime/test_context_alignment_evaluation.py",
+    "backend/tests/runtime/test_native_evaluation.py"
+  ],
+  "documented_definitions": 51,
+  "missing_docstrings": [],
+  "product_differences": [],
+  "product_base_commit": "8afb4f4",
+  "source_product_candidates": 325,
+  "product_files_matching_installation": 324,
+  "excluded_from_distribution": {
+    "backend/db/seeds/dev_data.sql": "Development-only seed; setuptools package data is backend db/*.sql, not db/seeds/*.sql."
+  },
+  "tests": {
+    "tests": "19",
+    "failures": "0",
+    "errors": "0",
+    "skipped": "0",
+    "time": "2.831"
+  },
+  "test_report_sha256": "793de3e23b97886eb1ce605099543cc6d5fcb5090aa9cf88a494fde195ddebbb",
+  "source_sha256": {
+    "evals/context_alignment/protocol.py": "1907aab5a20c3864222037dd64028fefe46f36472c058f80b06f75d6f43dc1ee",
+    "evals/context_alignment/report.py": "f1d95cf6be7175ef524fa5055f0a65909f5cd4d53a1b1aa5c0cf5e8278477a98",
+    "evals/context_alignment/run.py": "dd34674335cb1fa7523cd4cf656b768b576aea8ff7a032dbc6dca5b85e1b265d",
+    "evals/context_alignment/worker.py": "68d6fa9e238b7af2f9fbe8135fb5f8314f49ee9df5c2390f466f608c9caa5dd9",
+    "evals/runtime/native_trial.py": "5aec6e2c7e739c43e198e677a92d9e78b2ed7efcb60303b1359d0c6ea52cd870",
+    "backend/tests/runtime/test_context_alignment_evaluation.py": "97d0df57f6f847c93b8cbb108c3481a035cf3d777ac104782055f780d5644e94",
+    "backend/tests/runtime/test_native_evaluation.py": "19666395e1d5fd85d87b556276b89f9e94dbfdd44d461ec03954dd1b8b2eb628"
+  },
+  "known_initial_failure": {
+    "http_status": 409,
+    "cause": "Harness edited task metadata, advancing context to2, then requested version1.",
+    "run_count": 0,
+    "dispatch_count": 0,
+    "peer_count": 0,
+    "owned_backend_terminal": true,
+    "seconds": 1.659
+  },
+  "lint": {
+    "count": 12,
+    "rules": {
+      "F401": 1,
+      "I001": 8,
+      "ISC004": 3
+    },
+    "status": "deferred_DD082"
+  }
+}

@@ -7880,3 +7880,14 @@ unanswered, broader recovery, other real/scientific eval, security and page
 acceptance remain. All macro capabilities before final details and independent
 whole-plan review. Publish done/current/pending and measured time at every main
 task transition, including after compaction. No push/merge/deploy.
+
+
+## Context alignment comparison observed; human acceptance remains open
+
+- Progress: seven installed Codex subscription/Ken policy pairs,16 model turns,2 development and5 reserved cases. Matching substantive inputs, exact delivered policy hashes, model/effort and catalog.14 original services closed; all recorded peers closed and grants revoked.
+- First preparation rejected an obsolete context before any run/dispatch. Seed initial metadata instead of manufacturing a timestamped correction. Development pair receipt UUID caused the original comparison to fail; explicit hashed amendment before reserved trials reanalyses original outputs without replay or policy tuning.
+- Active correction supersedes the original attempt; next responses use200/0.10 and produce20/220. Partial usage in the two cancelled attempts remains unknown rather than a complete billing claim.
+-19 directed tests pass;51 definitions documented across7 Python files;324 shipped product Python/SQL files match the existing installation. The development SQL seed is excluded by existing packaging.12 style findings deferred to DD082. No production policy or backend change in this block.
+- Functional questions remain: both delegated-unit requests asked only in prose despite available structured-question tooling; the second admission receives corrected context but not the original request. Human understanding/effort have not been observed. Remaining profile/communication/real/scientific/security/migration/UI scope stays active.
+- Evidence: `context-alignment-review.md`, `context-alignment-results.json`, `context-alignment-validation.json`, original registration/amendment and anonymous reading material. No whole-suite rerun/green claim, push, merge or deployment.
+- Measured block06:34:27–07:11:10 UTC: **36 min 43 s**, including setup, diagnostics, model work and recording. Next main block: security/dependency review; start not yet recorded. Keep updated done/current/pending/time at every transition and details after all macro tasks.

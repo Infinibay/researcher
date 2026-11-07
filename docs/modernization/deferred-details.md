@@ -577,3 +577,14 @@ capacidades principales. Si al resolverlos aparece un fallo funcional, tratarlo
 como tal. El backup sí tenía un defecto funcional y se corrigió en este tramo.
 Los12 avisos de lint del arreglo están en `backup-sidecar-results.json`; aplicar
 el pulido junto con DD080 sin repetir automáticamente una suite de24min.
+
+## DD082 — estilo del evaluador de contexto
+
+El bloque conserva12 avisos:8 de orden de imports,1 import sin uso y3 de
+concatenación implícita de texto en una colección del exportador. Las cadenas
+exportadas se inspeccionaron; ajustar su forma después de las capacidades
+principales. [Ubicaciones](context-alignment-lint.json). No repetir modelos ni
+la suite global por este pulido.
+
+Las preguntas sólo en prosa y la continuidad del pedido entre admisiones son
+pendientes funcionales en [la evaluación](context-alignment-review.md), no DD082.

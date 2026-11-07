@@ -1,0 +1,10 @@
+{
+  "registered_at": "2026-11-07T06:57:46.147442+00:00",
+  "registration_sha256": "04d70f95201f53d0875f813c151714f3b1779900d3daa24c25e84be97f10fb70",
+  "allowed_model_receipt_variation": [
+    "run_id",
+    "attempt_id",
+    "selected_at"
+  ],
+  "reason": "Development pair receipts exposed an independently allocated run_id in model selection. Preserve every substantive model setting, scope and original receipt. Original first pair failed the unamended comparison; reanalyse those original observations, never regenerate them. No reserved arm has started. Policies, cases, source and model-visible input are unchanged."
+}
