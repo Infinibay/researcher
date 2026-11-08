@@ -1,14 +1,15 @@
 /** Planning register separates saved native proposals from existing work groups and milestones. @module */
-import {useEffect,useRef,useState,type FormEvent} from 'react'
+import {useEffect,useRef,useState} from 'react'
 import {useQuery,useQueryClient} from '@tanstack/react-query'
 import {Link} from 'react-router-dom'
 import {useProjectStore} from '../../stores/project'
-import {useEpics,useCreateEpic,useDeleteEpic} from '../../hooks/useEpics'
-import {useMilestones,useCreateMilestone} from '../../hooks/useMilestones'
+import {useEpics,useDeleteEpic} from '../../hooks/useEpics'
+import {useMilestones} from '../../hooks/useMilestones'
 import {useTasks,useTaskDependencies} from '../../hooks/useTasks'
 import {projectWorkspace} from '../../api/projectWorkspace'
 import {projectPlanState} from '../../api/projectPlans'
 import type {Epic,Task} from '../../types/api'
+import {PlanningCreateForm} from '../planning/PlanningCreateForm'
 import '../../styles/tasks.css'
 import '../../styles/planning.css'
 
@@ -46,33 +47,23 @@ function PlanningRegister({projectId}:{projectId:number}){
    </aside>
    <div id="planning-reading" tabIndex={-1} className="planning-reading">
     {selection&&<button className="planning-link planning-back" onClick={back}>Volver al índice</button>}
-    {selection?.kind==='create'?<GroupForm projectId={projectId} onCreated={id=>choose({kind:'group',id},`planning-group-${id}`)} onCancel={back}/>:selected?<GroupDetail key={selected.id} projectId={projectId} group={selected} onDeleted={back}/>:selection?.kind==='proposal'?<PlanPreview key={selection.runId} projectId={projectId} taskId={selection.taskId} runId={selection.runId}/>:<section className="planning-empty"><h2>{selection?'Grupo no disponible en esta consulta':'Del objetivo al trabajo concreto'}</h2><p>Elige un grupo para ver sus hitos, tareas y dependencias, o una propuesta para revisar sus bases.</p><p>Un plan propone trabajo. Aceptarlo crea tareas pendientes; ejecutarlas y aceptar sus resultados son decisiones posteriores.</p></section>}
+    {selection?.kind==='create'?<PlanningCreateForm kind="group" projectId={projectId} onCreated={id=>choose({kind:'group',id},`planning-group-${id}`)} onCancel={back}/>:selected?<GroupDetail key={selected.id} projectId={projectId} group={selected} onDeleted={back}/>:selection?.kind==='proposal'?<PlanPreview key={selection.runId} projectId={projectId} taskId={selection.taskId} runId={selection.runId}/>:<section className="planning-empty"><h2>{selection?'Grupo no disponible en esta consulta':'Del objetivo al trabajo concreto'}</h2><p>Elige un grupo para ver sus hitos, tareas y dependencias, o una propuesta para revisar sus bases.</p><p>Un plan propone trabajo. Aceptarlo crea tareas pendientes; ejecutarlas y aceptar sus resultados son decisiones posteriores.</p></section>}
    </div>
   </div>
  </section>
 }
 
-/** Create one manual work group from the captured project; preserve its draft after a rejected response. */
-function GroupForm({projectId,onCreated,onCancel}:{projectId:number;onCreated:(id:number)=>void;onCancel:()=>void}){
- const mutation=useCreateEpic(),[title,setTitle]=useState(''),[description,setDescription]=useState(''),[priority,setPriority]=useState(2)
- /** Submit only the entered metadata; creating a group grants no execution permission. */
- function submit(event:FormEvent){event.preventDefault();mutation.mutate({project_id:projectId,title:title.trim(),description,priority},{onSuccess:group=>onCreated(group.id)})}
- return <form className="planning-form" onSubmit={submit}><h2>Nuevo grupo de trabajo</h2><p>Organiza un objetivo en una épica. Las tareas y su ejecución se deciden por separado.</p><label>Nombre del grupo<input autoFocus required maxLength={255} value={title} onChange={event=>setTitle(event.target.value)}/></label><label>Descripción<textarea rows={4} value={description} onChange={event=>setDescription(event.target.value)}/></label><label>Prioridad<select value={priority} onChange={event=>setPriority(Number(event.target.value))}>{[1,2,3,4,5].map(value=><option key={value} value={value}>{value}{value===1?' · más urgente':''}</option>)}</select></label><div className="planning-actions"><button className="planning-primary" disabled={!title.trim()||mutation.isPending}>Crear grupo</button><button type="button" onClick={onCancel}>Cancelar</button></div>{mutation.error&&<p role="alert">No se confirmó la creación. {mutation.error.message} El borrador se conserva; si se perdió la conexión, consulta el índice antes de repetir.</p>}</form>
-}
-
 /** Show actual group members, independently loaded milestones and original task dependencies. */
 function GroupDetail({projectId,group,onDeleted}:{projectId:number;group:Epic;onDeleted:()=>void}){
- const tasks=useTasks(projectId),milestones=useMilestones(projectId,group.id),create=useCreateMilestone(),remove=useDeleteEpic(),client=useQueryClient()
- const [adding,setAdding]=useState(false),[title,setTitle]=useState(''),[deleting,setDeleting]=useState(false),[dependencyTask,setDependencyTask]=useState<number|null>(null)
+ const tasks=useTasks(projectId),milestones=useMilestones(projectId,group.id),remove=useDeleteEpic(),client=useQueryClient()
+ const [adding,setAdding]=useState(false),[deleting,setDeleting]=useState(false),[dependencyTask,setDependencyTask]=useState<number|null>(null)
  const members=tasks.data?.filter(task=>task.project_id===projectId&&task.epic_id===group.id)??[]
  const stages=milestones.data?.filter(m=>m.project_id===projectId&&m.epic_id===group.id)??[]
- /** Bind the submitted milestone to this exact mounted group; a project switch cannot retarget it. */
- function addMilestone(event:FormEvent){event.preventDefault();create.mutate({epic_id:group.id,title:title.trim()},{onSuccess:()=>{setAdding(false);setTitle('')}})}
  /** Remove only the explicitly named group and refresh every affected list after confirmation. */
  function deleteGroup(){remove.mutate(group.id,{onSuccess:()=>{void client.invalidateQueries({queryKey:['milestones',projectId]});void client.invalidateQueries({queryKey:['tasks',projectId]});setDeleting(false);onDeleted()}})}
  return <article className="planning-detail"><h2>{group.title}</h2><p className="planning-description">{group.description||'Sin descripción registrada.'}</p><p className="planning-muted">{group.tasks_done??'—'} de {group.task_count??'—'} tareas marcadas como hechas · {statusLabels[group.status]??group.status}.</p>
   <section><div className="planning-section-heading"><h3>Hitos</h3><button className="planning-link" onClick={()=>setAdding(!adding)}>Añadir hito</button></div>{milestones.isPending&&<p role="status">Consultando hitos…</p>}{milestones.error&&<div role="alert"><p>No pudimos consultar los hitos.</p><button onClick={()=>milestones.refetch()}>Volver a consultar hitos</button></div>}{milestones.isSuccess&&!stages.length&&<p>Este grupo no tiene hitos registrados.</p>}<ul className="planning-records">{stages.map(stage=><li key={stage.id}><strong>{stage.title}</strong><p className="planning-muted">{statusLabels[stage.status]??stage.status} · {stage.tasks_done??'—'} de {stage.task_count??'—'} tareas marcadas como hechas{stage.due_date?` · fecha registrada: ${stage.due_date}`:''}</p></li>)}</ul>
-   {adding&&<form className="planning-form" onSubmit={addMilestone}><label>Nombre del hito<input autoFocus required maxLength={255} value={title} onChange={event=>setTitle(event.target.value)}/></label><div className="planning-actions"><button className="planning-primary" disabled={!title.trim()||create.isPending}>Guardar hito</button><button type="button" onClick={()=>setAdding(false)}>Cancelar hito</button></div>{create.error&&<p role="alert">No se confirmó el hito. {create.error.message} Conservamos el texto; consulta la lista antes de repetir si se perdió la conexión.</p>}</form>}
+   {adding&&<PlanningCreateForm kind="milestone" projectId={projectId} epicId={group.id} onCreated={()=>setAdding(false)} onCancel={()=>setAdding(false)}/>}
   </section>
   <section><h3>Tareas y dependencias</h3>{tasks.isPending&&<p role="status">Consultando tareas…</p>}{tasks.error&&<p role="alert">No pudimos consultar las tareas del grupo.</p>}{tasks.isSuccess&&!members.length&&<p>No hay tareas asociadas a este grupo.</p>}<ul className="planning-records">{members.map(task=><li key={task.id}><div className="planning-task-heading"><Link to={`/tasks?project=${projectId}&task=${task.id}`}>{task.title}</Link><span className="planning-muted">{statusLabels[task.status]??task.status}</span></div>{task.milestone_id&&<p className="planning-muted">Hito: {stages.find(stage=>stage.id===task.milestone_id)?.title??`#${task.milestone_id} · pendiente de consulta`}</p>}<button className="planning-link" aria-expanded={dependencyTask===task.id} aria-controls={`planning-dependencies-${task.id}`} onClick={()=>setDependencyTask(dependencyTask===task.id?null:task.id)}>Ver dependencias: {task.title}</button>{dependencyTask===task.id&&<TaskDependencies projectId={projectId} task={task} tasks={tasks.data??[]}/>}</li>)}</ul><p className="planning-muted planning-explanation">Las dependencias describen el orden del trabajo. La aceptación y su vigencia se comprueban en la tarea original.</p></section>
   <footer><button className="planning-link planning-danger" onClick={()=>setDeleting(true)}>Eliminar grupo</button><p className="planning-muted">Eliminar retira el grupo y sus hitos; las tareas se desvinculan. El servidor puede rechazarlo si hay trabajo activo o historia protegida.</p></footer>

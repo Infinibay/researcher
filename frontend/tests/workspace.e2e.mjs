@@ -7,6 +7,7 @@ import path from 'node:path'
 const origin = process.env.RESEARCHER_E2E_ORIGIN
 const ownerFile = process.env.RESEARCHER_E2E_OWNER_FILE
 const output = process.env.RESEARCHER_E2E_OUTPUT
+const planningRecovery = process.env.RESEARCHER_E2E_PLANNING_RECOVERY === '1'
 if (!origin || !ownerFile || !output || new URL(origin).hostname !== '127.0.0.1') {
   throw new Error('Use evals/operation/web_workspace.py with a NEW disposable local installation')
 }
@@ -26,6 +27,21 @@ try {
       evidence.writes.push({ method, path: url.pathname, status: response.status() })
     }
   })
+  if (planningRecovery) {
+    evidence.planningRecovery = {}
+    for (const [kind, endpoint] of [['group', '/api/epics'], ['milestone', '/api/milestones']]) {
+      let lost = false
+      await page.route(`**${endpoint}`, async route => {
+        if (route.request().method() !== 'POST' || lost) return route.continue()
+        lost = true
+        const response = await route.fetch()
+        expect(response.status()).toBe(201)
+        const original = await response.json()
+        evidence.planningRecovery[kind] = {request: route.request().postDataJSON(), originalId: original.id, committedStatus: response.status()}
+        await route.abort('failed')
+      })
+    }
+  }
   /** Save an observed state and accessibility results without equating automatic checks with human comprehension. */
   async function capture(name, region, width = 1440) {
     await page.setViewportSize({ width, height: 1024 })
@@ -84,10 +100,38 @@ try {
   await page.getByRole('button', { name: 'Nuevo grupo', exact: true }).click()
   await page.getByLabel('Nombre del grupo').fill('Reunir evidencia')
   await page.getByRole('button', { name: 'Crear grupo', exact: true }).click()
+  if (planningRecovery) {
+    await expect(page.getByRole('alert')).toBeVisible()
+    await capture('03a-group-committed-reply-lost', '.planning-workbench')
+    await page.reload()
+    await page.getByRole('button', { name: 'Nuevo grupo', exact: true }).click()
+    await expect(page.getByLabel('Nombre del grupo')).toHaveValue('Reunir evidencia')
+    const recovered = page.waitForResponse(r => new URL(r.url()).pathname === '/api/epics' && r.request().method() === 'POST')
+    await page.getByRole('button', {name:'Recuperar la misma creación'}).click()
+    const response = await recovered, value = await response.json()
+    expect(response.request().postDataJSON()).toEqual(evidence.planningRecovery.group.request)
+    expect(value.id).toBe(evidence.planningRecovery.group.originalId)
+    expect(value.operation_key).toBe(evidence.planningRecovery.group.request.operation_key)
+  }
   await expect(page.getByRole('heading', { name: 'Reunir evidencia', exact: true })).toBeVisible()
   await page.getByRole('button', { name: 'Añadir hito', exact: true }).click()
   await page.getByLabel('Nombre del hito').fill('Datos contrastados')
   await page.getByRole('button', { name: 'Guardar hito', exact: true }).click()
+  if (planningRecovery) {
+    await expect(page.getByRole('alert')).toBeVisible()
+    await capture('03b-milestone-committed-reply-lost', '.planning-workbench')
+    await page.reload()
+    await page.getByRole('button', {name:/Reunir evidencia/}).click()
+    await page.getByRole('button', {name:'Añadir hito',exact:true}).click()
+    await expect(page.getByLabel('Nombre del hito')).toHaveValue('Datos contrastados')
+    const recovered = page.waitForResponse(r => new URL(r.url()).pathname === '/api/milestones' && r.request().method() === 'POST')
+    await page.getByRole('button', {name:'Recuperar la misma creación'}).click()
+    const response = await recovered, value = await response.json()
+    expect(response.request().postDataJSON()).toEqual(evidence.planningRecovery.milestone.request)
+    expect(value.id).toBe(evidence.planningRecovery.milestone.originalId)
+    expect(value.operation_key).toBe(evidence.planningRecovery.milestone.request.operation_key)
+    evidence.checks.push('group-and-milestone-original-creation-recovered-after-actual-commit-reply-loss-and-reload')
+  }
   await expect(page.getByText('Datos contrastados', { exact: true })).toBeVisible()
   await capture('03-group-and-milestone', '.planning-workbench')
   await navigate('Tareas')

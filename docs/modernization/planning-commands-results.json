@@ -1,0 +1,168 @@
+{
+  "base_commit": "4607e8e",
+  "started_at": "2026-11-08T04:27:54Z",
+  "status": "recoverable_owner_creation_verified_whole_page_in_progress",
+  "whole_page_accepted": false,
+  "wheel_sha256": "e3cedc1399983b1a0731d8001a585150f12440c5ab58530f0a0523ed658c31a0",
+  "schema_version": 69,
+  "source_selection": {
+    "cases": 23,
+    "passed": 23,
+    "failed": 0,
+    "skipped": 0,
+    "seconds": 11.16
+  },
+  "earlier_forward_and_crash_selection": {
+    "cases": 67,
+    "passed": 67,
+    "scope": "Earlier overlapping source selection including all forward boundaries and abrupt migration writer death through69; not67additionalcases"
+  },
+  "installed_selection": "docs/modernization/planning-commands-packaging.json",
+  "frontend": {
+    "contracts": 148,
+    "ui": 51,
+    "failed": 0,
+    "skipped": 0,
+    "types": "passed",
+    "build": "passed",
+    "changed_component_hook_helper_and_ui_eslint": "passed",
+    "shared_api_types_eslint": "pre-existing WSEvent.data:any,notgreen",
+    "scope": "UI tests use controlled network responses; actual commit/reply loss is separate below"
+  },
+  "browser": {
+    "status": "passed",
+    "browser_exit": 0,
+    "service_exit": 143,
+    "retained_root": ".researcher/evaluations/planning-creation-recovery-20261108",
+    "whole_workspace_states": 10,
+    "planning_states": [
+      {
+        "name": "03a-group-committed-reply-lost",
+        "width": 1440,
+        "fits": true,
+        "violations": []
+      },
+      {
+        "name": "03b-milestone-committed-reply-lost",
+        "width": 1440,
+        "fits": true,
+        "violations": []
+      },
+      {
+        "name": "03-group-and-milestone",
+        "width": 1440,
+        "fits": true,
+        "violations": []
+      },
+      {
+        "name": "07-real-dependency-mobile",
+        "width": 390,
+        "fits": true,
+        "violations": []
+      }
+    ],
+    "planning_recovery": {
+      "group": {
+        "request": {
+          "project_id": 1,
+          "operation_key": "00e753e9-ad9b-4e6c-a1eb-4e13f10c19d2",
+          "title": "Reunir evidencia",
+          "description": "",
+          "priority": 2
+        },
+        "originalId": 1,
+        "committedStatus": 201
+      },
+      "milestone": {
+        "request": {
+          "project_id": 1,
+          "epic_id": 1,
+          "operation_key": "a60c1a5b-b120-4413-b369-9b746799b753",
+          "title": "Datos contrastados",
+          "description": "",
+          "due_date": null
+        },
+        "originalId": 1,
+        "committedStatus": 201
+      }
+    },
+    "checks": [
+      "group-and-milestone-original-creation-recovered-after-actual-commit-reply-loss-and-reload",
+      "UI owner pairing",
+      "two real project creations",
+      "group and milestone persisted",
+      "two tasks with stored dependency",
+      "explicit user example survives reload",
+      "selection after reload",
+      "project isolation",
+      "no API fixtures"
+    ],
+    "groups": 1,
+    "milestones": 1,
+    "tasks": 2,
+    "operation_receipts": [
+      {
+        "project_id": 1,
+        "operation_key": "00e753e9-ad9b-4e6c-a1eb-4e13f10c19d2",
+        "kind": "group.create",
+        "resource_id": 1,
+        "request_json": "{\"description\":\"\",\"priority\":2,\"project_id\":1,\"title\":\"Reunir evidencia\"}",
+        "response_json": "{\"id\": 1, \"project_id\": 1, \"title\": \"Reunir evidencia\", \"description\": \"\", \"status\": \"open\", \"priority\": 2, \"order_index\": 0, \"created_by\": \"api\", \"created_at\": \"2026-11-08 05:13:34\", \"completed_at\": null, \"operation_key\": \"00e753e9-ad9b-4e6c-a1eb-4e13f10c19d2\", \"task_count\": 0, \"tasks_done\": 0, \"milestone_count\": 0}"
+      },
+      {
+        "project_id": 1,
+        "operation_key": "a60c1a5b-b120-4413-b369-9b746799b753",
+        "kind": "milestone.create",
+        "resource_id": 1,
+        "request_json": "{\"description\":\"\",\"due_date\":null,\"epic_id\":1,\"project_id\":1,\"title\":\"Datos contrastados\"}",
+        "response_json": "{\"id\": 1, \"project_id\": 1, \"epic_id\": 1, \"title\": \"Datos contrastados\", \"description\": \"\", \"status\": \"open\", \"target_cycle\": null, \"due_date\": null, \"order_index\": 0, \"created_at\": \"2026-11-08 05:13:35\", \"completed_at\": null, \"operation_key\": \"a60c1a5b-b120-4413-b369-9b746799b753\", \"task_count\": 0, \"tasks_done\": 0}"
+      }
+    ],
+    "original_ids_and_keys_independently_verified": true,
+    "integrity": "ok",
+    "images": [
+      {
+        "path": "docs/design/audits/2026-11-08-planning-creation-recovery/03a-group-committed-reply-lost.png",
+        "sha256": "1569146bbe60afa40d6c716a41d0ebb7507d5d34ffa0fd8e6a36a38e3df85efd"
+      },
+      {
+        "path": "docs/design/audits/2026-11-08-planning-creation-recovery/03b-milestone-committed-reply-lost.png",
+        "sha256": "273cc56c34e8e541f4f9a06dea6e27b441e92a16be2793a872db47a927094dce"
+      },
+      {
+        "path": "docs/design/audits/2026-11-08-planning-creation-recovery/03-group-and-milestone.png",
+        "sha256": "46d894c673b0a352a29420a80dc75f03c66ed9e4463080daf9a3bc0b816f92e0"
+      },
+      {
+        "path": "docs/design/audits/2026-11-08-planning-creation-recovery/07-real-dependency-mobile.png",
+        "sha256": "67d21a443dcb3b0d121443b092538d92022fcc0741cb46266ffde65b8189950b"
+      }
+    ],
+    "guardian_status": "closed",
+    "service_domain_removed": true
+  },
+  "generative_turns": 0,
+  "runs": 0,
+  "dispatches": 0,
+  "native_starts": 0,
+  "documented_definitions": 42,
+  "limitations": [
+    "Full Planning page acceptance remains open: proposal/history, deletion/guard and complete error/keyboard/data cases in real browser",
+    "Creation keys are optional for legacy callers; only stable supplied keys recover a lost response",
+    "Replayed create response is an original snapshot, not current metadata; the index is read separately",
+    "Project retirement follows existing guards and cascades these project-local metadata receipts",
+    "No root fix/reproduction of original AuthorityBusy, human U08/C10 acceptance, new global suite, push or deploy",
+    "Ruff and existing shared-type lint/bundle warnings deferred; no green style/global claim"
+  ],
+  "core_browser_verified_at": "2026-11-08T05:13:48Z",
+  "verified_at": "2026-11-08T05:25:17Z",
+  "seconds_until_phase_verification": 3443,
+  "prompt_freshness": {
+    "files_scanned": 318,
+    "candidates": 85,
+    "current": 18,
+    "stale": 67,
+    "unreviewed": 0,
+    "scope": "Current syntax-selected source/consumer freshness, not semantic rejection; final explicit revalidation remains pending"
+  }
+}

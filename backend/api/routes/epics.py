@@ -9,9 +9,17 @@ from fastapi import APIRouter, Query
 from backend.api.exceptions import EpicNotFound, ProjectNotFound
 from backend.api.models.epic import EpicCreate, EpicResponse, EpicUpdate
 from backend.project_records import load_project_state
-from backend.tools.base.db import execute_with_retry
+from backend.tools.base.db import execute_with_retry, get_db_path
 
 router = APIRouter(prefix="/api/epics", tags=["epics"])
+
+
+def _records():
+    """Bind owner metadata transactions to the same existing database as the current request."""
+    from backend.planning.owner_records import OwnerPlanningRecords
+    from backend.runtime.sqlite_runs import SQLiteRunStore
+
+    return OwnerPlanningRecords(SQLiteRunStore(get_db_path()))
 
 
 def _row_to_response(row: dict) -> EpicResponse:
@@ -53,25 +61,8 @@ def list_epics(project_id: int = Query(...)):
 
 @router.post("", response_model=EpicResponse, status_code=201)
 def create_epic(body: EpicCreate):
-    """Create a new epic."""
-    # Validate project exists
-    state = load_project_state(body.project_id)
-    if not state:
-        raise ProjectNotFound(body.project_id)
-
-    def _create(conn: sqlite3.Connection) -> dict:
-        cursor = conn.execute(
-            """INSERT INTO epics
-               (project_id, title, description, status, priority, created_by)
-               VALUES (?, ?, ?, 'open', ?, 'api')""",
-            (body.project_id, body.title, body.description, body.priority),
-        )
-        conn.commit()
-        row = conn.execute("SELECT * FROM epics WHERE id = ?", (cursor.lastrowid,)).fetchone()
-        return dict(row)
-
-    epic = execute_with_retry(_create)
-    return _row_to_response({**epic, "task_count": 0, "tasks_done": 0, "milestone_count": 0})
+    """Create or recover the exact owner group without repeating a committed effect."""
+    return _row_to_response(_records().create_group(**body.model_dump()))
 
 
 @router.get("/{epic_id}", response_model=EpicResponse)
@@ -113,6 +104,7 @@ def update_epic(epic_id: int, body: EpicUpdate):
     """Update an epic."""
 
     def _update(conn: sqlite3.Connection) -> dict | None:
+        """Update supported registered fields without rewriting the original creation receipt."""
         row = conn.execute("SELECT * FROM epics WHERE id = ?", (epic_id,)).fetchone()
         if not row:
             return None
@@ -133,7 +125,6 @@ def update_epic(epic_id: int, body: EpicUpdate):
             params.append(body.priority)
 
         if updates:
-            updates.append("updated_at = CURRENT_TIMESTAMP")
             params.append(epic_id)
             conn.execute(
                 f"UPDATE epics SET {', '.join(updates)} WHERE id = ?",
@@ -152,26 +143,6 @@ def update_epic(epic_id: int, body: EpicUpdate):
 
 @router.delete("/{epic_id}", status_code=204)
 def delete_epic(epic_id: int):
-    """Delete an epic and its milestones."""
-
-    def _delete(conn: sqlite3.Connection) -> bool:
-        row = conn.execute("SELECT id FROM epics WHERE id = ?", (epic_id,)).fetchone()
-        if not row:
-            return False
-
-        # Check for in-progress tasks
-        in_progress = conn.execute(
-            "SELECT COUNT(*) as cnt FROM tasks WHERE epic_id = ? AND status = 'in_progress'",
-            (epic_id,),
-        ).fetchone()
-        if in_progress and in_progress["cnt"] > 0:
-            raise ValueError(f"Epic {epic_id} has {in_progress['cnt']} tasks in progress")
-
-        conn.execute("DELETE FROM milestones WHERE epic_id = ?", (epic_id,))
-        conn.execute("DELETE FROM epics WHERE id = ?", (epic_id,))
-        conn.commit()
-        return True
-
-    found = execute_with_retry(_delete)
-    if not found:
+    """Retire a manual group atomically while preserving tasks and native history."""
+    if not _records().delete_group(epic_id):
         raise EpicNotFound(epic_id)

@@ -1,5 +1,11 @@
 # Inventario y revisión de prompts
 
+Corte de Planificación del8noviembre2026:318archivos,85candidatos,18revisiones
+vigentes y67desactualizadas;0sin revisión previa. El cambio de fuentes/consumidores
+no prueba que67textos estén mal; tampoco permite contar sus revisiones anteriores
+como vigentes. Revalidar al árbol final. [Resultado actual](../modernization/planning-commands-results.json).
+
+
 Comprobación de vigencia del8noviembre2026, base `a6855c4` más la reparación Ken:
 316archivos,85candidatos,20revisiones vigentes y65desactualizadas;0sin revisión
 previa. El inventario/revisiones comprometidos debajo conservan su corte histórico,

@@ -1,0 +1,306 @@
+{
+  "base_commit": "4607e8e",
+  "definitions": 42,
+  "missing": [],
+  "modules": [
+    {
+      "path": "backend/api/models/epic.py",
+      "sha256": "4500f5e7f082bec33fe4ab152d3ce019e39b36afe1d917735a9db2f6bbe12038",
+      "documented": true
+    },
+    {
+      "path": "backend/api/models/milestone.py",
+      "sha256": "b58423aa87c611810c608b02cdd16d7d708f71e7131b103a5837b15869bd0e7f",
+      "documented": true
+    },
+    {
+      "path": "backend/api/routes/epics.py",
+      "sha256": "56f6ab983b23de8153648e92c9ba2ce837536ff0cc15a807cb9f7776bb494b07",
+      "documented": true
+    },
+    {
+      "path": "backend/api/routes/milestones.py",
+      "sha256": "a336b1f9840c7ff4ca67e94777e45e51ea5ddcdd1a19fccb79e448b85055c675",
+      "documented": true
+    },
+    {
+      "path": "backend/db/migration_catalog.py",
+      "sha256": "e7e133ea7409cdb1ae1d26468a9492118a459bb5283cd41c6609f5cf9e5629ad",
+      "documented": true
+    },
+    {
+      "path": "backend/planning/owner_records.py",
+      "sha256": "e5b9c7ae51fcd7f5b69a8f534255e0aa17839b4fcf1942049a4f48c0a95e208c",
+      "documented": true
+    },
+    {
+      "path": "backend/db/planning_commands_migration.py",
+      "sha256": "30ac608fe2674f59c69dc2f483ee35b500e200d7440e3bbde6403acd79ce12e1",
+      "documented": true
+    },
+    {
+      "path": "backend/tests/api/test_planning_commands.py",
+      "sha256": "6513591bbb7d9fe3a5e3377a5e56b845c21afe13925add963231f99ff42e681d",
+      "documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_owner_planning_records.py",
+      "sha256": "df604e9297c8ad273aa1acda4795f19e5fea347d609c06ea819e97aa35a808b3",
+      "documented": true
+    }
+  ],
+  "contracts": [
+    {
+      "path": "backend/api/models/epic.py",
+      "symbol": "EpicCreate",
+      "line": 8,
+      "docstring": "Owner group metadata with an optional stable delivery identity for existing clients."
+    },
+    {
+      "path": "backend/api/models/epic.py",
+      "symbol": "EpicResponse",
+      "line": 25,
+      "docstring": "Registered group data; creation replies additionally identify the exact original owner request."
+    },
+    {
+      "path": "backend/api/models/milestone.py",
+      "symbol": "MilestoneCreate",
+      "line": 8,
+      "docstring": "Owner milestone intent; an explicit project scope and stable key enable exact recovery."
+    },
+    {
+      "path": "backend/api/models/milestone.py",
+      "symbol": "MilestoneResponse",
+      "line": 26,
+      "docstring": "Registered milestone data with an original request key only when returning a creation receipt."
+    },
+    {
+      "path": "backend/api/routes/epics.py",
+      "symbol": "_records",
+      "line": 17,
+      "docstring": "Bind owner metadata transactions to the same existing database as the current request."
+    },
+    {
+      "path": "backend/api/routes/epics.py",
+      "symbol": "create_epic",
+      "line": 63,
+      "docstring": "Create or recover the exact owner group without repeating a committed effect."
+    },
+    {
+      "path": "backend/api/routes/epics.py",
+      "symbol": "update_epic",
+      "line": 103,
+      "docstring": "Update an epic."
+    },
+    {
+      "path": "backend/api/routes/epics.py",
+      "symbol": "update_epic._update",
+      "line": 106,
+      "docstring": "Update supported registered fields without rewriting the original creation receipt."
+    },
+    {
+      "path": "backend/api/routes/epics.py",
+      "symbol": "delete_epic",
+      "line": 145,
+      "docstring": "Retire a manual group atomically while preserving tasks and native history."
+    },
+    {
+      "path": "backend/api/routes/milestones.py",
+      "symbol": "_records",
+      "line": 20,
+      "docstring": "Bind owner metadata transactions to the same existing database as the current request."
+    },
+    {
+      "path": "backend/api/routes/milestones.py",
+      "symbol": "create_milestone",
+      "line": 69,
+      "docstring": "Create or recover one milestone in its original project and group."
+    },
+    {
+      "path": "backend/api/routes/milestones.py",
+      "symbol": "update_milestone",
+      "line": 103,
+      "docstring": "Update a milestone."
+    },
+    {
+      "path": "backend/api/routes/milestones.py",
+      "symbol": "update_milestone._update",
+      "line": 106,
+      "docstring": "Write declared milestone metadata while retaining its immutable original creation response."
+    },
+    {
+      "path": "backend/api/routes/milestones.py",
+      "symbol": "delete_milestone",
+      "line": 149,
+      "docstring": "Retire a manual milestone only when no native history depends on its identity."
+    },
+    {
+      "path": "backend/planning/owner_records.py",
+      "symbol": "OwnerPlanningRecords",
+      "line": 14,
+      "docstring": "Own group/milestone mutations and their project-scoped receipts in one SQLite transaction."
+    },
+    {
+      "path": "backend/planning/owner_records.py",
+      "symbol": "OwnerPlanningRecords.__init__",
+      "line": 17,
+      "docstring": "Reuse the existing source-store transaction boundary without activating a runtime."
+    },
+    {
+      "path": "backend/planning/owner_records.py",
+      "symbol": "OwnerPlanningRecords._create",
+      "line": 21,
+      "docstring": "Return the exact original resource or atomically persist one new effect and its immutable response."
+    },
+    {
+      "path": "backend/planning/owner_records.py",
+      "symbol": "OwnerPlanningRecords.create_group",
+      "line": 47,
+      "docstring": "Create or recover one exact owner group, preserving its original response after later metadata edits."
+    },
+    {
+      "path": "backend/planning/owner_records.py",
+      "symbol": "OwnerPlanningRecords.create_group.insert",
+      "line": 51,
+      "docstring": "Write only the group metadata inside its request transaction."
+    },
+    {
+      "path": "backend/planning/owner_records.py",
+      "symbol": "OwnerPlanningRecords.create_milestone",
+      "line": 58,
+      "docstring": "Bind the milestone to the original project/group before creating or recovering its exact receipt."
+    },
+    {
+      "path": "backend/planning/owner_records.py",
+      "symbol": "OwnerPlanningRecords.create_milestone.insert",
+      "line": 69,
+      "docstring": "Reject a removed or foreign parent before writing the milestone in the same transaction."
+    },
+    {
+      "path": "backend/planning/owner_records.py",
+      "symbol": "OwnerPlanningRecords._protect",
+      "line": 79,
+      "docstring": "Retain native task and accepted-plan history while preserving the existing manual in-progress guard."
+    },
+    {
+      "path": "backend/planning/owner_records.py",
+      "symbol": "OwnerPlanningRecords.delete_group",
+      "line": 88,
+      "docstring": "Remove only a manual group and its milestones atomically, preserving tasks and native plan history."
+    },
+    {
+      "path": "backend/planning/owner_records.py",
+      "symbol": "OwnerPlanningRecords.delete_milestone",
+      "line": 101,
+      "docstring": "Remove one manual milestone only after checking its original project and native history under the writer lock."
+    },
+    {
+      "path": "backend/db/planning_commands_migration.py",
+      "symbol": "restore_planning_commands_schema",
+      "line": 4,
+      "docstring": "Restore schema68 atomically only when no planning receipt or later migration exists."
+    },
+    {
+      "path": "backend/tests/api/test_planning_commands.py",
+      "symbol": "test_repeated_group_creation_recovers_original_identity",
+      "line": 12,
+      "docstring": "The same owner operation must not duplicate a work group when its original response is unavailable."
+    },
+    {
+      "path": "backend/tests/api/test_planning_commands.py",
+      "symbol": "test_repeated_milestone_creation_recovers_original_identity",
+      "line": 23,
+      "docstring": "The original project/group must retain one milestone when an identical owner request is repeated."
+    },
+    {
+      "path": "backend/tests/api/test_planning_commands.py",
+      "symbol": "test_original_key_rejects_changed_content_and_another_kind",
+      "line": 36,
+      "docstring": "A valid receipt cannot authorize a different group title or be reused for another operation kind."
+    },
+    {
+      "path": "backend/tests/api/test_planning_commands.py",
+      "symbol": "test_planning_keys_are_project_scoped_and_foreign_parents_are_rejected",
+      "line": 46,
+      "docstring": "Identical keys may describe separate projects, but a milestone cannot move its parent into another scope."
+    },
+    {
+      "path": "backend/tests/api/test_planning_commands.py",
+      "symbol": "test_recovery_preserves_original_response_without_reverting_later_edits",
+      "line": 57,
+      "docstring": "Replay returns the original creation receipt while the current resource retains a later owner edit."
+    },
+    {
+      "path": "backend/tests/api/test_planning_commands.py",
+      "symbol": "test_a_retired_original_resource_is_not_recreated_by_its_request",
+      "line": 67,
+      "docstring": "Keeping the original receipt prevents replay from recreating a resource the owner subsequently removed."
+    },
+    {
+      "path": "backend/tests/api/test_planning_commands.py",
+      "symbol": "test_resource_and_receipt_rollback_together",
+      "line": 83,
+      "docstring": "An actual receipt INSERT failure rolls back the new resource and its audit event before an explicit retry."
+    },
+    {
+      "path": "backend/tests/api/test_planning_commands.py",
+      "symbol": "test_manual_group_removal_preserves_tasks_and_dependencies",
+      "line": 103,
+      "docstring": "Deleting an explicitly chosen manual group detaches its members instead of deleting their work or dependency edges."
+    },
+    {
+      "path": "backend/tests/runtime/test_owner_planning_records.py",
+      "symbol": "test_accepted_plan_groups_cannot_be_removed_before_child_execution",
+      "line": 22,
+      "docstring": "Pending child tasks still belong to an accepted plan whose original grouping must remain recoverable."
+    },
+    {
+      "path": "backend/tests/runtime/test_owner_planning_records.py",
+      "symbol": "test_unused_planning_schema_roundtrip_preserves_existing_owner_records",
+      "line": 44,
+      "docstring": "An explicit unused inverse returns to the exact prior schema and can be upgraded again without changing data."
+    },
+    {
+      "path": "backend/tests/runtime/test_owner_planning_records.py",
+      "symbol": "test_used_planning_schema_inverse_refuses_to_discard_receipts",
+      "line": 64,
+      "docstring": "An original owner receipt must survive an attempted inverse; it cannot be silently reissued later."
+    },
+    {
+      "path": "backend/tests/runtime/test_owner_planning_records.py",
+      "symbol": "test_inverse_failure_restores_dropped_table_and_receipt_trigger",
+      "line": 77,
+      "docstring": "Failure after transactional DROP must roll back the infrastructure rather than leave a schema prefix gap."
+    },
+    {
+      "path": "backend/tests/runtime/test_owner_planning_records.py",
+      "symbol": "test_inverse_failure_restores_dropped_table_and_receipt_trigger.reject_version_removal",
+      "line": 82,
+      "docstring": "Deny the final history write after DROP to exercise a real SQLite transactional rollback."
+    },
+    {
+      "path": "backend/tests/runtime/test_owner_planning_records.py",
+      "symbol": "test_concurrent_identical_owner_deliveries_share_one_resource",
+      "line": 95,
+      "docstring": "Two actual SQLite writers must converge on the same original resource and immutable receipt."
+    },
+    {
+      "path": "backend/tests/runtime/test_owner_planning_records.py",
+      "symbol": "test_concurrent_identical_owner_deliveries_share_one_resource.create",
+      "line": 99,
+      "docstring": "Release two original writer requests together, then let SQLite serialize their receipt transaction."
+    },
+    {
+      "path": "backend/tests/runtime/test_owner_planning_records.py",
+      "symbol": "test_group_removal_and_native_admission_preserve_current_context_in_either_order",
+      "line": 112,
+      "docstring": "Admission protects the grouping; an earlier deletion versions the inputs and rejects the old request without launching an actor."
+    },
+    {
+      "path": "backend/tests/runtime/test_owner_planning_records.py",
+      "symbol": "test_product_backup_restoration_keeps_exact_planning_receipts",
+      "line": 133,
+      "docstring": "The actual backup/restore format must retain original identities without re-enrolling execution or recreating metadata."
+    }
+  ]
+}

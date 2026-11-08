@@ -6,10 +6,14 @@ from pydantic import BaseModel, Field
 
 
 class MilestoneCreate(BaseModel):
+    """Owner milestone intent; an explicit project scope and stable key enable exact recovery."""
+
     epic_id: int
     title: str = Field(..., min_length=1, max_length=255)
     description: str = Field(default="")
     due_date: str | None = None
+    project_id: int | None = Field(default=None, ge=1)
+    operation_key: str | None = Field(default=None, pattern=r"^[A-Za-z0-9_.:-]{1,128}$")
 
 
 class MilestoneUpdate(BaseModel):
@@ -20,6 +24,9 @@ class MilestoneUpdate(BaseModel):
 
 
 class MilestoneResponse(BaseModel):
+    """Registered milestone data with an original request key only when returning a creation receipt."""
+
+    operation_key: str | None = None
     id: int
     project_id: int | None = None
     epic_id: int

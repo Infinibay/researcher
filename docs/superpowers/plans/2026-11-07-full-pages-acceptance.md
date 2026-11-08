@@ -1,5 +1,12 @@
 # Aceptación integral de las doce páginas
 
+Actualización8noviembre2026: **3/12 páginas** aceptadas (Documentos, Archivos,
+Repositorios). Planificación sigue en aceptación: creación recuperable y protección
+nativa verificadas, pendientes propuestas/historia/borrado/estados restantes en UI.
+[Trabajo vigente](2026-11-08-planning-page-acceptance.md). Los cortes anteriores se
+conservan debajo con sus estados históricos; no son el contador actual.
+
+
 Inicio real: **2026-11-07 23:58:35 UTC**, base `107240c`.
 El bloque de Proyectos sigue abierto tras cuatro correcciones funcionales.
 

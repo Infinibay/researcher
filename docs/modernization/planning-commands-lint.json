@@ -1,0 +1,39 @@
+{
+  "status": "not_green",
+  "findings": [
+    {
+      "path": "backend/api/routes/epics.py",
+      "code": "F401",
+      "line": 9,
+      "message": "`backend.api.exceptions.ProjectNotFound` imported but unused"
+    },
+    {
+      "path": "backend/api/routes/epics.py",
+      "code": "F401",
+      "line": 11,
+      "message": "`backend.project_records.load_project_state` imported but unused"
+    },
+    {
+      "path": "backend/api/routes/milestones.py",
+      "code": "F401",
+      "line": 9,
+      "message": "`backend.api.exceptions.EpicNotFound` imported but unused"
+    },
+    {
+      "path": "backend/tests/runtime/test_owner_planning_records.py",
+      "code": "I001",
+      "line": 3,
+      "message": "Import block is un-sorted or un-formatted"
+    }
+  ],
+  "codes": {
+    "F401": 3,
+    "I001": 1
+  },
+  "frontend": {
+    "changed_components_hooks_helper_and_ui_tests": "passed",
+    "shared_api_types": "pre-existing no-explicit-any at WSEvent.data; unchanged baseline279/current283",
+    "typescript": "passed",
+    "vite_build": "passed with existing large bundle warning"
+  }
+}

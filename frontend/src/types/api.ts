@@ -13,6 +13,8 @@ export interface Project {
 }
 
 export interface Epic {
+  /** Creation receipts identify the original request; list reads do not imply one. */
+  operation_key?: string | null
   id: number
   project_id: number
   title: string
@@ -28,6 +30,8 @@ export interface Epic {
 }
 
 export interface Milestone {
+  /** Original creation identity is checked before a retained request is cleared. */
+  operation_key?: string | null
   id: number
   project_id: number
   epic_id: number

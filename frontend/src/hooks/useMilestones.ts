@@ -21,10 +21,11 @@ export function useMilestone(milestoneId: number | null) {
   })
 }
 
+/** Preserve the original project, parent and request identity through repeated owner delivery. */
 export function useCreateMilestone() {
   const qc = useQueryClient()
   return useMutation({
-    mutationFn: (data: { epic_id: number; title: string; description?: string; due_date?: string }) =>
+    mutationFn: (data: { project_id: number; epic_id: number; title: string; description?: string; due_date?: string|null; operation_key: string }) =>
       fetchApi<Milestone>('/api/milestones', {
         method: 'POST',
         body: JSON.stringify(data),

@@ -2867,9 +2867,9 @@
         "evals/profile_communication/test_protocol.py",
         "docs/modernization/ken-grammars-results.json"
       ],
-      "implemented": "Historical static review snapshots retained. Current freshness check on316ownedfiles/85candidates:20current,65stale,0neverreviewed. Do not present old catalog/counts as current acceptance; explicit source/consumer revalidation remains required.",
+      "implemented": "Historical static review snapshots retained. Current syntax-selected freshness on318files/85candidates:18current,67stale,0neverreviewed. Source/consumer revalidation against final tree remains pending; no automatic hash renewal.",
       "remaining": [
-        "Revalidate65stale source-bound prompt reviews against the final current tree; do not renew hashes blindly. Review new corrective tool feedback separately from generative efficacy.",
+        "Revalidate67stale source-bound prompt reviews against the final current tree; do not renew hashes blindly. Review new corrective tool feedback separately from generative efficacy.",
         "Keep examples at the level of observed data: subgroup averages do not establish equal individual changes.",
         "Deliver useful results and explanations within explicit budgets; avoid secondary discovery consuming delivery margin and explain saved partial work honestly.",
         "Before/after efficacy and reserved comparisons for remaining profiles; historical investigation comparison is exploratory.",
@@ -6076,6 +6076,22 @@
           "deferred": [
             "DD128"
           ]
+        },
+        "planning": {
+          "status": "in_progress",
+          "selected_concept": "tree-detail",
+          "evidence": [
+            "docs/superpowers/plans/2026-11-08-planning-page-acceptance.md",
+            "docs/modernization/planning-commands-review.md",
+            "docs/modernization/planning-commands-results.json",
+            "docs/design/audits/2026-11-08-planning-creation-recovery/report.md"
+          ],
+          "remaining": [
+            "Actual proposal/history viewing and original decision navigation on real stored native-domain data without another generative turn",
+            "Manual deletion and protected-history refusal from the actual browser dialog",
+            "Read errors, extensive data and complete keyboard/mobile page states",
+            "Record full-page technical/delegated visual ruling without attributing human comprehension"
+          ]
         }
       }
     },
@@ -6139,6 +6155,23 @@
       "limits": [
         "Synthetic authority-format genesis for broker probe; not host enrollment or original contention reproduction",
         "Other language/scenario completeness and prompting efficacy not established by this case"
+      ]
+    },
+    "planning_owner_creation_recovery": {
+      "status": "verified",
+      "scope": "Exact project-scoped creation receipts in migration69; stable web packets use existing endpoint/session archive boundary and verify original response key/project/parent. Native history protected during manual deletion. Real HTTP/SQLite commit-then-reply-loss and reload recover one original group and milestone. Legacy callers without keys retain single-call behavior, no stable-recovery claim.",
+      "evidence": [
+        "docs/modernization/planning-commands-review.md",
+        "docs/modernization/planning-commands-results.json",
+        "docs/modernization/planning-commands-packaging.json",
+        "docs/modernization/planning-commands-docstrings.json",
+        "docs/design/audits/2026-11-08-planning-creation-recovery/report.md"
+      ],
+      "remaining": [],
+      "limits": [
+        "Planning full-page and human acceptance remain in_progress",
+        "124installed tests,148contracts51UI are selected/environment-specific observations, not a new global suite",
+        "Style and full migration inverse rehearsal remain pending"
       ]
     }
   }

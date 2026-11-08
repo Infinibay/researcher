@@ -8896,3 +8896,57 @@ gate estático pendiente al árbol final, no65fallos semánticos demostrados.
 Planificación completa, aún sin iniciar; otras páginas/evaluaciones/distribución
 siguen. Detalles secundarios al final junto a gates globales y revisión independiente.
 [Recibo y límites](ken-grammars-review.md).
+
+
+## Planificación en aceptación, diagnóstico abierto, 2026-11-08
+
+Inicio04:27:54UTC sobre4607e8e. A04:37:14UTC han transcurrido9min20s;
+no es tiempo hasta cierre ni estimación restante. La selección actual es tree-detail.
+Se leyeron componente, hooks, rutas/modelos y memoria del piloto. Las altas de
+épicas/hitos aún insertan por llamada: operation_key no está declarado y se ignora.
+Dos regresiones reales ownerHTTP repiten el mismo cuerpo y devuelven201con IDs2y3.
+**Dos RED, cero turnos generativos; todavía sin reparación ni aceptación completa.**
+La pérdida de recibo de red se comprobará después en navegador, no se acredita aquí.
+
+Preparado el plan de solicitud/recibo transaccional y recuperación web por ámbito;
+reusar las capacidades existentes antes de introducir persistencia. Verificar
+protección de historia/borrado con contratos nativos, sin asumir que la etiqueta
+in_progress equivale a toda actividad. Pendiente implementación, verde instalado y
+recorrido visual completo. Siguen3/12páginas y41/43escenarios; Ken offline ya verificado
+en4607e8e. [Evidencia RED](planning-commands-red-results.json),
+[plan](../superpowers/plans/2026-11-08-planning-page-acceptance.md).
+
+
+## Altas recuperables de Planificación verificadas, 2026-11-08
+
+Fase04:27:54–05:25:17UTC: **57min23s hasta verificar**, base4607e8e, incluyendo
+el diagnóstico inicial; navegador terminó05:13:48, inspección/evidencia posteriores.
+Grupos/hitos guardan efecto/recibo atómicos en migración69. Misma clave conserva
+identidad y respuesta original; contenido/kind diferente se rechaza y un registro
+retirado no se recrea. La web conserva la petición original en sessionStorage,
+comprueba clave/proyecto/padre y participa en el archivo de cambios de instalación.
+Ninguna alta o recuperación autoriza tareas o generación.
+
+Historia nativa y grupos/hitos de planes aceptados protegidos bajo writer lock;
+retiro manual conserva tareas/dependencias y versiona entradas. Ambos órdenes de
+admisión/retirada comprobados, dos escritores coordinados convergen en un recibo.
+Inversa sin uso/rollback/rechazo con recibos y backup/restore del producto pasan.
+Un test adicional detectó PUT con updated_at inexistente; ambas rutas corregidas.
+
+23casos fuente dirigidos y124instalados pasan; selección previa67solapa y no se suma.
+684Python/SQL empaquetados coinciden,365productivos; pip check pasa.42definiciones
+con docstrings,148contratos/51UI, tipos y build pasan. Estilo no verde:4Ruff y un any
+anterior del archivo de tipos, DD132.67de85revisiones estáticas están desactualizadas
+en318archivos; se mantienen como gate final, sin renovar huellas automáticamente.
+
+HTTP/SQLite reales: se corta cada respuesta de alta después de su201/commit;
+recarga y recuperación devuelven los mismos IDs/claves. Quedan un grupo/un hito,
+dos recibos y dos tareas/dependencia del recorrido compartido;0runs/despachos/inicios
+nativos. Servicio143, guardián cerrado/dominio eliminado. Diez estados compartidos,
+sólo cuatro de Planificación, revisados contra tree-detail; no comprensión humana.
+
+**Planificación sigue abierta**: faltan propuestas/historia, diálogo de borrado,
+errores de lectura y casos de escala/teclado/móvil completos con backend real.
+No se incrementan3/12páginas ni41/43escenarios. Contención original/U08/C10 y otras
+páginas/evaluaciones/distribución continúan; detalles/gates globales y revisión final
+al cierre. [Resultados](planning-commands-review.md).

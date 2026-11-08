@@ -6,10 +6,13 @@ from pydantic import BaseModel, Field
 
 
 class EpicCreate(BaseModel):
+    """Owner group metadata with an optional stable delivery identity for existing clients."""
+
     project_id: int
     title: str = Field(..., min_length=1, max_length=255)
     description: str = Field(default="")
     priority: int = Field(default=2, ge=1, le=5)
+    operation_key: str | None = Field(default=None, pattern=r"^[A-Za-z0-9_.:-]{1,128}$")
 
 
 class EpicUpdate(BaseModel):
@@ -20,6 +23,9 @@ class EpicUpdate(BaseModel):
 
 
 class EpicResponse(BaseModel):
+    """Registered group data; creation replies additionally identify the exact original owner request."""
+
+    operation_key: str | None = None
     id: int
     project_id: int
     title: str

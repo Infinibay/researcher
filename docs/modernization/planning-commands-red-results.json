@@ -1,0 +1,31 @@
+{
+  "base_commit": "4607e8e",
+  "started_at": "2026-11-08T04:27:54Z",
+  "observed_at": "2026-11-08T04:37:14Z",
+  "status": "in_progress_duplicate_creates_reproduced_not_fixed",
+  "elapsed_seconds_at_observation": 560,
+  "elapsed_is_not_a_completion_time_or_eta": true,
+  "tests": {
+    "path": "backend/tests/api/test_planning_commands.py",
+    "cases": 2,
+    "passed": 0,
+    "failed": 2,
+    "skipped": 0,
+    "seconds": 2.06,
+    "observed": "Two identical owner HTTP requests returned201 with different resource IDs2and3, for both group and milestone; no actual packet-loss browser case yet"
+  },
+  "root_cause": "Current create models do not declare operation_key and Pydantic ignores that extra argument; route inserts a new row for every delivery, with no durable request receipt",
+  "generative_turns": 0,
+  "whole_pages_accepted": 3,
+  "broad_scenarios_verified": 41,
+  "scope": "A new synthetic owner API regression; no operator project or original failed native attempt was reopened",
+  "source_sha256": {
+    "backend/api/routes/epics.py": "40e6383124a33e4c8e2898035f28f0b03241440eb08ca202f230767ef416127c",
+    "backend/api/routes/milestones.py": "4d940e8a8349e3ab3b497e1647cb3a93a254b30d52a0590ed54c4ad8733c4a22",
+    "backend/api/models/epic.py": "ceb1ab75636ceef2aa6c557aa691ff32be4564f260d67cfd7e35608037166bf2",
+    "backend/api/models/milestone.py": "9b1a0865478d30d88734bb9ef0a91d191041ef63a08a5bcb3ce6fc31b7f94d5a",
+    "backend/tests/api/test_planning_commands.py": "67568911f37e8e1a51b8a0fa56fabf69a5990736bc1ef7877e440f9939a3b0b2"
+  },
+  "next": "Implement exact transactional planning request/receipt contract and frontend pending-intent recovery; then complete real browser page acceptance",
+  "plan": "docs/superpowers/plans/2026-11-08-planning-page-acceptance.md"
+}

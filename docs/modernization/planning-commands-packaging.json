@@ -1,0 +1,40 @@
+{
+  "validation_environment": {
+    "runner_cgroup": "/sys/fs/cgroup/user.slice/user-1000.slice/user@1000.service/app.slice/run-p1382118-i1382119.scope",
+    "parent_controllers_before": "cpu memory pids",
+    "runner_cpu_max": "800000 100000",
+    "purpose": "Transient systemd scope with CPUQuota=800% retains CPU-controller availability during validation; it does not relax any product limit.",
+    "parent_controllers_after": "cpu memory pids"
+  },
+  "base_commit": "4607e8e",
+  "wheel": "researcher-0.1.0-cp312-cp312-linux_x86_64.whl",
+  "wheel_sha256": "e3cedc1399983b1a0731d8001a585150f12440c5ab58530f0a0523ed658c31a0",
+  "source_files_matching_wheel_and_installation": 684,
+  "product_files_matching": 365,
+  "observed": {
+    "cases": 124,
+    "passed": 124,
+    "failed": 0,
+    "skipped": 0,
+    "backend_modules": 243,
+    "all_backend_imports_from_native_env": true,
+    "seconds": 52.98,
+    "exit_code": 0
+  },
+  "tests": [
+    "backend/tests/api/test_planning_commands.py",
+    "backend/tests/runtime/test_owner_planning_records.py",
+    "backend/tests/api/test_project_records.py",
+    "backend/tests/runtime/test_plan_milestones.py",
+    "backend/tests/runtime/test_migration_chain.py",
+    "backend/tests/runtime/test_installation_backup.py",
+    "backend/tests/runtime/test_project_owner_cutover.py",
+    "backend/tests/runtime/test_project_planning.py"
+  ],
+  "real_model_turns": 0,
+  "limits": [
+    "Selected installed tests, not the global suite",
+    "Installed owner planning requests, protected native grouping, migration69/inverse/crash and real backup/restore selection; browser acceptance separate",
+    "Real SQLite/Git/files and controlled native planning-domain records, no real native actor/model turn or human understanding claim"
+  ]
+}

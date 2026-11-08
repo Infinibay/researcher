@@ -1103,3 +1103,19 @@ en el evaluador. [Lista exacta](ken-grammars-lint.json). Resolver tras las capac
 mayores, sin repetir un turno generativo por formato. Los92casos y los probes reales
 pasan, pero no se declara estilo verde. La vigencia pendiente de65revisiones de
 prompts es un gate funcional/documental separado, no un detalle Ruff.
+
+
+## DD132 — presentación y estilo de Planificación recuperable
+
+Tras las capacidades mayores: traducir el error de red `Failed to fetch`, reducir
+espacio secundario móvil y contextualizar como consulta anterior los vacíos del
+índice mientras una creación tiene respuesta incierta. La recuperación por clave
+ya es segura y está comprobada con commit real; no inferir por un nombre visible
+que se recibió el recibo exacto. No se cambia el diseño otra vez para ese pulido.
+
+Ruff conserva3F401 y1I001 en esta selección; lista en
+[planning-commands-lint.json](planning-commands-lint.json). ESLint del archivo de
+API compartido señala `WSEvent.data?: any`, heredado de4607e8e: línea279antes,
+283ahora. Los módulos/hooks/formularios nuevos pasan; no se declara estilo global
+verde. El warning de bundle grande sigue en DD121. Las67revisiones estáticas de
+prompts y las inversas globales pendientes al esquema69 son gates separados.

@@ -28,7 +28,39 @@ que se pueda comparar el avance; no presentar microajustes como tareas principal
 - Última suite global: `9fb873c`,2210 casos,2178 pasan,31 fallan y1 error de fixture; sin omisiones. La carrera de backup encontrada se corrigió después con40 pruebas instaladas. No se declara una nueva corrida global verde; la referencia `0c8b8d9` queda como evidencia histórica.
 - U01–U07, E01–E12, C01–C09 y D01–D13 quedan comprobados con el alcance de sus matrices; siguen 2 de 43 escenarios amplios sin aceptación completa en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Estado actual: Ken estructural offline verificado; continúa aceptación de páginas
+## Estado actual: altas recuperables verificadas; Planificación sigue abierta
+
+Fase **04:27:54–05:25:17UTC,57min23s hasta verificar**, desde `4607e8e`,
+incluyendo diagnóstico inicial. Recorrido terminó05:13:48; evidencia/inspección
+posteriores incluidas en el tiempo. [Alcance y límites](planning-commands-review.md).
+
+- Terminado: grupos/hitos recuperan la misma identidad tras perder el recibo,
+  guardar/reabrir la sesión y repetir explícitamente. Migración69, transacción
+  recurso/recibo, huella de solicitud comprobada en UI y ámbito del proyecto/padre.
+  Borrado conserva tareas/dependencias y protege historia nativa/planes aceptados.
+  Backup/restore/inversa comprobados.42definiciones documentadas en inglés.
+- Verificación: **124casos instalados**, **148contratos y51UI** pasan sin omisiones;
+ 684Python/SQL coinciden,365productivos. Navegador real: dos cortes después del
+  commit, mismos IDs/claves recuperados, un grupo/un hito y dos recibos.0runs,
+  despachos o inicios nativos; servicio cerrado y dominio retirado. Diez estados
+  compartidos, sólo cuatro de Planificación; no diez estados de esa página.
+- En curso: **aceptación completa de Planificación**. Siguiente dentro de la misma
+  tarea: propuestas/historia y decisión original, borrado/protección desde la UI,
+  errores de lectura, datos extensos y teclado/móvil restantes. No se acepta la
+  página por haber cerrado sus altas. [Plan](../superpowers/plans/2026-11-08-planning-page-acceptance.md).
+- Interfaz: **3/12páginas** aceptadas (Documentos, Archivos, Repositorios),
+  **41/43escenarios**. Además de Planificación: Resumen, Proyectos, Tareas, Agentes,
+  Conversación, Hallazgos, Informes y Ejecución. Proyectos y AuthorityBusy original
+  siguen sin causa reproducida/corregida. U08/C10, evaluaciones y distribución abiertos.
+- Gates al cierre: **67revisiones estáticas desactualizadas de85** en318archivos,
+ 18vigentes y0sin revisión previa; revalidación explícita al árbol final. Inversas
+  globales deben alcanzar el esquema69; no confundir su prueba local con toda la
+  plantilla histórica. Suite global, accesibilidad completa y revisión independiente.
+- Detalles al final: DD132 y anteriores; Ruff, un any heredado y bundle no verdes.
+  Error de red inglés y vacío de consulta antigua pendientes de presentación.
+  No porcentaje/ETA global defendible; sin push, merge o despliegue.
+
+## Etapa anterior: Ken estructural offline verificado; continúa aceptación de páginas
 
 **03:58:40–04:24:03 UTC,25min23s hasta verificar**, base `a6855c4`.
 Documentación/checkpoint posteriores excluidos. [Evidencia y límites](ken-grammars-review.md).
@@ -39,10 +71,13 @@ Documentación/checkpoint posteriores excluidos. [Evidencia y límites](ken-gram
   pasan, sin skips;26definiciones documentadas. Ken publicado encuentra llamadores
   positivos/negativos y pruebas, también bajo el broker real: dos operaciones
   cerradas, grant retirado, dominio eliminado;0inicios/despachos nativos.
-- Siguiente principal: **aceptación completa de Planificación**, reutilizando el
-  concepto ya elegido y fuentes sintéticas, sin otra generación para crear planes.
-  Implementación de ese nuevo bloque todavía no iniciada. Proyectos sigue abierto
-  por la contención AuthorityBusy original, sin reproducir/corregir.
+- En curso desde **04:27:54UTC**: **aceptación completa de Planificación**, concepto
+  tree-detail existente, sin otra generación. Dos RED reales demuestran que repetir
+  una creación de grupo/hito devuelve IDs distintos: falta identidad de solicitud y
+  recibo. **Protocolo todavía sin implementar**; es brecha principal, no detalle.
+  [Plan](../superpowers/plans/2026-11-08-planning-page-acceptance.md),
+  [evidencia](planning-commands-red-results.json). Proyectos sigue abierto por
+  AuthorityBusy original, sin reproducir/corregir.
 - Interfaz: **3/12 páginas** aceptadas (Documentos, Archivos, Repositorios),
   **41/43 escenarios**. Faltan Resumen, Proyectos, Planificación, Tareas, Agentes,
   Conversación, Hallazgos, Informes y Ejecución; U08/C10, evaluaciones,

@@ -19,10 +19,11 @@ export function useEpic(epicId: number | null) {
   })
 }
 
+/** Create only an explicitly identified web request; its original key enables recovery after reply loss. */
 export function useCreateEpic() {
   const qc = useQueryClient()
   return useMutation({
-    mutationFn: (data: { project_id: number; title: string; description?: string; priority?: number }) =>
+    mutationFn: (data: { project_id: number; title: string; description?: string; priority?: number; operation_key: string }) =>
       fetchApi<Epic>('/api/epics', {
         method: 'POST',
         body: JSON.stringify(data),
