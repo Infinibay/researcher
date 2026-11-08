@@ -1360,3 +1360,10 @@ Dos avisos Ruff I001 en `evals/profile_communication/finding_review.py`. El par 
 y36 comprobaciones dirigidas pasan; los hashes del script ejecutado están congelados
 y se conservan. Ordenar imports en la fase de detalles y verificar entonces el delta,
 sin modificar la política registrada ni repetir modelos para una corrección de estilo.
+
+## DD153 — imports del evaluador de revisión de código
+
+Un aviso Ruff I001 en `evals/profile_communication/code_review.py`. Las40 pruebas
+dirigidas y el par real pasan dentro de su alcance. Ordenar imports al terminar
+las capacidades principales; conservar los hashes y el transporte fallido/corregido
+originales. Un cambio de estilo no justifica repetir revisores de la suscripción.

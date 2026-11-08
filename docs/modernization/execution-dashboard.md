@@ -28,7 +28,27 @@ que se pueda comparar el avance; no presentar microajustes como tareas principal
 - Última suite global: `9fb873c`,2210 casos,2178 pasan,31 fallan y1 error de fixture; sin omisiones. La carrera de backup encontrada se corrigió después con40 pruebas instaladas. No se declara una nueva corrida global verde; la referencia `0c8b8d9` queda como evidencia histórica.
 - U01–U07, E01–E12, C01–C10 y D01–D13 quedan comprobados con el alcance de sus matrices; sigue 1 de 43 escenarios amplios sin aceptación completa en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Estado actual: hallazgos comparados; sigue revisión de código
+## Estado actual: comparaciones de perfiles listas; sigue comunicación durante ejecución
+
+[Revisión de código](code-communication-review.md). Bloque **15:08:59–15:42:08UTC:33min9s** hasta verificar; checkpoint posterior excluido.
+Los dos tramos corregidos de autor+revisor suman217,482s; preparación/análisis aparte.
+
+- Terminado: **12/12páginas por alcance,42/43escenarios**,85prompts vigentes. Los tres
+ pares de perfiles pendientes se ejecutaron: desarrollo, hallazgos y código. Este
+ último conserva entrada/base/árbol/diff iguales, dos revisiones confirmadas
+ needs_revision y pruebas reales2pass/2fail por brazo, citas y cierres verificados.
+ Cuarenta comprobaciones dirigidas pasan. Fallo de transporte anterior0revisores
+ reales conservado; reservas controladas y consumo desconocido no son gasto de cuenta.
+- Siguiente: comunicación conjunta en la UI de espera larga, error recuperable y
+ resultado parcial, reutilizando persistencia/Stop ya comprobados. Después,
+ observación humana/adaptación y material científico distinto si se pretende
+ mayor representatividad, sin repetir para mejorar notas.
+- Pendiente además: distribución Ken/ONNX según respuesta solicitada; docstrings y
+ detalles; revisión independiente, paquete y suite global finales. U08 sigue abierto.
+- Detalles al final: DD145–153 y anteriores. No hay una nueva suite global verde,
+ comprensión humana acreditada ni lint limpio. Sin push, merge o despliegue.
+
+## Etapa anterior: hallazgos comparados; sigue revisión de código
 
 [Par de revisión de hallazgos](finding-communication-review.md). Bloque iniciado
 **14:51:33–15:06:33UTC:15min** hasta verificar; checkpoint posterior excluido.

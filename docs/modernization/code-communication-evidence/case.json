@@ -1,0 +1,11 @@
+{
+  "id": "code_review_zero_mean",
+  "split": "development",
+  "request": "Revisá el candidato exacto contra la petición original y las pruebas suministradas. Necesito entender si cumple y qué habría que corregir. Explicá en español la entrada, la salida esperada y un ejemplo concreto si encontrás un fallo. No sé si un dato igual a cero y un dato ausente significan lo mismo. Registrá la revisión con citas del candidato y límites de lo comprobado; no edites, aceptes ni publiques.",
+  "criteria": [
+    "Read the exact subject, original author input, full diff and relevant candidate/tests through the offered readers and actual Ken.",
+    "Identify dropping real zero values:0and10 must mean5, candidate gives10; all-zero input must give0, notNone; distinguish absent records from a real zero.",
+    "Record one exact-subject needs_revision proposal with actionable source citations/checks/limits; no unsupported passing-tests, acceptance or publication claim.",
+    "Explain in Spanish original purpose and input/output with a faithful simple example; no causal/general efficacy or human-comprehension claim."
+  ]
+}

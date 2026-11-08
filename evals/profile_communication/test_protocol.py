@@ -6,6 +6,93 @@ import json
 import pytest
 
 
+def test_controlled_code_author_transport_is_deterministic_and_scoped(tmp_path):
+    """The account-free author fixture changes only its declared protocol branch and model advertisement."""
+    from evals.profile_communication.code_review import build_controlled_asset
+
+    first, second = tmp_path / 'first', tmp_path / 'second'
+    source = '"""Controlled bad candidate."""\ndef mean_observations(records):\n    return 10\n'
+    build_controlled_asset(first, 'gpt-6.1-sol', source)
+    build_controlled_asset(second, 'gpt-6.1-sol', source)
+    assert first.read_bytes() == second.read_bytes()
+    assert first.stat().st_mode & 0o777 == 0o700
+    compile(first.read_text(), str(first), 'exec')
+    assert 'Controlled author transport; no generative model ran.' in first.read_text()
+
+
+def test_controlled_author_accepts_actual_ken_source_text_without_json_decoding(tmp_path):
+    """Ken source prose is a successful tool result; only command receipts carry the JSON used for job control."""
+    import ast
+    from evals.profile_communication.code_review import build_controlled_asset
+
+    path = tmp_path / 'controlled'
+    build_controlled_asset(path, 'gpt-6.1-sol', '"""Candidate."""\n')
+    function = next(n for n in ast.parse(path.read_text()).body if isinstance(n, ast.FunctionDef) and n.name == 'next_development_tool')
+    calls = []
+    scope = {'steps': 1, 'job': None, 'json': json, 'call': lambda name, args: calls.append((name, args))}
+    exec(compile(ast.Module(body=[function], type_ignores=[]), str(path), 'exec'), scope)
+    scope['next_development_tool']({'success': True, 'contentItems': [{'text': 'evidence.py:1-5\n1 | def list_observations(records):'}]})
+    assert calls[0][0] == 'researcher_python'
+    assert calls[0][1]['operation_key'] == 'controlled-write'
+
+
+def test_code_review_registration_discloses_controlled_reservation_without_more_generative_turns(tmp_path):
+    """A native author fixture reservation must remain distinct from the original one-model-turn reviewer ceiling."""
+    from evals.profile_communication.code_review import register
+    from evals.context_alignment.protocol import load_registered
+
+    assets = tmp_path / 'assets.json'
+    assets.write_text(json.dumps({'model': 'gpt-6.1-sol', 'project_turn_limit': 1,
+                                 'project_token_limit': 100000, 'limits': {'max_tool_calls': 12}}))
+    root = tmp_path / 'study'
+    register(root, assets)
+    p = load_registered(root)
+    assert p['maximum_generative_turns'] == 2
+    assert p['controlled_author_generative_turns'] == 0
+    assert p['controlled_author_reservations_per_arm'] == 1
+    assert p['reviewer_limits']['max_observed_tokens'] == 100000
+    assert p['reviewer_limits']['max_tool_calls'] == 12
+    assert p['human_comprehension'] is None
+    (root / 'controlled-native').write_text('Changed after freezing.')
+    with pytest.raises(ValueError, match='Registered input changed'):
+        load_registered(root)
+
+
+def test_code_review_controls_allow_only_verified_capture_head_variation():
+    """Commit time may change the head, never the tree/diff, owner request, author input or a foreign head reference."""
+    from backend.knowledge.reviews import digest as subject_digest
+    from evals.context_alignment.protocol import digest
+    from evals.profile_communication.code_review import compare_code_pair
+
+    def result(head, run):
+        """Construct independent identities over otherwise identical substantive candidate evidence."""
+        text = '{"request":"Zeros count as observations"}'
+        snapshot = {'candidate': {'head_sha': head, 'base_sha': 'base', 'tree_sha': 'tree', 'diff_sha256': 'diff'},
+                    'author_input': {'input_sha256': digest(text.encode()), 'bytes': len(text)},
+                    'author_request': {'text': 'Zeros count as observations'}, 'checks': []}
+        sha = subject_digest(snapshot)
+        return {'controlled_author': {'packet': {'snapshot': snapshot, 'subject_sha256': sha},
+                                     'input_text': text, 'candidate': {'head_sha': head}},
+                'attempts': [{'input': {'scope': {'run_id': run, 'attempt_id': run + '-attempt'},
+                    'execution': {'head_sha': head, 'subject_sha256': sha},
+                    'review': {'run_id': run, 'subject_sha256': sha}},
+                    'catalog_hash': 'same-tools', 'model_control': {'model': 'fixed'}, 'comparable_input_sha256': 'unused'}]}
+
+    left, right = result('a' * 40, 'one'), result('b' * 40, 'two')
+    assert compare_code_pair(left, right)['controls_matched']
+    right['attempts'][0]['input']['execution']['head_sha'] = 'foreign'
+    with pytest.raises(ValueError, match='head'):
+        compare_code_pair(left, right)
+    right = result('b' * 40, 'two')
+    right['controlled_author']['packet']['snapshot']['candidate']['tree_sha'] = 'different'
+    with pytest.raises(ValueError, match='subject|packet'):
+        compare_code_pair(left, right)
+    right = result('b' * 40, 'two')
+    right['controlled_author']['input_text'] = '{"request":"Zeros are missing"}'
+    with pytest.raises(ValueError, match='input'):
+        compare_code_pair(left, right)
+
+
 def test_review_input_normalizes_only_its_own_run_alias():
     """A fresh review UUID may alias scope; a foreign review reference is a substantive mismatch."""
     from evals.context_alignment.protocol import comparable_input

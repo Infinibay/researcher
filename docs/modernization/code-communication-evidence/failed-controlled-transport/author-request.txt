@@ -1,0 +1,1 @@
+Synthetic controlled author, no generative model. Implement mean_observations(records) using list_observations. Every record has a numeric value. Every observation counts once, including zero. Values0and10 must return5; an empty registry returnsNone and all-zero observations return0. Preserve supplied tests. This is only a private candidate, no acceptance or publication.

@@ -1,0 +1,13 @@
+{
+  "case_id": "code_review_zero_mean",
+  "arm": "baseline",
+  "status": "failed",
+  "runs": [],
+  "admissions_sent": 0,
+  "actual_reviewer_turn_budget": 1,
+  "controlled_author_generative_turns": 0,
+  "source_base_sha": "44d4c2389b15efef61aa3a1ca2fa73866bca84d9",
+  "error_type": "ExceptionGroup",
+  "error": "unhandled errors in a TaskGroup (1 sub-exception)",
+  "seconds": 15.535
+}

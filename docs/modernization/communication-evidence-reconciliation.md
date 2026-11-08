@@ -1,8 +1,9 @@
 # Comunicación: evidencia vigente y trabajo pendiente
 
 Conciliación del 8 de noviembre de 2026 sobre `d4c5419`, contrastada por un
-revisor con contexto limpio. No hubo nuevas generaciones, cambios de política
-ni repetición de evaluaciones. Los resultados originales permanecen intactos.
+revisor con contexto limpio. La conciliación inicial no requirió generaciones ni cambios de política. Después
+se añadieron los pares acotados de desarrollo, hallazgos y código, con sus turnos
+reales declarados en cada informe. Los resultados originales permanecen intactos.
 
 ## Fallos históricos y comprobaciones posteriores
 
@@ -29,13 +30,12 @@ ni cuota restante. Tampoco es necesario repetirlos para volver a demostrar lo mi
   una tarea reconocible, explicar objetivo y ejemplo de entrada/salida, y permitir
   una corrección útil; evitar otro cuestionario abstracto. La adaptación posterior
   también necesita observarse. [Registro humano](interaction-human-review.json).
-- **Comparaciones de comunicación:** el [par de desarrollo](development-communication-review.md) ya se ejecutó con
-  ambos resultados entregados y controles iguales; faltan casos nuevos antes/después
-  para `code_review`. El [par de revisión de hallazgos](finding-communication-review.md)
-  también entregó ambas decisiones/explicaciones con controles iguales. Los revisores sí tienen turnos
-  funcionales reales históricos: [código](native-code-review-live.json) y
-  [hallazgos](native-review-live.json). Eso no es una comparación de comunicación
-  bajo la política final ni una prueba de calidad general.
+- **Comparaciones de comunicación:** ya se ejecutaron los pares nuevos de
+  [desarrollo](development-communication-review.md), [hallazgos](finding-communication-review.md)
+  y [código](code-communication-review.md), ambos brazos entregados y controles
+  verificados. Hay observaciones comparativas para los siete perfiles activos,
+  con distintos catálogos y alcances. No acredita catálogo9 en todos, comprensión
+  humana ni eficacia general; no repetir estos casos por una lista histórica.
 - **Recorridos del §7.7:** evaluar conjuntamente en la UI real la explicación de
   espera larga, fallo recuperable y resultado parcial, con intervención del usuario.
   Reutilizar persistencia/Stop ya comprobados. Falta observar un ejemplo o diagrama

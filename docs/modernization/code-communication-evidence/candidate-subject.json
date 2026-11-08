@@ -1,0 +1,59 @@
+{
+  "subject_sha256": "8871cdf4475b7436c4077940db929a6a280f4a5950618f596ef9d511a500e7cf",
+  "snapshot": {
+    "schema_version": 2,
+    "author_request": {
+      "source_kind": "owner_admission",
+      "run_id": "00000000-0000-0000-0000-000000000001",
+      "text": "Synthetic controlled author, no generative model. Implement mean_observations(records) using list_observations. Every record has a numeric value. Every observation counts once, including zero. Values0and10 must return5; an empty registry returnsNone and all-zero observations return0. Preserve supplied tests. This is only a private candidate, no acceptance or publication."
+    },
+    "author_input": {
+      "input_sha256": "c1490e56a146bcee845a120f0a62b7a818ca4da416de8f09ae98af3529cc3987",
+      "bytes": 1527
+    },
+    "candidate": {
+      "project_id": 101,
+      "task_id": 1001,
+      "repository_id": 11,
+      "run_id": "00000000-0000-0000-0000-000000000001",
+      "attempt_id": "00000000-0000-0000-0000-000000000002",
+      "context_version": 1,
+      "fence": 1,
+      "base_sha": "44d4c2389b15efef61aa3a1ca2fa73866bca84d9",
+      "head_sha": "f997e4aaf8794a451a796845e32da88e045f89ed",
+      "tree_sha": "f3c5b314e2940f8e7122f1de498c41ed86d3d141",
+      "diff_sha256": "996b3734c309d3ff835c4a1465c92dfac276685b2195ebf0bc98aacc8b8b59cf"
+    },
+    "requirements": {
+      "task": {
+        "title": "Mean of observations including zeroes",
+        "description": null,
+        "type": "code",
+        "acceptance_criteria": null,
+        "context_json": null,
+        "priority": 2,
+        "estimated_complexity": "medium",
+        "branch_name": null,
+        "assigned_to": null,
+        "reviewer": null,
+        "epic_id": null,
+        "milestone_id": null,
+        "parent_task_id": null
+      },
+      "context_version": 1,
+      "corrections": [],
+      "task_changes": [],
+      "user_answers": []
+    },
+    "author": {
+      "run_id": "00000000-0000-0000-0000-000000000001",
+      "attempt_id": "00000000-0000-0000-0000-000000000002",
+      "actor_id": "controlled-author",
+      "fence": 1,
+      "thread_id": "owned-thread",
+      "turn_id": "owned-turn"
+    },
+    "diff_bytes": 735,
+    "checks": []
+  }
+}

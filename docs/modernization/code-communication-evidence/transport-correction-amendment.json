@@ -1,0 +1,12 @@
+{
+  "prior_registration_sha256": "fd1cfeab766e28fa27b4507c87da923919c34fc98df5776bbe7ab860b9ea3d6f",
+  "current_registration_sha256": "0161988b69da370ef567b7b2960235f7cc54889e2fb18867b8c7a5ff07358d12",
+  "prior_status": "failed controlled author, zero real reviewer admissions/generations",
+  "cause": "Controlled native transport JSON-decoded Ken source prose; first outgoing tool count1, failing account-free reproduction retained. Only command receipts are now JSON-decoded.",
+  "original_process_exit": 1,
+  "original_peers_closed": true,
+  "original_unrevoked_grants": 0,
+  "original_attempt_and_reserved_usage": "Retained as recorded; no fabricated settlement, acceptance or replay.",
+  "new_real_reviewer_turn_ceiling": 2,
+  "scope": "Fresh corrected transport registration before any actual reviewer outcome; original files and hashes preserved."
+}

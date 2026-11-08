@@ -9475,3 +9475,32 @@ ni comprensión humana de esta muestra exploratoria.
 Bloque14:51:33–15:06:33UTC:15min hasta la verificación; checkpoint posterior
 excluido. Un revisor con contexto limpio investiga ahora el montaje mínimo de un
 candidato controlado para la comparación code_review, sólo lectura y sin generar.
+
+
+## 2026-11-08 — Comparación real de comunicación de revisión de código
+
+[Paquetes, verificación y recibos](code-communication-review.md). Autor mediante
+transporte controlado no generativo y captura/procedencia productivas; dos revisores
+reales por suscripción/Ken. Ambas propuestas confirmadas needs_revision:0y10 deben
+promediar5, el candidato descarta0y da10. Cuatro tests por brazo,2pass/2fail; paquete,
+entrada original y diff completos, citas hash/línea verificadas. Misma entrada
+original byte a byte, base/árbol/diff iguales, sólo head de captura y hashes derivados
+varían con validación explícita.148544/179488tokens reales observados,
+106,182/111,300s incluyendo autor.79/83peers cerrados,0grants,servicios-15; original/
+tests intactos, sin aceptación/publicación. Confirmación no significa aprobación.
+
+Primera preparación cortada después de un Kenread,0revisores reales. Archivo/fuente/
+registro/filas originales conservados. Unidad reproduce JSONDecodeError por tratar
+prosa Ken como JSON; stderr original ausente, causa original se declara inferida.
+Enmienda registrada antes de generar. CuatroRED y40casos finales pasan;85/322prompts
+vigentes. Presupuesto privado admite reserva controlada adicional, no otra generación:
+consumo del transporte desconocido, sin inventar cero ni gasto de cuenta. UnI001 en
+DD153. Funciones nuevas con docstrings ingleses. Sin nueva política/wheel/global.
+
+Terminan los tres perfiles comparativos pendientes. Siguen UI espera/error/parcial,
+humano/adaptación, Ken pendiente, docstrings/detalles y controles finales.42/43escenarios,
+12/12páginas por alcance. No repetir pares para mejorar prosa ni inferir eficacia general.
+
+Bloque15:08:59–15:42:08UTC:33min9s hasta verificar; checkpoint posterior excluido.
+Incluye revisión de montaje, implementación, fallo controlado previo y análisis.
+Los217,482s de tramos corregidos no representan todo ese bloque.

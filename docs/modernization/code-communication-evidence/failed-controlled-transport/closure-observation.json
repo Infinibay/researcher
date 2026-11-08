@@ -1,0 +1,104 @@
+{
+  "root_process_exit": 1,
+  "actual_reviewer_admissions": 0,
+  "actual_generative_turns": 0,
+  "controlled_transport_reservations": 1,
+  "run_status": "running",
+  "dispatch_status": "reserved",
+  "unrevoked_grants": 0,
+  "peers": [
+    [
+      "business",
+      "closed"
+    ],
+    [
+      "native",
+      "closed"
+    ],
+    [
+      "command",
+      "closed"
+    ],
+    [
+      "command",
+      "closed"
+    ],
+    [
+      "command",
+      "closed"
+    ],
+    [
+      "command",
+      "closed"
+    ],
+    [
+      "command",
+      "closed"
+    ],
+    [
+      "command",
+      "closed"
+    ],
+    [
+      "command",
+      "closed"
+    ],
+    [
+      "command",
+      "closed"
+    ],
+    [
+      "command",
+      "closed"
+    ],
+    [
+      "command",
+      "closed"
+    ],
+    [
+      "command",
+      "closed"
+    ],
+    [
+      "command",
+      "closed"
+    ],
+    [
+      "command",
+      "closed"
+    ],
+    [
+      "command",
+      "closed"
+    ],
+    [
+      "command",
+      "closed"
+    ],
+    [
+      "command",
+      "closed"
+    ],
+    [
+      "ken",
+      "closed"
+    ],
+    [
+      "ken",
+      "closed"
+    ],
+    [
+      "command",
+      "closed"
+    ],
+    [
+      "command",
+      "closed"
+    ],
+    [
+      "command",
+      "closed"
+    ]
+  ],
+  "diagnosis": "Original trace is RpcDisconnected after one outgoing Ken read. Unconditional JSON decode of Ken prose is directly reproduced by a failing account-free test; original child stderr was not retained, so that causal attribution is an inference. Original rows/usage unchanged; corrected registration precedes actual reviewer outcomes."
+}

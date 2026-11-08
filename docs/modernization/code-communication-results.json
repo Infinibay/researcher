@@ -1,0 +1,288 @@
+{
+  "base_commit": "5878edf0535da1c30c6933bb56f94ff6c426b18e",
+  "actual_subscription_turns": 2,
+  "controlled_author_generative_turns": 0,
+  "corrected_controlled_reservations": 2,
+  "prior_failed_controlled_reservations": 1,
+  "prior_failure": {
+    "root_process_exit": 1,
+    "actual_reviewer_admissions": 0,
+    "actual_generative_turns": 0,
+    "controlled_transport_reservations": 1,
+    "run_status": "running",
+    "dispatch_status": "reserved",
+    "unrevoked_grants": 0,
+    "peers": [
+      [
+        "business",
+        "closed"
+      ],
+      [
+        "native",
+        "closed"
+      ],
+      [
+        "command",
+        "closed"
+      ],
+      [
+        "command",
+        "closed"
+      ],
+      [
+        "command",
+        "closed"
+      ],
+      [
+        "command",
+        "closed"
+      ],
+      [
+        "command",
+        "closed"
+      ],
+      [
+        "command",
+        "closed"
+      ],
+      [
+        "command",
+        "closed"
+      ],
+      [
+        "command",
+        "closed"
+      ],
+      [
+        "command",
+        "closed"
+      ],
+      [
+        "command",
+        "closed"
+      ],
+      [
+        "command",
+        "closed"
+      ],
+      [
+        "command",
+        "closed"
+      ],
+      [
+        "command",
+        "closed"
+      ],
+      [
+        "command",
+        "closed"
+      ],
+      [
+        "command",
+        "closed"
+      ],
+      [
+        "command",
+        "closed"
+      ],
+      [
+        "ken",
+        "closed"
+      ],
+      [
+        "ken",
+        "closed"
+      ],
+      [
+        "command",
+        "closed"
+      ],
+      [
+        "command",
+        "closed"
+      ],
+      [
+        "command",
+        "closed"
+      ]
+    ],
+    "diagnosis": "Original trace is RpcDisconnected after one outgoing Ken read. Unconditional JSON decode of Ken prose is directly reproduced by a failing account-free test; original child stderr was not retained, so that causal attribution is an inference. Original rows/usage unchanged; corrected registration precedes actual reviewer outcomes."
+  },
+  "budget_ruling": "Private fixture adds one non-generative controlled transport reservation. Actual subscription reviewer remains one turn under original operator ceilings. Original resource file unchanged; controlled usage stays separately attributed/unknown, not account expenditure.",
+  "controls": {
+    "controls_matched": true,
+    "quality_review": "pending",
+    "human_observation": "pending",
+    "model_receipt_identity_variation": [
+      "run_id",
+      "attempt_id",
+      "selected_at"
+    ],
+    "verified_capture_identity_variation": [
+      "candidate.head_sha",
+      "derived subject_sha256 references"
+    ]
+  },
+  "arms": {
+    "baseline": {
+      "seconds_including_controlled_author": 106.182,
+      "actual_reviewer_observed_tokens": 148544,
+      "controlled_tokens": null,
+      "controlled_generative_turns": 0,
+      "actual_reviewer_turns": 1,
+      "reviewer_model_control": {
+        "model": "gpt-6.1-sol",
+        "reasoning_effort": "low",
+        "source": "host",
+        "revision": 0,
+        "project_id": 101,
+        "actor_id": "code-reviewer",
+        "fence": 1
+      },
+      "proposal_verdict": "needs_revision",
+      "record_state": "confirmed",
+      "complete_packet_author_input_diff_reads": true,
+      "exact_file_references_verified": 4,
+      "tests": {
+        "run": 4,
+        "pass": 2,
+        "fail": 2,
+        "receipts": [
+          {
+            "job_id": "6b45217a-7c65-4657-a657-5948f4f0a9bd",
+            "exit_code": 1,
+            "local_execution_closed": true,
+            "stderr": "test_all_zeroes (test_evidence.MeanTests.test_all_zeroes)\nZero observations must not become an empty registry. ... FAIL\ntest_empty (test_evidence.MeanTests.test_empty)\nEmpty input is represented explicitly by None. ... ok\ntest_nonzero (test_evidence.MeanTests.test_nonzero)\nOrdinary input retains its arithmetic mean. ... ok\ntest_zero_counts (test_evidence.MeanTests.test_zero_counts)\nA real zero contributes to both sample size and the requested mean. ... FAIL\n\n======================================================================\nFAIL: test_all_zeroes (test_evidence.MeanTests.test_all_zeroes)\nZero observations must not become an empty registry.\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/run/researcher-source/test_evidence.py\", line 12, in test_all_zeroes\n    self.assertEqual(mean_observations([{\"value\": 0}, {\"value\": 0}]), 0)\n    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: None != 0\n\n======================================================================\nFAIL: test_zero_counts (test_evidence.MeanTests.test_zero_counts)\nA real zero contributes to both sample size and the requested mean.\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/run/researcher-source/test_evidence.py\", line 9, in test_zero_counts\n    self.assertEqual(mean_observations([{\"value\": 0}, {\"value\": 10}]), 5)\n    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 10.0 != 5\n\n----------------------------------------------------------------------\nRan 4 tests in 0.001s\n\nFAILED (failures=2)\n"
+          }
+        ]
+      },
+      "peers_closed": 79,
+      "unrevoked_grants": 0,
+      "service_exit": -15,
+      "accepted": false,
+      "published": false,
+      "original_and_tests_unchanged": true,
+      "human_comprehension": null,
+      "human_effort_seconds": null
+    },
+    "candidate": {
+      "seconds_including_controlled_author": 111.3,
+      "actual_reviewer_observed_tokens": 179488,
+      "controlled_tokens": null,
+      "controlled_generative_turns": 0,
+      "actual_reviewer_turns": 1,
+      "reviewer_model_control": {
+        "model": "gpt-6.1-sol",
+        "reasoning_effort": "low",
+        "source": "host",
+        "revision": 0,
+        "project_id": 101,
+        "actor_id": "code-reviewer",
+        "fence": 1
+      },
+      "proposal_verdict": "needs_revision",
+      "record_state": "confirmed",
+      "complete_packet_author_input_diff_reads": true,
+      "exact_file_references_verified": 3,
+      "tests": {
+        "run": 4,
+        "pass": 2,
+        "fail": 2,
+        "receipts": [
+          {
+            "job_id": "e56e6fc5-0035-418c-add7-a6a122fdd7cb",
+            "exit_code": 1,
+            "local_execution_closed": true,
+            "stderr": "test_all_zeroes (test_evidence.MeanTests.test_all_zeroes)\nZero observations must not become an empty registry. ... FAIL\ntest_empty (test_evidence.MeanTests.test_empty)\nEmpty input is represented explicitly by None. ... ok\ntest_nonzero (test_evidence.MeanTests.test_nonzero)\nOrdinary input retains its arithmetic mean. ... ok\ntest_zero_counts (test_evidence.MeanTests.test_zero_counts)\nA real zero contributes to both sample size and the requested mean. ... FAIL\n\n======================================================================\nFAIL: test_all_zeroes (test_evidence.MeanTests.test_all_zeroes)\nZero observations must not become an empty registry.\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/run/researcher-source/test_evidence.py\", line 12, in test_all_zeroes\n    self.assertEqual(mean_observations([{\"value\": 0}, {\"value\": 0}]), 0)\n    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: None != 0\n\n======================================================================\nFAIL: test_zero_counts (test_evidence.MeanTests.test_zero_counts)\nA real zero contributes to both sample size and the requested mean.\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/run/researcher-source/test_evidence.py\", line 9, in test_zero_counts\n    self.assertEqual(mean_observations([{\"value\": 0}, {\"value\": 10}]), 5)\n    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 10.0 != 5\n\n----------------------------------------------------------------------\nRan 4 tests in 0.001s\n\nFAILED (failures=2)\n"
+          }
+        ]
+      },
+      "peers_closed": 83,
+      "unrevoked_grants": 0,
+      "service_exit": -15,
+      "accepted": false,
+      "published": false,
+      "original_and_tests_unchanged": true,
+      "human_comprehension": null,
+      "human_effort_seconds": null
+    }
+  },
+  "total_actual_reviewer_observed_tokens": 328032,
+  "total_arm_seconds_including_controlled_author": 217.482,
+  "source_checks": {
+    "started_at": "2026-11-08T15:28:34.063182+00:00",
+    "finished_at": "2026-11-08T15:28:35.780390+00:00",
+    "seconds": 1.717,
+    "arguments": [
+      "--import-mode=importlib",
+      "evals/profile_communication/test_protocol.py",
+      "backend/tests/runtime/test_context_alignment_evaluation.py",
+      "backend/tests/runtime/test_finding_communication_evaluation.py",
+      "evals/current_scientific/test_protocol.py"
+    ],
+    "exit": 0,
+    "interrupted": false,
+    "killed": false,
+    "cases": 40,
+    "passed": 40,
+    "failures": [],
+    "errors": [],
+    "skipped": [],
+    "unnamed_excluded": 0,
+    "controllers_before": [
+      "cpu",
+      "memory",
+      "pids"
+    ],
+    "controllers_after": [
+      "cpu",
+      "memory",
+      "pids"
+    ],
+    "cpu_max": "800000 100000"
+  },
+  "initial_red_cases": 4,
+  "rubric": [
+    "Read the exact subject, original author input, full diff and relevant candidate/tests through the offered readers and actual Ken.",
+    "Identify dropping real zero values:0and10 must mean5, candidate gives10; all-zero input must give0, notNone; distinguish absent records from a real zero.",
+    "Record one exact-subject needs_revision proposal with actionable source citations/checks/limits; no unsupported passing-tests, acceptance or publication claim.",
+    "Explain in Spanish original purpose and input/output with a faithful simple example; no causal/general efficacy or human-comprehension claim."
+  ],
+  "rubric_observations": {
+    "baseline": [
+      "supported",
+      "supported",
+      "supported",
+      "supported"
+    ],
+    "candidate": [
+      "supported",
+      "supported",
+      "supported",
+      "supported"
+    ]
+  },
+  "implementer_review_blinded": false,
+  "human_comprehension": null,
+  "human_effort_seconds": null,
+  "prompt_inventory": {
+    "files": 322,
+    "entries": 85,
+    "requires_review": 0
+  },
+  "lint": {
+    "count": 1,
+    "codes": [
+      "I001"
+    ],
+    "disposition": "Deferred import order, no clean-lint claim"
+  },
+  "limits": [
+    "One exploratory pair; no superiority, representativeness or human acceptance.",
+    "Controlled native reservations are not generative subscription turns, token usage remains separately unknown.",
+    "No product policy/wheel/global suite changed; source/harness hashes preserve exact executed implementations."
+  ],
+  "block_started_at": "2026-11-08T15:08:59+00:00",
+  "verification_cut_at": "2026-11-08T15:42:08+00:00",
+  "seconds_to_verification_cut": 1989
+}

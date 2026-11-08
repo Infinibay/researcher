@@ -1,0 +1,155 @@
+{
+  "request": "Revisá el candidato exacto contra la petición original y las pruebas suministradas. Necesito entender si cumple y qué habría que corregir. Explicá en español la entrada, la salida esperada y un ejemplo concreto si encontrás un fallo. No sé si un dato igual a cero y un dato ausente significan lo mismo. Registrá la revisión con citas del candidato y límites de lo comprobado; no edites, aceptes ni publiques.",
+  "responses": {
+    "baseline": {
+      "summary": "Registré la revisión como **requiere corrección** (`needs_revision`).\n\nEl fallo está en [evidence.py:9](/run/researcher-source/evidence.py:9): `if record[\"value\"]` descarta los ceros antes de calcular la media.\n\nLa entrada es una colección de registros con `value` numérico. Cada registro debe contar una vez:\n\n| Entrada (`value`) | Salida esperada | Salida actual |\n|---|---:|---:|\n| 0 y 10 | 5 | 10.0 |\n| 0 y 0 | 0 | `None` |\n| Sin registros | `None` | `None` |\n| 4 y 6 | 5 | 5.0 |\n\n**Cero y ausencia no significan lo mismo:** cero es un dato válido; una colección vacía no contiene datos. Para 0 y 10, corresponde `(0 + 10) / 2 = 5`.\n\nLa corrección necesaria es quitar ese filtro y conservar todos los valores. Ejecuté las cuatro pruebas suministradas: dos pasaron y las dos relacionadas con ceros fallaron.\n\nLeí la entrada original, el diff completo y ambos archivos completos. No comprobé entradas inválidas ni hice mediciones de rendimiento. No modifiqué, acepté ni publiqué código.",
+      "proposal": {
+        "checks": [
+          {
+            "criterion": "Uso de list_observations y preservación de las pruebas suministradas",
+            "explanation": "mean_observations invoca list_observations. El diff completo solo modifica evidence.py; test_evidence.py permanece sin cambios.",
+            "outcome": "supported"
+          },
+          {
+            "criterion": "Media contando todas las observaciones, incluidos ceros",
+            "explanation": "El filtro de evidence.py:9 elimina ceros. test_zero_counts falla con 10.0 != 5 y test_all_zeroes falla con None != 0. Es un único defecto de filtrado con dos manifestaciones.",
+            "outcome": "concern"
+          },
+          {
+            "criterion": "Colección vacía y media ordinaria",
+            "explanation": "La salida detallada de unittest confirma test_empty y test_nonzero correctos: [] devuelve None y valores 4 y 6 devuelven 5.",
+            "outcome": "supported"
+          },
+          {
+            "criterion": "Evidencia de pruebas",
+            "explanation": "El packet no contiene checks del autor. La comprobación propia ejecutó las cuatro pruebas suministradas sin omisiones ni fallo de infraestructura; dos fallaron por aserciones sobre ceros. Job 6b45217a-7c65-4657-a657-5948f4f0a9bd, salida completa leída, proceso cerrado, exit_code 1.",
+            "outcome": "concern"
+          },
+          {
+            "criterion": "Mantenibilidad",
+            "explanation": "La condición de veracidad contradice el contrato y la docstring que promete media aritmética. Eliminar ese filtro es una corrección local suficiente para los casos especificados; mantener las pruebas existentes.",
+            "outcome": "concern"
+          },
+          {
+            "criterion": "Seguridad y rutas de error relevantes",
+            "explanation": "El código completo inspeccionado solo materializa observaciones, accede a value y realiza aritmética; no introduce I/O, ejecución dinámica ni acceso externo. El guard evita división por cero para entrada vacía. La evaluación se limita al contrato explícito de registros con value numérico.",
+            "outcome": "supported"
+          },
+          {
+            "criterion": "Rendimiento",
+            "explanation": "Recorrido lineal y memoria lineal por las listas materializadas. No se observa regresión algorítmica relevante para el cambio; no hay requisitos de tamaño ni mediciones de rendimiento.",
+            "outcome": "supported"
+          }
+        ],
+        "limitations": [
+          "Revisión limitada al candidato exacto con subject_sha256 indicado; no se modificó, aceptó ni publicó código.",
+          "No se ejecutaron pruebas adicionales ni benchmarks; solo las cuatro pruebas suministradas y análisis estático de los archivos completos y llamadores encontrados por Ken.",
+          "Se usa la premisa explícita de la petición: cada registro contiene value numérico. El comportamiento ante claves ausentes, None, tipos no numéricos, valores no finitos o precisión de tipos numéricos no está especificado ni validado.",
+          "El indicador partial de Ken corresponde al rango solicitado hasta línea 100; el lector exacto confirmó complete_file=true para las 10 líneas de evidence.py y las 18 de test_evidence.py, sin cola pendiente."
+        ],
+        "rationale": "El candidato incumple el requisito explícito de contar cada observación, incluido cero. En evidence.py:9 el filtro de veracidad descarta los valores 0 antes de calcular el denominador. La entrada [{\"value\":0},{\"value\":10}] produce 10.0 en vez de 5; dos ceros producen None en vez de 0. Cero es una observación numérica válida; ausencia de observaciones significa una colección vacía. Corregir eliminando el filtro if record[\"value\"], conservando todas las observaciones y reservando None para la colección vacía. La petición original es owner_admission, no una inferencia del plan; work_delivery es null y no nombra prerrequisitos. Se leyeron completos packet, author_input, diff, evidence.py y test_evidence.py. Ken localizó como llamadores las cuatro pruebas suministradas. La ejecución observada de python -B -m unittest -v terminó con cuatro pruebas ejecutadas: dos correctas y dos fallidas; no es una mera inferencia del código de salida.",
+        "references": [
+          {
+            "kind": "file",
+            "path": "evidence.py",
+            "quote": "    values = [record[\"value\"] for record in list_observations(records) if record[\"value\"]]\n    return sum(values) / len(values) if values else None",
+            "sha256": "20b63f45ed943e920018ac36035e09cc5ac62ff0a0b090f4d92746cc82f48e2d",
+            "start_line": 9
+          },
+          {
+            "kind": "file",
+            "path": "test_evidence.py",
+            "quote": "        self.assertEqual(mean_observations([{\"value\": 0}, {\"value\": 10}]), 5)",
+            "sha256": "6cd6c13cc4ed6bf3d170ceb6d939cc142f33a93e4f680eba64fe23d8558590cc",
+            "start_line": 9
+          },
+          {
+            "kind": "file",
+            "path": "test_evidence.py",
+            "quote": "        self.assertEqual(mean_observations([{\"value\": 0}, {\"value\": 0}]), 0)",
+            "sha256": "6cd6c13cc4ed6bf3d170ceb6d939cc142f33a93e4f680eba64fe23d8558590cc",
+            "start_line": 12
+          },
+          {
+            "kind": "file",
+            "path": "evidence.py",
+            "quote": "def list_observations(records):\n    \"\"\"Return the supplied observations, preserving real zero values and order.\"\"\"\n    return list(records)",
+            "sha256": "20b63f45ed943e920018ac36035e09cc5ac62ff0a0b090f4d92746cc82f48e2d",
+            "start_line": 3
+          }
+        ],
+        "verdict": "needs_revision"
+      }
+    },
+    "candidate": {
+      "summary": "El candidato **requiere corrección**. Registré la revisión como `needs_revision`, con citas vinculadas al hash del candidato.\n\nEl fallo está en [evidence.py:9](/run/researcher-source/evidence.py:9): `if record[\"value\"]` elimina los ceros antes de calcular la media. Cada cero debe contar como una observación.\n\nLa entrada esperada son registros con `value` numérico; la salida debe ser su media:\n\n| Entrada | Salida esperada | Salida observada |\n|---|---:|---:|\n| `[{\"value\": 0}, {\"value\": 10}]` | 5 | 10.0 |\n| `[{\"value\": 0}, {\"value\": 0}]` | 0 | `None` |\n| `[]` | `None` | `None` |\n\n**Cero y ausencia no significan lo mismo:** con 0 y 10 hay dos observaciones, por lo que corresponde `(0 + 10) / 2 = 5`. Una entrada vacía no contiene observaciones. Los registros sin la clave `value` quedan fuera del contrato original.\n\nLa corrección necesaria es quitar ese filtro y conservar todos los valores.\n\nLeí la entrada original, el diff completo y ambos archivos completos. Ejecuté las cuatro pruebas suministradas: **dos pasaron y dos fallaron**, precisamente las de ceros. No apliqué ni probé la corrección propuesta; no edité, acepté ni publiqué el candidato.",
+      "proposal": {
+        "checks": [
+          {
+            "criterion": "Petición original y sujeto exacto",
+            "explanation": "Se leyeron completos el packet, la entrada original del autor y los 735 caracteres del diff del sujeto 8871cdf4475b7436c4077940db929a6a280f4a5950618f596ef9d511a500e7cf. La petición es owner_admission y exige incluir ceros.",
+            "outcome": "supported"
+          },
+          {
+            "criterion": "Media aritmética con ceros y distinción entre cero y ausencia de observaciones",
+            "explanation": "evidence.py:9 elimina ceros mediante una condición booleana. Las pruebas test_zero_counts y test_all_zeroes fallaron: 10.0 != 5 y None != 0, respectivamente. El denominador excluye observaciones válidas.",
+            "outcome": "concern"
+          },
+          {
+            "criterion": "Uso de list_observations y casos vacío y sin ceros",
+            "explanation": "mean_observations llama a list_observations. test_empty y test_nonzero pasaron; [] devuelve None y los valores 4 y 6 producen 5.",
+            "outcome": "supported"
+          },
+          {
+            "criterion": "Conservación de pruebas suministradas y evidencia de ejecución",
+            "explanation": "El diff completo modifica únicamente evidence.py y deja test_evidence.py sin cambios. Se leyó completo ese archivo y se ejecutó python -B -m unittest -v: 4 pruebas, 2 aprobadas y 2 fallidas; exit_code 1, ejecución cerrada y salida completa. El packet no incluye comprobaciones previas del autor (checks=[]).",
+            "outcome": "supported"
+          },
+          {
+            "criterion": "Mantenibilidad y corrección propuesta",
+            "explanation": "La condición de veracidad no representa el contrato numérico. Eliminar `if record[\"value\"]` conserva el conteo y permite reutilizar sin cambios la rama que trata la lista vacía. No se aplicó ni verificó una modificación.",
+            "outcome": "concern"
+          },
+          {
+            "criterion": "Seguridad y rendimiento relevantes",
+            "explanation": "El cambio consiste en una función local para registros numéricos; no introduce acceso externo ni una frontera de seguridad. No hay requisito de rendimiento ni se hicieron mediciones.",
+            "outcome": "not_applicable"
+          }
+        ],
+        "limitations": [
+          "Se leyeron completos evidence.py y test_evidence.py con Ken y con el lector de candidato, además del packet, la entrada original y el diff completo.",
+          "La consulta del grafo de callers de Ken devolvió symbol not found; la búsqueda literal de mean_observations encontró la definición y las referencias en test_evidence.py. No se afirma cobertura de consumidores externos al repositorio.",
+          "La ejecución de las cuatro pruebas suministradas es evidencia de esta revisión, no una comprobación previamente registrada por el autor ni validación de todos los valores numéricos posibles.",
+          "No se probaron registros con value ausente o no numérico: están fuera de la premisa original de que cada registro tiene un valor numérico.",
+          "No se editaron archivos ni se aceptó o publicó el candidato; la corrección recomendada no fue aplicada."
+        ],
+        "rationale": "El candidato incumple el requisito explícito de contar cada observación, incluido cero. Hallazgo de prioridad alta en evidence.py:9: el filtro `if record[\"value\"]` descarta los valores cero antes de calcular la suma y el número de observaciones. Con entrada [{\"value\": 0}, {\"value\": 10}], la salida requerida es (0+10)/2 = 5, pero devuelve 10.0. Con [{\"value\": 0}, {\"value\": 0}] debe devolver 0, pero devuelve None, confundiendo observaciones reales con un registro vacío. Corregir eliminando ese filtro y conservando todos los valores producidos por list_observations; mantener None únicamente cuando no hay observaciones. La entrada contractual contiene registros con value numérico: no se solicitó definir el comportamiento de registros con una clave ausente.",
+        "references": [
+          {
+            "kind": "file",
+            "path": "evidence.py",
+            "quote": "    values = [record[\"value\"] for record in list_observations(records) if record[\"value\"]]\n    return sum(values) / len(values) if values else None",
+            "sha256": "20b63f45ed943e920018ac36035e09cc5ac62ff0a0b090f4d92746cc82f48e2d",
+            "start_line": 9
+          },
+          {
+            "kind": "file",
+            "path": "test_evidence.py",
+            "quote": "        self.assertEqual(mean_observations([{\"value\": 0}, {\"value\": 10}]), 5)",
+            "sha256": "6cd6c13cc4ed6bf3d170ceb6d939cc142f33a93e4f680eba64fe23d8558590cc",
+            "start_line": 9
+          },
+          {
+            "kind": "file",
+            "path": "test_evidence.py",
+            "quote": "        self.assertEqual(mean_observations([{\"value\": 0}, {\"value\": 0}]), 0)",
+            "sha256": "6cd6c13cc4ed6bf3d170ceb6d939cc142f33a93e4f680eba64fe23d8558590cc",
+            "start_line": 12
+          }
+        ],
+        "verdict": "needs_revision"
+      }
+    }
+  },
+  "human_comprehension": null
+}

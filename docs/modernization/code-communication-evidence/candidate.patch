@@ -1,0 +1,16 @@
+diff --git a/evidence.py b/evidence.py
+index 3740d77e6edd3503ea6bb8db1200095f400d4450..fd6284cd50b003f3c826021c570952d6523fe0c8 100644
+--- a/evidence.py
++++ b/evidence.py
+@@ -1,5 +1,10 @@
+-"""Retain observation order; average calculation has not been implemented."""
++"""Retain observations and calculate their arithmetic mean."""
+ 
+ def list_observations(records):
+     """Return the supplied observations, preserving real zero values and order."""
+     return list(records)
++
++def mean_observations(records):
++    """Return the arithmetic mean of the supplied observation values."""
++    values = [record["value"] for record in list_observations(records) if record["value"]]
++    return sum(values) / len(values) if values else None

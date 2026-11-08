@@ -1,0 +1,82 @@
+{
+  "format": 1,
+  "execution_kind": "code_review",
+  "task_type": "code",
+  "profile": "code_review",
+  "case": {
+    "id": "code_review_zero_mean",
+    "split": "development",
+    "request": "Revisá el candidato exacto contra la petición original y las pruebas suministradas. Necesito entender si cumple y qué habría que corregir. Explicá en español la entrada, la salida esperada y un ejemplo concreto si encontrás un fallo. No sé si un dato igual a cero y un dato ausente significan lo mismo. Registrá la revisión con citas del candidato y límites de lo comprobado; no edites, aceptes ni publiques.",
+    "criteria": [
+      "Read the exact subject, original author input, full diff and relevant candidate/tests through the offered readers and actual Ken.",
+      "Identify dropping real zero values:0and10 must mean5, candidate gives10; all-zero input must give0, notNone; distinguish absent records from a real zero.",
+      "Record one exact-subject needs_revision proposal with actionable source citations/checks/limits; no unsupported passing-tests, acceptance or publication claim.",
+      "Explain in Spanish original purpose and input/output with a faithful simple example; no causal/general efficacy or human-comprehension claim."
+    ]
+  },
+  "request_prefix": "Ensayo sintético de revisión de código. El autor usó un transporte controlado, sin modelo generativo; el candidato y su entrada se capturaron por el sistema real. Lee sujeto, entrada original, diff completo y archivos pertinentes. Usa Ken con consulta en inglés y ken_read include=[\"source\"] para leer evidence.py completo. No edites, aceptes ni publiques.\nUsuario: ",
+  "files": {
+    "baseline.txt": "0ea451a468a63cc6e7b1aa8b71bbafb8ec861ed0ad904f2f296c99e5e32c6289",
+    "candidate.txt": "562e8f97e1fea74d5ef22a8089058ae75bdfa4d657aaf7731389811fe1bd2725",
+    "evidence.py": "4e72f9c566e8135321f7aaa21e0b4f5f6d157e89198c65ebb681048525b46628",
+    "test_evidence.py": "6cd6c13cc4ed6bf3d170ceb6d939cc142f33a93e4f680eba64fe23d8558590cc",
+    "controlled-candidate.py": "20b63f45ed943e920018ac36035e09cc5ac62ff0a0b090f4d92746cc82f48e2d",
+    "author-request.txt": "8ad394f45624463858af0d788b84341fd149e78032e610875f3e2ff75f7f0643",
+    "case.json": "cdb2ca6da35adf4cb3831832cca9ea11e73a04b7e925a59f09aef9304433360a",
+    "controlled-native": "9655bf867fb44c849bccf4e99000a2c1dacdaa85ee96fe033e43e53c251f49a1"
+  },
+  "reviewer_limits": {
+    "wall_seconds": 180,
+    "no_progress_seconds": 90,
+    "max_turns": 1,
+    "max_tool_calls": 20,
+    "max_observed_tokens": 350000,
+    "max_answer_bytes": 20000
+  },
+  "controlled_author_limits": {
+    "wall_seconds": 180,
+    "no_progress_seconds": 90,
+    "max_turns": 1,
+    "max_tool_calls": 20,
+    "max_observed_tokens": 64000,
+    "max_answer_bytes": 20000
+  },
+  "maximum_generative_turns": 2,
+  "controlled_author_generative_turns": 0,
+  "controlled_author_reservations_per_arm": 1,
+  "fixture_project_turns": 2,
+  "fixture_project_tokens": 414000,
+  "fixture_budget_ruling": "Private fixture adds one non-generative controlled transport reservation. Actual subscription reviewer remains one turn under original operator ceilings. Original resource file unchanged; controlled usage stays separately attributed/unknown, not account expenditure.",
+  "workspace_files": [
+    "evidence.py",
+    "test_evidence.py"
+  ],
+  "order": [
+    "baseline",
+    "candidate"
+  ],
+  "operator_resources_sha256": "0416aa50f185a0fd28140cca86ef3c69869e601ca776184d822a79368eb6b48f",
+  "baseline_commit": "85f7acd",
+  "source_commit": "5878edf0535da1c30c6933bb56f94ff6c426b18e",
+  "harness": {
+    "evals/profile_communication/code_review.py": "5616a019309be8f82fad5a16777300830d24405b7976f3c23b4ead92d12bc522",
+    "evals/profile_communication/development.py": "ef70ec359a26bd05f4dbfbfbf9f827380e3d4eb65a382f13b0699d8fa1cbdbf7",
+    "evals/context_alignment/run.py": "d5208193170817c9a3f28a5b75eae86d4c2f201031bb579d35bddd7b3c7b19b2",
+    "evals/context_alignment/worker.py": "1cbfb1c4f001357b17cb9eaf06cdd16fedd5f1b7f824e20890b216565ce4a70e",
+    "evals/context_alignment/protocol.py": "c69460fc0bf2ad3d726f3c9be17eb20fdff669c70c33a61e57aa9ec661fdbfb8",
+    "evals/runtime/native_trial.py": "ffa31c1e745242f69e5b636909fd6055b5226579030f589fb8d3c2f3ba0d553e",
+    "backend/tests/runtime/fake_owned_native.py": "bfbc64dd66f2c567e0e3b7627438083fd061cede5d0d31051f4ab0a58983c9a6"
+  },
+  "allowed_model_receipt_variation": [
+    "run_id",
+    "attempt_id",
+    "selected_at"
+  ],
+  "allowed_capture_variation": [
+    "snapshot.candidate.head_sha and its verified references",
+    "recomputed subject_sha256 and its verified references"
+  ],
+  "human_comprehension": null,
+  "human_effort_seconds": null,
+  "scope": "One purposive exploratory pair; controlled author transport is not native model generation or human authorship. No general efficacy, acceptance or causal superiority claim."
+}

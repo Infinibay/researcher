@@ -57,6 +57,37 @@ exactamente su alias; una referencia ajena sigue siendo una diferencia. Autor,
 fuentes, contenido y subject hash se preservan. Comprensión humana permanece
 desconocida; una revisión documental no acredita validez causal o científica.
 
+## Comparación adicional de revisión de código
+
+`code_review.py` registra una media de observaciones que descarta ceros reales.
+Un transporte nativo controlado escribe el candidato mediante herramientas
+productivas; el sistema conserva entrada original, captura Git y cierre real.
+El revisor usa después el runtime real, capacidad `code_review`, archivos de sólo
+lectura y el sujeto exacto. El transporte controlado no genera con un modelo.
+
+```bash
+python -m evals.profile_communication.code_review --prepare \
+  --assets /ruta/recursos-host.json --output /ruta/nueva
+python -m evals.profile_communication.code_review --live \
+  --assets /ruta/recursos-host.json --output /ruta/nueva
+```
+
+Cada brazo tiene **una generación real de revisor**, con los límites originales
+del operador. El fixture necesita además una reserva interna para su autor sin
+modelo: dos reservas productivas, una generación por brazo. Esa ampliación local
+de contadores se declara antes de ejecutar; no cambia el archivo de recursos del
+operador ni amplía el turno generativo. Tokens desconocidos del transporte
+controlado no se presentan como cero observado ni consumo de la cuenta.
+
+Se conserva la política completa, el código del transporte y sus hashes. El
+transporte reutiliza el fixture de protocolo existente, cambiando sólo su rama
+de edición y el modelo anunciado; no se usa como revisor. La comparación exige
+la misma entrada original byte por byte, base, árbol, diff, requisitos y checks.
+La hora de captura produce otro commit: sólo se normalizan su head y los hashes
+derivados tras verificar que cada referencia pertenece al recibo de su brazo.
+Los originales se conservan. Ninguna decisión acepta, publica o demuestra
+comprensión humana; el registro bloquea replay de brazos iniciados.
+
 ## Comparaciones históricas de planificación, ciencia y auditoría
 
 Este ensayo extiende el evaluador instalado de `context_alignment`: mismo
