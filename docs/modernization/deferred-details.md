@@ -1265,9 +1265,12 @@ idempotencia principal ya está verificada en task-comment-review.md.
 
 ## DD145 — explicación y auditoría después de las tareas gruesas
 
-Ciencia actual:5/6criterios y4parcial; explicar denominador inicial del cambio
-relativo (5.86%frente4.57puntos), quitar auditoría de herramientas/cierre de la
-explicación breve yaclararautoría«evaluador». No regenerar el caso para ocultarlo.
+Ciencia actual: cinco criterios completos y el criterio 4 parcial. La revisión
+independiente detectó que la rúbrica excedía la petición al exigir porcentaje
+relativo. Mantener la puntuación preregistrada; durante el pulido, omitir ese
+contraste innecesario si no se explica, sin ampliar la matemática para obtener
+6/6. Separar auditoría de herramientas/cierre de la explicación breve y aclarar
+la autoría de «evaluador». No regenerar el caso para ocultarlo.
 C10yaentrega50EURdurable. Pulir densidad/compositor/vocabulario de espera en la
 cabecera yreferencias técnicas del motivo. La cabecera cuenta trabajo pendiente,
 no prueba un proceso vivo; hacer más inmediata su lectura. Elharnessdehandoff
@@ -1275,3 +1278,21 @@ mantiene unbase_commit4cca5d4hardcoded: no atribuirlo al checkoutactual9280815;
 corregir metadato en futuras inscripciones sin editar el registro congelado.
 Lint del nuevo lector: imports/estilo pendiente; docstrings de módulo/funciones
 presentes. Gates humanos/perfiles/suite global siguen principales.
+
+
+## DD146 — documentación relevante para Ken
+
+Requisito explícito del usuario, pendiente de completar después de las capacidades
+principales. Auditoría sintáctica de `d278653`, backend propio sin tests: cero
+módulos no vacíos sin docstring y 621 definiciones sin él, incluidas funciones
+privadas y anidadas. Presencia no mide calidad ni convierte las 621 en piezas
+igualmente relevantes. El recibo detallado está en
+`.superpowers/sdd/2026-10-31-actualizacion-proyecto/docstring-presence-current.json`.
+
+Cubrir clases y métodos relevantes del motor, SQLite, autoridad y fronteras de
+proceso. Documentar propósito, contrato y límites en inglés, con entradas/salidas
+y efectos cuando ayuden a encontrar y usar el código. Evitar docstrings que solo
+repitan el nombre. Revisar el contenido al cambiar el comportamiento; mantener
+las descripciones de herramientas que realmente recibe el modelo bajo su revisión
+de prompts. No declarar toda la documentación completa por verificar módulos o
+solo las funciones nuevas de una entrega.

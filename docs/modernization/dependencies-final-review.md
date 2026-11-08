@@ -77,3 +77,13 @@ prompts/inversas71/global/revisiónfinal. Detalles al final.
 [Resultados](dependencies-final-results.json),
 [evidencia](dependencies-final-evidence/initial-summary.json),
 [licencias actuales](dependencies-final-evidence/licenses.json).
+
+
+## Revisión por aviso sobre el uso real
+
+La [matriz independiente](dependency-advisory-dispositions-2026-11-08.md) contrasta
+los 12 IDs únicos de ONNX y los cuatro de Chroma con fuentes primarias. Distingue
+APIs utilizadas, APIs no observadas en las fuentes verificadas y mitigaciones
+reales, con sus desconocidos. La actualización coherente de Ken o una decisión
+explícita sobre el riesgo residual siguen pendientes. Esta revisión no cambia el
+pin, no repite el candidato probado ni acepta el riesgo por el propietario.

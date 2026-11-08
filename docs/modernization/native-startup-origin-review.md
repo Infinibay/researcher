@@ -77,3 +77,20 @@ La historia es de preparación/cierre, no de un plan aceptado. No se continúan
 variantes equivalentes. Proyectos y fiabilidad original siguen principales;
 siguiente macroindependiente: idempotencia de comentarios de tarea.
 [Recibo](native-history-results.json), runner evals/operation/preparation_history.py.
+
+
+## Revisión independiente del gate de Proyectos
+
+Una revisión estática de contexto limpio sobre `d278653` no encontró evidencia
+suficiente para afirmar una carrera interna. El requisito de modificar la
+autoridad solo después de demostrar una causa se conserva. Se revisó la
+dependencia que obligaba a producir esa corrección antes de aceptar cualquier
+alcance de Proyectos: el contrato original permite aceptación acotada manteniendo
+problemas mayores abiertos. El [plan correctivo](../superpowers/plans/2026-11-08-native-preparation-contention.md)
+explicita el cambio y la comprobación pendiente sobre el intento original.
+
+`service.py` distingue cierre confirmado e inferencia; Proyectos conserva el enlace
+al run fallido y Tareas muestra su explicación. Falta acreditar ese recorrido
+instalado tras recarga, conservando presupuesto y sin nueva admisión, además de
+vincular Stop con su prueba anterior. La página y el incidente permanecen abiertos.
+No se ejecutaron otra preparación ni otro turno como parte de esta revisión.

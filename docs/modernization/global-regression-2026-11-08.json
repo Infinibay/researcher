@@ -1,0 +1,283 @@
+{
+  "base_commit": "d278653",
+  "scope": "Interrupted original global attempt; not complete global acceptance",
+  "collected": 2568,
+  "completed_named": 2075,
+  "passed_named": 2050,
+  "failures": [
+    {
+      "nodeid": "backend/tests/api/test_persistence_boundaries.py::test_writer_contention_leaves_health_and_websocket_responsive",
+      "seconds": 2.448,
+      "message": "AssertionError: Original request never reached its write\nassert False\n +  where False = wait(2)\n +    where wait = <threading.Event at 0x7fe20261b0b0: unset>.wait"
+    },
+    {
+      "nodeid": "backend/tests/api/test_persistence_boundaries.py::test_process_loss_preserves_one_atomic_task_event[before]",
+      "seconds": 0.775,
+      "message": "AssertionError: \nassert 0 == 72\n +  where 0 = CompletedProcess(args=['/home/andres/.codex/worktrees/b09e/researcher/.superpowers/sdd/2026-10-31-actualizacion-proyec...', 'before', '6684a57725ac32634c70f537df1f047f0eaa079f75d4a025cb56dc120969f951'], returncode=0, stdout=b'', stderr=b'').returncode"
+    },
+    {
+      "nodeid": "backend/tests/api/test_persistence_boundaries.py::test_process_loss_preserves_one_atomic_task_event[after]",
+      "seconds": 0.779,
+      "message": "AssertionError: \nassert 0 == 73\n +  where 0 = CompletedProcess(args=['/home/andres/.codex/worktrees/b09e/researcher/.superpowers/sdd/2026-10-31-actualizacion-proyec...b', 'after', '6684a57725ac32634c70f537df1f047f0eaa079f75d4a025cb56dc120969f951'], returncode=0, stdout=b'', stderr=b'').returncode"
+    },
+    {
+      "nodeid": "backend/tests/runtime/test_auxiliary_budget.py::test_unused_auxiliary_inverse_preserves_old_schema_and_refuses_work",
+      "seconds": 0.38,
+      "message": "RuntimeError: Check policy inverse refuses newer schema"
+    },
+    {
+      "nodeid": "backend/tests/runtime/test_auxiliary_continuation.py::test_unused_inverse_and_used_history_guard",
+      "seconds": 0.377,
+      "message": "RuntimeError: Check policy inverse refuses newer schema"
+    },
+    {
+      "nodeid": "backend/tests/runtime/test_auxiliary_restoration.py::test_origin_inverse_requires_unused_permission_and_archival",
+      "seconds": 0.375,
+      "message": "RuntimeError: Check policy inverse refuses newer schema"
+    },
+    {
+      "nodeid": "backend/tests/runtime/test_code_review_session.py::test_owned_native_review_records_exact_decision_after_closure",
+      "seconds": 23.317,
+      "message": "Failed: Timeout (>20.0s) from pytest-timeout."
+    },
+    {
+      "nodeid": "backend/tests/runtime/test_code_review_session.py::test_changed_review_cannot_confirm_and_retains_original_proposal[context]",
+      "seconds": 20.309,
+      "message": "Failed: Timeout (>20.0s) from pytest-timeout."
+    },
+    {
+      "nodeid": "backend/tests/runtime/test_code_review_session.py::test_changed_review_cannot_confirm_and_retains_original_proposal[source]",
+      "seconds": 20.01,
+      "message": "Failed: Timeout (>20.0s) from pytest-timeout."
+    },
+    {
+      "nodeid": "backend/tests/runtime/test_code_review_session.py::test_stop_during_review_confirmation_closes_original_owner_and_joins_work",
+      "seconds": 20.265,
+      "message": "Failed: Timeout (>20.0s) from pytest-timeout."
+    },
+    {
+      "nodeid": "backend/tests/runtime/test_code_review_session.py::test_coordinator_schedules_native_review_and_does_not_finish_unconfirmed_work[False-False]",
+      "seconds": 23.508,
+      "message": "Failed: Timeout (>20.0s) from pytest-timeout."
+    },
+    {
+      "nodeid": "backend/tests/runtime/test_code_review_session.py::test_coordinator_schedules_native_review_and_does_not_finish_unconfirmed_work[True-False]",
+      "seconds": 23.784,
+      "message": "Failed: Timeout (>20.0s) from pytest-timeout."
+    },
+    {
+      "nodeid": "backend/tests/runtime/test_code_review_session.py::test_coordinator_schedules_native_review_and_does_not_finish_unconfirmed_work[False-True]",
+      "seconds": 23.319,
+      "message": "Failed: Timeout (>20.0s) from pytest-timeout."
+    },
+    {
+      "nodeid": "backend/tests/runtime/test_data_boundaries.py::test_stop_interrupts_original_worker_before_contended_write_finishes",
+      "seconds": 2.705,
+      "message": "assert False"
+    },
+    {
+      "nodeid": "backend/tests/runtime/test_development_session.py::test_check_result_after_context_correction_is_retained_without_approval",
+      "seconds": 20.34,
+      "message": "Failed: Timeout (>20.0s) from pytest-timeout."
+    },
+    {
+      "nodeid": "backend/tests/runtime/test_development_session.py::test_stop_during_owned_check_closes_writer_and_retains_original_record",
+      "seconds": 20.496,
+      "message": "Failed: Timeout (>20.0s) from pytest-timeout."
+    },
+    {
+      "nodeid": "backend/tests/runtime/test_legacy_catalog_removal.py::test_historical_roster_reader_preserves_original_memory_and_runs",
+      "seconds": 0.382,
+      "message": "TypeError: object AgentList can't be used in 'await' expression"
+    },
+    {
+      "nodeid": "backend/tests/runtime/test_native_evaluation.py::test_scenario_failure_records_original_service_closure",
+      "seconds": 0.398,
+      "message": "AssertionError: Regex pattern did not match.\n  Expected regex: 'scenario failed'\n  Actual message: 'Expected one new pairing file from this original service start'"
+    },
+    {
+      "nodeid": "backend/tests/runtime/test_owner_command_output.py::test_owner_reads_binary_windows_after_authority_ends_without_mutation",
+      "seconds": 0.885,
+      "message": "AssertionError: assert RunView(run_i...election=None) == RunView(run_i...election=None)\n  \n  Omitting 21 identical items, use -vv to show\n  Differing attributes:\n  ['status', 'fence']\n  \n  Drill down into differing attribute status:\n    status: 'reconciling' != 'cancelling'...\n  \n  ...Full output truncated, use '-vv' to show"
+    },
+    {
+      "nodeid": "backend/tests/runtime/test_owner_history.py::test_archive_requires_the_actual_project_and_preserves_native_receipts",
+      "seconds": 1.027,
+      "message": "AssertionError: assert 'reconciling' == 'running'\n  \n  - running\n  + reconciling"
+    },
+    {
+      "nodeid": "backend/tests/runtime/test_owner_notes.py::test_paired_endpoint_identity_detects_replaced_database_before_note_mutation",
+      "seconds": 0.784,
+      "message": "AssertionError: assert '16980a7c1e626203ebab8de5c8332f3d37835ab2dc9a4a5fc71e9d988f1b296f' != '16980a7c1e626203ebab8de5c8332f3d37835ab2dc9a4a5fc71e9d988f1b296f'"
+    },
+    {
+      "nodeid": "backend/tests/runtime/test_preparation_budget.py::test_migration_preserves_old_dispatches_and_refuses_inverse_after_preparation",
+      "seconds": 0.37,
+      "message": "RuntimeError: Check policy inverse refuses newer schema"
+    },
+    {
+      "nodeid": "backend/tests/runtime/test_project_budget_policy.py::test_upgrade_preserves_old_policy_and_unused_inverse_preserves_it",
+      "seconds": 0.406,
+      "message": "RuntimeError: Check policy inverse refuses newer schema"
+    },
+    {
+      "nodeid": "backend/tests/runtime/test_project_producer_retirement.py::test_controlled_planner_fixture_cites_the_actual_supplied_history[False]",
+      "seconds": 0.03,
+      "message": "AssertionError: assert 'researcher_plan_deliver' == 'researcher_plan_propose'\n  \n  - researcher_plan_propose\n  + researcher_plan_deliver"
+    },
+    {
+      "nodeid": "backend/tests/runtime/test_project_producer_retirement.py::test_controlled_planner_fixture_cites_the_actual_supplied_history[True]",
+      "seconds": 0.03,
+      "message": "AssertionError: assert 'researcher_plan_deliver' == 'researcher_plan_propose'\n  \n  - researcher_plan_propose\n  + researcher_plan_deliver"
+    }
+  ],
+  "errors": 0,
+  "skipped": 0,
+  "unnamed_interruption_entries_excluded": 1,
+  "remaining": 493,
+  "next_original_node": "backend/tests/runtime/test_public_development.py::test_owner_http_develops_checks_reviews_and_accepts_exact_candidate[optimization]",
+  "raw_original_unchanged": true,
+  "driver_parser_caveat": "Original driver incorrectly counted anonymous interrupted JUnit entry as pass. Normalize named cases only; original raw JSON/log retained.",
+  "original_process": {
+    "base_commit": "d278653",
+    "started_at": "2026-11-08T12:12:12.585190+00:00",
+    "finished_at": "2026-11-08T12:40:40.273726+00:00",
+    "seconds": 1707.689,
+    "scope": "Whole backend source suite onCPython3.12.9; not full installed/browser/platform acceptance",
+    "source_suite_exit": 2,
+    "cases": 2076,
+    "passed": 2051,
+    "failures": [
+      "backend.tests.api.test_persistence_boundaries::test_writer_contention_leaves_health_and_websocket_responsive",
+      "backend.tests.api.test_persistence_boundaries::test_process_loss_preserves_one_atomic_task_event[before]",
+      "backend.tests.api.test_persistence_boundaries::test_process_loss_preserves_one_atomic_task_event[after]",
+      "backend.tests.runtime.test_auxiliary_budget::test_unused_auxiliary_inverse_preserves_old_schema_and_refuses_work",
+      "backend.tests.runtime.test_auxiliary_continuation::test_unused_inverse_and_used_history_guard",
+      "backend.tests.runtime.test_auxiliary_restoration::test_origin_inverse_requires_unused_permission_and_archival",
+      "backend.tests.runtime.test_code_review_session::test_owned_native_review_records_exact_decision_after_closure",
+      "backend.tests.runtime.test_code_review_session::test_changed_review_cannot_confirm_and_retains_original_proposal[context]",
+      "backend.tests.runtime.test_code_review_session::test_changed_review_cannot_confirm_and_retains_original_proposal[source]",
+      "backend.tests.runtime.test_code_review_session::test_stop_during_review_confirmation_closes_original_owner_and_joins_work",
+      "backend.tests.runtime.test_code_review_session::test_coordinator_schedules_native_review_and_does_not_finish_unconfirmed_work[False-False]",
+      "backend.tests.runtime.test_code_review_session::test_coordinator_schedules_native_review_and_does_not_finish_unconfirmed_work[True-False]",
+      "backend.tests.runtime.test_code_review_session::test_coordinator_schedules_native_review_and_does_not_finish_unconfirmed_work[False-True]",
+      "backend.tests.runtime.test_data_boundaries::test_stop_interrupts_original_worker_before_contended_write_finishes",
+      "backend.tests.runtime.test_development_session::test_check_result_after_context_correction_is_retained_without_approval",
+      "backend.tests.runtime.test_development_session::test_stop_during_owned_check_closes_writer_and_retains_original_record",
+      "backend.tests.runtime.test_legacy_catalog_removal::test_historical_roster_reader_preserves_original_memory_and_runs",
+      "backend.tests.runtime.test_native_evaluation::test_scenario_failure_records_original_service_closure",
+      "backend.tests.runtime.test_owner_command_output::test_owner_reads_binary_windows_after_authority_ends_without_mutation",
+      "backend.tests.runtime.test_owner_history::test_archive_requires_the_actual_project_and_preserves_native_receipts",
+      "backend.tests.runtime.test_owner_notes::test_paired_endpoint_identity_detects_replaced_database_before_note_mutation",
+      "backend.tests.runtime.test_preparation_budget::test_migration_preserves_old_dispatches_and_refuses_inverse_after_preparation",
+      "backend.tests.runtime.test_project_budget_policy::test_upgrade_preserves_old_policy_and_unused_inverse_preserves_it",
+      "backend.tests.runtime.test_project_producer_retirement::test_controlled_planner_fixture_cites_the_actual_supplied_history[False]",
+      "backend.tests.runtime.test_project_producer_retirement::test_controlled_planner_fixture_cites_the_actual_supplied_history[True]"
+    ],
+    "errors": [],
+    "skipped": [],
+    "controllers_before": "cpu memory pids",
+    "controllers_after": "cpu memory pids",
+    "cpu_max": "800000 100000",
+    "provider_environment_removed": true,
+    "socket_guards": "Project pytest.ini disables external sockets, retains Unix; test-specific local fixtures own their exceptions",
+    "normalization_required": true
+  },
+  "interruption": {
+    "signal": "SIGINT",
+    "pid": 1442482,
+    "driver_pid": 1442474,
+    "at": "2026-11-08T12:40:34.004869+00:00",
+    "reason": "Gracefully preserve original pytest summary/JUnit and owned fixture cleanup before the 1800s subprocess kill deadline; the suite is incomplete, not a completed global result",
+    "source_mutated": false
+  },
+  "configuration_correction": "Pytest settings reside in pyproject.toml, not pytest.ini as the raw driver label stated.",
+  "remainder": {
+    "base_commit": "d278653",
+    "scope": "Exactly493unexecuted nodes from interrupted original collection; fresh process, not single-process whole-suite order coverage",
+    "started_at": "2026-11-08T12:43:46.226973+00:00",
+    "finished_at": "2026-11-08T12:49:14.691637+00:00",
+    "seconds": 328.465,
+    "exit": 1,
+    "interrupted": false,
+    "killed": false,
+    "selected": 493,
+    "completed_named": 493,
+    "passed": 491,
+    "failures": [
+      {
+        "class": "backend.tests.runtime.test_workspace_retention",
+        "name": "test_retention_inverse_refuses_used_history_and_preserves_unused_prefix",
+        "message": "AssertionError: Regex pattern did not match.\n  Expected regex: 'history'\n  Actual message: 'Retention inverse refuses newer schema'"
+      }
+    ],
+    "errors": [
+      {
+        "class": "backend.tests.test_orchestrator",
+        "name": "test_terminal_owns_no_engine_and_recovers_exact_work_through_real_owner_http",
+        "message": "failed on setup with \"file /home/andres/.codex/worktrees/b09e/researcher/backend/tests/test_orchestrator.py, line 26\n  @pytest.mark.timeout(220)\n  async def test_terminal_owns_no_engine_and_recovers_exact_work_through_real_owner_http(\n      owned_config, socket_enabled\n  ):\n      \"\"\"One server handles web-equivalent terminal planning/research/private development/review/acceptance; lost execution response and terminal restart never create another turn or auto-merge.\"\"\"\n[+70 more lines; full report in element text]"
+      }
+    ],
+    "skipped": [],
+    "unnamed_excluded": 0,
+    "source_tests_unchanged": true,
+    "source_file_count": 705,
+    "controllers_before": [
+      "cpu",
+      "memory",
+      "pids"
+    ],
+    "controllers_after": [
+      "cpu",
+      "memory",
+      "pids"
+    ],
+    "cpu_max": "800000 100000"
+  },
+  "raw_artifacts": {
+    ".superpowers/sdd/2026-10-31-actualizacion-proyecto/global-current-original.xml": {
+      "sha256": "5cfc8aa95508273fd61d304d07abb46d1a2d8b3bae86d46fa25026acdad8395f",
+      "bytes": 397718
+    },
+    ".superpowers/sdd/2026-10-31-actualizacion-proyecto/global-current-original.log": {
+      "sha256": "1d8e40598a640d295c1c01412ae525b60d970f5131736969fbe0755b78b97bc2",
+      "bytes": 525543
+    },
+    ".superpowers/sdd/2026-10-31-actualizacion-proyecto/global-current-original.json": {
+      "sha256": "b3a080e235f98923ef63d7e95cc950752136e40fbf42c4d41ebe2de50868c563",
+      "bytes": 3781
+    },
+    ".superpowers/sdd/2026-10-31-actualizacion-proyecto/global-current-normalized.json": {
+      "sha256": "17fad593697c4964d158b9d6c9666deac00b97a4cb92ba7d2253cfe6879504ae",
+      "bytes": 8120
+    },
+    ".superpowers/sdd/2026-10-31-actualizacion-proyecto/global-current-collection.log": {
+      "sha256": "04788c5a6b6909b0010d9dc1fd54f70163222b28a1e85ed7f065e5af95657b1c",
+      "bytes": 308932
+    },
+    ".superpowers/sdd/2026-10-31-actualizacion-proyecto/global-current-remainder.xml": {
+      "sha256": "1e6573c23dbf6478dc350b7d8d66fa57528a814bc518d8f605c80cee9a28a3f6",
+      "bytes": 83371
+    },
+    ".superpowers/sdd/2026-10-31-actualizacion-proyecto/global-current-remainder.log": {
+      "sha256": "3e5aa2c49e4ffe56aacdaa5f7dfd7a2f0ee65ce0e5355de36cf8e138b33c4491",
+      "bytes": 78306
+    },
+    ".superpowers/sdd/2026-10-31-actualizacion-proyecto/global-current-remainder.json": {
+      "sha256": "897e2f0c4cdc177c278326c63e39090ded63691c827c7c542d87913598b92109",
+      "bytes": 1749
+    }
+  },
+  "combined": {
+    "collected": 2568,
+    "completed_named": 2568,
+    "passed": 2541,
+    "failed": 26,
+    "errors": 1,
+    "skipped": 0,
+    "process_count": 2,
+    "single_process_global_complete": false,
+    "green": false,
+    "source_tests_unchanged_in_remainder": true
+  }
+}

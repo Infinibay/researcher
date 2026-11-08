@@ -1,5 +1,37 @@
 # Preparación nativa: contención y explicación de fallos
 
+## Revisión de la dependencia de aceptación — 2026-11-08
+
+Una revisión independiente de solo lectura sobre `d278653` distingue el incidente
+de disponibilidad de la aceptación técnica de Proyectos. El `AuthorityBusy`
+original ocurrió, pero no demuestra una carrera interna: la misma clase cubre
+contención, capacidad, cola y retirada. Exigir una causa demostrada antes de
+modificar la autoridad sigue siendo correcto. Exigir producir una corrección
+causal antes de aceptar cualquier alcance de la página era una dependencia
+introducida por este plan, sin evidencia suficiente de ese defecto.
+
+Para la aceptación de la página se sustituye esa dependencia de los pasos 5–6 por
+el contrato original de recuperación, conservando las ejecuciones y criterios
+anteriores como evidencia histórica:
+
+1. Abrir en la instalación actual el intento fallido original desde Proyectos y
+   volver a él después de recargar, conservando tarea, run y proyecto exactos.
+2. Comprobar que la explicación visible, estado de cierre, inferencia y presupuesto
+   concuerdan con el registro; no admitir trabajo ni repetir la preparación.
+3. Vincular la evidencia existente de Stop con su requisito original, distinguiendo
+   comprobación visual de verificación física del cierre.
+4. Solo con esa evidencia, considerar una aceptación técnica/visual por alcance.
+   El incidente desconocido y la aceptación humana U08 siguen separados.
+
+La evidencia española/Ken posterior ya demuestra un recorrido funcional distinto;
+no demuestra una corrección del incidente. **La página todavía no se declara
+aceptada.** No se autoriza ignorar locks, liberar reservas por suposición ni
+repetir preparaciones equivalentes. [Contrato original de páginas](2026-11-07-full-pages-acceptance.md),
+[diagnóstico e incertidumbre](../../modernization/native-startup-origin-review.md),
+[recorrido español](../../modernization/spanish-plan-ken-review.md).
+
+## Plan y diagnóstico anteriores, conservados
+
 La investigación correctiva empezó el2026-11-08 a las00:49:17 UTC. La explicación
 del cierre se corrigió y se añadieron ubicaciones seguras al log. La contención
 original todavía no se reprodujo ni se corrigió. Conservar las ejecuciones originales.

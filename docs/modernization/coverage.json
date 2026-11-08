@@ -2873,11 +2873,12 @@
         "evals/profile_communication/cases.py",
         "evals/profile_communication/run.py",
         "evals/profile_communication/test_protocol.py",
-        "docs/modernization/ken-grammars-results.json"
+        "docs/modernization/ken-grammars-results.json",
+        "docs/prompts/review-2026-11-08.md",
+        "docs/prompts/revalidation-2026-11-08.json"
       ],
-      "implemented": "Historical static review snapshots retained. Current syntax-selected freshness on318files/85candidates:18current,67stale,0neverreviewed. Source/consumer revalidation against final tree remains pending; no automatic hash renewal.",
+      "implemented": "Current static semantic/source-consumer review:322owned Python files,85syntax-selected candidates,85current decisions,0stale and0unreviewed.68explicit delta reviews against matched dd1be91 source/consumer hashes,17unchanged. Catalogue9 and historic identities preserved. No new generation or human-comprehension acceptance.",
       "remaining": [
-        "Revalidate67stale source-bound prompt reviews against the final current tree; do not renew hashes blindly. Review new corrective tool feedback separately from generative efficacy.",
         "Keep examples at the level of observed data: subgroup averages do not establish equal individual changes.",
         "Deliver useful results and explanations within explicit budgets; avoid secondary discovery consuming delivery margin and explain saved partial work honestly.",
         "Before/after efficacy and reserved comparisons for remaining profiles; historical investigation comparison is exploratory.",
@@ -2885,7 +2886,8 @@
       ],
       "context_comparison_observed": "7 paired cases:2 development/5 reserved;16 Codex subscription turns with actual published Ken, matching substantive inputs/model/catalog and exact delivered policies. Initial no-dispatch context-version failure and development receipt-identity amendment retained.19 directed tests pass; human measures unknown.",
       "other_profile_observations": "4 paired synthetic cases/8 actual subscription+Ken turns;2pairs deliver both explanations. Current planning exceeds120000observedtokens after saving a proposal; current audit starts21tools with20allowed after saving a draft, no final delivery. All services/peers closed; all controls match after retained cutoff-alias amendment. Candidate weighted-mean report makes an unsupported per-batch claim. No causal superiority or human-comprehension claim.",
-      "historical_implementation_snapshot": "Catalog3 unchanged;83 candidates/287 files with83 current static decisions after69 explicit revalidations and14 unchanged reviews.516 historical identities preserved. Seven actual profile hashes/sizes verified; evaluator version metadata corrected.45 directed source cases pass, including four initially skipped and then run with existing offline semantic assets. No new LLM evaluation or human acceptance."
+      "historical_implementation_snapshot": "Catalog3 unchanged;83 candidates/287 files with83 current static decisions after69 explicit revalidations and14 unchanged reviews.516 historical identities preserved. Seven actual profile hashes/sizes verified; evaluator version metadata corrected.45 directed source cases pass, including four initially skipped and then run with existing offline semantic assets. No new LLM evaluation or human acceptance.",
+      "static_review_limits": "Current85candidate/source-direct-consumer review is complete atd278653, not exhaustive dynamic calls or isolated efficacy. Future source/consumer changes need delta review. Existing paired results, scientific frozen5pass1partial and U08/human remain separately bounded."
     },
     "context_evals": {
       "status": "in_progress",
@@ -5614,13 +5616,15 @@
         "docs/modernization/dependencies-final-review.md",
         "docs/modernization/dependencies-final-results.json",
         "docs/modernization/dependencies-final-evidence/initial-summary.json",
-        "docs/modernization/dependencies-final-evidence/ken-after-lock.json"
+        "docs/modernization/dependencies-final-evidence/ken-after-lock.json",
+        "docs/modernization/dependency-advisory-dispositions-2026-11-08.md"
       ],
       "remaining": [
-        "Adopt a coherent Ken/ONNX distribution or complete per-advisory reachability/mitigation decisions; actual published pin remains1.20.1",
+        "Integrate a coherent Ken/ONNX distribution or resolve the documented residual-risk decision; per-advisory route/mitigation review completed, current published pin remains1.20.1.",
         "Chroma aggregate memory/process bounds and parent SQLite snapshot security scope; official1.5.9 has no corrected release in current metadata"
       ],
-      "reader_mitigation": "Disable persisted embedding descriptors only in the disposable reader copy before Chroma imports; raw configuration and text/metadata retained.14directed tests and installed end-to-end105record import/HTTP pass, no model/embedding calls. Known package advisories remain visible; no incompatible ONNX override or version change. Frontend audit tool-path/parser-label errors retained alongside verified raw npm exit0/report."
+      "reader_mitigation": "Disable persisted embedding descriptors only in the disposable reader copy before Chroma imports; raw configuration and text/metadata retained.14directed tests and installed end-to-end105record import/HTTP pass, no model/embedding calls. Known package advisories remain visible; no incompatible ONNX override or version change. Frontend audit tool-path/parser-label errors retained alongside verified raw npm exit0/report.",
+      "advisory_review": "Independent readonly per-class disposition covers12unique ONNX IDs and4Chroma IDs with primary-source triggers, actual APIs, mitigation and unknowns. Current pinned ONNX load/save remains exposed to the documented classes; other APIs are not observed in verified Ken sources, not proved globally absent. Coherent adoption or explicit residual-risk decision remains open; no owner risk acceptance inferred."
     },
     "communication_continuity": {
       "status": "in_progress",

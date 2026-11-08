@@ -9308,3 +9308,32 @@ wheelcp313con698fuentes/371producto,83paquetes compatibles,85instaladas0skip,
 Sin cambios de producto/cuenta oenvenv3.12.42/43escenarios,11/12páginas.
 Siguiente: suite global actual para separar fallos funcionales de fixtures viejos,
 antes de pulir. Seguridad residual/prompts/inversas/U08/Proyectos/revisiónfinal abiertos.
+
+
+## 2026-11-08 — revisión estática y regresión actual
+
+Base `d278653`. Las tres revisiones independientes completaron los 68 candidatos
+desactualizados; 17 conservaron sus dependencias. El comprobador exige y confirma
+85 decisiones vigentes en 322 archivos. Catálogo 9, sin cambio de política ni
+nueva generación. Se reconoció el cambio semántico de `freeze_input` y el exceso
+de la rúbrica científica, conservando el resultado preregistrado 5 completos y
+uno parcial. [Alcance](../prompts/review-2026-11-08.md).
+
+La regresión cubrió 2.568 casos entre dos procesos: 2.541 pasan, 26 fallan y uno
+tiene error de fixture, sin omisiones. La primera ejecución se interrumpió antes
+del límite del controlador; su entrada JUnit anónima se excluye de aprobados.
+La segunda conserva hashes de 705 fuentes/tests/recursos. No es una única suite
+global verde. Tiempo de pared 12:12:12–12:49:14 UTC:37 min 2 s; tiempo de pytest
+28 min 26 s y 5 min 28 s. [Recibo](global-regression-2026-11-08.md).
+
+Se revisó explícitamente la dependencia interna que exigía un arreglo causal de
+AuthorityBusy antes de aceptar Proyectos. Falta su recorrido instalado de
+recuperación sobre el intento original; el incidente y la página siguen abiertos.
+La revisión por aviso de ONNX/Chroma distingue API utilizada y mitigación, sin
+aceptar riesgo por el propietario. No se repiten ensayos ya comprobados.
+
+**Siguiente:** diagnosticar y corregir los fallos por grupos, empezando por los
+timeouts compuestos con un presupuesto diagnóstico acotado. Después, recuperación
+de Proyectos, seguridad/distribución, inversas y controles finales. 42/43 escenarios
+y 11/12 páginas no cambian. Docstrings relevantes y DD145/anteriores se resuelven
+tras lo grueso. No hay historial que migrar; sin push, merge ni despliegue.

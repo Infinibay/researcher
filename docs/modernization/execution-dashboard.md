@@ -26,26 +26,38 @@ que se pueda comparar el avance; no presentar microajustes como tareas principal
 - Codex por suscripción y Ken publicado ensayados. Fuentes/citas, informes draft y revisión documental independiente conectados. Desarrollo admitido desde Tareas/Conversación con captura y comprobaciones explícitas; revisión independiente solicitada desde Tareas y aceptación del propietario conectada. Publicación local desde aceptación conectada; recuperación local de sólo lectura conectada; transporte remoto configurable conectado; recuperación remota y controles de Tareas conectados; ejecución/activación antiguas por tarea y proyecto retiradas; auxiliares de generación/proveedor, herramientas antiguas y sus cinco bibliotecas retirados. También se retiraron API interna, CLI, servicios/listeners y flows/helpers antiguos. También se retiraron autonomía, plantillas históricas y lectores de proveedor sin consumidores; se conserva el control de parada de trabajadores registrados.
 - Interfaz: doce pilotos, 36/36 conceptos de escritorio y 12/12 móviles; todas las rutas tienen piloto y 11/12 páginas tienen aceptación técnica y visual delegada.
 - Última suite global: `9fb873c`,2210 casos,2178 pasan,31 fallan y1 error de fixture; sin omisiones. La carrera de backup encontrada se corrigió después con40 pruebas instaladas. No se declara una nueva corrida global verde; la referencia `0c8b8d9` queda como evidencia histórica.
-- U01–U07, E01–E12, C01–C09 y D01–D13 quedan comprobados con el alcance de sus matrices; sigue 1 de 43 escenarios amplios sin aceptación completa en [coverage.json](coverage.json). No hay un porcentaje global defendible.
+- U01–U07, E01–E12, C01–C10 y D01–D13 quedan comprobados con el alcance de sus matrices; sigue 1 de 43 escenarios amplios sin aceptación completa en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Estado actual: matriz3.13 verificada; regresión global en curso
+## Estado actual: revisión estática cerrada; corregir regresión
 
-**12:01:20–12:07:28UTC,6min8s hasta verificar**, base44d2253.
-[Alcance](distribution-py313-review.md). Documentación/checkpoint excluidos.
+**Regresión: 12:12:12–12:49:14 UTC, 37 min 2 s de pared**, base `d278653`.
+Incluye dos ejecuciones y el intervalo de clasificación. Pytest: 28 min 26 s y
+5 min 28 s. [Recibo y límites](global-regression-2026-11-08.md).
+La escritura/verificación del registro de prompts fue de 12:44:34 a 12:46:40 UTC;
+las revisiones previas se hicieron en paralelo, sin reconstruir su hora de inicio.
 
-- Terminado: **11/12páginas y42/43escenarios**. CPython3.13.18/Linux/GIL:
- 85instaladas0skip,83paquetes compatibles,ABI/avisos/sourceC y3CLI comprobados.
-  Sin modelo real en3.13; no matriz universal. LockKen/licencias actuales verificados.
-- En curso: **regresión global actual**, para localizar fallos funcionales antes
-  del pulido. Comparar recibos yconservar fallos; no retirar tests para inventarverde.
-- Pendiente: Ken/ONNXo evaluación residual por aviso; Chroma/límites agregados.
-  Proyectos/AuthorityBusy sin corregir;U08/humano/otrosperfiles; prompts,
-  inversas71, suite global yrevisiónfinal. Sin historial que migrar.
-- Auditoría noverde: ONNX19entradas/12IDs,Chroma5/4. Última global31fallos/1error;
-  prompts al último corte67de85desactualizados/318archivos. U08esel escenario
-  amplio restante; estas fracciones no son porcentaje global de finalización.
-- Detalles al final: DD145y anteriores/noticesbundle/lint/fechas/enums/
-  densidad/accesibilidad completa. Sin push,merge odespliegue.
+- Terminado con evidencia: **42/43 escenarios y 11/12 páginas**, sin nueva
+  aceptación de producto en este bloque. Los **85 candidatos a prompt en 322
+  archivos** tienen revisión estática vigente: 68 deltas revisados y 17 sin cambio.
+  [Alcance](../prompts/review-2026-11-08.md). Python 3.13 y lock Ken conservan sus
+  comprobaciones anteriores.
+- En curso: **resolver la regresión**. Los 2.568 casos tienen resultado entre dos
+  procesos: 2.541 pasan, 26 fallan y uno tiene error de fixture, sin omisiones.
+  La primera ejecución se interrumpió para preservar sus diagnósticos; no hay
+  una suite global única verde. Reproducir los nueve timeouts antes de decidir
+  si falla el comportamiento o su presupuesto de prueba.
+- Pendiente principal: recuperación instalada de Proyectos sobre el intento
+  original, integración coherente de Ken/ONNX o decisión de riesgo sustentada,
+  límites de Chroma, inversas históricas hasta 71 y controles finales. La revisión
+  del gate de Proyectos separa recuperación visible e incidente desconocido;
+  todavía no acepta la página ni declara corregido AuthorityBusy.
+- Comunicación: U08/humano y otros perfiles conservan sus límites. La revisión
+  científica mantiene 5 criterios completos y uno parcial; se documentó que la
+  rúbrica excedía la petición en su contraste relativo. No hubo otra generación.
+- Detalles al final: docstrings relevantes pendientes (inventario de presencia:
+  621 definiciones sin docstring, cero módulos no vacíos sin él), DD145 y deuda
+  anterior de avisos, lint, fechas, enums, densidad y accesibilidad completa.
+  Sin historial del usuario que migrar. Sin push, merge o despliegue.
 
 ## Etapa anterior: Ken estructural offline verificado; continúa aceptación de páginas
 
@@ -274,7 +286,7 @@ ni un porcentaje global. Se mantiene lista y tiempo en cada transición.
 Bloque **2026-11-07 23:08:57–23:38:11 UTC**, desde `4eb15e8`:
 **29 min 14 s hasta la verificación final**, sin documentación/checkpoint posteriores.
 
-- **Terminado:** U01–U07, E01–E12, C01–C09 y D01–D13: **41/43 escenarios**.
+- **Terminado:** U01–U07, E01–E12, C01–C10 y D01–D13: **41/43 escenarios**.
   Las opciones conservan ID/etiqueta y texto libre; preguntas, hilo y contexto se
   mantienen. Se comprueban continuidad A→B→A, CLI/TUI y arranque limpio.
 - **En revisión:** U08. Diagramas con alternativa textual y fallo visible
