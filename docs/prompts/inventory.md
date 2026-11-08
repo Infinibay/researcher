@@ -130,3 +130,10 @@ un ejemplo que atribuye una media a cada individuo. Se comprobaron cálculos y
 controles, pero no eficacia general ni comprensión humana. Estos resultados
 mantienen abierta la mejora funcional de comunicación; no cambian las83 decisiones
 estáticas ni la política congelada3 de este corte.
+
+
+Actualización documental posterior: [broker y canales](../modernization/broker-docstrings-review.md).
+El inventario actual conserva 85 candidatos en 322 archivos. Se revalidó únicamente
+el consumidor de `read_feedback` modificado por doce docstrings del broker; fuente
+del candidato, AST ejecutable, siete políticas y 48 herramientas siguen iguales.
+Las otras 84 decisiones no se renovaron. No cambia la eficacia demostrada ni U08.

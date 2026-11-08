@@ -1312,6 +1312,14 @@ descripciones de negocio sin cambios;83pruebas fuente pasan. Continúan broker,
 perfiles de aislamiento, suscripción/mediación y otras fronteras relevantes.
 
 
+Tercer bloque: [71 docstrings del broker](broker-docstrings-review.md), 254 acumulados
+en doce módulos. Quedan 367 definiciones por presencia sintáctica. Contratos de
+cápsulas, canales, MCP y dueño original revisados; AST, siete políticas y 48
+definiciones de negocio iguales. Pasan 63 pruebas fuente. Siguen suscripción,
+estado nativo, mediación y demás fronteras relevantes; no es documentación global
+terminada ni un paquete actualizado.
+
+
 ## DD147 — recuperar observaciones CLI anteriores a la política
 
 La corrección de aceptación enlaza la política observada al request y al recibo.

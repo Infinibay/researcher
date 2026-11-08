@@ -1,0 +1,82 @@
+{
+  "base_commit": "8850633",
+  "scope": "Documentation-only broker/profile/MCP/stdio changes",
+  "added_docstrings": 71,
+  "cumulative_added_docstrings": 254,
+  "cumulative_modules": 12,
+  "files": {
+    "backend/runtime/broker_profile.py": {
+      "added_docstrings": 23,
+      "executable_ast_equal": true,
+      "before_sha256": "9785227ecfc1f39c3152e7d99ab344a6e3389939279fd91007271424aeabfb2f",
+      "after_sha256": "d0679d0b46844a738f6375070eb51b05d54fc742083d2be5524aa9667debc1a3"
+    },
+    "backend/runtime/broker_stdio.py": {
+      "added_docstrings": 23,
+      "executable_ast_equal": true,
+      "before_sha256": "1e32653cabce48d74f916ceee6f4804a32d99000dd0e66e24cc079e61ebd8ee3",
+      "after_sha256": "c7cfd977571a3618a234722adee6635d07e304268ffcd5f1b89800cb3cf90167"
+    },
+    "backend/runtime/broker_mcp.py": {
+      "added_docstrings": 13,
+      "executable_ast_equal": true,
+      "before_sha256": "5d1e26befdf02c6a08afadd39fde0b8fb0a64fa8230e311de8d7a78c1870d8ea",
+      "after_sha256": "145cfbd5a560f6abe4f4aa36e533b4567cb8e42e9cf5c8459e7b4730ca9d625b"
+    },
+    "backend/runtime/peer_broker.py": {
+      "added_docstrings": 12,
+      "executable_ast_equal": true,
+      "before_sha256": "10e3215f0c3053132ca5e097209e500f92617f0b5bd370175784474b01fef676",
+      "after_sha256": "67c6597b0dc03c17beab54f8b0afb1c2eb2e602022c35be502862065042ae904"
+    }
+  },
+  "introspection": {
+    "policy_bodies_unchanged": 7,
+    "business_descriptions_schemas_annotations_unchanged": 48,
+    "remaining_owned_definitions_without_docstring": 367,
+    "scope": "Presence only, not adequacy or equal relevance."
+  },
+  "tests": {
+    "passed": 63,
+    "failed": 0,
+    "skipped": 0,
+    "seconds": 52.69,
+    "files": [
+      "backend/tests/runtime/test_peer_broker.py",
+      "backend/tests/runtime/test_peer_broker_boundaries.py",
+      "backend/tests/runtime/test_broker_mcp.py",
+      "backend/tests/runtime/test_broker_rpc.py",
+      "backend/tests/runtime/test_broker_native.py",
+      "backend/tests/runtime/test_broker_ken.py",
+      "backend/tests/runtime/test_broker_commands.py",
+      "backend/tests/runtime/test_native_proxy.py"
+    ]
+  },
+  "prompt_inventory": {
+    "base_commit": "8850633",
+    "files_scanned": 322,
+    "candidates": 85,
+    "revalidated_ids": [
+      "backend/knowledge/reviews.py::read_feedback"
+    ],
+    "unchanged_review_count": 84,
+    "candidate_source_unchanged": true,
+    "changed_direct_consumer": "backend/runtime/peer_broker.py",
+    "rationale": "Candidate source is byte-identical to8850633. Its only changed direct module consumer is peer_broker.py, with12authored docstrings and executable AST equal after removing only documentation. Imports/calls of review-subject/current-state helpers are unchanged. Seven actual native instruction bodies and48business tool descriptions/schemas/annotations remain identical. This revalidates the documentation-only consumer delta, not general introspection or prompting efficacy."
+  },
+  "generative_model_turns": 0,
+  "package_rebuilt": false,
+  "human_comprehension": null,
+  "limits": [
+    "Presence is not adequacy or measured Ken ranking",
+    "Original connected MCP index was not reindexed",
+    "Older installed packages do not contain new docstrings",
+    "Not global-suite/scientific/human/accessibility acceptance"
+  ],
+  "time": {
+    "start_utc": "2026-11-08 18:46:38",
+    "verification_cut_utc": "2026-11-08 18:55:14",
+    "elapsed_seconds": 516,
+    "scope": "Includes context recovery/status interruption; report and checkpoint later"
+  }
+}

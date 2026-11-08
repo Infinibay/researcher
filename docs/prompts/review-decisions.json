@@ -92,9 +92,9 @@
       "reviewer": "Codex with independent clean-context source/consumer reviews"
     },
     "backend/knowledge/reviews.py::read_feedback": {
-      "dependencies_sha256": "8008b36a34994a23ad60f5b419a332c0b68bfe6de7b7c1df35a82c776e69ce71",
+      "dependencies_sha256": "1be61ff0def7cdfb144a167384bffedad57da45956dbaaab88e5992fa6a73519",
       "decision": "retained_input_renderer",
-      "rationale": "Candidate source is byte-identical to416abed. Its only changed direct module consumer is sqlite_runs.py, with41authored docstrings and an executable AST identical after removing documentation. Existing imports/calls to review subject/current-state helpers and freeze_input are unchanged. Checked7native instruction bodies and48business tool descriptions/schemas/annotations byte-for-byte: no model-visible policy delta. No authority, persistence or rendering behavior change is claimed from comments; broader introspection is outside this check.",
+      "rationale": "Candidate source is byte-identical to8850633. Its only changed direct module consumer is peer_broker.py, with12authored docstrings and executable AST equal after removing only documentation. Imports/calls of review-subject/current-state helpers are unchanged. Seven actual native instruction bodies and48business tool descriptions/schemas/annotations remain identical. This revalidates the documentation-only consumer delta, not general introspection or prompting efficacy.",
       "evidence": [
         "backend/knowledge/reviews.py",
         "docs/prompts/review-2026-11-07.md",
@@ -126,10 +126,12 @@
         "backend/planning/manual_prerequisites.py",
         "backend/runtime/peer_broker.py",
         "docs/modernization/core-docstrings-review.md",
-        "docs/modernization/core-docstrings-results.json"
+        "docs/modernization/core-docstrings-results.json",
+        "docs/modernization/broker-docstrings-review.md",
+        "docs/modernization/broker-docstrings-results.json"
       ],
       "conflicts": [],
-      "revalidation": "Candidate source is byte-identical to416abed. Its only changed direct module consumer is sqlite_runs.py, with41authored docstrings and an executable AST identical after removing documentation. Existing imports/calls to review subject/current-state helpers and freeze_input are unchanged. Checked7native instruction bodies and48business tool descriptions/schemas/annotations byte-for-byte: no model-visible policy delta. No authority, persistence or rendering behavior change is claimed from comments; broader introspection is outside this check.",
+      "revalidation": "Candidate source is byte-identical to8850633. Its only changed direct module consumer is peer_broker.py, with12authored docstrings and executable AST equal after removing only documentation. Imports/calls of review-subject/current-state helpers are unchanged. Seven actual native instruction bodies and48business tool descriptions/schemas/annotations remain identical. This revalidates the documentation-only consumer delta, not general introspection or prompting efficacy.",
       "previous_review": {
         "dependencies_sha256": "b66b34d5d8b18599bb15a22c72ef7e77a107fa044b9f0d7c36bf45630c3d53af",
         "decision": "retained_input_renderer",
@@ -146,10 +148,10 @@
       },
       "reviewed_at": "2026-11-08",
       "source_base_commit": "416abedd2415d8164bb7de77d97230335e5e974a",
-      "revalidation_baseline_commit": "dd1be91",
+      "revalidation_baseline_commit": "8850633",
       "reviewer": "Codex, executable-AST and source/consumer delta review",
-      "previous_dependencies_sha256": "dc7f98fd63f92adf714c384650cdad8256fcda72bbc4b700c9684ea87e8467d3",
-      "reviewed_source_state": "Base plus documentation-only changes to four core modules"
+      "previous_dependencies_sha256": "8008b36a34994a23ad60f5b419a332c0b68bfe6de7b7c1df35a82c776e69ce71",
+      "reviewed_source_state": "Base plus documentation-only changes to four broker modules"
     },
     "backend/planning/instructions.py::PLANNING_INSTRUCTIONS": {
       "dependencies_sha256": "890880f3f6da6e6204e3dca680fbcb8473db57cbb5f08dd1b1649dd6e4dfbfd7",

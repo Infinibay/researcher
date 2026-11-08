@@ -63,6 +63,9 @@ logger = logging.getLogger(__name__)
 
 
 def _digest(value):
+    """Fingerprint finite deterministic JSON for the broker's durable operation identity without
+    treating a matching hash as authority.
+    """
     return hashlib.sha256(
         json.dumps(
             value,
@@ -97,6 +100,9 @@ class BrokerLimits:
 
 @dataclass(frozen=True)
 class PeerStart:
+    """Return a broker operation's state and freshness, with new transport handles only for a fresh
+    successful gated birth.
+    """
     operation_id: str
     state: str
     fresh: bool
@@ -127,9 +133,15 @@ class PeerTransport:
         owner.stdin.close()
 
     def wait(self, *, timeout=5):
+        """Observe the original owner's direct-child exit without transferring pidfd/reaping ownership
+        or certifying domain retirement.
+        """
         return self._wait(timeout=timeout)
 
     def close_handles(self):
+        """Release only the client's duplicate data streams; the broker retains process and subtree
+        supervision.
+        """
         for stream in (self.stdin, self.stdout, self.stderr):
             stream.close()
 
@@ -179,6 +191,9 @@ class PeerBroker:
 
     @property
     def _grant_key(self):
+        """Locate this broker concession's journal record without creating a grant or changing its
+        state.
+        """
         return "broker:grant:" + self.grant_id
 
     def _reserve(
@@ -326,6 +341,9 @@ class PeerBroker:
         return operation
 
     def _update(self, operation_id, **changes):
+        """Publish an operation-state change only while the same original owner and global concession
+        remain active, using a witnessed compare-and-swap.
+        """
         snapshot = self.journal.load()
         grant = snapshot.records[self._grant_key]
         if (
@@ -347,6 +365,9 @@ class PeerBroker:
 
     @staticmethod
     def _info(fd):
+        """Read a bounded startup-info object before its deadline; parsing the object is not itself
+        validation or release of the reported namespace.
+        """
         data = b""
         deadline = time.monotonic() + 3
         while len(data) < 4096:
@@ -366,6 +387,9 @@ class PeerBroker:
         raise AuthorityUncertain("Peer identity record too large")
 
     def run_peer(self, registry, peer_id, *, operation_key, code):
+        """Request one analysis peer through the common reserve/spawn/bind/release path, preserving its
+        original operation key.
+        """
         return self._run(registry, peer_id, operation_key=operation_key, code=code)
 
     def run_ken(
@@ -378,6 +402,9 @@ class PeerBroker:
         model_cache=None,
         mode="mcp",
     ):
+        """Require an inspected Ken installation, fixed worker mode and needed model cache before
+        entering the shared owned launch path.
+        """
         if not isinstance(installation, KenInstallation) or mode not in (
             "mcp",
             "prepare",
@@ -469,6 +496,9 @@ class PeerBroker:
         )
 
     def run_command(self, registry, peer_id, *, operation_key, asset):
+        """Require an inspected native executable and select the account-free command profile under the
+        common broker ownership protocol.
+        """
         if not isinstance(asset, CodexAsset):
             raise TypeError("Command launch requires an inspected Codex asset")
         return self._run(
@@ -1106,6 +1136,9 @@ class PeerBroker:
                         os.close(fd)
 
     def _physical(self):
+        """Retire the original attempt subtree once under its physical lock and recover that exact
+        closure receipt on later calls.
+        """
         with self._physical_lock:
             if self._physical_closed is None:
                 self._physical_closed = self.domain.retire()
@@ -1376,6 +1409,9 @@ class PeerBroker:
 
     @staticmethod
     def _require_dead_owner(grant):
+        """Reject recovery while the visible original PID/start-tick owner is alive; missing visibility
+        stays uncertain and a reused PID is not the original owner.
+        """
         pid = grant.get("owner_pid")
         ticks = grant.get("owner_start_ticks")
         if type(pid) is not int or pid <= 1 or type(ticks) is not int or ticks <= 0:

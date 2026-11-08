@@ -28,7 +28,26 @@ que se pueda comparar el avance; no presentar microajustes como tareas principal
 - Última suite global: `9fb873c`,2210 casos,2178 pasan,31 fallan y1 error de fixture; sin omisiones. La carrera de backup encontrada se corrigió después con40 pruebas instaladas. No se declara una nueva corrida global verde; la referencia `0c8b8d9` queda como evidencia histórica.
 - U01–U07, E01–E12, C01–C10 y D01–D13 quedan comprobados con el alcance de sus matrices; sigue 1 de 43 escenarios amplios sin aceptación completa en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Estado actual: autoridad y transporte documentados por alcance
+## Estado actual: broker y canales documentados por alcance
+
+[Informe y pruebas](broker-docstrings-review.md). **18:46:38–18:55:14 UTC: 8 min 36 s**
+hasta verificación, incluida recuperación de contexto/consulta de estado;
+informe y checkpoint posteriores aparte. Pruebas: 52,69 segundos.
+
+- Terminado: 71 docstrings nuevos; **254 acumulados en doce módulos**. AST ejecutable,
+  siete políticas y 48 definiciones de negocio iguales. **63 pruebas fuente pasan**;
+  cero turnos generativos. Inventario 85/322 vigente, un consumidor revalidado.
+- En curso/siguiente: suscripción, estado nativo, mediación y fronteras relevantes.
+  Quedan 367 definiciones por presencia, con distinta relevancia. Sin relleno
+  automático ni un wheel por lote documental.
+- Pendientes: entrega/adaptación/comprensión humana U08; distribución Ken/ONNX;
+  documentación/JSDoc restante; accesibilidad y detalles; paquete, suite global
+  y revisión independiente finales.
+- Estado amplio: **12/12 páginas por alcance, 42/43 escenarios**. No hay nueva
+  suite global verde ni aceptación humana; el paquete anterior no tiene estos
+  nuevos docstrings. Sin push, merge o despliegue.
+
+## Etapa anterior: autoridad y transporte documentados por alcance
 
 [Docstrings y verificación](authority-transport-docstrings-review.md). Bloque
 **18:36:07–18:42:00UTC:5min53s** hasta comprobación; informe/checkpoint posteriores

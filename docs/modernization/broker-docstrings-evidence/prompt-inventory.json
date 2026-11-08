@@ -1,0 +1,12 @@
+{
+  "base_commit": "8850633",
+  "files_scanned": 322,
+  "candidates": 85,
+  "revalidated_ids": [
+    "backend/knowledge/reviews.py::read_feedback"
+  ],
+  "unchanged_review_count": 84,
+  "candidate_source_unchanged": true,
+  "changed_direct_consumer": "backend/runtime/peer_broker.py",
+  "rationale": "Candidate source is byte-identical to8850633. Its only changed direct module consumer is peer_broker.py, with12authored docstrings and executable AST equal after removing only documentation. Imports/calls of review-subject/current-state helpers are unchanged. Seven actual native instruction bodies and48business tool descriptions/schemas/annotations remain identical. This revalidates the documentation-only consumer delta, not general introspection or prompting efficacy."
+}

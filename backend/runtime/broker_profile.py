@@ -18,6 +18,9 @@ from backend.runtime.workspaces import PEER_WORKSPACE
 
 
 def _no_sockets():
+    """Build the base analysis syscall filter without socket creation; execution-domain and mount
+    checks remain separate controls.
+    """
     return _syscall_filter(network=False)
 
 
@@ -116,10 +119,16 @@ class AnalysisCapsule:
     """Own pinned input/assets through spawn; never mounts broker control or home."""
 
     def __init__(self, binding, code, info_fd):
+        """Retain the admitted workspace, analysis payload and startup-info descriptor until gated
+        spawn; construction mounts or launches nothing.
+        """
         self.binding, self.code, self.info_fd = binding, code, info_fd
         self._stack = ExitStack()
 
     def _program(self):
+        """Describe isolated, site-free Python execution of the admitted analysis payload without
+        invoking a shell.
+        """
         return [
             str(Path(sys.executable).resolve(strict=True)),
             "-I",
@@ -129,6 +138,9 @@ class AnalysisCapsule:
         ]
 
     def _mounts(self):
+        """Declare no additional host assets for the base analysis view beyond its fixed runtime and
+        pinned workspace mounts.
+        """
         return []
 
     def _workspace_mount(self, source):
@@ -136,9 +148,11 @@ class AnalysisCapsule:
         return "--ro-bind-fd"
 
     def _network(self):
+        """Keep the base capsule's private network namespace instead of sharing the host network."""
         return []
 
     def _filter(self):
+        """Select the base no-socket syscall policy independently of the capsule's filesystem view."""
         return _no_sockets()
 
     def __enter__(self):
@@ -231,6 +245,9 @@ class AnalysisCapsule:
             raise
 
     def __exit__(self, *_):
+        """Release pinned asset, workspace and filter descriptors after launch setup; process
+        retirement belongs to the broker.
+        """
         self._stack.close()
 
 
@@ -248,6 +265,9 @@ class CodexAsset:
 
     @classmethod
     def _read(cls, fd, path):
+        """Verify a bounded trusted executable through its open descriptor and fingerprint unchanged
+        bytes and physical identity; this manifest grants no execution authority.
+        """
         before = os.fstat(fd)
         if (
             not stat.S_ISREG(before.st_mode)
@@ -282,6 +302,9 @@ class CodexAsset:
 
     @classmethod
     def inspect(cls, path):
+        """Resolve and inspect a host-selected executable without running it, closing the temporary
+        descriptor after hashing.
+        """
         path = Path(path).resolve(strict=True)
         fd = os.open(path, os.O_RDONLY | os.O_NOFOLLOW | os.O_CLOEXEC)
         try:
@@ -424,6 +447,9 @@ class NativeCapsule(AnalysisCapsule):
         return command
 
     def _mounts(self):
+        """Expose verified native assets, optional separate private state and sealed public network
+        inputs without mounting host credentials or source-owned trust files.
+        """
         mounts = [
             "--dir",
             "/home/actor/.codex",
@@ -467,12 +493,21 @@ class NativeCapsule(AnalysisCapsule):
         return mounts
 
     def _network(self):
+        """Select host-network sharing for the direct native transport profile; this setting does not
+        restrict destination hosts.
+        """
         return ["--share-net"]
 
     def _filter(self):
+        """Select the direct native Internet-client syscall profile while retaining kernel control
+        denials; routing policy is a separate layer.
+        """
         return _syscall_filter(network=True)
 
     def __enter__(self):
+        """Pin the native launch view and explicitly selected state/assets, then expose only its
+        required descriptors and fixed runtime environment.
+        """
         super().__enter__()
         self.env.update(
             CODEX_HOME="/home/actor/.codex",
@@ -498,9 +533,15 @@ class NativeCommandCapsule(NativeCapsule):
     """Account-free command RPC under a readonly source or explicitly selected private write view."""
 
     def _network(self):
+        """Keep account-free command execution in its private network namespace rather than the native
+        transport's host network.
+        """
         return []
 
     def _filter(self):
+        """Deny socket creation except private pairs and protect peer process controls for the
+        dedicated command profile.
+        """
         return _syscall_filter(network=False, protected_peers=True, private_pairs=True)
 
 
@@ -536,12 +577,21 @@ class NativeProxyCapsule(NativeCapsule):
         self.channel = channel
 
     def _network(self):
+        """Keep the native relay and child inside a private network namespace; host connectivity uses
+        the separately owned descriptor channel.
+        """
         return []
 
     def _filter(self):
+        """Permit proxy listener/client sockets within the private namespace while denying protected
+        peer and kernel controls; destination checks are not encoded here.
+        """
         return _syscall_filter(network=True, listener_setup=True, protected_peers=True)
 
     def _program(self):
+        """Wrap the fixed native invocation with the sealed relay entry point and a duplicated child
+        channel descriptor.
+        """
         command = super()._program()
         self._bridge_fd = self.channel.duplicate_child()
         self._stack.callback(os.close, self._bridge_fd)
@@ -555,6 +605,9 @@ class NativeProxyCapsule(NativeCapsule):
         ]
 
     def _mounts(self):
+        """Seal the trusted relay and stricter native-child filter into read-only mounts alongside the
+        verified native assets.
+        """
         mounts = super()._mounts()
         self._proxy_fd = _domain_spawn.sealed(
             Path(__file__).with_name("proxy_payload.py").read_bytes()
@@ -575,6 +628,9 @@ class NativeProxyCapsule(NativeCapsule):
         ]
 
     def __enter__(self):
+        """Pin the relay/filter descriptors for one gated launch; entering the capsule does not release
+        the process.
+        """
         super().__enter__()
         self.pass_fds += (self._bridge_fd, self._proxy_fd, self._client_filter_fd)
         return self
@@ -584,11 +640,17 @@ class KenCapsule:
     """Reuse public Ken mounts in one owned birth, behind the same exec gate."""
 
     def __init__(self, binding, installation, info_fd, *, model_cache=None, mode="mcp"):
+        """Retain the inspected Ken installation, workspace identity and selected worker mode/cache
+        without starting an MCP process.
+        """
         self.binding, self.installation, self.info_fd = binding, installation, info_fd
         self.model_cache, self.mode = model_cache, mode
         self._stack = ExitStack()
 
     def __enter__(self):
+        """Reuse the Ken worker launch with the pinned workspace, add the broker exec gate and syscall
+        restrictions, and retain all descriptors until spawn.
+        """
         from backend.runtime.ken_worker import worker_process
 
         try:
@@ -637,4 +699,7 @@ class KenCapsule:
             raise
 
     def __exit__(self, *_):
+        """Release this Ken launch description's retained resources; closing them alone is not proof
+        that an MCP actor terminated.
+        """
         self._stack.close()

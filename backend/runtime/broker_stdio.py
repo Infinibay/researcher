@@ -13,39 +13,63 @@ from backend.runtime.authority_journal import AuthorityBusy, AuthorityConflict
 
 
 class _WriteProtocol(asyncio.Protocol):
+    """Translate pipe backpressure and connection loss into an event that lets writers distinguish
+    writable transport from a failed connection.
+    """
     def __init__(self):
+        """Begin with writable transport state and no observed connection error."""
         self.ready = asyncio.Event()
         self.ready.set()
         self.error = None
 
     def pause_writing(self):
+        """Pause drain observers until the event loop reports that transport buffering is writable
+        again.
+        """
         self.ready.clear()
 
     def resume_writing(self):
+        """Wake drain observers after transport backpressure subsides."""
         self.ready.set()
 
     def connection_lost(self, exc):
+        """Retain a connection error and wake blocked writers instead of letting a closed input appear
+        writable.
+        """
         self.error = exc or BrokenPipeError("Broker peer input closed")
         self.ready.set()
 
 
 class _PipeWriter:
+    """Adapt the event-loop write transport to the bounded RPC writer interface without becoming a
+    second process owner.
+    """
     def __init__(self, transport, protocol):
+        """Bind the existing pipe transport to its backpressure/error protocol."""
         self.transport, self.protocol = transport, protocol
 
     def write(self, data):
+        """Reject an already failed input before handing bytes to the event-loop transport; buffering
+        is not peer acknowledgement.
+        """
         if self.protocol.error is not None:
             raise self.protocol.error
         self.transport.write(data)
 
     async def drain(self):
         # Let a failed immediate write deliver connection_lost before success.
+        """Yield for immediate connection errors, wait for writability and expose transport loss before
+        reporting a completed drain.
+        """
         await asyncio.sleep(0)
         await self.protocol.ready.wait()
         if self.protocol.error is not None:
             raise self.protocol.error
 
     def close(self):
+        """Abort the write transport so a pending writer cannot retain a descriptor registration after
+        owner cleanup.
+        """
         if not self.transport.is_closing():
             self.transport.abort()
 
@@ -59,6 +83,9 @@ class AsyncPeerBroker:
     """
 
     def __init__(self, broker):
+        """Configure separate bounded launch, peer-close and whole-attempt Stop executors around the
+        original broker without launching actors.
+        """
         self.broker = broker
         self._launch_pool = ThreadPoolExecutor(
             1, thread_name_prefix="researcher-launch"
@@ -74,15 +101,20 @@ class AsyncPeerBroker:
         self._closing = None
 
     async def __aenter__(self):
+        """Enter one async ownership scope and reject reopening after entry or withdrawal."""
         if self._entered or self._closing is not None:
             raise RuntimeError("Async broker scope cannot reopen")
         self._entered = True
         return self
 
     async def __aexit__(self, *_):
+        """Drain the original broker retirement when its async scope exits."""
         await self.aclose()
 
     def peer(self, registry, peer_id, *, operation_key, code):
+        """Describe one analysis endpoint while leaving reservation, spawning and gate release to the
+        original broker.
+        """
         return self._endpoint(registry, peer_id, operation_key, code=code)
 
     def git(self, registry, peer_id, *, operation_key, launch):
@@ -94,6 +126,9 @@ class AsyncPeerBroker:
         return self._endpoint(registry, peer_id, operation_key, check_launch=launch)
 
     def command(self, registry, peer_id, *, operation_key, asset):
+        """Describe an account-free command endpoint using the selected executable; no command payload
+        is released by this factory.
+        """
         return self._endpoint(
             registry, peer_id, operation_key, asset=asset, command_only=True
         )
@@ -136,6 +171,9 @@ class AsyncPeerBroker:
         model_cache=None,
         mode="mcp",
     ):
+        """Describe a Ken endpoint with its selected installation/cache/mode, deferring actual
+        preparation and launch to the broker.
+        """
         return self._endpoint(
             registry,
             peer_id,
@@ -248,6 +286,9 @@ class AsyncPeerBroker:
         self._pending.add(future)
 
         def observed(done):
+            """Remove a settled constructor future from pending accounting and consume its exception
+            without replaying the launch.
+            """
             self._pending.discard(done)
             if not done.cancelled():
                 done.exception()
@@ -263,6 +304,9 @@ class AsyncPeerBroker:
                 # The completion observer may already have removed this future
                 # from _pending before cancellation resumes us. No caller can
                 # receive these data FDs, even when birth completed successfully.
+                """Close unreachable transport handles after a successful birth whose observer was
+                cancelled; physical retirement stays with the original broker.
+                """
                 if not done.cancelled() and done.exception() is None:
                     child = done.result().child
                     if child is not None:
@@ -278,6 +322,9 @@ class AsyncPeerBroker:
         return result
 
     async def _close_peer(self, operation_id):
+        """Close the original operation through the reserved peer-control worker and project its
+        receipt afterward; whole-attempt shutdown keeps its existing owner.
+        """
         if self._closing is not None:
             # The whole-attempt closure covers this peer. Never enqueue onto a
             # retired executor or wait on endpoint tasks from owner shutdown.
@@ -285,6 +332,9 @@ class AsyncPeerBroker:
             return
 
         def close():
+            """Obtain the physical closure receipt before projecting the same original operation into
+            local SQL.
+            """
             receipt = self.broker.close_peer(operation_id)
             self.broker.project_closed(operation_id=operation_id)
             return receipt
@@ -293,6 +343,9 @@ class AsyncPeerBroker:
         self._peer_pending.add(future)
 
         def observed(done):
+            """Remove a completed peer-control future and consume its exception without creating a new
+            closure owner.
+            """
             self._peer_pending.discard(done)
             if not done.cancelled():
                 done.exception()
@@ -312,6 +365,9 @@ class AsyncPeerBroker:
         await asyncio.shield(self.withdraw())
 
     async def _shutdown(self):
+        """Coordinate revocation, constructor draining, unused transport cleanup and later SQL closure
+        projection; retries concern closure, never payload execution.
+        """
         pending = list(self._pending)
         error = None
         try:
@@ -463,6 +519,9 @@ class BrokerEndpoint:
             return await asyncio.shield(self._closing)
 
     async def _shutdown(self):
+        """Close this endpoint's data pipes and ask its original operation owner for physical closure
+        when a launch identity exists.
+        """
         self._close_io()
         if self._operation is not None:
             return await self.owner._close_peer(self._operation)

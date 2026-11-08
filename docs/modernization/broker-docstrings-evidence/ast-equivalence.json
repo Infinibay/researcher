@@ -1,0 +1,30 @@
+{
+  "base_commit": "8850633",
+  "scope": "Documentation-only broker/profile/MCP/stdio changes",
+  "files": {
+    "backend/runtime/broker_profile.py": {
+      "added_docstrings": 23,
+      "executable_ast_equal": true,
+      "before_sha256": "9785227ecfc1f39c3152e7d99ab344a6e3389939279fd91007271424aeabfb2f",
+      "after_sha256": "d0679d0b46844a738f6375070eb51b05d54fc742083d2be5524aa9667debc1a3"
+    },
+    "backend/runtime/broker_stdio.py": {
+      "added_docstrings": 23,
+      "executable_ast_equal": true,
+      "before_sha256": "1e32653cabce48d74f916ceee6f4804a32d99000dd0e66e24cc079e61ebd8ee3",
+      "after_sha256": "c7cfd977571a3618a234722adee6635d07e304268ffcd5f1b89800cb3cf90167"
+    },
+    "backend/runtime/broker_mcp.py": {
+      "added_docstrings": 13,
+      "executable_ast_equal": true,
+      "before_sha256": "5d1e26befdf02c6a08afadd39fde0b8fb0a64fa8230e311de8d7a78c1870d8ea",
+      "after_sha256": "145cfbd5a560f6abe4f4aa36e533b4567cb8e42e9cf5c8459e7b4730ca9d625b"
+    },
+    "backend/runtime/peer_broker.py": {
+      "added_docstrings": 12,
+      "executable_ast_equal": true,
+      "before_sha256": "10e3215f0c3053132ca5e097209e500f92617f0b5bd370175784474b01fef676",
+      "after_sha256": "67c6597b0dc03c17beab54f8b0afb1c2eb2e602022c35be502862065042ae904"
+    }
+  }
+}

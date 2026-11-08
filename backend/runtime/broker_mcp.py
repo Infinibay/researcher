@@ -16,7 +16,13 @@ class McpTransportError(RuntimeError):
 
 
 class _Pipes:
+    """Bridge one broker-owned endpoint to bounded MCP SDK channels, retaining physical shutdown
+    ownership outside the SDK.
+    """
     def __init__(self, endpoint, limit, timeout):
+        """Create bounded read/write channels and bookkeeping for one endpoint without opening or
+        spawning a process.
+        """
         self.endpoint, self.limit, self.timeout = endpoint, limit, timeout
         self.read_send, self.read = anyio.create_memory_object_stream(8)
         self.write, self.write_receive = anyio.create_memory_object_stream(8)
@@ -25,6 +31,7 @@ class _Pipes:
         self._closing = None
 
     async def open(self):
+        """Open the existing endpoint owner once and start MCP input, output and diagnostic consumers."""
         await self.endpoint.open(limit=self.limit)
         self.tasks = [
             asyncio.create_task(self._reader()),
@@ -33,6 +40,9 @@ class _Pipes:
         ]
 
     async def fail(self):
+        """Wake SDK requests with connection loss and share one shielded peer close; raw decoder or
+        validation details are not forwarded to SDK logs.
+        """
         self.failed = True
         # Closing the receive channel wakes SDK requests with Connection closed.
         # Do not forward decoder/validation exceptions, which contain raw input.
@@ -43,6 +53,9 @@ class _Pipes:
         await asyncio.shield(self._closing)
 
     async def _reader(self):
+        """Validate bounded newline-delimited typed MCP frames before forwarding them, ending the peer
+        on malformed or incomplete input.
+        """
         try:
             while True:
                 line = await self.endpoint.stdout.readline()
@@ -72,6 +85,9 @@ class _Pipes:
             await self.fail()
 
     async def _writer(self):
+        """Send bounded serialized SDK frames under the request deadline; write failure closes the
+        existing peer instead of replaying an uncertain request.
+        """
         try:
             async for message in self.write_receive:
                 data = (
@@ -96,6 +112,9 @@ class _Pipes:
 
     async def _stderr(self):
         # Drain/discard diagnostics with fixed chunks; no unbounded capture or log.
+        """Drain diagnostic bytes in fixed chunks without retaining an unbounded transcript or logging
+        raw peer input.
+        """
         try:
             while await self.endpoint.stderr.read(16384):
                 pass
@@ -105,6 +124,9 @@ class _Pipes:
     async def close(self):
         # Physical peer closure precedes cancelling protocol IO tasks. The broker
         # retains its original pidfd/receipt ownership even if our wait is cancelled.
+        """Request physical peer closure before cancelling protocol tasks and releasing memory streams;
+        unresolved closure errors remain visible.
+        """
         try:
             await self.fail()
         finally:
@@ -116,11 +138,18 @@ class _Pipes:
 
 
 class _Client:
+    """Expose a bounded SDK session over the original broker peer, preserving uncertain delivery and
+    avoiding automatic tool replay.
+    """
     def __init__(self, session, pipes):
+        """Bind the existing SDK session and pipe owner with zero local requests in flight."""
         self._session, self._pipes = session, pipes
         self._inflight = 0
 
     async def _run(self, operation):
+        """Bound concurrent requests and duration, close the peer after an uncertain operation or
+        cancellation, and sanitize transport failures without replay.
+        """
         if self._pipes.failed:
             raise McpTransportError("MCP peer closed; reconcile before retrying")
         if self._inflight >= 8:
@@ -149,9 +178,15 @@ class _Client:
             self._inflight -= 1
 
     async def list_tools(self, *, cursor=None):
+        """Inspect tools over the already owned SDK session using its original continuation cursor and
+        request limits.
+        """
         return await self._run(lambda: self._session.list_tools(cursor=cursor))
 
     async def call_tool(self, name, arguments):
+        """Invoke one tool through the original session; typed tool error results remain results, while
+        transport uncertainty is handled separately.
+        """
         return await self._run(lambda: self._session.call_tool(name, arguments))
 
 

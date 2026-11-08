@@ -9625,3 +9625,19 @@ de introspección auditado.18:36:07–18:42:00UTC,5min53s hasta corte de verific
 informe/checkpoint posteriores aparte. Siguen broker/aislamiento/suscripción/
 mediación/JSDoc, U08/entrega, Ken, accesibilidad y cierre integrado.42/43escenarios,
 12/12páginas por alcance; sin nueva global verde ni push/merge/despliegue.
+
+## 2026-11-08 — Documentación del broker y los canales
+
+[Informe](broker-docstrings-review.md). 71 docstrings en cuatro módulos; 254
+acumulados en doce. Contratos de cápsulas/perfiles, stdio/MCP y dueño original
+revisados contra implementación. AST ejecutable, siete políticas y 48 herramientas
+idénticos; 63 pruebas fuente pasan, 52,69 s, sin omisiones ni nuevos modelos.
+Inventario 85/322 vigente: un consumidor documental revalidado, 84 decisiones
+sin cambios. 367 definiciones sin docstring fuera del alcance, relevancia desigual.
+
+18:46:38–18:55:14 UTC, 8 min 36 s hasta verificación; incluye recuperación de
+contexto y consulta de estado. Informe/checkpoint posteriores aparte. Sigue
+suscripción/estado/mediación y documentación relevante, después accesibilidad y
+cierre integrado. U08 y distribución Ken/ONNX abiertos. El turno anterior de
+estado no cambió el producto; este bloque sí añade documentación y evidencia.
+Sin nuevo wheel, suite global, push, merge ni despliegue.

@@ -189,9 +189,9 @@
     "backend/runtime/branch_inputs.py": "240a29c7387e365084db3d00d905c7dc19e00261490fad1ea90c97f3c08ab0d0",
     "backend/runtime/broker_git.py": "417743a08921281b9ecd80394622699ca61b890ae22a58caa16ccc495b6a24f5",
     "backend/runtime/broker_inference.py": "eeb89823d77339ca2c1ebb4d056989126aedcd9e7abda18ba364600dd65bd4a4",
-    "backend/runtime/broker_mcp.py": "5d1e26befdf02c6a08afadd39fde0b8fb0a64fa8230e311de8d7a78c1870d8ea",
-    "backend/runtime/broker_profile.py": "9785227ecfc1f39c3152e7d99ab344a6e3389939279fd91007271424aeabfb2f",
-    "backend/runtime/broker_stdio.py": "1e32653cabce48d74f916ceee6f4804a32d99000dd0e66e24cc079e61ebd8ee3",
+    "backend/runtime/broker_mcp.py": "145cfbd5a560f6abe4f4aa36e533b4567cb8e42e9cf5c8459e7b4730ca9d625b",
+    "backend/runtime/broker_profile.py": "d0679d0b46844a738f6375070eb51b05d54fc742083d2be5524aa9667debc1a3",
+    "backend/runtime/broker_stdio.py": "c7cfd977571a3618a234722adee6635d07e304268ffcd5f1b89800cb3cf90167",
     "backend/runtime/business_definitions.py": "e5243ae48d8c2b33d96efae3c88c7f03126f337c7947704afe7d3b1e9174c8a2",
     "backend/runtime/business_mediation.py": "e9dec784b48d473d2914a88ad5efdf110ab1f63dfec2f49a710efa1e16ac765e",
     "backend/runtime/candidate_capture.py": "69a49f1d87ea03fd52c82ae266338515fe5807df403043821154f674a7a03f12",
@@ -261,7 +261,7 @@
     "backend/runtime/native_search.py": "a0661b96d8dfbd7811e8183d00491d19fbce89301a42cbc5ee195fd552cd5092",
     "backend/runtime/native_state.py": "e5cc1b82c97cb9cac06b53c231d0ccef33283980e72195233ef57ca4c232ceaf",
     "backend/runtime/owned_runtime.py": "5d28a1b3909b77d9699c0770889a788a0365e25282b7c8eb4b3e13e9048a2145",
-    "backend/runtime/peer_broker.py": "10e3215f0c3053132ca5e097209e500f92617f0b5bd370175784474b01fef676",
+    "backend/runtime/peer_broker.py": "67c6597b0dc03c17beab54f8b0afb1c2eb2e602022c35be502862065042ae904",
     "backend/runtime/peer_guard.py": "82fb8a472a96142d470db4a8af992f4d48faf3b04596be7dde4116f1dfa8b8be",
     "backend/runtime/peer_payload.py": "21d725e1011e447d96ea78b3fb5597a5e7691cebfdb1e46aa5ecb1d14a05d1d7",
     "backend/runtime/peer_process.py": "6f6bba2b29098b3960814e3bd40a9badbda86e8d508b999935b9e0441097cd34",
@@ -805,7 +805,7 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "8008b36a34994a23ad60f5b419a332c0b68bfe6de7b7c1df35a82c776e69ce71",
+      "dependencies_sha256": "1be61ff0def7cdfb144a167384bffedad57da45956dbaaab88e5992fa6a73519",
       "direct_module_consumers": {
         "backend/api/routes/projects.py": "40bcd939312f048aa22eea9f47967115638effe831ec75786e29a4e1749689e3",
         "backend/communication/owner_notes.py": "27d60b5640960cd647bf3fd4ce8c9fb136e7b614a62326c3cf599336ad35ab51",
@@ -822,7 +822,7 @@
         "backend/runtime/code_publications.py": "c12ab69601293c3600681cda9e767328f7849f87759a7d682dd0819b5527f345",
         "backend/runtime/code_review_records.py": "3b168018dda8444211ec24536b4d237a6c54303342bfb7c4426bc03565bef512",
         "backend/runtime/code_reviews.py": "4bfc57ed5ff147c84d46d625ca4346716ea50507b333f550fd45e05fe80ca58a",
-        "backend/runtime/peer_broker.py": "10e3215f0c3053132ca5e097209e500f92617f0b5bd370175784474b01fef676",
+        "backend/runtime/peer_broker.py": "67c6597b0dc03c17beab54f8b0afb1c2eb2e602022c35be502862065042ae904",
         "backend/runtime/publication_recovery.py": "af13150ac5d40d64346a1006f5c05b7a17e6b790901d2ac82ab73aafd0df5547",
         "backend/runtime/remote_recovery.py": "f466005789688b6211111f77bb55879a160219edb3cbf9786c4cc36c3f018b02",
         "backend/runtime/remote_runtime.py": "082048fd26b62d26798178696a4f6f417caf0bbcc02c91f8b38640c7b60df693",
@@ -839,7 +839,7 @@
       },
       "suggested_disposition": "requires_review",
       "review_status": "reviewed",
-      "review_rationale": "Candidate source is byte-identical to416abed. Its only changed direct module consumer is sqlite_runs.py, with41authored docstrings and an executable AST identical after removing documentation. Existing imports/calls to review subject/current-state helpers and freeze_input are unchanged. Checked7native instruction bodies and48business tool descriptions/schemas/annotations byte-for-byte: no model-visible policy delta. No authority, persistence or rendering behavior change is claimed from comments; broader introspection is outside this check.",
+      "review_rationale": "Candidate source is byte-identical to8850633. Its only changed direct module consumer is peer_broker.py, with12authored docstrings and executable AST equal after removing only documentation. Imports/calls of review-subject/current-state helpers are unchanged. Seven actual native instruction bodies and48business tool descriptions/schemas/annotations remain identical. This revalidates the documentation-only consumer delta, not general introspection or prompting efficacy.",
       "review_evidence": [
         "backend/knowledge/reviews.py",
         "docs/prompts/review-2026-11-07.md",
@@ -871,7 +871,9 @@
         "backend/planning/manual_prerequisites.py",
         "backend/runtime/peer_broker.py",
         "docs/modernization/core-docstrings-review.md",
-        "docs/modernization/core-docstrings-results.json"
+        "docs/modernization/core-docstrings-results.json",
+        "docs/modernization/broker-docstrings-review.md",
+        "docs/modernization/broker-docstrings-results.json"
       ],
       "review_conflicts": []
     },
