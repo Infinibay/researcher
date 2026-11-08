@@ -148,9 +148,9 @@
       "reviewer": "Codex with independent clean-context source/consumer reviews"
     },
     "backend/planning/instructions.py::PLANNING_INSTRUCTIONS": {
-      "dependencies_sha256": "139e9ac0885484f5fec82080256a798d1c64818f3640fb335088db2ffed2199c",
+      "dependencies_sha256": "890880f3f6da6e6204e3dca680fbcb8473db57cbb5f08dd1b1649dd6e4dfbfd7",
       "decision": "reviewed_native",
-      "rationale": "Capability source is byte-identical to the matched baseline; native.py is its sole changed direct consumer. Reviewed the common composition delta without claiming a capability-specific source rewrite. Planning preserves bounded source discovery and a final proposal; selected Ken symbols do not certify whole-file coverage. Static source and inspected consumer review only; not exhaustive dynamic calls, isolated prompt efficacy, human comprehension or general scientific correctness.",
+      "rationale": "Capability policy source is byte-identical to64d9e28. Reviewed its changed native.py consumer: existing capability selection/tool authority and delivery contracts are unchanged; common framing and catalog10 apply once. No role-specific policy or permission was widened. Static review only; no general model efficacy or human comprehension claim.",
       "evidence": [
         "backend/planning/instructions.py",
         "docs/prompts/review-2026-11-07.md",
@@ -164,7 +164,9 @@
         "backend/tests/runtime/test_atomic_planning_delivery.py",
         "docs/prompts/review-2026-11-08.md",
         "backend/prompts/native.py",
-        "backend/runtime/owned_runtime.py"
+        "backend/runtime/owned_runtime.py",
+        "docs/modernization/purpose-framing-review.md",
+        "backend/tests/runtime/test_prompt_catalog.py"
       ],
       "conflicts": [],
       "previous_review": {
@@ -194,8 +196,8 @@
         "reviewed_at": "2026-11-07",
         "source_base_commit": "035b46c"
       },
-      "reviewed_at": "2026-11-08",
-      "source_base_commit": "d278653",
+      "reviewed_at": "2026-11-08T17:15:15.063443+00:00",
+      "source_base_commit": "64d9e2881b1a4a6465147352ec19eac8c4521a1a",
       "history": [
         {
           "dependencies_sha256": "f84378225c92d5472badec64d22f0dbe997e133c9b00c41b0fd090b2dd1f37f5",
@@ -288,14 +290,16 @@
           "source_base_commit": "ab36dc5"
         }
       ],
-      "revalidation": "Capability source is byte-identical to the matched baseline; native.py is its sole changed direct consumer. Reviewed the common composition delta without claiming a capability-specific source rewrite. Planning preserves bounded source discovery and a final proposal; selected Ken symbols do not certify whole-file coverage.",
+      "revalidation": "Capability policy source is byte-identical to64d9e28. Reviewed its changed native.py consumer: existing capability selection/tool authority and delivery contracts are unchanged; common framing and catalog10 apply once. No role-specific policy or permission was widened.",
       "revalidation_baseline_commit": "dd1be91",
-      "reviewer": "Codex with independent clean-context source/consumer reviews"
+      "reviewer": "Codex, direct source/consumer delta review",
+      "reviewed_source_state": "Base plus purpose-framing catalog10 and historical9 recognition",
+      "previous_dependencies_sha256": "139e9ac0885484f5fec82080256a798d1c64818f3640fb335088db2ffed2199c"
     },
     "backend/prompts/native.py::COMMON_INSTRUCTIONS": {
-      "dependencies_sha256": "31423e50a04e622c5e88d3674e9c84e07ac995dc6166ee7bf780186c6ec7e992",
+      "dependencies_sha256": "d5322d94d2f3dbaf429a4c47cb637c84e8f264d2b89ceaf8da0441e8f7928b75",
       "decision": "retained_and_revised",
-      "rationale": "Reviewed the complete common policy and matched-baseline delta: epistemic categories, task-anchored examples, bounded accessible diagrams, structured selections versus free text, and durable independent result/basis in questions[].why_needed before waiting. Static source and inspected consumer review only; not exhaustive dynamic calls, isolated prompt efficacy, human comprehension or general scientific correctness.",
+      "rationale": "The only policy-body delta is four lines: establish purpose/data relationships before a decision, use illustrative input/output when useful, and rebuild framing after clarity feedback without a comprehension quiz. Existing evidence/authority/question/budget rules remain intact. This implements stated owner feedback; efficacy and human understanding are not inferred. Static review only; no general model efficacy or human comprehension claim.",
       "evidence": [
         "backend/prompts/native.py",
         "docs/prompts/review-2026-11-07.md",
@@ -314,7 +318,8 @@
         "backend/runtime/owned_runtime.py",
         "backend/runtime/questions.py",
         "backend/runtime/sqlite_questions.py",
-        "docs/modernization/c10-independent-review.md"
+        "docs/modernization/c10-independent-review.md",
+        "docs/modernization/purpose-framing-review.md"
       ],
       "conflicts": [],
       "previous_review": {
@@ -350,8 +355,8 @@
         "reviewed_at": "2026-11-07",
         "source_base_commit": "035b46c"
       },
-      "reviewed_at": "2026-11-08",
-      "source_base_commit": "d278653",
+      "reviewed_at": "2026-11-08T17:15:15.063482+00:00",
+      "source_base_commit": "64d9e2881b1a4a6465147352ec19eac8c4521a1a",
       "history": [
         {
           "dependencies_sha256": "8f2ad99873098c626426e104f2c0bcd9a7b89404ac0a64acfee12f229c23c7d7",
@@ -406,14 +411,16 @@
           "source_base_commit": "ab36dc5"
         }
       ],
-      "revalidation": "Reviewed the complete common policy and matched-baseline delta: epistemic categories, task-anchored examples, bounded accessible diagrams, structured selections versus free text, and durable independent result/basis in questions[].why_needed before waiting.",
+      "revalidation": "The only policy-body delta is four lines: establish purpose/data relationships before a decision, use illustrative input/output when useful, and rebuild framing after clarity feedback without a comprehension quiz. Existing evidence/authority/question/budget rules remain intact. This implements stated owner feedback; efficacy and human understanding are not inferred.",
       "revalidation_baseline_commit": "dd1be91",
-      "reviewer": "Codex with independent clean-context source/consumer reviews"
+      "reviewer": "Codex, direct source/consumer delta review",
+      "reviewed_source_state": "Base plus purpose-framing catalog10 and historical9 recognition",
+      "previous_dependencies_sha256": "31423e50a04e622c5e88d3674e9c84e07ac995dc6166ee7bf780186c6ec7e992"
     },
     "backend/prompts/native.py::SOURCE_INSTRUCTIONS": {
-      "dependencies_sha256": "31423e50a04e622c5e88d3674e9c84e07ac995dc6166ee7bf780186c6ec7e992",
+      "dependencies_sha256": "d5322d94d2f3dbaf429a4c47cb637c84e8f264d2b89ceaf8da0441e8f7928b75",
       "decision": "retained",
-      "rationale": "Candidate source instructions are unchanged; module-level invalidation comes from common policy/catalogue changes. Source text retains provenance and cannot authorize work. Static source and inspected consumer review only; not exhaustive dynamic calls, isolated prompt efficacy, human comprehension or general scientific correctness.",
+      "rationale": "This exact source-acquisition literal is unchanged by AST comparison to64d9e28. Its module now composes catalog10 and a purpose-framing common policy; source-capture/continuation/quotation authority remains unchanged. Static review only; no general model efficacy or human comprehension claim.",
       "evidence": [
         "backend/prompts/native.py",
         "docs/prompts/review-2026-11-07.md",
@@ -432,7 +439,8 @@
         "backend/runtime/owned_runtime.py",
         "backend/runtime/questions.py",
         "backend/runtime/sqlite_questions.py",
-        "docs/modernization/c10-independent-review.md"
+        "docs/modernization/c10-independent-review.md",
+        "docs/modernization/purpose-framing-review.md"
       ],
       "conflicts": [],
       "previous_review": {
@@ -468,8 +476,8 @@
         "reviewed_at": "2026-11-07",
         "source_base_commit": "035b46c"
       },
-      "reviewed_at": "2026-11-08",
-      "source_base_commit": "d278653",
+      "reviewed_at": "2026-11-08T17:15:15.063497+00:00",
+      "source_base_commit": "64d9e2881b1a4a6465147352ec19eac8c4521a1a",
       "history": [
         {
           "dependencies_sha256": "8f2ad99873098c626426e104f2c0bcd9a7b89404ac0a64acfee12f229c23c7d7",
@@ -524,14 +532,16 @@
           "source_base_commit": "ab36dc5"
         }
       ],
-      "revalidation": "Candidate source instructions are unchanged; module-level invalidation comes from common policy/catalogue changes. Source text retains provenance and cannot authorize work.",
+      "revalidation": "This exact source-acquisition literal is unchanged by AST comparison to64d9e28. Its module now composes catalog10 and a purpose-framing common policy; source-capture/continuation/quotation authority remains unchanged.",
       "revalidation_baseline_commit": "dd1be91",
-      "reviewer": "Codex with independent clean-context source/consumer reviews"
+      "reviewer": "Codex, direct source/consumer delta review",
+      "reviewed_source_state": "Base plus purpose-framing catalog10 and historical9 recognition",
+      "previous_dependencies_sha256": "31423e50a04e622c5e88d3674e9c84e07ac995dc6166ee7bf780186c6ec7e992"
     },
     "backend/prompts/native.py::build_instructions": {
-      "dependencies_sha256": "31423e50a04e622c5e88d3674e9c84e07ac995dc6166ee7bf780186c6ec7e992",
+      "dependencies_sha256": "d5322d94d2f3dbaf429a4c47cb637c84e8f264d2b89ceaf8da0441e8f7928b75",
       "decision": "retained",
-      "rationale": "Reviewed catalogue9 composition, capability selector and effective limit transport. owned_runtime is byte-identical to the matched baseline and still supplies the same capability-scoped builder to CodexSession. Static source and inspected consumer review only; not exhaustive dynamic calls, isolated prompt efficacy, human comprehension or general scientific correctness.",
+      "rationale": "The selector function AST and actual owned_runtime consumer are unchanged. Seven capability profiles still include the common policy exactly once and freeze exact bytes/budgets, now with catalog10 and the four added framing lines. Static review only; no general model efficacy or human comprehension claim.",
       "evidence": [
         "backend/prompts/native.py",
         "docs/prompts/review-2026-11-07.md",
@@ -550,7 +560,8 @@
         "backend/runtime/owned_runtime.py",
         "backend/runtime/questions.py",
         "backend/runtime/sqlite_questions.py",
-        "docs/modernization/c10-independent-review.md"
+        "docs/modernization/c10-independent-review.md",
+        "docs/modernization/purpose-framing-review.md"
       ],
       "conflicts": [],
       "previous_review": {
@@ -586,8 +597,8 @@
         "reviewed_at": "2026-11-07",
         "source_base_commit": "035b46c"
       },
-      "reviewed_at": "2026-11-08",
-      "source_base_commit": "d278653",
+      "reviewed_at": "2026-11-08T17:15:15.063506+00:00",
+      "source_base_commit": "64d9e2881b1a4a6465147352ec19eac8c4521a1a",
       "history": [
         {
           "dependencies_sha256": "8f2ad99873098c626426e104f2c0bcd9a7b89404ac0a64acfee12f229c23c7d7",
@@ -642,14 +653,16 @@
           "source_base_commit": "ab36dc5"
         }
       ],
-      "revalidation": "Reviewed catalogue9 composition, capability selector and effective limit transport. owned_runtime is byte-identical to the matched baseline and still supplies the same capability-scoped builder to CodexSession.",
+      "revalidation": "The selector function AST and actual owned_runtime consumer are unchanged. Seven capability profiles still include the common policy exactly once and freeze exact bytes/budgets, now with catalog10 and the four added framing lines.",
       "revalidation_baseline_commit": "dd1be91",
-      "reviewer": "Codex with independent clean-context source/consumer reviews"
+      "reviewer": "Codex, direct source/consumer delta review",
+      "reviewed_source_state": "Base plus purpose-framing catalog10 and historical9 recognition",
+      "previous_dependencies_sha256": "31423e50a04e622c5e88d3674e9c84e07ac995dc6166ee7bf780186c6ec7e992"
     },
     "backend/prompts/native.py::instruction_identity": {
-      "dependencies_sha256": "31423e50a04e622c5e88d3674e9c84e07ac995dc6166ee7bf780186c6ec7e992",
+      "dependencies_sha256": "d5322d94d2f3dbaf429a4c47cb637c84e8f264d2b89ceaf8da0441e8f7928b75",
       "decision": "retained",
-      "rationale": "Reviewed current catalogue9 and retained catalogue2..8 identity hashes, known-profile validation and actual text identity; historical instructions are not rewritten. Static source and inspected consumer review only; not exhaustive dynamic calls, isolated prompt efficacy, human comprehension or general scientific correctness.",
+      "rationale": "The allowed catalog set adds historical9 while current becomes10. Versions2–9 preserve their original header/hash; unknown versions still returnNone. This does not relabel any stored prior instructions. Static review only; no general model efficacy or human comprehension claim.",
       "evidence": [
         "backend/prompts/native.py",
         "docs/prompts/review-2026-11-07.md",
@@ -668,7 +681,8 @@
         "backend/runtime/owned_runtime.py",
         "backend/runtime/questions.py",
         "backend/runtime/sqlite_questions.py",
-        "docs/modernization/c10-independent-review.md"
+        "docs/modernization/c10-independent-review.md",
+        "docs/modernization/purpose-framing-review.md"
       ],
       "conflicts": [],
       "previous_review": {
@@ -704,8 +718,8 @@
         "reviewed_at": "2026-11-07",
         "source_base_commit": "035b46c"
       },
-      "reviewed_at": "2026-11-08",
-      "source_base_commit": "d278653",
+      "reviewed_at": "2026-11-08T17:15:15.063514+00:00",
+      "source_base_commit": "64d9e2881b1a4a6465147352ec19eac8c4521a1a",
       "history": [
         {
           "dependencies_sha256": "8f2ad99873098c626426e104f2c0bcd9a7b89404ac0a64acfee12f229c23c7d7",
@@ -760,14 +774,16 @@
           "source_base_commit": "ab36dc5"
         }
       ],
-      "revalidation": "Reviewed current catalogue9 and retained catalogue2..8 identity hashes, known-profile validation and actual text identity; historical instructions are not rewritten.",
+      "revalidation": "The allowed catalog set adds historical9 while current becomes10. Versions2–9 preserve their original header/hash; unknown versions still returnNone. This does not relabel any stored prior instructions.",
       "revalidation_baseline_commit": "dd1be91",
-      "reviewer": "Codex with independent clean-context source/consumer reviews"
+      "reviewer": "Codex, direct source/consumer delta review",
+      "reviewed_source_state": "Base plus purpose-framing catalog10 and historical9 recognition",
+      "previous_dependencies_sha256": "31423e50a04e622c5e88d3674e9c84e07ac995dc6166ee7bf780186c6ec7e992"
     },
     "backend/prompts/native.py::GENERIC_INSTRUCTIONS": {
-      "dependencies_sha256": "31423e50a04e622c5e88d3674e9c84e07ac995dc6166ee7bf780186c6ec7e992",
+      "dependencies_sha256": "d5322d94d2f3dbaf429a4c47cb637c84e8f264d2b89ceaf8da0441e8f7928b75",
       "decision": "retained",
-      "rationale": "Generic candidate is unchanged; module-level invalidation comes from common policy/catalogue changes. Explicit supported capabilities remain selected by the host. Static source and inspected consumer review only; not exhaustive dynamic calls, isolated prompt efficacy, human comprehension or general scientific correctness.",
+      "rationale": "Compatibility composition AST is unchanged; resulting bytes inherit catalog10/common framing. The normal selector still has seven destinations and does not newly route requests into reference_research. Static review only; no general model efficacy or human comprehension claim.",
       "evidence": [
         "backend/prompts/native.py",
         "docs/prompts/review-2026-11-07.md",
@@ -786,7 +802,8 @@
         "backend/runtime/owned_runtime.py",
         "backend/runtime/questions.py",
         "backend/runtime/sqlite_questions.py",
-        "docs/modernization/c10-independent-review.md"
+        "docs/modernization/c10-independent-review.md",
+        "docs/modernization/purpose-framing-review.md"
       ],
       "conflicts": [],
       "previous_review": {
@@ -822,8 +839,8 @@
         "reviewed_at": "2026-11-07",
         "source_base_commit": "035b46c"
       },
-      "reviewed_at": "2026-11-08",
-      "source_base_commit": "d278653",
+      "reviewed_at": "2026-11-08T17:15:15.063522+00:00",
+      "source_base_commit": "64d9e2881b1a4a6465147352ec19eac8c4521a1a",
       "history": [
         {
           "dependencies_sha256": "8f2ad99873098c626426e104f2c0bcd9a7b89404ac0a64acfee12f229c23c7d7",
@@ -878,9 +895,11 @@
           "source_base_commit": "ab36dc5"
         }
       ],
-      "revalidation": "Generic candidate is unchanged; module-level invalidation comes from common policy/catalogue changes. Explicit supported capabilities remain selected by the host.",
+      "revalidation": "Compatibility composition AST is unchanged; resulting bytes inherit catalog10/common framing. The normal selector still has seven destinations and does not newly route requests into reference_research.",
       "revalidation_baseline_commit": "dd1be91",
-      "reviewer": "Codex with independent clean-context source/consumer reviews"
+      "reviewer": "Codex, direct source/consumer delta review",
+      "reviewed_source_state": "Base plus purpose-framing catalog10 and historical9 recognition",
+      "previous_dependencies_sha256": "31423e50a04e622c5e88d3674e9c84e07ac995dc6166ee7bf780186c6ec7e992"
     },
     "backend/research/stdio_server.py::main.description@93": {
       "dependencies_sha256": "37d0a82d854ea51389652d84bcc1d95955e0d1e71a446edeb9707aa22a6b6333",
@@ -2178,9 +2197,9 @@
       "reviewer": "Codex with independent clean-context source/consumer reviews"
     },
     "backend/runtime/code_audit_instructions.py::CODE_AUDIT_INSTRUCTIONS": {
-      "dependencies_sha256": "e7ae2aa7342a0fc49aec0703855d38d1dbfea891961575494cdc5732c28accb9",
+      "dependencies_sha256": "9773ca012f0a5c4c0ec335b2a2922850749b71cd7b154e3e37cd38c0eb7b7ad4",
       "decision": "rewritten",
-      "rationale": "Capability source is byte-identical to the matched baseline; native.py is its sole changed direct consumer. Reviewed the common composition delta without claiming a capability-specific source rewrite. Audit preserves readonly inspection, explicit evidence and no owner acceptance or publication. Static source and inspected consumer review only; not exhaustive dynamic calls, isolated prompt efficacy, human comprehension or general scientific correctness.",
+      "rationale": "Capability policy source is byte-identical to64d9e28. Reviewed its changed native.py consumer: existing capability selection/tool authority and delivery contracts are unchanged; common framing and catalog10 apply once. No role-specific policy or permission was widened. Static review only; no general model efficacy or human comprehension claim.",
       "evidence": [
         "backend/runtime/code_audit_instructions.py",
         "docs/prompts/review-2026-11-07.md",
@@ -2194,7 +2213,9 @@
         "docs/modernization/atomic-planning-review.md",
         "backend/tests/runtime/test_atomic_planning_delivery.py",
         "docs/prompts/review-2026-11-08.md",
-        "backend/runtime/owned_runtime.py"
+        "backend/runtime/owned_runtime.py",
+        "docs/modernization/purpose-framing-review.md",
+        "backend/tests/runtime/test_prompt_catalog.py"
       ],
       "conflicts": [],
       "previous_review": {
@@ -2226,8 +2247,8 @@
         "reviewed_at": "2026-11-07",
         "source_base_commit": "035b46c"
       },
-      "reviewed_at": "2026-11-08",
-      "source_base_commit": "d278653",
+      "reviewed_at": "2026-11-08T17:15:15.066345+00:00",
+      "source_base_commit": "64d9e2881b1a4a6465147352ec19eac8c4521a1a",
       "history": [
         {
           "dependencies_sha256": "0ea9582a8901d671c12aefe1856d7226a9d7cd9b1a61ac7df9643e472f03854b",
@@ -2278,9 +2299,11 @@
           "source_base_commit": "ab36dc5"
         }
       ],
-      "revalidation": "Capability source is byte-identical to the matched baseline; native.py is its sole changed direct consumer. Reviewed the common composition delta without claiming a capability-specific source rewrite. Audit preserves readonly inspection, explicit evidence and no owner acceptance or publication.",
+      "revalidation": "Capability policy source is byte-identical to64d9e28. Reviewed its changed native.py consumer: existing capability selection/tool authority and delivery contracts are unchanged; common framing and catalog10 apply once. No role-specific policy or permission was widened.",
       "revalidation_baseline_commit": "dd1be91",
-      "reviewer": "Codex with independent clean-context source/consumer reviews"
+      "reviewer": "Codex, direct source/consumer delta review",
+      "reviewed_source_state": "Base plus purpose-framing catalog10 and historical9 recognition",
+      "previous_dependencies_sha256": "e7ae2aa7342a0fc49aec0703855d38d1dbfea891961575494cdc5732c28accb9"
     },
     "backend/runtime/code_mode_payload.py::description@102": {
       "dependencies_sha256": "85eecfee03c57fd02de8c40076c25a3008ef6120ab4bffa623ec79b86f078fc1",
@@ -2294,9 +2317,9 @@
       "conflicts": []
     },
     "backend/runtime/code_review_instructions.py::CODE_REVIEW_INSTRUCTIONS": {
-      "dependencies_sha256": "09db272e2b384cdf02d362890e98c2b25c60b64d0d47123f9a14f11fc30f3882",
+      "dependencies_sha256": "6a6c211e1c5059ee09b8d810adedf7a2614e16a904761e5969ed5c659bb8ced6",
       "decision": "rewritten",
-      "rationale": "Capability source is byte-identical to the matched baseline; native.py is its sole changed direct consumer. Reviewed the common composition delta without claiming a capability-specific source rewrite. Code review preserves the frozen candidate and original checks; delivery, independent review and owner acceptance remain separate. Static source and inspected consumer review only; not exhaustive dynamic calls, isolated prompt efficacy, human comprehension or general scientific correctness.",
+      "rationale": "Capability policy source is byte-identical to64d9e28. Reviewed its changed native.py consumer: existing capability selection/tool authority and delivery contracts are unchanged; common framing and catalog10 apply once. No role-specific policy or permission was widened. Static review only; no general model efficacy or human comprehension claim.",
       "evidence": [
         "backend/runtime/code_review_instructions.py",
         "docs/prompts/review-2026-11-07.md",
@@ -2310,7 +2333,9 @@
         "docs/modernization/atomic-planning-review.md",
         "backend/tests/runtime/test_atomic_planning_delivery.py",
         "docs/prompts/review-2026-11-08.md",
-        "backend/runtime/owned_runtime.py"
+        "backend/runtime/owned_runtime.py",
+        "docs/modernization/purpose-framing-review.md",
+        "backend/tests/runtime/test_prompt_catalog.py"
       ],
       "conflicts": [],
       "previous_review": {
@@ -2342,8 +2367,8 @@
         "reviewed_at": "2026-11-07",
         "source_base_commit": "035b46c"
       },
-      "reviewed_at": "2026-11-08",
-      "source_base_commit": "d278653",
+      "reviewed_at": "2026-11-08T17:15:15.068705+00:00",
+      "source_base_commit": "64d9e2881b1a4a6465147352ec19eac8c4521a1a",
       "history": [
         {
           "dependencies_sha256": "3e0c7e09f4994ecb93fba31dc3b0133e76bf52bb066f0c00670c4971764ff75d",
@@ -2394,9 +2419,11 @@
           "source_base_commit": "ab36dc5"
         }
       ],
-      "revalidation": "Capability source is byte-identical to the matched baseline; native.py is its sole changed direct consumer. Reviewed the common composition delta without claiming a capability-specific source rewrite. Code review preserves the frozen candidate and original checks; delivery, independent review and owner acceptance remain separate.",
+      "revalidation": "Capability policy source is byte-identical to64d9e28. Reviewed its changed native.py consumer: existing capability selection/tool authority and delivery contracts are unchanged; common framing and catalog10 apply once. No role-specific policy or permission was widened.",
       "revalidation_baseline_commit": "dd1be91",
-      "reviewer": "Codex with independent clean-context source/consumer reviews"
+      "reviewer": "Codex, direct source/consumer delta review",
+      "reviewed_source_state": "Base plus purpose-framing catalog10 and historical9 recognition",
+      "previous_dependencies_sha256": "09db272e2b384cdf02d362890e98c2b25c60b64d0d47123f9a14f11fc30f3882"
     },
     "backend/runtime/code_review_tools.py::_TOOLS": {
       "dependencies_sha256": "1c80a8aa65700c7fcc361d74e1c81c9784a8400a7797730bf4ae1691ffd26375",
@@ -2474,9 +2501,9 @@
       ]
     },
     "backend/runtime/investigation_instructions.py::INVESTIGATION_INSTRUCTIONS": {
-      "dependencies_sha256": "486207e2cc7c4fff15b43f0a4c55e765451f0a42d566d733eb8f954c910e4244",
+      "dependencies_sha256": "c3eb6d56e33d752cb4a8130b54e3605c37f8301cd8f5a82620ee8b50b8067c1e",
       "decision": "rewritten",
-      "rationale": "Capability source is byte-identical to the matched baseline; native.py is its sole changed direct consumer. Reviewed the common composition delta without claiming a capability-specific source rewrite. Investigation preserves exploratory evidence and does not impose scientific methods on every project. Static source and inspected consumer review only; not exhaustive dynamic calls, isolated prompt efficacy, human comprehension or general scientific correctness.",
+      "rationale": "Capability policy source is byte-identical to64d9e28. Reviewed its changed native.py consumer: existing capability selection/tool authority and delivery contracts are unchanged; common framing and catalog10 apply once. No role-specific policy or permission was widened. Static review only; no general model efficacy or human comprehension claim.",
       "evidence": [
         "backend/runtime/investigation_instructions.py",
         "docs/prompts/review-2026-11-07.md",
@@ -2490,7 +2517,9 @@
         "docs/modernization/atomic-planning-review.md",
         "backend/tests/runtime/test_atomic_planning_delivery.py",
         "docs/prompts/review-2026-11-08.md",
-        "backend/runtime/owned_runtime.py"
+        "backend/runtime/owned_runtime.py",
+        "docs/modernization/purpose-framing-review.md",
+        "backend/tests/runtime/test_prompt_catalog.py"
       ],
       "conflicts": [],
       "previous_review": {
@@ -2522,8 +2551,8 @@
         "reviewed_at": "2026-11-07",
         "source_base_commit": "035b46c"
       },
-      "reviewed_at": "2026-11-08",
-      "source_base_commit": "d278653",
+      "reviewed_at": "2026-11-08T17:15:15.073698+00:00",
+      "source_base_commit": "64d9e2881b1a4a6465147352ec19eac8c4521a1a",
       "history": [
         {
           "dependencies_sha256": "fa178687d554f1447a429db504057522861ad14c35784866eac0336456044722",
@@ -2574,14 +2603,16 @@
           "source_base_commit": "ab36dc5"
         }
       ],
-      "revalidation": "Capability source is byte-identical to the matched baseline; native.py is its sole changed direct consumer. Reviewed the common composition delta without claiming a capability-specific source rewrite. Investigation preserves exploratory evidence and does not impose scientific methods on every project.",
+      "revalidation": "Capability policy source is byte-identical to64d9e28. Reviewed its changed native.py consumer: existing capability selection/tool authority and delivery contracts are unchanged; common framing and catalog10 apply once. No role-specific policy or permission was widened.",
       "revalidation_baseline_commit": "dd1be91",
-      "reviewer": "Codex with independent clean-context source/consumer reviews"
+      "reviewer": "Codex, direct source/consumer delta review",
+      "reviewed_source_state": "Base plus purpose-framing catalog10 and historical9 recognition",
+      "previous_dependencies_sha256": "486207e2cc7c4fff15b43f0a4c55e765451f0a42d566d733eb8f954c910e4244"
     },
     "backend/runtime/review_instructions.py::REVIEW_INSTRUCTIONS": {
-      "dependencies_sha256": "9e237badd19bfe7d39ac5485bd809b08bf24ab6bfb2d78ac7bdd85a4765bfc79",
+      "dependencies_sha256": "f676a65bfe50d7b212020f864073b60d8b5d423da60c0f7c9f9d4aa0527b7b81",
       "decision": "rewritten",
-      "rationale": "Capability source is byte-identical to the matched baseline; native.py is its sole changed direct consumer. Reviewed the common composition delta without claiming a capability-specific source rewrite. Finding review preserves the exact original subject, source windows and attributed decision; a citation is not sufficient support. Static source and inspected consumer review only; not exhaustive dynamic calls, isolated prompt efficacy, human comprehension or general scientific correctness.",
+      "rationale": "Capability policy source is byte-identical to64d9e28. Reviewed its changed native.py consumer: existing capability selection/tool authority and delivery contracts are unchanged; common framing and catalog10 apply once. No role-specific policy or permission was widened. Static review only; no general model efficacy or human comprehension claim.",
       "evidence": [
         "backend/runtime/review_instructions.py",
         "docs/prompts/review-2026-11-07.md",
@@ -2595,7 +2626,9 @@
         "docs/modernization/atomic-planning-review.md",
         "backend/tests/runtime/test_atomic_planning_delivery.py",
         "docs/prompts/review-2026-11-08.md",
-        "backend/runtime/owned_runtime.py"
+        "backend/runtime/owned_runtime.py",
+        "docs/modernization/purpose-framing-review.md",
+        "backend/tests/runtime/test_prompt_catalog.py"
       ],
       "conflicts": [],
       "previous_review": {
@@ -2627,8 +2660,8 @@
         "reviewed_at": "2026-11-07",
         "source_base_commit": "035b46c"
       },
-      "reviewed_at": "2026-11-08",
-      "source_base_commit": "d278653",
+      "reviewed_at": "2026-11-08T17:15:15.076546+00:00",
+      "source_base_commit": "64d9e2881b1a4a6465147352ec19eac8c4521a1a",
       "history": [
         {
           "dependencies_sha256": "f7acea8be016f5b7f105f9a8da5377a7d05c005ea62aaf0d98b32efcb7bb6a8c",
@@ -2679,9 +2712,11 @@
           "source_base_commit": "ab36dc5"
         }
       ],
-      "revalidation": "Capability source is byte-identical to the matched baseline; native.py is its sole changed direct consumer. Reviewed the common composition delta without claiming a capability-specific source rewrite. Finding review preserves the exact original subject, source windows and attributed decision; a citation is not sufficient support.",
+      "revalidation": "Capability policy source is byte-identical to64d9e28. Reviewed its changed native.py consumer: existing capability selection/tool authority and delivery contracts are unchanged; common framing and catalog10 apply once. No role-specific policy or permission was widened.",
       "revalidation_baseline_commit": "dd1be91",
-      "reviewer": "Codex with independent clean-context source/consumer reviews"
+      "reviewer": "Codex, direct source/consumer delta review",
+      "reviewed_source_state": "Base plus purpose-framing catalog10 and historical9 recognition",
+      "previous_dependencies_sha256": "9e237badd19bfe7d39ac5485bd809b08bf24ab6bfb2d78ac7bdd85a4765bfc79"
     },
     "backend/runtime/run_inputs.py::conversation_history": {
       "dependencies_sha256": "a28284e3374b00feb2cf428703d831e5468c19f17fbccb88e34d89f452a782c8",
@@ -2774,9 +2809,9 @@
       "reviewer": "Codex with independent clean-context source/consumer reviews"
     },
     "backend/runtime/scientific_instructions.py::SCIENTIFIC_RESEARCH_INSTRUCTIONS": {
-      "dependencies_sha256": "6c80642fbb0e447d67d1349df031c1bf514a3f21e2c04cc4eada483470bcec87",
+      "dependencies_sha256": "708031594487d3b575c251642fab329e95fb4a6e3f04f10f73a0a56600db0226",
       "decision": "retained",
-      "rationale": "Capability source is byte-identical to the matched baseline; native.py is its sole changed direct consumer. Reviewed the common composition delta without claiming a capability-specific source rewrite. Scientific investigation separates calculation from replication, citations from support, observation from causation and reported confidence from justified certainty. Static source and inspected consumer review only; not exhaustive dynamic calls, isolated prompt efficacy, human comprehension or general scientific correctness.",
+      "rationale": "Capability policy source is byte-identical to64d9e28. Reviewed its changed native.py consumer: existing capability selection/tool authority and delivery contracts are unchanged; common framing and catalog10 apply once. No role-specific policy or permission was widened. Static review only; no general model efficacy or human comprehension claim.",
       "evidence": [
         "backend/runtime/scientific_instructions.py",
         "docs/prompts/review-2026-11-07.md",
@@ -2790,7 +2825,9 @@
         "docs/modernization/atomic-planning-review.md",
         "backend/tests/runtime/test_atomic_planning_delivery.py",
         "docs/prompts/review-2026-11-08.md",
-        "backend/runtime/owned_runtime.py"
+        "backend/runtime/owned_runtime.py",
+        "docs/modernization/purpose-framing-review.md",
+        "backend/tests/runtime/test_prompt_catalog.py"
       ],
       "conflicts": [],
       "previous_review": {
@@ -2822,8 +2859,8 @@
         "reviewed_at": "2026-11-07",
         "source_base_commit": "035b46c"
       },
-      "reviewed_at": "2026-11-08",
-      "source_base_commit": "d278653",
+      "reviewed_at": "2026-11-08T17:15:15.078910+00:00",
+      "source_base_commit": "64d9e2881b1a4a6465147352ec19eac8c4521a1a",
       "history": [
         {
           "dependencies_sha256": "f9138b126c21be0568354464da518be3c0a441d635b7fbcba3a08b4ce881e190",
@@ -2874,9 +2911,11 @@
           "source_base_commit": "ab36dc5"
         }
       ],
-      "revalidation": "Capability source is byte-identical to the matched baseline; native.py is its sole changed direct consumer. Reviewed the common composition delta without claiming a capability-specific source rewrite. Scientific investigation separates calculation from replication, citations from support, observation from causation and reported confidence from justified certainty.",
+      "revalidation": "Capability policy source is byte-identical to64d9e28. Reviewed its changed native.py consumer: existing capability selection/tool authority and delivery contracts are unchanged; common framing and catalog10 apply once. No role-specific policy or permission was widened.",
       "revalidation_baseline_commit": "dd1be91",
-      "reviewer": "Codex with independent clean-context source/consumer reviews"
+      "reviewer": "Codex, direct source/consumer delta review",
+      "reviewed_source_state": "Base plus purpose-framing catalog10 and historical9 recognition",
+      "previous_dependencies_sha256": "6c80642fbb0e447d67d1349df031c1bf514a3f21e2c04cc4eada483470bcec87"
     },
     "scripts/audit_prompt_inventory.py::PROMPT_NAME": {
       "dependencies_sha256": "67d88e945331a7ae0b85d8ba93039652cf68914c0cf4c181df25bd8f529bba31",
@@ -3684,9 +3723,9 @@
       "reviewer": "Codex with independent clean-context source/consumer reviews"
     },
     "backend/runtime/development_policy.py::development_instructions": {
-      "dependencies_sha256": "f610a5d586d7aa2deaa986858c18b92762d43f2fb19aae3c7d31e90796f751dc",
+      "dependencies_sha256": "12efd4b20c8fde3311eece8724e7650a933cefcadec00ac78d959d5c71e0e804",
       "decision": "retained",
-      "rationale": "Source and api/runtime_dependencies.py are unchanged from matched baseline. Reviewed native.py composition and host_installation.py retrieval/grammar asset configuration delta. Explicit recipes, maximum eight checks, allowed environments and configuration-versus-success distinction remain unchanged. Static source and inspected consumer review only; not exhaustive dynamic calls, isolated prompt efficacy, human comprehension or general scientific correctness.",
+      "rationale": "Capability policy source is byte-identical to64d9e28. Reviewed its changed native.py consumer: existing capability selection/tool authority and delivery contracts are unchanged; common framing and catalog10 apply once. No role-specific policy or permission was widened. Static review only; no general model efficacy or human comprehension claim.",
       "evidence": [
         "backend/runtime/development_policy.py",
         "docs/prompts/review-2026-11-07.md",
@@ -3705,11 +3744,14 @@
         "docs/modernization/aux-workers-review.md",
         "docs/prompts/review-2026-11-08.md",
         "backend/runtime/host_installation.py",
-        "backend/api/runtime_dependencies.py"
+        "backend/api/runtime_dependencies.py",
+        "docs/modernization/purpose-framing-review.md",
+        "backend/tests/runtime/test_prompt_catalog.py",
+        "backend/runtime/owned_runtime.py"
       ],
       "conflicts": [],
       "consumer_recheck": "2026-11-06: prompt AST identical to 12a1744. Removed legacy launcher consumers; retained owned broker/catalog behavior is covered by test_owned_factory.py and test_broker_inference.py. No new semantic or model evaluation claimed.",
-      "revalidation": "Source and api/runtime_dependencies.py are unchanged from matched baseline. Reviewed native.py composition and host_installation.py retrieval/grammar asset configuration delta. Explicit recipes, maximum eight checks, allowed environments and configuration-versus-success distinction remain unchanged.",
+      "revalidation": "Capability policy source is byte-identical to64d9e28. Reviewed its changed native.py consumer: existing capability selection/tool authority and delivery contracts are unchanged; common framing and catalog10 apply once. No role-specific policy or permission was widened.",
       "previous_review": {
         "dependencies_sha256": "60ad21edf8aee9b134a66c5b403a0f17e1c12b86e58efe06064b46b16e6f3189",
         "decision": "retained",
@@ -3749,8 +3791,8 @@
         "reviewed_at": "2026-11-07",
         "source_base_commit": "035b46c"
       },
-      "reviewed_at": "2026-11-08",
-      "source_base_commit": "d278653",
+      "reviewed_at": "2026-11-08T17:15:15.070997+00:00",
+      "source_base_commit": "64d9e2881b1a4a6465147352ec19eac8c4521a1a",
       "history": [
         {
           "dependencies_sha256": "304181ebcda6fd5111bfc16797dcc043bbe1438a9ecd2f5d903d7aadd8b66f51",
@@ -3817,7 +3859,9 @@
         }
       ],
       "revalidation_baseline_commit": "dd1be91",
-      "reviewer": "Codex with independent clean-context source/consumer reviews"
+      "reviewer": "Codex, direct source/consumer delta review",
+      "reviewed_source_state": "Base plus purpose-framing catalog10 and historical9 recognition",
+      "previous_dependencies_sha256": "f610a5d586d7aa2deaa986858c18b92762d43f2fb19aae3c7d31e90796f751dc"
     },
     "backend/api/main.py::create_app.description@111": {
       "dependencies_sha256": "33c467d2c801aa49c31173b21927eca92ce1d914e93ffdfd5c9a480fcf54e6b6",

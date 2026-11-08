@@ -1,0 +1,35 @@
+/home/andres/.codex/worktrees/b09e/researcher/.superpowers/sdd/2026-10-31-actualizacion-proyecto/native-runtime-env/lib/python3.12/site-packages/pytest_asyncio/plugin.py:300: PytestDeprecationWarning: The configuration option "asyncio_default_fixture_loop_scope" is unset.
+The event loop scope for asynchronous fixtures will default to the "fixture" caching scope. Future versions of pytest-asyncio will default the loop scope for asynchronous fixtures to "function" scope. Set the default fixture loop scope explicitly in order to avoid unexpected behavior in the future. Valid fixture loop scopes are: "function", "class", "module", "package", "session"
+
+  warnings.warn(PytestDeprecationWarning(_DEFAULT_FIXTURE_LOOP_SCOPE_UNSET))
+.................F.........F..F                                          [100%]
+=================================== FAILURES ===================================
+___ test_actual_owned_turn_records_the_exact_versioned_policy_sent_to_native ___
+async def functions are not natively supported.
+You need to install a suitable plugin for your async framework, for example:
+  - anyio
+  - pytest-asyncio
+  - pytest-tornasync
+  - pytest-trio
+  - pytest-twisted
+_ test_native_delivery_closes_without_returning_a_tool_reply_or_requesting_another_turn _
+async def functions are not natively supported.
+You need to install a suitable plugin for your async framework, for example:
+  - anyio
+  - pytest-asyncio
+  - pytest-tornasync
+  - pytest-trio
+  - pytest-twisted
+_________ test_atomic_delivery_keeps_the_configured_human_output_limit _________
+async def functions are not natively supported.
+You need to install a suitable plugin for your async framework, for example:
+  - anyio
+  - pytest-asyncio
+  - pytest-tornasync
+  - pytest-trio
+  - pytest-twisted
+=========================== short test summary info ============================
+FAILED ::test_actual_owned_turn_records_the_exact_versioned_policy_sent_to_native
+FAILED ::test_native_delivery_closes_without_returning_a_tool_reply_or_requesting_another_turn
+FAILED ::test_atomic_delivery_keeps_the_configured_human_output_limit - Faile...
+3 failed, 28 passed in 6.24s

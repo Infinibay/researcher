@@ -1,56 +1,56 @@
 {
   "baseline_commit": "85f7acd",
-  "current_catalog_version": 4,
+  "current_catalog_version": 10,
   "measurement": "UTF-8 bytes and exact text hashes. Not model tokens, cost, latency, semantic correctness or user understanding.",
   "profiles": [
     {
       "profile": "scientific_research",
       "baseline_utf8_bytes": 13581,
-      "current_utf8_bytes": 12888,
+      "current_utf8_bytes": 15408,
       "baseline_sha256": "518a8df19199967178c9b017d60bf67f08be39e236aa8e90750e74a42672c325",
-      "current_sha256": "ee9ccc21042a392a210ec6c5772e345514c4129d2788142af8299decffcb5d4f"
+      "current_sha256": "efc8ddfcfb5dd728238a33e498ee8381d55734694811140c9fbb4f7111f8b08c"
     },
     {
       "profile": "code_audit",
       "baseline_utf8_bytes": 10155,
-      "current_utf8_bytes": 9001,
+      "current_utf8_bytes": 11521,
       "baseline_sha256": "3adb688bd7c0d8212a5a19071c7ae065d255234ea7dd44f1e65a7fb2752d9fb3",
-      "current_sha256": "3da8a29446051e675ef1551a7a3de02c2fafb85f092ee9128263af0a244031cd"
+      "current_sha256": "9bbdcddbda718251114adcdab59ed4662d0682e3db707a21431c9316a2bf991e"
     },
     {
       "profile": "planning",
       "baseline_utf8_bytes": 4029,
-      "current_utf8_bytes": 7809,
+      "current_utf8_bytes": 11227,
       "baseline_sha256": "e99a776599b9bee245b20d641142cb1d88890e2fd096a5c50119ca901f57a4d7",
-      "current_sha256": "86cfe9b9f96ebf4b1dc3cb17b8205fbd4663b6ca98ea8f16aee54472ca6827c1"
+      "current_sha256": "ccf59716479c81f4698cf79aeddeb75adb2165ece90e600e0f4cfa28ef3f618a"
     },
     {
       "profile": "investigation",
       "baseline_utf8_bytes": 2557,
-      "current_utf8_bytes": 6380,
+      "current_utf8_bytes": 8900,
       "baseline_sha256": "41630988d80197bc66f1ca847a20a02bc6d7dd07c002241f1f91905a55dc916f",
-      "current_sha256": "45038e7c05455fa0b72e9e86d3f8a274404f2048052de39cfb36ea41804867aa"
+      "current_sha256": "6ee80d32f55854cb2e1574a6641152c9fc197d93c281114540da4ccbb57102d5"
     },
     {
       "profile": "development",
       "baseline_utf8_bytes": 5773,
-      "current_utf8_bytes": 8713,
+      "current_utf8_bytes": 11233,
       "baseline_sha256": "22af61c3c7b15637fe98cb71e3ca8dc86f4bafb856a3b1f4e592a74a25e0841e",
-      "current_sha256": "42a965dc913adc40ceb65cd320e3c7704011fa99b601a7d991345cd999fea48b"
+      "current_sha256": "4c0fe59bab3ece609f10a710698cd4d90bc6a8174cad8a98e9455daf1bc18609"
     },
     {
       "profile": "code_review",
       "baseline_utf8_bytes": 4147,
-      "current_utf8_bytes": 7654,
+      "current_utf8_bytes": 10174,
       "baseline_sha256": "0ea451a468a63cc6e7b1aa8b71bbafb8ec861ed0ad904f2f296c99e5e32c6289",
-      "current_sha256": "ebd854b2955b54fde9a3fbcd16f35785d87f338673ef4a05b393d1756ef7dcdd"
+      "current_sha256": "4c7b202f584191a1ead6b456ee0c36ae569a91c597b552fbf254df479c194941"
     },
     {
       "profile": "finding_review",
       "baseline_utf8_bytes": 3159,
-      "current_utf8_bytes": 7158,
+      "current_utf8_bytes": 9678,
       "baseline_sha256": "0baefb8085b292392d3cbebd2bd771b1b5eb7bbda96195ad663ea012a2f988bb",
-      "current_sha256": "c6f4dd8e7a911dc1f508f0e6a5297b427a346b845093f253ad789aacf0187593"
+      "current_sha256": "72403e58cc98b8d94985725ffd209a8edae1388b1984388d184d6c18cb5c7520"
     }
   ],
   "model_evaluations": "not_run"

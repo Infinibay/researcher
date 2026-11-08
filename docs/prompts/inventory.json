@@ -145,7 +145,7 @@
     "backend/planning/tools.py": "0efb502494147b93dab33a883e865aae946e0250d75c5924b130492c78e34b5d",
     "backend/project_records.py": "3a2765c13018d7ccd2cd8eb590ec9428c5ebb1edf93fc213185291250a5be016",
     "backend/prompts/__init__.py": "581a39370021a34e2cadea4a9a654a681b34bfdb8047fb7a8e217439b55f89e6",
-    "backend/prompts/native.py": "0efa37bdacbdba98648d0272493b662b4e0418147b9d49365ca8b05f75c33fe3",
+    "backend/prompts/native.py": "297fdc8b419909bdb6e465d93233ebb3dad61cf0bed754d9000cca328155b6d4",
     "backend/research/__init__.py": "75a8b541dec5915760704a03d44432cdbf0bb5cbf7c22e1a8c1c0008536d0649",
     "backend/research/acquisition.py": "3544ba18b252cf36284fa317bbe67427cd919bbfd9dd72f485d556c04040263f",
     "backend/research/async_http_client.py": "36423e84c48c5593218a35ff6413eda1ff5e12e078a2285c2b0b06355aaa9d0b",
@@ -904,13 +904,13 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "139e9ac0885484f5fec82080256a798d1c64818f3640fb335088db2ffed2199c",
+      "dependencies_sha256": "890880f3f6da6e6204e3dca680fbcb8473db57cbb5f08dd1b1649dd6e4dfbfd7",
       "direct_module_consumers": {
-        "backend/prompts/native.py": "0efa37bdacbdba98648d0272493b662b4e0418147b9d49365ca8b05f75c33fe3"
+        "backend/prompts/native.py": "297fdc8b419909bdb6e465d93233ebb3dad61cf0bed754d9000cca328155b6d4"
       },
       "suggested_disposition": "reviewed_native",
       "review_status": "reviewed",
-      "review_rationale": "Capability source is byte-identical to the matched baseline; native.py is its sole changed direct consumer. Reviewed the common composition delta without claiming a capability-specific source rewrite. Planning preserves bounded source discovery and a final proposal; selected Ken symbols do not certify whole-file coverage. Static source and inspected consumer review only; not exhaustive dynamic calls, isolated prompt efficacy, human comprehension or general scientific correctness.",
+      "review_rationale": "Capability policy source is byte-identical to64d9e28. Reviewed its changed native.py consumer: existing capability selection/tool authority and delivery contracts are unchanged; common framing and catalog10 apply once. No role-specific policy or permission was widened. Static review only; no general model efficacy or human comprehension claim.",
       "review_evidence": [
         "backend/planning/instructions.py",
         "docs/prompts/review-2026-11-07.md",
@@ -924,7 +924,9 @@
         "backend/tests/runtime/test_atomic_planning_delivery.py",
         "docs/prompts/review-2026-11-08.md",
         "backend/prompts/native.py",
-        "backend/runtime/owned_runtime.py"
+        "backend/runtime/owned_runtime.py",
+        "docs/modernization/purpose-framing-review.md",
+        "backend/tests/runtime/test_prompt_catalog.py"
       ],
       "review_conflicts": []
     },
@@ -981,14 +983,14 @@
       "path": "backend/prompts/native.py",
       "symbol": "COMMON_INSTRUCTIONS",
       "line": 18,
-      "end_line": 113,
+      "end_line": 117,
       "owner": "backend.prompts.native",
       "family": "native_common_catalog",
       "disposition": "retained_and_revised",
       "objective": "Versioned native policy composition owns common communication and capability selection; historical role templates never enter this catalog.",
-      "source_sha256": "0efa37bdacbdba98648d0272493b662b4e0418147b9d49365ca8b05f75c33fe3",
-      "source_bytes": 7463,
-      "rendered_utf8_bytes": 7457,
+      "source_sha256": "297fdc8b419909bdb6e465d93233ebb3dad61cf0bed754d9000cca328155b6d4",
+      "source_bytes": 7806,
+      "rendered_utf8_bytes": 7800,
       "variables_kind": "referenced_identifiers",
       "variables": [],
       "direct_import_consumers": [],
@@ -1002,13 +1004,13 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "31423e50a04e622c5e88d3674e9c84e07ac995dc6166ee7bf780186c6ec7e992",
+      "dependencies_sha256": "d5322d94d2f3dbaf429a4c47cb637c84e8f264d2b89ceaf8da0441e8f7928b75",
       "direct_module_consumers": {
         "backend/runtime/owned_runtime.py": "5d28a1b3909b77d9699c0770889a788a0365e25282b7c8eb4b3e13e9048a2145"
       },
       "suggested_disposition": "rewritten",
       "review_status": "reviewed",
-      "review_rationale": "Reviewed the complete common policy and matched-baseline delta: epistemic categories, task-anchored examples, bounded accessible diagrams, structured selections versus free text, and durable independent result/basis in questions[].why_needed before waiting. Static source and inspected consumer review only; not exhaustive dynamic calls, isolated prompt efficacy, human comprehension or general scientific correctness.",
+      "review_rationale": "The only policy-body delta is four lines: establish purpose/data relationships before a decision, use illustrative input/output when useful, and rebuild framing after clarity feedback without a comprehension quiz. Existing evidence/authority/question/budget rules remain intact. This implements stated owner feedback; efficacy and human understanding are not inferred. Static review only; no general model efficacy or human comprehension claim.",
       "review_evidence": [
         "backend/prompts/native.py",
         "docs/prompts/review-2026-11-07.md",
@@ -1027,7 +1029,8 @@
         "backend/runtime/owned_runtime.py",
         "backend/runtime/questions.py",
         "backend/runtime/sqlite_questions.py",
-        "docs/modernization/c10-independent-review.md"
+        "docs/modernization/c10-independent-review.md",
+        "docs/modernization/purpose-framing-review.md"
       ],
       "review_conflicts": []
     },
@@ -1035,13 +1038,13 @@
       "id": "backend/prompts/native.py::SOURCE_INSTRUCTIONS",
       "path": "backend/prompts/native.py",
       "symbol": "SOURCE_INSTRUCTIONS",
-      "line": 116,
-      "end_line": 154,
+      "line": 120,
+      "end_line": 158,
       "owner": "backend.prompts.native",
       "family": "native_common_catalog",
       "disposition": "retained",
       "objective": "Versioned native policy composition owns common communication and capability selection; historical role templates never enter this catalog.",
-      "source_sha256": "0efa37bdacbdba98648d0272493b662b4e0418147b9d49365ca8b05f75c33fe3",
+      "source_sha256": "297fdc8b419909bdb6e465d93233ebb3dad61cf0bed754d9000cca328155b6d4",
       "source_bytes": 2788,
       "rendered_utf8_bytes": 2782,
       "variables_kind": "referenced_identifiers",
@@ -1057,13 +1060,13 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "31423e50a04e622c5e88d3674e9c84e07ac995dc6166ee7bf780186c6ec7e992",
+      "dependencies_sha256": "d5322d94d2f3dbaf429a4c47cb637c84e8f264d2b89ceaf8da0441e8f7928b75",
       "direct_module_consumers": {
         "backend/runtime/owned_runtime.py": "5d28a1b3909b77d9699c0770889a788a0365e25282b7c8eb4b3e13e9048a2145"
       },
       "suggested_disposition": "rewritten",
       "review_status": "reviewed",
-      "review_rationale": "Candidate source instructions are unchanged; module-level invalidation comes from common policy/catalogue changes. Source text retains provenance and cannot authorize work. Static source and inspected consumer review only; not exhaustive dynamic calls, isolated prompt efficacy, human comprehension or general scientific correctness.",
+      "review_rationale": "This exact source-acquisition literal is unchanged by AST comparison to64d9e28. Its module now composes catalog10 and a purpose-framing common policy; source-capture/continuation/quotation authority remains unchanged. Static review only; no general model efficacy or human comprehension claim.",
       "review_evidence": [
         "backend/prompts/native.py",
         "docs/prompts/review-2026-11-07.md",
@@ -1082,7 +1085,8 @@
         "backend/runtime/owned_runtime.py",
         "backend/runtime/questions.py",
         "backend/runtime/sqlite_questions.py",
-        "docs/modernization/c10-independent-review.md"
+        "docs/modernization/c10-independent-review.md",
+        "docs/modernization/purpose-framing-review.md"
       ],
       "review_conflicts": []
     },
@@ -1090,13 +1094,13 @@
       "id": "backend/prompts/native.py::build_instructions",
       "path": "backend/prompts/native.py",
       "symbol": "build_instructions",
-      "line": 165,
-      "end_line": 178,
+      "line": 169,
+      "end_line": 182,
       "owner": "backend.prompts.native",
       "family": "native_common_catalog",
       "disposition": "retained",
       "objective": "Versioned native policy composition owns common communication and capability selection; historical role templates never enter this catalog.",
-      "source_sha256": "0efa37bdacbdba98648d0272493b662b4e0418147b9d49365ca8b05f75c33fe3",
+      "source_sha256": "297fdc8b419909bdb6e465d93233ebb3dad61cf0bed754d9000cca328155b6d4",
       "source_bytes": 1186,
       "rendered_utf8_bytes": null,
       "variables_kind": "function_parameters",
@@ -1122,13 +1126,13 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "31423e50a04e622c5e88d3674e9c84e07ac995dc6166ee7bf780186c6ec7e992",
+      "dependencies_sha256": "d5322d94d2f3dbaf429a4c47cb637c84e8f264d2b89ceaf8da0441e8f7928b75",
       "direct_module_consumers": {
         "backend/runtime/owned_runtime.py": "5d28a1b3909b77d9699c0770889a788a0365e25282b7c8eb4b3e13e9048a2145"
       },
       "suggested_disposition": "rewritten",
       "review_status": "reviewed",
-      "review_rationale": "Reviewed catalogue9 composition, capability selector and effective limit transport. owned_runtime is byte-identical to the matched baseline and still supplies the same capability-scoped builder to CodexSession. Static source and inspected consumer review only; not exhaustive dynamic calls, isolated prompt efficacy, human comprehension or general scientific correctness.",
+      "review_rationale": "The selector function AST and actual owned_runtime consumer are unchanged. Seven capability profiles still include the common policy exactly once and freeze exact bytes/budgets, now with catalog10 and the four added framing lines. Static review only; no general model efficacy or human comprehension claim.",
       "review_evidence": [
         "backend/prompts/native.py",
         "docs/prompts/review-2026-11-07.md",
@@ -1147,7 +1151,8 @@
         "backend/runtime/owned_runtime.py",
         "backend/runtime/questions.py",
         "backend/runtime/sqlite_questions.py",
-        "docs/modernization/c10-independent-review.md"
+        "docs/modernization/c10-independent-review.md",
+        "docs/modernization/purpose-framing-review.md"
       ],
       "review_conflicts": []
     },
@@ -1155,14 +1160,14 @@
       "id": "backend/prompts/native.py::instruction_identity",
       "path": "backend/prompts/native.py",
       "symbol": "instruction_identity",
-      "line": 181,
-      "end_line": 185,
+      "line": 185,
+      "end_line": 189,
       "owner": "backend.prompts.native",
       "family": "native_common_catalog",
       "disposition": "retained",
       "objective": "Versioned native policy composition owns common communication and capability selection; historical role templates never enter this catalog.",
-      "source_sha256": "0efa37bdacbdba98648d0272493b662b4e0418147b9d49365ca8b05f75c33fe3",
-      "source_bytes": 524,
+      "source_sha256": "297fdc8b419909bdb6e465d93233ebb3dad61cf0bed754d9000cca328155b6d4",
+      "source_bytes": 526,
       "rendered_utf8_bytes": null,
       "variables_kind": "function_parameters",
       "variables": [
@@ -1179,13 +1184,13 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "31423e50a04e622c5e88d3674e9c84e07ac995dc6166ee7bf780186c6ec7e992",
+      "dependencies_sha256": "d5322d94d2f3dbaf429a4c47cb637c84e8f264d2b89ceaf8da0441e8f7928b75",
       "direct_module_consumers": {
         "backend/runtime/owned_runtime.py": "5d28a1b3909b77d9699c0770889a788a0365e25282b7c8eb4b3e13e9048a2145"
       },
       "suggested_disposition": "rewritten",
       "review_status": "reviewed",
-      "review_rationale": "Reviewed current catalogue9 and retained catalogue2..8 identity hashes, known-profile validation and actual text identity; historical instructions are not rewritten. Static source and inspected consumer review only; not exhaustive dynamic calls, isolated prompt efficacy, human comprehension or general scientific correctness.",
+      "review_rationale": "The allowed catalog set adds historical9 while current becomes10. Versions2–9 preserve their original header/hash; unknown versions still returnNone. This does not relabel any stored prior instructions. Static review only; no general model efficacy or human comprehension claim.",
       "review_evidence": [
         "backend/prompts/native.py",
         "docs/prompts/review-2026-11-07.md",
@@ -1204,7 +1209,8 @@
         "backend/runtime/owned_runtime.py",
         "backend/runtime/questions.py",
         "backend/runtime/sqlite_questions.py",
-        "docs/modernization/c10-independent-review.md"
+        "docs/modernization/c10-independent-review.md",
+        "docs/modernization/purpose-framing-review.md"
       ],
       "review_conflicts": []
     },
@@ -1212,13 +1218,13 @@
       "id": "backend/prompts/native.py::GENERIC_INSTRUCTIONS",
       "path": "backend/prompts/native.py",
       "symbol": "GENERIC_INSTRUCTIONS",
-      "line": 188,
-      "end_line": 188,
+      "line": 192,
+      "end_line": 192,
       "owner": "backend.prompts.native",
       "family": "native_common_catalog",
       "disposition": "retained",
       "objective": "Versioned native policy composition owns common communication and capability selection; historical role templates never enter this catalog.",
-      "source_sha256": "0efa37bdacbdba98648d0272493b662b4e0418147b9d49365ca8b05f75c33fe3",
+      "source_sha256": "297fdc8b419909bdb6e465d93233ebb3dad61cf0bed754d9000cca328155b6d4",
       "source_bytes": 50,
       "rendered_utf8_bytes": null,
       "variables_kind": "referenced_identifiers",
@@ -1237,13 +1243,13 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "31423e50a04e622c5e88d3674e9c84e07ac995dc6166ee7bf780186c6ec7e992",
+      "dependencies_sha256": "d5322d94d2f3dbaf429a4c47cb637c84e8f264d2b89ceaf8da0441e8f7928b75",
       "direct_module_consumers": {
         "backend/runtime/owned_runtime.py": "5d28a1b3909b77d9699c0770889a788a0365e25282b7c8eb4b3e13e9048a2145"
       },
       "suggested_disposition": "rewritten",
       "review_status": "reviewed",
-      "review_rationale": "Generic candidate is unchanged; module-level invalidation comes from common policy/catalogue changes. Explicit supported capabilities remain selected by the host. Static source and inspected consumer review only; not exhaustive dynamic calls, isolated prompt efficacy, human comprehension or general scientific correctness.",
+      "review_rationale": "Compatibility composition AST is unchanged; resulting bytes inherit catalog10/common framing. The normal selector still has seven destinations and does not newly route requests into reference_research. Static review only; no general model efficacy or human comprehension claim.",
       "review_evidence": [
         "backend/prompts/native.py",
         "docs/prompts/review-2026-11-07.md",
@@ -1262,7 +1268,8 @@
         "backend/runtime/owned_runtime.py",
         "backend/runtime/questions.py",
         "backend/runtime/sqlite_questions.py",
-        "docs/modernization/c10-independent-review.md"
+        "docs/modernization/c10-independent-review.md",
+        "docs/modernization/purpose-framing-review.md"
       ],
       "review_conflicts": []
     },
@@ -4163,13 +4170,13 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "e7ae2aa7342a0fc49aec0703855d38d1dbfea891961575494cdc5732c28accb9",
+      "dependencies_sha256": "9773ca012f0a5c4c0ec335b2a2922850749b71cd7b154e3e37cd38c0eb7b7ad4",
       "direct_module_consumers": {
-        "backend/prompts/native.py": "0efa37bdacbdba98648d0272493b662b4e0418147b9d49365ca8b05f75c33fe3"
+        "backend/prompts/native.py": "297fdc8b419909bdb6e465d93233ebb3dad61cf0bed754d9000cca328155b6d4"
       },
       "suggested_disposition": "reviewed_native",
       "review_status": "reviewed",
-      "review_rationale": "Capability source is byte-identical to the matched baseline; native.py is its sole changed direct consumer. Reviewed the common composition delta without claiming a capability-specific source rewrite. Audit preserves readonly inspection, explicit evidence and no owner acceptance or publication. Static source and inspected consumer review only; not exhaustive dynamic calls, isolated prompt efficacy, human comprehension or general scientific correctness.",
+      "review_rationale": "Capability policy source is byte-identical to64d9e28. Reviewed its changed native.py consumer: existing capability selection/tool authority and delivery contracts are unchanged; common framing and catalog10 apply once. No role-specific policy or permission was widened. Static review only; no general model efficacy or human comprehension claim.",
       "review_evidence": [
         "backend/runtime/code_audit_instructions.py",
         "docs/prompts/review-2026-11-07.md",
@@ -4183,7 +4190,9 @@
         "docs/modernization/atomic-planning-review.md",
         "backend/tests/runtime/test_atomic_planning_delivery.py",
         "docs/prompts/review-2026-11-08.md",
-        "backend/runtime/owned_runtime.py"
+        "backend/runtime/owned_runtime.py",
+        "docs/modernization/purpose-framing-review.md",
+        "backend/tests/runtime/test_prompt_catalog.py"
       ],
       "review_conflicts": []
     },
@@ -4256,13 +4265,13 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "09db272e2b384cdf02d362890e98c2b25c60b64d0d47123f9a14f11fc30f3882",
+      "dependencies_sha256": "6a6c211e1c5059ee09b8d810adedf7a2614e16a904761e5969ed5c659bb8ced6",
       "direct_module_consumers": {
-        "backend/prompts/native.py": "0efa37bdacbdba98648d0272493b662b4e0418147b9d49365ca8b05f75c33fe3"
+        "backend/prompts/native.py": "297fdc8b419909bdb6e465d93233ebb3dad61cf0bed754d9000cca328155b6d4"
       },
       "suggested_disposition": "reviewed_native",
       "review_status": "reviewed",
-      "review_rationale": "Capability source is byte-identical to the matched baseline; native.py is its sole changed direct consumer. Reviewed the common composition delta without claiming a capability-specific source rewrite. Code review preserves the frozen candidate and original checks; delivery, independent review and owner acceptance remain separate. Static source and inspected consumer review only; not exhaustive dynamic calls, isolated prompt efficacy, human comprehension or general scientific correctness.",
+      "review_rationale": "Capability policy source is byte-identical to64d9e28. Reviewed its changed native.py consumer: existing capability selection/tool authority and delivery contracts are unchanged; common framing and catalog10 apply once. No role-specific policy or permission was widened. Static review only; no general model efficacy or human comprehension claim.",
       "review_evidence": [
         "backend/runtime/code_review_instructions.py",
         "docs/prompts/review-2026-11-07.md",
@@ -4276,7 +4285,9 @@
         "docs/modernization/atomic-planning-review.md",
         "backend/tests/runtime/test_atomic_planning_delivery.py",
         "docs/prompts/review-2026-11-08.md",
-        "backend/runtime/owned_runtime.py"
+        "backend/runtime/owned_runtime.py",
+        "docs/modernization/purpose-framing-review.md",
+        "backend/tests/runtime/test_prompt_catalog.py"
       ],
       "review_conflicts": []
     },
@@ -4417,15 +4428,15 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "f610a5d586d7aa2deaa986858c18b92762d43f2fb19aae3c7d31e90796f751dc",
+      "dependencies_sha256": "12efd4b20c8fde3311eece8724e7650a933cefcadec00ac78d959d5c71e0e804",
       "direct_module_consumers": {
         "backend/api/runtime_dependencies.py": "ee0b6b403981f1c41edd4a934a138541f0a53bd487ac805905acf46561caaf30",
         "backend/runtime/host_installation.py": "3503fb7ee55761197c449e894e9d080de921109ff7f8c9a59d8f4c7bf19a4dc1",
-        "backend/prompts/native.py": "0efa37bdacbdba98648d0272493b662b4e0418147b9d49365ca8b05f75c33fe3"
+        "backend/prompts/native.py": "297fdc8b419909bdb6e465d93233ebb3dad61cf0bed754d9000cca328155b6d4"
       },
       "suggested_disposition": "reviewed_native",
       "review_status": "reviewed",
-      "review_rationale": "Source and api/runtime_dependencies.py are unchanged from matched baseline. Reviewed native.py composition and host_installation.py retrieval/grammar asset configuration delta. Explicit recipes, maximum eight checks, allowed environments and configuration-versus-success distinction remain unchanged. Static source and inspected consumer review only; not exhaustive dynamic calls, isolated prompt efficacy, human comprehension or general scientific correctness.",
+      "review_rationale": "Capability policy source is byte-identical to64d9e28. Reviewed its changed native.py consumer: existing capability selection/tool authority and delivery contracts are unchanged; common framing and catalog10 apply once. No role-specific policy or permission was widened. Static review only; no general model efficacy or human comprehension claim.",
       "review_evidence": [
         "backend/runtime/development_policy.py",
         "docs/prompts/review-2026-11-07.md",
@@ -4444,7 +4455,10 @@
         "docs/modernization/aux-workers-review.md",
         "docs/prompts/review-2026-11-08.md",
         "backend/runtime/host_installation.py",
-        "backend/api/runtime_dependencies.py"
+        "backend/api/runtime_dependencies.py",
+        "docs/modernization/purpose-framing-review.md",
+        "backend/tests/runtime/test_prompt_catalog.py",
+        "backend/runtime/owned_runtime.py"
       ],
       "review_conflicts": []
     },
@@ -4479,13 +4493,13 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "486207e2cc7c4fff15b43f0a4c55e765451f0a42d566d733eb8f954c910e4244",
+      "dependencies_sha256": "c3eb6d56e33d752cb4a8130b54e3605c37f8301cd8f5a82620ee8b50b8067c1e",
       "direct_module_consumers": {
-        "backend/prompts/native.py": "0efa37bdacbdba98648d0272493b662b4e0418147b9d49365ca8b05f75c33fe3"
+        "backend/prompts/native.py": "297fdc8b419909bdb6e465d93233ebb3dad61cf0bed754d9000cca328155b6d4"
       },
       "suggested_disposition": "reviewed_native",
       "review_status": "reviewed",
-      "review_rationale": "Capability source is byte-identical to the matched baseline; native.py is its sole changed direct consumer. Reviewed the common composition delta without claiming a capability-specific source rewrite. Investigation preserves exploratory evidence and does not impose scientific methods on every project. Static source and inspected consumer review only; not exhaustive dynamic calls, isolated prompt efficacy, human comprehension or general scientific correctness.",
+      "review_rationale": "Capability policy source is byte-identical to64d9e28. Reviewed its changed native.py consumer: existing capability selection/tool authority and delivery contracts are unchanged; common framing and catalog10 apply once. No role-specific policy or permission was widened. Static review only; no general model efficacy or human comprehension claim.",
       "review_evidence": [
         "backend/runtime/investigation_instructions.py",
         "docs/prompts/review-2026-11-07.md",
@@ -4499,7 +4513,9 @@
         "docs/modernization/atomic-planning-review.md",
         "backend/tests/runtime/test_atomic_planning_delivery.py",
         "docs/prompts/review-2026-11-08.md",
-        "backend/runtime/owned_runtime.py"
+        "backend/runtime/owned_runtime.py",
+        "docs/modernization/purpose-framing-review.md",
+        "backend/tests/runtime/test_prompt_catalog.py"
       ],
       "review_conflicts": []
     },
@@ -4660,13 +4676,13 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "9e237badd19bfe7d39ac5485bd809b08bf24ab6bfb2d78ac7bdd85a4765bfc79",
+      "dependencies_sha256": "f676a65bfe50d7b212020f864073b60d8b5d423da60c0f7c9f9d4aa0527b7b81",
       "direct_module_consumers": {
-        "backend/prompts/native.py": "0efa37bdacbdba98648d0272493b662b4e0418147b9d49365ca8b05f75c33fe3"
+        "backend/prompts/native.py": "297fdc8b419909bdb6e465d93233ebb3dad61cf0bed754d9000cca328155b6d4"
       },
       "suggested_disposition": "reviewed_native",
       "review_status": "reviewed",
-      "review_rationale": "Capability source is byte-identical to the matched baseline; native.py is its sole changed direct consumer. Reviewed the common composition delta without claiming a capability-specific source rewrite. Finding review preserves the exact original subject, source windows and attributed decision; a citation is not sufficient support. Static source and inspected consumer review only; not exhaustive dynamic calls, isolated prompt efficacy, human comprehension or general scientific correctness.",
+      "review_rationale": "Capability policy source is byte-identical to64d9e28. Reviewed its changed native.py consumer: existing capability selection/tool authority and delivery contracts are unchanged; common framing and catalog10 apply once. No role-specific policy or permission was widened. Static review only; no general model efficacy or human comprehension claim.",
       "review_evidence": [
         "backend/runtime/review_instructions.py",
         "docs/prompts/review-2026-11-07.md",
@@ -4680,7 +4696,9 @@
         "docs/modernization/atomic-planning-review.md",
         "backend/tests/runtime/test_atomic_planning_delivery.py",
         "docs/prompts/review-2026-11-08.md",
-        "backend/runtime/owned_runtime.py"
+        "backend/runtime/owned_runtime.py",
+        "docs/modernization/purpose-framing-review.md",
+        "backend/tests/runtime/test_prompt_catalog.py"
       ],
       "review_conflicts": []
     },
@@ -4839,13 +4857,13 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "6c80642fbb0e447d67d1349df031c1bf514a3f21e2c04cc4eada483470bcec87",
+      "dependencies_sha256": "708031594487d3b575c251642fab329e95fb4a6e3f04f10f73a0a56600db0226",
       "direct_module_consumers": {
-        "backend/prompts/native.py": "0efa37bdacbdba98648d0272493b662b4e0418147b9d49365ca8b05f75c33fe3"
+        "backend/prompts/native.py": "297fdc8b419909bdb6e465d93233ebb3dad61cf0bed754d9000cca328155b6d4"
       },
       "suggested_disposition": "reviewed_native",
       "review_status": "reviewed",
-      "review_rationale": "Capability source is byte-identical to the matched baseline; native.py is its sole changed direct consumer. Reviewed the common composition delta without claiming a capability-specific source rewrite. Scientific investigation separates calculation from replication, citations from support, observation from causation and reported confidence from justified certainty. Static source and inspected consumer review only; not exhaustive dynamic calls, isolated prompt efficacy, human comprehension or general scientific correctness.",
+      "review_rationale": "Capability policy source is byte-identical to64d9e28. Reviewed its changed native.py consumer: existing capability selection/tool authority and delivery contracts are unchanged; common framing and catalog10 apply once. No role-specific policy or permission was widened. Static review only; no general model efficacy or human comprehension claim.",
       "review_evidence": [
         "backend/runtime/scientific_instructions.py",
         "docs/prompts/review-2026-11-07.md",
@@ -4859,7 +4877,9 @@
         "docs/modernization/atomic-planning-review.md",
         "backend/tests/runtime/test_atomic_planning_delivery.py",
         "docs/prompts/review-2026-11-08.md",
-        "backend/runtime/owned_runtime.py"
+        "backend/runtime/owned_runtime.py",
+        "docs/modernization/purpose-framing-review.md",
+        "backend/tests/runtime/test_prompt_catalog.py"
       ],
       "review_conflicts": []
     },

@@ -13,7 +13,7 @@ from backend.runtime.investigation_instructions import INVESTIGATION_INSTRUCTION
 from backend.runtime.review_instructions import REVIEW_INSTRUCTIONS
 from backend.runtime.scientific_instructions import SCIENTIFIC_RESEARCH_INSTRUCTIONS
 
-CATALOG_VERSION=9
+CATALOG_VERSION=10
 
 COMMON_INSTRUCTIONS="""# Scope and authority
 Work on the host-admitted task and current context. Follow the actual owner request,
@@ -59,6 +59,10 @@ helpful; do not distort the problem for familiarity or expose hidden chain of th
 Anchor examples in a concrete situation from the user's task, with named actions and
 consequences. Unexplained numbers are not a useful situation. A diagram should clarify
 a relationship or decision; omit it when it merely repeats or decorates the prose.
+Before asking for a decision, establish the task's purpose, available data and their relationships.
+Use a small input/output example when it clarifies the requested result; label invented
+values. If the user cannot interpret the explanation, use their correction to rebuild
+that framing and offer a useful next step, not a comprehension quiz.
 For a useful diagram, use a fenced mermaid block with accTitle and accDescr explaining
 its actual relationships and limits in plain language. Keep it small (at most100edges
 and12000characters). No configuration directives, custom styles, links or external
@@ -181,7 +185,7 @@ def build_instructions(execution_kind,task_type,*,checks=(),limits=None):
 def instruction_identity(instructions):
     """Describe only an actually recorded catalog header and complete text hash; historical unversioned policy stays unknown rather than being retroactively labelled."""
     match=re.match(r'RESEARCHER_POLICY (\d+) ([a-z_]+)\n\n',instructions)
-    if match is None or int(match[1]) not in (2,3,4,5,6,7,8,CATALOG_VERSION) or match[2] not in _PROFILES:return None
+    if match is None or int(match[1]) not in (2,3,4,5,6,7,8,9,CATALOG_VERSION) or match[2] not in _PROFILES:return None
     return {'catalog_version':int(match[1]),'profile':match[2],'sha256':hashlib.sha256(instructions.encode()).hexdigest()}
 
 

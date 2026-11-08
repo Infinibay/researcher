@@ -11,6 +11,7 @@ reformular estados.
 | Pregunta material y corrección durante trabajo | `../communication_flow/` | Turnos reales y respuestas guionadas; no observación humana. |
 | Resultado guardado, fallo de lectura y recuperación | `retained.py`, `../../frontend/tests/communication-baseline.mjs` | API y datos reales de ensayos previos, corte de red inducido; cero nuevos turnos. |
 | Espera larga de herramienta activa | `live_wait.py`, `wait_worker.py`, `../../frontend/tests/communication-wait.mjs` | Comando realmente activo bajo el coordinador instalado; transporte nativo controlado sin generación. Los recibos determinan el resultado de cada ensayo. |
+| Encuadre de propósito, datos y entrada/salida | `purpose_framing.py` | Pregunta histórica reconocible y fuente real del repo; un turno de catálogo10 falló por presupuesto antes de entregar explicación. No aceptación humana. |
 
 Para leer los dos casos retenidos, usar Python del producto instalado y Node24:
 

@@ -28,7 +28,32 @@ que se pueda comparar el avance; no presentar microajustes como tareas principal
 - Última suite global: `9fb873c`,2210 casos,2178 pasan,31 fallan y1 error de fixture; sin omisiones. La carrera de backup encontrada se corrigió después con40 pruebas instaladas. No se declara una nueva corrida global verde; la referencia `0c8b8d9` queda como evidencia histórica.
 - U01–U07, E01–E12, C01–C10 y D01–D13 quedan comprobados con el alcance de sus matrices; sigue 1 de 43 escenarios amplios sin aceptación completa en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Estado actual: espera viva, recuperación de lectura y resultado parcial comprobados
+## Estado actual: encuadre conectado; nueva explicación real no entregada
+
+[Política, pruebas y fallo conservado](purpose-framing-review.md). Bloque
+**17:01:34–17:19:51UTC:18min17s** hasta comprobar resultados/revalidación;
+documentación/checkpoint posteriores aparte. Ensayo real55,880s; no todo el bloque.
+
+- Terminado: **12/12páginas por alcance,42/43escenarios**,85candidatos revisados.
+ El catálogo10pide propósito, datos/relaciones y ejemplo entrada/salida cuando
+ ayude, adaptando el encuadre ante feedback. Conserva las identidades2–9.
+42pruebas fuente y31instaladas pasan;699archivos fuente/sdist/wheel/instalación
+ coinciden. Doce decisiones revalidadas,73sin cambios; no eficacia acreditada.
+- Evidencia nueva incompleta: un turno real sobre código de configuración del
+ repo recibe la política exacta y lee fuente completa con Ken. Alcanza147058tokens
+ frente a120000antes de la explicación; guarda un hallazgo parcial. Cinco peers
+ cerrados,0grants,servicio-15. No reintentar ni ampliar este ensayo para mejorar la muestra.
+- Siguiente: **mantener abierta la entrega/comprensión/adaptación humana** y
+ revisar la proporcionalidad de descubrimiento para preguntas sencillas antes de
+ otra validación. La explicación aquí no se declara entregada por tener un hallazgo.
+ La [revisión con contexto limpio](remaining-coarse-review-2026-11-08.md) confirma
+ los cinco bloques reales, sin volver a abrir migraciones por listas antiguas.
+- Pendiente: decisión Ken/ONNX ya consultada; documentación relevante y accesibilidad
+ integral después de las capacidades; detalles DD145–157 y anteriores; revisión
+ independiente, paquete y suite global del árbol final. No datos reales que migrar.
+ No nueva global verde, aceptación U08, push, merge o despliegue.
+
+## Etapa anterior: espera viva, recuperación de lectura y resultado parcial comprobados
 
 [Espera viva y límites](live-wait-communication-review.md). Bloque
 **16:41:54–16:57:03UTC:15min9s** hasta inspeccionar; documentación/checkpoint

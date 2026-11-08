@@ -1,0 +1,184 @@
+ERROR: usage: python -m pytest [options] [file_or_dir] [file_or_dir] [...]
+python -m pytest: error: unrecognized arguments: --no-cov
+  inifile: /home/andres/.codex/worktrees/b09e/researcher/pyproject.toml
+  rootdir: /home/andres/.codex/worktrees/b09e/researcher
+
+FFFFFFF..........                                                        [100%]
+=================================== FAILURES ===================================
+_ test_every_native_profile_has_one_shared_policy_and_exact_versioned_identity[research-research-scientific_research] _
+
+kind = 'research', task = 'research', profile = 'scientific_research'
+
+    @pytest.mark.parametrize('kind,task,profile',[
+        ('research','research','scientific_research'),('research','review','code_audit'),
+        ('research','investigation','investigation'),('research','plan','planning'),
+        ('development','code','development'),('code_review','code','code_review'),
+        ('finding_review','research','finding_review'),
+    ])
+    def test_every_native_profile_has_one_shared_policy_and_exact_versioned_identity(kind,task,profile):
+        """Selecting a real capability includes common correction/communication policy exactly once and a hash of the complete actual instructions."""
+        from backend.prompts.native import build_instructions,instruction_identity,COMMON_INSTRUCTIONS
+        value=build_instructions(kind,task)
+        assert value.count(COMMON_INSTRUCTIONS)==1
+>       assert instruction_identity(value)=={'catalog_version':10,'profile':profile,'sha256':hashlib.sha256(value.encode()).hexdigest()}
+E       AssertionError: assert {'catalog_ver...4b71f1678feb'} == {'catalog_ver...4b71f1678feb'}
+E         
+E         Omitting 2 identical items, use -vv to show
+E         Differing items:
+E         {'catalog_version': 9} != {'catalog_version': 10}
+E         Use -v to get more diff
+
+backend/tests/runtime/test_prompt_catalog.py:19: AssertionError
+_ test_every_native_profile_has_one_shared_policy_and_exact_versioned_identity[research-review-code_audit] _
+
+kind = 'research', task = 'review', profile = 'code_audit'
+
+    @pytest.mark.parametrize('kind,task,profile',[
+        ('research','research','scientific_research'),('research','review','code_audit'),
+        ('research','investigation','investigation'),('research','plan','planning'),
+        ('development','code','development'),('code_review','code','code_review'),
+        ('finding_review','research','finding_review'),
+    ])
+    def test_every_native_profile_has_one_shared_policy_and_exact_versioned_identity(kind,task,profile):
+        """Selecting a real capability includes common correction/communication policy exactly once and a hash of the complete actual instructions."""
+        from backend.prompts.native import build_instructions,instruction_identity,COMMON_INSTRUCTIONS
+        value=build_instructions(kind,task)
+        assert value.count(COMMON_INSTRUCTIONS)==1
+>       assert instruction_identity(value)=={'catalog_version':10,'profile':profile,'sha256':hashlib.sha256(value.encode()).hexdigest()}
+E       AssertionError: assert {'catalog_ver...297b25bf852e'} == {'catalog_ver...297b25bf852e'}
+E         
+E         Omitting 2 identical items, use -vv to show
+E         Differing items:
+E         {'catalog_version': 9} != {'catalog_version': 10}
+E         Use -v to get more diff
+
+backend/tests/runtime/test_prompt_catalog.py:19: AssertionError
+_ test_every_native_profile_has_one_shared_policy_and_exact_versioned_identity[research-investigation-investigation] _
+
+kind = 'research', task = 'investigation', profile = 'investigation'
+
+    @pytest.mark.parametrize('kind,task,profile',[
+        ('research','research','scientific_research'),('research','review','code_audit'),
+        ('research','investigation','investigation'),('research','plan','planning'),
+        ('development','code','development'),('code_review','code','code_review'),
+        ('finding_review','research','finding_review'),
+    ])
+    def test_every_native_profile_has_one_shared_policy_and_exact_versioned_identity(kind,task,profile):
+        """Selecting a real capability includes common correction/communication policy exactly once and a hash of the complete actual instructions."""
+        from backend.prompts.native import build_instructions,instruction_identity,COMMON_INSTRUCTIONS
+        value=build_instructions(kind,task)
+        assert value.count(COMMON_INSTRUCTIONS)==1
+>       assert instruction_identity(value)=={'catalog_version':10,'profile':profile,'sha256':hashlib.sha256(value.encode()).hexdigest()}
+E       AssertionError: assert {'catalog_ver...5d23cb13e9ce'} == {'catalog_ver...5d23cb13e9ce'}
+E         
+E         Omitting 2 identical items, use -vv to show
+E         Differing items:
+E         {'catalog_version': 9} != {'catalog_version': 10}
+E         Use -v to get more diff
+
+backend/tests/runtime/test_prompt_catalog.py:19: AssertionError
+_ test_every_native_profile_has_one_shared_policy_and_exact_versioned_identity[research-plan-planning] _
+
+kind = 'research', task = 'plan', profile = 'planning'
+
+    @pytest.mark.parametrize('kind,task,profile',[
+        ('research','research','scientific_research'),('research','review','code_audit'),
+        ('research','investigation','investigation'),('research','plan','planning'),
+        ('development','code','development'),('code_review','code','code_review'),
+        ('finding_review','research','finding_review'),
+    ])
+    def test_every_native_profile_has_one_shared_policy_and_exact_versioned_identity(kind,task,profile):
+        """Selecting a real capability includes common correction/communication policy exactly once and a hash of the complete actual instructions."""
+        from backend.prompts.native import build_instructions,instruction_identity,COMMON_INSTRUCTIONS
+        value=build_instructions(kind,task)
+        assert value.count(COMMON_INSTRUCTIONS)==1
+>       assert instruction_identity(value)=={'catalog_version':10,'profile':profile,'sha256':hashlib.sha256(value.encode()).hexdigest()}
+E       AssertionError: assert {'catalog_ver...a238f3425ec8'} == {'catalog_ver...a238f3425ec8'}
+E         
+E         Omitting 2 identical items, use -vv to show
+E         Differing items:
+E         {'catalog_version': 9} != {'catalog_version': 10}
+E         Use -v to get more diff
+
+backend/tests/runtime/test_prompt_catalog.py:19: AssertionError
+_ test_every_native_profile_has_one_shared_policy_and_exact_versioned_identity[development-code-development] _
+
+kind = 'development', task = 'code', profile = 'development'
+
+    @pytest.mark.parametrize('kind,task,profile',[
+        ('research','research','scientific_research'),('research','review','code_audit'),
+        ('research','investigation','investigation'),('research','plan','planning'),
+        ('development','code','development'),('code_review','code','code_review'),
+        ('finding_review','research','finding_review'),
+    ])
+    def test_every_native_profile_has_one_shared_policy_and_exact_versioned_identity(kind,task,profile):
+        """Selecting a real capability includes common correction/communication policy exactly once and a hash of the complete actual instructions."""
+        from backend.prompts.native import build_instructions,instruction_identity,COMMON_INSTRUCTIONS
+        value=build_instructions(kind,task)
+        assert value.count(COMMON_INSTRUCTIONS)==1
+>       assert instruction_identity(value)=={'catalog_version':10,'profile':profile,'sha256':hashlib.sha256(value.encode()).hexdigest()}
+E       AssertionError: assert {'catalog_ver...f61e6ba8608b'} == {'catalog_ver...f61e6ba8608b'}
+E         
+E         Omitting 2 identical items, use -vv to show
+E         Differing items:
+E         {'catalog_version': 9} != {'catalog_version': 10}
+E         Use -v to get more diff
+
+backend/tests/runtime/test_prompt_catalog.py:19: AssertionError
+_ test_every_native_profile_has_one_shared_policy_and_exact_versioned_identity[code_review-code-code_review] _
+
+kind = 'code_review', task = 'code', profile = 'code_review'
+
+    @pytest.mark.parametrize('kind,task,profile',[
+        ('research','research','scientific_research'),('research','review','code_audit'),
+        ('research','investigation','investigation'),('research','plan','planning'),
+        ('development','code','development'),('code_review','code','code_review'),
+        ('finding_review','research','finding_review'),
+    ])
+    def test_every_native_profile_has_one_shared_policy_and_exact_versioned_identity(kind,task,profile):
+        """Selecting a real capability includes common correction/communication policy exactly once and a hash of the complete actual instructions."""
+        from backend.prompts.native import build_instructions,instruction_identity,COMMON_INSTRUCTIONS
+        value=build_instructions(kind,task)
+        assert value.count(COMMON_INSTRUCTIONS)==1
+>       assert instruction_identity(value)=={'catalog_version':10,'profile':profile,'sha256':hashlib.sha256(value.encode()).hexdigest()}
+E       AssertionError: assert {'catalog_ver...9925136b25e2'} == {'catalog_ver...9925136b25e2'}
+E         
+E         Omitting 2 identical items, use -vv to show
+E         Differing items:
+E         {'catalog_version': 9} != {'catalog_version': 10}
+E         Use -v to get more diff
+
+backend/tests/runtime/test_prompt_catalog.py:19: AssertionError
+_ test_every_native_profile_has_one_shared_policy_and_exact_versioned_identity[finding_review-research-finding_review] _
+
+kind = 'finding_review', task = 'research', profile = 'finding_review'
+
+    @pytest.mark.parametrize('kind,task,profile',[
+        ('research','research','scientific_research'),('research','review','code_audit'),
+        ('research','investigation','investigation'),('research','plan','planning'),
+        ('development','code','development'),('code_review','code','code_review'),
+        ('finding_review','research','finding_review'),
+    ])
+    def test_every_native_profile_has_one_shared_policy_and_exact_versioned_identity(kind,task,profile):
+        """Selecting a real capability includes common correction/communication policy exactly once and a hash of the complete actual instructions."""
+        from backend.prompts.native import build_instructions,instruction_identity,COMMON_INSTRUCTIONS
+        value=build_instructions(kind,task)
+        assert value.count(COMMON_INSTRUCTIONS)==1
+>       assert instruction_identity(value)=={'catalog_version':10,'profile':profile,'sha256':hashlib.sha256(value.encode()).hexdigest()}
+E       AssertionError: assert {'catalog_ver...934cdf08d2c9'} == {'catalog_ver...934cdf08d2c9'}
+E         
+E         Omitting 2 identical items, use -vv to show
+E         Differing items:
+E         {'catalog_version': 9} != {'catalog_version': 10}
+E         Use -v to get more diff
+
+backend/tests/runtime/test_prompt_catalog.py:19: AssertionError
+=========================== short test summary info ============================
+FAILED backend/tests/runtime/test_prompt_catalog.py::test_every_native_profile_has_one_shared_policy_and_exact_versioned_identity[research-research-scientific_research]
+FAILED backend/tests/runtime/test_prompt_catalog.py::test_every_native_profile_has_one_shared_policy_and_exact_versioned_identity[research-review-code_audit]
+FAILED backend/tests/runtime/test_prompt_catalog.py::test_every_native_profile_has_one_shared_policy_and_exact_versioned_identity[research-investigation-investigation]
+FAILED backend/tests/runtime/test_prompt_catalog.py::test_every_native_profile_has_one_shared_policy_and_exact_versioned_identity[research-plan-planning]
+FAILED backend/tests/runtime/test_prompt_catalog.py::test_every_native_profile_has_one_shared_policy_and_exact_versioned_identity[development-code-development]
+FAILED backend/tests/runtime/test_prompt_catalog.py::test_every_native_profile_has_one_shared_policy_and_exact_versioned_identity[code_review-code-code_review]
+FAILED backend/tests/runtime/test_prompt_catalog.py::test_every_native_profile_has_one_shared_policy_and_exact_versioned_identity[finding_review-research-finding_review]
+7 failed, 10 passed, 1 deselected in 0.57s

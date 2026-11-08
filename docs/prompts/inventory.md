@@ -1,5 +1,13 @@
 # Inventario y revisión de prompts
 
+**Estado vigente: catálogo10,85candidatos en322archivos.** Se revisó el delta de
+doce decisiones y se conservaron73vigentes, sin renovar huellas automáticamente.
+Incluye propósito/datos/relaciones/entrada-salida y adaptación del encuadre ante
+feedback, conservando las identidades históricas2–9. [Cambio y límites](../modernization/purpose-framing-review.md).
+La nueva observación real no entregó explicación dentro de120000tokens: no se
+acredita eficacia ni comprensión humana. Las cifras y tablas de cortes anteriores
+que siguen son históricas; consultar inventory.json para el árbol actual.
+
 Corte de Planificación del8noviembre2026:318archivos,85candidatos,18revisiones
 vigentes y67desactualizadas;0sin revisión previa. El cambio de fuentes/consumidores
 no prueba que67textos estén mal; tampoco permite contar sus revisiones anteriores

@@ -1,0 +1,71 @@
+{
+  "policy_catalog": 10,
+  "previous_catalog": 9,
+  "source_tests": {
+    "passed": 42,
+    "failed": 0
+  },
+  "installed_tests": {
+    "passed": 31,
+    "failed": 0,
+    "initial_invocation": {
+      "passed": 28,
+      "failed_async_tests": 3,
+      "cause": "Outside repository pytest asyncio_mode default strict; corrected to explicit auto, no product change"
+    },
+    "warning": "asyncio_default_fixture_loop_scope unset in installed runner"
+  },
+  "prompt_inventory": {
+    "files": 322,
+    "candidates": 85,
+    "revalidated": 12,
+    "retained_current": 73,
+    "stale": 0,
+    "unreviewed": 0
+  },
+  "native_observation": {
+    "status": "failed_budget_before_final_explanation",
+    "actual_subscription_turns": 1,
+    "model": "gpt-6.1-sol",
+    "observed_tokens": 147058,
+    "limit_tokens": 120000,
+    "seconds": 55.88,
+    "native_result": null,
+    "typed_partial_findings": 1,
+    "source_unchanged": true,
+    "ken": {
+      "status": "passed",
+      "complete_registered_source_returned": true
+    },
+    "actual_policy_hash_matches": true,
+    "peers_closed": 5,
+    "open_grants": 0,
+    "service_exit": -15,
+    "human_comprehension": null,
+    "final_explanation": null,
+    "no_repeat_for_better_sample": true
+  },
+  "packaging": {
+    "source_files_matching_sdist_and_wheel": 699,
+    "product_files_matching": 371,
+    "wheel": ".superpowers/sdd/2026-10-31-actualizacion-proyecto/purpose-framing-dist/researcher-0.1.0-cp312-cp312-linux_x86_64.whl",
+    "wheel_sha256": "91fb6dd576ef404d9aa81441b951acbfa45bf6df47292e955659327d25bc9681",
+    "sdist": ".superpowers/sdd/2026-10-31-actualizacion-proyecto/purpose-framing-dist/researcher-0.1.0.tar.gz",
+    "sdist_sha256": "7ead6ad65befde73f4b90938bfa8b8d3ef4b76a454701ab4e2057384715c7667",
+    "source_commit": "64d9e28 plus current common-policy10 and tests",
+    "exclusions": [
+      "backend/db/seeds/dev_data.sql"
+    ],
+    "initial_membership_check": "All700files compared; only intentionally excluded development seed missing, no extra or byte mismatches. Explicit seed exclusion then699match."
+  },
+  "limits": [
+    "One actual explanatory question with existing repository sources, not a held-out paired comparison or human acceptance",
+    "No delivery observed, no automatic retry and no inference that common framing is effective merely because present",
+    "Not whole global suite, complete documentation, security or accessibility"
+  ],
+  "source_sha256": {
+    "backend/prompts/native.py": "297fdc8b419909bdb6e465d93233ebb3dad61cf0bed754d9000cca328155b6d4",
+    "backend/tests/runtime/test_prompt_catalog.py": "fb2c351cd9143c722d4bcd85ea8ee299e817cb50836bb472f9f8b1f4bbdc5a51",
+    "evals/communication/purpose_framing.py": "b3720e01aa0a652c5a74377510d2cb5945a9e0316e84e036c6ce925a883a5929"
+  }
+}

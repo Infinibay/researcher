@@ -16,9 +16,17 @@
     "acceptance": "not_established",
     "agent_interpretation": "The evaluation question lacks sufficient problem framing; the user asks for purpose, data relationships and inputs/outputs. This interpretation is not proof of comprehension or a diagnosis of the user.",
     "required_next_evaluation": "Present the goal and a concrete related input/output example before asking for a useful decision; distinguish observed data from invented illustrations. Do not repeat an abstract comprehension quiz.",
-    "implemented_in_product": false,
+    "implemented_in_product": true,
     "evidence": "docs/modernization/spanish-plan-ken-review.md",
-    "guide_revision": "docs/interaction/communication-guide.md: purpose and data relationship before asking for a decision, with explicitly illustrative observation-to-CSV input/output. Not a generated product response or human acceptance."
+    "guide_revision": "docs/interaction/communication-guide.md: purpose and data relationship before asking for a decision, with explicitly illustrative observation-to-CSV input/output. Not a generated product response or human acceptance.",
+    "implementation_scope": "Common catalog10 explicitly frames purpose, available data/relationships and input/output when useful; rebuilds framing after clarity feedback without comprehension quiz. This is policy implementation, not proof of understanding.",
+    "actual_followup_observation": {
+      "question_source": "Different recognizable historical owner question: model configurability",
+      "request_authorship": "Implementer-authored evaluation using explicitly historical owner question/feedback, not a new owner instruction",
+      "report": "docs/modernization/purpose-framing-review.md",
+      "result": "Failed at147058observedtokens vs120000ceiling after one partial finding, no final explanation",
+      "human_acceptance": "not_observed"
+    }
   },
   "actual_scientific_followup": {
     "response": "docs/modernization/current-scientific-final-evidence/response.md",

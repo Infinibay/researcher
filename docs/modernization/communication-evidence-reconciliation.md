@@ -36,10 +36,11 @@ ni cuota restante. Tampoco es necesario repetirlos para volver a demostrar lo mi
   verificados. Hay observaciones comparativas para los siete perfiles activos,
   con distintos catálogos y alcances. No acredita catálogo9 en todos, comprensión
   humana ni eficacia general; no repetir estos casos por una lista histórica.
-- **Recorridos del §7.7:** evaluar conjuntamente en la UI real la explicación de
-  espera larga, fallo recuperable y resultado parcial, con intervención del usuario.
-  Reutilizar persistencia/Stop ya comprobados. Falta observar un ejemplo o diagrama
-  pertinente seguido de corrección/adaptación bajo política final.
+- **Recorridos del §7.7:** [lectura recuperable/parcial](execution-communication-review.md)
+  y [espera viva](live-wait-communication-review.md) ya tienen comprobaciones UI
+  acotadas, incluida consulta por teclado sin repetir trabajo. No volver a ejecutarlas
+  por esta lista. DD155conserva accesibilidad pendiente. Falta observar un ejemplo
+  pertinente seguido de corrección/adaptación humana bajo política final.
 - **Ciencia representativa:** el [caso primario actual](current-scientific-final-review.md)
   entregó cálculo e informe con cinco criterios completos y uno parcial. Se conserva
   esa rúbrica. Otro ensayo sólo ampliaría cobertura con pregunta/material distinto
@@ -51,3 +52,9 @@ la atribución ambigua de «evaluador» son pulido DD145. Se atienden después d
 capacidades principales. No hay aceptación humana, suite global final verde ni
 cierre general de comunicación. Siguen 42/43 escenarios amplios y 12/12 páginas
 aceptadas dentro de sus respectivos alcances.
+
+El [catálogo10](purpose-framing-review.md) incorpora después propósito/datos/
+relaciones/entrada-salida y adaptación del encuadre.85decisiones estáticas vigentes,
+doce revalidadas. El ensayo posterior sobre configuración de modelos falla por
+presupuesto antes de entregar explicación; conserva un hallazgo parcial, no una
+aceptación. Las comparaciones anteriores no se relabelan como catálogo10.

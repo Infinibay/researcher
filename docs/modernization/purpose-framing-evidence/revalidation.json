@@ -1,0 +1,25 @@
+{
+  "base_commit": "64d9e2881b1a4a6465147352ec19eac8c4521a1a",
+  "catalog_version": 10,
+  "scanned": 322,
+  "candidates": 85,
+  "revalidated": 12,
+  "retained_current": 73,
+  "changed_ids": [
+    "backend/planning/instructions.py::PLANNING_INSTRUCTIONS",
+    "backend/prompts/native.py::COMMON_INSTRUCTIONS",
+    "backend/prompts/native.py::SOURCE_INSTRUCTIONS",
+    "backend/prompts/native.py::build_instructions",
+    "backend/prompts/native.py::instruction_identity",
+    "backend/prompts/native.py::GENERIC_INSTRUCTIONS",
+    "backend/runtime/code_audit_instructions.py::CODE_AUDIT_INSTRUCTIONS",
+    "backend/runtime/code_review_instructions.py::CODE_REVIEW_INSTRUCTIONS",
+    "backend/runtime/development_policy.py::development_instructions",
+    "backend/runtime/investigation_instructions.py::INVESTIGATION_INSTRUCTIONS",
+    "backend/runtime/review_instructions.py::REVIEW_INSTRUCTIONS",
+    "backend/runtime/scientific_instructions.py::SCIENTIFIC_RESEARCH_INSTRUCTIONS"
+  ],
+  "native_source_sha256": "297fdc8b419909bdb6e465d93233ebb3dad61cf0bed754d9000cca328155b6d4",
+  "scope": "Static semantic delta and unchanged capability-source/owned-consumer checks; not model efficacy or human acceptance",
+  "source_policy_changed": true
+}

@@ -2399,7 +2399,10 @@
         "docs/design/audits/2026-11-08-execution-communication/report.md",
         "docs/modernization/live-wait-communication-review.md",
         "docs/modernization/live-wait-communication-results.json",
-        "docs/design/audits/2026-11-08-live-wait/report.md"
+        "docs/design/audits/2026-11-08-live-wait/report.md",
+        "docs/modernization/purpose-framing-review.md",
+        "docs/modernization/purpose-framing-results.json",
+        "docs/modernization/purpose-framing-evidence/registration.json"
       ],
       "remaining": [
         "Initial example rejected by the user as unhelpful; revised task-grounded example has no human acceptance yet",
@@ -2863,7 +2866,13 @@
         "docs/design/audits/2026-11-08-live-wait/report.md",
         "evals/communication/live_wait.py",
         "evals/communication/wait_worker.py",
-        "frontend/tests/communication-wait.mjs"
+        "frontend/tests/communication-wait.mjs",
+        "docs/modernization/purpose-framing-review.md",
+        "docs/modernization/purpose-framing-results.json",
+        "docs/modernization/purpose-framing-evidence/registration.json",
+        "backend/prompts/native.py",
+        "backend/tests/runtime/test_prompt_catalog.py",
+        "evals/communication/purpose_framing.py"
       ],
       "remaining": [
         "Observe human comprehension, useful correction and adaptation on a recognizable task with purpose, data relationships and input/output framing; U08 is not accepted.",
@@ -2876,7 +2885,16 @@
       "finding_review_comparison_observed": "One new purposive pair: two actual subscription+published-Ken reviewers, controlled author0model turns. Exact full subjects/source bytes and input/catalog/model controls match. Both typed needs_revision decisions and Spanish causal-limit explanations delivered; complete subject/source/Ken reads and exact source quotes verified. Hallucinated causal conclusion remains provisional; no acceptance/publication, peers4/4closed, grants0. No human or representative efficacy claim.",
       "code_review_comparison_observed": "One new purposive paired exact-candidate review. Two actual subscription+Ken reviewers, controlled author transport0generative turns per arm. Raw author inputs/base/tree/diff equal; only verified capture heads/derived packet references normalized. Both confirmed needs_revision, exact source citations, full packet/input/diff/Ken reads and four tests2pass2fail. Original/test unchanged, peers79/83closed, grants0, no acceptance/publication. Prior controlled-transport failure0real-reviewer admissions preserved; consumption unknown remains unknown.",
       "retained_ui_observed": "Two retained real outcomes, twelve automated regional UI states at1440/390; six final images manually inspected. Induced GET failure and keyboard retry recover original outcome, no new model admissions/product mutations/original-row changes. Saved review/partial-plan copy corrected; no live-tool or human claim.",
-      "live_tool_wait_observed": "One actual web admission, one owned command observed active for10.366s/browser11.336s/gate, same job exit0 and closure before candidate needs_review. Four manually inspected1440/390states, no overflow/page errors or duplicate instruction/command. Controlled transport0generative turns, actual installed coordinator/tools/Ken; all peers/grants closed. DD155accessibility retained and DD156unused timeout configuration, not human acceptance."
+      "live_tool_wait_observed": "One actual web admission, one owned command observed active for10.366s/browser11.336s/gate, same job exit0 and closure before candidate needs_review. Four manually inspected1440/390states, no overflow/page errors or duplicate instruction/command. Controlled transport0generative turns, actual installed coordinator/tools/Ken; all peers/grants closed. DD155accessibility retained and DD156unused timeout configuration, not human acceptance.",
+      "purpose_framing_catalog10": {
+        "policy": "Shared purpose/data relationships/I-O/corrected-framing instruction connected, historical2–9identities retained",
+        "static_reviews_current": 85,
+        "source_checks_passed": 42,
+        "installed_checks_passed": 31,
+        "actual_native_observation": "One actual subscription+Ken turn, exact policy10 and complete source verified;147058observedtokens vs120000ceiling, one partial finding, no final explanation, all5peers/grants closed",
+        "human_comprehension": null,
+        "limits": "Not a new paired comparison or demonstrated efficacy. Original failed outcome retained, no replay."
+      }
     },
     "prompt_inventory": {
       "status": "in_progress",
@@ -2944,23 +2962,35 @@
         "docs/modernization/code-communication-results.json",
         "docs/modernization/code-communication-live.json",
         "docs/modernization/code-communication-responses.json",
-        "evals/profile_communication/code_review.py"
+        "evals/profile_communication/code_review.py",
+        "docs/modernization/purpose-framing-review.md",
+        "docs/modernization/purpose-framing-results.json",
+        "docs/modernization/purpose-framing-evidence/registration.json",
+        "evals/communication/purpose_framing.py"
       ],
-      "implemented": "Current static semantic/source-consumer review:322owned Python files,85syntax-selected candidates,85current decisions,0stale and0unreviewed.68explicit delta reviews against matched dd1be91 source/consumer hashes,17unchanged. Catalogue9 and historic identities preserved. No new generation or human-comprehension acceptance.",
+      "implemented": "Current catalog10static semantic source/consumer review:322owned Python files,85candidates,85current decisions.12delta reviews against64d9e28,73unchanged; exact historical2–9headers preserved. One new actual explanation observation failed at147058/120000observedtokens before final delivery; no human acceptance.",
       "remaining": [
         "Static inventory/source-consumer review is complete for the recorded cut; revalidate changed dependencies only, not all prompts without a delta.",
         "Observe human comprehension, useful correction and adaptation on a recognizable task with purpose, data relationships and input/output framing; U08 is not accepted.",
-        "Evaluate the real-UI communication contract for long waits, recoverable failures and partial results, reusing existing persistence/Stop evidence.",
         "Broader scientific material/questions remain unrepresented; preserve the primary-abstract frozen five-pass/one-partial result instead of rerunning to improve its score."
       ],
       "context_comparison_observed": "7 paired cases:2 development/5 reserved;16 Codex subscription turns with actual published Ken, matching substantive inputs/model/catalog and exact delivered policies. Initial no-dispatch context-version failure and development receipt-identity amendment retained.19 directed tests pass; human measures unknown.",
       "historical_implementation_snapshot": "Catalog3 unchanged;83 candidates/287 files with83 current static decisions after69 explicit revalidations and14 unchanged reviews.516 historical identities preserved. Seven actual profile hashes/sizes verified; evaluator version metadata corrected.45 directed source cases pass, including four initially skipped and then run with existing offline semantic assets. No new LLM evaluation or human acceptance.",
-      "static_review_limits": "Current85candidate/source-direct-consumer review is complete atd278653, not exhaustive dynamic calls or isolated efficacy. Future source/consumer changes need delta review. Existing paired results, scientific frozen5pass1partial and U08/human remain separately bounded.",
+      "static_review_limits": "Current85source/direct-consumer reviews are complete for purpose-framing catalog10 working tree; not exhaustive dynamic calls or isolated efficacy. Changed dependencies require explicit delta review. Prior paired results and scientific5pass1partial keep their original catalogs and scope.",
       "later_bounded_observations": "Later bounded development observations: catalog4 audit346386/350000 and weighted means305543/350000 delivered; aggregate/individual distinction explicit. Catalog6 atomic plan/explanation81685/120000 delivered. Material-question/continuity flow and C10 independently useful50EUR delivery observed. Not new reserved comparisons, final-policy general efficacy or human acceptance; original failures preserved.",
       "historical_catalog3_profile_observations": "4 paired synthetic cases/8 actual subscription+Ken turns;2pairs deliver both explanations. Catalog3 planning exceeds120000observedtokens after saving a proposal; catalog3 audit starts21tools with20allowed after saving a draft, no final delivery. All services/peers closed; all controls match after retained cutoff-alias amendment. Candidate weighted-mean report makes an unsupported per-batch claim. No causal superiority or human-comprehension claim.",
       "development_comparison_observed": "One new purposive native development pair, two actual subscription+published-Ken turns. Same original request/source/six tests/Git base/input/catalog/model-effort controls verified. Both deliver private CSV candidates and Spanish explanations; six named tests per arm pass, original/test/listing unchanged; peers67/65closed, grants0. Historical231480/current205048 observed tokens. Not held-out, causal superiority, human acceptance or independent host checks.",
       "finding_review_comparison_observed": "One new purposive pair: two actual subscription+published-Ken reviewers, controlled author0model turns. Exact full subjects/source bytes and input/catalog/model controls match. Both typed needs_revision decisions and Spanish causal-limit explanations delivered; complete subject/source/Ken reads and exact source quotes verified. Hallucinated causal conclusion remains provisional; no acceptance/publication, peers4/4closed, grants0. No human or representative efficacy claim.",
-      "code_review_comparison_observed": "One new purposive paired exact-candidate review. Two actual subscription+Ken reviewers, controlled author transport0generative turns per arm. Raw author inputs/base/tree/diff equal; only verified capture heads/derived packet references normalized. Both confirmed needs_revision, exact source citations, full packet/input/diff/Ken reads and four tests2pass2fail. Original/test unchanged, peers79/83closed, grants0, no acceptance/publication. Prior controlled-transport failure0real-reviewer admissions preserved; consumption unknown remains unknown."
+      "code_review_comparison_observed": "One new purposive paired exact-candidate review. Two actual subscription+Ken reviewers, controlled author transport0generative turns per arm. Raw author inputs/base/tree/diff equal; only verified capture heads/derived packet references normalized. Both confirmed needs_revision, exact source citations, full packet/input/diff/Ken reads and four tests2pass2fail. Original/test unchanged, peers79/83closed, grants0, no acceptance/publication. Prior controlled-transport failure0real-reviewer admissions preserved; consumption unknown remains unknown.",
+      "purpose_framing_catalog10": {
+        "policy": "Shared purpose/data relationships/I-O/corrected-framing instruction connected, historical2–9identities retained",
+        "static_reviews_current": 85,
+        "source_checks_passed": 42,
+        "installed_checks_passed": 31,
+        "actual_native_observation": "One actual subscription+Ken turn, exact policy10 and complete source verified;147058observedtokens vs120000ceiling, one partial finding, no final explanation, all5peers/grants closed",
+        "human_comprehension": null,
+        "limits": "Not a new paired comparison or demonstrated efficacy. Original failed outcome retained, no replay."
+      }
     },
     "context_evals": {
       "status": "in_progress",
@@ -3061,7 +3091,13 @@
         "docs/design/audits/2026-11-08-live-wait/report.md",
         "evals/communication/live_wait.py",
         "evals/communication/wait_worker.py",
-        "frontend/tests/communication-wait.mjs"
+        "frontend/tests/communication-wait.mjs",
+        "docs/modernization/purpose-framing-review.md",
+        "docs/modernization/purpose-framing-results.json",
+        "docs/modernization/purpose-framing-evidence/registration.json",
+        "backend/prompts/native.py",
+        "backend/tests/runtime/test_prompt_catalog.py",
+        "evals/communication/purpose_framing.py"
       ],
       "remaining": [
         "Observe human comprehension, useful correction and adaptation on a recognizable task with purpose, data relationships and input/output framing; U08 is not accepted.",
@@ -3073,7 +3109,16 @@
       "finding_review_comparison_observed": "One new purposive pair: two actual subscription+published-Ken reviewers, controlled author0model turns. Exact full subjects/source bytes and input/catalog/model controls match. Both typed needs_revision decisions and Spanish causal-limit explanations delivered; complete subject/source/Ken reads and exact source quotes verified. Hallucinated causal conclusion remains provisional; no acceptance/publication, peers4/4closed, grants0. No human or representative efficacy claim.",
       "code_review_comparison_observed": "One new purposive paired exact-candidate review. Two actual subscription+Ken reviewers, controlled author transport0generative turns per arm. Raw author inputs/base/tree/diff equal; only verified capture heads/derived packet references normalized. Both confirmed needs_revision, exact source citations, full packet/input/diff/Ken reads and four tests2pass2fail. Original/test unchanged, peers79/83closed, grants0, no acceptance/publication. Prior controlled-transport failure0real-reviewer admissions preserved; consumption unknown remains unknown.",
       "retained_ui_observed": "Two retained real outcomes, twelve automated regional UI states at1440/390; six final images manually inspected. Induced GET failure and keyboard retry recover original outcome, no new model admissions/product mutations/original-row changes. Saved review/partial-plan copy corrected; no live-tool or human claim.",
-      "live_tool_wait_observed": "One actual web admission, one owned command observed active for10.366s/browser11.336s/gate, same job exit0 and closure before candidate needs_review. Four manually inspected1440/390states, no overflow/page errors or duplicate instruction/command. Controlled transport0generative turns, actual installed coordinator/tools/Ken; all peers/grants closed. DD155accessibility retained and DD156unused timeout configuration, not human acceptance."
+      "live_tool_wait_observed": "One actual web admission, one owned command observed active for10.366s/browser11.336s/gate, same job exit0 and closure before candidate needs_review. Four manually inspected1440/390states, no overflow/page errors or duplicate instruction/command. Controlled transport0generative turns, actual installed coordinator/tools/Ken; all peers/grants closed. DD155accessibility retained and DD156unused timeout configuration, not human acceptance.",
+      "purpose_framing_catalog10": {
+        "policy": "Shared purpose/data relationships/I-O/corrected-framing instruction connected, historical2–9identities retained",
+        "static_reviews_current": 85,
+        "source_checks_passed": 42,
+        "installed_checks_passed": 31,
+        "actual_native_observation": "One actual subscription+Ken turn, exact policy10 and complete source verified;147058observedtokens vs120000ceiling, one partial finding, no final explanation, all5peers/grants closed",
+        "human_comprehension": null,
+        "limits": "Not a new paired comparison or demonstrated efficacy. Original failed outcome retained, no replay."
+      }
     },
     "data_migrations": {
       "status": "in_progress",
@@ -5869,7 +5914,13 @@
         "docs/design/audits/2026-11-08-live-wait/report.md",
         "evals/communication/live_wait.py",
         "evals/communication/wait_worker.py",
-        "frontend/tests/communication-wait.mjs"
+        "frontend/tests/communication-wait.mjs",
+        "docs/modernization/purpose-framing-review.md",
+        "docs/modernization/purpose-framing-results.json",
+        "docs/modernization/purpose-framing-evidence/registration.json",
+        "backend/prompts/native.py",
+        "backend/tests/runtime/test_prompt_catalog.py",
+        "evals/communication/purpose_framing.py"
       ],
       "remaining": [
         "Observe human comprehension, useful correction and adaptation on a recognizable task with purpose, data relationships and input/output framing; U08 is not accepted.",
@@ -5884,7 +5935,16 @@
       "finding_review_comparison_observed": "One new purposive pair: two actual subscription+published-Ken reviewers, controlled author0model turns. Exact full subjects/source bytes and input/catalog/model controls match. Both typed needs_revision decisions and Spanish causal-limit explanations delivered; complete subject/source/Ken reads and exact source quotes verified. Hallucinated causal conclusion remains provisional; no acceptance/publication, peers4/4closed, grants0. No human or representative efficacy claim.",
       "code_review_comparison_observed": "One new purposive paired exact-candidate review. Two actual subscription+Ken reviewers, controlled author transport0generative turns per arm. Raw author inputs/base/tree/diff equal; only verified capture heads/derived packet references normalized. Both confirmed needs_revision, exact source citations, full packet/input/diff/Ken reads and four tests2pass2fail. Original/test unchanged, peers79/83closed, grants0, no acceptance/publication. Prior controlled-transport failure0real-reviewer admissions preserved; consumption unknown remains unknown.",
       "retained_ui_observed": "Two retained real outcomes, twelve automated regional UI states at1440/390; six final images manually inspected. Induced GET failure and keyboard retry recover original outcome, no new model admissions/product mutations/original-row changes. Saved review/partial-plan copy corrected; no live-tool or human claim.",
-      "live_tool_wait_observed": "One actual web admission, one owned command observed active for10.366s/browser11.336s/gate, same job exit0 and closure before candidate needs_review. Four manually inspected1440/390states, no overflow/page errors or duplicate instruction/command. Controlled transport0generative turns, actual installed coordinator/tools/Ken; all peers/grants closed. DD155accessibility retained and DD156unused timeout configuration, not human acceptance."
+      "live_tool_wait_observed": "One actual web admission, one owned command observed active for10.366s/browser11.336s/gate, same job exit0 and closure before candidate needs_review. Four manually inspected1440/390states, no overflow/page errors or duplicate instruction/command. Controlled transport0generative turns, actual installed coordinator/tools/Ken; all peers/grants closed. DD155accessibility retained and DD156unused timeout configuration, not human acceptance.",
+      "purpose_framing_catalog10": {
+        "policy": "Shared purpose/data relationships/I-O/corrected-framing instruction connected, historical2–9identities retained",
+        "static_reviews_current": 85,
+        "source_checks_passed": 42,
+        "installed_checks_passed": 31,
+        "actual_native_observation": "One actual subscription+Ken turn, exact policy10 and complete source verified;147058observedtokens vs120000ceiling, one partial finding, no final explanation, all5peers/grants closed",
+        "human_comprehension": null,
+        "limits": "Not a new paired comparison or demonstrated efficacy. Original failed outcome retained, no replay."
+      }
     },
     "observed_delivery_budget": {
       "status": "in_progress",
@@ -5903,13 +5963,28 @@
         "docs/modernization/atomic-planning-live.json",
         "docs/modernization/atomic-planning-results.json",
         "docs/modernization/atomic-planning-final-packaging.json",
-        "backend/tests/runtime/test_atomic_planning_delivery.py"
+        "backend/tests/runtime/test_atomic_planning_delivery.py",
+        "docs/modernization/purpose-framing-review.md",
+        "docs/modernization/purpose-framing-results.json",
+        "docs/modernization/purpose-framing-evidence/registration.json",
+        "backend/prompts/native.py",
+        "backend/tests/runtime/test_prompt_catalog.py",
+        "evals/communication/purpose_framing.py"
       ],
       "remaining": [
         "Human comprehension and effort remain unmeasured",
         "Other profiles and representative real material require evaluation",
         "Overall communication and page acceptance remain open"
-      ]
+      ],
+      "purpose_framing_catalog10": {
+        "policy": "Shared purpose/data relationships/I-O/corrected-framing instruction connected, historical2–9identities retained",
+        "static_reviews_current": 85,
+        "source_checks_passed": 42,
+        "installed_checks_passed": 31,
+        "actual_native_observation": "One actual subscription+Ken turn, exact policy10 and complete source verified;147058observedtokens vs120000ceiling, one partial finding, no final explanation, all5peers/grants closed",
+        "human_comprehension": null,
+        "limits": "Not a new paired comparison or demonstrated efficacy. Original failed outcome retained, no replay."
+      }
     },
     "isolated_legacy_chroma_reader": {
       "status": "in_progress",
@@ -6131,13 +6206,28 @@
         "docs/modernization/interaction-policy-final-packaging.json",
         "docs/modernization/interaction-artifact-comparison.json",
         "docs/design/audits/2026-11-07-interaction/report.md",
-        "docs/modernization/interaction-human-review.json"
+        "docs/modernization/interaction-human-review.json",
+        "docs/modernization/purpose-framing-review.md",
+        "docs/modernization/purpose-framing-results.json",
+        "docs/modernization/purpose-framing-evidence/registration.json",
+        "backend/prompts/native.py",
+        "backend/tests/runtime/test_prompt_catalog.py",
+        "evals/communication/purpose_framing.py"
       ],
       "remaining": [
         "Initial example rejected by the user as unhelpful; revised task-grounded example has no human acceptance yet",
         "Evaluate actual generated explanations and correction/adaptation under final policy; rendering and scripted tests do not establish understanding",
         "Owner follow-up asks for purpose, relationships and concrete inputs/outputs; comprehension question not understood well enough to establish acceptance. Incorporate framing and evaluate actual output, without another abstract quiz."
-      ]
+      ],
+      "purpose_framing_catalog10": {
+        "policy": "Shared purpose/data relationships/I-O/corrected-framing instruction connected, historical2–9identities retained",
+        "static_reviews_current": 85,
+        "source_checks_passed": 42,
+        "installed_checks_passed": 31,
+        "actual_native_observation": "One actual subscription+Ken turn, exact policy10 and complete source verified;147058observedtokens vs120000ceiling, one partial finding, no final explanation, all5peers/grants closed",
+        "human_comprehension": null,
+        "limits": "Not a new paired comparison or demonstrated efficacy. Original failed outcome retained, no replay."
+      }
     },
     "owner_historical_data_acceptance": {
       "status": "verified",
@@ -6809,6 +6899,44 @@
         "observed_tokens": null,
         "accessibility_clean": false
       }
+    },
+    "purpose_framing_policy": {
+      "status": "implemented_runtime_delivery_evaluation_incomplete",
+      "scope": "Explicit owner clarity feedback is in shared policy10; new actual-source explanatory case failed before final response",
+      "evidence": [
+        "docs/modernization/purpose-framing-review.md",
+        "docs/modernization/purpose-framing-results.json",
+        "docs/modernization/purpose-framing-evidence/registration.json",
+        "backend/prompts/native.py",
+        "backend/tests/runtime/test_prompt_catalog.py",
+        "evals/communication/purpose_framing.py"
+      ],
+      "remaining": [
+        "Useful final explanation/correction/adaptation and observed human comprehension",
+        "Keep original120k-budget failure and partial finding; do not relabel it successful"
+      ],
+      "limits": [
+        "No general prompt efficacy or final global-suite claim",
+        "Direct source/consumer static review and42source31installed selected tests"
+      ]
+    },
+    "remaining_coarse_audit": {
+      "status": "verified_scoped",
+      "scope": "Clean-context readonly audit of up to five major remaining blocks, not final whole-branch review",
+      "evidence": [
+        "docs/modernization/remaining-coarse-review-2026-11-08.md"
+      ],
+      "remaining": [
+        "U08human/adaptation",
+        "Ken/ONNXdistribution decision",
+        "Whole-document accessibility",
+        "Relevant documentation",
+        "Final package/global suite/independent review"
+      ],
+      "limits": [
+        "Stale historical coverage lists do not create fresh requirements",
+        "OriginalAuthorityBusyremains unknown; no broad defect fix claimed"
+      ]
     }
   }
 }

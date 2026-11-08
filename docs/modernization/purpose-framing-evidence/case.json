@@ -1,0 +1,26 @@
+{
+  "id": "model_configuration_purpose",
+  "split": "development",
+  "request": "Explicá si Researcher permite configurar qué modelo usar. Necesito entender para qué sirve esa elección, qué datos recibe, cómo se relacionan y qué cambia en el trabajo. Usá el módulo completo y la documentación capturados; un ejemplo pequeño de entrada/salida puede ayudar, siempre identificado como ilustración. No cambies ninguna configuración ni inicies otro trabajo. Aplicá el feedback histórico de claridad sin presentarlo como una nueva autorización ni atribuirme comprensión. Cerrá con un paso útil, sin un cuestionario.",
+  "context": {
+    "historical_owner_question": {
+      "text": "Se puede configurar que modelo usar o no?",
+      "source": "Owner modernization conversation",
+      "current_authorization": false
+    },
+    "historical_clarity_feedback": {
+      "text": "intentar entender la idea, los datos y como se relacionan. Cuales son las entradas y las salidas. No se si entiendo bien la pregunta",
+      "source": "Owner response to an earlier synthetic-plan explanation question",
+      "scope": "Purpose, data relationships and input/output framing",
+      "current_authorization": false
+    }
+  },
+  "criteria": [
+    "Answer the actual configurability question in Spanish and explain the purpose before implementation details.",
+    "Name model plus reasoning effort as the input pair, scopes/priority and the resulting selection for a new attempt; distinguish configuration from execution.",
+    "Give a faithful clearly illustrative example: a scope override affects future choices, not an already frozen attempt; do not invent account model availability.",
+    "Explain unavailable model/effort as an explicit refusal with no substitute; observed catalog is not a permanent subscription guarantee.",
+    "Read complete actual captured source with Ken and retain provenance/limits; no settings edit, execution, acceptance or publication claim.",
+    "Use historical clarity feedback to frame a useful explanation and next step, without another comprehension quiz or a claim that the user understood."
+  ]
+}

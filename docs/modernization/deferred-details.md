@@ -1399,3 +1399,14 @@ límites reales; no atribuirlo a una ampliación global. Reasignar la instancia 
 quitar la llamada sin efecto en la fase de detalles y validar esa configuración,
 conservando los hashes del ensayo histórico. Un cambio del evaluador no exige
 repetir modelos ni reescribir sus resultados anteriores.
+
+## DD157 — feedback útil sobre límites de lectura de comandos
+
+El ensayo de encuadre de modelos pidió `researcher_command_read` con max_bytes20000,
+rechazado por validación. La respuesta genérica menciona rechazo/reconciliación y
+conservar la operación, sin explicar qué parámetro de esta lectura falló. Revisar
+en detalles una indicación concreta que respete los límites y distinga parámetros
+inválidos de efectos inciertos. No cambiar la identidad de ejecución ni repetir
+un comando para recuperar su salida. El fallo completo de entrega por presupuesto
+se registra por separado como evidencia funcional incompleta; este detalle no lo
+declara resuelto ni permite convertirlo retrospectivamente en éxito.

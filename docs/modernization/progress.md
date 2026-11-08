@@ -9555,3 +9555,29 @@ global; docstrings/JSDoc en evaluadores nuevos.42/43escenarios,12/12páginas por
 alcance. Quedan humano/adaptación, Ken pendiente, docstrings/detalles y controles
 finales. La respuesta del usuario exige propósito, datos/relaciones y entrada/salida;
 no insistir en preguntas abstractas para acreditar comprensión.
+
+## 2026-11-08 — Feedback de encuadre en catálogo10 y observación real incompleta
+
+[Política y evidencia](purpose-framing-review.md). Cuatro líneas comunes explicitan
+propósito, datos/relaciones, entrada/salida útil y reconstrucción del encuadre ante
+feedback, sin cuestionario. Version10preserva2–9; selección/autoridad/límites
+sin cambios. RED siete perfiles,42pruebas fuente y31instaladas pasan. Inicial
+comando de cobertura inválido y28pass/3asyncfail por configuración fuera del repo
+conservados; auto explícito pasa31sin cambiar producto.699archivos coinciden en
+fuente/sdist/wheel/instalación, sólo semilla dev excluida. Inventario85/322vigente,
+doce decisiones revisadas con delta y73sin cambios. Bytes no son coste/eficacia.
+
+Un turno real suscripción/Ken sobre modelo/esfuerzo del propio repo, pregunta y
+feedback históricos atribuidos, petición de evaluación escrita por implementador.
+Política exacta10y lectura completa verificadas. Falla147058vs120000tokens antes
+de explicar; un hallazgo parcial con citas no es entrega. Cat redundante con
+lectura max_bytes20000rechazada; DD157para feedback de validación, sin declarar
+resuelto el fallo de entrega. Fuente intacta,5peers cerrados,0grants,servicio-15.
+No se repite ni aumenta presupuesto para mejorar resultado. Humano sigue desconocido.
+
+Revisor limpio, sólo lectura, contrasta cinco bloques pendientes y evidencia
+posterior; no propone reabrir grandes migraciones por campos históricos. Es
+revisión acotada de pendientes, no aceptación independiente final.42/43escenarios,
+12/12páginas por alcance. Restan humano/adaptación, Ken pendiente, documentación/
+accesibilidad/detalles y controles finales; global no verde.17:01:34–17:19:51UTC,
+18min17s hasta corte; documentación/checkpoint posteriores aparte.
