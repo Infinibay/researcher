@@ -1,0 +1,95 @@
+{
+  "base_commit": "14abcd2",
+  "initial_audit_exit": 2,
+  "initial_license_missing": "khroma2.1.0 lacks package.json license; exact archive has complete MIT license",
+  "final_license_inventory": {
+    "python_versions": 164,
+    "frontend_entries": 528,
+    "missing": 0,
+    "needs_review": 0,
+    "unavailable": 0,
+    "compatibility_approval": false
+  },
+  "ken_initial_fresh_admission": {
+    "installed": {
+      "ken-rank": "0.18.0",
+      "tree-sitter-language-pack": "1.25.0"
+    },
+    "admitted": false,
+    "error_type": "ValueError",
+    "error": "Ken must be the isolated published ken-rank==0.18.0 installation"
+  },
+  "ken_changed_pin": {
+    "tree-sitter-language-pack": [
+      "1.25.0",
+      "1.22.1"
+    ]
+  },
+  "other_ken_versions_unchanged": 71,
+  "fresh_environment_python": "3.13.18",
+  "fresh_packages_compatible": 72,
+  "parser_resources": 372,
+  "actual_loaded_languages": [
+    "python",
+    "javascript",
+    "typescript",
+    "tsx",
+    "go",
+    "rust",
+    "java",
+    "c",
+    "dart"
+  ],
+  "mcp_positive_negative_test_discovery": true,
+  "fresh_mcp_exit": -15,
+  "source_unchanged": true,
+  "model_turns": 0,
+  "new_auditor_tests": {
+    "red": 2,
+    "previous_passed": 12,
+    "green": 14
+  },
+  "known_advisory_scope_counts": {
+    "Ken_ONNX": {
+      "entries": 19,
+      "distinct_ids": 12
+    },
+    "Chroma": {
+      "entries": 5,
+      "distinct_ids": 4
+    }
+  },
+  "registry": {
+    "observed_at": "2026-11-08T11:38:28.329936+00:00",
+    "ken-rank": {
+      "version": "0.18.0",
+      "requires_python": ">=3.11",
+      "relevant_requires_dist": [
+        "onnx==1.20.1"
+      ],
+      "source": "https://pypi.org/pypi/ken-rank/json"
+    },
+    "onnx": {
+      "version": "1.23.2",
+      "requires_python": ">=3.10",
+      "relevant_requires_dist": [],
+      "source": "https://pypi.org/pypi/onnx/json"
+    },
+    "chromadb": {
+      "version": "1.5.9",
+      "requires_python": ">=3.9",
+      "relevant_requires_dist": [
+        "onnxruntime>=1.14.1"
+      ],
+      "source": "https://pypi.org/pypi/chromadb/json"
+    }
+  },
+  "product_backend_unchanged": true,
+  "current_product_wheel_sha256": "146cd005e819b69dda9c0bd9331bd4833496250110603c3728a664163f6927fe",
+  "limits": [
+    "Python3.13 was used for the separate Ken tool only; product Python3.13 matrix remains unverified",
+    "Known ONNX/Chroma advisories remain, not waived by isolation",
+    "Complete shipped-asset notices/native/model coverage not inferred from registry declarations",
+    "No sibling Ken edits/publication or deployment; previous coherent ONNX1.23.2 candidate proof reused as pointer only"
+  ]
+}

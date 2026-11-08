@@ -1,0 +1,25 @@
+{
+  "observed_at": "2026-11-08T11:38:28.329936+00:00",
+  "ken-rank": {
+    "version": "0.18.0",
+    "requires_python": ">=3.11",
+    "relevant_requires_dist": [
+      "onnx==1.20.1"
+    ],
+    "source": "https://pypi.org/pypi/ken-rank/json"
+  },
+  "onnx": {
+    "version": "1.23.2",
+    "requires_python": ">=3.10",
+    "relevant_requires_dist": [],
+    "source": "https://pypi.org/pypi/onnx/json"
+  },
+  "chromadb": {
+    "version": "1.5.9",
+    "requires_python": ">=3.9",
+    "relevant_requires_dist": [
+      "onnxruntime>=1.14.1"
+    ],
+    "source": "https://pypi.org/pypi/chromadb/json"
+  }
+}

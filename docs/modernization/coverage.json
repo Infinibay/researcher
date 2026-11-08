@@ -5610,14 +5610,15 @@
         "docs/modernization/dependency-reader-review.md",
         "docs/modernization/dependency-reader-results.json",
         "docs/modernization/dependency-reader-audit.json",
-        "docs/modernization/dependency-reader-registry.json"
+        "docs/modernization/dependency-reader-registry.json",
+        "docs/modernization/dependencies-final-review.md",
+        "docs/modernization/dependencies-final-results.json",
+        "docs/modernization/dependencies-final-evidence/initial-summary.json",
+        "docs/modernization/dependencies-final-evidence/ken-after-lock.json"
       ],
       "remaining": [
-        "Ken0.18.0 exact ONNX pin, corrected-release compatibility and reachability",
-        "Aggregate resource limits and remaining Chroma reader security scope",
-        "Actual release compatibility/source availability and complete notices, including two frontend packages missing license text",
-        "Publish/observe automation only at authorized integration",
-        "Broader security scenarios and final independent review"
+        "Adopt a coherent Ken/ONNX distribution or complete per-advisory reachability/mitigation decisions; actual published pin remains1.20.1",
+        "Chroma aggregate memory/process bounds and parent SQLite snapshot security scope; official1.5.9 has no corrected release in current metadata"
       ],
       "reader_mitigation": "Disable persisted embedding descriptors only in the disposable reader copy before Chroma imports; raw configuration and text/metadata retained.14directed tests and installed end-to-end105record import/HTTP pass, no model/embedding calls. Known package advisories remain visible; no incompatible ONNX override or version change. Frontend audit tool-path/parser-label errors retained alongside verified raw npm exit0/report."
     },
@@ -5777,12 +5778,16 @@
         "docs/modernization/license-inventory.json",
         "docs/modernization/license-artifact-reviews.json",
         "THIRD_PARTY_NOTICES.md",
-        "docs/modernization/interaction-dependency-review.json"
+        "docs/modernization/interaction-dependency-review.json",
+        "docs/modernization/dependencies-final-review.md",
+        "docs/modernization/dependencies-final-results.json",
+        "docs/modernization/dependencies-final-evidence/licenses.json"
       ],
       "remaining": [
-        "Consolidate Mermaid and113new lock entries into distribution inventory/notices; khroma missing-lock license was checked against the installed MIT license file",
-        "Verify final frontend/backend upgrade compatibility, including already-open older clients and structured question options"
-      ]
+        "Actual final shipped-asset notices, native/fonts/models and concrete distribution compatibility; declarations alone do not approve compatibility",
+        "Product Python3.13 and final wheel/sdist notice bytes, complete frontend/backend older-client/global acceptance"
+      ],
+      "current_inventory_scope": "164Python versions/528frontend entries,0missing/unavailable/needs_review. Khroma exact npm MIT archive/file review bound bySHA; inventory collector14tests. Not compatibility approval."
     },
     "aggregate_kernel_resources": {
       "status": "in_progress",
@@ -6475,6 +6480,17 @@
         "docs/modernization/nonempty-closure-results.json",
         "evals/operation/project_closure_page.py",
         "frontend/tests/project-closure.e2e.mjs"
+      ],
+      "remaining": []
+    },
+    "fresh_ken_locked_installation": {
+      "status": "verified",
+      "scope": "Fresh hash-locked72-packagePython3.13 tool environment, corrected wrapper1.22.1 bound to exact372parser archive; offline preparation,9languages and actual MCP callers/tests pass. Product Python3.13 matrix separate.",
+      "evidence": [
+        "docs/modernization/dependencies-final-review.md",
+        "docs/modernization/dependencies-final-results.json",
+        "docs/modernization/dependencies-final-evidence/ken-red.json",
+        "docs/modernization/dependencies-final-evidence/ken-live.json"
       ],
       "remaining": []
     }

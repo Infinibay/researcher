@@ -1861,15 +1861,17 @@ tree-sitter-javascript==0.25.0 \
     --hash=sha256:dfcf789064c58dc13c0a4edb550acacfc6f0f280577f1e7a00de3e89fc7f8ddc \
     --hash=sha256:e5ed840f5bd4a3f0272e441d19429b26eedc257abe5574c8546da6b556865e3c
     # via ken-rank
-tree-sitter-language-pack==1.25.0 \
-    --hash=sha256:17862646e7ca85d67ac0704da9494960df66c845c74ed617746608448a94ea03 \
-    --hash=sha256:40237b76d66327e4ed42dce56b49542830375688e2ed6c70b58560a0f0deb47e \
-    --hash=sha256:537d5237a1392cd665ccd82d45eb4b3697d1094e99fc0d5f366feafcc6f95aff \
-    --hash=sha256:5b42dd79f23e6641e0c9f0e37776a84c7c2d304bf0b342fc52f7d1548108bfd0 \
-    --hash=sha256:8dc0dcdf9ec0570c4b25fc81061c2b1f3e14d90703b3aeb4acc894c55d036ac3 \
-    --hash=sha256:b353f9e311f222b004606ddfa6f573d878872287a3038fe5cc1a09a2648da901 \
-    --hash=sha256:d29fc400eb0e95a7d5bbaf7a3abe8daff379183c6103bb80a66c9ddd9a2abaa0
-    # via ken-rank
+tree-sitter-language-pack==1.22.1 \
+    --hash=sha256:34e4e7a77d02d102abf95c7b088962fcd56825bd48eabbe80f93e1d43665e7ad \
+    --hash=sha256:624d90afb8b210584bdcb871935385035872eeb12b26e41f487c0c8e1cab350b \
+    --hash=sha256:852a0129463a94f898dda2aa9616fb19e598d9a0a9d3024ec9dc2bffb3fa7945 \
+    --hash=sha256:8a476b71c2f6c71f23b0b63f5ff6f72a8ba2c11901db63c360ebcaf1fc51af5c \
+    --hash=sha256:b85116c8a8d7bbdca2e1be8068d6c3d4f0ac66e95b3310a6dbdd21fc87332323 \
+    --hash=sha256:d34a528bdd845d024c42da3fa43495c5d51c66151597ea6e46a1e9d79d863e89 \
+    --hash=sha256:e0cba16312890fc7747da5fb5edb7aabfc68aac7db0ebab5212986a67cd01ed4
+    # via
+    #   -r requirements-ken.in
+    #   ken-rank
 tree-sitter-python==0.25.0 \
     --hash=sha256:0fbf6a3774ad7e89ee891851204c2e2c47e12b63a5edbe2e9156997731c128bb \
     --hash=sha256:14a79a47ddef72f987d5a2c122d148a812169d7484ff5c75a3db9609d419f361 \

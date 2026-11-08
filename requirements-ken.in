@@ -1,2 +1,5 @@
 # Isolated published MCP tool; never install its dependencies into the API venv.
 ken-rank==0.18.0
+
+# Match the grammar wrapper and verified parser archive admitted by the runtime.
+tree-sitter-language-pack==1.22.1

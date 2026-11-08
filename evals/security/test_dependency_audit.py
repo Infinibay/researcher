@@ -40,11 +40,14 @@ def test_missing_auditor_is_an_error(tmp_path):
     assert receipt == {"status": "error", "error": "FileNotFoundError"}
 
 
-def npm_archive(*, version="1.0.0", linked=False, archive_root="package"):
+def npm_archive(*, version="1.0.0", linked=False, archive_root="package", declared=True, license_text=None):
     """Build a real registry-shaped archive without installing or executing its contents."""
     output = io.BytesIO()
     with tarfile.open(fileobj=output, mode="w:gz") as archive:
-        content = json.dumps({"name": "example", "version": version, "license": "MIT"}).encode()
+        manifest = {"name": "example", "version": version}
+        if declared:
+            manifest["license"] = "MIT"
+        content = json.dumps(manifest).encode()
         member = tarfile.TarInfo(f"{archive_root}/package.json")
         member.size = len(content)
         if linked:
@@ -52,6 +55,10 @@ def npm_archive(*, version="1.0.0", linked=False, archive_root="package"):
             member.linkname = "/etc/passwd"
             member.size = 0
         archive.addfile(member, None if linked else io.BytesIO(content))
+        if license_text is not None:
+            member = tarfile.TarInfo(f"{archive_root}/license")
+            member.size = len(license_text.encode())
+            archive.addfile(member, io.BytesIO(license_text.encode()))
     return output.getvalue()
 
 
@@ -107,3 +114,22 @@ def test_python_source_license_review_is_bound_to_artifact_bytes(tmp_path, monke
     assert row["status"] == ("reviewed_artifact" if review_matches else "needs_review")
     assert bool(row.get("expression")) == review_matches
     assert row["artifact"]["license_files"][0]["text"] == license_text
+
+
+@pytest.mark.parametrize("review_matches", [True, False])
+def test_npm_missing_declaration_uses_only_an_exact_reviewed_license_file(tmp_path, monkeypatch, review_matches):
+    """A license file can supply reviewed evidence without a manifest field; a stale artifact review must not approve it."""
+    license_text = "The MIT License (MIT)\nCopyright fixture; permission and notice conditions retained.\n"
+    content = npm_archive(declared=False, license_text=license_text)
+    digest = hashlib.sha256(content).hexdigest()
+    reviews = tmp_path / "docs/modernization/license-artifact-reviews.json"
+    reviews.parent.mkdir(parents=True)
+    reviews.write_text(json.dumps([{"name": "example", "version": "1.0.0", "artifact_sha256": digest if review_matches else "0" * 64,
+        "member": "package/license", "member_sha256": hashlib.sha256(license_text.encode()).hexdigest(), "expression": "MIT"}]))
+    monkeypatch.setattr(audit, "ROOT", tmp_path)
+    monkeypatch.setattr(audit, "fetch_license_bytes", lambda url: content)
+    pin = {"version": "1.0.0", "resolved": "https://registry.npmjs.org/example/-/example-1.0.0.tgz",
+        "integrity": "sha512-" + base64.b64encode(hashlib.sha512(content).digest()).decode()}
+    row = audit.npm_license(("node_modules/example", pin))
+    assert row["status"] == ("reviewed_artifact" if review_matches else "needs_review")
+    assert bool(row.get("expression")) == review_matches

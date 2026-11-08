@@ -1,0 +1,9 @@
+{
+  "installed": {
+    "ken-rank": "0.18.0",
+    "tree-sitter-language-pack": "1.25.0"
+  },
+  "admitted": false,
+  "error_type": "ValueError",
+  "error": "Ken must be the isolated published ken-rank==0.18.0 installation"
+}

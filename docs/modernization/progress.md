@@ -9287,3 +9287,15 @@ instalada sin cambiar16tablas/fuentes.4peerscerrados, dominio retirado. Esquema7
 **42/43escenarios**,11/12páginas; U08/Proyectos/AuthorityBusysiguen abiertos.
 Siguiente: dependencias/distribución ylicencias con estado final del árbol; después
 prompts/inversas/global/revisiónfinal. DD145al final; sin push/merge/despliegue.
+
+## 2026-11-08 — lock Ken ylicencias de árbol actual
+
+Base14abcd2,11:35:21–11:54:49UTC,19min28s. [Alcance](dependencies-final-review.md):
+instalación limpia reproduce wrapper1.25rechazado; pin1.22.1corrige pareja admitida,
+otras71versiones iguales.72paquetes compatibles,372recursos/9parsers/MCPpositivos/
+negativos/tests,0generativos. Inventario164Python/528frontend,0ausencias/errores/
+revisiones pendientes;KhromaMITarchivo exacto,2RED→14tests. Auditoríanoverde:
+ONNX19entradas/12IDs yChroma5/4siguen. PruebaONNXcandidateprevia no repetida.
+Sin cambio de backend; avisos apuntan al inventario nuevo yexigen verificar bytes
+al próximo empaque.42/43escenarios,11/12páginas. Siguiente matrizPython3.13y
+artefactos; residualKen/Chroma ylosgatesfinales siguen principales.

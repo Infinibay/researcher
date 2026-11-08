@@ -20,5 +20,16 @@
     "reviewer": "Codex, 2026-11-07",
     "scope": "Observed license of this exact source distribution; not a review of every bundled component or platform wheel.",
     "version": "0.2.1"
+  },
+  {
+    "name": "khroma",
+    "version": "2.1.0",
+    "artifact_url": "https://registry.npmjs.org/khroma/-/khroma-2.1.0.tgz",
+    "artifact_sha256": "8963d209f3a682374d7f7e45e5fa361a58fc060c8528df6656fae0fc7c508110",
+    "member": "package/license",
+    "member_sha256": "66b333b0f66759a0b710459e03f7029abe17f4358114a128d2c972e642961b49",
+    "expression": "MIT",
+    "reviewer": "Codex, 2026-11-08",
+    "scope": "Observed complete MIT license/copyright/permission/notice/warranty text in this exact integrity-verified npm archive, despite absent package.json license field. No general compatibility or other-asset approval."
   }
 ]

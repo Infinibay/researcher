@@ -1,0 +1,71 @@
+{
+  "generative_turns": 0,
+  "grammars": {
+    "cache": "/home/andres/.codex/worktrees/b09e/researcher/.superpowers/sdd/2026-10-31-actualizacion-proyecto/ken-locked-repro-env/share/researcher-ken-cache",
+    "version": "1.22.1",
+    "files": 372,
+    "bytes": 521163488,
+    "fingerprint": "eba2539144b0353bbdff609fd798e62d6d728ef8df78b1e71469046b88e74d2e"
+  },
+  "status": "verified",
+  "prepare_exit": 0,
+  "parser_exit": 0,
+  "parsers": {
+    "languages": {
+      "python": true,
+      "javascript": true,
+      "typescript": true,
+      "tsx": true,
+      "go": true,
+      "rust": true,
+      "java": true,
+      "c": true,
+      "dart": true
+    },
+    "network_namespace": "net:[4026533716]"
+  },
+  "analyses": [
+    {
+      "ok": true,
+      "qualname": "list_observations",
+      "file": "observations.py",
+      "language": "python",
+      "min_confidence": 0.0,
+      "callers": [
+        {
+          "from_qualname": "summarize",
+          "file": "observations.py",
+          "line": 7,
+          "confidence_tier": "T1"
+        },
+        {
+          "from_qualname": "test_order",
+          "file": "test_observations.py",
+          "line": 5,
+          "confidence_tier": "T1"
+        }
+      ]
+    },
+    {
+      "ok": true,
+      "qualname": "unrelated",
+      "file": "observations.py",
+      "language": "python",
+      "min_confidence": 0.0,
+      "callers": []
+    },
+    {
+      "ok": true,
+      "path": "observations.py",
+      "tests": [
+        {
+          "path": "test_observations.py",
+          "reason": "imports target; named for target",
+          "score": 4.0
+        }
+      ]
+    }
+  ],
+  "mcp_exit": -15,
+  "source_unchanged": true
+}

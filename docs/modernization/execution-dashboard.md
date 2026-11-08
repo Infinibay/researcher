@@ -28,24 +28,24 @@ que se pueda comparar el avance; no presentar microajustes como tareas principal
 - Última suite global: `9fb873c`,2210 casos,2178 pasan,31 fallan y1 error de fixture; sin omisiones. La carrera de backup encontrada se corrigió después con40 pruebas instaladas. No se declara una nueva corrida global verde; la referencia `0c8b8d9` queda como evidencia histórica.
 - U01–U07, E01–E12, C01–C09 y D01–D13 quedan comprobados con el alcance de sus matrices; sigue 1 de 43 escenarios amplios sin aceptación completa en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Estado actual: C10verificado; sigue distribución/dependencias
+## Estado actual: instalación Ken corregida; matriz de distribución en curso
 
-**11:25:46–11:32:10UTC,6min24s hasta verificar/inspeccionar**, base9280815.
-[Alcance](c10-independent-review.md). Documentación/checkpoint excluidos.
+**11:35:21–11:54:49UTC,19min28s hasta verificar**, base14abcd2.
+[Alcance](dependencies-final-review.md). Documentación/checkpoint excluidos.
 
-- Terminado: **11/12páginas y42/43escenarios**. C10entrega50EURen la pregunta
-  durable, bloquea volumenambiguo sin prioridad inventada.1turno31.358s/52431tokens
-  observados, despacho unknownconservado;2estados/6checks de sólo lectura.52fuente/
-  49instaladas pasan. Ciencia: entrega real,5/6criterios y1parcial, no U08aceptado.
-- En curso: **dependencias/distribución/licencias**, revisión gruesa sobre el árbol
-  actual. Reutilizar recibos; no otra instalación si no cambia producto.
-- Pendiente: Proyectos/AuthorityBusy (no corregido); U08 yresto de evaluación
-  de comunicación/perfiles; distribución/dependencias, prompts, inversas71,
-  global y revisión final. Sin historial de usuario que migrar.
-- Última global31fallos/1error; prompts al último corte67de85desactualizados/
-  318archivos. No se declara globalverde. U08esel escenario amplio restante.
-- Detalles al final: DD145y anteriores; lint/fechas/enums/densidad/accesibilidad
-  completa. Sin porcentaje/ETA global inventados, push o merge.
+- Terminado: **11/12páginas y42/43escenarios**. Nuevo hostKen desde lock corregido:
+ 72paquetes,372recursos/9parsers/MCP reales,0generativos. Licencias164Python/
+ 528frontend con0ausencias/errores/pendientes,14tests del auditor.
+- En curso: **matrizPython3.13 yartefactos de distribución** deResearcher; lo
+  anterior sólo acredita esePythonparaKen. Verificar avisos actuales en wheel/sdist.
+- Pendiente: adopción coherenteKen/ONNXo evaluación residual por aviso; Chroma/
+  límites agregados. Proyectos/AuthorityBusy sin corregir;U08/humano/otrosperfiles;
+  prompts, inversas71, global yrevisiónfinal. Sin historial que migrar.
+- Auditoría noverde: ONNX19entradas/12IDs,Chroma5/4. Última global31fallos/1error;
+  prompts al último corte67de85desactualizados/318archivos. U08esel escenario
+  amplio restante; estas fracciones no son porcentaje global de finalización.
+- Detalles al final: DD145y anteriores, notices del bundle/lint/fechas/enums/
+  densidad/accesibilidad completa. Sin push,merge odespliegue.
 
 ## Etapa anterior: Ken estructural offline verificado; continúa aceptación de páginas
 

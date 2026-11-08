@@ -1,0 +1,85 @@
+{
+  "auditor": "pip-audit==2.10.1",
+  "exit_code": 2,
+  "licenses": {
+    "compatibility_review": "pending",
+    "missing": 1,
+    "needs_review": 0,
+    "unavailable": 0
+  },
+  "observed_at": "2026-11-08T11:38:27.145602+00:00",
+  "scope": "All registry versions in committed locks, including optional/platform variants",
+  "scopes": {
+    "frontend/package-lock.json": {
+      "advisory_entries": 0,
+      "advisory_ids": [],
+      "exit_code": 0,
+      "input_sha256": "452af37508808b9ffe1ecc2fd98a325e1bf9d751e3e844d92cd4d23187ec7603",
+      "skipped": [],
+      "status": "clean"
+    },
+    "requirements-ken.txt": {
+      "advisory_entries": 19,
+      "advisory_ids": [
+        "CVE-2026-115919",
+        "CVE-2026-115920",
+        "CVE-2026-115921",
+        "CVE-2026-115922",
+        "PYSEC-2026-103",
+        "PYSEC-2026-104",
+        "PYSEC-2026-2239",
+        "PYSEC-2026-2240",
+        "PYSEC-2026-2241",
+        "PYSEC-2026-2689",
+        "PYSEC-2026-3587",
+        "PYSEC-2026-3876"
+      ],
+      "exit_code": 1,
+      "input_sha256": "4516cc7c71ed86c7b670e13ac3a50128cba399f4ad9b0978e8a15c822311fef4",
+      "packages": 72,
+      "skipped": [],
+      "status": "vulnerable"
+    },
+    "scripts/export_legacy_chroma.py.lock": {
+      "advisory_entries": 5,
+      "advisory_ids": [
+        "PYSEC-2026-311",
+        "PYSEC-2026-3813",
+        "PYSEC-2026-3814",
+        "PYSEC-2026-3815"
+      ],
+      "exit_code": 1,
+      "input_sha256": "c58002cb830c32611ff7fc0926cd0b03ea3d2aa019bd3f970e6d96080f1815e6",
+      "packages": 87,
+      "skipped": [],
+      "status": "vulnerable"
+    },
+    "scripts/infinibay_mcp_server.py.lock": {
+      "advisory_entries": 0,
+      "advisory_ids": [],
+      "exit_code": 0,
+      "input_sha256": "9cce5b656df473193382ddb25d9954b63551c3ae257c178472726cddb48d2521",
+      "packages": 30,
+      "skipped": [],
+      "status": "clean"
+    },
+    "scripts/researcher_mcp_server.py.lock": {
+      "advisory_entries": 0,
+      "advisory_ids": [],
+      "exit_code": 0,
+      "input_sha256": "9cce5b656df473193382ddb25d9954b63551c3ae257c178472726cddb48d2521",
+      "packages": 30,
+      "skipped": [],
+      "status": "clean"
+    },
+    "uv.lock": {
+      "advisory_entries": 0,
+      "advisory_ids": [],
+      "exit_code": 0,
+      "input_sha256": "c8900b3fbda10dcf7c7c4ea98625b1a7020c08c8706bac2f03863313ca117ab4",
+      "packages": 85,
+      "skipped": [],
+      "status": "clean"
+    }
+  }
+}

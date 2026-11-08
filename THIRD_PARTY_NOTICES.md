@@ -36,7 +36,7 @@ inventory command. This is evidence collection, not an automatic compatibility
 decision. `--licenses` includes the same checks in the full vulnerability audit.
 
 The current evidence and specific source reviews live in
-`docs/modernization/license-inventory.json` and
+`docs/modernization/dependencies-final-evidence/licenses.json` and
 `docs/modernization/license-artifact-reviews.json`. A changed lock requires a new
 inventory. A changed reviewed artifact requires a new review.
 

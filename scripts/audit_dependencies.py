@@ -60,6 +60,20 @@ def license_archive_members(content):
     return selected
 
 
+
+def artifact_review(name, version, digest, members):
+    """Reuse a manual license decision only for the exact package archive and license-file bytes reviewed."""
+    path = ROOT / "docs/modernization/license-artifact-reviews.json"
+    reviews = json.loads(path.read_text()) if path.exists() else []
+    for review in reviews:
+        if (review["name"], review["version"], review["artifact_sha256"]) != (name, version, digest):
+            continue
+        text = members.get(review["member"])
+        if text is not None and hashlib.sha256(text.encode()).hexdigest() == review["member_sha256"]:
+            return review
+    return None
+
+
 def npm_license(item):
     """Fill a missing npm lock declaration from the exact integrity-verified package archive."""
     path, pin = item
@@ -87,9 +101,17 @@ def npm_license(item):
             declaration = declaration.get("type")
         if not isinstance(declaration, str) or not declaration.strip():
             declaration = None
+        digest = hashlib.sha256(content).hexdigest()
         row.update(declaration=declaration, source=pin["resolved"],
-                   artifact_sha256=hashlib.sha256(content).hexdigest(),
+                   artifact_sha256=digest,
                    status="declared_artifact" if declaration else "missing")
+        if declaration is None:
+            files = {name: text for name, text in members.items() if Path(name).name != "package.json"}
+            review = artifact_review(package["name"], package["version"], digest, files)
+            if review is not None:
+                row.update(expression=review["expression"], status="reviewed_artifact", review=review)
+            elif files:
+                row["status"] = "needs_review"
     except (OSError, ValueError, KeyError, TypeError, tarfile.TarError) as exc:
         row.update(status="unavailable", error=f"{type(exc).__name__}: {exc}")
     return row
@@ -108,14 +130,10 @@ def python_artifact_license(row, releases):
     files = [{"path": path, "sha256": hashlib.sha256(text.encode()).hexdigest(), "text": text}
              for path, text in sorted(members.items())]
     row["artifact"] = {"url": artifact["url"], "sha256": digest, "license_files": files}
-    reviews_path = ROOT / "docs/modernization/license-artifact-reviews.json"
-    reviews = json.loads(reviews_path.read_text()) if reviews_path.exists() else []
-    for review in reviews:
-        if (review["name"], review["version"], review["artifact_sha256"]) != (row["name"], row["version"], digest):
-            continue
-        if any(file["path"] == review["member"] and file["sha256"] == review["member_sha256"] for file in files):
-            row.update(expression=review["expression"], status="reviewed_artifact", review=review)
-            return
+    review = artifact_review(row["name"], row["version"], digest, members)
+    if review is not None:
+        row.update(expression=review["expression"], status="reviewed_artifact", review=review)
+        return
     row["status"] = "needs_review" if files else "missing"
 
 
