@@ -6010,15 +6010,18 @@
     },
     "native_preparation_reliability": {
       "status": "in_progress",
-      "scope": "Repeated real host preparation failures before inference: AuthorityConflict and AuthorityBusy; original peers closed, reservations preserved",
+      "scope": "Original real preparation contention remains unreproduced; closure explanation and safe operator diagnostics verified from clean installed wheel,97passing cases,0skips; four guarded preparations send0turns",
       "evidence": [
         "docs/modernization/projects-page-review.md",
         "docs/modernization/projects-page-results.json",
-        "docs/superpowers/plans/2026-11-08-native-preparation-contention.md"
+        "docs/superpowers/plans/2026-11-08-native-preparation-contention.md",
+        "docs/modernization/native-preparation-review.md",
+        "docs/modernization/native-preparation-results.json",
+        "docs/modernization/native-preparation-packaging.json",
+        "docs/modernization/native-preparation-docstrings.json"
       ],
       "remaining": [
         "Reproduce and fix demonstrated contention without ignoring authority locks or replaying uncertain effects",
-        "Differentiate preparation failure from unconfirmed closure in owner issue messages",
         "Record actual Ken query/result evidence in the verification harness"
       ]
     }

@@ -45,6 +45,25 @@ __all__ = ["RuntimeService", "WorkspaceRegistry"]
 logger = logging.getLogger(__name__)
 
 
+def _failure_sites(error):
+    """Locate bounded internal failure frames and causes without logging messages, paths, source lines or locals."""
+    sites, seen = [], set()
+    while error is not None and id(error) not in seen and len(sites) < 4:
+        seen.add(id(error))
+        frames, trace = [], error.__traceback__
+        while trace is not None:
+            frame = trace.tb_frame
+            module = frame.f_globals.get("__name__", "")
+            if module.startswith("backend."):
+                frames.append(f"{module}.{frame.f_code.co_name}:{trace.tb_lineno}")
+            trace = trace.tb_next
+        sites.append({"type": type(error).__name__, "sites": frames[-4:]})
+        error = error.__cause__ or (
+            None if error.__suppress_context__ else error.__context__
+        )
+    return sites
+
+
 @dataclass
 class _Worker:
     spec: object
@@ -825,7 +844,7 @@ class RuntimeService:
             finally:
                 self._workers.pop(run_id, None)
 
-    async def _note_issue(self, run, code, *, attempt_id=None, inference_started=False, limit=None, resources=None, project_budget=None):
+    async def _note_issue(self, run, code, *, attempt_id=None, inference_started=False, closure_confirmed=False, limit=None, resources=None, project_budget=None):
         """Persist a safe, actionable owner explanation for this original run."""
         messages = {
             "legacy_owner_active": (
@@ -891,6 +910,16 @@ class RuntimeService:
         }
         message, action = messages[code]
         details = {}
+        if code == "runtime_failed":
+            details["closure_confirmed"] = closure_confirmed
+            if closure_confirmed:
+                if inference_started is False:
+                    message = "No se pudo completar la preparación. No se inició inferencia y se comprobó el cierre de los procesos."
+                else:
+                    message = "La ejecución falló y se comprobó el cierre de sus procesos."
+                    if inference_started is None:
+                        message += " No se pudo confirmar si se inició inferencia."
+                message += " Conservamos el trabajo y los recibos guardados; revisa el intento y su presupuesto antes de continuar. No se repetirá por su cuenta."
         if project_budget is not None:
             message = (
                 "No se inició un turno nuevo: el proyecto tiene "
@@ -1125,6 +1154,7 @@ class RuntimeService:
         execution_limit = None
         project_budget = None
         resource_observation = None
+        closure_confirmed = False
         runtime_opened = False
         dispatch_reserved = native_started = False
         code_review = review_confirmed = False
@@ -1326,7 +1356,7 @@ class RuntimeService:
                 execution_limit = exc
             if isinstance(exc, ProjectBudgetExhausted):
                 project_budget = exc.budget
-            logger.warning("Research run stopped (%s)", error_type)
+            logger.warning("Research run stopped (%s; locations=%s)", error_type, _failure_sites(exc))
         finally:
             # Both peers have exited their owning worker scope before any final
             # retirement assertion. The grant gate closes even if SQL is busy.
@@ -1386,7 +1416,8 @@ class RuntimeService:
                         runtime_closed = (
                             consume_closure(lease) is True or runtime_closed
                         )
-                    if not peers_closed or not runtime_closed or not tools_closed:
+                    closure_confirmed = peers_closed and runtime_closed and tools_closed
+                    if not closure_confirmed:
                         await asyncio.to_thread(
                             self.store.uncertain_inference,
                             lease,
@@ -1521,6 +1552,7 @@ class RuntimeService:
                             else None
                             if dispatch_reserved
                             else False,
+                            closure_confirmed=closure_confirmed,
                             limit=execution_limit,
                             project_budget=project_budget,
                         )

@@ -335,6 +335,7 @@ async def test_a_changed_task_type_supersedes_queued_work_before_retry(
 async def test_start_explanation_distinguishes_no_dispatch_from_unknown_and_observed_inference(
     service_setup, stage
 ):
+    """Keep inference uncertainty separate from the independently observed closure of the original peers."""
     import json
     from contextlib import asynccontextmanager
     from dataclasses import asdict
@@ -360,6 +361,13 @@ async def test_start_explanation_distinguishes_no_dispatch_from_unknown_and_obse
         assert result.issue["code"] == "runtime_failed"
         expected = False if stage == "setup" else True if stage == "started" else None
         assert result.issue["inference_started"] is expected
+        assert result.issue["closure_confirmed"] is (stage != "setup")
+        if stage != "setup":
+            assert "cierre no confirmado" not in result.issue["message"]
+            assert "No se pudo confirmar el cierre" not in result.issue["message"]
+            assert "se comprobó el cierre" in result.issue["message"]
+        if stage == "dispatch_unknown":
+            assert "No se pudo confirmar si se inició inferencia" in result.issue["message"]
         assert "PRIVATE_DIAGNOSTIC" not in json.dumps(asdict(result))
         assert result.status in ("failed", "reconciling")
         assert (

@@ -8675,3 +8675,33 @@ esa preparación fallida de cierre desconocido. Es trabajo principal.
 luego cerrar Proyectos y seguir páginas. Ken está configurado y sus peers fueron
 preparados, pero este harness normal no registra consultas/resultados por nombre;
 no equiparar eso ni la prosa del modelo con su verificación. DD123/124 al final.
+
+
+## Preparation diagnosis and truthful closure, 2026-11-08
+
+Block00:49:17–01:02:11UTC,12m54s until verification, baseee39fd2. Original Projects
+contention remains unreproduced and unfixed. Four isolated real Codex/Ken startup
+probes reached an explicit generation guard, sent0turns and closed all peers;
+three use the prior artifact/default pytest loop, one the clean updated artifact
+and uvloop. No result is a generated Spanish plan or a verified Ken query.
+
+Runtime failure feedback now retains closure_confirmed separately from observed,
+unknown or absent inference. Real empty-domain failure closes safely and reports
+failed preparation with no inference; reserved dispatch retains uncertainty.
+Operator logs retain bounded internal frame locations and cause types without
+private exception messages/paths/source/locals. Four RED→GREEN cases;97installed
+selected cases pass,0skips;7changed definitions have English docstrings. Exact
+wheel/install/source comparison covers676Python/SQL files; uv pip check/Ruff pass.
+
+Direct checkout wheel construction accidentally reintroduced306retired sources
+from old build output. Content verification rejected it before tests or serving.
+Rebuilt sdist+wheel using the documented clean path, replaced the installation,
+proved the exact installed tree contains no retired sources. Original Projects
+run rows remain identical to their prior receipt, with1native start and0live peers
+or grants. Do not reuse the rejected preparation-diagnostics-dist artifact.
+
+41/43scenarios and0/12whole pages remain the actual totals. Next: finish native
+preparation diagnosis from a demonstrated caller; then actual Spanish/Ken evidence,
+Proyectos and11remaining pages, U08/C10/evaluations,dependencies/distribution.
+Fine details, global suite and independent review remain last. See
+native-preparation-review.md/results.json/packaging.json/docstrings.json.

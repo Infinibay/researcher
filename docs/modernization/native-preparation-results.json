@@ -1,0 +1,108 @@
+{
+  "base_commit": "ee39fd2",
+  "started_at": "2026-11-08T00:49:17Z",
+  "verified_at": "2026-11-08T01:02:11Z",
+  "seconds_until_verification": 774,
+  "status": "closure_explanation_and_safe_diagnostics_verified_contention_open",
+  "original_contention_reproduced": false,
+  "contention_root_cause_known": false,
+  "production_changes": [
+    "Persist inference observation independently of confirmed closure for runtime_failed",
+    "Explain failed preparation without claiming closure is unknown when it is proven",
+    "Record bounded internal exception locations/causes without private messages, paths, source lines or locals"
+  ],
+  "red_cases": 4,
+  "focused_green_cases": 4,
+  "installed_selection": {
+    "cases": 97,
+    "passed": 97,
+    "failed": 0,
+    "skipped": 0,
+    "backend_modules": 230,
+    "all_backend_imports_from_native_env": true,
+    "seconds": 48.811,
+    "exit_code": 0
+  },
+  "installed_exact_tree": {
+    "python_sql_files": 676,
+    "matches_clean_wheel": true,
+    "retired_sources_present": 0
+  },
+  "dependency_check": "passed, 83 installed distributions compatible",
+  "ruff": "passed",
+  "git_diff_check": "passed",
+  "documented_changed_definitions": 7,
+  "probes": [
+    {
+      "receipt": "native-preparation-probe.json",
+      "source_receipt_sha256": "59d4a57893636abca894e087e70a5fa6aef355719c23b359b2389ad600527b12",
+      "loop": "default_pytest_loop",
+      "artifact": "interaction-policy-final-dist",
+      "reached_generation_guard": true,
+      "native_starts": 0,
+      "unclosed_peers": 0,
+      "expected_deliberately_failed_run": true,
+      "unexpected_authority_exception": false
+    },
+    {
+      "receipt": "native-preparation-probe-1.json",
+      "source_receipt_sha256": "7610e1940f7976858312a58f520bf0f4327d183bde54a06b5978c17fc1ea33ea",
+      "loop": "default_pytest_loop",
+      "artifact": "interaction-policy-final-dist",
+      "reached_generation_guard": true,
+      "native_starts": 0,
+      "unclosed_peers": 0,
+      "expected_deliberately_failed_run": true,
+      "unexpected_authority_exception": false
+    },
+    {
+      "receipt": "native-preparation-probe-2.json",
+      "source_receipt_sha256": "7610e1940f7976858312a58f520bf0f4327d183bde54a06b5978c17fc1ea33ea",
+      "loop": "default_pytest_loop",
+      "artifact": "interaction-policy-final-dist",
+      "reached_generation_guard": true,
+      "native_starts": 0,
+      "unclosed_peers": 0,
+      "expected_deliberately_failed_run": true,
+      "unexpected_authority_exception": false
+    },
+    {
+      "receipt": "native-preparation-probe-3.json",
+      "source_receipt_sha256": "52295c217e3deab8bf7ad57f9bff5594b2f9f79fc1dddfc88e93c9b5020403c0",
+      "loop": "uvloop",
+      "artifact": "preparation-diagnostics-final-dist",
+      "reached_generation_guard": true,
+      "native_starts": 0,
+      "unclosed_peers": 0,
+      "expected_deliberately_failed_run": true,
+      "unexpected_authority_exception": false
+    }
+  ],
+  "real_model_turns": 0,
+  "original_projects_installation": {
+    "run_rows_equal_to_prior_receipt": true,
+    "native_starts": 1,
+    "unclosed_peers": 0,
+    "unrevoked_grants": 0,
+    "integrity": "ok"
+  },
+  "rejected_direct_wheel": {
+    "python_sql_files": 982,
+    "deleted_sources_reintroduced": 306,
+    "rejected_before_tests": true,
+    "server_or_model_started_with_rejected_wheel": false,
+    "replaced_by_verified_clean_wheel": true
+  },
+  "scope_limits": [
+    "No original contention root cause or corrective authority change; no locks/CAS/budgets relaxed",
+    "No actual generated Spanish plan or actual Ken query audit added",
+    "No historical issue rows rewritten; deliberate diagnostic run failure is not a generated result",
+    "No new global green suite, whole-page acceptance or human comprehension acceptance"
+  ],
+  "remaining_major": [
+    "Reproduce and fix original preparation contention without paid inference",
+    "Verify actual Spanish plan and actual Ken query/results after fixing demonstrated preparation failure",
+    "Complete Proyectos and remaining11pages",
+    "U08,C10,open evaluations,dependencies/distribution, deferred details and final global/independent review"
+  ]
+}

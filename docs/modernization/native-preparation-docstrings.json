@@ -1,0 +1,57 @@
+{
+  "base_commit": "ee39fd2",
+  "changed_or_new_definitions_documented": 7,
+  "missing": [],
+  "contracts": [
+    {
+      "path": "backend/runtime/service.py",
+      "symbol": "_failure_sites",
+      "line": 48,
+      "docstring": "Locate bounded internal failure frames and causes without logging messages, paths, source lines or locals.",
+      "file_sha256": "a74c7c4c5e4e587561be6313198075b9e052d3f694f92a2b1a51d5add0cefbf3"
+    },
+    {
+      "path": "backend/runtime/service.py",
+      "symbol": "RuntimeService",
+      "line": 83,
+      "docstring": "Own native attempts and grant-bound tool closure before durable terminal states.",
+      "file_sha256": "a74c7c4c5e4e587561be6313198075b9e052d3f694f92a2b1a51d5add0cefbf3"
+    },
+    {
+      "path": "backend/runtime/service.py",
+      "symbol": "RuntimeService._note_issue",
+      "line": 847,
+      "docstring": "Persist a safe, actionable owner explanation for this original run.",
+      "file_sha256": "a74c7c4c5e4e587561be6313198075b9e052d3f694f92a2b1a51d5add0cefbf3"
+    },
+    {
+      "path": "backend/runtime/service.py",
+      "symbol": "RuntimeService._execute",
+      "line": 1148,
+      "docstring": "Own one admitted native turn, then prove peer/tool closure before finalizing it.",
+      "file_sha256": "a74c7c4c5e4e587561be6313198075b9e052d3f694f92a2b1a51d5add0cefbf3"
+    },
+    {
+      "path": "backend/tests/runtime/test_admission_binding.py",
+      "symbol": "test_start_explanation_distinguishes_no_dispatch_from_unknown_and_observed_inference",
+      "line": 335,
+      "docstring": "Keep inference uncertainty separate from the independently observed closure of the original peers.",
+      "file_sha256": "5b86ce21ffc84174722f09fdd6b50972c6823cb3005333b365be869e17568adb"
+    },
+    {
+      "path": "backend/tests/runtime/test_owned_factory.py",
+      "symbol": "test_failed_preparation_reports_proven_closure_without_inference",
+      "line": 12,
+      "docstring": "An actual empty kernel domain can close after preparation fails, without implying unknown inference or replaying admission.",
+      "file_sha256": "b7bd6ee6851e0e5169112be127757b16a32249362df767df105079220efbcbdd"
+    },
+    {
+      "path": "backend/tests/runtime/test_owned_factory.py",
+      "symbol": "test_failed_preparation_reports_proven_closure_without_inference.unavailable",
+      "line": 19,
+      "docstring": "Fail before any peer is launched, retaining private error text only in memory.",
+      "file_sha256": "b7bd6ee6851e0e5169112be127757b16a32249362df767df105079220efbcbdd"
+    }
+  ],
+  "scope": "New/changed Python definitions and modules in this delivery. New frontend modules and exported behavior have English JSDoc; this Python audit does not certify all historical definitions."
+}

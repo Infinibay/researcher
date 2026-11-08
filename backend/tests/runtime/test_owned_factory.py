@@ -9,6 +9,46 @@ from types import SimpleNamespace
 import pytest
 
 
+async def test_failed_preparation_reports_proven_closure_without_inference(owned_config, monkeypatch, caplog):
+    """An actual empty kernel domain can close after preparation fails, without implying unknown inference or replaying admission."""
+    from backend.api.main import create_app
+    from backend.api.runtime_dependencies import configured_runtime
+    from backend.runtime.authority_journal import AuthorityBusy
+    from backend.runtime.native_state import NativeState
+
+    def unavailable(*args, **kwargs):
+        """Fail before any peer is launched, retaining private error text only in memory."""
+        try:
+            raise ValueError('PRIVATE_PREPARATION_CAUSE')
+        except ValueError as cause:
+            raise AuthorityBusy('PRIVATE_PREPARATION_MESSAGE') from cause
+
+    monkeypatch.setattr(NativeState, 'provision', unavailable)
+    c = owned_config
+    app = create_app()
+    runtime = configured_runtime(app.state.live_grants, app=app)
+    app.state.runtime_service = runtime
+    async with runtime:
+        run = await runtime.submit(c.s.c.spec, repository_id=11)
+        await runtime.wait(run.run_id)
+        saved = runtime.store.get(101, run.run_id)
+    assert saved.status == 'failed'
+    assert saved.issue['inference_started'] is False
+    assert saved.issue['closure_confirmed'] is True
+    assert 'preparación' in saved.issue['message']
+    assert 'No se inició inferencia' in saved.issue['message']
+    assert 'se comprobó el cierre' in saved.issue['message']
+    assert saved.issue['next_action'] == 'inspect_saved_work'
+    assert 'PRIVATE_PREPARATION' not in json.dumps(saved.issue)
+    assert 'PRIVATE_PREPARATION' not in caplog.text
+    assert 'backend.runtime.owned_runtime.open:' in caplog.text
+    assert 'AuthorityBusy' in caplog.text and 'ValueError' in caplog.text
+    with runtime.store._transaction() as db:
+        assert db.execute('SELECT COUNT(*) FROM runtime_inference_dispatches').fetchone()[0] == 0
+        assert db.execute('SELECT COUNT(*) FROM runtime_attempts WHERE turn_id IS NOT NULL').fetchone()[0] == 0
+        assert db.execute("SELECT COUNT(*) FROM runtime_peers WHERE state!='closed'").fetchone()[0] == 0
+
+
 @pytest.fixture
 def owned_config(
     service_setup, ken_installation, code_host_asset, tmp_path, monkeypatch

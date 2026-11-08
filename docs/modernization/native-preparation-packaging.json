@@ -1,0 +1,39 @@
+{
+  "validation_environment": {
+    "runner_cgroup": "/sys/fs/cgroup/user.slice/user-1000.slice/user@1000.service/app.slice/run-p1345323-i1345324.scope",
+    "parent_controllers_before": "cpu memory pids",
+    "runner_cpu_max": "800000 100000",
+    "purpose": "Transient systemd scope with CPUQuota=800% retains CPU-controller availability during validation; it does not relax any product limit.",
+    "parent_controllers_after": "cpu memory pids"
+  },
+  "base_commit": "ee39fd2",
+  "wheel": "researcher-0.1.0-cp312-cp312-linux_x86_64.whl",
+  "wheel_sha256": "a379e56f2e0934dd271eb91317c86d182ee56f7cb7d4a5a6e5bc2a8902188352",
+  "source_files_matching_wheel_and_installation": 676,
+  "product_files_matching": 360,
+  "observed": {
+    "cases": 97,
+    "passed": 97,
+    "failed": 0,
+    "skipped": 0,
+    "backend_modules": 230,
+    "all_backend_imports_from_native_env": true,
+    "seconds": 48.811,
+    "exit_code": 0
+  },
+  "tests": [
+    "backend/tests/runtime/test_admission_binding.py",
+    "backend/tests/runtime/test_runtime_service.py",
+    "backend/tests/runtime/test_owned_factory.py",
+    "backend/tests/runtime/test_owned_project_stop.py",
+    "backend/tests/runtime/test_broker_peer_close.py",
+    "backend/tests/runtime/test_native_state.py",
+    "backend/tests/runtime/test_authority_journal.py"
+  ],
+  "real_model_turns": 0,
+  "limits": [
+    "Selected installed tests, not the global suite",
+    "Three real Codex/Ken preparation probes passed before this wheel, with generation guarded; they did not reproduce the original contention",
+    "Original cgroup/SQLite/closure boundaries, controlled generation and no paid inference; original real AuthorityBusy/Conflict cause remains open"
+  ]
+}

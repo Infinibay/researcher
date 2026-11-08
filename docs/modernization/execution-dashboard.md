@@ -1,6 +1,6 @@
 # Tablero de ejecución de la actualización
 
-Actualizado: 2026-11-07. Objetivo activo: implementar **todo** el [plan](../superpowers/plans/2026-10-31-actualizacion-proyecto.md). Este tablero no reemplaza requisitos ni declara el plan terminado. [Diagnóstico del proceso](workflow-review.md).
+Actualizado: 2026-11-08. Objetivo activo: implementar **todo** el [plan](../superpowers/plans/2026-10-31-actualizacion-proyecto.md). Este tablero no reemplaza requisitos ni declara el plan terminado. [Diagnóstico del proceso](workflow-review.md).
 
 ## Seguimiento al cambiar de tarea
 
@@ -28,7 +28,34 @@ que se pueda comparar el avance; no presentar microajustes como tareas principal
 - Última suite global: `9fb873c`,2210 casos,2178 pasan,31 fallan y1 error de fixture; sin omisiones. La carrera de backup encontrada se corrigió después con40 pruebas instaladas. No se declara una nueva corrida global verde; la referencia `0c8b8d9` queda como evidencia histórica.
 - U01–U07, E01–E12, C01–C09 y D01–D13 quedan comprobados con el alcance de sus matrices; siguen 2 de 43 escenarios amplios sin aceptación completa en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Estado actual: Proyectos corregido; preparación nativa por investigar
+## Estado actual: explicación del fallo corregida; contención sin reproducir
+
+Bloque **2026-11-08 00:49:17–01:02:11 UTC**, desde `ee39fd2`:
+**12 min 54 s hasta verificar**, sin documentación/checkpoint posteriores.
+
+- Comprobado: **41/43 escenarios**. El fallo del runtime ahora distingue cierre
+  comprobado e inicio de inferencia desconocido; la preparación fallida no indica
+  cierre pendiente si sus procesos cerraron. Log del operador con sitios/causas
+  acotados, sin mensajes privados. **97 casos instalados pasan,0 omisiones**;
+  siete definiciones nuevas/modificadas documentadas en inglés.
+- En curso: **fiabilidad de preparación del engine**. Cuatro preparaciones reales
+  de Codex/Ken, con generación prohibida, enviaron0turnos y cerraron sus peers;
+  una usa uvloop y la rueda nueva. No reprodujeron AuthorityBusy/AuthorityConflict.
+  **La causa original sigue desconocida y sin corregir**.
+- Siguiente dentro de este trabajo: obtener sitio/causa en una reproducción
+  acotada, corregir la operación demostrada y comprobarla sin inferencia pagada.
+  No cambiar locks, CAS, reservas ni presupuestos para hacer pasar el ensayo.
+- Después: plan español con auditoría real de Ken, aceptación de Proyectos y
+  otras11páginas, U08/C10/evaluaciones, dependencias y distribución.
+- Al final: detalles aplazados, suite global y revisión independiente.
+
+**0/12 páginas completamente aceptadas**; no se crea un porcentaje global.
+El build directo inicial arrastró306módulos retirados y fue rechazado antes de
+pruebas; la rueda limpia sustituta coincide exactamente con676fuentes actuales.
+La instalación original de Proyectos conserva sus mismos runs y cero peers/grants
+activos. [Resultados y límites](native-preparation-review.md).
+
+## Etapa anterior: Proyectos corregido; preparación nativa por investigar
 
 Bloque **2026-11-07 23:58:35–2026-11-08 00:37:32 UTC**, desde `107240c`:
 **38 min 57 s hasta verificar**, sin documentación/checkpoint posteriores.

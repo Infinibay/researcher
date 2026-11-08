@@ -1,7 +1,8 @@
 # Preparación nativa: contención y explicación de fallos
 
-Preparado al cerrar el bloque de Proyectos. La investigación correctiva aún no
-comenzó. Leer primero el estado actual y conservar las ejecuciones originales.
+La investigación correctiva empezó el2026-11-08 a las00:49:17 UTC. La explicación
+del cierre se corrigió y se añadieron ubicaciones seguras al log. La contención
+original todavía no se reprodujo ni se corrigió. Conservar las ejecuciones originales.
 
 ## Evidencia conocida
 
@@ -36,3 +37,17 @@ comenzó. Leer primero el estado actual y conservar las ejecuciones originales.
    su preparación: no reescribir ni borrar esa historia.
 6. Volver a la aceptación de Proyectos y luego al resto de páginas. DD123/124 son
    detalles separados; esta fiabilidad del engine es trabajo principal.
+
+## Corte diagnóstico
+
+Cuatro preparaciones con generación prohibida llegaron a la guardia y cerraron
+sus peers: tres con asyncio y la rueda previa; una con uvloop y la rueda nueva.
+Cero turnos enviados. No bastan para cerrar la contención ni aceptar Proyectos.
+La explicación ahora distingue cierre comprobado e inferencia incierta; los logs
+permiten localizar el llamador sin registrar mensajes privados de excepción.
+[Revisión y límites](../../modernization/native-preparation-review.md).
+
+Antes de construir otro artefacto, consultar la regla de sdist + wheel limpio en
+`docs/architecture/native-python-installation.md`. Un build directo arrastró306
+módulos retirados y fue rechazado antes de ejecutar pruebas. Se sustituyó por
+una rueda limpia verificada; no reutilizar el artefacto descartado.
