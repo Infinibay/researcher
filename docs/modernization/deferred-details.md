@@ -1119,3 +1119,8 @@ API compartido señala `WSEvent.data?: any`, heredado de4607e8e: línea279antes,
 283ahora. Los módulos/hooks/formularios nuevos pasan; no se declara estilo global
 verde. El warning de bundle grande sigue en DD121. Las67revisiones estáticas de
 prompts y las inversas globales pendientes al esquema69 son gates separados.
+
+Aceptación completa de la página: añadir I001 de `evals/operation/planning_page.py`
+([lista](planning-page-lint.json)). Cabecera y badge global densos en móvil;
+notificaciones del fixture no equivalen a actividad nativa. Todo queda para el
+pulido global; no repetir generación o rehacer distribución por estos detalles.

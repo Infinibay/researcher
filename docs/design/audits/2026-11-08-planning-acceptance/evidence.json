@@ -1,0 +1,160 @@
+{
+  "status": "passed",
+  "syntheticDomainHistory": true,
+  "modelTurns": 0,
+  "states": [
+    {
+      "name": "01-desktop-group-dependency",
+      "width": 1440,
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "02-mobile-group-dependency",
+      "width": 390,
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "03-mobile-proposal",
+      "width": 390,
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "04-mobile-original-decision",
+      "width": 390,
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "05-desktop-accepted-history",
+      "width": 1440,
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "06-accepted-history-delete-refused",
+      "width": 1440,
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "07-partial-reads-failed",
+      "width": 1440,
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "08-proposal-list-read-failed",
+      "width": 1440,
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "09-original-proposal-read-failed",
+      "width": 1440,
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "10-late-alpha-response-in-beta",
+      "width": 390,
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "11-long-group-mobile",
+      "width": 390,
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "12-long-group-desktop",
+      "width": 1440,
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "13-manual-delete-dialog",
+      "width": 1440,
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "14-deletion-after-reload",
+      "width": 1440,
+      "fits": true,
+      "violations": []
+    }
+  ],
+  "checks": [
+    "actual-dependency-read",
+    "keyboard-selection-and-return",
+    "illustrative-input-output-not-observed-data",
+    "original-task-run-link",
+    "accepted-plan-group-delete-refused",
+    "native-history-group-delete-refused",
+    "partial-task-and-milestone-failure-not-empty",
+    "milestone-and-task-explicit-recovery",
+    "proposal-list-failure-not-empty",
+    "original-proposal-refresh-recovery",
+    "late-original-read-project-isolation",
+    "alpha-beta-alpha",
+    "nineteen-groups-and-long-description",
+    "manual-delete-dialog-safe-default-and-escape",
+    "manual-deletion-durable"
+  ],
+  "writes": [
+    {
+      "path": "/api/epics/3",
+      "method": "DELETE",
+      "status": 409
+    },
+    {
+      "path": "/api/epics/2",
+      "method": "DELETE",
+      "status": 409
+    },
+    {
+      "path": "/api/epics/1",
+      "method": "DELETE",
+      "status": 204
+    }
+  ],
+  "faults": [
+    {
+      "path": "/api/tasks",
+      "kind": "abort-read"
+    },
+    {
+      "path": "/api/milestones",
+      "kind": "abort-read"
+    },
+    {
+      "path": "/api/tasks",
+      "kind": "abort-read"
+    },
+    {
+      "path": "/api/milestones",
+      "kind": "abort-read"
+    },
+    {
+      "path": "/api/projects/101/workspace",
+      "kind": "abort-read"
+    },
+    {
+      "path": "/api/projects/101/workspace",
+      "kind": "abort-read"
+    },
+    {
+      "path": "/api/projects/101/runs/ce7dad19-05e3-4ae4-9b7c-f120fd5ec282/project-plan",
+      "kind": "abort-read"
+    },
+    {
+      "path": "/api/epics",
+      "kind": "late-original-alpha-read"
+    }
+  ],
+  "errors": []
+}

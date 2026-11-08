@@ -5993,7 +5993,7 @@
       "status": "in_progress",
       "pilots": 12,
       "concept_images": 48,
-      "fully_accepted": 3,
+      "fully_accepted": 4,
       "pages": {
         "projects": {
           "status": "in_progress",
@@ -6078,19 +6078,24 @@
           ]
         },
         "planning": {
-          "status": "in_progress",
+          "status": "verified",
           "selected_concept": "tree-detail",
           "evidence": [
             "docs/superpowers/plans/2026-11-08-planning-page-acceptance.md",
             "docs/modernization/planning-commands-review.md",
             "docs/modernization/planning-commands-results.json",
-            "docs/design/audits/2026-11-08-planning-creation-recovery/report.md"
+            "docs/design/audits/2026-11-08-planning-creation-recovery/report.md",
+            "docs/modernization/planning-page-review.md",
+            "docs/modernization/planning-page-results.json",
+            "docs/design/audits/2026-11-08-planning-acceptance/report.md",
+            "frontend/tests/planning.e2e.mjs",
+            "evals/operation/planning_page.py"
           ],
-          "remaining": [
-            "Actual proposal/history viewing and original decision navigation on real stored native-domain data without another generative turn",
-            "Manual deletion and protected-history refusal from the actual browser dialog",
-            "Read errors, extensive data and complete keyboard/mobile page states",
-            "Record full-page technical/delegated visual ruling without attributing human comprehension"
+          "remaining": [],
+          "scope": "Technical/delegated visual acceptance of owner reads/creation recovery/deletion on installed HTTP/SQLite; proposal/acceptance fixtures are synthetic domain history. Real generation and human comprehension remain separate.",
+          "deferred": [
+            "DD132",
+            "DD121"
           ]
         }
       }

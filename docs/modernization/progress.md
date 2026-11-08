@@ -8950,3 +8950,26 @@ errores de lectura y casos de escala/teclado/móvil completos con backend real.
 No se incrementan3/12páginas ni41/43escenarios. Contención original/U08/C10 y otras
 páginas/evaluaciones/distribución continúan; detalles/gates globales y revisión final
 al cierre. [Resultados](planning-commands-review.md).
+
+
+## Planificación aceptada; siguiente Resumen, 2026-11-08
+
+Continuación observada05:41:27–05:47:49UTC,6min22s hasta revisar resultados/capturas;
+documentación/checkpoint posteriores excluidos. Historia sintética por APIs de
+dominio con peers lógicos nunca lanzados y cerrados, no generación. HTTP/SQLite y
+DELETE reales: propuesta/aceptación, decisión original, dependencias, fallos de
+lectura/recuperación,19grupos, A→B→A con entrega tardía esperada y comprobada;
+dos409protegen historia y un204retira grupo manual sin perder seis tareas ni
+sus dependencias.14estados/15comprobaciones, Axe regional sin violaciones,
+escritorio/móvil y teclado pasan; capturas actuales inspeccionadas contra tree-detail.
+0despachos/inicios nativos, servicio143y dominio cerrado. Tres funciones/módulo
+Python documentados; I001 pendiente enDD132. No código productivo cambiado,
+no reconstrucción redundante del paquete. v1falló por URL incorrecta de la prueba,
+v2pasó yv3refuerza espera de respuesta tardía y lectura final; originales retenidos.
+
+**4/12páginas aceptadas,41/43escenarios.** U08/C10 continúan; la explicación de
+entradas/salidas de este fixture no acredita mejora de generación ni comprensión.
+[Resultados](planning-page-review.md). Siguiente: Resumen, sin modelos, siguiendo
+el concepto existente. Restan además Tareas/Agentes/Conversación/Hallazgos/Informes/
+Ejecución y Proyectos con contención original; evaluaciones/distribución/prompts,
+inversas69, detalles y revisión global al final. Política de tareas gruesas vigente.

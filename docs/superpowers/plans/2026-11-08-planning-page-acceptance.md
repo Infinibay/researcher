@@ -74,3 +74,18 @@ de la página. [Resultado y límites](../../modernization/planning-commands-revi
 Siguiente: completar pasos7–8 con propuestas/historia, diálogo de borrado,
 errores/escala/teclado/móvil reales. Sólo cuatro capturas actuales son de esta página;
 no extrapolar todo el recorrido compartido.3/12páginas y41/43escenarios permanecen.
+
+## Cierre del recorrido de la página
+
+Continuación observada05:41:27–05:47:49UTC,6min22s hasta verificar e inspeccionar.
+Pasos7–8 pasan:14estados/15comprobaciones en nuevo host instalado, historia de plan
+sintética preparada por APIs de dominio, lecturas y tres DELETE reales; dos409de
+protección y un204manual. Conservación de seis tareas/dependencias, recarga,
+fallos parciales/recuperación y entrega tardía A→B→A pasan.0inferencia/inicios
+nativos; servicio cerrado/dominio retirado. Teclado y Axe regional pasan; capturas
+actuales inspeccionadas contra tree-detail. No generación ni aceptación humana
+atribuida a los fixtures. Primer fallo era URL incorrecta del evaluador, retenido.
+
+**Página aceptada técnica y visualmente:4/12.**41/43escenarios; U08/C10 permanecen.
+DetallesDD132 al final. [Resultado](../../modernization/planning-page-review.md).
+No se reconstruye el mismo producto sin cambios ni se repite el turno pagado.

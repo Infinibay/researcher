@@ -1,8 +1,8 @@
 # Aceptación integral de las doce páginas
 
-Actualización8noviembre2026: **3/12 páginas** aceptadas (Documentos, Archivos,
-Repositorios). Planificación sigue en aceptación: creación recuperable y protección
-nativa verificadas, pendientes propuestas/historia/borrado/estados restantes en UI.
+Actualización8noviembre2026: **4/12 páginas** aceptadas (Documentos, Archivos,
+Repositorios y Planificación). Planificación completa el recorrido de propietario;
+la historia de propuestas de esta revisión es un fixture de dominio, sin inferencia.
 [Trabajo vigente](2026-11-08-planning-page-acceptance.md). Los cortes anteriores se
 conservan debajo con sus estados históricos; no son el contador actual.
 

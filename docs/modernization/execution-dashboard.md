@@ -24,41 +24,34 @@ que se pueda comparar el avance; no presentar microajustes como tareas principal
 ## Estado comprobado
 
 - Codex por suscripción y Ken publicado ensayados. Fuentes/citas, informes draft y revisión documental independiente conectados. Desarrollo admitido desde Tareas/Conversación con captura y comprobaciones explícitas; revisión independiente solicitada desde Tareas y aceptación del propietario conectada. Publicación local desde aceptación conectada; recuperación local de sólo lectura conectada; transporte remoto configurable conectado; recuperación remota y controles de Tareas conectados; ejecución/activación antiguas por tarea y proyecto retiradas; auxiliares de generación/proveedor, herramientas antiguas y sus cinco bibliotecas retirados. También se retiraron API interna, CLI, servicios/listeners y flows/helpers antiguos. También se retiraron autonomía, plantillas históricas y lectores de proveedor sin consumidores; se conserva el control de parada de trabajadores registrados.
-- Interfaz: doce pilotos, 36/36 conceptos de escritorio y 12/12 móviles; todas las rutas tienen piloto y 3/12 páginas tienen aceptación técnica y visual delegada.
+- Interfaz: doce pilotos, 36/36 conceptos de escritorio y 12/12 móviles; todas las rutas tienen piloto y 4/12 páginas tienen aceptación técnica y visual delegada.
 - Última suite global: `9fb873c`,2210 casos,2178 pasan,31 fallan y1 error de fixture; sin omisiones. La carrera de backup encontrada se corrigió después con40 pruebas instaladas. No se declara una nueva corrida global verde; la referencia `0c8b8d9` queda como evidencia histórica.
 - U01–U07, E01–E12, C01–C09 y D01–D13 quedan comprobados con el alcance de sus matrices; siguen 2 de 43 escenarios amplios sin aceptación completa en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Estado actual: altas recuperables verificadas; Planificación sigue abierta
+## Estado actual: Planificación aceptada; continúa Resumen
 
-Fase **04:27:54–05:25:17UTC,57min23s hasta verificar**, desde `4607e8e`,
-incluyendo diagnóstico inicial. Recorrido terminó05:13:48; evidencia/inspección
-posteriores incluidas en el tiempo. [Alcance y límites](planning-commands-review.md).
+Continuación observada **05:41:27–05:47:49UTC,6min22s hasta verificar/inspeccionar**.
+Inicio original de Planificación04:27:54UTC; tiempo de pared incluye fases e
+intervalos, sin atribuir todo a trabajo activo. [Alcance](planning-page-review.md).
 
-- Terminado: grupos/hitos recuperan la misma identidad tras perder el recibo,
-  guardar/reabrir la sesión y repetir explícitamente. Migración69, transacción
-  recurso/recibo, huella de solicitud comprobada en UI y ámbito del proyecto/padre.
-  Borrado conserva tareas/dependencias y protege historia nativa/planes aceptados.
-  Backup/restore/inversa comprobados.42definiciones documentadas en inglés.
-- Verificación: **124casos instalados**, **148contratos y51UI** pasan sin omisiones;
- 684Python/SQL coinciden,365productivos. Navegador real: dos cortes después del
-  commit, mismos IDs/claves recuperados, un grupo/un hito y dos recibos.0runs,
-  despachos o inicios nativos; servicio cerrado y dominio retirado. Diez estados
-  compartidos, sólo cuatro de Planificación; no diez estados de esa página.
-- En curso: **aceptación completa de Planificación**. Siguiente dentro de la misma
-  tarea: propuestas/historia y decisión original, borrado/protección desde la UI,
-  errores de lectura, datos extensos y teclado/móvil restantes. No se acepta la
-  página por haber cerrado sus altas. [Plan](../superpowers/plans/2026-11-08-planning-page-acceptance.md).
-- Interfaz: **3/12páginas** aceptadas (Documentos, Archivos, Repositorios),
-  **41/43escenarios**. Además de Planificación: Resumen, Proyectos, Tareas, Agentes,
-  Conversación, Hallazgos, Informes y Ejecución. Proyectos y AuthorityBusy original
-  siguen sin causa reproducida/corregida. U08/C10, evaluaciones y distribución abiertos.
-- Gates al cierre: **67revisiones estáticas desactualizadas de85** en318archivos,
- 18vigentes y0sin revisión previa; revalidación explícita al árbol final. Inversas
-  globales deben alcanzar el esquema69; no confundir su prueba local con toda la
-  plantilla histórica. Suite global, accesibilidad completa y revisión independiente.
-- Detalles al final: DD132 y anteriores; Ruff, un any heredado y bundle no verdes.
-  Error de red inglés y vacío de consulta antigua pendientes de presentación.
-  No porcentaje/ETA global defendible; sin push, merge o despliegue.
+- Terminado: **4/12páginas**, Documentos, Archivos, Repositorios y Planificación.
+  Altas recuperables en3d5928a y revisión actual de propuestas/historia/borrado,
+ 14estados/15comprobaciones; HTTP/SQLite y DELETE reales, historia de planes
+ sintética de dominio. Seis tareas/dependencias preservadas, dos409y un204.
+ 0inferencia/inicios nativos. Servicio cerrado, dominio eliminado. No aceptación humana.
+- En curso: **Resumen**, concepto situation-notebook existente; revisar entrada,
+ alcance, recuentos y enlaces originales, errores/recarga y teclado/móvil. Sin
+ rehacer el diseño ni lanzar modelos para preparar sus datos.
+- Pendiente en orden: restantes páginas Resumen, Tareas, Agentes, Conversación,
+ Hallazgos, Informes, Ejecución; Proyectos sigue abierto por AuthorityBusy original
+ sin causa reproducida/corregida. U08/C10 y evaluación científica; distribución y
+ dependencias, revalidación de prompts, inversas globales y suite/revisión final.
+- Seguimos en **41/43escenarios**, sin porcentaje/ETA global defendible. Última
+ suite global conserva31fallos y1error; no nueva afirmación de verde global.
+ **67de85revisiones estáticas desactualizadas** en318archivos y esquema69 son
+ gates pendientes; no actualizar huellas sin revisión.
+- Detalles al final: DD132y anteriores, densidad/mensajes/estilo/accesibilidad
+ completa; un I001 adicional del evaluador registrado. No push, merge o despliegue.
 
 ## Etapa anterior: Ken estructural offline verificado; continúa aceptación de páginas
 
