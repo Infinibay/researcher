@@ -5706,13 +5706,15 @@
         "docs/modernization/current-scientific-review.md",
         "docs/modernization/current-scientific-results.json",
         "evals/current_scientific/run.py",
-        "evals/current_scientific/test_protocol.py"
+        "evals/current_scientific/test_protocol.py",
+        "docs/modernization/current-scientific-final-review.md",
+        "docs/modernization/current-scientific-final-results.json"
       ],
       "remaining": [
         "Budget-aware final delivery and honest partial-result communication",
         "Faithful examples without inferring individual values from group means",
         "Other profiles, representative real scientific material and observed human comprehension/effort",
-        "Current catalog9 primary-abstract case reached an artificially low120000evaluation cap; source/calculation preserved but no delivered report/explanation. Future registrations use standard350000cap with operator minima; original failed arm not repeated."
+        "New current primary-abstract report delivered; independent review5of6 criteria pass, relative-percent explanation partial. One development observation, not representative generalization; original failed case preserved."
       ],
       "limitations": [
         "One purposive synthetic sample per arm/case, not population or causal efficacy",
@@ -5977,23 +5979,28 @@
     },
     "current_primary_scientific_evaluation": {
       "status": "in_progress",
-      "scope": "One catalog9 real subscription turn and Ken0.18.0; exact source/calculation verified, delivery failed at registered120000cap, closed original peers, unknown remote final usage preserved",
+      "scope": "Previous120000-cap failure retained; new registered350000-cap subscription observation delivers cited draft report/explanation, exact arithmetic and closed original authority. Independent review5/6pass, relative-percent teaching criterion partially satisfied; no human comprehension or general efficacy claim.",
       "evidence": [
         "docs/modernization/current-scientific-review.md",
         "docs/modernization/current-scientific-results.json",
         "evals/current_scientific/run.py",
-        "evals/current_scientific/test_protocol.py"
+        "evals/current_scientific/test_protocol.py",
+        "docs/modernization/current-scientific-final-review.md",
+        "docs/modernization/current-scientific-final-results.json",
+        "docs/modernization/current-scientific-final-evidence/response.md",
+        "docs/modernization/current-scientific-final-evidence/report.md"
       ],
       "remaining": [
-        "A delivered explanation must be evaluated in another separately registered case; no replay of original failure",
-        "Other profiles, human comprehension and full-page/global acceptance remain open"
+        "Registered criterion4 remains partially unmet: explicitly explain baseline denominator for relative-percent comparison",
+        "Keep brief user explanation free of unnecessary implementation audit prose and clarify interpretive authorship",
+        "Other profiles, observed human comprehension, full global acceptance remain open"
       ]
     },
     "full_pages_acceptance": {
       "status": "in_progress",
       "pilots": 12,
       "concept_images": 48,
-      "fully_accepted": 10,
+      "fully_accepted": 11,
       "pages": {
         "projects": {
           "status": "in_progress",

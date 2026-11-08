@@ -28,18 +28,20 @@ que se pueda comparar el avance; no presentar microajustes como tareas principal
 - Última suite global: `9fb873c`,2210 casos,2178 pasan,31 fallan y1 error de fixture; sin omisiones. La carrera de backup encontrada se corrigió después con40 pruebas instaladas. No se declara una nueva corrida global verde; la referencia `0c8b8d9` queda como evidencia histórica.
 - U01–U07, E01–E12, C01–C09 y D01–D13 quedan comprobados con el alcance de sus matrices; siguen 2 de 43 escenarios amplios sin aceptación completa en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Estado actual: cierre no vacío verificado; continúa ciencia
+## Estado actual: ciencia entregada con límites; continúa C10
 
-**11:05:21–11:12:24UTC,7min3s hasta verificar/inspeccionar**, base273c1a6.
-[Alcance](nonempty-closure-review.md). Documentación/checkpoint posteriores excluidos.
+**11:14:52–11:22:21UTC,7min29s hasta verificar/revisar**, base478ab0a.
+[Alcance](current-scientific-final-review.md). Bibliografía previa ycheckpoint excluidos.
 
-- Terminado: **11/12páginas** técnicas/delegadas, comentarios duraderos y cierre
-  no vacío con enlace original deResumen.5estados/10checks, un cierre, recuperación
-  GETsin otroPOST. Continuación sólo lectura tras error de selector.0modelos.
-- En curso: **caso científico nuevo**, registro previo/política actual y techo
-  efectivo hasta350k. No repetir el intento anterior de120k ni cambiar su historia.
-- Pendiente: Proyectos/AuthorityBusy (no corregido); U08/C10/ciencia,
-  distribución/dependencias, prompts, inversas71, global y revisión final.
+- Terminado: **11/12páginas**, comentarios duraderos/cierre no vacío y un caso
+  científico actual entregado.1turno/104.289s/343406tokens observados, informe con
+  citas/cálculo exacto. Revisión limpia5/6pasan y1parcial; no ciencia/U08globalverde.
+  Respuesta original conservada.0grants/peers abiertos ydominio eliminado.
+- En curso: **C10**, trabajo independiente visible/durable antes de una pregunta
+  que termina el turno. Investigar el contrato existente antes de añadir otroloop.
+- Pendiente: Proyectos/AuthorityBusy (no corregido); U08/C10 yresto de evaluación
+  de comunicación/perfiles; distribución/dependencias, prompts, inversas71,
+  global y revisión final. Criterio científico4yclaridad pendiente registrados.
 - Seguimos **41/43escenarios**. Última global31fallos/1error; prompts al último
   corte67de85desactualizados/318archivos. Sin historial de usuario que migrar.
 - Detalles al final: DD144y anteriores; lint/fechas/enums/densidad/accesibilidad

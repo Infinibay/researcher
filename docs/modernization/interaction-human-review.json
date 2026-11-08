@@ -18,5 +18,12 @@
     "required_next_evaluation": "Present the goal and a concrete related input/output example before asking for a useful decision; distinguish observed data from invented illustrations. Do not repeat an abstract comprehension quiz.",
     "implemented_in_product": false,
     "evidence": "docs/modernization/spanish-plan-ken-review.md"
+  },
+  "actual_scientific_followup": {
+    "response": "docs/modernization/current-scientific-final-evidence/response.md",
+    "report": "docs/modernization/current-scientific-final-evidence/report.md",
+    "technical_scope": "Actual generated explanation has purpose, supplied patient counts, calculated rates and explicit causal limits; independent review finds relative-change teaching incomplete and excess implementation detail.",
+    "human_acceptance": "not_observed",
+    "next_step": "Use actual inspectable task output and useful correction opportunities, without another abstract comprehension quiz."
   }
 }

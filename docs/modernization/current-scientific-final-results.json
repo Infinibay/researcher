@@ -1,0 +1,232 @@
+{
+  "base_commit": "478ab0a",
+  "registration_sha256": "a34f9035df389f7f7e58c7c3dfc4a13c071def5d8ed144629c4461897afb84c5",
+  "policy_identity": {
+    "catalog_version": 9,
+    "profile": "scientific_research",
+    "sha256": "a2115198e94cc68ca0c47a558c0f0bb93435066d64115f07b41f31584878c5b7"
+  },
+  "limits": {
+    "wall_seconds": 180,
+    "no_progress_seconds": 90,
+    "max_turns": 1,
+    "max_tool_calls": 20,
+    "max_observed_tokens": 350000,
+    "max_answer_bytes": 20000
+  },
+  "admissions": 1,
+  "attempts": 1,
+  "seconds": 104.289,
+  "model_control": {
+    "model": "gpt-6.1-sol",
+    "reasoning_effort": "low",
+    "source": "host",
+    "revision": 0,
+    "project_id": 101,
+    "actor_id": "researcher",
+    "fence": 1
+  },
+  "observed_tokens": 343406,
+  "dispatch_status": "settled",
+  "run_status": "needs_review",
+  "native_status": "completed",
+  "tool_calls": [
+    {
+      "tool": "ken_find",
+      "success": true
+    },
+    {
+      "tool": "researcher_reference_list",
+      "success": true
+    },
+    {
+      "tool": "researcher_capture_reference",
+      "success": true
+    },
+    {
+      "tool": "ken_read",
+      "success": true
+    },
+    {
+      "tool": "researcher_source_read",
+      "success": true
+    },
+    {
+      "tool": "researcher_python",
+      "success": true
+    },
+    {
+      "tool": "researcher_command_read",
+      "success": true
+    },
+    {
+      "tool": "researcher_capture_command",
+      "success": true
+    },
+    {
+      "tool": "researcher_source_read",
+      "success": true
+    },
+    {
+      "tool": "researcher_finding_record",
+      "success": true
+    },
+    {
+      "tool": "researcher_finding_record",
+      "success": true
+    },
+    {
+      "tool": "researcher_finding_record",
+      "success": true
+    },
+    {
+      "tool": "researcher_report_write",
+      "success": true
+    },
+    {
+      "tool": "researcher_result_propose",
+      "success": true
+    }
+  ],
+  "tool_log_sha256": "ceca18ad71294fb6f366294454cc3779726bf5520dbb37bb0f0d0b06066b4f0d",
+  "report": {
+    "id": 1,
+    "title": "Cálculos renales: diferencia observada y límites de la conclusión causal",
+    "content_sha256": "ee3377ec871d5ddee76e47d6f82423b74f825d251411d8f8ee2734414695d396",
+    "status": "draft"
+  },
+  "sources": [
+    {
+      "id": 1,
+      "kind": "attachment",
+      "title": "policy.md",
+      "locator": "reference:1",
+      "sha256": "7f8595fc3377bfd55af0a7b9bce05fa5b50cf01fca1d61d9a52244c3ca05a381"
+    },
+    {
+      "id": 2,
+      "kind": "attachment",
+      "title": "Command output 4fade0c3-6e96-4bd4-835e-856923555305",
+      "locator": "command-receipt:4fade0c3-6e96-4bd4-835e-856923555305",
+      "sha256": "690fe6d021bc24fca7227c3a6c3aa21bd30cfa88922a983a4569f6c00e599d23"
+    }
+  ],
+  "findings": 3,
+  "peers": [
+    {
+      "kind": "business",
+      "state": "closed"
+    },
+    {
+      "kind": "native",
+      "state": "closed"
+    },
+    {
+      "kind": "ken",
+      "state": "closed"
+    },
+    {
+      "kind": "ken",
+      "state": "closed"
+    },
+    {
+      "kind": "command",
+      "state": "closed"
+    }
+  ],
+  "unrevoked_grants": 0,
+  "integrity": "ok",
+  "foreign_keys": [],
+  "source_unchanged": true,
+  "independent_arithmetic": {
+    "open_percent": "78.00",
+    "percutaneous_percent": "82.57142857142857142857142857",
+    "percentage_points": "4.571428571428571428571428571",
+    "relative_percent": "5.860805860805860805860805861"
+  },
+  "human_comprehension": null,
+  "owner_acceptance": false,
+  "scientific_confidence": "not_formally_evaluated",
+  "limits_of_evaluation": [
+    "One development case, no baseline or representative population estimate",
+    "Exact clinical source was supplied abstract transcription; model did not independently review full paper",
+    "Previous120000-token failed trial remains retained and was not replayed"
+  ],
+  "witnessed_closure": {
+    "grant_count": 1,
+    "all_grants_retired": true,
+    "all_domains_removed": true,
+    "operation_count": 4,
+    "all_operations_execution_closed": true
+  },
+  "owned_backend_terminal": true,
+  "service_exit": -15,
+  "finding_source_references": [
+    {
+      "project_id": 101,
+      "finding_id": 1,
+      "source_id": 1,
+      "quote": "This excerpt does not describe group assignment, baseline comparability or uncertainty estimates."
+    },
+    {
+      "project_id": 101,
+      "finding_id": 2,
+      "source_id": 1,
+      "quote": "Open surgery: 350 patients; 273 classified as successful.\nPercutaneous nephrolithotomy: 350 patients; 289 classified as successful."
+    },
+    {
+      "project_id": 101,
+      "finding_id": 2,
+      "source_id": 2,
+      "quote": "difference second minus first: 8/175 = 4.5714285714 percentage points"
+    },
+    {
+      "project_id": 101,
+      "finding_id": 3,
+      "source_id": 1,
+      "quote": "That omission in the supplied abstract excerpt does not establish absence of those methods in the full study."
+    },
+    {
+      "project_id": 101,
+      "finding_id": 3,
+      "source_id": 1,
+      "quote": "The study outcome at three months was elimination of stones or reduction to less than 2 mm."
+    }
+  ],
+  "report_finding_links": [
+    {
+      "project_id": 101,
+      "artifact_id": 1,
+      "finding_id": 1
+    },
+    {
+      "project_id": 101,
+      "artifact_id": 1,
+      "finding_id": 2
+    },
+    {
+      "project_id": 101,
+      "artifact_id": 1,
+      "finding_id": 3
+    }
+  ],
+  "independent_review": {
+    "criteria_passed": [
+      1,
+      2,
+      3,
+      5,
+      6
+    ],
+    "criteria_partially_satisfied_failed": [
+      4
+    ],
+    "blocking_factual_or_causal_errors": [],
+    "human_comprehension": "not_observed",
+    "remaining": [
+      "Explain baseline denominator for relative percent; current report correctly explains proportions/subtraction but does not explain relative increase",
+      "Keep implementation audit details outside brief user-facing explanation",
+      "Clarify model authorship of the interpretive sentence called evaluador"
+    ]
+  }
+}

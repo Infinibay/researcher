@@ -9253,3 +9253,14 @@ GEToriginal yResumen real. Driverfailed por título ambiguo tras efecto; continu
 sólo lectura sobre el mismo host,0modelos. Sin cambios de producto/paquete.
 11/12páginas,41/43escenarios. Siguiente: nuevo caso científico con350k máximo,
 conservando el fallo anterior sin reejecutarlo ni cambiar sus presupuestos.
+
+## 2026-11-08 — caso científico nuevo entregado
+
+Base478ab0a,11:14:52–11:22:21UTC,7min29s hasta verificar/revisar.
+[Alcance](current-scientific-final-review.md):1turno/104.289s/343406tokens observados,
+despacho settled,14herramientas exitosas;1informe con citas/3findings. Revisión
+limpia5/6criterios pasan y4parcial no declarado completo. Respuesta original sin
+regenerar; cierre global/nativo comprobado y0grants. No comprensión humana ni
+aceptación de propietario.11/12páginas (contador agregado corregido de10a11),
+41/43escenarios. SigueC10/entrega parcial durable antes de preguntar; resto de
+gates aún abierto. No repetir el viejo fallo120k ni este resultado para pulirlo.
