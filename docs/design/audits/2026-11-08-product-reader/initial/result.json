@@ -1,0 +1,186 @@
+{
+  "status": "failed",
+  "scope": "Installed synthetic owner workspace, real reader; no physical listening or human acceptance",
+  "storage_before": {
+    "projects": [
+      {
+        "id": 1,
+        "name": "Atlas comprobable",
+        "description": "Comparar resultados con fuentes verificables. No presuponer que una propuesta est\u00e1 aceptada."
+      },
+      {
+        "id": 2,
+        "name": "Contexto separado",
+        "description": "No debe heredar las tareas de Atlas."
+      }
+    ],
+    "groups": [
+      {
+        "id": 1,
+        "project_id": 1,
+        "title": "Reunir evidencia"
+      }
+    ],
+    "milestones": [
+      {
+        "id": 1,
+        "epic_id": 1,
+        "title": "Datos contrastados"
+      }
+    ],
+    "tasks": [
+      {
+        "id": 1,
+        "project_id": 1,
+        "epic_id": 1,
+        "title": "Capturar fuente",
+        "status": "backlog"
+      },
+      {
+        "id": 2,
+        "project_id": 1,
+        "epic_id": 1,
+        "title": "Contrastar resultado",
+        "status": "backlog"
+      }
+    ],
+    "dependencies": [
+      {
+        "task_id": 2,
+        "depends_on_task_id": 1
+      }
+    ],
+    "corrections": [
+      {
+        "project_id": 1,
+        "task_id": 2,
+        "version": 2,
+        "statement": "Ejemplo concreto: dos fuentes con el mismo t\u00edtulo pueden describir versiones diferentes. Compara fecha y contenido antes de tratarlas como equivalentes.",
+        "source_kind": "user_example"
+      }
+    ],
+    "files": [],
+    "file_operations": [],
+    "captured_sources": 0,
+    "wiki": [],
+    "wiki_revisions": [],
+    "runs": 0,
+    "dispatches": 0,
+    "native_starts": 0,
+    "integrity": "ok"
+  },
+  "model_turns": 0,
+  "container_exit": 1,
+  "reader": {
+    "status": "failed",
+    "scope": "Installed owner workspace with actual Orca; ALSA null, no physical listening or human acceptance",
+    "pairing_before_reader": true,
+    "browser_exit": 1,
+    "error": "Inspect browser-result.json and original reader logs",
+    "children": [
+      {
+        "name": "orca",
+        "exit": 0
+      },
+      {
+        "name": "browser",
+        "exit": 1
+      },
+      {
+        "name": "speech",
+        "exit": 0
+      },
+      {
+        "name": "xvfb",
+        "exit": 0
+      }
+    ]
+  },
+  "browser": {
+    "status": "failed",
+    "scope": "Real installed HTTP/SQLite and Orca/Speech Dispatcher; native X keys; ALSA null, no physical listening or human acceptance",
+    "routes": [],
+    "content": [],
+    "pageErrors": [],
+    "apiErrors": [],
+    "error": "Error: Native Tab did not reach target: Resumen",
+    "focus": {
+      "path": "/projects",
+      "tag": "BODY",
+      "id": "",
+      "text": "\n    Ir al contenidoResearcherResumenProyectosPlanificaci\u00f3nTareasAgentesConversaci\u00f3nDocumentosHallazgosInformesArchivosRepositoriosEjecuci\u00f3nCerrar men\u00faResearche"
+    }
+  },
+  "error": "",
+  "container_cleanup_exit": 0,
+  "service_exit": 143,
+  "storage_after_close": {
+    "projects": [
+      {
+        "id": 1,
+        "name": "Atlas comprobable",
+        "description": "Comparar resultados con fuentes verificables. No presuponer que una propuesta est\u00e1 aceptada."
+      },
+      {
+        "id": 2,
+        "name": "Contexto separado",
+        "description": "No debe heredar las tareas de Atlas."
+      }
+    ],
+    "groups": [
+      {
+        "id": 1,
+        "project_id": 1,
+        "title": "Reunir evidencia"
+      }
+    ],
+    "milestones": [
+      {
+        "id": 1,
+        "epic_id": 1,
+        "title": "Datos contrastados"
+      }
+    ],
+    "tasks": [
+      {
+        "id": 1,
+        "project_id": 1,
+        "epic_id": 1,
+        "title": "Capturar fuente",
+        "status": "backlog"
+      },
+      {
+        "id": 2,
+        "project_id": 1,
+        "epic_id": 1,
+        "title": "Contrastar resultado",
+        "status": "backlog"
+      }
+    ],
+    "dependencies": [
+      {
+        "task_id": 2,
+        "depends_on_task_id": 1
+      }
+    ],
+    "corrections": [
+      {
+        "project_id": 1,
+        "task_id": 2,
+        "version": 2,
+        "statement": "Ejemplo concreto: dos fuentes con el mismo t\u00edtulo pueden describir versiones diferentes. Compara fecha y contenido antes de tratarlas como equivalentes.",
+        "source_kind": "user_example"
+      }
+    ],
+    "files": [],
+    "file_operations": [],
+    "captured_sources": 0,
+    "wiki": [],
+    "wiki_revisions": [],
+    "runs": 0,
+    "dispatches": 0,
+    "native_starts": 0,
+    "integrity": "ok"
+  },
+  "business_and_inference_unchanged": true
+}

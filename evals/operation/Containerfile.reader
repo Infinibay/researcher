@@ -1,0 +1,6 @@
+# Current packaged Orca with the same Node24 runtime; isolated reader tooling, not product packaging.
+FROM docker.io/library/node:24.22.2-bookworm-slim AS node-runtime
+FROM docker.io/library/archlinux:base
+ENV LANG=C.UTF-8
+COPY --from=node-runtime /usr/local /usr/local
+RUN pacman -Syu --noconfirm --needed orca speech-dispatcher espeak-ng xorg-server-xvfb xorg-xauth xdotool nss mesa alsa-lib libcups ttf-dejavu && pacman -Q > /opt/reader-packages.txt && pacman -Scc --noconfirm

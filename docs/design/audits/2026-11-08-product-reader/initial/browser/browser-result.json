@@ -1,0 +1,15 @@
+{
+  "status": "failed",
+  "scope": "Real installed HTTP/SQLite and Orca/Speech Dispatcher; native X keys; ALSA null, no physical listening or human acceptance",
+  "routes": [],
+  "content": [],
+  "pageErrors": [],
+  "apiErrors": [],
+  "error": "Error: Native Tab did not reach target: Resumen",
+  "focus": {
+    "path": "/projects",
+    "tag": "BODY",
+    "id": "",
+    "text": "\n    Ir al contenidoResearcherResumenProyectosPlanificaciónTareasAgentesConversaciónDocumentosHallazgosInformesArchivosRepositoriosEjecuciónCerrar menúResearche"
+  }
+}

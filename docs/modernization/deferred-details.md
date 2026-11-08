@@ -1509,3 +1509,14 @@ controles de terminal/bidi como texto visible y no cambió. Registrar una excepc
 local justificada o reformular sin perder ese comportamiento en la pasada de
 estilo final. No afirmar lint verde. Evidencia antes/después en la auditoría
 2026-11-08-accessibility-final.247 pruebas web pasan, sin cambiar esta semántica.
+
+
+## DD162 — replay aislado del foco del lector
+
+El verificador independiente del recorrido Orca51 vuelve a comprobar el cuerpo
+fresco del evento, identidad y estado focused; START/FINISHED lo valida el guion
+productor ejecutado, cuyas fuentes coinciden con las retenidas. Si se quiere que
+el replay aislado certifique por sí solo el cierre de procesamiento, añadir esa
+comprobación en la pasada final de detalles. No exige repetir la GUI ni cambiar
+la política de foco legítima de Wiki. [Evidencia](../design/audits/2026-11-08-product-reader/independent-review.md).
+El pase actual no afirma esa independencia adicional.

@@ -1,0 +1,34 @@
+{
+  "status": "passed",
+  "scope": "Installed owner workspace with actual Orca; ALSA null, no physical listening or human acceptance",
+  "pairing_before_reader": true,
+  "tools": {
+    "orca": "Orca version 51.1 (rev 244bdadd9), AT-SPI2 version: 2.62.1",
+    "node": "v24.22.2",
+    "speech_dispatcher": "speech-dispatcher 0.12.1"
+  },
+  "orca_arguments": [
+    "orca",
+    "--debug-file=/out/orca-debug.log",
+    "--speech-system=speechdispatcherfactory"
+  ],
+  "browser_exit": 0,
+  "children": [
+    {
+      "name": "orca",
+      "exit": 0
+    },
+    {
+      "name": "browser",
+      "exit": 0
+    },
+    {
+      "name": "speech",
+      "exit": 0
+    },
+    {
+      "name": "xvfb",
+      "exit": 0
+    }
+  ]
+}

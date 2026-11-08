@@ -28,7 +28,35 @@ que se pueda comparar el avance; no presentar microajustes como tareas principal
 - Última suite global: `cb4da17`,2578 casos,2576 pasan y2fallan,0omisiones. Ambos fallos reproducidos por contaminación de entorno de una prueba del lanzador; corrección posterior con3casos dirigidos/22ampliados aprobados. No se declara una nueva corrida completa verde. `9fb873c` y sus31fallos/1error quedan como referencia histórica.
 - U01–U07, E01–E12, C01–C10 y D01–D13 quedan comprobados con el alcance de sus matrices; sigue 1 de 43 escenarios amplios sin aceptación completa en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Estado actual: zoom nativo comprobado; siguiente lector de pantalla
+## Estado actual: lector de rutas y texto comprobado; continúan explicaciones enriquecidas
+
+[Informe](../design/audits/2026-11-08-product-reader/report.md),
+[resultados](product-reader-results.json). Primeras entradas22:38:29,621UTC;
+recibo final23:06:09,370UTC: **27min39,749s** entre archivos. Preparación previa,
+verificación/documentación posteriores aparte. Pase final:45,657s entre sus entradas
+y recibo; no es una estimación del trabajo restante.
+
+- Terminado por alcance: doce rutas con enlace/control/h1 leídos por Orca51.1;
+  dos frases de corrección leídas mediante SayAll.50comprobaciones en50frames
+  distintos de síntesis terminada y12rolesh1 confirmados. Foco real del contenido,
+  incluido h1 de Wiki; teclado X nativo y modo de lectura documentado.4procesos0,
+  contenedor/retirada0, supervisor143. Proyección de negocio/inferencia observada
+  igual, integridadok y0inferencias; no es igualdad byteporbyte deSQLite.
+- Investigación retenida: nueve intentos anteriores fallidos; caché obsoleta de
+  Orca43, interfaces del lector y supuestos del guion corregidos. La recarga
+  diagnóstica jamás acepta una ruta. No se cambió código de aplicación para pasar
+  estos ensayos. Verificador independiente aprueba también los logs comprimidos.
+- Ahora: ampliar lector al contenido explicativo enriquecido y diagramas. El
+  pase de rutas/texto no verifica todavía la misma explicación rica en el lector.
+- Pendientes en orden: ese contenido con lector; documentación frontend/C;
+  detalles; paquete/global/revisión independiente finales. U08 humano y decisión
+  Ken/ONNX continúan pendientes sin repetir preguntas ni inferir aceptación.
+- Estado amplio:42/43escenarios y12/12páginas por alcance. Última global mantiene
+  2576pass/2fallos con corrección posterior comprobada sólo en22casos. Sin nueva
+  global verde, push, merge o despliegue. Audiofísico/humano/móvil/otroslectores no
+  quedan aceptados por esta comprobación de escritorio.
+
+## Etapa anterior: zoom nativo comprobado y herramientas del lector preparadas
 
 [Informe](../design/audits/2026-11-08-native-zoom/report.md),
 [resultados](native-zoom-results.json). Entre creación del primer host y recibo

@@ -1,0 +1,556 @@
+{
+  "status": "failed",
+  "scope": "Installed synthetic owner workspace, real reader; no physical listening or human acceptance",
+  "storage_before": {
+    "projects": [
+      {
+        "id": 1,
+        "name": "Atlas comprobable",
+        "description": "Comparar resultados con fuentes verificables. No presuponer que una propuesta est\u00e1 aceptada."
+      },
+      {
+        "id": 2,
+        "name": "Contexto separado",
+        "description": "No debe heredar las tareas de Atlas."
+      }
+    ],
+    "groups": [
+      {
+        "id": 1,
+        "project_id": 1,
+        "title": "Reunir evidencia"
+      }
+    ],
+    "milestones": [
+      {
+        "id": 1,
+        "epic_id": 1,
+        "title": "Datos contrastados"
+      }
+    ],
+    "tasks": [
+      {
+        "id": 1,
+        "project_id": 1,
+        "epic_id": 1,
+        "title": "Capturar fuente",
+        "status": "backlog"
+      },
+      {
+        "id": 2,
+        "project_id": 1,
+        "epic_id": 1,
+        "title": "Contrastar resultado",
+        "status": "backlog"
+      }
+    ],
+    "dependencies": [
+      {
+        "task_id": 2,
+        "depends_on_task_id": 1
+      }
+    ],
+    "corrections": [
+      {
+        "project_id": 1,
+        "task_id": 2,
+        "version": 2,
+        "statement": "Ejemplo concreto: dos fuentes con el mismo t\u00edtulo pueden describir versiones diferentes. Compara fecha y contenido antes de tratarlas como equivalentes.",
+        "source_kind": "user_example"
+      }
+    ],
+    "files": [],
+    "file_operations": [],
+    "captured_sources": 0,
+    "wiki": [],
+    "wiki_revisions": [],
+    "runs": 0,
+    "dispatches": 0,
+    "native_starts": 0,
+    "integrity": "ok"
+  },
+  "model_turns": 0,
+  "backend": "/home/andres/.codex/worktrees/b09e/researcher/.superpowers/sdd/2026-10-31-actualizacion-proyecto/native-runtime-env/lib/python3.12/site-packages/backend/__init__.py",
+  "web_index_sha256": "be011881958834d8e2c34e5fb5f460c3e5cfbdb1801877b815d9d54341f5b8dd",
+  "tooling_image": "e3d48554c62032a4a95982abe75168b6e58b3faa65dbe1bfaf5ff213b8250e15",
+  "container_exit": 1,
+  "reader": {
+    "status": "failed",
+    "scope": "Installed owner workspace with actual Orca; ALSA null, no physical listening or human acceptance",
+    "pairing_before_reader": true,
+    "tools": {
+      "orca": "Orca version 51.1 (rev 244bdadd9), AT-SPI2 version: 2.62.1",
+      "node": "v24.22.2",
+      "speech_dispatcher": "speech-dispatcher 0.12.1"
+    },
+    "orca_arguments": [
+      "orca",
+      "--debug-file=/out/orca-debug.log",
+      "--speech-system=speechdispatcherfactory"
+    ],
+    "browser_exit": 1,
+    "error": "Inspect browser-result.json and original reader logs",
+    "children": [
+      {
+        "name": "orca",
+        "exit": 0
+      },
+      {
+        "name": "browser",
+        "exit": 1
+      },
+      {
+        "name": "speech",
+        "exit": 0
+      },
+      {
+        "name": "xvfb",
+        "exit": 0
+      }
+    ]
+  },
+  "browser": {
+    "status": "failed",
+    "scope": "Real installed HTTP/SQLite and Orca/Speech Dispatcher; native X keys; ALSA null, no physical listening or human acceptance",
+    "routes": [
+      {
+        "label": "Resumen",
+        "route": "/",
+        "tabs": 12,
+        "navigationSpeech": {
+          "phrase": "Resumen",
+          "start": {
+            "orca": 137169,
+            "speech": 5939929
+          },
+          "mode": "single",
+          "moduleText": "Resumen",
+          "moduleEnd": true,
+          "orcaOutput": "22:59:53.941041 - SPEECH OUTPUT: 'Resumen'{'established': 'False',"
+        },
+        "focusSpeech": {
+          "start": {
+            "orca": 479392,
+            "speech": 6599060
+          },
+          "event": "22:59:54.226528 - EVENT SOURCE:\n                  app='Google Chrome for Testing (Chromium 1.0)' name='' role='landmark' axid='' id=0x7f8b2c0d0900\n                  description=''\n                  help=''\n                  locale='C.UTF-8'\n                  states='enabled, focusable, focused, sensitive, showing, visible'\n                  relations=''\n                  actions='click-ancestor; show-context-menu; scroll-backward; scroll-down; scroll-forward; scroll-left; scroll-right; scroll-up'\n                  interfaces='Action, Collection, Component, Document, Hyperlink, Hypertext, Text'\n                  attributes='class:workspace-content min-w-0 flex-1 overflow-auto p-6, display:block, text-align:left, tag:main, id:main-content, xml-roles:main'\n                  text='[OBJ]'\n                  path=[-1, 0, 0, 0, 5, 2, 1, 3, 0, 3, 0]\n                  \n22:59:54.226590 - SCRIPT MANAGER: Active script is: Google Chrome for Testing (module=orca.scripts.toolkits.Chromium.script)\n22:59:54.226652 - FOCUS MANAGER: Locus of focus is [link: 'Resumen' (0x7f8b241ad400)]\n22:59:54.226897 - EVENT MANAGER: Getting script for event for [application: 'Google Chrome for Testing' (0x7f8b241e97c0)] [landmark (0x7f8b24093280)]\n22:59:54.226973 - SCRIPT MANAGER: Getting script for [application: 'Google Chrome for Testing' (0x7f8b241e97c0)] [landmark (0x7f8b24093280)]\n22:59:54.227097 - GSETTINGS REGISTRY: sleep-mode/apps using default value = []\n22:59:54.227140 - SCRIPT MANAGER: Script is app script Google Chrome for Testing (module=orca.scripts.toolkits.Chromium.script)\n22:59:54.227175 - EVENT MANAGER: Script for event is Google Chrome for Testing (module=orca.scripts.toolkits.Chromium.script)\n22:59:54.227228 - EVENT MANAGER: Processing object:state-changed:focused: script for event is active\n22:59:54.227422 - FOCUS MANAGER: Locus of focus is [link: 'Resumen' (0x7f8b241ad400)]\n22:59:54.227555 - WEB: Getting caret context for None\n22:59:54.227598 - FOCUS MANAGER: Active window is [frame: 'Researcher - Google Chrome for Testing' (0x7f8b241e9b40)] script._on_focused_changed:1355 > script_utilities.get_caret_context:3145 > script_utilities.active_document:212 > focus_manager.get_active_window:391\n22:59:54.228489 - AXUtilitiesRelation: [frame: 'Researcher - Google Chrome for Testing' (0x7f8b241e9b40)] embeds: [[document web: 'Researcher' (0x7f8b2412ad00)]]\n22:59:54.228547 - SCRIPT UTILITIES: Active document (via embeds): [document web: 'Researcher' (0x7f8b2412ad00)]\n22:59:54.228584 - WEB: Now getting caret context for [document web: 'Researcher' (0x7f8b2412ad00)]\n22:59:54.228677 - WEB: Cached context of [document web: 'Researcher' (0x7f8b2412ad00)] is [link: 'Resumen' (0x7f8b241ad400)], 0\n22:59:54.228778 - WEB: Result context of [document web: 'Researcher' (0x7f8b2412ad00)] is [link: 'Resumen' (0x7f8b241ad400)], 0.\n22:59:54.228853 - WEB: Caret context is [link: 'Resumen' (0x7f8b241ad400)], 0\n22:59:54.228927 - WEB: Deferring to other scripts for handling non-document source\n22:59:54.228992 - TOOLKIT BRIDGE: _on_focused_changed passing to default.Script._on_focused_changed\n22:59:54.229286 - SCRIPT UTILITIES: [frame: 'Researcher - Google Chrome for Testing' (0x7f8b241e9b40)] is top-level object for: [landmark (0x7f8b1ce6a7c0)]\n22:59:54.229616 - SCRIPT UTILITIES: [landmark (0x7f8b1ce6a7c0)] is in frame [frame: 'Researcher - Google Chrome for Testing' (0x7f8b241e9b40)] and dialog None\n22:59:54.229750 - AXObject: Clearing AT-SPI cache on [frame: 'Researcher - Google Chrome for Testing' (0x7f8b241e9b40)] Recursive: False. Reason: Checking if window can be the active window\n22:59:54.230247 - AXUtilities: [frame: 'Researcher - Google Chrome for Testing' (0x7f8b241e9b40)] from [application: 'Google Chrome for Testing' (0x7f8b241e97c0)] can be active window\n22:59:54.230347 - FOCUS MANAGER: Request to set locus of focus to [landmark (0x7f8b1ce6a7c0)] script._on_focused_changed:91 > toolkit_bridge.wrapper:56 > default._on_focused_changed:746 > focus_manager.set_locus_of_focus:320\n22:59:54.231426 - AXObject: Clearing AT-SPI cache on [landmark (0x7f8b1ce6a7c0)] Recursive: False. Reason: Setting locus of focus.\n22:59:54.231519 - SCRIPT MANAGER: Active script is: Google Chrome for Testing (module=orca.scripts.toolkits.Chromium.script)\n22:59:54.232728 - FOCUS MANAGER: Changing locus of focus from [link: 'Resumen' (0x7f8b241ad400)] to [landmark (0x7f8b1ce6a7c0)]. Notify: True\n22:59:54.233139 - FOCUS MANAGER: Region of interest: [landmark (0x7f8b1ce6a7c0)] (0, 0)\n22:59:54.233494 - FOCUS MANAGER: Switching object of interest from [link: 'Resumen' (0x7f8b241ad400)] to [landmark (0x7f8b1ce6a7c0)]\n22:59:54.233736 - WEB: Focus changing from [link: 'Resumen' (0x7f8b241ad400)] to [landmark (0x7f8b1ce6a7c0)]\n22:59:54.234996 - AXText: [landmark (0x7f8b1ce6a7c0)] reports 1 characters.\n22:59:54.235984 - AXUtilitiesRelation: [landmark (0x7f8b1ce6a7c0)] is label for: []\n22:59:54.236295 - AXText: [landmark (0x7f8b1ce6a7c0)] reports caret offset of -1.\n22:59:54.236399 - WEB: updating braille for [landmark (0x7f8b1ce6a7c0)] offset: None focus_manager.set_locus_of_focus:374 > toolkit_bridge.wrapper:47 > script.locus_of_focus_changed:500 > script.update_braille:346\n22:59:54.237471 - GSETTINGS REGISTRY: braille/enabled using default value = True\n22:59:54.237830 - AXDocument: Attributes of [document web: 'Researcher' (0x7f8b2412ad00)] are: {'DocType': 'html', 'MimeType': 'text/html', 'Title': 'Researcher', 'URI': 'http://127.0.0.1:37631/'}\n22:59:54.238197 - AXDocument: Attributes of [document web: 'Researcher' (0x7f8b2412ad00)] are: {'DocType': 'html', 'MimeType': 'text/html', 'Title': 'Researcher', 'URI': 'http://127.0.0.1:37631/'}\n22:59:54.238257 - WEB: updating braille for unhandled navigation type [landmark (0x7f8b1ce6a7c0)]\n22:59:54.238336 - GSETTINGS REGISTRY: braille/enabled using default value = True\n22:59:54.238404 - FOCUS MANAGER: Active mode: focus-tracking Object of interest: [landmark (0x7f8b1ce6a7c0)]\n22:59:54.238480 - GSETTINGS REGISTRY: braille/enabled using default value = True\n22:59:54.238550 - GSETTINGS REGISTRY: braille/verbosity-level using default value = 'verbose'\n22:59:54.238592 - FOCUS MANAGER: Locus of focus is [landmark (0x7f8b1ce6a7c0)]\n22:59:54.238637 - SCRIPT MANAGER: Active script is: Google Chrome for Testing (module=orca.scripts.toolkits.Chromium.script)\n22:59:54.238712 - GSETTINGS REGISTRY: braille/rolename-style using default value = 'verbose'\n22:59:54.238780 - GSETTINGS REGISTRY: braille/display-ancestors using default value = True\n22:59:54.238847 - GSETTINGS REGISTRY: braille/end-of-line-indicator using default value = True\n22:59:54.238913 - GSETTINGS REGISTRY: braille/present-mnemonics using default value = True\n22:59:54.238982 - WEB: Generating braille for document object [landmark (0x7f8b1ce6a7c0)] script.update_braille:389 > default.update_braille:331 > braille_presenter.present_generated_braille:740 > braille_generator.generate_braille:243\n22:59:54.240178 - AXUtilitiesRelation: [landmark (0x7f8b1ce6a7c0)] is label for: []\n22:59:54.240234 - FOCUS MANAGER: Active window is [frame: 'Researcher - Google Chrome for Testing' (0x7f8b241e9b40)] script_utilities.is_clickable_element:2436 > script_utilities._has_grid_descendant:2183 > script_utilities.active_document:212 > focus_manager.get_active_window:391\n22:59:54.241875 - AXUtilitiesRelation: [frame: 'Researcher - Google Chrome for Testing' (0x7f8b241e9b40)] embeds: [[document web: 'Researcher' (0x7f8b2412ad00)]]\n22:59:54.241947 - SCRIPT UTILITIES: Active document (via embeds): [document web: 'Researcher' (0x7f8b2412ad00)]\n22:59:54.243296 - AXText: [landmark (0x7f8b1ce6a7c0)] reports 1 characters.\n22:59:54.243494 - AXText: Text of [landmark (0x7f8b1ce6a7c0)]'\ufffc'\n22:59:54.243561 - WEB: [landmark (0x7f8b1ce6a7c0)] is not clickable: its text is just EOCs\n22:59:54.243973 - GENERATOR: _get_functional_role: landmark\n22:59:54.244073 - BRAILLE GENERATOR: braille_generator.BrailleGenerator._generate_landmark for [landmark (0x7f8b1ce6a7c0)]\n22:59:54.244366 - FOCUS MANAGER: Locus of focus is [landmark (0x7f8b1ce6a7c0)]\n22:59:54.244485 - AXUtilitiesRelation: [landmark (0x7f8b1ce6a7c0)] is labelled by: []\n22:59:54.244553 - GENERATOR: _generate_accessible_label: []\n22:59:54.244617 - WEB BRAILLE GENERATOR: _generate_accessible_label: []\n22:59:54.244869 - GENERATOR: _generate_accessible_name: []\n22:59:54.244958 - WEB BRAILLE GENERATOR: _generate_accessible_name: []\n22:59:54.245024 - GENERATOR: _generate_accessible_label_and_name: []\n22:59:54.245085 - WEB BRAILLE GENERATOR: _generate_accessible_label_and_name: []\n22:59:54.245193 - GENERATOR: _generate_text_substring: []\n22:59:54.245408 - AXText: [landmark (0x7f8b1ce6a7c0)] reports 1 characters.\n22:59:54.245602 - AXText: Text of [landmark (0x7f8b1ce6a7c0)]'\ufffc'\n22:59:54.245703 - GENERATOR: _generate_text_content: []\n22:59:54.245925 - GENERATOR: _generate_value: []\n22:59:54.246064 - AXUtilitiesTable: Coordinates label for [landmark (0x7f8b1ce6a7c0)]: \n22:59:54.246486 - BRAILLE GENERATOR: _generate_accessible_role: [main content]\n22:59:54.246784 - WEB BRAILLE GENERATOR: _generate_accessible_role: [main content]\n22:59:54.246884 - GENERATOR: _generate_state_required: []\n22:59:54.246970 - GENERATOR: _generate_state_invalid: []\n22:59:54.247757 - GENERATOR: _generate_keyboard_mnemonic: []\n22:59:54.247833 - BRAILLE: Not contracting 'main content' because contracted braille is not enabled.\n22:59:54.247971 - AXUtilitiesRelation: [landmark (0x7f8b1ce6a7c0)] is described by: []\n22:59:54.248047 - GENERATOR: _generate_accessible_description: []\n22:59:54.248111 - WEB BRAILLE GENERATOR: _generate_accessible_description: []\n22:59:54.248210 - GENERATOR: _generate_state_current: []\n22:59:54.248284 - BRAILLE GENERATOR: Results: [COMPONENT: 'main content', cursor offset:0]\n22:59:54.248415 - BRAILLE: Refresh. Pan: True target: 0\n22:59:54.248446 - BRAILLE: Kill flash message braille.display_line:1785 > braille.refresh:2304 > braille._prepare_refresh:2020 > braille.kill_flash:2402\n22:59:54.249831 - GSETTINGS REGISTRY: braille/enabled using default value = True\n22:59:54.249981 - BRAILLE: Last text object: None [(Caret:, 0,, Line:, 0,, Cell:, 0,)]\n22:59:54.250109 - BRAILLE: Current text object: None [(Caret:, 0,, Line:, 0,). On same line:] False\n22:59:54.250243 - BRAILLE: Line 0: 'main content' focusOffset: 0 [[0, 12]]\n22:59:54.250283 - BRAILLE: Cursor offset in line string is: 0\n22:59:54.250343 - BRAILLE: display_size=32 monitor=0\n22:59:54.250393 - BRAILLE: Not adjusting offset 0. Cursor offset fits on display.\n22:59:54.250512 - BRAILLE: Current range: (0, 32). Target cell: 0\n22:59:54.250567 - BRAILLE LINE:  'main content'\n22:59:54.250629 -      VISIBLE:  'main content', cursor=1\n22:59:54.250671 - BRAILLE: Enabling braille. BrlAPI running: False\n22:59:54.250691 - BRAILLE: Need to initialize first.\n22:59:54.250747 - BRAILLE: Initializing. Callback: input_event_manager.InputEventManager.process_braille_event\n22:59:54.250793 - BRAILLE: WINDOWPATH=None\n22:59:54.250832 - BRAILLE: XDG_VTNR=None\n22:59:54.250873 - BRAILLE: Attempting connection with BrlAPI.\n22:59:54.251176 - WEB: New focus [landmark (0x7f8b1ce6a7c0)] is not a special case. Generating speech.\n22:59:54.251335 - BRAILLE: BrlAPI Connection is unavailable (ConnectionError): couldn't connect to b':0' with key b'keyfile:/etc/brlapi.key+polkit': connect: No such file or directory\n                  (brlerrno 11, libcerrno 2, gaierrno 0)\n                  Is BRLTTY really running?\n22:59:54.251751 - AXUtilitiesRelation: [link: 'Resumen' (0x7f8b241ad400)] is controlled by [landmark (0x7f8b1ce6a7c0)]: False\n22:59:54.252023 - AXUtilitiesRelation: [landmark (0x7f8b1ce6a7c0)] is controlled by [link: 'Resumen' (0x7f8b241ad400)]: False\n22:59:54.252041 - PRESENTATION MANAGER: Interrupting presentation\n22:59:54.252128 - SPEECH MANAGER: interrupt_speech. Script: None Event: None notify_user: False\n22:59:54.252441 - SPEECH MANAGER: Speech server is <orca.speechdispatcherfactory.SpeechServer object at 0x7f8b24a9b380>\n22:59:54.252620 - BRAILLE: Kill flash message presentation_manager.interrupt_if_needed_for_focus_change:113 > presentation_manager.interrupt_presentation:94 > braille_presenter.kill_flash:1667 > braille.kill_flash:2402\n22:59:54.254017 - FOCUS MANAGER: Active mode: focus-tracking Object of interest: [landmark (0x7f8b1ce6a7c0)]\n22:59:54.254102 - GSETTINGS REGISTRY: speech/enable using default value = True\n22:59:54.254172 - GSETTINGS REGISTRY: speech/verbosity-level using default value = 'verbose'\n22:59:54.254214 - FOCUS MANAGER: Locus of focus is [landmark (0x7f8b1ce6a7c0)]\n22:59:54.254262 - SCRIPT MANAGER: Active script is: Google Chrome for Testing (module=orca.scripts.toolkits.Chromium.script)\n22:59:54.254336 - GSETTINGS REGISTRY: speech/auto-language-switching using default value = True\n22:59:54.254405 - GSETTINGS REGISTRY: speech/only-switch-configured-languages using default value = False\n22:59:54.258781 - GSETTINGS REGISTRY: speech/auto-language-switching-ui using default value = False\n22:59:54.258870 - GSETTINGS REGISTRY: speech/insert-pauses-between-utterances using default value = True\n22:59:54.258943 - GSETTINGS REGISTRY: speech/punctuation-level using default value = 'most'\n22:59:54.259080 - GSETTINGS REGISTRY: speech/only-speak-displayed-text using default value = False\n22:59:54.259146 - GSETTINGS REGISTRY: speech/speak-description using default value = True\n22:59:54.259210 - GSETTINGS REGISTRY: speech/speak-tutorial-messages using default value = True\n22:59:54.259273 - GSETTINGS REGISTRY: speech/speak-position-in-set using default value = False\n22:59:54.259335 - GSETTINGS REGISTRY: speech/speak-widget-mnemonic using default value = True\n22:59:54.259398 - GSETTINGS REGISTRY: speech/speak-blank-lines using default value = True\n22:59:54.259505 - GSETTINGS REGISTRY: speech/speak-indentation using default value = False\n22:59:54.259606 - GSETTINGS REGISTRY: speech/announce-cell-headers using default value = True\n22:59:54.259696 - GSETTINGS REGISTRY: speech/announce-cell-coordinates using default value = True\n22:59:54.259782 - GSETTINGS REGISTRY: speech/announce-spreadsheet-cell-coordinates using default value = True\n22:59:54.259867 - GSETTINGS REGISTRY: speech/announce-article using default value = True\n22:59:54.259953 - GSETTINGS REGISTRY: speech/announce-blockquote using default value = True\n22:59:54.260038 - GSETTINGS REGISTRY: speech/announce-code-block using default value = True\n22:59:54.260125 - GSETTINGS REGISTRY: speech/announce-document using default value = True\n22:59:54.260191 - GSETTINGS REGISTRY: speech/announce-form using default value = True\n22:59:54.260253 - GSETTINGS REGISTRY: speech/announce-grouping using default value = True\n22:59:54.260314 - GSETTINGS REGISTRY: speech/announce-landmark using default value = True\n22:59:54.260377 - GSETTINGS REGISTRY: speech/announce-list using default value = True\n22:59:54.260477 - GSETTINGS REGISTRY: speech/announce-table using default value = True\n22:59:54.260546 - GSETTINGS REGISTRY: speech/announce-tracked-changes using default value = True\n22:59:54.260611 - GSETTINGS REGISTRY: speech/speak-text-attribute-changes using default value = 'off'\n22:59:54.260684 - GSETTINGS REGISTRY: speech/speak-misspelled-indicator using default value = True\n22:59:54.260768 - WEB: Generating speech for document object [landmark (0x7f8b1ce6a7c0)]\n22:59:54.261134 - AXText: [landmark (0x7f8b1ce6a7c0)] reports 1 characters.\n22:59:54.261239 - AXText: Getting attributes for [landmark (0x7f8b1ce6a7c0)] chars: 0 - 1\n22:59:54.261671 - AXText: Attributes for [landmark (0x7f8b1ce6a7c0)] at offset 0: [{'bg-color': '255,254,250', 'direction': 'lr', 'family-name': 'DejaVu Sans', 'fg-color': '36,45,42', 'language': 'es', 'size': '12pt'}, 0, 1]\n22:59:54.261861 - AXText: 1 attribute ranges found.\n22:59:54.262093 - GENERATOR: _get_functional_role: landmark\n22:59:54.262179 - SPEECH GENERATOR: speech_generator.SpeechGenerator._generate_landmark for [landmark (0x7f8b1ce6a7c0)]\n22:59:54.263008 - SCRIPT UTILITIES: [frame: 'Researcher - Google Chrome for Testing' (0x7f8b241e9b40)] is top-level object for: [landmark (0x7f8b1ce6a7c0)]\n22:59:54.263300 - SCRIPT UTILITIES: [landmark (0x7f8b1ce6a7c0)] is in frame [frame: 'Researcher - Google Chrome for Testing' (0x7f8b241e9b40)] and dialog None\n22:59:54.263380 - AXUtilitiesRelation: [link: 'Resumen' (0x7f8b241ad400)] is label for: []\n22:59:54.263803 - SPEECH GENERATOR: _generate_old_ancestors: []\n22:59:54.263873 - WEB SPEECH GENERATOR: _generate_old_ancestors: []\n22:59:54.264243 - SPEECH GENERATOR: _generate_new_ancestors: []\n22:59:54.264312 - WEB SPEECH GENERATOR: _generate_new_ancestors: []\n22:59:54.264949 - SPEECH GENERATOR: system voice requested for [landmark (0x7f8b1ce6a7c0)] language='es', dialect=''Unmodified voice={'established': 'False'}\n22:59:54.265054 - SPEECH GENERATOR: Final voice is {'established': 'False', 'family': '{}', 'voice-type': 'system'}\n22:59:54.265290 - AXText: Text of [landmark (0x7f8b1ce6a7c0)]'\ufffc'\n22:59:54.265682 - WEB SPEECH GENERATOR: _generate_accessible_role: [main content, {'established': 'False', 'family': '{}', 'voice-type': 'system'}]\n22:59:54.265976 - FOCUS MANAGER: Locus of focus is [landmark (0x7f8b1ce6a7c0)]\n22:59:54.266058 - WEB SPEECH GENERATOR: _generate_accessible_label: []\n22:59:54.266224 - GENERATOR: _generate_accessible_name: []\n22:59:54.266292 - SPEECH GENERATOR: _generate_accessible_name: []\n22:59:54.266354 - WEB SPEECH GENERATOR: _generate_accessible_name: []\n22:59:54.266415 - GENERATOR: _generate_accessible_label_and_name: []\n22:59:54.266486 - SPEECH GENERATOR: _generate_accessible_label_and_name: []\n22:59:54.266549 - WEB SPEECH GENERATOR: _generate_accessible_label_and_name: []\n22:59:54.266844 - AXText: [landmark (0x7f8b1ce6a7c0)] reports caret offset of -1.\n22:59:54.267899 - AXText: Line at offset 0 in [landmark (0x7f8b1ce6a7c0)]'\ufffc' (0 - 1)\n22:59:54.268073 - AXText: Getting attributes for [landmark (0x7f8b1ce6a7c0)] chars: 0 - 1\n22:59:54.268518 - AXText: Attributes for [landmark (0x7f8b1ce6a7c0)] at offset 0: [{'bg-color': '255,254,250', 'direction': 'lr', 'family-name': 'DejaVu Sans', 'fg-color': '36,45,42', 'language': 'es', 'size': '12pt'}, 0, 1]\n22:59:54.268747 - AXText: 1 attribute ranges found.\n22:59:54.268970 - SPEECH GENERATOR: system voice requested for None language='es', dialect=''Unmodified voice={'established': 'False'}\n22:59:54.269084 - SPEECH GENERATOR: Final voice is {'established': 'False', 'family': '{}', 'voice-type': 'system'}\n22:59:54.269423 - AXText: Text of [landmark (0x7f8b1ce6a7c0)] (0 - 1): '\ufffc'\n22:59:54.269537 - SPEECH GENERATOR: _generate_text_line: []\n22:59:54.269654 - GENERATOR: _generate_state_current: []\n22:59:54.269721 - SPEECH GENERATOR: _generate_state_current: []\n22:59:54.269858 - WEB SPEECH GENERATOR: _generate_has_click_action: []\n22:59:54.269957 - AXUtilitiesRelation: [landmark (0x7f8b1ce6a7c0)] has details in: []\n22:59:54.270031 - WEB SPEECH GENERATOR: _generate_has_details: []\n22:59:54.270128 - AXUtilitiesRelation: [landmark (0x7f8b1ce6a7c0)] contains details for: []\n22:59:54.270197 - WEB SPEECH GENERATOR: _generate_details_for: []\n22:59:54.270334 - AXUtilitiesRelation: [landmark (0x7f8b1ce6a7c0)] is described by: []\n22:59:54.270409 - GENERATOR: _generate_accessible_description: []\n22:59:54.270506 - SPEECH GENERATOR: _generate_accessible_description: []\n22:59:54.270570 - WEB SPEECH GENERATOR: _generate_accessible_description: []\n22:59:54.270672 - SPEECH GENERATOR: _generate_state_has_popup: []\n22:59:54.270738 - WEB SPEECH GENERATOR: _generate_state_has_popup: []\n22:59:54.271151 - SPEECH GENERATOR: _generate_tutorial: []\n22:59:54.271325 - SPEECH GENERATOR: Results: [main content, {'established': 'False', 'family': '{}', 'voice-type': 'system'}, PAUSE]\n22:59:54.271394 - WEB: Speech generation for document object [landmark (0x7f8b1ce6a7c0)] complete.\n22:59:54.271568 - SPEECH: Speak [main content, {'established': 'False', 'family': '{}', 'voice-type': 'system'}, PAUSE], acss: None\n22:59:54.271687 - SPEECH OUTPUT: 'main content'{'established': 'False', 'voice-type': 'system'}\n22:59:54.271741 - SPEECH DISPATCHER: Speaking 'main content' as string\n22:59:54.272692 - SPEECH DISPATCHER: Speaking '<speak><mark name=\"0:4\"/>main <mark name=\"5:12\"/>content</speak>' \n                  ORCA rate 50, pitch 5.0, pitch-range 5.0, volume 10.0, language, punctuation: MOST\n                  SD rate 0, pitch 0, volume 100, language es\n22:59:54.273115 - DOCUMENT PRESENTER: Updating mode for focus change. Old focus: [link: 'Resumen' (0x7f8b241ad400)] old doc: [document web: 'Researcher' (0x7f8b2412ad00)] New focus: [landmark (0x7f8b1ce6a7c0)] new doc: [document web: 'Researcher' (0x7f8b2412ad00)]\n22:59:54.273198 - SCRIPT MANAGER: Active script is: Google Chrome for Testing (module=orca.scripts.toolkits.Chromium.script)\n22:59:54.273325 - GSETTINGS REGISTRY: document/native-nav-triggers-focus-mode using default value = True\n22:59:54.273567 - DOCUMENT PRESENTER: Not using focus mode for [landmark (0x7f8b1ce6a7c0)] due to lack of cause\n22:59:54.273691 - DOCUMENT PRESENTER: set_presentation_mode. Use focus mode: False, [landmark (0x7f8b1ce6a7c0)] in [document web: 'Researcher' (0x7f8b2412ad00)] notify user: True\n22:59:54.273719 - DOCUMENT PRESENTER: Presentation mode already set.\n22:59:54.273773 - TOOLKIT BRIDGE: locus_of_focus_changed handled by web script\n22:59:54.274178 - AXTable: Setting last cell coordinates to row=-1, column=-1\n22:59:54.274643 - AXText: [landmark (0x7f8b1ce6a7c0)] reports caret offset of -1.\n22:59:54.274741 - FOCUS MANAGER: Setting last cursor position to [landmark (0x7f8b1ce6a7c0)] -1\n22:59:54.275020 - AXText: [landmark (0x7f8b1ce6a7c0)] reports 0 selection(s).\n22:59:54.275296 - AXText: [landmark (0x7f8b1ce6a7c0)] reports caret offset of -1.\n22:59:54.275688 - AXText: Attributes for [landmark (0x7f8b1ce6a7c0)] at offset -1: [{'bg-color': '15,23,42', 'direction': 'lr', 'family-name': 'DejaVu Sans', 'fg-color': '226,232,240', 'language': 'es', 'size': '12pt'}, -1, -1]\n22:59:54.275955 - FOCUS MANAGER: Active window is [frame: 'Researcher - Google Chrome for Testing' (0x7f8b241e9b40)] focus_manager.set_locus_of_focus:376 > focus_manager._save_object_details:303 > ax_utilities_event.save_object_info_for_events:479 > focus_manager.get_active_window:391\nTOTAL PROCESSING TIME: 0.0535\n"
+        },
+        "browseModeSpeech": {
+          "phrase": "Browse mode is sticky",
+          "start": {
+            "orca": 633546,
+            "speech": 6794957
+          },
+          "mode": "single",
+          "moduleText": "Browse mode is sticky.",
+          "moduleEnd": true,
+          "orcaOutput": "22:59:54.799482 - SPEECH OUTPUT: 'Browse mode is sticky.'{'established': 'False'}"
+        },
+        "heading": "Atlas comprobable",
+        "headingSpeech": {
+          "phrase": "Atlas comprobable",
+          "start": {
+            "orca": 737747,
+            "speech": 7048636
+          },
+          "mode": "single",
+          "moduleText": "Atlas comprobable",
+          "moduleEnd": true,
+          "orcaOutput": "22:59:55.050324 - SPEECH OUTPUT: 'Atlas comprobable'{'established': 'False',"
+        },
+        "controlTabs": 1,
+        "controlLabel": "Actualizar resumen",
+        "controlSpeech": {
+          "phrase": "Actualizar resumen",
+          "start": {
+            "orca": 575492,
+            "speech": 6670422
+          },
+          "mode": "single",
+          "moduleText": "Actualizar resumen",
+          "moduleEnd": true,
+          "orcaOutput": "22:59:54.467343 - SPEECH OUTPUT: 'Actualizar resumen'{'established': 'False',"
+        }
+      },
+      {
+        "label": "Proyectos",
+        "route": "/projects",
+        "tabs": 14,
+        "navigationSpeech": {
+          "phrase": "Proyectos",
+          "start": {
+            "orca": 798148,
+            "speech": 7200439
+          },
+          "mode": "single",
+          "moduleText": "Proyectos",
+          "moduleEnd": true,
+          "orcaOutput": "22:59:55.973598 - SPEECH OUTPUT: 'Proyectos'{'established': 'False',"
+        },
+        "focusSpeech": {
+          "start": {
+            "orca": 1183467,
+            "speech": 7954397
+          },
+          "event": "22:59:56.207425 - EVENT SOURCE:\n                  app='Google Chrome for Testing (Chromium 1.0)' name='' role='landmark' axid='' id=0x7f8b1ce0eb00\n                  description=''\n                  help=''\n                  locale='C.UTF-8'\n                  states='enabled, focusable, focused, sensitive, showing, visible'\n                  relations=''\n                  actions='click-ancestor; show-context-menu; scroll-backward; scroll-down; scroll-forward; scroll-left; scroll-right; scroll-up'\n                  interfaces='Action, Collection, Component, Document, Hyperlink, Hypertext, Text'\n                  attributes='class:workspace-content min-w-0 flex-1 overflow-auto p-6, display:block, text-align:left, tag:main, id:main-content, xml-roles:main'\n                  text='[OBJ][OBJ][OBJ]'\n                  path=[-1, 0, 0, 0, 5, 2, 1, 3, 0, 3, 0]\n                  \n22:59:56.207545 - SCRIPT MANAGER: Active script is: Google Chrome for Testing (module=orca.scripts.toolkits.Chromium.script)\n22:59:56.207620 - FOCUS MANAGER: Locus of focus is [link: 'Proyectos' (0x7f8b1ce68040)]\n22:59:56.207706 - EVENT MANAGER: Getting script for event for [application: 'Google Chrome for Testing' (0x7f8b241e97c0)] [landmark (0x7f8b24927d80)]\n22:59:56.207758 - SCRIPT MANAGER: Getting script for [application: 'Google Chrome for Testing' (0x7f8b241e97c0)] [landmark (0x7f8b24927d80)]\n22:59:56.207890 - GSETTINGS REGISTRY: sleep-mode/apps using default value = []\n22:59:56.207937 - SCRIPT MANAGER: Script is app script Google Chrome for Testing (module=orca.scripts.toolkits.Chromium.script)\n22:59:56.207976 - EVENT MANAGER: Script for event is Google Chrome for Testing (module=orca.scripts.toolkits.Chromium.script)\n22:59:56.208034 - EVENT MANAGER: Processing object:state-changed:focused: script for event is active\n22:59:56.208339 - FOCUS MANAGER: Locus of focus is [link: 'Proyectos' (0x7f8b1ce68040)]\n22:59:56.208549 - WEB: Element claimed focus, but browse mode is sticky\n22:59:56.208622 - TOOLKIT BRIDGE: _on_focused_changed handled by web script\nTOTAL PROCESSING TIME: 0.0054\n"
+        },
+        "browseModeSpeech": {
+          "phrase": "Browse mode is sticky",
+          "start": {
+            "orca": 1294012,
+            "speech": 8176990
+          },
+          "mode": "single",
+          "moduleText": "Browse mode is sticky.",
+          "moduleEnd": true,
+          "orcaOutput": "22:59:56.979728 - SPEECH OUTPUT: 'Browse mode is sticky.'{'established': 'False'}"
+        },
+        "heading": "Proyectos",
+        "headingSpeech": {
+          "phrase": "Proyectos",
+          "start": {
+            "orca": 1361654,
+            "speech": 8424503
+          },
+          "mode": "single",
+          "moduleText": "Proyectos",
+          "moduleEnd": true,
+          "orcaOutput": "22:59:57.234494 - SPEECH OUTPUT: 'Proyectos'{'established': 'False',"
+        },
+        "controlTabs": 1,
+        "controlLabel": "Nuevo proyecto",
+        "controlSpeech": {
+          "phrase": "Nuevo proyecto",
+          "start": {
+            "orca": 1242056,
+            "speech": 7986448
+          },
+          "mode": "single",
+          "moduleText": "Nuevo proyecto",
+          "moduleEnd": true,
+          "orcaOutput": "22:59:56.394634 - SPEECH OUTPUT: 'Nuevo proyecto'{'established': 'False',"
+        }
+      },
+      {
+        "label": "Planificaci\u00f3n",
+        "route": "/epics",
+        "tabs": 18,
+        "navigationSpeech": {
+          "phrase": "Planificaci\u00f3n",
+          "start": {
+            "orca": 1419986,
+            "speech": 8615601
+          },
+          "mode": "single",
+          "moduleText": "Planificaci\u00f3n",
+          "moduleEnd": true,
+          "orcaOutput": "22:59:58.205693 - SPEECH OUTPUT: 'Planificaci\u00f3n'{'established': 'False',"
+        },
+        "focusSpeech": {
+          "start": {
+            "orca": 1841070,
+            "speech": 9384770
+          },
+          "event": "22:59:58.522567 - EVENT SOURCE:\n                  app='Google Chrome for Testing (Chromium 1.0)' name='' role='landmark' axid='' id=0x7f8b1cef0200\n                  description=''\n                  help=''\n                  locale='C.UTF-8'\n                  states='enabled, focusable, focused, sensitive, showing, visible'\n                  relations=''\n                  actions='click-ancestor; show-context-menu; scroll-backward; scroll-down; scroll-forward; scroll-left; scroll-right; scroll-up'\n                  interfaces='Action, Collection, Component, Document, Hyperlink, Hypertext, Text'\n                  attributes='class:workspace-content min-w-0 flex-1 overflow-auto p-6, display:block, text-align:left, tag:main, id:main-content, xml-roles:main'\n                  text='[OBJ]'\n                  path=[-1, 0, 0, 0, 5, 2, 1, 3, 0, 3, 0]\n                  \n22:59:58.522663 - SCRIPT MANAGER: Active script is: Google Chrome for Testing (module=orca.scripts.toolkits.Chromium.script)\n22:59:58.522726 - FOCUS MANAGER: Locus of focus is [link: 'Planificaci\u00f3n' (0x7f8b24960b80)]\n22:59:58.522802 - EVENT MANAGER: Getting script for event for [application: 'Google Chrome for Testing' (0x7f8b241e97c0)] [landmark (0x7f8b24090200)]\n22:59:58.522849 - SCRIPT MANAGER: Getting script for [application: 'Google Chrome for Testing' (0x7f8b241e97c0)] [landmark (0x7f8b24090200)]\n22:59:58.522960 - GSETTINGS REGISTRY: sleep-mode/apps using default value = []\n22:59:58.523000 - SCRIPT MANAGER: Script is app script Google Chrome for Testing (module=orca.scripts.toolkits.Chromium.script)\n22:59:58.523035 - EVENT MANAGER: Script for event is Google Chrome for Testing (module=orca.scripts.toolkits.Chromium.script)\n22:59:58.523086 - EVENT MANAGER: Processing object:state-changed:focused: script for event is active\n22:59:58.523159 - FOCUS MANAGER: Locus of focus is [link: 'Planificaci\u00f3n' (0x7f8b24960b80)]\n22:59:58.523216 - WEB: Element claimed focus, but browse mode is sticky\n22:59:58.523266 - TOOLKIT BRIDGE: _on_focused_changed handled by web script\nTOTAL PROCESSING TIME: 0.0045\n"
+        },
+        "browseModeSpeech": {
+          "phrase": "Browse mode is sticky",
+          "start": {
+            "orca": 1968130,
+            "speech": 9731819
+          },
+          "mode": "single",
+          "moduleText": "Browse mode is sticky.",
+          "moduleEnd": true,
+          "orcaOutput": "22:59:59.323739 - SPEECH OUTPUT: 'Browse mode is sticky.'{'established': 'False'}"
+        },
+        "heading": "Planificaci\u00f3n",
+        "headingSpeech": {
+          "phrase": "Planificaci\u00f3n",
+          "start": {
+            "orca": 2035657,
+            "speech": 9979238
+          },
+          "mode": "single",
+          "moduleText": "Planificaci\u00f3n",
+          "moduleEnd": true,
+          "orcaOutput": "22:59:59.552976 - SPEECH OUTPUT: 'Planificaci\u00f3n'{'established': 'False',"
+        },
+        "controlTabs": 1,
+        "controlLabel": "Nuevo grupo",
+        "controlSpeech": {
+          "phrase": "Nuevo grupo",
+          "start": {
+            "orca": 1912515,
+            "speech": 9434721
+          },
+          "mode": "single",
+          "moduleText": "Nuevo grupo",
+          "moduleEnd": true,
+          "orcaOutput": "22:59:58.743777 - SPEECH OUTPUT: 'Nuevo grupo'{'established': 'False',"
+        }
+      },
+      {
+        "label": "Tareas",
+        "route": "/tasks",
+        "tabs": 14,
+        "navigationSpeech": {
+          "phrase": "Tareas",
+          "start": {
+            "orca": 2094295,
+            "speech": 10127546
+          },
+          "mode": "single",
+          "moduleText": "Tareas",
+          "moduleEnd": true,
+          "orcaOutput": "23:00:00.364376 - SPEECH OUTPUT: 'Tareas'{'established': 'False',"
+        },
+        "focusSpeech": {
+          "start": {
+            "orca": 2431424,
+            "speech": 10743623
+          },
+          "event": "23:00:00.752321 - EVENT SOURCE:\n                  app='Google Chrome for Testing (Chromium 1.0)' name='' role='landmark' axid='' id=0x7f8b1ce6b340\n                  description=''\n                  help=''\n                  locale='C.UTF-8'\n                  states='enabled, focusable, focused, sensitive, showing, visible'\n                  relations=''\n                  actions='click-ancestor; show-context-menu; scroll-backward; scroll-down; scroll-forward; scroll-left; scroll-right; scroll-up'\n                  interfaces='Action, Collection, Component, Document, Hyperlink, Hypertext, Text'\n                  attributes='class:workspace-content min-w-0 flex-1 overflow-auto p-6, display:block, text-align:left, tag:main, id:main-content, xml-roles:main'\n                  text='[OBJ][OBJ][OBJ][OBJ][OBJ][OBJ][OBJ][OBJ]'\n                  path=[-1, 0, 0, 0, 5, 2, 1, 3, 0, 3, 0]\n                  \n23:00:00.752370 - SCRIPT MANAGER: Active script is: Google Chrome for Testing (module=orca.scripts.toolkits.Chromium.script)\n23:00:00.752417 - FOCUS MANAGER: Locus of focus is [entry: 'Address and search bar' (0x7f8b241e9780)]\n23:00:00.752486 - EVENT MANAGER: Getting script for event for [application: 'Google Chrome for Testing' (0x7f8b241e97c0)] [landmark (0x7f8b1ceebe00)]\n23:00:00.752531 - SCRIPT MANAGER: Getting script for [application: 'Google Chrome for Testing' (0x7f8b241e97c0)] [landmark (0x7f8b1ceebe00)]\n23:00:00.752619 - GSETTINGS REGISTRY: sleep-mode/apps using default value = []\n23:00:00.752658 - SCRIPT MANAGER: Script is app script Google Chrome for Testing (module=orca.scripts.toolkits.Chromium.script)\n23:00:00.752693 - EVENT MANAGER: Script for event is Google Chrome for Testing (module=orca.scripts.toolkits.Chromium.script)\n23:00:00.752741 - EVENT MANAGER: Processing object:state-changed:focused: script for event is active\n23:00:00.752904 - FOCUS MANAGER: Locus of focus is [entry: 'Address and search bar' (0x7f8b241e9780)]\n23:00:00.752968 - WEB: document changed from None to [document web: 'Researcher' (0x7f8b1cea7ac0)]\n23:00:00.753014 - WEB: Element claimed focus, but browse mode is sticky\n23:00:00.753061 - TOOLKIT BRIDGE: _on_focused_changed handled by web script\nTOTAL PROCESSING TIME: 0.0041\n"
+        },
+        "browseModeSpeech": {
+          "phrase": "Browse mode is sticky",
+          "start": {
+            "orca": 2587141,
+            "speech": 10968566
+          },
+          "mode": "single",
+          "moduleText": "Browse mode is sticky.",
+          "moduleEnd": true,
+          "orcaOutput": "23:00:01.455367 - SPEECH OUTPUT: 'Browse mode is sticky.'{'established': 'False'}"
+        },
+        "heading": "Tareas",
+        "headingSpeech": {
+          "phrase": "Tareas",
+          "start": {
+            "orca": 2656175,
+            "speech": 11251689
+          },
+          "mode": "single",
+          "moduleText": "Tareas",
+          "moduleEnd": true,
+          "orcaOutput": "23:00:01.693692 - SPEECH OUTPUT: 'Tareas'{'established': 'False',"
+        },
+        "controlTabs": 1,
+        "controlLabel": "Dependencias",
+        "controlSpeech": {
+          "phrase": "Dependencias",
+          "start": {
+            "orca": 2528520,
+            "speech": 10836219
+          },
+          "mode": "single",
+          "moduleText": "Dependencias",
+          "moduleEnd": true,
+          "orcaOutput": "23:00:01.119985 - SPEECH OUTPUT: 'Dependencias'{'established': 'False',"
+        }
+      },
+      {
+        "label": "Agentes",
+        "route": "/agents",
+        "tabs": 21,
+        "navigationSpeech": {
+          "phrase": "Agentes",
+          "start": {
+            "orca": 2713745,
+            "speech": 11388744
+          },
+          "mode": "single",
+          "moduleText": "Agentes",
+          "moduleEnd": true,
+          "orcaOutput": "23:00:02.828045 - SPEECH OUTPUT: 'Agentes'{'established': 'False',"
+        },
+        "focusSpeech": {
+          "start": {
+            "orca": 3189334,
+            "speech": 12099733
+          },
+          "event": "23:00:03.161484 - EVENT SOURCE:\n                  app='Google Chrome for Testing (Chromium 1.0)' name='' role='landmark' axid='' id=0x7f8b2412ae80\n                  description=''\n                  help=''\n                  locale='C.UTF-8'\n                  states='enabled, focusable, focused, sensitive, showing, visible'\n                  relations=''\n                  actions='click-ancestor; show-context-menu; scroll-backward; scroll-down; scroll-forward; scroll-left; scroll-right; scroll-up'\n                  interfaces='Action, Collection, Component, Document, Hyperlink, Hypertext, Text'\n                  attributes='class:workspace-content min-w-0 flex-1 overflow-auto p-6, display:block, text-align:left, tag:main, id:main-content, xml-roles:main'\n                  text='[OBJ]'\n                  path=[-1, 0, 0, 0, 5, 2, 1, 3, 0, 3, 0]\n                  \n23:00:03.161579 - SCRIPT MANAGER: Active script is: Google Chrome for Testing (module=orca.scripts.toolkits.Chromium.script)\n23:00:03.161637 - FOCUS MANAGER: Locus of focus is [link: 'Agentes' (0x7f8b1ce734c0)]\n23:00:03.161702 - EVENT MANAGER: Getting script for event for [application: 'Google Chrome for Testing' (0x7f8b241e97c0)] [landmark (0x7f8b2415f880)]\n23:00:03.161744 - SCRIPT MANAGER: Getting script for [application: 'Google Chrome for Testing' (0x7f8b241e97c0)] [landmark (0x7f8b2415f880)]\n23:00:03.161847 - GSETTINGS REGISTRY: sleep-mode/apps using default value = []\n23:00:03.161884 - SCRIPT MANAGER: Script is app script Google Chrome for Testing (module=orca.scripts.toolkits.Chromium.script)\n23:00:03.161915 - EVENT MANAGER: Script for event is Google Chrome for Testing (module=orca.scripts.toolkits.Chromium.script)\n23:00:03.161962 - EVENT MANAGER: Processing object:state-changed:focused: script for event is active\n23:00:03.162126 - FOCUS MANAGER: Locus of focus is [link: 'Agentes' (0x7f8b1ce734c0)]\n23:00:03.162181 - WEB: Element claimed focus, but browse mode is sticky\n23:00:03.162226 - TOOLKIT BRIDGE: _on_focused_changed handled by web script\nTOTAL PROCESSING TIME: 0.007\n"
+        },
+        "browseModeSpeech": {
+          "phrase": "Browse mode is sticky",
+          "start": {
+            "orca": 3384064,
+            "speech": 12457353
+          },
+          "mode": "single",
+          "moduleText": "Browse mode is sticky.",
+          "moduleEnd": true,
+          "orcaOutput": "23:00:03.975365 - SPEECH OUTPUT: 'Browse mode is sticky.'{'established': 'False'}"
+        },
+        "heading": "Agentes",
+        "headingSpeech": {
+          "phrase": "Agentes",
+          "start": {
+            "orca": 3452184,
+            "speech": 12705058
+          },
+          "mode": "single",
+          "moduleText": "Agentes",
+          "moduleEnd": true,
+          "orcaOutput": "23:00:04.265024 - SPEECH OUTPUT: 'Agentes'{'established': 'False',"
+        },
+        "controlTabs": 2,
+        "controlLabel": "Revisar c\u00e1lculos locales",
+        "controlSpeech": {
+          "phrase": "Revisar c\u00e1lculos locales",
+          "start": {
+            "orca": 3281153,
+            "speech": 12143384
+          },
+          "mode": "single",
+          "moduleText": "Revisar c\u00e1lculos locales",
+          "moduleEnd": true,
+          "orcaOutput": "23:00:03.440851 - SPEECH OUTPUT: 'Revisar c\u00e1lculos locales'{'established': 'False',"
+        }
+      },
+      {
+        "label": "Conversaci\u00f3n",
+        "route": "/chat",
+        "tabs": 18,
+        "navigationSpeech": {
+          "phrase": "Conversaci\u00f3n",
+          "start": {
+            "orca": 3518769,
+            "speech": 12970568
+          },
+          "mode": "single",
+          "moduleText": "Conversaci\u00f3n",
+          "moduleEnd": true,
+          "orcaOutput": "23:00:05.327491 - SPEECH OUTPUT: 'Conversaci\u00f3n'{'established': 'False',"
+        },
+        "focusSpeech": {
+          "start": {
+            "orca": 3909652,
+            "speech": 13567110
+          },
+          "event": "23:00:05.434943 - EVENT SOURCE:\n                  app='Google Chrome for Testing (Chromium 1.0)' name='' role='landmark' axid='' id=0x7f8b1ce2ad40\n                  description=''\n                  help=''\n                  locale='C.UTF-8'\n                  states='enabled, focusable, focused, sensitive, showing, visible'\n                  relations=''\n                  actions='click-ancestor; show-context-menu; scroll-backward; scroll-down; scroll-forward; scroll-left; scroll-right; scroll-up'\n                  interfaces='Action, Collection, Component, Document, Hyperlink, Hypertext, Text'\n                  attributes='class:workspace-content min-w-0 flex-1 overflow-auto p-6, display:block, text-align:left, tag:main, id:main-content, xml-roles:main'\n                  text='[OBJ]'\n                  path=[-1, 0, 0, 0, 5, 2, 1, 3, 0, 3, 0]\n                  \n23:00:05.435035 - SCRIPT MANAGER: Active script is: Google Chrome for Testing (module=orca.scripts.toolkits.Chromium.script)\n23:00:05.435100 - FOCUS MANAGER: Locus of focus is [link: 'Conversaci\u00f3n' (0x7f8b1ceb6f80)]\n23:00:05.435180 - EVENT MANAGER: Getting script for event for [application: 'Google Chrome for Testing' (0x7f8b241e97c0)] [landmark (0x7f8b2412af40)]\n23:00:05.435233 - SCRIPT MANAGER: Getting script for [application: 'Google Chrome for Testing' (0x7f8b241e97c0)] [landmark (0x7f8b2412af40)]\n23:00:05.435355 - GSETTINGS REGISTRY: sleep-mode/apps using default value = []\n23:00:05.435400 - SCRIPT MANAGER: Script is app script Google Chrome for Testing (module=orca.scripts.toolkits.Chromium.script)\n23:00:05.435450 - EVENT MANAGER: Script for event is Google Chrome for Testing (module=orca.scripts.toolkits.Chromium.script)\n23:00:05.435509 - EVENT MANAGER: Processing object:state-changed:focused: script for event is active\n23:00:05.435802 - FOCUS MANAGER: Locus of focus is [link: 'Conversaci\u00f3n' (0x7f8b1ceb6f80)]\n23:00:05.436065 - INPUT EVENT MANAGER:'Return' (36) mods: 0 key-released-event is release for'1' (10) mods: 0 key-pressed-event: False\n23:00:05.436156 - STRUCTURAL NAVIGATOR: Last navigation event ('1' (10) mods: 0 key-pressed-event) is last input event: False\n23:00:05.436191 - WEB: Element claimed focus, but browse mode is sticky\n23:00:05.436243 - TOOLKIT BRIDGE: _on_focused_changed handled by web script\nTOTAL PROCESSING TIME: 0.0066\n"
+        },
+        "browseModeSpeech": {
+          "phrase": "Browse mode is sticky",
+          "start": {
+            "orca": 4028382,
+            "speech": 13738352
+          },
+          "mode": "single",
+          "moduleText": "Browse mode is sticky.",
+          "moduleEnd": true,
+          "orcaOutput": "23:00:05.945454 - SPEECH OUTPUT: 'Browse mode is sticky.'{'established': 'False'}"
+        },
+        "heading": "Conversaci\u00f3n",
+        "headingSpeech": {
+          "phrase": "Conversaci\u00f3n",
+          "start": {
+            "orca": 4096771,
+            "speech": 13986390
+          },
+          "mode": "single",
+          "moduleText": "Conversaci\u00f3n",
+          "moduleEnd": true,
+          "orcaOutput": "23:00:06.179128 - SPEECH OUTPUT: 'Conversaci\u00f3n'{'established': 'False',"
+        },
+        "controlTabs": 1,
+        "controlLabel": "Gestionar tareas",
+        "controlSpeech": {
+          "phrase": "Gestionar tareas",
+          "start": {
+            "orca": 3980367,
+            "speech": 13606501
+          },
+          "mode": "single",
+          "moduleText": "Gestionar tareas",
+          "moduleEnd": true,
+          "orcaOutput": "23:00:05.605162 - SPEECH OUTPUT: 'Gestionar tareas'{'established': 'False',"
+        }
+      }
+    ],
+    "content": [],
+    "pageErrors": [],
+    "apiErrors": [],
+    "browserChromeEscapeBeforeRoutes": true,
+    "error": "Error: Orca processed current main focus\n\nOrca processed current main focus\n\nexpect(received).toBe(expected) // Object.is equality\n\nExpected: true\nReceived: false\n\nCall Log:\n- Timeout 5000ms exceeded while waiting on the predicate",
+    "focus": {
+      "path": "/wiki",
+      "tag": "H1",
+      "id": "",
+      "text": "Documentos"
+    }
+  },
+  "error": "",
+  "container_cleanup_exit": 0,
+  "service_exit": 143,
+  "storage_after_close": {
+    "projects": [
+      {
+        "id": 1,
+        "name": "Atlas comprobable",
+        "description": "Comparar resultados con fuentes verificables. No presuponer que una propuesta est\u00e1 aceptada."
+      },
+      {
+        "id": 2,
+        "name": "Contexto separado",
+        "description": "No debe heredar las tareas de Atlas."
+      }
+    ],
+    "groups": [
+      {
+        "id": 1,
+        "project_id": 1,
+        "title": "Reunir evidencia"
+      }
+    ],
+    "milestones": [
+      {
+        "id": 1,
+        "epic_id": 1,
+        "title": "Datos contrastados"
+      }
+    ],
+    "tasks": [
+      {
+        "id": 1,
+        "project_id": 1,
+        "epic_id": 1,
+        "title": "Capturar fuente",
+        "status": "backlog"
+      },
+      {
+        "id": 2,
+        "project_id": 1,
+        "epic_id": 1,
+        "title": "Contrastar resultado",
+        "status": "backlog"
+      }
+    ],
+    "dependencies": [
+      {
+        "task_id": 2,
+        "depends_on_task_id": 1
+      }
+    ],
+    "corrections": [
+      {
+        "project_id": 1,
+        "task_id": 2,
+        "version": 2,
+        "statement": "Ejemplo concreto: dos fuentes con el mismo t\u00edtulo pueden describir versiones diferentes. Compara fecha y contenido antes de tratarlas como equivalentes.",
+        "source_kind": "user_example"
+      }
+    ],
+    "files": [],
+    "file_operations": [],
+    "captured_sources": 0,
+    "wiki": [],
+    "wiki_revisions": [],
+    "runs": 0,
+    "dispatches": 0,
+    "native_starts": 0,
+    "integrity": "ok"
+  },
+  "business_and_inference_unchanged": true,
+  "pairing_code_absent_from_logs": true
+}

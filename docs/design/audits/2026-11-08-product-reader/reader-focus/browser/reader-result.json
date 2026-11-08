@@ -1,0 +1,25 @@
+{
+  "status": "failed",
+  "scope": "Installed owner workspace with actual Orca; ALSA null, no physical listening or human acceptance",
+  "pairing_before_reader": true,
+  "browser_exit": 1,
+  "error": "Inspect browser-result.json and original reader logs",
+  "children": [
+    {
+      "name": "orca",
+      "exit": 0
+    },
+    {
+      "name": "browser",
+      "exit": 1
+    },
+    {
+      "name": "speech",
+      "exit": 0
+    },
+    {
+      "name": "xvfb",
+      "exit": 0
+    }
+  ]
+}

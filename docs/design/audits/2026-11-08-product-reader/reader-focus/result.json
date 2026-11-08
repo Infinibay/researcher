@@ -1,0 +1,247 @@
+{
+  "status": "failed",
+  "scope": "Installed synthetic owner workspace, real reader; no physical listening or human acceptance",
+  "storage_before": {
+    "projects": [
+      {
+        "id": 1,
+        "name": "Atlas comprobable",
+        "description": "Comparar resultados con fuentes verificables. No presuponer que una propuesta est\u00e1 aceptada."
+      },
+      {
+        "id": 2,
+        "name": "Contexto separado",
+        "description": "No debe heredar las tareas de Atlas."
+      }
+    ],
+    "groups": [
+      {
+        "id": 1,
+        "project_id": 1,
+        "title": "Reunir evidencia"
+      }
+    ],
+    "milestones": [
+      {
+        "id": 1,
+        "epic_id": 1,
+        "title": "Datos contrastados"
+      }
+    ],
+    "tasks": [
+      {
+        "id": 1,
+        "project_id": 1,
+        "epic_id": 1,
+        "title": "Capturar fuente",
+        "status": "backlog"
+      },
+      {
+        "id": 2,
+        "project_id": 1,
+        "epic_id": 1,
+        "title": "Contrastar resultado",
+        "status": "backlog"
+      }
+    ],
+    "dependencies": [
+      {
+        "task_id": 2,
+        "depends_on_task_id": 1
+      }
+    ],
+    "corrections": [
+      {
+        "project_id": 1,
+        "task_id": 2,
+        "version": 2,
+        "statement": "Ejemplo concreto: dos fuentes con el mismo t\u00edtulo pueden describir versiones diferentes. Compara fecha y contenido antes de tratarlas como equivalentes.",
+        "source_kind": "user_example"
+      }
+    ],
+    "files": [],
+    "file_operations": [],
+    "captured_sources": 0,
+    "wiki": [],
+    "wiki_revisions": [],
+    "runs": 0,
+    "dispatches": 0,
+    "native_starts": 0,
+    "integrity": "ok"
+  },
+  "model_turns": 0,
+  "backend": "/home/andres/.codex/worktrees/b09e/researcher/.superpowers/sdd/2026-10-31-actualizacion-proyecto/native-runtime-env/lib/python3.12/site-packages/backend/__init__.py",
+  "web_index_sha256": "be011881958834d8e2c34e5fb5f460c3e5cfbdb1801877b815d9d54341f5b8dd",
+  "container_exit": 1,
+  "reader": {
+    "status": "failed",
+    "scope": "Installed owner workspace with actual Orca; ALSA null, no physical listening or human acceptance",
+    "pairing_before_reader": true,
+    "browser_exit": 1,
+    "error": "Inspect browser-result.json and original reader logs",
+    "children": [
+      {
+        "name": "orca",
+        "exit": 0
+      },
+      {
+        "name": "browser",
+        "exit": 1
+      },
+      {
+        "name": "speech",
+        "exit": 0
+      },
+      {
+        "name": "xvfb",
+        "exit": 0
+      }
+    ]
+  },
+  "browser": {
+    "status": "failed",
+    "scope": "Real installed HTTP/SQLite and Orca/Speech Dispatcher; native X keys; ALSA null, no physical listening or human acceptance",
+    "routes": [
+      {
+        "label": "Resumen",
+        "route": "/",
+        "tabs": 12,
+        "focusSpeech": {
+          "start": {
+            "orca": 228253,
+            "speech": 609984
+          },
+          "event": "\n22:45:46.902550 - OBJECT EVENT: object:state-changed:focused (1, 0, 0)\n                                app.name='Google Chrome for Testing' name='' role='landmark'\n                                description=''\n                                states='enabled focusable focused sensitive showing visible'\n                                relations=''\n                                actions='clickancestor showcontextmenu scrollbackward scrolldown scrollforward scrollleft scrollright scrollup'\n                                interfaces='Accessible Action Collection Component Document Hypertext Hyperlink Text'\n                                attributes='text-align:left, id:main-content, class:workspace-content min-w-0 flex-1 overflow-auto p-6, xml-roles:main, tag:main, display:block'\n                                path=[-1, 0, 0, 0, 5, 2, 1, 3, 0, 3, 0]\n\n22:45:46.904587 - EVENT MANAGER: Getting script for [application | Google Chrome for Testing] (check: True)\n22:45:46.904981 - EVENT MANAGER: Script is <orca.scripts.toolkits.Chromium.script.Script object at 0x7fb70ef552d0>\n22:45:46.905008 - EVENT MANAGER: Change active script: False (The script for this event is already active.)\n22:45:46.905349 - WEB: Not event from context replicant. locusOfFocus [link | Resumen] is not dead.\n22:45:46.905362 - WEB: Getting caret context for None\n22:45:46.905706 - WEB: Caret context is [link | Resumen], 0 (focus: [link | Resumen])\n22:45:46.905729 - WEB: Deferring to other scripts for handling non-document source\n22:45:46.905733 - CHROMIUM: Passing along event to default script\n22:45:46.907546 - INFO: Looking at [frame | Researcher - Google Chrome for Testing] from [application | Google Chrome for Testing] /opt/chromium/chrome --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-edgeupdater --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,BlockOriginHeaderModificationOnRedirect,AvoidCorsURLLoaderRestartOnRedirect,Translate,AutoDeElevate,OptimizationHints,NetworkTimeServiceQuerying,AimEnabled,msForceBrowserSignIn,msEdgeUpdateLaunchServicesPreferredVersion --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --disable-updater-scheduler --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --no-sandbox --force-renderer-accessibility --disable-dev-shm-usage --disable-features=Translate,TranslateUI --user-data-dir=/tmp/playwright_chromiumdev_profile-KYoLh6 --remote-debugging-pipe --no-startup-window \n22:45:46.907670 - INFO: [frame | Researcher - Google Chrome for Testing] can be active window\n22:45:46.907782 - INFO: [landmark | ] does not implement the selection interface\n22:45:46.907808 - ORCA: Active script is: <orca.scripts.toolkits.Chromium.script.Script object at 0x7fb70ef552d0>\n22:45:46.908092 - ORCA: Changing locusOfFocus from [link | Resumen] to [landmark | ]. Notify: True\n22:45:46.909152 - BRAILLE: disabled\n22:45:46.909285 - ORCA: Region of interest: [landmark | ] (0, 0)\n22:45:46.909477 - WEB: New focus [landmark | ] is not a special case. Generating speech.\n22:45:46.909632 - WEB: Generating speech for document object [landmark | ]\n22:45:46.909906 - INFO: Getting text attributes for [landmark | ] (chars: 0-1)\n22:45:46.910050 - INFO: Attributes at 0: ['bg-color:255,254,250', 'size:12pt', 'language:es', 'direction:lr', 'fg-color:36,45,42', 'family-name:DejaVu Sans'] (0-1)\n22:45:46.910067 - INFO: 1 attribute ranges found in 0.0001s\n22:45:46.910277 - SPEECH GENERATOR: Starting unfocused generation for [landmark | ] (ROLE_LANDMARK)\n22:45:46.910716 - DEFAULT: Not in SayAll\n                  GENERATION TIME: 0.0005  ---->  oldAncestors=[]\n22:45:46.911016 - DEFAULT: Not in SayAll\n                  GENERATION TIME: 0.0003  ---->  newAncestors=[]\n22:45:46.911220 - DEFAULT: Not in SayAll\n22:45:46.911343 - SPEECH GENERATOR: system voice requested with language='es', dialect=''\n                  GENERATION TIME: 0.0003  ---->  roleName=[main content]\n                  GENERATION TIME: 0.0007  ---->  labelAndName=[]\n                  GENERATION TIME: 0.0002  ---->  substring=[]\n                  GENERATION TIME: 0.0002  ---->  pause=[PAUSE]\n                  GENERATION TIME: 0.0002  ---->  unrelatedLabels=[]\n                  GENERATION TIME: 0.0002  ---->  newNodeLevel=[]\n                  GENERATION TIME: 0.0001  ---->  unselectedCell=[]\n22:45:46.914293 - SPEECH GENERATOR: system voice requested with language='es', dialect=''\n                  GENERATION TIME: 0.0012  ---->  clickable=[clickable]\n                  GENERATION TIME: 0.0010  ---->  hasLongDesc=[]\n                  GENERATION TIME: 0.0003  ---->  hasDetails=[]\n                  GENERATION TIME: 0.0002  ---->  detailsFor=[]\n                  GENERATION TIME: 0.0002  ---->  tutorial=[]\n                  GENERATION TIME: 0.0006  ---->  description=[]\n                  GENERATION TIME: 0.0002  ---->  hasPopup=[]\n                  COMPLETION TIME: 0.0067\n                  SPEECH GENERATOR: Results: \n                  'main content' \n                  '{'established': False}' \n                  'PAUSE' \n                  'clickable' \n                  '{'established': False}' \n                  'PAUSE' \n                  'PAUSE'\n22:45:46.916996 - WEB: Speech generation for document object [landmark | ] complete.\n22:45:46.917028 - SPEECH: Last spoke 0.9276 seconds ago\n22:45:46.917051 - SPEECH OUTPUT: 'main content.'{'established': False}\n22:45:46.917763 - SPEECH DISPATCHER: Speaking '<speak><mark name=\"0:4\"/>main <mark name=\"5:13\"/>content.</speak>' \n                  ORCA rate 5.0, pitch 5.0, volume 5.0, language en, punctuation: MOST \n                  SD rate 2, pitch 10, volume 100, language en-us\n22:45:46.917958 - SPEECH OUTPUT: 'clickable.'{'established': False}\n22:45:46.918418 - SPEECH DISPATCHER: Speaking '<speak><mark name=\"0:10\"/>clickable.</speak>' \n                  ORCA rate 5.0, pitch 5.0, volume 5.0, language en, punctuation: MOST \n                  SD rate 2, pitch 10, volume 100, language en-us\n22:45:46.920762 - DEFAULT: Not in SayAll\n22:45:46.922298 - WEB: Not using focus mode for [landmark | ] due to lack of cause\n22:45:46.923647 - EVENT MANAGER: locusOfFocus: [landmark | ] activeScript: <orca.scripts.toolkits.Chromium.script.Script object at 0x7fb70ef552d0>\n22:45:46.923678 - EVENT MANAGER: _lastCommandWasCaretNav: False\n22:45:46.923684 - EVENT MANAGER: _lastCommandWasStructNav: False\n22:45:46.923688 - EVENT MANAGER: _lastCommandWasMouseButton: False\n22:45:46.923692 - EVENT MANAGER: _inFocusMode: False\n22:45:46.923697 - EVENT MANAGER: _focusModeIsSticky: False\n22:45:46.923701 - EVENT MANAGER: _browseModeIsSticky: False\nTOTAL PROCESSING TIME: 0.0212\n"
+        },
+        "heading": "Atlas comprobable",
+        "headingSpeech": {
+          "phrase": "Atlas comprobable",
+          "start": {
+            "orca": 293316,
+            "speech": 718672
+          },
+          "moduleText": "Atlas comprobable heading level 1.",
+          "moduleEnd": true,
+          "orcaOutput": "22:45:47.054086 - SPEECH OUTPUT: 'Atlas comprobable heading level 1.'{'established': False}"
+        },
+        "controlTabs": 1,
+        "controlLabel": "Actualizar resumen",
+        "controlSpeech": {
+          "phrase": "Actualizar resumen",
+          "start": {
+            "orca": 309643,
+            "speech": 808127
+          },
+          "moduleText": "Actualizar resumen push button.",
+          "moduleEnd": true,
+          "orcaOutput": "22:45:47.181520 - SPEECH OUTPUT: 'Actualizar resumen push button.'{'established': False}"
+        }
+      }
+    ],
+    "content": [],
+    "pageErrors": [],
+    "apiErrors": [],
+    "browserChromeEscapeBeforeRoutes": true,
+    "headingFailure": {
+      "route": "/projects",
+      "heading": "Proyectos",
+      "focusSpeech": {
+        "start": {
+          "orca": 551910,
+          "speech": 1414113
+        },
+        "event": "\n22:45:48.199189 - OBJECT EVENT: object:state-changed:focused (1, 0, 0)\n                                app.name='Google Chrome for Testing' name='' role='landmark'\n                                description=''\n                                states='enabled focusable focused sensitive showing visible'\n                                relations=''\n                                actions='clickancestor showcontextmenu scrollbackward scrolldown scrollforward scrollleft scrollright scrollup'\n                                interfaces='Accessible Action Collection Component Document Hypertext Hyperlink Text'\n                                attributes='text-align:left, id:main-content, class:workspace-content min-w-0 flex-1 overflow-auto p-6, xml-roles:main, tag:main, display:block'\n                                path=[-1, 0, 0, 0, 5, 2, 1, 3, 0, 3, 0]\n\n22:45:48.200769 - EVENT MANAGER: Getting script for [application | Google Chrome for Testing] (check: True)\n22:45:48.201190 - EVENT MANAGER: Script is <orca.scripts.toolkits.Chromium.script.Script object at 0x7fb70ef552d0>\n22:45:48.201220 - EVENT MANAGER: Change active script: False (The script for this event is already active.)\n22:45:48.201648 - WEB: Not event from context replicant. locusOfFocus [heading | Proyectos] is not dead.\n22:45:48.201669 - WEB: Getting caret context for None\n22:45:48.202073 - WEB: Caret context is [heading | Proyectos], 0 (focus: [heading | Proyectos])\n22:45:48.202169 - WEB: Deferring to other scripts for handling non-document source\n22:45:48.202179 - CHROMIUM: Passing along event to default script\n22:45:48.203913 - INFO: Looking at [frame | Researcher - Google Chrome for Testing] from [application | Google Chrome for Testing] /opt/chromium/chrome --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-edgeupdater --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,BlockOriginHeaderModificationOnRedirect,AvoidCorsURLLoaderRestartOnRedirect,Translate,AutoDeElevate,OptimizationHints,NetworkTimeServiceQuerying,AimEnabled,msForceBrowserSignIn,msEdgeUpdateLaunchServicesPreferredVersion --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --disable-updater-scheduler --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --no-sandbox --force-renderer-accessibility --disable-dev-shm-usage --disable-features=Translate,TranslateUI --user-data-dir=/tmp/playwright_chromiumdev_profile-KYoLh6 --remote-debugging-pipe --no-startup-window \n22:45:48.204125 - INFO: [frame | Researcher - Google Chrome for Testing] can be active window\n22:45:48.204151 - ORCA: Active script is: <orca.scripts.toolkits.Chromium.script.Script object at 0x7fb70ef552d0>\n22:45:48.204391 - ORCA: Changing locusOfFocus from [heading | Proyectos] to [landmark | ]. Notify: True\n22:45:48.205549 - BRAILLE: disabled\n22:45:48.205684 - ORCA: Region of interest: [landmark | ] (0, 0)\n22:45:48.205932 - WEB: New focus [landmark | ] is not a special case. Generating speech.\n22:45:48.206086 - WEB: Generating speech for document object [landmark | ]\n22:45:48.206341 - INFO: Getting text attributes for [landmark | ] (chars: 0-3)\n22:45:48.206561 - INFO: Attributes at 0: ['bg-color:255,254,250', 'size:12pt', 'language:es', 'direction:lr', 'fg-color:36,45,42', 'family-name:DejaVu Sans'] (0-3)\n22:45:48.206582 - INFO: 1 attribute ranges found in 0.0002s\n22:45:48.206833 - SPEECH GENERATOR: Starting unfocused generation for [landmark | ] (ROLE_LANDMARK)\n22:45:48.207412 - DEFAULT: Not in SayAll\n                  GENERATION TIME: 0.0007  ---->  oldAncestors=[]\n22:45:48.207776 - DEFAULT: Not in SayAll\n                  GENERATION TIME: 0.0003  ---->  newAncestors=[]\n22:45:48.207991 - DEFAULT: Not in SayAll\n22:45:48.208103 - SPEECH GENERATOR: system voice requested with language='es', dialect=''\n                  GENERATION TIME: 0.0003  ---->  roleName=[main content]\n                  GENERATION TIME: 0.0006  ---->  labelAndName=[]\n                  GENERATION TIME: 0.0001  ---->  substring=[]\n                  GENERATION TIME: 0.0001  ---->  pause=[PAUSE]\n                  GENERATION TIME: 0.0002  ---->  unrelatedLabels=[]\n                  GENERATION TIME: 0.0001  ---->  newNodeLevel=[]\n                  GENERATION TIME: 0.0001  ---->  unselectedCell=[]\n22:45:48.210460 - SPEECH GENERATOR: system voice requested with language='es', dialect=''\n                  GENERATION TIME: 0.0010  ---->  clickable=[clickable]\n                  GENERATION TIME: 0.0007  ---->  hasLongDesc=[]\n                  GENERATION TIME: 0.0002  ---->  hasDetails=[]\n                  GENERATION TIME: 0.0003  ---->  detailsFor=[]\n                  GENERATION TIME: 0.0002  ---->  tutorial=[]\n                  GENERATION TIME: 0.0008  ---->  description=[]\n                  GENERATION TIME: 0.0003  ---->  hasPopup=[]\n                  COMPLETION TIME: 0.0063\n                  SPEECH GENERATOR: Results: \n                  'main content' \n                  '{'established': False}' \n                  'PAUSE' \n                  'clickable' \n                  '{'established': False}' \n                  'PAUSE' \n                  'PAUSE'\n22:45:48.213158 - WEB: Speech generation for document object [landmark | ] complete.\n22:45:48.213179 - SPEECH: Last spoke 0.2145 seconds ago\n22:45:48.213201 - SPEECH OUTPUT: 'main content.'{'established': False}\n22:45:48.214133 - SPEECH DISPATCHER: Speaking '<speak><mark name=\"0:4\"/>main <mark name=\"5:13\"/>content.</speak>' \n                  ORCA rate 5.0, pitch 5.0, volume 5.0, language en, punctuation: MOST \n                  SD rate 2, pitch 10, volume 100, language en-us\n22:45:48.214347 - SPEECH OUTPUT: 'clickable.'{'established': False}\n22:45:48.214916 - SPEECH DISPATCHER: Speaking '<speak><mark name=\"0:10\"/>clickable.</speak>' \n                  ORCA rate 5.0, pitch 5.0, volume 5.0, language en, punctuation: MOST \n                  SD rate 2, pitch 10, volume 100, language en-us\n22:45:48.215926 - DEFAULT: Not in SayAll\n22:45:48.216213 - WEB: Not using focus mode for [landmark | ] due to lack of cause\n22:45:48.216402 - EVENT MANAGER: locusOfFocus: [landmark | ] activeScript: <orca.scripts.toolkits.Chromium.script.Script object at 0x7fb70ef552d0>\n22:45:48.216418 - EVENT MANAGER: _lastCommandWasCaretNav: False\n22:45:48.216423 - EVENT MANAGER: _lastCommandWasStructNav: False\n22:45:48.216426 - EVENT MANAGER: _lastCommandWasMouseButton: False\n22:45:48.216430 - EVENT MANAGER: _inFocusMode: False\n22:45:48.216433 - EVENT MANAGER: _focusModeIsSticky: False\n22:45:48.216443 - EVENT MANAGER: _browseModeIsSticky: False\nTOTAL PROCESSING TIME: 0.0173\n"
+      },
+      "originalError": "Error: Fresh Orca output and completed synthesis: Proyectos\n\nFresh Orca output and completed synthesis: Proyectos\n\nexpect(received).toBe(expected) // Object.is equality\n\nExpected: true\nReceived: false\n\nCall Log:\n- Timeout 15000ms exceeded while waiting on the predicate",
+      "explicitReloadDiagnostic": {
+        "phrase": "Proyectos",
+        "start": {
+          "orca": 745647,
+          "speech": 1877285
+        },
+        "moduleText": "Proyectos heading level 1.",
+        "moduleEnd": true,
+        "orcaOutput": "22:46:03.526420 - SPEECH OUTPUT: 'Proyectos.'{'established': False}"
+      }
+    },
+    "error": "Error: Fresh Orca output and completed synthesis: Proyectos\n\nFresh Orca output and completed synthesis: Proyectos\n\nexpect(received).toBe(expected) // Object.is equality\n\nExpected: true\nReceived: false\n\nCall Log:\n- Timeout 15000ms exceeded while waiting on the predicate",
+    "focus": {
+      "path": "/projects",
+      "tag": "MAIN",
+      "id": "main-content",
+      "text": "ProyectosProyectosNuevo proyectoElige un proyecto y retoma su contexto.Atlas comprobableComparar resultados con fuentes verificables. No presuponer que una prop"
+    }
+  },
+  "error": "",
+  "container_cleanup_exit": 0,
+  "service_exit": 143,
+  "storage_after_close": {
+    "projects": [
+      {
+        "id": 1,
+        "name": "Atlas comprobable",
+        "description": "Comparar resultados con fuentes verificables. No presuponer que una propuesta est\u00e1 aceptada."
+      },
+      {
+        "id": 2,
+        "name": "Contexto separado",
+        "description": "No debe heredar las tareas de Atlas."
+      }
+    ],
+    "groups": [
+      {
+        "id": 1,
+        "project_id": 1,
+        "title": "Reunir evidencia"
+      }
+    ],
+    "milestones": [
+      {
+        "id": 1,
+        "epic_id": 1,
+        "title": "Datos contrastados"
+      }
+    ],
+    "tasks": [
+      {
+        "id": 1,
+        "project_id": 1,
+        "epic_id": 1,
+        "title": "Capturar fuente",
+        "status": "backlog"
+      },
+      {
+        "id": 2,
+        "project_id": 1,
+        "epic_id": 1,
+        "title": "Contrastar resultado",
+        "status": "backlog"
+      }
+    ],
+    "dependencies": [
+      {
+        "task_id": 2,
+        "depends_on_task_id": 1
+      }
+    ],
+    "corrections": [
+      {
+        "project_id": 1,
+        "task_id": 2,
+        "version": 2,
+        "statement": "Ejemplo concreto: dos fuentes con el mismo t\u00edtulo pueden describir versiones diferentes. Compara fecha y contenido antes de tratarlas como equivalentes.",
+        "source_kind": "user_example"
+      }
+    ],
+    "files": [],
+    "file_operations": [],
+    "captured_sources": 0,
+    "wiki": [],
+    "wiki_revisions": [],
+    "runs": 0,
+    "dispatches": 0,
+    "native_starts": 0,
+    "integrity": "ok"
+  },
+  "business_and_inference_unchanged": true
+}

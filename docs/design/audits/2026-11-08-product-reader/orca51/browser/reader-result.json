@@ -1,0 +1,25 @@
+{
+  "status": "failed",
+  "scope": "Installed owner workspace with actual Orca; ALSA null, no physical listening or human acceptance",
+  "pairing_before_reader": true,
+  "tools": {
+    "orca": "Orca version 51.1 (rev 244bdadd9), AT-SPI2 version: 2.62.1",
+    "node": "v24.22.2",
+    "speech_dispatcher": "speech-dispatcher 0.12.1"
+  },
+  "error": "invalid literal for int() with base 10: 'Orca version 51'",
+  "children": [
+    {
+      "name": "browser",
+      "exit": -9
+    },
+    {
+      "name": "speech",
+      "exit": 0
+    },
+    {
+      "name": "xvfb",
+      "exit": 0
+    }
+  ]
+}

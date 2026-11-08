@@ -1,0 +1,593 @@
+{
+  "status": "verified_scoped",
+  "scope": "Real installed HTTP/SQLite and Orca/Speech Dispatcher; native X keys; ALSA null, no physical listening or human acceptance",
+  "routes": 12,
+  "reader_focus_events": 12,
+  "completed_phrase_checks": 50,
+  "distinct_matched_module_frames": 50,
+  "heading_one_role_checks": [
+    {
+      "route": "/",
+      "role_frame": {
+        "start": 7171345,
+        "end": 7171438,
+        "text": "heading 1",
+        "completed": true
+      }
+    },
+    {
+      "route": "/projects",
+      "role_frame": {
+        "start": 8583148,
+        "end": 8583241,
+        "text": "heading 1",
+        "completed": true
+      }
+    },
+    {
+      "route": "/epics",
+      "role_frame": {
+        "start": 9998709,
+        "end": 9998802,
+        "text": "heading 1",
+        "completed": true
+      }
+    },
+    {
+      "route": "/tasks",
+      "role_frame": {
+        "start": 11256342,
+        "end": 11256435,
+        "text": "heading 1",
+        "completed": true
+      }
+    },
+    {
+      "route": "/agents",
+      "role_frame": {
+        "start": 13034312,
+        "end": 13034405,
+        "text": "heading 1",
+        "completed": true
+      }
+    },
+    {
+      "route": "/chat",
+      "role_frame": {
+        "start": 14360480,
+        "end": 14360573,
+        "text": "heading 1",
+        "completed": true
+      }
+    },
+    {
+      "route": "/wiki",
+      "role_frame": {
+        "start": 15572055,
+        "end": 15572178,
+        "text": "heading 1 clickable",
+        "completed": true
+      }
+    },
+    {
+      "route": "/findings",
+      "role_frame": {
+        "start": 17168492,
+        "end": 17168615,
+        "text": "heading 1 clickable",
+        "completed": true
+      }
+    },
+    {
+      "route": "/reports",
+      "role_frame": {
+        "start": 18566733,
+        "end": 18566856,
+        "text": "heading 1 clickable",
+        "completed": true
+      }
+    },
+    {
+      "route": "/files",
+      "role_frame": {
+        "start": 19892631,
+        "end": 19892724,
+        "text": "heading 1",
+        "completed": true
+      }
+    },
+    {
+      "route": "/repositories",
+      "role_frame": {
+        "start": 21292605,
+        "end": 21292698,
+        "text": "heading 1",
+        "completed": true
+      }
+    },
+    {
+      "route": "/flow",
+      "role_frame": {
+        "start": 23787943,
+        "end": 23788036,
+        "text": "heading 1",
+        "completed": true
+      }
+    }
+  ],
+  "phrase_evidence": [
+    {
+      "phrase": "Resumen",
+      "mode": "single",
+      "start": 6552391,
+      "end": 6552464,
+      "text": "Resumen",
+      "completed": true
+    },
+    {
+      "phrase": "Actualizar resumen",
+      "mode": "single",
+      "start": 6742492,
+      "end": 6742597,
+      "text": "Actualizar resumen",
+      "completed": true
+    },
+    {
+      "phrase": "Browse mode is sticky",
+      "mode": "single",
+      "start": 6997595,
+      "end": 6997764,
+      "text": "Browse mode is sticky.",
+      "completed": true
+    },
+    {
+      "phrase": "Atlas comprobable",
+      "mode": "single",
+      "start": 7127473,
+      "end": 7127575,
+      "text": "Atlas comprobable",
+      "completed": true
+    },
+    {
+      "phrase": "Proyectos",
+      "mode": "single",
+      "start": 7904317,
+      "end": 7904392,
+      "text": "Proyectos",
+      "completed": true
+    },
+    {
+      "phrase": "Nuevo proyecto",
+      "mode": "single",
+      "start": 8117047,
+      "end": 8117146,
+      "text": "Nuevo proyecto",
+      "completed": true
+    },
+    {
+      "phrase": "Browse mode is sticky",
+      "mode": "single",
+      "start": 8373354,
+      "end": 8373523,
+      "text": "Browse mode is sticky.",
+      "completed": true
+    },
+    {
+      "phrase": "Proyectos",
+      "mode": "single",
+      "start": 8552435,
+      "end": 8552510,
+      "text": "Proyectos",
+      "completed": true
+    },
+    {
+      "phrase": "Planificación",
+      "mode": "single",
+      "start": 9212419,
+      "end": 9212500,
+      "text": "Planificación",
+      "completed": true
+    },
+    {
+      "phrase": "Nuevo grupo",
+      "mode": "single",
+      "start": 9574513,
+      "end": 9574609,
+      "text": "Nuevo grupo",
+      "completed": true
+    },
+    {
+      "phrase": "Browse mode is sticky",
+      "mode": "single",
+      "start": 9825671,
+      "end": 9825840,
+      "text": "Browse mode is sticky.",
+      "completed": true
+    },
+    {
+      "phrase": "Planificación",
+      "mode": "single",
+      "start": 9959105,
+      "end": 9959186,
+      "text": "Planificación",
+      "completed": true
+    },
+    {
+      "phrase": "Tareas",
+      "mode": "single",
+      "start": 10551997,
+      "end": 10552069,
+      "text": "Tareas",
+      "completed": true
+    },
+    {
+      "phrase": "Dependencias",
+      "mode": "single",
+      "start": 10847233,
+      "end": 10847312,
+      "text": "Dependencias",
+      "completed": true
+    },
+    {
+      "phrase": "Browse mode is sticky",
+      "mode": "single",
+      "start": 11097331,
+      "end": 11097500,
+      "text": "Browse mode is sticky.",
+      "completed": true
+    },
+    {
+      "phrase": "Tareas",
+      "mode": "single",
+      "start": 11227928,
+      "end": 11228000,
+      "text": "Tareas",
+      "completed": true
+    },
+    {
+      "phrase": "Agentes",
+      "mode": "single",
+      "start": 12184685,
+      "end": 12184758,
+      "text": "Agentes",
+      "completed": true
+    },
+    {
+      "phrase": "Revisar cálculos locales",
+      "mode": "single",
+      "start": 12466692,
+      "end": 12466822,
+      "text": "Revisar cálculos locales",
+      "completed": true
+    },
+    {
+      "phrase": "Browse mode is sticky",
+      "mode": "single",
+      "start": 12747622,
+      "end": 12747791,
+      "text": "Browse mode is sticky.",
+      "completed": true
+    },
+    {
+      "phrase": "Agentes",
+      "mode": "single",
+      "start": 13006388,
+      "end": 13006461,
+      "text": "Agentes",
+      "completed": true
+    },
+    {
+      "phrase": "Conversación",
+      "mode": "single",
+      "start": 13719340,
+      "end": 13719420,
+      "text": "Conversación",
+      "completed": true
+    },
+    {
+      "phrase": "Gestionar tareas",
+      "mode": "single",
+      "start": 13935413,
+      "end": 13935515,
+      "text": "Gestionar tareas",
+      "completed": true
+    },
+    {
+      "phrase": "Browse mode is sticky",
+      "mode": "single",
+      "start": 14190224,
+      "end": 14190393,
+      "text": "Browse mode is sticky.",
+      "completed": true
+    },
+    {
+      "phrase": "Conversación",
+      "mode": "single",
+      "start": 14320877,
+      "end": 14320957,
+      "text": "Conversación",
+      "completed": true
+    },
+    {
+      "phrase": "Documentos",
+      "mode": "single",
+      "start": 14949875,
+      "end": 14949952,
+      "text": "Documentos",
+      "completed": true
+    },
+    {
+      "phrase": "Nueva página",
+      "mode": "single",
+      "start": 15157036,
+      "end": 15157134,
+      "text": "Nueva página",
+      "completed": true
+    },
+    {
+      "phrase": "Browse mode is sticky",
+      "mode": "single",
+      "start": 15407798,
+      "end": 15407967,
+      "text": "Browse mode is sticky.",
+      "completed": true
+    },
+    {
+      "phrase": "Documentos",
+      "mode": "single",
+      "start": 15537832,
+      "end": 15537909,
+      "text": "Documentos",
+      "completed": true
+    },
+    {
+      "phrase": "Hallazgos",
+      "mode": "single",
+      "start": 16479269,
+      "end": 16479344,
+      "text": "Hallazgos",
+      "completed": true
+    },
+    {
+      "phrase": "Buscar hallazgos",
+      "mode": "single",
+      "start": 16637185,
+      "end": 16637286,
+      "text": "Buscar hallazgos",
+      "completed": true
+    },
+    {
+      "phrase": "Browse mode is sticky",
+      "mode": "single",
+      "start": 16937917,
+      "end": 16938086,
+      "text": "Browse mode is sticky.",
+      "completed": true
+    },
+    {
+      "phrase": "Hallazgos",
+      "mode": "single",
+      "start": 17137686,
+      "end": 17137761,
+      "text": "Hallazgos",
+      "completed": true
+    },
+    {
+      "phrase": "Informes",
+      "mode": "single",
+      "start": 17870302,
+      "end": 17870376,
+      "text": "Informes",
+      "completed": true
+    },
+    {
+      "phrase": "Todos",
+      "mode": "single",
+      "start": 18099356,
+      "end": 18099427,
+      "text": "Todos",
+      "completed": true
+    },
+    {
+      "phrase": "Browse mode is sticky",
+      "mode": "single",
+      "start": 18356402,
+      "end": 18356571,
+      "text": "Browse mode is sticky.",
+      "completed": true
+    },
+    {
+      "phrase": "Informes",
+      "mode": "single",
+      "start": 18535932,
+      "end": 18536006,
+      "text": "Informes",
+      "completed": true
+    },
+    {
+      "phrase": "Archivos",
+      "mode": "single",
+      "start": 19320047,
+      "end": 19320121,
+      "text": "Archivos",
+      "completed": true
+    },
+    {
+      "phrase": "Ver tareas del proyecto",
+      "mode": "single",
+      "start": 19443021,
+      "end": 19443169,
+      "text": "Ver tareas del proyecto",
+      "completed": true
+    },
+    {
+      "phrase": "Browse mode is sticky",
+      "mode": "single",
+      "start": 19711711,
+      "end": 19711880,
+      "text": "Browse mode is sticky.",
+      "completed": true
+    },
+    {
+      "phrase": "Archivos de referencia",
+      "mode": "single",
+      "start": 19841660,
+      "end": 19841787,
+      "text": "Archivos de referencia",
+      "completed": true
+    },
+    {
+      "phrase": "Repositorios",
+      "mode": "single",
+      "start": 20583621,
+      "end": 20583700,
+      "text": "Repositorios",
+      "completed": true
+    },
+    {
+      "phrase": "Preparar fuente Git",
+      "mode": "single",
+      "start": 20808167,
+      "end": 20808291,
+      "text": "Preparar fuente Git",
+      "completed": true
+    },
+    {
+      "phrase": "Browse mode is sticky",
+      "mode": "single",
+      "start": 21071283,
+      "end": 21071452,
+      "text": "Browse mode is sticky.",
+      "completed": true
+    },
+    {
+      "phrase": "Repositorios",
+      "mode": "single",
+      "start": 21256306,
+      "end": 21256385,
+      "text": "Repositorios",
+      "completed": true
+    },
+    {
+      "phrase": "Ejecución",
+      "mode": "single",
+      "start": 22169902,
+      "end": 22169978,
+      "text": "Ejecución",
+      "completed": true
+    },
+    {
+      "phrase": "Actualizar",
+      "mode": "single",
+      "start": 23292042,
+      "end": 23292119,
+      "text": "Actualizar",
+      "completed": true
+    },
+    {
+      "phrase": "Browse mode is sticky",
+      "mode": "single",
+      "start": 23535994,
+      "end": 23536163,
+      "text": "Browse mode is sticky.",
+      "completed": true
+    },
+    {
+      "phrase": "Ejecución",
+      "mode": "single",
+      "start": 23757225,
+      "end": 23757301,
+      "text": "Ejecución",
+      "completed": true
+    },
+    {
+      "phrase": "Ejemplo concreto: dos fuentes con el mismo título pueden describir versiones diferentes",
+      "mode": "say-all",
+      "start": 29222927,
+      "end": 29223324,
+      "text": "Ejemplo concreto: dos fuentes con el mismo título pueden describir versiones diferentes. ",
+      "completed": true
+    },
+    {
+      "phrase": "Compara fecha y contenido antes de tratarlas como equivalentes.",
+      "mode": "say-all",
+      "start": 29375119,
+      "end": 29375429,
+      "text": "Compara fecha y contenido antes de tratarlas como equivalentes.",
+      "completed": true
+    }
+  ],
+  "source": {
+    "frontend/tests/screen-reader-audit.mjs": {
+      "sha256": "5c3462c90d1dc1e1ab7427d33014ed14a1ac9674b1e835a5bff07e4da585d61c",
+      "matches_current_worktree": true
+    },
+    "evals/operation/screen_reader.py": {
+      "sha256": "abf63a30acb57ddc380965ee78385b6abd1558d5b6fd9d976e2605877e28aba5",
+      "matches_current_worktree": true
+    },
+    "evals/operation/screen_reader_container.py": {
+      "sha256": "5de5e4d7ea313440275fa0019871c6d3d1cd541082f7dd4b7fc22c20e7a48c2e",
+      "matches_current_worktree": true
+    }
+  },
+  "tools": {
+    "orca": "Orca version 51.1 (rev 244bdadd9), AT-SPI2 version: 2.62.1",
+    "node": "v24.22.2",
+    "speech_dispatcher": "speech-dispatcher 0.12.1"
+  },
+  "model_turns": 0,
+  "observed_business_and_inference_unchanged": true,
+  "pairing_code_absent_from_logs": true,
+  "remaining": [
+    "Reader access to rich explanations and diagrams",
+    "Relevant frontend/C documentation",
+    "U08 human acceptance and Ken distribution choice",
+    "Deferred details and final coherent package/global/independent acceptance"
+  ],
+  "evidence": "docs/design/audits/2026-11-08-product-reader/report.md",
+  "raw_manifest": "docs/design/audits/2026-11-08-product-reader/raw-artifact-manifest.json",
+  "tooling_image": "e3d48554c62032a4a95982abe75168b6e58b3faa65dbe1bfaf5ff213b8250e15",
+  "web_index_sha256": "be011881958834d8e2c34e5fb5f460c3e5cfbdb1801877b815d9d54341f5b8dd",
+  "container_exit": 0,
+  "container_cleanup_exit": 0,
+  "service_exit": 143,
+  "children": [
+    {
+      "name": "orca",
+      "exit": 0
+    },
+    {
+      "name": "browser",
+      "exit": 0
+    },
+    {
+      "name": "speech",
+      "exit": 0
+    },
+    {
+      "name": "xvfb",
+      "exit": 0
+    }
+  ],
+  "storage_scope": [
+    "projects",
+    "groups",
+    "milestones",
+    "tasks",
+    "dependencies",
+    "corrections",
+    "files",
+    "file_operations",
+    "captured_sources",
+    "wiki",
+    "wiki_revisions",
+    "runs",
+    "dispatches",
+    "native_starts",
+    "integrity"
+  ],
+  "storage_scope_note": "Equal observed projection, not a byte comparison or proof of every SQLite table",
+  "source_verifier_sha256": "cccacf5b120757c7c4bdaf8add9a1ccf4a3326bf2b3b454841124f93d9bad945",
+  "broad_scenarios": "42/43 unchanged"
+}

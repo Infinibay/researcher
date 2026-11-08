@@ -1,0 +1,26 @@
+{
+  "scope": "Three new Python evaluation modules; presence is not semantic adequacy or improved Ken ranking",
+  "files": [
+    {
+      "path": "evals/operation/screen_reader.py",
+      "definitions": 1,
+      "missing_docstrings": 0,
+      "module_documented": true,
+      "sha256": "abf63a30acb57ddc380965ee78385b6abd1558d5b6fd9d976e2605877e28aba5"
+    },
+    {
+      "path": "evals/operation/screen_reader_container.py",
+      "definitions": 3,
+      "missing_docstrings": 0,
+      "module_documented": true,
+      "sha256": "5de5e4d7ea313440275fa0019871c6d3d1cd541082f7dd4b7fc22c20e7a48c2e"
+    },
+    {
+      "path": "evals/operation/verify_screen_reader.py",
+      "definitions": 6,
+      "missing_docstrings": 0,
+      "module_documented": true,
+      "sha256": "cccacf5b120757c7c4bdaf8add9a1ccf4a3326bf2b3b454841124f93d9bad945"
+    }
+  ]
+}

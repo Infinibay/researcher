@@ -1,0 +1,166 @@
+[
+  {
+    "case": "initial",
+    "status": "failed",
+    "routes": 0,
+    "correction_checks": 0,
+    "reader_tools": null,
+    "container_exit": 1,
+    "cleanup_exit": 0,
+    "service_exit": 143,
+    "business_and_inference_unchanged": true,
+    "inference_dispatches": 0,
+    "private_code_log_guard": null,
+    "error": "Error: Native Tab did not reach target: Resumen"
+  },
+  {
+    "case": "browser-locale",
+    "status": "failed",
+    "routes": 0,
+    "correction_checks": 0,
+    "reader_tools": null,
+    "container_exit": 1,
+    "cleanup_exit": 0,
+    "service_exit": 143,
+    "business_and_inference_unchanged": true,
+    "inference_dispatches": 0,
+    "private_code_log_guard": null,
+    "error": "Error: Native Tab did not reach target: Resumen"
+  },
+  {
+    "case": "native-escape",
+    "status": "failed",
+    "routes": 1,
+    "correction_checks": 0,
+    "reader_tools": null,
+    "container_exit": 1,
+    "cleanup_exit": 0,
+    "service_exit": 143,
+    "business_and_inference_unchanged": true,
+    "inference_dispatches": 0,
+    "private_code_log_guard": null,
+    "error": "Error: Fresh Orca output and completed synthesis: Proyectos\n\nFresh Orca output and completed synthesis: Proyectos\n\nexpect(received).toBe(expected) // Object.is equality\n\nExpected: true\nReceived: false\n\nCall Log:\n- Timeout 15000ms exceeded while waiting on the predicate"
+  },
+  {
+    "case": "reader-focus",
+    "status": "failed",
+    "routes": 1,
+    "correction_checks": 0,
+    "reader_tools": null,
+    "container_exit": 1,
+    "cleanup_exit": 0,
+    "service_exit": 143,
+    "business_and_inference_unchanged": true,
+    "inference_dispatches": 0,
+    "private_code_log_guard": null,
+    "error": "Error: Fresh Orca output and completed synthesis: Proyectos\n\nFresh Orca output and completed synthesis: Proyectos\n\nexpect(received).toBe(expected) // Object.is equality\n\nExpected: true\nReceived: false\n\nCall Log:\n- Timeout 15000ms exceeded while waiting on the predicate"
+  },
+  {
+    "case": "orca51",
+    "status": "failed",
+    "routes": 0,
+    "correction_checks": 0,
+    "reader_tools": {
+      "orca": "Orca version 51.1 (rev 244bdadd9), AT-SPI2 version: 2.62.1",
+      "node": "v24.22.2",
+      "speech_dispatcher": "speech-dispatcher 0.12.1"
+    },
+    "container_exit": 1,
+    "cleanup_exit": 0,
+    "service_exit": 143,
+    "business_and_inference_unchanged": true,
+    "inference_dispatches": 0,
+    "private_code_log_guard": true,
+    "error": "[Errno 2] No such file or directory: '/home/andres/.codex/worktrees/b09e/researcher/.researcher/evaluations/product-reader-20261108-orca51/browser/browser-result.json'"
+  },
+  {
+    "case": "orca51-version",
+    "status": "failed",
+    "routes": 3,
+    "correction_checks": 0,
+    "reader_tools": {
+      "orca": "Orca version 51.1 (rev 244bdadd9), AT-SPI2 version: 2.62.1",
+      "node": "v24.22.2",
+      "speech_dispatcher": "speech-dispatcher 0.12.1"
+    },
+    "container_exit": 1,
+    "cleanup_exit": 0,
+    "service_exit": 143,
+    "business_and_inference_unchanged": true,
+    "inference_dispatches": 0,
+    "private_code_log_guard": true,
+    "error": "Error: Fresh Orca output and completed synthesis: Tareas\n\nFresh Orca output and completed synthesis: Tareas\n\nexpect(received).toBe(expected) // Object.is equality\n\nExpected: true\nReceived: false\n\nCall Log:\n- Timeout 15000ms exceeded while waiting on the predicate"
+  },
+  {
+    "case": "browse-mode",
+    "status": "failed",
+    "routes": 3,
+    "correction_checks": 0,
+    "reader_tools": {
+      "orca": "Orca version 51.1 (rev 244bdadd9), AT-SPI2 version: 2.62.1",
+      "node": "v24.22.2",
+      "speech_dispatcher": "speech-dispatcher 0.12.1"
+    },
+    "container_exit": 1,
+    "cleanup_exit": 0,
+    "service_exit": 143,
+    "business_and_inference_unchanged": true,
+    "inference_dispatches": 0,
+    "private_code_log_guard": true,
+    "error": "Error: Fresh Orca output and completed synthesis: Browse mode is sticky\n\nFresh Orca output and completed synthesis: Browse mode is sticky\n\nexpect(received).toBe(expected) // Object.is equality\n\nExpected: true\nReceived: false\n\nCall Log:\n- Timeout 15000ms exceeded while waiting on the predicate"
+  },
+  {
+    "case": "content-first",
+    "status": "failed",
+    "routes": 6,
+    "correction_checks": 0,
+    "reader_tools": {
+      "orca": "Orca version 51.1 (rev 244bdadd9), AT-SPI2 version: 2.62.1",
+      "node": "v24.22.2",
+      "speech_dispatcher": "speech-dispatcher 0.12.1"
+    },
+    "container_exit": 1,
+    "cleanup_exit": 0,
+    "service_exit": 143,
+    "business_and_inference_unchanged": true,
+    "inference_dispatches": 0,
+    "private_code_log_guard": true,
+    "error": "Error: Orca processed current main focus\n\nOrca processed current main focus\n\nexpect(received).toBe(expected) // Object.is equality\n\nExpected: true\nReceived: false\n\nCall Log:\n- Timeout 5000ms exceeded while waiting on the predicate"
+  },
+  {
+    "case": "content-focus",
+    "status": "failed",
+    "routes": 6,
+    "correction_checks": 0,
+    "reader_tools": {
+      "orca": "Orca version 51.1 (rev 244bdadd9), AT-SPI2 version: 2.62.1",
+      "node": "v24.22.2",
+      "speech_dispatcher": "speech-dispatcher 0.12.1"
+    },
+    "container_exit": 1,
+    "cleanup_exit": 0,
+    "service_exit": 143,
+    "business_and_inference_unchanged": true,
+    "inference_dispatches": 0,
+    "private_code_log_guard": true,
+    "error": "Error: Fresh Orca output and completed synthesis: ＋ Nueva página\n\nFresh Orca output and completed synthesis: ＋ Nueva página\n\nexpect(received).toBe(expected) // Object.is equality\n\nExpected: true\nReceived: false\n\nCall Log:\n- Timeout 15000ms exceeded while waiting on the predicate"
+  },
+  {
+    "case": "final",
+    "status": "passed",
+    "routes": 12,
+    "correction_checks": 2,
+    "reader_tools": {
+      "orca": "Orca version 51.1 (rev 244bdadd9), AT-SPI2 version: 2.62.1",
+      "node": "v24.22.2",
+      "speech_dispatcher": "speech-dispatcher 0.12.1"
+    },
+    "container_exit": 0,
+    "cleanup_exit": 0,
+    "service_exit": 143,
+    "business_and_inference_unchanged": true,
+    "inference_dispatches": 0,
+    "private_code_log_guard": true,
+    "error": null
+  }
+]

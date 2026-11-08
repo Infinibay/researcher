@@ -1,0 +1,45 @@
+{
+  "status": "failed",
+  "scope": "Real installed HTTP/SQLite and Orca/Speech Dispatcher; native X keys; ALSA null, no physical listening or human acceptance",
+  "routes": [
+    {
+      "label": "Resumen",
+      "route": "/",
+      "tabs": 12,
+      "heading": "Atlas comprobable",
+      "headingSpeech": {
+        "phrase": "Atlas comprobable",
+        "start": {
+          "orca": 256306,
+          "speech": 699408
+        },
+        "moduleText": "Atlas comprobable heading level 1.",
+        "moduleEnd": true,
+        "orcaOutput": "22:40:44.419099 - SPEECH OUTPUT: 'Atlas comprobable heading level 1.'{'established': False}"
+      },
+      "controlTabs": 1,
+      "controlLabel": "Actualizar resumen",
+      "controlSpeech": {
+        "phrase": "Actualizar resumen",
+        "start": {
+          "orca": 320986,
+          "speech": 827778
+        },
+        "moduleText": "Actualizar resumen push button.",
+        "moduleEnd": true,
+        "orcaOutput": "22:40:44.517267 - SPEECH OUTPUT: 'Actualizar resumen push button.'{'established': False}"
+      }
+    }
+  ],
+  "content": [],
+  "pageErrors": [],
+  "apiErrors": [],
+  "browserChromeEscapeBeforeRoutes": true,
+  "error": "Error: Fresh Orca output and completed synthesis: Proyectos\n\nFresh Orca output and completed synthesis: Proyectos\n\nexpect(received).toBe(expected) // Object.is equality\n\nExpected: true\nReceived: false\n\nCall Log:\n- Timeout 15000ms exceeded while waiting on the predicate",
+  "focus": {
+    "path": "/projects",
+    "tag": "MAIN",
+    "id": "main-content",
+    "text": "ProyectosProyectosNuevo proyectoElige un proyecto y retoma su contexto.Atlas comprobableComparar resultados con fuentes verificables. No presuponer que una prop"
+  }
+}

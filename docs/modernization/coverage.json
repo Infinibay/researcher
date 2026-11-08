@@ -7320,6 +7320,20 @@
         "Actual installed product screen-reader journey",
         "No inferred universal WCAG or human comprehension acceptance"
       ]
+    },
+    "screen_reader_product_reading": {
+      "status": "verified_scoped",
+      "scope": "Orca51.1/AT-SPI2.62.1, desktop1280x900, actual installed synthetic owner workspace;12route/control/heading checks and2owner-correction sentences;50completed phrase checks. No diagrams, physical listening, human acceptance or universalWCAG.",
+      "evidence": [
+        "docs/design/audits/2026-11-08-product-reader/report.md",
+        "docs/modernization/product-reader-results.json",
+        "evals/operation/screen_reader.py",
+        "evals/operation/verify_screen_reader.py"
+      ],
+      "remaining": [
+        "Rich explanatory blocks and diagrams with actual reader",
+        "Other reader/viewport combinations and whole-product acceptance remain bounded by their evidence"
+      ]
     }
   }
 }
