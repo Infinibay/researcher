@@ -9087,3 +9087,12 @@ ninguna aceptación humana/científica nueva. Siguientes Tareas/Conversación/Ej
 Proyectos/contención original y gates globales. No nueva suite global o wheel.
 [Resultados y límites](finding-review-page-review.md). Respuesta del usuario ya
 registrada pide propósito/datos/relaciones/entradas/salidas; no repetir quiz abstracto.
+
+
+## Preflight de Tareas, 2026-11-08
+
+Desde07:06:21UTC, basefa7976e. Código demuestra POSTde creación sin clave durable,
+lecturas de dependencias fallidas transformadas en[]y discrepancia de campo
+estimated_complexity/complexity. Son riesgos/contratos a reproducir con RED; no
+fallos operativos ya medidos ni correcciones hechas. Plan acotado en
+2026-11-08-task-page-acceptance.md. No cambiar contador ni declarar Tareas aceptado.

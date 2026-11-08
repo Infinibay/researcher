@@ -37,8 +37,10 @@ que se pueda comparar el avance; no presentar microajustes como tareas principal
  combina lectores/búsqueda local positiva y recuperación del mismo revisor, fuente,
  límites e historia.8estados/11checks; sólo recuperación202 yStop202.0dispatches,
  mismos3IDs sintéticos nunca lanzados; sólo revisor pasa a cancelled.
-- En curso: preparar aceptación de **Tareas, Conversación y Ejecución**, reutilizando
- contratos y conceptos actuales. Sin nueva generación por defecto ni pulido menor.
+- En curso desde07:06:21UTC: **Tareas**, preflight encuentra creación sin clave
+ recuperable y lecturas de dependencias convertidas en[]ante fallos. Falta REDy
+ corrección; no declarar página aceptada. [Plan](../superpowers/plans/2026-11-08-task-page-acceptance.md).
+ Después Conversación/Ejecución; reutilizar conceptos y0generación por defecto.
 - Pendiente: esas tres páginas y Proyectos/AuthorityBusy original; cierre global no
  vacío, U08/C10/evaluación científica, distribución/dependencias, prompts, inversas69,
  suite y revisión independiente final. No hay historial del usuario que migrar.
