@@ -71,6 +71,7 @@ class BrokerInferenceSession(InferenceSession):
         return self._endpoint.web_search
 
     async def _request(self, request):
+        """Refresh authority for a live native tool call and route it through the host business facade; surface other input requests."""
         if self.active() and request["method"] == "item/tool/call":
             await self._refresh()
             return await self.business.call(request.get("params", {}))
@@ -170,6 +171,7 @@ async def broker_inference(
         )
 
     def admitted():
+        """Require caller activity and the original open, nonwithdrawn broker owner before admitting inference work."""
         return (
             active()
             and endpoint.owner._closing is None

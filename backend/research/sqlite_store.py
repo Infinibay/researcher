@@ -34,6 +34,7 @@ from backend.research.models import (
 
 
 def _json(value) -> str:
+    """Serialize deterministic UTF-8 JSON text with sorted keys and reject nonfinite numeric values."""
     return json.dumps(
         value,
         ensure_ascii=False,
@@ -44,6 +45,7 @@ def _json(value) -> str:
 
 
 def _hash(value: str) -> str:
+    """Return the SHA-256 identity of UTF-8 text used for credentials and effect intents."""
     return hashlib.sha256(value.encode("utf-8")).hexdigest()
 
 
@@ -57,12 +59,14 @@ class SQLiteResearchStore:
         clock: Callable[[], float] = time.time,
         runtime_authority: Callable[[str], bool] | None = None,
     ):
+        """Bind the existing database, clock and optional live-runtime authority check without opening a connection."""
         self.database = str(database)
         self.clock = clock
         self.runtime_authority = runtime_authority
 
     @contextmanager
     def _transaction(self, *, write=False):
+        """Own an existing-only SQLite read or immediate-write transaction and commit or roll back on exit."""
         with closing(connect(self.database, existing_only=True)) as conn, conn:
             conn.execute("BEGIN IMMEDIATE" if write else "BEGIN")
             yield conn
@@ -112,6 +116,7 @@ class SQLiteResearchStore:
         return token
 
     def revoke_grant(self, grant_id: str) -> None:
+        """Record the first revocation time without deleting the original grant or overwriting its history."""
         with self._transaction(write=True) as conn:
             conn.execute(
                 "UPDATE tool_grants SET revoked_at=COALESCE(revoked_at,?) WHERE id=?",
@@ -119,6 +124,7 @@ class SQLiteResearchStore:
             )
 
     def authorize(self, token: str) -> ResearchScope:
+        """Resolve a token to its stored scope and recheck current grant, context and task authority."""
         if not isinstance(token, str) or not 20 <= len(token) <= 512:
             raise ResearchForbidden("Invalid tool credentials")
         with self._transaction() as conn:
@@ -139,6 +145,7 @@ class SQLiteResearchStore:
             return scope
 
     def _task(self, conn, project_id, task_id):
+        """Require the task to belong to this project and still accept research-tool operations."""
         row = conn.execute(
             "SELECT status FROM tasks WHERE id=? AND project_id=?",
             (task_id, project_id),
@@ -267,6 +274,7 @@ class SQLiteResearchStore:
 
     @staticmethod
     def _fingerprint(scope, kind, intent):
+        """Bind project, task, author, context, operation kind and exact intent into one deterministic hash."""
         return _hash(
             _json(
                 {
@@ -281,6 +289,7 @@ class SQLiteResearchStore:
         )
 
     def _receipt(self, conn, scope, key, kind, intent):
+        """Return the original scoped effect receipt or reject reuse of its key for a different intent."""
         row = conn.execute(
             "SELECT request_hash,result_json FROM tool_operations WHERE project_id=? AND task_id=? AND operation_key=?",
             (scope.project_id, scope.task_id, key),
@@ -294,12 +303,14 @@ class SQLiteResearchStore:
         return json.loads(row["result_json"])
 
     def lookup_operation(self, scope, key, kind, intent) -> dict | None:
+        """Recheck current permission before reconciling an exact previously committed operation."""
         operation_key(key)
         with self._transaction() as conn:
             self._check_scope(conn, scope, self._permission(kind))
             return self._receipt(conn, scope, key, kind, intent)
 
     def _write(self, scope, key, kind, intent, apply):
+        """Recheck authority and commit an effect with its receipt atomically, returning an exact replay unchanged."""
         operation_key(key)
         fingerprint = self._fingerprint(scope, kind, intent)
         with self._transaction(write=True) as conn:
@@ -533,6 +544,7 @@ class SQLiteResearchStore:
 
     @staticmethod
     def _source(conn, project_id, source_id):
+        """Load one source only from the specified project and decode its stored provenance."""
         row = conn.execute(
             "SELECT * FROM research_sources WHERE id=? AND project_id=?",
             (source_id, project_id),
@@ -544,12 +556,14 @@ class SQLiteResearchStore:
         return result
 
     def read_source(self, scope, source_id):
+        """Require sources.read authority and return the full captured source in the caller project."""
         positive_id(source_id)
         with self._transaction() as conn:
             self._check_scope(conn, scope, "sources.read")
             return self._source(conn, scope.project_id, source_id)
 
     def list_sources(self, scope, *, after_id=0, limit=50):
+        """Return ascending source metadata after an ID within the validated page bound and current scope."""
         if (
             type(after_id) is not int
             or after_id < 0
@@ -588,6 +602,7 @@ class SQLiteResearchStore:
             )
 
     def list_references(self, scope):
+        """Return this authorized project's uploaded-reference metadata in ascending identity order."""
         with self._transaction() as conn:
             self._check_scope(conn, scope, "sources.read")
             return [
@@ -644,6 +659,7 @@ class SQLiteResearchStore:
 
     @staticmethod
     def _finding(conn, project_id, finding_id):
+        """Load one finding from the specified project or reject the missing scoped identity."""
         row = conn.execute(
             "SELECT * FROM findings WHERE project_id=? AND id=?",
             (project_id, finding_id),
@@ -686,6 +702,7 @@ class SQLiteResearchStore:
 
     @staticmethod
     def _evidence(conn, project_id, finding_ids):
+        """Read stored quotations, source identities and finding status for the selected project findings."""
         references = []
         for finding_id in finding_ids:
             rows = conn.execute(

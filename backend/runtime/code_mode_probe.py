@@ -8,6 +8,7 @@ from backend.runtime.codex_rpc import RpcProtocolError
 
 
 async def probe_code_mode(rpc):
+    """Run the fixed offline readiness payload through the existing broker sandbox and require its exact closed-session proof."""
     payload = Path(__file__).with_name("code_mode_payload.py").read_text()
     result = await rpc.request(
         "command/exec",

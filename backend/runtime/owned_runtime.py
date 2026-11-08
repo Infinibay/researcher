@@ -66,6 +66,7 @@ async def _settled(function, *args, **kwargs):
 
 
 async def _drain(reader):
+    """Consume Ken preparation output in chunks and reject cumulative output above the one-MiB host cap."""
     count = 0
     while chunk := await reader.read(8192):
         count += len(chunk)
@@ -476,9 +477,11 @@ class OwnedCodexRuntime:
                     live = True
 
                     def admitted():
+                        """Require the original local live flag, caller authority and nonwithdrawn broker for this attempt."""
                         return live and active() and not broker._withdrawn.is_set()
 
                     def withdraw():
+                        """Retire the local admission flag, withdraw the live grant and close broker authority without undoing committed effects."""
                         nonlocal live
                         live = False
                         self.live_grants.withdraw(scope.grant_id)
@@ -487,6 +490,7 @@ class OwnedCodexRuntime:
                     async with AsyncPeerBroker(broker) as owner:
 
                         async def watch():
+                            """Observe original attempt admission and withdraw authority before closing the owner when it ends."""
                             while admitted():
                                 await asyncio.sleep(0.02)
                             withdraw()

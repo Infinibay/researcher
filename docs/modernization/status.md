@@ -4,15 +4,16 @@ La implementación del [plan completo](../superpowers/plans/2026-10-31-actualiza
 
 ## Último avance
 
-La suite backend completa termina con **2576 aprobadas y2fallos**, sin omisiones,
-en35min21s. Ambos fallos se reprodujeron por entorno filtrado desde una prueba del
-lanzador; corregido sólo el aislamiento de esa prueba,3casos dirigidos y22ampliados
-pasan. **Todavía no hay nueva suite completa verde.**
-[Informe](global-source-20261108-review.md), [resultados](global-source-20261108-results.json).
+Backend Python documentado:205funciones/clases y5paquetes añadidos; presencia sin
+huecos en317módulos/2942definiciones. **705pruebas de fuente y121instaladas en cada
+CPython3.12/3.13 pasan**, sin omisiones.701archivos de paquete y todos los metadatos
+salvo29descripciones OpenAPI nuevas coinciden;85candidatos de prompts revisados.
+[Informe y límites](all-python-docstrings-review.md), [resultados](all-python-docstrings-results.json).
 
-Accesibilidad medida ya corregida; queda aplicar/verificar205docstrings de función/
-clase y5de paquete, preparados en copias durante el global. Ken/ONNX, U08 humano,
-zoom nativo/lector, detalles y controles finales siguen en el [tablero](execution-dashboard.md).
+El global anterior conserva2576aprobadas/2fallos de aislamiento, corregidos con
+reproducción y22casos posteriores; todavía no hay nueva suite completa verde.
+Siguiente: zoom nativo/accesibilidad restante; JSDoc/C, Ken/ONNX, U08 humano,
+detalles y controles finales conservan sus propios gates.
 
 ## Resultados disponibles
 

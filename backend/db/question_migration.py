@@ -7,6 +7,7 @@ from backend.db.migrations import execute_resource
 
 
 def apply_question_schema(conn):
+    """Upgrade question-pause storage atomically, preserving custom run objects and restoring SQLite flags after validation."""
     if conn.in_transaction:
         raise RuntimeError("Question migration cannot enter an existing transaction")
     foreign_keys = conn.execute("PRAGMA foreign_keys").fetchone()[0]

@@ -19,6 +19,7 @@ def execute_resource(conn: sqlite3.Connection, path: Path) -> None:
 
 
 def apply_sql_resource(conn: sqlite3.Connection, path: Path) -> None:
+    """Execute one SQL resource in an immediate transaction, committing success or rolling back every failure."""
     conn.execute("BEGIN IMMEDIATE")
     try:
         execute_resource(conn, path)

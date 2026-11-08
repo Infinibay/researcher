@@ -1,0 +1,521 @@
+{
+  "added": 210,
+  "files": {
+    "backend/research/http_client.py": {
+      "added": [
+        "ResearcherClientError",
+        "ResearcherClientError.__init__",
+        "_NoRedirect",
+        "_NoRedirect.redirect_request",
+        "ResearcherEndpoint.__init__",
+        "ResearcherEndpoint.prepare_request",
+        "ResearcherHTTPClient",
+        "ResearcherHTTPClient.__init__",
+        "ResearcherHTTPClient.request"
+      ],
+      "existing_docstrings_unchanged": true
+    },
+    "backend/research/async_http_client.py": {
+      "added": [
+        "AsyncResearcherHTTPClient",
+        "AsyncResearcherHTTPClient.__init__",
+        "AsyncResearcherHTTPClient.__aenter__",
+        "AsyncResearcherHTTPClient.__aexit__",
+        "AsyncResearcherHTTPClient.request",
+        "AsyncResearcherHTTPClient._send",
+        "AsyncResearcherHTTPClient.aclose",
+        "AsyncResearcherHTTPClient._shutdown"
+      ],
+      "existing_docstrings_unchanged": true
+    },
+    "backend/research/ports.py": {
+      "added": [
+        "ResearchRepository",
+        "ResearchRepository.lookup_operation",
+        "ResearchRepository.get_reference",
+        "ResearchRepository.capture_source",
+        "ReferenceReader",
+        "ReferenceReader.read",
+        "WebFetcher",
+        "WebFetcher.fetch"
+      ],
+      "existing_docstrings_unchanged": true
+    },
+    "backend/network_destinations.py": {
+      "added": [
+        "PublicNetworkError",
+        "public_address"
+      ],
+      "existing_docstrings_unchanged": true
+    },
+    "backend/research/web_fetcher.py": {
+      "added": [
+        "_resolve",
+        "_public_address",
+        "_DeadlineSSLSocket._bound_receive",
+        "_DeadlineSSLSocket.recv_into",
+        "_DeadlineSSLSocket.recv",
+        "PinnedHTTPSConnection.__init__",
+        "PinnedHTTPSConnection.connect",
+        "PublicWebFetcher._url"
+      ],
+      "existing_docstrings_unchanged": true
+    },
+    "backend/research/sqlite_store.py": {
+      "added": [
+        "_json",
+        "_hash",
+        "SQLiteResearchStore.__init__",
+        "SQLiteResearchStore._transaction",
+        "SQLiteResearchStore.revoke_grant",
+        "SQLiteResearchStore.authorize",
+        "SQLiteResearchStore._task",
+        "SQLiteResearchStore._fingerprint",
+        "SQLiteResearchStore._receipt",
+        "SQLiteResearchStore.lookup_operation",
+        "SQLiteResearchStore._write",
+        "SQLiteResearchStore._source",
+        "SQLiteResearchStore.read_source",
+        "SQLiteResearchStore.list_sources",
+        "SQLiteResearchStore.list_references",
+        "SQLiteResearchStore._finding",
+        "SQLiteResearchStore._evidence"
+      ],
+      "existing_docstrings_unchanged": true
+    },
+    "backend/runtime/code_mode_payload.py": {
+      "added": [
+        "main",
+        "main.send",
+        "main.exact",
+        "main.receive",
+        "main.response"
+      ],
+      "existing_docstrings_unchanged": true
+    },
+    "backend/runtime/proxy_payload.py": {
+      "added": [
+        "install_native_filter",
+        "install_native_filter.Program",
+        "stop_child",
+        "main"
+      ],
+      "existing_docstrings_unchanged": true
+    },
+    "backend/runtime/peer_guard.py": {
+      "added": [
+        "_info",
+        "_forward",
+        "run"
+      ],
+      "existing_docstrings_unchanged": true
+    },
+    "backend/runtime/command_output.py": {
+      "added": [
+        "output_window"
+      ],
+      "existing_docstrings_unchanged": true
+    },
+    "backend/runtime/peer_payload.py": {
+      "added": [
+        "main"
+      ],
+      "existing_docstrings_unchanged": true
+    },
+    "backend/runtime/bootstrap.py": {
+      "added": [
+        "_sync_directory",
+        "_create_file"
+      ],
+      "existing_docstrings_unchanged": true
+    },
+    "backend/api/exceptions.py": {
+      "added": [
+        "APIError.__init__",
+        "ProjectNotFound",
+        "ProjectNotFound.__init__",
+        "EpicNotFound",
+        "EpicNotFound.__init__",
+        "MilestoneNotFound",
+        "MilestoneNotFound.__init__",
+        "TaskNotFound",
+        "TaskNotFound.__init__",
+        "InvalidTaskStatus",
+        "InvalidTaskStatus.__init__",
+        "FileNotFoundError_",
+        "FileNotFoundError_.__init__",
+        "WikiPageNotFound",
+        "WikiPageNotFound.__init__",
+        "ProjectRunning",
+        "ProjectRunning.__init__",
+        "register_exception_handlers.api_error_handler",
+        "register_exception_handlers.value_error_handler"
+      ],
+      "existing_docstrings_unchanged": true
+    },
+    "backend/api/models/git.py": {
+      "added": [
+        "RepoCreate",
+        "RepoResponse",
+        "BranchCreate",
+        "PRMergeRequest",
+        "CleanupRequest",
+        "BranchDetail",
+        "RepoTreeEntry",
+        "FileContent",
+        "PRComment",
+        "PRCommentCreate"
+      ],
+      "existing_docstrings_unchanged": true
+    },
+    "backend/api/models/agent.py": {
+      "added": [
+        "AgentCurrentRun",
+        "AgentResponse",
+        "AgentPerformanceInfo",
+        "AgentList"
+      ],
+      "existing_docstrings_unchanged": true
+    },
+    "backend/api/models/user_request.py": {
+      "added": [
+        "UserRequestResponse",
+        "UserRequestRespond",
+        "UserRequestList"
+      ],
+      "existing_docstrings_unchanged": true
+    },
+    "backend/api/models/finding.py": {
+      "added": [
+        "FindingResponse",
+        "FindingSearchResult"
+      ],
+      "existing_docstrings_unchanged": true
+    },
+    "backend/api/models/project.py": {
+      "added": [
+        "ProjectList",
+        "EpicProgressItem",
+        "BlockingTaskInfo",
+        "BlockedTaskItem",
+        "ProjectProgressResponse"
+      ],
+      "existing_docstrings_unchanged": true
+    },
+    "backend/api/models/chat.py": {
+      "added": [
+        "ChatThreadResponse",
+        "UnreadCountsResponse",
+        "ThreadArchiveResponse"
+      ],
+      "existing_docstrings_unchanged": true
+    },
+    "backend/api/models/epic.py": {
+      "added": [
+        "EpicUpdate"
+      ],
+      "existing_docstrings_unchanged": true
+    },
+    "backend/api/models/milestone.py": {
+      "added": [
+        "MilestoneUpdate"
+      ],
+      "existing_docstrings_unchanged": true
+    },
+    "backend/api/routes/session.py": {
+      "added": [
+        "PairOwner",
+        "end_session"
+      ],
+      "existing_docstrings_unchanged": true
+    },
+    "backend/research/models.py": {
+      "added": [
+        "bounded_text",
+        "positive_id",
+        "operation_key",
+        "EvidenceReference",
+        "EvidenceReference.__post_init__",
+        "EvidenceReference.validate_against",
+        "FindingDraft",
+        "FindingDraft.__post_init__",
+        "ReportDraft",
+        "ReportDraft.__post_init__",
+        "ReportDraft.markdown",
+        "validate_report_finding"
+      ],
+      "existing_docstrings_unchanged": true
+    },
+    "backend/runtime/native_commands.py": {
+      "added": [
+        "_toml",
+        "_version"
+      ],
+      "existing_docstrings_unchanged": true
+    },
+    "backend/runtime/ken_worker.py": {
+      "added": [
+        "WorkerLaunch"
+      ],
+      "existing_docstrings_unchanged": true
+    },
+    "backend/runtime/workspaces.py": {
+      "added": [
+        "WorkspaceRegistry.__init__",
+        "WorkspaceRegistry.select",
+        "WorkspaceRegistry.validate"
+      ],
+      "existing_docstrings_unchanged": true
+    },
+    "backend/runtime/ken_mediation.py": {
+      "added": [
+        "_validator"
+      ],
+      "existing_docstrings_unchanged": true
+    },
+    "backend/runtime/broker_inference.py": {
+      "added": [
+        "BrokerInferenceSession._request",
+        "broker_inference.admitted"
+      ],
+      "existing_docstrings_unchanged": true
+    },
+    "backend/runtime/business_definitions.py": {
+      "added": [
+        "ToolDefinition",
+        "ToolDefinition.wire_schema.expand"
+      ],
+      "existing_docstrings_unchanged": true
+    },
+    "backend/runtime/host_business.py": {
+      "added": [
+        "HostBusinessPeer.list_tools",
+        "HostBusinessPeer.call_tool",
+        "HostBusinessPeer.aclose",
+        "HostBusinessPeer._shutdown"
+      ],
+      "existing_docstrings_unchanged": true
+    },
+    "backend/runtime/code_mode_probe.py": {
+      "added": [
+        "probe_code_mode"
+      ],
+      "existing_docstrings_unchanged": true
+    },
+    "backend/runtime/owned_runtime.py": {
+      "added": [
+        "_drain",
+        "OwnedCodexRuntime.open.admitted",
+        "OwnedCodexRuntime.open.withdraw",
+        "OwnedCodexRuntime.open.watch"
+      ],
+      "existing_docstrings_unchanged": true
+    },
+    "backend/db/research_migration.py": {
+      "added": [
+        "apply_research_schema"
+      ],
+      "existing_docstrings_unchanged": true
+    },
+    "backend/db/migrations.py": {
+      "added": [
+        "apply_sql_resource"
+      ],
+      "existing_docstrings_unchanged": true
+    },
+    "backend/db/question_migration.py": {
+      "added": [
+        "apply_question_schema"
+      ],
+      "existing_docstrings_unchanged": true
+    },
+    "backend/db/peer_kind_migration.py": {
+      "added": [
+        "migrate_ken_peers"
+      ],
+      "existing_docstrings_unchanged": true
+    },
+    "backend/tools/base/db.py": {
+      "added": [
+        "DBConnection.__init__",
+        "DBConnection.__enter__",
+        "DBConnection.__exit__",
+        "sanitize_fts5_query._capture_phrase",
+        "parse_query_or_terms._capture"
+      ],
+      "existing_docstrings_unchanged": true
+    },
+    "backend/flows/event_bus.py": {
+      "added": [
+        "EventBus.__init__"
+      ],
+      "existing_docstrings_unchanged": true
+    },
+    "backend/flows/snapshot_service.py": {
+      "added": [
+        "save_snapshot._upsert",
+        "load_snapshot._query"
+      ],
+      "existing_docstrings_unchanged": true
+    },
+    "backend/state/completion.py": {
+      "added": [
+        "CompletionState",
+        "CompletionDetector.detect",
+        "CompletionDetector.detect._query"
+      ],
+      "existing_docstrings_unchanged": true
+    },
+    "backend/state/dependency_validator.py": {
+      "added": [
+        "DependencyValidator.can_start._query",
+        "DependencyValidator.get_unmet_dependencies._query"
+      ],
+      "existing_docstrings_unchanged": true
+    },
+    "backend/state/progress.py": {
+      "added": [
+        "ProgressService.get_project_metrics._query",
+        "ProgressService.get_blocked_tasks._query",
+        "ProgressService.get_epic_progress._query",
+        "ProgressService.get_milestone_progress._query"
+      ],
+      "existing_docstrings_unchanged": true
+    },
+    "backend/git/branch_service.py": {
+      "added": [
+        "BranchService._get_task_row._query",
+        "BranchService.list_branches._query",
+        "BranchService.get_branch_for_task._query",
+        "BranchService.find_stale_branches._query"
+      ],
+      "existing_docstrings_unchanged": true
+    },
+    "backend/git/pr_service.py": {
+      "added": [
+        "PRService.list_prs._query",
+        "PRService.get_pr._query",
+        "PRService.get_pr_for_task._query",
+        "PRService.update_pr_status._update"
+      ],
+      "existing_docstrings_unchanged": true
+    },
+    "backend/git/repository_manager.py": {
+      "added": [
+        "RepositoryManager.list_repos._query",
+        "RepositoryManager.get_repo._query",
+        "RepositoryManager.archive_repo._update"
+      ],
+      "existing_docstrings_unchanged": true
+    },
+    "backend/git/forgejo_client.py": {
+      "added": [
+        "ForgejoClient.__init__",
+        "ForgejoClient._api_url",
+        "ForgejoClient._token"
+      ],
+      "existing_docstrings_unchanged": true
+    },
+    "backend/api/main.py": {
+      "added": [
+        "create_app.timing_middleware",
+        "create_app.serve_spa"
+      ],
+      "existing_docstrings_unchanged": true
+    },
+    "backend/api/run.py": {
+      "added": [
+        "main"
+      ],
+      "existing_docstrings_unchanged": true
+    },
+    "backend/communication/ownership.py": {
+      "added": [
+        "native_thread"
+      ],
+      "existing_docstrings_unchanged": true
+    },
+    "backend/api/routes/agents.py": {
+      "added": [
+        "list_agents._query"
+      ],
+      "existing_docstrings_unchanged": true
+    },
+    "backend/api/routes/chat.py": {
+      "added": [
+        "list_threads._query"
+      ],
+      "existing_docstrings_unchanged": true
+    },
+    "backend/api/routes/epics.py": {
+      "added": [
+        "_row_to_response",
+        "list_epics._query",
+        "get_epic._query"
+      ],
+      "existing_docstrings_unchanged": true
+    },
+    "backend/api/routes/git.py": {
+      "added": [
+        "_resolve_repo_path._query",
+        "_get_remote_url._query",
+        "_log_event._insert"
+      ],
+      "existing_docstrings_unchanged": true
+    },
+    "backend/api/routes/milestones.py": {
+      "added": [
+        "_row_to_response",
+        "list_milestones._query",
+        "get_milestone._query"
+      ],
+      "existing_docstrings_unchanged": true
+    },
+    "backend/api/routes/projects.py": {
+      "added": [
+        "_project_to_response",
+        "list_projects._query"
+      ],
+      "existing_docstrings_unchanged": true
+    },
+    "backend/api/routes/user_requests.py": {
+      "added": [
+        "list_pending_requests._query",
+        "respond_to_request._respond",
+        "respond_to_request._mirror_response"
+      ],
+      "existing_docstrings_unchanged": true
+    },
+    "backend/__init__.py": {
+      "added": [
+        "<module>"
+      ],
+      "existing_docstrings_unchanged": true
+    },
+    "backend/api/__init__.py": {
+      "added": [
+        "<module>"
+      ],
+      "existing_docstrings_unchanged": true
+    },
+    "backend/api/models/__init__.py": {
+      "added": [
+        "<module>"
+      ],
+      "existing_docstrings_unchanged": true
+    },
+    "backend/api/routes/__init__.py": {
+      "added": [
+        "<module>"
+      ],
+      "existing_docstrings_unchanged": true
+    },
+    "backend/config/__init__.py": {
+      "added": [
+        "<module>"
+      ],
+      "existing_docstrings_unchanged": true
+    }
+  },
+  "only_expected_previously_missing_docs_added": true
+}

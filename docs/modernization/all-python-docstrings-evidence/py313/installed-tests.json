@@ -1,0 +1,31 @@
+{
+  "scope": "Selected actual installed tests and complete byte membership, not installed global suite",
+  "paths": [
+    "backend/tests/research/test_http_client.py",
+    "backend/tests/research/test_async_http_client.py",
+    "backend/tests/research/test_web_fetcher.py",
+    "backend/tests/tools/test_db_layer.py",
+    "backend/tests/runtime/test_host_business.py",
+    "backend/tests/runtime/test_business_mediation.py",
+    "backend/tests/runtime/test_code_mode_host.py",
+    "backend/tests/runtime/test_broker_native.py",
+    "backend/tests/runtime/test_runtime_profile.py",
+    "backend/tests/runtime/test_ken_mediation.py",
+    "backend/tests/runtime/test_host_installation.py::test_prepared_semantic_assets_reach_reopened_host_and_launcher",
+    "backend/tests/runtime/test_owner_history.py::test_archive_requires_the_actual_project_and_preserves_native_receipts",
+    "backend/tests/runtime/test_workspace_delivery.py::test_owner_can_inspect_sources_and_closed_task_runs_without_runtime_config"
+  ],
+  "process_exit": 0,
+  "observed": {
+    "cases": 121,
+    "passed": 121,
+    "failed": 0,
+    "skipped": 0,
+    "backend_modules": 253,
+    "all_backend_imports_installed": true,
+    "installed_bytes_match": 701,
+    "seconds": 29.014,
+    "exit_code": 0
+  },
+  "real_model_turns_requested": 0
+}

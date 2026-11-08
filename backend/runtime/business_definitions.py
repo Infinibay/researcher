@@ -21,6 +21,7 @@ from backend.runtime.business_mediation import ALL_BUSINESS_NAMES, RESEARCH_NAME
 
 @dataclass(frozen=True)
 class ToolDefinition:
+    """Bind one host-selected tool name, description, argument model and handler with its declared annotations."""
     name: str
     description: str
     arguments: type[BaseModel]
@@ -37,6 +38,7 @@ class ToolDefinition:
         definitions = schema.get("$defs", {})
 
         def expand(node, seen=()):
+            """Inline only local acyclic DTO references and remove annotation titles while preserving schema properties."""
             if isinstance(node, list):
                 return [expand(value, seen) for value in node]
             if not isinstance(node, dict):

@@ -13,6 +13,7 @@ import time
 
 
 def main():
+    """Exercise one fixed offline code-host cell and delegated echo, verifying closure and reaping the original child."""
     deadline = time.monotonic() + 5
     child = subprocess.Popen(
         ["/run/researcher-runtime/codex-code-mode-host"],
@@ -23,11 +24,13 @@ def main():
     )
 
     def send(message):
+        """Write one length-prefixed compact JSON frame to the original code-host process."""
         payload = json.dumps(message, separators=(",", ":")).encode()
         child.stdin.write(struct.pack("<I", len(payload)) + payload)
         child.stdin.flush()
 
     def exact(count):
+        """Read exactly the requested byte count before the shared readiness deadline, refusing early EOF."""
         data = bytearray()
         while len(data) < count:
             if not select.select(
@@ -41,12 +44,14 @@ def main():
         return data
 
     def receive():
+        """Decode one V1 JSON frame and reject lengths outside the fixed readiness bound."""
         length = struct.unpack("<I", exact(4))[0]
         if not 0 < length <= 65536:
             raise RuntimeError("Code-mode readiness frame exceeded limit")
         return json.loads(exact(length))
 
     def response(request_id):
+        """Find this request's successful operation response within the bounded intervening-message count."""
         for _ in range(16):
             message = receive()
             if (

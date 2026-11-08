@@ -92,6 +92,7 @@ print(json.dumps({"version":d.version,"grammar_version":m.version("tree-sitter-l
 
 @dataclass(frozen=True)
 class WorkerLaunch:
+    """Carry the trusted Ken launch command, explicit environment and file descriptors passed to its owner."""
     command: tuple[str, ...]
     env: dict[str, str]
     pass_fds: tuple[int, ...]

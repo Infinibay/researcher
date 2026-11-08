@@ -33,6 +33,7 @@ class PRService:
         """List pull requests for a project with optional status filter."""
 
         def _query(conn: sqlite3.Connection) -> list[dict[str, Any]]:
+            """List stored project code-review records, optionally filtering their recorded status."""
             where = ["project_id = ?"]
             params: list[Any] = [project_id]
 
@@ -54,6 +55,7 @@ class PRService:
         """Get a single pull request by id."""
 
         def _query(conn: sqlite3.Connection) -> dict[str, Any] | None:
+            """Read a historical code-review record by identity without querying the remote provider."""
             row = conn.execute(
                 "SELECT * FROM code_reviews WHERE id = ?", (pr_id,)
             ).fetchone()
@@ -65,6 +67,7 @@ class PRService:
         """Get the pull request associated with a task."""
 
         def _query(conn: sqlite3.Connection) -> dict[str, Any] | None:
+            """Read the stored code-review record associated with the requested task."""
             row = conn.execute(
                 "SELECT * FROM code_reviews WHERE task_id = ?", (task_id,)
             ).fetchone()
@@ -91,6 +94,7 @@ class PRService:
         """
 
         def _update(conn: sqlite3.Connection) -> bool:
+            """Update stored review labels and optional reviewer or comments; native acceptance authority is separate."""
             sets = ["status = ?"]
             params: list[Any] = [status]
 

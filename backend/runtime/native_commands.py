@@ -57,6 +57,7 @@ DISABLED = (
 
 
 def _toml(value):
+    """Encode scalar configuration values with JSON literals and nested mappings with TOML inline-table syntax."""
     if isinstance(value, dict):
         return (
             "{"
@@ -67,6 +68,7 @@ def _toml(value):
 
 
 def _version(binary, env):
+    """Read the selected native binary version under the supplied environment with a five-second subprocess deadline."""
     return subprocess.check_output(
         [str(binary), "--version"], text=True, timeout=5, env=env
     ).strip()

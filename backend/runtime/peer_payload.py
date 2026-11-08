@@ -6,6 +6,7 @@ import sys
 
 
 def main():
+    """Require the trusted one-byte G gate within fifteen seconds before replacing this process with the admitted command."""
     if not select.select([0], [], [], 15)[0] or os.read(0, 1) != b"G":
         sys.exit(125)
     os.execvpe(sys.argv[1], sys.argv[1:], os.environ)

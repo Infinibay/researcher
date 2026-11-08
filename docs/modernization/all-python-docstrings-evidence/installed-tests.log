@@ -1,0 +1,11 @@
+........................................................................ [ 59%]
+.................................................                        [100%]
+=============================== warnings summary ===============================
+::test_native_finding_registry_facade_preserves_filters_cursors_and_exact_evidence[True]
+  /home/andres/.codex/worktrees/b09e/researcher/.superpowers/sdd/2026-10-31-actualizacion-proyecto/native-runtime-env/lib/python3.12/site-packages/backend/tests/research/test_http.py:4: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+121 passed, 1 warning in 38.57s
+DOCUMENTATION-INSTALLED:{"cases": 121, "passed": 121, "failed": 0, "skipped": 0, "backend_modules": 253, "all_backend_imports_installed": true, "installed_bytes_match": 701, "seconds": 38.573, "exit_code": 0}
+

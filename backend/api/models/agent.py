@@ -6,6 +6,7 @@ from pydantic import BaseModel, Field
 
 
 class AgentCurrentRun(BaseModel):
+    """Expose the roster-linked historical run labeled running; native closure evidence is separate."""
     agent_run_id: str
     task_id: int
     task_title: str | None = None
@@ -13,6 +14,7 @@ class AgentCurrentRun(BaseModel):
 
 
 class AgentResponse(BaseModel):
+    """Describe a retained roster entry with optional stored run and performance records."""
     agent_id: str
     name: str
     role: str
@@ -25,6 +27,7 @@ class AgentResponse(BaseModel):
 
 
 class AgentPerformanceInfo(BaseModel):
+    """Carry recorded historical counters and costs without claiming complete current native usage."""
     successful_runs: int = 0
     failed_runs: int = 0
     total_tokens: int = 0
@@ -37,5 +40,6 @@ AgentResponse.model_rebuild()
 
 
 class AgentList(BaseModel):
+    """Pair the returned roster entries with their reported total."""
     agents: list[AgentResponse]
     total: int

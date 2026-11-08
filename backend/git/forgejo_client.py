@@ -20,14 +20,17 @@ class ForgejoClient:
     """
 
     def __init__(self) -> None:
+        """Retain the configured provider owner used by subsequent Forgejo API calls."""
         self._owner = settings.FORGEJO_OWNER
 
     @property
     def _api_url(self) -> str:
+        """Read the configured Forgejo API base URL with trailing slashes removed."""
         return settings.FORGEJO_API_URL.rstrip("/")
 
     @property
     def _token(self) -> str:
+        """Read the configured provider token only when a Forgejo operation requests it."""
         return settings.FORGEJO_TOKEN
 
     # ── Helpers ────────────────────────────────────────────────────────

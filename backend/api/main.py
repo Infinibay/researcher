@@ -154,6 +154,7 @@ def create_app(*, access: LocalAccess | None = None, runtime_service=None) -> Fa
     # Request timing middleware
     @app.middleware("http")
     async def timing_middleware(request: Request, call_next):
+        """Measure completed HTTP requests, attach processing time and log requests taking over one second."""
         start = time.perf_counter()
         response = await call_next(request)
         elapsed = time.perf_counter() - start
@@ -257,6 +258,7 @@ def create_app(*, access: LocalAccess | None = None, runtime_service=None) -> Fa
         @app.get("/{full_path:path}", include_in_schema=False)
         async def serve_spa(full_path: str):
             # Don't serve SPA for API routes
+            """Return the built frontend index for client routes while refusing API and documentation fallbacks."""
             if full_path.startswith(("api/", "docs", "redoc")):
                 return JSONResponse(status_code=404, content={"error": "Not found"})
             index = static_dir / "index.html"

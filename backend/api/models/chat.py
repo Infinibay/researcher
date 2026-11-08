@@ -102,6 +102,7 @@ class NativeInstruction(BaseModel):
 
 
 class ChatThreadResponse(BaseModel):
+    """Expose a stored conversation identity, scope, last message and message count."""
     thread_id: str
     project_id: int
     thread_type: str | None = None
@@ -111,9 +112,11 @@ class ChatThreadResponse(BaseModel):
 
 
 class UnreadCountsResponse(BaseModel):
+    """Carry per-conversation unread counts rather than agent-message acknowledgement authority."""
     counts: dict[str, int]
 
 
 class ThreadArchiveResponse(BaseModel):
+    """Identify the thread and the recorded result of its archive operation."""
     thread_id: str
     status: str

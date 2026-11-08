@@ -55,6 +55,7 @@ def save_snapshot(
         state_str = json.dumps(state_dict, default=str)
 
         def _upsert(conn: sqlite3.Connection) -> None:
+            """Persist the retained project snapshot fields and timestamp, without starting or resuming a flow."""
             conn.execute(
                 """INSERT OR REPLACE INTO flow_snapshots
                    (project_id, flow_name, current_step, state_json,
@@ -81,6 +82,7 @@ def load_snapshot(project_id: int) -> dict[str, Any] | None:
     """Load the most recent snapshot for a project, or None if absent."""
 
     def _query(conn: sqlite3.Connection) -> dict[str, Any] | None:
+        """Read the retained flow snapshot for this project, returning no record when absent."""
         row = conn.execute(
             "SELECT * FROM flow_snapshots WHERE project_id = ?",
             (project_id,),

@@ -582,6 +582,7 @@ def _resolve_repo_path(project_id: int | None, repo_name: str) -> str:
         )
 
     def _query(conn: sqlite3.Connection) -> str | None:
+        """Look up the stored local path for the exact project and repository name without invoking Git."""
         row = conn.execute(
             "SELECT local_path FROM repositories WHERE project_id = ? AND name = ?",
             (project_id, repo_name),
@@ -601,6 +602,7 @@ def _get_remote_url(project_id: int, repo_name: str) -> str | None:
     """Look up the ``remote_url`` for a repo from the repositories table."""
 
     def _query(conn: sqlite3.Connection) -> str | None:
+        """Look up the registered remote URL for this project repository without contacting its provider."""
         row = conn.execute(
             "SELECT remote_url FROM repositories WHERE project_id = ? AND name = ?",
             (project_id, repo_name),
@@ -637,6 +639,7 @@ def _log_event(
         return
     try:
         def _insert(conn: sqlite3.Connection) -> None:
+            """Append the supplied Git-operation event and JSON details to the project event log."""
             conn.execute(
                 """INSERT INTO events_log
                        (project_id, event_type, event_source, entity_type,

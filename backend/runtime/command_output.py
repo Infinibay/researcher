@@ -4,6 +4,7 @@ import base64
 
 
 def output_window(chunk: bytes, *, offset: int, total_bytes: int):
+    """Describe supplied retained bytes with exact offsets, original base64 and an explicitly lossy UTF-8 preview."""
     try:
         preview = chunk.decode("utf-8")
         lossy = False

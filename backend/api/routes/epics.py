@@ -23,6 +23,7 @@ def _records():
 
 
 def _row_to_response(row: dict) -> EpicResponse:
+    """Validate a stored group row against the public epic response shape."""
     return EpicResponse(**row)
 
 
@@ -31,6 +32,7 @@ def list_epics(project_id: int = Query(...)):
     """List epics for a project with task and milestone counts."""
 
     def _query(conn: sqlite3.Connection) -> list[dict]:
+        """List project groups with stored task and milestone counts in priority order."""
         rows = conn.execute(
             """SELECT e.*,
                       COALESCE(tc.task_count, 0) as task_count,
@@ -70,6 +72,7 @@ def get_epic(epic_id: int):
     """Get epic details with task and milestone counts."""
 
     def _query(conn: sqlite3.Connection) -> dict | None:
+        """Read one group identity with its stored task and milestone counts, returning no row when absent."""
         row = conn.execute(
             """SELECT e.*,
                       COALESCE(tc.task_count, 0) as task_count,

@@ -6,6 +6,7 @@ from pydantic import BaseModel, Field
 
 
 class RepoCreate(BaseModel):
+    """Retain the implicit repository-creation request shape; compatibility guards reject its retired setup effects."""
     name: str = Field(..., min_length=1, max_length=128)
     local_path: str = Field(..., min_length=1)
     remote_url: str | None = None
@@ -13,6 +14,7 @@ class RepoCreate(BaseModel):
 
 
 class RepoResponse(BaseModel):
+    """Expose registered repository metadata independently of source availability or execution authority."""
     id: int
     project_id: int
     name: str
@@ -40,6 +42,7 @@ class BranchResponse(BaseModel):
 
 
 class BranchCreate(BaseModel):
+    """Retain the retired branch-creation request shape; its deprecated path does not select authoritative source."""
     task_id: int
     repo_path: str | None = Field(default=None, description="Deprecated; resolved from DB")
     base_branch: str = Field(default="main")
@@ -64,16 +67,19 @@ class PRResponse(BaseModel):
 
 
 class PRMergeRequest(BaseModel):
+    """Retain the optional merge-message shape for the retired compatibility mutation endpoint."""
     merge_message: str | None = None
 
 
 class CleanupRequest(BaseModel):
+    """Retain the historical cleanup request shape without granting Git deletion authority."""
     project_id: int
     repo_path: str
     delete_remote: bool = True
 
 
 class BranchDetail(BaseModel):
+    """Describe an observed branch name and available last-commit metadata."""
     name: str
     last_commit_sha: str | None = None
     last_commit_message: str | None = None
@@ -82,6 +88,7 @@ class BranchDetail(BaseModel):
 
 
 class RepoTreeEntry(BaseModel):
+    """Describe a repository-relative blob or tree identity and optional byte size."""
     path: str
     type: str  # "blob" | "tree"
     sha: str
@@ -89,6 +96,7 @@ class RepoTreeEntry(BaseModel):
 
 
 class FileContent(BaseModel):
+    """Carry a repository file body with its path, hash, byte size and optional provider link."""
     path: str
     content: str
     sha: str
@@ -97,6 +105,7 @@ class FileContent(BaseModel):
 
 
 class PRComment(BaseModel):
+    """Expose a provider comment identity, author, body and recorded timestamp."""
     id: int
     author: str
     body: str
@@ -105,4 +114,5 @@ class PRComment(BaseModel):
 
 
 class PRCommentCreate(BaseModel):
+    """Validate a nonempty comment body for the provider-comment request."""
     body: str = Field(..., min_length=1)

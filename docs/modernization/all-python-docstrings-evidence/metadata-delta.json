@@ -1,0 +1,298 @@
+{
+  "policies_unchanged": 7,
+  "business_tools_unchanged": 48,
+  "openapi_descriptions_added": 29,
+  "other_openapi_values_unchanged": true,
+  "changes": [
+    {
+      "path": [
+        "components",
+        "schemas",
+        "PRMergeRequest",
+        "description"
+      ],
+      "kind": "added",
+      "value": "Retain the optional merge-message shape for the retired compatibility mutation endpoint."
+    },
+    {
+      "path": [
+        "components",
+        "schemas",
+        "EpicUpdate",
+        "description"
+      ],
+      "kind": "added",
+      "value": "Validate optional planning-group metadata edits; guarded routes own history and lifecycle checks."
+    },
+    {
+      "path": [
+        "components",
+        "schemas",
+        "RepoResponse",
+        "description"
+      ],
+      "kind": "added",
+      "value": "Expose registered repository metadata independently of source availability or execution authority."
+    },
+    {
+      "path": [
+        "components",
+        "schemas",
+        "ProjectProgressResponse",
+        "description"
+      ],
+      "kind": "added",
+      "value": "Aggregate recorded task statuses and group progress; report validity and native activity remain separate."
+    },
+    {
+      "path": [
+        "components",
+        "schemas",
+        "BranchDetail",
+        "description"
+      ],
+      "kind": "added",
+      "value": "Describe an observed branch name and available last-commit metadata."
+    },
+    {
+      "path": [
+        "components",
+        "schemas",
+        "PairOwner",
+        "description"
+      ],
+      "kind": "added",
+      "value": "Validate the bounded owner-pairing code; this flow does not accept model tool bearer credentials."
+    },
+    {
+      "path": [
+        "components",
+        "schemas",
+        "PRComment",
+        "description"
+      ],
+      "kind": "added",
+      "value": "Expose a provider comment identity, author, body and recorded timestamp."
+    },
+    {
+      "path": [
+        "components",
+        "schemas",
+        "UserRequestList",
+        "description"
+      ],
+      "kind": "added",
+      "value": "Pair returned human-request records with their reported total."
+    },
+    {
+      "path": [
+        "components",
+        "schemas",
+        "AgentCurrentRun",
+        "description"
+      ],
+      "kind": "added",
+      "value": "Expose the roster-linked historical run labeled running; native closure evidence is separate."
+    },
+    {
+      "path": [
+        "components",
+        "schemas",
+        "AgentPerformanceInfo",
+        "description"
+      ],
+      "kind": "added",
+      "value": "Carry recorded historical counters and costs without claiming complete current native usage."
+    },
+    {
+      "path": [
+        "components",
+        "schemas",
+        "FileContent",
+        "description"
+      ],
+      "kind": "added",
+      "value": "Carry a repository file body with its path, hash, byte size and optional provider link."
+    },
+    {
+      "path": [
+        "components",
+        "schemas",
+        "AgentResponse",
+        "description"
+      ],
+      "kind": "added",
+      "value": "Describe a retained roster entry with optional stored run and performance records."
+    },
+    {
+      "path": [
+        "components",
+        "schemas",
+        "ThreadArchiveResponse",
+        "description"
+      ],
+      "kind": "added",
+      "value": "Identify the thread and the recorded result of its archive operation."
+    },
+    {
+      "path": [
+        "components",
+        "schemas",
+        "UserRequestResponse",
+        "description"
+      ],
+      "kind": "added",
+      "value": "Expose a stored human request, its options and any recorded response independently of native admission."
+    },
+    {
+      "path": [
+        "components",
+        "schemas",
+        "ProjectList",
+        "description"
+      ],
+      "kind": "added",
+      "value": "Pair returned project resource records with their reported total."
+    },
+    {
+      "path": [
+        "components",
+        "schemas",
+        "RepoCreate",
+        "description"
+      ],
+      "kind": "added",
+      "value": "Retain the implicit repository-creation request shape; compatibility guards reject its retired setup effects."
+    },
+    {
+      "path": [
+        "components",
+        "schemas",
+        "PRCommentCreate",
+        "description"
+      ],
+      "kind": "added",
+      "value": "Validate a nonempty comment body for the provider-comment request."
+    },
+    {
+      "path": [
+        "components",
+        "schemas",
+        "MilestoneUpdate",
+        "description"
+      ],
+      "kind": "added",
+      "value": "Validate optional milestone metadata and due-date edits within the route's scope checks."
+    },
+    {
+      "path": [
+        "components",
+        "schemas",
+        "BlockedTaskItem",
+        "description"
+      ],
+      "kind": "added",
+      "value": "Describe a task with the prerequisite records currently reported as blocking it."
+    },
+    {
+      "path": [
+        "components",
+        "schemas",
+        "RepoTreeEntry",
+        "description"
+      ],
+      "kind": "added",
+      "value": "Describe a repository-relative blob or tree identity and optional byte size."
+    },
+    {
+      "path": [
+        "components",
+        "schemas",
+        "UnreadCountsResponse",
+        "description"
+      ],
+      "kind": "added",
+      "value": "Carry per-conversation unread counts rather than agent-message acknowledgement authority."
+    },
+    {
+      "path": [
+        "components",
+        "schemas",
+        "BlockingTaskInfo",
+        "description"
+      ],
+      "kind": "added",
+      "value": "Identify a prerequisite task and its recorded display status."
+    },
+    {
+      "path": [
+        "components",
+        "schemas",
+        "EpicProgressItem",
+        "description"
+      ],
+      "kind": "added",
+      "value": "Summarize stored task counts and their completion percentage for one group or milestone."
+    },
+    {
+      "path": [
+        "components",
+        "schemas",
+        "AgentList",
+        "description"
+      ],
+      "kind": "added",
+      "value": "Pair the returned roster entries with their reported total."
+    },
+    {
+      "path": [
+        "components",
+        "schemas",
+        "ChatThreadResponse",
+        "description"
+      ],
+      "kind": "added",
+      "value": "Expose a stored conversation identity, scope, last message and message count."
+    },
+    {
+      "path": [
+        "components",
+        "schemas",
+        "CleanupRequest",
+        "description"
+      ],
+      "kind": "added",
+      "value": "Retain the historical cleanup request shape without granting Git deletion authority."
+    },
+    {
+      "path": [
+        "components",
+        "schemas",
+        "UserRequestRespond",
+        "description"
+      ],
+      "kind": "added",
+      "value": "Validate one nonempty owner response to the original stored request."
+    },
+    {
+      "path": [
+        "components",
+        "schemas",
+        "BranchCreate",
+        "description"
+      ],
+      "kind": "added",
+      "value": "Retain the retired branch-creation request shape; its deprecated path does not select authoritative source."
+    },
+    {
+      "path": [
+        "paths",
+        "/api/session",
+        "delete",
+        "description"
+      ],
+      "kind": "added",
+      "value": "Revoke the current owner session when present and expire its cookie without admitting native work."
+    }
+  ]
+}

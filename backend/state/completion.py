@@ -10,6 +10,7 @@ logger = logging.getLogger(__name__)
 
 
 class CompletionState(str, Enum):
+    """Classify stored task and objective labels for compatibility reporting, not native acceptance authority."""
     ACTIVE = "active"
     WAITING_FOR_RESEARCH = "waiting_for_research"
     IDLE_OBJECTIVES_MET = "idle_objectives_met"
@@ -21,8 +22,10 @@ class CompletionDetector:
 
     @staticmethod
     def detect(project_id: int) -> CompletionState:
+        """Derive a compatibility completion summary from recorded project tasks and group statuses."""
         def _query(conn: sqlite3.Connection) -> CompletionState:
             # Check for in-progress tasks
+            """Distinguish active task types before checking whether all stored group objectives are labeled completed."""
             ip_rows = conn.execute(
                 """SELECT id, type FROM tasks
                    WHERE project_id = ? AND status = 'in_progress'""",

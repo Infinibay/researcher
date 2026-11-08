@@ -31,6 +31,7 @@ class HostBusinessPeer:
         self.closed = False
 
     async def list_tools(self):
+        """Expose the host-selected schemas only while the original business scope remains admitted."""
         if self._closing is not None or not self._active():
             raise ResearcherClientError("Business admission authority ended")
         return ListToolsResult(
@@ -46,6 +47,7 @@ class HostBusinessPeer:
         )
 
     async def call_tool(self, name, arguments):
+        """Validate admitted arguments, invoke the bound handler and recheck live authority before returning its result."""
         try:
             if self._closing is not None or not self._active():
                 raise ResearcherClientError("Business admission authority ended")
@@ -77,6 +79,7 @@ class HostBusinessPeer:
         )
 
     async def aclose(self):
+        """Withdraw server-side authority immediately and join one shared shielded cleanup task."""
         if self._closing is None:
             # Immediate server-side authority withdrawal must precede IO cleanup.
             self._withdraw()
@@ -84,6 +87,7 @@ class HostBusinessPeer:
         await asyncio.shield(self._closing)
 
     async def _shutdown(self):
+        """Close the owned HTTP client and mark the peer closed only after that cleanup succeeds."""
         await self._client.aclose()
         self.closed = True
 

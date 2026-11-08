@@ -6,6 +6,7 @@ from pydantic import BaseModel
 
 
 class FindingResponse(BaseModel):
+    """Expose a stored claim and declared confidence or validation labels, without asserting scientific verification."""
     id: int
     project_id: int | None = None
     task_id: int
@@ -23,6 +24,7 @@ class FindingResponse(BaseModel):
 
 
 class FindingSearchResult(BaseModel):
+    """Carry a ranked stored-claim match; similarity and declared confidence do not validate its truth."""
     id: int
     topic: str
     content: str

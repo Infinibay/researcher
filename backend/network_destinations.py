@@ -8,10 +8,12 @@ import sys
 
 
 class PublicNetworkError(ValueError):
+    """Report invalid, nonpublic or unavailable network destination resolution."""
     pass
 
 
 def public_address(value):
+    """Parse a globally routable IP and reject reserved, multicast, scoped and transition-address forms."""
     try:
         address = ipaddress.ip_address(value)
     except ValueError:

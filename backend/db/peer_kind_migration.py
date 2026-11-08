@@ -2,6 +2,7 @@
 
 
 def migrate_ken_peers(conn):
+    """Extend the historical peer-kind schema for Ken in its own transaction and restore the original SQLite flags."""
     if conn.in_transaction:
         raise RuntimeError("Peer kind migration requires its own transaction")
     foreign_keys = conn.execute("PRAGMA foreign_keys").fetchone()[0]

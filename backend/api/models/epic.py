@@ -16,6 +16,7 @@ class EpicCreate(BaseModel):
 
 
 class EpicUpdate(BaseModel):
+    """Validate optional planning-group metadata edits; guarded routes own history and lifecycle checks."""
     title: str | None = Field(default=None, min_length=1, max_length=255)
     description: str | None = None
     status: str | None = None

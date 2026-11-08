@@ -83,6 +83,7 @@ class ReviewTarget:
 
 
 def bounded_text(value: str, name: str, max_bytes: int) -> None:
+    """Require nonblank text within a named UTF-8 byte bound rather than a character-count approximation."""
     if (
         not isinstance(value, str)
         or not value.strip()
@@ -94,11 +95,13 @@ def bounded_text(value: str, name: str, max_bytes: int) -> None:
 
 
 def positive_id(value: int) -> None:
+    """Require a strictly positive integer identity and reject booleans or other numeric types."""
     if type(value) is not int or value <= 0:
         raise ResearchInputError("Expected a positive integer identity")
 
 
 def operation_key(value: str) -> None:
+    """Validate the bounded ASCII operation identity used for exact effect reconciliation."""
     if not isinstance(value, str) or not re.fullmatch(r"[A-Za-z0-9_.:-]{1,128}", value):
         raise ResearchInputError(
             "Operation key must contain 1–128 ASCII letters, numbers, dots, colons, dashes or underscores"
@@ -138,14 +141,17 @@ class SourceDraft:
 
 @dataclass(frozen=True)
 class EvidenceReference:
+    """Declare a source identity and quote; exact matching against captured content is a separate check."""
     source_id: int
     quote: str
 
     def __post_init__(self):
+        """Validate the positive source ID and nonempty quote byte bound before source lookup."""
         positive_id(self.source_id)
         bounded_text(self.quote, "quote", 8000)
 
     def validate_against(self, source: dict) -> None:
+        """Require the declared quote to occur exactly in the supplied captured-source content."""
         if self.quote not in source["content"]:
             raise InvalidEvidence(
                 "Citation is not an exact excerpt of the captured source"
@@ -211,12 +217,14 @@ class ReviewDecision:
 
 @dataclass(frozen=True)
 class FindingDraft:
+    """Declare bounded claim text, a claim kind and distinct source references before provisional persistence."""
     topic: str
     content: str
     evidence: tuple[EvidenceReference, ...]
     finding_type: str = "observation"
 
     def __post_init__(self):
+        """Validate claim bounds, the declared kind and one to twenty distinct citations; this does not check scientific truth."""
         bounded_text(self.topic, "topic", 1200)
         bounded_text(self.content, "finding content", 100000)
         if self.finding_type not in (
@@ -235,12 +243,14 @@ class FindingDraft:
 
 @dataclass(frozen=True)
 class ReportDraft:
+    """Declare a bounded report body and exact selected finding identities without accepting their conclusions."""
     title: str
     content: str
     finding_ids: tuple[int, ...]
     report_type: str = "research"
 
     def __post_init__(self):
+        """Require a single-line title, supported report kind and one to fifty distinct positive finding IDs."""
         bounded_text(self.title, "title", 1200)
         if "\n" in self.title or "\r" in self.title:
             raise ResearchInputError("Report title must be a single line")
@@ -256,6 +266,7 @@ class ReportDraft:
 
     @property
     def markdown(self) -> str:
+        """Prefix the retained body with its declared Markdown title without changing or validating the body."""
         return f"# {self.title}\n\n{self.content}"
 
 
@@ -314,6 +325,7 @@ class ReferenceRecord:
 
 
 def validate_report_finding(finding: dict, evidence: list[dict]) -> None:
+    """Refuse superseded or uncited claims in a report; these guards do not establish scientific validity."""
     if finding["status"] == "superseded":
         raise InvalidEvidence("Report cannot use a superseded finding")
     if not evidence:

@@ -55,11 +55,13 @@ class ProjectResponse(BaseModel):
 
 
 class ProjectList(BaseModel):
+    """Pair returned project resource records with their reported total."""
     projects: list[ProjectResponse]
     total: int
 
 
 class EpicProgressItem(BaseModel):
+    """Summarize stored task counts and their completion percentage for one group or milestone."""
     id: int
     title: str
     total: int
@@ -68,12 +70,14 @@ class EpicProgressItem(BaseModel):
 
 
 class BlockingTaskInfo(BaseModel):
+    """Identify a prerequisite task and its recorded display status."""
     id: int
     title: str
     status: str
 
 
 class BlockedTaskItem(BaseModel):
+    """Describe a task with the prerequisite records currently reported as blocking it."""
     id: int
     title: str
     status: str
@@ -81,6 +85,7 @@ class BlockedTaskItem(BaseModel):
 
 
 class ProjectProgressResponse(BaseModel):
+    """Aggregate recorded task statuses and group progress; report validity and native activity remain separate."""
     total_tasks: int
     done: int
     in_progress: int

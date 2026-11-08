@@ -11,6 +11,7 @@ LEGACY_THREAD_CLAUSE = f"""NOT EXISTS(SELECT 1 FROM chat_messages ownership
 
 
 def native_thread(conn, project_id, thread_id):
+    """Detect native ownership markers in the specified project conversation before compatibility mutations."""
     return bool(
         conn.execute(
             f"SELECT EXISTS(SELECT 1 FROM chat_messages ownership WHERE project_id=? AND thread_id=? AND {NATIVE_MARKER})",

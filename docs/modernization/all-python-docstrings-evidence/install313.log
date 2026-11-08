@@ -1,0 +1,7 @@
+Using Python 3.13.18 environment at: .superpowers/sdd/2026-10-31-actualizacion-proyecto/distribution-py313-env
+Resolved 1 package in 2ms
+Prepared 1 package in 14ms
+Uninstalled 1 package in 37ms
+Installed 1 package in 97ms
+ - researcher==0.1.0 (from file:///home/andres/.codex/worktrees/b09e/researcher/.superpowers/sdd/2026-10-31-actualizacion-proyecto/distribution-py313-dist/researcher-0.1.0-cp313-cp313-linux_x86_64.whl)
+ + researcher==0.1.0 (from file:///home/andres/.codex/worktrees/b09e/researcher/.superpowers/sdd/2026-10-31-actualizacion-proyecto/documentation-py313-dist/researcher-0.1.0-cp313-cp313-linux_x86_64.whl)

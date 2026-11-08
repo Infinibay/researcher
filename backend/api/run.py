@@ -69,6 +69,7 @@ def main():
     # here can't reach it.  Graceful shutdown is handled by the FastAPI
     # lifespan handler in main.py (which runs inside the child process).
 
+    """Launch the configured ASGI app factory with reload disabled; app lifespan owns service startup and shutdown."""
     uvicorn.run(
         "backend.api.main:create_app",
         factory=True,

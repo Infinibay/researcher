@@ -39,6 +39,7 @@ class EventBus:
     """Simple pub/sub event bus for flow events."""
 
     def __init__(self) -> None:
+        """Create an empty handler registry and lock for process-local event subscription changes."""
         self._handlers: dict[str, list[Callable[[FlowEvent], None]]] = {}
         self._lock = threading.Lock()
 

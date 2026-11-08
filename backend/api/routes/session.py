@@ -10,6 +10,7 @@ router = APIRouter(prefix="/api/session", tags=["owner session"])
 
 
 class PairOwner(BaseModel):
+    """Validate the bounded owner-pairing code; this flow does not accept model tool bearer credentials."""
     model_config = ConfigDict(extra="forbid")
     code: str = Field(min_length=1, max_length=256)
 
@@ -49,6 +50,7 @@ async def pair_owner(body: PairOwner, request: Request, response: Response):
 
 @router.delete("", status_code=204)
 async def end_session(request: Request, response: Response):
+    """Revoke the current owner session when present and expire its cookie without admitting native work."""
     access = request.app.state.local_access
     session = request.state.owner_session
     if session is not None:

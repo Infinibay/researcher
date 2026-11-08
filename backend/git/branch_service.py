@@ -35,6 +35,7 @@ class BranchService:
         """Look up task id, title, and project_id from DB."""
 
         def _query(conn: sqlite3.Connection) -> dict[str, Any] | None:
+            """Read the task identity, title and owning project used by historical branch lookup."""
             row = conn.execute(
                 "SELECT id, title, project_id FROM tasks WHERE id = ?", (task_id,)
             ).fetchone()
@@ -65,6 +66,7 @@ class BranchService:
         """List branches for a project with optional filters."""
 
         def _query(conn: sqlite3.Connection) -> list[dict[str, Any]]:
+            """List stored project branches with optional repository-name and status filters in newest-first order."""
             where = ["project_id = ?"]
             params: list[Any] = [project_id]
 
@@ -89,6 +91,7 @@ class BranchService:
         """Look up the branch associated with a task."""
 
         def _query(conn: sqlite3.Connection) -> dict[str, Any] | None:
+            """Read the stored branch record associated with this task, without creating or selecting a worktree."""
             row = conn.execute(
                 "SELECT * FROM branches WHERE task_id = ?", (task_id,)
             ).fetchone()
@@ -150,6 +153,7 @@ class BranchService:
         """Find active branches with no commits in the last *days_threshold* days."""
 
         def _query(conn: sqlite3.Connection) -> list[dict[str, Any]]:
+            """Select active project branch records whose stored last-commit timestamp precedes the requested age threshold."""
             rows = conn.execute(
                 """SELECT * FROM branches
                    WHERE project_id = ?

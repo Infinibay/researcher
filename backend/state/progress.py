@@ -14,6 +14,7 @@ class ProgressService:
 
         def _query(conn: sqlite3.Connection) -> dict:
             # Task counts by status
+            """Aggregate stored status counts, blocked work and group or milestone percentages without inferring report validity."""
             rows = conn.execute(
                 """SELECT status, COUNT(*) as cnt
                    FROM tasks WHERE project_id = ?
@@ -143,6 +144,7 @@ class ProgressService:
         """Return tasks blocked by unmet dependencies."""
 
         def _query(conn: sqlite3.Connection) -> list[dict]:
+            """List backlog or pending tasks alongside blocking prerequisites not labeled done or cancelled."""
             rows = conn.execute(
                 """SELECT DISTINCT t.id, t.title, t.status,
                           dep.id as blocking_id, dep.title as blocking_title, dep.status as blocking_status
@@ -165,6 +167,7 @@ class ProgressService:
         """Return per-epic task completion stats."""
 
         def _query(conn: sqlite3.Connection) -> list[dict]:
+            """Summarize noncancelled task totals and done counts per project group in priority order."""
             rows = conn.execute(
                 """SELECT e.id, e.title,
                           SUM(CASE WHEN t.status != 'cancelled' THEN 1 ELSE 0 END) as total,
@@ -196,6 +199,7 @@ class ProgressService:
         """Return per-milestone task completion stats."""
 
         def _query(conn: sqlite3.Connection) -> list[dict]:
+            """Summarize noncancelled task totals and done counts per project milestone in identity order."""
             rows = conn.execute(
                 """SELECT m.id, m.title,
                           SUM(CASE WHEN t.status != 'cancelled' THEN 1 ELSE 0 END) as total,

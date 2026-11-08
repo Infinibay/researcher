@@ -28,30 +28,30 @@ que se pueda comparar el avance; no presentar microajustes como tareas principal
 - Última suite global: `cb4da17`,2578 casos,2576 pasan y2fallan,0omisiones. Ambos fallos reproducidos por contaminación de entorno de una prueba del lanzador; corrección posterior con3casos dirigidos/22ampliados aprobados. No se declara una nueva corrida completa verde. `9fb873c` y sus31fallos/1error quedan como referencia histórica.
 - U01–U07, E01–E12, C01–C10 y D01–D13 quedan comprobados con el alcance de sus matrices; sigue 1 de 43 escenarios amplios sin aceptación completa en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Estado actual: global completo diagnosticado; documentación final en curso
+## Estado actual: backend Python documentado y empaquetado; accesibilidad restante
 
-[Informe global](global-source-20261108-review.md). Ejecución20:32:30–21:07:52UTC;
-pytest35min21s: **2576 pasan/2fallan,0omisiones**,703 fuentes congeladas. Ambos
-fallos comparten contaminación del entorno en un test del lanzador; misma
-secuencia RED1/2, GREEN3/0; **22casos ampliados pasan16,34s**. Producto intacto.
-Verificación del diagnóstico y baseline de documentación leídas **21:15:01UTC**;
-desde salida global,7min9s incluyen lectura, reproducción, arreglo y comprobación.
+[Informe](all-python-docstrings-review.md), [resultados](all-python-docstrings-results.json).
+Baseline21:15:01UTC, lectura final21:42:02UTC: **27min1s** hasta verificación;
+preparación de borradores durante la suite anterior y checkpoint posteriores aparte.
 
-- Terminado por alcance: accesibilidad medida y revalidación33casos anteriores;
-  nueva suite completa y causa de sus dos fallos aislada. No hay global verde.
-- En curso: aplicar y verificar el bloque documental completo, preparado durante
-  la ejecución: **205 funciones/clases +5 módulos de paquete,61archivos**. Copias
-  con AST ejecutable equivalente; proyección2942definiciones/317módulos sin huecos
-  por presencia. Tres sobreafirmaciones del muestreo independiente y cuatro
-  formulaciones relacionadas ya acotadas. Aún sin aplicar ni aceptar por presencia.
-  Baseline actual:7políticas/48herramientas/143schemas OpenAPI capturados sin IO.
-- Revisión limpia del plan: no encuentra otra capacidad gruesa ausente demostrada.
-  Cuatro fragmentos históricos conciliados, sin cambiar estados. No revisión final.
-- Pendientes: documentación aplicada/metadatos/prompts/checks; distribución Ken/ONNX
-  (elección ya consultada, sin nueva publicación); U08 humano; zoom nativo/lector;
-  detalles; paquete coherente, suite final y revisión independiente.
-- Estado amplio:42/43 escenarios y12/12 páginas por alcance. No nuevos modelos generativos,
-  push, merge ni despliegue. Prueba primitiva de zoom nativo preparada pero NO ejecutada.
+- Terminado por alcance:205docstrings de función/clase y5de paquete en61archivos.
+  Presencia:317módulos/2942definiciones,0huecos. Todos los docs anteriores intactos;
+  AST ejecutable igual. **705fuente,121instaladas3.12 y121instaladas3.13 pasan**.
+  701archivos coinciden fuente/sdist/wheel/instalación;371producto, avisos/licencia
+  iguales.7políticas48herramientas intactas;29descripciones OpenAPI añadidas y
+  todos los demás valores iguales, también en ambos entornos instalados.
+- Prompts:85/322 vigentes;68deltas documentales revisados,17sin renovar y3IDs
+  desplazados por líneas enlazados explícitamente. Sin cambio de política, modelos
+  generativos ni mejora de ranking Ken atribuida. La revisión semántica de seis
+  módulos acotó tres sobreafirmaciones del borrador; no certifica todos los textos.
+- Ahora: prueba primitiva de zoom nativo de Chromium en perfiles desechables;
+  aún NO ejecutada ni aceptada. Después acceso real/lector y detalles.
+- Pendientes: JSDoc/C relevantes en revisión final; Ken/ONNX (elección ya consultada,
+  sin repetir pregunta ni adoptar/publicar); U08 humano; accesibilidad restante;
+  detalles y conjunto final coherente de paquete/global/revisión independiente.
+- Última global mantiene2576pass/2fallos, corregidos sólo mediante aislamiento de
+  prueba con22casos posteriores. No hay nueva global verde.12/12 páginas por alcance,
+  42/43escenarios, sin push/merge/despliegue.
 
 ## Etapa anterior: fallos medidos de accesibilidad corregidos
 

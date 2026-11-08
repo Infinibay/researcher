@@ -1,0 +1,7 @@
+Using Python 3.12.9 environment at: .superpowers/sdd/2026-10-31-actualizacion-proyecto/native-runtime-env
+Resolved 1 package in 2ms
+Prepared 1 package in 15ms
+Uninstalled 1 package in 30ms
+Installed 1 package in 349ms
+ - researcher==0.1.0 (from file:///home/andres/.codex/worktrees/b09e/researcher/.superpowers/sdd/2026-10-31-actualizacion-proyecto/coarse-delivery-dist/researcher-0.1.0-cp312-cp312-linux_x86_64.whl)
+ + researcher==0.1.0 (from file:///home/andres/.codex/worktrees/b09e/researcher/.superpowers/sdd/2026-10-31-actualizacion-proyecto/documentation-dist/researcher-0.1.0-cp312-cp312-linux_x86_64.whl)

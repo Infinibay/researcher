@@ -11,10 +11,12 @@ import time
 
 
 def install_native_filter():
+    """Apply the mounted native seccomp program after enabling no_new_privs, refusing filter setup failure."""
     with open("/run/researcher-host/native-filter", "rb") as source:
         data = source.read()
 
     class Program(ctypes.Structure):
+        """Match Linux sock_fprog memory layout for the trusted native filter bytecode."""
         _fields_ = [("length", ctypes.c_ushort), ("filter", ctypes.c_void_p)]
 
     instructions = ctypes.create_string_buffer(data)
@@ -25,6 +27,7 @@ def install_native_filter():
 
 
 def stop_child(pid):
+    """Terminate and reap this direct child, escalating from SIGTERM to SIGKILL after one second."""
     try:
         os.kill(pid, signal.SIGTERM)
     except ProcessLookupError:
@@ -39,6 +42,7 @@ def stop_child(pid):
 
 
 def main():
+    """Relay accepted private-loopback sockets to the host via SCM_RIGHTS and retire the filtered native child on bridge loss."""
     bridge_fd = int(sys.argv[1])
     for item in os.listdir("/proc/self/fd"):
         fd = int(item)

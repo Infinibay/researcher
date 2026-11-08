@@ -1,0 +1,190 @@
+{
+  "base_commit": "8b156a4",
+  "scope": "Full owned Python documentation presence with manually authored contracts, source and selected installed verification; not all-language semantic adequacy or a final global run",
+  "applied": {
+    "applied_utc": "2026-11-08T21:17:26.967963+00:00",
+    "function_class_docstrings_added": 205,
+    "package_module_docstrings_added": 5,
+    "files": 61,
+    "product_modules_scanned": 317,
+    "functions_classes_scanned": 2942,
+    "missing_presence": [],
+    "all_executable_ast_equal_after_docstring_removal": true
+  },
+  "prior_added_function_class_docs": 416,
+  "cumulative_added_function_class_docs": 621,
+  "package_modules_added_separately": 5,
+  "all_preexisting_docstrings_unchanged": true,
+  "metadata": {
+    "policies_unchanged": 7,
+    "business_tools_unchanged": 48,
+    "openapi_descriptions_added": 29,
+    "other_openapi_values_unchanged": true
+  },
+  "source_tests": {
+    "passed": 705,
+    "failed": 0,
+    "skipped": 0,
+    "seconds": 239.14,
+    "warning": "Existing Starlette/httpx deprecation"
+  },
+  "installed312": {
+    "cases": 121,
+    "passed": 121,
+    "failed": 0,
+    "skipped": 0,
+    "backend_modules": 253,
+    "all_backend_imports_installed": true,
+    "installed_bytes_match": 701,
+    "seconds": 38.573,
+    "exit_code": 0
+  },
+  "installed313": {
+    "cases": 121,
+    "passed": 121,
+    "failed": 0,
+    "skipped": 0,
+    "backend_modules": 253,
+    "all_backend_imports_installed": true,
+    "installed_bytes_match": 701,
+    "seconds": 29.014,
+    "exit_code": 0
+  },
+  "package312": {
+    "wheel": ".superpowers/sdd/2026-10-31-actualizacion-proyecto/documentation-dist/researcher-0.1.0-cp312-cp312-linux_x86_64.whl",
+    "wheel_sha256": "1f0d029a163f0eb8ccee8d3211647f7672e41f16938eef86e7255c723ce2e5df",
+    "sdist": ".superpowers/sdd/2026-10-31-actualizacion-proyecto/documentation-dist/researcher-0.1.0.tar.gz",
+    "sdist_sha256": "1bd7435b7b35717774f927a0510333176b54fe49533c1d8ff4082830d527f30b",
+    "source_py_sql_files": 701,
+    "product_files": 371,
+    "complete_membership_and_bytes_match": true,
+    "only_excluded_source": "backend/db/seeds/dev_data.sql",
+    "license_and_notice_bytes_match": true,
+    "source_c_bytes_match_sdist": true
+  },
+  "package313": {
+    "wheel": ".superpowers/sdd/2026-10-31-actualizacion-proyecto/documentation-py313-dist/researcher-0.1.0-cp313-cp313-linux_x86_64.whl",
+    "wheel_sha256": "7016484f08b0eabc9cc91aaa934f803f8f062d7e13fbbee85984f9dd0c2b3aff",
+    "sdist": ".superpowers/sdd/2026-10-31-actualizacion-proyecto/documentation-py313-dist/researcher-0.1.0.tar.gz",
+    "sdist_sha256": "61bb3a21c17a39d08a200174a2d0e2fad9c5405dfef850a9983fc5de7e24a277",
+    "source_wheel_sdist_files_equal": 701,
+    "license_notice_bytes_equal": true,
+    "scope": "Current CPython3.13 artifact bytes only; installed metadata/tests recorded separately"
+  },
+  "installed_metadata_equals_source": {
+    "policies": 7,
+    "business_tools": 48,
+    "full_owner_openapi": true,
+    "python_versions": [
+      "3.12",
+      "3.13"
+    ]
+  },
+  "prompt_inventory": {
+    "files": 322,
+    "candidates": 85,
+    "reviewed": 85,
+    "revalidated": 68,
+    "retained_current": 17,
+    "line_only_relocations": 3,
+    "check_exit": 0
+  },
+  "semantic_review": {
+    "reviewer": "/root/remaining_plan_closure_review",
+    "scope": "Six proposed files and immediate implementations only, read-only, no tests/models/build/source edits",
+    "findings_corrected": [
+      "Cancellation does not prove joined shutdown",
+      "JSON-object response does not validate receipt identity",
+      "TLS verification follows the supplied SSLContext"
+    ],
+    "implementer_related_corrections": [
+      "Synchronous client and host result terminology",
+      "Bounded DNS wording does not imply an external public resolver",
+      "Configuration scalar serialization wording"
+    ],
+    "scope_limit": "Not a general acceptance of all210docs or product behavior"
+  },
+  "evidence": "docs/modernization/all-python-docstrings-evidence",
+  "source_after_sha256": {
+    "backend/research/http_client.py": "3a2380f27c0968cd052f84ffadf0c2b2c42d3d2cc6f75ebf534ed70928e40a0a",
+    "backend/research/async_http_client.py": "ff84a01032be4007f8e9e28d8189b90f55b507b6024a127124465c3fccc9ebd7",
+    "backend/research/ports.py": "2a9a8eff3bd2344c6b1e872c964de07c98ac221f083d6ba88788147137426396",
+    "backend/network_destinations.py": "60518c42d952512642a7d1e72e0341d01696ba30ae21f451f1a74e5261424c91",
+    "backend/research/web_fetcher.py": "99ed810ab919868670d9870ac4dea347a62f61bb8e4053a7fa6825740557954b",
+    "backend/research/sqlite_store.py": "8dba48d10ad17d703c97f89df6b5944061da67e33aebd6fb6e17d44670cf22b8",
+    "backend/runtime/code_mode_payload.py": "b7163d450de444dad090aa248d0be4bce2992803327236696958f354e8460286",
+    "backend/runtime/proxy_payload.py": "3b81b8f19a75c6b8048c51a1d07091acb711c1d9374396b7224f32c8b2911ee4",
+    "backend/runtime/peer_guard.py": "d1e518ba6f7736104d705ec061e72b9302fbf73d06554f8b56af1357a14521ac",
+    "backend/runtime/command_output.py": "29b635d2b1574e8e466b0f9670e4f723eab84cee6e5681d76032da44dd484992",
+    "backend/runtime/peer_payload.py": "a806709e3114d5a00bd5ed7cc5337c99d894a344f858a6daecb4712844c49581",
+    "backend/runtime/bootstrap.py": "63f6ce20dae3e8def1eaddc4c19c32ce09ba002f7bb618eb1c39bbc93c2a85f2",
+    "backend/api/exceptions.py": "1234ecf7a89a126d6fc015445df340235fd64fbef2a975e277a2ff60bc64a522",
+    "backend/api/models/git.py": "888685e9846259a3a60bf1523db5a02e0baa7c750a9cdb1928642460a471fa8f",
+    "backend/api/models/agent.py": "50f841df3bcc2275ed0386b6d5da2af91cd46ac9d27242ee1d9564baa23fe52a",
+    "backend/api/models/user_request.py": "3da2b5661e57767d635f7c665c3183d74ca8aee6496af01a1219de427a829252",
+    "backend/api/models/finding.py": "c189745397f95232dd607655aa7b9a780a9458711d76c4d49c123e16b7b8feff",
+    "backend/api/models/project.py": "b2e0226a89c477f769e87e6832448df91b34c817974ac76bf0e419b257c62c30",
+    "backend/api/models/chat.py": "1538d89c55d5e23430c9d498dafce99a12d2928738840acd631336971351e385",
+    "backend/api/models/epic.py": "4acdcfd0f136de7d985d88f7ec5cbdb8330fd1f44c9909c807106ff3c90e1fb7",
+    "backend/api/models/milestone.py": "85a5d5a59da257d6937bd5ea2f040e251d6cb36efd847aa2f2833a07b260c44a",
+    "backend/api/routes/session.py": "d1165bc4a44f8121bb1860b83ff45aaa4b05d04d8b3ac83388084930bcf9d4ab",
+    "backend/research/models.py": "a2cd286750e1b6f211d07d649ce17d8afc8f63db6e0c64bb8f4a6126e1b01e22",
+    "backend/runtime/native_commands.py": "48b3a36a90d3854a7c9093c944682cd2a79865a872a75509c3ee5fd9dfa34416",
+    "backend/runtime/ken_worker.py": "e56f8444c76ffbbcbdb5893e4be3d913c45ae988db3d744da7e7be6b0b117cd4",
+    "backend/runtime/workspaces.py": "d91e9213f99f7689c9fe5862702eac4ec561b98a62853ec26e5bc01c20b44dba",
+    "backend/runtime/ken_mediation.py": "845a26615448cb278b7856ce0db9106bb017c4bb16190e6d4d3cd0928afa6c4f",
+    "backend/runtime/broker_inference.py": "046d2511acc19b559668824450c30acfccfa86fc5ba8093ca4dc0888e87cdbe6",
+    "backend/runtime/business_definitions.py": "5db8926b3dd954aefc70784d01d5742a2af95a8d1c7d96276e295a40fa8dde07",
+    "backend/runtime/host_business.py": "e08047adbb73dfa1245fef67c6ab58395d82e9fea6f1abfac53beb7b64963026",
+    "backend/runtime/code_mode_probe.py": "2b3bdbc2d3482f3a048db6eca3ecdbe77cb0321ac5ac86ea8c7faa7081efec67",
+    "backend/runtime/owned_runtime.py": "16d55b19af55e24b3859f3e73ef51feb01320ef9ecabaeace9476ccc34751865",
+    "backend/db/research_migration.py": "b154bb9ca93e7dbed7ffd440a47c7565edc2ecaf73546e20e49fcb84a1edd933",
+    "backend/db/migrations.py": "45492077afebf0fd7ff071db014fd343dfff3b87618074566812604fa30e9849",
+    "backend/db/question_migration.py": "47daad5d0fc140f4af39c1d7584847a6471d2b7c9583dfaca8a2d61e21fe809c",
+    "backend/db/peer_kind_migration.py": "405fc5f256f291329ad68aea19f8ba03942a0c15dacda8ca8d561ab3b0360cb5",
+    "backend/tools/base/db.py": "9ccfd9c5ca56bccb7f2a4aff3bd7094c4d329ce52a809bd39190b4900f2955be",
+    "backend/flows/event_bus.py": "3f7f96b0bbbf9f5d985e6de6b2f5bbc878dd8695513ed92a5976ed47c5324eff",
+    "backend/flows/snapshot_service.py": "2fe5cb6dbb3a4751767d5846b8d7dd0d456406296e81f848f48d1fbbb9a18abc",
+    "backend/state/completion.py": "b641b837e2c2a07283d47a12d55cb7b04b553c07271f81990c6da86fd6e740f8",
+    "backend/state/dependency_validator.py": "0ba5b6faeebae5ba03468f4d2e6fd08c14905cdcde3eec3e769bd8b63285b8e5",
+    "backend/state/progress.py": "5e0910fb17d9a8dc6c5c2f51cf96cc0ad77d202aad09f5f37b0bfe9c38cee9ea",
+    "backend/git/branch_service.py": "3fde87145274858f18c17dbf510bce4f74f61524b95b054f0f873efc5e56abb6",
+    "backend/git/pr_service.py": "5593eb62862360f71fe0b61bf2cbec6163555d8955b1a91a07faa83aa9e937e1",
+    "backend/git/repository_manager.py": "1d7923e711c9686b468c65b01c1cbba290aaa2e92b7174d01a2d6c7ce49760dc",
+    "backend/git/forgejo_client.py": "6a32b56b4152c9c999b97058dbf73cb88aa93af66f9f8a4cde5b40306cc40b73",
+    "backend/api/main.py": "a88ee0b431e6777c2d7cd4852a1362567426ee5f4e36662e90a712fd34b8939c",
+    "backend/api/run.py": "c3a520d3b0e466bc2ee844d77c48ff03e930546bce70a139fe5a3ebb7a20c003",
+    "backend/communication/ownership.py": "01313ab60a1d6c240b6b95a113262c5a0056fd03996a976acb97c318e87da05c",
+    "backend/api/routes/agents.py": "97c59ebd90010bb76f765c883a9c48f9f25ec95de96dac0cd7ece58b4f79625e",
+    "backend/api/routes/chat.py": "a538ec3b9cedb2daf59e0d884be33ab8783256ff19c4eea3465e609fadef16fa",
+    "backend/api/routes/epics.py": "404e7c2bcbf8560ee733c6897a3539672bec973582832565aa8200c0ae833c3d",
+    "backend/api/routes/git.py": "9357f463dc96f3118282e47fb3e4fec11ed5258306b2cce6cd2f2a8604ba326b",
+    "backend/api/routes/milestones.py": "9d837059b3b1be22367c98921445bf5f6fe059f6bd1ae13008f699c28ecd438a",
+    "backend/api/routes/projects.py": "a37f5975e585aa947ec7e44e6e96b577c6657e863ca68f2e395bf234c4f7b815",
+    "backend/api/routes/user_requests.py": "2d6b89dbc237c7786058768c242a4727878aeceb22db7ffa1bc2ca1b0a7142ea",
+    "backend/__init__.py": "0352726d21bfb273a3169e657b1edf992db4ed11a4470ccd1ef5e60afb368b06",
+    "backend/api/__init__.py": "44f2b9f0e896c9a8f746c81b03cba38757fcd43cdbffd281c2ecf2742f78170b",
+    "backend/api/models/__init__.py": "2a20b645289fb59715d8cc6a69f72768fb536abd9141ebac3accd3f5c4cbafc0",
+    "backend/api/routes/__init__.py": "cc24f62ae78062c2522bdc711173a350a4a0a5fcf26874a5393b393cf75657be",
+    "backend/config/__init__.py": "d0d513e010eea43535ba09d2c2c9058726e9771ce1dbd70895e7f039d6a5ecfc"
+  },
+  "remaining": [
+    "Frontend/C documentation relevance is a separate final-review scope; do not require generic callback filler",
+    "Ken public distribution/ONNX choice remains pending, not adopted here",
+    "U08human feedback/adaptation, native zoom/screen reader, remaining details, final coherent global and independent review"
+  ],
+  "limits": [
+    "No generative model call, human comprehension acceptance or measured Ken ranking change",
+    "Global source run before this block retained2576pass2fixture-environment failures, subsequently directed22pass; no new global green",
+    "Linux x86-64, CPython/GIL source/selected installed scope only, no other platform certification",
+    "No push, merge or deployment"
+  ],
+  "verified_read_utc": "2026-11-08T21:42:02Z",
+  "baseline_read_utc": "2026-11-08T21:15:01Z",
+  "elapsed_seconds_until_verification": 1621,
+  "diff_check": {
+    "non_raw_exit": 0,
+    "verbatim_evidence_whitespace_diagnostics": 2,
+    "logs_modified_for_style": false
+  }
+}

@@ -26,6 +26,7 @@ def _records():
 
 
 def _row_to_response(row: dict) -> MilestoneResponse:
+    """Validate a stored milestone row against its public response shape."""
     return MilestoneResponse(**row)
 
 
@@ -37,6 +38,7 @@ def list_milestones(
     """List milestones with task counts, optionally filtered by epic."""
 
     def _query(conn: sqlite3.Connection) -> list[dict]:
+        """List scoped milestones and task counts, optionally filtering a group and ordering missing due dates last."""
         where = "m.project_id = ?"
         params: list = [project_id]
         if epic_id is not None:
@@ -76,6 +78,7 @@ def get_milestone(milestone_id: int):
     """Get milestone details with task counts."""
 
     def _query(conn: sqlite3.Connection) -> dict | None:
+        """Read one milestone identity with stored task counts, returning no row when absent."""
         row = conn.execute(
             """SELECT m.*,
                       COALESCE(tc.task_count, 0) as task_count,

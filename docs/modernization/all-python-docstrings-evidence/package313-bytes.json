@@ -1,0 +1,9 @@
+{
+  "wheel": ".superpowers/sdd/2026-10-31-actualizacion-proyecto/documentation-py313-dist/researcher-0.1.0-cp313-cp313-linux_x86_64.whl",
+  "wheel_sha256": "7016484f08b0eabc9cc91aaa934f803f8f062d7e13fbbee85984f9dd0c2b3aff",
+  "sdist": ".superpowers/sdd/2026-10-31-actualizacion-proyecto/documentation-py313-dist/researcher-0.1.0.tar.gz",
+  "sdist_sha256": "61bb3a21c17a39d08a200174a2d0e2fad9c5405dfef850a9983fc5de7e24a277",
+  "source_wheel_sdist_files_equal": 701,
+  "license_notice_bytes_equal": true,
+  "scope": "Current CPython3.13 artifact bytes only; installed metadata/tests recorded separately"
+}

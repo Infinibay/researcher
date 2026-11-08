@@ -43,6 +43,7 @@ class RepositoryManager:
         """List active repositories for a project."""
 
         def _query(conn: sqlite3.Connection) -> list[dict[str, Any]]:
+            """List active repository registrations for this project in display-name order."""
             rows = conn.execute(
                 """SELECT * FROM repositories
                    WHERE project_id = ? AND status = 'active'
@@ -57,6 +58,7 @@ class RepositoryManager:
         """Look up a single repository by project and name."""
 
         def _query(conn: sqlite3.Connection) -> dict[str, Any] | None:
+            """Read one repository registration by project and exact display name, regardless of its stored status."""
             row = conn.execute(
                 "SELECT * FROM repositories WHERE project_id = ? AND name = ?",
                 (project_id, name),
@@ -69,6 +71,7 @@ class RepositoryManager:
         """Soft-delete a repository by setting status to 'archived'."""
 
         def _update(conn: sqlite3.Connection) -> bool:
+            """Set the selected project registration to archived without deleting its source directory."""
             cursor = conn.execute(
                 "UPDATE repositories SET status = 'archived' WHERE project_id = ? AND name = ?",
                 (project_id, name),

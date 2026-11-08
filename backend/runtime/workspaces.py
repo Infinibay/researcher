@@ -20,6 +20,7 @@ class WorkspaceRegistry:
     """Resolve actual registered source identities under one host root; names and paths are data, never execution authority."""
 
     def __init__(self, database, root):
+        """Bind the database path and resolve the trusted existing host workspace root."""
         self.database = str(database)
         self.root = Path(root).resolve(strict=True)
 
@@ -72,9 +73,11 @@ class WorkspaceRegistry:
         return root, info
 
     def select(self, project_id, repository_id=None):
+        """Return the directory of one validated active project registration, requiring explicit selection when ambiguous."""
         return Path(self.bind(project_id, repository_id).workspace)
 
     def validate(self, project_id, binding):
+        """Rebind the admitted registration and reject changed paths, device or inode before returning the original workspace."""
         try:
             current = self.bind(project_id, binding.repository_id)
         except (RunConflict, RunNotFound, OSError) as exc:

@@ -20,6 +20,7 @@ from backend.runtime.peer_process import boot_id, observer_namespace
 
 
 def _sync_directory(path):
+    """Fsync an opened directory and close its descriptor so newly created entries can become durable."""
     fd = os.open(path, os.O_RDONLY | os.O_DIRECTORY | os.O_CLOEXEC)
     try:
         os.fsync(fd)
@@ -28,6 +29,7 @@ def _sync_directory(path):
 
 
 def _create_file(path):
+    """Create a new private regular-file path exclusively without following a final symlink; never adopt existing data."""
     fd = os.open(
         path, os.O_RDWR | os.O_CREAT | os.O_EXCL | os.O_NOFOLLOW | os.O_CLOEXEC, 0o600
     )

@@ -6,6 +6,7 @@ from pydantic import BaseModel, Field
 
 
 class UserRequestResponse(BaseModel):
+    """Expose a stored human request, its options and any recorded response independently of native admission."""
     id: int
     project_id: int
     agent_id: str | None = None
@@ -21,9 +22,11 @@ class UserRequestResponse(BaseModel):
 
 
 class UserRequestRespond(BaseModel):
+    """Validate one nonempty owner response to the original stored request."""
     response: str = Field(..., min_length=1)
 
 
 class UserRequestList(BaseModel):
+    """Pair returned human-request records with their reported total."""
     requests: list[UserRequestResponse]
     total: int

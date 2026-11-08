@@ -6,13 +6,17 @@ from urllib import error, parse, request
 
 
 class ResearcherClientError(RuntimeError):
+    """Represent an unconfirmed tool request or rejected backend response with optional HTTP status."""
     def __init__(self, message: str, *, status: int | None = None):
+        """Retain the caller-safe message and optional response status for tool error handling."""
         super().__init__(message)
         self.status = status
 
 
 class _NoRedirect(request.HTTPRedirectHandler):
+    """Refuse redirect following so a local tool credential is never forwarded to a new URL."""
     def redirect_request(self, req, fp, code, msg, headers, newurl):
+        """Decline the redirect and let urllib surface the original HTTP response as an error."""
         return None
 
 
@@ -55,6 +59,7 @@ class ResearcherEndpoint:
         timeout: float = 15,
         response_limit: int = 1048576,
     ):
+        """Validate a numeric loopback origin, bearer credential and positive transport bounds without opening IO."""
         try:
             origin = parse.urlsplit(api_url)
             address = ipaddress.ip_address(origin.hostname or "")
@@ -98,6 +103,7 @@ class ResearcherEndpoint:
         body: dict | None = None,
         query: dict | None = None,
     ):
+        """Bind a validated GET or POST route and bounded JSON body to this fixed local tool origin."""
         if (
             method not in ("GET", "POST")
             or not path.startswith("/")
@@ -133,11 +139,14 @@ class ResearcherEndpoint:
 
 
 class ResearcherHTTPClient(ResearcherEndpoint):
+    """Send synchronous research-tool requests without environment proxies or automatic redirects."""
     def __init__(self, *args, **kwargs):
+        """Create the no-proxy, no-redirect opener after validating the shared endpoint configuration."""
         super().__init__(*args, **kwargs)
         self.opener = request.build_opener(request.ProxyHandler({}), _NoRedirect())
 
     def request(self, method, path, *, body=None, query=None) -> dict:
+        """Read a bounded JSON-object response; callers validate business receipt identity and transport failure leaves the operation unconfirmed."""
         url, data, headers = self.prepare_request(method, path, body=body, query=query)
         req = request.Request(url, data=data, headers=headers, method=method)
         try:

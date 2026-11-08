@@ -26,6 +26,7 @@ def list_agents(project_id: int | None = None):
 
     def _query(conn: sqlite3.Connection) -> list[dict]:
         # Build roster query — filter by project suffix if provided
+        """Read nonretired roster entries, optional project-suffix filtering and their historical run or performance rows."""
         if project_id is not None:
             like_pattern = f"%\\_p{project_id}"
             roster_rows = conn.execute(

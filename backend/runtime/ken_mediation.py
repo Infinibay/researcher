@@ -20,6 +20,7 @@ class KenNotReady(ValueError):
 
 
 def _validator(schema):
+    """Validate a JSON object schema and require every Ken reference to resolve within its own document."""
     if not isinstance(schema, dict) or schema.get("type") != "object":
         raise KenNotReady("Ken tool arguments require an object schema")
     Draft202012Validator.check_schema(schema)

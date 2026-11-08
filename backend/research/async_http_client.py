@@ -14,9 +14,11 @@ from backend.research.http_client import (
 
 
 class AsyncResearcherHTTPClient(ResearcherEndpoint):
+    """Own bounded async tool requests, their cancellation and the local HTTP client lifecycle."""
     def __init__(
         self, api_url, token, *, timeout=15, response_limit=1048576, transport=None
     ):
+        """Validate finite deadlines and byte bounds, then create a client with eight connection slots."""
         if (
             type(timeout) not in (int, float)
             or not math.isfinite(timeout)
@@ -39,15 +41,18 @@ class AsyncResearcherHTTPClient(ResearcherEndpoint):
         self.closed = False
 
     async def __aenter__(self):
+        """Admit this HTTP scope once; a closing or previously entered scope cannot reopen."""
         if self._entered or self._closing is not None:
             raise ResearcherClientError("Business HTTP scope cannot reopen")
         self._entered = True
         return self
 
     async def __aexit__(self, *_):
+        """Start or await shared shutdown; caller cancellation neither cancels that shutdown nor proves it has finished."""
         await self.aclose()
 
     async def request(self, method, path, *, body=None, query=None):
+        """Admit at most eight owned requests and join cancellation before releasing their pending slots."""
         if not self._entered or self._closing is not None:
             raise ResearcherClientError("Business HTTP admission ended")
         if len(self._pending) >= 8:
@@ -70,6 +75,7 @@ class AsyncResearcherHTTPClient(ResearcherEndpoint):
             self._pending.discard(task)
 
     async def _send(self, method, url, data, headers):
+        """Stream bounded identity-encoded bytes, redact API errors and require a JSON-object response; callers validate receipt identity."""
         try:
             async with asyncio.timeout(self.timeout):
                 async with self._client.stream(
@@ -113,11 +119,13 @@ class AsyncResearcherHTTPClient(ResearcherEndpoint):
         return result
 
     async def aclose(self):
+        """Share one cancellation-shielded shutdown task across concurrent or repeated close callers."""
         if self._closing is None:
             self._closing = asyncio.create_task(self._shutdown())
         await asyncio.shield(self._closing)
 
     async def _shutdown(self):
+        """Cancel owned requests and close the HTTP client under the three-second cleanup deadline."""
         pending = tuple(self._pending)
         for task in pending:
             task.cancel()

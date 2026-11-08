@@ -24,6 +24,7 @@ from backend.runtime.workspaces import PEER_WORKSPACE
 
 
 async def _info(fd):
+    """Read a bounded namespace identity JSON record within five seconds and always close its pipe transport."""
     loop = asyncio.get_running_loop()
     reader = asyncio.StreamReader(limit=4096)
     transport, _ = await loop.connect_read_pipe(
@@ -49,6 +50,7 @@ async def _info(fd):
 
 
 async def _forward(writer):
+    """Forward owner stdin with backpressure to the gated peer and close both transports on completion."""
     reader = asyncio.StreamReader(limit=65536)
     transport, _ = await asyncio.get_running_loop().connect_read_pipe(
         lambda: asyncio.StreamReaderProtocol(reader), sys.stdin.buffer
@@ -84,6 +86,7 @@ def _pinned_host_view(source_fd):
 
 
 async def run(args):
+    """Bind the prepared peer to its actual namespace before releasing exec, then own forwarding and physical cleanup."""
     registry = PeerRegistry(SQLiteRunStore(Path(args.database).resolve(strict=True)))
     peer = await asyncio.to_thread(registry.inspect, args.peer_id)
     if peer["state"] != "prepared":

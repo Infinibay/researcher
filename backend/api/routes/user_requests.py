@@ -22,6 +22,7 @@ def list_pending_requests(project_id: int):
     """Return all pending user requests for a project (FIFO order)."""
 
     def _query(conn: sqlite3.Connection) -> list[dict]:
+        """List pending stored human requests for the selected project in identity order."""
         rows = conn.execute(
             """SELECT * FROM user_requests
                WHERE project_id = ? AND status = 'pending'
@@ -42,6 +43,7 @@ def respond_to_request(request_id: int, body: UserRequestRespond):
     """Submit a response to a pending user request."""
 
     def _respond(conn: sqlite3.Connection) -> dict | None:
+        """Record a pending compatibility response while refusing native questions that require task and context-version controls."""
         row = conn.execute(
             "SELECT * FROM user_requests WHERE id = ?", (request_id,)
         ).fetchone()
@@ -80,6 +82,7 @@ def respond_to_request(request_id: int, body: UserRequestRespond):
 
     # Mirror the user's response as a chat_message so it persists in chat history
     def _mirror_response(conn: sqlite3.Connection) -> None:
+        """Mirror the saved compatibility response into its project user-QA conversation without resuming native work."""
         pid = result["project_id"]
         thread_id = f"user-qa-p{pid}"
         conn.execute(

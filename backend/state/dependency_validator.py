@@ -13,6 +13,7 @@ class DependencyValidator:
         """Return True if all blocking dependencies of *task_id* are done."""
 
         def _query(conn: sqlite3.Connection) -> bool:
+            """Require every blocking prerequisite to be labeled done or cancelled for the compatibility readiness check."""
             row = conn.execute(
                 """SELECT COUNT(*) as cnt
                    FROM task_dependencies td
@@ -31,6 +32,7 @@ class DependencyValidator:
         """Return blocking tasks that are not yet done."""
 
         def _query(conn: sqlite3.Connection) -> list[dict]:
+            """List blocking prerequisites whose recorded labels remain outside done and cancelled."""
             rows = conn.execute(
                 """SELECT dep.id, dep.title, dep.status
                    FROM task_dependencies td

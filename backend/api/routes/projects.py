@@ -74,6 +74,7 @@ async def register_project_source(project_id: int, body: RegisterProjectSource, 
 
 
 def _project_to_response(project: dict) -> ProjectResponse:
+    """Map current project metadata and stored counts into the public response without inferring acceptance validity."""
     return ProjectResponse(
         id=project["id"],
         name=project.get("name", ""),
@@ -93,6 +94,7 @@ def list_projects():
     """List all projects with task counts."""
 
     def _query(conn: sqlite3.Connection) -> list[dict]:
+        """Select project identities in newest-first order before assembling their current resource summaries."""
         rows = conn.execute(
             "SELECT id FROM projects ORDER BY created_at DESC"
         ).fetchall()

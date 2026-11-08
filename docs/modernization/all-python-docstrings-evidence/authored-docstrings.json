@@ -1,0 +1,787 @@
+{
+  "status": "draft_not_applied_or_tested",
+  "function_class_docstrings": 205,
+  "module_docstrings": 5,
+  "changed_files": 61,
+  "draft_product_modules_scanned": 317,
+  "draft_functions_classes_scanned": 2942,
+  "missing_presence_after_draft": [],
+  "files": {
+    "backend/research/http_client.py": {
+      "group": "research-docstrings-draft",
+      "source_sha256": "a4bf7cfa1616e2c6f730bddee975d716182f78da6ac04ae2b8ae98d0861f2dcf",
+      "draft_sha256": "3a2380f27c0968cd052f84ffadf0c2b2c42d3d2cc6f75ebf534ed70928e40a0a",
+      "documented": [
+        "ResearcherClientError",
+        "ResearcherClientError.__init__",
+        "_NoRedirect",
+        "_NoRedirect.redirect_request",
+        "ResearcherEndpoint.__init__",
+        "ResearcherEndpoint.prepare_request",
+        "ResearcherHTTPClient",
+        "ResearcherHTTPClient.__init__",
+        "ResearcherHTTPClient.request"
+      ],
+      "count": 9,
+      "executable_ast_equal_after_docstring_removal": true
+    },
+    "backend/research/async_http_client.py": {
+      "group": "research-docstrings-draft",
+      "source_sha256": "36423e84c48c5593218a35ff6413eda1ff5e12e078a2285c2b0b06355aaa9d0b",
+      "draft_sha256": "ff84a01032be4007f8e9e28d8189b90f55b507b6024a127124465c3fccc9ebd7",
+      "documented": [
+        "AsyncResearcherHTTPClient",
+        "AsyncResearcherHTTPClient.__init__",
+        "AsyncResearcherHTTPClient.__aenter__",
+        "AsyncResearcherHTTPClient.__aexit__",
+        "AsyncResearcherHTTPClient.request",
+        "AsyncResearcherHTTPClient._send",
+        "AsyncResearcherHTTPClient.aclose",
+        "AsyncResearcherHTTPClient._shutdown"
+      ],
+      "count": 8,
+      "executable_ast_equal_after_docstring_removal": true
+    },
+    "backend/research/ports.py": {
+      "group": "research-docstrings-draft",
+      "source_sha256": "2c5d517ac5ba20afdd8ef06d5af4549d870bb26d268142731a120493561f08e7",
+      "draft_sha256": "2a9a8eff3bd2344c6b1e872c964de07c98ac221f083d6ba88788147137426396",
+      "documented": [
+        "ResearchRepository",
+        "ResearchRepository.lookup_operation",
+        "ResearchRepository.get_reference",
+        "ResearchRepository.capture_source",
+        "ReferenceReader",
+        "ReferenceReader.read",
+        "WebFetcher",
+        "WebFetcher.fetch"
+      ],
+      "count": 8,
+      "executable_ast_equal_after_docstring_removal": true
+    },
+    "backend/network_destinations.py": {
+      "group": "research-docstrings-draft",
+      "source_sha256": "3277110ea5739f838c32974550d31b6e5c1ecbdd96afd6f74c23d4f23179f13d",
+      "draft_sha256": "60518c42d952512642a7d1e72e0341d01696ba30ae21f451f1a74e5261424c91",
+      "documented": [
+        "PublicNetworkError",
+        "public_address"
+      ],
+      "count": 2,
+      "executable_ast_equal_after_docstring_removal": true
+    },
+    "backend/research/web_fetcher.py": {
+      "group": "research-docstrings-draft",
+      "source_sha256": "f674a31ed31c392500be1b2d6d24f9d4362205d6e2d455281fac725fb108a4c5",
+      "draft_sha256": "99ed810ab919868670d9870ac4dea347a62f61bb8e4053a7fa6825740557954b",
+      "documented": [
+        "_resolve",
+        "_public_address",
+        "_DeadlineSSLSocket._bound_receive",
+        "_DeadlineSSLSocket.recv_into",
+        "_DeadlineSSLSocket.recv",
+        "PinnedHTTPSConnection.__init__",
+        "PinnedHTTPSConnection.connect",
+        "PublicWebFetcher._url"
+      ],
+      "count": 8,
+      "executable_ast_equal_after_docstring_removal": true
+    },
+    "backend/research/sqlite_store.py": {
+      "group": "research-docstrings-draft",
+      "source_sha256": "5b2cf93c021b0d477b09e112b9d6cb2caadc32c0cd24cf3b8d3dffd860ca77d2",
+      "draft_sha256": "8dba48d10ad17d703c97f89df6b5944061da67e33aebd6fb6e17d44670cf22b8",
+      "documented": [
+        "_json",
+        "_hash",
+        "SQLiteResearchStore.__init__",
+        "SQLiteResearchStore._transaction",
+        "SQLiteResearchStore.revoke_grant",
+        "SQLiteResearchStore.authorize",
+        "SQLiteResearchStore._task",
+        "SQLiteResearchStore._fingerprint",
+        "SQLiteResearchStore._receipt",
+        "SQLiteResearchStore.lookup_operation",
+        "SQLiteResearchStore._write",
+        "SQLiteResearchStore._source",
+        "SQLiteResearchStore.read_source",
+        "SQLiteResearchStore.list_sources",
+        "SQLiteResearchStore.list_references",
+        "SQLiteResearchStore._finding",
+        "SQLiteResearchStore._evidence"
+      ],
+      "count": 17,
+      "executable_ast_equal_after_docstring_removal": true
+    },
+    "backend/runtime/code_mode_payload.py": {
+      "group": "payload-docstrings-draft",
+      "source_sha256": "3bd1d09e2488cfd790764c4d6201457efaa1af1f74e38b6f2f2b4c7d4d3d6fbf",
+      "draft_sha256": "b7163d450de444dad090aa248d0be4bce2992803327236696958f354e8460286",
+      "documented": [
+        "main",
+        "main.send",
+        "main.exact",
+        "main.receive",
+        "main.response"
+      ],
+      "count": 5,
+      "executable_ast_equal_after_docstring_removal": true
+    },
+    "backend/runtime/proxy_payload.py": {
+      "group": "payload-docstrings-draft",
+      "source_sha256": "81ea2e1aa9e872bbb5b5f06b84ca01f35feaa1de9d551c83d250d7db274cbf0d",
+      "draft_sha256": "3b81b8f19a75c6b8048c51a1d07091acb711c1d9374396b7224f32c8b2911ee4",
+      "documented": [
+        "install_native_filter",
+        "install_native_filter.Program",
+        "stop_child",
+        "main"
+      ],
+      "count": 4,
+      "executable_ast_equal_after_docstring_removal": true
+    },
+    "backend/runtime/peer_guard.py": {
+      "group": "payload-docstrings-draft",
+      "source_sha256": "82fb8a472a96142d470db4a8af992f4d48faf3b04596be7dde4116f1dfa8b8be",
+      "draft_sha256": "d1e518ba6f7736104d705ec061e72b9302fbf73d06554f8b56af1357a14521ac",
+      "documented": [
+        "_info",
+        "_forward",
+        "run"
+      ],
+      "count": 3,
+      "executable_ast_equal_after_docstring_removal": true
+    },
+    "backend/runtime/command_output.py": {
+      "group": "payload-docstrings-draft",
+      "source_sha256": "581b6f609e59adeeed2688c10c3b94f7a7351e7abb4580c783e987e2f1b0593e",
+      "draft_sha256": "29b635d2b1574e8e466b0f9670e4f723eab84cee6e5681d76032da44dd484992",
+      "documented": [
+        "output_window"
+      ],
+      "count": 1,
+      "executable_ast_equal_after_docstring_removal": true
+    },
+    "backend/runtime/peer_payload.py": {
+      "group": "payload-docstrings-draft",
+      "source_sha256": "21d725e1011e447d96ea78b3fb5597a5e7691cebfdb1e46aa5ecb1d14a05d1d7",
+      "draft_sha256": "a806709e3114d5a00bd5ed7cc5337c99d894a344f858a6daecb4712844c49581",
+      "documented": [
+        "main"
+      ],
+      "count": 1,
+      "executable_ast_equal_after_docstring_removal": true
+    },
+    "backend/runtime/bootstrap.py": {
+      "group": "payload-docstrings-draft",
+      "source_sha256": "36a8fcc73d247b3a2c15ef2659a38dfd9bebcdce2b447b7b5e8d97b20138e7d5",
+      "draft_sha256": "63f6ce20dae3e8def1eaddc4c19c32ce09ba002f7bb618eb1c39bbc93c2a85f2",
+      "documented": [
+        "_sync_directory",
+        "_create_file"
+      ],
+      "count": 2,
+      "executable_ast_equal_after_docstring_removal": true
+    },
+    "backend/api/exceptions.py": {
+      "group": "api-documentation-draft",
+      "source_sha256": "874b055b3a8aa8c11b96c45adc7f02bfdce80a07ddf2c35e854c96b655f4b585",
+      "draft_sha256": "1234ecf7a89a126d6fc015445df340235fd64fbef2a975e277a2ff60bc64a522",
+      "documented": [
+        "APIError.__init__",
+        "ProjectNotFound",
+        "ProjectNotFound.__init__",
+        "EpicNotFound",
+        "EpicNotFound.__init__",
+        "MilestoneNotFound",
+        "MilestoneNotFound.__init__",
+        "TaskNotFound",
+        "TaskNotFound.__init__",
+        "InvalidTaskStatus",
+        "InvalidTaskStatus.__init__",
+        "FileNotFoundError_",
+        "FileNotFoundError_.__init__",
+        "WikiPageNotFound",
+        "WikiPageNotFound.__init__",
+        "ProjectRunning",
+        "ProjectRunning.__init__",
+        "register_exception_handlers.api_error_handler",
+        "register_exception_handlers.value_error_handler"
+      ],
+      "count": 19,
+      "executable_ast_equal_after_docstring_removal": true
+    },
+    "backend/api/models/git.py": {
+      "group": "api-documentation-draft",
+      "source_sha256": "077e7d7f508837fbf74f28650d513e06640ce1265565a9bd91851658729aab00",
+      "draft_sha256": "888685e9846259a3a60bf1523db5a02e0baa7c750a9cdb1928642460a471fa8f",
+      "documented": [
+        "RepoCreate",
+        "RepoResponse",
+        "BranchCreate",
+        "PRMergeRequest",
+        "CleanupRequest",
+        "BranchDetail",
+        "RepoTreeEntry",
+        "FileContent",
+        "PRComment",
+        "PRCommentCreate"
+      ],
+      "count": 10,
+      "executable_ast_equal_after_docstring_removal": true
+    },
+    "backend/api/models/agent.py": {
+      "group": "api-documentation-draft",
+      "source_sha256": "23eb182f59601828bcf0a0c54660e9ee96e4b959b10f5560ec54cb77c03ea6ff",
+      "draft_sha256": "50f841df3bcc2275ed0386b6d5da2af91cd46ac9d27242ee1d9564baa23fe52a",
+      "documented": [
+        "AgentCurrentRun",
+        "AgentResponse",
+        "AgentPerformanceInfo",
+        "AgentList"
+      ],
+      "count": 4,
+      "executable_ast_equal_after_docstring_removal": true
+    },
+    "backend/api/models/user_request.py": {
+      "group": "api-documentation-draft",
+      "source_sha256": "7b795cc8282c61594590732f35d3f4a6c01022d23449662397fdfea5c181af98",
+      "draft_sha256": "3da2b5661e57767d635f7c665c3183d74ca8aee6496af01a1219de427a829252",
+      "documented": [
+        "UserRequestResponse",
+        "UserRequestRespond",
+        "UserRequestList"
+      ],
+      "count": 3,
+      "executable_ast_equal_after_docstring_removal": true
+    },
+    "backend/api/models/finding.py": {
+      "group": "api-documentation-draft",
+      "source_sha256": "a2c20adb479b0d15f656629de263c5b4bb2fe1fcf9047766d1ca9cf8c1a2da14",
+      "draft_sha256": "c189745397f95232dd607655aa7b9a780a9458711d76c4d49c123e16b7b8feff",
+      "documented": [
+        "FindingResponse",
+        "FindingSearchResult"
+      ],
+      "count": 2,
+      "executable_ast_equal_after_docstring_removal": true
+    },
+    "backend/api/models/project.py": {
+      "group": "api-documentation-draft",
+      "source_sha256": "b761e098464bd77198983b38f138c2ea09705c18a9be34562f94060ab4c8a92c",
+      "draft_sha256": "b2e0226a89c477f769e87e6832448df91b34c817974ac76bf0e419b257c62c30",
+      "documented": [
+        "ProjectList",
+        "EpicProgressItem",
+        "BlockingTaskInfo",
+        "BlockedTaskItem",
+        "ProjectProgressResponse"
+      ],
+      "count": 5,
+      "executable_ast_equal_after_docstring_removal": true
+    },
+    "backend/api/models/chat.py": {
+      "group": "api-documentation-draft",
+      "source_sha256": "46d95f10e8e3403117470c96362edee0089b4db8e2702c187a1046811dda740d",
+      "draft_sha256": "1538d89c55d5e23430c9d498dafce99a12d2928738840acd631336971351e385",
+      "documented": [
+        "ChatThreadResponse",
+        "UnreadCountsResponse",
+        "ThreadArchiveResponse"
+      ],
+      "count": 3,
+      "executable_ast_equal_after_docstring_removal": true
+    },
+    "backend/api/models/epic.py": {
+      "group": "api-documentation-draft",
+      "source_sha256": "4500f5e7f082bec33fe4ab152d3ce019e39b36afe1d917735a9db2f6bbe12038",
+      "draft_sha256": "4acdcfd0f136de7d985d88f7ec5cbdb8330fd1f44c9909c807106ff3c90e1fb7",
+      "documented": [
+        "EpicUpdate"
+      ],
+      "count": 1,
+      "executable_ast_equal_after_docstring_removal": true
+    },
+    "backend/api/models/milestone.py": {
+      "group": "api-documentation-draft",
+      "source_sha256": "b58423aa87c611810c608b02cdd16d7d708f71e7131b103a5837b15869bd0e7f",
+      "draft_sha256": "85a5d5a59da257d6937bd5ea2f040e251d6cb36efd847aa2f2833a07b260c44a",
+      "documented": [
+        "MilestoneUpdate"
+      ],
+      "count": 1,
+      "executable_ast_equal_after_docstring_removal": true
+    },
+    "backend/api/routes/session.py": {
+      "group": "api-documentation-draft",
+      "source_sha256": "d332dda1bb5924b70a5accbfa3582b8d41906a51b8acedcdbd1267141cc34639",
+      "draft_sha256": "d1165bc4a44f8121bb1860b83ff45aaa4b05d04d8b3ac83388084930bcf9d4ab",
+      "documented": [
+        "PairOwner",
+        "end_session"
+      ],
+      "count": 2,
+      "executable_ast_equal_after_docstring_removal": true
+    },
+    "backend/research/models.py": {
+      "group": "runtime-contract-docstrings-draft",
+      "source_sha256": "6fdf43619f42e0741ed7b8fbf64e451e9589c708a8749766a03e640096a74753",
+      "draft_sha256": "a2cd286750e1b6f211d07d649ce17d8afc8f63db6e0c64bb8f4a6126e1b01e22",
+      "documented": [
+        "bounded_text",
+        "positive_id",
+        "operation_key",
+        "EvidenceReference",
+        "EvidenceReference.__post_init__",
+        "EvidenceReference.validate_against",
+        "FindingDraft",
+        "FindingDraft.__post_init__",
+        "ReportDraft",
+        "ReportDraft.__post_init__",
+        "ReportDraft.markdown",
+        "validate_report_finding"
+      ],
+      "count": 12,
+      "executable_ast_equal_after_docstring_removal": true
+    },
+    "backend/runtime/native_commands.py": {
+      "group": "runtime-contract-docstrings-draft",
+      "source_sha256": "02f76c3544fa7908817c5ed0c61afc21541b6b80c2abb74eb5b5c448b467010b",
+      "draft_sha256": "48b3a36a90d3854a7c9093c944682cd2a79865a872a75509c3ee5fd9dfa34416",
+      "documented": [
+        "_toml",
+        "_version"
+      ],
+      "count": 2,
+      "executable_ast_equal_after_docstring_removal": true
+    },
+    "backend/runtime/ken_worker.py": {
+      "group": "runtime-contract-docstrings-draft",
+      "source_sha256": "3601efb1a8d7b009db506746a157a46bdb4df2c138a62a3ee6977b3e37cd863c",
+      "draft_sha256": "e56f8444c76ffbbcbdb5893e4be3d913c45ae988db3d744da7e7be6b0b117cd4",
+      "documented": [
+        "WorkerLaunch"
+      ],
+      "count": 1,
+      "executable_ast_equal_after_docstring_removal": true
+    },
+    "backend/runtime/workspaces.py": {
+      "group": "runtime-contract-docstrings-draft",
+      "source_sha256": "41d2381ccc3b5025cb265eb7a4c353f3a125d357aee38974898ce5394256c98e",
+      "draft_sha256": "d91e9213f99f7689c9fe5862702eac4ec561b98a62853ec26e5bc01c20b44dba",
+      "documented": [
+        "WorkspaceRegistry.__init__",
+        "WorkspaceRegistry.select",
+        "WorkspaceRegistry.validate"
+      ],
+      "count": 3,
+      "executable_ast_equal_after_docstring_removal": true
+    },
+    "backend/runtime/ken_mediation.py": {
+      "group": "runtime-contract-docstrings-draft",
+      "source_sha256": "7521def04d637cdcc053d6b38073e232340c3a477ffd2908bcfabb8b64bee45d",
+      "draft_sha256": "845a26615448cb278b7856ce0db9106bb017c4bb16190e6d4d3cd0928afa6c4f",
+      "documented": [
+        "_validator"
+      ],
+      "count": 1,
+      "executable_ast_equal_after_docstring_removal": true
+    },
+    "backend/runtime/broker_inference.py": {
+      "group": "runtime-contract-docstrings-draft",
+      "source_sha256": "eeb89823d77339ca2c1ebb4d056989126aedcd9e7abda18ba364600dd65bd4a4",
+      "draft_sha256": "046d2511acc19b559668824450c30acfccfa86fc5ba8093ca4dc0888e87cdbe6",
+      "documented": [
+        "BrokerInferenceSession._request",
+        "broker_inference.admitted"
+      ],
+      "count": 2,
+      "executable_ast_equal_after_docstring_removal": true
+    },
+    "backend/runtime/business_definitions.py": {
+      "group": "runtime-contract-docstrings-draft",
+      "source_sha256": "e5243ae48d8c2b33d96efae3c88c7f03126f337c7947704afe7d3b1e9174c8a2",
+      "draft_sha256": "5db8926b3dd954aefc70784d01d5742a2af95a8d1c7d96276e295a40fa8dde07",
+      "documented": [
+        "ToolDefinition",
+        "ToolDefinition.wire_schema.expand"
+      ],
+      "count": 2,
+      "executable_ast_equal_after_docstring_removal": true
+    },
+    "backend/runtime/host_business.py": {
+      "group": "runtime-contract-docstrings-draft",
+      "source_sha256": "6eaae607cff9bfe24f183a907801c50be6f8d9da65cd06297b9335a47cf1fe57",
+      "draft_sha256": "e08047adbb73dfa1245fef67c6ab58395d82e9fea6f1abfac53beb7b64963026",
+      "documented": [
+        "HostBusinessPeer.list_tools",
+        "HostBusinessPeer.call_tool",
+        "HostBusinessPeer.aclose",
+        "HostBusinessPeer._shutdown"
+      ],
+      "count": 4,
+      "executable_ast_equal_after_docstring_removal": true
+    },
+    "backend/runtime/code_mode_probe.py": {
+      "group": "runtime-contract-docstrings-draft",
+      "source_sha256": "15514d1f7587d40391da1c33c92323aa7ecf5d609ecb7be851f1a824bc06ae3e",
+      "draft_sha256": "2b3bdbc2d3482f3a048db6eca3ecdbe77cb0321ac5ac86ea8c7faa7081efec67",
+      "documented": [
+        "probe_code_mode"
+      ],
+      "count": 1,
+      "executable_ast_equal_after_docstring_removal": true
+    },
+    "backend/runtime/owned_runtime.py": {
+      "group": "runtime-contract-docstrings-draft",
+      "source_sha256": "5d28a1b3909b77d9699c0770889a788a0365e25282b7c8eb4b3e13e9048a2145",
+      "draft_sha256": "16d55b19af55e24b3859f3e73ef51feb01320ef9ecabaeace9476ccc34751865",
+      "documented": [
+        "_drain",
+        "OwnedCodexRuntime.open.admitted",
+        "OwnedCodexRuntime.open.withdraw",
+        "OwnedCodexRuntime.open.watch"
+      ],
+      "count": 4,
+      "executable_ast_equal_after_docstring_removal": true
+    },
+    "backend/db/research_migration.py": {
+      "group": "storage-state-docstrings-draft",
+      "source_sha256": "f72c7acd4967353e5bc78bbdc1835e5334d03f122889d535182f0cfb8746985c",
+      "draft_sha256": "b154bb9ca93e7dbed7ffd440a47c7565edc2ecaf73546e20e49fcb84a1edd933",
+      "documented": [
+        "apply_research_schema"
+      ],
+      "count": 1,
+      "executable_ast_equal_after_docstring_removal": true
+    },
+    "backend/db/migrations.py": {
+      "group": "storage-state-docstrings-draft",
+      "source_sha256": "ef94b5f0e5b9d5203b95566b34f761bcfc089713be22fcaa53cd684ac44eba6d",
+      "draft_sha256": "45492077afebf0fd7ff071db014fd343dfff3b87618074566812604fa30e9849",
+      "documented": [
+        "apply_sql_resource"
+      ],
+      "count": 1,
+      "executable_ast_equal_after_docstring_removal": true
+    },
+    "backend/db/question_migration.py": {
+      "group": "storage-state-docstrings-draft",
+      "source_sha256": "65838e422a587199f10697e5c588cc6fb9fb9c5b54ecbe0b420e2363a02f69dd",
+      "draft_sha256": "47daad5d0fc140f4af39c1d7584847a6471d2b7c9583dfaca8a2d61e21fe809c",
+      "documented": [
+        "apply_question_schema"
+      ],
+      "count": 1,
+      "executable_ast_equal_after_docstring_removal": true
+    },
+    "backend/db/peer_kind_migration.py": {
+      "group": "storage-state-docstrings-draft",
+      "source_sha256": "ca61857fb06c869f0582185ff1d5e0038824f7df6c5ccf570ae6b94cacc125e9",
+      "draft_sha256": "405fc5f256f291329ad68aea19f8ba03942a0c15dacda8ca8d561ab3b0360cb5",
+      "documented": [
+        "migrate_ken_peers"
+      ],
+      "count": 1,
+      "executable_ast_equal_after_docstring_removal": true
+    },
+    "backend/tools/base/db.py": {
+      "group": "storage-state-docstrings-draft",
+      "source_sha256": "0f85f0a2a75192d887c2d7e590cb78ffbe4a196301182f44d90a1f3a46f55bec",
+      "draft_sha256": "9ccfd9c5ca56bccb7f2a4aff3bd7094c4d329ce52a809bd39190b4900f2955be",
+      "documented": [
+        "DBConnection.__init__",
+        "DBConnection.__enter__",
+        "DBConnection.__exit__",
+        "sanitize_fts5_query._capture_phrase",
+        "parse_query_or_terms._capture"
+      ],
+      "count": 5,
+      "executable_ast_equal_after_docstring_removal": true
+    },
+    "backend/flows/event_bus.py": {
+      "group": "storage-state-docstrings-draft",
+      "source_sha256": "e335d689869622d10af507213a00cff804308a1f670202ace4bc881a9d2b3b69",
+      "draft_sha256": "3f7f96b0bbbf9f5d985e6de6b2f5bbc878dd8695513ed92a5976ed47c5324eff",
+      "documented": [
+        "EventBus.__init__"
+      ],
+      "count": 1,
+      "executable_ast_equal_after_docstring_removal": true
+    },
+    "backend/flows/snapshot_service.py": {
+      "group": "storage-state-docstrings-draft",
+      "source_sha256": "9d36345504499c49ea6e586fe43290d56c7e6f31be8ce3955d607ca05a707e17",
+      "draft_sha256": "2fe5cb6dbb3a4751767d5846b8d7dd0d456406296e81f848f48d1fbbb9a18abc",
+      "documented": [
+        "save_snapshot._upsert",
+        "load_snapshot._query"
+      ],
+      "count": 2,
+      "executable_ast_equal_after_docstring_removal": true
+    },
+    "backend/state/completion.py": {
+      "group": "storage-state-docstrings-draft",
+      "source_sha256": "f7b45ea6fcab233689933d0f9867af0cfa4843019ea4b56908bcef616b5cf63e",
+      "draft_sha256": "b641b837e2c2a07283d47a12d55cb7b04b553c07271f81990c6da86fd6e740f8",
+      "documented": [
+        "CompletionState",
+        "CompletionDetector.detect",
+        "CompletionDetector.detect._query"
+      ],
+      "count": 3,
+      "executable_ast_equal_after_docstring_removal": true
+    },
+    "backend/state/dependency_validator.py": {
+      "group": "storage-state-docstrings-draft",
+      "source_sha256": "61738303dcb801e8e2b7997ef05221f1138cb7860304ad35295b825ecd894da6",
+      "draft_sha256": "0ba5b6faeebae5ba03468f4d2e6fd08c14905cdcde3eec3e769bd8b63285b8e5",
+      "documented": [
+        "DependencyValidator.can_start._query",
+        "DependencyValidator.get_unmet_dependencies._query"
+      ],
+      "count": 2,
+      "executable_ast_equal_after_docstring_removal": true
+    },
+    "backend/state/progress.py": {
+      "group": "storage-state-docstrings-draft",
+      "source_sha256": "c4afd69693f079c2edca4cc4bdfa1194cbf450f9e6a14a49ca2fbb06b6d5a2bc",
+      "draft_sha256": "5e0910fb17d9a8dc6c5c2f51cf96cc0ad77d202aad09f5f37b0bfe9c38cee9ea",
+      "documented": [
+        "ProgressService.get_project_metrics._query",
+        "ProgressService.get_blocked_tasks._query",
+        "ProgressService.get_epic_progress._query",
+        "ProgressService.get_milestone_progress._query"
+      ],
+      "count": 4,
+      "executable_ast_equal_after_docstring_removal": true
+    },
+    "backend/git/branch_service.py": {
+      "group": "compatibility-query-docstrings-draft",
+      "source_sha256": "441dcadd601b45ab9f05b7bc2a8d36876f1b616bc3ae37842e55ac59a9e8bc39",
+      "draft_sha256": "3fde87145274858f18c17dbf510bce4f74f61524b95b054f0f873efc5e56abb6",
+      "documented": [
+        "BranchService._get_task_row._query",
+        "BranchService.list_branches._query",
+        "BranchService.get_branch_for_task._query",
+        "BranchService.find_stale_branches._query"
+      ],
+      "count": 4,
+      "executable_ast_equal_after_docstring_removal": true
+    },
+    "backend/git/pr_service.py": {
+      "group": "compatibility-query-docstrings-draft",
+      "source_sha256": "9e2bf945764a66dddce6841b49088b5191fd168bcc07f160213c8e881755508d",
+      "draft_sha256": "5593eb62862360f71fe0b61bf2cbec6163555d8955b1a91a07faa83aa9e937e1",
+      "documented": [
+        "PRService.list_prs._query",
+        "PRService.get_pr._query",
+        "PRService.get_pr_for_task._query",
+        "PRService.update_pr_status._update"
+      ],
+      "count": 4,
+      "executable_ast_equal_after_docstring_removal": true
+    },
+    "backend/git/repository_manager.py": {
+      "group": "compatibility-query-docstrings-draft",
+      "source_sha256": "7b9e3bbd7ee294993d99b15fcba4c607a6699a769bddee46085d36ffe004ab49",
+      "draft_sha256": "1d7923e711c9686b468c65b01c1cbba290aaa2e92b7174d01a2d6c7ce49760dc",
+      "documented": [
+        "RepositoryManager.list_repos._query",
+        "RepositoryManager.get_repo._query",
+        "RepositoryManager.archive_repo._update"
+      ],
+      "count": 3,
+      "executable_ast_equal_after_docstring_removal": true
+    },
+    "backend/git/forgejo_client.py": {
+      "group": "compatibility-query-docstrings-draft",
+      "source_sha256": "a681f07dd95ed62489f6fa0dc06f26d19f6cf517ddeec93c24b79c6ab3b3975b",
+      "draft_sha256": "6a32b56b4152c9c999b97058dbf73cb88aa93af66f9f8a4cde5b40306cc40b73",
+      "documented": [
+        "ForgejoClient.__init__",
+        "ForgejoClient._api_url",
+        "ForgejoClient._token"
+      ],
+      "count": 3,
+      "executable_ast_equal_after_docstring_removal": true
+    },
+    "backend/api/main.py": {
+      "group": "compatibility-query-docstrings-draft",
+      "source_sha256": "6117224ced2d181aaddd4a1756c0a4d5c0d759c720bd78f1eee2c31bc1d75bf5",
+      "draft_sha256": "a88ee0b431e6777c2d7cd4852a1362567426ee5f4e36662e90a712fd34b8939c",
+      "documented": [
+        "create_app.timing_middleware",
+        "create_app.serve_spa"
+      ],
+      "count": 2,
+      "executable_ast_equal_after_docstring_removal": true
+    },
+    "backend/api/run.py": {
+      "group": "compatibility-query-docstrings-draft",
+      "source_sha256": "431c3f13bd938ec7026f2428b5e198e05ef3d51bc474b38cf21c8ea14e00e9c9",
+      "draft_sha256": "c3a520d3b0e466bc2ee844d77c48ff03e930546bce70a139fe5a3ebb7a20c003",
+      "documented": [
+        "main"
+      ],
+      "count": 1,
+      "executable_ast_equal_after_docstring_removal": true
+    },
+    "backend/communication/ownership.py": {
+      "group": "compatibility-query-docstrings-draft",
+      "source_sha256": "72bb624195447fd39133f5d491c0a7c33b03e6f4e7056abd2f8567542b4b21cb",
+      "draft_sha256": "01313ab60a1d6c240b6b95a113262c5a0056fd03996a976acb97c318e87da05c",
+      "documented": [
+        "native_thread"
+      ],
+      "count": 1,
+      "executable_ast_equal_after_docstring_removal": true
+    },
+    "backend/api/routes/agents.py": {
+      "group": "compatibility-query-docstrings-draft",
+      "source_sha256": "8eb6267dc32039d4ee49a389fa64c0c4977d3473892232f2a4a8f8c9a97792d8",
+      "draft_sha256": "97c59ebd90010bb76f765c883a9c48f9f25ec95de96dac0cd7ece58b4f79625e",
+      "documented": [
+        "list_agents._query"
+      ],
+      "count": 1,
+      "executable_ast_equal_after_docstring_removal": true
+    },
+    "backend/api/routes/chat.py": {
+      "group": "compatibility-query-docstrings-draft",
+      "source_sha256": "a201b3b79c8bf8446e9104ff066f03a30405e2f9575d407c17d09c8e5f326e9a",
+      "draft_sha256": "a538ec3b9cedb2daf59e0d884be33ab8783256ff19c4eea3465e609fadef16fa",
+      "documented": [
+        "list_threads._query"
+      ],
+      "count": 1,
+      "executable_ast_equal_after_docstring_removal": true
+    },
+    "backend/api/routes/epics.py": {
+      "group": "compatibility-query-docstrings-draft",
+      "source_sha256": "56f6ab983b23de8153648e92c9ba2ce837536ff0cc15a807cb9f7776bb494b07",
+      "draft_sha256": "404e7c2bcbf8560ee733c6897a3539672bec973582832565aa8200c0ae833c3d",
+      "documented": [
+        "_row_to_response",
+        "list_epics._query",
+        "get_epic._query"
+      ],
+      "count": 3,
+      "executable_ast_equal_after_docstring_removal": true
+    },
+    "backend/api/routes/git.py": {
+      "group": "compatibility-query-docstrings-draft",
+      "source_sha256": "2a4e7692fcd7f86f4bffc9edaef31934fbb4d170ef5a82d38a729e323a94cdaf",
+      "draft_sha256": "9357f463dc96f3118282e47fb3e4fec11ed5258306b2cce6cd2f2a8604ba326b",
+      "documented": [
+        "_resolve_repo_path._query",
+        "_get_remote_url._query",
+        "_log_event._insert"
+      ],
+      "count": 3,
+      "executable_ast_equal_after_docstring_removal": true
+    },
+    "backend/api/routes/milestones.py": {
+      "group": "compatibility-query-docstrings-draft",
+      "source_sha256": "a336b1f9840c7ff4ca67e94777e45e51ea5ddcdd1a19fccb79e448b85055c675",
+      "draft_sha256": "9d837059b3b1be22367c98921445bf5f6fe059f6bd1ae13008f699c28ecd438a",
+      "documented": [
+        "_row_to_response",
+        "list_milestones._query",
+        "get_milestone._query"
+      ],
+      "count": 3,
+      "executable_ast_equal_after_docstring_removal": true
+    },
+    "backend/api/routes/projects.py": {
+      "group": "compatibility-query-docstrings-draft",
+      "source_sha256": "40bcd939312f048aa22eea9f47967115638effe831ec75786e29a4e1749689e3",
+      "draft_sha256": "a37f5975e585aa947ec7e44e6e96b577c6657e863ca68f2e395bf234c4f7b815",
+      "documented": [
+        "_project_to_response",
+        "list_projects._query"
+      ],
+      "count": 2,
+      "executable_ast_equal_after_docstring_removal": true
+    },
+    "backend/api/routes/user_requests.py": {
+      "group": "compatibility-query-docstrings-draft",
+      "source_sha256": "070121bfd38fe675181b6d1e891137e1ec75d1d672359bcd82fa7bb26578ea01",
+      "draft_sha256": "2d6b89dbc237c7786058768c242a4727878aeceb22db7ffa1bc2ca1b0a7142ea",
+      "documented": [
+        "list_pending_requests._query",
+        "respond_to_request._respond",
+        "respond_to_request._mirror_response"
+      ],
+      "count": 3,
+      "executable_ast_equal_after_docstring_removal": true
+    },
+    "backend/__init__.py": {
+      "group": "package-docstrings-draft",
+      "source_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "draft_sha256": "0352726d21bfb273a3169e657b1edf992db4ed11a4470ccd1ef5e60afb368b06",
+      "documented": [
+        "<module>"
+      ],
+      "count": 1,
+      "executable_ast_equal_after_docstring_removal": true
+    },
+    "backend/api/__init__.py": {
+      "group": "package-docstrings-draft",
+      "source_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "draft_sha256": "44f2b9f0e896c9a8f746c81b03cba38757fcd43cdbffd281c2ecf2742f78170b",
+      "documented": [
+        "<module>"
+      ],
+      "count": 1,
+      "executable_ast_equal_after_docstring_removal": true
+    },
+    "backend/api/models/__init__.py": {
+      "group": "package-docstrings-draft",
+      "source_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "draft_sha256": "2a20b645289fb59715d8cc6a69f72768fb536abd9141ebac3accd3f5c4cbafc0",
+      "documented": [
+        "<module>"
+      ],
+      "count": 1,
+      "executable_ast_equal_after_docstring_removal": true
+    },
+    "backend/api/routes/__init__.py": {
+      "group": "package-docstrings-draft",
+      "source_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "draft_sha256": "cc24f62ae78062c2522bdc711173a350a4a0a5fcf26874a5393b393cf75657be",
+      "documented": [
+        "<module>"
+      ],
+      "count": 1,
+      "executable_ast_equal_after_docstring_removal": true
+    },
+    "backend/config/__init__.py": {
+      "group": "package-docstrings-draft",
+      "source_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "draft_sha256": "d0d513e010eea43535ba09d2c2c9058726e9771ce1dbd70895e7f039d6a5ecfc",
+      "documented": [
+        "<module>"
+      ],
+      "count": 1,
+      "executable_ast_equal_after_docstring_removal": true
+    }
+  },
+  "scope": "Presence plus manual source-grounded descriptions, no claim of Ken ranking, runtime or metadata validation. Actual product remains frozen for global test.",
+  "apply_guard": "Never copy over changed source. All source_sha256 values must match; rebase and rereview any file changed by global-failure fixes before inserting its authored docstrings.",
+  "semantic_review": {
+    "reviewer": "/root/remaining_plan_closure_review",
+    "scope": "Six proposed files and immediate implementations only, read-only, no tests/models/build/source edits",
+    "findings_corrected": [
+      "Cancellation does not prove joined shutdown",
+      "JSON-object response does not validate receipt identity",
+      "TLS verification follows the supplied SSLContext"
+    ],
+    "implementer_related_corrections": [
+      "Synchronous client and host result terminology",
+      "Bounded DNS wording does not imply an external public resolver",
+      "Configuration scalar serialization wording"
+    ],
+    "scope_limit": "Not a general acceptance of all210docs or product behavior"
+  }
+}

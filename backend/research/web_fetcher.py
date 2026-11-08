@@ -31,6 +31,7 @@ from backend.research.web_policy import DEFAULT_WEB_POLICY, MAX_ROBOTS_BYTES, US
 
 
 def _resolve(host: str, timeout: float) -> list[str]:
+    """Translate bounded DNS resolution failures into an explicit source-unavailable result."""
     try:
         return resolve_addresses(host, timeout)
     except PublicNetworkError:
@@ -40,6 +41,7 @@ def _resolve(host: str, timeout: float) -> list[str]:
 
 
 def _public_address(value: str):
+    """Require a public numeric destination and translate address-policy rejection to a source error."""
     try:
         return public_address(value)
     except PublicNetworkError:
@@ -52,6 +54,7 @@ class _DeadlineSSLSocket(ssl.SSLSocket):
     """Bound each network receive, including slow-drip response headers."""
 
     def _bound_receive(self):
+        """Apply the remaining acquisition deadline before each TLS receive, refusing expired reads."""
         deadline = getattr(self, "_source_deadline", None)
         if deadline is not None:
             remaining = deadline - time.monotonic()
@@ -60,10 +63,12 @@ class _DeadlineSSLSocket(ssl.SSLSocket):
             self.settimeout(remaining)
 
     def recv_into(self, *args, **kwargs):
+        """Bound the next TLS read into a caller buffer by the original acquisition deadline."""
         self._bound_receive()
         return super().recv_into(*args, **kwargs)
 
     def recv(self, *args, **kwargs):
+        """Bound the next TLS byte read by the original acquisition deadline."""
         self._bound_receive()
         return super().recv(*args, **kwargs)
 
@@ -72,6 +77,7 @@ class PinnedHTTPSConnection(HTTPSConnection):
     """Use the vetted numeric address while retaining original TLS/Host identity."""
 
     def __init__(self, host, port, address, timeout, *, context=None):
+        """Retain the vetted numeric destination while configuring TLS for the original requested host."""
         self.pinned_address = address
         self.tls_context = context or ssl.create_default_context()
         self.tls_context.set_alpn_protocols(["http/1.1"])
@@ -79,6 +85,7 @@ class PinnedHTTPSConnection(HTTPSConnection):
         super().__init__(host, port, timeout=timeout, context=self.tls_context)
 
     def connect(self):
+        """Connect to the pinned address using the original TLS hostname and deadline-bounded receives; verification follows the configured context."""
         deadline = time.monotonic() + self.timeout
         raw = socket.create_connection((self.pinned_address, self.port), self.timeout)
         try:
@@ -163,6 +170,7 @@ class PublicWebFetcher:
 
     @staticmethod
     def _url(url):
+        """Validate HTTPS syntax and normalize the request target; DNS address policy is checked separately."""
         if (
             not isinstance(url, str)
             or not 1 <= len(url) <= 4096

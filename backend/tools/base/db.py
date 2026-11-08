@@ -85,14 +85,17 @@ class DBConnection:
     """
 
     def __init__(self, db_path: str | None = None):
+        """Choose the configured or explicit database path without opening its owned connection."""
         self._db_path = db_path or get_db_path()
         self._conn: sqlite3.Connection | None = None
 
     def __enter__(self) -> sqlite3.Connection:
+        """Open the selected SQLite connection for this context and return it to the caller."""
         self._conn = get_connection(self._db_path)
         return self._conn
 
     def __exit__(self, exc_type, exc_val, exc_tb):
+        """Commit successful work or roll back failure, then close the owned connection and propagate the original exception."""
         if self._conn is None:
             return False
         try:
@@ -1129,6 +1132,7 @@ def sanitize_fts5_query(query: str) -> str:
     phrases: list[str] = []
 
     def _capture_phrase(m: re.Match) -> str:
+        """Mask each quoted phrase with an indexed placeholder while retaining its original quotes for later restoration."""
         phrases.append(m.group(0))  # keep with quotes
         return f"\x00PH{len(phrases) - 1}\x00"
 
@@ -1199,6 +1203,7 @@ def parse_query_or_terms(query: str) -> list[str]:
 
     def _capture(m: re.Match) -> str:
         # Store without quotes
+        """Mask a quoted phrase while retaining its unquoted text for OR-term construction."""
         phrases.append(m.group(0)[1:-1])
         return f"\x00PH{len(phrases) - 1}\x00"
 

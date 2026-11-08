@@ -101,6 +101,7 @@ def list_threads(project_id: int):
     """List conversation threads with last message."""
 
     def _query(conn: sqlite3.Connection) -> list[dict]:
+        """List stored project conversations with their last-message text and message counts in newest-first order."""
         rows = conn.execute(
             """SELECT ct.thread_id, ct.project_id, ct.thread_type, ct.created_at,
                       (SELECT message FROM chat_messages cm
