@@ -273,3 +273,13 @@ Se comprueban bytes exactos, cinco formatos de documento, recuperación y borrad
 Dos capturas iniciales de vacío se rechazan; la revisión corregida espera el
 proyecto y mensaje final. Son **2 de 12 páginas** junto con Documentos; DD127 y
 U08 quedan abiertos. [Auditoría](audits/2026-11-08-files-acceptance/report.md).
+
+## Aceptación de Repositorios — 2026-11-08
+
+Se conserva `source-explorer`. La preparación explícita existente y el explorador
+completan aceptación técnica/visual delegada, con 15 estados principales y 5
+complementarios, Git/TLS reales y REST Forgejo de contrato controlado. Registro,
+adopción, clonado, parada/reparación, ámbito e historia conservan sus identidades;
+no se publica código ni se contacta una cuenta real. No se modifica el renderer
+por ajustes secundarios. Son **3 de 12 páginas**; DD128, U08 y cierre global siguen
+abiertos. [Auditoría](audits/2026-11-08-repositories-acceptance/report.md).

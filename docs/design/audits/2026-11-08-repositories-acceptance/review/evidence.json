@@ -1,0 +1,57 @@
+{
+  "status": "passed",
+  "states": [
+    {
+      "name": "01-lost-registration-receipt",
+      "width": 1440,
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "02-same-registration-without-git",
+      "width": 1440,
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "03-independent-homonymous-source",
+      "width": 1440,
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "04-late-response-keeps-current-visit",
+      "width": 1440,
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "05-current-code-mobile",
+      "width": 390,
+      "fits": true,
+      "violations": []
+    }
+  ],
+  "errors": [],
+  "identities": {
+    "alpha": 1,
+    "beta": 2
+  },
+  "scope": "Actual additional registrations only; original source setup history unchanged; no Git writes, remote calls or models",
+  "registration": {
+    "project_id": 1,
+    "repository_id": 6,
+    "name": "sin-git",
+    "path": "/home/andres/.codex/worktrees/b09e/researcher/.researcher/evaluations/repositories-acceptance-v5-20261108/host/sources/sin-git",
+    "filesystem_changed": false,
+    "remote_changed": false
+  },
+  "late_registration": {
+    "project_id": 1,
+    "repository_id": 8,
+    "name": "tardia",
+    "path": "/home/andres/.codex/worktrees/b09e/researcher/.researcher/evaluations/repositories-acceptance-v5-20261108/host/sources/late-existing",
+    "filesystem_changed": false,
+    "remote_changed": false
+  }
+}

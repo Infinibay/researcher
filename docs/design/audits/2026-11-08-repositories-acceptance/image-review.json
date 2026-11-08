@@ -1,0 +1,125 @@
+{
+  "current_web_index_sha256": "06b973e29d5a66868d567af4946021618f843e061622c981957207fa1d2c1907",
+  "images": [
+    {
+      "path": "docs/design/audits/2026-11-08-repositories-acceptance/current/01-actual-empty.png",
+      "sha256": "ac4aa0b088df810835fe98814b9948b6cc023d31c66023daa23965427407775b",
+      "inspected": true,
+      "visual_acceptance": "inspected"
+    },
+    {
+      "path": "docs/design/audits/2026-11-08-repositories-acceptance/current/02-real-create-completed.png",
+      "sha256": "cce508eb503bb4e9b74d5dcad3e6f82d05db90e54c4cddc7c289eebd03323964",
+      "inspected": false,
+      "visual_acceptance": "programmatic_capture_not_individually_visually_audited"
+    },
+    {
+      "path": "docs/design/audits/2026-11-08-repositories-acceptance/current/03-empty-git-revision.png",
+      "sha256": "8913882e8a0669b4a0e94271f2c4c0783d9064673eed38364f55943a090710e0",
+      "inspected": false,
+      "visual_acceptance": "programmatic_capture_not_individually_visually_audited"
+    },
+    {
+      "path": "docs/design/audits/2026-11-08-repositories-acceptance/current/04-adopt-preserves-local-note.png",
+      "sha256": "9fe120c37b637f5d38630152937e87d174f2018d4b5b3bf73c6a073140c96cc0",
+      "inspected": false,
+      "visual_acceptance": "programmatic_capture_not_individually_visually_audited"
+    },
+    {
+      "path": "docs/design/audits/2026-11-08-repositories-acceptance/current/05-immutable-code.png",
+      "sha256": "c8b15cc0692d7995a7b5f85183f60db56bb5de3f9e385915aeea7beb78636d4a",
+      "inspected": true,
+      "visual_acceptance": "inspected"
+    },
+    {
+      "path": "docs/design/audits/2026-11-08-repositories-acceptance/current/06-markdown-mobile.png",
+      "sha256": "7922ae90cfa2a6c6de39594069f4de13a224d908d2b759ca4e6d14ca6a7104f9",
+      "inspected": true,
+      "visual_acceptance": "inspected"
+    },
+    {
+      "path": "docs/design/audits/2026-11-08-repositories-acceptance/current/07-literal-markdown-mobile.png",
+      "sha256": "dc883c8c79f17ca8e580c751e6ee7f9ed73877998f77c657975ba983ebc5cdb9",
+      "inspected": false,
+      "visual_acceptance": "programmatic_capture_not_individually_visually_audited"
+    },
+    {
+      "path": "docs/design/audits/2026-11-08-repositories-acceptance/current/08-actual-tls-clone.png",
+      "sha256": "ce600809ccffa80eb494c64a59c089f6079f7ad036815d593fb64527f2776ab9",
+      "inspected": false,
+      "visual_acceptance": "programmatic_capture_not_individually_visually_audited"
+    },
+    {
+      "path": "docs/design/audits/2026-11-08-repositories-acceptance/current/09-failed-registration-retains-git.png",
+      "sha256": "903abfb74e282b7e602d3a251706a53563f272610ea8daea60b3cbc5ee9247ad",
+      "inspected": false,
+      "visual_acceptance": "programmatic_capture_not_individually_visually_audited"
+    },
+    {
+      "path": "docs/design/audits/2026-11-08-repositories-acceptance/current/10-readonly-recovery.png",
+      "sha256": "2367c282eaa0eb89ac2c2dbf2204276d0e4370e2d7a51c7b71d822d31063dda4",
+      "inspected": false,
+      "visual_acceptance": "programmatic_capture_not_individually_visually_audited"
+    },
+    {
+      "path": "docs/design/audits/2026-11-08-repositories-acceptance/current/11-stopped-partial-clone.png",
+      "sha256": "9a90bfd75da22cd22c30a6d560709db3b1bef732418bd8fb3081993788e5181b",
+      "inspected": true,
+      "visual_acceptance": "inspected"
+    },
+    {
+      "path": "docs/design/audits/2026-11-08-repositories-acceptance/current/12-explicit-repair-keeps-note.png",
+      "sha256": "602fb70efee5c0f1fd5431ff8196678c5cca53c61d39507b414f19be665a1cd5",
+      "inspected": true,
+      "visual_acceptance": "inspected"
+    },
+    {
+      "path": "docs/design/audits/2026-11-08-repositories-acceptance/current/13-controlled-remote-creation.png",
+      "sha256": "f9d5ae9d74acb839bfb4e64edb3a6b292b48f32c8c60e27cfb3367f1cde95b6e",
+      "inspected": true,
+      "visual_acceptance": "inspected"
+    },
+    {
+      "path": "docs/design/audits/2026-11-08-repositories-acceptance/current/14-original-history-mobile.png",
+      "sha256": "126e2702ff1d1a3179a5d4195ed0ae599fa9c7eea16a1cddd116b6d3be3f52c1",
+      "inspected": true,
+      "visual_acceptance": "inspected"
+    },
+    {
+      "path": "docs/design/audits/2026-11-08-repositories-acceptance/current/15-independent-empty-mobile.png",
+      "sha256": "420146ca4f48cb819341467d604cac6d72bcfe998a23715b05df8154a4953194",
+      "inspected": true,
+      "visual_acceptance": "inspected"
+    },
+    {
+      "path": "docs/design/audits/2026-11-08-repositories-acceptance/review/01-lost-registration-receipt.png",
+      "sha256": "f5c416bc75cd7a2659aaea56de50b69732db9421c788bc60b7eb211e638fa767",
+      "inspected": true,
+      "visual_acceptance": "inspected"
+    },
+    {
+      "path": "docs/design/audits/2026-11-08-repositories-acceptance/review/02-same-registration-without-git.png",
+      "sha256": "ade255797855e7260687361409efe3c4f76e6b9d8db35d4eec46420cd0c2347b",
+      "inspected": true,
+      "visual_acceptance": "inspected"
+    },
+    {
+      "path": "docs/design/audits/2026-11-08-repositories-acceptance/review/03-independent-homonymous-source.png",
+      "sha256": "11830cc788ab7a1d352b456717ee99665b56916a6f01672184348e392d3edb02",
+      "inspected": false,
+      "visual_acceptance": "programmatic_capture_not_individually_visually_audited"
+    },
+    {
+      "path": "docs/design/audits/2026-11-08-repositories-acceptance/review/04-late-response-keeps-current-visit.png",
+      "sha256": "c4567fd5388f486d280b45e7ff31a4a39197cd8d6b20d950e44503f9adc8f939",
+      "inspected": true,
+      "visual_acceptance": "inspected"
+    },
+    {
+      "path": "docs/design/audits/2026-11-08-repositories-acceptance/review/05-current-code-mobile.png",
+      "sha256": "a2c0a758fa03b4e4cca6094c4e2f345bd4f8af0e4151706bc09dbbe431b75485",
+      "inspected": true,
+      "visual_acceptance": "inspected"
+    }
+  ]
+}

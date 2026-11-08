@@ -1,0 +1,42 @@
+[
+  {
+    "source": ".researcher/evaluations/repositories-acceptance-20261108",
+    "classification": "Select label included options; no source operation started",
+    "retained_states": 1,
+    "browser_exit": 1,
+    "service_exit": 143,
+    "guardian_closed": true,
+    "model_turns": 0,
+    "failure": "TimeoutError: locator.selectOption: Timeout 15000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByLabel('Operaci\u00f3n', { exact: true })\u001b[22m\n"
+  },
+  {
+    "source": ".researcher/evaluations/repositories-acceptance-v2-20261108",
+    "classification": "New setup form was queried before the completed original result loaded",
+    "retained_states": 3,
+    "browser_exit": 1,
+    "service_exit": 143,
+    "guardian_closed": true,
+    "model_turns": 0,
+    "failure": "TimeoutError: locator.selectOption: Timeout 15000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('combobox', { name: /^Operaci\u00f3n/ })\u001b[22m\n"
+  },
+  {
+    "source": ".researcher/evaluations/repositories-acceptance-v3-20261108",
+    "classification": "Stale Stop fence correctly rejected; source later completed",
+    "retained_states": 10,
+    "browser_exit": 1,
+    "service_exit": 143,
+    "guardian_closed": true,
+    "model_turns": 0,
+    "failure": "AssertionError [ERR_ASSERTION]: {\"operation_key\":\"9cb4790b-de6c-49eb-85e6-0ba950aa0663\",\"operation_id\":\"eadc94c2e6884f02a33e978102d576df\",\"mode\":\"clone\",\"name\":\"interrumpida\",\"path\":\"/home/andres/.codex/worktrees/b09e/researcher/.researcher/evaluations/repositories-acceptance-v3-20261108/host/sources/interrumpida\",\"status\":\"completed\",\"fence\":1,\"reservation_released\":false,\"requires_reconciliation\":false,\"repository_id\":5,\"observation\":{\"branch\":\"main\",\"head_sha\":\"24ffdc0e001b34fb858a566105bdc4eb0a54c31a\",\"origin\":\"https://127.0.0.1:33135/owner/repo.git\",\"tree_sha\":\"effeac564115464c6dc087b8dd1997d791ae80a1\",\"working_tree_clean\":true},\"remote\":null,\"observed_at\":1794103941.7627149,\"observation_kind\":\"recorded_not_rechecked\",\"project_id\":1,\"request\":{\"remote_server\":null,\"branch\":\"main\",\"mode\":\"clone\",\"name\":\"interrumpida\",\"path\":\"/home/andres/.codex/worktrees/b09e/researcher/.researcher/evaluations/repositories-acceptance-v3-20261108/host/sources/interrumpida\",\"private\":null,\"remote_owner\":null,\"remote_url\":\"https://127.0.0.1:33135/owner/repo.git\",\"use_configured_auth\":true},\"issue\":null,\"worker_active\":false,\"receipt\":{\"domain_removed\":true,\"observation\":{\"branch\":\"main\",\"head_sha\":\"24ffdc0e001b34fb858a566105bdc4eb0a54c31a\",\"origin\":\"https://127.0.0.1:33135/owner/repo.git\",\"tree_sha\":\"effeac564115464c6dc087b8dd1997d791ae80a1\",\"working_tree_clean\":true},\"observed_at\":1794103941.7627149,\"operation_id\":\"eadc94c2e6884f02a33e978102d576df\",\"operation_key\":\"9cb4790b-de6c-49eb-85e6-0ba950aa0663\",\"project_id\":1,\"repository_id\":5,\"request\":{\"branch\":\"main\",\"mode\":\"clone\",\"name\":\"interrumpida\",\"path\":\"/home/andres/.codex/worktrees/b09e/researcher/.researcher/evaluations/repositories-acceptance-v3-20261108/host/sources/interrumpida\",\"private\":null,\"remote_owner\":null,\"remote_server\":null,\"remote_url\":\"https://127.0.0.1:33135/owner/repo.git\",\"use_configured_auth\":true},\"status\":\"completed\"},\"local_closure\":\"confirmed\",\"message\":\"Estado guardado. Una observaci\u00f3n Git corresponde a su momento; no comprueba el estado actual. Una carpeta parcial se conserva para revisi\u00f3n.\",\"repair\":null,\"repair_authorizations\":[],\"reservation_release\":null}\n+ actual - expected\n\n+ 'completed'\n- 'stopped'\n"
+  },
+  {
+    "source": ".researcher/evaluations/repositories-acceptance-v4-20261108",
+    "classification": "Repair assertion read old stopped state before its POST admission; fixture shutdown preserved the stopped original",
+    "retained_states": 11,
+    "browser_exit": 1,
+    "service_exit": 143,
+    "guardian_closed": true,
+    "model_turns": 0,
+    "failure": "AssertionError [ERR_ASSERTION]: {\"operation_key\":\"59f63559-fe4d-47aa-bd4b-a828f0869185\",\"operation_id\":\"f358e0c5a1ae47ca852151fdc5ef1770\",\"mode\":\"clone\",\"name\":\"interrumpida\",\"path\":\"/home/andres/.codex/worktrees/b09e/researcher/.researcher/evaluations/repositories-acceptance-v4-20261108/host/sources/interrumpida\",\"status\":\"stopped\",\"fence\":1,\"reservation_released\":false,\"requires_reconciliation\":true,\"repository_id\":null,\"observation\":null,\"remote\":null,\"observed_at\":null,\"observation_kind\":\"recorded_not_rechecked\",\"project_id\":1,\"request\":{\"remote_server\":null,\"branch\":\"main\",\"mode\":\"clone\",\"name\":\"interrumpida\",\"path\":\"/home/andres/.codex/worktrees/b09e/researcher/.researcher/evaluations/repositories-acceptance-v4-20261108/host/sources/interrumpida\",\"private\":null,\"remote_owner\":null,\"remote_url\":\"https://127.0.0.1:39397/owner/repo.git\",\"use_configured_auth\":true},\"issue\":null,\"worker_active\":false,\"receipt\":null,\"local_closure\":\"confirmed\",\"message\":\"Estado guardado. Una observaci\u00f3n Git corresponde a su momento; no comprueba el estado actual. Una carpeta parcial se conserva para revisi\u00f3n.\",\"repair\":null,\"repair_authorizations\":[],\"reservation_release\":null}\n+ actual - expected\n\n+ 'stopped'\n- 'completed'\n"
+  }
+]

@@ -1,0 +1,85 @@
+{
+  "base_commit": "941dc5f",
+  "changed_or_new_definitions_documented": 11,
+  "missing": [],
+  "contracts": [
+    {
+      "path": "evals/operation/repositories_review.py",
+      "symbol": "original_operations",
+      "line": 16,
+      "docstring": "Bind original administrative history before complementary registration, without treating general project metadata as immutable.",
+      "file_sha256": "a21df43c7834e53ec2601c96944c8a6d92fa3e85ae5f84ab966642890afef2d3"
+    },
+    {
+      "path": "evals/operation/repositories_review.py",
+      "symbol": "main",
+      "line": 23,
+      "docstring": "Require a passed synthetic original, retain its exact source operations, and close the new service by its actual handle.",
+      "file_sha256": "a21df43c7834e53ec2601c96944c8a6d92fa3e85ae5f84ab966642890afef2d3"
+    },
+    {
+      "path": "evals/operation/repositories_workspace.py",
+      "symbol": "inspect",
+      "line": 17,
+      "docstring": "Read durable identities independently of browser labels without serializing credentials or full runtime metadata.",
+      "file_sha256": "bbd44500723f2076936f512d28473435594254444e7964f1b8dba2e32a664fe8"
+    },
+    {
+      "path": "evals/operation/repositories_workspace.py",
+      "symbol": "main",
+      "line": 34,
+      "docstring": "Retain the original host on failure and close its actual service handle before retiring owned test servers.",
+      "file_sha256": "bbd44500723f2076936f512d28473435594254444e7964f1b8dba2e32a664fe8"
+    },
+    {
+      "path": "evals/operation/repository_fixture.py",
+      "symbol": "git",
+      "line": 13,
+      "docstring": "Inspect or seed only a fixture-owned local repository, with deterministic synthetic commit identity.",
+      "file_sha256": "73b47e25fc2444a46cea50be52f059921cd8448eba05510c630f5e80ddfddd2d"
+    },
+    {
+      "path": "evals/operation/repository_fixture.py",
+      "symbol": "seed",
+      "line": 20,
+      "docstring": "Create a real small Git history and a separate untracked owner note for preservation checks.",
+      "file_sha256": "73b47e25fc2444a46cea50be52f059921cd8448eba05510c630f5e80ddfddd2d"
+    },
+    {
+      "path": "evals/operation/repository_fixture.py",
+      "symbol": "verify_repository_files",
+      "line": 37,
+      "docstring": "Verify real original/repaired files and credential confinement after the service has closed, without replaying Git effects.",
+      "file_sha256": "73b47e25fc2444a46cea50be52f059921cd8448eba05510c630f5e80ddfddd2d"
+    },
+    {
+      "path": "evals/operation/repository_fixture.py",
+      "symbol": "repository_fixture",
+      "line": 64,
+      "docstring": "Own real TLS smart-Git, a controlled Forgejo REST contract and fixed test fault controls through final shutdown.",
+      "file_sha256": "73b47e25fc2444a46cea50be52f059921cd8448eba05510c630f5e80ddfddd2d"
+    },
+    {
+      "path": "evals/operation/repository_fixture.py",
+      "symbol": "repository_fixture.Controls",
+      "line": 87,
+      "docstring": "Expose only fixed fixture actions; never accept arbitrary paths, SQL or commands from the browser.",
+      "file_sha256": "73b47e25fc2444a46cea50be52f059921cd8448eba05510c630f5e80ddfddd2d"
+    },
+    {
+      "path": "evals/operation/repository_fixture.py",
+      "symbol": "repository_fixture.Controls.log_message",
+      "line": 90,
+      "docstring": "Suppress request logs; all credentials are synthetic but remain outside evidence.",
+      "file_sha256": "73b47e25fc2444a46cea50be52f059921cd8448eba05510c630f5e80ddfddd2d"
+    },
+    {
+      "path": "evals/operation/repository_fixture.py",
+      "symbol": "repository_fixture.Controls.do_POST",
+      "line": 93,
+      "docstring": "Apply one explicit test control and return bounded independent fixture observations.",
+      "file_sha256": "73b47e25fc2444a46cea50be52f059921cd8448eba05510c630f5e80ddfddd2d"
+    }
+  ],
+  "scope": "New/changed Python definitions and modules in this delivery. New frontend modules and exported behavior have English JSDoc; this Python audit does not certify all historical definitions."
+}

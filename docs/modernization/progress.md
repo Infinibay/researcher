@@ -8773,3 +8773,35 @@ Ken, otras páginas, U08/C10 y evaluaciones siguen principales. DD127 y todos lo
 detalles secundarios después de capacidades mayores; suite global y revisión
 independiente al cierre. No hay historial del propietario que migrar (confirmado).
 [Resultados y límites](files-page-review.md).
+
+
+## Repositorios aceptado técnicamente y visualmente, 2026-11-08
+
+Bloque 02:02:43–02:22:16 UTC, **19 min 33 s hasta verificar**, base `941dc5f`;
+documentación/checkpoint posteriores no incluidos. Concepto existente conservado;
+sin cambios del renderer/backend/wheel. Quince estados principales y cinco
+complementarios con HTTP/SQLite/filesystem/Git reales y TLS con CA verificada.
+Creación/adopción/clonado, observación tras fallo SQLite real y Stop/reparación
+que conserva una nota local; remoto vacío en proveedor REST de contrato controlado.
+Una creación REST, cero escrituras Git del producto al servidor, cero modelos.
+Comprobación independiente confirma originales/configuración/notas conservados,
+dos copias con HEAD exacto, dos creaciones con un solo commit y credenciales fuera
+de Git/operaciones. Ocho registros y seis preparaciones completas/cerradas.
+
+Recibo de registro perdido recuperado tras recarga con la misma identidad; carpeta
+sin Git no hereda el repositorio padre. Fuentes homónimas entre proyectos aisladas;
+respuesta tardía A→B→A espera el callback y conserva la selección actual. Historia
+original de las seis preparaciones idéntica tras la revisión complementaria.
+54 casos backend instalados, 16 contratos frontend y 2 pruebas UI pasan sin skips;
+676 fuentes coinciden y todos los imports backend provienen del entorno instalado.
+Once definiciones Python nuevas documentadas en inglés; JSDoc en los navegadores.
+
+Cuatro fallos anteriores del harness conservados: selector, espera de formulario,
+Stop con fence antiguo (rechazado correctamente) y aserción del estado viejo antes
+de admitir reparación. No reintentar esa copia detenida; todos los peers cerraron.
+Las repeticiones no incrementan los casos. DD128 conserva densidad, observación
+antigua de actividad y dos PLW1510; Ruff no se declara verde. Sin comprensión humana,
+zoom nativo o publicación real acreditados. **3/12 páginas**, **41/43 escenarios**.
+Siguiente: preparación nativa/plan español con auditoría real Ken; otras nueve
+páginas, U08/C10/evaluaciones/distribución siguen abiertas. Detalles y suite global
+al final, con revisión independiente. [Alcance y evidencia](repositories-page-review.md).

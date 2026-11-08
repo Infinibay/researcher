@@ -1,0 +1,69 @@
+{
+  "base_commit": "941dc5f",
+  "started_at": "2026-11-08T02:02:43Z",
+  "verified_at": "2026-11-08T02:22:16Z",
+  "seconds_until_verification": 1173,
+  "status": "page_technical_visual_acceptance_verified",
+  "accepted_route": "/repositories",
+  "selected_concept": "source-explorer",
+  "whole_pages_accepted": 3,
+  "whole_pages_total": 12,
+  "product_changed_this_block": false,
+  "current_web_index_sha256": "06b973e29d5a66868d567af4946021618f843e061622c981957207fa1d2c1907",
+  "browser": {
+    "main_states": 15,
+    "review_states": 5,
+    "scoped_axe_violations": 0,
+    "no_page_errors": true,
+    "completed_preparations": 6,
+    "current_repositories": 8,
+    "original_preparation_history_unchanged": true,
+    "git_writes_from_product_to_fixture_remote": 0,
+    "controlled_remote_creations": 1
+  },
+  "external_scope": "Real verified TLS smart Git and actual product HTTP clients; Forgejo provider REST is a controlled contract fixture with synthetic credential, not a user account. Local seed push prepares fixture only.",
+  "installed_selection": {
+    "cases": 54,
+    "passed": 54,
+    "failed": 0,
+    "skipped": 0,
+    "backend_modules": 231,
+    "all_backend_imports_from_native_env": true,
+    "seconds": 73.553,
+    "exit_code": 0
+  },
+  "frontend_contracts": {
+    "passed": 16,
+    "failed": 0,
+    "skipped": 0
+  },
+  "frontend_ui": {
+    "passed": 2,
+    "failed": 0,
+    "skipped": 0
+  },
+  "python_new_definitions_documented": 11,
+  "source_installation_match": 676,
+  "runs": 0,
+  "dispatches": 0,
+  "native_inference_turns": 0,
+  "service_exits": [
+    143,
+    143
+  ],
+  "current_source_closures_confirmed": true,
+  "last_host_guardian": "closed, domain_removed=true (complementary service lifecycle)",
+  "style": "Two PLW1510 missing explicit check=False arguments in new coordinators; return codes asserted; DD128. Ruff not green.",
+  "repetition_policy": "Four prior failed browser fixtures retained separately; no uncertain original operation replayed. Final main and complementary review are separate journeys; repeated states are not summed as new cases.",
+  "scope_limits": [
+    "Technical/delegated visual page acceptance, not human comprehension U08",
+    "No native browser zoom or exhaustive screen-reader claim",
+    "Original native preparation contention and Spanish/Ken verification remain open",
+    "Historical review provenance/advancing immutable-read contracts combine retained earlier pilot evidence and installed tests; no new live PR publication",
+    "No user data migration, model inference, new global green suite, push, merge or deploy"
+  ],
+  "deferred": [
+    "DD128"
+  ],
+  "evidence": "docs/design/audits/2026-11-08-repositories-acceptance/report.md"
+}

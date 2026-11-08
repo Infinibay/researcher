@@ -5988,7 +5988,7 @@
       "status": "in_progress",
       "pilots": 12,
       "concept_images": 48,
-      "fully_accepted": 2,
+      "fully_accepted": 3,
       "pages": {
         "projects": {
           "status": "in_progress",
@@ -6046,6 +6046,27 @@
             "DD127",
             "DD126",
             "DD121"
+          ]
+        },
+        "repositories": {
+          "status": "verified",
+          "scope": "Technical and delegated visual route acceptance on installed owner HTTP/SQLite/filesystem and real local TLS Git; provider REST is a controlled contract fixture. Human comprehension U08 and final accessibility/release remain independent.",
+          "selected_concept": "source-explorer",
+          "evidence": [
+            "docs/modernization/repositories-page-review.md",
+            "docs/modernization/repositories-page-results.json",
+            "docs/modernization/repositories-page-packaging.json",
+            "docs/modernization/repositories-page-docstrings.json",
+            "docs/design/audits/2026-11-08-repositories-acceptance/report.md",
+            "frontend/tests/repositories.e2e.mjs",
+            "frontend/tests/repositories-review.e2e.mjs",
+            "evals/operation/repositories_workspace.py",
+            "evals/operation/repositories_review.py",
+            "evals/operation/repository_fixture.py"
+          ],
+          "remaining": [],
+          "deferred": [
+            "DD128"
           ]
         }
       }

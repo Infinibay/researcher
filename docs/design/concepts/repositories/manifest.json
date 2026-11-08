@@ -91,5 +91,7 @@
       ],
       "inspected": true
     }
-  ]
+  ],
+  "implementation_status": "technical and delegated visual full-route acceptance verified; controlled provider REST, U08 and final accessibility/release remain open",
+  "acceptance_evidence": "../../audits/2026-11-08-repositories-acceptance/report.md"
 }

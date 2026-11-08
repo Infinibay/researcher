@@ -1,0 +1,41 @@
+{
+  "validation_environment": {
+    "runner_cgroup": "/sys/fs/cgroup/user.slice/user-1000.slice/user@1000.service/app.slice/run-p1360674-i1360675.scope",
+    "parent_controllers_before": "cpu memory pids",
+    "runner_cpu_max": "800000 100000",
+    "purpose": "Transient systemd scope with CPUQuota=800% retains CPU-controller availability during validation; it does not relax any product limit.",
+    "parent_controllers_after": "cpu memory pids"
+  },
+  "base_commit": "941dc5f",
+  "wheel": "researcher-0.1.0-cp312-cp312-linux_x86_64.whl",
+  "wheel_sha256": "a379e56f2e0934dd271eb91317c86d182ee56f7cb7d4a5a6e5bc2a8902188352",
+  "source_files_matching_wheel_and_installation": 676,
+  "product_files_matching": 360,
+  "observed": {
+    "cases": 54,
+    "passed": 54,
+    "failed": 0,
+    "skipped": 0,
+    "backend_modules": 231,
+    "all_backend_imports_from_native_env": true,
+    "seconds": 73.553,
+    "exit_code": 0
+  },
+  "tests": [
+    "backend/tests/runtime/test_owned_source_setup.py",
+    "backend/tests/runtime/test_source_service.py",
+    "backend/tests/runtime/test_source_control.py",
+    "backend/tests/runtime/test_source_repair.py",
+    "backend/tests/runtime/test_remote_source.py",
+    "backend/tests/runtime/test_source_history.py",
+    "backend/tests/runtime/test_source_reservation.py",
+    "backend/tests/runtime/test_repository_reading.py",
+    "backend/tests/api/test_git_identity.py"
+  ],
+  "real_model_turns": 0,
+  "limits": [
+    "Selected installed tests, not the global suite",
+    "Current installed source setup/clone/recovery/remote/reading cases; browser page acceptance is recorded separately",
+    "Actual Git/TLS/SQLite, original-operation recovery and controlled provider REST; controlled native/import fixtures, no paid inference or human comprehension claim"
+  ]
+}

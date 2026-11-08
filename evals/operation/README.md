@@ -84,6 +84,34 @@ la evidencia funcional; falla si hay un fallo de navegación, HTTP o reflow.
 El ancho estrecho no equivale a probar zoom real o un lector de pantalla.
 [Resultado con pendientes conservados](../../docs/design/audits/2026-11-07-navigation-live/report.md).
 
+`repositories_workspace.py` prepara otro host nuevo y reutiliza las fixtures
+instaladas de TLS/Git y contrato Forgejo controlado; no usa un servidor del usuario:
+
+```sh
+<python-del-producto> evals/operation/repositories_workspace.py \
+  --assets <recursos-host.json> --output <carpeta-nueva> --node <node24>/bin/node
+```
+
+Recorre creación/adopción/clonado, lectura de commits completos, fallo real de
+registro SQLite, observación, Stop y reparación explícita que conserva una nota
+local. El Git HTTPS es real y verifica su CA privada; la API Forgejo es una fixture
+de contrato con credencial sintética. No acredita una cuenta remota real ni hace
+push desde el producto. El coordinador conserva el host y sus recibos de cierre.
+Después puede ejecutarse la revisión complementaria del original cerrado:
+
+```sh
+<python-del-producto> evals/operation/repositories_review.py \
+  --original <salida-pasada-del-comando-anterior> --output <otra-carpeta-nueva> \
+  --node <node24>/bin/node
+```
+
+Agrega registros explícitos, pérdida de recibo, recarga y respuesta tardía entre
+proyectos; comprueba que la historia original de preparación no cambie. No repite
+clonados ni contacta el proveedor. Los scripts npm correspondientes ejecutan sólo
+el navegador: variables comunes, `RESEARCHER_E2E_REPOSITORY_FIXTURE` y, en la revisión,
+`RESEARCHER_E2E_REPOSITORY_RECEIPT`; los coordinadores las configuran. No utilizar
+estos controles de fallos sobre datos del propietario. [Alcance y evidencia](../../docs/modernization/repositories-page-review.md).
+
 `restored_host.py` prepara una instalación sintética nueva, guarda una solicitud
 pendiente, crea/verifica una copia y la restaura en otra ruta. Reinscribe esa copia
 con autoridad y acceso nuevos; envía una sola solicitud nueva mediante HTTP,

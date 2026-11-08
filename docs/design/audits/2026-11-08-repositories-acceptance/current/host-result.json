@@ -1,0 +1,115 @@
+{
+  "status": "passed",
+  "model_turns": 0,
+  "web_index_sha256": "06b973e29d5a66868d567af4946021618f843e061622c981957207fa1d2c1907",
+  "scope": "Installed owner HTTP/SQLite/filesystem and real TLS smart Git; controlled Forgejo REST fixture, no user remote or paid inference",
+  "browser_exit": 0,
+  "service_exit": 143,
+  "storage": {
+    "integrity": "ok",
+    "runs": 0,
+    "dispatches": 0,
+    "unclosed_peers": 0,
+    "source_operations": [
+      {
+        "operation_id": "b2d7654e2ed444e8bbb2f80c19939864",
+        "status": "completed",
+        "closure": null,
+        "http_client_state": "closed",
+        "unclosed_peers": 0
+      },
+      {
+        "operation_id": "149cfec7c5f746f5b6427e1581bf2211",
+        "status": "completed",
+        "closure": {
+          "attempt_id": "2482551f1183464087b3d3716acf0d7c",
+          "domain_removed": true,
+          "grant_id": "a88eb8d22653753440d055bc2be136279716bcc476d6b2cc22e947f1840899fc"
+        },
+        "http_client_state": null,
+        "unclosed_peers": 0
+      },
+      {
+        "operation_id": "7d00c8437dfb4baeaa128ca07326068e",
+        "status": "completed",
+        "closure": {
+          "attempt_id": "2f813ab851154455b77ca5a034c4fdda",
+          "domain_removed": true,
+          "grant_id": "444a49d6135296ea256d21adfc119db589faa8f561d3561a9faa740c604ccd64"
+        },
+        "http_client_state": null,
+        "unclosed_peers": 0
+      },
+      {
+        "operation_id": "da9103b1c3934082a52038a87b04ed9d",
+        "status": "completed",
+        "closure": {
+          "attempt_id": "847dbda496074ca28a3cf51efa5dd4c6",
+          "domain_removed": true,
+          "grant_id": "8ddf4499675d5f368fa0c5612c892977b9a123dea377f31d38910897b5c89258"
+        },
+        "http_client_state": null,
+        "unclosed_peers": 0
+      },
+      {
+        "operation_id": "817436fa9ea44c1e8040c8e01f0d8b73",
+        "status": "completed",
+        "closure": {
+          "attempt_id": "932950423fd84d28a3df0cd909636c84",
+          "domain_removed": true,
+          "grant_id": "376e58f8b4610069f118e700a1a35b635871da7a51eef3b6611c6e689625d89c"
+        },
+        "http_client_state": null,
+        "unclosed_peers": 0
+      },
+      {
+        "operation_id": "8a88e8dfdd13442b930c62ed343bfe8a",
+        "status": "completed",
+        "closure": {
+          "attempt_id": "cf15c8d1ca834922acfe28caf324fe6b",
+          "domain_removed": true,
+          "grant_id": "65d8b560f6b9f143414929223ac3b365992ac923017df63ebae03ecc92961a67"
+        },
+        "http_client_state": null,
+        "unclosed_peers": 0
+      }
+    ],
+    "repositories": [
+      {
+        "id": 1,
+        "project_id": 1,
+        "name": "nueva",
+        "local_path": "/home/andres/.codex/worktrees/b09e/researcher/.researcher/evaluations/repositories-acceptance-v5-20261108/host/sources/nueva",
+        "default_branch": "main"
+      },
+      {
+        "id": 2,
+        "project_id": 1,
+        "name": "original",
+        "local_path": "/home/andres/.codex/worktrees/b09e/researcher/.researcher/evaluations/repositories-acceptance-v5-20261108/host/sources/original",
+        "default_branch": "main"
+      },
+      {
+        "id": 3,
+        "project_id": 1,
+        "name": "copia",
+        "local_path": "/home/andres/.codex/worktrees/b09e/researcher/.researcher/evaluations/repositories-acceptance-v5-20261108/host/sources/copia",
+        "default_branch": "main"
+      },
+      {
+        "id": 4,
+        "project_id": 1,
+        "name": "recuperable",
+        "local_path": "/home/andres/.codex/worktrees/b09e/researcher/.researcher/evaluations/repositories-acceptance-v5-20261108/host/sources/recuperable",
+        "default_branch": "main"
+      },
+      {
+        "id": 5,
+        "project_id": 1,
+        "name": "interrumpida",
+        "local_path": "/home/andres/.codex/worktrees/b09e/researcher/.researcher/evaluations/repositories-acceptance-v5-20261108/host/sources/interrumpida",
+        "default_branch": "main"
+      }
+    ]
+  }
+}

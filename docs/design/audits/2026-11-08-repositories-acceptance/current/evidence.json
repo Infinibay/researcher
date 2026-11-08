@@ -1,0 +1,638 @@
+{
+  "status": "passed",
+  "states": [
+    {
+      "name": "01-actual-empty",
+      "width": 1440,
+      "selector": ".repo-reading",
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "02-real-create-completed",
+      "width": 1440,
+      "selector": ".repo-reading",
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "03-empty-git-revision",
+      "width": 1440,
+      "selector": ".repo-reading",
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "04-adopt-preserves-local-note",
+      "width": 1440,
+      "selector": ".repo-reading",
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "05-immutable-code",
+      "width": 1440,
+      "selector": ".repo-file-pane",
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "06-markdown-mobile",
+      "width": 390,
+      "selector": ".repo-file-pane",
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "07-literal-markdown-mobile",
+      "width": 390,
+      "selector": ".repo-file-pane",
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "08-actual-tls-clone",
+      "width": 1440,
+      "selector": ".repo-reading",
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "09-failed-registration-retains-git",
+      "width": 1440,
+      "selector": ".repo-reading",
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "10-readonly-recovery",
+      "width": 1440,
+      "selector": ".repo-reading",
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "11-stopped-partial-clone",
+      "width": 1440,
+      "selector": ".repo-reading",
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "12-explicit-repair-keeps-note",
+      "width": 1440,
+      "selector": ".repo-reading",
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "13-controlled-remote-creation",
+      "width": 1440,
+      "selector": ".repo-reading",
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "14-original-history-mobile",
+      "width": 390,
+      "selector": ".repo-registration",
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "15-independent-empty-mobile",
+      "width": 390,
+      "selector": ".repo-register",
+      "fits": true,
+      "violations": []
+    }
+  ],
+  "operations": [
+    {
+      "operation_key": "ac782f2b-939f-4f8f-b9d0-0f221e08d3e9",
+      "operation_id": "da9103b1c3934082a52038a87b04ed9d",
+      "mode": "create",
+      "name": "nueva",
+      "path": "/home/andres/.codex/worktrees/b09e/researcher/.researcher/evaluations/repositories-acceptance-v5-20261108/host/sources/nueva",
+      "status": "completed",
+      "fence": 1,
+      "reservation_released": false,
+      "requires_reconciliation": false,
+      "repository_id": 1,
+      "observation": {
+        "branch": "main",
+        "head_sha": "2515b828a4830809502ee1bfd76b6cdbb3d28f23",
+        "origin": null,
+        "tree_sha": "4b825dc642cb6eb9a060e54bf8d69288fbee4904",
+        "working_tree_clean": true
+      },
+      "remote": null,
+      "observed_at": 1794104121.3354826,
+      "observation_kind": "recorded_not_rechecked",
+      "project_id": 1,
+      "request": {
+        "remote_server": null,
+        "branch": "main",
+        "mode": "create",
+        "name": "nueva",
+        "path": "/home/andres/.codex/worktrees/b09e/researcher/.researcher/evaluations/repositories-acceptance-v5-20261108/host/sources/nueva",
+        "private": null,
+        "remote_owner": null,
+        "remote_url": null,
+        "use_configured_auth": false
+      },
+      "issue": null,
+      "worker_active": false,
+      "receipt": {
+        "domain_removed": true,
+        "observation": {
+          "branch": "main",
+          "head_sha": "2515b828a4830809502ee1bfd76b6cdbb3d28f23",
+          "origin": null,
+          "tree_sha": "4b825dc642cb6eb9a060e54bf8d69288fbee4904",
+          "working_tree_clean": true
+        },
+        "observed_at": 1794104121.3354826,
+        "operation_id": "da9103b1c3934082a52038a87b04ed9d",
+        "operation_key": "ac782f2b-939f-4f8f-b9d0-0f221e08d3e9",
+        "project_id": 1,
+        "repository_id": 1,
+        "request": {
+          "branch": "main",
+          "mode": "create",
+          "name": "nueva",
+          "path": "/home/andres/.codex/worktrees/b09e/researcher/.researcher/evaluations/repositories-acceptance-v5-20261108/host/sources/nueva",
+          "private": null,
+          "remote_owner": null,
+          "remote_server": null,
+          "remote_url": null,
+          "use_configured_auth": false
+        },
+        "status": "completed"
+      },
+      "local_closure": "confirmed",
+      "message": "Estado guardado. Una observación Git corresponde a su momento; no comprueba el estado actual. Una carpeta parcial se conserva para revisión.",
+      "repair": null,
+      "repair_authorizations": [],
+      "reservation_release": null
+    },
+    {
+      "operation_key": "89070fdd-a1e7-4414-8ed2-ce301d40e9c7",
+      "operation_id": "7d00c8437dfb4baeaa128ca07326068e",
+      "mode": "adopt",
+      "name": "original",
+      "path": "/home/andres/.codex/worktrees/b09e/researcher/.researcher/evaluations/repositories-acceptance-v5-20261108/host/sources/original",
+      "status": "completed",
+      "fence": 1,
+      "reservation_released": false,
+      "requires_reconciliation": false,
+      "repository_id": 2,
+      "observation": {
+        "branch": "main",
+        "head_sha": "79ea105a7c77e38af0af7c7e7bb5cd67c8591fb2",
+        "origin": "https://example.invalid/preserved.git",
+        "tree_sha": "effeac564115464c6dc087b8dd1997d791ae80a1",
+        "working_tree_clean": false
+      },
+      "remote": null,
+      "observed_at": 1794104124.6089878,
+      "observation_kind": "recorded_not_rechecked",
+      "project_id": 1,
+      "request": {
+        "remote_server": null,
+        "branch": null,
+        "mode": "adopt",
+        "name": "original",
+        "path": "/home/andres/.codex/worktrees/b09e/researcher/.researcher/evaluations/repositories-acceptance-v5-20261108/host/sources/original",
+        "private": null,
+        "remote_owner": null,
+        "remote_url": null,
+        "use_configured_auth": false
+      },
+      "issue": null,
+      "worker_active": false,
+      "receipt": {
+        "domain_removed": true,
+        "observation": {
+          "branch": "main",
+          "head_sha": "79ea105a7c77e38af0af7c7e7bb5cd67c8591fb2",
+          "origin": "https://example.invalid/preserved.git",
+          "tree_sha": "effeac564115464c6dc087b8dd1997d791ae80a1",
+          "working_tree_clean": false
+        },
+        "observed_at": 1794104124.6089878,
+        "operation_id": "7d00c8437dfb4baeaa128ca07326068e",
+        "operation_key": "89070fdd-a1e7-4414-8ed2-ce301d40e9c7",
+        "project_id": 1,
+        "repository_id": 2,
+        "request": {
+          "branch": null,
+          "mode": "adopt",
+          "name": "original",
+          "path": "/home/andres/.codex/worktrees/b09e/researcher/.researcher/evaluations/repositories-acceptance-v5-20261108/host/sources/original",
+          "private": null,
+          "remote_owner": null,
+          "remote_server": null,
+          "remote_url": null,
+          "use_configured_auth": false
+        },
+        "status": "completed"
+      },
+      "local_closure": "confirmed",
+      "message": "Estado guardado. Una observación Git corresponde a su momento; no comprueba el estado actual. Una carpeta parcial se conserva para revisión.",
+      "repair": null,
+      "repair_authorizations": [],
+      "reservation_release": null
+    },
+    {
+      "operation_key": "e3af65ed-d235-46bf-876e-dd32eda0f6e2",
+      "operation_id": "8a88e8dfdd13442b930c62ed343bfe8a",
+      "mode": "clone",
+      "name": "copia",
+      "path": "/home/andres/.codex/worktrees/b09e/researcher/.researcher/evaluations/repositories-acceptance-v5-20261108/host/sources/copia",
+      "status": "completed",
+      "fence": 1,
+      "reservation_released": false,
+      "requires_reconciliation": false,
+      "repository_id": 3,
+      "observation": {
+        "branch": "main",
+        "head_sha": "79ea105a7c77e38af0af7c7e7bb5cd67c8591fb2",
+        "origin": "https://127.0.0.1:34157/owner/repo.git",
+        "tree_sha": "effeac564115464c6dc087b8dd1997d791ae80a1",
+        "working_tree_clean": true
+      },
+      "remote": null,
+      "observed_at": 1794104130.0397363,
+      "observation_kind": "recorded_not_rechecked",
+      "project_id": 1,
+      "request": {
+        "remote_server": null,
+        "branch": "main",
+        "mode": "clone",
+        "name": "copia",
+        "path": "/home/andres/.codex/worktrees/b09e/researcher/.researcher/evaluations/repositories-acceptance-v5-20261108/host/sources/copia",
+        "private": null,
+        "remote_owner": null,
+        "remote_url": "https://127.0.0.1:34157/owner/repo.git",
+        "use_configured_auth": true
+      },
+      "issue": null,
+      "worker_active": false,
+      "receipt": {
+        "domain_removed": true,
+        "observation": {
+          "branch": "main",
+          "head_sha": "79ea105a7c77e38af0af7c7e7bb5cd67c8591fb2",
+          "origin": "https://127.0.0.1:34157/owner/repo.git",
+          "tree_sha": "effeac564115464c6dc087b8dd1997d791ae80a1",
+          "working_tree_clean": true
+        },
+        "observed_at": 1794104130.0397363,
+        "operation_id": "8a88e8dfdd13442b930c62ed343bfe8a",
+        "operation_key": "e3af65ed-d235-46bf-876e-dd32eda0f6e2",
+        "project_id": 1,
+        "repository_id": 3,
+        "request": {
+          "branch": "main",
+          "mode": "clone",
+          "name": "copia",
+          "path": "/home/andres/.codex/worktrees/b09e/researcher/.researcher/evaluations/repositories-acceptance-v5-20261108/host/sources/copia",
+          "private": null,
+          "remote_owner": null,
+          "remote_server": null,
+          "remote_url": "https://127.0.0.1:34157/owner/repo.git",
+          "use_configured_auth": true
+        },
+        "status": "completed"
+      },
+      "local_closure": "confirmed",
+      "message": "Estado guardado. Una observación Git corresponde a su momento; no comprueba el estado actual. Una carpeta parcial se conserva para revisión.",
+      "repair": null,
+      "repair_authorizations": [],
+      "reservation_release": null
+    },
+    {
+      "operation_key": "84fbfad1-1577-4816-baab-fd51b3c5a730",
+      "operation_id": "149cfec7c5f746f5b6427e1581bf2211",
+      "mode": "create",
+      "name": "recuperable",
+      "path": "/home/andres/.codex/worktrees/b09e/researcher/.researcher/evaluations/repositories-acceptance-v5-20261108/host/sources/recuperable",
+      "status": "needs_reconciliation",
+      "fence": 1,
+      "reservation_released": false,
+      "requires_reconciliation": true,
+      "repository_id": null,
+      "observation": null,
+      "remote": null,
+      "observed_at": null,
+      "observation_kind": "recorded_not_rechecked",
+      "project_id": 1,
+      "request": {
+        "remote_server": null,
+        "branch": "main",
+        "mode": "create",
+        "name": "recuperable",
+        "path": "/home/andres/.codex/worktrees/b09e/researcher/.researcher/evaluations/repositories-acceptance-v5-20261108/host/sources/recuperable",
+        "private": null,
+        "remote_owner": null,
+        "remote_url": null,
+        "use_configured_auth": false
+      },
+      "issue": {
+        "code": "source_result_unconfirmed",
+        "message": "No se confirmó la preparación. Conservamos la solicitud y la carpeta; observa el resultado original antes de decidir cómo continuar."
+      },
+      "worker_active": false,
+      "receipt": null,
+      "local_closure": "confirmed",
+      "message": "Estado guardado. Una observación Git corresponde a su momento; no comprueba el estado actual. Una carpeta parcial se conserva para revisión.",
+      "repair": null,
+      "repair_authorizations": [],
+      "reservation_release": null
+    },
+    {
+      "operation_key": "84fbfad1-1577-4816-baab-fd51b3c5a730",
+      "operation_id": "149cfec7c5f746f5b6427e1581bf2211",
+      "mode": "create",
+      "name": "recuperable",
+      "path": "/home/andres/.codex/worktrees/b09e/researcher/.researcher/evaluations/repositories-acceptance-v5-20261108/host/sources/recuperable",
+      "status": "completed",
+      "fence": 2,
+      "reservation_released": false,
+      "requires_reconciliation": false,
+      "repository_id": 4,
+      "observation": {
+        "branch": "main",
+        "head_sha": "bc7706d3f8dead0179800d8c506f1c759a5696cf",
+        "origin": null,
+        "tree_sha": "4b825dc642cb6eb9a060e54bf8d69288fbee4904",
+        "working_tree_clean": true
+      },
+      "remote": null,
+      "observed_at": 1794104138.1124778,
+      "observation_kind": "recorded_not_rechecked",
+      "project_id": 1,
+      "request": {
+        "remote_server": null,
+        "branch": "main",
+        "mode": "create",
+        "name": "recuperable",
+        "path": "/home/andres/.codex/worktrees/b09e/researcher/.researcher/evaluations/repositories-acceptance-v5-20261108/host/sources/recuperable",
+        "private": null,
+        "remote_owner": null,
+        "remote_url": null,
+        "use_configured_auth": false
+      },
+      "issue": null,
+      "worker_active": false,
+      "receipt": {
+        "domain_removed": true,
+        "observation": {
+          "branch": "main",
+          "head_sha": "bc7706d3f8dead0179800d8c506f1c759a5696cf",
+          "origin": null,
+          "tree_sha": "4b825dc642cb6eb9a060e54bf8d69288fbee4904",
+          "working_tree_clean": true
+        },
+        "observed_at": 1794104138.1124778,
+        "operation_id": "149cfec7c5f746f5b6427e1581bf2211",
+        "operation_key": "84fbfad1-1577-4816-baab-fd51b3c5a730",
+        "project_id": 1,
+        "repository_id": 4,
+        "request": {
+          "branch": "main",
+          "mode": "create",
+          "name": "recuperable",
+          "path": "/home/andres/.codex/worktrees/b09e/researcher/.researcher/evaluations/repositories-acceptance-v5-20261108/host/sources/recuperable",
+          "private": null,
+          "remote_owner": null,
+          "remote_server": null,
+          "remote_url": null,
+          "use_configured_auth": false
+        },
+        "status": "completed"
+      },
+      "local_closure": "confirmed",
+      "message": "Estado guardado. Una observación Git corresponde a su momento; no comprueba el estado actual. Una carpeta parcial se conserva para revisión.",
+      "repair": null,
+      "repair_authorizations": [],
+      "reservation_release": null
+    },
+    {
+      "operation_key": "cf8cc29f-439b-4659-acaf-98489d61c323",
+      "operation_id": "817436fa9ea44c1e8040c8e01f0d8b73",
+      "mode": "clone",
+      "name": "interrumpida",
+      "path": "/home/andres/.codex/worktrees/b09e/researcher/.researcher/evaluations/repositories-acceptance-v5-20261108/host/sources/interrumpida",
+      "status": "stopped",
+      "fence": 1,
+      "reservation_released": false,
+      "requires_reconciliation": true,
+      "repository_id": null,
+      "observation": null,
+      "remote": null,
+      "observed_at": null,
+      "observation_kind": "recorded_not_rechecked",
+      "project_id": 1,
+      "request": {
+        "remote_server": null,
+        "branch": "main",
+        "mode": "clone",
+        "name": "interrumpida",
+        "path": "/home/andres/.codex/worktrees/b09e/researcher/.researcher/evaluations/repositories-acceptance-v5-20261108/host/sources/interrumpida",
+        "private": null,
+        "remote_owner": null,
+        "remote_url": "https://127.0.0.1:34157/owner/repo.git",
+        "use_configured_auth": true
+      },
+      "issue": null,
+      "worker_active": false,
+      "receipt": null,
+      "local_closure": "confirmed",
+      "message": "Estado guardado. Una observación Git corresponde a su momento; no comprueba el estado actual. Una carpeta parcial se conserva para revisión.",
+      "repair": null,
+      "repair_authorizations": [],
+      "reservation_release": null
+    },
+    {
+      "operation_key": "cf8cc29f-439b-4659-acaf-98489d61c323",
+      "operation_id": "817436fa9ea44c1e8040c8e01f0d8b73",
+      "mode": "clone",
+      "name": "interrumpida",
+      "path": "/home/andres/.codex/worktrees/b09e/researcher/.researcher/evaluations/repositories-acceptance-v5-20261108/host/sources/interrumpida",
+      "status": "completed",
+      "fence": 2,
+      "reservation_released": false,
+      "requires_reconciliation": false,
+      "repository_id": 5,
+      "observation": {
+        "branch": "main",
+        "head_sha": "79ea105a7c77e38af0af7c7e7bb5cd67c8591fb2",
+        "origin": "https://127.0.0.1:34157/owner/repo.git",
+        "tree_sha": "effeac564115464c6dc087b8dd1997d791ae80a1",
+        "working_tree_clean": false
+      },
+      "remote": null,
+      "observed_at": 1794104143.9262445,
+      "observation_kind": "recorded_not_rechecked",
+      "project_id": 1,
+      "request": {
+        "remote_server": null,
+        "branch": "main",
+        "mode": "clone",
+        "name": "interrumpida",
+        "path": "/home/andres/.codex/worktrees/b09e/researcher/.researcher/evaluations/repositories-acceptance-v5-20261108/host/sources/interrumpida",
+        "private": null,
+        "remote_owner": null,
+        "remote_url": "https://127.0.0.1:34157/owner/repo.git",
+        "use_configured_auth": true
+      },
+      "issue": null,
+      "worker_active": false,
+      "receipt": {
+        "domain_removed": true,
+        "observation": {
+          "branch": "main",
+          "head_sha": "79ea105a7c77e38af0af7c7e7bb5cd67c8591fb2",
+          "origin": "https://127.0.0.1:34157/owner/repo.git",
+          "tree_sha": "effeac564115464c6dc087b8dd1997d791ae80a1",
+          "working_tree_clean": false
+        },
+        "observed_at": 1794104143.9262445,
+        "operation_id": "817436fa9ea44c1e8040c8e01f0d8b73",
+        "operation_key": "cf8cc29f-439b-4659-acaf-98489d61c323",
+        "project_id": 1,
+        "repair_key": "dd81985e-212a-4277-aa50-0cab9fb3d19d",
+        "repository_id": 5,
+        "request": {
+          "branch": "main",
+          "mode": "clone",
+          "name": "interrumpida",
+          "path": "/home/andres/.codex/worktrees/b09e/researcher/.researcher/evaluations/repositories-acceptance-v5-20261108/host/sources/interrumpida",
+          "private": null,
+          "remote_owner": null,
+          "remote_server": null,
+          "remote_url": "https://127.0.0.1:34157/owner/repo.git",
+          "use_configured_auth": true
+        },
+        "status": "completed"
+      },
+      "local_closure": "confirmed",
+      "message": "Estado guardado. Una observación Git corresponde a su momento; no comprueba el estado actual. Una carpeta parcial se conserva para revisión.",
+      "repair": {
+        "fence": 1,
+        "operation_id": "817436fa9ea44c1e8040c8e01f0d8b73",
+        "repair_key": "dd81985e-212a-4277-aa50-0cab9fb3d19d"
+      },
+      "repair_authorizations": [
+        {
+          "fence": 1,
+          "operation_id": "817436fa9ea44c1e8040c8e01f0d8b73",
+          "repair_key": "dd81985e-212a-4277-aa50-0cab9fb3d19d"
+        }
+      ],
+      "reservation_release": null
+    },
+    {
+      "operation_key": "1f209dc7-1ba9-4383-9efc-2251aefbb962",
+      "operation_id": "b2d7654e2ed444e8bbb2f80c19939864",
+      "mode": "create_remote",
+      "name": "archivo-remoto",
+      "path": null,
+      "status": "completed",
+      "fence": 1,
+      "reservation_released": false,
+      "requires_reconciliation": false,
+      "repository_id": null,
+      "observation": null,
+      "remote": {
+        "api_base": "https://127.0.0.1:34157/api/v1",
+        "clone_url": "https://127.0.0.1:34157/research/archivo-remoto.git",
+        "full_name": "research/archivo-remoto",
+        "id": 301,
+        "marker": "researcher-source:f040b29a6312abb86cb4447963857c0dbb26a895f8e740220e87705ebde7bdbe",
+        "namespace": {
+          "id": 92,
+          "kind": "organization",
+          "name": "research"
+        },
+        "private": true
+      },
+      "observed_at": 1794104145.4667,
+      "observation_kind": "recorded_not_rechecked",
+      "project_id": 1,
+      "request": {
+        "remote_server": "https://127.0.0.1:34157/api/v1",
+        "branch": null,
+        "mode": "create_remote",
+        "name": "archivo-remoto",
+        "path": null,
+        "private": true,
+        "remote_owner": "research",
+        "remote_url": null,
+        "use_configured_auth": false
+      },
+      "issue": null,
+      "worker_active": false,
+      "receipt": {
+        "completed_after_withdrawal": false,
+        "http_client_closed": true,
+        "observed_at": 1794104145.4667,
+        "operation_id": "b2d7654e2ed444e8bbb2f80c19939864",
+        "operation_key": "1f209dc7-1ba9-4383-9efc-2251aefbb962",
+        "project_id": 1,
+        "remote": {
+          "api_base": "https://127.0.0.1:34157/api/v1",
+          "clone_url": "https://127.0.0.1:34157/research/archivo-remoto.git",
+          "full_name": "research/archivo-remoto",
+          "id": 301,
+          "marker": "researcher-source:f040b29a6312abb86cb4447963857c0dbb26a895f8e740220e87705ebde7bdbe",
+          "namespace": {
+            "id": 92,
+            "kind": "organization",
+            "name": "research"
+          },
+          "private": true
+        }
+      },
+      "local_closure": "confirmed",
+      "message": "Crear un remoto vacío es una operación separada. El cierre del cliente local no detiene necesariamente al servidor. Observar sólo consulta la creación original; no vuelve a enviarla. No se creó una carpeta local ni se publicó código.",
+      "repair": null,
+      "repair_authorizations": [],
+      "reservation_release": null
+    }
+  ],
+  "errors": [],
+  "checks": [],
+  "model_turns": 0,
+  "external_contract": "Real TLS smart Git plus controlled Forgejo REST fixture; no user server",
+  "identities": {
+    "alpha": 1,
+    "beta": 2
+  },
+  "last_request": {
+    "operation_key": "1f209dc7-1ba9-4383-9efc-2251aefbb962",
+    "mode": "create_remote",
+    "name": "archivo-remoto",
+    "path": null,
+    "branch": null,
+    "remote_url": null,
+    "remote_owner": "research",
+    "private": true,
+    "remote_server": "https://127.0.0.1:34157/api/v1",
+    "use_configured_auth": false
+  },
+  "external": {
+    "clone_entered": true,
+    "git_writes": 0,
+    "remote_head": "79ea105a7c77e38af0af7c7e7bb5cd67c8591fb2",
+    "create_posts": [
+      {
+        "path": "/api/v1/orgs/research/repos",
+        "name": "archivo-remoto",
+        "private": true
+      }
+    ]
+  }
+}

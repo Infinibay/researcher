@@ -1058,3 +1058,20 @@ desplazamiento. Mantener las identidades de los intentos y sus resultados; no
 ocultar una operación incierta para mejorar la presentación. Auditoría:
 `docs/design/audits/2026-11-08-files-acceptance/report.md`. Zoom nativo y lectores
 de pantalla completos siguen en el cierre de accesibilidad, no acreditados por Axe.
+
+## DD128 — presentación de Repositorios y estilo de sus coordinadores
+
+Después de las capacidades mayores: compactar las rutas largas del registro y la
+historia de preparación, y revisar cabecera/espacio móvil. La actividad global
+puede conservar una observación activa anterior a una preparación ya completada;
+se refresca con «Actualizar actividad». Contextualizar esa antigüedad sin inventar
+actividad actual ni cambiar el scope de Stop. Los intentos y sus archivos siguen
+conservados y consultables. Mantener la separación entre carpeta disponible, Git
+observado, revisión histórica y aceptación del trabajo.
+
+Ruff señala dos PLW1510 en los nuevos `repositories_workspace.py` y
+`repositories_review.py`: falta escribir explícitamente `check=False` en
+`subprocess.run`. El retorno se guarda y se comprueba después, pero el estilo no
+se declara verde. Resolver junto con los demás detalles; no repetir los recorridos
+Git por un ajuste equivalente al valor por defecto. Capturas y alcance:
+`docs/design/audits/2026-11-08-repositories-acceptance/report.md`.

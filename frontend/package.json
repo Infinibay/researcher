@@ -15,6 +15,8 @@
     "test:e2e:knowledge": "node tests/knowledge.e2e.mjs",
     "test:e2e:wiki": "node tests/wiki.e2e.mjs",
     "test:e2e:files": "node tests/files.e2e.mjs",
+    "test:e2e:repositories": "node tests/repositories.e2e.mjs",
+    "test:e2e:repositories-review": "node tests/repositories-review.e2e.mjs",
     "lint": "eslint src tests/ui vite.config.ts vitest.config.ts"
   },
   "dependencies": {
