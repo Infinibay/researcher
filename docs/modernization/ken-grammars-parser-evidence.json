@@ -1,0 +1,5 @@
+{
+  "exit": 0,
+  "stdout": "{\"languages\": {\"python\": true, \"javascript\": true, \"typescript\": true, \"tsx\": true, \"go\": true, \"rust\": true, \"java\": true, \"c\": true, \"dart\": true}, \"network_namespace\": \"net:[4026533716]\"}\n",
+  "stderr": ""
+}

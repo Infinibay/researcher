@@ -1,0 +1,148 @@
+{
+  "base_commit": "a6855c4",
+  "started_at": "2026-11-08T03:58:40Z",
+  "verified_at": "2026-11-08T04:24:03Z",
+  "seconds_until_verification": 1523,
+  "status": "offline_grammar_loading_and_python_relationships_verified",
+  "source_selection": {
+    "cases": 92,
+    "passed": 92,
+    "failed": 0,
+    "skipped": 0,
+    "seconds": 41.2
+  },
+  "installed_selection": "docs/modernization/ken-grammars-packaging.json",
+  "source_red": {
+    "cache_boundary": {
+      "failed": 1,
+      "reason": "worker read /tmp/cache instead of prepared resources"
+    },
+    "format_guidance": {
+      "failed": 2,
+      "reason": "opaque upstream call rather than corrective rejection"
+    }
+  },
+  "prior_failed_selection": {
+    "cases": 92,
+    "passed": 78,
+    "failed": 14,
+    "cause": "New grammar identity was recorded in broker manifest but omitted from exact preparation consumer comparison; corrected broker_inference._prepared, then all92passed"
+  },
+  "provisioning": {
+    "archive_url": "https://github.com/xberg-io/tree-sitter-language-pack/releases/download/v1.22.1/parsers-linux-x86_64.tar.zst",
+    "archive_bytes": 23031807,
+    "archive_sha256": "4ad211e4a265be2106909ef9db4ccdc706e557436a446fbc10afbf23d668a2a5",
+    "grammar_version": "1.22.1",
+    "files": 372,
+    "unpacked_bytes": 521163488,
+    "trust": "Manifest generated only by explicit pinned-archive preparation inside the already trusted executable installation; managed sources cannot supply or mutate it",
+    "first_attempt": "Rejected genuine libtree_sitter_TSQL.so due to lowercase-only filename policy; destination not published, corrected safe basename validation and preserved failed CLI log"
+  },
+  "live": {
+    "generative_turns": 0,
+    "grammars": {
+      "cache": "/home/andres/.codex/worktrees/b09e/researcher/.superpowers/sdd/2026-10-31-actualizacion-proyecto/toolchains/uv-tools/ken-rank/share/researcher-ken-cache",
+      "version": "1.22.1",
+      "files": 372,
+      "bytes": 521163488,
+      "fingerprint": "eba2539144b0353bbdff609fd798e62d6d728ef8df78b1e71469046b88e74d2e"
+    },
+    "status": "verified",
+    "prepare_exit": 0,
+    "parser_exit": 0,
+    "parsers": {
+      "languages": {
+        "python": true,
+        "javascript": true,
+        "typescript": true,
+        "tsx": true,
+        "go": true,
+        "rust": true,
+        "java": true,
+        "c": true,
+        "dart": true
+      },
+      "network_namespace": "net:[4026533716]"
+    },
+    "analyses": [
+      {
+        "ok": true,
+        "qualname": "list_observations",
+        "file": "observations.py",
+        "language": "python",
+        "min_confidence": 0.0,
+        "callers": [
+          {
+            "from_qualname": "summarize",
+            "file": "observations.py",
+            "line": 7,
+            "confidence_tier": "T1"
+          },
+          {
+            "from_qualname": "test_order",
+            "file": "test_observations.py",
+            "line": 5,
+            "confidence_tier": "T1"
+          }
+        ]
+      },
+      {
+        "ok": true,
+        "qualname": "unrelated",
+        "file": "observations.py",
+        "language": "python",
+        "min_confidence": 0.0,
+        "callers": []
+      },
+      {
+        "ok": true,
+        "path": "observations.py",
+        "tests": [
+          {
+            "path": "test_observations.py",
+            "reason": "imports target; named for target",
+            "score": 4.0
+          }
+        ]
+      }
+    ],
+    "mcp_exit": -15,
+    "source_unchanged": true
+  },
+  "live_root": ".researcher/evaluations/ken-grammars-installed-20261108",
+  "wheel_sha256": "12249104983c76f5a5242ea10ba3f0fff95854a7e009a2bd0d1e562e17416b18",
+  "packaged_python_sql_files": 679,
+  "product_files": 362,
+  "packaging_scope": "All backend Python and declared db/*.sql package data match; backend/db/seeds/dev_data.sql is an optional checkout-only development seed, excluded by existing packaging policy",
+  "packaging_check_limit": "Initial broad comparison incorrectly included optional development seed; shell continued to installation despite that assertion. Correct scoped comparison and subsequent independent installed verification passed; no artifact files were missing from declared package inventory.",
+  "docstrings": "docs/modernization/ken-grammars-docstrings.json",
+  "lint": "docs/modernization/ken-grammars-lint.json",
+  "prompts": {
+    "files_scanned": 316,
+    "candidates": 85,
+    "reviewed_current": 20,
+    "stale": 65,
+    "unreviewed": 0,
+    "status": "not_green",
+    "next": "Revalidate static prompt reviews against changed sources/consumers at the final review gate; do not treat previous reviewed snapshot as current green",
+    "evidence": "docs/modernization/ken-grammars-prompt-freshness.json"
+  },
+  "generative_turns": 0,
+  "semantic_embeddings": "Actual offline Ken retrieval preparation uses public local weights; zero generative turns does not mean zero model loading",
+  "limits": [
+    "All372resources verified, nine grammar loaders exercised; this is not runtime correctness for372languages",
+    "Actual MCP Python callers positive and negative plus test discovery verified on two synthetic files; other scopes/languages remain scoped by existing evidence",
+    "Original accepted plan and failed projects untouched; no child execution or external publication",
+    "No new frontend/page acceptance or human comprehension acceptance",
+    "No new global suite or prompting efficacy claim",
+    "Additional published MCP broker profile probe verifies the same analyses and physical retirement with synthetic authority-format genesis; it is not host enrollment or the original AuthorityBusy reproduction"
+  ],
+  "broker_profile_probe": "docs/modernization/ken-grammars-broker-results.json",
+  "installed_cli": {
+    "cache": "/home/andres/.codex/worktrees/b09e/researcher/.superpowers/sdd/2026-10-31-actualizacion-proyecto/toolchains/uv-tools/ken-rank/share/researcher-ken-cache",
+    "version": "1.22.1",
+    "files": 372,
+    "bytes": 521163488,
+    "fingerprint": "eba2539144b0353bbdff609fd798e62d6d728ef8df78b1e71469046b88e74d2e"
+  }
+}

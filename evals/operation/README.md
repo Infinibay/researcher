@@ -254,3 +254,25 @@ Conserva instalación y fallos sin reintentar, no ejecuta hijas y comprueba fuen
 intacta. Las trazas privadas pueden contener contexto: no publicar el log completo.
 El recibo separa éxito MCP de éxito de análisis y cierre de servicio de cierre de
 actores. [Caso observado y limitaciones](../../docs/modernization/spanish-plan-ken-review.md).
+
+
+## Gramáticas Ken y análisis reales sin turnos generativos
+
+`ken_grammars.py` usa el producto instalado, no editable, y el Ken publicado. Requiere
+la preparación explícita de gramáticas del [host](../../docs/architecture/native-host-installation.md).
+Crea dos archivos sintéticos en una carpeta nueva, prepara recuperación offline,
+carga nueve gramáticas y consulta llamadores positivos/negativos y pruebas por MCP.
+Distingue `isError` de `ok` y conserva respuestas y fuentes. Usa embeddings locales,
+pero no credenciales ni generación de texto. No usar el directorio de un caso anterior.
+
+```bash
+/ruta/al/entorno/bin/python -I evals/operation/ken_grammars.py \
+  --ken-command /ruta/al/entorno-ken/bin/ken \
+  --model-cache /ruta/al/cache/hub \
+  --output /ruta/privada/caso-gramaticas-nuevo
+```
+
+El auxiliar usa `worker_process` aislado; no acredita por sí solo la inscripción de
+un host ni cierre de un broker arbitrario. El ensayo adicional con perfil real del
+broker se conserva por separado en el [recibo](../../docs/modernization/ken-grammars-broker-results.json).
+[Resultado conjunto y límites](../../docs/modernization/ken-grammars-review.md).

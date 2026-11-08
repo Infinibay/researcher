@@ -19,6 +19,7 @@ from backend.runtime.workspaces import PEER_WORKSPACE
 
 
 def _prepared(endpoint, operation_id):
+    """Require the exact closed preparation, including the admitted grammar identity, before opening a native thread."""
     broker = endpoint.owner.broker
     records = broker.journal.load().records
     operation = records.get("broker:op:" + operation_id, {})
@@ -29,6 +30,7 @@ def _prepared(endpoint, operation_id):
         "tool_root": str(installation.tool_root),
         "python_root": str(installation.python_root),
         "assets": json.loads(json.dumps(installation.assets)),
+        "grammar_fingerprint": installation.grammar_fingerprint,
     }
     if (
         records.get("broker:active") != broker.grant_id

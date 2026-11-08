@@ -26,3 +26,23 @@ Autorizado dentro de la modernización, sin nueva generación para verificarlo.
 7. Construir sdist→wheel limpio, instalar y ejecutar selección de consumidores;
    verificar inventario y docstrings. Actualizar matrices sin cerrar AuthorityBusy,
    Proyectos o comprensión humana por esta reparación. Detalles visuales al final.
+
+## Resultado verificado
+
+2026-11-08,03:58:40–04:24:03UTC,25min23s. Se reutiliza la instalación confiable
+de Ken, sin otro campo de configuración. Preparación explícita del archivo fijado,
+372gramáticas verificadas; caché de sólo lectura, huella en broker/preparación y
+preflight antes de nuevas admisiones. Error correctivo para tests+compact/evidence
+sin enviar ni reintentar llamadas.92casos fuente y92instalados pasan, sin skips.
+MCP publicado real encuentra llamadores positivos/negativos y pruebas, también bajo
+el perfil de broker/kernel de producción; cero turnos generativos.26definiciones
+con docstrings. No se tocó el Ken hermano ni se abrió red al peer.
+
+Conservados: rechazo inicial de TSQL por nombre en mayúsculas;14fallos al ampliar
+la suite que localizaron la comparación exacta del consumidor de preparación;
+comprobación inicial demasiado amplia del seed opcional. Corregidos con evidencia,
+sin ocultar los fallos. Estilo no verde, DD131.65revisiones estáticas de prompts
+requieren revalidación sobre el árbol final; no se revalidan por cambiar sólo hashes.
+Proyectos/contención/U08/C10/otras páginas continúan abiertos. No eficacia generativa
+nueva, aceptación humana, suite global, push ni despliegue.
+[Resultado y alcance](../../modernization/ken-grammars-review.md).

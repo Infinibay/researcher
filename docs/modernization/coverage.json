@@ -2864,17 +2864,20 @@
         "evals/profile_communication/README.md",
         "evals/profile_communication/cases.py",
         "evals/profile_communication/run.py",
-        "evals/profile_communication/test_protocol.py"
+        "evals/profile_communication/test_protocol.py",
+        "docs/modernization/ken-grammars-results.json"
       ],
-      "implemented": "Catalog3 unchanged;83 candidates/287 files with83 current static decisions after69 explicit revalidations and14 unchanged reviews.516 historical identities preserved. Seven actual profile hashes/sizes verified; evaluator version metadata corrected.45 directed source cases pass, including four initially skipped and then run with existing offline semantic assets. No new LLM evaluation or human acceptance.",
+      "implemented": "Historical static review snapshots retained. Current freshness check on316ownedfiles/85candidates:20current,65stale,0neverreviewed. Do not present old catalog/counts as current acceptance; explicit source/consumer revalidation remains required.",
       "remaining": [
+        "Revalidate65stale source-bound prompt reviews against the final current tree; do not renew hashes blindly. Review new corrective tool feedback separately from generative efficacy.",
         "Keep examples at the level of observed data: subgroup averages do not establish equal individual changes.",
         "Deliver useful results and explanations within explicit budgets; avoid secondary discovery consuming delivery margin and explain saved partial work honestly.",
         "Before/after efficacy and reserved comparisons for remaining profiles; historical investigation comparison is exploratory.",
         "Actual human comprehension and broader communication/context journeys."
       ],
       "context_comparison_observed": "7 paired cases:2 development/5 reserved;16 Codex subscription turns with actual published Ken, matching substantive inputs/model/catalog and exact delivered policies. Initial no-dispatch context-version failure and development receipt-identity amendment retained.19 directed tests pass; human measures unknown.",
-      "other_profile_observations": "4 paired synthetic cases/8 actual subscription+Ken turns;2pairs deliver both explanations. Current planning exceeds120000observedtokens after saving a proposal; current audit starts21tools with20allowed after saving a draft, no final delivery. All services/peers closed; all controls match after retained cutoff-alias amendment. Candidate weighted-mean report makes an unsupported per-batch claim. No causal superiority or human-comprehension claim."
+      "other_profile_observations": "4 paired synthetic cases/8 actual subscription+Ken turns;2pairs deliver both explanations. Current planning exceeds120000observedtokens after saving a proposal; current audit starts21tools with20allowed after saving a draft, no final delivery. All services/peers closed; all controls match after retained cutoff-alias amendment. Candidate weighted-mean report makes an unsupported per-batch claim. No causal superiority or human-comprehension claim.",
+      "historical_implementation_snapshot": "Catalog3 unchanged;83 candidates/287 files with83 current static decisions after69 explicit revalidations and14 unchanged reviews.516 historical identities preserved. Seven actual profile hashes/sizes verified; evaluator version metadata corrected.45 directed source cases pass, including four initially skipped and then run with existing offline semantic assets. No new LLM evaluation or human acceptance."
     },
     "context_evals": {
       "status": "in_progress",
@@ -6003,12 +6006,12 @@
             "frontend/tests/project-plan-actions.test.ts",
             "docs/modernization/spanish-plan-ken-review.md",
             "docs/modernization/spanish-plan-ken-results.json",
-            "docs/modernization/spanish-plan-ken-tools.json"
+            "docs/modernization/spanish-plan-ken-tools.json",
+            "docs/modernization/ken-grammars-review.md"
           ],
           "remaining": [
             "Native preparation AuthorityBusy/AuthorityConflict callers and cause need diagnosis",
-            "Finish complete page acceptance without hiding original failures",
-            "Spanish plan and Ken find/read verified in one explicit synthetic case; tests/callers analyses failed and need diagnosis"
+            "Finish complete page acceptance without hiding original failures"
           ]
         },
         "wiki": {
@@ -6102,19 +6105,40 @@
       ]
     },
     "actual_spanish_plan_and_ken": {
-      "status": "in_progress",
-      "scope": "One actual Spanish plan accepted without child execution; Ken implementation find/source read verified from actual responses. Tests search and callers analysis failed; no isolated prompting comparison or native reliability fix claimed.",
+      "status": "verified",
+      "scope": "One explicit synthetic Spanish subscription plan accepted with exact hash and no child execution; actual Ken find/read responses verified. Follow-up installed offline grammar repair verifies Python callers positive/negative and test discovery directly and under broker kernel profile without another generative turn. No isolated prompting comparison or original AuthorityBusy fix.",
       "evidence": [
         "docs/modernization/spanish-plan-ken-review.md",
         "docs/modernization/spanish-plan-ken-results.json",
         "docs/modernization/spanish-plan-proposal.json",
         "docs/modernization/spanish-plan-ken-tools.json",
         "docs/modernization/ken-capability-diagnosis.md",
-        "docs/modernization/ken-capability-diagnosis-results.json"
+        "docs/modernization/ken-capability-diagnosis-results.json",
+        "docs/modernization/ken-grammars-review.md",
+        "docs/modernization/ken-grammars-results.json",
+        "docs/modernization/ken-grammars-broker-results.json"
       ],
-      "remaining": [
-        "Causes diagnosed: tests compact format invalid; valid default format verified. Structural Python grammar not provisioned in offline worker. Implement verified grammar provisioning/mount and regression before declaring repaired.",
-        "Human communication evaluation with purpose and input/output framing remains open"
+      "remaining": [],
+      "limits": [
+        "Explicit Spanish project description; not prompting efficacy proof",
+        "Original contention, general product scenario coverage and human U08 acceptance remain separate open gates",
+        "372resource hashes and nine loader checks do not prove372language analyses"
+      ]
+    },
+    "ken_offline_grammar_capability": {
+      "status": "verified",
+      "scope": "Pinned public372grammar archive prepared explicitly in trusted Ken tool root; manifest bytes/identity checked before admission and launch, readonly offline loader; same grammar identity required by native preparation. Corrective invalid-format feedback, no auto retry. Actual installed Python caller positive/negative and test discovery pass under worker and broker kernel profile, zero generative turns.",
+      "evidence": [
+        "docs/modernization/ken-grammars-review.md",
+        "docs/modernization/ken-grammars-results.json",
+        "docs/modernization/ken-grammars-packaging.json",
+        "docs/modernization/ken-grammars-broker-results.json",
+        "docs/modernization/ken-grammars-docstrings.json"
+      ],
+      "remaining": [],
+      "limits": [
+        "Synthetic authority-format genesis for broker probe; not host enrollment or original contention reproduction",
+        "Other language/scenario completeness and prompting efficacy not established by this case"
       ]
     }
   }

@@ -1,0 +1,41 @@
+{
+  "validation_environment": {
+    "runner_cgroup": "/sys/fs/cgroup/user.slice/user-1000.slice/user@1000.service/app.slice/run-p1375827-i1375828.scope",
+    "parent_controllers_before": "cpu memory pids",
+    "runner_cpu_max": "800000 100000",
+    "purpose": "Transient systemd scope with CPUQuota=800% retains CPU-controller availability during validation; it does not relax any product limit.",
+    "parent_controllers_after": "cpu memory pids"
+  },
+  "base_commit": "a6855c4",
+  "wheel": "researcher-0.1.0-cp312-cp312-linux_x86_64.whl",
+  "wheel_sha256": "12249104983c76f5a5242ea10ba3f0fff95854a7e009a2bd0d1e562e17416b18",
+  "source_files_matching_wheel_and_installation": 679,
+  "product_files_matching": 362,
+  "observed": {
+    "cases": 92,
+    "passed": 92,
+    "failed": 0,
+    "skipped": 0,
+    "backend_modules": 238,
+    "all_backend_imports_from_native_env": true,
+    "seconds": 42.003,
+    "exit_code": 0
+  },
+  "tests": [
+    "backend/tests/runtime/test_ken_grammars.py",
+    "backend/tests/runtime/test_ken_worker.py",
+    "backend/tests/runtime/test_broker_ken.py",
+    "backend/tests/runtime/test_ken_mediation.py",
+    "backend/tests/runtime/test_host_installation.py",
+    "backend/tests/cli/test_bootstrap.py",
+    "backend/tests/api/test_bootstrap_startup.py",
+    "backend/tests/runtime/test_broker_mcp.py",
+    "backend/tests/runtime/test_broker_inference.py"
+  ],
+  "real_model_turns": 0,
+  "limits": [
+    "Selected installed tests, not the global suite",
+    "Current installed grammar preparation/preflight/readonly cache, broker MCP/native preparation and bootstrap selection; published parser/MCP probe recorded separately",
+    "Actual kernel/SQLite broker ownership with inert synthetic grammar fixtures; no claim that those fixture bytes parse code. Published grammar and MCP checks separate; no paid inference or human comprehension"
+  ]
+}

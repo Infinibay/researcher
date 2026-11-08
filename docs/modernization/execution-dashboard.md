@@ -28,7 +28,35 @@ que se pueda comparar el avance; no presentar microajustes como tareas principal
 - Última suite global: `9fb873c`,2210 casos,2178 pasan,31 fallan y1 error de fixture; sin omisiones. La carrera de backup encontrada se corrigió después con40 pruebas instaladas. No se declara una nueva corrida global verde; la referencia `0c8b8d9` queda como evidencia histórica.
 - U01–U07, E01–E12, C01–C09 y D01–D13 quedan comprobados con el alcance de sus matrices; siguen 2 de 43 escenarios amplios sin aceptación completa en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Estado actual: causas Ken identificadas; provisión offline pendiente
+## Estado actual: Ken estructural offline verificado; continúa aceptación de páginas
+
+**03:58:40–04:24:03 UTC,25min23s hasta verificar**, base `a6855c4`.
+Documentación/checkpoint posteriores excluidos. [Evidencia y límites](ken-grammars-review.md).
+
+- Terminado: preparación explícita de372gramáticas, verificación/huella antes de
+  admisión y lanzamiento, caché de sólo lectura sin red adicional. Error útil de
+  tests+compact/evidence sin envío ni reintento. **92casos fuente y92instalados**
+  pasan, sin skips;26definiciones documentadas. Ken publicado encuentra llamadores
+  positivos/negativos y pruebas, también bajo el broker real: dos operaciones
+  cerradas, grant retirado, dominio eliminado;0inicios/despachos nativos.
+- Siguiente principal: **aceptación completa de Planificación**, reutilizando el
+  concepto ya elegido y fuentes sintéticas, sin otra generación para crear planes.
+  Implementación de ese nuevo bloque todavía no iniciada. Proyectos sigue abierto
+  por la contención AuthorityBusy original, sin reproducir/corregir.
+- Interfaz: **3/12 páginas** aceptadas (Documentos, Archivos, Repositorios),
+  **41/43 escenarios**. Faltan Resumen, Proyectos, Planificación, Tareas, Agentes,
+  Conversación, Hallazgos, Informes y Ejecución; U08/C10, evaluaciones,
+  dependencias/distribución. No hay historial del usuario que migrar.
+- Comunicación: evaluar objetivo, datos, relaciones y entradas/salidas con un
+  ejemplo útil, según la respuesta del usuario; U08 no aceptado. El resultado
+  español/Ken queda comprobado con su alcance, no como comprensión humana.
+- Gates al cierre: revalidar **65revisiones estáticas de prompts desactualizadas de85**
+  sobre el árbol final (20vigentes,0sin revisión previa), suite global y revisión
+  independiente; accesibilidad completa. No renovar huellas a ciegas.
+- Detalles al final: DD131 (Ruff no verde) y anteriores. No hay porcentaje o ETA
+  global defendible. No push, merge o despliegue.
+
+## Etapa anterior: causas Ken identificadas; provisión offline pendiente
 
 **03:18:47–03:51:45 UTC, 32 min 58 s hasta verificar**, base `3d8b33a`.
 Documentación/checkpoint posteriores excluidos. [Evidencia y límites](spanish-plan-ken-review.md).

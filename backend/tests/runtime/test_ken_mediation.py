@@ -39,6 +39,32 @@ class Peer:
         )
 
 
+@pytest.mark.parametrize("response_format", ["compact", "evidence"])
+async def test_invalid_test_search_format_explains_a_valid_call_without_sending_or_retrying(response_format):
+    """The observed planner mistake receives actionable argument feedback before an opaque upstream error, without an automatic replacement call."""
+    from backend.runtime.ken_mediation import KenTools
+
+    peer = Peer()
+    peer.tools[0].inputSchema = {
+        "type": "object", "properties": {
+            "scope": {"type": "string"}, "query": {"type": "string"},
+            "response_format": {"type": "string"},
+        }, "required": ["query", "scope"], "additionalProperties": False,
+    }
+    tools = await KenTools.connect(peer)
+    bad = await tools.call({"tool": "ken_find", "arguments": {
+        "scope": "tests", "query": "observations.py", "response_format": response_format,
+    }})
+    assert bad["success"] is False
+    assert "omit response_format" in bad["contentItems"][0]["text"]
+    assert not peer.calls
+    good = await tools.call({"tool": "ken_find", "arguments": {
+        "scope": "tests", "query": "observations.py",
+    }})
+    assert good["success"] is True
+    assert peer.calls == [("ken_find", {"scope": "tests", "query": "observations.py"})]
+
+
 async def test_required_ken_catalog_filters_extra_tools_and_uses_shared_result_boundary():
     from backend.runtime.ken_mediation import KenTools
 

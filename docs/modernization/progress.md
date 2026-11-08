@@ -8867,3 +8867,32 @@ Siguiente capacidad: recursos de gramáticas fijados, preflight y montaje de só
 lectura con análisis real sin red. Reparación todavía pendiente; no tocar Ken
 hermano ni abrir red al peer. Siguen3/12páginas,41/43escenarios, contención/U08/C10,
 otras páginas/evaluaciones/distribución; detalles y revisión final al final.
+
+
+## Ken estructural offline reparado y verificado, 2026-11-08
+
+03:58:40–04:24:03UTC, **25min23s hasta verificar**, base `a6855c4`;
+documentación/checkpoint posteriores excluidos. Preparación explícita del archivo
+público fijado,372gramáticas521163488bytes dentro de la instalación confiable.
+Sin ruta nueva en recursos del host ni red al peer. Versiones/bytes/manifiesto
+verificados antes de admisión, huella revalidada en lanzamiento y preparación
+nativa exacta. Error correctivo de formato Ken sin envío ni reintento automático.
+
+RED→GREEN del caché y de dos combinaciones de formato.92casos fuente y los mismos92
+instalados pasan sin skips;679Python/SQL empaquetados coinciden,362productivos,
+pip check pasa;26definiciones documentadas. Ken publicado real: nueve loaders,
+llamadores positivos/negativos y pruebas; además pasa bajo perfil broker/seccomp/
+cgroup2GiB. Ambos peers/operaciones cerrados, grant retirado, dominio eliminado,
+0OOM, pico1393745920bytes. Contexto sintético cancelado/retirado por APIs tras cerrar
+placeholders nunca liberados;0despachos/inicios nativos. No se tocó el intento original.
+
+Conservados: nombre TSQL inicialmente rechazado;14fallos del consumidor exacto de
+preparación corregidos sin relajar el fence; comparación demasiado amplia del seed
+opcional antes de instalación, corregida y verificada independientemente. Ruff11
+avisos DD131/heredados, no verde.85revisiones de prompts tienen65huellas desactualizadas:
+gate estático pendiente al árbol final, no65fallos semánticos demostrados.
+
+**3/12páginas,41/43escenarios**, U08/C10 y contención siguen abiertos. Siguiente
+Planificación completa, aún sin iniciar; otras páginas/evaluaciones/distribución
+siguen. Detalles secundarios al final junto a gates globales y revisión independiente.
+[Recibo y límites](ken-grammars-review.md).

@@ -1,0 +1,64 @@
+[
+  {
+    "jsonrpc": "2.0",
+    "id": 1,
+    "result": {
+      "capabilities": {
+        "prompts": {
+          "listChanged": false
+        },
+        "resources": {
+          "listChanged": false,
+          "subscribe": false
+        },
+        "tools": {
+          "listChanged": false
+        }
+      },
+      "protocolVersion": "2024-11-05",
+      "serverInfo": {
+        "name": "ken",
+        "version": ""
+      }
+    }
+  },
+  {
+    "jsonrpc": "2.0",
+    "id": 2,
+    "result": {
+      "content": [
+        {
+          "text": "{\n  \"ok\": true,\n  \"qualname\": \"list_observations\",\n  \"file\": \"observations.py\",\n  \"language\": \"python\",\n  \"min_confidence\": 0.0,\n  \"callers\": [\n    {\n      \"from_qualname\": \"summarize\",\n      \"file\": \"observations.py\",\n      \"line\": 7,\n      \"confidence_tier\": \"T1\"\n    },\n    {\n      \"from_qualname\": \"test_order\",\n      \"file\": \"test_observations.py\",\n      \"line\": 5,\n      \"confidence_tier\": \"T1\"\n    }\n  ]\n}",
+          "type": "text"
+        }
+      ],
+      "isError": false
+    }
+  },
+  {
+    "jsonrpc": "2.0",
+    "id": 3,
+    "result": {
+      "content": [
+        {
+          "text": "{\n  \"ok\": true,\n  \"qualname\": \"unrelated\",\n  \"file\": \"observations.py\",\n  \"language\": \"python\",\n  \"min_confidence\": 0.0,\n  \"callers\": []\n}",
+          "type": "text"
+        }
+      ],
+      "isError": false
+    }
+  },
+  {
+    "jsonrpc": "2.0",
+    "id": 4,
+    "result": {
+      "content": [
+        {
+          "text": "{\n  \"ok\": true,\n  \"path\": \"observations.py\",\n  \"tests\": [\n    {\n      \"path\": \"test_observations.py\",\n      \"reason\": \"imports target; named for target\",\n      \"score\": 4.0\n    }\n  ]\n}",
+          "type": "text"
+        }
+      ],
+      "isError": false
+    }
+  }
+]

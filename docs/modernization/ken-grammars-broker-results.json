@@ -1,0 +1,89 @@
+{
+  "published_version": "0.18.0",
+  "generative_model_turns": 0,
+  "image_calls": 0,
+  "models_bytes": 533070470,
+  "memory_limit_bytes": 2147483648,
+  "prepare_exit": 0,
+  "prepare_stderr_sha256": "3d168ae806d52b2c77e2b5c468fdfc223345ff3612b4f10286e8f53801d6ff49",
+  "prepare_stdout_sha256": "d972df8e04390f0b05a4a5e12558f73c7ef0100d80627272d3ce2b1ba2896341",
+  "prepare_memory_peak": 1393745920,
+  "prepare_memory_events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0\n",
+  "required_catalog_present": true,
+  "analyses": [
+    {
+      "ok": true,
+      "qualname": "invoice_total",
+      "file": "invoice.py",
+      "language": "python",
+      "min_confidence": 0.0,
+      "callers": [
+        {
+          "from_qualname": "summarize",
+          "file": "invoice.py",
+          "line": 6,
+          "confidence_tier": "T1"
+        },
+        {
+          "from_qualname": "test_invoice",
+          "file": "test_invoice.py",
+          "line": 4,
+          "confidence_tier": "T1"
+        }
+      ]
+    },
+    {
+      "ok": true,
+      "qualname": "unrelated",
+      "file": "invoice.py",
+      "language": "python",
+      "min_confidence": 0.0,
+      "callers": []
+    },
+    {
+      "ok": true,
+      "path": "invoice.py",
+      "tests": [
+        {
+          "path": "test_invoice.py",
+          "reason": "imports target; named for target",
+          "score": 4.0
+        }
+      ]
+    }
+  ],
+  "memory_peak_bytes": 1393745920,
+  "memory_events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0\n",
+  "stable_root": "/run/researcher-source",
+  "both_ken_peers_closed": true,
+  "manifest_profile": "readonly-published-ken-v1",
+  "status": "passed",
+  "domain_retired": true,
+  "source_unchanged": true,
+  "original_diagnostic_context_cleanup": {
+    "initial_prepared_peers": [
+      {
+        "kind": "business",
+        "state": "prepared",
+        "init_pid": null
+      },
+      {
+        "kind": "native",
+        "state": "prepared",
+        "init_pid": null
+      }
+    ],
+    "method": "After independently verifying original operations closed and domain removed, registry.close marks never-released peers; original run cancelled and retired through store APIs, without executing native/business actors",
+    "terminal_status": "cancelled",
+    "unclosed_peers": 0,
+    "native_starts": 0,
+    "inference_dispatches": 0,
+    "grants_retired": 1,
+    "closed_operations": 2,
+    "authority_active": null
+  },
+  "scope": "Published Ken in the actual production broker kernel/seccomp/cgroup profile, using synthetic authority-format genesis and synthetic DB. Not host enrollment or a native generative turn.",
+  "grammar_identity_in_both_original_manifests": "eba2539144b0353bbdff609fd798e62d6d728ef8df78b1e71469046b88e74d2e",
+  "new_helper_hash_in_both_manifests_verified": true,
+  "retained_root": ".researcher/evaluations/ken-grammars-broker-20261108"
+}

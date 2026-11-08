@@ -10,18 +10,25 @@ from contextlib import ExitStack, contextmanager
 from dataclasses import dataclass
 from pathlib import Path
 
+from backend.runtime.ken_grammars import VERSION as GRAMMAR_VERSION
+from backend.runtime.ken_grammars import cache_directory, verify_grammars
+
 KEN_VERSION = "0.18.0"
 
 
 @dataclass(frozen=True)
 class KenInstallation:
+    """A verified published tool installation whose parser resources share its trusted boundary."""
+
     executable: Path
     tool_root: Path
     python_root: Path
     assets: tuple[dict, ...] = ()
+    grammar_fingerprint: str | None = None
 
     @classmethod
-    def inspect(cls, executable: Path):
+    def inspect(cls, executable: Path, *, require_grammars=True):
+        """Verify the trusted published tool and offline grammars; only explicit preparation may omit the cache check."""
         executable = executable.resolve(strict=True)
         tool = executable.parent.parent
         python = tool / "bin/python"
@@ -40,7 +47,7 @@ for name in ("potion-code-16M-v2.json","code-context-int8.json","ettin-68m-fp32.
         from ken.model_assets import ModelAssets
         value=json.loads(manifest.read_text())
         models.append(ModelAssets.from_dict(value.get("source",value)).to_dict())
-print(json.dumps({"version":d.version,"prefix":sys.prefix,"base_prefix":sys.base_prefix,"package":str(Path(ken.__file__).resolve()),"direct_url":d.read_text("direct_url.json"),"models":models}))
+print(json.dumps({"version":d.version,"grammar_version":m.version("tree-sitter-language-pack"),"prefix":sys.prefix,"base_prefix":sys.base_prefix,"package":str(Path(ken.__file__).resolve()),"direct_url":d.read_text("direct_url.json"),"models":models}))
 """
         try:
             result = subprocess.run(
@@ -56,6 +63,7 @@ print(json.dumps({"version":d.version,"prefix":sys.prefix,"base_prefix":sys.base
             direct = json.loads(info["direct_url"] or "{}")
             if (
                 info["version"] != KEN_VERSION
+                or info["grammar_version"] != GRAMMAR_VERSION
                 or Path(info["prefix"]).resolve() != tool
                 or not Path(info["package"]).is_relative_to(tool)
                 or direct.get("dir_info", {}).get("editable")
@@ -76,7 +84,8 @@ print(json.dumps({"version":d.version,"prefix":sys.prefix,"base_prefix":sys.base
                 raise ValueError("Unexpected Ken interpreter installation")
             if base in {Path("/"), Path.home()} or tool in {Path("/"), Path.home()}:
                 raise ValueError("Ken tool roots must not expose host root or home")
-            return cls(executable, tool, alias, tuple(info["models"]))
+            grammar = verify_grammars(tool) if require_grammars else None
+            return cls(executable, tool, alias, tuple(info["models"]), grammar["fingerprint"] if grammar else None)
         except (subprocess.SubprocessError, json.JSONDecodeError, KeyError) as exc:
             raise ValueError("Could not verify isolated ken-rank==0.18.0") from exc
 
@@ -125,6 +134,9 @@ def worker_process(
     for tool in (installation.tool_root, installation.python_root):
         if tool.is_relative_to(root):
             raise ValueError("Workspace cannot contain the trusted tool installation")
+    grammar = verify_grammars(installation.tool_root)
+    if grammar["fingerprint"] != installation.grammar_fingerprint:
+        raise ValueError("Ken grammar preparation changed after installation inspection")
     bubblewrap = shutil.which("bwrap")
     if not bubblewrap:
         raise ValueError("Isolated Ken requires bubblewrap; no unsandboxed fallback")
@@ -221,7 +233,7 @@ def worker_process(
             "/tmp/home",
             "--setenv",
             "XDG_CACHE_HOME",
-            "/tmp/cache",
+            str(cache_directory(installation.tool_root)),
             "--setenv",
             "LANG",
             "C.UTF-8",

@@ -756,6 +756,7 @@ class PeerBroker:
                         "tool_root": str(ken.tool_root),
                         "python_root": str(ken.python_root),
                         "assets": ken.assets,
+                        "grammar_fingerprint": ken.grammar_fingerprint,
                     },
                     "model_cache": str(model_cache)
                     if model_cache is not None
@@ -766,6 +767,7 @@ class PeerBroker:
                         ).hexdigest()
                         for name in (
                             "ken_worker.py",
+                            "ken_grammars.py",
                             "broker_profile.py",
                             "peer_payload.py",
                         )

@@ -1093,3 +1093,13 @@ Dos I001 en `evals/operation/plan_language.py`, líneas18 y65. Resolver junto co
 los detalles después de las capacidades mayores; no repetir un turno de suscripción
 por formato. El ensayo funcional y la comprobación sintáctica pasan; estilo no verde.
 Los fallos Ken de pruebas/llamadores son una capacidad pendiente separada, no estilo.
+
+
+## DD131 — estilo de preparación y evaluación de gramáticas
+
+La selección modificada de este bloque conserva11avisos Ruff: seis I001, S110/BLE001
+del sumidero ya registrado en DD129, RET501 de fixture, F401 en el test nuevo y SIM117
+en el evaluador. [Lista exacta](ken-grammars-lint.json). Resolver tras las capacidades
+mayores, sin repetir un turno generativo por formato. Los92casos y los probes reales
+pasan, pero no se declara estilo verde. La vigencia pendiente de65revisiones de
+prompts es un gate funcional/documental separado, no un detalle Ruff.

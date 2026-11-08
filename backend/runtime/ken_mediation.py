@@ -44,8 +44,11 @@ def _validator(schema):
 
 
 class KenTools(McpTools):
+    """Expose the required Ken catalog with schema checks and correction guidance for known pinned-version constraints."""
+
     @classmethod
     async def connect(cls, peer, *, active=lambda: True):
+        """Snapshot all five required capabilities and their locally resolvable argument schemas before native admission."""
         catalog, seen, cursors = {}, set(), set()
         cursor = None
         for _ in range(8):
@@ -106,6 +109,7 @@ class KenTools(McpTools):
         return tools
 
     async def call(self, params):
+        """Reject invalid envelopes and known format combinations without changing arguments or replaying a tool call."""
         if (
             not isinstance(params, dict)
             or not isinstance(params.get("tool"), str)
@@ -121,4 +125,14 @@ class KenTools(McpTools):
             self._validators[params["tool"]].validate(params.get("arguments"))
         except (ValidationError, Unresolvable, RecursionError, ValueError, TypeError):
             return _failure("Ken arguments do not match the admitted schema")
+        arguments = params["arguments"]
+        if (params["tool"] == "ken_find"
+                and arguments.get("response_format") in ("compact", "evidence")
+                and arguments.get("scope", "symbols") not in ("files", "symbols")):
+            return _failure(
+                "Ken compact/evidence response_format requires scope files or symbols. "
+                "For tests, omit response_format or use auto. For structured result fields, "
+                "use output_format=json and check analysis ok separately from transport success. "
+                "No call was sent or automatically retried."
+            )
         return await super().call(params)

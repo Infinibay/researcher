@@ -1,5 +1,13 @@
 # Inventario y revisión de prompts
 
+Comprobación de vigencia del8noviembre2026, base `a6855c4` más la reparación Ken:
+316archivos,85candidatos,20revisiones vigentes y65desactualizadas;0sin revisión
+previa. El inventario/revisiones comprometidos debajo conservan su corte histórico,
+no un gate verde del árbol actual. Revalidar textos y consumidores cambiados al
+cierre, sin renovar huellas automáticamente. No confundir desactualización con
+un fallo semántico demostrado ni revisión estática con eficacia de prompting.
+[Recibo actual y límites](../modernization/ken-grammars-results.json).
+
 Corte posterior del 7 de noviembre de 2026 sobre `ab36dc5`: catálogo nativo
 **versión 4**, **83 candidatos en 287 archivos**, con **83 decisiones estáticas
 vigentes**. Se revisó el cambio en16 decisiones y se conservaron67 sin cambios;

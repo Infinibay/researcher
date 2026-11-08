@@ -14,6 +14,8 @@ todas las rutas por las de esta instalación:
 - Instalación aislada del paquete publicado `ken-rank==0.18.0`, con su comando
   `ken`, y caché de los modelos fijados por ese paquete. La preparación verifica
   tamaño y SHA-256 de cada artefacto; no descarga pesos durante el arranque.
+  Fijar también `tree-sitter-language-pack==1.22.1` y preparar sus gramáticas
+  públicas en esa instalación antes de `init-host`/`check-host`.
 - Archivo de cuenta de la suscripción de Codex, privado y administrado por el
   usuario. Se conserva su ubicación; los tokens no se copian a la configuración.
 - Linux con cgroup v2 delegado al usuario del servicio, controladores `cpu`,
@@ -58,6 +60,25 @@ arranque: conservarlo e inspeccionar la recuperación, sin borrar controles para
 forzar la continuación. [Pruebas y alcance](../modernization/service-resources-review.md).
 
 ## Inicialización y comprobación
+
+Preparar una vez las gramáticas fuera de los procesos de análisis. Descargar el
+[archivo Linux x86_64 v1.22.1](https://github.com/xberg-io/tree-sitter-language-pack/releases/download/v1.22.1/parsers-linux-x86_64.tar.zst)
+en una ruta nueva y ejecutar:
+
+```sh
+researcher-bootstrap prepare-ken-grammars \
+  --ken-command /ruta/al/entorno-ken/bin/ken \
+  --archive /ruta/a/parsers-linux-x86_64.tar.zst
+```
+
+El comando verifica tamaño y SHA-256 fijados antes de extraer, requiere `zstd`,
+y escribe sólo el caché público dentro de la instalación confiable de herramientas.
+Son372bibliotecas, aproximadamente521MB, distintas de los modelos de embeddings.
+Una preparación válida se puede comprobar de nuevo; un destino inválido no se
+reemplaza. La aplicación verifica archivos y huella antes de admitir trabajo;
+el worker los lee mediante su montaje de sólo lectura, sin descargar ni obtener
+red adicional. El archivo de recursos del host conserva sus campos existentes.
+[Evidencia de preparación y análisis reales](../modernization/ken-grammars-review.md).
 
 Los directorios padre deben existir. Los dos destinos deben ser nuevos y
 separados; el testigo de autoridad queda fuera del directorio de instalación.

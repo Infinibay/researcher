@@ -145,6 +145,9 @@ def broker_setup(service_setup, tmp_path):
 
 @pytest.fixture
 def ken_installation(tmp_path):
+    """Create a synthetic trusted Ken installation with inert, hash-verified grammar resources for boundary tests."""
+    import hashlib
+    import json
     import sys
     import venv
 
@@ -157,6 +160,19 @@ def ken_installation(tmp_path):
     (metadata / "METADATA").write_text(
         "Metadata-Version: 2.1\nName: ken-rank\nVersion: 0.18.0\n"
     )
+    grammar_metadata = packages / 'tree_sitter_language_pack-1.22.1.dist-info'
+    grammar_metadata.mkdir()
+    (grammar_metadata / 'METADATA').write_text('Metadata-Version: 2.1\nName: tree-sitter-language-pack\nVersion: 1.22.1\n')
+    from backend.runtime.ken_grammars import ARCHIVE_SHA256, VERSION, cache_directory
+
+    cache = cache_directory(tool)
+    libs = cache / f'tree-sitter-language-pack/v{VERSION}/libs'
+    libs.mkdir(parents=True)
+    content = b'INERT_SYNTHETIC_GRAMMAR_NOT_A_PARSER'
+    (libs / 'libtree_sitter_python.so').write_bytes(content)
+    (cache / 'manifest.json').write_text(json.dumps({'format': 1, 'version': VERSION,
+        'archive_sha256': ARCHIVE_SHA256, 'files': {'libtree_sitter_python.so': {
+            'bytes': len(content), 'sha256': hashlib.sha256(content).hexdigest()}}}))
     package = packages / "ken"
     package.mkdir()
     (package / "__init__.py").write_text("")

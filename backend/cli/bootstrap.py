@@ -28,6 +28,9 @@ def main(argv=None, *, _in_worker=False):
     retrieval.add_argument("--directory", required=True)
     retrieval.add_argument("--cache-dir", required=True)
     retrieval.add_argument("--offline", action="store_true")
+    grammars = commands.add_parser('prepare-ken-grammars', help='Prepare pinned public parsers in the trusted Ken tool installation, without inference')
+    grammars.add_argument('--ken-command', required=True)
+    grammars.add_argument('--archive', required=True, help='Previously downloaded pinned Linux x86_64 grammar archive')
     host = commands.add_parser('init-host', help='Prepare a NEW native installation using explicit existing host assets')
     host.add_argument('--directory', required=True)
     host.add_argument('--witness-dir', required=True)
@@ -104,6 +107,14 @@ def main(argv=None, *, _in_worker=False):
             from backend.runtime.host_installation import inspect_host
 
             result = inspect_host(options.directory, probe=options.probe)
+        elif options.command == 'prepare-ken-grammars':
+            from pathlib import Path
+
+            from backend.runtime.ken_grammars import prepare_grammars
+            from backend.runtime.ken_worker import KenInstallation
+
+            installation = KenInstallation.inspect(Path(options.ken_command), require_grammars=False)
+            result = prepare_grammars(installation.tool_root, options.archive)
         elif options.command == "prepare-retrieval":
             from backend.research.retrieval_assets import prepare
 

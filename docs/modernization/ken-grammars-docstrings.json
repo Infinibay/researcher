@@ -1,0 +1,242 @@
+{
+  "base_commit": "a6855c4",
+  "definitions_documented": 26,
+  "missing": [],
+  "contracts": [
+    {
+      "path": "backend/runtime/ken_grammars.py",
+      "symbol": "cache_directory",
+      "line": 27,
+      "docstring": "Locate public parser resources inside the already trusted, read-only tool installation.",
+      "file_sha256": "8b4f4a1735be1cd7b378e3491e11bb627c658d54953b21dc075f43ea433c23be"
+    },
+    {
+      "path": "backend/runtime/ken_grammars.py",
+      "symbol": "verify_grammars",
+      "line": 32,
+      "docstring": "Verify bounded regular files against the installation manifest without importing a loader or accessing a network.",
+      "file_sha256": "8b4f4a1735be1cd7b378e3491e11bb627c658d54953b21dc075f43ea433c23be"
+    },
+    {
+      "path": "backend/runtime/ken_grammars.py",
+      "symbol": "_verify_cache",
+      "line": 37,
+      "docstring": "Validate the complete declared cache before exposing it as a prepared installation.",
+      "file_sha256": "8b4f4a1735be1cd7b378e3491e11bb627c658d54953b21dc075f43ea433c23be"
+    },
+    {
+      "path": "backend/runtime/ken_grammars.py",
+      "symbol": "prepare_grammars",
+      "line": 86,
+      "docstring": "Unpack one exact public Linux x86_64 archive into a new trusted cache, preserving every existing invalid path.",
+      "file_sha256": "8b4f4a1735be1cd7b378e3491e11bb627c658d54953b21dc075f43ea433c23be"
+    },
+    {
+      "path": "backend/runtime/ken_worker.py",
+      "symbol": "KenInstallation",
+      "line": 20,
+      "docstring": "A verified published tool installation whose parser resources share its trusted boundary.",
+      "file_sha256": "3601efb1a8d7b009db506746a157a46bdb4df2c138a62a3ee6977b3e37cd863c"
+    },
+    {
+      "path": "backend/runtime/ken_worker.py",
+      "symbol": "KenInstallation.inspect",
+      "line": 30,
+      "docstring": "Verify the trusted published tool and offline grammars; only explicit preparation may omit the cache check.",
+      "file_sha256": "3601efb1a8d7b009db506746a157a46bdb4df2c138a62a3ee6977b3e37cd863c"
+    },
+    {
+      "path": "backend/runtime/ken_worker.py",
+      "symbol": "worker_process",
+      "line": 101,
+      "docstring": "Pin source/state directories before mounting; only .ken is writable.\n\nInput environment is intentionally ignored, including HOME, proxy/provider\nsettings and grant credentials. The returned FDs must remain owned until\nchild creation, then be closed by this context. Never reuse another run's\nlaunch or descriptors. This requires Linux bubblewrap with bind-fd support.",
+      "file_sha256": "3601efb1a8d7b009db506746a157a46bdb4df2c138a62a3ee6977b3e37cd863c"
+    },
+    {
+      "path": "backend/runtime/ken_mediation.py",
+      "symbol": "KenTools",
+      "line": 46,
+      "docstring": "Expose the required Ken catalog with schema checks and correction guidance for known pinned-version constraints.",
+      "file_sha256": "7521def04d637cdcc053d6b38073e232340c3a477ffd2908bcfabb8b64bee45d"
+    },
+    {
+      "path": "backend/runtime/ken_mediation.py",
+      "symbol": "KenTools.connect",
+      "line": 50,
+      "docstring": "Snapshot all five required capabilities and their locally resolvable argument schemas before native admission.",
+      "file_sha256": "7521def04d637cdcc053d6b38073e232340c3a477ffd2908bcfabb8b64bee45d"
+    },
+    {
+      "path": "backend/runtime/ken_mediation.py",
+      "symbol": "KenTools.call",
+      "line": 111,
+      "docstring": "Reject invalid envelopes and known format combinations without changing arguments or replaying a tool call.",
+      "file_sha256": "7521def04d637cdcc053d6b38073e232340c3a477ffd2908bcfabb8b64bee45d"
+    },
+    {
+      "path": "backend/runtime/broker_inference.py",
+      "symbol": "_prepared",
+      "line": 21,
+      "docstring": "Require the exact closed preparation, including the admitted grammar identity, before opening a native thread.",
+      "file_sha256": "eeb89823d77339ca2c1ebb4d056989126aedcd9e7abda18ba364600dd65bd4a4"
+    },
+    {
+      "path": "backend/runtime/peer_broker.py",
+      "symbol": "PeerBroker",
+      "line": 137,
+      "docstring": "One externally supplied, non-reused domain for one original attempt.\n\n``run_peer`` owns reserve\u2192spawn\u2192global publication\u2192concrete local bind\u2192G.\nCallers receive a transport only after G and can only recover a receipt on\nretry. ``revoke`` withdraws G before waiting for SQL/constructors. Global\nrecovery needs only the journal/domain, never the original project DB.\nComplete actor-origin and endpoint authentication remain deployment work.",
+      "file_sha256": "10e3215f0c3053132ca5e097209e500f92617f0b5bd370175784474b01fef676"
+    },
+    {
+      "path": "backend/runtime/peer_broker.py",
+      "symbol": "PeerBroker._run",
+      "line": 482,
+      "docstring": "Witness launch intent before its original gate; retain safe startup locations after physical closure even when withdrawal replaces the outward error.",
+      "file_sha256": "10e3215f0c3053132ca5e097209e500f92617f0b5bd370175784474b01fef676"
+    },
+    {
+      "path": "backend/cli/bootstrap.py",
+      "symbol": "main",
+      "line": 9,
+      "docstring": "Run one explicit local administration action; help never reads assets, initializes data or downloads.",
+      "file_sha256": "4eb78a06b444683ec9d73e4ef0cc4b8a973dd1af2adfef6adc74e7007eef6c10"
+    },
+    {
+      "path": "backend/tests/runtime/conftest.py",
+      "symbol": "ken_installation",
+      "line": 147,
+      "docstring": "Create a synthetic trusted Ken installation with inert, hash-verified grammar resources for boundary tests.",
+      "file_sha256": "037deb1b6a9407facdce0bb52eab9b40e88d60a703df1aeeed558cf2d2da2575"
+    },
+    {
+      "path": "backend/tests/runtime/test_ken_grammars.py",
+      "symbol": "test_worker_reads_the_trusted_grammar_cache_without_making_it_writable",
+      "line": 14,
+      "docstring": "The isolated worker must read provisioned grammars through its cache and preserve their bytes.",
+      "file_sha256": "e3d09a2b3a847b18fe5b02c1a0a2a3854a99b776b484709efcd5145de79686ee"
+    },
+    {
+      "path": "backend/tests/runtime/test_ken_grammars.py",
+      "symbol": "test_incomplete_or_changed_grammars_refuse_admission_before_source_state",
+      "line": 43,
+      "docstring": "A trusted installation receipt cannot hide missing, altered or redirected parser bytes before a worker starts.",
+      "file_sha256": "e3d09a2b3a847b18fe5b02c1a0a2a3854a99b776b484709efcd5145de79686ee"
+    },
+    {
+      "path": "backend/tests/runtime/test_ken_grammars.py",
+      "symbol": "test_preparation_preserves_an_invalid_existing_cache",
+      "line": 72,
+      "docstring": "Explicit preparation must not overwrite unknown resources or silently repair a changed installation.",
+      "file_sha256": "e3d09a2b3a847b18fe5b02c1a0a2a3854a99b776b484709efcd5145de79686ee"
+    },
+    {
+      "path": "backend/tests/runtime/test_ken_grammars.py",
+      "symbol": "test_an_unpinned_archive_cannot_create_a_grammar_cache",
+      "line": 82,
+      "docstring": "Preparation verifies the archive before creating any destination resource directory.",
+      "file_sha256": "e3d09a2b3a847b18fe5b02c1a0a2a3854a99b776b484709efcd5145de79686ee"
+    },
+    {
+      "path": "backend/tests/runtime/test_ken_grammars.py",
+      "symbol": "test_grammar_checks_never_need_a_network_or_loader",
+      "line": 93,
+      "docstring": "Preflight reads declared bytes only; it neither runs Ken nor triggers a lazy parser download.",
+      "file_sha256": "e3d09a2b3a847b18fe5b02c1a0a2a3854a99b776b484709efcd5145de79686ee"
+    },
+    {
+      "path": "backend/tests/runtime/test_ken_grammars.py",
+      "symbol": "test_grammar_checks_never_need_a_network_or_loader.unavailable",
+      "line": 95,
+      "docstring": "Reject any subprocess attempt from a local grammar-integrity check.",
+      "file_sha256": "e3d09a2b3a847b18fe5b02c1a0a2a3854a99b776b484709efcd5145de79686ee"
+    },
+    {
+      "path": "backend/tests/runtime/test_ken_grammars.py",
+      "symbol": "test_an_inspected_installation_cannot_silently_use_a_replaced_grammar_manifest",
+      "line": 104,
+      "docstring": "A newly consistent cache has a different identity and cannot reuse the original admission snapshot.",
+      "file_sha256": "e3d09a2b3a847b18fe5b02c1a0a2a3854a99b776b484709efcd5145de79686ee"
+    },
+    {
+      "path": "backend/tests/runtime/test_ken_mediation.py",
+      "symbol": "test_invalid_test_search_format_explains_a_valid_call_without_sending_or_retrying",
+      "line": 43,
+      "docstring": "The observed planner mistake receives actionable argument feedback before an opaque upstream error, without an automatic replacement call.",
+      "file_sha256": "828d7894711e9731930f16c9470a6aa260759fd3ccf46f25c60c174ae6e1b512"
+    },
+    {
+      "path": "evals/operation/ken_grammars.py",
+      "symbol": "packet",
+      "line": 14,
+      "docstring": "Send one MCP request and observe its original matching reply without replaying or replacing it.",
+      "file_sha256": "31d3fd5f641edeb10e44cbb8eed3b2d6ff9a5575079624d38d4ef04af8706b37"
+    },
+    {
+      "path": "evals/operation/ken_grammars.py",
+      "symbol": "data",
+      "line": 35,
+      "docstring": "Read the actual structured analysis result separately from the MCP transport status.",
+      "file_sha256": "31d3fd5f641edeb10e44cbb8eed3b2d6ff9a5575079624d38d4ef04af8706b37"
+    },
+    {
+      "path": "evals/operation/ken_grammars.py",
+      "symbol": "main",
+      "line": 43,
+      "docstring": "Prepare a new synthetic source and retain real parser/MCP receipts from the noneditable installed product.",
+      "file_sha256": "31d3fd5f641edeb10e44cbb8eed3b2d6ff9a5575079624d38d4ef04af8706b37"
+    }
+  ],
+  "modules": [
+    {
+      "path": "backend/runtime/ken_grammars.py",
+      "sha256": "8b4f4a1735be1cd7b378e3491e11bb627c658d54953b21dc075f43ea433c23be",
+      "module_documented": true
+    },
+    {
+      "path": "backend/runtime/ken_worker.py",
+      "sha256": "3601efb1a8d7b009db506746a157a46bdb4df2c138a62a3ee6977b3e37cd863c",
+      "module_documented": true
+    },
+    {
+      "path": "backend/runtime/ken_mediation.py",
+      "sha256": "7521def04d637cdcc053d6b38073e232340c3a477ffd2908bcfabb8b64bee45d",
+      "module_documented": true
+    },
+    {
+      "path": "backend/runtime/broker_inference.py",
+      "sha256": "eeb89823d77339ca2c1ebb4d056989126aedcd9e7abda18ba364600dd65bd4a4",
+      "module_documented": true
+    },
+    {
+      "path": "backend/runtime/peer_broker.py",
+      "sha256": "10e3215f0c3053132ca5e097209e500f92617f0b5bd370175784474b01fef676",
+      "module_documented": true
+    },
+    {
+      "path": "backend/cli/bootstrap.py",
+      "sha256": "4eb78a06b444683ec9d73e4ef0cc4b8a973dd1af2adfef6adc74e7007eef6c10",
+      "module_documented": true
+    },
+    {
+      "path": "backend/tests/runtime/conftest.py",
+      "sha256": "037deb1b6a9407facdce0bb52eab9b40e88d60a703df1aeeed558cf2d2da2575",
+      "module_documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_ken_grammars.py",
+      "sha256": "e3d09a2b3a847b18fe5b02c1a0a2a3854a99b776b484709efcd5145de79686ee",
+      "module_documented": true
+    },
+    {
+      "path": "backend/tests/runtime/test_ken_mediation.py",
+      "sha256": "828d7894711e9731930f16c9470a6aa260759fd3ccf46f25c60c174ae6e1b512",
+      "module_documented": true
+    },
+    {
+      "path": "evals/operation/ken_grammars.py",
+      "sha256": "31d3fd5f641edeb10e44cbb8eed3b2d6ff9a5575079624d38d4ef04af8706b37",
+      "module_documented": true
+    }
+  ],
+  "scope": "New/changed Python definitions and module docstrings; does not assert complete historical coverage or Ken retrieval quality."
+}
