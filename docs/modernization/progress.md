@@ -9687,3 +9687,14 @@ Inventario 85/322 vigente, una revisión de metadata y 84 decisiones sin renovar
 Sin modelos/wheel/global nuevos. DD157 y entrega humana no se declaran resueltos.
 Siguen interfaces/JSDoc, U08, Ken/ONNX, accesibilidad y cierre integrado; sin push,
 merge ni despliegue.
+
+## 2026-11-08 — Acceso y vistas del propietario documentados
+
+[Informe](owner-interface-docstrings-review.md). 43 docstrings nuevos; 416
+acumulados en 26 módulos y 205 faltantes por presencia. Catorce descripciones
+OpenAPI añadidas con demás valores iguales; AST ejecutable, siete políticas y
+48 herramientas intactos. 55 pruebas fuente pasan, 29,83 s y un aviso de deprecación.
+Inventario 85/322 vigente: dos consumidores de views revisados, 83 decisiones
+sin renovar. 19:08:56–19:11:47 UTC: 2 min 51 s hasta verificación, informe/checkpoint
+posteriores aparte. Cero modelos nuevos; sin otro wheel/global/push/merge/despliegue.
+Continúan interfaces/JSDoc, U08, Ken/ONNX, accesibilidad y cierre integrado.

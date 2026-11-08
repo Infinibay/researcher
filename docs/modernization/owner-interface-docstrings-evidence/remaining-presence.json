@@ -1,0 +1,1027 @@
+[
+  {
+    "path": "backend/api/exceptions.py",
+    "name": "ProjectNotFound",
+    "line": 19
+  },
+  {
+    "path": "backend/api/exceptions.py",
+    "name": "EpicNotFound",
+    "line": 28
+  },
+  {
+    "path": "backend/api/exceptions.py",
+    "name": "MilestoneNotFound",
+    "line": 37
+  },
+  {
+    "path": "backend/api/exceptions.py",
+    "name": "TaskNotFound",
+    "line": 46
+  },
+  {
+    "path": "backend/api/exceptions.py",
+    "name": "InvalidTaskStatus",
+    "line": 55
+  },
+  {
+    "path": "backend/api/exceptions.py",
+    "name": "FileNotFoundError_",
+    "line": 64
+  },
+  {
+    "path": "backend/api/exceptions.py",
+    "name": "WikiPageNotFound",
+    "line": 73
+  },
+  {
+    "path": "backend/api/exceptions.py",
+    "name": "ProjectRunning",
+    "line": 82
+  },
+  {
+    "path": "backend/api/exceptions.py",
+    "name": "__init__",
+    "line": 12
+  },
+  {
+    "path": "backend/api/exceptions.py",
+    "name": "__init__",
+    "line": 20
+  },
+  {
+    "path": "backend/api/exceptions.py",
+    "name": "__init__",
+    "line": 29
+  },
+  {
+    "path": "backend/api/exceptions.py",
+    "name": "__init__",
+    "line": 38
+  },
+  {
+    "path": "backend/api/exceptions.py",
+    "name": "__init__",
+    "line": 47
+  },
+  {
+    "path": "backend/api/exceptions.py",
+    "name": "__init__",
+    "line": 56
+  },
+  {
+    "path": "backend/api/exceptions.py",
+    "name": "__init__",
+    "line": 65
+  },
+  {
+    "path": "backend/api/exceptions.py",
+    "name": "__init__",
+    "line": 74
+  },
+  {
+    "path": "backend/api/exceptions.py",
+    "name": "__init__",
+    "line": 83
+  },
+  {
+    "path": "backend/api/exceptions.py",
+    "name": "api_error_handler",
+    "line": 95
+  },
+  {
+    "path": "backend/api/exceptions.py",
+    "name": "value_error_handler",
+    "line": 106
+  },
+  {
+    "path": "backend/api/main.py",
+    "name": "timing_middleware",
+    "line": 156
+  },
+  {
+    "path": "backend/api/main.py",
+    "name": "serve_spa",
+    "line": 258
+  },
+  {
+    "path": "backend/api/models/agent.py",
+    "name": "AgentCurrentRun",
+    "line": 8
+  },
+  {
+    "path": "backend/api/models/agent.py",
+    "name": "AgentResponse",
+    "line": 15
+  },
+  {
+    "path": "backend/api/models/agent.py",
+    "name": "AgentPerformanceInfo",
+    "line": 27
+  },
+  {
+    "path": "backend/api/models/agent.py",
+    "name": "AgentList",
+    "line": 39
+  },
+  {
+    "path": "backend/api/models/chat.py",
+    "name": "ChatThreadResponse",
+    "line": 104
+  },
+  {
+    "path": "backend/api/models/chat.py",
+    "name": "UnreadCountsResponse",
+    "line": 113
+  },
+  {
+    "path": "backend/api/models/chat.py",
+    "name": "ThreadArchiveResponse",
+    "line": 117
+  },
+  {
+    "path": "backend/api/models/epic.py",
+    "name": "EpicUpdate",
+    "line": 18
+  },
+  {
+    "path": "backend/api/models/finding.py",
+    "name": "FindingResponse",
+    "line": 8
+  },
+  {
+    "path": "backend/api/models/finding.py",
+    "name": "FindingSearchResult",
+    "line": 25
+  },
+  {
+    "path": "backend/api/models/git.py",
+    "name": "RepoCreate",
+    "line": 8
+  },
+  {
+    "path": "backend/api/models/git.py",
+    "name": "RepoResponse",
+    "line": 15
+  },
+  {
+    "path": "backend/api/models/git.py",
+    "name": "BranchCreate",
+    "line": 42
+  },
+  {
+    "path": "backend/api/models/git.py",
+    "name": "PRMergeRequest",
+    "line": 66
+  },
+  {
+    "path": "backend/api/models/git.py",
+    "name": "CleanupRequest",
+    "line": 70
+  },
+  {
+    "path": "backend/api/models/git.py",
+    "name": "BranchDetail",
+    "line": 76
+  },
+  {
+    "path": "backend/api/models/git.py",
+    "name": "RepoTreeEntry",
+    "line": 84
+  },
+  {
+    "path": "backend/api/models/git.py",
+    "name": "FileContent",
+    "line": 91
+  },
+  {
+    "path": "backend/api/models/git.py",
+    "name": "PRComment",
+    "line": 99
+  },
+  {
+    "path": "backend/api/models/git.py",
+    "name": "PRCommentCreate",
+    "line": 107
+  },
+  {
+    "path": "backend/api/models/milestone.py",
+    "name": "MilestoneUpdate",
+    "line": 19
+  },
+  {
+    "path": "backend/api/models/project.py",
+    "name": "ProjectList",
+    "line": 57
+  },
+  {
+    "path": "backend/api/models/project.py",
+    "name": "EpicProgressItem",
+    "line": 62
+  },
+  {
+    "path": "backend/api/models/project.py",
+    "name": "BlockingTaskInfo",
+    "line": 70
+  },
+  {
+    "path": "backend/api/models/project.py",
+    "name": "BlockedTaskItem",
+    "line": 76
+  },
+  {
+    "path": "backend/api/models/project.py",
+    "name": "ProjectProgressResponse",
+    "line": 83
+  },
+  {
+    "path": "backend/api/models/user_request.py",
+    "name": "UserRequestResponse",
+    "line": 8
+  },
+  {
+    "path": "backend/api/models/user_request.py",
+    "name": "UserRequestRespond",
+    "line": 23
+  },
+  {
+    "path": "backend/api/models/user_request.py",
+    "name": "UserRequestList",
+    "line": 27
+  },
+  {
+    "path": "backend/api/routes/agents.py",
+    "name": "_query",
+    "line": 27
+  },
+  {
+    "path": "backend/api/routes/chat.py",
+    "name": "_query",
+    "line": 103
+  },
+  {
+    "path": "backend/api/routes/epics.py",
+    "name": "_row_to_response",
+    "line": 25
+  },
+  {
+    "path": "backend/api/routes/epics.py",
+    "name": "_query",
+    "line": 33
+  },
+  {
+    "path": "backend/api/routes/epics.py",
+    "name": "_query",
+    "line": 72
+  },
+  {
+    "path": "backend/api/routes/git.py",
+    "name": "_query",
+    "line": 584
+  },
+  {
+    "path": "backend/api/routes/git.py",
+    "name": "_query",
+    "line": 603
+  },
+  {
+    "path": "backend/api/routes/git.py",
+    "name": "_insert",
+    "line": 639
+  },
+  {
+    "path": "backend/api/routes/milestones.py",
+    "name": "_row_to_response",
+    "line": 28
+  },
+  {
+    "path": "backend/api/routes/milestones.py",
+    "name": "_query",
+    "line": 39
+  },
+  {
+    "path": "backend/api/routes/milestones.py",
+    "name": "_query",
+    "line": 78
+  },
+  {
+    "path": "backend/api/routes/projects.py",
+    "name": "_project_to_response",
+    "line": 76
+  },
+  {
+    "path": "backend/api/routes/projects.py",
+    "name": "_query",
+    "line": 95
+  },
+  {
+    "path": "backend/api/routes/session.py",
+    "name": "PairOwner",
+    "line": 12
+  },
+  {
+    "path": "backend/api/routes/session.py",
+    "name": "end_session",
+    "line": 51
+  },
+  {
+    "path": "backend/api/routes/user_requests.py",
+    "name": "_query",
+    "line": 24
+  },
+  {
+    "path": "backend/api/routes/user_requests.py",
+    "name": "_respond",
+    "line": 44
+  },
+  {
+    "path": "backend/api/routes/user_requests.py",
+    "name": "_mirror_response",
+    "line": 82
+  },
+  {
+    "path": "backend/api/run.py",
+    "name": "main",
+    "line": 65
+  },
+  {
+    "path": "backend/communication/ownership.py",
+    "name": "native_thread",
+    "line": 13
+  },
+  {
+    "path": "backend/db/migrations.py",
+    "name": "apply_sql_resource",
+    "line": 21
+  },
+  {
+    "path": "backend/db/peer_kind_migration.py",
+    "name": "migrate_ken_peers",
+    "line": 4
+  },
+  {
+    "path": "backend/db/question_migration.py",
+    "name": "apply_question_schema",
+    "line": 9
+  },
+  {
+    "path": "backend/db/research_migration.py",
+    "name": "apply_research_schema",
+    "line": 9
+  },
+  {
+    "path": "backend/flows/event_bus.py",
+    "name": "__init__",
+    "line": 41
+  },
+  {
+    "path": "backend/flows/snapshot_service.py",
+    "name": "_query",
+    "line": 83
+  },
+  {
+    "path": "backend/flows/snapshot_service.py",
+    "name": "_upsert",
+    "line": 57
+  },
+  {
+    "path": "backend/git/branch_service.py",
+    "name": "_query",
+    "line": 37
+  },
+  {
+    "path": "backend/git/branch_service.py",
+    "name": "_query",
+    "line": 67
+  },
+  {
+    "path": "backend/git/branch_service.py",
+    "name": "_query",
+    "line": 91
+  },
+  {
+    "path": "backend/git/branch_service.py",
+    "name": "_query",
+    "line": 152
+  },
+  {
+    "path": "backend/git/forgejo_client.py",
+    "name": "__init__",
+    "line": 22
+  },
+  {
+    "path": "backend/git/forgejo_client.py",
+    "name": "_api_url",
+    "line": 26
+  },
+  {
+    "path": "backend/git/forgejo_client.py",
+    "name": "_token",
+    "line": 30
+  },
+  {
+    "path": "backend/git/pr_service.py",
+    "name": "_query",
+    "line": 35
+  },
+  {
+    "path": "backend/git/pr_service.py",
+    "name": "_query",
+    "line": 56
+  },
+  {
+    "path": "backend/git/pr_service.py",
+    "name": "_query",
+    "line": 67
+  },
+  {
+    "path": "backend/git/pr_service.py",
+    "name": "_update",
+    "line": 93
+  },
+  {
+    "path": "backend/git/repository_manager.py",
+    "name": "_query",
+    "line": 45
+  },
+  {
+    "path": "backend/git/repository_manager.py",
+    "name": "_query",
+    "line": 59
+  },
+  {
+    "path": "backend/git/repository_manager.py",
+    "name": "_update",
+    "line": 71
+  },
+  {
+    "path": "backend/network_destinations.py",
+    "name": "PublicNetworkError",
+    "line": 10
+  },
+  {
+    "path": "backend/network_destinations.py",
+    "name": "public_address",
+    "line": 14
+  },
+  {
+    "path": "backend/research/async_http_client.py",
+    "name": "AsyncResearcherHTTPClient",
+    "line": 16
+  },
+  {
+    "path": "backend/research/async_http_client.py",
+    "name": "__init__",
+    "line": 17
+  },
+  {
+    "path": "backend/research/async_http_client.py",
+    "name": "__aenter__",
+    "line": 41
+  },
+  {
+    "path": "backend/research/async_http_client.py",
+    "name": "__aexit__",
+    "line": 47
+  },
+  {
+    "path": "backend/research/async_http_client.py",
+    "name": "request",
+    "line": 50
+  },
+  {
+    "path": "backend/research/async_http_client.py",
+    "name": "_send",
+    "line": 72
+  },
+  {
+    "path": "backend/research/async_http_client.py",
+    "name": "aclose",
+    "line": 115
+  },
+  {
+    "path": "backend/research/async_http_client.py",
+    "name": "_shutdown",
+    "line": 120
+  },
+  {
+    "path": "backend/research/http_client.py",
+    "name": "ResearcherClientError",
+    "line": 8
+  },
+  {
+    "path": "backend/research/http_client.py",
+    "name": "_NoRedirect",
+    "line": 14
+  },
+  {
+    "path": "backend/research/http_client.py",
+    "name": "ResearcherHTTPClient",
+    "line": 135
+  },
+  {
+    "path": "backend/research/http_client.py",
+    "name": "__init__",
+    "line": 9
+  },
+  {
+    "path": "backend/research/http_client.py",
+    "name": "redirect_request",
+    "line": 15
+  },
+  {
+    "path": "backend/research/http_client.py",
+    "name": "__init__",
+    "line": 50
+  },
+  {
+    "path": "backend/research/http_client.py",
+    "name": "prepare_request",
+    "line": 93
+  },
+  {
+    "path": "backend/research/http_client.py",
+    "name": "__init__",
+    "line": 136
+  },
+  {
+    "path": "backend/research/http_client.py",
+    "name": "request",
+    "line": 140
+  },
+  {
+    "path": "backend/research/models.py",
+    "name": "bounded_text",
+    "line": 85
+  },
+  {
+    "path": "backend/research/models.py",
+    "name": "positive_id",
+    "line": 96
+  },
+  {
+    "path": "backend/research/models.py",
+    "name": "operation_key",
+    "line": 101
+  },
+  {
+    "path": "backend/research/models.py",
+    "name": "EvidenceReference",
+    "line": 140
+  },
+  {
+    "path": "backend/research/models.py",
+    "name": "FindingDraft",
+    "line": 213
+  },
+  {
+    "path": "backend/research/models.py",
+    "name": "ReportDraft",
+    "line": 237
+  },
+  {
+    "path": "backend/research/models.py",
+    "name": "validate_report_finding",
+    "line": 316
+  },
+  {
+    "path": "backend/research/models.py",
+    "name": "__post_init__",
+    "line": 144
+  },
+  {
+    "path": "backend/research/models.py",
+    "name": "validate_against",
+    "line": 148
+  },
+  {
+    "path": "backend/research/models.py",
+    "name": "__post_init__",
+    "line": 219
+  },
+  {
+    "path": "backend/research/models.py",
+    "name": "__post_init__",
+    "line": 243
+  },
+  {
+    "path": "backend/research/models.py",
+    "name": "markdown",
+    "line": 258
+  },
+  {
+    "path": "backend/research/ports.py",
+    "name": "ResearchRepository",
+    "line": 8
+  },
+  {
+    "path": "backend/research/ports.py",
+    "name": "ReferenceReader",
+    "line": 20
+  },
+  {
+    "path": "backend/research/ports.py",
+    "name": "WebFetcher",
+    "line": 24
+  },
+  {
+    "path": "backend/research/ports.py",
+    "name": "lookup_operation",
+    "line": 9
+  },
+  {
+    "path": "backend/research/ports.py",
+    "name": "get_reference",
+    "line": 12
+  },
+  {
+    "path": "backend/research/ports.py",
+    "name": "capture_source",
+    "line": 15
+  },
+  {
+    "path": "backend/research/ports.py",
+    "name": "read",
+    "line": 21
+  },
+  {
+    "path": "backend/research/ports.py",
+    "name": "fetch",
+    "line": 25
+  },
+  {
+    "path": "backend/research/sqlite_store.py",
+    "name": "_json",
+    "line": 36
+  },
+  {
+    "path": "backend/research/sqlite_store.py",
+    "name": "_hash",
+    "line": 46
+  },
+  {
+    "path": "backend/research/sqlite_store.py",
+    "name": "__init__",
+    "line": 53
+  },
+  {
+    "path": "backend/research/sqlite_store.py",
+    "name": "_transaction",
+    "line": 65
+  },
+  {
+    "path": "backend/research/sqlite_store.py",
+    "name": "revoke_grant",
+    "line": 114
+  },
+  {
+    "path": "backend/research/sqlite_store.py",
+    "name": "authorize",
+    "line": 121
+  },
+  {
+    "path": "backend/research/sqlite_store.py",
+    "name": "_task",
+    "line": 141
+  },
+  {
+    "path": "backend/research/sqlite_store.py",
+    "name": "_fingerprint",
+    "line": 269
+  },
+  {
+    "path": "backend/research/sqlite_store.py",
+    "name": "_receipt",
+    "line": 283
+  },
+  {
+    "path": "backend/research/sqlite_store.py",
+    "name": "lookup_operation",
+    "line": 296
+  },
+  {
+    "path": "backend/research/sqlite_store.py",
+    "name": "_write",
+    "line": 302
+  },
+  {
+    "path": "backend/research/sqlite_store.py",
+    "name": "_source",
+    "line": 535
+  },
+  {
+    "path": "backend/research/sqlite_store.py",
+    "name": "read_source",
+    "line": 546
+  },
+  {
+    "path": "backend/research/sqlite_store.py",
+    "name": "list_sources",
+    "line": 552
+  },
+  {
+    "path": "backend/research/sqlite_store.py",
+    "name": "list_references",
+    "line": 590
+  },
+  {
+    "path": "backend/research/sqlite_store.py",
+    "name": "_finding",
+    "line": 646
+  },
+  {
+    "path": "backend/research/sqlite_store.py",
+    "name": "_evidence",
+    "line": 688
+  },
+  {
+    "path": "backend/research/web_fetcher.py",
+    "name": "_resolve",
+    "line": 33
+  },
+  {
+    "path": "backend/research/web_fetcher.py",
+    "name": "_public_address",
+    "line": 42
+  },
+  {
+    "path": "backend/research/web_fetcher.py",
+    "name": "_bound_receive",
+    "line": 54
+  },
+  {
+    "path": "backend/research/web_fetcher.py",
+    "name": "recv_into",
+    "line": 62
+  },
+  {
+    "path": "backend/research/web_fetcher.py",
+    "name": "recv",
+    "line": 66
+  },
+  {
+    "path": "backend/research/web_fetcher.py",
+    "name": "__init__",
+    "line": 74
+  },
+  {
+    "path": "backend/research/web_fetcher.py",
+    "name": "connect",
+    "line": 81
+  },
+  {
+    "path": "backend/research/web_fetcher.py",
+    "name": "_url",
+    "line": 165
+  },
+  {
+    "path": "backend/runtime/bootstrap.py",
+    "name": "_sync_directory",
+    "line": 22
+  },
+  {
+    "path": "backend/runtime/bootstrap.py",
+    "name": "_create_file",
+    "line": 30
+  },
+  {
+    "path": "backend/runtime/broker_inference.py",
+    "name": "_request",
+    "line": 73
+  },
+  {
+    "path": "backend/runtime/broker_inference.py",
+    "name": "admitted",
+    "line": 172
+  },
+  {
+    "path": "backend/runtime/business_definitions.py",
+    "name": "ToolDefinition",
+    "line": 23
+  },
+  {
+    "path": "backend/runtime/business_definitions.py",
+    "name": "expand",
+    "line": 39
+  },
+  {
+    "path": "backend/runtime/code_mode_payload.py",
+    "name": "main",
+    "line": 15
+  },
+  {
+    "path": "backend/runtime/code_mode_payload.py",
+    "name": "send",
+    "line": 25
+  },
+  {
+    "path": "backend/runtime/code_mode_payload.py",
+    "name": "exact",
+    "line": 30
+  },
+  {
+    "path": "backend/runtime/code_mode_payload.py",
+    "name": "receive",
+    "line": 43
+  },
+  {
+    "path": "backend/runtime/code_mode_payload.py",
+    "name": "response",
+    "line": 49
+  },
+  {
+    "path": "backend/runtime/code_mode_probe.py",
+    "name": "probe_code_mode",
+    "line": 10
+  },
+  {
+    "path": "backend/runtime/command_output.py",
+    "name": "output_window",
+    "line": 6
+  },
+  {
+    "path": "backend/runtime/host_business.py",
+    "name": "list_tools",
+    "line": 33
+  },
+  {
+    "path": "backend/runtime/host_business.py",
+    "name": "call_tool",
+    "line": 48
+  },
+  {
+    "path": "backend/runtime/host_business.py",
+    "name": "aclose",
+    "line": 79
+  },
+  {
+    "path": "backend/runtime/host_business.py",
+    "name": "_shutdown",
+    "line": 86
+  },
+  {
+    "path": "backend/runtime/ken_mediation.py",
+    "name": "_validator",
+    "line": 22
+  },
+  {
+    "path": "backend/runtime/ken_worker.py",
+    "name": "WorkerLaunch",
+    "line": 94
+  },
+  {
+    "path": "backend/runtime/native_commands.py",
+    "name": "_toml",
+    "line": 59
+  },
+  {
+    "path": "backend/runtime/native_commands.py",
+    "name": "_version",
+    "line": 69
+  },
+  {
+    "path": "backend/runtime/owned_runtime.py",
+    "name": "_drain",
+    "line": 68
+  },
+  {
+    "path": "backend/runtime/owned_runtime.py",
+    "name": "admitted",
+    "line": 478
+  },
+  {
+    "path": "backend/runtime/owned_runtime.py",
+    "name": "withdraw",
+    "line": 481
+  },
+  {
+    "path": "backend/runtime/owned_runtime.py",
+    "name": "watch",
+    "line": 489
+  },
+  {
+    "path": "backend/runtime/peer_guard.py",
+    "name": "_info",
+    "line": 26
+  },
+  {
+    "path": "backend/runtime/peer_guard.py",
+    "name": "_forward",
+    "line": 51
+  },
+  {
+    "path": "backend/runtime/peer_guard.py",
+    "name": "run",
+    "line": 86
+  },
+  {
+    "path": "backend/runtime/peer_payload.py",
+    "name": "main",
+    "line": 8
+  },
+  {
+    "path": "backend/runtime/proxy_payload.py",
+    "name": "install_native_filter",
+    "line": 13
+  },
+  {
+    "path": "backend/runtime/proxy_payload.py",
+    "name": "stop_child",
+    "line": 27
+  },
+  {
+    "path": "backend/runtime/proxy_payload.py",
+    "name": "main",
+    "line": 41
+  },
+  {
+    "path": "backend/runtime/proxy_payload.py",
+    "name": "Program",
+    "line": 17
+  },
+  {
+    "path": "backend/runtime/workspaces.py",
+    "name": "__init__",
+    "line": 22
+  },
+  {
+    "path": "backend/runtime/workspaces.py",
+    "name": "select",
+    "line": 74
+  },
+  {
+    "path": "backend/runtime/workspaces.py",
+    "name": "validate",
+    "line": 77
+  },
+  {
+    "path": "backend/state/completion.py",
+    "name": "CompletionState",
+    "line": 12
+  },
+  {
+    "path": "backend/state/completion.py",
+    "name": "detect",
+    "line": 23
+  },
+  {
+    "path": "backend/state/completion.py",
+    "name": "_query",
+    "line": 24
+  },
+  {
+    "path": "backend/state/dependency_validator.py",
+    "name": "_query",
+    "line": 15
+  },
+  {
+    "path": "backend/state/dependency_validator.py",
+    "name": "_query",
+    "line": 33
+  },
+  {
+    "path": "backend/state/progress.py",
+    "name": "_query",
+    "line": 15
+  },
+  {
+    "path": "backend/state/progress.py",
+    "name": "_query",
+    "line": 145
+  },
+  {
+    "path": "backend/state/progress.py",
+    "name": "_query",
+    "line": 167
+  },
+  {
+    "path": "backend/state/progress.py",
+    "name": "_query",
+    "line": 198
+  },
+  {
+    "path": "backend/tools/base/db.py",
+    "name": "__init__",
+    "line": 87
+  },
+  {
+    "path": "backend/tools/base/db.py",
+    "name": "__enter__",
+    "line": 91
+  },
+  {
+    "path": "backend/tools/base/db.py",
+    "name": "__exit__",
+    "line": 95
+  },
+  {
+    "path": "backend/tools/base/db.py",
+    "name": "_capture_phrase",
+    "line": 1131
+  },
+  {
+    "path": "backend/tools/base/db.py",
+    "name": "_capture",
+    "line": 1200
+  }
+]

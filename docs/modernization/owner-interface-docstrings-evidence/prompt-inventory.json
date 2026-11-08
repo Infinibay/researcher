@@ -1,0 +1,21 @@
+{
+  "base_commit": "3f1e19d",
+  "files_scanned": 322,
+  "candidates": 85,
+  "revalidated": [
+    {
+      "id": "backend/runtime/run_inputs.py::conversation_history",
+      "changed_consumers": [
+        "backend/runtime/views.py"
+      ]
+    },
+    {
+      "id": "backend/runtime/run_inputs.py::freeze_input",
+      "changed_consumers": [
+        "backend/runtime/views.py"
+      ]
+    }
+  ],
+  "unchanged_review_count": 83,
+  "rationale": "Candidate source is byte-identical to3f1e19d. Changed direct module consumers contain only authored documentation in views.py; executable AST and imports/calls are unchanged. Owner route/model descriptions are intentionally added to OpenAPI, with all other OpenAPI values checked equal. Seven native policies and48business tool descriptions/schemas/annotations are unchanged. No change to frozen-context rendering, provenance, answer authority or replay semantics; no prompting efficacy or human acceptance is inferred."
+}

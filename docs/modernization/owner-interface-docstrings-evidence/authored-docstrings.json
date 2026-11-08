@@ -1,0 +1,53 @@
+{
+  "backend/api/local_access.py": {
+    "_digest": "Hash a local pairing/session/CSRF value for comparison or lookup without storing another plaintext copy; a digest alone is not an authenticated owner session.",
+    "OwnerSession": "Retain one process-local owner session's CSRF secret, monotonic expiry and explicit revocation state, separate from model tool grants.",
+    "LocalAccess.__init__": "Configure bounded local owner sessions and trusted hosts/origins, optionally binding an existing pairing secret without creating credential files.",
+    "LocalAccess.close": "Revoke all local sessions, clear pairing authority and remove this process's generated pairing file when present.",
+    "LocalAccess.valid": "Check a retained session's active flag and monotonic deadline without extending its lifetime.",
+    "LocalAccess.session": "Resolve a bounded owner cookie through its hash and return only a currently valid process-local session.",
+    "LocalAccess.pair": "Validate the pairing code under failure-rate and live-session bounds, then return a new opaque cookie token and its separate CSRF session.",
+    "LocalAccess.revoke": "Invalidate the selected session and prune all expired or revoked session entries without changing the host's subscription credentials.",
+    "OwnerAccessMiddleware.__init__": "Bind the downstream ASGI app to its host-selected local owner authority without creating a session or starting serving.",
+    "OwnerAccessMiddleware.__call__.deny": "Return a no-store HTTP error or close a WebSocket with policy violation before forwarding the rejected request.",
+    "OwnerAccessMiddleware.__call__.guarded_send": "Recheck the original session before WebSocket output and close a revoked or expired connection instead of delivering more owner data.",
+    "OwnerAccessMiddleware.__call__.guarded_receive": "Poll incoming WebSocket activity within short observation windows and emit a disconnect when the original session ceases to be valid."
+  },
+  "backend/api/routes/runs.py": {
+    "install_run_errors": "Register owner API mappings for missing runs, conflicting intents and uncertain peer closure without treating uncertainty as a successful stop.",
+    "service": "Require the configured local subscription runtime for an owner action; absent runtime produces service-unavailable rather than a provider fallback.",
+    "read_store": "Reuse the configured runtime store or bind the existing database for owner reads without launching native execution.",
+    "owner_view": "Build owner-only read projections over the same database selected for this request.",
+    "RetryStart": "Carry an explicit stable retry key, expected task context and run fence; this request does not authorize repeating an uncertain native effect.",
+    "CorrectContext": "Carry an owner correction tied to the expected context version and its declared message/example provenance.",
+    "RecoverRun": "Identify the original attempt and expected fence for explicit recovery under a stable operation key, without authorizing a replacement run.",
+    "inspect_recovery": "Return no-store evidence about the original attempt's recovery eligibility and blockers without retiring peers or replaying work.",
+    "reconcile_run": "Request recovery of the explicitly named original attempt through the installed owner runtime, preserving its operation key and fence.",
+    "read_run": "Read the project-scoped durable run record without inferring live process state from its saved status.",
+    "retry_start": "Request an explicit context/fence-bound start retry through the owner runtime; uncertain prior effects remain subject to its reconciliation protocol.",
+    "stop_run": "Withdraw the selected run through its original runtime owner and return the observed durable state; this does not accept the task.",
+    "history": "Read a bounded project event page after the given durable cursor without dispatching or accepting any run.",
+    "current_context": "Read the task's attributed current context snapshot so an owner action can bind the version actually inspected.",
+    "run_input": "Read the original frozen input record with no-store headers; this evidence does not silently adopt later context or policy changes.",
+    "command_list": "Read a bounded owner page of saved commands for this run, retaining job/attempt identities rather than starting new work.",
+    "command_output": "Read no-store stdout/stderr byte windows for the exact project/run/job identity; exit code, local closure and task acceptance remain distinct.",
+    "question_inbox": "Read a bounded no-store page of retained owner questions and answer-readiness state without answering or resuming the associated runs.",
+    "install_run_errors.not_found": "Map a project-scoped missing-run error to an HTTP 404 response.",
+    "install_run_errors.conflict": "Map an incompatible or stale owner intent to HTTP 409 without retrying its action.",
+    "install_run_errors.uncertain": "Report unproved local closure as HTTP 503 while explicitly preserving uncertainty and rejecting automatic replay.",
+    "CorrectContext.nonempty_statement": "Reject a whitespace-only correction while preserving the owner's original nonempty statement text."
+  },
+  "backend/runtime/sqlite_questions.py": {
+    "SQLiteQuestionStore": "Coordinate durable question/pause and owner-answer/context transitions using the original run journal and scoped research write boundary.",
+    "SQLiteQuestionStore.__init__": "Bind the existing run and research stores without asking a question, advancing context or opening a native turn.",
+    "SQLiteQuestionStore._question": "Require the retained question to belong to the exact project and task, returning its linked run/pause state for answer validation.",
+    "SQLiteQuestionStore.answer": "Atomically validate an original paused question, record the owner's answers and next context version plus chat/event/receipt; never resume inference or accept work.",
+    "SQLiteQuestionStore.ask.apply": "Within the scoped write, require a bound native turn, create the linked owner request/chat message and withdraw run authority before pause confirmation."
+  },
+  "backend/runtime/views.py": {
+    "_job_summary": "Project a saved command identity and output sizes, keeping observed exit and peer-closure receipt separate from task acceptance or a live process probe.",
+    "OwnerRuntimeView.command_list": "Read a bounded cursor page of one project-scoped run's saved commands and total count in one database transaction.",
+    "OwnerRuntimeView.command_output": "Read both exact BLOB byte windows in one scoped snapshot without materializing the entire output; return canonical offsets and lossy-preview flags.",
+    "OwnerRuntimeView.instruction_message": "Read the original instruction message joined to the exact project/run conversation link, rejecting an absent or foreign record."
+  }
+}

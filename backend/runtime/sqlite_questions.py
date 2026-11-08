@@ -17,7 +17,13 @@ from backend.runtime.sqlite_runs import _json
 
 
 class SQLiteQuestionStore:
+    """Coordinate durable question/pause and owner-answer/context transitions using the original run
+    journal and scoped research write boundary.
+    """
     def __init__(self, runs, research):
+        """Bind the existing run and research stores without asking a question, advancing context or
+        opening a native turn.
+        """
         self.runs = runs
         self.research = research
 
@@ -25,6 +31,9 @@ class SQLiteQuestionStore:
         """A business-tool request, requiring a live, bound native attempt."""
 
         def apply(conn):
+            """Within the scoped write, require a bound native turn, create the linked owner
+            request/chat message and withdraw run authority before pause confirmation.
+            """
             grant = conn.execute(
                 "SELECT runtime_bound,runtime_attempt_id FROM tool_grants WHERE id=?",
                 (scope.grant_id,),
@@ -180,6 +189,9 @@ class SQLiteQuestionStore:
 
     @staticmethod
     def _question(conn, project_id, task_id, request_id):
+        """Require the retained question to belong to the exact project and task, returning its linked
+        run/pause state for answer validation.
+        """
         row = conn.execute(
             """SELECT q.*,u.status,u.response,r.status AS run_status FROM runtime_question_links q
             JOIN user_requests u ON u.id=q.request_id AND u.project_id=q.project_id
@@ -200,6 +212,9 @@ class SQLiteQuestionStore:
         operation_key,
         answers,
     ):
+        """Atomically validate an original paused question, record the owner's answers and next context
+        version plus chat/event/receipt; never resume inference or accept work.
+        """
         for value in (project_id, task_id, request_id, expected_version):
             identity(value)
         command_key(operation_key)

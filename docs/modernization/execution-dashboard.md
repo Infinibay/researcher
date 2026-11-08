@@ -28,7 +28,25 @@ que se pueda comparar el avance; no presentar microajustes como tareas principal
 - Última suite global: `9fb873c`,2210 casos,2178 pasan,31 fallan y1 error de fixture; sin omisiones. La carrera de backup encontrada se corrigió después con40 pruebas instaladas. No se declara una nueva corrida global verde; la referencia `0c8b8d9` queda como evidencia histórica.
 - U01–U07, E01–E12, C01–C10 y D01–D13 quedan comprobados con el alcance de sus matrices; sigue 1 de 43 escenarios amplios sin aceptación completa en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Estado actual: herramientas de análisis documentadas
+## Estado actual: acceso y vistas del propietario documentados
+
+[Informe](owner-interface-docstrings-review.md). **19:08:56–19:11:47 UTC: 2 min 51 s**
+hasta verificación; informe/checkpoint después. Pruebas: 29,83 s.
+
+- Terminado: 43 docstrings nuevos; **416 acumulados en 26 módulos**. Catorce
+  descripciones OpenAPI nuevas y demás valores iguales; **55 pruebas fuente pasan**
+  con un aviso de deprecación. Inventario 85/322 vigente: dos consumidores revisados,
+  83 decisiones sin renovar. Cero turnos de modelo nuevos.
+- En curso/siguiente: revisión acotada de proporcionalidad de la entrega U08,
+  usando las herramientas existentes antes de otro ensayo. Documentación de otras
+  interfaces/JSDoc sigue abierta: 205 definiciones por presencia, relevancia desigual.
+- Pendientes: entrega/adaptación/comprensión humana; Ken/ONNX; documentación relevante;
+  accesibilidad/detalles; paquete, suite global y revisión independiente finales.
+- Estado amplio: **12/12 páginas por alcance, 42/43 escenarios**. Sin aceptación
+  humana ni nueva global verde; wheel anterior conserva sus bytes. Sin push,
+  merge ni despliegue.
+
+## Etapa anterior: herramientas de análisis documentadas
 
 [Informe](analysis-docstrings-review.md). **19:05:35–19:07:03 UTC: 1 min 28 s**
 hasta verificación; informe/checkpoint posteriores aparte. Pruebas: 35,13 s.

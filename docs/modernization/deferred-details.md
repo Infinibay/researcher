@@ -1340,6 +1340,12 @@ descripciones Pydantic son visibles al modelo; campos, límites y demás catálo
 iguales. Pasan 43 pruebas fuente. No se declara DD157 ni U08 resueltos.
 
 
+Séptimo bloque: [43 docstrings de acceso y vistas](owner-interface-docstrings-review.md),
+416 acumulados en 26 módulos; 205 definiciones restantes por presencia. Catorce
+descripciones OpenAPI nuevas, demás valores/contratos iguales; 55 pruebas fuente
+pasan con un aviso de deprecación conservado. No acredita comprensión humana.
+
+
 ## DD147 — recuperar observaciones CLI anteriores a la política
 
 La corrección de aceptación enlaza la política observada al request y al recibo.

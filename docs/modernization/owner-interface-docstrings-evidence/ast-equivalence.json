@@ -1,0 +1,30 @@
+{
+  "base_commit": "3f1e19d",
+  "scope": "Documentation-only source edits; owner OpenAPI documentation intentionally changes",
+  "files": {
+    "backend/api/local_access.py": {
+      "added_docstrings": 12,
+      "executable_ast_equal": true,
+      "before_sha256": "114456de477b4248fdc5a8aa2554c3962e0df9fe8675e782ea27e2703048f155",
+      "after_sha256": "a608258c57943e3ab255ea890658426e68f30cd38fa51a55fff5bc5aa4367fc8"
+    },
+    "backend/api/routes/runs.py": {
+      "added_docstrings": 22,
+      "executable_ast_equal": true,
+      "before_sha256": "60b91d23b237b00d033bee05305d487b861cc572b87d3a627d23861fa5e560ad",
+      "after_sha256": "ba2dbeb2c96c38b4d8c03c67a1e62f042aaa37bc0fdc630bd6987a22b51f9376"
+    },
+    "backend/runtime/sqlite_questions.py": {
+      "added_docstrings": 5,
+      "executable_ast_equal": true,
+      "before_sha256": "9315a4d6aa01bf82780e4996cddebca689892492a414da5c291d9bfe442b89c1",
+      "after_sha256": "71f788f1729dc39b1d58fd771052f3ea7d216c8c78d8f8a10671b694951729b6"
+    },
+    "backend/runtime/views.py": {
+      "added_docstrings": 4,
+      "executable_ast_equal": true,
+      "before_sha256": "54b952846ba01a80b942d44e4abaf489bcb2d141d726d51f0040dfa10eef8206",
+      "after_sha256": "57fbb373dd5bd3c3a1b48fdf2efa127508fa44c6a272cfd6ded23932f91a59f0"
+    }
+  }
+}

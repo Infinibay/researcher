@@ -10,7 +10,7 @@
     "backend/api/dependencies.py": "51c13649706b869e773a5685f36d1211c266b8a6c1ae2975c1e6fe9f02cbed26",
     "backend/api/exceptions.py": "874b055b3a8aa8c11b96c45adc7f02bfdce80a07ddf2c35e854c96b655f4b585",
     "backend/api/flow_manager.py": "fd260c2a58cd8e282b2e77b479d68b949ec08d5ec502661abd369a3ecb59ca61",
-    "backend/api/local_access.py": "114456de477b4248fdc5a8aa2554c3962e0df9fe8675e782ea27e2703048f155",
+    "backend/api/local_access.py": "a608258c57943e3ab255ea890658426e68f30cd38fa51a55fff5bc5aa4367fc8",
     "backend/api/main.py": "6117224ced2d181aaddd4a1756c0a4d5c0d759c720bd78f1eee2c31bc1d75bf5",
     "backend/api/models/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     "backend/api/models/agent.py": "23eb182f59601828bcf0a0c54660e9ee96e4b959b10f5560ec54cb77c03ea6ff",
@@ -50,7 +50,7 @@
     "backend/api/routes/projects.py": "40bcd939312f048aa22eea9f47967115638effe831ec75786e29a4e1749689e3",
     "backend/api/routes/research.py": "b15128a5c7605bbe1d8cafdb134cdadb19a62deb743b026c659b712e2576260c",
     "backend/api/routes/retention.py": "ad156020a3bd8da3c88abb5cb890232c9c6456ac0d276d7372b6011612487194",
-    "backend/api/routes/runs.py": "60b91d23b237b00d033bee05305d487b861cc572b87d3a627d23861fa5e560ad",
+    "backend/api/routes/runs.py": "ba2dbeb2c96c38b4d8c03c67a1e62f042aaa37bc0fdc630bd6987a22b51f9376",
     "backend/api/routes/session.py": "d332dda1bb5924b70a5accbfa3582b8d41906a51b8acedcdbd1267141cc34639",
     "backend/api/routes/source_operations.py": "1f9d1881c96368bc08cf9cf5bccf1f6a11e05d97447f451d72ca58e627565255",
     "backend/api/routes/task_workspace.py": "63f542e897b7d9894c5ccdba6f565e84d1ef3aa7339b0cb8ca46697a1668928c",
@@ -299,13 +299,13 @@
     "backend/runtime/service.py": "a1970933f71146454535043ad113e7d03bed97ce05cb5f4ba3defc8018daad21",
     "backend/runtime/service_process.py": "0036d73e3a61bd1e2bec72a386a29a3c9bdad120da4f3f501d0df3b1fabcf6a7",
     "backend/runtime/snapshot_files.py": "07be9cc59b2d9b92973715320527bec1860b911cebf9a6c8a03d504570d518f3",
-    "backend/runtime/sqlite_questions.py": "9315a4d6aa01bf82780e4996cddebca689892492a414da5c291d9bfe442b89c1",
+    "backend/runtime/sqlite_questions.py": "71f788f1729dc39b1d58fd771052f3ea7d216c8c78d8f8a10671b694951729b6",
     "backend/runtime/sqlite_runs.py": "9b6ea15d678d527a7f3d4cecb46be799f34e5dadda6105113c017dd18a8a0ede",
     "backend/runtime/storage_volume.py": "45b9e33e4bdab46f8f8bf4516ae8ada11bf0ef526c2330a8d1ac04e90bbc7643",
     "backend/runtime/subscription_auth.py": "d2eab329cf049f77d39c98c2ddbeb38b12864793ee3e8c3ec9d4aaef0eb305f3",
     "backend/runtime/subscription_provider.py": "9738f27e5369f3521fd7c92066b756235be1193a82631fa12cc00ad9ffd644a4",
     "backend/runtime/task_profiles.py": "5b968d82c810d92ae7b2231d5f9024db019f99ffa3f9d95fa57cf6b8e276ae32",
-    "backend/runtime/views.py": "54b952846ba01a80b942d44e4abaf489bcb2d141d726d51f0040dfa10eef8206",
+    "backend/runtime/views.py": "57fbb373dd5bd3c3a1b48fdf2efa127508fa44c6a272cfd6ded23932f91a59f0",
     "backend/runtime/work_budget.py": "e4531e6fb6c8fdf611db5ebab30a7588839dfc1e300a190f5424dbd9c497c927",
     "backend/runtime/workspace_retention.py": "2324a541928e587834256c99489f67e07dd6fbca8d7d9c97fce9e400a8ecede0",
     "backend/runtime/workspaces.py": "41d2381ccc3b5025cb265eb7a4c353f3a125d357aee38974898ce5394256c98e",
@@ -4739,14 +4739,14 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "52da21faa41f8e8129f78b0bfc8f134116ddf606b90cce059888492acc6f62c4",
+      "dependencies_sha256": "b4683df382c4be7b27cfa7638ce05c56e8ea5ad021ed85d6951cd2f0fbf2de19",
       "direct_module_consumers": {
         "backend/runtime/sqlite_runs.py": "9b6ea15d678d527a7f3d4cecb46be799f34e5dadda6105113c017dd18a8a0ede",
-        "backend/runtime/views.py": "54b952846ba01a80b942d44e4abaf489bcb2d141d726d51f0040dfa10eef8206"
+        "backend/runtime/views.py": "57fbb373dd5bd3c3a1b48fdf2efa127508fa44c6a272cfd6ded23932f91a59f0"
       },
       "suggested_disposition": "retained",
       "review_status": "reviewed",
-      "review_rationale": "Candidate source is byte-identical to416abed. Its only changed direct module consumer is sqlite_runs.py, with41authored docstrings and an executable AST identical after removing documentation. Existing imports/calls to review subject/current-state helpers and freeze_input are unchanged. Checked7native instruction bodies and48business tool descriptions/schemas/annotations byte-for-byte: no model-visible policy delta. No authority, persistence or rendering behavior change is claimed from comments; broader introspection is outside this check.",
+      "review_rationale": "Candidate source is byte-identical to3f1e19d. Changed direct module consumers contain only authored documentation in views.py; executable AST and imports/calls are unchanged. Owner route/model descriptions are intentionally added to OpenAPI, with all other OpenAPI values checked equal. Seven native policies and48business tool descriptions/schemas/annotations are unchanged. No change to frozen-context rendering, provenance, answer authority or replay semantics; no prompting efficacy or human acceptance is inferred.",
       "review_evidence": [
         "backend/runtime/run_inputs.py",
         "docs/prompts/review-2026-11-07.md",
@@ -4767,7 +4767,9 @@
         "backend/tests/runtime/test_manual_prerequisite_review.py",
         "backend/tests/runtime/test_dependency_authority.py",
         "docs/modernization/core-docstrings-review.md",
-        "docs/modernization/core-docstrings-results.json"
+        "docs/modernization/core-docstrings-results.json",
+        "docs/modernization/owner-interface-docstrings-review.md",
+        "docs/modernization/owner-interface-docstrings-results.json"
       ],
       "review_conflicts": []
     },
@@ -4806,14 +4808,14 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "52da21faa41f8e8129f78b0bfc8f134116ddf606b90cce059888492acc6f62c4",
+      "dependencies_sha256": "b4683df382c4be7b27cfa7638ce05c56e8ea5ad021ed85d6951cd2f0fbf2de19",
       "direct_module_consumers": {
         "backend/runtime/sqlite_runs.py": "9b6ea15d678d527a7f3d4cecb46be799f34e5dadda6105113c017dd18a8a0ede",
-        "backend/runtime/views.py": "54b952846ba01a80b942d44e4abaf489bcb2d141d726d51f0040dfa10eef8206"
+        "backend/runtime/views.py": "57fbb373dd5bd3c3a1b48fdf2efa127508fa44c6a272cfd6ded23932f91a59f0"
       },
       "suggested_disposition": "retained",
       "review_status": "reviewed",
-      "review_rationale": "Candidate source is byte-identical to416abed. Its only changed direct module consumer is sqlite_runs.py, with41authored docstrings and an executable AST identical after removing documentation. Existing imports/calls to review subject/current-state helpers and freeze_input are unchanged. Checked7native instruction bodies and48business tool descriptions/schemas/annotations byte-for-byte: no model-visible policy delta. No authority, persistence or rendering behavior change is claimed from comments; broader introspection is outside this check.",
+      "review_rationale": "Candidate source is byte-identical to3f1e19d. Changed direct module consumers contain only authored documentation in views.py; executable AST and imports/calls are unchanged. Owner route/model descriptions are intentionally added to OpenAPI, with all other OpenAPI values checked equal. Seven native policies and48business tool descriptions/schemas/annotations are unchanged. No change to frozen-context rendering, provenance, answer authority or replay semantics; no prompting efficacy or human acceptance is inferred.",
       "review_evidence": [
         "backend/runtime/run_inputs.py",
         "docs/prompts/review-2026-11-07.md",
@@ -4834,7 +4836,9 @@
         "backend/tests/runtime/test_manual_prerequisite_review.py",
         "backend/tests/runtime/test_dependency_authority.py",
         "docs/modernization/core-docstrings-review.md",
-        "docs/modernization/core-docstrings-results.json"
+        "docs/modernization/core-docstrings-results.json",
+        "docs/modernization/owner-interface-docstrings-review.md",
+        "docs/modernization/owner-interface-docstrings-results.json"
       ],
       "review_conflicts": []
     },

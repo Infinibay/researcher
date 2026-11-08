@@ -22,16 +22,24 @@ router = APIRouter(prefix="/api/projects", tags=["runtime"])
 
 
 def install_run_errors(app: FastAPI):
+    """Register owner API mappings for missing runs, conflicting intents and uncertain peer closure
+    without treating uncertainty as a successful stop.
+    """
     async def not_found(request, exc):
+        """Map a project-scoped missing-run error to an HTTP 404 response."""
         return JSONResponse(status_code=404, content={"detail": str(exc)})
 
     async def conflict(request, exc):
+        """Map an incompatible or stale owner intent to HTTP 409 without retrying its action."""
         return JSONResponse(status_code=409, content={"detail": str(exc)})
 
     app.add_exception_handler(RunNotFound, not_found)
     app.add_exception_handler(RunConflict, conflict)
 
     async def uncertain(request, exc):
+        """Report unproved local closure as HTTP 503 while explicitly preserving uncertainty and
+        rejecting automatic replay.
+        """
         return JSONResponse(
             status_code=503,
             content={
@@ -43,6 +51,9 @@ def install_run_errors(app: FastAPI):
 
 
 def service(request: Request):
+    """Require the configured local subscription runtime for an owner action; absent runtime produces
+    service-unavailable rather than a provider fallback.
+    """
     runtime = request.app.state.runtime_service
     if runtime is None:
         raise HTTPException(
@@ -52,6 +63,9 @@ def service(request: Request):
 
 
 def read_store(request):
+    """Reuse the configured runtime store or bind the existing database for owner reads without
+    launching native execution.
+    """
     from backend.runtime.sqlite_runs import SQLiteRunStore
     from backend.tools.base.db import get_db_path
 
@@ -60,6 +74,7 @@ def read_store(request):
 
 
 def owner_view(request):
+    """Build owner-only read projections over the same database selected for this request."""
     from backend.runtime.views import OwnerRuntimeView
 
     return OwnerRuntimeView(read_store(request).database)
@@ -673,6 +688,9 @@ async def start_finding_review(
 
 
 class RetryStart(BaseModel):
+    """Carry an explicit stable retry key, expected task context and run fence; this request does not
+    authorize repeating an uncertain native effect.
+    """
     model_config = ConfigDict(extra="forbid", strict=True)
     operation_key: str = Field(pattern=r"^[A-Za-z0-9_.:-]{1,128}$")
     context_version: int = Field(ge=1)
@@ -680,6 +698,9 @@ class RetryStart(BaseModel):
 
 
 class CorrectContext(BaseModel):
+    """Carry an owner correction tied to the expected context version and its declared message/example
+    provenance.
+    """
     model_config = ConfigDict(extra="forbid", strict=True)
     operation_key: str = Field(pattern=r"^[A-Za-z0-9_.:-]{1,128}$")
     expected_version: int = Field(ge=1)
@@ -689,12 +710,18 @@ class CorrectContext(BaseModel):
     @field_validator("statement")
     @classmethod
     def nonempty_statement(cls, value):
+        """Reject a whitespace-only correction while preserving the owner's original nonempty statement
+        text.
+        """
         if not value.strip():
             raise ValueError("A correction needs a nonempty statement")
         return value
 
 
 class RecoverRun(BaseModel):
+    """Identify the original attempt and expected fence for explicit recovery under a stable operation
+    key, without authorizing a replacement run.
+    """
     model_config = ConfigDict(extra="forbid", strict=True)
     operation_key: str = Field(pattern=r"^[A-Za-z0-9_.:-]{1,128}$")
     attempt_id: str = Field(pattern=r"^[A-Za-z0-9_.:-]{1,128}$")
@@ -703,6 +730,9 @@ class RecoverRun(BaseModel):
 
 @router.get("/{project_id}/runs/{run_id}/recovery")
 async def inspect_recovery(project_id: int, run_id: str, request: Request):
+    """Return no-store evidence about the original attempt's recovery eligibility and blockers without
+    retiring peers or replaying work.
+    """
     from backend.runtime.recovery import RunRecovery
 
     data = await asyncio.to_thread(
@@ -715,6 +745,9 @@ async def inspect_recovery(project_id: int, run_id: str, request: Request):
 async def reconcile_run(
     project_id: int, run_id: str, body: RecoverRun, request: Request
 ):
+    """Request recovery of the explicitly named original attempt through the installed owner runtime,
+    preserving its operation key and fence.
+    """
     return await service(request).reconcile(
         project_id=project_id, run_id=run_id, **body.model_dump()
     )
@@ -794,11 +827,17 @@ async def preview_prior_files(project_id: Annotated[int, Path(gt=0)], task_id: A
 
 @router.get("/{project_id}/runs/{run_id}")
 async def read_run(project_id: int, run_id: str, request: Request):
+    """Read the project-scoped durable run record without inferring live process state from its saved
+    status.
+    """
     return asdict(await asyncio.to_thread(read_store(request).get, project_id, run_id))
 
 
 @router.post("/{project_id}/runs/{run_id}/retry-start", status_code=202)
 async def retry_start(project_id: int, run_id: str, body: RetryStart, request: Request):
+    """Request an explicit context/fence-bound start retry through the owner runtime; uncertain prior
+    effects remain subject to its reconciliation protocol.
+    """
     return asdict(
         await service(request).retry_start(
             project_id=project_id, run_id=run_id, **body.model_dump()
@@ -808,6 +847,9 @@ async def retry_start(project_id: int, run_id: str, body: RetryStart, request: R
 
 @router.post("/{project_id}/runs/{run_id}/stop", status_code=202)
 async def stop_run(project_id: int, run_id: str, request: Request):
+    """Withdraw the selected run through its original runtime owner and return the observed durable
+    state; this does not accept the task.
+    """
     return asdict(await service(request).stop(project_id, run_id))
 
 
@@ -848,6 +890,9 @@ async def history(
     after_id: int = Query(0, ge=0),
     limit: int = Query(100, ge=1, le=200),
 ):
+    """Read a bounded project event page after the given durable cursor without dispatching or
+    accepting any run.
+    """
     return asdict(
         await asyncio.to_thread(
             read_store(request).events, project_id, after_id=after_id, limit=limit
@@ -857,6 +902,9 @@ async def history(
 
 @router.get("/{project_id}/tasks/{task_id}/runtime-context")
 async def current_context(project_id: int, task_id: int, request: Request):
+    """Read the task's attributed current context snapshot so an owner action can bind the version
+    actually inspected.
+    """
     return await asyncio.to_thread(
         read_store(request).context_snapshot, project_id, task_id
     )
@@ -864,6 +912,9 @@ async def current_context(project_id: int, task_id: int, request: Request):
 
 @router.get("/{project_id}/runs/{run_id}/input")
 async def run_input(project_id: int, run_id: str, request: Request):
+    """Read the original frozen input record with no-store headers; this evidence does not silently
+    adopt later context or policy changes.
+    """
     data = await asyncio.to_thread(read_store(request).input_record, project_id, run_id)
     return JSONResponse(data, headers={"Cache-Control": "no-store"})
 
@@ -876,6 +927,9 @@ async def command_list(
     after_seq: int = Query(0, ge=0, le=9223372036854775807),
     limit: int = Query(25, ge=1, le=100),
 ):
+    """Read a bounded owner page of saved commands for this run, retaining job/attempt identities
+    rather than starting new work.
+    """
     data = await asyncio.to_thread(
         owner_view(request).command_list,
         project_id,
@@ -896,6 +950,9 @@ async def command_output(
     stderr_offset: int = Query(0, ge=0, le=2147483647),
     max_bytes: int = Query(8192, ge=1, le=16384),
 ):
+    """Read no-store stdout/stderr byte windows for the exact project/run/job identity; exit code,
+    local closure and task acceptance remain distinct.
+    """
     data = await asyncio.to_thread(
         owner_view(request).command_output,
         project_id,
@@ -915,6 +972,9 @@ async def question_inbox(
     after_id: int = Query(default=0, ge=0, le=9223372036854775807),
     limit: int = Query(default=100, ge=1, le=100),
 ):
+    """Read a bounded no-store page of retained owner questions and answer-readiness state without
+    answering or resuming the associated runs.
+    """
     data = await asyncio.to_thread(
         owner_view(request).question_inbox, project_id, after_id=after_id, limit=limit
     )

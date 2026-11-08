@@ -6964,7 +6964,9 @@
         "docs/modernization/network-recovery-docstrings-review.md",
         "docs/modernization/network-recovery-docstrings-results.json",
         "docs/modernization/analysis-docstrings-review.md",
-        "docs/modernization/analysis-docstrings-results.json"
+        "docs/modernization/analysis-docstrings-results.json",
+        "docs/modernization/owner-interface-docstrings-review.md",
+        "docs/modernization/owner-interface-docstrings-results.json"
       ],
       "verified": [
         "88authored English docstrings across coordinator/contracts/SQLite/peer registry",
@@ -6980,11 +6982,13 @@
         "48 English docstrings across egress proxy/channel, network assets, process identity and run recovery; 355 cumulative in 21 modules",
         "Executable AST, 7 policies and 48 business wire definitions unchanged; 88 source tests pass",
         "18 English docstrings in analysis tools; 373 cumulative in 22 modules",
-        "Exactly four model-visible argument schema descriptions added; fields/types/bounds/defaults/tool descriptions unchanged; 43 source tests pass"
+        "Exactly four model-visible argument schema descriptions added; fields/types/bounds/defaults/tool descriptions unchanged; 43 source tests pass",
+        "43 English docstrings across local owner access, run routes, questions and read views; 416 cumulative in 26 modules",
+        "14 owner OpenAPI descriptions added, all other OpenAPI values unchanged; 55 source tests pass"
       ],
       "remaining": [
         "Review other relevant interfaces and JSDoc",
-        "248 definitions outside completed scope lack docstrings; assess actual responsibility/relevance, do not auto-fill",
+        "205 definitions outside completed scope lack docstrings; assess actual responsibility/relevance, do not auto-fill",
         "Final package/global validation"
       ],
       "limits": [
@@ -6993,9 +6997,9 @@
         "Older installed wheel does not contain these new documentation bytes",
         "Four analysis argument schema descriptions intentionally change model-visible metadata; no efficacy claim"
       ],
-      "cumulative_added_docstrings": 373,
-      "cumulative_modules": 22,
-      "remaining_presence_count": 248
+      "cumulative_added_docstrings": 416,
+      "cumulative_modules": 26,
+      "remaining_presence_count": 205
     }
   }
 }

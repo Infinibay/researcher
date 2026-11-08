@@ -22,11 +22,17 @@ logger = logging.getLogger(__name__)
 
 
 def _digest(value: str) -> str:
+    """Hash a local pairing/session/CSRF value for comparison or lookup without storing another
+    plaintext copy; a digest alone is not an authenticated owner session.
+    """
     return hashlib.sha256(value.encode()).hexdigest()
 
 
 @dataclass
 class OwnerSession:
+    """Retain one process-local owner session's CSRF secret, monotonic expiry and explicit revocation
+    state, separate from model tool grants.
+    """
     csrf_token: str
     expires: float
     active: bool = True
@@ -44,6 +50,9 @@ class LocalAccess:
         clock=time.monotonic,
         session_seconds=28800,
     ):
+        """Configure bounded local owner sessions and trusted hosts/origins, optionally binding an
+        existing pairing secret without creating credential files.
+        """
         from backend.api.config import CORS_ORIGINS
 
         if pairing_key is not None and len(pairing_key) < 32:
@@ -96,6 +105,9 @@ class LocalAccess:
         print(f"Researcher local access code file: {path}", file=sys.stderr, flush=True)
 
     def close(self):
+        """Revoke all local sessions, clear pairing authority and remove this process's generated
+        pairing file when present.
+        """
         for session in self._sessions.values():
             session.active = False
         self._sessions.clear()
@@ -105,9 +117,15 @@ class LocalAccess:
             self.key_file = None
 
     def valid(self, session: OwnerSession | None) -> bool:
+        """Check a retained session's active flag and monotonic deadline without extending its
+        lifetime.
+        """
         return session is not None and session.active and self.clock() < session.expires
 
     def session(self, connection: HTTPConnection) -> OwnerSession | None:
+        """Resolve a bounded owner cookie through its hash and return only a currently valid process-
+        local session.
+        """
         token = connection.cookies.get(COOKIE, "")
         if len(token) > 256:
             return None
@@ -115,6 +133,9 @@ class LocalAccess:
         return session if self.valid(session) else None
 
     def pair(self, code: str) -> tuple[str, OwnerSession]:
+        """Validate the pairing code under failure-rate and live-session bounds, then return a new
+        opaque cookie token and its separate CSRF session.
+        """
         now = self.clock()
         self._failures = [t for t in self._failures if now - t < 60]
         if len(self._failures) >= 20:
@@ -139,6 +160,9 @@ class LocalAccess:
         return token, session
 
     def revoke(self, session: OwnerSession):
+        """Invalidate the selected session and prune all expired or revoked session entries without
+        changing the host's subscription credentials.
+        """
         session.active = False
         self._sessions = {
             key: value for key, value in self._sessions.items() if self.valid(value)
@@ -149,6 +173,9 @@ class OwnerAccessMiddleware:
     """Separate owner sessions/CSRF and optional physical endpoint binding from model-side tool authority."""
 
     def __init__(self, app, *, access: LocalAccess):
+        """Bind the downstream ASGI app to its host-selected local owner authority without creating a
+        session or starting serving.
+        """
         self.app = app
         self.access = access
 
@@ -160,6 +187,9 @@ class OwnerAccessMiddleware:
         websocket = scope["type"] == "websocket"
 
         async def deny(status, detail):
+            """Return a no-store HTTP error or close a WebSocket with policy violation before
+            forwarding the rejected request.
+            """
             if websocket:
                 await send({"type": "websocket.close", "code": 1008})
             else:
@@ -207,6 +237,9 @@ class OwnerAccessMiddleware:
             closed = False
 
             async def guarded_send(message):
+                """Recheck the original session before WebSocket output and close a revoked or expired
+                connection instead of delivering more owner data.
+                """
                 nonlocal closed
                 if (
                     not self.access.valid(session)
@@ -219,6 +252,9 @@ class OwnerAccessMiddleware:
                 await send(message)
 
             async def guarded_receive():
+                """Poll incoming WebSocket activity within short observation windows and emit a
+                disconnect when the original session ceases to be valid.
+                """
                 nonlocal closed
                 while self.access.valid(session):
                     try:

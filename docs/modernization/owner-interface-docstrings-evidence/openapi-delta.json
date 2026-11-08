@@ -1,0 +1,61 @@
+{
+  "scope": "Only documentation descriptions added. Paths, methods, constraints, references and other OpenAPI values unchanged.",
+  "changes": [
+    {
+      "path": "/components/schemas/CorrectContext/description",
+      "added_description": "Carry an owner correction tied to the expected context version and its declared message/example\nprovenance."
+    },
+    {
+      "path": "/components/schemas/RecoverRun/description",
+      "added_description": "Identify the original attempt and expected fence for explicit recovery under a stable operation\nkey, without authorizing a replacement run."
+    },
+    {
+      "path": "/components/schemas/RetryStart/description",
+      "added_description": "Carry an explicit stable retry key, expected task context and run fence; this request does not\nauthorize repeating an uncertain native effect."
+    },
+    {
+      "path": "/paths//api/projects/{project_id}/questions/get/description",
+      "added_description": "Read a bounded no-store page of retained owner questions and answer-readiness state without\nanswering or resuming the associated runs."
+    },
+    {
+      "path": "/paths//api/projects/{project_id}/runs/{run_id}/get/description",
+      "added_description": "Read the project-scoped durable run record without inferring live process state from its saved\nstatus."
+    },
+    {
+      "path": "/paths//api/projects/{project_id}/runs/{run_id}/input/get/description",
+      "added_description": "Read the original frozen input record with no-store headers; this evidence does not silently\nadopt later context or policy changes."
+    },
+    {
+      "path": "/paths//api/projects/{project_id}/runs/{run_id}/jobs/get/description",
+      "added_description": "Read a bounded owner page of saved commands for this run, retaining job/attempt identities\nrather than starting new work."
+    },
+    {
+      "path": "/paths//api/projects/{project_id}/runs/{run_id}/jobs/{job_id}/get/description",
+      "added_description": "Read no-store stdout/stderr byte windows for the exact project/run/job identity; exit code,\nlocal closure and task acceptance remain distinct."
+    },
+    {
+      "path": "/paths//api/projects/{project_id}/runs/{run_id}/recovery/get/description",
+      "added_description": "Return no-store evidence about the original attempt's recovery eligibility and blockers without\nretiring peers or replaying work."
+    },
+    {
+      "path": "/paths//api/projects/{project_id}/runs/{run_id}/recovery/post/description",
+      "added_description": "Request recovery of the explicitly named original attempt through the installed owner runtime,\npreserving its operation key and fence."
+    },
+    {
+      "path": "/paths//api/projects/{project_id}/runs/{run_id}/retry-start/post/description",
+      "added_description": "Request an explicit context/fence-bound start retry through the owner runtime; uncertain prior\neffects remain subject to its reconciliation protocol."
+    },
+    {
+      "path": "/paths//api/projects/{project_id}/runs/{run_id}/stop/post/description",
+      "added_description": "Withdraw the selected run through its original runtime owner and return the observed durable\nstate; this does not accept the task."
+    },
+    {
+      "path": "/paths//api/projects/{project_id}/runtime-events/get/description",
+      "added_description": "Read a bounded project event page after the given durable cursor without dispatching or\naccepting any run."
+    },
+    {
+      "path": "/paths//api/projects/{project_id}/tasks/{task_id}/runtime-context/get/description",
+      "added_description": "Read the task's attributed current context snapshot so an owner action can bind the version\nactually inspected."
+    }
+  ]
+}

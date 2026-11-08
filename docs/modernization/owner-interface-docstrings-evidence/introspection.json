@@ -1,0 +1,8 @@
+{
+  "policy_bodies_unchanged": 7,
+  "business_descriptions_schemas_annotations_unchanged": 48,
+  "owner_openapi_descriptions_added": 14,
+  "other_openapi_values_unchanged": true,
+  "remaining_owned_definitions_without_docstring": 205,
+  "scope": "Presence only, not adequacy or equal relevance."
+}

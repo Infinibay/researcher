@@ -2732,9 +2732,9 @@
       "previous_dependencies_sha256": "9e237badd19bfe7d39ac5485bd809b08bf24ab6bfb2d78ac7bdd85a4765bfc79"
     },
     "backend/runtime/run_inputs.py::conversation_history": {
-      "dependencies_sha256": "52da21faa41f8e8129f78b0bfc8f134116ddf606b90cce059888492acc6f62c4",
+      "dependencies_sha256": "b4683df382c4be7b27cfa7638ce05c56e8ea5ad021ed85d6951cd2f0fbf2de19",
       "decision": "retained_input_renderer",
-      "rationale": "Candidate source is byte-identical to416abed. Its only changed direct module consumer is sqlite_runs.py, with41authored docstrings and an executable AST identical after removing documentation. Existing imports/calls to review subject/current-state helpers and freeze_input are unchanged. Checked7native instruction bodies and48business tool descriptions/schemas/annotations byte-for-byte: no model-visible policy delta. No authority, persistence or rendering behavior change is claimed from comments; broader introspection is outside this check.",
+      "rationale": "Candidate source is byte-identical to3f1e19d. Changed direct module consumers contain only authored documentation in views.py; executable AST and imports/calls are unchanged. Owner route/model descriptions are intentionally added to OpenAPI, with all other OpenAPI values checked equal. Seven native policies and48business tool descriptions/schemas/annotations are unchanged. No change to frozen-context rendering, provenance, answer authority or replay semantics; no prompting efficacy or human acceptance is inferred.",
       "evidence": [
         "backend/runtime/run_inputs.py",
         "docs/prompts/review-2026-11-07.md",
@@ -2755,7 +2755,9 @@
         "backend/tests/runtime/test_manual_prerequisite_review.py",
         "backend/tests/runtime/test_dependency_authority.py",
         "docs/modernization/core-docstrings-review.md",
-        "docs/modernization/core-docstrings-results.json"
+        "docs/modernization/core-docstrings-results.json",
+        "docs/modernization/owner-interface-docstrings-review.md",
+        "docs/modernization/owner-interface-docstrings-results.json"
       ],
       "conflicts": [],
       "previous_review": {
@@ -2774,16 +2776,16 @@
       },
       "reviewed_at": "2026-11-08",
       "source_base_commit": "416abedd2415d8164bb7de77d97230335e5e974a",
-      "revalidation": "Candidate source is byte-identical to416abed. Its only changed direct module consumer is sqlite_runs.py, with41authored docstrings and an executable AST identical after removing documentation. Existing imports/calls to review subject/current-state helpers and freeze_input are unchanged. Checked7native instruction bodies and48business tool descriptions/schemas/annotations byte-for-byte: no model-visible policy delta. No authority, persistence or rendering behavior change is claimed from comments; broader introspection is outside this check.",
-      "revalidation_baseline_commit": "dd1be91",
-      "reviewer": "Codex, executable-AST and source/consumer delta review",
-      "previous_dependencies_sha256": "a28284e3374b00feb2cf428703d831e5468c19f17fbccb88e34d89f452a782c8",
+      "revalidation": "Candidate source is byte-identical to3f1e19d. Changed direct module consumers contain only authored documentation in views.py; executable AST and imports/calls are unchanged. Owner route/model descriptions are intentionally added to OpenAPI, with all other OpenAPI values checked equal. Seven native policies and48business tool descriptions/schemas/annotations are unchanged. No change to frozen-context rendering, provenance, answer authority or replay semantics; no prompting efficacy or human acceptance is inferred.",
+      "revalidation_baseline_commit": "3f1e19d",
+      "reviewer": "Codex, documentation consumer and OpenAPI metadata delta review",
+      "previous_dependencies_sha256": "52da21faa41f8e8129f78b0bfc8f134116ddf606b90cce059888492acc6f62c4",
       "reviewed_source_state": "Base plus documentation-only changes to four core modules"
     },
     "backend/runtime/run_inputs.py::freeze_input": {
-      "dependencies_sha256": "52da21faa41f8e8129f78b0bfc8f134116ddf606b90cce059888492acc6f62c4",
+      "dependencies_sha256": "b4683df382c4be7b27cfa7638ce05c56e8ea5ad021ed85d6951cd2f0fbf2de19",
       "decision": "retained_input_renderer",
-      "rationale": "Candidate source is byte-identical to416abed. Its only changed direct module consumer is sqlite_runs.py, with41authored docstrings and an executable AST identical after removing documentation. Existing imports/calls to review subject/current-state helpers and freeze_input are unchanged. Checked7native instruction bodies and48business tool descriptions/schemas/annotations byte-for-byte: no model-visible policy delta. No authority, persistence or rendering behavior change is claimed from comments; broader introspection is outside this check.",
+      "rationale": "Candidate source is byte-identical to3f1e19d. Changed direct module consumers contain only authored documentation in views.py; executable AST and imports/calls are unchanged. Owner route/model descriptions are intentionally added to OpenAPI, with all other OpenAPI values checked equal. Seven native policies and48business tool descriptions/schemas/annotations are unchanged. No change to frozen-context rendering, provenance, answer authority or replay semantics; no prompting efficacy or human acceptance is inferred.",
       "evidence": [
         "backend/runtime/run_inputs.py",
         "docs/prompts/review-2026-11-07.md",
@@ -2804,7 +2806,9 @@
         "backend/tests/runtime/test_manual_prerequisite_review.py",
         "backend/tests/runtime/test_dependency_authority.py",
         "docs/modernization/core-docstrings-review.md",
-        "docs/modernization/core-docstrings-results.json"
+        "docs/modernization/core-docstrings-results.json",
+        "docs/modernization/owner-interface-docstrings-review.md",
+        "docs/modernization/owner-interface-docstrings-results.json"
       ],
       "conflicts": [],
       "previous_review": {
@@ -2823,10 +2827,10 @@
       },
       "reviewed_at": "2026-11-08",
       "source_base_commit": "416abedd2415d8164bb7de77d97230335e5e974a",
-      "revalidation": "Candidate source is byte-identical to416abed. Its only changed direct module consumer is sqlite_runs.py, with41authored docstrings and an executable AST identical after removing documentation. Existing imports/calls to review subject/current-state helpers and freeze_input are unchanged. Checked7native instruction bodies and48business tool descriptions/schemas/annotations byte-for-byte: no model-visible policy delta. No authority, persistence or rendering behavior change is claimed from comments; broader introspection is outside this check.",
-      "revalidation_baseline_commit": "dd1be91",
-      "reviewer": "Codex, executable-AST and source/consumer delta review",
-      "previous_dependencies_sha256": "a28284e3374b00feb2cf428703d831e5468c19f17fbccb88e34d89f452a782c8",
+      "revalidation": "Candidate source is byte-identical to3f1e19d. Changed direct module consumers contain only authored documentation in views.py; executable AST and imports/calls are unchanged. Owner route/model descriptions are intentionally added to OpenAPI, with all other OpenAPI values checked equal. Seven native policies and48business tool descriptions/schemas/annotations are unchanged. No change to frozen-context rendering, provenance, answer authority or replay semantics; no prompting efficacy or human acceptance is inferred.",
+      "revalidation_baseline_commit": "3f1e19d",
+      "reviewer": "Codex, documentation consumer and OpenAPI metadata delta review",
+      "previous_dependencies_sha256": "52da21faa41f8e8129f78b0bfc8f134116ddf606b90cce059888492acc6f62c4",
       "reviewed_source_state": "Base plus documentation-only changes to four core modules"
     },
     "backend/runtime/scientific_instructions.py::SCIENTIFIC_RESEARCH_INSTRUCTIONS": {

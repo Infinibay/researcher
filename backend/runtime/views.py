@@ -23,6 +23,9 @@ _JOB_COLUMNS = """j.rowid AS seq,j.id AS job_id,j.attempt_id,j.operation_key,
 
 
 def _job_summary(row, run):
+    """Project a saved command identity and output sizes, keeping observed exit and peer-closure
+    receipt separate from task acceptance or a live process probe.
+    """
     return {
         "job_id": row["job_id"],
         "seq": str(row["seq"]),
@@ -56,6 +59,9 @@ class OwnerRuntimeView:
         self.runs = SQLiteRunStore(database)
 
     def command_list(self, project_id, run_id, *, after_seq=0, limit=25):
+        """Read a bounded cursor page of one project-scoped run's saved commands and total count in one
+        database transaction.
+        """
         if type(after_seq) is not int or not 0 <= after_seq <= 9223372036854775807:
             raise ValueError("Invalid command cursor")
         if type(limit) is not int or not 1 <= limit <= 100:
@@ -90,6 +96,9 @@ class OwnerRuntimeView:
         stderr_offset=0,
         max_bytes=8192,
     ):
+        """Read both exact BLOB byte windows in one scoped snapshot without materializing the entire
+        output; return canonical offsets and lossy-preview flags.
+        """
         text(job_id, "job_id", 128)
         if any(
             type(offset) is not int or not 0 <= offset <= 2147483647
@@ -345,6 +354,9 @@ class OwnerRuntimeView:
             }
 
     def instruction_message(self, project_id, run_id):
+        """Read the original instruction message joined to the exact project/run conversation link,
+        rejecting an absent or foreign record.
+        """
         with closing(connect(self.database, existing_only=True)) as conn:
             row = conn.execute(
                 MESSAGE_SELECT
