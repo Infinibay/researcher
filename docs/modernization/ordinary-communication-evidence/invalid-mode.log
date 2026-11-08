@@ -1,0 +1,3 @@
+usage: purpose_framing.py [-h] --assets ASSETS --output OUTPUT [--prepare]
+                          [--live] [--configured-limits]
+purpose_framing.py: error: --configured-limits selects registration only; live uses its frozen protocol

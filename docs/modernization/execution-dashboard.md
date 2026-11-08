@@ -28,7 +28,30 @@ que se pueda comparar el avance; no presentar microajustes como tareas principal
 - Última suite global: `9fb873c`,2210 casos,2178 pasan,31 fallan y1 error de fixture; sin omisiones. La carrera de backup encontrada se corrigió después con40 pruebas instaladas. No se declara una nueva corrida global verde; la referencia `0c8b8d9` queda como evidencia histórica.
 - U01–U07, E01–E12, C01–C10 y D01–D13 quedan comprobados con el alcance de sus matrices; sigue 1 de 43 escenarios amplios sin aceptación completa en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Estado actual: adquisición y entrega ejecutables comprobadas
+## Estado actual: explicación ordinaria entregada, feedback humano pendiente
+
+[Explicación real](ordinary-communication-explanation.md) e
+[informe](ordinary-communication-review.md). Observación iniciada **20:01:19 UTC**;
+98,669 s de ejecución. La comprobación de contenido y citas se leyó a las
+**20:07:48 UTC**. Preparación, observación y checkpoint son tiempos distintos.
+
+- Terminado por alcance: un turno real con política 11 y límites operativos de
+  350 000 tokens y 25 herramientas. Final `completed`, 295 palabras en español,
+  informe/propuesta y cero cambios de configuración o aceptación. Se observaron
+  285 862 tokens, nueve rondas y 14 herramientas; cinco peers cerrados, cero grants.
+  Las 118 líneas Ken, citas y hashes se comprobaron. Sin receta o respuesta inyectadas.
+- En curso: feedback práctico opcional solicitado sobre esa explicación;
+  comprensión y adaptación todavía desconocidas. Continuar trabajo independiente
+  con documentación relevante, accesibilidad/detalles y cierre integrado.
+- Pendientes: U08 humano; distribución Ken/ONNX; documentación restante
+  (416 añadidos, 205 faltantes por presencia); accesibilidad y detalles; paquete,
+  suite global y revisión independiente finales.
+- Límites: no éxito con 120k ni eficiencia/causalidad; ambos fallos se conservan.
+  DD157–160 mantienen error de argumento, estilo previo, enlaces/idioma y coste.
+  Estado amplio: **12/12 páginas por alcance, 42/43 escenarios**. Sin nueva suite
+  global verde, push, merge o despliegue.
+
+## Etapa anterior: adquisición y entrega ejecutables comprobadas
 
 [Informe](complete-acquisition-review.md). **19:38:13–19:54:27 UTC: 16 min 14 s**
 hasta comprobación; informe/checkpoint después. Cinco casos: 77,57 s, sin omisiones.

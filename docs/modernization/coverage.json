@@ -2412,15 +2412,15 @@
         "docs/modernization/coarse-delivery-policy-evidence/native-result.json",
         "docs/modernization/complete-acquisition-review.md",
         "docs/modernization/complete-acquisition-results.json",
-        "backend/tests/runtime/test_investigation_acquisition_cell.py"
+        "backend/tests/runtime/test_investigation_acquisition_cell.py",
+        "docs/modernization/ordinary-communication-review.md",
+        "docs/modernization/ordinary-communication-results.json",
+        "docs/modernization/ordinary-communication-explanation.md"
       ],
       "remaining": [
-        "Initial example rejected by the user as unhelpful; revised task-grounded example has no human acceptance yet",
-        "Evaluate actual generated explanations and correction/adaptation under final policy; rendering and scripted tests do not establish understanding",
-        "Actual-plan question had insufficient framing per owner feedback; no comprehension acceptance established",
-        "Coarse composed delivery is viable in one real offline code-host cell with authored fixture code; native policy guidance, actual generated budget fit and human acceptance remain unproven. Original failed explanation remains failed.",
-        "Catalog11 orientation is connected but actual same-case delivery failed at126302observed tokens/120000; validate executable acquisition and reserve native final before another observation.",
-        "Executable acquisition/delivery control now passes with realKen and strict source guards; generated final/explanation and observed human acceptance remain unproven. A separate configured350k observation is planned, not a120k performance success."
+        "Observe owner feedback/useful correction and adaptation on the actual task-grounded explanation; comprehension/acceptance unknown",
+        "Retain both120kfailures. Ordinary350k delivery is observed, not120kfit, efficiency or causal improvement",
+        "General production acquisition/provenance and final accessibility/global/review gates retain their scope"
       ]
     }
   },
@@ -2888,7 +2888,10 @@
         "evals/communication/purpose_framing.py",
         "docs/modernization/coarse-delivery-policy-review.md",
         "docs/modernization/coarse-delivery-policy-results.json",
-        "docs/modernization/coarse-delivery-policy-evidence/native-result.json"
+        "docs/modernization/coarse-delivery-policy-evidence/native-result.json",
+        "docs/modernization/ordinary-communication-review.md",
+        "docs/modernization/ordinary-communication-results.json",
+        "docs/modernization/ordinary-communication-explanation.md"
       ],
       "remaining": [
         "Observe human comprehension, useful correction and adaptation on a recognizable task with purpose, data relationships and input/output framing; U08 is not accepted.",
@@ -2922,6 +2925,17 @@
         "proposals": 0,
         "human_comprehension": null,
         "scope": "One registered development observation; not causal or held-out. Executable acquisition composition remains unverified."
+      },
+      "ordinary_configured_budget_delivery": {
+        "native_status": "completed",
+        "run_status": "needs_review",
+        "words": 295,
+        "observed_tokens": 285862,
+        "token_limit": 350000,
+        "native_rounds": 9,
+        "actual_model_turns": 1,
+        "human_comprehension": null,
+        "human_feedback": "pending"
       }
     },
     "prompt_inventory": {
@@ -2999,7 +3013,10 @@
         "docs/modernization/core-docstrings-results.json",
         "docs/modernization/coarse-delivery-policy-review.md",
         "docs/modernization/coarse-delivery-policy-results.json",
-        "docs/modernization/coarse-delivery-policy-evidence/native-result.json"
+        "docs/modernization/coarse-delivery-policy-evidence/native-result.json",
+        "docs/modernization/ordinary-communication-review.md",
+        "docs/modernization/ordinary-communication-results.json",
+        "docs/modernization/ordinary-communication-explanation.md"
       ],
       "implemented": "Current catalog10static semantic source/consumer review:322owned Python files,85candidates,85current decisions.12delta reviews against64d9e28,73unchanged; exact historical2–9headers preserved. One new actual explanation observation failed at147058/120000observedtokens before final delivery; no human acceptance.",
       "remaining": [
@@ -3042,6 +3059,17 @@
         "proposals": 0,
         "human_comprehension": null,
         "scope": "One registered development observation; not causal or held-out. Executable acquisition composition remains unverified."
+      },
+      "ordinary_configured_budget_delivery": {
+        "native_status": "completed",
+        "run_status": "needs_review",
+        "words": 295,
+        "observed_tokens": 285862,
+        "token_limit": 350000,
+        "native_rounds": 9,
+        "actual_model_turns": 1,
+        "human_comprehension": null,
+        "human_feedback": "pending"
       }
     },
     "context_evals": {
@@ -3152,7 +3180,10 @@
         "evals/communication/purpose_framing.py",
         "docs/modernization/coarse-delivery-policy-review.md",
         "docs/modernization/coarse-delivery-policy-results.json",
-        "docs/modernization/coarse-delivery-policy-evidence/native-result.json"
+        "docs/modernization/coarse-delivery-policy-evidence/native-result.json",
+        "docs/modernization/ordinary-communication-review.md",
+        "docs/modernization/ordinary-communication-results.json",
+        "docs/modernization/ordinary-communication-explanation.md"
       ],
       "remaining": [
         "Observe human comprehension, useful correction and adaptation on a recognizable task with purpose, data relationships and input/output framing; U08 is not accepted.",
@@ -3185,6 +3216,17 @@
         "proposals": 0,
         "human_comprehension": null,
         "scope": "One registered development observation; not causal or held-out. Executable acquisition composition remains unverified."
+      },
+      "ordinary_configured_budget_delivery": {
+        "native_status": "completed",
+        "run_status": "needs_review",
+        "words": 295,
+        "observed_tokens": 285862,
+        "token_limit": 350000,
+        "native_rounds": 9,
+        "actual_model_turns": 1,
+        "human_comprehension": null,
+        "human_feedback": "pending"
       }
     },
     "data_migrations": {
@@ -5990,7 +6032,10 @@
         "evals/communication/purpose_framing.py",
         "docs/modernization/coarse-delivery-policy-review.md",
         "docs/modernization/coarse-delivery-policy-results.json",
-        "docs/modernization/coarse-delivery-policy-evidence/native-result.json"
+        "docs/modernization/coarse-delivery-policy-evidence/native-result.json",
+        "docs/modernization/ordinary-communication-review.md",
+        "docs/modernization/ordinary-communication-results.json",
+        "docs/modernization/ordinary-communication-explanation.md"
       ],
       "remaining": [
         "Observe human comprehension, useful correction and adaptation on a recognizable task with purpose, data relationships and input/output framing; U08 is not accepted.",
@@ -6026,6 +6071,17 @@
         "proposals": 0,
         "human_comprehension": null,
         "scope": "One registered development observation; not causal or held-out. Executable acquisition composition remains unverified."
+      },
+      "ordinary_configured_budget_delivery": {
+        "native_status": "completed",
+        "run_status": "needs_review",
+        "words": 295,
+        "observed_tokens": 285862,
+        "token_limit": 350000,
+        "native_rounds": 9,
+        "actual_model_turns": 1,
+        "human_comprehension": null,
+        "human_feedback": "pending"
       }
     },
     "observed_delivery_budget": {
@@ -6297,7 +6353,10 @@
         "evals/communication/purpose_framing.py",
         "docs/modernization/coarse-delivery-policy-review.md",
         "docs/modernization/coarse-delivery-policy-results.json",
-        "docs/modernization/coarse-delivery-policy-evidence/native-result.json"
+        "docs/modernization/coarse-delivery-policy-evidence/native-result.json",
+        "docs/modernization/ordinary-communication-review.md",
+        "docs/modernization/ordinary-communication-results.json",
+        "docs/modernization/ordinary-communication-explanation.md"
       ],
       "remaining": [
         "Initial example rejected by the user as unhelpful; revised task-grounded example has no human acceptance yet",
@@ -6324,6 +6383,17 @@
         "proposals": 0,
         "human_comprehension": null,
         "scope": "One registered development observation; not causal or held-out. Executable acquisition composition remains unverified."
+      },
+      "ordinary_configured_budget_delivery": {
+        "native_status": "completed",
+        "run_status": "needs_review",
+        "words": 295,
+        "observed_tokens": 285862,
+        "token_limit": 350000,
+        "native_rounds": 9,
+        "actual_model_turns": 1,
+        "human_comprehension": null,
+        "human_feedback": "pending"
       }
     },
     "owner_historical_data_acceptance": {
@@ -6998,7 +7068,7 @@
       }
     },
     "purpose_framing_policy": {
-      "status": "implemented_runtime_delivery_evaluation_incomplete",
+      "status": "implemented_runtime_generated_delivery_observed_human_pending",
       "scope": "Explicit owner clarity feedback is in shared policy10; new actual-source explanatory case failed before final response",
       "evidence": [
         "docs/modernization/purpose-framing-review.md",
@@ -7006,11 +7076,14 @@
         "docs/modernization/purpose-framing-evidence/registration.json",
         "backend/prompts/native.py",
         "backend/tests/runtime/test_prompt_catalog.py",
-        "evals/communication/purpose_framing.py"
+        "evals/communication/purpose_framing.py",
+        "docs/modernization/ordinary-communication-review.md",
+        "docs/modernization/ordinary-communication-results.json",
+        "docs/modernization/ordinary-communication-explanation.md"
       ],
       "remaining": [
-        "Useful final explanation/correction/adaptation and observed human comprehension",
-        "Keep original120k-budget failure and partial finding; do not relabel it successful"
+        "Observe useful owner feedback/correction, adaptation and comprehension on delivered real explanation",
+        "Keep both120kfailures unchanged; ordinary350k result is not efficiency or120kfit"
       ],
       "limits": [
         "No general prompt efficacy or final global-suite claim",
@@ -7098,7 +7171,10 @@
         "docs/modernization/coarse-delivery-policy-evidence/native-result.json",
         "docs/modernization/complete-acquisition-review.md",
         "docs/modernization/complete-acquisition-results.json",
-        "backend/tests/runtime/test_investigation_acquisition_cell.py"
+        "backend/tests/runtime/test_investigation_acquisition_cell.py",
+        "docs/modernization/ordinary-communication-review.md",
+        "docs/modernization/ordinary-communication-results.json",
+        "docs/modernization/ordinary-communication-explanation.md"
       ],
       "verified": [
         "55source and55installed tests pass with zero skips",
@@ -7107,15 +7183,34 @@
         "Authored acquisition+delivery through real publicKen/code host:5source tests pass, including truncation/withdrawal/hash-mismatch stops; no model calls"
       ],
       "remaining": [
-        "Actual generated final/explanation and human correction under explicitly registered operational limits",
+        "Observe owner feedback/correction/adaptation on ordinary configured-budget explanation",
         "General production acquisition input/provenance contract beyond fixed trusted fixture descriptors",
-        "Efficiency under120k remains unproved; preserve both failed observations"
+        "Efficiency under120k unproved; preserve both failed observations"
       ],
       "limits": [
         "No causal efficacy or general budget-fit proof",
         "Observed ceiling crossed by consumed native round;not provider billing/cost estimate",
         "Original failed observation retained"
       ]
+    },
+    "ordinary_configured_communication": {
+      "status": "generated_delivery_observed_human_pending",
+      "scope": "One preregistered actual subscription/Ken explanation of real model-setting code under configured350kbudget, separate from120kdevelopment condition",
+      "evidence": [
+        "docs/modernization/ordinary-communication-review.md",
+        "docs/modernization/ordinary-communication-results.json",
+        "docs/modernization/ordinary-communication-explanation.md"
+      ],
+      "verified": [
+        "Nativecompleted/needs_review,295Spanishwords,typedreport/proposal,0acceptances/0modelsettingchanges",
+        "Exactpolicy11,complete118lineKen read,sourcehashes/exactquotes,5peersclosed/0grants",
+        "Default120kmode unchanged,configuredmode respectsoperatorcaps,invalidlivebudgetselectionrefused"
+      ],
+      "remaining": [
+        "Useful observed owner correction/adaptation and comprehension",
+        "Deferred link/header/error/efficiency details and final whole-branch validation"
+      ],
+      "human_comprehension": null
     }
   }
 }

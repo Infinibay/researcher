@@ -1,0 +1,26 @@
+{
+  "scope": "Prospective ordinary delivery/clarity observation, not efficiency or a replacement120k result",
+  "default_development_limits_unchanged": {
+    "wall_seconds": 180,
+    "no_progress_seconds": 90,
+    "max_turns": 1,
+    "max_tool_calls": 20,
+    "max_observed_tokens": 120000,
+    "max_answer_bytes": 12000
+  },
+  "configured_operator_limits": {
+    "wall_seconds": 180,
+    "no_progress_seconds": 90,
+    "max_turns": 1,
+    "max_tool_calls": 25,
+    "max_observed_tokens": 350000,
+    "max_answer_bytes": 12000
+  },
+  "same_case_and_sources": true,
+  "same_policy11_body_except_budget": true,
+  "maximum_model_turns": 1,
+  "original_failed_results_preserved": true,
+  "no_recipe_or_prebuilt_answer_injected": true,
+  "human_comprehension": null,
+  "registration_sha256": "a81ff2ea5533f5964ed36df0aeea7a4b263398714988cf1deb479c0f58bd328e"
+}

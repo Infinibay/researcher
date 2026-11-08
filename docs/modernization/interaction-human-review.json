@@ -34,5 +34,24 @@
     "technical_scope": "Actual generated explanation has purpose, supplied patient counts, calculated rates and explicit causal limits; independent review finds relative-change teaching incomplete and excess implementation detail.",
     "human_acceptance": "not_observed",
     "next_step": "Use actual inspectable task output and useful correction opportunities, without another abstract comprehension quiz."
+  },
+  "ordinary_generated_delivery": {
+    "status": "presented_human_feedback_pending",
+    "evidence": [
+      "docs/modernization/ordinary-communication-explanation.md",
+      "docs/modernization/ordinary-communication-review.md",
+      "docs/modernization/ordinary-communication-results.json"
+    ],
+    "actual_native_status": "completed",
+    "run_status": "needs_review",
+    "policy_version": 11,
+    "configured_token_limit": 350000,
+    "observed_tokens": 285862,
+    "native_rounds": 9,
+    "words": 295,
+    "historical_feedback_applied": true,
+    "current_human_comprehension": null,
+    "current_human_acceptance": null,
+    "note": "Practical optional feedback requested once after presenting a real task-grounded explanation. Earlier rejected/unevaluated examples keep their original status."
   }
 }

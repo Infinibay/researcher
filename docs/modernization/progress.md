@@ -9771,3 +9771,30 @@ SEPARADA preregistrada bajo límites ordinarios, misma pregunta/fuentes/Ken/pol�
 sin respuesta precocinada. No reescribir fallos120k ni alegar eficiencia/causalidad;
 comprensión humana queda pendiente. No anteponer otra API al resultado humano.
 Siguen Ken/ONNX, documentación, accesibilidad y cierre integrado, sin global verde.
+
+## 2026-11-08 — Explicación real bajo límites operativos
+
+[Explicación](ordinary-communication-explanation.md) e
+[informe](ordinary-communication-review.md). Modo explícito de registro ordinario,
+limitado por configuración del operador/proyecto. El modo de desarrollo mantiene
+120k/20 y la selección inválida de presupuesto en `--live` se rechaza antes de admitir.
+Misma pregunta, fuentes, criterios, modelo/esfuerzo y cuerpo de política 11;
+sin receta ni respuesta inyectadas.
+
+Un intento: native `completed`, run `needs_review`, 295 palabras, dos hallazgos,
+un informe y una propuesta; cero aceptaciones o ajustes. Se observaron 285 862
+tokens, nueve rondas y 14 herramientas en 98,669 s. Cinco peers cerrados, cero
+grants, servicio -15. Política exacta, 118 líneas Ken, hashes y citas comprobados.
+
+Ambos fallos de 120k siguen fallidos. El resultado comprueba entrega ordinaria,
+no optimización, causalidad o cabida en 120k. Revisión manual del contenido por
+el implementador; feedback humano práctico solicitado una vez, todavía pendiente.
+La proyección adapta sólo dos enlaces a la fuente original; la salida exacta
+se conserva aparte. DD158: estilo previo del evaluador; DD159: enlaces/encabezados;
+DD160: coste. DD157: error de lectura repetido y declarado.
+
+Inicio 20:01:19 UTC; observación 98,669 s; comprobación leída a las 20:07:48 UTC.
+Documentación posterior aparte. Continuar trabajo independiente: documentación
+relevante, accesibilidad/detalles y cierre integrado. U08 humano y Ken siguen
+pendientes; sin nueva global verde, aceptación de todo el objetivo, push, merge
+ni despliegue.

@@ -1,0 +1,158 @@
+{
+  "base_commit": "1256aad",
+  "status": "configured_budget_generated_delivery_observed_human_pending",
+  "source_sha256": {
+    "evals/communication/purpose_framing.py": "3ea2feb446d48d0532dc67bd3f98ae8ce5737cc4bf31c6073826345c220abf96",
+    "backend/prompts/native.py": "845237ff6b118afe5f931258d73169ff139d25680604b92ddf043db0f7260df7",
+    "backend/runtime/investigation_instructions.py": "4f54a8bc8295e191bfb375d68230b04f6adfe3d0b6b803e44706a87fa8ac1af9",
+    "backend/runtime/model_settings.py": "876a6af6da86055532ac3bb663fd1af7c62aec8ea407fbded04b1fd0e6fdd4eb",
+    "docs/architecture/model-configuration.md": "48e757ada33d80c231ab1bf29c05aacce9b76851e1f30966ef928d6648806941"
+  },
+  "registration": {
+    "scope": "Prospective ordinary delivery/clarity observation, not efficiency or a replacement120k result",
+    "default_development_limits_unchanged": {
+      "wall_seconds": 180,
+      "no_progress_seconds": 90,
+      "max_turns": 1,
+      "max_tool_calls": 20,
+      "max_observed_tokens": 120000,
+      "max_answer_bytes": 12000
+    },
+    "configured_operator_limits": {
+      "wall_seconds": 180,
+      "no_progress_seconds": 90,
+      "max_turns": 1,
+      "max_tool_calls": 25,
+      "max_observed_tokens": 350000,
+      "max_answer_bytes": 12000
+    },
+    "same_case_and_sources": true,
+    "same_policy11_body_except_budget": true,
+    "maximum_model_turns": 1,
+    "original_failed_results_preserved": true,
+    "no_recipe_or_prebuilt_answer_injected": true,
+    "human_comprehension": null,
+    "registration_sha256": "a81ff2ea5533f5964ed36df0aeea7a4b263398714988cf1deb479c0f58bd328e"
+  },
+  "observation": {
+    "status": "observed_generated_final_under_configured_limits",
+    "policy_version": 11,
+    "exact_registered_policy_observed": true,
+    "same_historical_question_and_clarity_feedback": true,
+    "no_recipe_or_prebuilt_answer_injected": true,
+    "model_control": {
+      "model": "gpt-6.1-sol",
+      "reasoning_effort": "low",
+      "source": "host",
+      "revision": 0,
+      "project_id": 101,
+      "actor_id": "researcher",
+      "fence": 1
+    },
+    "limits": {
+      "wall_seconds": 180,
+      "no_progress_seconds": 90,
+      "max_turns": 1,
+      "max_tool_calls": 25,
+      "max_observed_tokens": 350000,
+      "max_answer_bytes": 12000
+    },
+    "admissions": 1,
+    "native_model_turns": 1,
+    "native_rounds": 9,
+    "exec_cells": 8,
+    "observed_tokens": 285862,
+    "seconds": 98.669,
+    "tool_calls": 14,
+    "ken_complete_registered_lines": 118,
+    "source_hashes_verified": [
+      {
+        "source_id": 1,
+        "kind": "attachment",
+        "sha256": "3f31b3330c8923c8fa7e8e9f497d6e0c61e6b19e52f522d982fe68dbb7a2315e"
+      }
+    ],
+    "database_counts": {
+      "findings": 2,
+      "research_reports": 1,
+      "runtime_result_proposals": 1,
+      "runtime_result_acceptances": 0,
+      "runtime_model_settings": 0
+    },
+    "native_status": "completed",
+    "run_status": "needs_review",
+    "candidate_status": "proposed",
+    "task_status": "in_progress",
+    "native_answer_words": 295,
+    "native_answer_utf8_bytes": 2116,
+    "native_answer_sha256": "12b0e21dcc9077157fa61b71dbfcb5a3a2554d225eae99f4839c35dc2a75eebd",
+    "peers_closed": 5,
+    "unrevoked_grants": 0,
+    "owned_backend_terminal": true,
+    "service_exit": -15,
+    "selected_report_ids": [
+      1
+    ],
+    "human_comprehension": null,
+    "human_acceptance": null,
+    "interpretation": "Ordinary configured-budget delivery observed. Not proof of120kfit, efficiency improvement, general prompting efficacy, causal comparison or human understanding."
+  },
+  "manual_review": [
+    {
+      "criterion": "Spanish useful conclusion and purpose first",
+      "assessment": "supported_in_this_output",
+      "evidence": "Answer begins with whole model/effort pair for future attempts; explains the selection purpose."
+    },
+    {
+      "criterion": "Inputs, scopes/priority and resulting frozen choice",
+      "assessment": "supported_in_this_output",
+      "evidence": "Names scope, pair and expected revision; explains effective pair/provenance and actor→project→global→host, immutable attempt selection."
+    },
+    {
+      "criterion": "Faithful illustrative input/output and no invented model availability",
+      "assessment": "supported_in_this_output",
+      "evidence": "Explicit fictional model-A/low vs model-B/high inheritance example; states names are not offered models and a later change does not rewrite the attempt."
+    },
+    {
+      "criterion": "Unavailable pair refused with no substitute and honest catalog limits",
+      "assessment": "supported_in_this_output",
+      "evidence": "Names native catalog verification and refusal without substitution; does not claim current account availability or measured quality/speed/cost."
+    },
+    {
+      "criterion": "Real complete Ken source, attributed limits and no configuration/acceptance effect",
+      "assessment": "supported_with_declared_limits",
+      "evidence": "All118lines independently match original; saved quotations exact; model settings/acceptances tables empty. Caller query returned analysis error, auxiliary read validation failed and neither is used as evidence."
+    },
+    {
+      "criterion": "Historical feedback framed as purpose/data/I-O, useful next action, no quiz",
+      "assessment": "supported_in_this_output_human_effect_unknown",
+      "evidence": "Explains inputs/results/relationships, offers a fictional worked selection and proposes inspecting effective Modelos state; no comprehension quiz or claim owner understood."
+    }
+  ],
+  "generative_model_turns": 1,
+  "configuration_changes": 0,
+  "acceptances": 0,
+  "human_comprehension": null,
+  "human_acceptance": null,
+  "literal_generated_text": "docs/modernization/ordinary-communication-original.md",
+  "human_projection": "docs/modernization/ordinary-communication-explanation.md",
+  "projection_changes": "Only two sandbox source-link targets map to the same actual repository source; all other generated answer text preserved",
+  "package_rebuilt": false,
+  "product_package": "c31a4bd policy11 wheel, product371Python/SQL files unchanged",
+  "limits": [
+    "Ordinary configured350k observation is distinct from the two failed120k conditions; no120kfit or efficiency improvement",
+    "One development output, not causal/paired/held-out or general prompting/scientific validity",
+    "Historical feedback is not a new owner correction or proof of comprehension",
+    "Native file links use sandbox paths; human projection explicitly adapts them",
+    "Host typed report has English headings despite Spanish body; deferred",
+    "Auxiliary read still failed validation and caller relation was unresolved; no complete caller verification",
+    "No new global suite or whole-goal acceptance"
+  ],
+  "time": {
+    "mode_decision_recorded_before_run": true,
+    "live_started_utc": "2026-11-08 20:01:19",
+    "live_seconds": 98.669,
+    "verification_cut_utc": "2026-11-08 20:07:48",
+    "scope": "Registration, live observation and evidence/manual checks are separate; docs/checkpoint later"
+  }
+}

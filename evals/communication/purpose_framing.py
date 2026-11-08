@@ -40,8 +40,12 @@ PREFIX = ('Evaluación de desarrollo con código real capturado de este reposito
           'de una pregunta y feedback históricos del propietario, que no son nuevas autorizaciones.\nPetición de evaluación: ')
 
 
-def register(root, assets):
-    """Freeze source provenance, the exact current policy, historical feedback and rubric before one bounded generation."""
+def register(root, assets, *, configured_limits=False):
+    """Freeze one development or configured-budget observation before generation.
+
+    The ordinary-budget mode answers a different question from the retained120k
+    efficiency condition; it never changes or relabels an earlier observation.
+    """
     from backend.prompts.native import build_instructions
     from backend.runtime.codex_session import ExecutionLimits
     from evals.context_alignment.run import save
@@ -49,7 +53,9 @@ def register(root, assets):
     root.mkdir(mode=0o700, parents=True, exist_ok=False)
     operator = json.loads(assets.read_text())
     ceilings = {'wall_seconds': 180, 'no_progress_seconds': 90, 'max_turns': 1,
-                'max_tool_calls': 20, 'max_observed_tokens': 120000, 'max_answer_bytes': 12000}
+                'max_tool_calls': 25 if configured_limits else 20,
+                'max_observed_tokens': 350000 if configured_limits else 120000,
+                'max_answer_bytes': 12000}
     limits = {key: min(operator.get('limits', {}).get(key, cap), cap) for key, cap in ceilings.items()}
     limits['max_observed_tokens'] = min(limits['max_observed_tokens'], operator['project_token_limit'])
     source = ROOT / 'backend/runtime/model_settings.py'
@@ -62,6 +68,7 @@ def register(root, assets):
     for name, data in files.items():
         (root / name).write_bytes(data)
     protocol = {'format': 1, 'profile': 'investigation', 'task_type': 'investigation',
+                'budget_mode': 'configured_operator' if configured_limits else 'bounded_development',
                 'task_title': 'Entender la configuración del modelo en Researcher', 'request_prefix': PREFIX,
                 'reference_file': 'reference.md', 'require_complete_source': True, 'limits': limits,
                 'maximum_model_turns': 1, 'human_comprehension': None, 'human_effort_seconds': None,
@@ -73,7 +80,9 @@ def register(root, assets):
                     'evals/communication/purpose_framing.py', 'evals/context_alignment/run.py',
                     'evals/context_alignment/worker.py', 'evals/runtime/native_trial.py')},
                 'criteria': CASE['criteria'],
-                'scope': 'One actual generated explanation after a common-policy change, using a recognizable historical owner question and clarity feedback. Not paired, held-out, causal superiority or observed human comprehension/adaptation acceptance.'}
+                'scope': ('One actual generated explanation under the configured operator budget. This tests ordinary delivery/clarity, not optimization or fit in the retained120k development condition. '
+                          if configured_limits else 'One actual generated explanation under the bounded development budget. ')
+                         + 'Uses a recognizable historical owner question and clarity feedback. Not paired, held-out, causal superiority or observed human comprehension/adaptation acceptance.'}
     save(root / 'registration.json', protocol)
     (root / 'registration.sha256').write_text(hashlib.sha256((root / 'registration.json').read_bytes()).hexdigest() + '\n')
     return protocol
@@ -105,14 +114,18 @@ def main():
     parser.add_argument('--output', type=Path, required=True)
     parser.add_argument('--prepare', action='store_true')
     parser.add_argument('--live', action='store_true')
+    parser.add_argument('--configured-limits', action='store_true',
+                        help='Register one separate observation with bounded operator limits; does not change earlier120k cases.')
     args = parser.parse_args()
     if args.prepare == args.live:
         parser.error('Choose exactly --prepare or --live')
+    if args.configured_limits and not args.prepare:
+        parser.error('--configured-limits selects registration only; live uses its frozen protocol')
     root = args.output.resolve()
     if not root.is_relative_to(ROOT / '.researcher/evaluations'):
         raise ValueError('Use a private synthetic evaluation output')
     if args.prepare:
-        register(root, args.assets.resolve(strict=True))
+        register(root, args.assets.resolve(strict=True), configured_limits=args.configured_limits)
     else:
         asyncio.run(run(root, args.assets.resolve(strict=True)))
 

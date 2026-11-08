@@ -1,0 +1,338 @@
+{
+  "status": "observed_generated_final_under_configured_limits",
+  "policy_version": 11,
+  "exact_registered_policy_observed": true,
+  "same_historical_question_and_clarity_feedback": true,
+  "no_recipe_or_prebuilt_answer_injected": true,
+  "model_control": {
+    "model": "gpt-6.1-sol",
+    "reasoning_effort": "low",
+    "source": "host",
+    "revision": 0,
+    "project_id": 101,
+    "actor_id": "researcher",
+    "fence": 1
+  },
+  "limits": {
+    "wall_seconds": 180,
+    "no_progress_seconds": 90,
+    "max_turns": 1,
+    "max_tool_calls": 25,
+    "max_observed_tokens": 350000,
+    "max_answer_bytes": 12000
+  },
+  "admissions": 1,
+  "native_model_turns": 1,
+  "native_rounds": 9,
+  "exec_cells": 8,
+  "observed_tokens": 285862,
+  "usage_records": [
+    {
+      "total_token_usage": {
+        "input_tokens": 26058,
+        "cached_input_tokens": 0,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 103,
+        "reasoning_output_tokens": 0,
+        "total_tokens": 26161
+      },
+      "last_token_usage": {
+        "input_tokens": 26058,
+        "cached_input_tokens": 0,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 103,
+        "reasoning_output_tokens": 0,
+        "total_tokens": 26161
+      },
+      "last_usage_includes_reasoning": true,
+      "model_context_window": 475000
+    },
+    {
+      "total_token_usage": {
+        "input_tokens": 52947,
+        "cached_input_tokens": 25984,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 192,
+        "reasoning_output_tokens": 0,
+        "total_tokens": 53139
+      },
+      "last_token_usage": {
+        "input_tokens": 26889,
+        "cached_input_tokens": 25984,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 89,
+        "reasoning_output_tokens": 0,
+        "total_tokens": 26978
+      },
+      "last_usage_includes_reasoning": true,
+      "model_context_window": 475000
+    },
+    {
+      "total_token_usage": {
+        "input_tokens": 82900,
+        "cached_input_tokens": 52736,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 302,
+        "reasoning_output_tokens": 0,
+        "total_tokens": 83202
+      },
+      "last_token_usage": {
+        "input_tokens": 29953,
+        "cached_input_tokens": 26752,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 110,
+        "reasoning_output_tokens": 0,
+        "total_tokens": 30063
+      },
+      "last_usage_includes_reasoning": true,
+      "model_context_window": 475000
+    },
+    {
+      "total_token_usage": {
+        "input_tokens": 113633,
+        "cached_input_tokens": 82560,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 362,
+        "reasoning_output_tokens": 0,
+        "total_tokens": 113995
+      },
+      "last_token_usage": {
+        "input_tokens": 30733,
+        "cached_input_tokens": 29824,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 60,
+        "reasoning_output_tokens": 0,
+        "total_tokens": 30793
+      },
+      "last_usage_includes_reasoning": true,
+      "model_context_window": 475000
+    },
+    {
+      "total_token_usage": {
+        "input_tokens": 146065,
+        "cached_input_tokens": 113152,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 463,
+        "reasoning_output_tokens": 40,
+        "total_tokens": 146528
+      },
+      "last_token_usage": {
+        "input_tokens": 32432,
+        "cached_input_tokens": 30592,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 101,
+        "reasoning_output_tokens": 40,
+        "total_tokens": 32533
+      },
+      "last_usage_includes_reasoning": true,
+      "model_context_window": 475000
+    },
+    {
+      "total_token_usage": {
+        "input_tokens": 178823,
+        "cached_input_tokens": 145536,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 1136,
+        "reasoning_output_tokens": 123,
+        "total_tokens": 179959
+      },
+      "last_token_usage": {
+        "input_tokens": 32758,
+        "cached_input_tokens": 32384,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 673,
+        "reasoning_output_tokens": 83,
+        "total_tokens": 33431
+      },
+      "last_usage_includes_reasoning": true,
+      "model_context_window": 475000
+    },
+    {
+      "total_token_usage": {
+        "input_tokens": 212696,
+        "cached_input_tokens": 178816,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 2003,
+        "reasoning_output_tokens": 140,
+        "total_tokens": 214699
+      },
+      "last_token_usage": {
+        "input_tokens": 33873,
+        "cached_input_tokens": 33280,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 867,
+        "reasoning_output_tokens": 17,
+        "total_tokens": 34740
+      },
+      "last_usage_includes_reasoning": true,
+      "model_context_window": 475000
+    },
+    {
+      "total_token_usage": {
+        "input_tokens": 247756,
+        "cached_input_tokens": 213376,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 2146,
+        "reasoning_output_tokens": 149,
+        "total_tokens": 249902
+      },
+      "last_token_usage": {
+        "input_tokens": 35060,
+        "cached_input_tokens": 34560,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 143,
+        "reasoning_output_tokens": 9,
+        "total_tokens": 35203
+      },
+      "last_usage_includes_reasoning": true,
+      "model_context_window": 475000
+    },
+    {
+      "total_token_usage": {
+        "input_tokens": 283272,
+        "cached_input_tokens": 248448,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 2590,
+        "reasoning_output_tokens": 149,
+        "total_tokens": 285862
+      },
+      "last_token_usage": {
+        "input_tokens": 35516,
+        "cached_input_tokens": 35072,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 444,
+        "reasoning_output_tokens": 0,
+        "total_tokens": 35960
+      },
+      "last_usage_includes_reasoning": true,
+      "model_context_window": 475000
+    }
+  ],
+  "seconds": 98.669,
+  "tool_calls": 14,
+  "ken_complete_registered_lines": 118,
+  "source_hashes_verified": [
+    {
+      "source_id": 1,
+      "kind": "attachment",
+      "sha256": "3f31b3330c8923c8fa7e8e9f497d6e0c61e6b19e52f522d982fe68dbb7a2315e"
+    }
+  ],
+  "exact_quotes": [
+    {
+      "source_id": 1,
+      "quote": "Se hereda la pareja completa. Un cambio no combina el modelo nuevo con un esfuerzo\nprocedente de otro modelo.",
+      "exact": true
+    },
+    {
+      "source_id": 1,
+      "quote": "Guardar configuración no inicia inferencia.",
+      "exact": true
+    },
+    {
+      "source_id": 1,
+      "quote": "La pareja se verifica\ncon `model/list` de la conexión nativa, antes de crear el thread o enviar el turno.",
+      "exact": true
+    },
+    {
+      "source_id": 1,
+      "quote": "La elección se expone como `model_selection`; `model` sigue\nsiendo la procedencia de inferencia realmente registrada.",
+      "exact": true
+    },
+    {
+      "source_id": 1,
+      "quote": "El catálogo visible es una observación fechada, no una promesa sobre la cuenta.",
+      "exact": true
+    }
+  ],
+  "database_counts": {
+    "findings": 2,
+    "research_reports": 1,
+    "runtime_result_proposals": 1,
+    "runtime_result_acceptances": 0,
+    "runtime_model_settings": 0
+  },
+  "native_status": "completed",
+  "run_status": "needs_review",
+  "candidate_status": "proposed",
+  "task_status": "in_progress",
+  "native_answer_words": 295,
+  "native_answer_utf8_bytes": 2116,
+  "native_answer_sha256": "12b0e21dcc9077157fa61b71dbfcb5a3a2554d225eae99f4839c35dc2a75eebd",
+  "peers_closed": 5,
+  "unrevoked_grants": 0,
+  "owned_backend_terminal": true,
+  "service_exit": -15,
+  "reports": [
+    {
+      "id": 1,
+      "content": "# Configuración del modelo en Researcher\n\n## Question and scope\n\n¿Permite Researcher configurar el modelo, qué entradas y salidas intervienen y qué cambia en el trabajo?\n\n### Included\n\n- Lectura de evidence.py completo mediante búsqueda en inglés y Ken source: líneas 1–118 y comprobación de ventana posterior vacía.\n\n- Lectura completa de policy.md capturado como fuente 1, SHA-256 3f31b3330c8923c8fa7e8e9f497d6e0c61e6b19e52f522d982fe68dbb7a2315e.\n\n- Explicación de selección, herencia, fijación y validación de disponibilidad.\n\n### Outside scope\n\n- Cambios de configuración o código, inferencia, aceptación y publicación.\n\n- Verificación del archivo original, interfaz, rutas y llamadores externos al módulo.\n\n## Observations by area\n\n### Para qué sirve y qué datos recibe\n\nResearcher permite guardar modelo y esfuerzo como pareja para futuros intentos. Recibe ámbito global/proyecto/agente, pareja y revisión esperada; devuelve el ajuste con nueva revisión. La consulta muestra ajuste local y valor efectivo con procedencia. Prioridad: agente del proyecto → proyecto → global → host. Restablecer ambos campos a nulo activa herencia.\n\nReferenced findings: #1\n\n### Qué cambia al trabajar\n\nLa elección queda fija por intento antes del despacho y se comprueba contra el catálogo nativo. Ausencia o fallo de comprobación impide continuar con una sustitución automática. La documentación indica que el turno recibe el esfuerzo elegido, antes fijado a low; no cambian credenciales ni permisos. Ilustración inventada: si el global guarda modelo-A/low y el proyecto modelo-B/high, un agente que hereda obtiene modelo-B/high; el resultado de selección incluye procedencia proyecto y revisión. Los nombres son ficticios y no indican disponibilidad.\n\nReferenced findings: #2\n\n### Contenido enviado al modelo y límites\n\nEste módulo gestiona ajustes, metadatos del intento y catálogo. No contiene el ensamblado del texto de la tarea o evidencias enviado al modelo ni produce la respuesta de investigación. No permite asegurar qué contexto exacto recibe el modelo ni cuantificar variaciones de calidad, rapidez o consumo.\n\nReferenced findings: #2\n\n## Summary\n\nSí: la implementación capturada permite configurar una pareja modelo/esfuerzo para futuros intentos, con herencia y elección inmutable por intento, sujeta a verificación del catálogo real. La evidencia establece el mecanismo, no el rendimiento ni la disponibilidad actual de una cuenta.\n\n## Limitations\n\n- La equivalencia byte a byte con el original procede de la petición y no se contrastó con una segunda copia.\n\n- Sin ejecución de pruebas, interfaz o inferencia; los llamadores no pudieron verificarse en la copia disponible.\n\n- Un comando auxiliar devolvió recibo inicial; su lectura fue rechazada por ValidationError, y no se utilizó como evidencia.\n\n- Los hallazgos son provisionales; no representan aceptación ni publicación.\n\n## Proposed next steps\n\n- Consultar el ámbito y valor efectivo mostrados por Modelos para identificar qué pareja correspondería al próximo intento, sin guardar cambios.",
+      "title": "Configuración del modelo en Researcher",
+      "status": "draft",
+      "content_sha256": "01cd5f080d069e0b25d5faf6d0857b43aa91ed2b0a0bd920795b1cf5f19c0d87"
+    }
+  ],
+  "selected_report_ids": [
+    1
+  ],
+  "tool_errors": [
+    {
+      "tool": "ken_read",
+      "arguments": {
+        "path": "policy.md",
+        "include": [
+          "source"
+        ],
+        "start_line": 1,
+        "end_line": 200,
+        "max_chars": 20000
+      },
+      "response": {
+        "success": true,
+        "contentItems": [
+          {
+            "type": "inputText",
+            "text": "policy.md\nok: false\nerror: file not indexed"
+          }
+        ]
+      }
+    },
+    {
+      "tool": "ken_related",
+      "arguments": {
+        "target": "evidence.py",
+        "relation": "callers",
+        "limit": 5
+      },
+      "response": {
+        "success": true,
+        "contentItems": [
+          {
+            "type": "inputText",
+            "text": "evidence.py\nok: false\nerror: symbol not found"
+          }
+        ]
+      }
+    },
+    {
+      "tool": "researcher_command_read",
+      "arguments": {
+        "job_id": "74524aeb-df0e-405c-a4d1-7cb10332f4c1",
+        "max_bytes": 20000,
+        "wait_ms": 1000
+      },
+      "response": {
+        "success": false,
+        "contentItems": [
+          {
+            "type": "inputText",
+            "text": "Analysis tool refused or requires reconciliation (ValidationError). Keep the original operation key; inspect its receipt before retrying."
+          }
+        ]
+      }
+    }
+  ],
+  "human_comprehension": null,
+  "human_acceptance": null,
+  "interpretation": "Ordinary configured-budget delivery observed. Not proof of120kfit, efficiency improvement, general prompting efficacy, causal comparison or human understanding."
+}

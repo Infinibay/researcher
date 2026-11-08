@@ -1458,3 +1458,33 @@ inválidos de efectos inciertos. No cambiar la identidad de ejecución ni repeti
 un comando para recuperar su salida. El fallo completo de entrega por presupuesto
 se registra por separado como evidencia funcional incompleta; este detalle no lo
 declara resuelto ni permite convertirlo retrospectivamente en éxito.
+
+## DD158 — estilo previo del evaluador de comunicación
+
+Ruff detecta UP012 en la construcción del prefijo documental de
+`evals/communication/purpose_framing.py`: literal ASCII seguido de `.encode()`.
+Es anterior al selector de presupuesto ordinario; no se cambia mientras un registro
+liga el hash del harness. Resolver con el resto del estilo final, conservando los
+bytes y resultados históricos. No es un fallo funcional de registro/generación.
+
+## DD159 — enlaces de archivos y encabezados del informe generado
+
+La [observación ordinaria](ordinary-communication-review.md) entrega enlaces
+`/run/researcher-source/evidence.py` propios del sandbox. No son una referencia
+portable para el lector del informe. La proyección de evaluación adapta dos
+links al código original verificado y preserva la salida exacta aparte; no es
+una solución general del producto. Resolver una presentación de referencias
+inspectables ligada al snapshot/proyecto correcto, sin convertir rutas arbitrarias
+en acceso al host ni atribuir a un archivo mutable la identidad histórica.
+El renderer tipado de investigación usa títulos ingleses con contenido español;
+revisar idioma/versionado sin reinterpretar Markdown/hashes históricos.
+
+## DD160 — coste observado de comunicación y adquisición
+
+Nueve rondas y 285 862 tokens observados para 295 palabras bajo configuración de
+350k. Los dos ensayos de 120k siguen fallidos. La receta controlada comprueba una
+adquisición en un exec y entrega en otro, pero no se inyectó al modelo ni demuestra
+que la seleccione. Revisar adopción/orquestación y catálogo conservando capacidades,
+citas, autoridad, juicio semántico y final nativo. Bytes de JSON y entradas cacheadas
+no equivalen a coste monetario ni ahorro demostrado. No repetir modelos sólo para
+mejorar el ejemplo; medir un cambio concreto y preservar todas las condiciones.
