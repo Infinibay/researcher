@@ -44,3 +44,16 @@ No regenerar conceptos ni pulir cada control. Reutilizar workbench existente.
 
 Pendientes generales:4páginas (Tareas/Conversación/Ejecución/Proyectos), U08/C10,
 contención original y gates finales.8/12páginas,41/43escenarios al inicio.
+
+## Primer resultado verificado07:29:21UTC
+
+Puntos1–3 implementados en alcance de creación/lectura de grafo: migración70,
+recibos inmutables/rollback/concurrencia, alias explícito de complejidad, padres/
+dependencias del proyecto y recuperación UI.30fuente/133instalados,154contratos/
+52UI;9estados/13checks,0modelos yuna tarea ante tres entregas idénticas. La copia
+sin confirmación tras desmontar el componente se conserva hasta recuperar en
+el proyecto original. No cambiar producto para forzar su limpieza prematura.
+
+Puntos4–5restan para página completa: Trabajo/historia/corrección/controles sobre
+originales. Sigue8/12páginas,41/43escenarios. DetallesDD138al final.
+[Pruebas y límites](../../modernization/task-creation-review.md).

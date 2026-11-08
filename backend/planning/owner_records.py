@@ -12,7 +12,7 @@ from backend.runtime.contracts import RunConflict, RunNotFound, command_key, ide
 
 
 class OwnerPlanningRecords:
-    """Own group/milestone mutations and their project-scoped receipts in one SQLite transaction."""
+    """Own group, milestone and task metadata with project-scoped receipts in one SQLite transaction."""
 
     def __init__(self, runs):
         """Reuse the existing source-store transaction boundary without activating a runtime."""
@@ -27,7 +27,7 @@ class OwnerPlanningRecords:
             raise RunNotFound("Proyecto no disponible.")
         encoded = json.dumps(intent, sort_keys=True, separators=(",", ":"), ensure_ascii=False)
         previous = conn.execute("SELECT * FROM owner_planning_commands WHERE project_id=? AND operation_key=?", (project, key)).fetchone()
-        table = "epics" if kind == "group.create" else "milestones"
+        table = {"group.create": "epics", "milestone.create": "milestones", "task.create": "tasks"}[kind]
         if previous is not None:
             if previous["kind"] != kind or previous["request_json"] != encoded:
                 raise RunConflict("La solicitud original identifica otro contenido; no se creó otro registro.")
@@ -37,12 +37,49 @@ class OwnerPlanningRecords:
         resource_id = insert()
         response = dict(conn.execute(f"SELECT * FROM {table} WHERE id=?", (resource_id,)).fetchone())
         response["operation_key"] = key
-        response.update(task_count=0, tasks_done=0)
+        if kind != "task.create":
+            response.update(task_count=0, tasks_done=0)
         if kind == "group.create":
             response["milestone_count"] = 0
         conn.execute("INSERT INTO owner_planning_commands(project_id,operation_key,kind,request_json,response_json,resource_id,created_at) VALUES(?,?,?,?,?,?,?)",
             (project, key, kind, encoded, json.dumps(response, ensure_ascii=False), resource_id, self.runs.clock()))
         return response
+
+    def create_task(self, *, title, project_id=None, epic_id=None, milestone_id=None,
+                    description="", type="code", priority=2, complexity="medium", depends_on=(), operation_key=None):
+        """Create one task/dependency set or recover its original receipt without reverting later edits or launching work."""
+        with self.runs._transaction(write=True) as conn:
+            group = conn.execute("SELECT project_id FROM epics WHERE id=?", (epic_id,)).fetchone() if epic_id is not None else None
+            milestone = conn.execute("SELECT project_id,epic_id FROM milestones WHERE id=?", (milestone_id,)).fetchone() if milestone_id is not None else None
+            if project_id is None:
+                project_id = group['project_id'] if group is not None else milestone['project_id'] if milestone is not None else None
+            if project_id is None:
+                raise ValueError('project_id is required directly or through an existing group/milestone')
+            dependencies = list(depends_on)
+            if len(set(dependencies)) != len(dependencies):
+                raise ValueError('Dependency tasks must be unique')
+            for dependency in dependencies:
+                identity(dependency)
+            intent = dict(project_id=project_id, epic_id=epic_id, milestone_id=milestone_id, title=title,
+                          description=description, type=type, priority=priority, complexity=complexity, depends_on=dependencies)
+
+            def insert():
+                """Validate all original relationships before atomically writing the task and dependency edges."""
+                if epic_id is not None and (group is None or group['project_id'] != project_id):
+                    raise RunNotFound('El grupo no pertenece al proyecto de esta solicitud.')
+                if milestone_id is not None and (milestone is None or milestone['project_id'] != project_id):
+                    raise RunNotFound('El hito no pertenece al proyecto de esta solicitud.')
+                if epic_id is not None and milestone_id is not None and milestone['epic_id'] != epic_id:
+                    raise RunConflict('El hito no pertenece al grupo de esta solicitud.')
+                for dependency in dependencies:
+                    if not conn.execute('SELECT 1 FROM tasks WHERE id=? AND project_id=?', (dependency, project_id)).fetchone():
+                        raise RunNotFound('Una tarea requerida no pertenece al proyecto de esta solicitud.')
+                task = conn.execute("""INSERT INTO tasks(project_id,epic_id,milestone_id,type,status,title,description,priority,estimated_complexity,created_by)
+                    VALUES(?,?,?,?,'backlog',?,?,?,?,'api')""", (project_id, epic_id, milestone_id, type, title, description, priority, complexity)).lastrowid
+                conn.executemany("INSERT INTO task_dependencies(task_id,depends_on_task_id,dependency_type) VALUES(?,?,'blocks')", ((task, dependency) for dependency in dependencies))
+                return task
+
+            return self._create(conn, project_id, operation_key, 'task.create', intent, insert)
 
     def create_group(self, *, project_id, title, description="", priority=2, operation_key=None):
         """Create or recover one exact owner group, preserving its original response after later metadata edits."""

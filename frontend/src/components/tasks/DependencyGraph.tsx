@@ -1,6 +1,8 @@
+/** Read only the confirmed dependency snapshot; visible filters may omit other tasks. @module */
 import type { Task, TaskDependency } from '../../types/api'
-import { STATUS_COLORS } from '../../utils/colors'
+import {taskStatusLabels} from './TaskQueue'
 
+/** Present confirmed prerequisite edges with keyboard task navigation and the workbench's readable palette. */
 export function DependencyGraph({
   tasks,
   dependencies,
@@ -13,7 +15,7 @@ export function DependencyGraph({
   onSelectTask?: (id: number) => void
 }) {
   if (tasks.length === 0) {
-    return <div className="py-4 text-center text-sm text-slate-500">No tasks to display</div>
+    return <div className="py-4 text-center text-sm text-[var(--work-muted)]">No hay tareas visibles con estos filtros.</div>
   }
 
   const taskMap = new Map(tasks.map((t) => [t.id, t]))
@@ -25,7 +27,7 @@ export function DependencyGraph({
 
   return (
     <div className="space-y-2">
-      <div className="text-xs font-medium text-slate-500 uppercase tracking-wider">Dependency Map</div>
+      <h2 className="text-sm font-medium text-[var(--work-ink)]">Mapa de prerrequisitos</h2>
       <div className="space-y-1">
         {tasks.map((task) => {
           const deps = depEdges.filter((d) => d.task_id === task.id)
@@ -38,25 +40,25 @@ export function DependencyGraph({
               onClick={() => onSelectTask?.(task.id)}
               className={`flex w-full items-start gap-3 rounded-md border p-2 text-left text-sm transition-colors ${
                 isSelected
-                  ? 'border-sky-500/50 bg-sky-500/10'
-                  : 'border-surface-700 bg-surface-800 hover:border-surface-700/80'
+                  ? 'border-[var(--work-accent)] bg-[var(--work-wash)]'
+                  : 'border-[var(--work-line)] bg-[var(--work-paper)] hover:bg-[var(--work-wash)]'
               }`}
             >
-              <span className="shrink-0 font-mono text-xs text-slate-500">#{task.id}</span>
+              <span className="shrink-0 font-mono text-xs text-[var(--work-muted)]">#{task.id}</span>
               <div className="min-w-0 flex-1">
-                <div className="truncate text-slate-200">{task.title}</div>
+                <div className="break-words text-[var(--work-ink)]">{task.title}</div>
                 <div className="mt-0.5 flex flex-wrap gap-1">
-                  <span className={`inline-flex rounded-full px-1.5 py-0.5 text-[10px] font-medium ${STATUS_COLORS[task.status] || ''}`}>
-                    {task.status}
+                  <span className="task-status" data-status={task.status}>
+                    {taskStatusLabels[task.status]??task.status}
                   </span>
                   {deps.length > 0 && (
-                    <span className="text-[10px] text-slate-500">
-                      depends on: {deps.map((d) => `#${d.depends_on_task_id}`).join(', ')}
+                    <span className="text-xs text-[var(--work-muted)]">
+                      Necesita antes: {deps.map((d) => `#${d.depends_on_task_id}`).join(', ')}
                     </span>
                   )}
                   {blockers.length > 0 && (
-                    <span className="text-[10px] text-amber-500">
-                      blocks: {blockers.map((d) => `#${d.task_id}`).join(', ')}
+                    <span className="text-xs text-[var(--work-caution)]">
+                      Prerrequisito de: {blockers.map((d) => `#${d.task_id}`).join(', ')}
                     </span>
                   )}
                 </div>

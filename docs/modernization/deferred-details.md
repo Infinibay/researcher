@@ -1180,3 +1180,21 @@ tras Stop; ajustar su relación temporal con el estado observado al pulir mensaj
 No equivale a otra solicitud lanzada. Estilo2I001/1F401en
 [finding-review-page-lint.json](finding-review-page-lint.json); helpers duplicados de
 evaluación ya registradosDD134. Sin nueva suite global ni accesibilidad completa.
+
+
+## DD138 — formularios de Tareas, etiquetas y documentación heredada
+
+Pulir densidad del formulario y textos de enums research/high; mantener cuerpo
+capturado, clave y diferencia entre metadatos y ejecución. Los select envueltos
+incluyen opciones en su nombre accesible: revisar etiquetas al cierre de
+accesibilidad completa. La captura móvil de respuesta incierta retiene scroll y
+no encuadra todo el aviso; no repetir el recorrido por ese encuadre. Estado/header
+compartidosDD132. El mapa aún usa Nlecturas por tareas visibles: evaluar lote si la
+escala real lo necesita, sin convertir fallos parciales en ausencia de relaciones.
+
+Ruff6(4I001/2C408) en[task-creation-lint.json](task-creation-lint.json); ESLint conserva
+2anyheredados en hook/tipos ([lista](task-creation-eslint.json)). Los módulos nuevos
+pasan ESLint. Inventario55definiciones lista12omisiones heredadas en clases/helpers
+no modificados; nuevas/relevantes modificadas sí documentadas. Completar esas
+omisiones con documentación útil para Ken al pulido, sin afirmar documentación
+global completa. Inversa70y cadena forwardverdes no cierran todas las inversas.

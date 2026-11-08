@@ -69,74 +69,12 @@ def list_tasks(
 
 @router.post("", response_model=TaskResponse, status_code=201)
 def create_task(body: TaskCreate):
-    """Commit task, dependencies and its single trigger-owned audit event together."""
+    """Create or recover exact owner task metadata and dependencies without launching native work."""
+    from backend.planning.owner_records import OwnerPlanningRecords
+    from backend.runtime.sqlite_runs import SQLiteRunStore
+    from backend.tools.base.db import get_db_path
 
-    def _create(conn: sqlite3.Connection) -> dict:
-        """Persist one task and its dependencies; the database trigger owns the matching audit record."""
-        project_id = body.project_id
-
-        # If no project_id, try to get it from epic or milestone
-        if project_id is None and body.epic_id is not None:
-            epic = conn.execute(
-                "SELECT project_id FROM epics WHERE id = ?", (body.epic_id,)
-            ).fetchone()
-            if epic:
-                project_id = epic["project_id"]
-
-        if project_id is None and body.milestone_id is not None:
-            ms = conn.execute(
-                "SELECT project_id FROM milestones WHERE id = ?", (body.milestone_id,)
-            ).fetchone()
-            if ms:
-                project_id = ms["project_id"]
-
-        if project_id is None:
-            raise ValueError("project_id is required (directly or via epic_id/milestone_id)")
-
-        # Validate epic/milestone
-        if body.epic_id is not None:
-            row = conn.execute("SELECT id FROM epics WHERE id = ?", (body.epic_id,)).fetchone()
-            if not row:
-                raise ValueError(f"Epic {body.epic_id} not found")
-
-        if body.milestone_id is not None:
-            row = conn.execute(
-                "SELECT id FROM milestones WHERE id = ?", (body.milestone_id,)
-            ).fetchone()
-            if not row:
-                raise ValueError(f"Milestone {body.milestone_id} not found")
-
-        # Validate dependencies
-        for dep_id in body.depends_on:
-            row = conn.execute("SELECT id FROM tasks WHERE id = ?", (dep_id,)).fetchone()
-            if not row:
-                raise ValueError(f"Dependency task {dep_id} not found")
-
-        cursor = conn.execute(
-            """INSERT INTO tasks
-               (project_id, epic_id, milestone_id, type, status, title,
-                description, priority, estimated_complexity, created_by)
-               VALUES (?, ?, ?, ?, 'backlog', ?, ?, ?, ?, 'api')""",
-            (project_id, body.epic_id, body.milestone_id, body.type,
-             body.title, body.description, body.priority, body.complexity),
-        )
-        task_id = cursor.lastrowid
-
-        # Create dependencies
-        for dep_id in body.depends_on:
-            conn.execute(
-                """INSERT INTO task_dependencies (task_id, depends_on_task_id, dependency_type)
-                   VALUES (?, ?, 'blocks')""",
-                (task_id, dep_id),
-            )
-
-        conn.commit()
-
-        row = conn.execute("SELECT * FROM tasks WHERE id = ?", (task_id,)).fetchone()
-        return dict(row)
-
-    task = execute_with_retry(_create)
-    return _row_to_response(task)
+    return _row_to_response(OwnerPlanningRecords(SQLiteRunStore(get_db_path())).create_task(**body.model_dump()))
 
 
 @router.get("/{task_id}", response_model=TaskResponse)

@@ -28,26 +28,28 @@ que se pueda comparar el avance; no presentar microajustes como tareas principal
 - Última suite global: `9fb873c`,2210 casos,2178 pasan,31 fallan y1 error de fixture; sin omisiones. La carrera de backup encontrada se corrigió después con40 pruebas instaladas. No se declara una nueva corrida global verde; la referencia `0c8b8d9` queda como evidencia histórica.
 - U01–U07, E01–E12, C01–C09 y D01–D13 quedan comprobados con el alcance de sus matrices; siguen 2 de 43 escenarios amplios sin aceptación completa en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Estado actual: Hallazgos verificado; siguientes Tareas, Conversación y Ejecución
+## Estado actual: creación de Tareas recuperable; continúa su recorrido de Trabajo
 
-**06:51:21–07:04:37UTC,13min16s hasta verificar/inspeccionar**, base8a817c3.
-[Alcance y límites](finding-review-page-review.md). Documentación/checkpoint posteriores excluidos.
+**07:06:21–07:29:21UTC,23min hasta verificar/inspeccionar**, base1306a90.
+[Alcance y límites](task-creation-review.md). Documentación/checkpoint posteriores excluidos.
 
-- Terminado: **8/12 páginas** con aceptación técnica/visual delegada. Hallazgos
- combina lectores/búsqueda local positiva y recuperación del mismo revisor, fuente,
- límites e historia.8estados/11checks; sólo recuperación202 yStop202.0dispatches,
- mismos3IDs sintéticos nunca lanzados; sólo revisor pasa a cancelled.
-- En curso desde07:06:21UTC: **Tareas**, preflight encuentra creación sin clave
- recuperable y lecturas de dependencias convertidas en[]ante fallos. Falta REDy
- corrección; no declarar página aceptada. [Plan](../superpowers/plans/2026-11-08-task-page-acceptance.md).
- Después Conversación/Ejecución; reutilizar conceptos y0generación por defecto.
-- Pendiente: esas tres páginas y Proyectos/AuthorityBusy original; cierre global no
- vacío, U08/C10/evaluación científica, distribución/dependencias, prompts, inversas69,
- suite y revisión independiente final. No hay historial del usuario que migrar.
-- Seguimos **41/43 escenarios**. Última suite global31fallos/1error; último corte de
- prompts67de85desactualizados sobre318archivos, revalidar árbol final. No ETA/porcentaje global inventado.
-- Detalles al final: DD137y anteriores; densidad, mensajes, accesibilidad completa y
- estilo. Módulo/dos funciones documentados;2I001/1F401 pendientes. No push/merge.
+- Terminado: **8/12 páginas** completas en alcance técnico/delegado. Nueva capacidad
+ de Tareas: una creación ante tres entregas iguales; padres, dependencias y complejidad
+ validados, recibos/rollback/concurrencia y migración70. Errores del grafo no son
+ mapas vacíos.30fuente/133instalados,154contratos/52UI,tipos/build pasan;9estados reales,
+ 0Axe regional/overflow/errores y0runs/dispatches. Sin nueva aceptación de página.
+- En curso: **recorrido de Trabajo de Tareas**, historial, corrección y controles
+ vinculados al original. [Plan](../superpowers/plans/2026-11-08-task-page-acceptance.md).
+- Pendiente en orden: completar Tareas, Conversación, Ejecución y Proyectos/
+ AuthorityBusy original; cierre no vacío, U08/C10/evaluación científica,
+ distribución/dependencias, prompts, inversas hasta70, suite y revisión independiente final.
+ No hay historial del usuario que migrar; no nueva generación por defecto.
+- Seguimos **41/43 escenarios**; última suite global31fallos/1error. Último corte de
+ prompts67de85desactualizados/318archivos requiere revalidación final. No ETA/porcentaje inventados.
+- Detalles al final: DD138y anteriores, densidad, mensajes, estilo y accesibilidad
+ completa. Todas las definiciones nuevas/modificadas relevantes documentadas;
+ inventario55enumera12omisiones heredadas en modelos/helpers no modificados.
+ No push/merge ni suite global verde.
 
 ## Etapa anterior: Ken estructural offline verificado; continúa aceptación de páginas
 

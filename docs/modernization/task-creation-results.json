@@ -1,0 +1,288 @@
+{
+  "status": "passed",
+  "model_turns": 0,
+  "synthetic_project_data": true,
+  "before": {
+    "groups": [
+      {
+        "id": 1,
+        "project_id": 101,
+        "title": "Exportación documentada"
+      }
+    ],
+    "milestones": [
+      {
+        "id": 1,
+        "epic_id": 1
+      }
+    ],
+    "tasks": [
+      {
+        "id": 1,
+        "epic_id": 1,
+        "milestone_id": 1,
+        "status": "backlog"
+      },
+      {
+        "id": 2,
+        "epic_id": 1,
+        "milestone_id": null,
+        "status": "backlog"
+      }
+    ],
+    "dependencies": [
+      {
+        "task_id": 2,
+        "depends_on_task_id": 1
+      }
+    ],
+    "runs": [],
+    "peers": [],
+    "dispatches": 0,
+    "native_starts": 0,
+    "integrity": "ok",
+    "foreign_keys": [],
+    "task_records": [
+      {
+        "id": 1,
+        "project_id": 101,
+        "epic_id": 1,
+        "milestone_id": 1,
+        "title": "Leer una observación real",
+        "description": "",
+        "type": "research",
+        "status": "backlog",
+        "priority": 2,
+        "estimated_complexity": "medium",
+        "created_by": "api"
+      },
+      {
+        "id": 2,
+        "project_id": 101,
+        "epic_id": 1,
+        "milestone_id": null,
+        "title": "Exportar columnas comprobadas",
+        "description": "",
+        "type": "code",
+        "status": "backlog",
+        "priority": 2,
+        "estimated_complexity": "medium",
+        "created_by": "api"
+      }
+    ],
+    "owner_commands": [
+      {
+        "project_id": 101,
+        "operation_key": "fixture-group",
+        "kind": "group.create",
+        "resource_id": 1,
+        "request_sha256": "6a5a53d60bfe322987457da25fd3a06c1274087909686d77aa2bfc5be93282d7",
+        "response_sha256": "ec61298e8068df82fe9dff41c33a749944dcfda2a1e2f15aead9f83bd27b9dcb"
+      },
+      {
+        "project_id": 101,
+        "operation_key": "fixture-input",
+        "kind": "task.create",
+        "resource_id": 1,
+        "request_sha256": "60bc5881a222a2c744ddff6445f359e701037168d06a7f570040c346195e0b8c",
+        "response_sha256": "843eef1a3a810d45ecc441417da2e52709b60554c25bd6ffad92959b783f00b9"
+      },
+      {
+        "project_id": 101,
+        "operation_key": "fixture-milestone",
+        "kind": "milestone.create",
+        "resource_id": 1,
+        "request_sha256": "2232dfa05664d418d45450e0ad1dd80cfc0723c8ca87a5e39497621469e7f7a4",
+        "response_sha256": "123304927a969ca942404bfadf066d2be6fbda59007b05196d7d73bd9dc991b4"
+      },
+      {
+        "project_id": 101,
+        "operation_key": "fixture-output",
+        "kind": "task.create",
+        "resource_id": 2,
+        "request_sha256": "dace83ae407c32a91d4b2af6883cc611b90262cb1c218c0f2e2ec3eabfabe36b",
+        "response_sha256": "c33995d7f3d9760a176bef968fa89f0187e227b863a50a25ef6a23992e2b1762"
+      }
+    ],
+    "events": 4
+  },
+  "backend": "/home/andres/.codex/worktrees/b09e/researcher/.superpowers/sdd/2026-10-31-actualizacion-proyecto/native-runtime-env/lib/python3.12/site-packages/backend/__init__.py",
+  "web_index_sha256": "f11f4aa009194cc16c7fabb45ff3d6e3e2628bdb87fab90675a442ac51dcfa58",
+  "browser_exit": 0,
+  "created_task_id": 3,
+  "service_exit": 143,
+  "after": {
+    "groups": [
+      {
+        "id": 1,
+        "project_id": 101,
+        "title": "Exportación documentada"
+      }
+    ],
+    "milestones": [
+      {
+        "id": 1,
+        "epic_id": 1
+      }
+    ],
+    "tasks": [
+      {
+        "id": 1,
+        "epic_id": 1,
+        "milestone_id": 1,
+        "status": "backlog"
+      },
+      {
+        "id": 2,
+        "epic_id": 1,
+        "milestone_id": null,
+        "status": "backlog"
+      },
+      {
+        "id": 3,
+        "epic_id": 1,
+        "milestone_id": 1,
+        "status": "backlog"
+      }
+    ],
+    "dependencies": [
+      {
+        "task_id": 2,
+        "depends_on_task_id": 1
+      },
+      {
+        "task_id": 3,
+        "depends_on_task_id": 1
+      }
+    ],
+    "runs": [],
+    "peers": [],
+    "dispatches": 0,
+    "native_starts": 0,
+    "integrity": "ok",
+    "foreign_keys": [],
+    "task_records": [
+      {
+        "id": 1,
+        "project_id": 101,
+        "epic_id": 1,
+        "milestone_id": 1,
+        "title": "Leer una observación real",
+        "description": "",
+        "type": "research",
+        "status": "backlog",
+        "priority": 2,
+        "estimated_complexity": "medium",
+        "created_by": "api"
+      },
+      {
+        "id": 2,
+        "project_id": 101,
+        "epic_id": 1,
+        "milestone_id": null,
+        "title": "Exportar columnas comprobadas",
+        "description": "",
+        "type": "code",
+        "status": "backlog",
+        "priority": 2,
+        "estimated_complexity": "medium",
+        "created_by": "api"
+      },
+      {
+        "id": 3,
+        "project_id": 101,
+        "epic_id": 1,
+        "milestone_id": 1,
+        "title": "Preparar CSV con columnas comprobadas",
+        "description": "Objetivo: exportar las observaciones. Entrada ilustrativa: {id: 7, value: 12}. Salida deseada: cabecera id,value y fila 7,12. Primero comprobar una observación real; el ejemplo inventado no demuestra su formato.",
+        "type": "documentation",
+        "status": "backlog",
+        "priority": 1,
+        "estimated_complexity": "high",
+        "created_by": "api"
+      }
+    ],
+    "owner_commands": [
+      {
+        "project_id": 101,
+        "operation_key": "2739076b-af90-4709-8ddf-62e1624c03d4",
+        "kind": "task.create",
+        "resource_id": 3,
+        "request_sha256": "245e696e0660cc6a75d025eaa0ac4c5b57f7ff8f2c5d5b795778fcc001f994a9",
+        "response_sha256": "0a8ec9702f7ed80eb4b8a28a23c37aad8b2faefcaf3eff5706c7fdb5f7dbde67"
+      },
+      {
+        "project_id": 101,
+        "operation_key": "fixture-group",
+        "kind": "group.create",
+        "resource_id": 1,
+        "request_sha256": "6a5a53d60bfe322987457da25fd3a06c1274087909686d77aa2bfc5be93282d7",
+        "response_sha256": "ec61298e8068df82fe9dff41c33a749944dcfda2a1e2f15aead9f83bd27b9dcb"
+      },
+      {
+        "project_id": 101,
+        "operation_key": "fixture-input",
+        "kind": "task.create",
+        "resource_id": 1,
+        "request_sha256": "60bc5881a222a2c744ddff6445f359e701037168d06a7f570040c346195e0b8c",
+        "response_sha256": "843eef1a3a810d45ecc441417da2e52709b60554c25bd6ffad92959b783f00b9"
+      },
+      {
+        "project_id": 101,
+        "operation_key": "fixture-milestone",
+        "kind": "milestone.create",
+        "resource_id": 1,
+        "request_sha256": "2232dfa05664d418d45450e0ad1dd80cfc0723c8ca87a5e39497621469e7f7a4",
+        "response_sha256": "123304927a969ca942404bfadf066d2be6fbda59007b05196d7d73bd9dc991b4"
+      },
+      {
+        "project_id": 101,
+        "operation_key": "fixture-output",
+        "kind": "task.create",
+        "resource_id": 2,
+        "request_sha256": "dace83ae407c32a91d4b2af6883cc611b90262cb1c218c0f2e2ec3eabfabe36b",
+        "response_sha256": "c33995d7f3d9760a176bef968fa89f0187e227b863a50a25ef6a23992e2b1762"
+      }
+    ],
+    "events": 5
+  },
+  "base_commit": "1306a90",
+  "raw_evaluation": ".researcher/evaluations/task-creation-page-20261108-v4",
+  "browser_states": 9,
+  "browser_checks": [
+    "selected-complexity-and-parent-captured",
+    "actual-201-commit-before-reply-loss",
+    "same-body-and-key-after-reload",
+    "one-original-receipt",
+    "late-reply-cannot-select-other-project",
+    "unacknowledged-copy-retained-after-unmount",
+    "mounted-recovery-retires-exact-local-copy",
+    "keyboard-original-task-open",
+    "stored-goal-and-illustrative-input-output",
+    "dependency-error-not-empty-map",
+    "actual-prerequisite-recovery",
+    "task-list-error-not-empty",
+    "no-native-admission"
+  ],
+  "creation_deliveries": 3,
+  "new_tasks": 1,
+  "new_audit_events": 1,
+  "new_native_runs": 0,
+  "raw_result_sha256": "ddf199483eec662bbf04b616245437ea5cd28a1401847ec6db9f894e2a8dc7ed",
+  "browser_receipt_sha256": "78e3c6ac02d323e5cd88547b87e90e822911d8f5f357a5c1db3414461cfc1134",
+  "source_red": {
+    "cases": 8,
+    "failed": 8,
+    "skipped": 0
+  },
+  "source_green": {
+    "cases": 30,
+    "failed": 0,
+    "skipped": 0
+  },
+  "frontend_contracts": 154,
+  "frontend_ui_cases": 52,
+  "types_exit": 0,
+  "build_exit": 0,
+  "global_suite_rerun": false
+}

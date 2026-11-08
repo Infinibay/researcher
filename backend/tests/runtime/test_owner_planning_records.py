@@ -61,7 +61,8 @@ def test_unused_planning_schema_roundtrip_preserves_existing_owner_records(tmp_p
     ensure_migrations(str(database), target_version=69)
 
 
-def test_used_planning_schema_inverse_refuses_to_discard_receipts(coordination):
+@pytest.mark.parametrize('schema_target', [69])
+def test_used_planning_schema_inverse_refuses_to_discard_receipts(coordination, schema_target):
     """An original owner receipt must survive an attempted inverse; it cannot be silently reissued later."""
     from backend.db.planning_commands_migration import restore_planning_commands_schema
 
@@ -74,7 +75,8 @@ def test_used_planning_schema_inverse_refuses_to_discard_receipts(coordination):
         assert conn.execute("SELECT MAX(version) FROM schema_migrations").fetchone()[0] == 69
 
 
-def test_inverse_failure_restores_dropped_table_and_receipt_trigger(coordination):
+@pytest.mark.parametrize('schema_target', [69])
+def test_inverse_failure_restores_dropped_table_and_receipt_trigger(coordination, schema_target):
     """Failure after transactional DROP must roll back the infrastructure rather than leave a schema prefix gap."""
     from backend.db.planning_commands_migration import restore_planning_commands_schema
 

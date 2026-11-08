@@ -1,0 +1,161 @@
+{
+  "status": "passed",
+  "scope": "Real owner metadata writes/read faults; synthetic projects and no native run/model",
+  "states": [
+    {
+      "name": "01-captured-input-before-delivery",
+      "width": 1440,
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "02-original-request-after-lost-reply",
+      "width": 390,
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "03-reload-keeps-original-input",
+      "width": 390,
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "04-late-original-receipt-does-not-select-other-project",
+      "width": 390,
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "05-original-task-with-selected-values",
+      "width": 1440,
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "06-dependency-read-failure-is-unknown",
+      "width": 390,
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "07-confirmed-prerequisites",
+      "width": 1440,
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "08-task-list-read-error",
+      "width": 390,
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "09-original-created-task-after-read-recovery",
+      "width": 1440,
+      "fits": true,
+      "violations": []
+    }
+  ],
+  "checks": [
+    "selected-complexity-and-parent-captured",
+    "actual-201-commit-before-reply-loss",
+    "same-body-and-key-after-reload",
+    "one-original-receipt",
+    "late-reply-cannot-select-other-project",
+    "unacknowledged-copy-retained-after-unmount",
+    "mounted-recovery-retires-exact-local-copy",
+    "keyboard-original-task-open",
+    "stored-goal-and-illustrative-input-output",
+    "dependency-error-not-empty-map",
+    "actual-prerequisite-recovery",
+    "task-list-error-not-empty",
+    "no-native-admission"
+  ],
+  "posts": [
+    {
+      "title": "Preparar CSV con columnas comprobadas",
+      "description": "Objetivo: exportar las observaciones. Entrada ilustrativa: {id: 7, value: 12}. Salida deseada: cabecera id,value y fila 7,12. Primero comprobar una observación real; el ejemplo inventado no demuestra su formato.",
+      "type": "documentation",
+      "priority": 1,
+      "complexity": "high",
+      "epic_id": 1,
+      "milestone_id": 1,
+      "depends_on": [
+        1
+      ],
+      "project_id": 101,
+      "operation_key": "2739076b-af90-4709-8ddf-62e1624c03d4"
+    },
+    {
+      "title": "Preparar CSV con columnas comprobadas",
+      "description": "Objetivo: exportar las observaciones. Entrada ilustrativa: {id: 7, value: 12}. Salida deseada: cabecera id,value y fila 7,12. Primero comprobar una observación real; el ejemplo inventado no demuestra su formato.",
+      "type": "documentation",
+      "priority": 1,
+      "complexity": "high",
+      "epic_id": 1,
+      "milestone_id": 1,
+      "depends_on": [
+        1
+      ],
+      "project_id": 101,
+      "operation_key": "2739076b-af90-4709-8ddf-62e1624c03d4"
+    },
+    {
+      "title": "Preparar CSV con columnas comprobadas",
+      "description": "Objetivo: exportar las observaciones. Entrada ilustrativa: {id: 7, value: 12}. Salida deseada: cabecera id,value y fila 7,12. Primero comprobar una observación real; el ejemplo inventado no demuestra su formato.",
+      "type": "documentation",
+      "priority": 1,
+      "complexity": "high",
+      "epic_id": 1,
+      "milestone_id": 1,
+      "depends_on": [
+        1
+      ],
+      "project_id": 101,
+      "operation_key": "2739076b-af90-4709-8ddf-62e1624c03d4"
+    }
+  ],
+  "committed": [
+    {
+      "operation_key": "2739076b-af90-4709-8ddf-62e1624c03d4",
+      "id": 3,
+      "project_id": 101,
+      "epic_id": 1,
+      "milestone_id": 1,
+      "type": "documentation",
+      "status": "backlog",
+      "title": "Preparar CSV con columnas comprobadas",
+      "description": "Objetivo: exportar las observaciones. Entrada ilustrativa: {id: 7, value: 12}. Salida deseada: cabecera id,value y fila 7,12. Primero comprobar una observación real; el ejemplo inventado no demuestra su formato.",
+      "priority": 1,
+      "estimated_complexity": "high",
+      "assigned_to": null,
+      "reviewer": null,
+      "branch_name": null,
+      "created_by": "api",
+      "created_at": "2026-11-08 07:26:10",
+      "updated_at": null,
+      "completed_at": null,
+      "retry_count": 0
+    }
+  ],
+  "faults": [
+    {
+      "kind": "lost-after-201-commit",
+      "task": 3
+    },
+    {
+      "kind": "abort-read",
+      "path": "/api/tasks/1/dependencies"
+    },
+    {
+      "kind": "abort-read",
+      "path": "/api/tasks"
+    },
+    {
+      "kind": "abort-read",
+      "path": "/api/tasks"
+    }
+  ],
+  "errors": []
+}

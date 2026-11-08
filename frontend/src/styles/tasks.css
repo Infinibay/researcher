@@ -26,6 +26,12 @@
 }
 .task-workbench :where(button):disabled { cursor: not-allowed; }
 .task-workbench textarea { line-height: 1.6; resize: vertical; }
+.task-create-form { padding-block:1.25rem; }
+.task-create-form .planning-primary { background:var(--work-accent);color:white;padding:.5rem 1rem;border-radius:.25rem;font-weight:600; }
+.task-create-form fieldset { display:grid;gap:.4rem;max-height:20rem;overflow:auto;border:1px solid var(--work-line);padding:.75rem; }
+.task-create-form fieldset label { grid-template-columns:1.25rem minmax(0,1fr);align-items:center;min-height:2.75rem; }
+.task-create-form input[type='checkbox'] { width:1.25rem;height:1.25rem;min-height:0;padding:0;accent-color:var(--work-accent); }
+.task-create-form [role='alert'] { color:var(--work-error); }
 .task-workbench > :not(.task-split) { margin-inline: 2rem; }
 .task-page-heading { display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; justify-content: space-between; padding-block: 1.5rem 1rem; }
 .task-page-heading h1 { font-family: Georgia, 'Times New Roman', serif; font-size: 2rem; font-weight: 600; line-height: 1.2; margin: .15rem 0 .4rem; }

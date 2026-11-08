@@ -59,3 +59,11 @@ restauración después de nuevas escrituras. Siguen pendientes el inventario y
 migración de los datos reales y la aceptación integral de recuperación.
 Ninguna base del propietario fue migrada en estos ensayos. El pulido DD071 y
 posteriores permanece para después de las capacidades principales.
+
+
+La cadena forward18–70 y sus interrupciones de escritor pasan en la selección de
+133pruebas instaladas del [recibo de tareas](../modernization/task-creation-packaging.json).
+Migración70 conserva recibos de grupos/hitos y permite creación exacta de tareas;
+su inversa local rechaza recibos usados y versiones posteriores. No sustituye el
+ensayo global pendiente de todas las inversas hasta70. El usuario confirmó que no
+hay historial suyo que migrar; no volver a buscar una base de usuario por defecto.

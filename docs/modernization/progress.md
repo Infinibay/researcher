@@ -6633,7 +6633,7 @@ Browser initial9captures/7actions passed HTTP/storage assertions, but visual ins
 - Allhandles terminal: broad26843exit1, baseline91163exit1, contracts97701exit0, source33697exit0, planning40517exit0, wheel46476/package12677exit0. No retained QA server or running verification. Native env now contains current prompt-catalog application wheel, not prior85f7.
 - Inventory docs/decisions/results/packaging/coverage/communication guide updated. Fine ledger representation/style/typos deferredDD040 until all principal work. Real-model comparisons/human/science evaluation remain main acceptance work. Counts24/36desktop8/12mobile8pilots0accepted unchanged;43scenarios/global/restore/DD030/inverses43–54/remaining4routes/legacy/operation/budgets/CLI/finalfreshreview still full goal.
 
-- Continuación: el turno de confirmación de seguimiento fue sin progreso de implementación. Se revalidó el worktree; inventario578/512sinrevisionespendientes y12testsPASS2.97s. Se cierra el checkpoint estático de prompts, conservando la evaluación real/humana pendiente, y comienza Resumen como siguiente página principal.
+- Continuación: el turno de confirmación de seguimiento fue sin progreso de implementación. Se revalidó el worktree; inventario558/512sinrevisionespendientes y12testsPASS2.97s. Se cierra el checkpoint estático de prompts, conservando la evaluación real/humana pendiente, y comienza Resumen como siguiente página principal.
 
 ## 2026-11-06 — Resumen con contexto y atención
 
@@ -9096,3 +9096,27 @@ lecturas de dependencias fallidas transformadas en[]y discrepancia de campo
 estimated_complexity/complexity. Son riesgos/contratos a reproducir con RED; no
 fallos operativos ya medidos ni correcciones hechas. Plan acotado en
 2026-11-08-task-page-acceptance.md. No cambiar contador ni declarar Tareas aceptado.
+
+
+## Tareas: creación recuperable y lectura sin falsos vacíos, 2026-11-08
+
+07:06:21–07:29:21UTC,23min hasta verificar/inspeccionar,base1306a90.8REDdeAPI;
+30fuente/133instalados,0skips. Migración70retiene recibos previos, inversa local
+condicionada; cadena forward/interrupciones18–70verde.689fuentes/367producto,
+243importsinstalados,83paquetes compatibles. Wheelb2103c057f25443db82254c626f0f1b7962eaa7f23c35bbf499509d8a74ada51.
+TaskCreatealiascomplejidad explícito/contradicción422; padres/deps del proyecto.
+Recepción perdida no duplica, edición/borrado original no se revierte/recrea.
+
+154contratos/52UI,tipos/build pasan. REDDOMdel grafo antes de corregir; ahora
+error no se presenta como mapa completo.9estados/13checks enHTTPinstalado; tres
+entregas idénticas tras pérdida201,recarga y cambio de proyecto dan una tarea,
+una dependencia y un evento. Respuesta tardía no retargetea; copia sin confirmación
+permanece hasta recuperación explícita montada.0runs/dispatches/IDs de turno;
+servicio143,0Axe regional/overflow/errores. Tres fallos de evaluador conservados,
+sin cambios de producto para satisfacerlos. DetallesDD138al final. Inventario55
+registra12omisiones heredadas no modificadas; definiciones nuevas documentadas.
+
+No nueva página aceptada:8/12y41/43. Sigue recorrido Trabajo/historia/correcciones/
+controles de Tareas, luego Conversación/Ejecución/Proyectos, U08/C10 y gatesfinales.
+Inversasglobales ahora hasta70, no declaradas verdes. No modelos ni datos del usuario.
+[Alcance](task-creation-review.md).

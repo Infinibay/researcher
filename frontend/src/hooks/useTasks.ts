@@ -3,6 +3,7 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { fetchApi, buildUrl } from '../api/client'
 import type { Task, TaskComment, TaskDependency } from '../types/api'
+import type { TaskCreationBody } from '../api/taskCreation'
 
 interface TaskFilters {
   status?: string
@@ -31,20 +32,11 @@ export function useTask(taskId: number | null, projectId?: number | null) {
   })
 }
 
+/** Create exact owner metadata with a stable key; recovery never changes the original captured input. */
 export function useCreateTask() {
   const qc = useQueryClient()
   return useMutation({
-    mutationFn: (data: {
-      project_id?: number
-      epic_id?: number
-      milestone_id?: number
-      type: string
-      title: string
-      description?: string
-      priority?: number
-      estimated_complexity?: string
-      depends_on?: number[]
-    }) =>
+    mutationFn: (data: TaskCreationBody) =>
       fetchApi<Task>('/api/tasks', {
         method: 'POST',
         body: JSON.stringify(data),
@@ -155,6 +147,7 @@ export function useSetTaskDependencies() {
       }),
     onSuccess: (_, vars) => {
       qc.invalidateQueries({ queryKey: ['task-dependencies', vars.taskId] })
+      qc.invalidateQueries({ queryKey: ['task-dependency-graph'] })
       qc.invalidateQueries({ queryKey: ['tasks'] })
     },
   })

@@ -1,0 +1,69 @@
+{
+  "scope": "Full definitions in selected changed modules; existing omissions explicitly listed, no complete documentation claim",
+  "definitions": 55,
+  "files": [
+    {
+      "path": "backend/api/models/task.py",
+      "sha256": "d23f334364880a94dc32afe128e6b19abdaca57d4fd61eb0660790ade429a47f",
+      "module_documented": true,
+      "definitions": 8,
+      "missing": [
+        "TaskUpdate",
+        "TaskCommentCreate",
+        "TaskCommentResponse",
+        "TaskDependencyCreate",
+        "TaskDependencyResponse"
+      ]
+    },
+    {
+      "path": "backend/api/routes/tasks.py",
+      "sha256": "92a36462ef49571ea0889319d6b76f514974f6fa0eff8e9ae8182e1cab5020f6",
+      "module_documented": true,
+      "definitions": 19,
+      "missing": [
+        "_row_to_response",
+        "_query",
+        "_delete",
+        "_query",
+        "_create",
+        "_query",
+        "_set"
+      ]
+    },
+    {
+      "path": "backend/db/task_commands_migration.py",
+      "sha256": "640496faad79a6df943aa58f97e557af3daf8f4d5093591c49a51c0a114cb0d5",
+      "module_documented": true,
+      "definitions": 1,
+      "missing": []
+    },
+    {
+      "path": "backend/planning/owner_records.py",
+      "sha256": "6f126bc5e6f2729cb7b5f3e8d433e118bce4c884ee1da3b37ccfea0d2d864010",
+      "module_documented": true,
+      "definitions": 12,
+      "missing": []
+    },
+    {
+      "path": "backend/tests/api/test_task_creation_commands.py",
+      "sha256": "b55f45c0fef281c15cf1757302c2413bbefdab0f98b1e02e214c52b72cc0a82e",
+      "module_documented": true,
+      "definitions": 6,
+      "missing": []
+    },
+    {
+      "path": "backend/tests/runtime/test_task_creation_commands.py",
+      "sha256": "698b998b8e24cdfb55cddecfbf54b941a3c0b76d1adf2cfb8ee55a5ef78a8d57",
+      "module_documented": true,
+      "definitions": 6,
+      "missing": []
+    },
+    {
+      "path": "evals/operation/task_creation_page.py",
+      "sha256": "6ae67b856bcfd00f65c39d84c5b940f1bf864f43bcdad7838c702af5e5d11325",
+      "module_documented": true,
+      "definitions": 3,
+      "missing": []
+    }
+  ]
+}

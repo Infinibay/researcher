@@ -2,9 +2,11 @@
 
 import { useState, useEffect, useRef } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
+import { useQuery } from '@tanstack/react-query'
+import { fetchApi } from '../../api/client'
 import { scopedEntityId } from '../../utils/projectSelection'
 import { useProjectStore } from '../../stores/project'
-import { useTasks, useCreateTask, useDeleteTask } from '../../hooks/useTasks'
+import { useTasks, useDeleteTask } from '../../hooks/useTasks'
 import { useEpics } from '../../hooks/useEpics'
 import { useMilestones } from '../../hooks/useMilestones'
 import { LoadingSpinner } from '../common/LoadingSpinner'
@@ -14,11 +16,10 @@ import { TaskQueue, taskStatusLabels } from '../tasks/TaskQueue'
 import '../../styles/tasks.css'
 import { DependencyGraph } from '../tasks/DependencyGraph'
 import type { TaskDependency } from '../../types/api'
+import { TaskCreationForm } from '../tasks/TaskCreationForm'
+import '../../styles/planning.css'
 
 const statusOptions = ['', 'backlog', 'pending', 'in_progress', 'review_ready', 'rejected', 'done', 'blocked']
-const typeOptions = ['code', 'research', 'investigation', 'review', 'test', 'design', 'integrate', 'documentation', 'bug_fix']
-const complexityOptions = ['low', 'medium', 'high']
-
 /** Open the selected project's task workbench without inferring a project from a URL. */
 export function TasksPage() {
   const projectId = useProjectStore((s) => s.activeProjectId)
@@ -39,7 +40,6 @@ function ProjectTaskWorkbench({ projectId }: { projectId: number }) {
   })
   const { data: epics } = useEpics(projectId)
   const { data: milestones } = useMilestones(projectId)
-  const createTask = useCreateTask()
   const deleteTask = useDeleteTask()
 
   const [showForm, setShowForm] = useState(false)
@@ -50,17 +50,13 @@ function ProjectTaskWorkbench({ projectId }: { projectId: number }) {
   const setSelectedTaskId = (id: number | null) => setParams(id == null ? {} : { project: String(projectId), task: String(id) })
   const [deleteId, setDeleteId] = useState<number | null>(null)
   const [showDepGraph, setShowDepGraph] = useState(false)
-  const [allDeps, setAllDeps] = useState<TaskDependency[]>([])
-
-  // Form state
-  const [fTitle, setFTitle] = useState('')
-  const [fDesc, setFDesc] = useState('')
-  const [fType, setFType] = useState('research')
-  const [fEpic, setFEpic] = useState<number | undefined>()
-  const [fMilestone, setFMilestone] = useState<number | undefined>()
-  const [fPriority, setFPriority] = useState(3)
-  const [fComplexity, setFComplexity] = useState('medium')
-  const [fDependsOn, setFDependsOn] = useState<number[]>([])
+  const dependencyGraph = useQuery({
+    queryKey: ['task-dependency-graph', projectId, (tasks??[]).map(task=>task.id)],
+    queryFn: async () => (await Promise.all((tasks??[]).map(task=>fetchApi<TaskDependency[]>(`/api/tasks/${task.id}/dependencies`)))).flat(),
+    enabled: showDepGraph && !!tasks && !isLoading && !error,
+    retry: false,
+    refetchInterval: showDepGraph ? 10000 : false,
+  })
 
   const [search, setSearch] = useState('')
   const lastSelection = useRef<number | null>(null)
@@ -69,59 +65,6 @@ function ProjectTaskWorkbench({ projectId }: { projectId: number }) {
   }, [selectedTaskId])
   const visibleTasks = (tasks ?? []).filter(task => `${task.id} ${task.title}`.toLocaleLowerCase().includes(search.toLocaleLowerCase()))
   const selectTask = (id: number) => { lastSelection.current = id; setShowForm(false); setShowDepGraph(false); setSelectedTaskId(id) }
-
-  const handleCreate = () => {
-    if (!fTitle.trim()) return
-    createTask.mutate(
-      {
-        project_id: projectId,
-        type: fType,
-        title: fTitle.trim(),
-        description: fDesc.trim() || undefined,
-        epic_id: fEpic,
-        milestone_id: fMilestone,
-        priority: fPriority,
-        estimated_complexity: fComplexity,
-        depends_on: fDependsOn.length > 0 ? fDependsOn : undefined,
-      },
-      {
-        onSuccess: () => {
-          setFTitle('')
-          setFDesc('')
-          setFType('research')
-          setFEpic(undefined)
-          setFMilestone(undefined)
-          setFPriority(3)
-          setFComplexity('medium')
-          setFDependsOn([])
-          setShowForm(false)
-        },
-      },
-    )
-  }
-
-  // Fetch dependency data for the graph when toggled
-  const handleToggleDepGraph = async () => {
-    if (showDepGraph) {
-      setShowDepGraph(false)
-      return
-    }
-    // Fetch dependencies for all visible tasks
-    const ids = (tasks ?? []).map((t) => t.id)
-    try {
-      const results = await Promise.all(
-        ids.map((id) =>
-          fetch(`/api/tasks/${id}/dependencies`)
-            .then((r) => (r.ok ? r.json() : []))
-            .catch(() => []),
-        ),
-      )
-      setAllDeps(results.flat())
-    } catch {
-      setAllDeps([])
-    }
-    setShowDepGraph(true)
-  }
 
   return (
     <div className="task-workbench" data-has-selection={selectedTaskId != null}>
@@ -132,7 +75,7 @@ function ProjectTaskWorkbench({ projectId }: { projectId: number }) {
         <div><p className="task-eyebrow">ESPACIO DE TRABAJO</p><h1>Tareas</h1><p className="task-page-description">Selecciona una tarea para revisar la evidencia, corregir el contexto o iniciar trabajo.</p></div>
         <div className="flex gap-2">
           <button
-            onClick={handleToggleDepGraph}
+            onClick={()=>setShowDepGraph(!showDepGraph)}
             className={`rounded-md px-4 py-2 text-sm font-medium ${
               showDepGraph
                 ? 'bg-[var(--work-wash)] text-[var(--work-accent)]'
@@ -188,109 +131,22 @@ function ProjectTaskWorkbench({ projectId }: { projectId: number }) {
         </select>
       </div>
 
-      {/* Create form */}
-      {showForm && (
-        <div className="rounded-lg border border-[var(--work-line)] bg-[var(--work-paper)] p-4 space-y-3">
-          <label htmlFor="task-new-title" className="block text-sm">Título</label>
-          <input
-            type="text"
-            value={fTitle}
-            onChange={(e) => setFTitle(e.target.value)}
-            id="task-new-title" placeholder="Qué necesitas comprobar o construir"
-            className="w-full rounded-md border border-[var(--work-line)] bg-[var(--work-paper)] px-3 py-2 text-sm text-[var(--work-ink)] placeholder-slate-600 focus:border-sky-500/50 focus:outline-hidden"
-            autoFocus
-          />
-          <label htmlFor="task-new-description" className="block text-sm">Descripción</label>
-          <textarea
-            value={fDesc}
-            onChange={(e) => setFDesc(e.target.value)}
-            id="task-new-description" placeholder="Contexto, ejemplo y resultado esperado"
-            rows={3}
-            className="w-full rounded-md border border-[var(--work-line)] bg-[var(--work-paper)] px-3 py-2 text-sm text-[var(--work-ink)] placeholder-slate-600 focus:border-sky-500/50 focus:outline-hidden"
-          />
-          <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
-            <div>
-              <label htmlFor="task-new-type" className="mb-1 block text-xs text-[var(--work-muted)]">Tipo</label>
-              <select id="task-new-type" value={fType} onChange={(e) => setFType(e.target.value)} className="w-full rounded-md border border-[var(--work-line)] bg-[var(--work-paper)] px-2 py-1.5 text-sm text-[var(--work-ink)]">
-                {typeOptions.map((t) => <option key={t} value={t}>{t}</option>)}
-              </select>
-            </div>
-            <div>
-              <label htmlFor="task-new-priority" className="mb-1 block text-xs text-[var(--work-muted)]">Prioridad</label>
-              <select id="task-new-priority" value={fPriority} onChange={(e) => setFPriority(Number(e.target.value))} className="w-full rounded-md border border-[var(--work-line)] bg-[var(--work-paper)] px-2 py-1.5 text-sm text-[var(--work-ink)]">
-                {[1, 2, 3, 4, 5].map((v) => <option key={v} value={v}>{v}</option>)}
-              </select>
-            </div>
-            <div>
-              <label htmlFor="task-new-complexity" className="mb-1 block text-xs text-[var(--work-muted)]">Complejidad</label>
-              <select id="task-new-complexity" value={fComplexity} onChange={(e) => setFComplexity(e.target.value)} className="w-full rounded-md border border-[var(--work-line)] bg-[var(--work-paper)] px-2 py-1.5 text-sm text-[var(--work-ink)]">
-                {complexityOptions.map((c) => <option key={c} value={c}>{c}</option>)}
-              </select>
-            </div>
-            <div>
-              <label htmlFor="task-new-epic" className="mb-1 block text-xs text-[var(--work-muted)]">Épica</label>
-              <select id="task-new-epic" value={fEpic ?? ''} onChange={(e) => setFEpic(e.target.value ? Number(e.target.value) : undefined)} className="w-full rounded-md border border-[var(--work-line)] bg-[var(--work-paper)] px-2 py-1.5 text-sm text-[var(--work-ink)]">
-                <option value="">Sin épica</option>
-                {(epics ?? []).map((ep) => <option key={ep.id} value={ep.id}>{ep.title}</option>)}
-              </select>
-            </div>
-          </div>
-          {/* Depends on multi-select */}
-          {(tasks ?? []).length > 0 && (
-            <div>
-              <label className="mb-1 block text-xs text-[var(--work-muted)]">Tareas que deben resolverse antes</label>
-              <div className="flex flex-wrap gap-1.5 rounded-md border border-[var(--work-line)] bg-[var(--work-paper)] p-2 max-h-32 overflow-y-auto">
-                {(tasks ?? []).map((t) => {
-                  const selected = fDependsOn.includes(t.id)
-                  return (
-                    <button
-                      key={t.id}
-                      type="button" aria-pressed={selected}
-                      onClick={() =>
-                        setFDependsOn((prev) =>
-                          selected ? prev.filter((id) => id !== t.id) : [...prev, t.id],
-                        )
-                      }
-                      className={`rounded-full px-2 py-0.5 text-xs font-medium transition-colors ${
-                        selected
-                          ? 'bg-[var(--work-wash)] text-[var(--work-accent)]'
-                          : 'bg-[var(--work-wash)] text-[var(--work-muted)] hover:bg-[var(--work-wash)]'
-                      }`}
-                    >
-                      #{t.id} {t.title.length > 30 ? t.title.slice(0, 30) + '...' : t.title}
-                    </button>
-                  )
-                })}
-              </div>
-              {fDependsOn.length > 0 && (
-                <div className="mt-1 text-xs text-[var(--work-muted)]">
-                  Seleccionadas: {fDependsOn.map((id) => `#${id}`).join(', ')}
-                </div>
-              )}
-            </div>
-          )}
-          <button
-            onClick={handleCreate}
-            disabled={!fTitle.trim() || createTask.isPending}
-            className="rounded-md bg-[var(--work-accent-fill)] px-4 py-2 text-sm font-medium text-white hover:bg-[var(--work-accent-strong)] disabled:opacity-50"
-          >
-            {createTask.isPending ? 'Creando…' : 'Crear tarea'}
-          </button>
-          {createTask.error && <p role="alert" className="task-error">No se confirmó la creación. {createTask.error.message}</p>}
-        </div>
-      )}
+      {showForm && <TaskCreationForm key={projectId} projectId={projectId} tasks={tasks??[]} groups={epics??[]} milestones={milestones??[]} onCreated={id=>{setShowForm(false);selectTask(id)}} onCancel={()=>setShowForm(false)}/>}
 
       {/* Dependency Graph */}
-      {showDepGraph && tasks && tasks.length > 0 && (
-        <div className="rounded-lg border border-[var(--work-line)] bg-[var(--work-paper)] p-4">
+      {showDepGraph && <section aria-label="Mapa de dependencias" className="rounded-lg border border-[var(--work-line)] bg-[var(--work-paper)] p-4">
+        {(isLoading||dependencyGraph.isPending)&&<p role="status">Consultando dependencias…</p>}
+        {(error||dependencyGraph.error)&&<div role="alert"><p>No se pudieron consultar las dependencias. No se conoce el mapa completo.</p><button className="task-secondary" onClick={()=>{refetch();dependencyGraph.refetch()}}>Volver a consultar dependencias</button></div>}
+        {!error&&!dependencyGraph.error&&dependencyGraph.isSuccess&&tasks&&<>
+        <p>Relaciones entre las tareas visibles. Los filtros pueden ocultar otros prerrequisitos.</p>
           <DependencyGraph
             tasks={tasks}
-            dependencies={allDeps}
+            dependencies={dependencyGraph.data}
             selectedTaskId={selectedTaskId ?? undefined}
             onSelectTask={selectTask}
           />
-        </div>
-      )}
+        </>}
+      </section>}
 
       <div className="task-split">
         <section className="task-index" aria-label="Elegir tarea">

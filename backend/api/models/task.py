@@ -4,12 +4,14 @@ from __future__ import annotations
 
 from typing import Literal
 
-from pydantic import BaseModel, Field
+from pydantic import AliasChoices, BaseModel, Field, model_validator
 
 CommentType = Literal["comment", "change_request", "approval", "question", "answer"]
 
 
 class TaskCreate(BaseModel):
+    """Owner task metadata and optional stable creation key; accept the former complexity field explicitly."""
+
     title: str = Field(..., min_length=1, max_length=255)
     description: str = Field(default="")
     type: str = Field(default="code")
@@ -17,8 +19,17 @@ class TaskCreate(BaseModel):
     epic_id: int | None = None
     project_id: int | None = None
     priority: int = Field(default=2, ge=1, le=5)
-    complexity: str = Field(default="medium")
+    complexity: str = Field(default="medium", validation_alias=AliasChoices("complexity", "estimated_complexity"))
     depends_on: list[int] = Field(default_factory=list)
+    operation_key: str | None = Field(default=None, pattern=r"^[A-Za-z0-9_.:-]{1,128}$")
+
+    @model_validator(mode='before')
+    @classmethod
+    def unambiguous_complexity(cls, value):
+        """Reject contradictory old/new fields rather than silently discarding the owner's selected value."""
+        if isinstance(value, dict) and 'complexity' in value and 'estimated_complexity' in value and value['complexity'] != value['estimated_complexity']:
+            raise ValueError('complexity and estimated_complexity must agree when both are supplied')
+        return value
 
 
 class TaskUpdate(BaseModel):
@@ -32,6 +43,9 @@ class TaskUpdate(BaseModel):
 
 
 class TaskResponse(BaseModel):
+    """Task record; a creation response additionally identifies the original owner's request."""
+
+    operation_key: str | None = None
     id: int
     project_id: int | None = None
     epic_id: int | None = None

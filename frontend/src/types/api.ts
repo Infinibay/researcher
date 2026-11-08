@@ -46,6 +46,7 @@ export interface Milestone {
 }
 
 export interface Task {
+  operation_key?: string | null
   id: number
   project_id: number
   epic_id?: number

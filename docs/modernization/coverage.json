@@ -6184,6 +6184,25 @@
             "DD121"
           ],
           "scope": "Technical/delegated visual acceptance of installed readers, pinned local semantic search and exact existing owner review admission recovery/Stop/history. Reviewer decision and native turn IDs are synthetic domain fixtures; no fresh generative review, scientific validity or human acceptance claim."
+        },
+        "tasks": {
+          "status": "in_progress",
+          "selected_concept": "editorial-inspector",
+          "scope": "Installed task metadata creation recovery and truthful dependency map reads verified. Full native work/history/correction/owner controls and page acceptance remain open. Synthetic projects, no native actor or model.",
+          "evidence": [
+            "docs/modernization/task-creation-review.md",
+            "docs/modernization/task-creation-results.json",
+            "docs/modernization/task-creation-packaging.json",
+            "docs/design/audits/2026-11-08-task-creation/report.md"
+          ],
+          "remaining": [
+            "Full original task work/history/context correction and owner command journey acceptance"
+          ],
+          "deferred": [
+            "DD138",
+            "DD132",
+            "DD121"
+          ]
         }
       }
     },
@@ -6264,6 +6283,24 @@
         "Planning full-page and human acceptance remain in_progress",
         "124installed tests,148contracts51UI are selected/environment-specific observations, not a new global suite",
         "Style and full migration inverse rehearsal remain pending"
+      ]
+    },
+    "task_owner_creation_recovery": {
+      "status": "verified",
+      "scope": "Exact project-scoped owner task metadata and dependency creation receipts in schema70, legacy complexity alias, immutable original response after edit and no recreation after deletion. Actual201reply loss/reload/late project switch and three identical deliveries retain one task/event with0runs/dispatches.",
+      "evidence": [
+        "docs/architecture/owner-task-creation.md",
+        "docs/modernization/task-creation-review.md",
+        "docs/modernization/task-creation-results.json",
+        "docs/modernization/task-creation-packaging.json",
+        "backend/tests/api/test_task_creation_commands.py",
+        "backend/tests/runtime/test_task_creation_commands.py",
+        "frontend/tests/task-creation.e2e.mjs"
+      ],
+      "remaining": [],
+      "limits": [
+        "No complete Tasks page, human/scientific or global suite acceptance",
+        "Inverse70 checked locally; complete inverse chain to70 remains a final gate"
       ]
     }
   }
