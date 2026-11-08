@@ -5993,7 +5993,7 @@
       "status": "in_progress",
       "pilots": 12,
       "concept_images": 48,
-      "fully_accepted": 7,
+      "fully_accepted": 8,
       "pages": {
         "projects": {
           "status": "in_progress",
@@ -6159,7 +6159,7 @@
           ]
         },
         "findings": {
-          "status": "in_progress",
+          "status": "verified",
           "selected_concept": "evidence-ledger",
           "evidence": [
             "docs/modernization/evidence-pages-review.md",
@@ -6168,14 +6168,22 @@
             "docs/modernization/managed-semantic-review.md",
             "docs/modernization/managed-semantic-results.json",
             "docs/modernization/managed-semantic-packaging.json",
-            "docs/design/audits/2026-11-08-managed-semantic/report.md"
+            "docs/design/audits/2026-11-08-managed-semantic/report.md",
+            "docs/modernization/finding-review-page-review.md",
+            "docs/modernization/finding-review-page-results.json",
+            "docs/design/audits/2026-11-08-finding-review/report.md",
+            "evals/operation/finding_review_page.py",
+            "frontend/tests/finding-review.e2e.mjs"
           ],
-          "remaining": [
-            "Complete independent review admission/history and protected original-task flow acceptance; positive managed local semantic search is now verified"
-          ],
+          "remaining": [],
           "deferred": [
-            "DD135"
-          ]
+            "DD137",
+            "DD136",
+            "DD135",
+            "DD132",
+            "DD121"
+          ],
+          "scope": "Technical/delegated visual acceptance of installed readers, pinned local semantic search and exact existing owner review admission recovery/Stop/history. Reviewer decision and native turn IDs are synthetic domain fixtures; no fresh generative review, scientific validity or human acceptance claim."
         }
       }
     },

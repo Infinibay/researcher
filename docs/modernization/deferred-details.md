@@ -1169,3 +1169,14 @@ no es una imagen completa del formulario. Cabecera y densidad enDD132/DD135.
 DiezRuff(8I001/2TRY004) en[managed-semantic-lint.json](managed-semantic-lint.json).
 No repetir carga de encoder ni verificación generativa por estos detalles.
 Revisión independiente sigue siendo capacidad principal pendiente.
+
+
+## DD137 — densidad de revisión y estilo del evaluador
+
+Cabecera compartida y procedencia extendida desplazan el lector en móvil. La vista
+conserva citas/límites y no desborda; pulir al final, sin regenerar conceptos o
+repetir generación científica. Un aviso de solicitud registrada puede persistir
+tras Stop; ajustar su relación temporal con el estado observado al pulir mensajes.
+No equivale a otra solicitud lanzada. Estilo2I001/1F401en
+[finding-review-page-lint.json](finding-review-page-lint.json); helpers duplicados de
+evaluación ya registradosDD134. Sin nueva suite global ni accesibilidad completa.

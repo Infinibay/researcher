@@ -1,0 +1,107 @@
+[
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 35,
+      "row": 19
+    },
+    "filename": "/home/andres/.codex/worktrees/b09e/researcher/evals/operation/finding_review_page.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "import argparse\nimport json\nimport os\nimport socket\nimport subprocess\nimport sys\nfrom contextlib import closing\nfrom pathlib import Path\nfrom uuid import uuid4\n\nfrom evidence_pages import observe\nfrom host_smoke import start, stop\n\n",
+          "end_location": {
+            "column": 1,
+            "row": 21
+          },
+          "location": {
+            "column": 1,
+            "row": 8
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 1,
+      "row": 8
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 8,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  },
+  {
+    "cell": null,
+    "code": "F401",
+    "end_location": {
+      "column": 31,
+      "row": 9
+    },
+    "filename": "/home/andres/.codex/worktrees/b09e/researcher/evals/operation/finding_review_page.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "",
+          "end_location": {
+            "column": 1,
+            "row": 10
+          },
+          "location": {
+            "column": 1,
+            "row": 9
+          }
+        }
+      ],
+      "message": "Remove unused import: `contextlib.closing`"
+    },
+    "location": {
+      "column": 24,
+      "row": 9
+    },
+    "message": "`contextlib.closing` imported but unused",
+    "name": "unused-import",
+    "noqa_row": 9,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unused-import"
+  },
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 61,
+      "row": 32
+    },
+    "filename": "/home/andres/.codex/worktrees/b09e/researcher/evals/operation/finding_review_page.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "    from backend.api.routes.runs import StartFindingReview\n    from backend.research.models import (\n        REVIEW_PERMISSIONS,\n        EvidenceReference,\n        ReviewCheck,\n        ReviewDecision,\n        ReviewTarget,\n    )\n    from backend.research.sqlite_store import SQLiteResearchStore\n    from backend.runtime.contracts import RunSpec\n    from backend.runtime.peer_registry import AttemptPeers\n    from backend.runtime.sqlite_runs import SQLiteRunStore\n    from backend.runtime.workspaces import WorkspaceRegistry\n",
+          "end_location": {
+            "column": 1,
+            "row": 33
+          },
+          "location": {
+            "column": 1,
+            "row": 26
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 5,
+      "row": 26
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 26,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  }
+]

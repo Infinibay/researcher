@@ -1,0 +1,95 @@
+{
+  "status": "passed",
+  "scope": "Existing synthetic reviewer decision; actual exact admission recovery/Stop HTTP, no generative turn",
+  "states": [
+    {
+      "name": "01-uncertain-original-request",
+      "width": 1440,
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "02-original-decision-and-provenance",
+      "width": 1440,
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "03-mobile-decision-and-limits",
+      "width": 390,
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "04-review-source-read-failed",
+      "width": 390,
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "05-reviewed-original-source",
+      "width": 390,
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "06-closed-review-keeps-decision",
+      "width": 1440,
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "07-foreign-project-link-not-retargeted",
+      "width": 390,
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "08-original-project-return",
+      "width": 1440,
+      "fits": true,
+      "violations": []
+    }
+  ],
+  "checks": [
+    "read-error-not-empty-review",
+    "exact-existing-admission-recovered-once",
+    "same-original-run-context-and-request",
+    "decision-limits-not-scientific-certainty",
+    "reviewer-author-provenance",
+    "original-reviewed-source-and-version",
+    "source-read-failure-retry",
+    "source-focus-return",
+    "stop-original-review-keeps-decision",
+    "reload-clears-only-original-packet",
+    "foreign-link-and-project-return"
+  ],
+  "writes": [
+    {
+      "method": "POST",
+      "path": "/api/projects/101/tasks/1001/finding-reviews",
+      "status": 202
+    },
+    {
+      "method": "POST",
+      "path": "/api/projects/101/runs/b972fd54-fac2-422b-b783-364b5067acc8/stop",
+      "status": 202
+    }
+  ],
+  "faults": [
+    {
+      "path": "/api/projects/101/findings/1/review-state",
+      "kind": "abort-read"
+    },
+    {
+      "path": "/api/projects/101/research-sources/1",
+      "kind": "abort-read"
+    }
+  ],
+  "errors": [],
+  "replayed": {
+    "run": "b972fd54-fac2-422b-b783-364b5067acc8",
+    "status": 202,
+    "operation_key": "review-61c4db56-10b3-40e9-8629-6241e38d29fd"
+  }
+}

@@ -1,0 +1,80 @@
+{
+  "status": "passed",
+  "synthetic_review_decision": true,
+  "actual_generative_turns": 0,
+  "existing_owner_admission_replayed": "b972fd54-fac2-422b-b783-364b5067acc8",
+  "browser_exit": 0,
+  "service_exit": 143,
+  "base_commit": "8a817c3",
+  "raw_evaluation": ".researcher/evaluations/finding-review-page-20261108-v3",
+  "states": 8,
+  "checks": 11,
+  "writes": [
+    {
+      "method": "POST",
+      "path": "/api/projects/101/tasks/1001/finding-reviews",
+      "status": 202
+    },
+    {
+      "method": "POST",
+      "path": "/api/projects/101/runs/b972fd54-fac2-422b-b783-364b5067acc8/stop",
+      "status": 202
+    }
+  ],
+  "changed_sections": [
+    "runs"
+  ],
+  "before_runs": [
+    {
+      "id": "37f6db5b-c278-4115-8f3c-af3b66c58049",
+      "status": "needs_review"
+    },
+    {
+      "id": "b972fd54-fac2-422b-b783-364b5067acc8",
+      "status": "needs_review"
+    },
+    {
+      "id": "f9095e00-7f11-4bff-a5ed-97b04e77e41c",
+      "status": "accepted"
+    }
+  ],
+  "after_runs": [
+    {
+      "id": "37f6db5b-c278-4115-8f3c-af3b66c58049",
+      "status": "needs_review"
+    },
+    {
+      "id": "b972fd54-fac2-422b-b783-364b5067acc8",
+      "status": "cancelled"
+    },
+    {
+      "id": "f9095e00-7f11-4bff-a5ed-97b04e77e41c",
+      "status": "accepted"
+    }
+  ],
+  "unchanged_sections": [
+    "groups",
+    "milestones",
+    "tasks",
+    "dependencies",
+    "peers",
+    "dispatches",
+    "native_starts",
+    "integrity",
+    "foreign_keys",
+    "sources",
+    "findings",
+    "artifacts",
+    "reports"
+  ],
+  "dispatches_before_after": [
+    0,
+    0
+  ],
+  "synthetic_bound_turn_ids_before_after": [
+    3,
+    3
+  ],
+  "raw_result_sha256": "28cb79a5204cf6b85c50ca8e1f1daff0bd60c762b1ca52fed71ec219e53852e2",
+  "browser_receipt_sha256": "59f6a506af763baa38f4dbe24b958ab3a02776c4fba50ac19570209815ae37a2"
+}

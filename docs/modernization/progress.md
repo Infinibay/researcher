@@ -9068,3 +9068,22 @@ archiva, otras once enhostretenido.7/12páginas y41/43escenarios sin incremento 
 subcapacidad; falta admisión/historia de revisión independiente de Hallazgos.
 DD136y anteriores al final; U08/C10/AuthorityBusy, otras páginas y gates globales
 continúan. [Resultados](managed-semantic-review.md).
+
+
+## Hallazgos: revisión original recuperada, 2026-11-08
+
+06:51:21–07:04:37UTC,13min16s hasta verificar/inspeccionar.8estados/11checks,
+0Axe regional/overflow/errores. Reenvío exacto202recupera mismo run/claves/cuerpo;
+fuente/hash, límites, autor/revisor/contexto y retorno de foco comprobados. Stop202
+cierra sólo revisor y conserva decisión; recarga y proyecto ajeno no retargetean.
+Estado documental/tareas/runs/peers conservados salvo revisor→cancelled.0dispatches,
+3IDs de turno explícitamente sintéticos, ningún modelo. Servicio143. Dos fallos de
+evaluador corregidos sin tocar producto o crear otro reviewer; originales retenidos.
+Módulo/dos funciones documentados,JSsintaxis verde;2I001/1F401 al finalDD137.
+
+Con lectores/búsqueda local positiva anteriores: **8/12 páginas** técnicamente/
+visualmente aceptadas en alcance delegado; **41/43 escenarios**. U08/C10 no cerrados,
+ninguna aceptación humana/científica nueva. Siguientes Tareas/Conversación/Ejecución,
+Proyectos/contención original y gates globales. No nueva suite global o wheel.
+[Resultados y límites](finding-review-page-review.md). Respuesta del usuario ya
+registrada pide propósito/datos/relaciones/entradas/salidas; no repetir quiz abstracto.

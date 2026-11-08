@@ -24,32 +24,28 @@ que se pueda comparar el avance; no presentar microajustes como tareas principal
 ## Estado comprobado
 
 - Codex por suscripción y Ken publicado ensayados. Fuentes/citas, informes draft y revisión documental independiente conectados. Desarrollo admitido desde Tareas/Conversación con captura y comprobaciones explícitas; revisión independiente solicitada desde Tareas y aceptación del propietario conectada. Publicación local desde aceptación conectada; recuperación local de sólo lectura conectada; transporte remoto configurable conectado; recuperación remota y controles de Tareas conectados; ejecución/activación antiguas por tarea y proyecto retiradas; auxiliares de generación/proveedor, herramientas antiguas y sus cinco bibliotecas retirados. También se retiraron API interna, CLI, servicios/listeners y flows/helpers antiguos. También se retiraron autonomía, plantillas históricas y lectores de proveedor sin consumidores; se conserva el control de parada de trabajadores registrados.
-- Interfaz: doce pilotos, 36/36 conceptos de escritorio y 12/12 móviles; todas las rutas tienen piloto y 7/12 páginas tienen aceptación técnica y visual delegada.
+- Interfaz: doce pilotos, 36/36 conceptos de escritorio y 12/12 móviles; todas las rutas tienen piloto y 8/12 páginas tienen aceptación técnica y visual delegada.
 - Última suite global: `9fb873c`,2210 casos,2178 pasan,31 fallan y1 error de fixture; sin omisiones. La carrera de backup encontrada se corrigió después con40 pruebas instaladas. No se declara una nueva corrida global verde; la referencia `0c8b8d9` queda como evidencia histórica.
 - U01–U07, E01–E12, C01–C09 y D01–D13 quedan comprobados con el alcance de sus matrices; siguen 2 de 43 escenarios amplios sin aceptación completa en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Estado actual: búsqueda local positiva; continúa revisión de Hallazgos
+## Estado actual: Hallazgos verificado; siguientes Tareas, Conversación y Ejecución
 
-**06:29:16–06:47:58 UTC,18min42s hasta verificar/inspeccionar**, baseefbf84e.
-[Alcance](managed-semantic-review.md). Documentación/checkpoint posteriores excluidos.
+**06:51:21–07:04:37UTC,13min16s hasta verificar/inspeccionar**, base8a817c3.
+[Alcance y límites](finding-review-page-review.md). Documentación/checkpoint posteriores excluidos.
 
-- Terminado: **7/12 páginas** en alcance delegado, sin cambio de contador por
- cerrar una subcapacidad. Informes conserva su aceptación original bien mostrada.
- Hallazgos ya conecta pesos locales explícitos en preparación/reapertura del host:
-30fuente/6CLI checkout/38instalados pasan,685fuentes/365producto coinciden.
- Consulta y continuación200sobre53registros con iguales hashes; un cálculo
- local settled3788msCPU,workercerrado y servicio/dominio retirados.0generación.
-- En curso: **Hallazgos: admisión e historia de revisión independiente**. Completar
- decisión/procedencia, controles y recuperación originales sin confundir una cita,
- similitud o fixture con comprobación científica o aceptación humana.
-- Pendiente en orden: Hallazgos, Tareas, Conversación, Ejecución; Proyectos por
- AuthorityBusy original. Enlace no vacío de cierre en recorrido global; U08/C10 y
- evaluación científica; distribución/dependencias, prompts, inversas69, suite y
- revisión independiente final. No nueva suite global verde ni porcentaje/ETA inventados.
-- Seguimos **41/43 escenarios**. Última suite global31fallos/1error. Último corte
- de prompts67de85desactualizadas en318archivos; revalidar sobre árbol final.
-- Detalles al final: DD136y anteriores, fragmentos/densidad/mensajes/estilo y
- accesibilidad completa.22definiciones documentadas,10Ruffpendientes. No push/merge.
+- Terminado: **8/12 páginas** con aceptación técnica/visual delegada. Hallazgos
+ combina lectores/búsqueda local positiva y recuperación del mismo revisor, fuente,
+ límites e historia.8estados/11checks; sólo recuperación202 yStop202.0dispatches,
+ mismos3IDs sintéticos nunca lanzados; sólo revisor pasa a cancelled.
+- En curso: preparar aceptación de **Tareas, Conversación y Ejecución**, reutilizando
+ contratos y conceptos actuales. Sin nueva generación por defecto ni pulido menor.
+- Pendiente: esas tres páginas y Proyectos/AuthorityBusy original; cierre global no
+ vacío, U08/C10/evaluación científica, distribución/dependencias, prompts, inversas69,
+ suite y revisión independiente final. No hay historial del usuario que migrar.
+- Seguimos **41/43 escenarios**. Última suite global31fallos/1error; último corte de
+ prompts67de85desactualizados sobre318archivos, revalidar árbol final. No ETA/porcentaje global inventado.
+- Detalles al final: DD137y anteriores; densidad, mensajes, accesibilidad completa y
+ estilo. Módulo/dos funciones documentados;2I001/1F401 pendientes. No push/merge.
 
 ## Etapa anterior: Ken estructural offline verificado; continúa aceptación de páginas
 
