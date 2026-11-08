@@ -14,19 +14,19 @@ from backend.tests.runtime.test_runtime_service import ControlledInference, coor
 
 async def test_stop_interrupts_original_worker_before_contended_write_finishes(service_setup, monkeypatch):
     """A real HTTP writer waits on SQLite while the same loop withdraws native authority and serves health."""
-    from backend.tools.base import db
+    from backend.runtime import sqlite_runs
 
     s = service_setup
     native = ControlledInference(s)
     service = coordinator(s, native)
     app = create_app(access=LocalAccess(pairing_key='contention-owner-code-at-least-32-characters'), runtime_service=service)
     entered = threading.Event()
-    original = db.get_connection
+    original = sqlite_runs.connect
 
     def observed_connection(*args, **kwargs):
-        """Signal that the original task insert reached SQLite without simulating its lock."""
+        """Observe the task receipt writer transaction before its real contended SQLite lock."""
         conn = original(*args, **kwargs)
-        conn.set_trace_callback(lambda sql: entered.set() if sql.lstrip().upper().startswith('INSERT INTO TASKS') else None)
+        conn.set_trace_callback(lambda sql: entered.set() if sql.strip().upper() == 'BEGIN IMMEDIATE' else None)
         return conn
 
     async with app.router.lifespan_context(app), httpx.AsyncClient(transport=httpx.ASGITransport(app=app), base_url='http://localhost') as client:
@@ -35,7 +35,7 @@ async def test_stop_interrupts_original_worker_before_contended_write_finishes(s
         client.headers['X-Researcher-CSRF'] = paired.json()['csrf_token']
         run = await service.submit(s.c.spec)
         await asyncio.wait_for(native.started.wait(), 2)
-        monkeypatch.setattr(db, 'get_connection', observed_connection)
+        monkeypatch.setattr(sqlite_runs, 'connect', observed_connection)
         with closing(sqlite3.connect(s.c.database)) as writer:
             writer.execute('BEGIN IMMEDIATE')
             mutation = asyncio.create_task(client.post('/api/tasks', json={'project_id': 101, 'title': 'Contended one-time write'}))

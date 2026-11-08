@@ -64,11 +64,12 @@ async def test_owner_reads_binary_windows_after_authority_ends_without_mutation(
     job = record(c, lease, stdout=b"\xffA\xc3\xb1Z", stderr=b"error")
     c.store.cancel(101, run.run_id)
     assert not c.store.attempt_active(lease)
-    before = c.store.get(101, run.run_id)
     async with (
         owner_app.router.lifespan_context(owner_app),
         owner_client(owner_app) as owner,
     ):
+        # Startup reconciles unowned history; the following reads must preserve it.
+        before = c.store.get(101, run.run_id)
         path = f"/api/projects/101/runs/{run.run_id}/jobs/{job.job_id}"
         response = await owner.get(path, params={"max_bytes": 2})
         assert response.status_code == 200, response.text

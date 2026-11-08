@@ -29,15 +29,15 @@ def test_failed_audit_rolls_back_task_and_dependencies(client, seeded_project, d
 
 def test_writer_contention_leaves_health_and_websocket_responsive(client, seeded_project, _isolated_db, monkeypatch):
     """Hold a real writer lock while independent API and WebSocket reads use the same event loop."""
-    from backend.tools.base import db
+    from backend.runtime import sqlite_runs
 
     entered = threading.Event()
-    original = db.get_connection
+    original = sqlite_runs.connect
 
     def observed_connection(*args, **kwargs):
-        """Observe the original insert reaching SQLite without replacing database execution."""
+        """Observe the task receipt transaction reaching its real writer lock before the insert."""
         conn = original(*args, **kwargs)
-        conn.set_trace_callback(lambda sql: entered.set() if sql.lstrip().upper().startswith('INSERT INTO TASKS') else None)
+        conn.set_trace_callback(lambda sql: entered.set() if sql.strip().upper() == 'BEGIN IMMEDIATE' else None)
         return conn
 
     def read_surfaces():
@@ -47,7 +47,7 @@ def test_writer_contention_leaves_health_and_websocket_responsive(client, seeded
             assert socket.receive_json()['type'] == 'events.page'
         return True
 
-    monkeypatch.setattr(db, 'get_connection', observed_connection)
+    monkeypatch.setattr(sqlite_runs, 'connect', observed_connection)
     responsive = False
     with closing(sqlite3.connect(_isolated_db)) as writer, ThreadPoolExecutor(max_workers=2) as pool:
         writer.execute('BEGIN IMMEDIATE')
@@ -122,22 +122,23 @@ import hashlib,os,sqlite3,sys
 from pathlib import Path
 from backend.api.models.task import TaskCreate
 from backend.api.routes import tasks
-from backend.tools.base import db
+from backend.runtime import sqlite_runs
 assert hashlib.sha256(Path(tasks.__file__).read_bytes()).hexdigest()==sys.argv[3]
 class CrashConnection(sqlite3.Connection):
     """Preserve the actual transaction while terminating before or after its commit."""
-    def commit(self):
-        """Terminate only this process at the requested physical boundary."""
-        if sys.argv[2]=='before':os._exit(72)
-        super().commit()
-        os._exit(73)
+    def __exit__(self, exc_type, exc, traceback):
+        """Terminate around the context-managed commit actually used by SQLiteRunStore."""
+        if exc_type is None and sys.argv[2]=='before':os._exit(72)
+        result=super().__exit__(exc_type, exc, traceback)
+        if exc_type is None:os._exit(73)
+        return result
 def connection(*args,**kwargs):
     """Use the original database with real trigger/FK behavior and a commit observation seam."""
     conn=sqlite3.connect(sys.argv[1],factory=CrashConnection)
     conn.row_factory=sqlite3.Row
     conn.execute('PRAGMA foreign_keys=ON')
     return conn
-db.get_connection=connection
+sqlite_runs.connect=connection
 tasks.create_task(TaskCreate(project_id=1,title='Crash boundary'))
 '''
     result = subprocess.run([sys.executable, '-c', program, _isolated_db, boundary,

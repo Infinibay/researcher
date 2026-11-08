@@ -211,3 +211,64 @@ def test_terminal_corrected_graph_keeps_original_adoption_packet_across_restart(
         assert client.pending() is None
     finally:
         client.close()
+
+
+@pytest.mark.parametrize('receipt_revision', [7, 8])
+def test_terminal_code_acceptance_binds_observed_check_policy(tmp_path, receipt_revision):
+    """Send the policy actually shown to the owner and retain uncertainty for a receipt identifying another revision."""
+    import json
+
+    import httpx
+
+    from backend.cli.owner_client import OwnerClient, TerminalError
+    from backend.orchestrator import ProjectOrchestrator
+    from backend.tests.cli.test_owner_client import client_config
+
+    reads = []
+    posts = []
+    observed = {
+        'project_id': 101,
+        'eligible': True,
+        'candidate_current': True,
+        'candidate': {'attempt_id': 'author:a', 'context_version': 3},
+        'subject_sha256': 'b' * 64,
+        'review_sha256': 'c' * 64,
+        'requires_acknowledgement': True,
+        'project_check_policy': {'revision': 7, 'mode': 'allow_missing'},
+    }
+
+    def handle(request):
+        """Control transport and receipt identity only; canonical policy guards are tested separately."""
+        if request.url.path == '/api/session':
+            return httpx.Response(200, json={
+                'authenticated': True, 'csrf_token': 'csrf',
+                'endpoint_id': 'a' * 64, 'workspace_roots': [],
+            })
+        if request.method == 'GET':
+            reads.append(request.url.path)
+            return httpx.Response(200, json=observed)
+        body = json.loads(request.content)
+        posts.append(body)
+        return httpx.Response(200, json={
+            **body, 'project_id': 101, 'run_id': 'code:a',
+            'task_accepted': True, 'publication_performed': False,
+            'check_policy_revision': receipt_revision,
+        })
+
+    client = OwnerClient(**client_config(tmp_path), transport=httpx.MockTransport(handle))
+    controller = ProjectOrchestrator(project_id=101, owner_client=client)
+    try:
+        controller.handle_user_message('/code code:a')
+        if receipt_revision == 7:
+            assert 'no publica' in controller.handle_user_message('/accept-code code:a --ack-limits')
+            assert client.pending() is None
+        else:
+            with pytest.raises(TerminalError):
+                controller.handle_user_message('/accept-code code:a --ack-limits')
+            pending = client.pending()
+            assert pending['body'] == posts[0]
+            assert pending['expected']['check_policy_revision'] == 7
+        assert posts[0]['check_policy_revision'] == 7
+        assert reads == ['/api/projects/101/runs/code:a/code-result']
+    finally:
+        controller.shutdown()

@@ -20,6 +20,7 @@ async def test_archive_requires_the_actual_project_and_preserves_native_receipts
     thread = saved["thread_id"]
     before = tuple(c.conn.execute("SELECT * FROM chat_messages WHERE id=?", (saved["message_id"],)).fetchone())
     async with workspace_app.router.lifespan_context(workspace_app), owner_client(workspace_app) as owner:
+        runs_before_archive = [tuple(row) for row in c.conn.execute('SELECT * FROM runtime_runs ORDER BY id')]
         wrong = await owner.post(f"/api/chat/202/threads/{thread}/archive")
         assert wrong.status_code == 404
         assert c.conn.execute("SELECT status FROM conversation_threads WHERE thread_id=?", (thread,)).fetchone()[0] == "active"
@@ -32,7 +33,7 @@ async def test_archive_requires_the_actual_project_and_preserves_native_receipts
     assert tuple(c.conn.execute("SELECT * FROM chat_messages WHERE id=?", (saved["message_id"],)).fetchone()) == before
     assert c.conn.execute("SELECT count(*) FROM events_log WHERE event_type='conversation.archived'").fetchone()[0] == 1
     assert c.conn.execute("SELECT count(*) FROM agent_events").fetchone()[0] == 0
-    assert c.store.get(101, sender[0].run_id).status == c.store.get(101, recipient[0].run_id).status == "running"
+    assert [tuple(row) for row in c.conn.execute('SELECT * FROM runtime_runs ORDER BY id')] == runs_before_archive
     with pytest.raises(OperationConflict, match="closed"):
         messages.send(recipient[2], "closed-reply", recipient_run_id=sender[0].run_id, intent="answer", message="An answer", in_reply_to=saved["message_id"])
     assert messages.read(recipient[2], saved["message_id"])["delivery"] == "recorded"

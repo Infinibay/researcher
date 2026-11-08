@@ -166,6 +166,7 @@ def test_failed_input_freeze_retains_preparation_without_fabricating_dispatch(co
     assert budget['used_turns'] == 1 and budget['held_tokens'] == 100 and budget['preparation_only'] == 1
 
 
+@pytest.mark.parametrize('schema_target', [65])
 def test_migration_preserves_old_dispatches_and_refuses_inverse_after_preparation(coordination):
     """Upgrade and unused inverse retain historical dispatch bytes without inventing preparation receipts."""
     from backend.db.project_check_policy_migration import restore_project_check_policy_schema
@@ -179,7 +180,7 @@ def test_migration_preserves_old_dispatches_and_refuses_inverse_after_preparatio
     c.store.reserve_inference(lease, workspace='/host/alpha', catalog_hash='a'*64, limits=LIMITS)
     original = [tuple(row) for row in c.conn.execute('SELECT * FROM runtime_inference_dispatches')]
     restore_project_check_policy_schema(c.conn);restore_preparation_budget_schema(c.conn)
-    ensure_migrations(c.database)
+    ensure_migrations(c.database, target_version=65)
     assert [tuple(row) for row in c.conn.execute('SELECT * FROM runtime_inference_dispatches')] == original
     budget = RuntimeHistory(c.database).budget(101)
     assert budget['used_turns'] == 1 and budget['preparation_only'] == 0

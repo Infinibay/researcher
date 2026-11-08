@@ -1296,3 +1296,15 @@ repitan el nombre. Revisar el contenido al cambiar el comportamiento; mantener
 las descripciones de herramientas que realmente recibe el modelo bajo su revisión
 de prompts. No declarar toda la documentación completa por verificar módulos o
 solo las funciones nuevas de una entrega.
+
+
+## DD147 — recuperar observaciones CLI anteriores a la política
+
+La corrección de aceptación enlaza la política observada al request y al recibo.
+Un journal anterior puede conservar una observación `eligible=true` sin
+`project_check_policy`: al iniciar una aceptación nueva produce `KeyError`.
+Renovar `/code` obtiene la observación actual. Pulir ese mensaje para indicar
+la recuperación concreta; no modificar automáticamente observaciones ni paquetes
+pendientes. Los `/retry` y recibos ya guardados conservan su protocolo original.
+Añadir un editor CLI de política es una mejora de paridad separada, no condición
+para este arreglo: la configuración explícita ya existe por HTTP propietario/web.

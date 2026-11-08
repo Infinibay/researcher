@@ -683,6 +683,7 @@ async def test_owned_checks_persist_exact_results_and_invalidate_mutated_copy(
             )
 
 
+@pytest.mark.timeout(60)
 async def test_check_result_after_context_correction_is_retained_without_approval(
     development_config, monkeypatch
 ):
@@ -730,6 +731,7 @@ async def test_check_result_after_context_correction_is_retained_without_approva
             assert Path(check["workspace"]).exists()
 
 
+@pytest.mark.timeout(60)
 async def test_stop_during_owned_check_closes_writer_and_retains_original_record(
     development_config,
 ):

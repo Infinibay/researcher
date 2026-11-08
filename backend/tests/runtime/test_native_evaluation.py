@@ -78,9 +78,15 @@ async def test_scenario_failure_records_original_service_closure(tmp_path, evalu
     from evals.runtime.native_trial import backend, prepare
 
     trial = prepare(tmp_path / 'trial', evaluation_assets, live=True, turns=1)
-    (trial.installation / 'auth' / 'owner-test.key').write_text('synthetic-pairing')
     handle = object()
-    monkeypatch.setattr(host_smoke, 'start', lambda *args: (handle, None))
+
+    def start(installation, output, port, attempt):
+        """Create this start's pairing file after the evaluator captures preexisting keys."""
+        assert installation == trial.installation and output == trial.root
+        (installation / 'auth' / 'owner-test.key').write_text('synthetic-pairing')
+        return handle, None
+
+    monkeypatch.setattr(host_smoke, 'start', start)
 
     def stop(process, log):
         """Observe the exact original fixture handle rather than resolving a PID file."""

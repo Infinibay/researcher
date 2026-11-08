@@ -1,0 +1,1697 @@
+{
+  "base_commit": "e8d89d0",
+  "source_change": "backend/orchestrator.py::_accept_result forwards observed check_policy_revision and binds expected receipt to it; no API/guard/migration change",
+  "source_regression_base": "d278653",
+  "diagnostic_started_at": "2026-11-08T12:55:21.166909+00:00",
+  "source_verified_at": "2026-11-08T13:17:04.250063+00:00",
+  "elapsed_seconds_to_source_verification": 1303.083154,
+  "original_global_outcomes": {
+    "passed": 2541,
+    "failed": 26,
+    "errors": 1,
+    "processes": 2,
+    "single_process_global_complete": false
+  },
+  "directed_current_unique_cases": 220,
+  "directed_current_outcomes": {
+    "passed": 220,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "deduplication": "Latest named case identity across listed directed runs; earlier failures and diagnostic-only runs retained separately. Not inferred whole-suite green.",
+  "source_runs": [
+    {
+      "name": "inverse-prefix-consumers",
+      "started_at": "2026-11-08T13:01:52.971205+00:00",
+      "finished_at": "2026-11-08T13:03:06.707710+00:00",
+      "seconds": 73.737,
+      "arguments": [
+        "backend/tests/runtime/test_auxiliary_budget.py",
+        "backend/tests/runtime/test_auxiliary_continuation.py",
+        "backend/tests/runtime/test_auxiliary_restoration.py",
+        "backend/tests/runtime/test_preparation_budget.py",
+        "backend/tests/runtime/test_project_budget_policy.py",
+        "backend/tests/runtime/test_workspace_retention.py",
+        "backend/tests/runtime/test_project_check_policy.py",
+        "backend/tests/runtime/test_migration_chain.py"
+      ],
+      "exit": 0,
+      "interrupted": false,
+      "killed": false,
+      "cases": 143,
+      "passed": 143,
+      "failures": [],
+      "errors": [],
+      "skipped": [],
+      "unnamed_excluded": 0,
+      "controllers_before": [
+        "cpu",
+        "memory",
+        "pids"
+      ],
+      "controllers_after": [
+        "cpu",
+        "memory",
+        "pids"
+      ],
+      "cpu_max": "800000 100000"
+    },
+    {
+      "name": "regression-current-fixtures",
+      "started_at": "2026-11-08T13:04:25.820439+00:00",
+      "finished_at": "2026-11-08T13:04:52.193015+00:00",
+      "seconds": 26.373,
+      "arguments": [
+        "backend/tests/api/test_persistence_boundaries.py",
+        "backend/tests/runtime/test_data_boundaries.py",
+        "backend/tests/runtime/test_legacy_catalog_removal.py",
+        "backend/tests/runtime/test_native_evaluation.py",
+        "backend/tests/runtime/test_owner_command_output.py",
+        "backend/tests/runtime/test_owner_history.py",
+        "backend/tests/runtime/test_owner_notes.py",
+        "backend/tests/runtime/test_project_producer_retirement.py",
+        "backend/tests/test_orchestrator.py"
+      ],
+      "exit": 1,
+      "interrupted": false,
+      "killed": false,
+      "cases": 54,
+      "passed": 52,
+      "failures": [
+        {
+          "class": "backend.tests.runtime.test_owner_notes",
+          "name": "test_paired_endpoint_identity_detects_replaced_database_before_note_mutation",
+          "message": "AssertionError: assert '0d16e75485c6f35dc6f3c4ec25c0b6042bad1fe85a1ff48746d7f5a39b871932' == '836868734db4dfb4455da5d16ced4ae1cae61d7df57b8c7561c115bea3872ea1'\n  \n  - 836868734db4dfb4455da5d16ced4ae1cae61d7df57b8c7561c115bea3872ea1\n  + 0d16e75485c6f35dc6f3c4ec25c0b6042bad1fe85a1ff48746d7f5a39b871932"
+        },
+        {
+          "class": "backend.tests.test_orchestrator",
+          "name": "test_terminal_owns_no_engine_and_recovers_exact_work_through_real_owner_http",
+          "message": "AssertionError: assert 'cancelling' == 'needs_review'\n  \n  - needs_review\n  + cancelling"
+        }
+      ],
+      "errors": [],
+      "skipped": [],
+      "unnamed_excluded": 0,
+      "controllers_before": [
+        "cpu",
+        "memory",
+        "pids"
+      ],
+      "controllers_after": [
+        "cpu",
+        "memory",
+        "pids"
+      ],
+      "cpu_max": "800000 100000"
+    },
+    {
+      "name": "regression-two-current-contracts",
+      "started_at": "2026-11-08T13:07:33.586689+00:00",
+      "finished_at": "2026-11-08T13:08:11.341468+00:00",
+      "seconds": 37.755,
+      "arguments": [
+        "backend/tests/runtime/test_owner_notes.py::test_paired_endpoint_identity_detects_replaced_database_before_note_mutation",
+        "backend/tests/test_orchestrator.py"
+      ],
+      "exit": 1,
+      "interrupted": false,
+      "killed": false,
+      "cases": 2,
+      "passed": 1,
+      "failures": [
+        {
+          "class": "backend.tests.test_orchestrator",
+          "name": "test_terminal_owns_no_engine_and_recovers_exact_work_through_real_owner_http",
+          "message": "backend.cli.owner_client.TerminalError: El resultado observado no admite aceptación. Consulta su evidencia y estado actual."
+        }
+      ],
+      "errors": [],
+      "skipped": [],
+      "unnamed_excluded": 0,
+      "controllers_before": [
+        "cpu",
+        "memory",
+        "pids"
+      ],
+      "controllers_after": [
+        "cpu",
+        "memory",
+        "pids"
+      ],
+      "cpu_max": "800000 100000"
+    },
+    {
+      "name": "timeout-final60",
+      "started_at": "2026-11-08T13:10:20.769836+00:00",
+      "finished_at": "2026-11-08T13:13:37.350314+00:00",
+      "seconds": 196.58,
+      "arguments": [
+        "backend/tests/runtime/test_code_review_session.py::test_owned_native_review_records_exact_decision_after_closure",
+        "backend/tests/runtime/test_code_review_session.py::test_changed_review_cannot_confirm_and_retains_original_proposal[context]",
+        "backend/tests/runtime/test_code_review_session.py::test_changed_review_cannot_confirm_and_retains_original_proposal[source]",
+        "backend/tests/runtime/test_code_review_session.py::test_stop_during_review_confirmation_closes_original_owner_and_joins_work",
+        "backend/tests/runtime/test_code_review_session.py::test_coordinator_schedules_native_review_and_does_not_finish_unconfirmed_work[False-False]",
+        "backend/tests/runtime/test_code_review_session.py::test_coordinator_schedules_native_review_and_does_not_finish_unconfirmed_work[True-False]",
+        "backend/tests/runtime/test_code_review_session.py::test_coordinator_schedules_native_review_and_does_not_finish_unconfirmed_work[False-True]",
+        "backend/tests/runtime/test_development_session.py::test_check_result_after_context_correction_is_retained_without_approval",
+        "backend/tests/runtime/test_development_session.py::test_stop_during_owned_check_closes_writer_and_retains_original_record"
+      ],
+      "exit": 0,
+      "interrupted": false,
+      "killed": false,
+      "cases": 9,
+      "passed": 9,
+      "failures": [],
+      "errors": [],
+      "skipped": [],
+      "unnamed_excluded": 0,
+      "controllers_before": [
+        "cpu",
+        "memory",
+        "pids"
+      ],
+      "controllers_after": [
+        "cpu",
+        "memory",
+        "pids"
+      ],
+      "cpu_max": "800000 100000"
+    },
+    {
+      "name": "terminal-policy-green",
+      "started_at": "2026-11-08T13:16:17.215682+00:00",
+      "finished_at": "2026-11-08T13:17:04.250063+00:00",
+      "seconds": 47.034,
+      "arguments": [
+        "backend/tests/cli/test_terminal_controller.py",
+        "backend/tests/cli/test_owner_client.py",
+        "backend/tests/runtime/test_project_check_policy.py",
+        "backend/tests/test_orchestrator.py"
+      ],
+      "exit": 0,
+      "interrupted": false,
+      "killed": false,
+      "cases": 30,
+      "passed": 30,
+      "failures": [],
+      "errors": [],
+      "skipped": [],
+      "unnamed_excluded": 0,
+      "controllers_before": [
+        "cpu",
+        "memory",
+        "pids"
+      ],
+      "controllers_after": [
+        "cpu",
+        "memory",
+        "pids"
+      ],
+      "cpu_max": "800000 100000"
+    }
+  ],
+  "tdd_new_policy_cases": {
+    "red_cases": 2,
+    "observed_failures": [
+      "request omitted check_policy_revision",
+      "receipt for another revision cleared uncertainty"
+    ],
+    "green_receipt": "terminal-policy-green"
+  },
+  "cases": [
+    {
+      "class": "backend.tests.runtime.test_auxiliary_budget",
+      "name": "test_original_result_survives_reply_loss_and_another_actor_without_new_work",
+      "outcome": "passed",
+      "latest_run": "inverse-prefix-consumers"
+    },
+    {
+      "class": "backend.tests.runtime.test_auxiliary_budget",
+      "name": "test_uncertain_failure_keeps_full_hold_after_restart_and_never_replays",
+      "outcome": "passed",
+      "latest_run": "inverse-prefix-consumers"
+    },
+    {
+      "class": "backend.tests.runtime.test_auxiliary_budget",
+      "name": "test_competing_calls_cannot_both_take_last_project_slot",
+      "outcome": "passed",
+      "latest_run": "inverse-prefix-consumers"
+    },
+    {
+      "class": "backend.tests.runtime.test_auxiliary_budget",
+      "name": "test_worker_cpu_without_measurement_stays_unknown_even_with_result",
+      "outcome": "passed",
+      "latest_run": "inverse-prefix-consumers"
+    },
+    {
+      "class": "backend.tests.runtime.test_auxiliary_budget",
+      "name": "test_owner_policy_revision_keeps_unknown_hold_and_old_decisions_compatible",
+      "outcome": "passed",
+      "latest_run": "inverse-prefix-consumers"
+    },
+    {
+      "class": "backend.tests.runtime.test_auxiliary_budget",
+      "name": "test_writer_process_death_retains_original_reservation_without_replay",
+      "outcome": "passed",
+      "latest_run": "inverse-prefix-consumers"
+    },
+    {
+      "class": "backend.tests.runtime.test_auxiliary_budget",
+      "name": "test_attempt_cannot_evade_its_local_allowance_or_read_after_revocation",
+      "outcome": "passed",
+      "latest_run": "inverse-prefix-consumers"
+    },
+    {
+      "class": "backend.tests.runtime.test_auxiliary_budget",
+      "name": "test_unused_auxiliary_inverse_preserves_old_schema_and_refuses_work[65]",
+      "outcome": "passed",
+      "latest_run": "inverse-prefix-consumers"
+    },
+    {
+      "class": "backend.tests.runtime.test_auxiliary_continuation",
+      "name": "test_closed_failure_has_one_explicit_successor_and_original_receipt",
+      "outcome": "passed",
+      "latest_run": "inverse-prefix-consumers"
+    },
+    {
+      "class": "backend.tests.runtime.test_auxiliary_continuation",
+      "name": "test_live_owner_and_unfinished_callback_cannot_be_repeated",
+      "outcome": "passed",
+      "latest_run": "inverse-prefix-consumers"
+    },
+    {
+      "class": "backend.tests.runtime.test_auxiliary_continuation",
+      "name": "test_real_owner_death_allows_new_calculation_without_erasing_pending_hold",
+      "outcome": "passed",
+      "latest_run": "inverse-prefix-consumers"
+    },
+    {
+      "class": "backend.tests.runtime.test_auxiliary_continuation",
+      "name": "test_permission_does_not_override_budget_or_allow_two_successors",
+      "outcome": "passed",
+      "latest_run": "inverse-prefix-consumers"
+    },
+    {
+      "class": "backend.tests.runtime.test_auxiliary_continuation",
+      "name": "test_missing_identity_never_claims_closure",
+      "outcome": "passed",
+      "latest_run": "inverse-prefix-consumers"
+    },
+    {
+      "class": "backend.tests.runtime.test_auxiliary_continuation",
+      "name": "test_changed_observer_and_permission_failure_are_unknown",
+      "outcome": "passed",
+      "latest_run": "inverse-prefix-consumers"
+    },
+    {
+      "class": "backend.tests.runtime.test_auxiliary_continuation",
+      "name": "test_new_permission_still_requires_current_native_grant",
+      "outcome": "passed",
+      "latest_run": "inverse-prefix-consumers"
+    },
+    {
+      "class": "backend.tests.runtime.test_auxiliary_continuation",
+      "name": "test_unused_inverse_and_used_history_guard[65]",
+      "outcome": "passed",
+      "latest_run": "inverse-prefix-consumers"
+    },
+    {
+      "class": "backend.tests.runtime.test_auxiliary_continuation",
+      "name": "test_owner_api_recovers_exact_receipt_and_excludes_tool_bearer",
+      "outcome": "passed",
+      "latest_run": "inverse-prefix-consumers"
+    },
+    {
+      "class": "backend.tests.runtime.test_auxiliary_continuation",
+      "name": "test_actual_worker_is_bound_before_input_and_explicit_successor_reuses_new_result",
+      "outcome": "passed",
+      "latest_run": "inverse-prefix-consumers"
+    },
+    {
+      "class": "backend.tests.runtime.test_auxiliary_continuation",
+      "name": "test_dead_owner_with_live_worker_is_blocked_until_exact_worker_ends",
+      "outcome": "passed",
+      "latest_run": "inverse-prefix-consumers"
+    },
+    {
+      "class": "backend.tests.runtime.test_auxiliary_continuation",
+      "name": "test_crash_during_unbound_creation_remains_explicitly_uncertain",
+      "outcome": "passed",
+      "latest_run": "inverse-prefix-consumers"
+    },
+    {
+      "class": "backend.tests.runtime.test_auxiliary_continuation",
+      "name": "test_pagination_and_second_generation_keep_every_original",
+      "outcome": "passed",
+      "latest_run": "inverse-prefix-consumers"
+    },
+    {
+      "class": "backend.tests.runtime.test_auxiliary_continuation",
+      "name": "test_closed_worker_with_receipt_still_being_saved_cannot_be_repeated",
+      "outcome": "passed",
+      "latest_run": "inverse-prefix-consumers"
+    },
+    {
+      "class": "backend.tests.runtime.test_auxiliary_continuation",
+      "name": "test_forward_upgrade_preserves_unknown_legacy_work_without_inventing_process_identity[61]",
+      "outcome": "passed",
+      "latest_run": "inverse-prefix-consumers"
+    },
+    {
+      "class": "backend.tests.runtime.test_auxiliary_continuation",
+      "name": "test_competing_requests_consume_the_same_permission_only_once",
+      "outcome": "passed",
+      "latest_run": "inverse-prefix-consumers"
+    },
+    {
+      "class": "backend.tests.runtime.test_auxiliary_restoration",
+      "name": "test_copied_pending_permission_cannot_start_work_and_needs_fresh_owner_decision",
+      "outcome": "passed",
+      "latest_run": "inverse-prefix-consumers"
+    },
+    {
+      "class": "backend.tests.runtime.test_auxiliary_restoration",
+      "name": "test_restored_history_is_eligible_without_false_original_closure[missing_identity]",
+      "outcome": "passed",
+      "latest_run": "inverse-prefix-consumers"
+    },
+    {
+      "class": "backend.tests.runtime.test_auxiliary_restoration",
+      "name": "test_restored_history_is_eligible_without_false_original_closure[foreign_kernel]",
+      "outcome": "passed",
+      "latest_run": "inverse-prefix-consumers"
+    },
+    {
+      "class": "backend.tests.runtime.test_auxiliary_restoration",
+      "name": "test_restored_history_is_eligible_without_false_original_closure[creation_gap]",
+      "outcome": "passed",
+      "latest_run": "inverse-prefix-consumers"
+    },
+    {
+      "class": "backend.tests.runtime.test_auxiliary_restoration",
+      "name": "test_failed_enrollment_rolls_back_local_archival_and_never_enables_host",
+      "outcome": "passed",
+      "latest_run": "inverse-prefix-consumers"
+    },
+    {
+      "class": "backend.tests.runtime.test_auxiliary_restoration",
+      "name": "test_restoring_again_requires_another_current_decision_and_keeps_saved_results",
+      "outcome": "passed",
+      "latest_run": "inverse-prefix-consumers"
+    },
+    {
+      "class": "backend.tests.runtime.test_auxiliary_restoration",
+      "name": "test_migration_preserves_legacy_receipt_without_inventing_permission_origin[62]",
+      "outcome": "passed",
+      "latest_run": "inverse-prefix-consumers"
+    },
+    {
+      "class": "backend.tests.runtime.test_auxiliary_restoration",
+      "name": "test_origin_inverse_requires_unused_permission_and_archival[65]",
+      "outcome": "passed",
+      "latest_run": "inverse-prefix-consumers"
+    },
+    {
+      "class": "backend.tests.runtime.test_preparation_budget",
+      "name": "test_exhausted_project_never_enters_runtime_preparation",
+      "outcome": "passed",
+      "latest_run": "inverse-prefix-consumers"
+    },
+    {
+      "class": "backend.tests.runtime.test_preparation_budget",
+      "name": "test_failed_preparation_retains_capacity_and_blocks_another_task_after_restart",
+      "outcome": "passed",
+      "latest_run": "inverse-prefix-consumers"
+    },
+    {
+      "class": "backend.tests.runtime.test_preparation_budget",
+      "name": "test_preparation_and_dispatch_count_as_one_request",
+      "outcome": "passed",
+      "latest_run": "inverse-prefix-consumers"
+    },
+    {
+      "class": "backend.tests.runtime.test_preparation_budget",
+      "name": "test_two_connections_cannot_prepare_against_the_same_last_slot",
+      "outcome": "passed",
+      "latest_run": "inverse-prefix-consumers"
+    },
+    {
+      "class": "backend.tests.runtime.test_preparation_budget",
+      "name": "test_reserved_preparation_is_not_replayed_or_counted_twice",
+      "outcome": "passed",
+      "latest_run": "inverse-prefix-consumers"
+    },
+    {
+      "class": "backend.tests.runtime.test_preparation_budget",
+      "name": "test_owner_reduction_does_not_revoke_existing_preparation_and_settlement_counts_once",
+      "outcome": "passed",
+      "latest_run": "inverse-prefix-consumers"
+    },
+    {
+      "class": "backend.tests.runtime.test_preparation_budget",
+      "name": "test_failed_input_freeze_retains_preparation_without_fabricating_dispatch",
+      "outcome": "passed",
+      "latest_run": "inverse-prefix-consumers"
+    },
+    {
+      "class": "backend.tests.runtime.test_preparation_budget",
+      "name": "test_migration_preserves_old_dispatches_and_refuses_inverse_after_preparation[65]",
+      "outcome": "passed",
+      "latest_run": "inverse-prefix-consumers"
+    },
+    {
+      "class": "backend.tests.runtime.test_project_budget_policy",
+      "name": "test_owner_change_replays_original_receipt_and_preserves_usage",
+      "outcome": "passed",
+      "latest_run": "inverse-prefix-consumers"
+    },
+    {
+      "class": "backend.tests.runtime.test_project_budget_policy",
+      "name": "test_explicit_policy_governs_next_admission_without_restarting_prior_attempt",
+      "outcome": "passed",
+      "latest_run": "inverse-prefix-consumers"
+    },
+    {
+      "class": "backend.tests.runtime.test_project_budget_policy",
+      "name": "test_creation_before_first_turn_and_scope_and_stale_rejection",
+      "outcome": "passed",
+      "latest_run": "inverse-prefix-consumers"
+    },
+    {
+      "class": "backend.tests.runtime.test_project_budget_policy",
+      "name": "test_invalid_policy_cannot_change_storage[turn_limit-True]",
+      "outcome": "passed",
+      "latest_run": "inverse-prefix-consumers"
+    },
+    {
+      "class": "backend.tests.runtime.test_project_budget_policy",
+      "name": "test_invalid_policy_cannot_change_storage[token_limit-0]",
+      "outcome": "passed",
+      "latest_run": "inverse-prefix-consumers"
+    },
+    {
+      "class": "backend.tests.runtime.test_project_budget_policy",
+      "name": "test_invalid_policy_cannot_change_storage[token_limit-9007199254740992]",
+      "outcome": "passed",
+      "latest_run": "inverse-prefix-consumers"
+    },
+    {
+      "class": "backend.tests.runtime.test_project_budget_policy",
+      "name": "test_invalid_policy_cannot_change_storage[expected_revision--1]",
+      "outcome": "passed",
+      "latest_run": "inverse-prefix-consumers"
+    },
+    {
+      "class": "backend.tests.runtime.test_project_budget_policy",
+      "name": "test_invalid_policy_cannot_change_storage[expected_revision-False]",
+      "outcome": "passed",
+      "latest_run": "inverse-prefix-consumers"
+    },
+    {
+      "class": "backend.tests.runtime.test_project_budget_policy",
+      "name": "test_two_editors_cannot_overwrite_the_same_revision",
+      "outcome": "passed",
+      "latest_run": "inverse-prefix-consumers"
+    },
+    {
+      "class": "backend.tests.runtime.test_project_budget_policy",
+      "name": "test_process_loss_before_commit_retains_original_policy_and_allows_exact_retry",
+      "outcome": "passed",
+      "latest_run": "inverse-prefix-consumers"
+    },
+    {
+      "class": "backend.tests.runtime.test_project_budget_policy",
+      "name": "test_upgrade_preserves_old_policy_and_unused_inverse_preserves_it",
+      "outcome": "passed",
+      "latest_run": "inverse-prefix-consumers"
+    },
+    {
+      "class": "backend.tests.runtime.test_project_budget_policy",
+      "name": "test_budget_api_requires_owner_and_csrf_and_can_recover_without_runtime",
+      "outcome": "passed",
+      "latest_run": "inverse-prefix-consumers"
+    },
+    {
+      "class": "backend.tests.runtime.test_project_budget_policy",
+      "name": "test_owned_explicit_budget_change_then_new_request_uses_new_capacity",
+      "outcome": "passed",
+      "latest_run": "inverse-prefix-consumers"
+    },
+    {
+      "class": "backend.tests.runtime.test_workspace_retention",
+      "name": "test_explicit_retention_preserves_all_work_and_restores_new_data",
+      "outcome": "passed",
+      "latest_run": "inverse-prefix-consumers"
+    },
+    {
+      "class": "backend.tests.runtime.test_workspace_retention",
+      "name": "test_changed_files_do_not_inherit_an_older_removal_decision",
+      "outcome": "passed",
+      "latest_run": "inverse-prefix-consumers"
+    },
+    {
+      "class": "backend.tests.runtime.test_workspace_retention",
+      "name": "test_unproved_closure_and_foreign_scope_never_quarantine",
+      "outcome": "passed",
+      "latest_run": "inverse-prefix-consumers"
+    },
+    {
+      "class": "backend.tests.runtime.test_workspace_retention",
+      "name": "test_crash_after_filesystem_effect_recovers_original_receipt[archive]",
+      "outcome": "passed",
+      "latest_run": "inverse-prefix-consumers"
+    },
+    {
+      "class": "backend.tests.runtime.test_workspace_retention",
+      "name": "test_crash_after_filesystem_effect_recovers_original_receipt[remove]",
+      "outcome": "passed",
+      "latest_run": "inverse-prefix-consumers"
+    },
+    {
+      "class": "backend.tests.runtime.test_workspace_retention",
+      "name": "test_crash_after_filesystem_effect_recovers_original_receipt[restore]",
+      "outcome": "passed",
+      "latest_run": "inverse-prefix-consumers"
+    },
+    {
+      "class": "backend.tests.runtime.test_workspace_retention",
+      "name": "test_partial_copy_and_corrupt_archive_never_authorize_deletion",
+      "outcome": "passed",
+      "latest_run": "inverse-prefix-consumers"
+    },
+    {
+      "class": "backend.tests.runtime.test_workspace_retention",
+      "name": "test_partial_removal_failure_stays_pending_and_reconciles_without_force",
+      "outcome": "passed",
+      "latest_run": "inverse-prefix-consumers"
+    },
+    {
+      "class": "backend.tests.runtime.test_workspace_retention",
+      "name": "test_symlinks_are_archived_as_links_and_never_followed_during_removal",
+      "outcome": "passed",
+      "latest_run": "inverse-prefix-consumers"
+    },
+    {
+      "class": "backend.tests.runtime.test_workspace_retention",
+      "name": "test_parent_replacement_cannot_redirect_partial_deletion",
+      "outcome": "passed",
+      "latest_run": "inverse-prefix-consumers"
+    },
+    {
+      "class": "backend.tests.runtime.test_workspace_retention",
+      "name": "test_retention_shutdown_drains_original_copy_and_rejects_new_decisions",
+      "outcome": "passed",
+      "latest_run": "inverse-prefix-consumers"
+    },
+    {
+      "class": "backend.tests.runtime.test_workspace_retention",
+      "name": "test_retention_inverse_refuses_used_history_and_preserves_unused_prefix[68]",
+      "outcome": "passed",
+      "latest_run": "inverse-prefix-consumers"
+    },
+    {
+      "class": "backend.tests.runtime.test_workspace_retention",
+      "name": "test_installation_backup_recovers_archive_data_without_replaying_copied_deletion",
+      "outcome": "passed",
+      "latest_run": "inverse-prefix-consumers"
+    },
+    {
+      "class": "backend.tests.runtime.test_project_check_policy",
+      "name": "test_unconfigured_project_requires_explicit_policy[frozen_author]",
+      "outcome": "passed",
+      "latest_run": "terminal-policy-green"
+    },
+    {
+      "class": "backend.tests.runtime.test_project_check_policy",
+      "name": "test_policy_revision_binds_new_acceptance_and_preserves_old_decision[frozen_author]",
+      "outcome": "passed",
+      "latest_run": "terminal-policy-green"
+    },
+    {
+      "class": "backend.tests.runtime.test_project_check_policy",
+      "name": "test_policy_history_scope_and_atomic_conflict[frozen_author]",
+      "outcome": "passed",
+      "latest_run": "terminal-policy-green"
+    },
+    {
+      "class": "backend.tests.runtime.test_project_check_policy",
+      "name": "test_project_policy_distinguishes_commands_and_executed_tests[checks0-False-checks_absent-frozen_author]",
+      "outcome": "passed",
+      "latest_run": "terminal-policy-green"
+    },
+    {
+      "class": "backend.tests.runtime.test_project_check_policy",
+      "name": "test_project_policy_distinguishes_commands_and_executed_tests[checks1-False-test_execution_unproven-frozen_author]",
+      "outcome": "passed",
+      "latest_run": "terminal-policy-green"
+    },
+    {
+      "class": "backend.tests.runtime.test_project_check_policy",
+      "name": "test_project_policy_distinguishes_commands_and_executed_tests[checks2-False-check_partially_skipped-frozen_author]",
+      "outcome": "passed",
+      "latest_run": "terminal-policy-green"
+    },
+    {
+      "class": "backend.tests.runtime.test_project_check_policy",
+      "name": "test_project_policy_distinguishes_commands_and_executed_tests[checks3-True-None-frozen_author]",
+      "outcome": "passed",
+      "latest_run": "terminal-policy-green"
+    },
+    {
+      "class": "backend.tests.runtime.test_project_check_policy",
+      "name": "test_project_policy_distinguishes_commands_and_executed_tests[checks4-False-check_no_tests-frozen_author]",
+      "outcome": "passed",
+      "latest_run": "terminal-policy-green"
+    },
+    {
+      "class": "backend.tests.runtime.test_project_check_policy",
+      "name": "test_project_policy_distinguishes_commands_and_executed_tests[checks5-False-check_skipped-frozen_author]",
+      "outcome": "passed",
+      "latest_run": "terminal-policy-green"
+    },
+    {
+      "class": "backend.tests.runtime.test_project_check_policy",
+      "name": "test_no_project_policy_overrides_failed_or_unknown_checks[failed-frozen_author]",
+      "outcome": "passed",
+      "latest_run": "terminal-policy-green"
+    },
+    {
+      "class": "backend.tests.runtime.test_project_check_policy",
+      "name": "test_no_project_policy_overrides_failed_or_unknown_checks[infrastructure_error-frozen_author]",
+      "outcome": "passed",
+      "latest_run": "terminal-policy-green"
+    },
+    {
+      "class": "backend.tests.runtime.test_project_check_policy",
+      "name": "test_no_project_policy_overrides_failed_or_unknown_checks[invalidated-frozen_author]",
+      "outcome": "passed",
+      "latest_run": "terminal-policy-green"
+    },
+    {
+      "class": "backend.tests.runtime.test_project_check_policy",
+      "name": "test_no_project_policy_overrides_failed_or_unknown_checks[None-frozen_author]",
+      "outcome": "passed",
+      "latest_run": "terminal-policy-green"
+    },
+    {
+      "class": "backend.tests.runtime.test_project_check_policy",
+      "name": "test_policy_http_owner_csrf_and_read_only_recovery[frozen_author]",
+      "outcome": "passed",
+      "latest_run": "terminal-policy-green"
+    },
+    {
+      "class": "backend.tests.runtime.test_project_check_policy",
+      "name": "test_policy_migration_preserves_existing_history_and_inverse_refuses_decisions[65-frozen_author]",
+      "outcome": "passed",
+      "latest_run": "terminal-policy-green"
+    },
+    {
+      "class": "backend.tests.runtime.test_migration_chain",
+      "name": "test_forward_targets_form_one_complete_history_and_preserve_seeded_data",
+      "outcome": "passed",
+      "latest_run": "inverse-prefix-consumers"
+    },
+    {
+      "class": "backend.tests.runtime.test_migration_chain",
+      "name": "test_writer_crash_before_version_commit_preserves_prior_schema_and_resumes[18]",
+      "outcome": "passed",
+      "latest_run": "inverse-prefix-consumers"
+    },
+    {
+      "class": "backend.tests.runtime.test_migration_chain",
+      "name": "test_writer_crash_before_version_commit_preserves_prior_schema_and_resumes[19]",
+      "outcome": "passed",
+      "latest_run": "inverse-prefix-consumers"
+    },
+    {
+      "class": "backend.tests.runtime.test_migration_chain",
+      "name": "test_writer_crash_before_version_commit_preserves_prior_schema_and_resumes[20]",
+      "outcome": "passed",
+      "latest_run": "inverse-prefix-consumers"
+    },
+    {
+      "class": "backend.tests.runtime.test_migration_chain",
+      "name": "test_writer_crash_before_version_commit_preserves_prior_schema_and_resumes[21]",
+      "outcome": "passed",
+      "latest_run": "inverse-prefix-consumers"
+    },
+    {
+      "class": "backend.tests.runtime.test_migration_chain",
+      "name": "test_writer_crash_before_version_commit_preserves_prior_schema_and_resumes[22]",
+      "outcome": "passed",
+      "latest_run": "inverse-prefix-consumers"
+    },
+    {
+      "class": "backend.tests.runtime.test_migration_chain",
+      "name": "test_writer_crash_before_version_commit_preserves_prior_schema_and_resumes[23]",
+      "outcome": "passed",
+      "latest_run": "inverse-prefix-consumers"
+    },
+    {
+      "class": "backend.tests.runtime.test_migration_chain",
+      "name": "test_writer_crash_before_version_commit_preserves_prior_schema_and_resumes[24]",
+      "outcome": "passed",
+      "latest_run": "inverse-prefix-consumers"
+    },
+    {
+      "class": "backend.tests.runtime.test_migration_chain",
+      "name": "test_writer_crash_before_version_commit_preserves_prior_schema_and_resumes[25]",
+      "outcome": "passed",
+      "latest_run": "inverse-prefix-consumers"
+    },
+    {
+      "class": "backend.tests.runtime.test_migration_chain",
+      "name": "test_writer_crash_before_version_commit_preserves_prior_schema_and_resumes[26]",
+      "outcome": "passed",
+      "latest_run": "inverse-prefix-consumers"
+    },
+    {
+      "class": "backend.tests.runtime.test_migration_chain",
+      "name": "test_writer_crash_before_version_commit_preserves_prior_schema_and_resumes[27]",
+      "outcome": "passed",
+      "latest_run": "inverse-prefix-consumers"
+    },
+    {
+      "class": "backend.tests.runtime.test_migration_chain",
+      "name": "test_writer_crash_before_version_commit_preserves_prior_schema_and_resumes[28]",
+      "outcome": "passed",
+      "latest_run": "inverse-prefix-consumers"
+    },
+    {
+      "class": "backend.tests.runtime.test_migration_chain",
+      "name": "test_writer_crash_before_version_commit_preserves_prior_schema_and_resumes[29]",
+      "outcome": "passed",
+      "latest_run": "inverse-prefix-consumers"
+    },
+    {
+      "class": "backend.tests.runtime.test_migration_chain",
+      "name": "test_writer_crash_before_version_commit_preserves_prior_schema_and_resumes[30]",
+      "outcome": "passed",
+      "latest_run": "inverse-prefix-consumers"
+    },
+    {
+      "class": "backend.tests.runtime.test_migration_chain",
+      "name": "test_writer_crash_before_version_commit_preserves_prior_schema_and_resumes[31]",
+      "outcome": "passed",
+      "latest_run": "inverse-prefix-consumers"
+    },
+    {
+      "class": "backend.tests.runtime.test_migration_chain",
+      "name": "test_writer_crash_before_version_commit_preserves_prior_schema_and_resumes[32]",
+      "outcome": "passed",
+      "latest_run": "inverse-prefix-consumers"
+    },
+    {
+      "class": "backend.tests.runtime.test_migration_chain",
+      "name": "test_writer_crash_before_version_commit_preserves_prior_schema_and_resumes[33]",
+      "outcome": "passed",
+      "latest_run": "inverse-prefix-consumers"
+    },
+    {
+      "class": "backend.tests.runtime.test_migration_chain",
+      "name": "test_writer_crash_before_version_commit_preserves_prior_schema_and_resumes[34]",
+      "outcome": "passed",
+      "latest_run": "inverse-prefix-consumers"
+    },
+    {
+      "class": "backend.tests.runtime.test_migration_chain",
+      "name": "test_writer_crash_before_version_commit_preserves_prior_schema_and_resumes[35]",
+      "outcome": "passed",
+      "latest_run": "inverse-prefix-consumers"
+    },
+    {
+      "class": "backend.tests.runtime.test_migration_chain",
+      "name": "test_writer_crash_before_version_commit_preserves_prior_schema_and_resumes[36]",
+      "outcome": "passed",
+      "latest_run": "inverse-prefix-consumers"
+    },
+    {
+      "class": "backend.tests.runtime.test_migration_chain",
+      "name": "test_writer_crash_before_version_commit_preserves_prior_schema_and_resumes[37]",
+      "outcome": "passed",
+      "latest_run": "inverse-prefix-consumers"
+    },
+    {
+      "class": "backend.tests.runtime.test_migration_chain",
+      "name": "test_writer_crash_before_version_commit_preserves_prior_schema_and_resumes[38]",
+      "outcome": "passed",
+      "latest_run": "inverse-prefix-consumers"
+    },
+    {
+      "class": "backend.tests.runtime.test_migration_chain",
+      "name": "test_writer_crash_before_version_commit_preserves_prior_schema_and_resumes[39]",
+      "outcome": "passed",
+      "latest_run": "inverse-prefix-consumers"
+    },
+    {
+      "class": "backend.tests.runtime.test_migration_chain",
+      "name": "test_writer_crash_before_version_commit_preserves_prior_schema_and_resumes[40]",
+      "outcome": "passed",
+      "latest_run": "inverse-prefix-consumers"
+    },
+    {
+      "class": "backend.tests.runtime.test_migration_chain",
+      "name": "test_writer_crash_before_version_commit_preserves_prior_schema_and_resumes[41]",
+      "outcome": "passed",
+      "latest_run": "inverse-prefix-consumers"
+    },
+    {
+      "class": "backend.tests.runtime.test_migration_chain",
+      "name": "test_writer_crash_before_version_commit_preserves_prior_schema_and_resumes[42]",
+      "outcome": "passed",
+      "latest_run": "inverse-prefix-consumers"
+    },
+    {
+      "class": "backend.tests.runtime.test_migration_chain",
+      "name": "test_writer_crash_before_version_commit_preserves_prior_schema_and_resumes[43]",
+      "outcome": "passed",
+      "latest_run": "inverse-prefix-consumers"
+    },
+    {
+      "class": "backend.tests.runtime.test_migration_chain",
+      "name": "test_writer_crash_before_version_commit_preserves_prior_schema_and_resumes[44]",
+      "outcome": "passed",
+      "latest_run": "inverse-prefix-consumers"
+    },
+    {
+      "class": "backend.tests.runtime.test_migration_chain",
+      "name": "test_writer_crash_before_version_commit_preserves_prior_schema_and_resumes[45]",
+      "outcome": "passed",
+      "latest_run": "inverse-prefix-consumers"
+    },
+    {
+      "class": "backend.tests.runtime.test_migration_chain",
+      "name": "test_writer_crash_before_version_commit_preserves_prior_schema_and_resumes[46]",
+      "outcome": "passed",
+      "latest_run": "inverse-prefix-consumers"
+    },
+    {
+      "class": "backend.tests.runtime.test_migration_chain",
+      "name": "test_writer_crash_before_version_commit_preserves_prior_schema_and_resumes[47]",
+      "outcome": "passed",
+      "latest_run": "inverse-prefix-consumers"
+    },
+    {
+      "class": "backend.tests.runtime.test_migration_chain",
+      "name": "test_writer_crash_before_version_commit_preserves_prior_schema_and_resumes[48]",
+      "outcome": "passed",
+      "latest_run": "inverse-prefix-consumers"
+    },
+    {
+      "class": "backend.tests.runtime.test_migration_chain",
+      "name": "test_writer_crash_before_version_commit_preserves_prior_schema_and_resumes[49]",
+      "outcome": "passed",
+      "latest_run": "inverse-prefix-consumers"
+    },
+    {
+      "class": "backend.tests.runtime.test_migration_chain",
+      "name": "test_writer_crash_before_version_commit_preserves_prior_schema_and_resumes[50]",
+      "outcome": "passed",
+      "latest_run": "inverse-prefix-consumers"
+    },
+    {
+      "class": "backend.tests.runtime.test_migration_chain",
+      "name": "test_writer_crash_before_version_commit_preserves_prior_schema_and_resumes[51]",
+      "outcome": "passed",
+      "latest_run": "inverse-prefix-consumers"
+    },
+    {
+      "class": "backend.tests.runtime.test_migration_chain",
+      "name": "test_writer_crash_before_version_commit_preserves_prior_schema_and_resumes[52]",
+      "outcome": "passed",
+      "latest_run": "inverse-prefix-consumers"
+    },
+    {
+      "class": "backend.tests.runtime.test_migration_chain",
+      "name": "test_writer_crash_before_version_commit_preserves_prior_schema_and_resumes[53]",
+      "outcome": "passed",
+      "latest_run": "inverse-prefix-consumers"
+    },
+    {
+      "class": "backend.tests.runtime.test_migration_chain",
+      "name": "test_writer_crash_before_version_commit_preserves_prior_schema_and_resumes[54]",
+      "outcome": "passed",
+      "latest_run": "inverse-prefix-consumers"
+    },
+    {
+      "class": "backend.tests.runtime.test_migration_chain",
+      "name": "test_writer_crash_before_version_commit_preserves_prior_schema_and_resumes[55]",
+      "outcome": "passed",
+      "latest_run": "inverse-prefix-consumers"
+    },
+    {
+      "class": "backend.tests.runtime.test_migration_chain",
+      "name": "test_writer_crash_before_version_commit_preserves_prior_schema_and_resumes[56]",
+      "outcome": "passed",
+      "latest_run": "inverse-prefix-consumers"
+    },
+    {
+      "class": "backend.tests.runtime.test_migration_chain",
+      "name": "test_writer_crash_before_version_commit_preserves_prior_schema_and_resumes[57]",
+      "outcome": "passed",
+      "latest_run": "inverse-prefix-consumers"
+    },
+    {
+      "class": "backend.tests.runtime.test_migration_chain",
+      "name": "test_writer_crash_before_version_commit_preserves_prior_schema_and_resumes[58]",
+      "outcome": "passed",
+      "latest_run": "inverse-prefix-consumers"
+    },
+    {
+      "class": "backend.tests.runtime.test_migration_chain",
+      "name": "test_writer_crash_before_version_commit_preserves_prior_schema_and_resumes[59]",
+      "outcome": "passed",
+      "latest_run": "inverse-prefix-consumers"
+    },
+    {
+      "class": "backend.tests.runtime.test_migration_chain",
+      "name": "test_writer_crash_before_version_commit_preserves_prior_schema_and_resumes[60]",
+      "outcome": "passed",
+      "latest_run": "inverse-prefix-consumers"
+    },
+    {
+      "class": "backend.tests.runtime.test_migration_chain",
+      "name": "test_writer_crash_before_version_commit_preserves_prior_schema_and_resumes[61]",
+      "outcome": "passed",
+      "latest_run": "inverse-prefix-consumers"
+    },
+    {
+      "class": "backend.tests.runtime.test_migration_chain",
+      "name": "test_writer_crash_before_version_commit_preserves_prior_schema_and_resumes[62]",
+      "outcome": "passed",
+      "latest_run": "inverse-prefix-consumers"
+    },
+    {
+      "class": "backend.tests.runtime.test_migration_chain",
+      "name": "test_writer_crash_before_version_commit_preserves_prior_schema_and_resumes[63]",
+      "outcome": "passed",
+      "latest_run": "inverse-prefix-consumers"
+    },
+    {
+      "class": "backend.tests.runtime.test_migration_chain",
+      "name": "test_writer_crash_before_version_commit_preserves_prior_schema_and_resumes[64]",
+      "outcome": "passed",
+      "latest_run": "inverse-prefix-consumers"
+    },
+    {
+      "class": "backend.tests.runtime.test_migration_chain",
+      "name": "test_writer_crash_before_version_commit_preserves_prior_schema_and_resumes[65]",
+      "outcome": "passed",
+      "latest_run": "inverse-prefix-consumers"
+    },
+    {
+      "class": "backend.tests.runtime.test_migration_chain",
+      "name": "test_writer_crash_before_version_commit_preserves_prior_schema_and_resumes[66]",
+      "outcome": "passed",
+      "latest_run": "inverse-prefix-consumers"
+    },
+    {
+      "class": "backend.tests.runtime.test_migration_chain",
+      "name": "test_writer_crash_before_version_commit_preserves_prior_schema_and_resumes[67]",
+      "outcome": "passed",
+      "latest_run": "inverse-prefix-consumers"
+    },
+    {
+      "class": "backend.tests.runtime.test_migration_chain",
+      "name": "test_writer_crash_before_version_commit_preserves_prior_schema_and_resumes[68]",
+      "outcome": "passed",
+      "latest_run": "inverse-prefix-consumers"
+    },
+    {
+      "class": "backend.tests.runtime.test_migration_chain",
+      "name": "test_writer_crash_before_version_commit_preserves_prior_schema_and_resumes[69]",
+      "outcome": "passed",
+      "latest_run": "inverse-prefix-consumers"
+    },
+    {
+      "class": "backend.tests.runtime.test_migration_chain",
+      "name": "test_writer_crash_before_version_commit_preserves_prior_schema_and_resumes[70]",
+      "outcome": "passed",
+      "latest_run": "inverse-prefix-consumers"
+    },
+    {
+      "class": "backend.tests.runtime.test_migration_chain",
+      "name": "test_writer_crash_before_version_commit_preserves_prior_schema_and_resumes[71]",
+      "outcome": "passed",
+      "latest_run": "inverse-prefix-consumers"
+    },
+    {
+      "class": "backend.tests.runtime.test_migration_chain",
+      "name": "test_invalid_forward_target_never_creates_storage[True]",
+      "outcome": "passed",
+      "latest_run": "inverse-prefix-consumers"
+    },
+    {
+      "class": "backend.tests.runtime.test_migration_chain",
+      "name": "test_invalid_forward_target_never_creates_storage[16]",
+      "outcome": "passed",
+      "latest_run": "inverse-prefix-consumers"
+    },
+    {
+      "class": "backend.tests.runtime.test_migration_chain",
+      "name": "test_invalid_forward_target_never_creates_storage[72]",
+      "outcome": "passed",
+      "latest_run": "inverse-prefix-consumers"
+    },
+    {
+      "class": "backend.tests.runtime.test_migration_chain",
+      "name": "test_invalid_forward_target_never_creates_storage[29]",
+      "outcome": "passed",
+      "latest_run": "inverse-prefix-consumers"
+    },
+    {
+      "class": "backend.tests.runtime.test_migration_chain",
+      "name": "test_forward_rejects_unsupported_history_without_rewriting_rows[future]",
+      "outcome": "passed",
+      "latest_run": "inverse-prefix-consumers"
+    },
+    {
+      "class": "backend.tests.runtime.test_migration_chain",
+      "name": "test_forward_rejects_unsupported_history_without_rewriting_rows[gap]",
+      "outcome": "passed",
+      "latest_run": "inverse-prefix-consumers"
+    },
+    {
+      "class": "backend.tests.runtime.test_migration_chain",
+      "name": "test_forward_rejects_unsupported_history_without_rewriting_rows[downgrade]",
+      "outcome": "passed",
+      "latest_run": "inverse-prefix-consumers"
+    },
+    {
+      "class": "backend.tests.api.test_persistence_boundaries",
+      "name": "test_creation_has_one_transactional_event",
+      "outcome": "passed",
+      "latest_run": "regression-current-fixtures"
+    },
+    {
+      "class": "backend.tests.api.test_persistence_boundaries",
+      "name": "test_failed_audit_rolls_back_task_and_dependencies",
+      "outcome": "passed",
+      "latest_run": "regression-current-fixtures"
+    },
+    {
+      "class": "backend.tests.api.test_persistence_boundaries",
+      "name": "test_writer_contention_leaves_health_and_websocket_responsive",
+      "outcome": "passed",
+      "latest_run": "regression-current-fixtures"
+    },
+    {
+      "class": "backend.tests.api.test_persistence_boundaries",
+      "name": "test_startup_refuses_existing_foreign_key_damage",
+      "outcome": "passed",
+      "latest_run": "regression-current-fixtures"
+    },
+    {
+      "class": "backend.tests.api.test_persistence_boundaries",
+      "name": "test_readiness_requires_current_complete_schema",
+      "outcome": "passed",
+      "latest_run": "regression-current-fixtures"
+    },
+    {
+      "class": "backend.tests.api.test_persistence_boundaries",
+      "name": "test_busy_after_committed_effect_is_never_automatically_repeated",
+      "outcome": "passed",
+      "latest_run": "regression-current-fixtures"
+    },
+    {
+      "class": "backend.tests.api.test_persistence_boundaries",
+      "name": "test_process_loss_preserves_one_atomic_task_event[before]",
+      "outcome": "passed",
+      "latest_run": "regression-current-fixtures"
+    },
+    {
+      "class": "backend.tests.api.test_persistence_boundaries",
+      "name": "test_process_loss_preserves_one_atomic_task_event[after]",
+      "outcome": "passed",
+      "latest_run": "regression-current-fixtures"
+    },
+    {
+      "class": "backend.tests.runtime.test_data_boundaries",
+      "name": "test_stop_interrupts_original_worker_before_contended_write_finishes",
+      "outcome": "passed",
+      "latest_run": "regression-current-fixtures"
+    },
+    {
+      "class": "backend.tests.runtime.test_legacy_catalog_removal",
+      "name": "test_role_factories_and_framework_memory_are_not_available",
+      "outcome": "passed",
+      "latest_run": "regression-current-fixtures"
+    },
+    {
+      "class": "backend.tests.runtime.test_legacy_catalog_removal",
+      "name": "test_historical_roster_reader_preserves_original_memory_and_runs",
+      "outcome": "passed",
+      "latest_run": "regression-current-fixtures"
+    },
+    {
+      "class": "backend.tests.runtime.test_legacy_catalog_removal",
+      "name": "test_native_finding_catalog_can_inspect_actual_review_feedback[RESEARCH_NAMES]",
+      "outcome": "passed",
+      "latest_run": "regression-current-fixtures"
+    },
+    {
+      "class": "backend.tests.runtime.test_legacy_catalog_removal",
+      "name": "test_native_finding_catalog_can_inspect_actual_review_feedback[REVIEW_NAMES]",
+      "outcome": "passed",
+      "latest_run": "regression-current-fixtures"
+    },
+    {
+      "class": "backend.tests.runtime.test_legacy_catalog_removal",
+      "name": "test_native_finding_catalog_can_inspect_actual_review_feedback[INVESTIGATION_NAMES]",
+      "outcome": "passed",
+      "latest_run": "regression-current-fixtures"
+    },
+    {
+      "class": "backend.tests.runtime.test_legacy_catalog_removal",
+      "name": "test_native_finding_catalog_can_inspect_actual_review_feedback[DEVELOPMENT_NAMES]",
+      "outcome": "passed",
+      "latest_run": "regression-current-fixtures"
+    },
+    {
+      "class": "backend.tests.runtime.test_native_evaluation",
+      "name": "test_native_trial_requires_live_before_creating_anything",
+      "outcome": "passed",
+      "latest_run": "regression-current-fixtures"
+    },
+    {
+      "class": "backend.tests.runtime.test_native_evaluation",
+      "name": "test_trials_get_independent_authorities_and_synthetic_sources",
+      "outcome": "passed",
+      "latest_run": "regression-current-fixtures"
+    },
+    {
+      "class": "backend.tests.runtime.test_native_evaluation",
+      "name": "test_trial_rejects_old_authority_or_insufficient_turn_budget[extra0]",
+      "outcome": "passed",
+      "latest_run": "regression-current-fixtures"
+    },
+    {
+      "class": "backend.tests.runtime.test_native_evaluation",
+      "name": "test_trial_rejects_old_authority_or_insufficient_turn_budget[extra1]",
+      "outcome": "passed",
+      "latest_run": "regression-current-fixtures"
+    },
+    {
+      "class": "backend.tests.runtime.test_native_evaluation",
+      "name": "test_trial_rejects_old_authority_or_insufficient_turn_budget[extra2]",
+      "outcome": "passed",
+      "latest_run": "regression-current-fixtures"
+    },
+    {
+      "class": "backend.tests.runtime.test_native_evaluation",
+      "name": "test_scenario_failure_records_original_service_closure",
+      "outcome": "passed",
+      "latest_run": "regression-current-fixtures"
+    },
+    {
+      "class": "backend.tests.runtime.test_native_evaluation",
+      "name": "test_initial_case_context_does_not_fabricate_a_metadata_correction",
+      "outcome": "passed",
+      "latest_run": "regression-current-fixtures"
+    },
+    {
+      "class": "backend.tests.runtime.test_owner_command_output",
+      "name": "test_owner_reads_binary_windows_after_authority_ends_without_mutation",
+      "outcome": "passed",
+      "latest_run": "regression-current-fixtures"
+    },
+    {
+      "class": "backend.tests.runtime.test_owner_command_output",
+      "name": "test_listing_paginates_all_jobs_without_loading_output_into_the_response",
+      "outcome": "passed",
+      "latest_run": "regression-current-fixtures"
+    },
+    {
+      "class": "backend.tests.runtime.test_owner_command_output",
+      "name": "test_pagination_cursor_preserves_sqlite_ids_larger_than_javascript_integers",
+      "outcome": "passed",
+      "latest_run": "regression-current-fixtures"
+    },
+    {
+      "class": "backend.tests.runtime.test_owner_command_output",
+      "name": "test_job_and_list_are_scoped_to_both_project_and_run",
+      "outcome": "passed",
+      "latest_run": "regression-current-fixtures"
+    },
+    {
+      "class": "backend.tests.runtime.test_owner_command_output",
+      "name": "test_agent_bearer_and_anonymous_clients_cannot_read_owner_jobs",
+      "outcome": "passed",
+      "latest_run": "regression-current-fixtures"
+    },
+    {
+      "class": "backend.tests.runtime.test_owner_command_output",
+      "name": "test_unknown_result_stays_null_and_partial_bytes_remain_inspectable",
+      "outcome": "passed",
+      "latest_run": "regression-current-fixtures"
+    },
+    {
+      "class": "backend.tests.runtime.test_owner_command_output",
+      "name": "test_large_output_is_recoverable_in_windows_without_silent_tail_loss",
+      "outcome": "passed",
+      "latest_run": "regression-current-fixtures"
+    },
+    {
+      "class": "backend.tests.runtime.test_owner_command_output",
+      "name": "test_invalid_read_windows_are_rejected[jobs?limit=0]",
+      "outcome": "passed",
+      "latest_run": "regression-current-fixtures"
+    },
+    {
+      "class": "backend.tests.runtime.test_owner_command_output",
+      "name": "test_invalid_read_windows_are_rejected[jobs?limit=101]",
+      "outcome": "passed",
+      "latest_run": "regression-current-fixtures"
+    },
+    {
+      "class": "backend.tests.runtime.test_owner_command_output",
+      "name": "test_invalid_read_windows_are_rejected[jobs?after_seq=-1]",
+      "outcome": "passed",
+      "latest_run": "regression-current-fixtures"
+    },
+    {
+      "class": "backend.tests.runtime.test_owner_command_output",
+      "name": "test_invalid_read_windows_are_rejected[jobs/JOB?max_bytes=16385]",
+      "outcome": "passed",
+      "latest_run": "regression-current-fixtures"
+    },
+    {
+      "class": "backend.tests.runtime.test_owner_command_output",
+      "name": "test_invalid_read_windows_are_rejected[jobs/JOB?stdout_offset=-1]",
+      "outcome": "passed",
+      "latest_run": "regression-current-fixtures"
+    },
+    {
+      "class": "backend.tests.runtime.test_owner_command_output",
+      "name": "test_invalid_read_windows_are_rejected[jobs/JOB?stderr_offset=2147483648]",
+      "outcome": "passed",
+      "latest_run": "regression-current-fixtures"
+    },
+    {
+      "class": "backend.tests.runtime.test_owner_command_output",
+      "name": "test_invalid_owner_command_identity_is_a_validation_error",
+      "outcome": "passed",
+      "latest_run": "regression-current-fixtures"
+    },
+    {
+      "class": "backend.tests.runtime.test_owner_history",
+      "name": "test_archive_requires_the_actual_project_and_preserves_native_receipts",
+      "outcome": "passed",
+      "latest_run": "regression-current-fixtures"
+    },
+    {
+      "class": "backend.tests.runtime.test_owner_history",
+      "name": "test_archive_and_durable_event_commit_or_rollback_together",
+      "outcome": "passed",
+      "latest_run": "regression-current-fixtures"
+    },
+    {
+      "class": "backend.tests.runtime.test_owner_history",
+      "name": "test_owner_historical_inbox_keeps_read_markers_without_reclassifying_native_messages",
+      "outcome": "passed",
+      "latest_run": "regression-current-fixtures"
+    },
+    {
+      "class": "backend.tests.runtime.test_owner_notes",
+      "name": "test_owner_note_retry_preserves_original_message_without_dispatch",
+      "outcome": "passed",
+      "latest_run": "regression-current-fixtures"
+    },
+    {
+      "class": "backend.tests.runtime.test_owner_notes",
+      "name": "test_legacy_note_body_remains_readable_but_no_longer_activates_autonomy",
+      "outcome": "passed",
+      "latest_run": "regression-current-fixtures"
+    },
+    {
+      "class": "backend.tests.runtime.test_owner_notes",
+      "name": "test_paired_endpoint_identity_detects_replaced_database_before_note_mutation",
+      "outcome": "passed",
+      "latest_run": "regression-two-current-contracts"
+    },
+    {
+      "class": "backend.tests.runtime.test_owner_notes",
+      "name": "test_frozen_conversation_distinguishes_attributed_owner_note_from_instruction",
+      "outcome": "passed",
+      "latest_run": "regression-current-fixtures"
+    },
+    {
+      "class": "backend.tests.runtime.test_project_producer_retirement",
+      "name": "test_legacy_project_entry_is_policy_not_fabricated_native_history",
+      "outcome": "passed",
+      "latest_run": "regression-current-fixtures"
+    },
+    {
+      "class": "backend.tests.runtime.test_project_producer_retirement",
+      "name": "test_flow_manager_does_not_clear_old_events_or_activate_before_admission",
+      "outcome": "passed",
+      "latest_run": "regression-current-fixtures"
+    },
+    {
+      "class": "backend.tests.runtime.test_project_producer_retirement",
+      "name": "test_native_plan_freezes_legacy_business_material_and_actual_task_inventory",
+      "outcome": "passed",
+      "latest_run": "regression-current-fixtures"
+    },
+    {
+      "class": "backend.tests.runtime.test_project_producer_retirement",
+      "name": "test_unreadable_history_is_explicit_and_does_not_destroy_other_material[not JSON-invalid_json]",
+      "outcome": "passed",
+      "latest_run": "regression-current-fixtures"
+    },
+    {
+      "class": "backend.tests.runtime.test_project_producer_retirement",
+      "name": "test_unreadable_history_is_explicit_and_does_not_destroy_other_material[material1-excluded_size_limit]",
+      "outcome": "passed",
+      "latest_run": "regression-current-fixtures"
+    },
+    {
+      "class": "backend.tests.runtime.test_project_producer_retirement",
+      "name": "test_unreadable_history_is_explicit_and_does_not_destroy_other_material[material2-field_limit]",
+      "outcome": "passed",
+      "latest_run": "regression-current-fixtures"
+    },
+    {
+      "class": "backend.tests.runtime.test_project_producer_retirement",
+      "name": "test_unreadable_history_is_explicit_and_does_not_destroy_other_material[{\"requirements\": \"\\\\ud800\", \"plan\": \"Keep this smaller plan\"}-invalid_utf8]",
+      "outcome": "passed",
+      "latest_run": "regression-current-fixtures"
+    },
+    {
+      "class": "backend.tests.runtime.test_project_producer_retirement",
+      "name": "test_large_task_inventory_discloses_unexamined_work",
+      "outcome": "passed",
+      "latest_run": "regression-current-fixtures"
+    },
+    {
+      "class": "backend.tests.runtime.test_project_producer_retirement",
+      "name": "test_controlled_planner_fixture_cites_the_actual_supplied_history[False]",
+      "outcome": "passed",
+      "latest_run": "regression-current-fixtures"
+    },
+    {
+      "class": "backend.tests.runtime.test_project_producer_retirement",
+      "name": "test_controlled_planner_fixture_cites_the_actual_supplied_history[True]",
+      "outcome": "passed",
+      "latest_run": "regression-current-fixtures"
+    },
+    {
+      "class": "backend.tests.test_orchestrator",
+      "name": "test_terminal_owns_no_engine_and_recovers_exact_work_through_real_owner_http",
+      "outcome": "passed",
+      "latest_run": "terminal-policy-green"
+    },
+    {
+      "class": "backend.tests.runtime.test_code_review_session",
+      "name": "test_owned_native_review_records_exact_decision_after_closure",
+      "outcome": "passed",
+      "latest_run": "timeout-final60"
+    },
+    {
+      "class": "backend.tests.runtime.test_code_review_session",
+      "name": "test_changed_review_cannot_confirm_and_retains_original_proposal[context]",
+      "outcome": "passed",
+      "latest_run": "timeout-final60"
+    },
+    {
+      "class": "backend.tests.runtime.test_code_review_session",
+      "name": "test_changed_review_cannot_confirm_and_retains_original_proposal[source]",
+      "outcome": "passed",
+      "latest_run": "timeout-final60"
+    },
+    {
+      "class": "backend.tests.runtime.test_code_review_session",
+      "name": "test_stop_during_review_confirmation_closes_original_owner_and_joins_work",
+      "outcome": "passed",
+      "latest_run": "timeout-final60"
+    },
+    {
+      "class": "backend.tests.runtime.test_code_review_session",
+      "name": "test_coordinator_schedules_native_review_and_does_not_finish_unconfirmed_work[False-False]",
+      "outcome": "passed",
+      "latest_run": "timeout-final60"
+    },
+    {
+      "class": "backend.tests.runtime.test_code_review_session",
+      "name": "test_coordinator_schedules_native_review_and_does_not_finish_unconfirmed_work[True-False]",
+      "outcome": "passed",
+      "latest_run": "timeout-final60"
+    },
+    {
+      "class": "backend.tests.runtime.test_code_review_session",
+      "name": "test_coordinator_schedules_native_review_and_does_not_finish_unconfirmed_work[False-True]",
+      "outcome": "passed",
+      "latest_run": "timeout-final60"
+    },
+    {
+      "class": "backend.tests.runtime.test_development_session",
+      "name": "test_check_result_after_context_correction_is_retained_without_approval",
+      "outcome": "passed",
+      "latest_run": "timeout-final60"
+    },
+    {
+      "class": "backend.tests.runtime.test_development_session",
+      "name": "test_stop_during_owned_check_closes_writer_and_retains_original_record",
+      "outcome": "passed",
+      "latest_run": "timeout-final60"
+    },
+    {
+      "class": "backend.tests.cli.test_terminal_controller",
+      "name": "test_terminal_continuation_retains_observed_snapshot_after_reply_loss",
+      "outcome": "passed",
+      "latest_run": "terminal-policy-green"
+    },
+    {
+      "class": "backend.tests.cli.test_terminal_controller",
+      "name": "test_terminal_plan_and_acceptance_use_exact_observed_versions",
+      "outcome": "passed",
+      "latest_run": "terminal-policy-green"
+    },
+    {
+      "class": "backend.tests.cli.test_terminal_controller",
+      "name": "test_terminal_requires_observation_and_has_no_local_task_completion",
+      "outcome": "passed",
+      "latest_run": "terminal-policy-green"
+    },
+    {
+      "class": "backend.tests.cli.test_terminal_controller",
+      "name": "test_terminal_corrected_graph_keeps_original_adoption_packet_across_restart",
+      "outcome": "passed",
+      "latest_run": "terminal-policy-green"
+    },
+    {
+      "class": "backend.tests.cli.test_terminal_controller",
+      "name": "test_terminal_code_acceptance_binds_observed_check_policy[7]",
+      "outcome": "passed",
+      "latest_run": "terminal-policy-green"
+    },
+    {
+      "class": "backend.tests.cli.test_terminal_controller",
+      "name": "test_terminal_code_acceptance_binds_observed_check_policy[8]",
+      "outcome": "passed",
+      "latest_run": "terminal-policy-green"
+    },
+    {
+      "class": "backend.tests.cli.test_owner_client",
+      "name": "test_terminal_lost_response_reloads_exact_original_packet_and_receipt",
+      "outcome": "passed",
+      "latest_run": "terminal-policy-green"
+    },
+    {
+      "class": "backend.tests.cli.test_owner_client",
+      "name": "test_terminal_changed_database_identity_cannot_replay_pending_work",
+      "outcome": "passed",
+      "latest_run": "terminal-policy-green"
+    },
+    {
+      "class": "backend.tests.cli.test_owner_client",
+      "name": "test_terminal_rejects_foreign_receipt_and_requires_explicit_disposal_of_rejection",
+      "outcome": "passed",
+      "latest_run": "terminal-policy-green"
+    },
+    {
+      "class": "backend.tests.cli.test_owner_client",
+      "name": "test_terminal_configuration_cannot_send_credentials_to_remote_or_untrusted_state",
+      "outcome": "passed",
+      "latest_run": "terminal-policy-green"
+    },
+    {
+      "class": "backend.tests.cli.test_owner_client",
+      "name": "test_terminal_finding_page_cannot_change_its_project_scope",
+      "outcome": "passed",
+      "latest_run": "terminal-policy-green"
+    },
+    {
+      "class": "backend.tests.cli.test_owner_client",
+      "name": "test_terminal_cwd_is_not_assumed_to_be_the_servers_source_workspace",
+      "outcome": "passed",
+      "latest_run": "terminal-policy-green"
+    },
+    {
+      "class": "backend.tests.cli.test_owner_client",
+      "name": "test_terminal_pending_state_cannot_be_inside_declared_server_workspace",
+      "outcome": "passed",
+      "latest_run": "terminal-policy-green"
+    },
+    {
+      "class": "backend.tests.cli.test_owner_client",
+      "name": "test_terminal_cannot_resolve_acceptance_without_created_task_identities",
+      "outcome": "passed",
+      "latest_run": "terminal-policy-green"
+    }
+  ],
+  "raw_artifacts": {
+    ".superpowers/sdd/2026-10-31-actualizacion-proyecto/inverse-prefix-consumers.json": {
+      "sha256": "c6316d318d7e5a9f82dc6b3768d4ba6190519f2f0c081200171fb6991a548b8e",
+      "bytes": 934
+    },
+    ".superpowers/sdd/2026-10-31-actualizacion-proyecto/inverse-prefix-consumers.xml": {
+      "sha256": "3bf1cfd88f7f0075d213a50339959be9a4c97a7fd90d07b1a10c92c020e545f3",
+      "bytes": 23704
+    },
+    ".superpowers/sdd/2026-10-31-actualizacion-proyecto/inverse-prefix-consumers.log": {
+      "sha256": "31fea6eee41b89f5e750b8454097f7b97f746a012f61a0fd425f705599eedbe5",
+      "bytes": 22427
+    },
+    ".superpowers/sdd/2026-10-31-actualizacion-proyecto/regression-current-fixtures.json": {
+      "sha256": "b77581b71eb2b01ceef3811aa7a0461822c0ee6a50ad5654f0e7148c3de7964d",
+      "bytes": 1722
+    },
+    ".superpowers/sdd/2026-10-31-actualizacion-proyecto/regression-current-fixtures.xml": {
+      "sha256": "ec2a8b54508241a26ef0761cd0e6e00ab86320344bce3c70b8af918cc6f2d2b1",
+      "bytes": 10263
+    },
+    ".superpowers/sdd/2026-10-31-actualizacion-proyecto/regression-current-fixtures.log": {
+      "sha256": "8ac6c7f6c879ce163edd0fd08dec2658dd83812071f21ae3ded2fa89c280a9f7",
+      "bytes": 22031
+    },
+    ".superpowers/sdd/2026-10-31-actualizacion-proyecto/regression-two-current-contracts.json": {
+      "sha256": "4f1551e701affeddba5ba3515935341f0d2e608e1b41f7714f133802eef26501",
+      "bytes": 950
+    },
+    ".superpowers/sdd/2026-10-31-actualizacion-proyecto/regression-two-current-contracts.xml": {
+      "sha256": "b2022b727366b099f6ee235dd2673d57c6812ab92638a80e99b1ed894768d277",
+      "bytes": 1677
+    },
+    ".superpowers/sdd/2026-10-31-actualizacion-proyecto/regression-two-current-contracts.log": {
+      "sha256": "3d2d4ea1529b66260494583ec96e19534773b03fee111513ad8070c19884c87e",
+      "bytes": 8539
+    },
+    ".superpowers/sdd/2026-10-31-actualizacion-proyecto/timeout-final60.json": {
+      "sha256": "7fdc0d7e10e249a55d65c4d1706a0890bd7c8b01cc562ca3ad37e3acfbaa1bf8",
+      "bytes": 1693
+    },
+    ".superpowers/sdd/2026-10-31-actualizacion-proyecto/timeout-final60.xml": {
+      "sha256": "974051c62411bcbd6bddbd46beebcc2037c1b8b6c86a6948893412fb94a2f1d6",
+      "bytes": 1776
+    },
+    ".superpowers/sdd/2026-10-31-actualizacion-proyecto/timeout-final60.log": {
+      "sha256": "c72c481baa267a60616ac514d298cb338ced28cded036c0e953665183fffd34d",
+      "bytes": 4012
+    },
+    ".superpowers/sdd/2026-10-31-actualizacion-proyecto/terminal-policy-green.json": {
+      "sha256": "1bddf1debf73febc2104e7bd757599a22fedd9246365c795b5a7334886da1455",
+      "bytes": 675
+    },
+    ".superpowers/sdd/2026-10-31-actualizacion-proyecto/terminal-policy-green.xml": {
+      "sha256": "c96ddadabd4aa8d29e690620bf9953fc19223c3337ba808d8969bed1b3dc42ad",
+      "bytes": 5267
+    },
+    ".superpowers/sdd/2026-10-31-actualizacion-proyecto/terminal-policy-green.log": {
+      "sha256": "c3af731d3757e9d2b78e428a4455cc061f8e00d5171d74573cf4fed04286d2de",
+      "bytes": 7036
+    },
+    ".superpowers/sdd/2026-10-31-actualizacion-proyecto/terminal-policy-red.json": {
+      "sha256": "6cf797da90b5f22b78bbe3673b42b29eff16d1de2df3de8eae603194554a14c3",
+      "bytes": 999
+    },
+    ".superpowers/sdd/2026-10-31-actualizacion-proyecto/terminal-policy-red.xml": {
+      "sha256": "660b91ba65966331422245fb55e3372deeca5acc1579e77e1ca3fc9903016119",
+      "bytes": 1163
+    },
+    ".superpowers/sdd/2026-10-31-actualizacion-proyecto/terminal-policy-red.log": {
+      "sha256": "eb3cfe8900b59e18abeefe6fb4e71708d170e1b0874ae05841d428d2a73ce766",
+      "bytes": 3077
+    },
+    ".superpowers/sdd/2026-10-31-actualizacion-proyecto/global-timeout-diagnostic.json": {
+      "sha256": "b6e3e3d65fc488308c27220911f0e6c1208ccad4e9c933a1044b98a95ab2e487",
+      "bytes": 3646
+    },
+    ".superpowers/sdd/2026-10-31-actualizacion-proyecto/global-timeout-diagnostic.xml": {
+      "sha256": "0789c693a137379b77aca285bc7aaa01b9b51172a099fd0f7ea67aecbe204fc6",
+      "bytes": 1776
+    },
+    ".superpowers/sdd/2026-10-31-actualizacion-proyecto/global-timeout-diagnostic.log": {
+      "sha256": "bd037dee53b35aae326f07a51389b8d618b47ba8ca02c783f55dd61b8b764b53",
+      "bytes": 4003
+    },
+    ".superpowers/sdd/2026-10-31-actualizacion-proyecto/inverse-prefix-green.json": {
+      "sha256": "b4f8b4bb0bf1cd3447cfafe9aeee5c0b2142b98e2b98474f57d43377fbb41b30",
+      "bytes": 1210
+    },
+    ".superpowers/sdd/2026-10-31-actualizacion-proyecto/inverse-prefix-green.xml": {
+      "sha256": "73a64a5e36d2805728ba05313dc28fb6d363317980c0090c91b3bf1839dc18a5",
+      "bytes": 1205
+    },
+    ".superpowers/sdd/2026-10-31-actualizacion-proyecto/inverse-prefix-green.log": {
+      "sha256": "a81b6c5b5e2bea27a97021ed14168dcaa57e7d7793ba68a4d444ea552f22d05c",
+      "bytes": 3406
+    }
+  },
+  "installed_verification": {
+    "status": "verified",
+    "packaging_receipt": "docs/modernization/regression-cli-packaging.json",
+    "artifact": {
+      "wheel": ".superpowers/sdd/2026-10-31-actualizacion-proyecto/regression-cli-dist/researcher-0.1.0-cp312-cp312-linux_x86_64.whl",
+      "wheel_sha256": "aede534e6e1a14d654a7ece70bb08ae5a86bbda1bc67d37b5d10bc7c8b172cfa",
+      "sdist": ".superpowers/sdd/2026-10-31-actualizacion-proyecto/regression-cli-dist/researcher-0.1.0.tar.gz",
+      "sdist_sha256": "5eb75bd414a9ff27d26be494ab8b5cda2be20a287a962b119704d13bcb3d3057",
+      "source_files_matching": 698,
+      "product_files_matching": 371,
+      "extensions": [
+        "backend/runtime/_domain_spawn.cpython-312-x86_64-linux-gnu.so"
+      ],
+      "notices_sha256": {
+        "LICENSE.md": "c50f239b57bc97261453eb0f8a0298a04cf58573a466259590a54b997e86924a",
+        "THIRD_PARTY_NOTICES.md": "237fa7accb34b0dc05e7ab1a58ac6806395775f052e534e9e4f389ef765adf54"
+      },
+      "source_sdist_wheel_match": true,
+      "c_sources_matching": {
+        "backend/runtime/_domain_spawn.c": "09e2262b0ddddb475f2a19c5e6b5a2cfd9e58829a41fd77664606254f0c97743"
+      }
+    },
+    "observed": {
+      "cases": 43,
+      "passed": 43,
+      "failed": 0,
+      "skipped": 0,
+      "backend_modules": 262,
+      "all_backend_imports_from_native_env": true,
+      "seconds": 54.034,
+      "exit_code": 0
+    },
+    "compatible_installed_packages": 83
+  },
+  "real_model_turns": 0,
+  "limits": [
+    "Directed tests, not a new whole-suite result",
+    "Kernel/HTTP/Git real; generation/Ken controlled, no subscription inference",
+    "No human comprehension or page acceptance",
+    "Historical eligible observations missing project_check_policy need refreshed /code; pending old packets unchanged, recorded asDD147"
+  ],
+  "prompt_inventory_follow_up": {
+    "changed_source_module": "backend/orchestrator.py",
+    "candidate_or_direct_consumer_changes": false,
+    "current_reviewed_candidates": 85,
+    "stale": 0,
+    "unreviewed": 0,
+    "inventory_sha256": "415404e99b4e4460ddae41463364cc83f336f67b6c4634c4b2bcf2c9b69984af",
+    "original_review_receipt": "docs/prompts/revalidation-2026-11-08.json at commit e8d89d0, retained unchanged"
+  },
+  "ruff": {
+    "scope": "backend/orchestrator.py",
+    "exit": 0,
+    "result": "All checks passed; not whole-tree lint"
+  }
+}

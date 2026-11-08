@@ -72,7 +72,11 @@ async def test_paired_endpoint_identity_detects_replaced_database_before_note_mu
 ):
     """An authenticated session and the same URL do not authorize a pending note against a physical replacement of its original database."""
     import sqlite3
+    from contextlib import closing
+    from pathlib import Path
 
+    # Exercise this paired read-only host explicitly, independent of prior tests.
+    monkeypatch.delenv("INFINIBAY_RUNTIME_CONFIG", raising=False)
     async with (
         workspace_app.router.lifespan_context(workspace_app),
         owner_client(workspace_app) as owner,
@@ -81,9 +85,10 @@ async def test_paired_endpoint_identity_detects_replaced_database_before_note_mu
         assert len(first) == 64
         assert (await owner.get("/api/session")).json()["endpoint_id"] == first
         clone = tmp_path / "replacement.db"
-        with sqlite3.connect(clone) as target:
+        with closing(sqlite3.connect(clone)) as target:
             coordination.conn.backup(target)
-        monkeypatch.setenv("INFINIBAY_DB", str(clone))
+        coordination.conn.close()
+        clone.replace(Path(coordination.database))
         current = (await owner.get("/api/session")).json()["endpoint_id"]
         assert current != first
         result = await owner.post(
@@ -95,7 +100,7 @@ async def test_paired_endpoint_identity_detects_replaced_database_before_note_mu
             headers={"X-Researcher-Endpoint": first},
         )
         assert result.status_code == 409
-        with sqlite3.connect(clone) as target:
+        with closing(sqlite3.connect(coordination.database)) as target:
             assert (
                 target.execute("SELECT count(*)FROM chat_messages").fetchone()[0] == 0
             )

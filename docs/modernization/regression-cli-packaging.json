@@ -1,0 +1,40 @@
+{
+  "validation_environment": {
+    "runner_cgroup": "/sys/fs/cgroup/user.slice/user-1000.slice/user@1000.service/app.slice/run-p1488279-i1488280.scope",
+    "parent_controllers_before": "cpu memory pids",
+    "runner_cpu_max": "800000 100000",
+    "purpose": "Transient systemd scope with CPUQuota=800% retains CPU-controller availability during validation; it does not relax any product limit.",
+    "parent_controllers_after": "cpu memory pids"
+  },
+  "base_commit": "e8d89d0",
+  "source_state": "plus current bounded CLI policy-revision fix and reviewed test-only regression changes",
+  "wheel": "researcher-0.1.0-cp312-cp312-linux_x86_64.whl",
+  "wheel_sha256": "aede534e6e1a14d654a7ece70bb08ae5a86bbda1bc67d37b5d10bc7c8b172cfa",
+  "source_files_matching_wheel_and_installation": 698,
+  "product_files_matching": 371,
+  "observed": {
+    "cases": 43,
+    "passed": 43,
+    "failed": 0,
+    "skipped": 0,
+    "backend_modules": 262,
+    "all_backend_imports_from_native_env": true,
+    "seconds": 54.034,
+    "exit_code": 0
+  },
+  "tests": [
+    "backend/tests/cli/test_terminal_controller.py",
+    "backend/tests/cli/test_owner_client.py",
+    "backend/tests/runtime/test_project_check_policy.py",
+    "backend/tests/test_orchestrator.py",
+    "backend/tests/api/test_persistence_boundaries.py",
+    "backend/tests/runtime/test_data_boundaries.py",
+    "backend/tests/runtime/test_owner_notes.py"
+  ],
+  "real_model_turns": 0,
+  "limits": [
+    "Selected installed tests, not the global suite",
+    "Current terminal observed check-policy revision, exact receipt mismatch retention, canonical policy guards and owner persistence/Stop/physical database identity; schema71 unchanged",
+    "Actual installed owner HTTP/native broker/kernel/Git terminal chain; generation and Ken controlled, no subscription inference or human/scientific acceptance"
+  ]
+}

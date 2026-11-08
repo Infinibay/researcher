@@ -337,7 +337,7 @@ class ProjectOrchestrator:
         )
 
     def _accept_result(self, arguments, code=False):
-        """Send the observed exact candidate/context/review, requiring an explicit limits flag when the owner chooses to acknowledge them."""
+        """Bind acceptance to the observed candidate, context, review and check policy, with explicit acknowledgement of displayed limits."""
         parts = arguments.split()
         if len(parts) not in (1, 2) or (len(parts) == 2 and parts[1] != "--ack-limits"):
             raise TerminalError(
@@ -367,6 +367,7 @@ class ProjectOrchestrator:
             body.update(
                 attempt_id=candidate["attempt_id"],
                 subject_sha256=state["subject_sha256"],
+                check_policy_revision=state["project_check_policy"]["revision"],
             )
             expected = {
                 "project_id": self.project_id,
@@ -375,6 +376,7 @@ class ProjectOrchestrator:
                 "subject_sha256": state["subject_sha256"],
                 "context_version": body["context_version"],
                 "review_sha256": body["review_sha256"],
+                "check_policy_revision": body["check_policy_revision"],
                 "task_accepted": True,
                 "publication_performed": False,
             }

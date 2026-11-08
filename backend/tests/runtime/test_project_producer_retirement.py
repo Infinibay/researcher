@@ -142,7 +142,7 @@ def test_controlled_planner_fixture_cites_the_actual_supplied_history(historic):
     exec(compile(ast.Module(body=[node],type_ignores=[]),'<controlled-planner>','exec'),namespace)
     namespace['next_planning_tool']()
     name, body = calls[0]
-    assert name == 'researcher_plan_propose'
+    assert name == 'researcher_plan_deliver'
     validate_plan(body['plan'],sources)
     assert any(item['source'].endswith(':requirements') for item in body['plan']['basis']) is historic
 

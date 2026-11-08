@@ -28,8 +28,7 @@ def test_role_factories_and_framework_memory_are_not_available():
     assert not hasattr(backend.knowledge, "KnowledgeService")
 
 
-@pytest.mark.asyncio
-async def test_historical_roster_reader_preserves_original_memory_and_runs(coordination):
+def test_historical_roster_reader_preserves_original_memory_and_runs(coordination):
     """Retiring constructors leaves old identities, memory text and recorded execution available without adopting or executing them."""
     from backend.api.routes.agents import list_agents
 
@@ -38,7 +37,7 @@ async def test_historical_roster_reader_preserves_original_memory_and_runs(coord
     c.conn.execute("INSERT INTO agent_runs(project_id,agent_run_id,agent_id,task_id,role,status) VALUES(101,'original-old-run','old_1_p101',1001,'researcher','running')")
     c.conn.commit()
     before = dict(c.conn.execute("SELECT * FROM roster WHERE agent_id='old_1_p101'").fetchone())
-    response = await list_agents(project_id=101)
+    response = list_agents(project_id=101)
     assert response.total == 1
     assert response.agents[0].agent_id == 'old_1_p101'
     assert response.agents[0].current_run.agent_run_id == 'original-old-run'

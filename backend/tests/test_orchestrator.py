@@ -18,6 +18,9 @@ from backend.tests.runtime.conftest import (
     ken_installation as ken_installation,  # noqa: PLC0414
 )
 from backend.tests.runtime.conftest import (
+    schema_target as schema_target,  # noqa: PLC0414 -- transitive coordination fixture.
+)
+from backend.tests.runtime.conftest import (
     service_setup as service_setup,  # noqa: PLC0414
 )
 from backend.tests.runtime.test_owned_factory import owned_config as owned_config  # noqa: PLC0414
@@ -113,6 +116,18 @@ async def test_terminal_owns_no_engine_and_recovers_exact_work_through_real_owne
                 await serving
             await asyncio.sleep(0.05)
         assert server.started
+        async with httpx.AsyncClient(base_url=origin, trust_env=False) as owner:
+            paired = await owner.post('/api/session', json={'code': code}, headers={'X-Researcher-Client': 'web'})
+            assert paired.status_code == 200, paired.text
+            owner.headers['X-Researcher-CSRF'] = paired.json()['csrf_token']
+            policy = (await owner.get('/api/projects/101/check-policy')).json()
+            assert policy == {'revision': 0, 'mode': None}
+            chosen = await owner.post('/api/projects/101/check-policy', json={
+                'operation_key': 'terminal-project-check-policy',
+                'expected_revision': policy['revision'], 'mode': 'allow_missing',
+            })
+            assert chosen.status_code == 200, chosen.text
+            assert chosen.json()['revision'] == 1 and chosen.json()['inference_started'] is False
         controller = ProjectOrchestrator(
             project_id=101,
             owner_client=OwnerClient(**options, transport=LostExecutionReply()),
@@ -138,7 +153,7 @@ async def test_terminal_owns_no_engine_and_recovers_exact_work_through_real_owne
             """Observe an original scoped run until its actual terminal proposal state, without restarting from observation timeout."""
             for _ in range(800):
                 rows = runtime.store.task_runs(101, task)
-                if rows and rows[0].status not in ("queued", "running"):
+                if rows and rows[0].status not in ("queued", "running", "cancelling"):
                     return rows[0]
                 await asyncio.sleep(0.05)
             raise AssertionError(

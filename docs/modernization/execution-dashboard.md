@@ -28,36 +28,35 @@ que se pueda comparar el avance; no presentar microajustes como tareas principal
 - Última suite global: `9fb873c`,2210 casos,2178 pasan,31 fallan y1 error de fixture; sin omisiones. La carrera de backup encontrada se corrigió después con40 pruebas instaladas. No se declara una nueva corrida global verde; la referencia `0c8b8d9` queda como evidencia histórica.
 - U01–U07, E01–E12, C01–C10 y D01–D13 quedan comprobados con el alcance de sus matrices; sigue 1 de 43 escenarios amplios sin aceptación completa en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Estado actual: revisión estática cerrada; corregir regresión
+## Estado actual: corrección CLI instalada; recuperar Proyectos
 
-**Regresión: 12:12:12–12:49:14 UTC, 37 min 2 s de pared**, base `d278653`.
-Incluye dos ejecuciones y el intervalo de clasificación. Pytest: 28 min 26 s y
-5 min 28 s. [Recibo y límites](global-regression-2026-11-08.md).
-La escritura/verificación del registro de prompts fue de 12:44:34 a 12:46:40 UTC;
-las revisiones previas se hicieron en paralelo, sin reconstruir su hora de inicio.
+**Diagnóstico/corrección fuente: 12:55:21–13:17:04 UTC, 21 min 43 s.**
+[Alcance y recibos](regression-corrections-2026-11-08.md).
+Verificación instalada posterior: 43 casos en 54,034 s, sobre wheel limpio.
 
-- Terminado con evidencia: **42/43 escenarios y 11/12 páginas**, sin nueva
-  aceptación de producto en este bloque. Los **85 candidatos a prompt en 322
-  archivos** tienen revisión estática vigente: 68 deltas revisados y 17 sin cambio.
-  [Alcance](../prompts/review-2026-11-08.md). Python 3.13 y lock Ken conservan sus
-  comprobaciones anteriores.
-- En curso: **resolver la regresión**. Los 2.568 casos tienen resultado entre dos
-  procesos: 2.541 pasan, 26 fallan y uno tiene error de fixture, sin omisiones.
-  La primera ejecución se interrumpió para preservar sus diagnósticos; no hay
-  una suite global única verde. Reproducir los nueve timeouts antes de decidir
-  si falla el comportamiento o su presupuesto de prueba.
-- Pendiente principal: recuperación instalada de Proyectos sobre el intento
-  original, integración coherente de Ken/ONNX o decisión de riesgo sustentada,
-  límites de Chroma, inversas históricas hasta 71 y controles finales. La revisión
-  del gate de Proyectos separa recuperación visible e incidente desconocido;
-  todavía no acepta la página ni declara corregido AuthorityBusy.
-- Comunicación: U08/humano y otros perfiles conservan sus límites. La revisión
-  científica mantiene 5 criterios completos y uno parcial; se documentó que la
-  rúbrica excedía la petición en su contraste relativo. No hubo otra generación.
-- Detalles al final: docstrings relevantes pendientes (inventario de presencia:
-  621 definiciones sin docstring, cero módulos no vacíos sin él), DD145 y deuda
-  anterior de avisos, lint, fechas, enums, densidad y accesibilidad completa.
-  Sin historial del usuario que migrar. Sin push, merge o despliegue.
+- Terminado: 26 fallos y un error del corte global anterior tienen comprobación
+  dirigida de los contratos corregidos; 220 identidades distintas con resultado
+  final aprobado. Nueve timeouts pasan con el límite definitivo de prueba de 60 s;
+  143 casos de migraciones/consumidores pasan. El consumidor CLI envía y valida la
+  revisión de política observada; dos regresiones nuevas tuvieron RED antes del
+  cambio. No se debilitan guardas ni se infiere una suite global verde.
+- Distribución: 698 fuentes Python/SQL y fuente C coinciden con sdist/wheel;
+  43 instaladas pasan, 262 imports del prefix, 83 paquetes compatibles. Avisos
+  actuales incluidos. El wheel principal se actualizó; no hubo generación pagada.
+- En curso: **recuperación instalada de Proyectos** sobre el intento fallido
+  original: enlace exacto, recarga, explicación histórica, cierre y presupuesto
+  coherentes, sin nueva admisión. Conservar el incidente desconocido separado.
+  El host original tiene esquema68: declarar migraciones69–71 y demostrar que
+  no alteran sus filas originales ni crean operaciones.
+- Alcance de producto: **42/43 escenarios, 11/12 páginas**. Los 85 candidatos a
+  prompt siguen vigentes; el cambio de CLI solo exige regenerar el árbol escaneado.
+  Pendientes: integración coherente de Ken/ONNX o decisión de riesgo sustentada,
+  fronteras de Chroma, U08/humano/otros perfiles, revisión independiente final y
+  una suite global única final. Las inversas históricas corregidas hasta71 se
+  verifican en su alcance dirigido, sin prometer toda combinación de rollback.
+- Detalles al final: DD147/146/145 y deuda anterior, incluida documentación
+  relevante de 621 definiciones identificadas por presencia. Sin historial real
+  que migrar; sin push, merge ni despliegue.
 
 ## Etapa anterior: Ken estructural offline verificado; continúa aceptación de páginas
 

@@ -226,6 +226,7 @@ async def test_retention_shutdown_drains_original_copy_and_rejects_new_decisions
     assert retention.operation(101,'archive')['state']=='completed'
 
 
+@pytest.mark.parametrize('schema_target', [68])
 def test_retention_inverse_refuses_used_history_and_preserves_unused_prefix(retained,tmp_path):
     """Rollback cannot discard quarantine/history; an unused schema68 can return to67 without touching project data."""
     import sqlite3
@@ -234,11 +235,11 @@ def test_retention_inverse_refuses_used_history_and_preserves_unused_prefix(reta
     s,lease,root,retention=retained
     retention.quarantine(101,lease.attempt_id,'archive',retention_days=1,acknowledge_unavailability=True)
     with pytest.raises(RuntimeError,match='history'):restore_workspace_retention_schema(s.c.conn)
-    empty=tmp_path/'unused.db';ensure_migrations(empty)
+    empty=tmp_path/'unused.db';ensure_migrations(empty, target_version=68)
     with sqlite3.connect(empty) as conn:
         restore_workspace_retention_schema(conn)
         assert conn.execute('SELECT max(version) FROM schema_migrations').fetchone()[0]==67
-    ensure_migrations(empty)
+    ensure_migrations(empty, target_version=68)
 
 
 def test_installation_backup_recovers_archive_data_without_replaying_copied_deletion(installation,service_setup,tmp_path):

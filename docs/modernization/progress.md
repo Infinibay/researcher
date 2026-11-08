@@ -9337,3 +9337,33 @@ timeouts compuestos con un presupuesto diagnóstico acotado. Después, recuperac
 de Proyectos, seguridad/distribución, inversas y controles finales. 42/43 escenarios
 y 11/12 páginas no cambian. Docstrings relevantes y DD145/anteriores se resuelven
 tras lo grueso. No hay historial que migrar; sin push, merge ni despliegue.
+
+
+## 2026-11-08 — regresión dirigida y política de aceptación CLI
+
+Base `e8d89d0` más cambio acotado del consumidor. Los nueve timeouts se aislaron
+con código intacto: nueve pasan con presupuesto diagnóstico de 90 s; sus duraciones
+19,7–23,4 s explican el límite de 20 s insuficiente. Con decoradores de 60 s definitivos pasan
+los nueve. Se alinearon seis inversas a prefijos históricos 65/68 sin relajar
+guardas: seis casos y 143 de módulos/consumidores/cadena pasan.
+
+El recorrido terminal dejó de fallar por preparación de fixtures y expuso dos
+hechos distintos: política sin elegir correctamente bloqueada, y consumidor CLI
+sin revisión de política. Se configura por HTTP propietario la opción explícita
+de la prueba; request y recibo CLI quedan vinculados a la observación. Dos nuevos
+casos RED antes del cambio. La selección CLI/cliente/política/HTTP completa pasa
+30 casos; matriz dirigida deduplicada de 220 aprobados. Se conservan fallos intermedios.
+[Alcance](regression-corrections-2026-11-08.md).
+
+21 min 43 s hasta verificación fuente,12:55:21–13:17:04 UTC. Después se construyó
+sdist→wheel limpio:698 fuentes Python/SQL, 371 de producto y fuente C coinciden, avisos
+actuales preservados,83 paquetes compatibles.43 instaladas sin omisiones,262 imports del
+prefix,54,034 s. Sin turno de suscripción ni cambio de guardas de aceptación.
+Los 85 candidatos siguen vigentes tras regenerar el único módulo CLI del inventario;
+no se renovaron sus decisiones. DD147 conserva recuperación de observación antigua.
+
+**Siguiente:** recuperación de Proyectos sobre el intento original, sin repetir
+preparación. La revisión readonly confirmó filas originales y cierre; esquema 68
+exige declarar 69–71 al arrancar. Siguen 42/43 escenarios y 11/12 páginas, seguridad,
+U08/humano/otros perfiles, detalles/docstrings y controles finales. No hay una nueva
+suite global única verde. Sin historial real que migrar; sin push/merge/despliegue.

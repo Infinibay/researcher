@@ -138,8 +138,9 @@ def test_new_permission_still_requires_current_native_grant(coordination):
     assert c.conn.execute('SELECT count(*) FROM runtime_attempts').fetchone()[0]==1
 
 
+@pytest.mark.parametrize('schema_target', [65])
 def test_unused_inverse_and_used_history_guard(coordination):
-    """Empty latest metadata can reverse, but recorded execution cannot be erased through a downgrade."""
+    """Reverse unused schema65 metadata while refusing to erase recorded auxiliary execution."""
     from backend.db.auxiliary_continuation_migration import restore_auxiliary_continuation_schema
     from backend.db.project_check_policy_migration import restore_project_check_policy_schema
     from backend.db.preparation_budget_migration import restore_preparation_budget_schema
@@ -148,7 +149,7 @@ def test_unused_inverse_and_used_history_guard(coordination):
 
     c=coordination;restore_project_check_policy_schema(c.conn);restore_preparation_budget_schema(c.conn);restore_auxiliary_origin_schema(c.conn);restore_auxiliary_continuation_schema(c.conn)
     assert c.conn.execute('SELECT max(version) FROM schema_migrations').fetchone()[0]==61
-    ensure_migrations(c.database);failed(AuxiliaryBudget(c.database,101))
+    ensure_migrations(c.database, target_version=65);failed(AuxiliaryBudget(c.database,101))
     restore_project_check_policy_schema(c.conn);restore_preparation_budget_schema(c.conn);restore_auxiliary_origin_schema(c.conn)
     with pytest.raises(RuntimeError,match='recorded'):restore_auxiliary_continuation_schema(c.conn)
 

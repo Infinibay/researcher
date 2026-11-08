@@ -119,8 +119,9 @@ def test_attempt_cannot_evade_its_local_allowance_or_read_after_revocation(coord
     with pytest.raises(ResearchForbidden):calculation(budget,b'0')
 
 
+@pytest.mark.parametrize('schema_target', [65])
 def test_unused_auxiliary_inverse_preserves_old_schema_and_refuses_work(coordination):
-    """Only unused latest schema can reverse; source data and recorded work remain authoritative."""
+    """Reverse the supported schema65 prefix without losing source data or recorded auxiliary work."""
     from backend.db.auxiliary_budget_migration import restore_auxiliary_budget_schema
     from backend.db.auxiliary_continuation_migration import restore_auxiliary_continuation_schema
     from backend.db.project_check_policy_migration import restore_project_check_policy_schema
@@ -133,7 +134,7 @@ def test_unused_auxiliary_inverse_preserves_old_schema_and_refuses_work(coordina
     restore_auxiliary_continuation_schema(c.conn)
     restore_auxiliary_budget_schema(c.conn)
     assert c.conn.execute('SELECT max(version) FROM schema_migrations').fetchone()[0]==60
-    ensure_migrations(c.database)
+    ensure_migrations(c.database, target_version=65)
     calculation(AuxiliaryBudget(c.database,101))
     with pytest.raises(RuntimeError,match='newer schema'):restore_auxiliary_budget_schema(c.conn)
     restore_project_check_policy_schema(c.conn);restore_preparation_budget_schema(c.conn);restore_auxiliary_origin_schema(c.conn)

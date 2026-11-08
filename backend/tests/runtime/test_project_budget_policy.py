@@ -124,7 +124,7 @@ def test_upgrade_preserves_old_policy_and_unused_inverse_preserves_it(_isolated_
     c=SimpleNamespace(database=_isolated_db,conn=db_conn,store=SQLiteRunStore(_isolated_db))
     c.conn.execute("INSERT INTO projects(id,name) VALUES(101,'Historical')")
     c.conn.execute('INSERT INTO runtime_project_budgets VALUES(101,2,200)');c.conn.commit()
-    ensure_migrations(c.database);ensure_migrations(c.database)
+    ensure_migrations(c.database, target_version=65);ensure_migrations(c.database, target_version=65)
     assert RuntimeHistory(c.database).budget(101)['policy']=={'turn_limit':2,'token_limit':200,'revision':0}
     assert c.conn.execute('SELECT count(*) FROM runtime_project_budget_changes').fetchone()[0]==0
     restore_project_check_policy_schema(c.conn);restore_preparation_budget_schema(c.conn);restore_auxiliary_origin_schema(c.conn)
@@ -132,7 +132,7 @@ def test_upgrade_preserves_old_policy_and_unused_inverse_preserves_it(_isolated_
     restore_auxiliary_budget_schema(c.conn)
     restore_project_budget_schema(c.conn)
     assert tuple(c.conn.execute('SELECT * FROM runtime_project_budgets').fetchone())==(101,2,200)
-    ensure_migrations(c.database);change(c)
+    ensure_migrations(c.database, target_version=65);change(c)
     restore_project_check_policy_schema(c.conn);restore_preparation_budget_schema(c.conn);restore_auxiliary_origin_schema(c.conn)
     restore_auxiliary_continuation_schema(c.conn)
     restore_auxiliary_budget_schema(c.conn)

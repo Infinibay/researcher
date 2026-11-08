@@ -6508,6 +6508,23 @@
         "docs/modernization/distribution-py313-artifacts.json"
       ],
       "remaining": []
+    },
+    "terminal_check_policy_acceptance": {
+      "status": "complete",
+      "scope": "New CLI code acceptance sends the actually observed project policy revision and binds expected receipt; old pending retry packets unchanged. Test setup uses explicit owner HTTP policy choice.",
+      "evidence": [
+        "backend/orchestrator.py",
+        "backend/tests/cli/test_terminal_controller.py",
+        "backend/tests/test_orchestrator.py",
+        "docs/modernization/regression-corrections-2026-11-08.md",
+        "docs/modernization/regression-corrections-2026-11-08-results.json",
+        "docs/modernization/regression-cli-packaging.json"
+      ],
+      "limitations": [
+        "Directed220unique current source case outcomes and43installed; not new whole-suite green, page or human acceptance",
+        "Legacy observations without policy require refreshed /code; polish DD147 deferred",
+        "No new subscription inference; native generation/Ken controlled"
+      ]
     }
   }
 }

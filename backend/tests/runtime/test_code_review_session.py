@@ -21,6 +21,7 @@ from backend.tests.runtime.test_owned_factory import (
 )
 
 
+@pytest.mark.timeout(60)
 async def test_owned_native_review_records_exact_decision_after_closure(
     development_config,
 ):
@@ -230,6 +231,7 @@ async def proposed_native_review(c):
 
 
 @pytest.mark.parametrize("change", ["context", "source"])
+@pytest.mark.timeout(60)
 async def test_changed_review_cannot_confirm_and_retains_original_proposal(
     development_config, change
 ):
@@ -260,6 +262,7 @@ async def test_changed_review_cannot_confirm_and_retains_original_proposal(
         assert (review.c.s.workspace / "fact.txt").read_text() == "137"
 
 
+@pytest.mark.timeout(60)
 async def test_stop_during_review_confirmation_closes_original_owner_and_joins_work(
     development_config, monkeypatch
 ):
@@ -293,6 +296,7 @@ async def test_stop_during_review_confirmation_closes_original_owner_and_joins_w
 
 
 @pytest.mark.parametrize("changed,rejected", [(False, False), (True, False), (False, True)])
+@pytest.mark.timeout(60)
 async def test_coordinator_schedules_native_review_and_does_not_finish_unconfirmed_work(
     development_config, monkeypatch, changed, rejected
 ):
