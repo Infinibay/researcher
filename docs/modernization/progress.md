@@ -9198,3 +9198,21 @@ continuó el mismo fixture según estado comprobado; último tramo sólo lectura
 Proyectos/AuthorityBusy, idempotencia de comentarios de tarea (endpoint separado),
 U08/C10/ciencia, distribución/dependencias, prompts, inversas71, global y revisión
 final. DetallesDD143y anteriores al final. Sin push/merge/despliegue.
+
+## Siguiente preflight: Ejecución
+
+Desde10:25:52UTC, base379dc63. Ruta real **/flow**, componente FlowPage.tsx
+(verificado mediante Sidebar); no adivinar /execution ni un DagPage inexistente.
+Leídos FlowPage, PlanExecution, planExecution API y flow.browser.mjs. El navegador
+existente intercepta todas las API con datos controlados: no prueba todavía el
+servicio instalado. El lector ya conserva errores/historia/contexto separado de
+actividad física y controles en readonly al fallar; no inventar otro defecto.
+
+Siguiente acción: reutilizar el host sintético conocido o un fixture de dominio
+existente para un plan realmente aceptado y entregas causales, **pausado antes de
+servir**. Leer grafo/evidencia y recuperar una pausa original ya registrada con
+cuerpo/clave exactos; no autorizar trabajo nuevo para comprobar UI. Revisar fuente
+productora antes de construir IDs/manifest/propuesta. En el evaluador, viewport
+explícito y esperar el cambio de selección antes de teclado; no repetir efectos
+conocidos por un fallo de navegación. Sólo reporte/coverage/tablero al cerrar,
+sin otra capa de informes redundantes por cada comprobación.
