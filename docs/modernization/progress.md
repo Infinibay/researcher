@@ -9367,3 +9367,33 @@ preparación. La revisión readonly confirmó filas originales y cierre; esquema
 exige declarar 69–71 al arrancar. Siguen 42/43 escenarios y 11/12 páginas, seguridad,
 U08/humano/otros perfiles, detalles/docstrings y controles finales. No hay una nueva
 suite global única verde. Sin historial real que migrar; sin push/merge/despliegue.
+
+
+## 2026-11-08 — Proyectos completa el alcance de doce páginas
+
+[Lectura instalada del intento original](projects-original-recovery-review.md):
+proyecto 5, tarea 6 y run original, con enlace, recarga y regreso; mensaje histórico
+y presupuesto preservados. Cuatro estados/siete comprobaciones a 1440/390 pasan,
+sin errores, overflow, infracciones axe regionales ni admisiones. Lectura final:
+9,229 s, 13:46:32–13:46:41 UTC; preparación previa no incluida.
+
+La primera lectura actualizó 68→71 y luego falló por consultar presupuesto antes
+de emparejar. Se conserva ese verificador y se continúa sobre el mismo host:
+162 tablas originales idénticas, cuatro nuevas vacías y tres filas de migración
+añadidas; cuatro runs/cuatro attempts/un dispatch previo y tres fuentes intactas,
+sin peers/grants abiertos. Ambos servicios terminaron 143.
+
+Se inspeccionaron las cuatro capturas actuales. Proyectos se acepta técnica y
+visualmente por alcance junto a las pruebas anteriores de plan español/Ken y
+Stop (UI y kernel separados). AuthorityBusy sigue desconocido; el gate se revisó
+explícitamente, sin inventar una corrección causal. **12/12 páginas, 42/43
+escenarios**; U08/humano y la accesibilidad general permanecen independientes.
+Densidad, etiquetas y encuadre en DD148.
+
+Una revisión del plan original verificó que extender contención agregada/SQLite
+en sandbox al exportador manual Chroma sería hardening adicional. Se registra
+DD149 y se conservan sus límites/avisos. No hay historial real del propietario.
+La distribución Ken/ONNX queda consultada: variante local probada o esperar
+publicación; respuesta aún pendiente, sin asumir aceptación de riesgo. Después
+siguen comunicación, docstrings/detalles, revisión independiente y suite global
+final. Sin push, merge ni despliegue.

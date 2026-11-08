@@ -88,3 +88,14 @@ y cierre desconocido. Ambos son trabajo funcional principal, no pulido visual.
 Siguen **0/12 páginas aceptadas** y 41/43 escenarios comprobados. U08, C10 y la
 evaluación científica conservan su alcance pendiente. No se solicita otra
 evaluación humana sobre un resultado que todavía no está listo.
+
+
+## Cierre acotado de aceptación — 2026-11-08
+
+La [recuperación instalada actual](projects-original-recovery-review.md) cubre el
+intento fallido original, recarga, retorno y presupuesto sin admisión. Se conserva
+el fallo del verificador por consulta anterior al emparejamiento y su continuación
+sobre el mismo host. El gate revisado está explícito en el plan correctivo; no se
+impone producir una corrección de carrera que no fue demostrada. Proyectos queda
+aceptado técnica y visualmente por alcance, manteniendo el incidente desconocido
+y U08 separados. El mensaje histórico no se reemplaza por wording actual.

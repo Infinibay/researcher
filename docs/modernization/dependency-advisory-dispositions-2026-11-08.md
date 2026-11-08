@@ -62,3 +62,16 @@ Esta revisión deja explícitos uso, mitigaciones y desconocidos. No declara una
 auditoría verde, una migración de datos del propietario ni la aceptación de riesgo
 en su nombre. La actualización coherente de Ken y las decisiones sobre el lector
 siguen abiertas.
+
+
+## Alcance del hardening del lector
+
+Una segunda revisión del plan distingue requisitos explícitos de mejoras futuras.
+D05 protege publicación/persistencia recuperable; D13 limita clientes/broadcast y
+exige restore consistente. D12 cubre ejecución de agente/CI. Ninguno prescribe
+una nueva cuota agregada para este exportador administrativo opcional, separado
+del servidor, ni mover su snapshot SQLite al sandbox. Es una mejora futura DD149,
+condicionada a nuevo uso servido, almacenamiento hostil explícito o defecto
+concreto. Se conservan todos los límites ya declarados y avisos conocidos. La
+confirmación de que no hay historial real elimina una migración del propietario
+pendiente; no demuestra seguridad general del lector.

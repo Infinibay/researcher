@@ -1308,3 +1308,27 @@ la recuperación concreta; no modificar automáticamente observaciones ni paquet
 pendientes. Los `/retry` y recibos ya guardados conservan su protocolo original.
 Añadir un editor CLI de política es una mejora de paridad separada, no condición
 para este arreglo: la configuración explícita ya existe por HTTP propietario/web.
+
+
+## DD148 — densidad y encuadre de la recuperación de Proyectos
+
+Después de las capacidades principales: acortar la descripción repetida en cada
+fila del registro; agrupar los metadatos técnicos de ejecución; reforzar la
+distinción entre estado registrado de tarea y proceso físico. En las capturas
+actuales, el expediente muestra el alcance antes del enlace guardado, que queda
+más abajo; el navegador verificó el enlace exacto. Mantener su encuadre visible
+en futuras capturas de recuperación. La advertencia antigua de cierre debe
+identificarse como historia, conservando el texto original y mostrando cualquier
+observación actual separadamente. No reescribir issue_json para mejorar una foto.
+
+## DD149 — hardening futuro del exportador manual Chroma
+
+La revisión de alcance contrastó D05/D13 y la migración del plan original. No
+exigen una nueva cuota agregada para este CLI opcional fuera del servidor ni
+mover su snapshot SQLite del padre a otro sandbox. La falta de esos controles
+permanece documentada; no se afirma contención frente a ejecución arbitraria.
+No hay explotación ni falso éxito demostrados en esta revisión, y el usuario
+confirmó ausencia de historial real. Si pasa a ser herramienta servida, se exige
+procesar almacenamiento hostil o aparece un defecto concreto, revisar entonces
+la frontera agregada y el parser. No ocultar los avisos conocidos ni ampliar sus
+mitigaciones actuales a otros formatos/servidores.

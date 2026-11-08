@@ -28,35 +28,38 @@ que se pueda comparar el avance; no presentar microajustes como tareas principal
 - Última suite global: `9fb873c`,2210 casos,2178 pasan,31 fallan y1 error de fixture; sin omisiones. La carrera de backup encontrada se corrigió después con40 pruebas instaladas. No se declara una nueva corrida global verde; la referencia `0c8b8d9` queda como evidencia histórica.
 - U01–U07, E01–E12, C01–C10 y D01–D13 quedan comprobados con el alcance de sus matrices; sigue 1 de 43 escenarios amplios sin aceptación completa en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Estado actual: corrección CLI instalada; recuperar Proyectos
+## Estado actual: doce páginas verificadas; distribución Ken pendiente de decisión
 
-**Diagnóstico/corrección fuente: 12:55:21–13:17:04 UTC, 21 min 43 s.**
-[Alcance y recibos](regression-corrections-2026-11-08.md).
-Verificación instalada posterior: 43 casos en 54,034 s, sobre wheel limpio.
+**Proyectos: continuación instalada 13:46:32–13:46:41 UTC, 9,229 s.**
+Inspección y preparación anteriores fuera de ese cronómetro.
+[Alcance y capturas](projects-original-recovery-review.md).
 
-- Terminado: 26 fallos y un error del corte global anterior tienen comprobación
-  dirigida de los contratos corregidos; 220 identidades distintas con resultado
-  final aprobado. Nueve timeouts pasan con el límite definitivo de prueba de 60 s;
-  143 casos de migraciones/consumidores pasan. El consumidor CLI envía y valida la
-  revisión de política observada; dos regresiones nuevas tuvieron RED antes del
-  cambio. No se debilitan guardas ni se infiere una suite global verde.
-- Distribución: 698 fuentes Python/SQL y fuente C coinciden con sdist/wheel;
-  43 instaladas pasan, 262 imports del prefix, 83 paquetes compatibles. Avisos
-  actuales incluidos. El wheel principal se actualizó; no hubo generación pagada.
-- En curso: **recuperación instalada de Proyectos** sobre el intento fallido
-  original: enlace exacto, recarga, explicación histórica, cierre y presupuesto
-  coherentes, sin nueva admisión. Conservar el incidente desconocido separado.
-  El host original tiene esquema68: declarar migraciones69–71 y demostrar que
-  no alteran sus filas originales ni crean operaciones.
-- Alcance de producto: **42/43 escenarios, 11/12 páginas**. Los 85 candidatos a
-  prompt siguen vigentes; el cambio de CLI solo exige regenerar el árbol escaneado.
-  Pendientes: integración coherente de Ken/ONNX o decisión de riesgo sustentada,
-  fronteras de Chroma, U08/humano/otros perfiles, revisión independiente final y
-  una suite global única final. Las inversas históricas corregidas hasta71 se
-  verifican en su alcance dirigido, sin prometer toda combinación de rollback.
-- Detalles al final: DD147/146/145 y deuda anterior, incluida documentación
-  relevante de 621 definiciones identificadas por presencia. Sin historial real
-  que migrar; sin push, merge ni despliegue.
+- Terminado: **12/12 páginas con aceptación técnica y visual por alcance**.
+  Recuperación de Proyectos desde expediente hasta el intento fallido exacto,
+  recarga y retorno; cuatro estados/siete checks pasan a 1440/390, cero errores,
+  overflow o infracciones regionales axe. Presupuesto y filas conservados; cero
+  admisiones nuevas. El mensaje histórico no se reescribe.
+- Migración del host sintético: 68→71, 162 tablas originales con hash idéntico,
+  cuatro tablas nuevas vacías y tres filas de versión añadidas. La primera
+  comprobación tuvo401 por consultar antes de emparejar; se conserva. Se continuó
+  sobre el mismo host. Servicios cerrados 143, cuatro runs/cuatro attempts/un
+  dispatch anterior y tres fuentes sin cambios; ningún peer/grant abierto.
+- Evidencia vigente: corrección CLI de política instalada (43 pasan, 262 imports del
+  prefix), 220 casos dirigidos distintos pasan; 85 candidatos a prompt vigentes.
+  **42/43 escenarios**: U08/humano sigue abierto. No hay una nueva suite global
+  única verde ni una certificación general de fiabilidad/accesibilidad.
+- En curso: **decidir distribución Ken/ONNX**. Se consultó preferencia entre la
+  variante local coherente probada y esperar publicación compatible; aún no hay
+  respuesta. Mantener ambas alternativas concretas, sin interpretar la selección
+  predefinida como respuesta o aceptar riesgo por el propietario.
+- Alcance de Chroma revisado: su cuota agregada y snapshot en sandbox son
+  hardening futuro DD149, no un requisito explícito incumplido de D05/D13 para
+  el CLI opcional. Se conservan avisos y límites, sin afirmación de seguridad
+  general. No hay historial real que migrar.
+- Pendientes: distribución/riesgo Ken, U08 y otros perfiles, docstrings relevantes
+  y detalles DD148/147/146/145 y anteriores, revisión independiente final y suite
+  global final. AuthorityBusy original permanece como incidente desconocido;
+  no se declara corregido. Sin push, merge o despliegue.
 
 ## Etapa anterior: Ken estructural offline verificado; continúa aceptación de páginas
 

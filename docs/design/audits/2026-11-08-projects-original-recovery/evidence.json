@@ -1,0 +1,417 @@
+{
+  "status": "passed",
+  "states": [
+    {
+      "name": "projects-1440",
+      "width": 1440,
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "original-failure-1440",
+      "width": 1440,
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "projects-390",
+      "width": 390,
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "original-failure-390",
+      "width": 390,
+      "fits": true,
+      "violations": []
+    }
+  ],
+  "errors": [],
+  "requests": [
+    {
+      "method": "GET",
+      "path": "/api/session"
+    },
+    {
+      "method": "POST",
+      "path": "/api/session"
+    },
+    {
+      "method": "GET",
+      "path": "/api/projects/5/workspace"
+    },
+    {
+      "method": "GET",
+      "path": "/api/projects"
+    },
+    {
+      "method": "GET",
+      "path": "/api/projects/5"
+    },
+    {
+      "method": "GET",
+      "path": "/api/session"
+    },
+    {
+      "method": "GET",
+      "path": "/api/projects/5/workspace"
+    },
+    {
+      "method": "GET",
+      "path": "/api/projects"
+    },
+    {
+      "method": "GET",
+      "path": "/api/projects/5"
+    },
+    {
+      "method": "GET",
+      "path": "/api/projects"
+    },
+    {
+      "method": "GET",
+      "path": "/api/projects/5"
+    },
+    {
+      "method": "GET",
+      "path": "/api/projects/5/workspace"
+    },
+    {
+      "method": "GET",
+      "path": "/api/tasks/6"
+    },
+    {
+      "method": "GET",
+      "path": "/api/tasks"
+    },
+    {
+      "method": "GET",
+      "path": "/api/epics"
+    },
+    {
+      "method": "GET",
+      "path": "/api/milestones"
+    },
+    {
+      "method": "GET",
+      "path": "/api/projects/5/tasks/6/workspace"
+    },
+    {
+      "method": "GET",
+      "path": "/api/projects/5/runs/dff92343-be0a-4bad-93ad-8bc8aa2ef2de/project-plan"
+    },
+    {
+      "method": "GET",
+      "path": "/api/session"
+    },
+    {
+      "method": "GET",
+      "path": "/api/projects/5/workspace"
+    },
+    {
+      "method": "GET",
+      "path": "/api/projects"
+    },
+    {
+      "method": "GET",
+      "path": "/api/projects/5"
+    },
+    {
+      "method": "GET",
+      "path": "/api/tasks/6"
+    },
+    {
+      "method": "GET",
+      "path": "/api/tasks"
+    },
+    {
+      "method": "GET",
+      "path": "/api/epics"
+    },
+    {
+      "method": "GET",
+      "path": "/api/milestones"
+    },
+    {
+      "method": "GET",
+      "path": "/api/projects/5/tasks/6/workspace"
+    },
+    {
+      "method": "GET",
+      "path": "/api/projects/5"
+    },
+    {
+      "method": "GET",
+      "path": "/api/projects/5/workspace"
+    },
+    {
+      "method": "GET",
+      "path": "/api/tasks"
+    },
+    {
+      "method": "GET",
+      "path": "/api/epics"
+    },
+    {
+      "method": "GET",
+      "path": "/api/tasks/6"
+    },
+    {
+      "method": "GET",
+      "path": "/api/projects/5/runs/dff92343-be0a-4bad-93ad-8bc8aa2ef2de/project-plan"
+    },
+    {
+      "method": "GET",
+      "path": "/api/session"
+    },
+    {
+      "method": "GET",
+      "path": "/api/projects/5/workspace"
+    },
+    {
+      "method": "GET",
+      "path": "/api/projects"
+    },
+    {
+      "method": "GET",
+      "path": "/api/projects/5"
+    },
+    {
+      "method": "GET",
+      "path": "/api/session"
+    },
+    {
+      "method": "GET",
+      "path": "/api/projects/5/workspace"
+    },
+    {
+      "method": "GET",
+      "path": "/api/projects"
+    },
+    {
+      "method": "GET",
+      "path": "/api/projects/5"
+    },
+    {
+      "method": "GET",
+      "path": "/api/projects"
+    },
+    {
+      "method": "GET",
+      "path": "/api/projects/5"
+    },
+    {
+      "method": "GET",
+      "path": "/api/projects/5/workspace"
+    },
+    {
+      "method": "GET",
+      "path": "/api/tasks/6"
+    },
+    {
+      "method": "GET",
+      "path": "/api/tasks"
+    },
+    {
+      "method": "GET",
+      "path": "/api/epics"
+    },
+    {
+      "method": "GET",
+      "path": "/api/milestones"
+    },
+    {
+      "method": "GET",
+      "path": "/api/projects/5/tasks/6/workspace"
+    },
+    {
+      "method": "GET",
+      "path": "/api/projects/5/runs/dff92343-be0a-4bad-93ad-8bc8aa2ef2de/project-plan"
+    },
+    {
+      "method": "GET",
+      "path": "/api/session"
+    },
+    {
+      "method": "GET",
+      "path": "/api/projects/5/workspace"
+    },
+    {
+      "method": "GET",
+      "path": "/api/projects"
+    },
+    {
+      "method": "GET",
+      "path": "/api/projects/5"
+    },
+    {
+      "method": "GET",
+      "path": "/api/tasks/6"
+    },
+    {
+      "method": "GET",
+      "path": "/api/tasks"
+    },
+    {
+      "method": "GET",
+      "path": "/api/epics"
+    },
+    {
+      "method": "GET",
+      "path": "/api/milestones"
+    },
+    {
+      "method": "GET",
+      "path": "/api/projects/5/tasks/6/workspace"
+    },
+    {
+      "method": "GET",
+      "path": "/api/projects/5/runs/dff92343-be0a-4bad-93ad-8bc8aa2ef2de/project-plan"
+    },
+    {
+      "method": "GET",
+      "path": "/api/projects"
+    },
+    {
+      "method": "GET",
+      "path": "/api/projects/5"
+    },
+    {
+      "method": "GET",
+      "path": "/api/projects/5/workspace"
+    },
+    {
+      "method": "GET",
+      "path": "/api/tasks"
+    },
+    {
+      "method": "GET",
+      "path": "/api/epics"
+    },
+    {
+      "method": "GET",
+      "path": "/api/milestones"
+    },
+    {
+      "method": "GET",
+      "path": "/api/tasks/6"
+    },
+    {
+      "method": "GET",
+      "path": "/api/projects/5/tasks/6/workspace"
+    },
+    {
+      "method": "GET",
+      "path": "/api/session"
+    },
+    {
+      "method": "GET",
+      "path": "/api/projects/5/workspace"
+    },
+    {
+      "method": "GET",
+      "path": "/api/projects"
+    },
+    {
+      "method": "GET",
+      "path": "/api/projects/5"
+    }
+  ],
+  "forbidden": [],
+  "checks": [
+    "original-project-task-run-link",
+    "same-failed-attempt-after-reload",
+    "historical-issue-preserved",
+    "return-to-original-dossier",
+    "original-budget-preserved",
+    "only-get-and-pairing",
+    "desktop-mobile-no-overflow-regional-axe"
+  ],
+  "budget_before": {
+    "project_id": 5,
+    "policy": {
+      "turn_limit": 1,
+      "token_limit": 350000,
+      "revision": 0
+    },
+    "used_turns": 1,
+    "observed_tokens": null,
+    "unmeasured_dispatches": 0,
+    "preparation_only": 1,
+    "unsettled_dispatches": 0,
+    "accounted_tokens": 350000,
+    "held_tokens": 350000,
+    "auxiliary": {
+      "policy": {
+        "operation_limit": 200,
+        "cpu_ms_limit": 600000
+      },
+      "policy_origin": "default",
+      "used_operations": 0,
+      "observed_cpu_ms": null,
+      "unknown_operations": 0,
+      "pending_operations": 0,
+      "input_bytes": 0,
+      "accounted_cpu_ms": 0,
+      "held_cpu_ms": 0,
+      "remaining_operations": 200,
+      "remaining_cpu_ms": 600000,
+      "attempt_policy": {
+        "operation_limit": 50,
+        "cpu_ms_limit": 120000
+      }
+    },
+    "remaining_turns": 0,
+    "remaining_tokens": 0,
+    "overrun_tokens": 0
+  },
+  "observed_run": {
+    "run_id": "dff92343-be0a-4bad-93ad-8bc8aa2ef2de",
+    "status": "failed",
+    "context_version": 1,
+    "issue": {
+      "code": "runtime_failed",
+      "inference_started": false,
+      "message": "No se pudo confirmar el cierre de la ejecución. Conservamos el trabajo y los recibos guardados; revisa qué quedó completo y qué falta. No se repetirá por su cuenta.",
+      "next_action": "inspect_saved_work"
+    }
+  },
+  "budget_after": {
+    "project_id": 5,
+    "policy": {
+      "turn_limit": 1,
+      "token_limit": 350000,
+      "revision": 0
+    },
+    "used_turns": 1,
+    "observed_tokens": null,
+    "unmeasured_dispatches": 0,
+    "preparation_only": 1,
+    "unsettled_dispatches": 0,
+    "accounted_tokens": 350000,
+    "held_tokens": 350000,
+    "auxiliary": {
+      "policy": {
+        "operation_limit": 200,
+        "cpu_ms_limit": 600000
+      },
+      "policy_origin": "default",
+      "used_operations": 0,
+      "observed_cpu_ms": null,
+      "unknown_operations": 0,
+      "pending_operations": 0,
+      "input_bytes": 0,
+      "accounted_cpu_ms": 0,
+      "held_cpu_ms": 0,
+      "remaining_operations": 200,
+      "remaining_cpu_ms": 600000,
+      "attempt_policy": {
+        "operation_limit": 50,
+        "cpu_ms_limit": 120000
+      }
+    },
+    "remaining_turns": 0,
+    "remaining_tokens": 0,
+    "overrun_tokens": 0
+  }
+}

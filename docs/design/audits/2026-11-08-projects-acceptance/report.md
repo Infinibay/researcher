@@ -24,3 +24,12 @@ La información extensa ocupa demasiado el registro lateral y algunos estados
 guardados conservan etiquetas técnicas. Son detalles de presentación para DD123.
 La preparación nativa y la generación española aún sin verificar impiden aceptar
 la página completa: no se rebajan a detalles visuales.
+
+
+## Continuación actual
+
+La [lectura del intento original](../2026-11-08-projects-original-recovery/report.md)
+completa el alcance técnico/visual junto a la evidencia española/Ken posterior.
+Conserva todos los intentos y el incidente de disponibilidad sin afirmar su
+corrección causal. La aceptación humana y la pasada completa de accesibilidad
+siguen independientes.

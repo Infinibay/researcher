@@ -5620,11 +5620,11 @@
         "docs/modernization/dependency-advisory-dispositions-2026-11-08.md"
       ],
       "remaining": [
-        "Integrate a coherent Ken/ONNX distribution or resolve the documented residual-risk decision; per-advisory route/mitigation review completed, current published pin remains1.20.1.",
-        "Chroma aggregate memory/process bounds and parent SQLite snapshot security scope; official1.5.9 has no corrected release in current metadata"
+        "Integrate a coherent Ken/ONNX distribution or resolve the documented residual-risk decision; per-advisory route/mitigation review completed, current published pin remains1.20.1. Distribution preference asked; no owner risk acceptance inferred."
       ],
       "reader_mitigation": "Disable persisted embedding descriptors only in the disposable reader copy before Chroma imports; raw configuration and text/metadata retained.14directed tests and installed end-to-end105record import/HTTP pass, no model/embedding calls. Known package advisories remain visible; no incompatible ONNX override or version change. Frontend audit tool-path/parser-label errors retained alongside verified raw npm exit0/report.",
-      "advisory_review": "Independent readonly per-class disposition covers12unique ONNX IDs and4Chroma IDs with primary-source triggers, actual APIs, mitigation and unknowns. Current pinned ONNX load/save remains exposed to the documented classes; other APIs are not observed in verified Ken sources, not proved globally absent. Coherent adoption or explicit residual-risk decision remains open; no owner risk acceptance inferred."
+      "advisory_review": "Independent readonly per-class disposition covers12unique ONNX IDs and4Chroma IDs with primary-source triggers, actual APIs, mitigation and unknowns. Current pinned ONNX load/save remains exposed to the documented classes; other APIs are not observed in verified Ken sources, not proved globally absent. Coherent adoption or explicit residual-risk decision remains open; no owner risk acceptance inferred.",
+      "optional_reader_hardening": "Chroma aggregate process/memory bounds and parent SQLite sandbox are future hardening, not unmet explicitD05/D13requirements for the optional manual exporter. Exact plan-scope review retained; known advisory mitigations and parser-boundary limits remain visible. No real owner history exists to migrate."
     },
     "communication_continuity": {
       "status": "in_progress",
@@ -6014,13 +6014,13 @@
       ]
     },
     "full_pages_acceptance": {
-      "status": "in_progress",
+      "status": "verified",
       "pilots": 12,
       "concept_images": 48,
-      "fully_accepted": 11,
+      "fully_accepted": 12,
       "pages": {
         "projects": {
-          "status": "in_progress",
+          "status": "verified",
           "evidence": [
             "docs/modernization/projects-page-review.md",
             "docs/modernization/projects-page-results.json",
@@ -6031,11 +6031,26 @@
             "docs/modernization/spanish-plan-ken-review.md",
             "docs/modernization/spanish-plan-ken-results.json",
             "docs/modernization/spanish-plan-ken-tools.json",
-            "docs/modernization/ken-grammars-review.md"
+            "docs/modernization/ken-grammars-review.md",
+            "docs/modernization/projects-original-recovery-review.md",
+            "docs/modernization/projects-original-recovery-results.json",
+            "docs/design/audits/2026-11-08-projects-original-recovery/report.md",
+            "evals/operation/projects_original.py",
+            "frontend/tests/projects-original.e2e.mjs",
+            "docs/superpowers/plans/2026-11-08-native-preparation-contention.md"
           ],
-          "remaining": [
-            "Native preparation AuthorityBusy/AuthorityConflict callers and cause need diagnosis",
-            "Finish complete page acceptance without hiding original failures"
+          "remaining": [],
+          "selected_concept": "Expediente del proyecto",
+          "scope": "Technical/delegated visual cumulative acceptance: current installed readonly recovery of original failed Spanish attempt, prior actual Spanish/Ken successful plan and existing mutation/Stop proofs. Original Busy cause and human U08 remain open.",
+          "limitations": [
+            "Original AuthorityBusy availability incident remains unexplained; not a causal fix",
+            "Current service closed143 and all original registered peers/tool grants closed; historical issue wording remains unchanged",
+            "Region-specific axe and desktop/mobile evidence, not universal accessibility or human comprehension"
+          ],
+          "deferred": [
+            "DD148",
+            "DD123",
+            "DD142"
           ]
         },
         "wiki": {
@@ -6286,7 +6301,8 @@
             "No C10/U08 acceptance inferred"
           ]
         }
-      }
+      },
+      "scope": "Twelve technical/delegated visual page acceptances, each bounded by its evidence; not whole-product readiness, full accessibility, human comprehension or absence of known incidents"
     },
     "native_preparation_reliability": {
       "status": "in_progress",
