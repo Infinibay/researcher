@@ -9655,3 +9655,11 @@ sin omisiones ni modelos nuevos. Inventario 85/322 vigente sin renovar revisione
 aparte. Quedan 314 definiciones por presencia, relevancia desigual. Siguen otras
 fronteras/JSDoc, U08/entrega, Ken/ONNX, accesibilidad y cierre integrado. Sin nuevo
 wheel ni suite global, sin push/merge/despliegue.
+
+## 2026-11-08 — Revalidación de la publicación Ken
+
+[Recibo](ken-published-recheck-20261108.json). PyPI sigue anunciando ken-rank 0.18.0
+con onnx==1.20.1 a las 19:00 UTC. No apareció una distribución pública nueva que
+haga innecesaria la decisión pendiente. Sólo se consultaron metadatos: ninguna
+instalación, inferencia, auditoría repetida ni selección de variante. Sigue el
+trabajo independiente de documentación relevante.

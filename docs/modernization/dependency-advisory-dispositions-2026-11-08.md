@@ -75,3 +75,14 @@ condicionada a nuevo uso servido, almacenamiento hostil explícito o defecto
 concreto. Se conservan todos los límites ya declarados y avisos conocidos. La
 confirmación de que no hay historial real elimina una migración del propietario
 pendiente; no demuestra seguridad general del lector.
+
+## Comprobación posterior de la publicación
+
+A las 19:00 UTC del 8 de noviembre se consultaron de nuevo los
+[metadatos públicos de PyPI](https://pypi.org/pypi/ken-rank/json): la versión sigue
+siendo **0.18.0**, con **`onnx==1.20.1`**. El
+[recibo acotado](ken-published-recheck-20261108.json) conserva versión, requisito
+y hashes de los artefactos anunciados. Esta comprobación no repite instalación,
+auditoría ni pruebas de la variante y no adopta ninguna distribución. La elección
+anterior sigue pendiente; la publicación no aporta una alternativa nueva que
+permita resolverla automáticamente.
