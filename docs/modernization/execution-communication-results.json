@@ -1,0 +1,233 @@
+{
+  "scope": "Retained real review and partial plan with induced read-only transport fault and keyboard recovery; no live-tool or human-comprehension claim",
+  "status": "verified_scoped",
+  "cases": {
+    "code": {
+      "status": "passed",
+      "kind": "code_review",
+      "started_at": "2026-11-08T16:31:56.709622+00:00",
+      "new_model_admissions": 0,
+      "browser_exit": 0,
+      "changed_original_tables": [],
+      "new_tables": {},
+      "service_exit": 143,
+      "owned_backend_terminal": true,
+      "seconds": 8.283,
+      "original_receipt": ".researcher/evaluations/execution-communication-20261108-final-code/result.json",
+      "original_receipt_sha256": "c1a485aec81941c513b0408fe486563b6ae306100f03a4d760ac8d5050af7c9a",
+      "storage_archive": "docs/design/audits/2026-11-08-execution-communication/code-storage.json",
+      "browser_archive": "docs/design/audits/2026-11-08-execution-communication/code-browser.json",
+      "screens": [
+        {
+          "file": "review-status-1440.png",
+          "width": 1440,
+          "overflow": false,
+          "scope": ".task-execution",
+          "violations": [],
+          "archive": "docs/design/audits/2026-11-08-execution-communication/code-review-status-1440.png",
+          "sha256": "e067b46860519ff908d6ebbb54f12c40b57b54aa5c297aaf12aa31da4646af63"
+        },
+        {
+          "file": "saved-review-1440.png",
+          "width": 1440,
+          "overflow": false,
+          "scope": ".task-execution",
+          "violations": [],
+          "archive": "docs/design/audits/2026-11-08-execution-communication/code-saved-review-1440.png",
+          "sha256": "c68a8edaf323cd4b5c34ccdd1a893123e4cfa0b6aa9c36d9094e137ca796f81a"
+        },
+        {
+          "file": "review-status-390.png",
+          "width": 390,
+          "overflow": false,
+          "scope": ".task-execution",
+          "violations": [],
+          "archive": "docs/design/audits/2026-11-08-execution-communication/code-review-status-390.png",
+          "sha256": "c18eadefc82ea6b09af28c5a7f21c75c7ff2f7ee5d50aaf0829b1594f962c9e2"
+        },
+        {
+          "file": "saved-review-390.png",
+          "width": 390,
+          "overflow": false,
+          "scope": ".task-execution",
+          "violations": [],
+          "archive": "docs/design/audits/2026-11-08-execution-communication/code-saved-review-390.png",
+          "sha256": "e2fb345cd515884b61061d43927312e74ac6b5837cd7757903786a38514e34df"
+        },
+        {
+          "file": "read-failure.png",
+          "width": 390,
+          "overflow": false,
+          "scope": "main [role=\"alert\"]",
+          "violations": [],
+          "archive": "docs/design/audits/2026-11-08-execution-communication/code-read-failure.png",
+          "sha256": "6af80f238bd3a906960de754f8eda30491b9f4024204c387afe8cc161e689cf3"
+        },
+        {
+          "file": "original-result-recovered.png",
+          "width": 390,
+          "overflow": false,
+          "scope": ".task-execution",
+          "violations": [],
+          "archive": "docs/design/audits/2026-11-08-execution-communication/code-original-result-recovered.png",
+          "sha256": "e3bfeb8d1478b0eb886cc9491b4478e2cc5e1a4a39e3b09396a201419a1f4280"
+        }
+      ],
+      "original_tables_compared": 166
+    },
+    "partial": {
+      "status": "passed",
+      "kind": "partial",
+      "started_at": "2026-11-08T16:34:53.875438+00:00",
+      "new_model_admissions": 0,
+      "browser_exit": 0,
+      "changed_original_tables": [],
+      "new_tables": {},
+      "service_exit": 143,
+      "owned_backend_terminal": true,
+      "seconds": 9.38,
+      "original_receipt": ".researcher/evaluations/execution-communication-20261108-final-partial/result.json",
+      "original_receipt_sha256": "cdec19eb82e3d3e2b12f92ca10414bd99df61c3f3df3dbc2a045465fd2ad0ae8",
+      "storage_archive": "docs/design/audits/2026-11-08-execution-communication/partial-storage.json",
+      "browser_archive": "docs/design/audits/2026-11-08-execution-communication/partial-browser.json",
+      "screens": [
+        {
+          "file": "partial-issue-1440.png",
+          "width": 1440,
+          "overflow": false,
+          "scope": ".task-execution",
+          "violations": [],
+          "archive": "docs/design/audits/2026-11-08-execution-communication/partial-partial-issue-1440.png",
+          "sha256": "18254af35feae82b65c462a7642f948c3eb5a7b4e51473ff35da1e5bc59aaac8"
+        },
+        {
+          "file": "saved-plan-1440.png",
+          "width": 1440,
+          "overflow": false,
+          "scope": ".task-execution",
+          "violations": [],
+          "archive": "docs/design/audits/2026-11-08-execution-communication/partial-saved-plan-1440.png",
+          "sha256": "017fa5511a14a30dd868f879e9a837c2c52a4d77f032ebd31e1d157a6044b53f"
+        },
+        {
+          "file": "partial-issue-390.png",
+          "width": 390,
+          "overflow": false,
+          "scope": ".task-execution",
+          "violations": [],
+          "archive": "docs/design/audits/2026-11-08-execution-communication/partial-partial-issue-390.png",
+          "sha256": "9d9c1ee69cd263427ac3934b4a334e6d20cd74257c2b6af76b10b75a7c9989a0"
+        },
+        {
+          "file": "saved-plan-390.png",
+          "width": 390,
+          "overflow": false,
+          "scope": ".task-execution",
+          "violations": [],
+          "archive": "docs/design/audits/2026-11-08-execution-communication/partial-saved-plan-390.png",
+          "sha256": "7246c2e1bbac1b83be1b67ab6526d4cc087f0186415501131686e8821b292106"
+        },
+        {
+          "file": "read-failure.png",
+          "width": 390,
+          "overflow": false,
+          "scope": "main [role=\"alert\"]",
+          "violations": [],
+          "archive": "docs/design/audits/2026-11-08-execution-communication/partial-read-failure.png",
+          "sha256": "5829ad041de878f094488c87550321336eebb474b83592718304af59b980b9f0"
+        },
+        {
+          "file": "original-result-recovered.png",
+          "width": 390,
+          "overflow": false,
+          "scope": ".task-execution",
+          "violations": [],
+          "archive": "docs/design/audits/2026-11-08-execution-communication/partial-original-result-recovered.png",
+          "sha256": "b02da35d05444e35723df5a15dc75fe93745ca07f058e646b0ce830391653ce8"
+        }
+      ],
+      "original_tables_compared": 166
+    }
+  },
+  "new_model_admissions": 0,
+  "human_comprehension": null,
+  "live_tool_wait": "pending",
+  "preliminary_schema_additions": {
+    "runtime_project_budget_changes": 0,
+    "runtime_auxiliary_policies": 0,
+    "runtime_auxiliary_work": 0,
+    "runtime_auxiliary_executions": 0,
+    "runtime_auxiliary_continuations": 0,
+    "runtime_auxiliary_archives": 0,
+    "runtime_preparation_reservations": 0,
+    "runtime_project_check_policies": 0,
+    "runtime_project_check_policy_changes": 0,
+    "reference_file_operations": 0,
+    "workspace_retention": 0,
+    "workspace_retention_operations": 0,
+    "owner_planning_commands": 0,
+    "runtime_context_causes": 0,
+    "runtime_context_affected": 0,
+    "runtime_manual_prerequisites": 0
+  },
+  "preliminary_original_tables_changed": [],
+  "frontend": {
+    "contracts_passed": 165,
+    "ui_passed": 77,
+    "ui_files": 24,
+    "skipped": 0,
+    "build": "passed",
+    "lint": {
+      "status": "failed",
+      "errors": 15,
+      "files_unchanged_in_block": true
+    },
+    "logs": {
+      "final-web-tests": {
+        "archive": "docs/design/audits/2026-11-08-execution-communication/final-web-tests.log",
+        "sha256": "e19ad1152f23d1c3d762de2ab14285a2974e465915df8fde1280a89d77f61963"
+      },
+      "final-web-build": {
+        "archive": "docs/design/audits/2026-11-08-execution-communication/final-web-build.log",
+        "sha256": "324321ba4384ca72492c9c15c4c4c6519739be1fe4ed5f4e8382b3916be7fb70"
+      },
+      "web-lint": {
+        "archive": "docs/design/audits/2026-11-08-execution-communication/web-lint.log",
+        "sha256": "1ee1a60f303b79b0d1af2cf18d9248f4362e52d27b8b6c742e94b5391993d248"
+      }
+    },
+    "checkpoint_tests": {
+      "archive": "docs/design/audits/2026-11-08-execution-communication/checkpoint-tests.log",
+      "exit": 0,
+      "sha256": "ba23866ce98c89016d873f60ff6a252ae7a858648c6baf2ced0c06c760c25641",
+      "contracts_passed": 165,
+      "ui_passed": 77
+    },
+    "checkpoint_initial_invocation": {
+      "exit": 127,
+      "cause": "npm subprocess absent from PATH; no tests started; explicit toolchain PATH corrected"
+    }
+  },
+  "manual_final_image_reviews": [
+    "code-review-status-1440.png",
+    "code-saved-review-390.png",
+    "code-read-failure.png",
+    "partial-partial-issue-1440.png",
+    "partial-saved-plan-390.png",
+    "partial-original-result-recovered.png"
+  ],
+  "retained_rejected_or_red_evidence": [
+    ".researcher/evaluations/execution-communication-20261108-baseline",
+    ".researcher/evaluations/execution-communication-20261108-review",
+    ".researcher/evaluations/execution-communication-20261108-partial-reason-red"
+  ],
+  "source_sha256": {
+    "frontend/src/api/runtime.ts": "a48ee5d4410628a72ef11fae3e4f453f1ba21912a698ea528d4b8e940b8ab1ee",
+    "frontend/src/components/findings/reviewPresentation.ts": "d76ac4c37184abad516badbf0de20e463eb9206f36db98b69d916df95efc470f",
+    "frontend/src/components/tasks/TaskRunWorkspace.tsx": "4df7efa2a34d8648bdac8ec5eca0e6519a013aed0dca43ad5f641eaf77bbd86a",
+    "frontend/src/components/tasks/ProjectPlanDelivery.tsx": "54c0ec5037c788ae01ccc469d22fc8149c448f39393a5a6ecbc6d2e9c67b22ed",
+    "frontend/tests/runtime.test.ts": "bf6ce8a480590457def904bd32556aa242800d86483925c9738cd72d8878319d",
+    "evals/communication/retained.py": "f87fd05239a1abf70f131cb5140a722861be2362791b6ade5c43ac3c9b17e2f7",
+    "frontend/tests/communication-baseline.mjs": "6a5c7b9081e9b493b678e5f3faabb4add48362b20b24df88f37c591df61c16bf"
+  }
+}

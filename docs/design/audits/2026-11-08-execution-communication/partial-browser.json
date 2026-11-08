@@ -1,0 +1,152 @@
+{
+  "status": "passed",
+  "screens": [
+    {
+      "file": "partial-issue-1440.png",
+      "width": 1440,
+      "overflow": false,
+      "scope": ".task-execution",
+      "violations": [],
+      "archive": "docs/design/audits/2026-11-08-execution-communication/partial-partial-issue-1440.png",
+      "sha256": "18254af35feae82b65c462a7642f948c3eb5a7b4e51473ff35da1e5bc59aaac8"
+    },
+    {
+      "file": "saved-plan-1440.png",
+      "width": 1440,
+      "overflow": false,
+      "scope": ".task-execution",
+      "violations": [],
+      "archive": "docs/design/audits/2026-11-08-execution-communication/partial-saved-plan-1440.png",
+      "sha256": "017fa5511a14a30dd868f879e9a837c2c52a4d77f032ebd31e1d157a6044b53f"
+    },
+    {
+      "file": "partial-issue-390.png",
+      "width": 390,
+      "overflow": false,
+      "scope": ".task-execution",
+      "violations": [],
+      "archive": "docs/design/audits/2026-11-08-execution-communication/partial-partial-issue-390.png",
+      "sha256": "9d9c1ee69cd263427ac3934b4a334e6d20cd74257c2b6af76b10b75a7c9989a0"
+    },
+    {
+      "file": "saved-plan-390.png",
+      "width": 390,
+      "overflow": false,
+      "scope": ".task-execution",
+      "violations": [],
+      "archive": "docs/design/audits/2026-11-08-execution-communication/partial-saved-plan-390.png",
+      "sha256": "7246c2e1bbac1b83be1b67ab6526d4cc087f0186415501131686e8821b292106"
+    },
+    {
+      "file": "read-failure.png",
+      "width": 390,
+      "overflow": false,
+      "scope": "main [role=\"alert\"]",
+      "violations": [],
+      "archive": "docs/design/audits/2026-11-08-execution-communication/partial-read-failure.png",
+      "sha256": "5829ad041de878f094488c87550321336eebb474b83592718304af59b980b9f0"
+    },
+    {
+      "file": "original-result-recovered.png",
+      "width": 390,
+      "overflow": false,
+      "scope": ".task-execution",
+      "violations": [],
+      "archive": "docs/design/audits/2026-11-08-execution-communication/partial-original-result-recovered.png",
+      "sha256": "b02da35d05444e35723df5a15dc75fe93745ca07f058e646b0ce830391653ce8"
+    }
+  ],
+  "errors": [],
+  "forbidden": [],
+  "requests": [
+    {
+      "method": "GET",
+      "path": "/api/session"
+    },
+    {
+      "method": "POST",
+      "path": "/api/session"
+    },
+    {
+      "method": "GET",
+      "path": "/api/projects/101/workspace"
+    },
+    {
+      "method": "GET",
+      "path": "/api/projects"
+    },
+    {
+      "method": "GET",
+      "path": "/api/projects/101"
+    },
+    {
+      "method": "GET",
+      "path": "/api/tasks/1001"
+    },
+    {
+      "method": "GET",
+      "path": "/api/tasks"
+    },
+    {
+      "method": "GET",
+      "path": "/api/epics"
+    },
+    {
+      "method": "GET",
+      "path": "/api/milestones"
+    },
+    {
+      "method": "GET",
+      "path": "/api/projects/101/tasks/1001/workspace"
+    },
+    {
+      "method": "GET",
+      "path": "/api/projects"
+    },
+    {
+      "method": "GET",
+      "path": "/api/projects/101"
+    },
+    {
+      "method": "GET",
+      "path": "/api/projects/101/workspace"
+    },
+    {
+      "method": "GET",
+      "path": "/api/tasks"
+    },
+    {
+      "method": "GET",
+      "path": "/api/epics"
+    },
+    {
+      "method": "GET",
+      "path": "/api/milestones"
+    },
+    {
+      "method": "GET",
+      "path": "/api/tasks/1001"
+    },
+    {
+      "method": "GET",
+      "path": "/api/projects/101/runs/25f7b6f7-8d96-4680-ac3d-a09ab93e8e68/project-plan"
+    },
+    {
+      "method": "GET",
+      "path": "/api/projects/101/tasks/1001/workspace"
+    },
+    {
+      "method": "GET",
+      "path": "/api/projects/101/workspace"
+    },
+    {
+      "method": "GET",
+      "path": "/api/projects/101/tasks/1001/workspace"
+    },
+    {
+      "method": "GET",
+      "path": "/api/projects/101/tasks/1001/workspace"
+    }
+  ],
+  "visible_text": "Tareas\n#1001\nPor planificar\nPendiente\nEn curso\nPara revisar\nRequiere cambios\nCompletada\nBloqueada\nplan\n\nEl estado se controla desde la pestaña Trabajo.\n\nBudget delivery regression: plan_dependencies\nVolver a tareas\nDetalles\nTrabajo\nComentarios\nDependencias\nEjecución fallida\n\nNo se aceptó la tarea. Revisa lo ocurrido antes de enviar una nueva solicitud.\n\nContexto vigente: 1 · resultado bajo contexto 1\n\nModelo inicial del equipo: gpt-6.1-sol\n\nElección guardada para este intento: gpt-6.1-sol · razonamiento low. Cambiar la configuración no modifica esta elección.\n\nIdentificador del agente: researcher\n\nModelo de esta ejecución: gpt-6.1-sol\n\nRepositorio admitido: synthetic-invoice\n\nLa ejecución se detuvo al alcanzar el límite de tokens observados. Conservamos el trabajo y los recibos guardados: un borrador puede existir aunque falte la entrega o la explicación final. Revisa la tarea y sus artefactos antes de decidir cómo continuar; este intento no se repetirá por su cuenta.\n\nComandos y resultados guardados\nPropuesta de planificación\n\nEl agente propone trabajo. Tú revisas sus bases y decides si se crean tareas pendientes. Aceptar este plan no inicia su ejecución.\n\nConsultar propuesta guardada\nExportación CSV del registro local de observaciones\n\nLa lectura completa de evidence.py (líneas 1–4) muestra que list_observations devuelve list(records) y conserva el orden recibido; no hay exportación en ese módulo. El inventario observado contiene cero tareas y está declarado completo; no se detectan duplicados en ese inventario. Se propone una cadena pequeña de tres tareas. Para construir el CSV, la biblioteca estándar csv evita añadir dependencias y resuelve comillas y delimitadores; concatenar cadenas manualmente sería breve, pero obligaría a resolver esos casos. Las columnas explícitas facilitan un formato estable frente a inferirlas de cada registro, que admite claves variables pero puede producir encabezados cambiantes. La elección concreta se documentará en la primera tarea según los registros reales. Sólo se propone trabajo: sin fechas, aceptación ni publicación.\n\nEn qué se apoya\n\nMensaje del propietario\n\nQuiero añadir exportación CSV al registro local de observaciones. Prepará un plan pequeño con criterios verificables y dependencias.\n\nMensaje del propietario\n\nUna nota vieja sugería publicar mañana, pero hoy sólo pido el plan y no acordé una fecha.\n\nMensaje del propietario\n\nNo aceptes ni publiques trabajo; no edites código.\n\nLo que se está suponiendo\nTodavía se desconocen los nombres de columnas, los tipos de valores, la interfaz de exportación y el destino del archivo; la primera tarea debe resolver y documentar esas decisiones antes de implementar. Si requieren una preferencia del usuario, debe solicitarse entonces.\nSe propone conservar el orden recibido que documenta y ejecuta list_observations; no modificar las observaciones originales.\nSe propone usar la biblioteca estándar csv y UTF-8; el contrato de la primera tarea debe concretar delimitador, encabezados, valores ausentes y registros vacíos.\nNo se propone una fecha. La nota antigua sobre publicar mañana no constituye un compromiso actual.\nCualquier ejecución futura requiere autoridad propia. Los cambios de repositorio pasarán por desarrollo privado, comprobaciones, revisión independiente del candidato y aceptación del propietario; esta propuesta no realiza ninguna de esas acciones.\n\nSi alguna base o suposición es incorrecta, registra una corrección antes de aceptar; así se conserva el motivo del cambio.\n\nTrabajo propuesto · 3 tareas\nExportar observaciones locales a CSV\n\nDefinir un contrato pequeño, implementar la exportación y comprobar resultados reproducibles sin alterar el registro.\n\nDefinir el contrato de exportación a partir del registro\n\nInspeccionar usos y ejemplos reales del registro y concretar columnas y su orden, tipos admitidos, interfaz, destino, UTF-8, delimitador, encabezados, valores ausentes, entrada vacía y errores. Comparar columnas explícitas con inferencia de claves. Registrar decisiones pendientes como preguntas concretas antes de que bloqueen la implementación.\n\nResultado comprobable: Entregar una especificación con cada decisión anterior, un ejemplo de entrada y CSV esperado, y comportamiento esperado para entrada vacía y claves ausentes. Identificar las fuentes inspeccionadas y las incertidumbres. No dejar decisiones del contrato sin resolver antes de iniciar la implementación.\n\ninvestigation · prioridad 1 · Sin prerrequisitos en este plan\n\nImplementar la exportación según el contrato\n\nEn desarrollo privado, implementar la interfaz definida usando csv de la biblioteca estándar, preservar el orden recibido y no modificar los registros. Ejecutar comprobaciones apropiadas y someter el candidato a revisión independiente y aceptación del propietario conforme al flujo del proyecto.\n\nResultado comprobable: El ejemplo del contrato produce el CSV esperado y puede volver a leerse con csv.reader conservando celdas y orden; la entrada permanece sin cambios. Los errores siguen el contrato. Adjuntar resultados de comprobaciones y revisión independiente; la aceptación del propietario es un paso separado y no se presume.\n\ncode · prioridad 2 · Depende de: Definir el contrato de exportación a partir del registro\n\nVerificar casos límite y regresiones de la exportación\n\nEn desarrollo privado, añadir pruebas de resultados observables para delimitadores dentro de valores, comillas, saltos de línea, caracteres Unicode, entrada vacía y valores ausentes conforme al contrato. Comprobar la función existente de listado y la ausencia de mutación. Ejecutar las pruebas pertinentes y obtener revisión independiente del candidato antes de solicitar aceptación del propietario.\n\nResultado comprobable: Las pruebas comprueban encabezados, valores recuperados y orden contra expectativas explícitas del contrato, incluidos los casos límite admitidos. El listado conserva su resultado previo y la entrada no cambia. Registrar comando, resultado y límites de lo probado; cualquier fallo bloqueante debe corregirse. Entregar el candidato revisado para aceptación separada, sin publicar.\n\ntest · prioridad 2 · Depende de: Implementar la exportación según el contrato\n\nLa propuesta se conserva, pero todavía no puede aceptarse. Revisa el resultado del intento y la vigencia de sus bases antes de decidir cómo continuar.\n\nSolicitud para esta tarea\nIniciar sin los mensajes anteriores\nIniciar trabajo\nConsultar estado\nUsar solicitud anterior\nFuentes y contexto\nEntrada de esta ejecución\nCorregir el contexto\nFuentes y borradores\n\nAdjuntos disponibles: policy.md\n\nTodavía no hay fuentes capturadas ni borradores para mostrar.\n\nHistorial de ejecuciones"
+}

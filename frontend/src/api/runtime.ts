@@ -378,15 +378,31 @@ export function sourceWindow(projectId: number, sourceId: number, offset = 0, ex
   )
 }
 
-export function presentRun(status: string | null) {
+/** Explain saved execution facts and pending decisions without implying approval or active work. */
+export interface RunPresentation {
+  title: string
+  description: string
+  canStart: boolean
+  stopAction?: {label: string; description: string}
+}
+
+/** Separate an attributed review, a saved proposal and running work using the actual capability. */
+export function presentRun(status: string | null, kind?: RuntimeRun['execution_kind']): RunPresentation {
+  const pendingAction = {label:'Cerrar intento pendiente',description:'Lo que ya quedó guardado se conserva. Cerrar este intento no deshace acciones anteriores.'}
   switch (status) {
     case null: return { title: 'Sin ejecución', description: 'Prepara una solicitud para esta tarea.', canStart: true }
     case 'queued': return { title: 'Solicitud registrada', description: 'El trabajo todavía no comenzó.', canStart: false }
     case 'running': return { title: 'En curso', description: 'Puedes detener el trabajo o registrar una corrección.', canStart: false }
     case 'cancelling': return { title: 'Detención solicitada', description: 'Falta confirmar que terminó la ejecución.', canStart: false }
     case 'reconciling': return { title: 'Requiere comprobación', description: 'No se conocen todos los efectos. La ejecución no se repetirá automáticamente.', canStart: false }
-    case 'waiting_input': return { title: 'Esperando tu respuesta', description: 'El trabajo está pausado y el agente ya no puede actuar en el proyecto. Tu respuesta se guardará para la próxima ejecución.', canStart: false }
-    case 'needs_review': return { title: 'Propuesta para revisar', description: 'El resultado está disponible; falta registrar su aceptación.', canStart: false }
+    case 'waiting_input': return { title: 'Esperando tu respuesta', description: 'El trabajo está pausado y el agente ya no puede actuar en el proyecto. Tu respuesta se guardará para la próxima ejecución.', canStart: false, stopAction:pendingAction }
+    case 'needs_review': return {
+      title: kind==='code_review'||kind==='finding_review'?'Revisión terminada':'Propuesta para revisar',
+      description: kind==='code_review'||kind==='finding_review'
+        ?'Inspecciona la decisión y sus límites antes de cerrar este intento. Esta revisión por sí sola no acepta la tarea.'
+        :'El resultado está guardado. Revisa sus límites y las comprobaciones: puede requerir cambios y todavía no está aceptado.',
+      canStart:false,stopAction:pendingAction,
+    }
     case 'cancelled': return { title: 'Ejecución detenida', description: 'La detención fue confirmada. Las fuentes y borradores guardados se conservan.', canStart: true }
     case 'superseded': return { title: 'Contexto anterior', description: 'Hay una corrección registrada para la próxima ejecución.', canStart: true }
     case 'failed': return { title: 'Ejecución fallida', description: 'No se aceptó la tarea. Revisa lo ocurrido antes de enviar una nueva solicitud.', canStart: true }

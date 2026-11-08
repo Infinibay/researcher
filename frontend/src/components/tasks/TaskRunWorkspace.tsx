@@ -131,7 +131,7 @@ export function TaskRunWorkspace({ projectId, taskId, conversationThreadId, onCo
   const current = active ?? data.runs[0] ?? null
   // Historical acceptance remains intact while a reopened context permits an explicit new request.
   const historicalAcceptance = !active && current?.status === 'accepted' && current.context_version < data.context.context_version
-  const state = presentRun(historicalAcceptance ? 'superseded' : current?.status ?? null)
+  const state = presentRun(historicalAcceptance ? 'superseded' : current?.status ?? null, current?.execution_kind)
   const supported = data.runtime.supported_task_types.includes(data.context.task.type)
   const closed = ['done', 'cancelled', 'failed'].includes(data.context.task.status)
   const available = data.runtime.configured && supported && !closed
@@ -207,7 +207,8 @@ export function TaskRunWorkspace({ projectId, taskId, conversationThreadId, onCo
     {current?.status === 'queued' && available && <QueuedStart key={`${projectId}:${current.run_id}`} projectId={projectId} taskId={taskId} run={current} />}
     {!available && <p className="rounded-md border border-amber-700/50 p-3 text-[var(--work-caution)]">{closed ? 'Esta tarea está cerrada. Su historial y sus fuentes siguen disponibles.' : !data.runtime.configured ? 'Configura el motor local para iniciar trabajo. El historial y las fuentes siguen disponibles.' : 'Este tipo de tarea aún no permite iniciar trabajo. Su historial se conserva.'}</p>}
     {current && ['queued', 'running', 'cancelling', 'reconciling', 'waiting_input', 'needs_review'].includes(current.status) && <div className="space-y-2">
-      <button className={buttonClass} disabled={stop.isPending || current.status === 'cancelling'} onClick={() => stop.mutate(current.run_id)}>Detener ejecución</button>
+      <button className={buttonClass} disabled={stop.isPending || current.status === 'cancelling'} onClick={() => stop.mutate(current.run_id)}>{state.stopAction?.label??'Detener ejecución'}</button>
+      {state.stopAction&&<p className="text-[var(--work-muted)]">{state.stopAction.description}</p>}
       {stop.error && <p role="alert" className="text-[var(--work-error)]">No se confirmó la detención. Consulta el estado antes de continuar. {stop.error.message}</p>}
     </div>}
     {data.questions.map(question => <QuestionCard key={`${projectId}:${taskId}:${question.request_id}`} projectId={projectId} taskId={taskId} question={question} />)}

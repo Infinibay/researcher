@@ -9504,3 +9504,27 @@ humano/adaptación, Ken pendiente, docstrings/detalles y controles finales.42/43
 Bloque15:08:59–15:42:08UTC:33min9s hasta verificar; checkpoint posterior excluido.
 Incluye revisión de montaje, implementación, fallo controlado previo y análisis.
 Los217,482s de tramos corregidos no representan todo ese bloque.
+
+## 2026-11-08 — Resultados guardados, plan parcial y recuperación de lectura
+
+[Informe y capturas](execution-communication-review.md). Dos lectores del producto
+instalado reutilizan resultados reales anteriores, sin generar: revisión que pide
+cambios y plan guardado antes de agotar tokens. Corte inducido sólo del GET de
+workspace, recuperación con foco/Enter.12estados automatizados,6capturas finales
+inspeccionadas,0overflow/axe regional/errores de página/mutaciones prohibidas.
+Hashes/cantidades de filas originales conservados; actualización preliminar del
+host de plan añade16tablas vacías, final sin adiciones. Servicios cerrados143.
+
+Se corrige la falsa afirmación de que sólo falta aceptar una propuesta; el revisor
+terminado se identifica como revisión y el control conserva el significado de
+cierre de intento. La propuesta parcial no atribuye su inelegibilidad a una causa
+no demostrada. Sin API, backend, autoridad ni prompts nuevos.242tests frontend
+pasan y build correcto; lint15errores en archivos sin cambios, DD154. Fallos de
+placeholder/scope de auditoría y RED del copy conservados. Docstrings/JSDoc en
+el lector, capturador y nueva presentación compartida.
+
+42/43escenarios y12/12páginas por alcance se mantienen. Sigue espera viva de
+herramienta y humano/adaptación; no es comprensión acreditada, recuperación física
+ni nueva suite global/wheel. Ken pendiente, docstrings/detalles y controles finales.
+Bloque15:44:21–16:38:43UTC:54min22s hasta corte de inspección; documentación y
+checkpoint posteriores aparte. Los lectores finales sólo suman17,663s.

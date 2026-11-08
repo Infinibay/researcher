@@ -1367,3 +1367,15 @@ Un aviso Ruff I001 en `evals/profile_communication/code_review.py`. Las40 prueba
 dirigidas y el par real pasan dentro de su alcance. Ordenar imports al terminar
 las capacidades principales; conservar los hashes y el transporte fallido/corregido
 originales. Un cambio de estilo no justifica repetir revisores de la suscripción.
+
+## DD154 — lint frontend y presentación de fallo de lectura
+
+El bloque de comunicación conserva15errores ESLint en archivos que no modifica:
+client, remotePublications, session, ProjectsPage, RunCommands, useProjects,
+loopState, types/api y tests UI check-policy/local-work/project-budget. Resolver
+en la fase de detalles; no declarar lint limpio por pasar242tests y build. El
+build avisa de chunks de más de500kB (incluido Mermaid/ELK); estudiar la carga
+según mediciones antes de modificar el reparto. En la captura de red, el mensaje
+español termina en `Failed to fetch`; pulir su traducción conservando el diagnóstico.
+La densidad y distinción tarea/proceso se mantienen en DD148. No repetir modelos
+ni reescribir resultados históricos para estos detalles.

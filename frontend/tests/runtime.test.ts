@@ -147,6 +147,21 @@ test('native completion remains a proposal and uncertain work cannot start again
   assert.equal(presentRun(null).canStart, true)
 })
 
+test('a saved proposal is not presented as awaiting approval or as ongoing execution', async () => {
+  const { presentRun } = await import('../src/api/runtime.ts')
+  const proposal=presentRun('needs_review')
+  assert.equal(proposal.canStart,false)
+  assert.doesNotMatch(proposal.description,/falta registrar su aceptación/)
+  assert.match(proposal.description,/comprobaciones/)
+  assert.equal(proposal.stopAction?.label,'Cerrar intento pendiente')
+  assert.match(proposal.stopAction?.description??'',/no deshace/i)
+  assert.equal(presentRun('waiting_input').stopAction?.label,'Cerrar intento pendiente')
+  assert.notEqual(presentRun('running').stopAction?.label,'Cerrar intento pendiente')
+  assert.equal(presentRun('needs_review','code_review').title,'Revisión terminada')
+  assert.equal(presentRun('needs_review','finding_review').title,'Revisión terminada')
+  assert.equal(presentRun('needs_review','code_review').canStart,false)
+})
+
 test('invalid scope and empty instructions never reach transport', async () => {
   const { prepareInstruction } = await import('../src/api/runtime.ts')
   assert.throws(() => prepareInstruction(101, { task_id: 1001, context_version: 1, thread_id: 'thread-a', message: '   ' }))

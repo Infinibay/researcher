@@ -28,7 +28,29 @@ que se pueda comparar el avance; no presentar microajustes como tareas principal
 - Última suite global: `9fb873c`,2210 casos,2178 pasan,31 fallan y1 error de fixture; sin omisiones. La carrera de backup encontrada se corrigió después con40 pruebas instaladas. No se declara una nueva corrida global verde; la referencia `0c8b8d9` queda como evidencia histórica.
 - U01–U07, E01–E12, C01–C10 y D01–D13 quedan comprobados con el alcance de sus matrices; sigue 1 de 43 escenarios amplios sin aceptación completa en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Estado actual: comparaciones de perfiles listas; sigue comunicación durante ejecución
+## Estado actual: resultados parciales y recuperación de lectura comprobados
+
+[Recorridos y límites](execution-communication-review.md). Bloque iniciado
+**15:44:21UTC**; las dos lecturas finales duran8,283s y9,380s. Corte de comprobación
+de capturas **16:38:43UTC:54min22s** desde el inicio; documentación/checkpoint
+posteriores aparte. No confundir tiempo de lectores con todo el trabajo.
+
+- Terminado: **12/12páginas por alcance,42/43escenarios**,85prompts vigentes y
+ tres pares nuevos de perfiles. Ahora se añaden revisión guardada/plan parcial,
+ fallo GET inducido y recuperación por teclado:12estados automatizados,6capturas
+ finales inspeccionadas manualmente,0overflow/axe regional/errores de página.
+ Cero nuevas admisiones de modelo y filas originales conservadas. Copy de
+ aprobación/cierre/contexto corregido sin cambiar aceptación ni API.
+- Siguiente: **espera de una herramienta activa** bajo el coordinador productivo,
+ con la identidad del mismo comando. No usar un recibo terminal para acreditarla.
+ Después, observación humana y adaptación con objetivo/datos/relaciones/entrada/salida.
+- Pendiente además: distribución Ken/ONNX según respuesta solicitada; docstrings
+ y detalles; revisión independiente, paquete y suite global finales. U08 abierto.
+- Detalles al final: DD145–154 y anteriores.242pruebas frontend y build pasan;
+ lint conserva15errores en archivos sin modificar. No hay nueva suite global
+ verde ni comprensión humana acreditada. Sin push, merge o despliegue.
+
+## Etapa anterior: comparaciones de perfiles listas
 
 [Revisión de código](code-communication-review.md). Bloque **15:08:59–15:42:08UTC:33min9s** hasta verificar; checkpoint posterior excluido.
 Los dos tramos corregidos de autor+revisor suman217,482s; preparación/análisis aparte.

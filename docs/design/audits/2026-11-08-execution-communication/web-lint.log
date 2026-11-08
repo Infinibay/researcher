@@ -1,0 +1,45 @@
+
+> researcher-frontend@0.0.1 lint
+> eslint src tests/ui vite.config.ts vitest.config.ts
+
+
+/home/andres/.codex/worktrees/b09e/researcher/frontend/src/api/client.ts
+  32:13  error  Empty block statement  no-empty
+
+/home/andres/.codex/worktrees/b09e/researcher/frontend/src/api/remotePublications.ts
+  37:6  error  'keys' is never reassigned. Use 'const' instead  prefer-const
+
+/home/andres/.codex/worktrees/b09e/researcher/frontend/src/api/session.ts
+  83:57  error  Unexpected control character(s) in regular expression: \x00  no-control-regex
+
+/home/andres/.codex/worktrees/b09e/researcher/frontend/src/components/pages/ProjectsPage.tsx
+  9:232  error  'ProjectWorkspaceState' is defined but never used  @typescript-eslint/no-unused-vars
+
+/home/andres/.codex/worktrees/b09e/researcher/frontend/src/components/tasks/RunCommands.tsx
+  13:23  error  Unexpected control character(s) in regular expression: \x00, \x08, \x0b, \x1f  no-control-regex
+
+/home/andres/.codex/worktrees/b09e/researcher/frontend/src/hooks/useProjects.ts
+  96:16  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/home/andres/.codex/worktrees/b09e/researcher/frontend/src/stores/loopState.ts
+  61:26  error  '_' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+/home/andres/.codex/worktrees/b09e/researcher/frontend/src/types/api.ts
+  291:10  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/home/andres/.codex/worktrees/b09e/researcher/frontend/tests/ui/check-policy.test.tsx
+  13:25  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  17:40  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/home/andres/.codex/worktrees/b09e/researcher/frontend/tests/ui/local-work.test.tsx
+  14:25  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  18:44  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/home/andres/.codex/worktrees/b09e/researcher/frontend/tests/ui/project-budget.test.tsx
+  16:25  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  20:41  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  50:41  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+✖ 15 problems (15 errors, 0 warnings)
+  1 error and 0 warnings potentially fixable with the `--fix` option.
+

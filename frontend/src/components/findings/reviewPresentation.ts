@@ -4,7 +4,7 @@ import {presentRun} from '../../api/runtime'
 
 /** Finishing a review produces attributed checks, not acceptance of the underlying task. */
 export function reviewRunStatus(status:string) {
- return status==='needs_review'?{title:'Revisión terminada',description:'Inspecciona la decisión y sus límites antes de cerrar este intento. Esta revisión por sí sola no acepta la tarea.'}:presentRun(status)
+ return presentRun(status,'finding_review')
 }
 
 /** Refuse cached responses from a different project, task or finding before rendering their text. */

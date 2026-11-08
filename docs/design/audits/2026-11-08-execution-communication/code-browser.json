@@ -1,0 +1,172 @@
+{
+  "status": "passed",
+  "screens": [
+    {
+      "file": "review-status-1440.png",
+      "width": 1440,
+      "overflow": false,
+      "scope": ".task-execution",
+      "violations": [],
+      "archive": "docs/design/audits/2026-11-08-execution-communication/code-review-status-1440.png",
+      "sha256": "e067b46860519ff908d6ebbb54f12c40b57b54aa5c297aaf12aa31da4646af63"
+    },
+    {
+      "file": "saved-review-1440.png",
+      "width": 1440,
+      "overflow": false,
+      "scope": ".task-execution",
+      "violations": [],
+      "archive": "docs/design/audits/2026-11-08-execution-communication/code-saved-review-1440.png",
+      "sha256": "c68a8edaf323cd4b5c34ccdd1a893123e4cfa0b6aa9c36d9094e137ca796f81a"
+    },
+    {
+      "file": "review-status-390.png",
+      "width": 390,
+      "overflow": false,
+      "scope": ".task-execution",
+      "violations": [],
+      "archive": "docs/design/audits/2026-11-08-execution-communication/code-review-status-390.png",
+      "sha256": "c18eadefc82ea6b09af28c5a7f21c75c7ff2f7ee5d50aaf0829b1594f962c9e2"
+    },
+    {
+      "file": "saved-review-390.png",
+      "width": 390,
+      "overflow": false,
+      "scope": ".task-execution",
+      "violations": [],
+      "archive": "docs/design/audits/2026-11-08-execution-communication/code-saved-review-390.png",
+      "sha256": "e2fb345cd515884b61061d43927312e74ac6b5837cd7757903786a38514e34df"
+    },
+    {
+      "file": "read-failure.png",
+      "width": 390,
+      "overflow": false,
+      "scope": "main [role=\"alert\"]",
+      "violations": [],
+      "archive": "docs/design/audits/2026-11-08-execution-communication/code-read-failure.png",
+      "sha256": "6af80f238bd3a906960de754f8eda30491b9f4024204c387afe8cc161e689cf3"
+    },
+    {
+      "file": "original-result-recovered.png",
+      "width": 390,
+      "overflow": false,
+      "scope": ".task-execution",
+      "violations": [],
+      "archive": "docs/design/audits/2026-11-08-execution-communication/code-original-result-recovered.png",
+      "sha256": "e3bfeb8d1478b0eb886cc9491b4478e2cc5e1a4a39e3b09396a201419a1f4280"
+    }
+  ],
+  "errors": [],
+  "forbidden": [],
+  "requests": [
+    {
+      "method": "GET",
+      "path": "/api/session"
+    },
+    {
+      "method": "POST",
+      "path": "/api/session"
+    },
+    {
+      "method": "GET",
+      "path": "/api/projects/101/workspace"
+    },
+    {
+      "method": "GET",
+      "path": "/api/projects"
+    },
+    {
+      "method": "GET",
+      "path": "/api/projects/101"
+    },
+    {
+      "method": "GET",
+      "path": "/api/tasks/1001"
+    },
+    {
+      "method": "GET",
+      "path": "/api/tasks"
+    },
+    {
+      "method": "GET",
+      "path": "/api/epics"
+    },
+    {
+      "method": "GET",
+      "path": "/api/milestones"
+    },
+    {
+      "method": "GET",
+      "path": "/api/projects/101/tasks/1001/workspace"
+    },
+    {
+      "method": "GET",
+      "path": "/api/projects/101/runs/00000000-0000-0000-0000-000000000001/code-result"
+    },
+    {
+      "method": "GET",
+      "path": "/api/projects/101/tasks/1001/prior-files/sources"
+    },
+    {
+      "method": "GET",
+      "path": "/api/projects/101/tasks/1001/prior-branches"
+    },
+    {
+      "method": "GET",
+      "path": "/api/projects"
+    },
+    {
+      "method": "GET",
+      "path": "/api/projects/101"
+    },
+    {
+      "method": "GET",
+      "path": "/api/projects/101/workspace"
+    },
+    {
+      "method": "GET",
+      "path": "/api/tasks"
+    },
+    {
+      "method": "GET",
+      "path": "/api/epics"
+    },
+    {
+      "method": "GET",
+      "path": "/api/milestones"
+    },
+    {
+      "method": "GET",
+      "path": "/api/tasks/1001"
+    },
+    {
+      "method": "GET",
+      "path": "/api/projects/101/tasks/1001/workspace"
+    },
+    {
+      "method": "GET",
+      "path": "/api/projects/101/runs/00000000-0000-0000-0000-000000000001/code-result"
+    },
+    {
+      "method": "GET",
+      "path": "/api/projects/101/tasks/1001/prior-files/sources"
+    },
+    {
+      "method": "GET",
+      "path": "/api/projects/101/tasks/1001/prior-branches"
+    },
+    {
+      "method": "GET",
+      "path": "/api/projects/101/tasks/1001/workspace"
+    },
+    {
+      "method": "GET",
+      "path": "/api/projects/101/workspace"
+    },
+    {
+      "method": "GET",
+      "path": "/api/projects/101/tasks/1001/workspace"
+    }
+  ],
+  "visible_text": "Tareas\n#1001\nPor planificar\nPendiente\nEn curso\nPara revisar\nRequiere cambios\nCompletada\nBloqueada\ncode\n\nEl estado se controla desde la pestaña Trabajo.\n\nMean of observations including zeroes\nVolver a tareas\nDetalles\nTrabajo\nComentarios\nDependencias\nRevisión terminada\n\nInspecciona la decisión y sus límites antes de cerrar este intento. Esta revisión por sí sola no acepta la tarea.\n\nContexto vigente: 1 · resultado bajo contexto 1\n\nModelo inicial del equipo: gpt-6.1-sol\n\nElección guardada para este intento: gpt-6.1-sol · razonamiento low. Cambiar la configuración no modifica esta elección.\n\nIdentificador del agente: code-reviewer\n\nModelo de esta ejecución: gpt-6.1-sol\n\nRepositorio admitido: synthetic-invoice\n\nCerrar intento pendiente\n\nLo que ya quedó guardado se conserva. Cerrar este intento no deshace acciones anteriores.\n\nComandos y resultados guardados\nCódigo entregado\n\nRevisar el código → aceptar una versión → publicar por separado.\n\nConsultar estado\n\nVersión f997e4aaf879 · contexto 1\n\nAceptar esta versión no la publica. Puedes publicar después el candidato aceptado en una rama nueva.\n\nPetición original del propietario\nVer diff capturado\nQué pruebas exige este proyecto\n\nTodavía no elegiste una política para aceptar código en este proyecto.\n\nUn fallo o una revisión rechazada siempre bloquea la aceptación. Cambiar esta política conserva las decisiones históricas.\n\nElegir política de pruebas\nComprobaciones\n\nNo hay comprobaciones registradas del candidato.\n\nRevisión independiente\n\nRequiere cambios\n\nEl candidato incumple el requisito explícito de contar cada observación, incluido cero. Hallazgo de prioridad alta en evidence.py:9: el filtro `if record[\"value\"]` descarta los valores cero antes de calcular la suma y el número de observaciones. Con entrada [{\"value\": 0}, {\"value\": 10}], la salida requerida es (0+10)/2 = 5, pero devuelve 10.0. Con [{\"value\": 0}, {\"value\": 0}] debe devolver 0, pero devuelve None, confundiendo observaciones reales con un registro vacío. Corregir eliminando ese filtro y conservando todos los valores producidos por list_observations; mantener None únicamente cuando no hay observaciones. La entrada contractual contiene registros con value numérico: no se solicitó definir el comportamiento de registros con una clave ausente.\n\nCitas y límites del revisor\n\nNo se puede aceptar esta versión todavía.\n\nEl revisor pide cambios o no pudo respaldar el resultado.\nElige la política de comprobaciones del proyecto antes de aceptar código.\nIdentidad de la versión observada\nPropuesta\n\nEl candidato requiere corrección. Registré la revisión como needs_revision, con citas vinculadas al hash del candidato.\n\nEl fallo está en evidence.py:9: if record[\"value\"] elimina los ceros antes de calcular la media. Cada cero debe contar como una observación.\n\nLa entrada esperada son registros con value numérico; la salida debe ser su media:\n\nEntrada\tSalida esperada\tSalida observada\n[{\"value\": 0}, {\"value\": 10}]\t5\t10.0\n[{\"value\": 0}, {\"value\": 0}]\t0\tNone\n[]\tNone\tNone\n\nCero y ausencia no significan lo mismo: con 0 y 10 hay dos observaciones, por lo que corresponde (0 + 10) / 2 = 5. Una entrada vacía no contiene observaciones. Los registros sin la clave value quedan fuera del contrato original.\n\nLa corrección necesaria es quitar ese filtro y conservar todos los valores.\n\nLeí la entrada original, el diff completo y ambos archivos completos. Ejecuté las cuatro pruebas suministradas: dos pasaron y dos fallaron, precisamente las de ceros. No apliqué ni probé la corrección propuesta; no edité, acepté ni publiqué el candidato.\n\nReutilizar cambios anteriores\n\nPuedes tomar un candidato anterior como punto de partida. Por ejemplo, conservar su implementación y adaptarla a una corrección nueva. Sus pruebas y su aprobación no se trasladan.\n\nCambios guardados\nIniciar sin seleccionar cambios anteriores\nContexto 1 · Synthetic controlled author, no generative model. Implement mean_observations(records) usi · 00000000\nImportar archivos de trabajo anterior\n\nElige un origen registrado y las rutas que quieres revisar. Por ejemplo, src/calculo.py y tests/test_calculo.py. Los demás archivos quedan fuera de la selección.\n\nOrigen\nElige un origen anterior\nCopia privada · 00000000-0000-0000-0000-000000000001 · repositorio 11\nRutas relativas, una por línea\nInspeccionar archivos seleccionados\nSolicitud para esta tarea\nIniciar sin los mensajes anteriores\nIniciar trabajo\nConsultar estado\nUsar solicitud anterior\nFuentes y contexto\nEntrada de esta ejecución\nCorregir el contexto\nFuentes y borradores\n\nAdjuntos disponibles: policy.md\n\nTodavía no hay fuentes capturadas ni borradores para mostrar.\n\nHistorial de ejecuciones"
+}

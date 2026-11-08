@@ -2393,7 +2393,10 @@
         "docs/modernization/interaction-artifact-comparison.json",
         "docs/design/audits/2026-11-07-interaction/report.md",
         "docs/modernization/interaction-human-review.json",
-        "docs/modernization/communication-evidence-reconciliation.md"
+        "docs/modernization/communication-evidence-reconciliation.md",
+        "docs/modernization/execution-communication-review.md",
+        "docs/modernization/execution-communication-results.json",
+        "docs/design/audits/2026-11-08-execution-communication/report.md"
       ],
       "remaining": [
         "Initial example rejected by the user as unhelpful; revised task-grounded example has no human acceptance yet",
@@ -2845,11 +2848,17 @@
         "docs/modernization/code-communication-results.json",
         "docs/modernization/code-communication-live.json",
         "docs/modernization/code-communication-responses.json",
-        "evals/profile_communication/code_review.py"
+        "evals/profile_communication/code_review.py",
+        "docs/modernization/execution-communication-review.md",
+        "docs/modernization/execution-communication-results.json",
+        "docs/design/audits/2026-11-08-execution-communication/report.md",
+        "evals/communication/README.md",
+        "evals/communication/retained.py",
+        "frontend/tests/communication-baseline.mjs"
       ],
       "remaining": [
         "Observe human comprehension, useful correction and adaptation on a recognizable task with purpose, data relationships and input/output framing; U08 is not accepted.",
-        "Evaluate the real-UI communication contract for long waits, recoverable failures and partial results, reusing existing persistence/Stop evidence.",
+        "Evaluate a live long tool wait in the real UI; read-only failure/recovery and retained partial results now have bounded evidence, separate from existing persistence/Stop proof.",
         "Broader scientific material/questions remain unrepresented; preserve the primary-abstract frozen five-pass/one-partial result instead of rerunning to improve its score."
       ],
       "context_comparison_observed": "7 paired cases:2 development/5 reserved;16 Codex subscription turns with actual published Ken, matching substantive inputs/model/catalog and exact delivered policies. Initial no-dispatch context-version failure and development receipt-identity amendment retained.19 directed tests pass; human measures unknown.",
@@ -2857,7 +2866,8 @@
       "historical_catalog3_profile_observations": "4 paired synthetic cases/8 actual subscription+Ken turns;2pairs deliver both explanations. Catalog3 planning exceeds120000observedtokens after saving a proposal; catalog3 audit starts21tools with20allowed after saving a draft, no final delivery. All services/peers closed; all controls match after retained cutoff-alias amendment. Candidate weighted-mean report makes an unsupported per-batch claim. No causal superiority or human-comprehension claim.",
       "development_comparison_observed": "One new purposive native development pair, two actual subscription+published-Ken turns. Same original request/source/six tests/Git base/input/catalog/model-effort controls verified. Both deliver private CSV candidates and Spanish explanations; six named tests per arm pass, original/test/listing unchanged; peers67/65closed, grants0. Historical231480/current205048 observed tokens. Not held-out, causal superiority, human acceptance or independent host checks.",
       "finding_review_comparison_observed": "One new purposive pair: two actual subscription+published-Ken reviewers, controlled author0model turns. Exact full subjects/source bytes and input/catalog/model controls match. Both typed needs_revision decisions and Spanish causal-limit explanations delivered; complete subject/source/Ken reads and exact source quotes verified. Hallucinated causal conclusion remains provisional; no acceptance/publication, peers4/4closed, grants0. No human or representative efficacy claim.",
-      "code_review_comparison_observed": "One new purposive paired exact-candidate review. Two actual subscription+Ken reviewers, controlled author transport0generative turns per arm. Raw author inputs/base/tree/diff equal; only verified capture heads/derived packet references normalized. Both confirmed needs_revision, exact source citations, full packet/input/diff/Ken reads and four tests2pass2fail. Original/test unchanged, peers79/83closed, grants0, no acceptance/publication. Prior controlled-transport failure0real-reviewer admissions preserved; consumption unknown remains unknown."
+      "code_review_comparison_observed": "One new purposive paired exact-candidate review. Two actual subscription+Ken reviewers, controlled author transport0generative turns per arm. Raw author inputs/base/tree/diff equal; only verified capture heads/derived packet references normalized. Both confirmed needs_revision, exact source citations, full packet/input/diff/Ken reads and four tests2pass2fail. Original/test unchanged, peers79/83closed, grants0, no acceptance/publication. Prior controlled-transport failure0real-reviewer admissions preserved; consumption unknown remains unknown.",
+      "retained_ui_observed": "Two retained real outcomes, twelve automated regional UI states at1440/390; six final images manually inspected. Induced GET failure and keyboard retry recover original outcome, no new model admissions/product mutations/original-row changes. Saved review/partial-plan copy corrected; no live-tool or human claim."
     },
     "prompt_inventory": {
       "status": "in_progress",
@@ -3030,18 +3040,25 @@
         "docs/modernization/code-communication-results.json",
         "docs/modernization/code-communication-live.json",
         "docs/modernization/code-communication-responses.json",
-        "evals/profile_communication/code_review.py"
+        "evals/profile_communication/code_review.py",
+        "docs/modernization/execution-communication-review.md",
+        "docs/modernization/execution-communication-results.json",
+        "docs/design/audits/2026-11-08-execution-communication/report.md",
+        "evals/communication/README.md",
+        "evals/communication/retained.py",
+        "frontend/tests/communication-baseline.mjs"
       ],
       "remaining": [
         "Observe human comprehension, useful correction and adaptation on a recognizable task with purpose, data relationships and input/output framing; U08 is not accepted.",
-        "Evaluate the real-UI communication contract for long waits, recoverable failures and partial results, reusing existing persistence/Stop evidence.",
+        "Evaluate a live long tool wait in the real UI; read-only failure/recovery and retained partial results now have bounded evidence, separate from existing persistence/Stop proof.",
         "Broader scientific material/questions remain unrepresented; preserve the primary-abstract frozen five-pass/one-partial result instead of rerunning to improve its score."
       ],
       "context_comparison_observed": "7 paired cases:2 development/5 reserved;16 Codex subscription turns with actual published Ken, matching substantive inputs/model/catalog and exact delivered policies. Initial no-dispatch context-version failure and development receipt-identity amendment retained.19 directed tests pass; human measures unknown.",
       "later_bounded_observations": "Later bounded development observations: catalog4 audit346386/350000 and weighted means305543/350000 delivered; aggregate/individual distinction explicit. Catalog6 atomic plan/explanation81685/120000 delivered. Material-question/continuity flow and C10 independently useful50EUR delivery observed. Not new reserved comparisons, final-policy general efficacy or human acceptance; original failures preserved.",
       "development_comparison_observed": "One new purposive native development pair, two actual subscription+published-Ken turns. Same original request/source/six tests/Git base/input/catalog/model-effort controls verified. Both deliver private CSV candidates and Spanish explanations; six named tests per arm pass, original/test/listing unchanged; peers67/65closed, grants0. Historical231480/current205048 observed tokens. Not held-out, causal superiority, human acceptance or independent host checks.",
       "finding_review_comparison_observed": "One new purposive pair: two actual subscription+published-Ken reviewers, controlled author0model turns. Exact full subjects/source bytes and input/catalog/model controls match. Both typed needs_revision decisions and Spanish causal-limit explanations delivered; complete subject/source/Ken reads and exact source quotes verified. Hallucinated causal conclusion remains provisional; no acceptance/publication, peers4/4closed, grants0. No human or representative efficacy claim.",
-      "code_review_comparison_observed": "One new purposive paired exact-candidate review. Two actual subscription+Ken reviewers, controlled author transport0generative turns per arm. Raw author inputs/base/tree/diff equal; only verified capture heads/derived packet references normalized. Both confirmed needs_revision, exact source citations, full packet/input/diff/Ken reads and four tests2pass2fail. Original/test unchanged, peers79/83closed, grants0, no acceptance/publication. Prior controlled-transport failure0real-reviewer admissions preserved; consumption unknown remains unknown."
+      "code_review_comparison_observed": "One new purposive paired exact-candidate review. Two actual subscription+Ken reviewers, controlled author transport0generative turns per arm. Raw author inputs/base/tree/diff equal; only verified capture heads/derived packet references normalized. Both confirmed needs_revision, exact source citations, full packet/input/diff/Ken reads and four tests2pass2fail. Original/test unchanged, peers79/83closed, grants0, no acceptance/publication. Prior controlled-transport failure0real-reviewer admissions preserved; consumption unknown remains unknown.",
+      "retained_ui_observed": "Two retained real outcomes, twelve automated regional UI states at1440/390; six final images manually inspected. Induced GET failure and keyboard retry recover original outcome, no new model admissions/product mutations/original-row changes. Saved review/partial-plan copy corrected; no live-tool or human claim."
     },
     "data_migrations": {
       "status": "in_progress",
@@ -5825,11 +5842,17 @@
         "docs/modernization/code-communication-results.json",
         "docs/modernization/code-communication-live.json",
         "docs/modernization/code-communication-responses.json",
-        "evals/profile_communication/code_review.py"
+        "evals/profile_communication/code_review.py",
+        "docs/modernization/execution-communication-review.md",
+        "docs/modernization/execution-communication-results.json",
+        "docs/design/audits/2026-11-08-execution-communication/report.md",
+        "evals/communication/README.md",
+        "evals/communication/retained.py",
+        "frontend/tests/communication-baseline.mjs"
       ],
       "remaining": [
         "Observe human comprehension, useful correction and adaptation on a recognizable task with purpose, data relationships and input/output framing; U08 is not accepted.",
-        "Evaluate the real-UI communication contract for long waits, recoverable failures and partial results, reusing existing persistence/Stop evidence.",
+        "Evaluate a live long tool wait in the real UI; read-only failure/recovery and retained partial results now have bounded evidence, separate from existing persistence/Stop proof.",
         "Broader scientific material/questions remain unrepresented; preserve the primary-abstract frozen five-pass/one-partial result instead of rerunning to improve its score."
       ],
       "limitations": [
@@ -5839,7 +5862,8 @@
       "later_bounded_observations": "Later bounded development observations: catalog4 audit346386/350000 and weighted means305543/350000 delivered; aggregate/individual distinction explicit. Catalog6 atomic plan/explanation81685/120000 delivered. Material-question/continuity flow and C10 independently useful50EUR delivery observed. Not new reserved comparisons, final-policy general efficacy or human acceptance; original failures preserved.",
       "development_comparison_observed": "One new purposive native development pair, two actual subscription+published-Ken turns. Same original request/source/six tests/Git base/input/catalog/model-effort controls verified. Both deliver private CSV candidates and Spanish explanations; six named tests per arm pass, original/test/listing unchanged; peers67/65closed, grants0. Historical231480/current205048 observed tokens. Not held-out, causal superiority, human acceptance or independent host checks.",
       "finding_review_comparison_observed": "One new purposive pair: two actual subscription+published-Ken reviewers, controlled author0model turns. Exact full subjects/source bytes and input/catalog/model controls match. Both typed needs_revision decisions and Spanish causal-limit explanations delivered; complete subject/source/Ken reads and exact source quotes verified. Hallucinated causal conclusion remains provisional; no acceptance/publication, peers4/4closed, grants0. No human or representative efficacy claim.",
-      "code_review_comparison_observed": "One new purposive paired exact-candidate review. Two actual subscription+Ken reviewers, controlled author transport0generative turns per arm. Raw author inputs/base/tree/diff equal; only verified capture heads/derived packet references normalized. Both confirmed needs_revision, exact source citations, full packet/input/diff/Ken reads and four tests2pass2fail. Original/test unchanged, peers79/83closed, grants0, no acceptance/publication. Prior controlled-transport failure0real-reviewer admissions preserved; consumption unknown remains unknown."
+      "code_review_comparison_observed": "One new purposive paired exact-candidate review. Two actual subscription+Ken reviewers, controlled author transport0generative turns per arm. Raw author inputs/base/tree/diff equal; only verified capture heads/derived packet references normalized. Both confirmed needs_revision, exact source citations, full packet/input/diff/Ken reads and four tests2pass2fail. Original/test unchanged, peers79/83closed, grants0, no acceptance/publication. Prior controlled-transport failure0real-reviewer admissions preserved; consumption unknown remains unknown.",
+      "retained_ui_observed": "Two retained real outcomes, twelve automated regional UI states at1440/390; six final images manually inspected. Induced GET failure and keyboard retry recover original outcome, no new model admissions/product mutations/original-row changes. Saved review/partial-plan copy corrected; no live-tool or human claim."
     },
     "observed_delivery_budget": {
       "status": "in_progress",
@@ -6709,6 +6733,27 @@
         "Original failed controlled fixture and unknown usage/status retained, no actual reviewer replay.",
         "No statistical superiority, representativeness or human-comprehension claim.",
         "Real-UI communication journeys and final package/global acceptance remain separate."
+      ]
+    },
+    "retained_execution_communication": {
+      "status": "verified",
+      "scope": "Retained real review and partial plan with induced read-only transport fault and keyboard recovery; no live-tool or human-comprehension claim",
+      "evidence": [
+        "docs/modernization/execution-communication-review.md",
+        "docs/modernization/execution-communication-results.json",
+        "docs/design/audits/2026-11-08-execution-communication/report.md",
+        "evals/communication/README.md",
+        "evals/communication/retained.py",
+        "frontend/tests/communication-baseline.mjs"
+      ],
+      "remaining": [
+        "Live tool wait in managed execution",
+        "Human comprehension and useful correction/adaptation"
+      ],
+      "limits": [
+        "Regional accessibility and six manual final image reviews only",
+        "Induced GET transport fault is not engine recovery",
+        "No new backend wheel or global suite"
       ]
     }
   }
