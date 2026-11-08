@@ -1,0 +1,127 @@
+{
+  "original": {
+    "status": "failed",
+    "synthetic_project_data": true,
+    "actual_model_turns": 0,
+    "before": {
+      "table_sha256": {
+        "projects": "a9e0ea95bc2fae1dcfdeee11751983ddb669f23a140e07c0856537a5442cc5be",
+        "tasks": "8f3640355cba7101b6a0649847b1d8325c80b984f5f286a6df9bbe827a977aa6",
+        "task_dependencies": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "task_contexts": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "runtime_runs": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "runtime_attempts": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "runtime_peers": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "tool_grants": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "events_log": "5d5694899fd0c7d57e22036a2d1217a0bbaf53362b2f9bbb12b7f86bce336e89",
+        "runtime_inference_dispatches": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "notes": [],
+      "runs": 0,
+      "dispatches": 0,
+      "peers": 0,
+      "integrity": "ok",
+      "foreign_keys": []
+    },
+    "backend": "/home/andres/.codex/worktrees/b09e/researcher/.superpowers/sdd/2026-10-31-actualizacion-proyecto/native-runtime-env/lib/python3.12/site-packages/backend/__init__.py",
+    "web_index_sha256": "4c0359a6eb11108e9417a03785240d62c5314897e54d39726cf581c91564b5b0",
+    "browser_exit": 1,
+    "error_type": "AssertionError",
+    "service_exit": 143,
+    "after": {
+      "table_sha256": {
+        "projects": "a9e0ea95bc2fae1dcfdeee11751983ddb669f23a140e07c0856537a5442cc5be",
+        "tasks": "8f3640355cba7101b6a0649847b1d8325c80b984f5f286a6df9bbe827a977aa6",
+        "task_dependencies": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "task_contexts": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "runtime_runs": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "runtime_attempts": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "runtime_peers": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "tool_grants": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "events_log": "5d5694899fd0c7d57e22036a2d1217a0bbaf53362b2f9bbb12b7f86bce336e89",
+        "runtime_inference_dispatches": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "notes": [
+        {
+          "id": 1,
+          "task_id": 1,
+          "author": "user",
+          "comment_type": "approval",
+          "content": "Entrada ilustrativa: id7 y measurement12. Salida esperada del ejemplo: columnas id,value y fila7,12. Todav\u00eda falta comprobar los registros reales.",
+          "metadata_json": "{\"owner_comment\": {\"operation_key\": \"04e9ae4f-1c97-46cc-aa51-3b55cd3e8b2b\", \"intent\": {\"project_id\": 101, \"task_id\": 1, \"author\": \"user\", \"content\": \"Entrada ilustrativa: id7 y measurement12. Salida esperada del ejemplo: columnas id,value y fila7,12. Todav\u00eda falta comprobar los registros reales.\", \"comment_type\": \"approval\"}, \"receipt\": {\"id\": 1, \"task_id\": 1, \"author\": \"user\", \"comment_type\": \"approval\", \"content\": \"Entrada ilustrativa: id7 y measurement12. Salida esperada del ejemplo: columnas id,value y fila7,12. Todav\u00eda falta comprobar los registros reales.\", \"created_at\": \"2026-11-08 11:01:32\", \"project_id\": 101, \"operation_key\": \"04e9ae4f-1c97-46cc-aa51-3b55cd3e8b2b\", \"authorizes_work\": false}}}"
+        }
+      ],
+      "runs": 0,
+      "dispatches": 0,
+      "peers": 0,
+      "integrity": "ok",
+      "foreign_keys": []
+    }
+  },
+  "readonly_continuation": {
+    "status": "passed",
+    "original_result": "/home/andres/.codex/worktrees/b09e/researcher/.researcher/evaluations/task-comment-20261108/result.json",
+    "before": {
+      "table_sha256": {
+        "projects": "a9e0ea95bc2fae1dcfdeee11751983ddb669f23a140e07c0856537a5442cc5be",
+        "tasks": "8f3640355cba7101b6a0649847b1d8325c80b984f5f286a6df9bbe827a977aa6",
+        "task_dependencies": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "task_contexts": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "runtime_runs": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "runtime_attempts": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "runtime_peers": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "tool_grants": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "events_log": "5d5694899fd0c7d57e22036a2d1217a0bbaf53362b2f9bbb12b7f86bce336e89",
+        "runtime_inference_dispatches": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "notes": [
+        {
+          "id": 1,
+          "task_id": 1,
+          "author": "user",
+          "comment_type": "approval",
+          "content": "Entrada ilustrativa: id7 y measurement12. Salida esperada del ejemplo: columnas id,value y fila7,12. Todav\u00eda falta comprobar los registros reales.",
+          "metadata_json": "{\"owner_comment\": {\"operation_key\": \"04e9ae4f-1c97-46cc-aa51-3b55cd3e8b2b\", \"intent\": {\"project_id\": 101, \"task_id\": 1, \"author\": \"user\", \"content\": \"Entrada ilustrativa: id7 y measurement12. Salida esperada del ejemplo: columnas id,value y fila7,12. Todav\u00eda falta comprobar los registros reales.\", \"comment_type\": \"approval\"}, \"receipt\": {\"id\": 1, \"task_id\": 1, \"author\": \"user\", \"comment_type\": \"approval\", \"content\": \"Entrada ilustrativa: id7 y measurement12. Salida esperada del ejemplo: columnas id,value y fila7,12. Todav\u00eda falta comprobar los registros reales.\", \"created_at\": \"2026-11-08 11:01:32\", \"project_id\": 101, \"operation_key\": \"04e9ae4f-1c97-46cc-aa51-3b55cd3e8b2b\", \"authorizes_work\": false}}}"
+        }
+      ],
+      "runs": 0,
+      "dispatches": 0,
+      "peers": 0,
+      "integrity": "ok",
+      "foreign_keys": []
+    },
+    "continuation": "Readonly, after original comment and exact recovery already completed. No owner action replay.",
+    "browser_exit": 0,
+    "service_exit": 143,
+    "after": {
+      "table_sha256": {
+        "projects": "a9e0ea95bc2fae1dcfdeee11751983ddb669f23a140e07c0856537a5442cc5be",
+        "tasks": "8f3640355cba7101b6a0649847b1d8325c80b984f5f286a6df9bbe827a977aa6",
+        "task_dependencies": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "task_contexts": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "runtime_runs": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "runtime_attempts": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "runtime_peers": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "tool_grants": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "events_log": "5d5694899fd0c7d57e22036a2d1217a0bbaf53362b2f9bbb12b7f86bce336e89",
+        "runtime_inference_dispatches": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "notes": [
+        {
+          "id": 1,
+          "task_id": 1,
+          "author": "user",
+          "comment_type": "approval",
+          "content": "Entrada ilustrativa: id7 y measurement12. Salida esperada del ejemplo: columnas id,value y fila7,12. Todav\u00eda falta comprobar los registros reales.",
+          "metadata_json": "{\"owner_comment\": {\"operation_key\": \"04e9ae4f-1c97-46cc-aa51-3b55cd3e8b2b\", \"intent\": {\"project_id\": 101, \"task_id\": 1, \"author\": \"user\", \"content\": \"Entrada ilustrativa: id7 y measurement12. Salida esperada del ejemplo: columnas id,value y fila7,12. Todav\u00eda falta comprobar los registros reales.\", \"comment_type\": \"approval\"}, \"receipt\": {\"id\": 1, \"task_id\": 1, \"author\": \"user\", \"comment_type\": \"approval\", \"content\": \"Entrada ilustrativa: id7 y measurement12. Salida esperada del ejemplo: columnas id,value y fila7,12. Todav\u00eda falta comprobar los registros reales.\", \"created_at\": \"2026-11-08 11:01:32\", \"project_id\": 101, \"operation_key\": \"04e9ae4f-1c97-46cc-aa51-3b55cd3e8b2b\", \"authorizes_work\": false}}}"
+        }
+      ],
+      "runs": 0,
+      "dispatches": 0,
+      "peers": 0,
+      "integrity": "ok",
+      "foreign_keys": []
+    }
+  },
+  "scope": "One original installed note effect and two exact receipts; initial driver failed after recovery on an incorrect foreign-link heading, then readonly review completed. No repeated owner action."
+}

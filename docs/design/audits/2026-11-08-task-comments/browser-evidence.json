@@ -1,0 +1,91 @@
+{
+  "status": "passed",
+  "comments": [
+    {
+      "body": {
+        "project_id": 101,
+        "operation_key": "04e9ae4f-1c97-46cc-aa51-3b55cd3e8b2b",
+        "author": "user",
+        "content": "Entrada ilustrativa: id7 y measurement12. Salida esperada del ejemplo: columnas id,value y fila7,12. Todavía falta comprobar los registros reales.",
+        "comment_type": "approval"
+      },
+      "receipt": {
+        "id": 1,
+        "task_id": 1,
+        "project_id": 101,
+        "operation_key": "04e9ae4f-1c97-46cc-aa51-3b55cd3e8b2b",
+        "authorizes_work": false,
+        "author": "user",
+        "comment_type": "approval",
+        "content": "Entrada ilustrativa: id7 y measurement12. Salida esperada del ejemplo: columnas id,value y fila7,12. Todavía falta comprobar los registros reales.",
+        "created_at": "2026-11-08 11:01:32"
+      },
+      "status": 201
+    },
+    {
+      "body": {
+        "project_id": 101,
+        "operation_key": "04e9ae4f-1c97-46cc-aa51-3b55cd3e8b2b",
+        "author": "user",
+        "content": "Entrada ilustrativa: id7 y measurement12. Salida esperada del ejemplo: columnas id,value y fila7,12. Todavía falta comprobar los registros reales.",
+        "comment_type": "approval"
+      },
+      "receipt": {
+        "id": 1,
+        "task_id": 1,
+        "project_id": 101,
+        "operation_key": "04e9ae4f-1c97-46cc-aa51-3b55cd3e8b2b",
+        "authorizes_work": false,
+        "author": "user",
+        "comment_type": "approval",
+        "content": "Entrada ilustrativa: id7 y measurement12. Salida esperada del ejemplo: columnas id,value y fila7,12. Todavía falta comprobar los registros reales.",
+        "created_at": "2026-11-08 11:01:32"
+      },
+      "status": 201
+    }
+  ],
+  "states": [
+    {
+      "name": "01-original-task-note-before-delivery",
+      "width": 1440,
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "02-committed-note-with-lost-receipt",
+      "width": 390,
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "03-original-packet-restored-alongside-one-stored-note",
+      "width": 1440,
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "04-original-receipt-confirmed-without-another-note",
+      "width": 390,
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "05-original-history-readonly-after-restart",
+      "width": 1440,
+      "fits": true,
+      "violations": []
+    }
+  ],
+  "errors": [],
+  "checks": [
+    "one-original-scoped-advisory-note",
+    "committed-201-reply-lost",
+    "reload-restores-literal-text-type-project-task-key",
+    "same-key-body-receipt-after-reload",
+    "exact-local-clear-after-ack",
+    "one-history-row-after-replay",
+    "approval-label-never-accepts-results",
+    "foreign-project-cannot-compose-on-original-task",
+    "desktop-mobile-no-overflow-or-regional-axe-violations"
+  ]
+}

@@ -193,50 +193,22 @@ def delete_task(task_id: int):
 
 @router.get("/{task_id}/comments", response_model=list[TaskCommentResponse])
 def list_task_comments(task_id: int):
-    """List comments for a task."""
+    """Read actual task notes without treating their labels as work authority."""
+    from backend.runtime.sqlite_runs import SQLiteRunStore
+    from backend.task_comments import TaskComments
+    from backend.tools.base.db import get_db_path
 
-    def _query(conn: sqlite3.Connection) -> list[dict]:
-        # Verify task exists
-        'Read chronological owner notes without interpreting their labels as task acceptance.'
-        row = conn.execute("SELECT id FROM tasks WHERE id = ?", (task_id,)).fetchone()
-        if not row:
-            raise ValueError(f"Task {task_id} not found")
-
-        rows = conn.execute(
-            """SELECT * FROM task_comments
-               WHERE task_id = ?
-               ORDER BY created_at ASC""",
-            (task_id,),
-        ).fetchall()
-        return [dict(r) for r in rows]
-
-    comments = execute_with_retry(_query)
-    return [TaskCommentResponse(**c) for c in comments]
+    return [TaskCommentResponse(**row) for row in TaskComments(SQLiteRunStore(get_db_path())).list(task_id)]
 
 
 @router.post("/{task_id}/comments", response_model=TaskCommentResponse, status_code=201)
 def add_task_comment(task_id: int, body: TaskCommentCreate):
-    """Add a comment to a task."""
+    """Append one scoped advisory note or recover its exact original stored receipt."""
+    from backend.runtime.sqlite_runs import SQLiteRunStore
+    from backend.task_comments import TaskComments
+    from backend.tools.base.db import get_db_path
 
-    def _create(conn: sqlite3.Connection) -> dict:
-        'Persist one explicit note without starting work, correcting context or accepting the task.'
-        row = conn.execute("SELECT id FROM tasks WHERE id = ?", (task_id,)).fetchone()
-        if not row:
-            raise ValueError(f"Task {task_id} not found")
-
-        cursor = conn.execute(
-            """INSERT INTO task_comments (task_id, author, comment_type, content)
-               VALUES (?, ?, ?, ?)""",
-            (task_id, body.author, body.comment_type, body.content),
-        )
-        conn.commit()
-        row = conn.execute(
-            "SELECT * FROM task_comments WHERE id = ?", (cursor.lastrowid,)
-        ).fetchone()
-        return dict(row)
-
-    comment = execute_with_retry(_create)
-    return TaskCommentResponse(**comment)
+    return TaskCommentResponse(**TaskComments(SQLiteRunStore(get_db_path())).create(task_id, **body.model_dump()))
 
 
 # ── Dependencies ──────────────────────────────────────────────────────────────

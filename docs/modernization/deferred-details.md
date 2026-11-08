@@ -1253,3 +1253,12 @@ esperar transición observable en evaluadores; no diagnosticar ausencia por CSS.
 
 Idempotencia de comentarios de tarea es pendiente principal, no detalle de estilo
 ni capacidad cubierta por las nuevas notas del hilo. Se registra en coverage.json.
+
+## DD144 — comentarios, lint y compatibilidad futura
+
+Pasada fina: anypreexistente en frontend/src/types/api.ts:291 (WSEvent.data),
+C408enTaskComments.create eI001enel evaluador. Selecciónlint no declarada verde.
+Fechas/enums siguenDD142; bundleDD121. No cambiar ahora para pulir el recorrido.
+Si se añade edición/borrado individual de notas, sacar o conservar el recibo
+inmutable fuera de la fila; hoy sólo se añaden por las APIs soportadas. La
+idempotencia principal ya está verificada en task-comment-review.md.

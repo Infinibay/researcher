@@ -6433,15 +6433,22 @@
       "remaining": []
     },
     "owner_task_comment_idempotency": {
-      "status": "in_progress",
-      "scope": "Code-observed separate retained task-comment endpoint has no operation key; the new owner-thread note receipt does not cover task comments. Reproduce and implement before whole-goal completion.",
+      "status": "verified",
+      "scope": "Exact captured project/task advisory-note intent and atomic original receipt, including concurrent requests, rollback, reload and uncertain reply recovery. Existing metadata reused; legacy unkeyed calls create independent notes. No native acceptance/dispatch authority.",
       "evidence": [
-        "frontend/src/components/tasks/TaskCommentsPanel.tsx",
-        "backend/api/routes/tasks.py",
-        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md"
+        "docs/modernization/task-comment-review.md",
+        "docs/modernization/task-comment-results.json",
+        "docs/modernization/task-comment-packaging.json",
+        "backend/tests/api/test_task_comment_recovery.py",
+        "frontend/tests/task-comments.test.ts",
+        "frontend/tests/ui/task-comment-recovery.test.tsx",
+        "docs/design/audits/2026-11-08-task-comments/report.md"
       ],
-      "remaining": [
-        "Reproduce uncertain task comment delivery; add durable exact scoped receipt and frontend packet recovery, without treating approval-labelled comments as acceptance"
+      "remaining": [],
+      "limits": [
+        "Supported APIs append notes; future individual edit/delete needs preserved receipts",
+        "Global suite and complete accessibility remain open",
+        "No fresh model/scientific/human evaluation"
       ]
     }
   }

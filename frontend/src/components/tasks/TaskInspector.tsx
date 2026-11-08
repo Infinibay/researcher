@@ -269,7 +269,7 @@ export function TaskInspector({
                 </div>
               )}
 
-              {tab==='comments'&&<TaskCommentsPanel key={taskId} taskId={taskId}/>}
+              {tab==='comments'&&<TaskCommentsPanel key={`${task.project_id}:${taskId}`} projectId={task.project_id} taskId={taskId}/>}
               {tab==='dependencies'&&projectId!=null&&<TaskDependenciesPanel key={`${projectId}:${taskId}`} projectId={projectId} taskId={taskId}/>}
 
             </div>

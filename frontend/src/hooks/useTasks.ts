@@ -4,6 +4,7 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { fetchApi, buildUrl } from '../api/client'
 import type { Task, TaskComment, TaskDependency } from '../types/api'
 import type { TaskCreationBody } from '../api/taskCreation'
+import type { TaskCommentPacket } from '../api/taskComments'
 
 interface TaskFilters {
   status?: string
@@ -114,10 +115,7 @@ export function useAddTaskComment() {
       ...data
     }: {
       taskId: number
-      author: string
-      content: string
-      comment_type: string
-    }) =>
+    } & TaskCommentPacket['body']) =>
       fetchApi<TaskComment>(`/api/tasks/${taskId}/comments`, {
         method: 'POST',
         body: JSON.stringify(data),

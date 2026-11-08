@@ -28,26 +28,23 @@ que se pueda comparar el avance; no presentar microajustes como tareas principal
 - Última suite global: `9fb873c`,2210 casos,2178 pasan,31 fallan y1 error de fixture; sin omisiones. La carrera de backup encontrada se corrigió después con40 pruebas instaladas. No se declara una nueva corrida global verde; la referencia `0c8b8d9` queda como evidencia histórica.
 - U01–U07, E01–E12, C01–C09 y D01–D13 quedan comprobados con el alcance de sus matrices; siguen 2 de 43 escenarios amplios sin aceptación completa en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Estado actual: 11páginas aceptadas; comentarios de tarea en curso
+## Estado actual: comentarios verificados; sigue cierre completo
 
-**10:31:26–10:44:29UTC,13min3s hasta verificar/inspeccionar**, base64b6cf3.
-[Alcance](execution-page-review.md). Documentación/checkpoint posteriores excluidos.
+**10:51:41–11:03:35UTC,11min54s hasta verificar/inspeccionar**, basecc0434e.
+[Alcance](task-comment-review.md). Documentación/checkpoint posteriores excluidos.
 
-- Terminado: **11/12páginas** técnicas/delegadas. Ejecución: grafo/prerequisito,
-  entrega causal original, recuperación exacta de pausa sin despacho, lectura
-  desconocida/contexto anterior y aislamiento.9estados/15checks,0modelos;
- 19tablas/fuente sin cambio. Producto/backend/esquema71sin modificaciones.
-- En curso desde10:51:41UTC: **comentarios de tarea duraderos**. Proyectos/AuthorityBusy
-  sigue abierto: historia+reinicio no reprodujo el fallo (6min1s,0turnos). Revisión
-  limpia no encontró segundo journal en lecturas ordinarias; no cambiar locks por
-  hipótesis ni encadenar variantes equivalentes.
-- Pendiente en orden: Proyectos, idempotencia de comentarios de tarea (distinta
-  de notas del hilo); cierre no vacío, U08/C10/ciencia, distribución/dependencias,
+- Terminado: **11/12páginas** técnicas/delegadas y comentarios de tarea duraderos:
+ 33fuente/33instaladas,77UI/164contratos/tipos/build. Una nota y2recibos originales;
+  continuación sólo lectura tras error de selector,0modelos. Esquema71sin cambio.
+- En curso: **cierre de proyecto con entregas aceptadas**, no vacío, y enlace
+  real deResumen. Reutilizar contratos/fixtures; no otra generación para probarUI.
+- Pendiente: Proyectos/AuthorityBusy (historia+reinicio no reprodujeron el fallo,
+  no corregido); cierre no vacío, U08/C10/ciencia, distribución/dependencias,
   prompts, inversas71, global y revisión final.
 - Seguimos **41/43escenarios**. Última global31fallos/1error; prompts al último
   corte67de85desactualizados/318archivos. Sin historial de usuario que migrar.
-- Detalles al final: DD143y anteriores; densidad/encuadre, estilo, fechas relativas
-  y accesibilidad completa. Sin porcentaje/ETA global inventados, push o merge.
+- Detalles al final: DD144y anteriores; lint/fechas/enums/densidad/accesibilidad
+  completa. Sin porcentaje/ETA global inventados, push o merge.
 
 ## Etapa anterior: Ken estructural offline verificado; continúa aceptación de páginas
 

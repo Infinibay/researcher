@@ -67,7 +67,11 @@ export interface Task {
   retry_count?: number
 }
 
+/** A stored note is advisory; only a keyed original receipt confirms its own delivery. */
 export interface TaskComment {
+  project_id?: number | null
+  operation_key?: string | null
+  authorizes_work?: false
   id: number
   task_id: number
   author: string

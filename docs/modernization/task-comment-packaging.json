@@ -1,0 +1,37 @@
+{
+  "validation_environment": {
+    "runner_cgroup": "/sys/fs/cgroup/user.slice/user-1000.slice/user@1000.service/app.slice/run-p1434329-i1434330.scope",
+    "parent_controllers_before": "cpu memory pids",
+    "runner_cpu_max": "800000 100000",
+    "purpose": "Transient systemd scope with CPUQuota=800% retains CPU-controller availability during validation; it does not relax any product limit.",
+    "parent_controllers_after": "cpu memory pids"
+  },
+  "base_commit": "cc0434e",
+  "wheel": "researcher-0.1.0-cp312-cp312-linux_x86_64.whl",
+  "wheel_sha256": "78250ff767586811df0c6d5fcf96fc1465efdda66c70bb8ad73f60d11c739986",
+  "source_files_matching_wheel_and_installation": 698,
+  "product_files_matching": 371,
+  "observed": {
+    "cases": 33,
+    "passed": 33,
+    "failed": 0,
+    "skipped": 0,
+    "backend_modules": 226,
+    "all_backend_imports_from_native_env": true,
+    "seconds": 20.637,
+    "exit_code": 0
+  },
+  "tests": [
+    "backend/tests/api/test_task_comment_recovery.py",
+    "backend/tests/api/test_task_inspector_boundaries.py",
+    "backend/tests/api/test_task_creation_commands.py",
+    "backend/tests/api/test_project_records.py",
+    "backend/tests/research/test_task_workspace.py"
+  ],
+  "real_model_turns": 0,
+  "limits": [
+    "Selected installed tests, not the global suite",
+    "Task note original receipts, atomic rollback/concurrency/project scope, retained task metadata and native advisory-note compatibility; schema71 unchanged",
+    "Real installed SQLite/owner HTTP; controlled research workspace scope; no paid model or human/scientific acceptance"
+  ]
+}

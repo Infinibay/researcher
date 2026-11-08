@@ -69,18 +69,23 @@ class TaskResponse(BaseModel):
 
 
 class TaskCommentCreate(BaseModel):
-    """Owner note data and a claimed author label; the note grants no acceptance or execution authority."""
+    """Captured owner note scope/key; claimed author and approval labels grant no native authority."""
 
-    author: str = Field(default="user")
-    content: str = Field(..., min_length=1)
+    project_id: int | None = Field(default=None, ge=1, strict=True)
+    operation_key: str | None = Field(default=None, pattern=r"^[A-Za-z0-9_.:-]{1,128}$")
+    author: str = Field(default="user", min_length=1, max_length=128)
+    content: str = Field(..., min_length=1, max_length=50000)
     comment_type: CommentType = Field(default="comment")
 
 
 class TaskCommentResponse(BaseModel):
-    """Persisted note without interpreting its approval/change label as a native control receipt."""
+    """Persisted advisory note and optional original-key receipt, never a native control receipt."""
 
     id: int
     task_id: int
+    project_id: int | None = None
+    operation_key: str | None = None
+    authorizes_work: Literal[False] = False
     author: str
     comment_type: CommentType
     content: str

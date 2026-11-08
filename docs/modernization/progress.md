@@ -9235,3 +9235,12 @@ concesiones retiradas ydominios eliminados. Sin cambios de producto/locks.
 11/12páginas,41/43escenarios; Proyectos no aceptado. Desde10:51:41UTC sigue
 idempotencia de comentarios de tarea: cuerpo/clave/proyecto/tarea originales,
 recibo duradero yrecuperación local. No confundir con notas de conversación.
+
+## 2026-11-08 — comentarios de tarea duraderos
+
+Basecc0434e,10:51:41–11:03:35UTC,11min54s hasta verificar/inspeccionar.
+[Alcance](task-comment-review.md):33fuente/33instaladas,77UI/164contratos/tipos/build;
+5estados/9checks sobre una nota original y2recibos201idénticos, continuación sólo
+lecturas tras error de selector del driver.0modelos/autoridad nueva. Esquema71.
+11/12páginas,41/43escenarios;Proyectos/AuthorityBusyabierto. Sigue cierre no vacío
+yrecomprobación deResumen; luego U08/C10/ciencia ygatesglobales. DetallesDD144al final.
