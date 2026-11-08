@@ -28,34 +28,37 @@ que se pueda comparar el avance; no presentar microajustes como tareas principal
 - Última suite global: `9fb873c`,2210 casos,2178 pasan,31 fallan y1 error de fixture; sin omisiones. La carrera de backup encontrada se corrigió después con40 pruebas instaladas. No se declara una nueva corrida global verde; la referencia `0c8b8d9` queda como evidencia histórica.
 - U01–U07, E01–E12, C01–C09 y D01–D13 quedan comprobados con el alcance de sus matrices; siguen 2 de 43 escenarios amplios sin aceptación completa en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Estado actual: tres páginas aceptadas; siguiente preparación nativa
+## Estado actual: diagnóstico del productor verificado; contención abierta
 
-**Repositorios: 02:02:43–02:22:16 UTC, 19 min 33 s hasta verificar**, base `941dc5f`.
-Documentación/checkpoint posteriores no incluidos. [Alcance y límites](repositories-page-review.md).
+**Arranque: 02:28:30–03:01:09 UTC, 32 min 39 s hasta verificar**, base `b5b2b3c`.
+Documentación/checkpoint posteriores no incluidos. [Alcance y límites](native-startup-origin-review.md).
 
-- Terminado: **Repositorios**, junto con Documentos y Archivos son **3/12 páginas**
-  con aceptación técnica/visual delegada. Quince estados principales y cinco
-  complementarios: preparación Git, recuperación, parada/reparación, remoto vacío
-  de contrato controlado, recibos y selección entre proyectos. **54 pruebas backend
-  instaladas, 16 contratos frontend y 2 pruebas UI pasan**, cero omisiones/modelos.
-- Siguiente tarea principal: **preparación nativa del engine y plan español con
-  auditoría real de consultas/resultados Ken**. Todavía sin iniciar ese nuevo bloque;
-  registrar hora al hacerlo. Mantener el fallo original, locks/CAS/límites y datos.
-  Las preparaciones Git comprobadas no demuestran que la contención esté corregida.
-- Pendiente de interfaz: Resumen, Proyectos, Planificación, Tareas, Agentes,
-  Conversación, Hallazgos, Informes y Ejecución. Siguen U08/C10, evaluaciones,
-  dependencias y distribución: **41/43 escenarios amplios**, sin porcentaje global
-  defendible. No hay historial que migrar, confirmado por el usuario.
-- Al final: detalles aplazados, accesibilidad completa, suite global y revisión
-  independiente. DD128 recoge densidad, observación de actividad y dos PLW1510 del
-  evaluador; DD125–127 y detalles anteriores continúan. Ruff no se declara verde.
+- Terminado: registro seguro del origen del fallo de arranque aun cuando la
+  retirada sustituye la excepción externa. Primero cierre físico; un log roto no
+  altera el resultado. RED→GREEN, **88 casos de origen y 88 instalados pasan**,
+  cero omisiones/modelos reales; rueda limpia con 677 fuentes y 9 definiciones
+  documentadas. Son las mismas selecciones, no 176 escenarios nuevos.
+- Pendiente principal/en investigación: causa del **AuthorityBusy original**.
+  El ensayo de navegador tampoco lo reprodujo: una admisión, 35 lecturas iniciadas,
+  cero turnos y cierre comprobado. Los originales inglés/español usaron procesos
+  distintos; no asumir reutilización de la misma instancia. Conservar historia,
+  reservas y diagnósticos antes de elegir otra prueba con una diferencia causal.
+- Siguiente capacidad: plan español y evidencia real de consultas/resultados Ken.
+  No se confunde la preparación del catálogo con consultas verificadas ni la
+  observabilidad corregida con fiabilidad demostrada. Todavía sin nueva inferencia.
+- Interfaz: Documentos, Archivos y Repositorios aceptados: **3/12 páginas**. Faltan
+  Resumen, Proyectos, Planificación, Tareas, Agentes, Conversación, Hallazgos,
+  Informes y Ejecución. Siguen **41/43 escenarios**, U08/C10, evaluaciones,
+  dependencias/distribución; no hay historial que migrar, confirmado por el usuario.
+- Al final: detalles DD125–129 y anteriores, accesibilidad completa, suite global
+  y revisión independiente. Cuatro hallazgos Ruff en la selección nueva, DD129;
+  no se declara estilo/global verdes ni porcentaje global defendible.
 
-Se conservan cuatro fallos previos del harness; el final espera cada admisión HTTP
-antes de leer el resultado y no suma repeticiones como casos nuevos. El ensayo
-complementario mantiene idéntica la historia original. Ocho registros, seis
-preparaciones completadas/cerradas, archivos y notas verificados de forma
-independiente. Cero runs/despachos/inferencias. La contención nativa, U08 y el
-resultado científico pendiente permanecen principales; última suite global sin cambios.
+La nueva prueba kernel demuestra pérdida de causa bajo retirada, no reproduce
+el AuthorityBusy original. El nuevo diagnóstico conserva tipos/etapas/ubicaciones
+sin mensajes privados. Ninguna reserva o ejecución original se reescribe; no hubo
+push, merge ni despliegue. Los 3 pilotos aceptados mantienen su alcance técnico y
+visual delegado; U08 continúa sin aceptación humana.
 
 ## Etapa anterior: Documentos en aceptación; contención sigue abierta
 

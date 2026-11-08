@@ -57,3 +57,41 @@ La preparación HTTP bajo guardián/uvloop tampoco reprodujo el fallo; conservó
 fuente, límites y reserva,0turnos y cierre comprobado. No se repiten casos iguales
 indefinidamente. La fiabilidad queda como pendiente principal mientras se verifica
 una capacidad independiente sin inferencia (Documentos), sin afirmar su corrección.
+
+
+## Retoma con navegador real — 2026-11-08 02:28:30 UTC
+
+Base `b5b2b3c`; 3/12 páginas y 41/43 escenarios comprobados. La preparación Git
+real no reprodujo la contención nativa ni demuestra su corrección.
+
+Ruling: un único ensayo adicional con navegador y sus peticiones naturales durante
+la admisión. El HTTP anterior consultaba sus tres endpoints secuencialmente;
+la concurrencia no era la de la página. Mantener ambas guardias que prohíben
+generación, registrar el productor de AuthorityBusy/Conflict si aparece y conservar
+el intento nuevo. No alterar locks/CAS, reservas, límites o instalaciones previas.
+
+La guardia previa sí se alcanza después de abrir la sesión nativa y enlazar su
+thread: broker_inference entra en async with native antes de entregar el facade.
+Las cinco observaciones no fueron sólo preparación Ken. El nuevo ensayo cambia
+el cliente/concurrencia; sigue enviando cero inferencias. Si no aparece el fallo,
+conservar el resultado sin declarar la contención resuelta y documentar antes de
+elegir otro experimento. El plan español con auditoría real Ken sigue pendiente;
+no reintentar el proyecto 5 ni abrir una sucesión de variantes sin nueva evidencia.
+
+El ensayo del navegador llegó a la guardia con 35 lecturas iniciadas, una admisión
+y cero turnos; no reprodujo la contención. No se midió solapamiento en el servidor.
+Los logs originales muestran procesos API distintos para el plan inglés y el
+fallo español, con fuentes de bytes idénticos. Descartar la suposición de que ambos
+ocurrieron necesariamente en la misma instancia viva del servicio.
+
+Ruling: proteger primero el diagnóstico del productor. `_run` puede sustituir
+el error por un conflicto con contexto suprimido durante retirada. Una prueba
+kernel reproduce esa pérdida y requiere conservar ubicaciones seguras después del
+cierre físico; otra impide que el sumidero roto controle el resultado. Se comparte
+el extractor existente con el servicio, manteniendo su alias. No modifica CAS,
+locks, reservas o el gate, ni afirma corregir el AuthorityBusy original.
+
+88 casos de origen y los mismos 88 instalados pasan; 677 fuentes coinciden con
+la rueda limpia y 9 definiciones están documentadas. Verificado a las 03:01:09 UTC,
+32 min 39 s hasta verificar, sin documentación/checkpoint posteriores. Detalles de
+estilo en DD129. [Alcance y siguiente investigación](../../modernization/native-startup-origin-review.md).

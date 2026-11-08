@@ -1,0 +1,71 @@
+{
+  "base_commit": "b5b2b3c",
+  "changed_or_new_definitions_documented": 9,
+  "missing": [],
+  "contracts": [
+    {
+      "path": "backend/runtime/failure_diagnostics.py",
+      "symbol": "failure_sites",
+      "line": 4,
+      "docstring": "Locate at most four internal frames per cause and four causes, excluding messages, filesystem paths, source lines and locals.",
+      "file_sha256": "1bda0e130f17ab889d11445deb8bcb07f1850445f7907d352bec35b5e4e11d37"
+    },
+    {
+      "path": "backend/runtime/peer_broker.py",
+      "symbol": "PeerBroker",
+      "line": 137,
+      "docstring": "One externally supplied, non-reused domain for one original attempt.\n\n``run_peer`` owns reserve\u2192spawn\u2192global publication\u2192concrete local bind\u2192G.\nCallers receive a transport only after G and can only recover a receipt on\nretry. ``revoke`` withdraws G before waiting for SQL/constructors. Global\nrecovery needs only the journal/domain, never the original project DB.\nComplete actor-origin and endpoint authentication remain deployment work.",
+      "file_sha256": "b03b17fe5ad34253da404134208855e8298bccc658cad43754d4bfee1896f262"
+    },
+    {
+      "path": "backend/runtime/peer_broker.py",
+      "symbol": "PeerBroker._run",
+      "line": 482,
+      "docstring": "Witness launch intent before its original gate; retain safe startup locations after physical closure even when withdrawal replaces the outward error.",
+      "file_sha256": "b03b17fe5ad34253da404134208855e8298bccc658cad43754d4bfee1896f262"
+    },
+    {
+      "path": "backend/tests/runtime/test_peer_broker_boundaries.py",
+      "symbol": "test_startup_log_preserves_private_failure_origin_after_physical_close_and_withdrawal",
+      "line": 13,
+      "docstring": "A withdrawn real pre-gate namespace retains safe original diagnostics before its public conflict suppresses that cause.",
+      "file_sha256": "12d6424e6b3bfc69a0ab0bb414b506ed230219151fc31de260dff28b3239d9b2"
+    },
+    {
+      "path": "backend/tests/runtime/test_peer_broker_boundaries.py",
+      "symbol": "test_startup_log_preserves_private_failure_origin_after_physical_close_and_withdrawal.record_warning",
+      "line": 23,
+      "docstring": "Require physical retirement before operator logging can perform any I/O.",
+      "file_sha256": "12d6424e6b3bfc69a0ab0bb414b506ed230219151fc31de260dff28b3239d9b2"
+    },
+    {
+      "path": "backend/tests/runtime/test_peer_broker_boundaries.py",
+      "symbol": "test_startup_log_preserves_private_failure_origin_after_physical_close_and_withdrawal.interrupted_namespace",
+      "line": 28,
+      "docstring": "Inject an original namespace observation failure alongside a real owner withdrawal, before any gate is sent.",
+      "file_sha256": "12d6424e6b3bfc69a0ab0bb414b506ed230219151fc31de260dff28b3239d9b2"
+    },
+    {
+      "path": "backend/tests/runtime/test_peer_broker_boundaries.py",
+      "symbol": "test_operator_log_failure_cannot_replace_startup_error_or_delay_physical_close",
+      "line": 51,
+      "docstring": "An unavailable log sink preserves the original startup exception and observes a closed real pre-gate domain.",
+      "file_sha256": "12d6424e6b3bfc69a0ab0bb414b506ed230219151fc31de260dff28b3239d9b2"
+    },
+    {
+      "path": "backend/tests/runtime/test_peer_broker_boundaries.py",
+      "symbol": "test_operator_log_failure_cannot_replace_startup_error_or_delay_physical_close.failed_namespace",
+      "line": 58,
+      "docstring": "Fail before native code can receive a gate; the error message is synthetic and private.",
+      "file_sha256": "12d6424e6b3bfc69a0ab0bb414b506ed230219151fc31de260dff28b3239d9b2"
+    },
+    {
+      "path": "backend/tests/runtime/test_peer_broker_boundaries.py",
+      "symbol": "test_operator_log_failure_cannot_replace_startup_error_or_delay_physical_close.failed_log",
+      "line": 62,
+      "docstring": "Simulate a broken operator sink after physical retirement instead of granting logging authority over Stop.",
+      "file_sha256": "12d6424e6b3bfc69a0ab0bb414b506ed230219151fc31de260dff28b3239d9b2"
+    }
+  ],
+  "scope": "New/changed Python definitions and modules in this delivery. New frontend modules and exported behavior have English JSDoc; this Python audit does not certify all historical definitions."
+}

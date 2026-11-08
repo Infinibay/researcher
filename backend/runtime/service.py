@@ -34,6 +34,7 @@ from backend.runtime.contracts import (
     WorkspaceChanged,
     validate_correction,
 )
+from backend.runtime.failure_diagnostics import failure_sites as _failure_sites
 from backend.runtime.peer_registry import AttemptPeers
 from backend.runtime.recovery import RunRecovery
 from backend.runtime.sqlite_questions import SQLiteQuestionStore
@@ -43,25 +44,6 @@ from backend.runtime.workspaces import WorkspaceRegistry
 __all__ = ["RuntimeService", "WorkspaceRegistry"]
 
 logger = logging.getLogger(__name__)
-
-
-def _failure_sites(error):
-    """Locate bounded internal failure frames and causes without logging messages, paths, source lines or locals."""
-    sites, seen = [], set()
-    while error is not None and id(error) not in seen and len(sites) < 4:
-        seen.add(id(error))
-        frames, trace = [], error.__traceback__
-        while trace is not None:
-            frame = trace.tb_frame
-            module = frame.f_globals.get("__name__", "")
-            if module.startswith("backend."):
-                frames.append(f"{module}.{frame.f_code.co_name}:{trace.tb_lineno}")
-            trace = trace.tb_next
-        sites.append({"type": type(error).__name__, "sites": frames[-4:]})
-        error = error.__cause__ or (
-            None if error.__suppress_context__ else error.__context__
-        )
-    return sites
 
 
 @dataclass

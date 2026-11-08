@@ -8805,3 +8805,31 @@ zoom nativo o publicación real acreditados. **3/12 páginas**, **41/43 escenari
 Siguiente: preparación nativa/plan español con auditoría real Ken; otras nueve
 páginas, U08/C10/evaluaciones/distribución siguen abiertas. Detalles y suite global
 al final, con revisión independiente. [Alcance y evidencia](repositories-page-review.md).
+
+
+## Diagnóstico de arranque conservado en el productor, 2026-11-08
+
+Bloque 02:28:30–03:01:09 UTC, **32 min 39 s hasta verificar**, base `b5b2b3c`;
+documentación/checkpoint posteriores no incluidos. Un único ensayo nuevo con
+Chromium, guardián productivo y uvloop llega a la guardia de generación: una
+admisión, 35 lecturas iniciadas, cero turnos. Fuente intacta, peers/grants cerrados;
+no mide solapamiento en servidor ni reproduce la contención. La revisión confirma
+que las cinco guardias anteriores sí abrieron sesión Codex/thread; los originales
+inglés/español usaron procesos API distintos y fuentes de bytes idénticos.
+
+Se reproduce por separado una pérdida de causa: fallo de observación de un
+namespace real previo al gate más retirada termina como conflicto con contexto
+suprimido. RED→GREEN para un registro seguro en el broker después del cierre físico;
+otro caso demuestra que el sumidero roto no sustituye el error ni retrasa esa
+retirada. Helper común, alias service._failure_sites compatible; sin cambios de
+locks/CAS/reservas/gate/excepciones externas. Nueve definiciones documentadas.
+88 casos de origen y los mismos 88 instalados pasan, sin omisiones/modelos reales.
+Rueda limpia sdist→wheel, 677 fuentes/361 de producto coinciden; imports instalados
+y uv pip check pasan. Artefacto actual startup-origin-dist, SHA en el recibo.
+Ruff tiene cuatro hallazgos conservados en DD129; no se declara verde.
+
+**3/12 páginas y 41/43 escenarios**, sin nueva suite global verde. La causa del
+AuthorityBusy original, plan español y auditoría real Ken siguen pendientes
+principales; U08/C10, nueve páginas, evaluaciones/distribución, detalles y revisión
+independiente al cierre. No repetir proyectos fallidos ni devolver sus reservas
+por suposición. [Alcance](native-startup-origin-review.md).

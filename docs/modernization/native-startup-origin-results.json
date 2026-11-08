@@ -1,0 +1,75 @@
+{
+  "base_commit": "b5b2b3c",
+  "started_at": "2026-11-08T02:28:30Z",
+  "verified_at": "2026-11-08T03:01:09Z",
+  "seconds_until_verification": 1959,
+  "status": "producer_diagnostics_verified_original_contention_unfixed",
+  "original_authority_busy_reproduced": false,
+  "original_authority_busy_fixed": false,
+  "controlled_fault": "Real pre-gate kernel namespace observation fails with private OSError alongside withdrawal; outward AuthorityConflict suppresses context. Original producer logged only after physical closure.",
+  "red_before_change": {
+    "cases": 1,
+    "failed": 1,
+    "reason": "No producer log retained"
+  },
+  "source_selection": {
+    "cases": 88,
+    "passed": 88,
+    "failed": 0,
+    "skipped": 0,
+    "seconds": 142.86
+  },
+  "installed_selection": {
+    "cases": 88,
+    "passed": 88,
+    "failed": 0,
+    "skipped": 0,
+    "backend_modules": 258,
+    "all_backend_imports_from_native_env": true,
+    "seconds": 143.839,
+    "exit_code": 0
+  },
+  "new_and_changed_definitions_documented": 9,
+  "wheel_sha256": "d253a856e9ad7d7bea779916e327ddba4e53659675d858c758fcd39a5097ff04",
+  "source_files_matching_wheel_installation": 677,
+  "product_files_matching": 361,
+  "service_private_helper_alias_preserved": true,
+  "operator_log_fields": [
+    "peer_kind",
+    "startup_stage",
+    "exception_type",
+    "up_to_four_internal_module_function_line_locations_per_cause",
+    "up_to_four_causes"
+  ],
+  "excluded_log_content": [
+    "exception_messages",
+    "filesystem_paths",
+    "source_lines",
+    "locals"
+  ],
+  "physical_retirement_before_log": true,
+  "failed_log_sink_preserves_error_and_closure": true,
+  "model_turns": 0,
+  "pip_check": "passed",
+  "ruff": {
+    "status": "not_green",
+    "findings": [
+      "I001 imports peer_broker.py",
+      "S110 intentional diagnostic sink exception boundary",
+      "BLE001 same intentional boundary",
+      "SIM117 nested test contexts"
+    ],
+    "deferred": "DD129"
+  },
+  "browser_probe": "docs/modernization/native-preparation-browser-results.json",
+  "whole_pages_accepted": 3,
+  "broad_scenarios_verified": 41,
+  "broad_scenarios_total": 43,
+  "limits": [
+    "Diagnostic failure-origin preservation, not a fix of original AuthorityBusy",
+    "Source and installed selections are repeated distinct environments, not176newscenarios",
+    "Controlled kernel faults/native fixture actors; no paid inference or new Spanish plan",
+    "Original accepted English plan, Spanish failure and budget holds untouched",
+    "No new global green suite, push, merge or deploy"
+  ]
+}

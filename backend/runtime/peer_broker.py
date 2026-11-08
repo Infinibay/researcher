@@ -7,6 +7,7 @@ an LLM turn, accepts product work or grants authority from a storage receipt.
 
 import hashlib
 import json
+import logging
 import os
 import select
 import threading
@@ -36,6 +37,7 @@ from backend.runtime.contracts import command_key, text
 from backend.runtime.egress_channel import EgressChannel
 from backend.runtime.egress_proxy import EgressPolicy, TunnelProxy
 from backend.runtime.execution_domain import DomainIdentity, ExecutionDomain
+from backend.runtime.failure_diagnostics import failure_sites
 from backend.runtime.git_capsule import GitCapsule, GitLaunch
 from backend.runtime.ken_worker import KenInstallation
 from backend.runtime.native_network import NativeNetwork
@@ -56,6 +58,8 @@ from backend.runtime.remote_capsule import (
     RemoteGitLaunch,
     RemoteObservationLaunch,
 )
+
+logger = logging.getLogger(__name__)
 
 
 def _digest(value):
@@ -496,7 +500,7 @@ class PeerBroker:
         git_launch=None,
         check_launch=None,
     ):
-        """Witness launch intent and manifests before releasing the original gate."""
+        """Witness launch intent before its original gate; retain safe startup locations after physical closure even when withdrawal replaces the outward error."""
         command_key(operation_key)
         if check_launch is not None and any(
             (
@@ -933,12 +937,14 @@ class PeerBroker:
             self._projection_source = registry
             self._gate_observed[operation_id] = False
             read_fd = write_fd = None
+            startup_stage = "resource_limits"
             try:
                 if not self._children:
                     self.domain.limit(**asdict(self._limits))
                 read_fd, write_fd = os.pipe2(os.O_CLOEXEC)
                 channel = None
                 if egress is not None:
+                    startup_stage = "egress_channel"
                     channel = EgressChannel(TunnelProxy(egress))
                     with self._decision_lock:
                         admitted = not self._withdrawn.is_set()
@@ -975,6 +981,7 @@ class PeerBroker:
                     )
                 if check_launch is not None:
                     capsule = CheckCapsule
+                startup_stage = "capsule_profile"
                 with capsule(
                     admission["binding"],
                     check_launch
@@ -1014,6 +1021,7 @@ class PeerBroker:
                 ) as profile:
                     if self._withdrawn.is_set():
                         raise AuthorityConflict("Broker admission withdrawn")
+                    startup_stage = "spawn"
                     child = self.domain.spawn(
                         profile.argv, env=profile.env, pass_fds=profile.pass_fds
                     )
@@ -1024,6 +1032,7 @@ class PeerBroker:
                     channel.close_child_end()
                 os.close(write_fd)
                 write_fd = None
+                startup_stage = "namespace_observation"
                 info = self._info(read_fd)
                 pid = info.get("child-pid")
                 if type(pid) is not int or pid <= 1:
@@ -1044,12 +1053,16 @@ class PeerBroker:
                             raise
                         time.sleep(0.01)
                 self._namespaces[operation_id] = identity
+                startup_stage = "namespace_publication"
                 self._update(
                     operation_id, state="published", namespace=asdict(identity)
                 )
+                startup_stage = "local_binding"
                 registry.bind(peer_id, identity)
                 # Persist intent before the effect. A lost G/ack is never replayed.
+                startup_stage = "gate_intent"
                 self._update(operation_id, state="dispatching", gate_sent=None)
+                startup_stage = "gate_release"
                 with self._decision_lock:
                     if self._withdrawn.is_set():
                         raise AuthorityConflict("Broker revoked before gate")
@@ -1058,14 +1071,27 @@ class PeerBroker:
                     if os.write(child.stdin.fileno(), b"G") != 1:
                         raise AuthorityUncertain("Gate write incomplete")
                     self._gate_observed[operation_id] = True
+                startup_stage = "release_publication"
                 self._update(operation_id, state="released", gate_sent=True)
                 return PeerStart(operation_id, "released", True, PeerTransport(child))
-            except BaseException:
+            except BaseException as error:
                 revoked = self._withdrawn.is_set()
                 self.withdraw()
                 try:
                     self._physical()
                 except (OSError, RuntimeError):
+                    pass
+                # Preserve the original producer before withdrawal replaces its
+                # outward exception. Physical withdrawal/retirement cannot wait
+                # for log I/O, and diagnostics cannot change the original outcome.
+                try:
+                    logger.warning(
+                        "Peer startup failed: kind=%s stage=%s sites=%s",
+                        kind,
+                        startup_stage,
+                        failure_sites(error),
+                    )
+                except Exception:
                     pass
                 if revoked:
                     raise AuthorityConflict(

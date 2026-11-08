@@ -1,0 +1,41 @@
+{
+  "validation_environment": {
+    "runner_cgroup": "/sys/fs/cgroup/user.slice/user-1000.slice/user@1000.service/app.slice/run-p1367145-i1367146.scope",
+    "parent_controllers_before": "cpu memory pids",
+    "runner_cpu_max": "800000 100000",
+    "purpose": "Transient systemd scope with CPUQuota=800% retains CPU-controller availability during validation; it does not relax any product limit.",
+    "parent_controllers_after": "cpu memory pids"
+  },
+  "base_commit": "b5b2b3c",
+  "wheel": "researcher-0.1.0-cp312-cp312-linux_x86_64.whl",
+  "wheel_sha256": "d253a856e9ad7d7bea779916e327ddba4e53659675d858c758fcd39a5097ff04",
+  "source_files_matching_wheel_and_installation": 677,
+  "product_files_matching": 361,
+  "observed": {
+    "cases": 88,
+    "passed": 88,
+    "failed": 0,
+    "skipped": 0,
+    "backend_modules": 258,
+    "all_backend_imports_from_native_env": true,
+    "seconds": 143.839,
+    "exit_code": 0
+  },
+  "tests": [
+    "backend/tests/runtime/test_peer_broker_boundaries.py",
+    "backend/tests/runtime/test_peer_broker.py",
+    "backend/tests/runtime/test_broker_native.py",
+    "backend/tests/runtime/test_broker_rpc.py",
+    "backend/tests/runtime/test_broker_peer_close.py",
+    "backend/tests/runtime/test_broker_limits.py",
+    "backend/tests/runtime/test_broker_inference.py",
+    "backend/tests/runtime/test_runtime_service.py",
+    "backend/tests/runtime/test_owned_code_dependencies.py"
+  ],
+  "real_model_turns": 0,
+  "limits": [
+    "Selected installed tests, not the global suite",
+    "Current installed broker/startup/closure/native mediation/service cases; browser page acceptance is recorded separately",
+    "Actual kernel/SQLite broker ownership, safe producer diagnostics, controlled native actors; controlled native/import fixtures, no paid inference or human comprehension claim"
+  ]
+}

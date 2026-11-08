@@ -6073,7 +6073,7 @@
     },
     "native_preparation_reliability": {
       "status": "in_progress",
-      "scope": "Original real preparation contention remains unreproduced; closure explanation and safe operator diagnostics verified from clean installed wheel,97passing cases,0skips; four guarded preparations send0turns",
+      "scope": "Original contention remains unreproduced/unfixed. Six generation-forbidden preparations reach the guard; browser observation has1admission/35read starts, not measured server concurrency. Producer diagnostics preserve safe original failure after physical closure despite withdrawal or broken log sink;88source/88installed pass,677matching sources. Original English/Spanish API processes distinct and source bytes identical.",
       "evidence": [
         "docs/modernization/projects-page-review.md",
         "docs/modernization/projects-page-results.json",
@@ -6082,7 +6082,14 @@
         "docs/modernization/native-preparation-results.json",
         "docs/modernization/native-preparation-packaging.json",
         "docs/modernization/native-preparation-docstrings.json",
-        "docs/modernization/native-preparation-http-results.json"
+        "docs/modernization/native-preparation-http-results.json",
+        "docs/modernization/native-preparation-browser-results.json",
+        "docs/modernization/native-startup-origin-review.md",
+        "docs/modernization/native-startup-origin-results.json",
+        "docs/modernization/native-startup-origin-packaging.json",
+        "docs/modernization/native-startup-origin-docstrings.json",
+        "backend/runtime/failure_diagnostics.py",
+        "backend/tests/runtime/test_peer_broker_boundaries.py"
       ],
       "remaining": [
         "Reproduce and fix demonstrated contention without ignoring authority locks or replaying uncertain effects",

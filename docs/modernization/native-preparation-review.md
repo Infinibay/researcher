@@ -90,3 +90,17 @@ y límites originales. Llegó a la guardia de generación, envió0turnos y cerr�
 peers; no reprodujo la contención. [Recibo independiente](native-preparation-http-results.json).
 La causa permanece abierta. Se continúa con capacidades independientes de la web,
 sin reclasificar la fiabilidad nativa como detalle ni repetir ensayos equivalentes.
+
+
+## Navegador y diagnóstico del productor, 2026-11-08
+
+Una sexta observación con cliente Chromium real también llega a la guardia: una
+admisión, 35 lecturas iniciadas, cero turnos y cierre comprobado. No reproduce la
+contención; no mide concurrencia dentro del servidor. Los procesos originales de
+la propuesta inglesa y del fallo español eran distintos y sus fuentes idénticas.
+
+Se demuestra por separado una pérdida de causa durante retirada de arranque y
+se protege con registro seguro en el broker, después del cierre físico. Un log
+roto no sustituye el resultado. 88 casos de origen y 88 instalados pasan; 677 fuentes
+coinciden con la rueda limpia. Es mejora de diagnóstico, no solución del error
+original. DD129 conserva estilo. [Revisión y límites](native-startup-origin-review.md).

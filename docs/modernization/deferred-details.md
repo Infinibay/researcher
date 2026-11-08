@@ -1075,3 +1075,13 @@ Ruff señala dos PLW1510 en los nuevos `repositories_workspace.py` y
 se declara verde. Resolver junto con los demás detalles; no repetir los recorridos
 Git por un ajuste equivalente al valor por defecto. Capturas y alcance:
 `docs/design/audits/2026-11-08-repositories-acceptance/report.md`.
+
+## DD129 — estilo del diagnóstico de arranque
+
+Después de las capacidades mayores: I001 en imports de `peer_broker.py`, SIM117
+en el test nuevo y S110/BLE001 en la captura de errores del sumidero. La captura
+amplia es deliberada y está cubierta: el dominio ya debe estar cerrado y un
+fallo del log no puede sustituir el error original. Revisar una anotación explícita
+o forma equivalente sin introducir otro log recursivo ni mover I/O antes del
+cierre físico. Ruff de esta selección no se declara verde. El resto de detalles
+previos y la contención original siguen separados de este diagnóstico comprobado.

@@ -1,12 +1,75 @@
 """Real contention and descendant pressure over the analysis broker profile."""
 
 import json
+import logging
 import select
 import sqlite3
 from pathlib import Path
 from uuid import uuid4
 
 import pytest
+
+
+def test_startup_log_preserves_private_failure_origin_after_physical_close_and_withdrawal(broker_setup, monkeypatch, caplog):
+    """A withdrawn real pre-gate namespace retains safe original diagnostics before its public conflict suppresses that cause."""
+    from backend.runtime.authority_journal import AuthorityConflict
+
+    _source, registry, peer, broker, storage, path = broker_setup
+    private = '/private/synthetic-account.json synthetic-secret-do-not-log'
+    observed = []
+    logger = logging.getLogger('backend.runtime.peer_broker')
+    warning = logger.warning
+
+    def record_warning(*args, **kwargs):
+        """Require physical retirement before operator logging can perform any I/O."""
+        observed.append({'domain_present': path.exists(), 'args': args})
+        return warning(*args, **kwargs)
+
+    def interrupted_namespace(_descriptor):
+        """Inject an original namespace observation failure alongside a real owner withdrawal, before any gate is sent."""
+        broker.withdraw()
+        raise OSError(private)
+
+    monkeypatch.setattr(logger, 'warning', record_warning)
+    monkeypatch.setattr(broker, '_info', interrupted_namespace)
+    with caplog.at_level(logging.WARNING, logger='backend.runtime.peer_broker'):
+        with pytest.raises(AuthorityConflict) as caught:
+            broker.run_peer(registry, peer, operation_key='withdrawn-startup-failure', code="print('MUST NOT RUN')")
+    assert caught.value.__suppress_context__ is True
+    assert len(observed) == 1 and observed[0]['domain_present'] is False
+    record, = [record for record in caplog.records if record.name == 'backend.runtime.peer_broker']
+    assert record.args[0:2] == ('command', 'namespace_observation')
+    assert record.args[2][0]['type'] == 'OSError'
+    assert record.args[2][0]['sites'] and len(record.args[2][0]['sites']) <= 4
+    assert record.exc_info is None and private not in caplog.text
+    assert broker.revoke()['state'] == 'retired'
+    snapshot = storage.load()
+    operations = [value for key, value in snapshot.records.items() if key.startswith('broker:op:')]
+    assert len(operations) == 1 and operations[0]['gate_sent'] is False
+
+
+def test_operator_log_failure_cannot_replace_startup_error_or_delay_physical_close(broker_setup, monkeypatch):
+    """An unavailable log sink preserves the original startup exception and observes a closed real pre-gate domain."""
+    from backend.runtime.peer_broker import logger
+
+    _source, registry, peer, broker, _storage, path = broker_setup
+    observed = []
+
+    def failed_namespace(_descriptor):
+        """Fail before native code can receive a gate; the error message is synthetic and private."""
+        raise OSError('private synthetic namespace observation')
+
+    def failed_log(*_arguments, **_keywords):
+        """Simulate a broken operator sink after physical retirement instead of granting logging authority over Stop."""
+        observed.append(path.exists())
+        raise RuntimeError('operator sink unavailable')
+
+    monkeypatch.setattr(broker, '_info', failed_namespace)
+    monkeypatch.setattr(logger, 'warning', failed_log)
+    with pytest.raises(OSError, match='private synthetic namespace observation'):
+        broker.run_peer(registry, peer, operation_key='unavailable-startup-log', code="print('MUST NOT RUN')")
+    assert observed == [False]
+    assert broker.revoke()['state'] == 'retired'
 
 
 def test_two_databases_on_same_source_cannot_hold_global_concession(

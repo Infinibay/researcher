@@ -1,0 +1,47 @@
+{
+  "base_commit": "b5b2b3c",
+  "started_at": "2026-11-08T02:28:30Z",
+  "observed_at": "2026-11-08T02:38:25Z",
+  "seconds_until_observation": 595,
+  "status": "observed_without_reproducing_contention",
+  "original_failure_fixed": false,
+  "client": "Actual Chromium Projects to Tasks to Projects navigation with its natural application reads",
+  "admissions_sent": 1,
+  "browser_exit": 0,
+  "browser_api_reads_started": 35,
+  "server_request_overlap_measured": false,
+  "reached_generation_guard": true,
+  "diagnostics": [
+    {
+      "stage": "prepared_generation_forbidden",
+      "loop": "uvloop"
+    }
+  ],
+  "native_starts": 0,
+  "reserved_sql_dispatches": 1,
+  "unclosed_peers": 0,
+  "unrevoked_tool_grants": 0,
+  "integrity": "ok",
+  "source_unchanged": true,
+  "service_exit": 143,
+  "service_resources": {
+    "status": "closed",
+    "domain_removed": true
+  },
+  "interpretation": "Deliberate runtime_failed after the generation guard. SQL reservation exists and product conservatively reports unknown inference; both diagnostic guards and zero native starts prove no turn was sent in this trial. Not a Spanish response or evidence of Ken queries.",
+  "original_timeline_check": {
+    "accepted_english_and_failed_spanish_used_distinct_api_processes": true,
+    "original_sources_sha256_equal": true,
+    "source_sha256": "8b925a4f40dee5ea1a4212bfd6f4ebbbf200bf77662bc8be9805c7db1bfbc33b",
+    "limitation": "Retained installation/history differs from fresh probes; no cause inferred from that difference and no assumption of same serving-process reuse."
+  },
+  "prototype_sha256": "dd8742217070bb592ed1e97069508ac921d6f4fd89b2bd75f3b2bd4b4785d15a",
+  "browser_script": "frontend/tests/preparation-probe.e2e.mjs",
+  "next": "Inspect the specific source paths that can raise AuthorityBusy before native publication, comparing retained history without modifying original runs. No automatic new probe or paid retry.",
+  "scope_limits": [
+    "Six generation-forbidden startup observations do not establish intermittent reliability or root cause",
+    "35read-start events are client observations, not measured server simultaneity",
+    "Original project5, its budget hold and accepted English proposal untouched",
+    "Still3of12pages,41of43scenarios; U08/C10 and Spanish plan/Ken-query verification open"
+  ]
+}
