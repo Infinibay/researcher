@@ -1,0 +1,53 @@
+{
+  "validation_environment": {
+    "runner_cgroup": "/sys/fs/cgroup/user.slice/user-1000.slice/user@1000.service/app.slice/run-p1419657-i1419658.scope",
+    "parent_controllers_before": "cpu memory pids",
+    "runner_cpu_max": "800000 100000",
+    "purpose": "Transient systemd scope with CPUQuota=800% retains CPU-controller availability during validation; it does not relax any product limit.",
+    "parent_controllers_after": "cpu memory pids"
+  },
+  "base_commit": "9d99cac",
+  "wheel": "researcher-0.1.0-cp312-cp312-linux_x86_64.whl",
+  "wheel_sha256": "59241c4a8460fa623de7d428dbf99a9a1a7ccd85fbe91a62ae572b312bf5f19d",
+  "source_files_matching_wheel_and_installation": 696,
+  "product_files_matching": 370,
+  "observed": {
+    "cases": 169,
+    "passed": 169,
+    "failed": 0,
+    "skipped": 0,
+    "backend_modules": 274,
+    "all_backend_imports_from_native_env": true,
+    "seconds": 193.808,
+    "exit_code": 0
+  },
+  "tests": [
+    "backend/tests/runtime/test_dependency_authority.py",
+    "backend/tests/runtime/test_context_causality_migration.py",
+    "backend/tests/runtime/test_manual_prerequisite_review.py",
+    "backend/tests/runtime/test_task_creation_commands.py",
+    "backend/tests/runtime/test_task_input_versioning.py",
+    "backend/tests/runtime/test_result_acceptance.py",
+    "backend/tests/runtime/test_plan_execution.py",
+    "backend/tests/runtime/test_plan_reauthorization.py",
+    "backend/tests/runtime/test_plan_continuation.py",
+    "backend/tests/runtime/test_predecessor_code_material.py",
+    "backend/tests/runtime/test_predecessor_research_material.py",
+    "backend/tests/runtime/test_work_material.py",
+    "backend/tests/runtime/test_run_input.py",
+    "backend/tests/runtime/test_code_carryover.py",
+    "backend/tests/runtime/test_code_review_state.py",
+    "backend/tests/runtime/test_owned_plan_execution.py",
+    "backend/tests/runtime/test_owned_plan_reauthorization.py",
+    "backend/tests/runtime/test_owned_selective_material.py",
+    "backend/tests/api/test_task_inspector_boundaries.py",
+    "backend/tests/runtime/test_migration_chain.py::test_forward_targets_form_one_complete_history_and_preserve_seeded_data",
+    "backend/tests/runtime/test_migration_chain.py::test_writer_crash_before_version_commit_preserves_prior_schema_and_resumes[71]"
+  ],
+  "real_model_turns": 0,
+  "limits": [
+    "Selected installed tests, not the global suite",
+    "Causal closure, native/tools authority, immutable manual/reviewer evidence, effective plan reauthorization, schema71 inverse/forward/crash and retained input/result regressions; whole page acceptance separate",
+    "Real SQLite/Git/files and controlled native protocol peers in selected owned tests; no paid model or human/scientific acceptance"
+  ]
+}

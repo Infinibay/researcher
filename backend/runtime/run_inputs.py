@@ -132,10 +132,12 @@ def task_request_history(conn, row, conversation):
 def freeze_input(conn, row, context):
     """Freeze current task/history and versioned causal evidence; new large historical sections use exact retrievable references, never silent truncation."""
     from backend.planning.material_views import project_delivery
+    from backend.planning.manual_prerequisites import ManualPrerequisites, causal_source_row
 
     # Input validation belongs to the owning store before this renderer; reading
     # its immutable packet here preserves the exact original causal material.
-    delivery = conn.execute("SELECT h.packet_json FROM runtime_plan_handoffs h JOIN runtime_plan_deliveries d ON d.id=h.delivery_id WHERE d.run_id=?", (row["id"],)).fetchone()
+    source=causal_source_row(conn,row)
+    delivery = conn.execute("SELECT h.packet_json FROM runtime_plan_handoffs h JOIN runtime_plan_deliveries d ON d.id=h.delivery_id WHERE d.run_id=?", (source["id"],)).fetchone()
     conversation = conversation_history(conn, row)
     payload = {
         "schema_version": 1,
@@ -156,6 +158,10 @@ def freeze_input(conn, row, context):
         "work_delivery": project_delivery(json.loads(delivery["packet_json"])) if delivery else None,
     }
     from backend.runtime.code_carryover import CodeCarryovers
+    if delivery is None:
+        prerequisites=ManualPrerequisites.read_packet(conn,source)
+        if prerequisites is not None:
+            payload['prerequisite_material']=prerequisites
 
     prior_code = CodeCarryovers.input(conn, row)
     if prior_code is not None:

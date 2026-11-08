@@ -14,6 +14,7 @@ const labels:Record<string,string>={
  'run.finished':'Resultado de ejecución registrado','run.cancel_requested':'Parada solicitada',
  'run.cancelled':'Cierre de la ejecución registrado','run.accepted':'Resultado aceptado por el propietario',
  'context.corrected':'Contexto corregido para el trabajo posterior','run.issue':'Problema de ejecución registrado',
+ 'context.dependencies_changed':'Cambió una premisa de esta tarea; revisa el contexto antes de iniciar otro trabajo',
  'run.usage_observed':'Recibo de consumo registrado','run.usage_high_water':'Medición parcial de consumo registrada',
  'agent.message_recorded':'Mensaje entre agentes guardado','conversation.archived':'Conversación archivada',
  'finding.review_recorded':'Revisión documental guardada','project.completed':'Cierre del proyecto aceptado',

@@ -110,16 +110,22 @@ class PredecessorMaterials:
         from backend.planning.execution import PlanExecutions
 
         row = self.runs._authority(conn, lease)
-        if row['execution_kind'] == 'code_review':
-            request = CodeReviews(self.runs)._request(conn, lease.project_id, lease.run_id, require_current=True)
-            row = self.runs._row(conn, lease.project_id, request['author_run_id'])
+        from backend.planning.manual_prerequisites import causal_source_row
+
+        row=causal_source_row(conn,row)
         packet = PlanExecutions(self.runs).input(conn, row)
         if packet is None:
-            return None, None
+            from backend.planning.manual_prerequisites import ManualPrerequisites
+
+            packet=ManualPrerequisites(self.runs).input(conn,row)
+            if packet is None:
+                return None, None
         binding = conn.execute('SELECT * FROM runtime_workspace_bindings WHERE run_id=?', (row['id'],)).fetchone()
-        if binding is None:
+        if binding is None and packet.get('kind')!='manual_task_prerequisites':
             raise RunConflict('Original causal consumer has no registered source')
-        return packet, asdict(self.runs._binding_view(binding))
+        if binding is None and any(source['kind']=='accepted_code_candidate' for source in packet['prerequisites']):
+            raise RunConflict('Accepted code prerequisites require a registered consumer source')
+        return packet, asdict(self.runs._binding_view(binding)) if binding else None
 
     def available(self, lease):
         """Offer readonly material tools for actual current causal sources; malformed or stale deliveries are never silently ignored."""

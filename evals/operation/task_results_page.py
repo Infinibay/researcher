@@ -76,6 +76,8 @@ def observe(host, ids):
     value['result'] = SQLiteRunStore(host/'source.db').result_state(101,ids['run'])
     with closing(sqlite3.connect(host/'source.db')) as db:
         value['report_sha256'] = hashlib.sha256(db.execute('SELECT content FROM artifacts WHERE id=?',(ids['report'],)).fetchone()[0].encode()).hexdigest()
+        db.row_factory=sqlite3.Row
+        value['notes']=[dict(row) for row in db.execute('SELECT task_id,author,comment_type,content FROM task_comments ORDER BY id')]
     return value
 
 
@@ -128,9 +130,16 @@ def main():
         assert after['result']['candidate']==before['result']['candidate']
         assert after['report_sha256']==before['report_sha256'] and after['source_sha256']==before['source_sha256']
         assert after['dispatches']==0 and after['native_starts']==1 and after['peers']==before['peers']
-        assert len(after['corrections'])==1 and after['corrections'][0]['version']==2
+        owner_changes=[row for row in after['corrections'] if row['task_id']==ids['input']]
+        dependent_changes=[row for row in after['corrections'] if row['task_id']==ids['output']]
+        assert len(owner_changes)==1 and owner_changes[0]['version']==2
+        assert [row['version'] for row in dependent_changes]==[2,3,4,5,6]
+        assert all(row['source_kind']=='tool_evidence' for row in dependent_changes)
         task = next(row for row in after['task_records'] if row['id']==ids['input'])
-        assert task['status']=='pending'
+        assert task['status']=='pending' and task['title']=='Leer una observación de ejemplo'
+        assert task['description'].startswith('Objetivo: explicar una transformación.')
+        assert after['contexts']==[{'task_id':ids['input'],'version':4},{'task_id':ids['output'],'version':6}]
+        assert after['notes']==[{'task_id':ids['input'],'author':'user','comment_type':'approval','content':'Nota sintética de lectura; esta etiqueta no acepta el contexto nuevo.'}]
         assert all(after[key]==before[key] for key in ('groups','milestones','dependencies','owner_commands','integrity','foreign_keys'))
         result['status'] = 'passed'
     except BaseException as error:

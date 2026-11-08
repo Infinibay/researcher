@@ -1,0 +1,40 @@
+{
+  "definitions": 32,
+  "files": [
+    {
+      "path": "backend/planning/manual_prerequisites.py",
+      "sha256": "2d9d865bdf3b958ec3fe0736a15831b065850275a5d0100807214fba5c3944c2",
+      "module_documented": true,
+      "definitions": 8,
+      "missing": []
+    },
+    {
+      "path": "backend/db/context_causality_migration.py",
+      "sha256": "1dde88c0bfd14fe22451c7f3b62c315e563c53a2f28d58d731fb4d26ed814e32",
+      "module_documented": true,
+      "definitions": 2,
+      "missing": []
+    },
+    {
+      "path": "backend/tests/runtime/test_dependency_authority.py",
+      "sha256": "0611d67183b668b8df5a8a25dcd1185ee34e52f59984f2333ea0e80f41e23f4e",
+      "module_documented": true,
+      "definitions": 15,
+      "missing": []
+    },
+    {
+      "path": "backend/tests/runtime/test_context_causality_migration.py",
+      "sha256": "507f5abdd8222845b8b49289fca61c1bb5bd8644f3fc29c3118d14410ec34d19",
+      "module_documented": true,
+      "definitions": 5,
+      "missing": []
+    },
+    {
+      "path": "backend/tests/runtime/test_manual_prerequisite_review.py",
+      "sha256": "60729ef9fae52838d6562e6a7c520640d3b6714d4fd47615985031a726578d4b",
+      "module_documented": true,
+      "definitions": 2,
+      "missing": []
+    }
+  ]
+}

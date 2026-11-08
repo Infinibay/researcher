@@ -13,6 +13,12 @@ from backend.runtime.sqlite_runs import SQLiteRunStore
 from backend.tools.base.db import ensure_migrations
 
 
+@pytest.fixture
+def schema_target():
+    """Keep schema70 inverse tests at their original historical boundary."""
+    return 70
+
+
 def test_concurrent_exact_task_creations_share_original_receipt(coordination):
     """Two SQLite writers converge on one task/dependency effect and identical immutable responses."""
     records = OwnerPlanningRecords(coordination.store)

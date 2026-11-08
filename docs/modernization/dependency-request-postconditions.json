@@ -1,0 +1,14 @@
+{
+  "status": "passed",
+  "original_driver_status": "failed",
+  "original_browser_status": "passed",
+  "cause": "Original verifier omitted an absent dependent context; absence means baseline1, not zero or nonexistent task. Corrected pure verifier checked original captured before/after and unchanged current database.",
+  "original_result_sha256": "bef0ebdd6fab3ba5baf94c9d90a8b586ba788ca92653a95c18fe234e405ed8e4",
+  "verifier_sha256": "f782e0a80de68f485bb711837c3a5531c297f22a5f6f9d2e835d191a6bad1873",
+  "original_decisions_repeated": false,
+  "final_context": 2,
+  "states": 10,
+  "checks": 15,
+  "model_turns": 0,
+  "service_exit": 143
+}

@@ -1,0 +1,65 @@
+{
+  "base_commit": "9d99cac",
+  "files": [
+    {
+      "path": "backend/db/context_causality_schema.sql",
+      "sha256": "d49ac74ccbf998c7a9589da76b5371da3e43748449db3d1a07441201cd4c84ab"
+    },
+    {
+      "path": "backend/db/context_causality_migration.py",
+      "sha256": "1dde88c0bfd14fe22451c7f3b62c315e563c53a2f28d58d731fb4d26ed814e32"
+    },
+    {
+      "path": "backend/db/migration_catalog.py",
+      "sha256": "943767d19be61111806a6ffa81ae7201b9ac501743205a3fc5ec0c0fa3af6500"
+    },
+    {
+      "path": "backend/planning/manual_prerequisites.py",
+      "sha256": "2d9d865bdf3b958ec3fe0736a15831b065850275a5d0100807214fba5c3944c2"
+    },
+    {
+      "path": "backend/planning/materials.py",
+      "sha256": "15acc1ec6ec7a74c24ada12ec9b4c04238c7c0d7b262616dc023619815ab17cb"
+    },
+    {
+      "path": "backend/runtime/sqlite_runs.py",
+      "sha256": "16a7efff3a260ccd3b684143fd079959d3c315904695b6af9e8e40718294667e"
+    },
+    {
+      "path": "backend/runtime/run_inputs.py",
+      "sha256": "013b13f5a960d176192c606632a82e4c87dd65f94db389c604f2aea4f0381b12"
+    },
+    {
+      "path": "backend/tests/runtime/test_dependency_authority.py",
+      "sha256": "0611d67183b668b8df5a8a25dcd1185ee34e52f59984f2333ea0e80f41e23f4e"
+    },
+    {
+      "path": "backend/tests/runtime/test_context_causality_migration.py",
+      "sha256": "507f5abdd8222845b8b49289fca61c1bb5bd8644f3fc29c3118d14410ec34d19"
+    },
+    {
+      "path": "backend/tests/runtime/test_manual_prerequisite_review.py",
+      "sha256": "60729ef9fae52838d6562e6a7c520640d3b6714d4fd47615985031a726578d4b"
+    },
+    {
+      "path": "backend/tests/runtime/test_task_creation_commands.py",
+      "sha256": "4a2f0ce1580a8e339d33c04d94c63a3dfb86b5f7a53170047bff58998d5e9ade"
+    },
+    {
+      "path": "frontend/src/hooks/useWebSocketSync.ts",
+      "sha256": "39530446feae4068ae410551f9fee736f9dd32fa0628578fb5cd4b55e8eae5d4"
+    },
+    {
+      "path": "frontend/tests/task-results.e2e.mjs",
+      "sha256": "950adbf67b2a503f8a96586ee0f020463674bccf5ad0a5e94479894f719685b0"
+    },
+    {
+      "path": "evals/operation/task_results_page.py",
+      "sha256": "e5f33aef74d9ec1f71599ac1a0f4e8a26cf646a0c123f81e5a88e872e13df662"
+    },
+    {
+      "path": "evals/operation/task_requests_page.py",
+      "sha256": "f782e0a80de68f485bb711837c3a5531c297f22a5f6f9d2e835d191a6bad1873"
+    }
+  ]
+}

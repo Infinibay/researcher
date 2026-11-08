@@ -180,3 +180,33 @@ obsoleta; related_to/parent_of no bloqueantes; padre cambiado antes de claim y c
 hijo activo/con grant; hijo aceptado, nieto, diamante/ciclo, aislamiento de proyecto,
 fallo transaccional/reintento sin duplicación, no reactivación al reaceptar padre.
 No buscar de nuevo historial del usuario ni pedirle aprobar decisiones rutinarias.
+
+## Decisión e implementación de coordinación, desde09:06:31UTC
+
+Elegida alternativaA tras revisión parcial independiente: causa durable y conjunto
+materializado por tarea; preservar invalidación conservadora de grafo efectivo,
+cubrir ambos productores y primera versión, no superponer triggers recursivos.
+Migración71 nueva, inversa sólo sin causas/paquetes y restaura triggers exactos.
+El guard blocks se aplica a admisiones manuales; related_to/parent_of no bloquean.
+Se captura material aceptado recuperable en la misma admisión, con límites y
+lectores existentes. [Contrato](../../architecture/causal-task-dependencies.md).
+
+REDinicial:4fallos de comportamiento y1fixture inválido al intentar declarar done
+por una ruta ya prohibida; el caso histórico usa ahora INSERTexplícito de baseline.
+REDindependiente de material: available devolvíaFalsepara consumidor manual.
+La revisión de código detectó otro defecto nuevo antes del paquete: revisor no
+tiene entrega propia. Un REDlo reproduce en claim. Resolver autor exacto mediante
+helper compartido de validación/input/readers, preservar scope del revisor y no
+inventar su paquete. Primer corte141fuente verde previo a ese ajuste; selección
+posterior con revisión y protocolos owned en curso. No declarar instalado hasta
+nuevo sdist→wheel/identidad/selección aislada. Detalles de estilo al final.
+
+## Aceptación principal de Tareas09:38:09UTC
+
+[Resultados y límites](../../modernization/dependency-authority-review.md):169
+instaladas,0skips;696fuentes/370producto,32definiciones documentadas;157contratos,
+tipos/build. Navegador actual10estados/16checks, edición auxiliar real y decisiones
+originales conservadas. Recuperación compartida10/15 verificada sobre los mismos
+originales al corregir postcondición de contexto ausente; sin repetir decisiones.
+9/12páginas técnicas/delegadas,41/43escenarios. Detalles DD142 al final.
+Siguiente tarea principal: aceptación de Conversación. El plan global sigue activo.

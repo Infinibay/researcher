@@ -70,6 +70,28 @@ def observe(host):
     return result
 
 
+def verify_postconditions(ids,before,after,evidence):
+    """Check original captured domain observations without repeating owner decisions or inferring absent contexts as version zero."""
+    expected_runs = json.loads(json.dumps(before['runs']))
+    expected_runs[0]['status'] = 'cancelled'
+    assert after['runs']==expected_runs
+    assert all(after[key]==before[key] for key in ('groups','milestones','tasks','task_records','dependencies','owner_commands','peers','dispatches','native_starts','integrity','foreign_keys','source_sha256'))
+    versions={item['task_id']:item['version'] for item in before['contexts']}
+    for task in (ids['input'],ids['output']):
+        versions[task]=versions.get(task,1)+1
+    expected_contexts=[{'task_id':task,'version':version} for task,version in sorted(versions.items())]
+    assert after['contexts']==expected_contexts
+    assert len(after['corrections'])==len(before['corrections'])+2
+    dependents=[item for item in after['corrections'] if item['task_id']==ids['output']]
+    assert len(dependents)==1 and dependents[0]['version']==2 and dependents[0]['source_kind']=='tool_evidence'
+    correction = evidence['corrections'][0]['body']
+    row = next(row for row in after['corrections'] if row['source_reference']=='owner-correction:'+correction['operation_key'])
+    assert row['version']==correction['expected_version']+1 and row['statement']==correction['statement'] and row['source_kind']==correction['source_kind']
+    controls = [row for row in after['controls'] if row['operation_key']==correction['operation_key']]
+    assert len(controls)==1 and json.loads(controls[0]['result_json'])=={'version':row['version']}
+    return row
+
+
 def main():
     """Own the installed host/browser and prove replay/Stop/correction cannot create another run or context revision."""
     import backend
@@ -116,21 +138,7 @@ def main():
         assert browser.returncode == 0, 'Inspect original browser log'
         evidence = json.loads((output/'browser/evidence.json').read_text())
         after = observe(host)
-        expected_runs = json.loads(json.dumps(before['runs']))
-        expected_runs[0]['status'] = 'cancelled'
-        assert after['runs']==expected_runs
-        assert all(after[key]==before[key] for key in ('groups','milestones','tasks','task_records','dependencies','owner_commands','peers','dispatches','native_starts','integrity','foreign_keys','source_sha256'))
-        expected_contexts = json.loads(json.dumps(before['contexts']))
-        for row in expected_contexts:
-            if row['task_id']==ids['input']:
-                row['version'] += 1
-        assert after['contexts']==expected_contexts
-        assert len(after['corrections'])==len(before['corrections'])+1
-        correction = evidence['corrections'][0]['body']
-        row = next(row for row in after['corrections'] if row['source_reference']=='owner-correction:'+correction['operation_key'])
-        assert row['version']==correction['expected_version']+1 and row['statement']==correction['statement'] and row['source_kind']==correction['source_kind']
-        controls = [row for row in after['controls'] if row['operation_key']==correction['operation_key']]
-        assert len(controls)==1 and json.loads(controls[0]['result_json'])=={'version':row['version']}
+        row=verify_postconditions(ids,before,after,evidence)
         result.update(status='passed',original_run_id=ids['run'],final_context_version=row['version'])
     except BaseException as error:
         result.update(status='failed',error_type=type(error).__name__)

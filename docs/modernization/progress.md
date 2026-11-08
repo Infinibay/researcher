@@ -9164,3 +9164,17 @@ informe/aceptación conservados, nueva solicitud habilitada. Backend sin cambio.
 8/12páginas,41/43escenarios. Contrato manual y dependientes siguen principales;
 detallesDD141al final. La respuesta del usuario no se trata como comprensión
 validada ni se le repite una pregunta abstracta.
+
+## 2026-11-08 — coordinación causal y aceptación principal de Tareas
+
+Base9d99cac,09:06:31–09:38:09UTC,31min38s hasta verificar/inspeccionar.
+[Alcance](dependency-authority-review.md). Migración71 materializa causa/conjunto,
+conserva grafo efectivo e invalida manuales/planes sin duplicar versiones; material
+inmutable y autor causal exacto para revisores.169instaladas,0skip;696fuentes/
+370producto;157contratos/tipos/build. Navegador10estados/16checks y recuperación
+compartida10/15 con postcondición corregida sobre originales,0modelos.
+
+**9/12páginas** técnicas/delegadas: Tareas se añade.41/43escenarios sigue igual.
+Siguiente: Conversación; luego Ejecución y Proyectos/AuthorityBusy, U08/C10/ciencia,
+distribución/dependencias, prompts, inversas71, global y revisión independiente
+final. Detalles DD142y anteriores al final; sin push/merge/despliegue.

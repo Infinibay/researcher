@@ -93,7 +93,7 @@ class SQLiteRunStore:
 
     @staticmethod
     def _task(conn, project_id, task_id):
-        """Require open scoped work and current accepted plan/prerequisites before granting any native child execution authority."""
+        """Require scoped open work and current accepted blocking results for both manual and planned native execution."""
         row = SQLiteRunStore._existing_task(conn, project_id, task_id)
         if row["status"] in ("done", "cancelled", "failed"):
             raise RunConflict("Task no longer admits execution")
@@ -104,7 +104,7 @@ class SQLiteRunStore:
 
             if not PlanExecutions.admits_revised_task(conn, project_id, task_id):
                 raise RunConflict("The original accepted project plan changed; inspect its history before new child work")
-        if conn.execute("SELECT 1 FROM runtime_project_plan_tasks WHERE task_id=?", (task_id,)).fetchone() and conn.execute(
+        if conn.execute(
             """SELECT 1 FROM task_dependencies d JOIN tasks p ON p.id=d.depends_on_task_id
             WHERE d.task_id=? AND d.dependency_type='blocks' AND (p.status!='done' OR NOT EXISTS(
                 SELECT 1 FROM runtime_runs r WHERE r.project_id=p.project_id AND r.task_id=p.id
@@ -1250,6 +1250,9 @@ class SQLiteRunStore:
             from backend.planning.execution import PlanExecutions
 
             PlanExecutions(self).attach(conn, spec, run_id)
+            from backend.planning.manual_prerequisites import ManualPrerequisites
+
+            ManualPrerequisites(self).capture(conn,self._row(conn,spec.project_id,run_id))
             self._event(
                 conn,
                 spec.project_id,
@@ -1527,8 +1530,15 @@ class SQLiteRunStore:
         else:
             self._task(conn, row["project_id"], row["task_id"])
             from backend.planning.execution import PlanExecutions
+            from backend.planning.manual_prerequisites import ManualPrerequisites, causal_source_row
 
-            PlanExecutions(self).input(conn, row)
+            if row['execution_kind']=='code_review':
+                from backend.runtime.code_reviews import CodeReviews
+
+                CodeReviews(self)._request(conn,row['project_id'],row['id'],require_current=True)
+            source=causal_source_row(conn,row)
+            if PlanExecutions(self).input(conn, source) is None:
+                ManualPrerequisites(self).input(conn,source)
             if conn.execute("SELECT 1 FROM runtime_project_plan_requests WHERE run_id=?", (row["id"],)).fetchone():
                 from backend.planning.store import ProjectPlans
 

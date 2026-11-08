@@ -1,0 +1,632 @@
+[
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 15,
+      "row": 4
+    },
+    "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/db/context_causality_migration.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "import sqlite3\nfrom pathlib import Path\n\n\n",
+          "end_location": {
+            "column": 1,
+            "row": 7
+          },
+          "location": {
+            "column": 1,
+            "row": 3
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 1,
+      "row": 3
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 3,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  },
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 50,
+      "row": 12
+    },
+    "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/planning/manual_prerequisites.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "import hashlib\nimport json\nfrom dataclasses import asdict\n\nfrom backend.knowledge.reviews import canonical\nfrom backend.runtime.contracts import RunConflict\n\n\n",
+          "end_location": {
+            "column": 1,
+            "row": 15
+          },
+          "location": {
+            "column": 1,
+            "row": 7
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 1,
+      "row": 7
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 7,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  },
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 99,
+      "row": 230
+    },
+    "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/planning/materials.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "        from backend.planning.material_views import (\n            WORK_SECTIONS,\n            describe_value,\n            select_material,\n        )\n",
+          "end_location": {
+            "column": 1,
+            "row": 231
+          },
+          "location": {
+            "column": 1,
+            "row": 230
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 9,
+      "row": 230
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 230,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  },
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 93,
+      "row": 135
+    },
+    "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/runtime/run_inputs.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "    from backend.planning.manual_prerequisites import (\n        ManualPrerequisites,\n        causal_source_row,\n    )\n    from backend.planning.material_views import project_delivery\n",
+          "end_location": {
+            "column": 1,
+            "row": 136
+          },
+          "location": {
+            "column": 1,
+            "row": 134
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 5,
+      "row": 134
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 134,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  },
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 72,
+      "row": 1036
+    },
+    "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/runtime/sqlite_runs.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "            from backend.runtime.branch_inputs import PriorBranchTarget\n            from backend.runtime.code_carryover import PriorCodeTarget\n            from backend.runtime.file_imports import PriorFilesTarget\n",
+          "end_location": {
+            "column": 1,
+            "row": 1037
+          },
+          "location": {
+            "column": 1,
+            "row": 1034
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 13,
+      "row": 1034
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 1034,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  },
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 101,
+      "row": 1533
+    },
+    "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/runtime/sqlite_runs.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "            from backend.planning.execution import PlanExecutions\n            from backend.planning.manual_prerequisites import (\n                ManualPrerequisites,\n                causal_source_row,\n            )\n",
+          "end_location": {
+            "column": 1,
+            "row": 1534
+          },
+          "location": {
+            "column": 1,
+            "row": 1532
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 13,
+      "row": 1532
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 1532,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  },
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 52,
+      "row": 9
+    },
+    "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/tests/runtime/test_context_causality_migration.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "import sqlite3\nfrom contextlib import closing\n\nimport pytest\n\nfrom backend.db.context_causality_migration import restore_context_causality_schema\nfrom backend.tools.base.db import ensure_migrations\n\n\n",
+          "end_location": {
+            "column": 1,
+            "row": 12
+          },
+          "location": {
+            "column": 1,
+            "row": 3
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 1,
+      "row": 3
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 3,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  },
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 84,
+      "row": 130
+    },
+    "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/tests/runtime/test_dependency_authority.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "    from types import SimpleNamespace\n\n    from backend.tests.runtime.test_plan_execution import accept_documentary_result\n",
+          "end_location": {
+            "column": 1,
+            "row": 131
+          },
+          "location": {
+            "column": 1,
+            "row": 129
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 5,
+      "row": 129
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 129,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  },
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 84,
+      "row": 146
+    },
+    "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/tests/runtime/test_dependency_authority.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "    from types import SimpleNamespace\n\n    from backend.tests.runtime.test_plan_execution import accept_documentary_result\n",
+          "end_location": {
+            "column": 1,
+            "row": 147
+          },
+          "location": {
+            "column": 1,
+            "row": 145
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 5,
+      "row": 145
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 145,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  },
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 56,
+      "row": 165
+    },
+    "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/tests/runtime/test_dependency_authority.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "    import json\n\n    from backend.planning.materials import PredecessorMaterials\n    from backend.runtime.run_inputs import freeze_input\n",
+          "end_location": {
+            "column": 1,
+            "row": 166
+          },
+          "location": {
+            "column": 1,
+            "row": 163
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 5,
+      "row": 163
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 163,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  },
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 2,
+      "row": 13
+    },
+    "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/tests/runtime/test_manual_prerequisite_review.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "import json\nfrom dataclasses import replace\n\nimport pytest\n\nfrom backend.tests.runtime.test_code_review_state import (\n    candidate_state as candidate_state,\n)\nfrom backend.tests.runtime.test_code_review_state import (\n    development_state as development_state,\n)\nfrom backend.tests.runtime.test_code_review_state import (\n    review_request,\n)\nfrom backend.tests.runtime.test_code_review_state import (\n    review_state as review_state,\n)\n\n\n",
+          "end_location": {
+            "column": 1,
+            "row": 16
+          },
+          "location": {
+            "column": 1,
+            "row": 3
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 1,
+      "row": 3
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 3,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  },
+  {
+    "cell": null,
+    "code": "PLC0414",
+    "end_location": {
+      "column": 39,
+      "row": 9
+    },
+    "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/tests/runtime/test_manual_prerequisite_review.py",
+    "fix": {
+      "applicability": "unsafe",
+      "edits": [
+        {
+          "content": "candidate_state",
+          "end_location": {
+            "column": 39,
+            "row": 9
+          },
+          "location": {
+            "column": 5,
+            "row": 9
+          }
+        }
+      ],
+      "message": "Remove import alias"
+    },
+    "location": {
+      "column": 5,
+      "row": 9
+    },
+    "message": "Import alias does not rename original package",
+    "name": "useless-import-alias",
+    "noqa_row": 9,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/useless-import-alias"
+  },
+  {
+    "cell": null,
+    "code": "PLC0414",
+    "end_location": {
+      "column": 43,
+      "row": 10
+    },
+    "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/tests/runtime/test_manual_prerequisite_review.py",
+    "fix": {
+      "applicability": "unsafe",
+      "edits": [
+        {
+          "content": "development_state",
+          "end_location": {
+            "column": 43,
+            "row": 10
+          },
+          "location": {
+            "column": 5,
+            "row": 10
+          }
+        }
+      ],
+      "message": "Remove import alias"
+    },
+    "location": {
+      "column": 5,
+      "row": 10
+    },
+    "message": "Import alias does not rename original package",
+    "name": "useless-import-alias",
+    "noqa_row": 10,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/useless-import-alias"
+  },
+  {
+    "cell": null,
+    "code": "PLC0414",
+    "end_location": {
+      "column": 33,
+      "row": 11
+    },
+    "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/tests/runtime/test_manual_prerequisite_review.py",
+    "fix": {
+      "applicability": "unsafe",
+      "edits": [
+        {
+          "content": "review_state",
+          "end_location": {
+            "column": 33,
+            "row": 11
+          },
+          "location": {
+            "column": 5,
+            "row": 11
+          }
+        }
+      ],
+      "message": "Remove import alias"
+    },
+    "location": {
+      "column": 5,
+      "row": 11
+    },
+    "message": "Import alias does not rename original package",
+    "name": "useless-import-alias",
+    "noqa_row": 11,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/useless-import-alias"
+  },
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 52,
+      "row": 13
+    },
+    "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/tests/runtime/test_task_creation_commands.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "import sqlite3\nfrom concurrent.futures import ThreadPoolExecutor\nfrom contextlib import closing\nfrom threading import Barrier\n\nimport pytest\n\nfrom backend.db.task_commands_migration import restore_task_commands_schema\nfrom backend.planning.owner_records import OwnerPlanningRecords\nfrom backend.runtime.sqlite_runs import SQLiteRunStore\nfrom backend.tools.base.db import ensure_migrations\n\n\n",
+          "end_location": {
+            "column": 1,
+            "row": 16
+          },
+          "location": {
+            "column": 1,
+            "row": 3
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 1,
+      "row": 3
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 3,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  },
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 82,
+      "row": 19
+    },
+    "filename": "/home/andres/.codex/worktrees/b09e/researcher/evals/operation/task_requests_page.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "import argparse\nimport hashlib\nimport json\nimport os\nimport socket\nimport sqlite3\nimport subprocess\nimport sys\nfrom contextlib import closing\nfrom pathlib import Path\n\nfrom host_smoke import start, stop\nfrom task_creation_page import observe as original_observe\nfrom task_creation_page import seed as original_seed\n\n",
+          "end_location": {
+            "column": 1,
+            "row": 21
+          },
+          "location": {
+            "column": 1,
+            "row": 7
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 1,
+      "row": 7
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 7,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  },
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 55,
+      "row": 20
+    },
+    "filename": "/home/andres/.codex/worktrees/b09e/researcher/evals/operation/task_results_page.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "import argparse\nimport hashlib\nimport json\nimport os\nimport socket\nimport sqlite3\nimport subprocess\nimport sys\nfrom contextlib import closing\nfrom pathlib import Path\n\nfrom host_smoke import start, stop\nfrom task_creation_page import seed as seed_metadata\nfrom task_requests_page import observe as observe_task\n\n",
+          "end_location": {
+            "column": 1,
+            "row": 22
+          },
+          "location": {
+            "column": 1,
+            "row": 7
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 1,
+      "row": 7
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 7,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  },
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 61,
+      "row": 33
+    },
+    "filename": "/home/andres/.codex/worktrees/b09e/researcher/evals/operation/task_results_page.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "    from backend.db.connection import connect\n    from backend.research.models import (\n        RESEARCH_PERMISSIONS,\n        EvidenceReference,\n        FindingDraft,\n        ReportDraft,\n        ResultDraft,\n        SourceDraft,\n    )\n    from backend.research.sqlite_store import SQLiteResearchStore\n    from backend.runtime.contracts import RunSpec\n    from backend.runtime.peer_registry import AttemptPeers\n    from backend.runtime.sqlite_runs import SQLiteRunStore\n    from backend.runtime.workspaces import WorkspaceRegistry\n",
+          "end_location": {
+            "column": 1,
+            "row": 34
+          },
+          "location": {
+            "column": 1,
+            "row": 27
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 5,
+      "row": 27
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 27,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  }
+]

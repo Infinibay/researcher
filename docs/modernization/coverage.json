@@ -5993,7 +5993,7 @@
       "status": "in_progress",
       "pilots": 12,
       "concept_images": 48,
-      "fully_accepted": 8,
+      "fully_accepted": 9,
       "pages": {
         "projects": {
           "status": "in_progress",
@@ -6186,9 +6186,9 @@
           "scope": "Technical/delegated visual acceptance of installed readers, pinned local semantic search and exact existing owner review admission recovery/Stop/history. Reviewer decision and native turn IDs are synthetic domain fixtures; no fresh generative review, scientific validity or human acceptance claim."
         },
         "tasks": {
-          "status": "in_progress",
+          "status": "verified",
           "selected_concept": "editorial-inspector",
-          "scope": "Creation/request/correction/result-decision recovery, Stop/history and inspector reads/boundaries verified over installed synthetic domain history. Manual dependency execution/propagation contract and auxiliary edit journey remain open.",
+          "scope": "Technical/delegated visual acceptance of selected editorial-inspector main workflows: installed metadata creation/recovery, native request/correction/Stop/history, result decisions/reopening, error-aware inspector, actual metadata/note/relation editing and protected lifecycle APIs. Synthetic browser history, no fresh generative/scientific/human acceptance.",
           "evidence": [
             "docs/modernization/task-creation-review.md",
             "docs/modernization/task-creation-results.json",
@@ -6197,18 +6197,45 @@
             "docs/modernization/task-request-review.md",
             "docs/modernization/task-request-results.json",
             "docs/modernization/task-inspector-review.md",
-            "docs/modernization/task-reopen-review.md"
+            "docs/modernization/task-reopen-review.md",
+            "docs/modernization/dependency-authority-review.md",
+            "docs/modernization/dependency-authority-results.json",
+            "docs/modernization/dependency-authority-packaging.json",
+            "docs/design/audits/2026-11-08-task-page/report.md"
           ],
-          "remaining": [
-            "Resolve manual blocks admission and dependent invalidation contract; complete auxiliary editing journey before full-page acceptance"
-          ],
+          "remaining": [],
           "deferred": [
             "DD138",
             "DD132",
             "DD121",
             "DD139",
             "DD140",
-            "DD141"
+            "DD141",
+            "DD142"
+          ],
+          "limits": [
+            "Full accessibility remains a final gate",
+            "Other task kinds use their separately verified domain/UI controls; this browser fixture is research with a code dependent",
+            "No human comprehension or scientific confidence claim"
+          ]
+        },
+        "chat": {
+          "status": "in_progress",
+          "scope": "Shared original request/correction recovery verified with Tasks; complete conversation-page acceptance remains open.",
+          "evidence": [
+            "docs/modernization/task-request-review.md",
+            "docs/modernization/dependency-authority-review.md"
+          ],
+          "remaining": [
+            "Accept complete conversation journey, owner notes/threads/question handling and truthful states on installed service"
+          ]
+        },
+        "execution": {
+          "status": "in_progress",
+          "scope": "Existing page pilot and scoped runtime controls; complete page acceptance remains open.",
+          "evidence": [],
+          "remaining": [
+            "Accept complete execution journey on installed service, with original observation/recovery/consumption identities"
           ]
         }
       }
@@ -6350,6 +6377,25 @@
         "docs/design/audits/2026-11-08-task-results/report.md"
       ],
       "remaining": []
+    },
+    "causal_task_dependency_authority": {
+      "status": "verified",
+      "scope": "Unified causal context closure across manual blocks, accepted plan children and effective authorized graph; atomic descendant fencing/grants/questions, accepted-child reopening and immutable manual/reviewer predecessor material. No inferred comprehension or publication.",
+      "evidence": [
+        "docs/architecture/causal-task-dependencies.md",
+        "docs/modernization/dependency-authority-review.md",
+        "docs/modernization/dependency-authority-results.json",
+        "docs/modernization/dependency-authority-packaging.json",
+        "backend/tests/runtime/test_dependency_authority.py",
+        "backend/tests/runtime/test_manual_prerequisite_review.py",
+        "backend/tests/runtime/test_context_causality_migration.py"
+      ],
+      "remaining": [],
+      "limits": [
+        "Scoped tests and controlled native peers; no new paid model/scientific/human evaluation",
+        "No backfill of unknown historical input",
+        "Global regression and final independent review remain open"
+      ]
     }
   }
 }

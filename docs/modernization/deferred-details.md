@@ -1226,3 +1226,16 @@ Densidad y encuadre de lectura histórica (cabecera fija/scroll) se pulen al fin
 El ejemplo muestra propósito, entrada, relación y salida, pero no fue generado ni
 validado por el usuario.2I001 del evaluador en [lista](task-reopen-lint.json);
 [ESLint](task-reopen-eslint.json) seleccionado verde. Bundle DD121.
+
+## DD142 — tareas, tiempo relativo e interfaces de material
+
+Pasada fina: enums/fechas en notas (la fecha naive del servidor se interpreta con
+desfase3horas), botón Eliminar visible aunque el servidor/confirmación protegen
+historial nativo, densidad/encuadre y accesibilidad completa. No tocar ahora el
+protocolo para pulir capturas. Revisar exposición nominal del lector compartido
+PlanExecutions._prerequisites y herramientas readonly sin secciones aplicables;
+la selección de material concreta y las comprobaciones de ámbito ya funcionan.
+
+Ruff15I001/3PLC0414 en [lista](dependency-authority-lint.json). ESLint seleccionado
+verde; warning Starlette en primer corte fuente. Bundle DD121.32definiciones
+nuevas seleccionadas documentadas. Gates globales y U08/C10 siguen principales.

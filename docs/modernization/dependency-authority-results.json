@@ -1,0 +1,77 @@
+{
+  "base_commit": "9d99cac",
+  "source_cuts": [
+    {
+      "passed": 141,
+      "scope": "First selection before final reviewer-source integration"
+    },
+    {
+      "passed": 54,
+      "scope": "Final source integration including reviewer and owned execution/material protocols"
+    }
+  ],
+  "installed": {
+    "cases": 169,
+    "passed": 169,
+    "failed": 0,
+    "skipped": 0,
+    "backend_modules": 274,
+    "all_backend_imports_from_native_env": true,
+    "seconds": 193.808,
+    "exit_code": 0
+  },
+  "frontend_contracts": 157,
+  "frontend_type_check": "passed",
+  "frontend_build": "passed",
+  "compatible_packages": 83,
+  "docstrings": 32,
+  "browser": {
+    "states": 10,
+    "checks": 16,
+    "metadata_puts": 2,
+    "note_posts": 1,
+    "relation_posts": 2,
+    "acceptance_deliveries": 2,
+    "correction_deliveries": 2,
+    "context_versions": [
+      {
+        "task_id": 1,
+        "version": 4
+      },
+      {
+        "task_id": 2,
+        "version": 6
+      }
+    ],
+    "model_turns": 0,
+    "synthetic_bound_turn_ids": 1,
+    "native_dispatches": 0,
+    "service_exit": 143
+  },
+  "request_recovery": {
+    "status": "passed",
+    "original_driver_status": "failed",
+    "original_browser_status": "passed",
+    "cause": "Original verifier omitted an absent dependent context; absence means baseline1, not zero or nonexistent task. Corrected pure verifier checked original captured before/after and unchanged current database.",
+    "original_result_sha256": "bef0ebdd6fab3ba5baf94c9d90a8b586ba788ca92653a95c18fe234e405ed8e4",
+    "verifier_sha256": "f782e0a80de68f485bb711837c3a5531c297f22a5f6f9d2e835d191a6bad1873",
+    "original_decisions_repeated": false,
+    "final_context": 2,
+    "states": 10,
+    "checks": 15,
+    "model_turns": 0,
+    "service_exit": 143
+  },
+  "timing": {
+    "start_utc": "2026-11-08 09:06:31",
+    "verified_utc": "2026-11-08 09:38:09",
+    "seconds": 1898,
+    "scope": "Through verification and visual inspection; subsequent documentation/checkpoint excluded"
+  },
+  "limits": [
+    "No new global suite",
+    "Synthetic browser author/report; no scientific or human acceptance",
+    "Selected owned tests use controlled native protocols; no paid model",
+    "Final whole-branch independent review and full accessibility remain open"
+  ]
+}

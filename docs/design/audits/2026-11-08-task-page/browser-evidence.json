@@ -1,0 +1,285 @@
+{
+  "status": "passed",
+  "scope": "Synthetic delivered report; actual owner decisions, metadata/notes/relations and original receipt recovery without new inference",
+  "states": [
+    {
+      "name": "01-original-delivery-input-output",
+      "width": 1440,
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "02-acceptance-committed-reply-lost",
+      "width": 390,
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "03-original-acceptance-recovered",
+      "width": 1440,
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "04-change-committed-reply-lost",
+      "width": 390,
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "05-reopened-context-explicit-new-request",
+      "width": 390,
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "06-original-report-and-historic-acceptance",
+      "width": 1440,
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "07-metadata-saved-with-keyboard-title",
+      "width": 1440,
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "08-note-does-not-accept-current-task",
+      "width": 390,
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "09-explicit-dependency-removal",
+      "width": 390,
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "10-original-direction-restored",
+      "width": 1440,
+      "fits": true,
+      "violations": []
+    }
+  ],
+  "acceptances": [
+    {
+      "body": {
+        "operation_key": "61685584-2c1b-40ee-9d80-7090db39dd52",
+        "candidate_id": 1,
+        "candidate_sha256": "0b7d9f0e8422e069fef65fa8c299ab250a1e3b6c4709929d89878a5ebaf4fc48",
+        "context_version": 1,
+        "review_sha256": "1a98ceb8a7bcd61d923a96964d3e52ccf20d161bb63e6b9943d4b5093b8d49b3",
+        "acknowledge_limits": true,
+        "note": "Decisión sintética para probar el recorrido; no aceptación humana ni científica."
+      },
+      "receipt": {
+        "project_id": 101,
+        "task_id": 1,
+        "run_id": "0cef659e-2873-40a4-bf58-03086f617aaa",
+        "candidate_id": 1,
+        "candidate_sha256": "0b7d9f0e8422e069fef65fa8c299ab250a1e3b6c4709929d89878a5ebaf4fc48",
+        "context_version": 1,
+        "review_sha256": "1a98ceb8a7bcd61d923a96964d3e52ccf20d161bb63e6b9943d4b5093b8d49b3",
+        "operation_key": "61685584-2c1b-40ee-9d80-7090db39dd52",
+        "actor_source": "paired_owner_action",
+        "owner_note": "Decisión sintética para probar el recorrido; no aceptación humana ni científica.",
+        "acknowledged_limits": true,
+        "accepted_at": 1794130533.380285,
+        "task_accepted": true,
+        "acceptance_scope": "research_reports",
+        "publication_performed": false,
+        "scientific_confidence": null,
+        "acceptance_id": 1
+      },
+      "status": 200
+    },
+    {
+      "body": {
+        "operation_key": "61685584-2c1b-40ee-9d80-7090db39dd52",
+        "candidate_id": 1,
+        "candidate_sha256": "0b7d9f0e8422e069fef65fa8c299ab250a1e3b6c4709929d89878a5ebaf4fc48",
+        "context_version": 1,
+        "review_sha256": "1a98ceb8a7bcd61d923a96964d3e52ccf20d161bb63e6b9943d4b5093b8d49b3",
+        "acknowledge_limits": true,
+        "note": "Decisión sintética para probar el recorrido; no aceptación humana ni científica."
+      },
+      "receipt": {
+        "acceptance_scope": "research_reports",
+        "accepted_at": 1794130533.380285,
+        "acknowledged_limits": true,
+        "actor_source": "paired_owner_action",
+        "candidate_id": 1,
+        "candidate_sha256": "0b7d9f0e8422e069fef65fa8c299ab250a1e3b6c4709929d89878a5ebaf4fc48",
+        "context_version": 1,
+        "operation_key": "61685584-2c1b-40ee-9d80-7090db39dd52",
+        "owner_note": "Decisión sintética para probar el recorrido; no aceptación humana ni científica.",
+        "project_id": 101,
+        "publication_performed": false,
+        "review_sha256": "1a98ceb8a7bcd61d923a96964d3e52ccf20d161bb63e6b9943d4b5093b8d49b3",
+        "run_id": "0cef659e-2873-40a4-bf58-03086f617aaa",
+        "scientific_confidence": null,
+        "task_accepted": true,
+        "task_id": 1,
+        "acceptance_id": 1
+      },
+      "status": 200
+    }
+  ],
+  "corrections": [
+    {
+      "body": {
+        "operation_key": "e41aafcd-822e-4829-ab60-a7ff690eb38b",
+        "expected_version": 1,
+        "statement": "Añade una segunda observación de ejemplo y muestra cómo se conserva su orden en el CSV; los ejemplos siguen siendo sintéticos.",
+        "source_kind": "user_message"
+      },
+      "receipt": {
+        "context_version": 2,
+        "application": "recorded_for_next_run",
+        "inference_started": false
+      },
+      "status": 200
+    },
+    {
+      "body": {
+        "operation_key": "e41aafcd-822e-4829-ab60-a7ff690eb38b",
+        "expected_version": 1,
+        "statement": "Añade una segunda observación de ejemplo y muestra cómo se conserva su orden en el CSV; los ejemplos siguen siendo sintéticos.",
+        "source_kind": "user_message"
+      },
+      "receipt": {
+        "context_version": 2,
+        "application": "recorded_for_next_run",
+        "inference_started": false
+      },
+      "status": 200
+    }
+  ],
+  "edits": [
+    {
+      "path": "/api/tasks/1",
+      "method": "PUT",
+      "body": {
+        "title": "Leer una observación de ejemplo"
+      },
+      "status": 200,
+      "receipt": {
+        "operation_key": null,
+        "id": 1,
+        "project_id": 101,
+        "epic_id": 1,
+        "milestone_id": 1,
+        "type": "research",
+        "status": "pending",
+        "title": "Leer una observación de ejemplo",
+        "description": "",
+        "priority": 2,
+        "estimated_complexity": "medium",
+        "assigned_to": null,
+        "reviewer": null,
+        "branch_name": null,
+        "created_by": "api",
+        "created_at": "2026-11-08 09:35:28",
+        "updated_at": null,
+        "completed_at": null,
+        "retry_count": 0
+      }
+    },
+    {
+      "path": "/api/tasks/1",
+      "method": "PUT",
+      "body": {
+        "description": "Objetivo: explicar una transformación. Entrada sintética: id=7, measurement=12. Salida esperada: fila CSV 7,12 con columnas id,value. Falta comprobar la estructura real."
+      },
+      "status": 200,
+      "receipt": {
+        "operation_key": null,
+        "id": 1,
+        "project_id": 101,
+        "epic_id": 1,
+        "milestone_id": 1,
+        "type": "research",
+        "status": "pending",
+        "title": "Leer una observación de ejemplo",
+        "description": "Objetivo: explicar una transformación. Entrada sintética: id=7, measurement=12. Salida esperada: fila CSV 7,12 con columnas id,value. Falta comprobar la estructura real.",
+        "priority": 2,
+        "estimated_complexity": "medium",
+        "assigned_to": null,
+        "reviewer": null,
+        "branch_name": null,
+        "created_by": "api",
+        "created_at": "2026-11-08 09:35:28",
+        "updated_at": null,
+        "completed_at": null,
+        "retry_count": 0
+      }
+    },
+    {
+      "path": "/api/tasks/1/comments",
+      "method": "POST",
+      "body": {
+        "author": "user",
+        "content": "Nota sintética de lectura; esta etiqueta no acepta el contexto nuevo.",
+        "comment_type": "approval"
+      },
+      "status": 201,
+      "receipt": {
+        "id": 1,
+        "task_id": 1,
+        "author": "user",
+        "comment_type": "approval",
+        "content": "Nota sintética de lectura; esta etiqueta no acepta el contexto nuevo.",
+        "created_at": "2026-11-08 09:35:41"
+      }
+    },
+    {
+      "path": "/api/tasks/2/dependencies",
+      "method": "POST",
+      "body": {
+        "depends_on": [],
+        "dependency_type": "blocks"
+      },
+      "status": 201,
+      "receipt": []
+    },
+    {
+      "path": "/api/tasks/2/dependencies",
+      "method": "POST",
+      "body": {
+        "depends_on": [
+          1
+        ],
+        "dependency_type": "blocks"
+      },
+      "status": 201,
+      "receipt": [
+        {
+          "task_id": 2,
+          "depends_on_task_id": 1,
+          "dependency_type": "blocks"
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "checks": [
+    "original-frozen-input-output-report",
+    "acknowledgement-required",
+    "acceptance-commit-before-reply-loss",
+    "exact-acceptance-receipt-after-reload",
+    "closed-current-acceptance-blocks-new-work",
+    "change-commit-before-reply-loss",
+    "exact-change-receipt-after-reload",
+    "historic-acceptance-retained",
+    "current-context-two-original-context-one",
+    "explicit-new-request-enabled-never-sent",
+    "original-frozen-report-retained",
+    "no-page-errors-or-regional-axe-violations",
+    "keyboard-title-and-description-persist",
+    "approval-note-does-not-accept-new-context",
+    "dependency-removal-and-restoration-original-direction",
+    "metadata-context-four-historical-acceptance-still-retained"
+  ]
+}
