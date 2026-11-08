@@ -28,7 +28,26 @@ que se pueda comparar el avance; no presentar microajustes como tareas principal
 - Última suite global: `9fb873c`,2210 casos,2178 pasan,31 fallan y1 error de fixture; sin omisiones. La carrera de backup encontrada se corrigió después con40 pruebas instaladas. No se declara una nueva corrida global verde; la referencia `0c8b8d9` queda como evidencia histórica.
 - U01–U07, E01–E12, C01–C10 y D01–D13 quedan comprobados con el alcance de sus matrices; sigue 1 de 43 escenarios amplios sin aceptación completa en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Estado actual: desarrollo comparado; continúan perfiles revisores
+## Estado actual: hallazgos comparados; sigue revisión de código
+
+[Par de revisión de hallazgos](finding-communication-review.md). Bloque iniciado
+**14:51:33–15:06:33UTC:15min** hasta verificar; checkpoint posterior excluido.
+Dos brazos suman **116,572s**, sin preparación/análisis/documentación.
+
+- Terminado: **12/12 páginas por alcance,42/43 escenarios**,85 candidatos a prompt
+ vigentes. Desarrollo y revisión de hallazgos tienen nuevos pares reales con
+ controles iguales y ambos resultados entregados. Este último registra dos
+ needs_revision, lecturas completas/citas verificadas, fuente/hallazgo/informe
+ intactos,4peers por brazo cerrados y0grants.36comprobaciones dirigidas pasan.
+- Siguiente: comparación de comunicación `code_review`, con candidato exacto y
+ procedencia del autor; ya existen ensayos funcionales históricos de ese revisor.
+- Pendiente después: contrato UI de espera/error recuperable/parcial, observación
+ humana/adaptación; distribución Ken/ONNX pendiente de la respuesta solicitada;
+ docstrings/detalles y revisión independiente, paquete y suite global finales.
+- Detalles al final: DD145–152 y anteriores. No se declara comprensión humana,
+ superioridad, lint limpio ni global verde. Sin push, merge o despliegue.
+
+## Etapa anterior: desarrollo comparado; continúan perfiles revisores
 
 [Par de desarrollo](development-communication-review.md), iniciado el bloque a
 **14:33:40 UTC**, verificación cerrada **14:49:56 UTC:16min16s**.

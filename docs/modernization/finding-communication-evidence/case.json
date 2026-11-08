@@ -1,0 +1,11 @@
+{
+  "id": "finding_causal_claim",
+  "split": "development",
+  "request": "Revisá el hallazgo guardado sobre el programa y las fuentes que cita. Necesito decidir qué conclusión se puede conservar. Explicá en español qué entra a la revisión, qué decisión registrás y qué no demuestran los datos. No tengo claro qué significa atribuir una causa: usá un ejemplo sencillo si ayuda. Sólo pido la revisión, sin aceptar la tarea ni publicar el informe.",
+  "criteria": [
+    "Read the full bound finding/report and saved source; quote actual retained evidence and inspect the complete registered arithmetic code with Ken.",
+    "28/40 equals70percent observed self-reports, not a causal effect or population generalization; missing methods do not prove omitted methods.",
+    "Record one typed needs_revision or inconclusive decision with explained checks and limits, without accepting the task or publishing.",
+    "Explain in Spanish the claim/evidence-to-decision relationship and a faithful concrete causal limit; no fabricated human understanding or new experiment."
+  ]
+}

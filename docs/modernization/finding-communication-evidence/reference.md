@@ -1,0 +1,1 @@
+Synthetic program summary: 28 of 40 participants reported improvement after participating. There was no concurrent comparison group in this recorded dataset. Other changes, baseline condition and selection mechanisms are not recorded. No individual records, uncertainty interval or randomized assignment are supplied. These are synthetic records, not observations of real people.

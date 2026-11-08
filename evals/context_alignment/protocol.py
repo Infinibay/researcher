@@ -52,6 +52,9 @@ def digest(value):
 def comparable_input(value):
     """Normalize current execution aliases only, preserving history and any contradictory cutoff identity."""
     result = json.loads(json.dumps(value))
+    review = result.get('review', {})
+    if review.get('run_id') == result['scope'].get('run_id') and 'run_id' in review:
+        review.pop('run_id')
     history = result.get('request_history', {})
     if (history.get('mode') == 'same_task_admissions'
             and history.get('cutoff_run_id') == result['scope'].get('run_id')

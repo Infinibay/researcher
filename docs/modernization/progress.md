@@ -9452,3 +9452,26 @@ Bloque14:33:40–14:49:56UTC:16min16s hasta la verificación; checkpoint posteri
 excluido. Dos fallos de comando al exportar recibos (Python del sistema sin httpx y
 uso incorrecto de runpy) se corrigieron usando el entorno CP312; ninguna ejecución
 de modelo repetida ni modificación de sus resultados.
+
+
+## 2026-11-08 — Comparación real de comunicación de revisión de hallazgos
+
+[Informe y recibos](finding-communication-review.md): autor controlado0turnos de
+modelo, dos revisores reales por suscripción/Ken, mismo sujeto completo y fuente.
+Ambos guardan needs_revision y explicación española:28/40 es70%autorreporte, no
+causa ni generalización.102930/123862tokens observados,59,497/57,075s. Citas/offsets,
+lecturas completas, código/sujeto sin cambios, tarea in_progress/hallazgo provisional/
+informe draft;4peers por brazo cerrados,0grants,servicios-15. Sin aceptación ni
+publicación. Registros históricos y reservas anteriores intactos.
+
+Cuatro RED y36casos dirigidos finales pasan; aliasreview.run_id sólo se normaliza
+si coincide con scope y recursos cambiados después de registrar se rechazan.
+Inventario85/322vigente; dosI001 de imports en DD152, docstrings ingleses en código
+nuevo. Sin nueva política, wheel o global; nuevo test backend no está en el wheel
+anterior. Sigue comparación code_review, UI espera/error/parcial, humano y demás
+controles finales.42/43escenarios,12/12páginas por alcance. No inferir superioridad
+ni comprensión humana de esta muestra exploratoria.
+
+Bloque14:51:33–15:06:33UTC:15min hasta la verificación; checkpoint posterior
+excluido. Un revisor con contexto limpio investiga ahora el montaje mínimo de un
+candidato controlado para la comparación code_review, sólo lectura y sin generar.

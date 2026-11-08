@@ -1353,3 +1353,10 @@ No editar ni repetir resultados históricos para presentar un diff más limpio.
 El mismo bloque conserva seis avisos I001 de orden de imports en los archivos
 previos del evaluador; el módulo nuevo no tiene avisos. Pulirlos al final sin
 reinterpretar los hashes históricos de los scripts usados en el ensayo.
+
+## DD152 — orden de imports del evaluador de revisión de hallazgos
+
+Dos avisos Ruff I001 en `evals/profile_communication/finding_review.py`. El par real
+y36 comprobaciones dirigidas pasan; los hashes del script ejecutado están congelados
+y se conservan. Ordenar imports en la fase de detalles y verificar entonces el delta,
+sin modificar la política registrada ni repetir modelos para una corrección de estilo.

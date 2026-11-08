@@ -6,6 +6,64 @@ import json
 import pytest
 
 
+def test_review_input_normalizes_only_its_own_run_alias():
+    """A fresh review UUID may alias scope; a foreign review reference is a substantive mismatch."""
+    from evals.context_alignment.protocol import comparable_input
+
+    first = {'scope': {'run_id': 'one', 'attempt_id': 'a'},
+             'review': {'run_id': 'one', 'subject_sha256': 'same', 'author_run_id': 'author'}}
+    second = {'scope': {'run_id': 'two', 'attempt_id': 'b'},
+              'review': {'run_id': 'two', 'subject_sha256': 'same', 'author_run_id': 'author'}}
+    assert comparable_input(first) == comparable_input(second)
+    second['review']['run_id'] = 'foreign'
+    assert comparable_input(first) != comparable_input(second)
+    second['review']['run_id'] = 'two'
+    second['review']['author_run_id'] = 'different-author'
+    assert comparable_input(first) != comparable_input(second)
+
+
+def test_finding_review_registration_freezes_author_material_and_real_review_capability(tmp_path):
+    """Review comparison fixes the controlled author's evidence/claim and rejects changed policy before dispatch."""
+    from evals.profile_communication.finding_review import register
+    from evals.context_alignment.protocol import load_registered
+
+    assets = tmp_path / 'assets.json'
+    assets.write_text(json.dumps({'limits': {'max_tool_calls': 12}, 'project_token_limit': 100000}))
+    root = tmp_path / 'study'
+    register(root, assets)
+    p = load_registered(root)
+    assert p['execution_kind'] == 'finding_review'
+    assert p['maximum_model_turns'] == 2 and p['controlled_author_model_turns'] == 0
+    assert p['limits']['max_tool_calls'] == 12 and p['limits']['max_observed_tokens'] == 100000
+    assert p['human_comprehension'] is None
+    (root / 'reference.md').write_text('Different evidence.')
+    with pytest.raises(ValueError, match='Registered input changed'):
+        load_registered(root)
+
+
+async def test_review_execution_preserves_a_lower_operator_limit_after_registration(tmp_path, monkeypatch):
+    """Frozen experiment ceilings never override a tighter current operator budget before installation or inference."""
+    from evals.profile_communication import finding_review as review
+
+    assets = tmp_path / 'assets.json'
+    assets.write_text('{}')
+    root = tmp_path / 'study'
+    protocol = review.register(root, assets)
+    assets.write_text(json.dumps({'limits': {'max_tool_calls': 7, 'max_observed_tokens': 50000}}))
+    observed = {}
+
+    def stopped_prepare(folder, private, **kwargs):
+        """Read the derived resource plan, then stop without a host or model."""
+        observed.update(json.loads(private.read_text()))
+        raise RuntimeError('Stopped before installation')
+
+    monkeypatch.setattr(review, 'prepare', stopped_prepare)
+    with pytest.raises(RuntimeError, match='Stopped before installation'):
+        await review.run_review_arm(root, protocol, 'candidate', assets)
+    assert observed['limits']['max_tool_calls'] == 7
+    assert observed['limits']['max_observed_tokens'] == 50000
+
+
 def test_development_registration_freezes_source_tests_and_lower_operator_limits(tmp_path):
     """A development comparison must freeze its input/output contract without raising account or execution ceilings."""
     from evals.profile_communication.development import register

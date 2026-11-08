@@ -31,7 +31,8 @@ ni cuota restante. Tampoco es necesario repetirlos para volver a demostrar lo mi
   también necesita observarse. [Registro humano](interaction-human-review.json).
 - **Comparaciones de comunicación:** el [par de desarrollo](development-communication-review.md) ya se ejecutó con
   ambos resultados entregados y controles iguales; faltan casos nuevos antes/después
-  para `code_review` y `finding_review`. Los revisores sí tienen turnos
+  para `code_review`. El [par de revisión de hallazgos](finding-communication-review.md)
+  también entregó ambas decisiones/explicaciones con controles iguales. Los revisores sí tienen turnos
   funcionales reales históricos: [código](native-code-review-live.json) y
   [hallazgos](native-review-live.json). Eso no es una comparación de comunicación
   bajo la política final ni una prueba de calidad general.

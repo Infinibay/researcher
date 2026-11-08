@@ -1,0 +1,191 @@
+{
+  "request": "Revisá el hallazgo guardado sobre el programa y las fuentes que cita. Necesito decidir qué conclusión se puede conservar. Explicá en español qué entra a la revisión, qué decisión registrás y qué no demuestran los datos. No tengo claro qué significa atribuir una causa: usá un ejemplo sencillo si ayuda. Sólo pido la revisión, sin aceptar la tarea ni publicar el informe.",
+  "responses": {
+    "candidate": "Registré **«requiere revisión» (`needs_revision`)**. Puede conservarse esta conclusión:\n\n> En el registro sintético, 28 de 40 participantes (70%) declararon mejoría después de participar.\n\nRevisé el hallazgo congelado completo, su cita, la procedencia declarada del autor controlado, el borrador incluido, la fuente guardada y `evidence.py` completo mediante Ken. El código calcula `28/40`; eso respalda el porcentaje descriptivo.\n\n**Los datos no demuestran que el programa causara la mejoría.** La fuente declara que no hay grupo de comparación y que faltan datos sobre la condición inicial, otros cambios y la selección de participantes. Además, son registros sintéticos, sin observaciones de personas reales. Tampoco permiten generalizar ese 70% a otras personas.\n\nAtribuir una causa significa sostener que el programa produjo una diferencia respecto de lo que habría ocurrido sin él. Por ejemplo, hipotéticamente, alguien podría mejorar después de participar porque también empezó a descansar más. Observar la mejoría posterior no permite distinguir esas explicaciones. Esto tampoco demuestra que el programa no tenga efecto.\n\nNo ejecuté el código ni repetí mediciones. No edité el hallazgo, acepté la tarea ni publiqué el informe.",
+    "baseline": "Registré **needs_revision (requiere revisión)**. Revisé el hallazgo completo, su cita, el origen declarado del autor, el borrador vinculado, la fuente guardada completa y las siete líneas de `evidence.py`, mediante Ken.\n\nPuede conservarse esta conclusión:\n\n> En los registros sintéticos suministrados, 28 de 40 participantes (70%) informaron mejoría después de participar.\n\nEl código calcula correctamente 28/40. **Eso no demuestra que el programa causara la mejoría**: falta un grupo de comparación y no se registraron otros cambios, condiciones iniciales ni mecanismos de selección. Tampoco permite generalizar ese 70% a personas reales.\n\nPor ejemplo, si alguien participa en un programa y además empieza a dormir mejor, su mejoría posterior no permite saber cuánto se debe al programa. Atribuir una causa exige evidencia sobre qué habría ocurrido sin él.\n\nNo verifiqué mediciones individuales ni repetí un experimento; los datos son sintéticos. Los IDs y fechas declarados como fixtures no aportan validación. No edité el hallazgo, acepté la tarea ni publiqué el informe."
+  },
+  "decisions": {
+    "candidate": {
+      "checks": [
+        {
+          "criterion": "Exactitud de la cita y del porcentaje descriptivo",
+          "explanation": "La cita guardada aparece literalmente en la fuente. 28/40 = 0,70; evidence.py define esos dos valores y devuelve su cociente. Esto verifica la coherencia documental y aritmética, no una medición empírica.",
+          "outcome": "supported"
+        },
+        {
+          "criterion": "Atribución causal al programa",
+          "explanation": "La fuente declara que no hay grupo de comparación concurrente y que no se registran otros cambios, condición inicial ni mecanismos de selección. El código sólo calcula una proporción. Que una mejoría se declare después de participar no permite establecer qué habría ocurrido sin el programa.",
+          "outcome": "concern"
+        },
+        {
+          "criterion": "Alcance de la conclusión sobre las personas",
+          "explanation": "El 70% describe únicamente los 40 registros sintéticos resumidos y sus declaraciones de mejoría. No establece una tasa aplicable a otras personas, una mejoría objetiva ni un efecto atribuible al programa.",
+          "outcome": "concern"
+        },
+        {
+          "criterion": "Calidad y límites metodológicos de la evidencia citada",
+          "explanation": "El resumen es explícitamente sintético y no suministra registros individuales, intervalo de incertidumbre ni asignación aleatoria. Permite comprobar lo que el resumen afirma, pero no auditar mediciones individuales ni estimar un efecto causal. El borrador no añade evidencia.",
+          "outcome": "concern"
+        }
+      ],
+      "evidence": [
+        {
+          "quote": "28 of 40 participants reported improvement after participating.",
+          "source_id": 1
+        },
+        {
+          "quote": "There was no concurrent comparison group in this recorded dataset.",
+          "source_id": 1
+        },
+        {
+          "quote": "Other changes, baseline condition and selection mechanisms are not recorded.",
+          "source_id": 1
+        },
+        {
+          "quote": "No individual records, uncertainty interval or randomized assignment are supplied.",
+          "source_id": 1
+        },
+        {
+          "quote": "These are synthetic records, not observations of real people.",
+          "source_id": 1
+        }
+      ],
+      "limitations": [
+        "Revisión limitada al hallazgo congelado, su cita, el borrador incluido, la fuente guardada y evidence.py; no se incorporaron fuentes nuevas.",
+        "Se inspeccionó el código fuente completo mostrado por Ken; no se ejecutó el programa ni se repitieron mediciones.",
+        "La ausencia de evidencia causal suficiente no demuestra que el programa carezca de efecto.",
+        "La decisión registra una revisión y una corrección propuesta; no acepta la tarea ni publica el informe."
+      ],
+      "rationale": "Puede conservarse únicamente la descripción del registro sintético: 28 de 40 participantes (70%) declararon mejoría después de participar. La cita es exacta, pero no respalda que el programa haya causado esa mejoría ni que el 70% de las personas mejore gracias a él. El borrador repite esa inferencia causal y requiere la misma corrección. Se leyó completo el sujeto congelado, incluida la procedencia del autor controlado y el borrador, la única fuente guardada citada y el código de evidence.py (líneas 1–7) mediante Ken. Los IDs y fechas son fixtures declarados; no acreditan observaciones empíricas ni validación independiente.",
+      "review_scope": "reported_checks_only",
+      "scientific_confidence": null,
+      "verdict": "needs_revision",
+      "verified_evidence": [
+        {
+          "quote": "28 of 40 participants reported improvement after participating.",
+          "quote_offset": 27,
+          "source_id": 1,
+          "source_sha256": "7157abc8ecb3ba725ac3c5a7303eb8a3973fe375037dd57afc49309d5f8d3b61"
+        },
+        {
+          "quote": "There was no concurrent comparison group in this recorded dataset.",
+          "quote_offset": 91,
+          "source_id": 1,
+          "source_sha256": "7157abc8ecb3ba725ac3c5a7303eb8a3973fe375037dd57afc49309d5f8d3b61"
+        },
+        {
+          "quote": "Other changes, baseline condition and selection mechanisms are not recorded.",
+          "quote_offset": 158,
+          "source_id": 1,
+          "source_sha256": "7157abc8ecb3ba725ac3c5a7303eb8a3973fe375037dd57afc49309d5f8d3b61"
+        },
+        {
+          "quote": "No individual records, uncertainty interval or randomized assignment are supplied.",
+          "quote_offset": 235,
+          "source_id": 1,
+          "source_sha256": "7157abc8ecb3ba725ac3c5a7303eb8a3973fe375037dd57afc49309d5f8d3b61"
+        },
+        {
+          "quote": "These are synthetic records, not observations of real people.",
+          "quote_offset": 318,
+          "source_id": 1,
+          "source_sha256": "7157abc8ecb3ba725ac3c5a7303eb8a3973fe375037dd57afc49309d5f8d3b61"
+        }
+      ]
+    },
+    "baseline": {
+      "checks": [
+        {
+          "criterion": "Alcance y correspondencia documental",
+          "explanation": "Leí todo el JSON del sujeto (next_offset null), su cita, origen de autor y único borrador vinculado; el borrador repite la misma afirmación causal. Leí los 380 caracteres completos de la fuente guardada, cuyo hash coincide con el consignado en el sujeto.",
+          "outcome": "supported"
+        },
+        {
+          "criterion": "Proporción descriptiva y código",
+          "explanation": "La fuente registra 28 de 40 informes de mejoría; 28/40 = 0,70. Ken permitió leer evidence.py completo, líneas 1–7: constantes 40 y 28 y una función que devuelve su cociente. Esto sustenta la proporción sintética declarada, sin verificar observaciones reales ni ejecutar un experimento.",
+          "outcome": "supported"
+        },
+        {
+          "criterion": "Atribución causal",
+          "explanation": "La fuente declara ausencia de grupo de comparación concurrente y de asignación aleatoria, y no registra otros cambios, condición inicial ni mecanismos de selección. Observar mejoría después de participar no determina cuánto habría mejorado el mismo grupo sin el programa. No hay evidencia suficiente para conservar 'causó' o 'por el programa'.",
+          "outcome": "concern"
+        },
+        {
+          "criterion": "Calidad, incertidumbre y alcance",
+          "explanation": "Son registros sintéticos, no observaciones de personas reales. No se proporcionan registros individuales, intervalo de incertidumbre ni detalles para comprobar la medición de mejoría. El 70% describe exclusivamente el recuento suministrado y no establece eficacia ni una tasa generalizable a una población.",
+          "outcome": "concern"
+        },
+        {
+          "criterion": "Verificación experimental o de datos originales",
+          "explanation": "No repetí un experimento ni validé mediciones individuales: no están suministrados. La inspección del cálculo y la coincidencia de la cita no sustituyen esas comprobaciones.",
+          "outcome": "not_checked"
+        }
+      ],
+      "evidence": [
+        {
+          "quote": "28 of 40 participants reported improvement after participating.",
+          "source_id": 1
+        },
+        {
+          "quote": "There was no concurrent comparison group in this recorded dataset.",
+          "source_id": 1
+        },
+        {
+          "quote": "Other changes, baseline condition and selection mechanisms are not recorded.",
+          "source_id": 1
+        },
+        {
+          "quote": "No individual records, uncertainty interval or randomized assignment are supplied.",
+          "source_id": 1
+        },
+        {
+          "quote": "These are synthetic records, not observations of real people.",
+          "source_id": 1
+        }
+      ],
+      "limitations": [
+        "Revisión limitada al sujeto congelado, su borrador vinculado, la fuente 1 guardada y la versión de evidence.py leída durante esta revisión; no se evaluaron cambios posteriores.",
+        "No se dispone de datos individuales, mediciones originales ni comparación que identifique qué habría ocurrido sin el programa.",
+        "No se ejecutó el código ni se repitió un experimento; el cociente se comprobó por inspección y aritmética.",
+        "La decisión registra una evaluación independiente de la afirmación; no acepta la tarea ni publica o modifica el hallazgo o el informe."
+      ],
+      "rationale": "Revisé el sujeto congelado completo, incluida la procedencia del autor controlado y el borrador vinculado, la única fuente citada completa (fuente 1) y evidence.py completo (líneas 1–7), localizado mediante consulta Ken en inglés. Puede conservarse sólo la descripción: en estos registros sintéticos, 28 de 40 participantes (70%) informaron mejoría después de participar. El hallazgo y el borrador atribuyen esa mejoría al programa y generalizan a las personas, pero la fuente no permite identificar ese efecto causal. El código sólo divide 28 por 40; no estima una comparación causal. Los IDs y las fechas son fixtures declarados, no validación independiente.",
+      "review_scope": "reported_checks_only",
+      "scientific_confidence": null,
+      "verdict": "needs_revision",
+      "verified_evidence": [
+        {
+          "quote": "28 of 40 participants reported improvement after participating.",
+          "quote_offset": 27,
+          "source_id": 1,
+          "source_sha256": "7157abc8ecb3ba725ac3c5a7303eb8a3973fe375037dd57afc49309d5f8d3b61"
+        },
+        {
+          "quote": "There was no concurrent comparison group in this recorded dataset.",
+          "quote_offset": 91,
+          "source_id": 1,
+          "source_sha256": "7157abc8ecb3ba725ac3c5a7303eb8a3973fe375037dd57afc49309d5f8d3b61"
+        },
+        {
+          "quote": "Other changes, baseline condition and selection mechanisms are not recorded.",
+          "quote_offset": 158,
+          "source_id": 1,
+          "source_sha256": "7157abc8ecb3ba725ac3c5a7303eb8a3973fe375037dd57afc49309d5f8d3b61"
+        },
+        {
+          "quote": "No individual records, uncertainty interval or randomized assignment are supplied.",
+          "quote_offset": 235,
+          "source_id": 1,
+          "source_sha256": "7157abc8ecb3ba725ac3c5a7303eb8a3973fe375037dd57afc49309d5f8d3b61"
+        },
+        {
+          "quote": "These are synthetic records, not observations of real people.",
+          "quote_offset": 318,
+          "source_id": 1,
+          "source_sha256": "7157abc8ecb3ba725ac3c5a7303eb8a3973fe375037dd57afc49309d5f8d3b61"
+        }
+      ]
+    }
+  },
+  "human_comprehension": null
+}

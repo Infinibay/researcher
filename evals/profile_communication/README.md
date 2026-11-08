@@ -29,6 +29,34 @@ Un brazo ya iniciado bloquea replay; un fallo conserva sus recibos. Comprensión
 y esfuerzo humanos siguen `null`. Los resultados se registran después de observar
 el cierre original; esta descripción no afirma que hayan pasado.
 
+## Comparación adicional de revisión de hallazgos
+
+`finding_review.py` usa la capacidad real `finding_review` y el endpoint propietario
+de revisión sobre un hallazgo concreto. El autor es controlado, sin modelo; fuente,
+afirmación e informe se guardan mediante transacciones reales. Sus IDs y fechas
+son fixtures declarados para producir el mismo paquete completo en cada base
+nueva. Esas fechas no describen una captura real. La autoridad de cada instalación
+es nueva; no se copia una instalación anterior.
+
+```bash
+python -m evals.profile_communication.finding_review --prepare \
+  --assets /ruta/recursos-host.json --output /ruta/nueva
+python -m evals.profile_communication.finding_review --live \
+  --assets /ruta/recursos-host.json --output /ruta/nueva
+```
+
+Máximo dos revisores reales, uno por política. El registro congela material,
+criterios, políticas, evaluador y hash de recursos antes de generar respuestas;
+un cambio posterior de recursos exige un registro nuevo sin iniciar. Límites por
+brazo:180 segundos,20herramientas,350000tokens observados o los techos menores
+del operador. Se conserva cualquier primer fallo; no se repite el brazo.
+
+La comparación exige el mismo paquete completo además de modelo/catálogo/contexto.
+Sólo normaliza el UUID del reviewer en `scope` y en `review.run_id` cuando es
+exactamente su alias; una referencia ajena sigue siendo una diferencia. Autor,
+fuentes, contenido y subject hash se preservan. Comprensión humana permanece
+desconocida; una revisión documental no acredita validez causal o científica.
+
 ## Comparaciones históricas de planificación, ciencia y auditoría
 
 Este ensayo extiende el evaluador instalado de `context_alignment`: mismo
