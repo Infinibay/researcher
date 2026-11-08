@@ -11,7 +11,7 @@ export function QuestionInbox({ projectId, tasks, onChoose }: { projectId: numbe
     <h2 id="conversation-pending-title">Preguntas pendientes</h2>
     {query.isPending && <p role="status">Consultando solicitudes…</p>}
     {query.error && <div role="alert"><p>No se pudieron recuperar las preguntas.</p><button onClick={() => query.refetch()}>Volver a consultar</button></div>}
-    {total != null && <p className="conversation-count">{total} {total === 1 ? 'solicitud pendiente' : 'solicitudes pendientes'}</p>}
+    {total != null && <p className="conversation-count">{query.error?'Última lectura guardada: ':''}{total} {total === 1 ? 'solicitud pendiente' : 'solicitudes pendientes'}{query.error?'. El estado actual no está confirmado.':''}</p>}
     {items.length === 0 && query.isSuccess && <p>No hay preguntas pendientes en este proyecto.</p>}
     <ul>{items.map(item => <li key={item.request_id} data-request-id={item.request_id}>
       {item.kind === 'native' && item.task_id != null ? <button disabled={!tasks.some(task => task.id === item.task_id)} onClick={() => onChoose(item.task_id!, item.request_id)}>

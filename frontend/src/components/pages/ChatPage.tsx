@@ -1,3 +1,4 @@
+/** Project-scoped conversation, original question responses and explicitly readonly thread archive. @module */
 import { useEffect, useRef, useState } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
 import { useProjectStore } from '../../stores/project'
@@ -7,16 +8,19 @@ import { useTaskWorkspace } from '../../hooks/useRuntime'
 import { TaskRunWorkspace } from '../tasks/TaskRunWorkspace'
 import { ConversationTimeline } from '../chat/ConversationTimeline'
 import { QuestionInbox } from '../chat/QuestionInbox'
+import { OwnerNoteForm } from '../chat/OwnerNoteForm'
 import type { Task } from '../../types/api'
 import '../../styles/tasks.css'
 import '../../styles/conversation.css'
 
+/** Choose only an actual active project before exposing conversation controls. */
 export function ChatPage() {
   const projectId = useProjectStore(state => state.activeProjectId)
   if (projectId == null) return <section className="task-workbench conversation-workbench conversation-empty"><h1>Conversación</h1><h2>Ningún proyecto seleccionado</h2><p>Selecciona un proyecto para abrir sus tareas y conversaciones.</p></section>
   return <ProjectConversation key={projectId} projectId={projectId} />
 }
 
+/** Keep project task reads, selection and question links distinct from inference admission. */
 function ProjectConversation({ projectId }: { projectId: number }) {
   const tasks = useTasks(projectId)
   const [params, setParams] = useSearchParams()
@@ -24,6 +28,7 @@ function ProjectConversation({ projectId }: { projectId: number }) {
   const id = Number(params.get('task'))
   const selected = tasks.data?.find(task => task.id === id && task.project_id === projectId)
   const questionId = Number(params.get('question')) || undefined
+  /** Change only selection; opening a task or question must never submit work. */
   const choose = (taskId: number, requestId?: number) => {
     const next = new URLSearchParams(params)
     next.set('task', String(taskId))
@@ -31,6 +36,7 @@ function ProjectConversation({ projectId }: { projectId: number }) {
     else next.delete('question')
     setParams(next)
   }
+  /** Return to the current project index while preserving a keyboard focus destination. */
   const back = () => {
     const next = new URLSearchParams(params)
     next.delete('task'); next.delete('question')
@@ -46,18 +52,19 @@ function ProjectConversation({ projectId }: { projectId: number }) {
         <div className="conversation-task-heading"><h2>Tareas</h2><label>Buscar tarea<input type="search" value={search} onChange={event => setSearch(event.target.value)} placeholder="Título o número" /></label></div>
         {tasks.isPending && <p role="status">Recuperando las tareas…</p>}
         {tasks.error && <div className="conversation-error" role="alert"><p>No se pudieron recuperar las tareas.</p><button onClick={() => tasks.refetch()}>Volver a consultar</button></div>}
-        {tasks.data?.length === 0 && <p className="conversation-index-note">Crea una tarea en Tareas para empezar.</p>}
-        {tasks.data && tasks.data.length > 0 && !visibleTasks.length && <p className="conversation-index-note">No hay tareas con esa búsqueda.</p>}
+        {tasks.isSuccess && tasks.data?.length === 0 && <p className="conversation-index-note">Crea una tarea en Tareas para empezar.</p>}
+        {tasks.isSuccess && tasks.data && tasks.data.length > 0 && !visibleTasks.length && <p className="conversation-index-note">No hay tareas con esa búsqueda.</p>}
         <ul className="conversation-tasks">{visibleTasks.map(task => <li key={task.id}><button id={`conversation-task-${task.id}`} onClick={() => choose(task.id)} aria-current={selected?.id === task.id ? 'true' : undefined}><span className="conversation-meta">Tarea #{task.id}</span><strong>{task.title}</strong><span>{task.type === 'research' ? 'Investigación' : task.type}</span></button></li>)}</ul>
       </aside>
       <div className="conversation-reading">
-        {selected ? <TaskConversation key={`${projectId}:${selected.id}`} projectId={projectId} task={selected} questionId={questionId} onBack={back} /> : <div className="conversation-empty"><h2>Elige una tarea</h2><p>Abre una tarea para leer su conversación, responder sus preguntas o indicar qué quieres comprobar. Seleccionarla no inicia trabajo.</p>{id > 0 && !tasks.isPending && <p>La tarea indicada no está disponible en este proyecto.</p>}</div>}
+        {selected ? <TaskConversation key={`${projectId}:${selected.id}`} projectId={projectId} task={selected} questionId={questionId} onBack={back} /> : <div className="conversation-empty"><h2>Elige una tarea</h2><p>Abre una tarea para leer su conversación, responder sus preguntas o indicar qué quieres comprobar. Seleccionarla no inicia trabajo.</p>{id > 0 && tasks.isSuccess && <p>La tarea indicada no está disponible en este proyecto.</p>}</div>}
         <ProjectArchive projectId={projectId} />
       </div>
     </div>
   </section>
 }
 
+/** Attribute thread history to the selected task and retain original question/run identities. */
 function TaskConversation({ projectId, task, questionId, onBack }: { projectId: number; task: Task; questionId?: number; onBack: () => void }) {
   const workspace = useTaskWorkspace(projectId, task.id)
   const [thread, setThread] = useState<string | null>(null)
@@ -85,10 +92,12 @@ function TaskConversation({ projectId, task, questionId, onBack }: { projectId: 
       {history.error && <div role="alert"><p>No se pudo recuperar la conversación.</p><button onClick={() => history.refetch()}>Volver a consultar</button></div>}
       {messages.length > 0 && <ConversationTimeline messages={messages} selectedTaskId={task.id} />}
       {threadId != null && history.isSuccess && !messages.length && <p>Las preguntas que requieren respuesta se muestran debajo con sus controles.</p>}
+      {threadId!=null&&history.isSuccess&&<OwnerNoteForm key={`${projectId}:${threadId}`} projectId={projectId} threadId={threadId}/>}
     </section>} />
   </article>
 }
 
+/** Read original project threads without creating work or confusing failed cached emptiness with a current observation. */
 function ProjectArchive({ projectId }: { projectId: number }) {
   const threads = useChatThreads(projectId)
   const [selected, setSelected] = useState<string | null>(null)
@@ -96,7 +105,7 @@ function ProjectArchive({ projectId }: { projectId: number }) {
   return <details className="conversation-archive"><summary>Archivo de conversaciones del proyecto</summary><p>Lectura de los hilos guardados. Abrirlos no envía mensajes ni inicia ejecuciones.</p>
     {threads.isPending && <p role="status">Recuperando los hilos…</p>}
     {threads.error && <div role="alert"><p>No se pudieron recuperar los hilos.</p><button onClick={() => threads.refetch()}>Volver a consultar</button></div>}
-    {threads.data?.length === 0 && <p>Todavía no hay hilos guardados.</p>}
+    {threads.isSuccess && threads.data?.length === 0 && <p>Todavía no hay hilos guardados.</p>}
     <ul className="conversation-archive-index">{threads.data?.map(item => <li key={item.thread_id}><button aria-pressed={selected === item.thread_id} onClick={() => setSelected(item.thread_id)}><span>{item.last_message || 'Conversación sin mensajes'}</span><span>{item.message_count ?? 0} mensajes</span></button></li>)}</ul>
     {selected && history.isPending && <p role="status">Recuperando el hilo…</p>}
     {history.error && <div role="alert"><p>No se pudo recuperar el hilo.</p><button onClick={() => history.refetch()}>Volver a consultar</button></div>}

@@ -19,7 +19,7 @@ function question(): RuntimeQuestion {
 }
 
 describe('complete and scoped question answers', () => {
-  beforeEach(() => { mutation.mutate.mockReset(); mutation.error = null })
+  beforeEach(() => { sessionStorage.clear();mutation.mutate.mockReset(); mutation.error = null })
 
   it('sends option identity plus free text and retries the exact packet after a lost reply', async () => {
     const user = userEvent.setup(), view = render(<QuestionCard projectId={101} taskId={1001} question={question()} />)

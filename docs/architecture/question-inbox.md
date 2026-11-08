@@ -1,5 +1,14 @@
 # Bandeja de preguntas y conversación del propietario
 
+## Aceptación principal de Conversación — 2026-11-08
+
+La web distingue lecturas fallidas de vacío/ausencia, conserva respuestas originales y ofrece notas advisory por hilo con recibo duradero, sin iniciar trabajo. El archivo del proyecto sigue siendo lector.
+
+[Verificación y límites actuales](../modernization/conversation-page-review.md):
+10/12páginas técnicas/delegadas; sin aceptación científica ni comprensión humana.
+Los apartados del piloto inicial conservados debajo son evidencia histórica,
+no una declaración de que sigan pendientes los mismos controles ya implementados.
+
 `GET /api/projects/{project_id}/questions` es una lectura del propietario, disponible
 sin configurar inferencia. Cookie/sesión del propietario; un bearer de herramientas
 no autoriza esta ruta. Responde no-store, con un máximo de cien registros por página

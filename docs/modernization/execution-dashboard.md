@@ -24,28 +24,29 @@ que se pueda comparar el avance; no presentar microajustes como tareas principal
 ## Estado comprobado
 
 - Codex por suscripción y Ken publicado ensayados. Fuentes/citas, informes draft y revisión documental independiente conectados. Desarrollo admitido desde Tareas/Conversación con captura y comprobaciones explícitas; revisión independiente solicitada desde Tareas y aceptación del propietario conectada. Publicación local desde aceptación conectada; recuperación local de sólo lectura conectada; transporte remoto configurable conectado; recuperación remota y controles de Tareas conectados; ejecución/activación antiguas por tarea y proyecto retiradas; auxiliares de generación/proveedor, herramientas antiguas y sus cinco bibliotecas retirados. También se retiraron API interna, CLI, servicios/listeners y flows/helpers antiguos. También se retiraron autonomía, plantillas históricas y lectores de proveedor sin consumidores; se conserva el control de parada de trabajadores registrados.
-- Interfaz: doce pilotos, 36/36 conceptos de escritorio y 12/12 móviles; todas las rutas tienen piloto y 9/12 páginas tienen aceptación técnica y visual delegada.
+- Interfaz: doce pilotos, 36/36 conceptos de escritorio y 12/12 móviles; todas las rutas tienen piloto y 10/12 páginas tienen aceptación técnica y visual delegada.
 - Última suite global: `9fb873c`,2210 casos,2178 pasan,31 fallan y1 error de fixture; sin omisiones. La carrera de backup encontrada se corrigió después con40 pruebas instaladas. No se declara una nueva corrida global verde; la referencia `0c8b8d9` queda como evidencia histórica.
 - U01–U07, E01–E12, C01–C09 y D01–D13 quedan comprobados con el alcance de sus matrices; siguen 2 de 43 escenarios amplios sin aceptación completa en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Estado actual: Tareas aceptada; continúa Conversación
+## Estado actual: Conversación aceptada; continúa Ejecución
 
-**09:06:31–09:38:09UTC,31min38s hasta verificar/inspeccionar**, base9d99cac.
-[Alcance](dependency-authority-review.md). Documentación/checkpoint posteriores excluidos.
+**09:43:34–10:19:14UTC,35min40s hasta verificar/inspeccionar**, based9e455a.
+[Alcance](conversation-page-review.md). Documentación/checkpoint posteriores excluidos.
 
-- Terminado: **9/12 páginas** técnicas/delegadas. Tareas: recorridos principales,
-  coordinación causal y material aceptado para manuales/revisores.169instaladas,
-  0skips;696fuentes/370producto;157contratos/tipos/build. Navegador10estados/16checks;
-  recuperación original compartida10/15,0modelos. Migración71/inversa/crash verificadas.
-- En curso: **aceptación completa de Conversación**, reutilizando componentes y
-  recuperación ya comprobados. No regenerar conceptos ni inventar historiales.
-- Pendiente en orden: Conversación, Ejecución, Proyectos/AuthorityBusy; cierre no
-  vacío, U08/C10/ciencia, distribución/dependencias, prompts, inversas hasta71,
-  suite global y revisión independiente final. Sin historial de usuario que migrar.
+- Terminado: **10/12 páginas** técnicas/delegadas. Conversación: historial/archivo,
+  lecturas desconocidas, nota advisory y respuestas duraderas con recibo original;
+  75UI/161contratos/tipos/build/ESLint.11estados/17checks sobre el mismo fixture,
+  una nota/una respuesta1→2,0modelos. Backend/esquema71sin cambios;169instaladas
+  corresponden al recibo anterior, no otra suite.
+- En curso: **aceptación principal de Ejecución**, sobre observaciones/control
+  originales; reutilizar fixture e interfaz existentes sin otra generación.
+- Pendiente en orden: Ejecución, Proyectos/AuthorityBusy, idempotencia de comentarios
+  de tarea (no cubierta por notas del hilo); cierre no vacío, U08/C10/ciencia,
+  distribución/dependencias, prompts, inversas71, global y revisión final.
 - Seguimos **41/43 escenarios**. Última global31fallos/1error; prompts al último
-  corte67de85desactualizados/318archivos. Revalidar árbol final; sin ETA inventada.
-- Detalles al final: DD142y anteriores; fecha relativa, enums, controles protegidos,
-  densidad, estilo y accesibilidad completa. Sin push, merge o despliegue.
+  corte67de85desactualizados/318archivos. Sin historial de usuario que migrar.
+- Detalles al final: DD143y anteriores; densidad/encuadre, estilo, fechas relativas
+  y accesibilidad completa. Sin porcentaje/ETA global inventados, push o merge.
 
 ## Etapa anterior: Ken estructural offline verificado; continúa aceptación de páginas
 

@@ -1239,3 +1239,17 @@ la selección de material concreta y las comprobaciones de ámbito ya funcionan.
 Ruff15I001/3PLC0414 en [lista](dependency-authority-lint.json). ESLint seleccionado
 verde; warning Starlette en primer corte fuente. Bundle DD121.32definiciones
 nuevas seleccionadas documentadas. Gates globales y U08/C10 siguen principales.
+
+## DD143 — densidad y encuadre de Conversación
+
+Simplificar densidad/mensajes y evaluar prioridad visual de una pregunta pendiente
+frente al compositor de notas, sin cambiar semántica de nota/corrección/instrucción.
+Algunas capturas1024noencuadran todo el formulario; no repetir mutaciones por ese
+encuadre. Scope y controles principales funcionan a1440/390; accesibilidad completa,
+zoom y lector siguen como gate final. Ruff2I001del evaluador en
+[lista](conversation-page-lint.json); selecciónESLintverde.4funcionesPython/
+27definicionesfrontend documentadas. Bundle DD121. Mantener viewport explícito y
+esperar transición observable en evaluadores; no diagnosticar ausencia por CSS.
+
+Idempotencia de comentarios de tarea es pendiente principal, no detalle de estilo
+ni capacidad cubierta por las nuevas notas del hilo. Se registra en coverage.json.

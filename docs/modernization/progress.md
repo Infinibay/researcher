@@ -9185,3 +9185,16 @@ Desde09:41:48UTC, base6be94e2. Leídos ChatPage/ConversationTimeline/QuestionInb
 [plan](../superpowers/plans/2026-11-08-conversation-page-acceptance.md). Primero
 preguntas/nota vs instrucción y lecturas cacheadas; no asumir contratos nuevos ni
 repetir quizzes humanos. Sin cambios de backend después del paquete verificado.
+
+## 2026-11-08 — aceptación principal de Conversación
+
+Based9e455a,09:43:34–10:19:14UTC,35min40s hasta verificar/inspeccionar.
+[Alcance](conversation-page-review.md):75UI/161contratos/tipos/build/ESLint pasan;
+11estados/17checks sobre originales, una nota/una respuesta1→2,0modelos. Se
+continuó el mismo fixture según estado comprobado; último tramo sólo lectura.
+4funcionesPython/27definicionesfrontend documentadas. Backend/esquema71sin cambio.
+
+**10/12páginas** técnicas/delegadas;41/43escenarios. Siguiente Ejecución; luego
+Proyectos/AuthorityBusy, idempotencia de comentarios de tarea (endpoint separado),
+U08/C10/ciencia, distribución/dependencias, prompts, inversas71, global y revisión
+final. DetallesDD143y anteriores al final. Sin push/merge/despliegue.

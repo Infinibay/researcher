@@ -218,15 +218,25 @@ export function sendRecovery(intent: RecoveryIntent) {
 
 /** Freeze the exact observed answer packet, including nested selections, before a possibly uncertain HTTP write. */
 export function prepareAnswer(projectId: number, taskId: number, questionId: number, expectedVersion: number, answers: Record<string, QuestionAnswer>): AnswerIntent {
+  return restoreAnswer({projectId,taskId,questionId,body:{operation_key:crypto.randomUUID(),expected_version:expectedVersion,answers}})
+}
+
+/** Validate and freeze the original answer without minting another operation key during recovery. */
+export function restoreAnswer(intent:AnswerIntent):AnswerIntent {
+  const {projectId,taskId,questionId,body}=intent
+  const {expected_version:expectedVersion,answers}=body
   if (![projectId, taskId, questionId, expectedVersion].every(x => Number.isSafeInteger(x) && x > 0)
+    || typeof body.operation_key!=='string' || !/^[A-Za-z0-9_.:-]{1,128}$/.test(body.operation_key)
+    || !answers || typeof answers!=='object' || Array.isArray(answers)
     || Object.keys(answers).length < 1 || Object.keys(answers).length > 3
+    || Object.keys(answers).some(key=>!/^[A-Za-z][A-Za-z0-9_-]{0,63}$/.test(key))
     || Object.values(answers).some(value => typeof value === 'string' ? !value.trim()
       : !value || Object.keys(value).length !== 1 || !Object.prototype.hasOwnProperty.call(value, 'option_id') || !/^[A-Za-z][A-Za-z0-9_-]{0,63}$/.test(value.option_id))
     || new TextEncoder().encode(JSON.stringify(answers)).length > 12000) {
     throw new Error('Responde las preguntas dentro del límite de 12.000 bytes.')
   }
   return Object.freeze({ projectId, taskId, questionId, body: Object.freeze({
-    operation_key: crypto.randomUUID(), expected_version: expectedVersion,
+    operation_key: body.operation_key, expected_version: expectedVersion,
     answers: Object.freeze(Object.fromEntries(Object.entries(answers).map(([key, value]) => [key, typeof value === 'string' ? value : Object.freeze({ option_id: value.option_id })]))),
   }) })
 }

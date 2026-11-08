@@ -1,5 +1,14 @@
 # Preguntas, pausa y respuestas con procedencia
 
+## Respuestas recuperables desde la web — 2026-11-08
+
+La copia de respuestas se guarda antes de enviar y recupera cuerpo/clave/contexto originales tras recarga, aunque la pregunta ya figure respondida. La selección por ID sigue separada del texto literal. No se inicia inferencia al responder.
+
+[Verificación y límites actuales](../modernization/conversation-page-review.md):
+10/12páginas técnicas/delegadas; sin aceptación científica ni comprensión humana.
+Los apartados del piloto inicial conservados debajo son evidencia histórica,
+no una declaración de que sigan pendientes los mismos controles ya implementados.
+
 ## Contrato actual: opciones identificadas y texto libre (2026-11-07)
 
 Las opciones nuevas aceptan `{id, label}`. La selección se guarda como

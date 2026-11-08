@@ -5993,7 +5993,7 @@
       "status": "in_progress",
       "pilots": 12,
       "concept_images": 48,
-      "fully_accepted": 9,
+      "fully_accepted": 10,
       "pages": {
         "projects": {
           "status": "in_progress",
@@ -6220,14 +6220,26 @@
           ]
         },
         "chat": {
-          "status": "in_progress",
-          "scope": "Shared original request/correction recovery verified with Tasks; complete conversation-page acceptance remains open.",
+          "status": "verified",
+          "scope": "Technical/delegated visual acceptance of main conversation workflows: original task/thread/history and archive reads, honest failures, grouped answer/note persistence and exact receipt recovery, keyboard/filter/focus and foreign project isolation. Synthetic domain question; no fresh generation/scientific/human comprehension acceptance.",
           "evidence": [
             "docs/modernization/task-request-review.md",
-            "docs/modernization/dependency-authority-review.md"
+            "docs/modernization/dependency-authority-review.md",
+            "docs/modernization/conversation-page-review.md",
+            "docs/modernization/conversation-page-results.json",
+            "docs/design/audits/2026-11-08-conversation-page/report.md"
           ],
-          "remaining": [
-            "Accept complete conversation journey, owner notes/threads/question handling and truthful states on installed service"
+          "remaining": [],
+          "deferred": [
+            "DD143",
+            "DD142",
+            "DD132",
+            "DD121"
+          ],
+          "limits": [
+            "Regional accessibility only; full zoom/screen-reader acceptance remains open",
+            "Readonly continuation sessions reuse original effects; no new native run",
+            "No human evaluation implied"
           ]
         },
         "execution": {
@@ -6395,6 +6407,30 @@
         "Scoped tests and controlled native peers; no new paid model/scientific/human evaluation",
         "No backfill of unknown historical input",
         "Global regression and final independent review remain open"
+      ]
+    },
+    "owner_conversation_packet_recovery": {
+      "status": "verified",
+      "scope": "Durable original question answers and advisory thread notes with exact context/body/key recovery across reload, even when the server question is historical. No implicit inference or invented run identity.",
+      "evidence": [
+        "docs/modernization/conversation-page-review.md",
+        "docs/modernization/conversation-page-results.json",
+        "frontend/tests/ui/question-answer-recovery.test.tsx",
+        "frontend/tests/ui/owner-note-recovery.test.tsx",
+        "frontend/tests/conversation-packets.test.ts"
+      ],
+      "remaining": []
+    },
+    "owner_task_comment_idempotency": {
+      "status": "in_progress",
+      "scope": "Code-observed separate retained task-comment endpoint has no operation key; the new owner-thread note receipt does not cover task comments. Reproduce and implement before whole-goal completion.",
+      "evidence": [
+        "frontend/src/components/tasks/TaskCommentsPanel.tsx",
+        "backend/api/routes/tasks.py",
+        "docs/superpowers/plans/2026-10-31-actualizacion-proyecto.md"
+      ],
+      "remaining": [
+        "Reproduce uncertain task comment delivery; add durable exact scoped receipt and frontend packet recovery, without treating approval-labelled comments as acceptance"
       ]
     }
   }

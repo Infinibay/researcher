@@ -1,0 +1,63 @@
+{
+  "python": {
+    "path": "evals/operation/conversation_page.py",
+    "module_documented": true,
+    "definitions": 4,
+    "missing": [],
+    "sha256": "189dd85367ea0c213b7a73eee779e6759e2254b52823e8dac9120f04b6071fd4"
+  },
+  "frontend_documented_modules": [
+    "frontend/src/api/ownerNotes.ts",
+    "frontend/src/api/questionAnswers.ts",
+    "frontend/src/components/chat/OwnerNoteForm.tsx",
+    "frontend/src/components/chat/QuestionCard.tsx",
+    "frontend/src/components/pages/ChatPage.tsx",
+    "frontend/src/hooks/useChat.ts"
+  ],
+  "scope": "New/relevant modified modules and named functions carry English documentation; this is not a whole-tree docstring claim.",
+  "frontend": [
+    {
+      "path": "frontend/src/api/ownerNotes.ts",
+      "module_documented": true,
+      "definitions": 7,
+      "missing": []
+    },
+    {
+      "path": "frontend/src/api/questionAnswers.ts",
+      "module_documented": true,
+      "definitions": 5,
+      "missing": []
+    },
+    {
+      "path": "frontend/src/components/chat/OwnerNoteForm.tsx",
+      "module_documented": true,
+      "definitions": 3,
+      "missing": []
+    },
+    {
+      "path": "frontend/src/components/chat/QuestionCard.tsx",
+      "module_documented": true,
+      "definitions": 3,
+      "missing": []
+    },
+    {
+      "path": "frontend/src/components/chat/QuestionInbox.tsx",
+      "module_documented": true,
+      "definitions": 1,
+      "missing": []
+    },
+    {
+      "path": "frontend/src/components/pages/ChatPage.tsx",
+      "module_documented": true,
+      "definitions": 4,
+      "missing": []
+    },
+    {
+      "path": "frontend/src/hooks/useChat.ts",
+      "module_documented": true,
+      "definitions": 4,
+      "missing": []
+    }
+  ],
+  "frontend_named_definitions": 27
+}

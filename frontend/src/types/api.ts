@@ -109,7 +109,10 @@ export interface PeerMessageReceipt {
 }
 
 /** Owner conversation row, optionally linked to native work or a distinct advisory peer receipt. */
+/** Attributed stored messages and original owner-note receipt identity, distinct from native instruction admission. */
 export interface ChatMessage {
+  /** Original paired-owner note nonce; a recorded message does not authorize work. */
+  operation_key?: string | null
   id: number
   project_id: number
   thread_id?: string

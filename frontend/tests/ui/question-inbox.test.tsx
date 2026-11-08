@@ -33,3 +33,10 @@ it('keeps a failed or incomplete page distinct from an empty inbox', async () =>
   await user.click(screen.getByRole('button', { name: 'Ver más pendientes' }))
   expect(fetchNextPage).toHaveBeenCalledOnce()
 })
+
+it('labels a cached count as historical when the current inbox read failed',()=>{
+ state.query={data:{pages:[{total_pending:0,items:[]}]},error:new Error('Offline'),isSuccess:false,refetch:vi.fn()}
+ render(<QuestionInbox projectId={101} tasks={[]} onChoose={vi.fn()}/>)
+ expect(screen.getByText('Última lectura guardada: 0 solicitudes pendientes. El estado actual no está confirmado.')).toBeVisible()
+ expect(screen.queryByText('No hay preguntas pendientes en este proyecto.')).toBeNull()
+})

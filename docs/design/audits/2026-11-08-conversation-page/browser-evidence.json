@@ -1,0 +1,196 @@
+{
+  "status": "passed",
+  "scope": "Synthetic closed question; actual owner notes/answers and immutable receipt recovery",
+  "states": [
+    {
+      "name": "01-task-read-failure-is-unknown",
+      "width": 1440,
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "02-original-grouped-question-and-reason",
+      "width": 1440,
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "03-thread-list-error-is-not-empty",
+      "width": 390,
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "04-readonly-original-archive",
+      "width": 1440,
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "05-note-committed-reply-lost",
+      "width": 390,
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "06-original-note-recovered-without-context-change",
+      "width": 1440,
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "07-history-failure-keeps-question-controls",
+      "width": 390,
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "08-keyboard-task-selection",
+      "width": 1440,
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "09-answer-committed-reply-lost",
+      "width": 390,
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "10-original-answer-recovered-explicit-next-work",
+      "width": 1440,
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "11-foreign-task-link-has-no-controls",
+      "width": 390,
+      "fits": true,
+      "violations": []
+    }
+  ],
+  "notes": [
+    {
+      "body": {
+        "operation_key": "07b6355e-6be6-4c3b-9b03-3849cdbd8fb2",
+        "message": "La observación será un ejemplo ilustrativo; todavía no es una medición real.",
+        "thread_id": "synthetic-question-thread",
+        "to_agent": null,
+        "to_role": "project_lead"
+      },
+      "receipt": {
+        "operation_key": "07b6355e-6be6-4c3b-9b03-3849cdbd8fb2",
+        "id": 5,
+        "project_id": 101,
+        "thread_id": "synthetic-question-thread",
+        "from_agent": "user",
+        "to_agent": null,
+        "to_role": "project_lead",
+        "message": "La observación será un ejemplo ilustrativo; todavía no es una medición real.",
+        "conversation_type": "user_to_agent",
+        "created_at": "2026-11-08 10:03:56",
+        "runtime_run_id": null,
+        "runtime_status": null,
+        "context_version": null,
+        "task_id": null,
+        "peer_message": null,
+        "delivery": "recorded"
+      },
+      "status": 201
+    },
+    {
+      "body": {
+        "operation_key": "07b6355e-6be6-4c3b-9b03-3849cdbd8fb2",
+        "message": "La observación será un ejemplo ilustrativo; todavía no es una medición real.",
+        "thread_id": "synthetic-question-thread",
+        "to_agent": null,
+        "to_role": "project_lead"
+      },
+      "receipt": {
+        "operation_key": "07b6355e-6be6-4c3b-9b03-3849cdbd8fb2",
+        "id": 5,
+        "project_id": 101,
+        "thread_id": "synthetic-question-thread",
+        "from_agent": "user",
+        "to_agent": null,
+        "to_role": "project_lead",
+        "message": "La observación será un ejemplo ilustrativo; todavía no es una medición real.",
+        "conversation_type": "user_to_agent",
+        "created_at": "2026-11-08 10:03:56",
+        "runtime_run_id": null,
+        "runtime_status": null,
+        "context_version": null,
+        "task_id": null,
+        "peer_message": null,
+        "delivery": "recorded"
+      },
+      "status": 201
+    }
+  ],
+  "answers": [
+    {
+      "body": {
+        "operation_key": "c7bb05ad-04f5-4780-bc99-187d558591bc",
+        "expected_version": 1,
+        "answers": {
+          "example": "{\"id\":7,\"measurement\":12}",
+          "column": {
+            "option_id": "output_value"
+          }
+        }
+      },
+      "receipt": {
+        "context_version": 2,
+        "application": "recorded_for_next_run",
+        "inference_started": false
+      },
+      "status": 200
+    },
+    {
+      "body": {
+        "operation_key": "c7bb05ad-04f5-4780-bc99-187d558591bc",
+        "expected_version": 1,
+        "answers": {
+          "example": "{\"id\":7,\"measurement\":12}",
+          "column": {
+            "option_id": "output_value"
+          }
+        }
+      },
+      "receipt": {
+        "context_version": 2,
+        "application": "recorded_for_next_run",
+        "inference_started": false
+      },
+      "status": 200
+    }
+  ],
+  "errors": [],
+  "readFaults": [
+    "/api/chat/101/threads",
+    "/api/tasks",
+    "/api/chat/101/threads",
+    "/api/tasks",
+    "/api/chat/101/threads/synthetic-question-thread"
+  ],
+  "checks": [
+    "task-read-error-not-absence",
+    "original-question-focus-and-reason",
+    "thread-list-error-not-empty",
+    "archive-readonly-original-thread",
+    "foreign-note-excluded",
+    "original-note-201-receipt-after-reload",
+    "note-does-not-change-context-or-start-work",
+    "history-error-keeps-original-question",
+    "filter-does-not-retarget-selected-task",
+    "keyboard-selection-focus",
+    "complete-answer-keeps-choice-id-and-literal-text",
+    "answer-commit-before-reply-loss",
+    "exact-answer-key-and-context-recovery-after-responded",
+    "pending-inbox-clears-from-server-answer",
+    "next-work-enabled-never-started",
+    "foreign-task-has-no-control",
+    "no-page-errors-overflow-or-regional-axe-violations"
+  ],
+  "continued_from": "/home/andres/.codex/worktrees/b09e/researcher/.researcher/evaluations/conversation-page-20261108-resumed3/browser/evidence.json"
+}

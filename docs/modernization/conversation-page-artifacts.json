@@ -1,0 +1,77 @@
+{
+  "base_commit": "d9e455a",
+  "files": [
+    {
+      "path": "frontend/src/api/ownerActions.ts",
+      "sha256": "45d4b6927cb64406184627d51bbad50cf2d01c4865d5bd1c74e6b25019aa983e"
+    },
+    {
+      "path": "frontend/src/api/runtime.ts",
+      "sha256": "f3a8289d9602a145aded0e6ad2dcd20e21428b6021f4ca7162e31e409a62a003"
+    },
+    {
+      "path": "frontend/src/api/questionAnswers.ts",
+      "sha256": "4218f3d6c5892435949b2621273792deb6cb4c6cf51f50ad2b68e45ac275c49e"
+    },
+    {
+      "path": "frontend/src/api/ownerNotes.ts",
+      "sha256": "2b335260616dce8b975776907cd1c6b0e73af4e4ef5ffa184e662a8d1cfad0c7"
+    },
+    {
+      "path": "frontend/src/types/api.ts",
+      "sha256": "156c51fa507b73261a86b197a8b1f0f186ab6ea449bd6035d4b3fb3e4dc60520"
+    },
+    {
+      "path": "frontend/src/components/chat/QuestionCard.tsx",
+      "sha256": "072dd8afec9250e8891a3b36a6b0e66bf87280d9c6b1d1485165c12d5b6ad34a"
+    },
+    {
+      "path": "frontend/src/components/chat/QuestionInbox.tsx",
+      "sha256": "bdebc3b1c06ae297cdf157158bdbf159312d02dd1a9dbd56d381239e0588ddae"
+    },
+    {
+      "path": "frontend/src/components/chat/OwnerNoteForm.tsx",
+      "sha256": "83e1b0f761f131d72735ad99fca7306534a7b2c047bd6620f217800058583d37"
+    },
+    {
+      "path": "frontend/src/components/pages/ChatPage.tsx",
+      "sha256": "d091e1b0e75c2aa41395e709f93b249ac1d5b0cd42a851109746ef3f8122eecc"
+    },
+    {
+      "path": "frontend/src/hooks/useChat.ts",
+      "sha256": "d425fbfd724134d78286078f97caccb2b082cc8ebfbcaba2b9c8935ed9b13e80"
+    },
+    {
+      "path": "frontend/tests/conversation-packets.test.ts",
+      "sha256": "834460f1d24a50e084cde30a43ba7fe3c2183d4f6567530394bed603932db385"
+    },
+    {
+      "path": "frontend/tests/conversation.e2e.mjs",
+      "sha256": "21bdeb4627e801c814251c6e620898d3f8cc45381195352431b1ed3d05f5f3de"
+    },
+    {
+      "path": "frontend/tests/ui/question-answer-recovery.test.tsx",
+      "sha256": "56890ed485bcc4549e40f44fcba2185e69c522ed4c306a06c7cc44ab5476f84c"
+    },
+    {
+      "path": "frontend/tests/ui/owner-note-recovery.test.tsx",
+      "sha256": "632b1c915f15ae02961988f9e2e2cd11efe8aecbbc8826b84ca8a660b93a2e48"
+    },
+    {
+      "path": "frontend/tests/ui/conversation-reads.test.tsx",
+      "sha256": "a787ef20f8d130cbf16b0ad65161fad9ccdef08d9f82d55781682557e2b4ba37"
+    },
+    {
+      "path": "frontend/tests/ui/question-card.test.tsx",
+      "sha256": "86d620d3d0d8e27f3cffed1942c9df3b16823ff8373343a3a8b9b7d1a3d069ec"
+    },
+    {
+      "path": "frontend/tests/ui/question-inbox.test.tsx",
+      "sha256": "bb70ffc6158a544ed52b88ec624914d2de4de5c3cb1b3f4664a303d6210668e3"
+    },
+    {
+      "path": "evals/operation/conversation_page.py",
+      "sha256": "189dd85367ea0c213b7a73eee779e6759e2254b52823e8dac9120f04b6071fd4"
+    }
+  ]
+}

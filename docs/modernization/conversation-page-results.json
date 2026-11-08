@@ -1,0 +1,91 @@
+{
+  "base_commit": "d9e455a",
+  "frontend_ui": {
+    "cases": 75,
+    "passed": 75,
+    "failed": 0
+  },
+  "frontend_contracts": {
+    "cases": 161,
+    "passed": 161,
+    "failed": 0
+  },
+  "type_check": "passed",
+  "build": "passed",
+  "eslint": "passed",
+  "backend_changes": false,
+  "backend_wheel_sha256": "59241c4a8460fa623de7d428dbf99a9a1a7ccd85fbe91a62ae572b312bf5f19d",
+  "backend_installed_test_receipt": "docs/modernization/dependency-authority-packaging.json",
+  "backend_test_receipt_is_previous_not_rerun": true,
+  "browser": {
+    "states": 11,
+    "checks": 17,
+    "note_http_deliveries": 2,
+    "new_note_records": 1,
+    "answer_http_deliveries": 2,
+    "context_versions": [
+      {
+        "task_id": 1,
+        "version": 2
+      },
+      {
+        "task_id": 2,
+        "version": 2
+      }
+    ],
+    "original_runs_before": 1,
+    "original_runs_after": 1,
+    "native_dispatches": 0,
+    "actual_model_turns": 0,
+    "synthetic_bound_turn_ids": 1,
+    "service_exit": 143,
+    "continuation_receipts": [
+      {
+        "path": ".researcher/evaluations/conversation-page-20261108",
+        "status": "failed",
+        "service_exit": 143,
+        "sha256": "7aaa5dbdba57518f98ef1ca71092b689256c0b7b0241df960892a340aac03233"
+      },
+      {
+        "path": ".researcher/evaluations/conversation-page-20261108-resumed",
+        "status": "failed",
+        "service_exit": 143,
+        "sha256": "9e80121f8cbad9b9c74a2a3456dfedbf363deef9d479d9c9d98cfe3656adee45"
+      },
+      {
+        "path": ".researcher/evaluations/conversation-page-20261108-resumed2",
+        "status": "failed",
+        "service_exit": 143,
+        "sha256": "60a378d3ac84246fcd6b2110dcafd96358295b5c7c81eeb7cac2777caa6ff8b7"
+      },
+      {
+        "path": ".researcher/evaluations/conversation-page-20261108-resumed3",
+        "status": "failed",
+        "service_exit": 143,
+        "sha256": "1fac4da7020188d630ba457d6f5efd1ce45078d8b520b8796883c20316494878"
+      },
+      {
+        "path": ".researcher/evaluations/conversation-page-20261108-final",
+        "status": "passed",
+        "service_exit": 143,
+        "sha256": "443f6abed79138e4c1ecf4b634f028f0667b5e557022852926bf8eb1e23b4bae"
+      }
+    ],
+    "original_fixture_reused": true
+  },
+  "documentation": {
+    "python_functions": 4,
+    "frontend_named_definitions": 27
+  },
+  "timing": {
+    "start_utc": "2026-11-08 09:43:34",
+    "verified_utc": "2026-11-08 10:19:14",
+    "seconds": 2140,
+    "scope": "Current verification/visual inspection and identical build check; previous preflight and subsequent documentation/checkpoint excluded"
+  },
+  "limits": [
+    "Synthetic question and logical closure witnesses, no generative model or human comprehension claim",
+    "Regional Axe/keyboard/responsive checks, not full accessibility",
+    "No new backend/global suite; unchanged installed artifact retains its previous169-test receipt"
+  ]
+}
