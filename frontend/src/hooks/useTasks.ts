@@ -12,6 +12,7 @@ interface TaskFilters {
   assigned_to?: string
 }
 
+/** Read the selected project task list with explicit optional filters. */
 export function useTasks(projectId: number | null, filters?: TaskFilters) {
   return useQuery({
     queryKey: ['tasks', projectId, filters],
@@ -41,14 +42,15 @@ export function useCreateTask() {
         method: 'POST',
         body: JSON.stringify(data),
       }),
-    onSuccess: () => {
-      qc.invalidateQueries({ queryKey: ['tasks'] })
-      qc.invalidateQueries({ queryKey: ['epics'] })
-      qc.invalidateQueries({ queryKey: ['milestones'] })
+    onSettled: (_, __, data) => {
+      qc.invalidateQueries({ queryKey: ['tasks',data.project_id] })
+      qc.invalidateQueries({ queryKey: ['epics',data.project_id] })
+      qc.invalidateQueries({ queryKey: ['milestones',data.project_id] })
     },
   })
 }
 
+/** Refresh original task/context reads after every reply, including an unconfirmed metadata write. */
 export function useUpdateTask() {
   const qc = useQueryClient()
   return useMutation({
@@ -69,7 +71,7 @@ export function useUpdateTask() {
         method: 'PUT',
         body: JSON.stringify(data),
       }),
-    onSuccess: (_, vars) => {
+    onSettled: (_, __, vars) => {
       qc.invalidateQueries({ queryKey: ['tasks'] })
       qc.invalidateQueries({ queryKey: ['task', vars.id] })
       qc.invalidateQueries({ queryKey: ['task-workspace'] })
@@ -79,6 +81,7 @@ export function useUpdateTask() {
   })
 }
 
+/** Request manual retirement and preserve server explanations when native history prevents deletion. */
 export function useDeleteTask() {
   const qc = useQueryClient()
   return useMutation({
@@ -92,14 +95,17 @@ export function useDeleteTask() {
   })
 }
 
+/** Read stored notes; a failed query does not prove an empty history. */
 export function useTaskComments(taskId: number | null) {
   return useQuery({
     queryKey: ['task-comments', taskId],
     queryFn: () => fetchApi<TaskComment[]>(`/api/tasks/${taskId}/comments`),
     enabled: taskId != null,
+    retry: false,
   })
 }
 
+/** Append a note and refresh its history even when the delivery response is unavailable. */
 export function useAddTaskComment() {
   const qc = useQueryClient()
   return useMutation({
@@ -116,20 +122,23 @@ export function useAddTaskComment() {
         method: 'POST',
         body: JSON.stringify(data),
       }),
-    onSuccess: (_, vars) => {
+    onSettled: (_, __, vars) => {
       qc.invalidateQueries({ queryKey: ['task-comments', vars.taskId] })
     },
   })
 }
 
-export function useTaskDependencies(taskId: number | null) {
+/** Preserve outgoing-only consumers; the inspector explicitly asks for both relation directions. */
+export function useTaskDependencies(taskId: number | null, includeIncoming=false) {
   return useQuery({
-    queryKey: ['task-dependencies', taskId],
-    queryFn: () => fetchApi<TaskDependency[]>(`/api/tasks/${taskId}/dependencies`),
+    queryKey: includeIncoming ? ['task-dependencies', taskId, 'both'] : ['task-dependencies', taskId],
+    queryFn: () => fetchApi<TaskDependency[]>(buildUrl(`/api/tasks/${taskId}/dependencies`,{include_incoming:includeIncoming?true:undefined})),
     enabled: taskId != null,
+    retry: false,
   })
 }
 
+/** Replace confirmed relations and refresh their task context after successful or uncertain delivery. */
 export function useSetTaskDependencies() {
   const qc = useQueryClient()
   return useMutation({
@@ -141,13 +150,15 @@ export function useSetTaskDependencies() {
       depends_on: number[]
       dependency_type?: string
     }) =>
-      fetchApi<any>(`/api/tasks/${taskId}/dependencies`, {
+      fetchApi<TaskDependency[]>(`/api/tasks/${taskId}/dependencies`, {
         method: 'POST',
         body: JSON.stringify(data),
       }),
-    onSuccess: (_, vars) => {
+    onSettled: (_, __, vars) => {
       qc.invalidateQueries({ queryKey: ['task-dependencies', vars.taskId] })
       qc.invalidateQueries({ queryKey: ['task-dependency-graph'] })
+      qc.invalidateQueries({ queryKey: ['task', vars.taskId] })
+      qc.invalidateQueries({ queryKey: ['task-workspace'] })
       qc.invalidateQueries({ queryKey: ['tasks'] })
     },
   })

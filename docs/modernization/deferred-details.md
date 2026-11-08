@@ -1209,3 +1209,13 @@ el disclosure completo; no repetir un recorrido sólo por ello. Avisos técnicos
 DD132. Copia dañada se conserva y bloquea una nueva mutación; no descartar o crear
 otra clave automáticamente. EstiloPythonen[task-request-lint.json](task-request-lint.json);
 selecciónfrontendpasa[ESLint](task-request-eslint.json). BundleDD121.
+
+## DD140 — estilo y presentación del inspector
+
+Pulir espacio/densidad y texto de notas/relaciones al final. La captura entrante
+1440 muestra la dirección correcta; no sustituye accesibilidad completa ni prueba
+de edición.3Ruff (I001/C408) en [lista](task-inspector-lint.json),1any heredado
+de tipos en [ESLint](task-inspector-eslint.json). Nuevos paneles/hook pasan.
+Las omisiones Python seleccionadas de DD138 quedan resueltas:58definiciones
+documentadas en5módulos. Bundle DD121. Contrato de admisión manual y reapertura
+de trabajo son pendientes principales, no detalles secundarios.

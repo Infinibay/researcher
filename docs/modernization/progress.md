@@ -9144,3 +9144,13 @@ Backend689fuentes igual al wheelb2103c057f25443db82254c626f0f1b7962eaa7f23c35bbf
 no reinstalación o nueva suitebackend/global.8/12páginas/41de43escenarios. Continúa
 aceptación de resultados ylecturas/ediciones del inspector deTareas; luego otras
 páginas y gatesglobales. [Resultados y límites](task-request-review.md).
+
+## 2026-11-08 — inspector y fronteras de dependencias
+
+Base50fdaa3,08:05:44–08:54:41UTC (48min57s hasta verificar).
+[Revisión](task-inspector-review.md):59fuente/113instaladas/59UI/157contratos,
+tipos/build y navegador10estados/15checks pasan. Cambios atómicos de contexto,
+rollback, proyectos y borrado protegidos.58definiciones Python documentadas.
+Revisión limpia parcial registra asimetría de admisión manual como principal
+pendiente, sin inventar intención universal.8/12páginas y41/43escenarios.
+Sigue resultado→aceptar→pedir cambios→nuevo trabajo; detalles DD140 al final.

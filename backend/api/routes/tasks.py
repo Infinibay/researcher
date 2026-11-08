@@ -24,6 +24,7 @@ router = APIRouter(prefix="/api/tasks", tags=["tasks"])
 
 
 def _row_to_response(row: dict) -> TaskResponse:
+    'Build the public task DTO from the registered database row.'
     return TaskResponse(**row)
 
 
@@ -38,6 +39,7 @@ def list_tasks(
     """List tasks with optional filters."""
 
     def _query(conn: sqlite3.Connection) -> list[dict]:
+        'Read the selected project and requested filters without importing tasks from other projects.'
         where = ["t.project_id = ?"]
         params: list = [project_id]
 
@@ -177,30 +179,12 @@ async def update_task(task_id: int, body: TaskUpdate, request: Request):
 
 @router.delete("/{task_id}", status_code=204)
 def delete_task(task_id: int):
-    """Delete a task (only if backlog, pending, or cancelled)."""
+    """Retire only manual unreferenced task metadata; native and plan history are preserved."""
+    from backend.planning.owner_records import OwnerPlanningRecords
+    from backend.runtime.sqlite_runs import SQLiteRunStore
+    from backend.tools.base.db import get_db_path
 
-    def _delete(conn: sqlite3.Connection) -> bool:
-        row = conn.execute(
-            "SELECT id, status FROM tasks WHERE id = ?", (task_id,)
-        ).fetchone()
-        if not row:
-            return False
-
-        if row["status"] not in ("backlog", "pending", "cancelled"):
-            raise ValueError(
-                f"Cannot delete task in status '{row['status']}'. "
-                f"Only backlog, pending, or cancelled tasks can be deleted."
-            )
-
-        conn.execute("DELETE FROM task_dependencies WHERE task_id = ? OR depends_on_task_id = ?",
-                      (task_id, task_id))
-        conn.execute("DELETE FROM task_comments WHERE task_id = ?", (task_id,))
-        conn.execute("DELETE FROM tasks WHERE id = ?", (task_id,))
-        conn.commit()
-        return True
-
-    found = execute_with_retry(_delete)
-    if not found:
+    if not OwnerPlanningRecords(SQLiteRunStore(get_db_path())).delete_task(task_id):
         raise TaskNotFound(task_id)
 
 
@@ -213,6 +197,7 @@ def list_task_comments(task_id: int):
 
     def _query(conn: sqlite3.Connection) -> list[dict]:
         # Verify task exists
+        'Read chronological owner notes without interpreting their labels as task acceptance.'
         row = conn.execute("SELECT id FROM tasks WHERE id = ?", (task_id,)).fetchone()
         if not row:
             raise ValueError(f"Task {task_id} not found")
@@ -234,6 +219,7 @@ def add_task_comment(task_id: int, body: TaskCommentCreate):
     """Add a comment to a task."""
 
     def _create(conn: sqlite3.Connection) -> dict:
+        'Persist one explicit note without starting work, correcting context or accepting the task.'
         row = conn.execute("SELECT id FROM tasks WHERE id = ?", (task_id,)).fetchone()
         if not row:
             raise ValueError(f"Task {task_id} not found")
@@ -257,15 +243,17 @@ def add_task_comment(task_id: int, body: TaskCommentCreate):
 
 
 @router.get("/{task_id}/dependencies", response_model=list[TaskDependencyResponse])
-def list_task_dependencies(task_id: int):
-    """List dependencies for a task."""
+def list_task_dependencies(task_id: int, include_incoming: bool = Query(default=False)):
+    """Read outgoing relations by default; the inspector may explicitly include tasks that refer to this one."""
 
     def _query(conn: sqlite3.Connection) -> list[dict]:
+        'Read the original directed relationships and any explicitly requested incoming references.'
         rows = conn.execute(
             """SELECT task_id, depends_on_task_id, dependency_type
                FROM task_dependencies
-               WHERE task_id = ?""",
-            (task_id,),
+               WHERE task_id = ? OR (? AND depends_on_task_id = ?)
+               ORDER BY task_id, depends_on_task_id""",
+            (task_id, include_incoming, task_id),
         ).fetchall()
         return [dict(r) for r in rows]
 
@@ -274,45 +262,15 @@ def list_task_dependencies(task_id: int):
 
 
 @router.post("/{task_id}/dependencies", response_model=list[TaskDependencyResponse], status_code=201)
-def set_task_dependencies(task_id: int, body: TaskDependencyCreate):
-    """Set dependencies for a task."""
+async def set_task_dependencies(task_id: int, body: TaskDependencyCreate, request: Request):
+    """Replace scoped relations and their context atomically, then notify the host after commit."""
+    from backend.planning.owner_records import OwnerPlanningRecords
+    from backend.runtime.sqlite_runs import SQLiteRunStore
+    from backend.tools.base.db import get_db_path
 
-    def _set(conn: sqlite3.Connection) -> list[dict]:
-        # Validate task exists
-        row = conn.execute("SELECT id FROM tasks WHERE id = ?", (task_id,)).fetchone()
-        if not row:
-            raise ValueError(f"Task {task_id} not found")
-
-        # Validate dependencies
-        for dep_id in body.depends_on:
-            if dep_id == task_id:
-                raise ValueError("A task cannot depend on itself")
-            row = conn.execute("SELECT id FROM tasks WHERE id = ?", (dep_id,)).fetchone()
-            if not row:
-                raise ValueError(f"Dependency task {dep_id} not found")
-
-        # Remove existing of same type and re-insert
-        conn.execute(
-            "DELETE FROM task_dependencies WHERE task_id = ? AND dependency_type = ?",
-            (task_id, body.dependency_type),
-        )
-
-        results = []
-        for dep_id in body.depends_on:
-            conn.execute(
-                """INSERT OR IGNORE INTO task_dependencies
-                   (task_id, depends_on_task_id, dependency_type)
-                   VALUES (?, ?, ?)""",
-                (task_id, dep_id, body.dependency_type),
-            )
-            results.append({
-                "task_id": task_id,
-                "depends_on_task_id": dep_id,
-                "dependency_type": body.dependency_type,
-            })
-
-        conn.commit()
-        return results
-
-    deps = execute_with_retry(_set)
-    return [TaskDependencyResponse(**d) for d in deps]
+    records = OwnerPlanningRecords(SQLiteRunStore(get_db_path()))
+    result = await run_in_threadpool(records.set_task_dependencies, task_id, body.depends_on, body.dependency_type)
+    runtime = request.app.state.runtime_service
+    if result['changed'] and runtime is not None:
+        runtime.task_inputs_changed(result['project_id'],task_id)
+    return [TaskDependencyResponse(**item) for item in result['items']]

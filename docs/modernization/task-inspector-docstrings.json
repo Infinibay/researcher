@@ -1,0 +1,40 @@
+{
+  "definitions": 58,
+  "files": [
+    {
+      "path": "backend/api/models/task.py",
+      "sha256": "1521e7cf6f471b78de0ad65ed002f1d3a067604b88719c5f851e87a171e38966",
+      "module_documented": true,
+      "definitions": 8,
+      "missing": []
+    },
+    {
+      "path": "backend/api/routes/tasks.py",
+      "sha256": "d70b9207ec29ada56f83be419794e906377fab9fde5f78c4fc6f8f8d2921ed59",
+      "module_documented": true,
+      "definitions": 17,
+      "missing": []
+    },
+    {
+      "path": "backend/planning/owner_records.py",
+      "sha256": "365b394241a026c2a64eed65d67ed704c121c919b63ea13b6d3f8a82a5a29a1d",
+      "module_documented": true,
+      "definitions": 15,
+      "missing": []
+    },
+    {
+      "path": "backend/tests/api/test_task_inspector_boundaries.py",
+      "sha256": "8c13385bf3cdf92a99e2835aef5ff204dd56ed57566fdfb22c704ac87135e737",
+      "module_documented": true,
+      "definitions": 9,
+      "missing": []
+    },
+    {
+      "path": "backend/tests/runtime/test_owner_planning_records.py",
+      "sha256": "8299b31d149fba0a4421c2929a91ab9e5e981e65d681eb2e61180a101e6a4197",
+      "module_documented": true,
+      "definitions": 9,
+      "missing": []
+    }
+  ]
+}

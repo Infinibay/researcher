@@ -1,0 +1,107 @@
+[
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 52,
+      "row": 21
+    },
+    "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/api/routes/tasks.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "from __future__ import annotations\n\nimport sqlite3\n\nfrom fastapi import APIRouter, HTTPException, Query, Request\nfrom starlette.concurrency import run_in_threadpool\n\nfrom backend.api.exceptions import TaskNotFound\nfrom backend.api.models.task import (\n    TaskCommentCreate,\n    TaskCommentResponse,\n    TaskCreate,\n    TaskDependencyCreate,\n    TaskDependencyResponse,\n    TaskResponse,\n    TaskUpdate,\n)\nfrom backend.state.machine import TaskStateMachine\nfrom backend.tools.base.db import execute_with_retry\n\n",
+          "end_location": {
+            "column": 1,
+            "row": 23
+          },
+          "location": {
+            "column": 1,
+            "row": 3
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 1,
+      "row": 3
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 3,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  },
+  {
+    "cell": null,
+    "code": "C408",
+    "end_location": {
+      "column": 129,
+      "row": 64
+    },
+    "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/planning/owner_records.py",
+    "fix": {
+      "applicability": "unsafe",
+      "edits": [
+        {
+          "content": "{\"project_id\": project_id, \"epic_id\": epic_id, \"milestone_id\": milestone_id, \"title\": title,\n                          \"description\": description, \"type\": type, \"priority\": priority, \"complexity\": complexity, \"depends_on\": dependencies}",
+          "end_location": {
+            "column": 129,
+            "row": 64
+          },
+          "location": {
+            "column": 22,
+            "row": 63
+          }
+        }
+      ],
+      "message": "Rewrite as a literal"
+    },
+    "location": {
+      "column": 22,
+      "row": 63
+    },
+    "message": "Unnecessary `dict()` call (rewrite as a literal)",
+    "name": "unnecessary-collection-call",
+    "noqa_row": 63,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unnecessary-collection-call"
+  },
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 72,
+      "row": 16
+    },
+    "filename": "/home/andres/.codex/worktrees/b09e/researcher/backend/tests/runtime/test_owner_planning_records.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "import sqlite3\nfrom concurrent.futures import ThreadPoolExecutor\nfrom contextlib import closing\nfrom dataclasses import replace\nfrom threading import Barrier\n\nimport pytest\n\nfrom backend.planning.owner_records import OwnerPlanningRecords\nfrom backend.runtime.contracts import RunConflict\nfrom backend.tests.runtime.test_installation_backup import installation\nfrom backend.tests.runtime.test_migration_chain import logical_snapshot\nfrom backend.tests.runtime.test_plan_milestones import milestone_draft\nfrom backend.tests.runtime.test_project_planning import planning_state\n\n",
+          "end_location": {
+            "column": 1,
+            "row": 18
+          },
+          "location": {
+            "column": 1,
+            "row": 3
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 1,
+      "row": 3
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 3,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  }
+]

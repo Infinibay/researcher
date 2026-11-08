@@ -28,27 +28,24 @@ que se pueda comparar el avance; no presentar microajustes como tareas principal
 - Última suite global: `9fb873c`,2210 casos,2178 pasan,31 fallan y1 error de fixture; sin omisiones. La carrera de backup encontrada se corrigió después con40 pruebas instaladas. No se declara una nueva corrida global verde; la referencia `0c8b8d9` queda como evidencia histórica.
 - U01–U07, E01–E12, C01–C09 y D01–D13 quedan comprobados con el alcance de sus matrices; siguen 2 de 43 escenarios amplios sin aceptación completa en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Estado actual: solicitudes y correcciones duraderas; continúa aceptación de Tareas
+## Estado actual: inspector protegido; continúa aceptación de resultados
 
-**07:33:01–08:01:05UTC,28min4s hasta verificar/inspeccionar**, basef0d57bf.
-[Alcance](task-request-review.md). Documentación/checkpoint posteriores excluidos.
+**08:05:44–08:54:41UTC,48min57s hasta verificar/inspeccionar**, base50fdaa3.
+[Alcance](task-inspector-review.md). Documentación/checkpoint posteriores excluidos.
 
-- Terminado: **8/12 páginas** en alcance técnico/delegado. Solicitud/corrección
- compartidas por Tareas y Conversación se guardan antes del envío; recarga conserva
- texto/clave/contexto/conversación/repositorio/material. Recibos ajenos no confirman.
- 57UI/157contratos,tipos/build pasan.7estados instalados/12checks: un run original,
- Stop202 yuna corrección1→2ante respuesta perdida,0dispatches/turnos yservicio143.
-- En curso: **Tareas: aceptación de resultados y lecturas/ediciones del inspector**.
- Historial, recuperación de solicitud, Stop y corrección originales ya comprobados
- con admisión sintética. [Plan](../superpowers/plans/2026-11-08-task-page-acceptance.md).
+- Terminado: **8/12 páginas**. Inspector no inventa vacío al fallar una lectura;
+  dependencias entrantes explícitas; edición retira autoridad atómicamente y
+  borrado protege historia, plan y dependientes.59fuente/113instaladas/59UI/
+  157contratos; tipos/build pasan.10estados/15checks instalados,0modelos.
+- En curso: **Tareas: aceptar resultado, pedir cambios y nuevo trabajo**.
+  Una aceptación histórica no debe bloquear una tarea reabierta bajo otro contexto.
 - Pendiente: completar Tareas, Conversación, Ejecución y Proyectos/AuthorityBusy;
- cierre no vacío, U08/C10/ciencia, distribución/dependencias, prompts, inversas70,
- suite y revisión independiente final. No historial del usuario que migrar.
+  contrato de dependencias manuales, cierre no vacío, U08/C10/ciencia,
+  distribución/dependencias, prompts, inversas70, suite y revisión final.
 - Seguimos **41/43 escenarios**. Última global31fallos/1error; prompts al último
- corte67de85desactualizados/318archivos. Revalidar árbol final; no porcentaje/ETA inventados.
-- Detalles al final: DD139y anteriores, densidad/scroll/mensajes, estilo y
- accesibilidad completa. Backend y esquema70sin cambios; 133instalados son evidencia
- anterior del mismo wheel, no nueva suite. Sin nueva generación, push o merge.
+  corte67de85desactualizados/318archivos. Sin porcentaje/ETA global defendible.
+- Detalles al final: DD140y anteriores. Sin historial de usuario que migrar.
+  Sin nueva generación, push o merge. No se declara Tareas aceptada aún.
 
 ## Etapa anterior: Ken estructural offline verificado; continúa aceptación de páginas
 

@@ -33,6 +33,8 @@ class TaskCreate(BaseModel):
 
 
 class TaskUpdate(BaseModel):
+    """Selective owner metadata edits; native lifecycle changes require distinct execution controls."""
+
     title: str | None = Field(default=None, min_length=1, max_length=255)
     description: str | None = None
     status: str | None = None
@@ -67,12 +69,16 @@ class TaskResponse(BaseModel):
 
 
 class TaskCommentCreate(BaseModel):
+    """Owner note data and a claimed author label; the note grants no acceptance or execution authority."""
+
     author: str = Field(default="user")
     content: str = Field(..., min_length=1)
     comment_type: CommentType = Field(default="comment")
 
 
 class TaskCommentResponse(BaseModel):
+    """Persisted note without interpreting its approval/change label as a native control receipt."""
+
     id: int
     task_id: int
     author: str
@@ -82,11 +88,15 @@ class TaskCommentResponse(BaseModel):
 
 
 class TaskDependencyCreate(BaseModel):
+    """Replace one typed outgoing relation set; the owner store validates each target in its project."""
+
     depends_on: list[int]
     dependency_type: str = Field(default="blocks")
 
 
 class TaskDependencyResponse(BaseModel):
+    """Original directed relation endpoints; incoming queries retain their original direction."""
+
     task_id: int
     depends_on_task_id: int
     dependency_type: str

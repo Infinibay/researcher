@@ -161,7 +161,7 @@ function ProjectTaskWorkbench({ projectId }: { projectId: number }) {
       <ConfirmDialog
         open={deleteId != null}
         title="Eliminar tarea"
-        message={deleteTask.error ? `No se pudo eliminar la tarea. ${deleteTask.error.message}` : 'Se eliminará esta tarea. Si tiene una ejecución pendiente de cierre, primero debe resolverse.'}
+        message={deleteTask.error ? `No se pudo eliminar la tarea. ${deleteTask.error.message}` : 'Sólo se eliminará si no tiene historia nativa, vínculos con un plan aceptado ni otras tareas dependientes. Si conserva alguno, se mostrará el motivo y la tarea permanecerá.'}
         confirmLabel="Eliminar"
         cancelLabel="Conservar tarea"
         danger

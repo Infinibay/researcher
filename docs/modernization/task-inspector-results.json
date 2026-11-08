@@ -1,0 +1,35 @@
+{
+  "base_commit": "50fdaa3",
+  "source_tests": {
+    "passed": 59,
+    "skipped": 0
+  },
+  "installed_tests": {
+    "passed": 113,
+    "skipped": 0
+  },
+  "ui_tests": 59,
+  "contract_tests": 157,
+  "type_check": "passed",
+  "build": "passed",
+  "package_check": {
+    "compatible": 83
+  },
+  "browser": {
+    "status": "passed",
+    "checks": 15,
+    "states": 10,
+    "real_model_turns": 0,
+    "dispatches_before": 0,
+    "dispatches_after": 0,
+    "runs_before": 1,
+    "runs_after": 1,
+    "context_version_after": 2,
+    "service_exit": 143
+  },
+  "limitations": [
+    "Selected tests only; global suite not rerun",
+    "Synthetic existing admission; no generative, scientific or human acceptance",
+    "Tasks page remains open; dependency edit browser mutation not covered"
+  ]
+}

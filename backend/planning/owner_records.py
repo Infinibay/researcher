@@ -81,6 +81,68 @@ class OwnerPlanningRecords:
 
             return self._create(conn, project_id, operation_key, 'task.create', intent, insert)
 
+    def set_task_dependencies(self, task_id, depends_on, dependency_type="blocks"):
+        """Replace one scoped relation set and withdraw the old observed context atomically; identical sets are no-ops."""
+        identity(task_id)
+        if dependency_type not in {"blocks", "related_to", "parent_of"}:
+            raise ValueError("Unsupported dependency type")
+        requested = sorted(depends_on)
+        for dependency in requested:
+            identity(dependency)
+            if dependency == task_id:
+                raise ValueError("A task cannot depend on itself")
+        if len(set(requested)) != len(requested):
+            raise ValueError("Dependency tasks must be unique")
+        with self.runs._transaction(write=True) as conn:
+            task = conn.execute("SELECT project_id FROM tasks WHERE id=?", (task_id,)).fetchone()
+            if task is None:
+                raise RunNotFound("Tarea no disponible.")
+            project = task['project_id']
+            for dependency in requested:
+                if not conn.execute("SELECT 1 FROM tasks WHERE id=? AND project_id=?", (dependency, project)).fetchone():
+                    raise RunNotFound("Una tarea requerida no pertenece al proyecto de esta solicitud.")
+            current = [row[0] for row in conn.execute("SELECT depends_on_task_id FROM task_dependencies WHERE task_id=? AND dependency_type=? ORDER BY depends_on_task_id", (task_id, dependency_type))]
+            changed = current != requested
+            if changed:
+                if any(conn.execute("SELECT 1 FROM task_dependencies WHERE task_id=? AND depends_on_task_id=? AND dependency_type!=?", (task_id, dependency, dependency_type)).fetchone() for dependency in requested):
+                    raise RunConflict("Una relación ya tiene otro tipo. Retírala explícitamente antes de reemplazarla.")
+                before = self.runs._context(conn, task_id)
+                conn.execute("DELETE FROM task_dependencies WHERE task_id=? AND dependency_type=?", (task_id, dependency_type))
+                conn.executemany("INSERT INTO task_dependencies(task_id,depends_on_task_id,dependency_type) VALUES(?,?,?)", ((task_id, dependency, dependency_type) for dependency in requested))
+                def describe(identifiers):
+                    """Capture observed names in this project without inventing the identity of a missing or foreign target."""
+                    values=[]
+                    for identifier in identifiers:
+                        target=conn.execute('SELECT title FROM tasks WHERE project_id=? AND id=?',(project,identifier)).fetchone()
+                        values.append(f"#{identifier}: {target['title']}" if target else f"#{identifier}: nombre no disponible en este proyecto")
+                    return '; '.join(values) if values else 'ninguno'
+
+                label={'blocks':'prerrequisitos','related_to':'vínculos relacionados','parent_of':'tareas subordinadas'}[dependency_type]
+                statement = f"Registro de metadatos: cambiaron los {label}. Antes: {describe(current)}. Después: {describe(requested)}. Este registro describe el cambio; no es un testimonio del usuario."
+                self.runs._advance_context(conn, project_id=project, task_id=task_id, expected_version=before, statement=statement, source_kind='tool_evidence', source_reference='task-dependencies:'+uuid4().hex)
+            items = [dict(row) for row in conn.execute("SELECT task_id,depends_on_task_id,dependency_type FROM task_dependencies WHERE task_id=? AND dependency_type=? ORDER BY depends_on_task_id", (task_id, dependency_type))]
+            return {'project_id':project,'items':items,'changed':changed}
+
+    def delete_task(self, task_id):
+        """Delete only manual unreferenced work, preserving native admissions and accepted plan identities under the writer lock."""
+        identity(task_id)
+        with self.runs._transaction(write=True) as conn:
+            task = conn.execute("SELECT project_id,status FROM tasks WHERE id=?", (task_id,)).fetchone()
+            if task is None:
+                return False
+            if conn.execute("SELECT 1 FROM runtime_runs WHERE project_id=? AND task_id=? LIMIT 1", (task['project_id'],task_id)).fetchone():
+                raise RunConflict("Esta tarea tiene historia nativa protegida. Su solicitud y sus resultados se conservan; consulta el historial o retira el proyecto mediante su control explícito.")
+            if conn.execute("SELECT 1 FROM runtime_project_plan_tasks WHERE task_id=? LIMIT 1", (task_id,)).fetchone():
+                raise RunConflict("Esta tarea forma parte de un plan aceptado. Su identidad y su historia se conservan.")
+            if conn.execute("SELECT 1 FROM task_dependencies WHERE depends_on_task_id=? LIMIT 1", (task_id,)).fetchone():
+                raise RunConflict("Otras tareas conservan una relación con ésta. Revisa y retira esas relaciones explícitamente antes de eliminarla.")
+            if task['status'] not in ('backlog','pending','cancelled'):
+                raise ValueError("Only backlog, pending or cancelled manual tasks may be deleted")
+            conn.execute("DELETE FROM task_dependencies WHERE task_id=?", (task_id,))
+            conn.execute("DELETE FROM task_comments WHERE task_id=?", (task_id,))
+            conn.execute("DELETE FROM tasks WHERE id=?", (task_id,))
+            return True
+
     def create_group(self, *, project_id, title, description="", priority=2, operation_key=None):
         """Create or recover one exact owner group, preserving its original response after later metadata edits."""
         intent = {"project_id": project_id, "title": title, "description": description, "priority": priority}

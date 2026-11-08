@@ -79,7 +79,7 @@ export interface TaskComment {
 export interface TaskDependency {
   task_id: number
   depends_on_task_id: number
-  dependency_type: 'blocks' | 'depends_on'
+  dependency_type: 'blocks' | 'related_to' | 'parent_of' | 'depends_on'
 }
 
 /** Canonical peer provenance: a receipt never certifies understanding or work authorization. */

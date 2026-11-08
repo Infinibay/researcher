@@ -18,7 +18,7 @@ from backend.tests.runtime.test_installation_backup import installation
 __all__ = ["installation"]
 
 
-@pytest.mark.parametrize("kind", ["group", "milestone"])
+@pytest.mark.parametrize("kind", ["group", "milestone", "task"])
 def test_accepted_plan_groups_cannot_be_removed_before_child_execution(service_setup, kind):
     """Pending child tasks still belong to an accepted plan whose original grouping must remain recoverable."""
     from backend.planning.store import ProjectPlans
@@ -35,7 +35,12 @@ def test_accepted_plan_groups_cannot_be_removed_before_child_execution(service_s
     group, milestone = accepted["epics"]["work"], accepted["milestones"]["evidence"]
     before = [tuple(row) for row in s.c.conn.execute("SELECT id,epic_id,milestone_id,status FROM tasks ORDER BY id")]
     with pytest.raises(RunConflict, match="plan aceptado"):
-        (records.delete_group(group) if kind == "group" else records.delete_milestone(milestone))
+        if kind == 'task':
+            records.delete_task(next(iter(accepted['tasks'].values())))
+        elif kind == 'group':
+            records.delete_group(group)
+        else:
+            records.delete_milestone(milestone)
     assert s.c.conn.execute("SELECT 1 FROM epics WHERE id=?", (group,)).fetchone()
     assert s.c.conn.execute("SELECT 1 FROM milestones WHERE id=?", (milestone,)).fetchone()
     assert [tuple(row) for row in s.c.conn.execute("SELECT id,epic_id,milestone_id,status FROM tasks ORDER BY id")] == before

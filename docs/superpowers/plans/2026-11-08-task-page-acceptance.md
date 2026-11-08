@@ -91,3 +91,46 @@ estables para texto restaurado. [Alcance](../../modernization/task-request-revie
 Continúan: aceptación de resultados ylecturas/ediciones auxiliares del inspector
 (comentarios/dependencias no pueden inventar vacío por fallo); después cierre de
 página. No sustituir ese recorrido por otro test sólo de paquetes. Detalles al final.
+
+## Frontera del inspector, inicio08:05:44UTC, base50fdaa3
+
+La inspección del módulo actual descubre dos defectos principales adicionales:
+set_task_dependencies valida sólo existencia, no proyecto; no versiona el cambio
+ni notifica runtime como update_task. delete_task elimina asociaciones e historia
+por cascada basándose sólo en status. Reproducir con API/SQLite antes de cambiar.
+
+Resolver en OwnerPlanningRecords bajo la transacción existente: reemplazo
+semántico del conjunto de relaciones, validación del proyecto, conservación de
+cambios como evidencia de metadatos y retiro de autoridad del contexto anterior.
+Reutilizar _advance_context y task_inputs_changed, sin migración inventada ni
+revisión de dependencias iniciales creadas atómicamente antes de admitir tareas.
+Los otros productores retenidos crean asociaciones al crear tareas/aceptar planes;
+retiro completo de proyecto conserva su política explícita separada. No declarar
+protección de SQL arbitrario fuera de estos escritores del producto.
+
+Un reemplazo idéntico es no-op; errores o fallo de evento revierten conjunto,
+versión y retiro juntos. Borrado manual rechaza historia nativa, pertenencia a un
+plan aceptado o tareas dependientes; exigir quitar relaciones explícitamente evita
+borrar sus condiciones por cascada. No cambiar semántica de admisión manual vs
+planes aceptados sin revisar su contrato; ese gate no se deduce de la etiqueta UI.
+
+Lecturas del inspector: loading/error/reintento y no falsos vacíos; no editar
+prerrequisitos con lectura fallida. Luego aceptación real de resultado guardado y
+petición de cambios reabriendo tarea, conservando recibo e informe originales.
+Estos son contratos principales, no pulido;8/12páginas sigue sin incremento.
+
+Hallazgo para el siguiente recorrido de resultado: presentRun('accepted') declara
+canStart:false. TaskRunWorkspace lo usa aunque el resultado pertenezca al contexto
+anterior y la tarea ya se haya reabierto con una corrección. Reproducir y resolver
+al aceptar/pedir cambios; no confundir aceptación histórica con permiso de iniciar
+el trabajo actual. Guardar datos y recibos originales. No declarar Tareas aceptada
+sólo por completar la frontera del inspector.
+
+## Inspector verificado08:54:41UTC
+
+[Alcance](../../modernization/task-inspector-review.md):59fuente/113instaladas,
+59UI/157contratos;10estados/15checks en navegador instalado,0modelos. Borrado,
+proyecto y retiro de autoridad protegidos. No se acepta toda Tareas aún.
+Siguiente bloque principal: resultado aceptado→pedir cambios→contexto nuevo→
+solicitud nueva habilitada sin perder informe/recibo. La asimetría blocks manual
+queda documentada para resolver después del recorrido. Detalles DD140 al final.

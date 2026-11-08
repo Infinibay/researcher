@@ -1,0 +1,57 @@
+{
+  "base_commit": "50fdaa3",
+  "files": [
+    {
+      "path": "backend/api/models/task.py",
+      "sha256": "1521e7cf6f471b78de0ad65ed002f1d3a067604b88719c5f851e87a171e38966"
+    },
+    {
+      "path": "backend/api/routes/tasks.py",
+      "sha256": "d70b9207ec29ada56f83be419794e906377fab9fde5f78c4fc6f8f8d2921ed59"
+    },
+    {
+      "path": "backend/planning/owner_records.py",
+      "sha256": "365b394241a026c2a64eed65d67ed704c121c919b63ea13b6d3f8a82a5a29a1d"
+    },
+    {
+      "path": "backend/tests/api/test_task_inspector_boundaries.py",
+      "sha256": "8c13385bf3cdf92a99e2835aef5ff204dd56ed57566fdfb22c704ac87135e737"
+    },
+    {
+      "path": "backend/tests/runtime/test_owner_planning_records.py",
+      "sha256": "8299b31d149fba0a4421c2929a91ab9e5e981e65d681eb2e61180a101e6a4197"
+    },
+    {
+      "path": "frontend/src/components/tasks/TaskInspector.tsx",
+      "sha256": "dad5390febc525245ffeb7a38ec908c25c7249a32da502e97ac38bb963dd79cb"
+    },
+    {
+      "path": "frontend/src/components/tasks/TaskCommentsPanel.tsx",
+      "sha256": "c59ad2bfbd03cf882e04cfef18e3e01a8afd3818d70abcb3b9dcb8fb64f13dd3"
+    },
+    {
+      "path": "frontend/src/components/tasks/TaskDependenciesPanel.tsx",
+      "sha256": "b46d0d3448759dbf89e94f5526bed08bee4d9e21bf10836304532cc50e426bce"
+    },
+    {
+      "path": "frontend/src/hooks/useTasks.ts",
+      "sha256": "36ec9bc32e6b8128925a69c9230ad9cf7a00f8b4fc9d73d60c4f47ee0a5fd545"
+    },
+    {
+      "path": "frontend/src/types/api.ts",
+      "sha256": "5458389ac8024a90302c8c812e4f8588c0590c0b9a52ddd307a16a946af7955d"
+    },
+    {
+      "path": "frontend/src/components/pages/TasksPage.tsx",
+      "sha256": "8bcc09e7ec4309c0424e445d2ab12094e305aabe06408ad76ef4d52afbf5c329"
+    },
+    {
+      "path": "frontend/tests/ui/task-inspector-reads.test.tsx",
+      "sha256": "5b757219bda041b73c35709e302be2637cf29414dde3c3262003caa40d2d0527"
+    },
+    {
+      "path": "frontend/tests/task-requests.e2e.mjs",
+      "sha256": "efa984e48cd65f946e1f2a15866f2475b4112af04e61bc5120301777b8fd14d3"
+    }
+  ]
+}

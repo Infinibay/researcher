@@ -1,0 +1,42 @@
+{
+  "validation_environment": {
+    "runner_cgroup": "/sys/fs/cgroup/user.slice/user-1000.slice/user@1000.service/app.slice/run-p1409224-i1409225.scope",
+    "parent_controllers_before": "cpu memory pids",
+    "runner_cpu_max": "800000 100000",
+    "purpose": "Transient systemd scope with CPUQuota=800% retains CPU-controller availability during validation; it does not relax any product limit.",
+    "parent_controllers_after": "cpu memory pids"
+  },
+  "base_commit": "50fdaa3",
+  "wheel": "researcher-0.1.0-cp312-cp312-linux_x86_64.whl",
+  "wheel_sha256": "bb330f5f3a773cd4358e5b5d2e876735fec070c22d63de109538cb70d9b2469e",
+  "source_files_matching_wheel_and_installation": 690,
+  "product_files_matching": 367,
+  "observed": {
+    "cases": 113,
+    "passed": 113,
+    "failed": 0,
+    "skipped": 0,
+    "backend_modules": 250,
+    "all_backend_imports_from_native_env": true,
+    "seconds": 60.218,
+    "exit_code": 0
+  },
+  "tests": [
+    "backend/tests/api/test_task_inspector_boundaries.py",
+    "backend/tests/api/test_task_creation_commands.py",
+    "backend/tests/api/test_planning_commands.py",
+    "backend/tests/runtime/test_owner_planning_records.py",
+    "backend/tests/runtime/test_task_creation_commands.py",
+    "backend/tests/runtime/test_task_input_versioning.py",
+    "backend/tests/runtime/test_admission_binding.py",
+    "backend/tests/runtime/test_task_request_history.py",
+    "backend/tests/runtime/test_result_acceptance.py",
+    "backend/tests/runtime/test_plan_execution.py"
+  ],
+  "real_model_turns": 0,
+  "limits": [
+    "Selected installed tests, not the global suite",
+    "Inspector dependency context withdrawal and rollback, protected task/plan history, creation receipts, admission/input/result and accepted graph regressions; browser acceptance separate",
+    "Real SQLite/Git/files and controlled native planning-domain records, no real native actor/model turn or human understanding claim"
+  ]
+}
