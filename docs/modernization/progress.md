@@ -9178,3 +9178,10 @@ compartida10/15 con postcondición corregida sobre originales,0modelos.
 Siguiente: Conversación; luego Ejecución y Proyectos/AuthorityBusy, U08/C10/ciencia,
 distribución/dependencias, prompts, inversas71, global y revisión independiente
 final. Detalles DD142y anteriores al final; sin push/merge/despliegue.
+
+## Siguiente preflight: Conversación
+
+Desde09:41:48UTC, base6be94e2. Leídos ChatPage/ConversationTimeline/QuestionInbox;
+[plan](../superpowers/plans/2026-11-08-conversation-page-acceptance.md). Primero
+preguntas/nota vs instrucción y lecturas cacheadas; no asumir contratos nuevos ni
+repetir quizzes humanos. Sin cambios de backend después del paquete verificado.
