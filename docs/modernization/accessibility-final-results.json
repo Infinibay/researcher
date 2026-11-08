@@ -1,0 +1,88 @@
+{
+  "status": "verified_scoped",
+  "base_commit": "d1d505b",
+  "started_utc": "2026-11-08T20:13:17Z",
+  "verification_observed_utc": "2026-11-08T20:23:46Z",
+  "elapsed_seconds_until_verification": 629,
+  "frontend": {
+    "contracts": 167,
+    "interaction": 80,
+    "failed": 0,
+    "build_exit": 0,
+    "build_warning": "existing chunks over500KiB",
+    "lint_exit": 1,
+    "lint_baseline_exit": 1,
+    "unchanged_lint_rule": "no-control-regex in deliberate terminal-control rendering regex"
+  },
+  "baseline": {
+    "states": 24,
+    "label_content_name_mismatch_states": 24,
+    "page_has_heading_one_states": 1,
+    "reflow_failures": 4,
+    "main_width": 320,
+    "affected_workbench_width": 336,
+    "affected_main_scroll_width": 328,
+    "margin_px": -24,
+    "padding_px": 16
+  },
+  "final": {
+    "states": 24,
+    "axe_violations": 0,
+    "keyboard_route_transitions": 24,
+    "shared_keyboard_controls": 3,
+    "reflow_failures": 0,
+    "affected_workbench_width": 320,
+    "affected_main_scroll_width": 320,
+    "margin_px": -16,
+    "model_turns": 0,
+    "runs": 0,
+    "dispatches": 0,
+    "native_starts": 0,
+    "sqlite_integrity": "ok",
+    "service_exit": 143
+  },
+  "red": {
+    "contracts_pass": 14,
+    "contracts_fail": 2,
+    "header_pass": 1,
+    "header_fail": 2,
+    "pre_product_browser_exit": 1
+  },
+  "jsdoc_added": 8,
+  "source_sha256": {
+    "frontend/src/components/layout/Header.tsx": "229df3c24f93a3e27770971219db10a375beb35fbfc3fd81aeb35b79966cb245",
+    "frontend/src/components/pages/ReportsPage.tsx": "e4673a7e0e5373ccfe85c37ef4b462d6a31d85b12d73a4407950b3093c2dd143",
+    "frontend/src/components/tasks/RunCommands.tsx": "5e0e4a8685a8b3f87f029d32c3605db190cdcb3384d4616301c0cc928ca3fd06",
+    "frontend/src/styles/wiki.css": "6f5b59b1ab39bfca6a7181ef1146b77b12714ccdca6693e4be7096d9817a1a46",
+    "frontend/src/styles/findings.css": "edc91cfa642906cc7ae62754866bf6d532ffe409952d03aa81a3f8773011282d",
+    "frontend/src/styles/reports.css": "8ac657ba360d33338134ec5c30b5b1691947ba49e62cf5339e424d23cf3a0083",
+    "frontend/src/styles/files.css": "2ddaa300b947fb5ead3bc070992f009a064629494a4b6f325a3c621a5473e06d",
+    "frontend/tests/workspace.e2e.mjs": "14937d69923e68f9e7fcaf39889e8253404aed98fc62399e1467e108ad7bef8b",
+    "frontend/tests/navigation-audit.mjs": "db84dec146ec1a9bcb84bde9baf07b5f4373c064efd28145071a0995805a2e54",
+    "frontend/tests/command-output.test.ts": "14c12f6af627482dc0e2f850aee0238aefe77b9cddd5a097242e519be93e8d83",
+    "frontend/tests/report-design.test.ts": "ec59532314e65390c68bd61972f0ba0a7db5a3229c4899caaaba78b275663683",
+    "frontend/tests/ui/header-accessibility.test.tsx": "6dee6094b9fd0ed834e9d6353f40b643a52d86048912a00ce7ccf48651afa44b"
+  },
+  "screens_visually_inspected": [
+    "before-320-wiki.png",
+    "before-320-reports.png",
+    "320-wiki.png",
+    "320-findings.png",
+    "320-reports.png",
+    "320-files.png",
+    "1440-reports.png"
+  ],
+  "limitations": [
+    "No native browser zoom or physical screen reader: integrated browser host unavailable; existing authorized repository Playwright fallback used",
+    "Synthetic empty content on several routes; earlier content/error/live execution acceptance is not newly verified here",
+    "No human comprehension or U08 acceptance",
+    "Pagination name regression uses actual server-rendered component DOM, not an end-to-end command execution",
+    "No new wheel, backend global run, push, merge or deployment"
+  ],
+  "evidence_directory": "docs/design/audits/2026-11-08-accessibility-final",
+  "diff_check": {
+    "non_log_exit": 0,
+    "verbatim_log_whitespace_diagnostics": 42,
+    "logs_modified_for_style": false
+  }
+}

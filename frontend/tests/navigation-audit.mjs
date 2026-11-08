@@ -75,7 +75,16 @@ export async function auditNavigation(page, output) {
         const layout = await page.locator('#main-content').evaluate(main => {
           const rect = main.getBoundingClientRect()
           return { documentFits: document.documentElement.scrollWidth <= innerWidth,
-            contentFits: main.scrollWidth <= main.clientWidth + 1, width: rect.width, height: rect.height }
+            contentFits: main.scrollWidth <= main.clientWidth + 1, width: rect.width, height: rect.height,
+            scrollWidth: main.scrollWidth, clientWidth: main.clientWidth,
+            workbench: (() => {
+              const node = main.firstElementChild
+              if (!node) return null
+              const box = node.getBoundingClientRect(), style = getComputedStyle(node)
+              return { left: box.left, right: box.right, width: box.width,
+                marginLeft: style.marginLeft, marginRight: style.marginRight,
+                mainPaddingLeft: getComputedStyle(main).paddingLeft }
+            })() }
         })
         const name = `${width}-${route.slice(1) || 'overview'}`
         await page.screenshot({ path: path.join(auditDir, `${name}.png`), fullPage: true })

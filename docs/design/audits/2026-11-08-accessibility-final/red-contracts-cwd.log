@@ -1,0 +1,428 @@
+✔ unknown exit and registered closure are separate facts in the owner receipt (130.594394ms)
+✔ a zero exit without closure proof does not imply validation (1.793043ms)
+✔ capture loss and a partial read window have distinct explanations (2.021824ms)
+✔ terminal and bidi controls are visible rather than interpreted (1.660342ms)
+✔ another project never displays cached output from the previous scope (1.031818ms)
+✔ a failed read offers another read without a command execution control (0.960367ms)
+✔ the job list exposes pagination beyond its first page (6.245415ms)
+✖ output pagination names contain visible labels in both enabled and disabled streams (177.304882ms)
+✔ saved report reads as one document with explicit review state and a scoped correction link (586.654075ms)
+✔ owner acceptance is historical context, separate from stored draft state and current validity (9.191017ms)
+✔ changed current bytes are never represented as the version with owner acceptance (7.467634ms)
+✔ source panel renders captured quotes safely and retains source/hash provenance (6.637038ms)
+✔ detail and evidence failures offer recovery without conflating missing evidence with no citations (6.759919ms)
+✔ legacy code artifacts remain readable and project mismatches cannot select another project report (4.628023ms)
+✔ report action opens its task and retains a scoped route back to the original report (274.175163ms)
+✖ the unselected report index owns the page heading even when the reader is hidden (2.030295ms)
+ℹ tests 16
+ℹ suites 0
+ℹ pass 14
+ℹ fail 2
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1170.874402
+
+✖ failing tests:
+
+test at tests/command-output.test.ts:68:1
+✖ output pagination names contain visible labels in both enabled and disabled streams (177.304882ms)
+  Error [TestingLibraryElementError]: Unable to find an accessible element with the role "button" and name "Anterior: bytes de salida estándar"
+  
+  Here are the accessible roles:
+  
+    region:
+  
+    Name "Recibo del comando":
+    [36m<section[39m
+      [33maria-label[39m=[32m"Recibo del comando"[39m
+      [33mclass[39m=[32m"space-y-3 rounded-md border border-[var(--work-line)] p-3"[39m
+    [36m/>[39m
+  
+    Name "Salida estándar":
+    [36m<section[39m
+      [33maria-busy[39m=[32m"false"[39m
+      [33maria-label[39m=[32m"Salida estándar"[39m
+      [33mclass[39m=[32m"space-y-2"[39m
+    [36m/>[39m
+  
+    Name "Salida de errores":
+    [36m<section[39m
+      [33maria-busy[39m=[32m"false"[39m
+      [33maria-label[39m=[32m"Salida de errores"[39m
+      [33mclass[39m=[32m"space-y-2"[39m
+    [36m/>[39m
+  
+    --------------------------------------------------
+    heading:
+  
+    Name "python3 · contexto 2":
+    [36m<h4[39m
+      [33mclass[39m=[32m"font-medium text-[var(--work-ink)]"[39m
+    [36m/>[39m
+  
+    Name "Salida estándar":
+    [36m<h5[39m
+      [33mclass[39m=[32m"font-medium text-[var(--work-ink)]"[39m
+    [36m/>[39m
+  
+    Name "Salida de errores":
+    [36m<h5[39m
+      [33mclass[39m=[32m"font-medium text-[var(--work-ink)]"[39m
+    [36m/>[39m
+  
+    --------------------------------------------------
+    paragraph:
+  
+    Name "":
+    [36m<p />[39m
+  
+    Name "":
+    [36m<p />[39m
+  
+    Name "":
+    [36m<p[39m
+      [33mclass[39m=[32m"text-[var(--work-muted)]"[39m
+    [36m/>[39m
+  
+    Name "":
+    [36m<p[39m
+      [33mclass[39m=[32m"text-[var(--work-muted)]"[39m
+    [36m/>[39m
+  
+    Name "":
+    [36m<p[39m
+      [33mclass[39m=[32m"mt-2 text-[var(--work-muted)]"[39m
+    [36m/>[39m
+  
+    Name "":
+    [36m<p[39m
+      [33mclass[39m=[32m"break-all text-xs text-[var(--work-muted)]"[39m
+    [36m/>[39m
+  
+    Name "":
+    [36m<p[39m
+      [33mclass[39m=[32m"text-xs text-[var(--work-muted)]"[39m
+    [36m/>[39m
+  
+    Name "":
+    [36m<p[39m
+      [33mclass[39m=[32m"text-[var(--work-caution)]"[39m
+    [36m/>[39m
+  
+    Name "":
+    [36m<p[39m
+      [33mclass[39m=[32m"text-[var(--work-muted)]"[39m
+    [36m/>[39m
+  
+    Name "":
+    [36m<p[39m
+      [33mclass[39m=[32m"text-xs text-[var(--work-muted)]"[39m
+    [36m/>[39m
+  
+    --------------------------------------------------
+    group:
+  
+    Name "":
+    [36m<details />[39m
+  
+    Name "":
+    [36m<details />[39m
+  
+    --------------------------------------------------
+    button:
+  
+    Name "Inicio de salida estándar":
+    [36m<button[39m
+      [33maria-label[39m=[32m"Inicio de salida estándar"[39m
+      [33mclass[39m=[32m"rounded-md border border-[var(--work-line)] px-3 py-2 text-sm text-[var(--work-ink)] hover:bg-[var(--work-wash)] disabled:opacity-50"[39m
+      [33mdisabled[39m=[32m""[39m
+      [33mtype[39m=[32m"button"[39m
+    [36m/>[39m
+  
+    Name "Bytes anteriores de salida estándar":
+    [36m<button[39m
+      [33maria-label[39m=[32m"Bytes anteriores de salida estándar"[39m
+      [33mclass[39m=[32m"rounded-md border border-[var(--work-line)] px-3 py-2 text-sm text-[var(--work-ink)] hover:bg-[var(--work-wash)] disabled:opacity-50"[39m
+      [33mdisabled[39m=[32m""[39m
+      [33mtype[39m=[32m"button"[39m
+    [36m/>[39m
+  
+    Name "Bytes siguientes de salida estándar":
+    [36m<button[39m
+      [33maria-label[39m=[32m"Bytes siguientes de salida estándar"[39m
+      [33mclass[39m=[32m"rounded-md border border-[var(--work-line)] px-3 py-2 text-sm text-[var(--work-ink)] hover:bg-[var(--work-wash)] disabled:opacity-50"[39m
+      [33mtype[39m=[32m"button"[39m
+    [36m/>[39m
+  
+    Name "Últimos bytes de salida estándar":
+    [36m<button[39m
+      [33maria-label[39m=[32m"Últimos bytes de salida estándar"[39m
+      [33mclass[39m=[32m"rounded-md border border-[var(--work-line)] px-3 py-2 text-sm text-[var(--work-ink)] hover:bg-[var(--work-wash)] disabled:opacity-50"[39m
+      [33mtype[39m=[32m"button"[39m
+    [36m/>[39m
+  
+    Name "Inicio de salida de errores":
+    [36m<button[39m
+      [33maria-label[39m=[32m"Inicio de salida de errores"[39m
+      [33mclass[39m=[32m"rounded-md border border-[var(--work-line)] px-3 py-2 text-sm text-[var(--work-ink)] hover:bg-[var(--work-wash)] disabled:opacity-50"[39m
+      [33mdisabled[39m=[32m""[39m
+      [33mtype[39m=[32m"button"[39m
+    [36m/>[39m
+  
+    Name "Bytes anteriores de salida de errores":
+    [36m<button[39m
+      [33maria-label[39m=[32m"Bytes anteriores de salida de errores"[39m
+      [33mclass[39m=[32m"rounded-md border border-[var(--work-line)] px-3 py-2 text-sm text-[var(--work-ink)] hover:bg-[var(--work-wash)] disabled:opacity-50"[39m
+      [33mdisabled[39m=[32m""[39m
+      [33mtype[39m=[32m"button"[39m
+    [36m/>[39m
+  
+    Name "Bytes siguientes de salida de errores":
+    [36m<button[39m
+      [33maria-label[39m=[32m"Bytes siguientes de salida de errores"[39m
+      [33mclass[39m=[32m"rounded-md border border-[var(--work-line)] px-3 py-2 text-sm text-[var(--work-ink)] hover:bg-[var(--work-wash)] disabled:opacity-50"[39m
+      [33mdisabled[39m=[32m""[39m
+      [33mtype[39m=[32m"button"[39m
+    [36m/>[39m
+  
+    Name "Últimos bytes de salida de errores":
+    [36m<button[39m
+      [33maria-label[39m=[32m"Últimos bytes de salida de errores"[39m
+      [33mclass[39m=[32m"rounded-md border border-[var(--work-line)] px-3 py-2 text-sm text-[var(--work-ink)] hover:bg-[var(--work-wash)] disabled:opacity-50"[39m
+      [33mdisabled[39m=[32m""[39m
+      [33mtype[39m=[32m"button"[39m
+    [36m/>[39m
+  
+    Name "Consultar recibo":
+    [36m<button[39m
+      [33mclass[39m=[32m"rounded-md border border-[var(--work-line)] px-3 py-2 text-sm text-[var(--work-ink)] hover:bg-[var(--work-wash)] disabled:opacity-50"[39m
+      [33mtype[39m=[32m"button"[39m
+    [36m/>[39m
+  
+    --------------------------------------------------
+  
+  Ignored nodes: comments, script, style
+  [36m<body>[39m
+    [36m<section[39m
+      [33maria-label[39m=[32m"Recibo del comando"[39m
+      [33mclass[39m=[32m"space-y-3 rounded-md border border-[var(--work-line)] p-3"[39m
+    [36m>[39m
+      [36m<h4[39m
+        [33mclass[39m=[32m"font-medium text-[var(--work-ink)]"[39m
+      [36m>[39m
+        [0mpython3 · contexto 2[0m
+      [36m</h4>[39m
+      [36m<div[39m
+        [33mclass[39m=[32m"space-y-1 text-[var(--work-muted)]"[39m
+      [36m>[39m
+        [36m<p>[39m
+          [0mResultado desconocido[0m
+        [36m</p>[39m
+        [36m<p>[39m
+          [0mCierre local registrado[0m
+        [36m</p>[39m
+      [36m</div>[39m
+      [36m<p[39m
+        [33mclass[39m=[32m"text-[var(--work-muted)]"[39m
+      [36m>[39m
+        [0mEl código de salida y el cierre registrado son hechos distintos. No confirman la validez del análisis ni la aceptación de la tarea.[0m
+      [36m</p>[39m
+      [36m<p[39m
+        [33mclass[39m=[32m"text-[var(--work-muted)]"[39m
+      [36m>[39m
+        [0mLa salida se guarda al terminar o perder seguimiento del comando. Mientras trabaja puede estar vacía. Consultarla no repite el comando.[0m
+      [36m</p>[39m
+      [36m<details>[39m
+        [36m<summary[39m
+          [33mclass[39m=[32m"cursor-pointer text-[var(--work-accent)]"[39m
+        [36m>[39m
+          [0mArgumentos y límites registrados[0m
+        [36m</summary>[39m
+        [36m<p[39m
+          [33mclass[39m=[32m"mt-2 text-[var(--work-muted)]"[39m
+        [36m>[39m
+          [0mCarpeta relativa: . · máximo 30 segundos · 65536 bytes por salida[0m
+        [36m</p>[39m
+        [36m<pre[39m
+          [33mclass[39m=[32m"max-h-72 overflow-auto whitespace-pre-wrap break-words rounded-md bg-[var(--work-wash)] p-3 text-xs text-[var(--work-ink)]"[39m
+          [33mtabindex[39m=[32m"0"[39m
+        [36m>[39m
+          [0m[
+    "python3",
+    "-c",
+    "print('&lt;example&gt;')"
+  ][0m
+        [36m</pre>[39m
+        [36m<p[39m
+          [33mclass[39m=[32m"break-all text-xs text-[var(--work-muted)]"[39m
+        [36m>[39m
+          [0mOperación: calculate · comando: job-a[0m
+        [36m</p>[39m
+      [36m</details>[39m
+      [36m<section[39m
+        [33maria-busy[39m=[32m"false"[39m
+        [33maria-label[39m=[32m"Salida estándar"[39m
+        [33mclass[39m=[32m"space-y-2"[39m
+      [36m>[39m
+        [36m<h5[39m
+          [33mclass[39m=[32m"font-medium text-[var(--work-ink)]"[39m
+        [36m>[39m
+          [0mSalida estándar[0m
+        [36m</h5>[39m
+        [36m<p[39m
+          [33mclass[39m=[32m"text-xs text-[var(--work-muted)]"[39m
+        [36m>[39m
+          [0mBytes 1–16 de 100 guardados[0m
+        [36m</p>[39m
+        [36m<pre[39m
+          [33maria-label[39m=[32m"Texto de salida estándar"[39m
+          [33mclass[39m=[32m"max-h-72 overflow-auto whitespace-pre-wrap break-words rounded-md bg-[var(--work-wash)] p-3 text-xs text-[var(--work-ink)]"[39m
+          [33mtabindex[39m=[32m"0"[39m
+        [36m>[39m
+          [0m�PARTIAL&lt;script&gt;[0m
+        [36m</pre>[39m
+        [36m<p[39m
+          [33mclass[39m=[32m"text-[var(--work-caution)]"[39m
+        [36m>[39m
+          [0mLa vista UTF-8 incluye reemplazos: puede haber bytes no válidos o un carácter cortado entre ventanas. El base64 conserva los bytes originales.[0m
+        [36m</p>[39m
+        [36m<p[39m
+          [33mclass[39m=[32m"text-[var(--work-muted)]"[39m
+        [36m>[39m
+          [0mHay más bytes guardados para consultar.[0m
+        [36m</p>[39m
+        [36m<details>[39m
+          [36m<summary[39m
+            [33mclass[39m=[32m"cursor-pointer text-[var(--work-accent)]"[39m
+          [36m>[39m
+            [0mBytes originales de esta ventana (base64)[0m
+          [36m</summary>[39m
+          [36m<pre[39m
+            [33mclass[39m=[32m"max-h-72 overflow-auto whitespace-pre-wrap break-words rounded-md bg-[var(--work-wash)] p-3 text-xs text-[var(--work-ink)]"[39m
+            [33mtabindex[39m=[32m"0"[39m
+          [36m>[39m
+            [0m/1BBUlRJQUw8c2NyaXB0Pg==[0m
+          [36m</pre>[39m
+        [36m</details>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"flex flex-wrap gap-2"[39m
+        [36m>[39m
+          [36m<button[39m
+            [33maria-label[39m=[32m"Inicio de salida estándar"[39m
+            [33mclass[39m=[32m"rounded-md border border-[var(--work-line)] px-3 py-2 text-sm text-[var(--work-ink)] hover:bg-[var(--work-wash)] disabled:opacity-50"[39m
+            [33mdisabled[39m=[32m""[39m
+            [33mtype[39m=[32m"button"[39m
+          [36m>[39m
+            [0mInicio[0m
+          [36m</button>[39m
+          [36m<button[39m
+            [33maria-label[39m=[32m"Bytes anteriores de salida estándar"[39m
+            [33mclass[39m=[32m"rounded-md border border-[var(--work-line)] px-3 py-2 text-sm text-[var(--work-ink)] hover:bg-[var(--work-wash)] disabled:opacity-50"[39m
+            [33mdisabled[39m=[32m""[39m
+            [33mtype[39m=[32m"button"[39m
+          [36m>[39m
+            [0mAnterior[0m
+          [36m</button>[39m
+          [36m<button[39m
+            [33maria-label[39m=[32m"Bytes siguientes de salida estándar"[39m
+            [33mclass[39m=[32m"rounded-md border border-[var(--work-line)] px-3 py-2 text-sm text-[var(--work-ink)] hover:bg-[var(--work-wash)] disabled:opacity-50"[39m
+            [33mtype[39m=[32m"button"[39m
+          [36m>[39m
+            [0mSiguiente[0m
+          [36m</button>[39m
+          [36m<button[39m
+            [33maria-label[39m=[32m"Últimos bytes de salida estándar"[39m
+            [33mclass[39m=[32m"rounded-md border border-[var(--work-line)] px-3 py-2 text-sm text-[var(--work-ink)] hover:bg-[var(--work-wash)] disabled:opacity-50"[39m
+            [33mtype[39m=[32m"button"[39m
+          [36m>[39m
+            [0mÚltimos bytes[0m
+          [36m</button>[39m
+        [36m</div>[39m
+      [36m</section>[39m
+      [36m<section[39m
+        [33maria-busy[39m=[32m"false"[39m
+        [33maria-label[39m=[32m"Salida de errores"[39m
+        [33mclass[39m=[32m"space-y-2"[39m
+      [36m>[39m
+        [36m<h5[39m
+          [33mclass[39m=[32m"font-medium text-[var(--work-ink)]"[39m
+        [36m>[39m
+          [0mSalida de errores[0m
+        [36m</h5>[39m
+        [36m<p[39m
+          [33mclass[39m=[32m"text-xs text-[var(--work-muted)]"[39m
+        [36m>[39m
+          [0mSin bytes en esta ventana · 0 guardados[0m
+        [36m</p>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"flex flex-wrap gap-2"[39m
+        [36m>[39m
+          [36m<button[39m
+            [33maria-label[39m=[32m"Inicio de salida de errores"[39m
+            [33mclass[39m=[32m"rounded-md border border-[var(--work-line)] px-3 py-2 text-sm text-[var(--work-ink)] hover:bg-[var(--work-wash)] disabled:opacity-50"[39m
+            [33mdisabled[39m=[32m""[39m
+            [33mtype[39m=[32m"button"[39m
+          [36m>[39m
+            [0mInicio[0m
+          [36m</button>[39m
+          [36m<button[39m
+            [33maria-label[39m=[32m"Bytes anteriores de salida de errores"[39m
+            [33mclass[39m=[32m"rounded-md border border-[var(--work-line)] px-3 py-2 text-sm text-[var(--work-ink)] hover:bg-[var(--work-wash)] disabled:opacity-50"[39m
+            [33mdisabled[39m=[32m""[39m
+            [33mtype[39m=[32m"button"[39m
+          [36m>[39m
+            [0mAnterior[0m
+          [36m</button>[39m
+          [36m<button[39m
+            [33maria-label[39m=[32m"Bytes siguientes de salida de errores"[39m
+            [33mclass[39m=[32m"rounded-md border border-[var(--work-line)] px-3 py-2 text-sm text-[var(--work-ink)] hover:bg-[var(--work-wash)] disabled:opacity-50"[39m
+            [33mdisabled[39m=[32m""[39m
+            [33mtype[39m=[32m"button"[39m
+          [36m>[39m
+            [0mSiguiente[0m
+          [36m</button>[39m
+          [36m<button[39m
+            [33maria-label[39m=[32m"Últimos bytes de salida de errores"[39m
+            [33mclass[39m=[32m"rounded-md border border-[var(--work-line)] px-3 py-2 text-sm text-[var(--work-ink)] hover:bg-[var(--work-wash)] disabled:opacity-50"[39m
+            [33mdisabled[39m=[32m""[39m
+            [33mtype[39m=[32m"button"[39m
+          [36m>[39m
+            [0mÚltimos bytes[0m
+          [36m</button>[39m
+        [36m</div>[39m
+      [36m</section>[39m
+      [36m<button[39m
+        [33mclass[39m=[32m"rounded-md border border-[var(--work-line)] px-3 py-2 text-sm text-[var(--work-ink)] hover:bg-[var(--work-wash)] disabled:opacity-50"[39m
+        [33mtype[39m=[32m"button"[39m
+      [36m>[39m
+        [0mConsultar recibo[0m
+      [36m</button>[39m
+    [36m</section>[39m
+  [36m</body>[39m
+      at Object.getElementError (/home/andres/.codex/worktrees/b09e/researcher/frontend/node_modules/@testing-library/dom/dist/config.js:37:19)
+      at /home/andres/.codex/worktrees/b09e/researcher/frontend/node_modules/@testing-library/dom/dist/query-helpers.js:76:38
+      at /home/andres/.codex/worktrees/b09e/researcher/frontend/node_modules/@testing-library/dom/dist/query-helpers.js:52:17
+      at /home/andres/.codex/worktrees/b09e/researcher/frontend/node_modules/@testing-library/dom/dist/query-helpers.js:95:19
+      at TestContext.<anonymous> (file:///home/andres/.codex/worktrees/b09e/researcher/frontend/tests/command-output.test.ts:72:24)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+
+test at tests/report-design.test.ts:75:1
+✖ the unselected report index owns the page heading even when the reader is hidden (2.030295ms)
+  AssertionError [ERR_ASSERTION]: The input did not match the regular expression /<h1[^>]*>Informes<\/h1>/. Input:
+  
+  '<div class="task-workbench report-workbench" data-has-selection="false"><div class="report-layout"><section class="report-index" aria-label="Lista de informes y archivos guardados"><header class="report-index-header"><h2 tabindex="-1">Informes</h2><p>Resultados guardados de tu proyecto.</p><p role="status" class="report-link-warning">Este enlace corresponde a otro proyecto. Elige ese proyecto en la cabecera o abre un informe de la lista actual.</p><div class="report-types" role="group" aria-label="Tipo de archivo"><button type="button" aria-pressed="true">Todos</button><button type="button" aria-pressed="false">Informes</button><button type="button" aria-pressed="false">Código</button><button type="button" aria-pressed="false">Datos</button><button type="button" aria-pressed="false">Diagramas</button></div><label>Buscar en informes<input type="search" maxLength="200" placeholder="Título o descripción" value=""/></label><label>Estado<select><option value="" selected="">Todos los estados</option><option value="draft">Borradores</option><option value="accepted">Aceptados</option><option value="superseded">Sustituidos</option></select></label></header><ul class="report-list"><li><button id="report-select-9" type="button"><strong>Informe &lt;guardado&gt;</strong><span class="report-row-meta"><span class="report-status" data-status="draft">Borrador · pendiente de revisión</span></span><time dateTime="2026-11-01T17:39:00.000Z">1 de nov de 2026, 17:39 UTC</time></button></li></ul><div class="report-index-footer"><p>1 archivos mostrados</p></div></section><section class="report-reader" aria-label="Lectura del informe"><div class="report-idle"><p class="task-eyebrow">LECTURA Y PROCEDENCIA</p><h1>Elige un informe para leerlo</h1><p>Su contenido y sus fuentes se conservan. Un borrador necesita revisión; abrirlo no lo acepta ni inicia trabajo.</p></div></section></div></div>'
+  
+      at TestContext.<anonymous> (file:///home/andres/.codex/worktrees/b09e/researcher/frontend/tests/report-design.test.ts:77:9)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: '<div class="task-workbench report-workbench" data-has-selection="false"><div class="report-layout"><section class="report-index" aria-label="Lista de informes y archivos guardados"><header class="report-index-header"><h2 tabindex="-1">Informes</h2><p>Resultados guardados de tu proyecto.</p><p role="status" class="report-link-warning">Este enlace corresponde a otro proyecto. Elige ese proyecto en la cabecera o abre un informe de la lista actual.</p><div class="report-types" role="group" aria-label="Tipo de archivo"><button type="button" aria-pressed="true">Todos</button><button type="button" aria-pressed="false">Informes</button><button type="button" aria-pressed="false">Código</button><button type="button" aria-pressed="false">Datos</button><button type="button" aria-pressed="false">Diagramas</button></div><label>Buscar en informes<input type="search" maxLength="200" placeholder="Título o descripción" value=""/></label><label>Estado<select><option value="" selected="">Todos los estados</option><option value="draft">Borradores</option><option value="accepted">Aceptados</option><option value="superseded">Sustituidos</option></select></label></header><ul class="report-list"><li><button id="report-select-9" type="button"><strong>Informe &lt;guardado&gt;</strong><span class="report-row-meta"><span class="report-status" data-status="draft">Borrador · pendiente de revisión</span></span><time dateTime="2026-11-01T17:39:00.000Z">1 de nov de 2026, 17:39 UTC</time></button></li></ul><div class="report-index-footer"><p>1 archivos mostrados</p></div></section><section class="report-reader" aria-label="Lectura del informe"><div class="report-idle"><p class="task-eyebrow">LECTURA Y PROCEDENCIA</p><h1>Elige un informe para leerlo</h1><p>Su contenido y sus fuentes se conservan. Un borrador necesita revisión; abrirlo no lo acepta ni inicia trabajo.</p></div></section></div></div>',
+    expected: /<h1[^>]*>Informes<\/h1>/,
+    operator: 'match',
+    diff: 'simple'
+  }

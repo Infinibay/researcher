@@ -28,7 +28,30 @@ que se pueda comparar el avance; no presentar microajustes como tareas principal
 - Última suite global: `9fb873c`,2210 casos,2178 pasan,31 fallan y1 error de fixture; sin omisiones. La carrera de backup encontrada se corrigió después con40 pruebas instaladas. No se declara una nueva corrida global verde; la referencia `0c8b8d9` queda como evidencia histórica.
 - U01–U07, E01–E12, C01–C10 y D01–D13 quedan comprobados con el alcance de sus matrices; sigue 1 de 43 escenarios amplios sin aceptación completa en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Estado actual: explicación ordinaria entregada, feedback humano pendiente
+## Estado actual: fallos medidos de accesibilidad corregidos
+
+[Informe](../design/audits/2026-11-08-accessibility-final/report.md) y
+[resultados](accessibility-final-results.json). **20:13:17–20:23:46 UTC: 10 min 29 s**
+hasta comprobaciones; documentación/checkpoint posteriores aparte.
+
+- Terminado por alcance: DD106/DD107 y nombres de DD155 corregidos. Auditoría de
+  página completa en las doce rutas, a1440/320px: **24 estados sin infracciones
+  Axe, sin desbordamientos y24 transiciones por teclado**; tres controles comunes
+  pasan. Márgenes336→320px medidos. **167 contratos/80 UI y build pasan**. Ocho
+  JSDoc ingleses añadidos al recibo. Cero inferencias; cuatro hosts cerrados y
+  bases íntegras. Guion actualizado a los controles actuales; fallos previos retenidos.
+- Siguiente: resolver distribución Ken/ONNX y documentación relevante restante;
+  luego detalles y cierre integrado. La explicación real sigue disponible, con
+  feedback práctico opcional pendiente; no reiterar el cuestionario.
+- Pendientes: U08 humano; Ken/ONNX; documentación (416 Python añadidos,205 faltantes
+  por presencia, relevancia desigual); detalles; zoom nativo/lector de pantalla;
+  paquete final, suite global y revisión independiente.
+- Límites: lint dirigido conserva una regla anterior `no-control-regex` (DD161),
+  no se declara verde; Axe/reflujo no acreditan zoom nativo ni lector. No se
+  renovaron todos los estados de contenido/error/ejecución. Estado amplio:
+  **12/12 páginas por alcance,42/43 escenarios**. Sin global verde ni push/merge.
+
+## Etapa anterior: explicación ordinaria entregada, feedback humano pendiente
 
 [Explicación real](ordinary-communication-explanation.md) e
 [informe](ordinary-communication-review.md). Observación iniciada **20:01:19 UTC**;

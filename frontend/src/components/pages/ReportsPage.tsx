@@ -57,6 +57,7 @@ function ProjectReports({ projectId }: { projectId: number }) {
     previous.current = selectedId
   }, [selectedId, detail.data?.id])
   const choose = (id: number | null) => setParams(id == null ? {} : { project: String(projectId), artifact: String(id) })
+  const IndexHeading = selectedId == null ? 'h1' : 'h2'
   const selected = detail.data
   const citations = evidence.data?.pages.flatMap(page => page.evidence) ?? []
   const totalCitations = evidence.data?.pages[0]?.total_evidence
@@ -65,7 +66,7 @@ function ProjectReports({ projectId }: { projectId: number }) {
     <div className="report-layout">
       <section className="report-index" aria-label="Lista de informes y archivos guardados">
         <header className="report-index-header">
-          <h2 tabIndex={-1} ref={indexTitle}>Informes</h2>
+          <IndexHeading tabIndex={-1} ref={indexTitle}>Informes</IndexHeading>
           <p>Resultados guardados de tu proyecto.</p>
           {foreignLink && <p role="status" className="report-link-warning">Este enlace corresponde a otro proyecto. Elige ese proyecto en la cabecera o abre un informe de la lista actual.</p>}
           <div className="report-types" role="group" aria-label="Tipo de archivo">
@@ -84,7 +85,7 @@ function ProjectReports({ projectId }: { projectId: number }) {
         </>}
       </section>
       <section className="report-reader" aria-label="Lectura del informe">
-        {selectedId == null ? <div className="report-idle"><p className="task-eyebrow">LECTURA Y PROCEDENCIA</p><h1>Elige un informe para leerlo</h1><p>Su contenido y sus fuentes se conservan. Un borrador necesita revisión; abrirlo no lo acepta ni inicia trabajo.</p></div> : <>
+        {selectedId == null ? <div className="report-idle"><p className="task-eyebrow">LECTURA Y PROCEDENCIA</p><h2>Elige un informe para leerlo</h2><p>Su contenido y sus fuentes se conservan. Un borrador necesita revisión; abrirlo no lo acepta ni inicia trabajo.</p></div> : <>
           <button className="report-back" onClick={() => choose(null)}>Todos los informes</button>
           {detail.isPending ? <p className="report-message" role="status">Cargando el informe…</p> : detail.isError ? <div className="report-message report-error" role="alert"><h1>No se pudo cargar el informe</h1><p>Puede no estar disponible en este proyecto. Vuelve a consultar o regresa a la lista.</p><button className="task-secondary" onClick={() => detail.refetch()}>Volver a consultar</button></div> : selected && <>
             <header className="report-heading">

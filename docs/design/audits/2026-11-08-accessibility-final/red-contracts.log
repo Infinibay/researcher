@@ -1,0 +1,270 @@
+5:20:44 PM [vite] (ssr) Error when evaluating SSR module /tests/command-output-fixture.tsx: Failed to load url /tests/command-output-fixture.tsx (resolved id: /tests/command-output-fixture.tsx). Does the file exist?
+      at loadAndTransform (file:///home/andres/.codex/worktrees/b09e/researcher/frontend/node_modules/vite/dist/node/chunks/node.js:20097:31)
+✖ unknown exit and registered closure are separate facts in the owner receipt (41.308114ms)
+✖ a zero exit without closure proof does not imply validation (0.790116ms)
+✖ capture loss and a partial read window have distinct explanations (0.104891ms)
+✖ terminal and bidi controls are visible rather than interpreted (0.059531ms)
+✖ another project never displays cached output from the previous scope (0.063471ms)
+✖ a failed read offers another read without a command execution control (0.04792ms)
+✖ the job list exposes pagination beyond its first page (0.05301ms)
+✖ output pagination names contain visible labels in both enabled and disabled streams (0.069271ms)
+5:20:43 PM [vite] (ssr) Error when evaluating SSR module /tests/report-design-fixture.tsx: Failed to load url /tests/report-design-fixture.tsx (resolved id: /tests/report-design-fixture.tsx). Does the file exist?
+      at loadAndTransform (file:///home/andres/.codex/worktrees/b09e/researcher/frontend/node_modules/vite/dist/node/chunks/node.js:20097:31)
+✖ saved report reads as one document with explicit review state and a scoped correction link (50.275601ms)
+✖ owner acceptance is historical context, separate from stored draft state and current validity (0.837286ms)
+✖ changed current bytes are never represented as the version with owner acceptance (0.121051ms)
+✖ source panel renders captured quotes safely and retains source/hash provenance (0.117001ms)
+✖ detail and evidence failures offer recovery without conflating missing evidence with no citations (0.131341ms)
+✖ legacy code artifacts remain readable and project mismatches cannot select another project report (0.077021ms)
+✖ report action opens its task and retains a scoped route back to the original report (0.093951ms)
+✖ the unselected report index owns the page heading even when the reader is hidden (0.117721ms)
+ℹ tests 16
+ℹ suites 0
+ℹ pass 0
+ℹ fail 16
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 733.770691
+
+✖ failing tests:
+
+test at frontend/tests/command-output.test.ts:15:1
+✖ unknown exit and registered closure are separate facts in the owner receipt (41.308114ms)
+  Error: Failed to load url /tests/command-output-fixture.tsx (resolved id: /tests/command-output-fixture.tsx). Does the file exist?
+      at loadAndTransform (file:///home/andres/.codex/worktrees/b09e/researcher/frontend/node_modules/vite/dist/node/chunks/node.js:20097:31) {
+    code: 'ERR_LOAD_URL',
+    runnerError: Error: RunnerError
+        at reviveInvokeError (file:///home/andres/.codex/worktrees/b09e/researcher/frontend/node_modules/vite/dist/node/module-runner.js:547:64)
+        at Object.invoke (file:///home/andres/.codex/worktrees/b09e/researcher/frontend/node_modules/vite/dist/node/module-runner.js:620:11)
+        at async SSRCompatModuleRunner.getModuleInformation (file:///home/andres/.codex/worktrees/b09e/researcher/frontend/node_modules/vite/dist/node/module-runner.js:1202:7)
+        at async SSRCompatModuleRunner.import (file:///home/andres/.codex/worktrees/b09e/researcher/frontend/node_modules/vite/dist/node/module-runner.js:1123:23)
+        at async instantiateModule (file:///home/andres/.codex/worktrees/b09e/researcher/frontend/node_modules/vite/dist/node/chunks/node.js:15913:10)
+        at async TestContext.<anonymous> (file:///home/andres/.codex/worktrees/b09e/researcher/frontend/tests/command-output.test.ts:11:21)
+        at async TestHook.run (node:internal/test_runner/test:1409:7)
+  }
+
+test at frontend/tests/command-output.test.ts:26:1
+✖ a zero exit without closure proof does not imply validation (0.790116ms)
+  Error: Failed to load url /tests/command-output-fixture.tsx (resolved id: /tests/command-output-fixture.tsx). Does the file exist?
+      at loadAndTransform (file:///home/andres/.codex/worktrees/b09e/researcher/frontend/node_modules/vite/dist/node/chunks/node.js:20097:31) {
+    code: 'ERR_LOAD_URL',
+    runnerError: Error: RunnerError
+        at reviveInvokeError (file:///home/andres/.codex/worktrees/b09e/researcher/frontend/node_modules/vite/dist/node/module-runner.js:547:64)
+        at Object.invoke (file:///home/andres/.codex/worktrees/b09e/researcher/frontend/node_modules/vite/dist/node/module-runner.js:620:11)
+        at async SSRCompatModuleRunner.getModuleInformation (file:///home/andres/.codex/worktrees/b09e/researcher/frontend/node_modules/vite/dist/node/module-runner.js:1202:7)
+        at async SSRCompatModuleRunner.import (file:///home/andres/.codex/worktrees/b09e/researcher/frontend/node_modules/vite/dist/node/module-runner.js:1123:23)
+        at async instantiateModule (file:///home/andres/.codex/worktrees/b09e/researcher/frontend/node_modules/vite/dist/node/chunks/node.js:15913:10)
+        at async TestContext.<anonymous> (file:///home/andres/.codex/worktrees/b09e/researcher/frontend/tests/command-output.test.ts:11:21)
+        at async TestHook.run (node:internal/test_runner/test:1409:7)
+  }
+
+test at frontend/tests/command-output.test.ts:33:1
+✖ capture loss and a partial read window have distinct explanations (0.104891ms)
+  Error: Failed to load url /tests/command-output-fixture.tsx (resolved id: /tests/command-output-fixture.tsx). Does the file exist?
+      at loadAndTransform (file:///home/andres/.codex/worktrees/b09e/researcher/frontend/node_modules/vite/dist/node/chunks/node.js:20097:31) {
+    code: 'ERR_LOAD_URL',
+    runnerError: Error: RunnerError
+        at reviveInvokeError (file:///home/andres/.codex/worktrees/b09e/researcher/frontend/node_modules/vite/dist/node/module-runner.js:547:64)
+        at Object.invoke (file:///home/andres/.codex/worktrees/b09e/researcher/frontend/node_modules/vite/dist/node/module-runner.js:620:11)
+        at async SSRCompatModuleRunner.getModuleInformation (file:///home/andres/.codex/worktrees/b09e/researcher/frontend/node_modules/vite/dist/node/module-runner.js:1202:7)
+        at async SSRCompatModuleRunner.import (file:///home/andres/.codex/worktrees/b09e/researcher/frontend/node_modules/vite/dist/node/module-runner.js:1123:23)
+        at async instantiateModule (file:///home/andres/.codex/worktrees/b09e/researcher/frontend/node_modules/vite/dist/node/chunks/node.js:15913:10)
+        at async TestContext.<anonymous> (file:///home/andres/.codex/worktrees/b09e/researcher/frontend/tests/command-output.test.ts:11:21)
+        at async TestHook.run (node:internal/test_runner/test:1409:7)
+  }
+
+test at frontend/tests/command-output.test.ts:40:1
+✖ terminal and bidi controls are visible rather than interpreted (0.059531ms)
+  Error: Failed to load url /tests/command-output-fixture.tsx (resolved id: /tests/command-output-fixture.tsx). Does the file exist?
+      at loadAndTransform (file:///home/andres/.codex/worktrees/b09e/researcher/frontend/node_modules/vite/dist/node/chunks/node.js:20097:31) {
+    code: 'ERR_LOAD_URL',
+    runnerError: Error: RunnerError
+        at reviveInvokeError (file:///home/andres/.codex/worktrees/b09e/researcher/frontend/node_modules/vite/dist/node/module-runner.js:547:64)
+        at Object.invoke (file:///home/andres/.codex/worktrees/b09e/researcher/frontend/node_modules/vite/dist/node/module-runner.js:620:11)
+        at async SSRCompatModuleRunner.getModuleInformation (file:///home/andres/.codex/worktrees/b09e/researcher/frontend/node_modules/vite/dist/node/module-runner.js:1202:7)
+        at async SSRCompatModuleRunner.import (file:///home/andres/.codex/worktrees/b09e/researcher/frontend/node_modules/vite/dist/node/module-runner.js:1123:23)
+        at async instantiateModule (file:///home/andres/.codex/worktrees/b09e/researcher/frontend/node_modules/vite/dist/node/chunks/node.js:15913:10)
+        at async TestContext.<anonymous> (file:///home/andres/.codex/worktrees/b09e/researcher/frontend/tests/command-output.test.ts:11:21)
+        at async TestHook.run (node:internal/test_runner/test:1409:7)
+  }
+
+test at frontend/tests/command-output.test.ts:46:1
+✖ another project never displays cached output from the previous scope (0.063471ms)
+  Error: Failed to load url /tests/command-output-fixture.tsx (resolved id: /tests/command-output-fixture.tsx). Does the file exist?
+      at loadAndTransform (file:///home/andres/.codex/worktrees/b09e/researcher/frontend/node_modules/vite/dist/node/chunks/node.js:20097:31) {
+    code: 'ERR_LOAD_URL',
+    runnerError: Error: RunnerError
+        at reviveInvokeError (file:///home/andres/.codex/worktrees/b09e/researcher/frontend/node_modules/vite/dist/node/module-runner.js:547:64)
+        at Object.invoke (file:///home/andres/.codex/worktrees/b09e/researcher/frontend/node_modules/vite/dist/node/module-runner.js:620:11)
+        at async SSRCompatModuleRunner.getModuleInformation (file:///home/andres/.codex/worktrees/b09e/researcher/frontend/node_modules/vite/dist/node/module-runner.js:1202:7)
+        at async SSRCompatModuleRunner.import (file:///home/andres/.codex/worktrees/b09e/researcher/frontend/node_modules/vite/dist/node/module-runner.js:1123:23)
+        at async instantiateModule (file:///home/andres/.codex/worktrees/b09e/researcher/frontend/node_modules/vite/dist/node/chunks/node.js:15913:10)
+        at async TestContext.<anonymous> (file:///home/andres/.codex/worktrees/b09e/researcher/frontend/tests/command-output.test.ts:11:21)
+        at async TestHook.run (node:internal/test_runner/test:1409:7)
+  }
+
+test at frontend/tests/command-output.test.ts:52:1
+✖ a failed read offers another read without a command execution control (0.04792ms)
+  Error: Failed to load url /tests/command-output-fixture.tsx (resolved id: /tests/command-output-fixture.tsx). Does the file exist?
+      at loadAndTransform (file:///home/andres/.codex/worktrees/b09e/researcher/frontend/node_modules/vite/dist/node/chunks/node.js:20097:31) {
+    code: 'ERR_LOAD_URL',
+    runnerError: Error: RunnerError
+        at reviveInvokeError (file:///home/andres/.codex/worktrees/b09e/researcher/frontend/node_modules/vite/dist/node/module-runner.js:547:64)
+        at Object.invoke (file:///home/andres/.codex/worktrees/b09e/researcher/frontend/node_modules/vite/dist/node/module-runner.js:620:11)
+        at async SSRCompatModuleRunner.getModuleInformation (file:///home/andres/.codex/worktrees/b09e/researcher/frontend/node_modules/vite/dist/node/module-runner.js:1202:7)
+        at async SSRCompatModuleRunner.import (file:///home/andres/.codex/worktrees/b09e/researcher/frontend/node_modules/vite/dist/node/module-runner.js:1123:23)
+        at async instantiateModule (file:///home/andres/.codex/worktrees/b09e/researcher/frontend/node_modules/vite/dist/node/chunks/node.js:15913:10)
+        at async TestContext.<anonymous> (file:///home/andres/.codex/worktrees/b09e/researcher/frontend/tests/command-output.test.ts:11:21)
+        at async TestHook.run (node:internal/test_runner/test:1409:7)
+  }
+
+test at frontend/tests/command-output.test.ts:59:1
+✖ the job list exposes pagination beyond its first page (0.05301ms)
+  Error: Failed to load url /tests/command-output-fixture.tsx (resolved id: /tests/command-output-fixture.tsx). Does the file exist?
+      at loadAndTransform (file:///home/andres/.codex/worktrees/b09e/researcher/frontend/node_modules/vite/dist/node/chunks/node.js:20097:31) {
+    code: 'ERR_LOAD_URL',
+    runnerError: Error: RunnerError
+        at reviveInvokeError (file:///home/andres/.codex/worktrees/b09e/researcher/frontend/node_modules/vite/dist/node/module-runner.js:547:64)
+        at Object.invoke (file:///home/andres/.codex/worktrees/b09e/researcher/frontend/node_modules/vite/dist/node/module-runner.js:620:11)
+        at async SSRCompatModuleRunner.getModuleInformation (file:///home/andres/.codex/worktrees/b09e/researcher/frontend/node_modules/vite/dist/node/module-runner.js:1202:7)
+        at async SSRCompatModuleRunner.import (file:///home/andres/.codex/worktrees/b09e/researcher/frontend/node_modules/vite/dist/node/module-runner.js:1123:23)
+        at async instantiateModule (file:///home/andres/.codex/worktrees/b09e/researcher/frontend/node_modules/vite/dist/node/chunks/node.js:15913:10)
+        at async TestContext.<anonymous> (file:///home/andres/.codex/worktrees/b09e/researcher/frontend/tests/command-output.test.ts:11:21)
+        at async TestHook.run (node:internal/test_runner/test:1409:7)
+  }
+
+test at frontend/tests/command-output.test.ts:68:1
+✖ output pagination names contain visible labels in both enabled and disabled streams (0.069271ms)
+  Error: Failed to load url /tests/command-output-fixture.tsx (resolved id: /tests/command-output-fixture.tsx). Does the file exist?
+      at loadAndTransform (file:///home/andres/.codex/worktrees/b09e/researcher/frontend/node_modules/vite/dist/node/chunks/node.js:20097:31) {
+    code: 'ERR_LOAD_URL',
+    runnerError: Error: RunnerError
+        at reviveInvokeError (file:///home/andres/.codex/worktrees/b09e/researcher/frontend/node_modules/vite/dist/node/module-runner.js:547:64)
+        at Object.invoke (file:///home/andres/.codex/worktrees/b09e/researcher/frontend/node_modules/vite/dist/node/module-runner.js:620:11)
+        at async SSRCompatModuleRunner.getModuleInformation (file:///home/andres/.codex/worktrees/b09e/researcher/frontend/node_modules/vite/dist/node/module-runner.js:1202:7)
+        at async SSRCompatModuleRunner.import (file:///home/andres/.codex/worktrees/b09e/researcher/frontend/node_modules/vite/dist/node/module-runner.js:1123:23)
+        at async instantiateModule (file:///home/andres/.codex/worktrees/b09e/researcher/frontend/node_modules/vite/dist/node/chunks/node.js:15913:10)
+        at async TestContext.<anonymous> (file:///home/andres/.codex/worktrees/b09e/researcher/frontend/tests/command-output.test.ts:11:21)
+        at async TestHook.run (node:internal/test_runner/test:1409:7)
+  }
+
+test at frontend/tests/report-design.test.ts:14:1
+✖ saved report reads as one document with explicit review state and a scoped correction link (50.275601ms)
+  Error: Failed to load url /tests/report-design-fixture.tsx (resolved id: /tests/report-design-fixture.tsx). Does the file exist?
+      at loadAndTransform (file:///home/andres/.codex/worktrees/b09e/researcher/frontend/node_modules/vite/dist/node/chunks/node.js:20097:31) {
+    code: 'ERR_LOAD_URL',
+    runnerError: Error: RunnerError
+        at reviveInvokeError (file:///home/andres/.codex/worktrees/b09e/researcher/frontend/node_modules/vite/dist/node/module-runner.js:547:64)
+        at Object.invoke (file:///home/andres/.codex/worktrees/b09e/researcher/frontend/node_modules/vite/dist/node/module-runner.js:620:11)
+        at async SSRCompatModuleRunner.getModuleInformation (file:///home/andres/.codex/worktrees/b09e/researcher/frontend/node_modules/vite/dist/node/module-runner.js:1202:7)
+        at async SSRCompatModuleRunner.import (file:///home/andres/.codex/worktrees/b09e/researcher/frontend/node_modules/vite/dist/node/module-runner.js:1123:23)
+        at async instantiateModule (file:///home/andres/.codex/worktrees/b09e/researcher/frontend/node_modules/vite/dist/node/chunks/node.js:15913:10)
+        at async TestContext.<anonymous> (file:///home/andres/.codex/worktrees/b09e/researcher/frontend/tests/report-design.test.ts:11:34)
+        at async TestHook.run (node:internal/test_runner/test:1409:7)
+  }
+
+test at frontend/tests/report-design.test.ts:22:1
+✖ owner acceptance is historical context, separate from stored draft state and current validity (0.837286ms)
+  Error: Failed to load url /tests/report-design-fixture.tsx (resolved id: /tests/report-design-fixture.tsx). Does the file exist?
+      at loadAndTransform (file:///home/andres/.codex/worktrees/b09e/researcher/frontend/node_modules/vite/dist/node/chunks/node.js:20097:31) {
+    code: 'ERR_LOAD_URL',
+    runnerError: Error: RunnerError
+        at reviveInvokeError (file:///home/andres/.codex/worktrees/b09e/researcher/frontend/node_modules/vite/dist/node/module-runner.js:547:64)
+        at Object.invoke (file:///home/andres/.codex/worktrees/b09e/researcher/frontend/node_modules/vite/dist/node/module-runner.js:620:11)
+        at async SSRCompatModuleRunner.getModuleInformation (file:///home/andres/.codex/worktrees/b09e/researcher/frontend/node_modules/vite/dist/node/module-runner.js:1202:7)
+        at async SSRCompatModuleRunner.import (file:///home/andres/.codex/worktrees/b09e/researcher/frontend/node_modules/vite/dist/node/module-runner.js:1123:23)
+        at async instantiateModule (file:///home/andres/.codex/worktrees/b09e/researcher/frontend/node_modules/vite/dist/node/chunks/node.js:15913:10)
+        at async TestContext.<anonymous> (file:///home/andres/.codex/worktrees/b09e/researcher/frontend/tests/report-design.test.ts:11:34)
+        at async TestHook.run (node:internal/test_runner/test:1409:7)
+  }
+
+test at frontend/tests/report-design.test.ts:31:1
+✖ changed current bytes are never represented as the version with owner acceptance (0.121051ms)
+  Error: Failed to load url /tests/report-design-fixture.tsx (resolved id: /tests/report-design-fixture.tsx). Does the file exist?
+      at loadAndTransform (file:///home/andres/.codex/worktrees/b09e/researcher/frontend/node_modules/vite/dist/node/chunks/node.js:20097:31) {
+    code: 'ERR_LOAD_URL',
+    runnerError: Error: RunnerError
+        at reviveInvokeError (file:///home/andres/.codex/worktrees/b09e/researcher/frontend/node_modules/vite/dist/node/module-runner.js:547:64)
+        at Object.invoke (file:///home/andres/.codex/worktrees/b09e/researcher/frontend/node_modules/vite/dist/node/module-runner.js:620:11)
+        at async SSRCompatModuleRunner.getModuleInformation (file:///home/andres/.codex/worktrees/b09e/researcher/frontend/node_modules/vite/dist/node/module-runner.js:1202:7)
+        at async SSRCompatModuleRunner.import (file:///home/andres/.codex/worktrees/b09e/researcher/frontend/node_modules/vite/dist/node/module-runner.js:1123:23)
+        at async instantiateModule (file:///home/andres/.codex/worktrees/b09e/researcher/frontend/node_modules/vite/dist/node/chunks/node.js:15913:10)
+        at async TestContext.<anonymous> (file:///home/andres/.codex/worktrees/b09e/researcher/frontend/tests/report-design.test.ts:11:34)
+        at async TestHook.run (node:internal/test_runner/test:1409:7)
+  }
+
+test at frontend/tests/report-design.test.ts:36:1
+✖ source panel renders captured quotes safely and retains source/hash provenance (0.117001ms)
+  Error: Failed to load url /tests/report-design-fixture.tsx (resolved id: /tests/report-design-fixture.tsx). Does the file exist?
+      at loadAndTransform (file:///home/andres/.codex/worktrees/b09e/researcher/frontend/node_modules/vite/dist/node/chunks/node.js:20097:31) {
+    code: 'ERR_LOAD_URL',
+    runnerError: Error: RunnerError
+        at reviveInvokeError (file:///home/andres/.codex/worktrees/b09e/researcher/frontend/node_modules/vite/dist/node/module-runner.js:547:64)
+        at Object.invoke (file:///home/andres/.codex/worktrees/b09e/researcher/frontend/node_modules/vite/dist/node/module-runner.js:620:11)
+        at async SSRCompatModuleRunner.getModuleInformation (file:///home/andres/.codex/worktrees/b09e/researcher/frontend/node_modules/vite/dist/node/module-runner.js:1202:7)
+        at async SSRCompatModuleRunner.import (file:///home/andres/.codex/worktrees/b09e/researcher/frontend/node_modules/vite/dist/node/module-runner.js:1123:23)
+        at async instantiateModule (file:///home/andres/.codex/worktrees/b09e/researcher/frontend/node_modules/vite/dist/node/chunks/node.js:15913:10)
+        at async TestContext.<anonymous> (file:///home/andres/.codex/worktrees/b09e/researcher/frontend/tests/report-design.test.ts:11:34)
+        at async TestHook.run (node:internal/test_runner/test:1409:7)
+  }
+
+test at frontend/tests/report-design.test.ts:45:1
+✖ detail and evidence failures offer recovery without conflating missing evidence with no citations (0.131341ms)
+  Error: Failed to load url /tests/report-design-fixture.tsx (resolved id: /tests/report-design-fixture.tsx). Does the file exist?
+      at loadAndTransform (file:///home/andres/.codex/worktrees/b09e/researcher/frontend/node_modules/vite/dist/node/chunks/node.js:20097:31) {
+    code: 'ERR_LOAD_URL',
+    runnerError: Error: RunnerError
+        at reviveInvokeError (file:///home/andres/.codex/worktrees/b09e/researcher/frontend/node_modules/vite/dist/node/module-runner.js:547:64)
+        at Object.invoke (file:///home/andres/.codex/worktrees/b09e/researcher/frontend/node_modules/vite/dist/node/module-runner.js:620:11)
+        at async SSRCompatModuleRunner.getModuleInformation (file:///home/andres/.codex/worktrees/b09e/researcher/frontend/node_modules/vite/dist/node/module-runner.js:1202:7)
+        at async SSRCompatModuleRunner.import (file:///home/andres/.codex/worktrees/b09e/researcher/frontend/node_modules/vite/dist/node/module-runner.js:1123:23)
+        at async instantiateModule (file:///home/andres/.codex/worktrees/b09e/researcher/frontend/node_modules/vite/dist/node/chunks/node.js:15913:10)
+        at async TestContext.<anonymous> (file:///home/andres/.codex/worktrees/b09e/researcher/frontend/tests/report-design.test.ts:11:34)
+        at async TestHook.run (node:internal/test_runner/test:1409:7)
+  }
+
+test at frontend/tests/report-design.test.ts:55:1
+✖ legacy code artifacts remain readable and project mismatches cannot select another project report (0.077021ms)
+  Error: Failed to load url /tests/report-design-fixture.tsx (resolved id: /tests/report-design-fixture.tsx). Does the file exist?
+      at loadAndTransform (file:///home/andres/.codex/worktrees/b09e/researcher/frontend/node_modules/vite/dist/node/chunks/node.js:20097:31) {
+    code: 'ERR_LOAD_URL',
+    runnerError: Error: RunnerError
+        at reviveInvokeError (file:///home/andres/.codex/worktrees/b09e/researcher/frontend/node_modules/vite/dist/node/module-runner.js:547:64)
+        at Object.invoke (file:///home/andres/.codex/worktrees/b09e/researcher/frontend/node_modules/vite/dist/node/module-runner.js:620:11)
+        at async SSRCompatModuleRunner.getModuleInformation (file:///home/andres/.codex/worktrees/b09e/researcher/frontend/node_modules/vite/dist/node/module-runner.js:1202:7)
+        at async SSRCompatModuleRunner.import (file:///home/andres/.codex/worktrees/b09e/researcher/frontend/node_modules/vite/dist/node/module-runner.js:1123:23)
+        at async instantiateModule (file:///home/andres/.codex/worktrees/b09e/researcher/frontend/node_modules/vite/dist/node/chunks/node.js:15913:10)
+        at async TestContext.<anonymous> (file:///home/andres/.codex/worktrees/b09e/researcher/frontend/tests/report-design.test.ts:11:34)
+        at async TestHook.run (node:internal/test_runner/test:1409:7)
+  }
+
+test at frontend/tests/report-design.test.ts:65:1
+✖ report action opens its task and retains a scoped route back to the original report (0.093951ms)
+  Error: Failed to load url /tests/report-design-fixture.tsx (resolved id: /tests/report-design-fixture.tsx). Does the file exist?
+      at loadAndTransform (file:///home/andres/.codex/worktrees/b09e/researcher/frontend/node_modules/vite/dist/node/chunks/node.js:20097:31) {
+    code: 'ERR_LOAD_URL',
+    runnerError: Error: RunnerError
+        at reviveInvokeError (file:///home/andres/.codex/worktrees/b09e/researcher/frontend/node_modules/vite/dist/node/module-runner.js:547:64)
+        at Object.invoke (file:///home/andres/.codex/worktrees/b09e/researcher/frontend/node_modules/vite/dist/node/module-runner.js:620:11)
+        at async SSRCompatModuleRunner.getModuleInformation (file:///home/andres/.codex/worktrees/b09e/researcher/frontend/node_modules/vite/dist/node/module-runner.js:1202:7)
+        at async SSRCompatModuleRunner.import (file:///home/andres/.codex/worktrees/b09e/researcher/frontend/node_modules/vite/dist/node/module-runner.js:1123:23)
+        at async instantiateModule (file:///home/andres/.codex/worktrees/b09e/researcher/frontend/node_modules/vite/dist/node/chunks/node.js:15913:10)
+        at async TestContext.<anonymous> (file:///home/andres/.codex/worktrees/b09e/researcher/frontend/tests/report-design.test.ts:11:34)
+        at async TestHook.run (node:internal/test_runner/test:1409:7)
+  }
+
+test at frontend/tests/report-design.test.ts:75:1
+✖ the unselected report index owns the page heading even when the reader is hidden (0.117721ms)
+  Error: Failed to load url /tests/report-design-fixture.tsx (resolved id: /tests/report-design-fixture.tsx). Does the file exist?
+      at loadAndTransform (file:///home/andres/.codex/worktrees/b09e/researcher/frontend/node_modules/vite/dist/node/chunks/node.js:20097:31) {
+    code: 'ERR_LOAD_URL',
+    runnerError: Error: RunnerError
+        at reviveInvokeError (file:///home/andres/.codex/worktrees/b09e/researcher/frontend/node_modules/vite/dist/node/module-runner.js:547:64)
+        at Object.invoke (file:///home/andres/.codex/worktrees/b09e/researcher/frontend/node_modules/vite/dist/node/module-runner.js:620:11)
+        at async SSRCompatModuleRunner.getModuleInformation (file:///home/andres/.codex/worktrees/b09e/researcher/frontend/node_modules/vite/dist/node/module-runner.js:1202:7)
+        at async SSRCompatModuleRunner.import (file:///home/andres/.codex/worktrees/b09e/researcher/frontend/node_modules/vite/dist/node/module-runner.js:1123:23)
+        at async instantiateModule (file:///home/andres/.codex/worktrees/b09e/researcher/frontend/node_modules/vite/dist/node/chunks/node.js:15913:10)
+        at async TestContext.<anonymous> (file:///home/andres/.codex/worktrees/b09e/researcher/frontend/tests/report-design.test.ts:11:34)
+        at async TestHook.run (node:internal/test_runner/test:1409:7)
+  }

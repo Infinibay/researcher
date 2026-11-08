@@ -94,3 +94,6 @@
 .findings-review-decision dd {overflow-wrap:anywhere}
 .findings-review-decision summary {min-height:2.75rem;padding-block:.75rem;cursor:pointer}
 .findings-review .findings-citation blockquote {margin-block:.75rem}
+
+/* Match the shell content inset below its 700px breakpoint. */
+@media (max-width: 700px) { .task-workbench.findings-workbench { margin: -1rem; } }

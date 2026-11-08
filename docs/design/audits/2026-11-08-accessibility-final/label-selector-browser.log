@@ -1,0 +1,15 @@
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+locator.selectOption: Timeout 10000ms exceeded.
+Call log:
+[2m  - waiting for getByLabel('Grupo', { exact: true })[22m
+
+    at createTask (/home/andres/.codex/worktrees/b09e/researcher/frontend/tests/workspace.e2e.mjs:79:53)
+    at async file:///home/andres/.codex/worktrees/b09e/researcher/frontend/tests/workspace.e2e.mjs:138:18 {
+  log: [ "  - waiting for getByLabel('Grupo', { exact: true })" ],
+  name: 'TimeoutError'
+}
+
+Node.js v24.22.2

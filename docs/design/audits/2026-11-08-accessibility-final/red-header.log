@@ -1,0 +1,307 @@
+
+ RUN  v5.1.0 /home/andres/.codex/worktrees/b09e/researcher/frontend
+
+ ❯ tests/ui/header-accessibility.test.tsx (3 tests | 2 failed) 90ms
+   × names the visible unread badge and clears it on opening (4) 74ms
+   × names the visible unread badge and clears it on opening (120) 9ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/ui/header-accessibility.test.tsx > names the visible unread badge and clears it on opening (4)
+TestingLibraryElementError: Unable to find an accessible element with the role "button" and name "Actividad del proyecto: 4 sin leer"
+
+Here are the accessible roles:
+
+  banner:
+
+  Name "":
+  [36m<header[39m
+    [33mclass[39m=[32m"workspace-header flex h-16 shrink-0 items-center justify-between border-b border-surface-700 bg-surface-900 px-6"[39m
+  [36m/>[39m
+
+  --------------------------------------------------
+  button:
+
+  Name "Menú":
+  [36m<button[39m
+    [33mclass[39m=[32m"workspace-menu-toggle"[39m
+    [33mpopovertarget[39m=[32m"workspace-menu"[39m
+  [36m/>[39m
+
+  Name "Seleccionar proyecto: Elegir proyecto…":
+  [36m<button[39m
+    [33maria-controls[39m=[32m"project-options"[39m
+    [33maria-expanded[39m=[32m"false"[39m
+    [33maria-label[39m=[32m"Seleccionar proyecto: Elegir proyecto…"[39m
+    [33mclass[39m=[32m"flex items-center gap-2 rounded-md border border-surface-700 px-3 py-1.5 text-sm text-slate-200 hover:bg-surface-800"[39m
+  [36m/>[39m
+
+  Name "Cerrar sesión":
+  [36m<button[39m
+    [33mclass[39m=[32m"rounded-md px-3 py-1.5 text-xs text-slate-300 hover:bg-surface-800 focus-visible:ring-2 focus-visible:ring-sky-400"[39m
+  [36m/>[39m
+
+  Name "Modelos":
+  [36m<button />[39m
+
+  Name "Actividad del proyecto":
+  [36m<button[39m
+    [33maria-label[39m=[32m"Actividad del proyecto"[39m
+    [33maria-pressed[39m=[32m"false"[39m
+    [33mclass[39m=[32m"relative rounded-md p-1.5 text-slate-400 hover:bg-surface-800 hover:text-slate-200 "[39m
+    [33mtitle[39m=[32m"Toggle activity feed"[39m
+  [36m/>[39m
+
+  --------------------------------------------------
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<header[39m
+      [33mclass[39m=[32m"workspace-header flex h-16 shrink-0 items-center justify-between border-b border-surface-700 bg-surface-900 px-6"[39m
+    [36m>[39m
+      [36m<button[39m
+        [33mclass[39m=[32m"workspace-menu-toggle"[39m
+        [33mpopovertarget[39m=[32m"workspace-menu"[39m
+      [36m>[39m
+        [0mMenú[0m
+      [36m</button>[39m
+      [36m<div[39m
+        [33mclass[39m=[32m"workspace-project-select flex min-w-0 items-center gap-4"[39m
+      [36m>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"relative"[39m
+        [36m>[39m
+          [36m<button[39m
+            [33maria-controls[39m=[32m"project-options"[39m
+            [33maria-expanded[39m=[32m"false"[39m
+            [33maria-label[39m=[32m"Seleccionar proyecto: Elegir proyecto…"[39m
+            [33mclass[39m=[32m"flex items-center gap-2 rounded-md border border-surface-700 px-3 py-1.5 text-sm text-slate-200 hover:bg-surface-800"[39m
+          [36m>[39m
+            [36m<span[39m
+              [33mclass[39m=[32m"text-slate-500"[39m
+            [36m>[39m
+              [0mElegir proyecto…[0m
+            [36m</span>[39m
+            [36m<svg[39m
+              [33mclass[39m=[32m"ml-1 h-4 w-4 text-slate-500"[39m
+              [33mfill[39m=[32m"none"[39m
+              [33mstroke[39m=[32m"currentColor"[39m
+              [33mviewBox[39m=[32m"0 0 24 24"[39m
+            [36m>[39m
+              [36m<path[39m
+                [33md[39m=[32m"M19 9l-7 7-7-7"[39m
+                [33mstroke-linecap[39m=[32m"round"[39m
+                [33mstroke-linejoin[39m=[32m"round"[39m
+                [33mstroke-width[39m=[32m"2"[39m
+              [36m/>[39m
+            [36m</svg>[39m
+          [36m</button>[39m
+        [36m</div>[39m
+      [36m</div>[39m
+      [36m<div[39m
+        [33mclass[39m=[32m"workspace-owner-actions flex items-center gap-3"[39m
+      [36m>[39m
+        [36m<button[39m
+          [33mclass[39m=[32m"rounded-md px-3 py-1.5 text-xs text-slate-300 hover:bg-surface-800 focus-visible:ring-2 focus-visible:ring-sky-400"[39m
+        [36m>[39m
+          [0mCerrar sesión[0m
+        [36m</button>[39m
+        [36m<button>[39m
+          [0mModelos[0m
+        [36m</button>[39m
+        [36m<button[39m
+          [33maria-label[39m=[32m"Actividad del proyecto"[39m
+          [33maria-pressed[39m=[32m"false"[39m
+          [33mclass[39m=[32m"relative rounded-md p-1.5 text-slate-400 hover:bg-surface-800 hover:text-slate-200 "[39m
+          [33mtitle[39m=[32m"Toggle activity feed"[39m
+        [36m>[39m
+          [36m<svg[39m
+            [33mclass[39m=[32m"h-5 w-5"[39m
+            [33mfill[39m=[32m"none"[39m
+            [33mstroke[39m=[32m"currentColor"[39m
+            [33mstroke-width[39m=[32m"1.5"[39m
+            [33mviewBox[39m=[32m"0 0 24 24"[39m
+          [36m>[39m
+            [36m<path[39m
+              [33md[39m=[32m"M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0"[39m
+              [33mstroke-linecap[39m=[32m"round"[39m
+              [33mstroke-linejoin[39m=[32m"round"[39m
+            [36m/>[39m
+          [36m</svg>[39m
+          [36m<span[39m
+            [33mclass[39m=[32m"absolute -right-1 -top-1 flex h-4 min-w-4 items-center justify-center rounded-full bg-sky-500 px-1 text-[10px] font-bold text-white"[39m
+          [36m>[39m
+            [0m4[0m
+          [36m</span>[39m
+        [36m</button>[39m
+      [36m</div>[39m
+    [36m</header>[39m
+  [36m</div>[39m
+[36m</body>[39m
+ ❯ Object.getElementError node_modules/@testing-library/dom/dist/config.js:37:19
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:76:38
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:52:17
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:95:19
+ ❯ tests/ui/header-accessibility.test.tsx:21:26
+     19|   useActivityFeedStore.setState({unreadCount: count})
+     20|   render(<Header />)
+     21|   const control = screen.getByRole('button', {name: `Actividad del pro…
+       |                          ^
+     22|   expect(control).toHaveTextContent(count > 99 ? '99+' : String(count))
+     23|   expect(control).toHaveAttribute('aria-pressed', 'false')
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  tests/ui/header-accessibility.test.tsx > names the visible unread badge and clears it on opening (120)
+TestingLibraryElementError: Unable to find an accessible element with the role "button" and name "Actividad del proyecto: 99+ sin leer (120 en total)"
+
+Here are the accessible roles:
+
+  banner:
+
+  Name "":
+  [36m<header[39m
+    [33mclass[39m=[32m"workspace-header flex h-16 shrink-0 items-center justify-between border-b border-surface-700 bg-surface-900 px-6"[39m
+  [36m/>[39m
+
+  --------------------------------------------------
+  button:
+
+  Name "Menú":
+  [36m<button[39m
+    [33mclass[39m=[32m"workspace-menu-toggle"[39m
+    [33mpopovertarget[39m=[32m"workspace-menu"[39m
+  [36m/>[39m
+
+  Name "Seleccionar proyecto: Elegir proyecto…":
+  [36m<button[39m
+    [33maria-controls[39m=[32m"project-options"[39m
+    [33maria-expanded[39m=[32m"false"[39m
+    [33maria-label[39m=[32m"Seleccionar proyecto: Elegir proyecto…"[39m
+    [33mclass[39m=[32m"flex items-center gap-2 rounded-md border border-surface-700 px-3 py-1.5 text-sm text-slate-200 hover:bg-surface-800"[39m
+  [36m/>[39m
+
+  Name "Cerrar sesión":
+  [36m<button[39m
+    [33mclass[39m=[32m"rounded-md px-3 py-1.5 text-xs text-slate-300 hover:bg-surface-800 focus-visible:ring-2 focus-visible:ring-sky-400"[39m
+  [36m/>[39m
+
+  Name "Modelos":
+  [36m<button />[39m
+
+  Name "Actividad del proyecto":
+  [36m<button[39m
+    [33maria-label[39m=[32m"Actividad del proyecto"[39m
+    [33maria-pressed[39m=[32m"false"[39m
+    [33mclass[39m=[32m"relative rounded-md p-1.5 text-slate-400 hover:bg-surface-800 hover:text-slate-200 "[39m
+    [33mtitle[39m=[32m"Toggle activity feed"[39m
+  [36m/>[39m
+
+  --------------------------------------------------
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<header[39m
+      [33mclass[39m=[32m"workspace-header flex h-16 shrink-0 items-center justify-between border-b border-surface-700 bg-surface-900 px-6"[39m
+    [36m>[39m
+      [36m<button[39m
+        [33mclass[39m=[32m"workspace-menu-toggle"[39m
+        [33mpopovertarget[39m=[32m"workspace-menu"[39m
+      [36m>[39m
+        [0mMenú[0m
+      [36m</button>[39m
+      [36m<div[39m
+        [33mclass[39m=[32m"workspace-project-select flex min-w-0 items-center gap-4"[39m
+      [36m>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"relative"[39m
+        [36m>[39m
+          [36m<button[39m
+            [33maria-controls[39m=[32m"project-options"[39m
+            [33maria-expanded[39m=[32m"false"[39m
+            [33maria-label[39m=[32m"Seleccionar proyecto: Elegir proyecto…"[39m
+            [33mclass[39m=[32m"flex items-center gap-2 rounded-md border border-surface-700 px-3 py-1.5 text-sm text-slate-200 hover:bg-surface-800"[39m
+          [36m>[39m
+            [36m<span[39m
+              [33mclass[39m=[32m"text-slate-500"[39m
+            [36m>[39m
+              [0mElegir proyecto…[0m
+            [36m</span>[39m
+            [36m<svg[39m
+              [33mclass[39m=[32m"ml-1 h-4 w-4 text-slate-500"[39m
+              [33mfill[39m=[32m"none"[39m
+              [33mstroke[39m=[32m"currentColor"[39m
+              [33mviewBox[39m=[32m"0 0 24 24"[39m
+            [36m>[39m
+              [36m<path[39m
+                [33md[39m=[32m"M19 9l-7 7-7-7"[39m
+                [33mstroke-linecap[39m=[32m"round"[39m
+                [33mstroke-linejoin[39m=[32m"round"[39m
+                [33mstroke-width[39m=[32m"2"[39m
+              [36m/>[39m
+            [36m</svg>[39m
+          [36m</button>[39m
+        [36m</div>[39m
+      [36m</div>[39m
+      [36m<div[39m
+        [33mclass[39m=[32m"workspace-owner-actions flex items-center gap-3"[39m
+      [36m>[39m
+        [36m<button[39m
+          [33mclass[39m=[32m"rounded-md px-3 py-1.5 text-xs text-slate-300 hover:bg-surface-800 focus-visible:ring-2 focus-visible:ring-sky-400"[39m
+        [36m>[39m
+          [0mCerrar sesión[0m
+        [36m</button>[39m
+        [36m<button>[39m
+          [0mModelos[0m
+        [36m</button>[39m
+        [36m<button[39m
+          [33maria-label[39m=[32m"Actividad del proyecto"[39m
+          [33maria-pressed[39m=[32m"false"[39m
+          [33mclass[39m=[32m"relative rounded-md p-1.5 text-slate-400 hover:bg-surface-800 hover:text-slate-200 "[39m
+          [33mtitle[39m=[32m"Toggle activity feed"[39m
+        [36m>[39m
+          [36m<svg[39m
+            [33mclass[39m=[32m"h-5 w-5"[39m
+            [33mfill[39m=[32m"none"[39m
+            [33mstroke[39m=[32m"currentColor"[39m
+            [33mstroke-width[39m=[32m"1.5"[39m
+            [33mviewBox[39m=[32m"0 0 24 24"[39m
+          [36m>[39m
+            [36m<path[39m
+              [33md[39m=[32m"M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0"[39m
+              [33mstroke-linecap[39m=[32m"round"[39m
+              [33mstroke-linejoin[39m=[32m"round"[39m
+            [36m/>[39m
+          [36m</svg>[39m
+          [36m<span[39m
+            [33mclass[39m=[32m"absolute -right-1 -top-1 flex h-4 min-w-4 items-center justify-center rounded-full bg-sky-500 px-1 text-[10px] font-bold text-white"[39m
+          [36m>[39m
+            [0m99+[0m
+          [36m</span>[39m
+        [36m</button>[39m
+      [36m</div>[39m
+    [36m</header>[39m
+  [36m</div>[39m
+[36m</body>[39m
+ ❯ Object.getElementError node_modules/@testing-library/dom/dist/config.js:37:19
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:76:38
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:52:17
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:95:19
+ ❯ tests/ui/header-accessibility.test.tsx:21:26
+     19|   useActivityFeedStore.setState({unreadCount: count})
+     20|   render(<Header />)
+     21|   const control = screen.getByRole('button', {name: `Actividad del pro…
+       |                          ^
+     22|   expect(control).toHaveTextContent(count > 99 ? '99+' : String(count))
+     23|   expect(control).toHaveAttribute('aria-pressed', 'false')
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  2 failed | 1 passed (3)
+   Start at  17:21:03
+   Duration  769ms (environment 59%, tests 13%, setup 13%, transform 7%, import 6%, worker 1%)
+

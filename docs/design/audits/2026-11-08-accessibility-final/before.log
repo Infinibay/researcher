@@ -1,0 +1,9 @@
+WARNING: proceeding, even though we could not create PATH aliases: CODEX_HOME points to "/nonexistent", but that path does not exist
+{"status": "failed", "receipt": "/home/andres/.codex/worktrees/b09e/researcher/.researcher/evaluations/accessibility-before-20261108/result.json"}
+Traceback (most recent call last):
+  File "/home/andres/.codex/worktrees/b09e/researcher/evals/operation/web_workspace.py", line 262, in <module>
+    main()
+  File "/home/andres/.codex/worktrees/b09e/researcher/evals/operation/web_workspace.py", line 129, in main
+    assert browser.returncode == 0, "Inspect the original browser log and screenshots"
+           ^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Inspect the original browser log and screenshots

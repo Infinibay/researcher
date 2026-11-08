@@ -1,3 +1,4 @@
+/** Read bounded command receipts and paginate retained bytes without executing commands. @module */
 import { useEffect, useId, useRef, useState } from 'react'
 import { keepPreviousData, useQuery } from '@tanstack/react-query'
 import { commandList, commandOutput } from '../../api/runtime'
@@ -7,6 +8,7 @@ const buttonClass = 'rounded-md border border-[var(--work-line)] px-3 py-2 text-
 const blockClass = 'max-h-72 overflow-auto whitespace-pre-wrap break-words rounded-md bg-[var(--work-wash)] p-3 text-xs text-[var(--work-ink)]'
 const windowBytes = 8192
 
+/** Expose terminal and bidirectional controls without changing the original retained bytes. */
 function visibleText(text: string) {
   // Preserve original bytes in the receipt; do not let terminal/bidi controls
   // visually rewrite a read-only explanation. HTML remains React-escaped text.
@@ -14,6 +16,7 @@ function visibleText(text: string) {
     value => `\\u${value.charCodeAt(0).toString(16).padStart(4, '0')}`)
 }
 
+/** Distinguish the process result, local closure evidence and historical attempt scope. */
 function CommandState({command}: {command: CommandSummary}) {
   return <div className="space-y-1 text-[var(--work-muted)]">
     <p>{command.status === 'dispatching' ? 'En ejecución' : command.status === 'cancelling' ? 'Cancelación solicitada' : command.exit_code == null ? 'Resultado desconocido' : `Código de salida ${command.exit_code}`}</p>
@@ -22,6 +25,7 @@ function CommandState({command}: {command: CommandSummary}) {
   </div>
 }
 
+/** Show one retained byte window with named navigation and original-byte access. */
 function OutputStream({label, window, busy, change}: {label: string; window: CommandWindow; busy: boolean; change: (offset: number) => void}) {
   return <section className="space-y-2" aria-label={label} aria-busy={busy}>
     <h5 className="font-medium text-[var(--work-ink)]">{label}</h5>
@@ -34,8 +38,8 @@ function OutputStream({label, window, busy, change}: {label: string; window: Com
     {window.total_bytes > 0 && <details><summary className="cursor-pointer text-[var(--work-accent)]">Bytes originales de esta ventana (base64)</summary><pre tabIndex={0} className={blockClass}>{window.base64}</pre></details>}
     <div className="flex flex-wrap gap-2">
       <button type="button" className={buttonClass} disabled={busy || window.offset === 0} aria-label={`Inicio de ${label.toLowerCase()}`} onClick={() => change(0)}>Inicio</button>
-      <button type="button" className={buttonClass} disabled={busy || window.offset === 0} aria-label={`Bytes anteriores de ${label.toLowerCase()}`} onClick={() => change(Math.max(0, window.offset - windowBytes))}>Anterior</button>
-      <button type="button" className={buttonClass} disabled={busy || !window.has_more} aria-label={`Bytes siguientes de ${label.toLowerCase()}`} onClick={() => change(window.next_offset)}>Siguiente</button>
+      <button type="button" className={buttonClass} disabled={busy || window.offset === 0} aria-label={`Anterior: bytes de ${label.toLowerCase()}`} onClick={() => change(Math.max(0, window.offset - windowBytes))}>Anterior</button>
+      <button type="button" className={buttonClass} disabled={busy || !window.has_more} aria-label={`Siguiente: bytes de ${label.toLowerCase()}`} onClick={() => change(window.next_offset)}>Siguiente</button>
       <button type="button" className={buttonClass} disabled={busy || !window.has_more} aria-label={`Últimos bytes de ${label.toLowerCase()}`} onClick={() => change(Math.max(0, window.total_bytes - windowBytes))}>Últimos bytes</button>
     </div>
   </section>
@@ -43,11 +47,13 @@ function OutputStream({label, window, busy, change}: {label: string; window: Com
 
 type ReceiptProps = {projectId:number;runId:string;jobId:string;enabled?:boolean}
 
+/** Reset receipt presentation whenever project, run or command ownership changes. */
 export function CommandReceipt(props: ReceiptProps) {
   // Reset offsets and placeholder data when changing owner scope or job.
   return <ReceiptScope key={`${props.projectId}:${props.runId}:${props.jobId}`} {...props} />
 }
 
+/** Fetch owner-scoped output windows and retain explicit read-error and capture-loss states. */
 function ReceiptScope({projectId,runId,jobId,enabled = true}: ReceiptProps) {
   const [stdoutOffset,setStdoutOffset] = useState(0)
   const [stderrOffset,setStderrOffset] = useState(0)
@@ -76,10 +82,12 @@ function ReceiptScope({projectId,runId,jobId,enabled = true}: ReceiptProps) {
   </section>
 }
 
+/** Reset the command catalog when its project or run changes. */
 export function RunCommands(props: {projectId:number;runId:string}) {
   return <RunCommandsScope key={`${props.projectId}:${props.runId}`} {...props} />
 }
 
+/** Browse the bounded retained command catalog and open a read-only receipt. */
 function RunCommandsScope({projectId,runId}: {projectId:number;runId:string}) {
   const [open,setOpen] = useState(false)
   const [cursors,setCursors] = useState(['0'])

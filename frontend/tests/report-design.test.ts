@@ -71,3 +71,10 @@ test('report action opens its task and retains a scoped route back to the origin
  const stale=await renderTaskLink({foreignTask:true})
  assert.doesNotMatch(stale,/OTHER PROJECT SECRET/)
 })
+
+test('the unselected report index owns the page heading even when the reader is hidden',()=>{
+ const html=renderReport({wrongProject:true})
+ assert.match(html,/<h1[^>]*>Informes<\/h1>/)
+ assert.match(html,/<h2>Elige un informe para leerlo<\/h2>/)
+ assert.equal((html.match(/<h1[ >]/g)||[]).length,1)
+})

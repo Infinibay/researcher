@@ -805,6 +805,8 @@ y el valor visible. La navegación por teclado pasó; esto no acredita conformid
 ni reduce la severidad del hallazgo. No modificar ahora todos los selectores por
 un ajuste de nombre compartido; revisar sus consumidores al corregirlo.
 
+**Actualización 8 noviembre:** DD106 corregido por alcance medido: nombre del contador y h1 del índice; auditoría final24estados sin Axe. Véase [informe final](../design/audits/2026-11-08-accessibility-final/report.md). Zoom nativo/lector permanecen pendientes.
+
 ## DD107 — desbordamiento interior en cuatro índices a320px
 
 Documentos, Hallazgos, Informes y Archivos tienen `main.scrollWidth` mayor que
@@ -814,6 +816,8 @@ aceptación responsive. Los márgenes negativos de1.5rem frente al padding móvi
 de1rem son una hipótesis del origen, no una medición causal ya demostrada.
 El harness conserva exit1 por estos cuatro casos. Revalidar los contenedores y
 sus controles, además de `document.documentElement.scrollWidth`.
+
+**Actualización 8 noviembre:** DD107 corregido y medido: margin−24/padding16 producía336px; ahora margin−16 produce320px, main320/320 en las cuatro rutas.24estados finales sin reflujo. [Informe](../design/audits/2026-11-08-accessibility-final/report.md).
 
 ## DD108 — densidad y captura móvil del presupuesto
 
@@ -1438,6 +1442,8 @@ se declara accesibilidad limpia. Corregir nombres coherentes en la fase de detal
 conservando el contexto de cada salida y verificando también controles habilitados.
 El ensayo fallido original queda archivado, sin convertirse retroactivamente en éxito.
 
+**Actualización 8 noviembre:** DD155 corregido: nombres incluyen «Anterior»/«Siguiente» y contexto de salida; DOM real renderizado comprueba ambas salidas habilitadas/deshabilitadas. No se repite ejecución ni se atribuye un nuevo ensayo completo del recibo. [Informe](../design/audits/2026-11-08-accessibility-final/report.md).
+
 ## DD156 — configuración del timeout del evaluador de espera
 
 `expect.configure({timeout:45000})` devuelve otra instancia y el evaluador no la
@@ -1488,3 +1494,13 @@ que la seleccione. Revisar adopción/orquestación y catálogo conservando capac
 citas, autoridad, juicio semántico y final nativo. Bytes de JSON y entradas cacheadas
 no equivalen a coste monetario ni ahorro demostrado. No repetir modelos sólo para
 mejorar el ejemplo; medir un cambio concreto y preservar todas las condiciones.
+
+
+## DD161 — regla lint anterior en representación de controles de terminal
+
+ESLint dirigido conserva `no-control-regex` en `RunCommands.visibleText`.
+El mismo archivo de d1d505b reproduce la regla; la expresión intencional conserva
+controles de terminal/bidi como texto visible y no cambió. Registrar una excepción
+local justificada o reformular sin perder ese comportamiento en la pasada de
+estilo final. No afirmar lint verde. Evidencia antes/después en la auditoría
+2026-11-08-accessibility-final.247 pruebas web pasan, sin cambiar esta semántica.

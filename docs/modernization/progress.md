@@ -9798,3 +9798,22 @@ Documentación posterior aparte. Continuar trabajo independiente: documentación
 relevante, accesibilidad/detalles y cierre integrado. U08 humano y Ken siguen
 pendientes; sin nueva global verde, aceptación de todo el objetivo, push, merge
 ni despliegue.
+
+
+## 2026-11-08 — Accessibility names, headings and narrow reflow
+
+Base d1d505b. 20:13:17–20:23:46UTC,629seconds until verification, documentation
+and checkpoint separate. Four new regression failures observed before product
+changes. Full frontend:167contracts/80UI pass; build passes with existing chunk
+warning. Live installed owner HTTP/SQLite journey:24route transitions at1440/320px,
+three shared keyboard controls, zero whole-page Axe violations and zero reflow
+failures. Four specialized workbenches now match the shell inset; names retain
+visible count/words and report index owns the visible page heading. Eight English
+JSDoc additions. Four hosts closed; no model calls, integrity ok.
+
+Original script-isolation/cwd and stale-selector failures preserved. Directed lint
+has the same preexisting deliberate control-regex error as HEAD (DD161). Native
+zoom/screen reader remain unobserved; this does not close U08 or all accessibility.
+See docs/design/audits/2026-11-08-accessibility-final/report.md and
+accessibility-final-results.json. Next: Ken/ONNX, relevant documentation, remaining
+details, final package/global suite/independent review. No push/merge/deployment.

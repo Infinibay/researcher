@@ -1,0 +1,576 @@
+{
+  "scope": "Real keyboard/HTTP navigation; 320 CSS px tests reflow, not browser zoom or a screen reader",
+  "states": [
+    {
+      "name": "1440-overview",
+      "route": "/",
+      "width": 1440,
+      "tabs": 4,
+      "layout": {
+        "documentFits": true,
+        "contentFits": true,
+        "width": 1248,
+        "height": 948.21875,
+        "scrollWidth": 1248,
+        "clientWidth": 1248,
+        "workbench": {
+          "left": 192,
+          "right": 1440,
+          "width": 1248,
+          "marginLeft": "-24px",
+          "marginRight": "-24px",
+          "mainPaddingLeft": "24px"
+        }
+      },
+      "violations": []
+    },
+    {
+      "name": "1440-projects",
+      "route": "/projects",
+      "width": 1440,
+      "tabs": 10,
+      "layout": {
+        "documentFits": true,
+        "contentFits": true,
+        "width": 1248,
+        "height": 948.21875,
+        "scrollWidth": 1248,
+        "clientWidth": 1248,
+        "workbench": {
+          "left": 192,
+          "right": 1440,
+          "width": 1248,
+          "marginLeft": "-24px",
+          "marginRight": "-24px",
+          "mainPaddingLeft": "24px"
+        }
+      },
+      "violations": []
+    },
+    {
+      "name": "1440-epics",
+      "route": "/epics",
+      "width": 1440,
+      "tabs": 14,
+      "layout": {
+        "documentFits": true,
+        "contentFits": true,
+        "width": 1248,
+        "height": 948.21875,
+        "scrollWidth": 1248,
+        "clientWidth": 1248,
+        "workbench": {
+          "left": 192,
+          "right": 1440,
+          "width": 1248,
+          "marginLeft": "-24px",
+          "marginRight": "-24px",
+          "mainPaddingLeft": "24px"
+        }
+      },
+      "violations": []
+    },
+    {
+      "name": "1440-tasks",
+      "route": "/tasks",
+      "width": 1440,
+      "tabs": 10,
+      "layout": {
+        "documentFits": true,
+        "contentFits": true,
+        "width": 1248,
+        "height": 948.21875,
+        "scrollWidth": 1248,
+        "clientWidth": 1248,
+        "workbench": {
+          "left": 192,
+          "right": 1440,
+          "width": 1248,
+          "marginLeft": "-24px",
+          "marginRight": "-24px",
+          "mainPaddingLeft": "24px"
+        }
+      },
+      "violations": []
+    },
+    {
+      "name": "1440-agents",
+      "route": "/agents",
+      "width": 1440,
+      "tabs": 17,
+      "layout": {
+        "documentFits": true,
+        "contentFits": true,
+        "width": 1248,
+        "height": 948.21875,
+        "scrollWidth": 1248,
+        "clientWidth": 1248,
+        "workbench": {
+          "left": 192,
+          "right": 1440,
+          "width": 1248,
+          "marginLeft": "-24px",
+          "marginRight": "-24px",
+          "mainPaddingLeft": "24px"
+        }
+      },
+      "violations": []
+    },
+    {
+      "name": "1440-chat",
+      "route": "/chat",
+      "width": 1440,
+      "tabs": 14,
+      "layout": {
+        "documentFits": true,
+        "contentFits": true,
+        "width": 1248,
+        "height": 948.21875,
+        "scrollWidth": 1248,
+        "clientWidth": 1248,
+        "workbench": {
+          "left": 192,
+          "right": 1440,
+          "width": 1248,
+          "marginLeft": "-24px",
+          "marginRight": "-24px",
+          "mainPaddingLeft": "24px"
+        }
+      },
+      "violations": []
+    },
+    {
+      "name": "1440-wiki",
+      "route": "/wiki",
+      "width": 1440,
+      "tabs": 14,
+      "layout": {
+        "documentFits": true,
+        "contentFits": true,
+        "width": 1248,
+        "height": 948.21875,
+        "scrollWidth": 1248,
+        "clientWidth": 1248,
+        "workbench": {
+          "left": 192,
+          "right": 1440,
+          "width": 1248,
+          "marginLeft": "-24px",
+          "marginRight": "-24px",
+          "mainPaddingLeft": "24px"
+        }
+      },
+      "violations": []
+    },
+    {
+      "name": "1440-findings",
+      "route": "/findings",
+      "width": 1440,
+      "tabs": 14,
+      "layout": {
+        "documentFits": true,
+        "contentFits": true,
+        "width": 1248,
+        "height": 948.21875,
+        "scrollWidth": 1248,
+        "clientWidth": 1248,
+        "workbench": {
+          "left": 192,
+          "right": 1440,
+          "width": 1248,
+          "marginLeft": "-24px",
+          "marginRight": "-24px",
+          "mainPaddingLeft": "24px"
+        }
+      },
+      "violations": []
+    },
+    {
+      "name": "1440-reports",
+      "route": "/reports",
+      "width": 1440,
+      "tabs": 17,
+      "layout": {
+        "documentFits": true,
+        "contentFits": true,
+        "width": 1248,
+        "height": 948.21875,
+        "scrollWidth": 1248,
+        "clientWidth": 1248,
+        "workbench": {
+          "left": 192,
+          "right": 1440,
+          "width": 1248,
+          "marginLeft": "-24px",
+          "marginRight": "-24px",
+          "mainPaddingLeft": "24px"
+        }
+      },
+      "violations": []
+    },
+    {
+      "name": "1440-files",
+      "route": "/files",
+      "width": 1440,
+      "tabs": 19,
+      "layout": {
+        "documentFits": true,
+        "contentFits": true,
+        "width": 1248,
+        "height": 948.21875,
+        "scrollWidth": 1248,
+        "clientWidth": 1248,
+        "workbench": {
+          "left": 192,
+          "right": 1440,
+          "width": 1248,
+          "marginLeft": "-24px",
+          "marginRight": "-24px",
+          "mainPaddingLeft": "24px"
+        }
+      },
+      "violations": []
+    },
+    {
+      "name": "1440-repositories",
+      "route": "/repositories",
+      "width": 1440,
+      "tabs": 18,
+      "layout": {
+        "documentFits": true,
+        "contentFits": true,
+        "width": 1248,
+        "height": 948.21875,
+        "scrollWidth": 1248,
+        "clientWidth": 1248,
+        "workbench": {
+          "left": 192,
+          "right": 1440,
+          "width": 1248,
+          "marginLeft": "-24px",
+          "marginRight": "-24px",
+          "mainPaddingLeft": "24px"
+        }
+      },
+      "violations": []
+    },
+    {
+      "name": "1440-flow",
+      "route": "/flow",
+      "width": 1440,
+      "tabs": 18,
+      "layout": {
+        "documentFits": true,
+        "contentFits": true,
+        "width": 1248,
+        "height": 948.21875,
+        "scrollWidth": 1248,
+        "clientWidth": 1248,
+        "workbench": {
+          "left": 192,
+          "right": 1440,
+          "width": 1248,
+          "marginLeft": "-24px",
+          "marginRight": "-24px",
+          "mainPaddingLeft": "24px"
+        }
+      },
+      "violations": []
+    },
+    {
+      "name": "320-overview",
+      "route": "/",
+      "width": 320,
+      "tabs": 2,
+      "layout": {
+        "documentFits": true,
+        "contentFits": true,
+        "width": 320,
+        "height": 833,
+        "scrollWidth": 320,
+        "clientWidth": 320,
+        "workbench": {
+          "left": 0,
+          "right": 320,
+          "width": 320,
+          "marginLeft": "-16px",
+          "marginRight": "-16px",
+          "mainPaddingLeft": "16px"
+        }
+      },
+      "violations": []
+    },
+    {
+      "name": "320-projects",
+      "route": "/projects",
+      "width": 320,
+      "tabs": 3,
+      "layout": {
+        "documentFits": true,
+        "contentFits": true,
+        "width": 320,
+        "height": 833,
+        "scrollWidth": 320,
+        "clientWidth": 320,
+        "workbench": {
+          "left": 0,
+          "right": 320,
+          "width": 320,
+          "marginLeft": "-16px",
+          "marginRight": "-16px",
+          "mainPaddingLeft": "16px"
+        }
+      },
+      "violations": []
+    },
+    {
+      "name": "320-epics",
+      "route": "/epics",
+      "width": 320,
+      "tabs": 4,
+      "layout": {
+        "documentFits": true,
+        "contentFits": true,
+        "width": 320,
+        "height": 833,
+        "scrollWidth": 320,
+        "clientWidth": 320,
+        "workbench": {
+          "left": 0,
+          "right": 320,
+          "width": 320,
+          "marginLeft": "-16px",
+          "marginRight": "-16px",
+          "mainPaddingLeft": "16px"
+        }
+      },
+      "violations": []
+    },
+    {
+      "name": "320-tasks",
+      "route": "/tasks",
+      "width": 320,
+      "tabs": 5,
+      "layout": {
+        "documentFits": true,
+        "contentFits": true,
+        "width": 320,
+        "height": 833,
+        "scrollWidth": 320,
+        "clientWidth": 320,
+        "workbench": {
+          "left": 0,
+          "right": 320,
+          "width": 320,
+          "marginLeft": "-16px",
+          "marginRight": "-16px",
+          "mainPaddingLeft": "16px"
+        }
+      },
+      "violations": []
+    },
+    {
+      "name": "320-agents",
+      "route": "/agents",
+      "width": 320,
+      "tabs": 6,
+      "layout": {
+        "documentFits": true,
+        "contentFits": true,
+        "width": 320,
+        "height": 833,
+        "scrollWidth": 320,
+        "clientWidth": 320,
+        "workbench": {
+          "left": 0,
+          "right": 320,
+          "width": 320,
+          "marginLeft": "-16px",
+          "marginRight": "-16px",
+          "mainPaddingLeft": "16px"
+        }
+      },
+      "violations": []
+    },
+    {
+      "name": "320-chat",
+      "route": "/chat",
+      "width": 320,
+      "tabs": 7,
+      "layout": {
+        "documentFits": true,
+        "contentFits": true,
+        "width": 320,
+        "height": 833,
+        "scrollWidth": 320,
+        "clientWidth": 320,
+        "workbench": {
+          "left": 0,
+          "right": 320,
+          "width": 320,
+          "marginLeft": "-16px",
+          "marginRight": "-16px",
+          "mainPaddingLeft": "16px"
+        }
+      },
+      "violations": []
+    },
+    {
+      "name": "320-wiki",
+      "route": "/wiki",
+      "width": 320,
+      "tabs": 8,
+      "layout": {
+        "documentFits": true,
+        "contentFits": true,
+        "width": 320,
+        "height": 833,
+        "scrollWidth": 320,
+        "clientWidth": 320,
+        "workbench": {
+          "left": 0,
+          "right": 320,
+          "width": 320,
+          "marginLeft": "-16px",
+          "marginRight": "-16px",
+          "mainPaddingLeft": "16px"
+        }
+      },
+      "violations": []
+    },
+    {
+      "name": "320-findings",
+      "route": "/findings",
+      "width": 320,
+      "tabs": 9,
+      "layout": {
+        "documentFits": true,
+        "contentFits": true,
+        "width": 320,
+        "height": 833,
+        "scrollWidth": 320,
+        "clientWidth": 320,
+        "workbench": {
+          "left": 0,
+          "right": 320,
+          "width": 320,
+          "marginLeft": "-16px",
+          "marginRight": "-16px",
+          "mainPaddingLeft": "16px"
+        }
+      },
+      "violations": []
+    },
+    {
+      "name": "320-reports",
+      "route": "/reports",
+      "width": 320,
+      "tabs": 10,
+      "layout": {
+        "documentFits": true,
+        "contentFits": true,
+        "width": 320,
+        "height": 833,
+        "scrollWidth": 320,
+        "clientWidth": 320,
+        "workbench": {
+          "left": 0,
+          "right": 320,
+          "width": 320,
+          "marginLeft": "-16px",
+          "marginRight": "-16px",
+          "mainPaddingLeft": "16px"
+        }
+      },
+      "violations": []
+    },
+    {
+      "name": "320-files",
+      "route": "/files",
+      "width": 320,
+      "tabs": 11,
+      "layout": {
+        "documentFits": true,
+        "contentFits": true,
+        "width": 320,
+        "height": 833,
+        "scrollWidth": 320,
+        "clientWidth": 320,
+        "workbench": {
+          "left": 0,
+          "right": 320,
+          "width": 320,
+          "marginLeft": "-16px",
+          "marginRight": "-16px",
+          "mainPaddingLeft": "16px"
+        }
+      },
+      "violations": []
+    },
+    {
+      "name": "320-repositories",
+      "route": "/repositories",
+      "width": 320,
+      "tabs": 12,
+      "layout": {
+        "documentFits": true,
+        "contentFits": true,
+        "width": 320,
+        "height": 833,
+        "scrollWidth": 320,
+        "clientWidth": 320,
+        "workbench": {
+          "left": 0,
+          "right": 320,
+          "width": 320,
+          "marginLeft": "-16px",
+          "marginRight": "-16px",
+          "mainPaddingLeft": "16px"
+        }
+      },
+      "violations": []
+    },
+    {
+      "name": "320-flow",
+      "route": "/flow",
+      "width": 320,
+      "tabs": 13,
+      "layout": {
+        "documentFits": true,
+        "contentFits": true,
+        "width": 320,
+        "height": 833,
+        "scrollWidth": 320,
+        "clientWidth": 320,
+        "workbench": {
+          "left": 0,
+          "right": 320,
+          "width": 320,
+          "marginLeft": "-16px",
+          "marginRight": "-16px",
+          "mainPaddingLeft": "16px"
+        }
+      },
+      "violations": []
+    }
+  ],
+  "controls": [
+    {
+      "width": 1440,
+      "action": "skip-link",
+      "passed": true
+    },
+    {
+      "width": 320,
+      "action": "skip-link",
+      "passed": true
+    },
+    {
+      "width": 320,
+      "action": "menu-escape-restores-trigger",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "apiErrors": []
+}

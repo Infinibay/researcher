@@ -78,3 +78,6 @@
 .wiki-body-field { display:grid; gap:.35rem; }
 
 .wiki-scope { display:grid; gap:.35rem; }
+
+/* Match the shell content inset below its 700px breakpoint. */
+@media (max-width: 700px) { .task-workbench.wiki-workbench { margin: -1rem; } }

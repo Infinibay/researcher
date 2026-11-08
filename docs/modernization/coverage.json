@@ -2415,7 +2415,13 @@
         "backend/tests/runtime/test_investigation_acquisition_cell.py",
         "docs/modernization/ordinary-communication-review.md",
         "docs/modernization/ordinary-communication-results.json",
-        "docs/modernization/ordinary-communication-explanation.md"
+        "docs/modernization/ordinary-communication-explanation.md",
+        "docs/design/audits/2026-11-08-accessibility-final/report.md",
+        "docs/design/audits/2026-11-08-accessibility-final/final-evidence.json",
+        "docs/modernization/accessibility-final-results.json",
+        "frontend/tests/ui/header-accessibility.test.tsx",
+        "frontend/tests/command-output.test.ts",
+        "frontend/tests/report-design.test.ts"
       ],
       "remaining": [
         "Observe owner feedback/useful correction and adaptation on the actual task-grounded explanation; comprehension/acceptance unknown",
@@ -3727,11 +3733,17 @@
         "evals/operation/web_workspace.py",
         "docs/design/audits/2026-11-07-navigation-live/report.md",
         "docs/modernization/web-navigation-results.json",
-        "frontend/tests/navigation-audit.mjs"
+        "frontend/tests/navigation-audit.mjs",
+        "docs/design/audits/2026-11-08-accessibility-final/report.md",
+        "docs/design/audits/2026-11-08-accessibility-final/final-evidence.json",
+        "docs/modernization/accessibility-final-results.json",
+        "frontend/tests/ui/header-accessibility.test.tsx",
+        "frontend/tests/command-output.test.ts"
       ],
       "notes": [
         "Real desktop/mobile read-only owner capture now passes; full rendered state, keyboard, screen-reader/zoom and human acceptance remain pending. See browser-evidence.json.",
-        "2026-11-07:24 keyboard route transitions and3shared keyboard controls pass against real installed host; whole-document Axe finds counter naming/H1 issues, and4routes overflow the main at320CSSpx. Harness remains exit1; DD106/DD107 deferred until all macro work. Not screen reader, real zoom or human acceptance."
+        "2026-11-07:24 keyboard route transitions and3shared keyboard controls pass against real installed host; whole-document Axe finds counter naming/H1 issues, and4routes overflow the main at320CSSpx. Harness remains exit1; DD106/DD107 deferred until all macro work. Not screen reader, real zoom or human acceptance.",
+        "2026-11-08: final24 route states1440/320 pass whole-page Axe, keyboard and interior reflow after DD106/DD107 fixes;167contracts80UI/build pass. DD155 pagination names verified in rendered DOM. Native zoom and physical screen-reader evaluation still pending, as is U08 human comprehension. Directed lint retains the demonstrated preexisting no-control-regex rule DD161."
       ]
     },
     "legacy_removal": {

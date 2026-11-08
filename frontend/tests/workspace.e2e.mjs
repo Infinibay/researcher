@@ -76,8 +76,8 @@ try {
     await page.getByRole('button', { name: 'Nueva tarea', exact: true }).click()
     await page.getByLabel('Título', { exact: true }).fill(title)
     await page.getByLabel('Descripción', { exact: true }).fill('Ensayo sintético: conservar evidencia y revisar el resultado antes de aceptarlo.')
-    await page.getByLabel('Épica', { exact: true }).selectOption({ label: 'Reunir evidencia' })
-    if (dependency) await page.getByRole('button', { name: `#${dependency} Capturar fuente`, exact: true }).click()
+    await page.getByRole('combobox', { name: /^Grupo/ }).selectOption({ label: 'Reunir evidencia' })
+    if (dependency) await page.getByRole('checkbox', { name: 'Capturar fuente', exact: true }).check()
     const response = page.waitForResponse(r => new URL(r.url()).pathname === '/api/tasks' && r.request().method() === 'POST')
     await page.getByRole('button', { name: 'Crear tarea', exact: true }).click()
     const created = await response
@@ -176,8 +176,8 @@ try {
   if (process.env.RESEARCHER_E2E_NAVIGATION === '1') {
     const { auditNavigation } = await import('./navigation-audit.mjs')
     evidence.navigation = await auditNavigation(page, output)
-    // Automatic accessibility findings remain explicit review obligations; they do not erase completed navigation evidence.
-    expect(evidence.navigation.failures.filter(item => item.kind !== 'axe')).toEqual([])
+    // Every whole-page accessibility or layout failure blocks this navigation gate.
+    expect(evidence.navigation.failures).toEqual([])
   }
   expect(evidence.errors).toEqual([])
   if (process.env.RESEARCHER_E2E_INTERACTION === '1') {

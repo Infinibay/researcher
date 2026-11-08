@@ -1,4 +1,6 @@
 import assert from 'node:assert/strict'
+import { JSDOM } from 'jsdom'
+import { getByRole } from '@testing-library/dom'
 import { after, before, test } from 'node:test'
 import { createServer, type ViteDevServer } from 'vite'
 
@@ -60,4 +62,19 @@ test('the job list exposes pagination beyond its first page', () => {
   assert.match(html,/>Siguientes comandos<\/button>/)
   assert.match(html,/contexto 2/)
   assert.match(html,/no repite/)
+})
+
+// Regresses labels that omit the visible word used for speech control.
+test('output pagination names contain visible labels in both enabled and disabled streams', () => {
+  const dom = new JSDOM(renderCommand())
+  try {
+    for (const stream of ['salida estándar', 'salida de errores']) {
+      const previous = getByRole(dom.window.document.body, 'button', {name: `Anterior: bytes de ${stream}`})
+      const next = getByRole(dom.window.document.body, 'button', {name: `Siguiente: bytes de ${stream}`})
+      assert.equal(previous.textContent, 'Anterior')
+      assert.equal(previous.hasAttribute('disabled'), true)
+      assert.equal(next.textContent, 'Siguiente')
+      assert.equal(next.hasAttribute('disabled'), stream === 'salida de errores')
+    }
+  } finally { dom.window.close() }
 })

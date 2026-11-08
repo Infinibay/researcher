@@ -2,6 +2,18 @@
 
 La implementación del [plan completo](../superpowers/plans/2026-10-31-actualizacion-proyecto.md) sigue en curso. El [tablero](execution-dashboard.md) organiza la siguiente entrega y [coverage.json](coverage.json) conserva requisitos/evidencia. No se ha hecho merge ni despliegue. La rama se subió hasta `0c8b8d9` antes de la pausa; los checkpoints posteriores son locales.
 
+## Último avance
+
+Los fallos medidos de accesibilidad quedan corregidos: las doce rutas pasan
+24 estados de página completa a1440/320px, sin infracciones Axe ni desbordamientos;
+24 transiciones por teclado correctas.167 contratos y80 pruebas UI pasan, al igual
+que el build. La regla lint anterior de controles de terminal se conserva como
+DD161. Zoom nativo/lector de pantalla y comprensión humana siguen pendientes.
+[Informe y límites](../design/audits/2026-11-08-accessibility-final/report.md),
+[resultados](accessibility-final-results.json). Siguiente: Ken/ONNX y documentación
+relevante; después detalles y cierre integrado. Estado amplio42/43, sin nueva
+suite global verde ni despliegue.
+
 ## Resultados disponibles
 
 - **Temporales y salidas de Chroma acotados:** tmpfs con capacidad de datos
