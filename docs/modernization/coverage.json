@@ -2409,14 +2409,18 @@
         "backend/tests/runtime/test_investigation_delivery_cell.py",
         "docs/modernization/coarse-delivery-policy-review.md",
         "docs/modernization/coarse-delivery-policy-results.json",
-        "docs/modernization/coarse-delivery-policy-evidence/native-result.json"
+        "docs/modernization/coarse-delivery-policy-evidence/native-result.json",
+        "docs/modernization/complete-acquisition-review.md",
+        "docs/modernization/complete-acquisition-results.json",
+        "backend/tests/runtime/test_investigation_acquisition_cell.py"
       ],
       "remaining": [
         "Initial example rejected by the user as unhelpful; revised task-grounded example has no human acceptance yet",
         "Evaluate actual generated explanations and correction/adaptation under final policy; rendering and scripted tests do not establish understanding",
         "Actual-plan question had insufficient framing per owner feedback; no comprehension acceptance established",
         "Coarse composed delivery is viable in one real offline code-host cell with authored fixture code; native policy guidance, actual generated budget fit and human acceptance remain unproven. Original failed explanation remains failed.",
-        "Catalog11 orientation is connected but actual same-case delivery failed at126302observed tokens/120000; validate executable acquisition and reserve native final before another observation."
+        "Catalog11 orientation is connected but actual same-case delivery failed at126302observed tokens/120000; validate executable acquisition and reserve native final before another observation.",
+        "Executable acquisition/delivery control now passes with realKen and strict source guards; generated final/explanation and observed human acceptance remain unproven. A separate configured350k observation is planned, not a120k performance success."
       ]
     }
   },
@@ -7091,16 +7095,21 @@
       "evidence": [
         "docs/modernization/coarse-delivery-policy-review.md",
         "docs/modernization/coarse-delivery-policy-results.json",
-        "docs/modernization/coarse-delivery-policy-evidence/native-result.json"
+        "docs/modernization/coarse-delivery-policy-evidence/native-result.json",
+        "docs/modernization/complete-acquisition-review.md",
+        "docs/modernization/complete-acquisition-results.json",
+        "backend/tests/runtime/test_investigation_acquisition_cell.py"
       ],
       "verified": [
         "55source and55installed tests pass with zero skips",
         "700Python/SQL files match sdist/wheel;235backend modules only installed",
-        "Actual registered policy11 and complete118line Ken source observed;all5peers closed/0unrevokedgrants"
+        "Actual registered policy11 and complete118line Ken source observed;all5peers closed/0unrevokedgrants",
+        "Authored acquisition+delivery through real publicKen/code host:5source tests pass, including truncation/withdrawal/hash-mismatch stops; no model calls"
       ],
       "remaining": [
-        "Executable acquisition composition with canonical source output and strict provenance/authority/failure handling",
-        "Native final explanation within unchanged limits and useful observed human correction/acceptance"
+        "Actual generated final/explanation and human correction under explicitly registered operational limits",
+        "General production acquisition input/provenance contract beyond fixed trusted fixture descriptors",
+        "Efficiency under120k remains unproved; preserve both failed observations"
       ],
       "limits": [
         "No causal efficacy or general budget-fit proof",

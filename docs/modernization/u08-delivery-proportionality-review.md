@@ -80,3 +80,19 @@ para hacer pasar este caso. Una captura Ken automática exigiría semántica nue
 formato, estabilidad, autoridad y procedencia; el código no demuestra que haga falta.
 La reducción de catálogo es otra hipótesis de rendimiento, no ahorro de tokens
 probado. DD157 y pulido continúan diferidos.
+
+## Composición completa y contraste del presupuesto
+
+La [composición ejecutable](complete-acquisition-review.md) pasa cinco casos con
+Ken/code host reales y fuentes canónicas, incluido rechazo por truncación,
+autoridad retirada y discrepancia de hash. No prueba generación ni final nativo;
+usa descriptores e informe de control. No se eleva esa evidencia a U08.
+
+En una revisión de alcance posterior, el mismo revisor distingue el techo 120k/20
+del evaluador de los límites operativos 350k/25 del operador. El plan no exige el
+primero como criterio del propietario. Recomienda una única observación separada,
+preregistrada, con la misma pregunta/fuentes/Ken/política11 y final requerido, para
+medir comunicación ordinaria. Debe conservar los fallos120k, no afirmar eficiencia
+ni causalidad y presentar el resultado real para permitir corrección humana.
+No ejecutó modelos/pruebas ni modificó archivos; el implementador verificó ambos
+límites en fuentes reales. La decisión se registra antes de otra inferencia.

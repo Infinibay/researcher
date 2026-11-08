@@ -9747,3 +9747,27 @@ Siguen U08, Ken/ONNX, documentación, accesibilidad y cierre integrado; sin glob
 verde/push/merge/despliegue. El turno anterior fue progreso:233docstrings y prueba
 real offline de composición; este bloque añade política, paquete y evidencia real
 que obliga a revisar la adquisición, sin dar por logrado el resultado humano.
+
+## 2026-11-08 — Adquisición y entrega ejecutables con Ken real
+
+[Informe](complete-acquisition-review.md). Receta de adquisición en un exec y
+entrega en otro; Ken publicado/code host reales, esquemas/API/SQLite reales.
+Nueve llamadas de adquisición, tres de entrega;118líneas Ken y dos fuentes
+canónicas/hash/bytecoverage verificados. Comando leído en ventana1byte paraestado,
+captura usa recibo completo y el modelo no recibiría otra copia base64.
+Cinco casos pasan/77,57s, sin omisiones: completo, truncado, grant retirado,
+hash esperado distinto y entrega anterior. Ruff/docstrings/JSDoc completos.
+Primeros dos fallos: fixture adjunto fuera de uploads/101/uploads; rechazo de API
+preservado, fixture corregido. Lease120s de prueba explícita para preparación offline.
+
+19:38:13–19:54:27UTC:16min14s hasta comprobar; informe/checkpoint después. Cero
+modelos/suscripción. Programa e informe/final son controlados; metadatos fiables
+líneas/hash del fixture no se suponen en input genérico. No API nueva ni solución
+U08;371fuentes de producto iguales al wheel previo, dos tests/JS cambian sólo repo.
+
+Ruling de alcance, contrastada por revisor readonly y límites reales:120k/20 fue
+techo del evaluador, operador configura350k/25/1turno/180s. Próximo una observación
+SEPARADA preregistrada bajo límites ordinarios, misma pregunta/fuentes/Ken/política11
+sin respuesta precocinada. No reescribir fallos120k ni alegar eficiencia/causalidad;
+comprensión humana queda pendiente. No anteponer otra API al resultado humano.
+Siguen Ken/ONNX, documentación, accesibilidad y cierre integrado, sin global verde.

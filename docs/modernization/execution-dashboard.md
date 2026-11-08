@@ -28,7 +28,26 @@ que se pueda comparar el avance; no presentar microajustes como tareas principal
 - Última suite global: `9fb873c`,2210 casos,2178 pasan,31 fallan y1 error de fixture; sin omisiones. La carrera de backup encontrada se corrigió después con40 pruebas instaladas. No se declara una nueva corrida global verde; la referencia `0c8b8d9` queda como evidencia histórica.
 - U01–U07, E01–E12, C01–C10 y D01–D13 quedan comprobados con el alcance de sus matrices; sigue 1 de 43 escenarios amplios sin aceptación completa en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Estado actual: política 11 conectada; explicación real fallida
+## Estado actual: adquisición y entrega ejecutables comprobadas
+
+[Informe](complete-acquisition-review.md). **19:38:13–19:54:27 UTC: 16 min 14 s**
+hasta comprobación; informe/checkpoint después. Cinco casos: 77,57 s, sin omisiones.
+
+- Terminado por alcance: adquisición en un exec con Ken real y fuentes canónicas,
+  lectura mínima de estado sin emitir copia base64; entrega en otro con IDs reales.
+  Cinco casos pasan, incluidas truncación, retirada de grant y discrepancia de hash.
+  Programas/informe/final son controlados; no prueba generativa ni aceptación humana.
+- Siguiente: una observación separada y preregistrada de comunicación bajo límites
+  operativos 350k/25, misma pregunta/fuentes/política11 y final requerido. El120k/20
+  era un techo del evaluador; ambos fallos se mantienen, sin alegar optimización.
+- Pendientes: U08/explicación/adaptación/comprensión humana; Ken/ONNX; documentación
+  relevante (416 añadidos,205faltantes por presencia), accesibilidad/detalles;
+  paquete, suite global y revisión independiente finales.
+- Estado amplio: **12/12 páginas por alcance,42/43 escenarios**. Producto371fuentes
+  coincide con el wheel anterior; nuevos tests/receta sólo repositorio. Cero modelos
+  nuevos en este bloque. Sin global verde ni push/merge/despliegue.
+
+## Etapa anterior: política 11 conectada; explicación real fallida
 
 [Informe](coarse-delivery-policy-review.md). **19:22:51–19:35:06 UTC: 12 min 15 s**
 hasta comprobación/análisis; informe/checkpoint después. Pruebas fuente 19,04 s,

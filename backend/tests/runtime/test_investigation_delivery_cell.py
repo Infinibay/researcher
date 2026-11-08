@@ -45,7 +45,7 @@ async def operation_response(process, request_id):
     raise AssertionError(("Missing operation response", request_id, observed))
 
 
-async def execute_cell(binary, facade, source):
+async def execute_cell(binary, facade, source, *, marker="DELIVERY_READY", yield_ms=5000):
     """Run one fixed offline cell and delegate actual tools without a model round."""
     process = await asyncio.create_subprocess_exec(
         binary.path,
@@ -54,8 +54,9 @@ async def execute_cell(binary, facade, source):
         stderr=asyncio.subprocess.DEVNULL,
     )
     calls = []
+    invocations = []
     try:
-        async with asyncio.timeout(15):
+        async with asyncio.timeout(yield_ms / 1000 + 10):
             await write_frame(process, {
                 "type": "connection/hello",
                 "supportedVersions": [1],
@@ -68,7 +69,7 @@ async def execute_cell(binary, facade, source):
                 "request": {
                     "method": "session/open", "sessionId": "delivery-fixture",
                     "cellExecutionLimits": {
-                        "maxYieldTimeMs": 5000, "maxHeapSizeBytes": 64 * 1024**2,
+                        "maxYieldTimeMs": yield_ms, "maxHeapSizeBytes": 64 * 1024**2,
                     },
                 },
             })
@@ -86,8 +87,8 @@ async def execute_cell(binary, facade, source):
                     "method": "session/execute", "sessionId": "delivery-fixture",
                     "request": {
                         "tool_call_id": "delivery-fixture", "enabled_tools": enabled,
-                        "source": source, "yield_time_ms": 5000,
-                        "max_output_tokens": 256,
+                        "source": source, "yield_time_ms": yield_ms,
+                        "max_output_tokens": 12000,
                     },
                 },
             })
@@ -101,6 +102,9 @@ async def execute_cell(binary, facade, source):
                     calls.append(name)
                     reply = await facade.call({
                         "tool": name, "arguments": invocation["input"],
+                    })
+                    invocations.append({
+                        "tool": name, "arguments": invocation["input"], "response": reply,
                     })
                     await write_frame(process, {
                         "type": "delegate/response", "id": message["id"],
@@ -119,7 +123,7 @@ async def execute_cell(binary, facade, source):
                     result = value
             assert "Result" in result, result
             assert not result["Result"].get("error_text"), result
-            assert "DELIVERY_READY" in json.dumps(result), result
+            assert marker in json.dumps(result), (result, invocations[-1:] or calls)
             await write_frame(process, {
                 "type": "operation/request", "id": 3,
                 "request": {
@@ -130,7 +134,7 @@ async def execute_cell(binary, facade, source):
             assert closed["type"] == "session/closed", closed
             process.stdin.close()
             assert await process.wait() == 0
-            return calls
+            return {"calls": calls, "output": result, "invocations": invocations}
     finally:
         if process.returncode is None:
             process.kill()
@@ -200,7 +204,8 @@ text({status: 'DELIVERY_READY', report_id: report.artifact_id, proposal});
         transport=httpx.ASGITransport(app=app),
     ) as peer:
         facade = await BusinessTools.connect(peer)
-        assert await execute_cell(code_host_asset, facade, source) == [
+        execution = await execute_cell(code_host_asset, facade, source)
+        assert execution["calls"] == [
             "researcher_finding_record", "researcher_investigation_summary",
             "researcher_result_propose",
         ]

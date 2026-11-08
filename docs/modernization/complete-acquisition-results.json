@@ -1,0 +1,151 @@
+{
+  "base_commit": "c31a4bd",
+  "scope": "Authored executable acquisition recipe and deterministic integration, not a generated explanation or product policy update",
+  "source_sha256": {
+    "evals/communication/acquire_evidence.js": "fe1475a7dd31e7adeecf3493b7e5757af6937a28b12e120c4a0feb3d58eb49f9",
+    "backend/tests/runtime/test_investigation_acquisition_cell.py": "f04433f2510abf639063d15987309b72ca2551a4f590a603a3ff76670a95ce57",
+    "backend/tests/runtime/test_investigation_delivery_cell.py": "326d5c6fb111f1e329ec582959ebbaf12f00f0520caa6469134dd73dd7427dd6"
+  },
+  "tests": {
+    "passed": 5,
+    "failed": 0,
+    "skipped": 0,
+    "seconds": 77.57,
+    "cases": [
+      "complete",
+      "truncated",
+      "withdrawn",
+      "expected_sha_mismatch",
+      "existing_delivery_only"
+    ],
+    "early_runs": [
+      "First and diagnostic second failed because fixture reference path was outside configured project uploads; real API rejected it",
+      "Fixture corrected to uploads/101/uploads and explicit120s test lease before offline preparation; no product authorization or inference limit changed",
+      "Third run2pass21.13s before adding negative cases; final5pass77.57s"
+    ]
+  },
+  "observations": {
+    "complete": {
+      "status": "ACQUISITION_READY",
+      "reason": null,
+      "tool_calls": [
+        "ken_find",
+        "ken_read",
+        "researcher_reference_list",
+        "researcher_capture_reference",
+        "researcher_source_read",
+        "researcher_command_start",
+        "researcher_command_read",
+        "researcher_capture_command",
+        "researcher_source_read"
+      ],
+      "code_host_duration_seconds": 4.527688,
+      "emitted_json_utf8_bytes": 25447,
+      "emitted_base64_keys": false,
+      "full_raw_base64_copy_emitted": false,
+      "ken_complete_source_lines": 118,
+      "source_sizes": [
+        {
+          "source_id": 2,
+          "characters": 3318,
+          "utf8_bytes": 3362,
+          "sha256": "48e757ada33d80c231ab1bf29c05aacce9b76851e1f30966ef928d6648806941"
+        },
+        {
+          "source_id": 3,
+          "characters": 9320,
+          "utf8_bytes": 9342,
+          "sha256": "52e2e2b9c4d1770dad0efdaf467842879a05c7dd7d1a20dea8e9fb9477eda61e"
+        }
+      ],
+      "command_stdout_matches_registered_code_sha256": true,
+      "delivery_code_host_duration_seconds": 0.063798,
+      "delivery_tools": [
+        "researcher_finding_record",
+        "researcher_investigation_summary",
+        "researcher_result_propose"
+      ],
+      "total_calls_before_native_final": 12
+    },
+    "truncated": {
+      "status": "ACQUISITION_STOPPED",
+      "reason": "command_incomplete",
+      "tool_calls": [
+        "ken_find",
+        "ken_read",
+        "researcher_reference_list",
+        "researcher_capture_reference",
+        "researcher_source_read",
+        "researcher_command_start",
+        "researcher_command_read"
+      ],
+      "code_host_duration_seconds": 4.533074,
+      "emitted_json_utf8_bytes": 146,
+      "emitted_base64_keys": false,
+      "full_raw_base64_copy_emitted": false
+    },
+    "withdrawn": {
+      "status": "ACQUISITION_STOPPED",
+      "reason": "tool_refused",
+      "tool_calls": [
+        "ken_find",
+        "ken_read",
+        "researcher_reference_list",
+        "researcher_capture_reference",
+        "researcher_source_read",
+        "researcher_command_start",
+        "researcher_command_read",
+        "researcher_capture_command"
+      ],
+      "code_host_duration_seconds": 4.59245,
+      "emitted_json_utf8_bytes": 140,
+      "emitted_base64_keys": false,
+      "full_raw_base64_copy_emitted": false
+    },
+    "changed": {
+      "status": "ACQUISITION_STOPPED",
+      "reason": "captured_code_changed",
+      "tool_calls": [
+        "ken_find",
+        "ken_read",
+        "researcher_reference_list",
+        "researcher_capture_reference",
+        "researcher_source_read",
+        "researcher_command_start",
+        "researcher_command_read",
+        "researcher_capture_command",
+        "researcher_source_read"
+      ],
+      "code_host_duration_seconds": 4.677541,
+      "emitted_json_utf8_bytes": 168,
+      "emitted_base64_keys": false,
+      "full_raw_base64_copy_emitted": false
+    }
+  },
+  "product_source_files_unchanged_and_matching_installed_wheel": 371,
+  "package_rebuilt": false,
+  "new_or_changed_test_files_not_in_previous_package": 2,
+  "generative_model_turns": 0,
+  "subscription_inference_requests": 0,
+  "quality": {
+    "ruff": "passed",
+    "new_python_definitions_have_docstrings": true,
+    "recipe_functions_have_JSDoc": true
+  },
+  "human_comprehension": null,
+  "limits": [
+    "Authored fixture programs and summary; no proof a model selects this strategy or understands the source",
+    "Source line count/hash are trusted fixture descriptors, not generally available native input; no generic production acquisition API is implemented",
+    "Fixed actual code/document fixture, not a held-out model communication case",
+    "Command wire and original native/business receipts use synthetic fixtures; actual Ken/code-host processes do not prove full broker containment here",
+    "Two exec cells do not prove native final completion or fit in120000tokens",
+    "Unknown transport/job outcome branches are conservative recipe guards but not all independently injected in this new test",
+    "Old wheel product371files match; changed/new tests and JS recipe are repository artifacts until final package/review"
+  ],
+  "time": {
+    "start_utc": "2026-11-08 19:38:13",
+    "verification_cut_utc": "2026-11-08 19:54:27",
+    "elapsed_seconds": 974,
+    "scope": "Includes fixture diagnosis and guards, offline Ken preparation and tests; report/checkpoint later"
+  }
+}

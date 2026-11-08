@@ -1,0 +1,107 @@
+{
+  "calls": [
+    "researcher_finding_record",
+    "researcher_investigation_summary",
+    "researcher_result_propose"
+  ],
+  "output": {
+    "Result": {
+      "cell_id": "1",
+      "content_items": [
+        {
+          "type": "input_text",
+          "text": "{\"status\":\"DELIVERY_READY\",\"report_id\":1,\"proposal\":{\"candidate_id\":1,\"run_id\":\"1633936a-d796-4a32-bf57-f897a7ab6ae7\",\"candidate_sha256\":\"c8396c18ec0424c4ba2dceace965f95552f797c9bb7d3561814e480779173c21\",\"kind\":\"research_reports\",\"status\":\"proposed\",\"task_accepted\":false,\"report_ids\":[1],\"operation_key\":\"composed-proposal\"}}"
+        }
+      ],
+      "error_text": null,
+      "result_buffered_for_ns": 0,
+      "code_mode_host_duration_ns": 63798235
+    }
+  },
+  "invocations": [
+    {
+      "tool": "researcher_finding_record",
+      "arguments": {
+        "operation_key": "composed-finding",
+        "topic": "Model input pair",
+        "content": "The captured function returns model and reasoning_effort together.",
+        "evidence": [
+          {
+            "source_id": 3,
+            "quote": "return {'model':model,'reasoning_effort':reasoning_effort}"
+          }
+        ]
+      },
+      "response": {
+        "success": true,
+        "contentItems": [
+          {
+            "type": "inputText",
+            "text": "{\"finding_id\": 2, \"status\": \"provisional\", \"confidence\": null, \"operation_key\": \"composed-finding\"}"
+          }
+        ]
+      }
+    },
+    {
+      "tool": "researcher_investigation_summary",
+      "arguments": {
+        "operation_key": "composed-summary",
+        "summary": {
+          "title": "Recorded model selection",
+          "question": "What input pair does the captured code validate?",
+          "scope_includes": [
+            "Inspect the captured model_profile function."
+          ],
+          "scope_excludes": [
+            "Change settings or check account eligibility."
+          ],
+          "areas": [
+            {
+              "title": "Input pair",
+              "observations": "The code returns model and reasoning_effort together.",
+              "finding_ids": [
+                2
+              ]
+            }
+          ],
+          "conclusion": "The captured function validates a model and reasoning-effort pair.",
+          "limitations": [
+            "Static source observation, not current account availability."
+          ],
+          "next_steps": []
+        }
+      },
+      "response": {
+        "success": true,
+        "contentItems": [
+          {
+            "type": "inputText",
+            "text": "{\"artifact_id\": 1, \"status\": \"draft\", \"title\": \"Recorded model selection\", \"summary_sha256\": \"96d2a1aaf7ad7f864841f181ee935fe5bd3e2942d253c694f3b118fe1a705dcd\", \"operation_key\": \"composed-summary\"}"
+          }
+        ]
+      }
+    },
+    {
+      "tool": "researcher_result_propose",
+      "arguments": {
+        "operation_key": "composed-proposal",
+        "report_ids": [
+          1
+        ],
+        "summary": "The captured function validates a model and reasoning-effort pair.",
+        "limitations": [
+          "Static source observation, not current account availability."
+        ]
+      },
+      "response": {
+        "success": true,
+        "contentItems": [
+          {
+            "type": "inputText",
+            "text": "{\"candidate_id\": 1, \"run_id\": \"1633936a-d796-4a32-bf57-f897a7ab6ae7\", \"candidate_sha256\": \"c8396c18ec0424c4ba2dceace965f95552f797c9bb7d3561814e480779173c21\", \"kind\": \"research_reports\", \"status\": \"proposed\", \"task_accepted\": false, \"report_ids\": [1], \"operation_key\": \"composed-proposal\"}"
+          }
+        ]
+      }
+    }
+  ]
+}

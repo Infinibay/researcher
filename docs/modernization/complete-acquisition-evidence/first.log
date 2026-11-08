@@ -1,0 +1,41 @@
+F.                                                                       [100%]
+=================================== FAILURES ===================================
+_ test_real_ken_acquisition_and_delivery_use_canonical_sources_without_base64 __
+  + Exception Group Traceback (most recent call last):
+  |   File "/home/andres/.codex/worktrees/b09e/researcher/backend/tests/runtime/test_investigation_acquisition_cell.py", line 135, in test_real_ken_acquisition_and_delivery_use_canonical_sources_without_base64
+  |     stdio_client(server, errlog=errors) as streams,
+  |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |   File "/home/andres/.local/share/uv/python/cpython-3.12-linux-x86_64-gnu/lib/python3.12/contextlib.py", line 231, in __aexit__
+  |     await self.gen.athrow(value)
+  |   File "/home/andres/.codex/worktrees/b09e/researcher/.superpowers/sdd/2026-10-31-actualizacion-proyecto/native-runtime-env/lib/python3.12/site-packages/mcp/client/stdio/__init__.py", line 183, in stdio_client
+  |     anyio.create_task_group() as tg,
+  |     ^^^^^^^^^^^^^^^^^^^^^^^^^
+  |   File "/home/andres/.codex/worktrees/b09e/researcher/.superpowers/sdd/2026-10-31-actualizacion-proyecto/native-runtime-env/lib/python3.12/site-packages/anyio/_backends/_asyncio.py", line 847, in __aexit__
+  |     raise BaseExceptionGroup(
+  | ExceptionGroup: unhandled errors in a TaskGroup (1 sub-exception)
+  +-+---------------- 1 ----------------
+    | Exception Group Traceback (most recent call last):
+    |   File "/home/andres/.codex/worktrees/b09e/researcher/backend/tests/runtime/test_investigation_acquisition_cell.py", line 136, in test_real_ken_acquisition_and_delivery_use_canonical_sources_without_base64
+    |     ClientSession(*streams) as ken_peer,
+    |     ^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "/home/andres/.codex/worktrees/b09e/researcher/.superpowers/sdd/2026-10-31-actualizacion-proyecto/native-runtime-env/lib/python3.12/site-packages/mcp/shared/session.py", line 238, in __aexit__
+    |     return await self._task_group.__aexit__(exc_type, exc_val, exc_tb)
+    |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "/home/andres/.codex/worktrees/b09e/researcher/.superpowers/sdd/2026-10-31-actualizacion-proyecto/native-runtime-env/lib/python3.12/site-packages/anyio/_backends/_asyncio.py", line 847, in __aexit__
+    |     raise BaseExceptionGroup(
+    | ExceptionGroup: unhandled errors in a TaskGroup (1 sub-exception)
+    +-+---------------- 1 ----------------
+      | Traceback (most recent call last):
+      |   File "/home/andres/.codex/worktrees/b09e/researcher/backend/tests/runtime/test_investigation_acquisition_cell.py", line 148, in test_real_ken_acquisition_and_delivery_use_canonical_sources_without_base64
+      |     acquired = await execute_cell(
+      |                ^^^^^^^^^^^^^^^^^^^
+      |   File "/home/andres/.codex/worktrees/b09e/researcher/backend/tests/runtime/test_investigation_delivery_cell.py", line 126, in execute_cell
+      |     assert marker in json.dumps(result), result
+      | AssertionError: {'Result': {'cell_id': '1', 'content_items': [{'type': 'input_text', 'text': '{"status":"ACQUISITION_STOPPED","reason":"tool_refused","receipts":{}}'}], 'error_text': None, 'result_buffered_for_ns': 0, ...}}
+      | assert 'ACQUISITION_READY' in '{"Result": {"cell_id": "1", "content_items": [{"type": "input_text", "text": "{\\"status\\":\\"ACQUISITION_STOPPED\\"...\\",\\"receipts\\":{}}"}], "error_text": null, "result_buffered_for_ns": 0, "code_mode_host_duration_ns": 4418724300}}'
+      |  +  where '{"Result": {"cell_id": "1", "content_items": [{"type": "input_text", "text": "{\\"status\\":\\"ACQUISITION_STOPPED\\"...\\",\\"receipts\\":{}}"}], "error_text": null, "result_buffered_for_ns": 0, "code_mode_host_duration_ns": 4418724300}}' = <function dumps at 0x7f980ca21300>({'Result': {'cell_id': '1', 'content_items': [{'type': 'input_text', 'text': '{"status":"ACQUISITION_STOPPED","reason":"tool_refused","receipts":{}}'}], 'error_text': None, 'result_buffered_for_ns': 0, ...}})
+      |  +    where <function dumps at 0x7f980ca21300> = json.dumps
+      +------------------------------------
+=========================== short test summary info ============================
+FAILED backend/tests/runtime/test_investigation_acquisition_cell.py::test_real_ken_acquisition_and_delivery_use_canonical_sources_without_base64
+1 failed, 1 passed in 20.34s

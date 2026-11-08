@@ -1,0 +1,98 @@
+{
+  "complete": {
+    "status": "ACQUISITION_READY",
+    "reason": null,
+    "tool_calls": [
+      "ken_find",
+      "ken_read",
+      "researcher_reference_list",
+      "researcher_capture_reference",
+      "researcher_source_read",
+      "researcher_command_start",
+      "researcher_command_read",
+      "researcher_capture_command",
+      "researcher_source_read"
+    ],
+    "code_host_duration_seconds": 4.527688,
+    "emitted_json_utf8_bytes": 25447,
+    "emitted_base64_keys": false,
+    "full_raw_base64_copy_emitted": false,
+    "ken_complete_source_lines": 118,
+    "source_sizes": [
+      {
+        "source_id": 2,
+        "characters": 3318,
+        "utf8_bytes": 3362,
+        "sha256": "48e757ada33d80c231ab1bf29c05aacce9b76851e1f30966ef928d6648806941"
+      },
+      {
+        "source_id": 3,
+        "characters": 9320,
+        "utf8_bytes": 9342,
+        "sha256": "52e2e2b9c4d1770dad0efdaf467842879a05c7dd7d1a20dea8e9fb9477eda61e"
+      }
+    ],
+    "command_stdout_matches_registered_code_sha256": true,
+    "delivery_code_host_duration_seconds": 0.063798,
+    "delivery_tools": [
+      "researcher_finding_record",
+      "researcher_investigation_summary",
+      "researcher_result_propose"
+    ],
+    "total_calls_before_native_final": 12
+  },
+  "truncated": {
+    "status": "ACQUISITION_STOPPED",
+    "reason": "command_incomplete",
+    "tool_calls": [
+      "ken_find",
+      "ken_read",
+      "researcher_reference_list",
+      "researcher_capture_reference",
+      "researcher_source_read",
+      "researcher_command_start",
+      "researcher_command_read"
+    ],
+    "code_host_duration_seconds": 4.533074,
+    "emitted_json_utf8_bytes": 146,
+    "emitted_base64_keys": false,
+    "full_raw_base64_copy_emitted": false
+  },
+  "withdrawn": {
+    "status": "ACQUISITION_STOPPED",
+    "reason": "tool_refused",
+    "tool_calls": [
+      "ken_find",
+      "ken_read",
+      "researcher_reference_list",
+      "researcher_capture_reference",
+      "researcher_source_read",
+      "researcher_command_start",
+      "researcher_command_read",
+      "researcher_capture_command"
+    ],
+    "code_host_duration_seconds": 4.59245,
+    "emitted_json_utf8_bytes": 140,
+    "emitted_base64_keys": false,
+    "full_raw_base64_copy_emitted": false
+  },
+  "changed": {
+    "status": "ACQUISITION_STOPPED",
+    "reason": "captured_code_changed",
+    "tool_calls": [
+      "ken_find",
+      "ken_read",
+      "researcher_reference_list",
+      "researcher_capture_reference",
+      "researcher_source_read",
+      "researcher_command_start",
+      "researcher_command_read",
+      "researcher_capture_command",
+      "researcher_source_read"
+    ],
+    "code_host_duration_seconds": 4.677541,
+    "emitted_json_utf8_bytes": 168,
+    "emitted_base64_keys": false,
+    "full_raw_base64_copy_emitted": false
+  }
+}
