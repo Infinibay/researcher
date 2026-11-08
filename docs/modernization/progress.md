@@ -9698,3 +9698,23 @@ Inventario 85/322 vigente: dos consumidores de views revisados, 83 decisiones
 sin renovar. 19:08:56–19:11:47 UTC: 2 min 51 s hasta verificación, informe/checkpoint
 posteriores aparte. Cero modelos nuevos; sin otro wheel/global/push/merge/despliegue.
 Continúan interfaces/JSDoc, U08, Ken/ONNX, accesibilidad y cierre integrado.
+
+## 2026-11-08 — Composición de entrega comprobada sin otro modelo
+
+[Revisión acotada](u08-delivery-proportionality-review.md) y
+[prueba determinista](composed-investigation-delivery-review.md). El rollout
+original confirma cinco rondas de 26–32 mil tokens, sin entrega completa. Una
+prueba con code host real, wrappers/esquemas/HTTP/SQLite reales demuestra que
+un exec puede encadenar hallazgo, resumen y propuesta. El draft sigue legible
+si falta finalización nativa; aceptación permanece bloqueada. No es una explicación
+generada ni prueba de comprensión o presupuesto. La política aún no cambia.
+
+Prueba directa 1 pasa/1,68 s. Ampliación: 22 pasan, 4 variantes semánticas omitidas
+por fixture local no preparado, un aviso/15,28 s; Ruff y docstrings nuevos pasan.
+El primer driver asumía una respuesta de cierre inmediata; correlación corregida
+según preflight existente, log inicial conservado. Cero suscripción/modelos nuevos.
+19:13:05–19:19:38 UTC: 6 min 33 s hasta verificación leída; informe/checkpoint después.
+Ruling: usar composición existente antes de añadir otra API o elevar límites;
+si el modelo no sigue la orientación, la viabilidad determinista no basta y
+seguirá pendiente la entrega real. Próximo: política versionada y observación
+registrada sólo por cambio semántico. U08 sigue abierto y DD157 diferido.

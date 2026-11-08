@@ -1,0 +1,62 @@
+{
+  "base_commit": "f74b279",
+  "scope": "One actual pinned offline code-host exec composes three existing business tools through canonical schemas, scoped HTTP and SQLite; manually authored JavaScript and synthetic storage peers",
+  "source_sha256": {
+    "backend/tests/runtime/test_investigation_delivery_cell.py": "cfff4eead3d2ba8e4aeec488a29cb7472e52293e155b951238720e0e0ca68b02",
+    "backend/runtime/investigation_instructions.py": "ceecf2ff65d95086bd4931b758090e6be8d692be89739e5d39610e40429c181a",
+    "backend/research/investigation.py": "0d7203a503ad3c28538d472be1f340f06144b97859c03f48207621ea8471ca7f",
+    "backend/runtime/host_business.py": "6eaae607cff9bfe24f183a907801c50be6f8d9da65cd06297b9335a47cf1fe57",
+    "backend/runtime/business_definitions.py": "e5243ae48d8c2b33d96efae3c88c7f03126f337c7947704afe7d3b1e9174c8a2",
+    "backend/runtime/business_mediation.py": "dd3607a369472989d96ba508971322abb8a58ff3f1ad384b615b15e19574aac0"
+  },
+  "deterministic_observations": {
+    "code_mode_cells": 1,
+    "ordered_tools": [
+      "researcher_finding_record",
+      "researcher_investigation_summary",
+      "researcher_result_propose"
+    ],
+    "returned_ids_used": true,
+    "typed_report_count": 1,
+    "new_finding_count": 1,
+    "owner_artifact_http_status": 200,
+    "retained_explanation_readable_after_failed_native_completion": true,
+    "eligible_for_acceptance_after_failed_completion": false,
+    "task_done": false,
+    "acceptance_count": 0,
+    "code_host_shutdown_confirmed": true
+  },
+  "tests": {
+    "initial": "1 failed in1.68s: test driver assumed next shutdown frame was the matching operation response; corrected to consume intervening events using the existing readiness protocol pattern. No product change.",
+    "direct": "1 passed in1.68s, no skips",
+    "final": {
+      "passed": 22,
+      "failed": 0,
+      "skipped": 4,
+      "seconds": 15.28,
+      "warnings": 1,
+      "skip_scope": "Four optional semantic-retrieval variants in test_host_business.py: pinned local semantic model fixture not prepared. No skip of the new code-host composition test.",
+      "files": [
+        "backend/tests/runtime/test_investigation_delivery_cell.py",
+        "backend/tests/runtime/test_investigation.py",
+        "backend/tests/runtime/test_host_business.py"
+      ]
+    }
+  },
+  "quality_checks": {
+    "ruff": "passed",
+    "new_definitions_documented": true
+  },
+  "generative_model_turns": 0,
+  "subscription_requests": 0,
+  "product_policy_changed": false,
+  "package_rebuilt": false,
+  "human_comprehension": null,
+  "limits": [
+    "Authored fixture code does not prove a generative agent will compose delivery",
+    "No measured reduction in live model tokens/latency or budget-fit proof",
+    "Host code-mode process is real; synthetic peer storage fixture does not establish native sandbox/closure certification",
+    "Existing failed explanation remains failed; DD157 remains deferred",
+    "No global suite, new package or human U08 acceptance"
+  ]
+}

@@ -1,0 +1,173 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+___ test_one_cell_delivers_typed_result_visible_without_another_model_round ____
+
+coordination = namespace(store=<backend.runtime.sqlite_runs.SQLiteRunStore object at 0x7f3e9ae6c740>, spec=RunSpec(project_id=101, ta...object at 0x7f3e9b1a1af0>, database='/tmp/pytest-of-andres/pytest-8/test_one_cell_delivers_typed_r0/test_infinibay.db')
+code_host_asset = CodexAsset(path='/home/andres/.codex/packages/standalone/releases/0.166.0-x86_64-unknown-linux-musl/bin/codex-code-mod...97072617252600, changed=1793410115573632613, sha256='657f4e902726e05867c937b583049d5997e057f8cd0ab40450633c9c9ef8d630')
+
+    async def test_one_cell_delivers_typed_result_visible_without_another_model_round(
+        coordination, code_host_asset,
+    ):
+        """Returned IDs compose through real schemas/HTTP into an owner-readable draft.
+    
+        Losing the later native completion leaves acceptance blocked, while the
+        selected report remains inspectable without a synthesis model or replay.
+        """
+        from backend.api.local_access import LocalAccess
+        from backend.api.main import create_app
+        from backend.runtime.business_mediation import BusinessTools
+        from backend.runtime.host_business import host_business
+    
+        coordination.now[0] = time.time()
+        c, run, lease, peers, scope, previous_finding = investigation_state(coordination)
+        source_id = c.conn.execute(
+            "SELECT source_id FROM finding_sources WHERE finding_id=?", (previous_finding,),
+        ).fetchone()[0]
+        # The fixture's token is retained by the store helper only as its digest;
+        # mint another grant and bind it to the same original author for the API.
+        from backend.research.models import RESEARCH_PERMISSIONS
+    
+        token = c.research.issue_grant(
+            project_id=101, task_id=1001, agent_id=lease.actor_id,
+            permissions=set(RESEARCH_PERMISSIONS),
+        )
+        scope = c.research.authorize(token)
+        c.store.bind_grant(lease, scope.grant_id)
+        app = create_app(access=LocalAccess(
+            pairing_key="workspace-owner-key-at-least-32-characters",
+        ))
+        app.state.live_grants.activate(scope.grant_id)
+        packet = summary_packet(previous_finding)
+        source = """
+    function unwrap(reply) {
+      if (!reply.success) throw new Error('Delivery stopped: reconcile original receipts');
+      return JSON.parse(reply.contentItems[0].text);
+    }
+    const finding = unwrap(await tools.researcher_finding_record(FINDING));
+    const summary = SUMMARY;
+    summary.areas[0].finding_ids = [finding.finding_id];
+    const report = unwrap(await tools.researcher_investigation_summary({
+      operation_key: 'one-cell-summary', summary
+    }));
+    const proposal = unwrap(await tools.researcher_result_propose({
+      operation_key: 'one-cell-proposal', report_ids: [report.artifact_id],
+      summary: 'Documentary count and an unresolved measurement method.',
+      limitations: ['Documentary inspection only.']
+    }));
+    text({status: 'DELIVERY_READY', report_id: report.artifact_id, proposal});
+    """.replace("FINDING", json.dumps({
+            "operation_key": "one-cell-finding", "topic": "Recorded count",
+            "content": "The supplied source records 137 units.",
+            "evidence": [{"source_id": source_id, "quote": "137 units"}],
+        })).replace("SUMMARY", json.dumps(packet))
+        async with host_business(
+            api_url="http://127.0.0.1", token=token,
+            withdraw=lambda: app.state.live_grants.withdraw(scope.grant_id),
+            names={"researcher_finding_record", "researcher_investigation_summary",
+                   "researcher_result_propose"},
+            transport=httpx.ASGITransport(app=app),
+        ) as peer:
+            facade = await BusinessTools.connect(peer)
+>           assert await execute_cell(code_host_asset, facade, source) == [
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                "researcher_finding_record", "researcher_investigation_summary",
+                "researcher_result_propose",
+            ]
+
+backend/tests/runtime/test_investigation_delivery_cell.py:191: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+binary = CodexAsset(path='/home/andres/.codex/packages/standalone/releases/0.166.0-x86_64-unknown-linux-musl/bin/codex-code-mod...97072617252600, changed=1793410115573632613, sha256='657f4e902726e05867c937b583049d5997e057f8cd0ab40450633c9c9ef8d630')
+facade = <backend.runtime.business_mediation.BusinessTools object at 0x7f3e99dc2c00>
+source = "\nfunction unwrap(reply) {\n  if (!reply.success) throw new Error('Delivery stopped: reconcile original receipts');\n...: ['Documentary inspection only.']\n}));\ntext({status: 'DELIVERY_READY', report_id: report.artifact_id, proposal});\n"
+
+    async def execute_cell(binary, facade, source):
+        """Run one fixed offline cell and delegate actual tools without a model round."""
+        process = await asyncio.create_subprocess_exec(
+            binary.path,
+            stdin=asyncio.subprocess.PIPE,
+            stdout=asyncio.subprocess.PIPE,
+            stderr=asyncio.subprocess.DEVNULL,
+        )
+        calls = []
+        try:
+            async with asyncio.timeout(15):
+                await write_frame(process, {
+                    "type": "connection/hello",
+                    "supportedVersions": [1],
+                    "requiredCapabilities": ["session-cell-execution-resource-limits"],
+                    "optionalCapabilities": [],
+                })
+                assert (await read_frame(process))["type"] == "connection/ready"
+                await write_frame(process, {
+                    "type": "operation/request", "id": 1,
+                    "request": {
+                        "method": "session/open", "sessionId": "delivery-fixture",
+                        "cellExecutionLimits": {
+                            "maxYieldTimeMs": 5000, "maxHeapSizeBytes": 64 * 1024**2,
+                        },
+                    },
+                })
+                opened = await read_frame(process)
+                assert opened["result"]["value"]["type"] == "session/ready", opened
+                enabled = [{
+                    "name": tool["name"],
+                    "tool_name": {"name": tool["name"], "namespace": None},
+                    "description": tool["description"], "kind": "function",
+                    "input_schema": tool["inputSchema"], "output_schema": None,
+                } for tool in facade.catalog]
+                await write_frame(process, {
+                    "type": "operation/request", "id": 2,
+                    "request": {
+                        "method": "session/execute", "sessionId": "delivery-fixture",
+                        "request": {
+                            "tool_call_id": "delivery-fixture", "enabled_tools": enabled,
+                            "source": source, "yield_time_ms": 5000,
+                            "max_output_tokens": 256,
+                        },
+                    },
+                })
+                started = False
+                result = None
+                while not started or result is None:
+                    message = await read_frame(process)
+                    if message["type"] == "delegate/request":
+                        invocation = message["request"]["invocation"]
+                        name = invocation["tool_name"]["name"]
+                        calls.append(name)
+                        reply = await facade.call({
+                            "tool": name, "arguments": invocation["input"],
+                        })
+                        await write_frame(process, {
+                            "type": "delegate/response", "id": message["id"],
+                            "result": {
+                                "status": "ok",
+                                "value": {"type": "tool/result", "result": reply},
+                            },
+                        })
+                        continue
+                    assert message.get("id") == 2, message
+                    assert message["result"]["status"] == "ok", message
+                    value = message["result"]["value"]
+                    if message["type"] == "operation/response":
+                        started = value["type"] == "execution/started"
+                    elif message["type"] == "execute/initialResponse":
+                        result = value
+                assert "Result" in result, result
+                assert not result["Result"].get("error_text"), result
+                assert "DELIVERY_READY" in json.dumps(result), result
+                await write_frame(process, {
+                    "type": "operation/request", "id": 3,
+                    "request": {
+                        "method": "session/shutdown", "sessionId": "delivery-fixture",
+                    },
+                })
+                closed = await read_frame(process)
+>               assert closed["result"]["value"]["type"] == "session/closed", closed
+                       ^^^^^^^^^^^^^^^^
+E               KeyError: 'result'
+
+backend/tests/runtime/test_investigation_delivery_cell.py:118: KeyError
+=========================== short test summary info ============================
+FAILED backend/tests/runtime/test_investigation_delivery_cell.py::test_one_cell_delivers_typed_result_visible_without_another_model_round
+1 failed in 1.68s

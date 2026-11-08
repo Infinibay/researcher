@@ -28,7 +28,28 @@ que se pueda comparar el avance; no presentar microajustes como tareas principal
 - Última suite global: `9fb873c`,2210 casos,2178 pasan,31 fallan y1 error de fixture; sin omisiones. La carrera de backup encontrada se corrigió después con40 pruebas instaladas. No se declara una nueva corrida global verde; la referencia `0c8b8d9` queda como evidencia histórica.
 - U01–U07, E01–E12, C01–C10 y D01–D13 quedan comprobados con el alcance de sus matrices; sigue 1 de 43 escenarios amplios sin aceptación completa en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Estado actual: acceso y vistas del propietario documentados
+## Estado actual: composición de entrega comprobada sin modelo
+
+[Informe](composed-investigation-delivery-review.md) y
+[revisión con contexto limpio](u08-delivery-proportionality-review.md).
+Bloque iniciado **19:13:05 UTC**; verificación final leída **19:19:38 UTC: 6 min 33 s**.
+Informe/checkpoint posteriores aparte. Prueba directa 1,68 s; ampliación 15,28 s.
+
+- Terminado: un `exec` del code host real encadena hallazgo → resumen → propuesta
+  con IDs devueltos y API/SQLite reales. Draft retenido legible tras finalización
+  nativa fallida, aceptación bloqueada. Prueba directa pasa; ampliación 22 pasan,
+  4 variantes semánticas omitidas por fixture no preparado, un aviso conservado.
+- Siguiente: orientar la política nativa hacia adquisición/entrega en pasos gruesos,
+  comprobar su identidad/input congelado y sólo después justificar un ensayo real.
+  No crear otra API ni aumentar límites antes de comprobar lo existente.
+- Pendientes: U08/entrega/adaptación/comprensión humana; Ken/ONNX; documentación
+  relevante restante (416 añadidos, 205 faltantes por presencia), accesibilidad/
+  detalles; paquete, suite global y revisión independiente finales.
+- Estado amplio: **12/12 páginas por alcance, 42/43 escenarios**. Ninguna nueva
+  llamada de suscripción ni política cambiada aquí. No hay prueba de cabida en
+  presupuesto, comprensión humana, paquete nuevo o global verde.
+
+## Etapa anterior: acceso y vistas del propietario documentados
 
 [Informe](owner-interface-docstrings-review.md). **19:08:56–19:11:47 UTC: 2 min 51 s**
 hasta verificación; informe/checkpoint después. Pruebas: 29,83 s.
