@@ -28,7 +28,31 @@ que se pueda comparar el avance; no presentar microajustes como tareas principal
 - Última suite global: `9fb873c`,2210 casos,2178 pasan,31 fallan y1 error de fixture; sin omisiones. La carrera de backup encontrada se corrigió después con40 pruebas instaladas. No se declara una nueva corrida global verde; la referencia `0c8b8d9` queda como evidencia histórica.
 - U01–U07, E01–E12, C01–C10 y D01–D13 quedan comprobados con el alcance de sus matrices; sigue 1 de 43 escenarios amplios sin aceptación completa en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Estado actual: resultados parciales y recuperación de lectura comprobados
+## Estado actual: espera viva, recuperación de lectura y resultado parcial comprobados
+
+[Espera viva y límites](live-wait-communication-review.md). Bloque
+**16:41:54–16:57:03UTC:15min9s** hasta inspeccionar; documentación/checkpoint
+posteriores aparte. Último ensayo70,613s; no representa todo el bloque.
+
+- Terminado: **12/12páginas por alcance,42/43escenarios**,85prompts vigentes y
+ tres comparaciones nuevas de perfiles. El contrato técnico de espera/error de
+ lectura/parcial tiene ahora evidencia: un comando activo observado10,366s en
+ navegador y11,336s en la puerta, consulta por teclado, mismo recibo terminal0,
+ un único comando/instrucción y candidato guardado. Cuatro capturas finales
+ inspeccionadas1440/390. Transporte controlado0turnos generativos, todos los
+ peers/grants cerrados. Cinco ensayos previos fallidos conservados, no borrados.
+- Siguiente: **adaptación y comprensión humana en un caso reconocible**, con
+ objetivo, datos/relaciones y entrada/salida claros. La respuesta del usuario
+ corrige el encuadre de la evaluación, no acredita aceptación de U08.
+- Pendiente además: distribución Ken/ONNX según respuesta ya solicitada;
+ docstrings/detalles; revisión independiente final, paquete y suite global.
+- Detalles al final: DD145–156 y anteriores. DD155 permanece en las cuatro
+ capturas; no accesibilidad limpia. La configuración global de timeout no
+ reasigna expect, DD156; éxito observado con sus límites reales. Producto sin
+ cambios en este bloque: no repetir suite anterior ni modelos por el evaluador.
+ No hay comprensión humana acreditada, nueva global verde, push/merge/despliegue.
+
+## Etapa anterior: resultados parciales y recuperación de lectura comprobados
 
 [Recorridos y límites](execution-communication-review.md). Bloque iniciado
 **15:44:21UTC**; las dos lecturas finales duran8,283s y9,380s. Corte de comprobación

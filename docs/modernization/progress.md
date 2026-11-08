@@ -9528,3 +9528,30 @@ herramienta y humano/adaptación; no es comprensión acreditada, recuperación f
 ni nueva suite global/wheel. Ken pendiente, docstrings/detalles y controles finales.
 Bloque15:44:21–16:38:43UTC:54min22s hasta corte de inspección; documentación y
 checkpoint posteriores aparte. Los lectores finales sólo suman17,663s.
+
+## 2026-11-08 — Espera de herramienta viva observada
+
+[Informe y fallos conservados](live-wait-communication-review.md). Un formulario
+real admite una instrucción; el coordinador instalado ejecuta un comando privado,
+con Ken y transporte nativo controlado0generación. Navegador observa10,366s de
+espera, padre11,336s de puerta; consulta por teclado sin repetir. Mismo job termina0,
+106bytes, cierre local registrado y propuesta needs_review/candidato ready. Una
+reserva controlada settled/completed, consumoNone; originales evidence.py intactos,
+peers/grants cerrados, servicio-15. No aceptación/publicación de trabajo.
+
+Cuatro capturas finales1440/390 inspeccionadas,0overflow/errores de página.
+Axe regional conserva nombres de cuatro botones deshabilitados, DD155: no afirmar
+accesibilidad limpia. Cinco ensayos anteriores fallidos conservados, cinco reservas
+controladas entre los seis ensayos,0turnos generativos en total. Primero falla
+revalidación de red0reservas; después axe, timeout8s del transporte reutilizado y
+dos condiciones con límite5s del evaluador. Ningún intento incierto se reenvía.
+Copias públicas verificadas conservan la validación de identidad; sólo el fixture
+permite90s frente a comando80s/puerta60s. Configuración global expect sin efecto,
+DD156; no atribuirle el éxito del último recorrido. Hashes finales verificados.
+
+Bloque16:41:54–16:57:03UTC:15min9s hasta inspección; último ensayo70,613s.
+Documentación/checkpoint posteriores aparte. No producto/prompts nuevos, wheel o
+global; docstrings/JSDoc en evaluadores nuevos.42/43escenarios,12/12páginas por
+alcance. Quedan humano/adaptación, Ken pendiente, docstrings/detalles y controles
+finales. La respuesta del usuario exige propósito, datos/relaciones y entrada/salida;
+no insistir en preguntas abstractas para acreditar comprensión.

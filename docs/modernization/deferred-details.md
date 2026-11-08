@@ -1379,3 +1379,23 @@ según mediciones antes de modificar el reparto. En la captura de red, el mensaj
 español termina en `Failed to fetch`; pulir su traducción conservando el diagnóstico.
 La densidad y distinción tarea/proceso se mantienen en DD148. No repetir modelos
 ni reescribir resultados históricos para estos detalles.
+
+## DD155 — nombres accesibles de paginación de salida
+
+La espera viva de herramienta descubrió una infracción axe `label-content-name-mismatch`
+en cuatro botones deshabilitados de Anterior/Siguiente: el nombre accesible usa
+«Bytes anteriores/siguientes» y no contiene el texto visible exacto. Se conserva
+la infracción y se continúa el recorrido funcional con esa excepción exacta; no
+se declara accesibilidad limpia. Corregir nombres coherentes en la fase de detalles,
+conservando el contexto de cada salida y verificando también controles habilitados.
+El ensayo fallido original queda archivado, sin convertirse retroactivamente en éxito.
+
+## DD156 — configuración del timeout del evaluador de espera
+
+`expect.configure({timeout:45000})` devuelve otra instancia y el evaluador no la
+reasigna. La espera específica de propuesta sí declara45s; las otras aserciones
+conservan el límite por defecto. El último recorrido completo pasó con esos
+límites reales; no atribuirlo a una ampliación global. Reasignar la instancia o
+quitar la llamada sin efecto en la fase de detalles y validar esa configuración,
+conservando los hashes del ensayo histórico. Un cambio del evaluador no exige
+repetir modelos ni reescribir sus resultados anteriores.

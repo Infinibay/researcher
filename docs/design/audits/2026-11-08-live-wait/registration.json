@@ -1,0 +1,30 @@
+{
+  "scope": "Managed active command and UI receipt, controlled non-generative native transport",
+  "generative_model_turns": 0,
+  "maximum_native_reservations": 1,
+  "controlled_asset_sha256": "703abd01d4918d8de4afd1d19b35453f0627ced36c46e428894a2e6ec0363169",
+  "gate_timeout_seconds": 60,
+  "command_timeout_seconds": 80,
+  "minimum_browser_wait_seconds": 10,
+  "fixture_command_transport_timeout_seconds": 90,
+  "source_sha256": "4e72f9c566e8135321f7aaa21e0b4f5f6d157e89198c65ebb681048525b46628",
+  "candidate_sha256": "b0590b304a79e99a804238ae50f1648fead212ce6614da202ec296db34dcf965",
+  "operator_resources_sha256": "0416aa50f185a0fd28140cca86ef3c69869e601ca776184d822a79368eb6b48f",
+  "public_network_inputs": {
+    "resolver": {
+      "source": "/etc/resolv.conf",
+      "sha256": "0a36d8d04b4e9fe6b1ef216be90fd7861a4382b481c1024ca496fc2c4a26d72c"
+    },
+    "ca_bundle": {
+      "source": "/etc/ca-certificates/extracted/tls-ca-bundle.pem",
+      "sha256": "9a9c1b798f6ae057ecb84545704e38c89e10f3db5519b24cd4647a1bb2dbf299"
+    }
+  },
+  "harness_sha256": {
+    "evals/communication/live_wait.py": "122668adac052575d191438d13736af3a1fba11109f22bc4992e36b5fb777205",
+    "evals/communication/wait_worker.py": "95d2208f2ef75d0cc0639e6de7b6edd04e7432acb0c527146740b0ef69fc7e56",
+    "frontend/tests/communication-wait.mjs": "ab0c590e840e516e0487f82344e9cfcb84328a68961831eceff7b318d4a8a09b"
+  },
+  "human_comprehension": null,
+  "request": "Synthetic controlled author, no generative model. Implement mean_observations(records) using list_observations. Every record has a numeric value. Every observation counts once, including zero. Values0and10 must return5; an empty registry returnsNone and all-zero observations return0. Preserve supplied tests. This is only a private candidate, no acceptance or publication."
+}

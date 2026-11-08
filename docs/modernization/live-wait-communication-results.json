@@ -1,0 +1,289 @@
+{
+  "status": "verified_scoped_with_deferred_accessibility",
+  "scope": "Managed active command and UI receipt, controlled non-generative native transport",
+  "run_id": "c10b5eb3-ffcf-4df1-9eeb-44fcd602ccdc",
+  "job_id": "215ab1fe-1905-45b5-a5dd-ec9baecbf115",
+  "gate_seconds": 11.336,
+  "browser_active_wait_ms": 10366,
+  "trial_seconds": 70.613,
+  "actual_ui_instructions": 1,
+  "actual_work_commands": 1,
+  "generative_model_turns": 0,
+  "controlled_native_reservations": 1,
+  "observed_tokens": null,
+  "source_unchanged": true,
+  "human_comprehension": null,
+  "accessibility_clean": false,
+  "deferred": [
+    "DD155",
+    "DD156"
+  ],
+  "screens": [
+    {
+      "file": "active-command-1440.png",
+      "width": 1440,
+      "overflow": false,
+      "violations": [
+        {
+          "id": "label-content-name-mismatch",
+          "nodes": 4
+        }
+      ],
+      "sha256": "25de93b82a1636c1d5c74034966b5c10e4cbda49a1cb3e00aeb264f9e54854f3"
+    },
+    {
+      "file": "active-command-390.png",
+      "width": 390,
+      "overflow": false,
+      "violations": [
+        {
+          "id": "label-content-name-mismatch",
+          "nodes": 4
+        }
+      ],
+      "sha256": "69277a39c493308b38c93072d4812f755235f7d745e1464e4cdbdf5579bdca9d"
+    },
+    {
+      "file": "original-command-terminal-390.png",
+      "width": 390,
+      "overflow": false,
+      "violations": [
+        {
+          "id": "label-content-name-mismatch",
+          "nodes": 4
+        }
+      ],
+      "sha256": "95c1611790f01d2965ae6757f3f4663cc3d2a5c978819642d466d2f64d4caea7"
+    },
+    {
+      "file": "original-command-terminal-1440.png",
+      "width": 1440,
+      "overflow": false,
+      "violations": [
+        {
+          "id": "label-content-name-mismatch",
+          "nodes": 4
+        }
+      ],
+      "sha256": "d187be339f7ac68b31f16847b910ca449f3372bd2dbb20063c92a4c5ab0d0ec6"
+    }
+  ],
+  "archive": "docs/design/audits/2026-11-08-live-wait",
+  "trial_history": [
+    {
+      "directory": ".researcher/evaluations/communication-live-wait-20261108",
+      "status": "failed",
+      "seconds": 63.351,
+      "service_exit": -15,
+      "owned_backend_terminal": true,
+      "after": {
+        "runs": [
+          [
+            "ae439139-c3e4-4952-8e66-16140c5dd25e",
+            "failed"
+          ]
+        ],
+        "workspaces": [
+          [
+            "ae439139-c3e4-4952-8e66-16140c5dd25e",
+            "/home/andres/.codex/worktrees/b09e/researcher/.researcher/evaluations/communication-live-wait-20261108/trial/installation/control/development/ae439139-c3e4-4952-8e66-16140c5dd25e/6bff3128-2b6c-4389-8071-0ed09011cd5f/repository"
+          ]
+        ],
+        "dispatches": [],
+        "open_peers": 0,
+        "open_grants": 0,
+        "candidates": []
+      },
+      "result_sha256": "156ff5291fd5b95b5db0dc7cd8a2c766088cfe8656e8e81195995ac4336a5aa8",
+      "registration_sha256": "1e7f323ddcb7af2314ef7354d87e19c6d666f338bf46c1e0d0133b2674015e4f",
+      "generative_model_turns": 0
+    },
+    {
+      "directory": ".researcher/evaluations/communication-live-wait-20261108-stable-network",
+      "status": "failed",
+      "seconds": 29.236,
+      "service_exit": -15,
+      "owned_backend_terminal": true,
+      "after": {
+        "runs": [
+          [
+            "def0d6d2-76af-45d7-bc48-64ad9be1ae95",
+            "cancelled"
+          ]
+        ],
+        "workspaces": [
+          [
+            "def0d6d2-76af-45d7-bc48-64ad9be1ae95",
+            "/home/andres/.codex/worktrees/b09e/researcher/.researcher/evaluations/communication-live-wait-20261108-stable-network/trial/installation/control/development/def0d6d2-76af-45d7-bc48-64ad9be1ae95/3e3fb19a-5365-4ced-9f34-efc9670db1f3/repository"
+          ]
+        ],
+        "dispatches": [
+          [
+            "unknown",
+            null,
+            null
+          ]
+        ],
+        "open_peers": 0,
+        "open_grants": 0,
+        "candidates": []
+      },
+      "result_sha256": "90a98d9859582e144dd6b979b3439efd46651d5248b59b81bc110b82c8f7dcba",
+      "registration_sha256": "fe35063773aba478e9424ef021a7cb8fc99cd6789c5a60ab998d94656e2436dd",
+      "generative_model_turns": 0
+    },
+    {
+      "directory": ".researcher/evaluations/communication-live-wait-20261108-deferred-a11y",
+      "status": "failed",
+      "seconds": 43.485,
+      "service_exit": -15,
+      "owned_backend_terminal": true,
+      "after": {
+        "runs": [
+          [
+            "cb49698d-2614-4ad6-ae8e-b9e626370133",
+            "failed"
+          ]
+        ],
+        "workspaces": [
+          [
+            "cb49698d-2614-4ad6-ae8e-b9e626370133",
+            "/home/andres/.codex/worktrees/b09e/researcher/.researcher/evaluations/communication-live-wait-20261108-deferred-a11y/trial/installation/control/development/cb49698d-2614-4ad6-ae8e-b9e626370133/6fc18b25-2ffb-43ee-930a-5a77de7d408f/repository"
+          ]
+        ],
+        "dispatches": [
+          [
+            "unknown",
+            null,
+            null
+          ]
+        ],
+        "open_peers": 0,
+        "open_grants": 0,
+        "candidates": []
+      },
+      "result_sha256": "fa593f022ae41fd45aaa12e669bb293cc058423dd4e126b42c1ad5437fa91792",
+      "registration_sha256": "9529c54ee2f367bb0784d95b739cb40fb6631742175762a614c00362caae44f6",
+      "generative_model_turns": 0
+    },
+    {
+      "directory": ".researcher/evaluations/communication-live-wait-20261108-transport-bound",
+      "status": "failed",
+      "seconds": 49.327,
+      "service_exit": -15,
+      "owned_backend_terminal": true,
+      "after": {
+        "runs": [
+          [
+            "0059e883-2c8f-4f99-a7aa-a38dd6cfcc7b",
+            "cancelled"
+          ]
+        ],
+        "workspaces": [
+          [
+            "0059e883-2c8f-4f99-a7aa-a38dd6cfcc7b",
+            "/home/andres/.codex/worktrees/b09e/researcher/.researcher/evaluations/communication-live-wait-20261108-transport-bound/trial/installation/control/development/0059e883-2c8f-4f99-a7aa-a38dd6cfcc7b/a6be300f-c5d1-40c6-82b8-fce2c725c71c/repository"
+          ]
+        ],
+        "dispatches": [
+          [
+            "settled",
+            null,
+            "completed"
+          ]
+        ],
+        "open_peers": 0,
+        "open_grants": 0,
+        "candidates": [
+          [
+            "reconciling"
+          ]
+        ]
+      },
+      "result_sha256": "ebc075cff8c4d6b3cf023e996b272ee39f2302b02c3a6fd6e110ad6603fd813d",
+      "registration_sha256": "42e21c2090e2d6d55248db4dd535963495b73c1fd4844d2db6aa2fe09480ab8a",
+      "generative_model_turns": 0
+    },
+    {
+      "directory": ".researcher/evaluations/communication-live-wait-20261108-final",
+      "status": "failed",
+      "seconds": 44.99,
+      "service_exit": -15,
+      "owned_backend_terminal": true,
+      "after": {
+        "runs": [
+          [
+            "c1e57938-442b-40cb-81eb-378e9199ca11",
+            "cancelled"
+          ]
+        ],
+        "workspaces": [
+          [
+            "c1e57938-442b-40cb-81eb-378e9199ca11",
+            "/home/andres/.codex/worktrees/b09e/researcher/.researcher/evaluations/communication-live-wait-20261108-final/trial/installation/control/development/c1e57938-442b-40cb-81eb-378e9199ca11/341f8e69-2af5-48ca-99f4-2cbd3c1fee79/repository"
+          ]
+        ],
+        "dispatches": [
+          [
+            "settled",
+            null,
+            "completed"
+          ]
+        ],
+        "open_peers": 0,
+        "open_grants": 0,
+        "candidates": [
+          [
+            "reconciling"
+          ]
+        ]
+      },
+      "result_sha256": "9977b134f24bbc24e25ab70d0c5ebeccc41493d50b1e0aa098053173181ae00d",
+      "registration_sha256": "34caa30d559f986cbe32cea74fb0c689540c3b0ad798811cbddaf72bbf866dd5",
+      "generative_model_turns": 0
+    },
+    {
+      "directory": ".researcher/evaluations/communication-live-wait-20261108-observed-closure",
+      "status": "passed",
+      "seconds": 70.613,
+      "service_exit": -15,
+      "owned_backend_terminal": true,
+      "after": {
+        "runs": [
+          [
+            "c10b5eb3-ffcf-4df1-9eeb-44fcd602ccdc",
+            "needs_review"
+          ]
+        ],
+        "workspaces": [
+          [
+            "c10b5eb3-ffcf-4df1-9eeb-44fcd602ccdc",
+            "/home/andres/.codex/worktrees/b09e/researcher/.researcher/evaluations/communication-live-wait-20261108-observed-closure/trial/installation/control/development/c10b5eb3-ffcf-4df1-9eeb-44fcd602ccdc/00cf0d7c-5643-460b-9f11-4eb369239d58/repository"
+          ]
+        ],
+        "dispatches": [
+          [
+            "settled",
+            null,
+            "completed"
+          ]
+        ],
+        "open_peers": 0,
+        "open_grants": 0,
+        "candidates": [
+          [
+            "ready"
+          ]
+        ]
+      },
+      "result_sha256": "c3b2cdfc93e1f53457ccf7ec597a6cb5241fd2523261b443d88fb66d44c5280e",
+      "registration_sha256": "7a8f5f495f9270d0be1f198333aadc99ea409b580125174f8e53b4840a0ac636",
+      "generative_model_turns": 0
+    }
+  ],
+  "total_controlled_native_reservations": 5,
+  "all_original_trial_peers_and_grants_closed": true,
+  "final_harness_matches_registration": true,
+  "new_product_code_or_prompt_changes": false,
+  "frontend_unit_receipt_unchanged": "913e2f5:165contracts+77UI/build; this block adds evaluator mjs only, not a new whole-suite claim"
+}

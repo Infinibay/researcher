@@ -1,0 +1,169 @@
+{
+  "status": "passed",
+  "generative_model_turns": 0,
+  "active_observation": {
+    "state": {
+      "runs": [
+        [
+          "c10b5eb3-ffcf-4df1-9eeb-44fcd602ccdc",
+          "running"
+        ]
+      ],
+      "workspaces": [
+        [
+          "c10b5eb3-ffcf-4df1-9eeb-44fcd602ccdc",
+          "/home/andres/.codex/worktrees/b09e/researcher/.researcher/evaluations/communication-live-wait-20261108-observed-closure/trial/installation/control/development/c10b5eb3-ffcf-4df1-9eeb-44fcd602ccdc/00cf0d7c-5643-460b-9f11-4eb369239d58/repository"
+        ]
+      ],
+      "dispatches": [
+        [
+          "reserved",
+          null,
+          null
+        ]
+      ],
+      "open_peers": 4,
+      "open_grants": 1,
+      "candidates": []
+    },
+    "jobs": {
+      "run_id": "c10b5eb3-ffcf-4df1-9eeb-44fcd602ccdc",
+      "total": 1,
+      "items": [
+        {
+          "job_id": "215ab1fe-1905-45b5-a5dd-ec9baecbf115",
+          "seq": "1",
+          "run_id": "c10b5eb3-ffcf-4df1-9eeb-44fcd602ccdc",
+          "attempt_id": "00cf0d7c-5643-460b-9f11-4eb369239d58",
+          "context_version": 1,
+          "is_current_attempt": true,
+          "operation_key": "controlled-write",
+          "status": "dispatching",
+          "exit_code": null,
+          "error": null,
+          "output_limited": false,
+          "cancel_requested": false,
+          "local_execution_closed": false,
+          "executable": "python3.12",
+          "cwd": ".",
+          "timeout_seconds": 80.0,
+          "output_bytes": 65536,
+          "stdout_bytes": 0,
+          "stderr_bytes": 0,
+          "output_persistence": "terminal_receipt"
+        }
+      ],
+      "next_after_seq": null
+    }
+  },
+  "observed_gate_seconds": 11.336,
+  "terminal_jobs": {
+    "run_id": "c10b5eb3-ffcf-4df1-9eeb-44fcd602ccdc",
+    "total": 1,
+    "items": [
+      {
+        "job_id": "215ab1fe-1905-45b5-a5dd-ec9baecbf115",
+        "seq": "1",
+        "run_id": "c10b5eb3-ffcf-4df1-9eeb-44fcd602ccdc",
+        "attempt_id": "00cf0d7c-5643-460b-9f11-4eb369239d58",
+        "context_version": 1,
+        "is_current_attempt": true,
+        "operation_key": "controlled-write",
+        "status": "exited",
+        "exit_code": 0,
+        "error": null,
+        "output_limited": false,
+        "cancel_requested": false,
+        "local_execution_closed": true,
+        "executable": "python3.12",
+        "cwd": ".",
+        "timeout_seconds": 80.0,
+        "output_bytes": 65536,
+        "stdout_bytes": 106,
+        "stderr_bytes": 0,
+        "output_persistence": "terminal_receipt"
+      }
+    ],
+    "next_after_seq": null
+  },
+  "terminal_receipt": {
+    "job_id": "215ab1fe-1905-45b5-a5dd-ec9baecbf115",
+    "seq": "1",
+    "run_id": "c10b5eb3-ffcf-4df1-9eeb-44fcd602ccdc",
+    "attempt_id": "00cf0d7c-5643-460b-9f11-4eb369239d58",
+    "context_version": 1,
+    "is_current_attempt": true,
+    "operation_key": "controlled-write",
+    "status": "exited",
+    "exit_code": 0,
+    "error": null,
+    "output_limited": false,
+    "cancel_requested": false,
+    "local_execution_closed": true,
+    "executable": "python3.12",
+    "cwd": ".",
+    "timeout_seconds": 80.0,
+    "output_bytes": 65536,
+    "stdout_bytes": 106,
+    "stderr_bytes": 0,
+    "output_persistence": "terminal_receipt",
+    "argv": [
+      "/home/andres/.local/share/uv/python/cpython-3.12.9-linux-x86_64-gnu/bin/python3.12",
+      "-I",
+      "-S",
+      "-B",
+      "-c",
+      "from pathlib import Path\nimport time\nPath(\"evidence.py\").write_text('\"\"\"Retain observations and calculate their arithmetic mean.\"\"\"\\n\\ndef list_observations(records):\\n    \"\"\"Return the supplied observations, preserving real zero values and order.\"\"\"\\n    return list(records)\\n\\ndef mean_observations(records):\\n    \"\"\"Return the arithmetic mean of the supplied observation values.\"\"\"\\n    values = [record[\"value\"] for record in list_observations(records)]\\n    return sum(values) / len(values) if values else None\\n')\ngate = Path('.ui-communication-gate')\ngate.mkdir()\n(gate / \"ready\").write_text(\"Original owned command is waiting.\\n\")\nprint(\"Candidate written; waiting for UI receipt inspection.\", flush=True)\ntry:\n    deadline = time.monotonic() + 60\n    while not (gate / \"release\").exists():\n        if time.monotonic() >= deadline:\n            raise TimeoutError(\"UI gate was not released within its declared bound\")\n        time.sleep(.05)\nfinally:\n    for entry in gate.iterdir():\n        entry.unlink()\n    gate.rmdir()\nprint(\"UI inspection finished; original command completed.\", flush=True)\n"
+    ],
+    "stdout": {
+      "offset": 0,
+      "next_offset": 106,
+      "total_bytes": 106,
+      "has_more": false,
+      "base64": "Q2FuZGlkYXRlIHdyaXR0ZW47IHdhaXRpbmcgZm9yIFVJIHJlY2VpcHQgaW5zcGVjdGlvbi4KVUkgaW5zcGVjdGlvbiBmaW5pc2hlZDsgb3JpZ2luYWwgY29tbWFuZCBjb21wbGV0ZWQuCg==",
+      "text": "Candidate written; waiting for UI receipt inspection.\nUI inspection finished; original command completed.\n",
+      "utf8_lossy": false
+    },
+    "stderr": {
+      "offset": 0,
+      "next_offset": 0,
+      "total_bytes": 0,
+      "has_more": false,
+      "base64": "",
+      "text": "",
+      "utf8_lossy": false
+    }
+  },
+  "owned_backend_terminal": true,
+  "service_exit": -15,
+  "after": {
+    "runs": [
+      [
+        "c10b5eb3-ffcf-4df1-9eeb-44fcd602ccdc",
+        "needs_review"
+      ]
+    ],
+    "workspaces": [
+      [
+        "c10b5eb3-ffcf-4df1-9eeb-44fcd602ccdc",
+        "/home/andres/.codex/worktrees/b09e/researcher/.researcher/evaluations/communication-live-wait-20261108-observed-closure/trial/installation/control/development/c10b5eb3-ffcf-4df1-9eeb-44fcd602ccdc/00cf0d7c-5643-460b-9f11-4eb369239d58/repository"
+      ]
+    ],
+    "dispatches": [
+      [
+        "settled",
+        null,
+        "completed"
+      ]
+    ],
+    "open_peers": 0,
+    "open_grants": 0,
+    "candidates": [
+      [
+        "ready"
+      ]
+    ]
+  },
+  "source_unchanged": true,
+  "seconds": 70.613
+}

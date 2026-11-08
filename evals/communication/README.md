@@ -10,7 +10,7 @@ reformular estados.
 | Comparación e incertidumbre | `../profile_communication/`, `../current_scientific/` | Casos sintéticos y resumen primario; no representatividad o validez causal general. |
 | Pregunta material y corrección durante trabajo | `../communication_flow/` | Turnos reales y respuestas guionadas; no observación humana. |
 | Resultado guardado, fallo de lectura y recuperación | `retained.py`, `../../frontend/tests/communication-baseline.mjs` | API y datos reales de ensayos previos, corte de red inducido; cero nuevos turnos. |
-| Espera larga de herramienta activa | Pendiente de captura viva | Un estado terminal guardado no demuestra una espera actual. |
+| Espera larga de herramienta activa | `live_wait.py`, `wait_worker.py`, `../../frontend/tests/communication-wait.mjs` | Comando realmente activo bajo el coordinador instalado; transporte nativo controlado sin generación. Los recibos determinan el resultado de cada ensayo. |
 
 Para leer los dos casos retenidos, usar Python del producto instalado y Node24:
 
@@ -24,6 +24,28 @@ El otro modo es `--kind partial`. Rechaza fuentes con peers/grants abiertos o
 intentos activos, conserva filas/campos anteriores y registra adiciones de esquema.
 El navegador permite sólo GET y emparejamiento. Una interrupción de GET comprueba
 recuperación de lectura; no demuestra recuperación del backend o de una herramienta.
+
+Para la espera, usar una salida privada nueva, el mismo Python instalado y Node24:
+
+```bash
+python -I evals/communication/live_wait.py --assets /ruta/privada/recursos.json \
+  --output /ruta/nueva/dentro/de/.researcher/evaluations/espera --node /ruta/absoluta/node
+```
+
+El navegador envía una única instrucción real. Un comando conserva una puerta
+acotada en su copia privada hasta que el navegador consulte el mismo recibo en
+escritorio/móvil durante al menos diez segundos. Después se libera ese comando,
+se observa su salida y se espera la propuesta antes de cerrar el servicio original.
+No hay modelo generativo: la reserva nativa controlada y su consumo desconocido
+se registran aparte. El transporte corto reutilizado se amplía a90s sólo en su
+copia; el comando sigue limitado a80s y la puerta a60s. Recursos originales intactos.
+Se fijan copias verificadas de DNS/certificados públicos fuera de las fuentes,
+conservando la verificación productiva de identidad y el Ken real.
+
+La infracción conocida de nombres accesibles de cuatro botones deshabilitados se
+retiene como DD155 y se identifica exactamente; cualquier otro hallazgo falla.
+Un recorrido funcional con esa excepción no es accesibilidad limpia. Conservar
+también intentos fallidos y no volver a enviar sus instrucciones inciertas.
 
 ## Rúbrica común
 
