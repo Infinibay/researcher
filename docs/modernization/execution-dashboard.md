@@ -28,31 +28,28 @@ que se pueda comparar el avance; no presentar microajustes como tareas principal
 - Última suite global: `9fb873c`,2210 casos,2178 pasan,31 fallan y1 error de fixture; sin omisiones. La carrera de backup encontrada se corrigió después con40 pruebas instaladas. No se declara una nueva corrida global verde; la referencia `0c8b8d9` queda como evidencia histórica.
 - U01–U07, E01–E12, C01–C09 y D01–D13 quedan comprobados con el alcance de sus matrices; siguen 2 de 43 escenarios amplios sin aceptación completa en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Estado actual: Informes aceptado; continúa Hallazgos
+## Estado actual: búsqueda local positiva; continúa revisión de Hallazgos
 
-**06:04:08–06:26:36 UTC,22min28s hasta verificar/inspeccionar**, base1e6e0f0;
-incluye corrección funcional y evaluador. [Alcance](evidence-pages-review.md).
+**06:29:16–06:47:58 UTC,18min42s hasta verificar/inspeccionar**, baseefbf84e.
+[Alcance](managed-semantic-review.md). Documentación/checkpoint posteriores excluidos.
 
-- Terminado: **7/12 páginas** en alcance delegado: Documentos, Archivos,
- Repositorios, Planificación, Resumen, Agentes e Informes. Se reparó la lectura de
- aceptación original de informes sin cambiar su flag draft ni inferir vigencia.
-35fuente/94instalados,150contratos/51UI verdes;685fuentes/365producto coinciden,
- pip check83paquetes, tipos/build pasan. Ocho estados actuales de Informes.
-- En curso: **Hallazgos**. Cuatro estados de lector pasan (texto/citas/hash,
- declaraciones históricas, paginación/filtros); búsqueda semántica real devuelve503
- en este host administrado. Diagnosticar configuración/wiring y probar ruta positiva;
- completar admisión/historia de revisión independiente. No aceptado por lector solo.
+- Terminado: **7/12 páginas** en alcance delegado, sin cambio de contador por
+ cerrar una subcapacidad. Informes conserva su aceptación original bien mostrada.
+ Hallazgos ya conecta pesos locales explícitos en preparación/reapertura del host:
+30fuente/6CLI checkout/38instalados pasan,685fuentes/365producto coinciden.
+ Consulta y continuación200sobre53registros con iguales hashes; un cálculo
+ local settled3788msCPU,workercerrado y servicio/dominio retirados.0generación.
+- En curso: **Hallazgos: admisión e historia de revisión independiente**. Completar
+ decisión/procedencia, controles y recuperación originales sin confundir una cita,
+ similitud o fixture con comprobación científica o aceptación humana.
 - Pendiente en orden: Hallazgos, Tareas, Conversación, Ejecución; Proyectos por
  AuthorityBusy original. Enlace no vacío de cierre en recorrido global; U08/C10 y
  evaluación científica; distribución/dependencias, prompts, inversas69, suite y
- revisión independiente final. No nueva suite global verde.
-- Seguimos **41/43 escenarios**. Sin porcentaje/ETA global defendible. Última suite
- global31fallos/1error. Último corte de prompts:67de85desactualizadas en318archivos;
- revalidar sobre árbol final, no renovar huellas sin revisar.
-- Detalles al final: DD135y anteriores, presentación/densidad/mensajes/estilo y
- accesibilidad completa. El503y revisión son capacidades pendientes, no detalles.
-0turnos generativos; dos IDs de turno del fixture no equivalen a ejecuciones.
- No push, merge o despliegue.
+ revisión independiente final. No nueva suite global verde ni porcentaje/ETA inventados.
+- Seguimos **41/43 escenarios**. Última suite global31fallos/1error. Último corte
+ de prompts67de85desactualizadas en318archivos; revalidar sobre árbol final.
+- Detalles al final: DD136y anteriores, fragmentos/densidad/mensajes/estilo y
+ accesibilidad completa.22definiciones documentadas,10Ruffpendientes. No push/merge.
 
 ## Etapa anterior: Ken estructural offline verificado; continúa aceptación de páginas
 

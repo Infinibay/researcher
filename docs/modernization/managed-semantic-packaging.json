@@ -1,0 +1,36 @@
+{
+  "validation_environment": {
+    "runner_cgroup": "/sys/fs/cgroup/user.slice/user-1000.slice/user@1000.service/app.slice/run-p1395453-i1395454.scope",
+    "parent_controllers_before": "cpu memory pids",
+    "runner_cpu_max": "800000 100000",
+    "purpose": "Transient systemd scope with CPUQuota=800% retains CPU-controller availability during validation; it does not relax any product limit.",
+    "parent_controllers_after": "cpu memory pids"
+  },
+  "base_commit": "efbf84e",
+  "wheel": "researcher-0.1.0-cp312-cp312-linux_x86_64.whl",
+  "wheel_sha256": "c8a08615fa87ea7a7a05330f1d95af8ec1a87c3e565319307450a5d34d301d91",
+  "source_files_matching_wheel_and_installation": 685,
+  "product_files_matching": 365,
+  "observed": {
+    "cases": 38,
+    "passed": 38,
+    "failed": 0,
+    "skipped": 0,
+    "backend_modules": 237,
+    "all_backend_imports_from_native_env": true,
+    "seconds": 30.306,
+    "exit_code": 0
+  },
+  "tests": [
+    "backend/tests/runtime/test_host_installation.py",
+    "backend/tests/research/test_finding_semantic.py",
+    "backend/tests/research/test_auxiliary_http.py",
+    "backend/tests/runtime/test_artifact_acceptance.py"
+  ],
+  "real_model_turns": 0,
+  "limits": [
+    "Selected installed tests, not the global suite",
+    "Installed host resource preparation, launcher, positive offline retrieval/auxiliary budget and artifact acceptance regression selection; browser acceptance separate",
+    "Actual offline semantic encoder and real SQLite/host checks; no generative model turn or human understanding claim"
+  ]
+}

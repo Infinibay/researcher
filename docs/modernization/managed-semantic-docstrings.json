@@ -1,0 +1,26 @@
+{
+  "definitions": 22,
+  "files": [
+    {
+      "path": "backend/runtime/host_installation.py",
+      "sha256": "3503fb7ee55761197c449e894e9d080de921109ff7f8c9a59d8f4c7bf19a4dc1",
+      "module_documented": true,
+      "definitions": 10,
+      "missing": []
+    },
+    {
+      "path": "backend/tests/runtime/test_host_installation.py",
+      "sha256": "a922d77bcb92179a2443127bb69bb92025629530e9ff6aaf8867847d016d78f9",
+      "module_documented": true,
+      "definitions": 9,
+      "missing": []
+    },
+    {
+      "path": "evals/operation/evidence_pages.py",
+      "sha256": "3aed922a387fcec59ff0622d151d520b7a2f3a91b2b2761611c153a845c622ff",
+      "module_documented": true,
+      "definitions": 3,
+      "missing": []
+    }
+  ]
+}

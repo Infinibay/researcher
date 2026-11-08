@@ -5,6 +5,7 @@
   "code_mode_host": "/opt/codex-0.166.0/bin/codex-code-mode-host",
   "ken_command": "/opt/researcher-tools/ken-rank/bin/ken",
   "model_cache": "/var/cache/researcher/huggingface/hub",
+  "retrieval_asset_dir": "/var/cache/researcher/multilingual-retrieval",
   "token_file": "/home/you/.codex/auth.json",
   "cgroup_parent": "/sys/fs/cgroup/OPERATOR-DELEGATED-PARENT",
   "static_dir": "/opt/researcher/frontend/dist",

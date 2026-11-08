@@ -1159,3 +1159,13 @@ ESLint de la selección es el any heredado de tipos, línea283, yaDD132. Los arc
 de Informes y sus pruebas pasan ESLint. BundleDD121. Configuración semántica503y
 aceptación de revisión independiente son capacidades principales pendientes,
 no detalles de estilo.
+
+## DD136 — fragmentos semánticos y estilo de preparación
+
+El ranking muestra fragmentos con palabras cortadas en los límites; pulir su
+presentación al final manteniendo offsets/identidad, sin cambiar el corpus o
+inventar texto. La captura tras paginar queda desplazada hacia las filas nuevas,
+no es una imagen completa del formulario. Cabecera y densidad enDD132/DD135.
+DiezRuff(8I001/2TRY004) en[managed-semantic-lint.json](managed-semantic-lint.json).
+No repetir carga de encoder ni verificación generativa por estos detalles.
+Revisión independiente sigue siendo capacidad principal pendiente.

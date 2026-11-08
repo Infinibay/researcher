@@ -1,0 +1,117 @@
+{
+  "status": "verified",
+  "base_commit": "efbf84e",
+  "retained_evaluation": ".researcher/evaluations/managed-semantic-20261108-v2",
+  "actual_generative_turns": 0,
+  "source_tests": {
+    "cases": 30,
+    "passed": 30,
+    "failed": 0,
+    "skipped": 0
+  },
+  "checkout_cli_tests": {
+    "cases": 6,
+    "passed": 6,
+    "failed": 0,
+    "skipped": 0
+  },
+  "installed_tests": {
+    "cases": 38,
+    "passed": 38,
+    "failed": 0,
+    "skipped": 0,
+    "seconds": 30.306,
+    "backend_modules": 237,
+    "all_backend_imports_from_native_env": true
+  },
+  "browser_exit": 0,
+  "service_exit": 143,
+  "semantic": {
+    "status": 200,
+    "search_kind": "semantic_cosine",
+    "full_coverage": true,
+    "scientific_confidence": null,
+    "corpus_count": 53,
+    "corpus_sha256": "4fb4b461496d1f9a6767400445e6480b1756704b408b3ba8a990bd7591e63458",
+    "record_set_sha256": "1f8c5411e8d2d51c5149dc3fe3065d642b8b5bcf7328340c1022f0dff329186b",
+    "execution": {
+      "peak_rss_kib": 740028,
+      "cpu_used_seconds": 3.7878220000000002,
+      "cpu_limit_seconds": 15,
+      "cpu_hard_limit_seconds": 16,
+      "address_space_limit_bytes": 2147483648,
+      "sandbox": {
+        "landlock_abi": 7,
+        "filesystem": "selected_public_reads_no_writes",
+        "network": "denied",
+        "new_processes_and_threads": "denied"
+      },
+      "worker_closed": true,
+      "wall_limit_seconds": 30
+    },
+    "continuation": {
+      "status": 200,
+      "matches": 10,
+      "next_rank": 20,
+      "execution": {
+        "peak_rss_kib": 740028,
+        "cpu_used_seconds": 3.7878220000000002,
+        "cpu_limit_seconds": 15,
+        "cpu_hard_limit_seconds": 16,
+        "address_space_limit_bytes": 2147483648,
+        "sandbox": {
+          "landlock_abi": 7,
+          "filesystem": "selected_public_reads_no_writes",
+          "network": "denied",
+          "new_processes_and_threads": "denied"
+        },
+        "worker_closed": true,
+        "wall_limit_seconds": 30
+      }
+    }
+  },
+  "local_work": [
+    {
+      "kind": "semantic",
+      "status": "settled",
+      "observed_cpu_ms": 3788,
+      "cpu_ceiling_ms": 16000,
+      "finished_at": 1794120355.642057
+    }
+  ],
+  "semantic_resources": {
+    "configured": true,
+    "fingerprint": "7435645f6c1421f5cba914aae07054ba47c3f7796ad71e9fee748b28303d9241",
+    "files_verified": 2
+  },
+  "states": 12,
+  "new_semantic_captures": 1,
+  "writes": [],
+  "errors": [],
+  "axe_violations": 0,
+  "all_widths_fit": true,
+  "domain_state_unchanged": true,
+  "dispatches": 0,
+  "synthetic_bound_turn_ids": 2,
+  "service_domain": {
+    "status": "closed",
+    "domain_removed": true
+  },
+  "source_sha256": {
+    "backend/runtime/host_installation.py": "3503fb7ee55761197c449e894e9d080de921109ff7f8c9a59d8f4c7bf19a4dc1",
+    "backend/tests/runtime/test_host_installation.py": "a922d77bcb92179a2443127bb69bb92025629530e9ff6aaf8867847d016d78f9",
+    "evals/operation/evidence_pages.py": "3aed922a387fcec59ff0622d151d520b7a2f3a91b2b2761611c153a845c622ff",
+    "frontend/tests/evidence.e2e.mjs": "9526e23487cd5964e7b2b970b8d9fdf965ad99290a70023e7509a2884e9772ef",
+    "docs/config/host-assets.example.json": "9b476c6bd36d46a7732d3ec362373e5bea8c5e25752ef83f5b5927c1b91d96b1"
+  },
+  "initial_failures": [
+    "Five source RED cases reject unrecognized config rather than validate/persist explicit semantic weights; fixed host option.",
+    "Initial installed selection included checkout script test which copies site-packages/start.sh; original failed receipt16cases/15pass/1failure retained privately, six CLI tests pass in checkout and installed selection38passes without skips.",
+    "Initial positive browser expected ten distinct findings for ten ranked fragments. Six were correct after UI identity deduplication; test now checks unique returned finding IDs and original next_rank/hashes, without changing ranking code."
+  ],
+  "limits": [
+    "Local encoder execution is real; sources/domain histories/native turn IDs are synthetic. No generative inference, OpenAI subscription consumption or scientific confidence claim.",
+    "Local retrieval wiring is verified; Findings independent-review admission/history remains open.",
+    "Current browser reruns12shared evidence states; only one new semantic screenshot archived here."
+  ]
+}

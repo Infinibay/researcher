@@ -118,6 +118,48 @@ def test_launcher_consumes_prepared_host_without_shell_environment(tmp_path, hos
     assert os.environ['INFINIBAY_RUNTIME_CONFIG'] == str(root / 'runtime.json')
 
 
+def test_prepared_semantic_assets_reach_reopened_host_and_launcher(tmp_path, host_assets, monkeypatch):
+    """Explicit pinned public weights survive installation/reopen and reach the API without loading an encoder."""
+    from backend.cli import launcher
+    from backend.research.retrieval_assets import FINGERPRINT
+    from backend.runtime.host_installation import host_environment, initialize_host, inspect_host
+
+    configured = os.environ.get('RESEARCHER_TEST_RETRIEVAL_ASSETS')
+    if not configured or not Path(configured).is_dir():
+        pytest.skip('Explicit pinned offline assets are required')
+    assets = {**host_assets, 'retrieval_asset_dir': str(Path(configured).resolve())}
+    root = tmp_path / 'installation'
+    prepared = initialize_host(root, witness_dir=tmp_path / 'witness', assets=assets)
+    assert prepared['environment']['INFINIBAY_RETRIEVAL_ASSET_DIR'] == assets['retrieval_asset_dir']
+    assert host_environment(root)['INFINIBAY_RETRIEVAL_ASSET_DIR'] == assets['retrieval_asset_dir']
+    assert json.loads((root / 'runtime.json').read_text())['retrieval_asset_dir'] == assets['retrieval_asset_dir']
+    semantic = inspect_host(root)['resource_observations']['semantic_assets']
+    assert semantic == {'configured': True, 'fingerprint': FINGERPRINT, 'files_verified': 2}
+    monkeypatch.delenv('INFINIBAY_RETRIEVAL_ASSET_DIR', raising=False)
+    monkeypatch.setattr(launcher, 'run_services', lambda _: 0)
+    assert launcher.main(['--installation', str(root)]) == 0
+    assert os.environ['INFINIBAY_RETRIEVAL_ASSET_DIR'] == assets['retrieval_asset_dir']
+    assert prepared['model_turns'] == 0
+
+
+@pytest.mark.parametrize('case', ['none', 'relative', 'missing', 'changed'])
+def test_invalid_semantic_assets_fail_before_any_host_or_witness_write(tmp_path, host_assets, case):
+    """A path alone is not model preparation; invalid or unpinned bytes cannot create a usable installation."""
+    from backend.runtime.host_installation import initialize_host
+
+    value = {'none': None, 'relative': 'relative-assets', 'missing': str(tmp_path / 'missing')}.get(case)
+    if case == 'changed':
+        directory = tmp_path / 'changed-assets'
+        directory.mkdir()
+        (directory / 'model.onnx').write_bytes(b'Changed bytes')
+        (directory / 'tokenizer.json').write_text('{}')
+        value = str(directory)
+    root, witness = tmp_path / 'installation', tmp_path / 'witness'
+    with pytest.raises((ValueError, OSError, RuntimeError), match='(?i)retrieval|semantic|pinned'):
+        initialize_host(root, witness_dir=witness, assets={**host_assets, 'retrieval_asset_dir': value})
+    assert not root.exists() and not witness.exists()
+
+
 def test_host_refuses_missing_cpu_controller_before_creating_installation(tmp_path, host_assets):
     """A delegated memory/process domain cannot silently omit the required shared CPU boundary."""
     from uuid import uuid4

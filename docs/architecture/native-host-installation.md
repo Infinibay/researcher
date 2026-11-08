@@ -26,6 +26,10 @@ todas las rutas por las de esta instalación:
   importar parsers o el encoder, junto con seccomp y sus límites existentes.
 - Web ya compilada, con `index.html`, si se desea servir la interfaz. Sin
   `static_dir`, el launcher sólo sirve la API.
+- Para buscar por significado en Hallazgos: `retrieval_asset_dir` opcional con los
+  dos pesos públicos multilingües fijados por el producto. Es una preparación
+  distinta de `model_cache` de Ken; no se supone que ambas carpetas sean iguales.
+  Si no se desea configurar esta capacidad, quitar ese campo del ejemplo.
 - Para el límite agregado durable del ejemplo: un volumen ext4 dedicado, ya
   montado en `/srv/researcher-volume`, propiedad del usuario del servicio y con
   permisos `0700`. El dispositivo completo debe medir como máximo 32 GiB.
@@ -35,6 +39,30 @@ todas las rutas por las de esta instalación:
 opciones explícitas. Que el archivo de cuenta sea válido localmente no demuestra
 disponibilidad remota del modelo ni saldo/cuota de la suscripción. Se mantiene
 la validación del runtime al admitir una tarea.
+
+## Búsqueda local de Hallazgos
+
+Preparar los pesos explícitamente antes de `init-host`:
+
+```sh
+researcher-bootstrap prepare-retrieval \
+  --directory /var/cache/researcher/multilingual-retrieval \
+  --cache-dir /var/cache/researcher/huggingface
+```
+
+Con la caché pública ya completa se puede añadir `--offline`. La preparación usa
+el modelo y las revisiones/hashes fijos del producto; no llama a OpenAI. Declarar
+la ruta absoluta como `retrieval_asset_dir` en los recursos. `init-host` y
+`check-host` comprueban los dos archivos antes de acreditar la preparación, sin
+cargar el encoder. El launcher deriva `INFINIBAY_RETRIEVAL_ASSET_DIR` de la
+configuración guardada también al reabrir; no requiere una variable exportada a
+mano para ese host. Cada búsqueda vuelve a verificar los bytes y ejecuta el
+trabajador local limitado; no descarga pesos ni consume turnos generativos.
+
+Las instalaciones sin ese campo conservan compatibilidad. Una ruta configurada
+no acredita por sí sola una búsqueda correcta: probar la ruta positiva después
+de arrancar. Un503de búsqueda sin recursos no se sustituye silenciosamente por
+resultados de palabras ni demuestra ausencia de hallazgos.
 
 `broker_limits.cpu_millis` limita CPU compartida entre todos los procesos del
 dominio:2000 permite el equivalente de dos núcleos, y250 el de un cuarto de núcleo.

@@ -172,10 +172,23 @@ try{
  const semantic=page.waitForResponse(r=>new URL(r.url()).pathname==='/api/findings-query')
  await page.getByRole('button',{name:'Buscar',exact:true}).click()
  const response=await semantic,body=await response.json()
- evidence.semantic={status:response.status(),search_kind:body.search_kind??null,full_coverage:body.full_coverage??null,scientific_confidence:body.scientific_confidence??null}
+ evidence.semantic={status:response.status(),search_kind:body.search_kind??null,full_coverage:body.full_coverage??null,scientific_confidence:body.scientific_confidence??null,corpus_count:body.corpus_count??null,corpus_sha256:body.corpus_sha256??null,record_set_sha256:body.record_set_sha256??null,execution:body.execution??null}
+ if(process.env.RESEARCHER_E2E_EXPECT_SEMANTIC==='1')expect(response.status()).toBe(200)
  if(response.status()===200){
   expect(body.scientific_confidence).toBe(null);expect(body.full_coverage).toBe(true)
+  expect(body.corpus_count).toBe(53);expect(new Set(body.finding_ids).size).toBe(53)
+  expect(body.corpus_sha256).toMatch(/^[a-f0-9]{64}$/);expect(body.record_set_sha256).toMatch(/^[a-f0-9]{64}$/)
   await expect(page.locator('.findings-count')).toContainText('53 registros completos')
+  await expect(page.locator('[id^="finding-select-"]')).toHaveCount(new Set(body.matches.map(match=>match.finding_id)).size)
+  expect(body.next_rank).not.toBe(null)
+  const continuation=page.waitForResponse(r=>{const u=new URL(r.url());return u.pathname==='/api/findings-query'&&u.searchParams.get('after_rank')===String(body.next_rank)})
+  await page.getByRole('button',{name:'Mostrar más coincidencias',exact:true}).click()
+  const next=await continuation,nextBody=await next.json()
+  expect(next.status()).toBe(200)
+  expect(nextBody.corpus_sha256).toBe(body.corpus_sha256);expect(nextBody.record_set_sha256).toBe(body.record_set_sha256)
+  expect(nextBody.full_coverage).toBe(true);expect(nextBody.scientific_confidence).toBe(null)
+  await expect(page.locator('[id^="finding-select-"]')).toHaveCount(new Set([...body.matches,...nextBody.matches].map(match=>match.finding_id)).size)
+  evidence.semantic.continuation={status:next.status(),matches:nextBody.matches.length,next_rank:nextBody.next_rank,execution:nextBody.execution??null}
  }else{
   await expect(page.getByRole('alert')).toContainText('No se pudo completar la búsqueda por significado')
   await expect(page.locator('[id^="finding-select-"]')).toHaveCount(0)

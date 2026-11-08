@@ -6164,11 +6164,14 @@
           "evidence": [
             "docs/modernization/evidence-pages-review.md",
             "docs/modernization/evidence-pages-results.json",
-            "docs/design/audits/2026-11-08-evidence-pages/report.md"
+            "docs/design/audits/2026-11-08-evidence-pages/report.md",
+            "docs/modernization/managed-semantic-review.md",
+            "docs/modernization/managed-semantic-results.json",
+            "docs/modernization/managed-semantic-packaging.json",
+            "docs/design/audits/2026-11-08-managed-semantic/report.md"
           ],
           "remaining": [
-            "Managed installed host semantic retrieval returns503; inspect actual configuration/wiring and prove positive local retrieval without a lexical fallback",
-            "Complete independent review admission/history and protected original-task flow acceptance; reader alone does not close this capability"
+            "Complete independent review admission/history and protected original-task flow acceptance; positive managed local semantic search is now verified"
           ],
           "deferred": [
             "DD135"

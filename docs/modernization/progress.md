@@ -9043,3 +9043,28 @@ políticas. v4pasa en alcance explícito: búsqueda semántica503no es capacidad
 positiva y revisión independiente. Después Tareas/Conversación/Ejecución/Proyectos,
 evaluaciones/distribución/prompts/inversas69/global/revisión. U08/C10/AuthorityBusy
 original continúan. [Evidencia](evidence-pages-review.md).
+
+
+## Búsqueda semántica administrada conectada, 2026-11-08
+
+06:29:16–06:47:58UTC,18min42s hasta verificar/inspeccionar. Nuevo campo opcional
+retrieval_asset_dirvalida pesos fijados antes de escribir host/witness y se entrega
+al API al preparar/reabrir. No se supone igualdad con caché de Ken, no encoder
+nuevo ni descarga al servir.5RED→30fuente,6CLIcheckout/38instalados pasan;685fuentes/
+365producto,83paquetes compatibles,22definiciones con docstrings. Esquema69igual.
+Wheelc8a08615fa87ea7a7a05330f1d95af8ec1a87c3e565319307450a5d34d301d91.
+
+Primer verificador instalado llevó un fixture que copia start.shdecheckout;
+16casos/15pass/1failconservados, luego seisCLI probados donde corresponden y38
+instalados verdes,0skips. Browserinicialasumía10hallazgos por10fragmentos; seis
+filas eran correctas tras dedup por identidad. Evaluador corregido sin tocar ranking.
+Hostnuevo confirma200semantic_cosine,53IDs/cobertura, continuación200con iguales
+hashes. Dos consultas HTTPreutilizan un cálculosettled3788msCPU; workerclosedtrue,
+red/nuevosprocesos denegados, servicio143/dominio retirado.0modelos generativos,
+0dispatches; dosIDs de turno sintéticos no son ejecuciones. Estado documental igual.
+
+12estados compartidos pasan,Axe regional0/overflow0; sólo una captura nueva se
+archiva, otras once enhostretenido.7/12páginas y41/43escenarios sin incremento por
+subcapacidad; falta admisión/historia de revisión independiente de Hallazgos.
+DD136y anteriores al final; U08/C10/AuthorityBusy, otras páginas y gates globales
+continúan. [Resultados](managed-semantic-review.md).

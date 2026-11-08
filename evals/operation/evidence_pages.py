@@ -96,6 +96,7 @@ def main():
     parser.add_argument("--assets", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--node", type=Path, required=True)
+    parser.add_argument("--retrieval-assets", type=Path, help="Explicit already-prepared pinned local weights; require the positive semantic path")
     args = parser.parse_args()
     if not Path(backend.__file__).resolve().is_relative_to(Path(sys.prefix).resolve()):
         raise RuntimeError("Use the separately installed product Python")
@@ -107,6 +108,8 @@ def main():
         os.chmod(token, 0o600)
         json.dump({"auth_mode": "chatgpt", "tokens": {"access_token": "synthetic.header.signature", "account_id": "synthetic-evidence-review"}}, stream)
     assets.update(token_file=str(token), static_dir=str(ROOT / "frontend/dist"))
+    if args.retrieval_assets is not None:
+        assets['retrieval_asset_dir'] = str(args.retrieval_assets.resolve(strict=True))
     assets.pop("storage", None)
     host = output / "host"
     initialize_host(host, witness_dir=output / "witness", assets=assets)
@@ -128,6 +131,8 @@ def main():
         if len(keys) != 1:
             raise RuntimeError("Expected one private owner file")
         env = {**os.environ, "RESEARCHER_E2E_ORIGIN": f"http://127.0.0.1:{port}", "RESEARCHER_E2E_OWNER_FILE": str(keys[0]), "RESEARCHER_E2E_OUTPUT": str(output / "browser"), "RESEARCHER_E2E_FIXTURE": str(fixture)}
+        if args.retrieval_assets is not None:
+            env['RESEARCHER_E2E_EXPECT_SEMANTIC'] = '1'
         with (output / "browser.log").open("x") as browser_log:
             browser = subprocess.run([str(args.node.resolve(strict=True)), "tests/evidence.e2e.mjs"], cwd=ROOT / "frontend", env=env, stdout=browser_log, stderr=subprocess.STDOUT, check=False)
         result["browser_exit"] = browser.returncode
@@ -141,6 +146,9 @@ def main():
         if process is not None:
             result["service_exit"] = stop(process, log)
         result["after"] = observe(host)
+        from backend.db.connection import connect
+        with closing(connect(host / 'source.db')) as db:
+            result['local_work'] = [dict(row) for row in db.execute('SELECT kind,status,observed_cpu_ms,cpu_ceiling_ms,finished_at FROM runtime_auxiliary_work ORDER BY created_at')]
         (output / "result.json").write_text(json.dumps(result, indent=2) + "\n")
         print(json.dumps({"status": result["status"], "receipt": str(output / "result.json")}), flush=True)
 

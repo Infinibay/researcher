@@ -20,7 +20,7 @@ from backend.runtime.storage_volume import StorageVolume, configured_storage
 
 _PATHS = ('codex_binary', 'code_mode_host', 'ken_command', 'model_cache', 'token_file', 'cgroup_parent')
 _OPTIONS = {'model', 'reasoning_effort', 'web_search', 'broker_limits', 'service_limits', 'limits', 'static_dir',
-            'project_turn_limit', 'project_token_limit', 'resolver', 'ca_bundle', 'development_checks', 'storage'}
+            'project_turn_limit', 'project_token_limit', 'resolver', 'ca_bundle', 'development_checks', 'storage', 'retrieval_asset_dir'}
 
 
 def _read_json(path):
@@ -45,6 +45,25 @@ def _write_new(path, value):
     _sync_directory(path.parent)
 
 
+def _semantic_assets(config):
+    """Verify optional pinned multilingual weights before installation writes, without loading an encoder or downloading."""
+    from backend.research.retrieval_assets import ARTIFACTS, FINGERPRINT, pinned_assets
+
+    if 'retrieval_asset_dir' not in config:
+        return {'configured': False}
+    value = config['retrieval_asset_dir']
+    if not isinstance(value, str) or not Path(value).is_absolute():
+        raise ValueError('retrieval_asset_dir must be an absolute host path string')
+    try:
+        directory = Path(value).resolve(strict=True)
+    except OSError as error:
+        raise ValueError('Semantic retrieval assets directory is unavailable') from error
+    with pinned_assets(directory):
+        pass
+    config['retrieval_asset_dir'] = str(directory)
+    return {'configured': True, 'fingerprint': FINGERPRINT, 'files_verified': len(ARTIFACTS)}
+
+
 def _resources(assets):
     """Check explicit native/Ken/account/network/cgroup inputs without inference or downloads."""
     from backend.runtime.broker_profile import CodexAsset
@@ -65,6 +84,7 @@ def _resources(assets):
         raise ValueError('Explicit model and all native host asset paths are required')
     text(assets['model'], 'native model', 128)
     config = dict(assets)
+    semantic = _semantic_assets(config)
     worker_landlock_abi = requirements()
     for key in _PATHS:
         if not isinstance(assets[key], str):
@@ -113,6 +133,7 @@ def _resources(assets):
                     'ken_artifacts_verified': artifacts, 'credential_snapshot_valid': True,
                     'document_worker_landlock_abi': worker_landlock_abi,
                     'service_limits_configured': config['service_limits'],
+                    'semantic_assets': semantic,
                     'remote_entitlement_verified': False}
 
 
@@ -123,6 +144,19 @@ def _environment(root):
             'INFINIBAY_UPLOAD_BASE_DIR': str(root / 'uploads'),
             'INFINIBAY_AUTH_DIR': str(root / 'auth'),
             'INFINIBAY_RUNTIME_CONFIG': str(root / 'runtime.json')}
+
+
+def _service_environment(root, config):
+    """Forward explicit web/retrieval configuration on preparation and reopening; queries still pin and verify weight bytes."""
+    environment = _environment(root)
+    if config.get('static_dir'):
+        environment['INFINIBAY_STATIC_DIR'] = config['static_dir']
+    if 'retrieval_asset_dir' in config:
+        value = config['retrieval_asset_dir']
+        if not isinstance(value, str) or not Path(value).is_absolute():
+            raise ValueError('retrieval_asset_dir must be an absolute host path string')
+        environment['INFINIBAY_RETRIEVAL_ASSET_DIR'] = value
+    return environment
 
 
 def host_environment(directory):
@@ -137,12 +171,9 @@ def host_environment(directory):
     for name in ('source.db', 'runtime.json'):
         if not (root / name).is_file():
             raise ValueError('Host state is missing; restore the original installation')
-    environment = _environment(root)
     config = _read_json(root / 'runtime.json')
     configured_storage(config, [root, *[config['authority'][key] for key in ('database', 'witness', 'mutex')]])
-    if config.get('static_dir'):
-        environment['INFINIBAY_STATIC_DIR'] = config['static_dir']
-    return environment
+    return _service_environment(root, config)
 
 
 def initialize_host(directory, *, witness_dir, assets):
@@ -168,9 +199,7 @@ def initialize_host(directory, *, witness_dir, assets):
     config.update(runtime_profile='owned-codex-v1', workspace_root=str(root / 'sources'),
                   control_root=str(root / 'control'), authority=authority, max_concurrent=1)
     _write_new(root / 'runtime.json', config)
-    environment = _environment(root)
-    if config.get('static_dir'):
-        environment['INFINIBAY_STATIC_DIR'] = config['static_dir']
+    environment = _service_environment(root, config)
     result = {'format': 1, 'status': 'prepared', 'environment': environment,
               'storage': storage,
               'authority_id': authority['authority_id'], 'resource_observations': evidence,
