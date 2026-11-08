@@ -6101,18 +6101,19 @@
         "home": {
           "status": "verified",
           "selected_concept": "situation-notebook",
-          "scope": "Installed overview read/navigation route and delegated visual acceptance. Synthetic domain plan/question records, not real generation or human acceptance; nonempty closure-report link was controlled in the historical pilot and remains subject to final closure-flow validation.",
+          "scope": "Installed overview reads/navigation and original nonempty closure-report link back to exact plan/task/run and current acceptance. Synthetic domain history; no human/scientific acceptance.",
           "evidence": [
             "docs/modernization/overview-page-review.md",
             "docs/modernization/overview-page-results.json",
             "docs/design/audits/2026-11-08-overview-acceptance/report.md",
             "frontend/tests/overview.e2e.mjs",
-            "evals/operation/overview_page.py"
+            "evals/operation/overview_page.py",
+            "docs/modernization/nonempty-closure-review.md",
+            "docs/modernization/nonempty-closure-results.json",
+            "docs/design/audits/2026-11-08-nonempty-project-closure/report.md"
           ],
           "remaining": [],
-          "release_recheck": [
-            "Nonempty accepted closure-report navigation in the final complete closure flow; historical pilot is controlled HTTP evidence only"
-          ],
+          "release_recheck": [],
           "deferred": [
             "DD133",
             "DD132",
@@ -6450,6 +6451,17 @@
         "Global suite and complete accessibility remain open",
         "No fresh model/scientific/human evaluation"
       ]
+    },
+    "nonempty_project_closure_navigation": {
+      "status": "verified",
+      "scope": "One current installed owner closure over three accepted documentary task records/two causal deliveries, exact original receipt GET after lost POST response and original overview link/current-validity check. Synthetic history, no new model/publication.",
+      "evidence": [
+        "docs/modernization/nonempty-closure-review.md",
+        "docs/modernization/nonempty-closure-results.json",
+        "evals/operation/project_closure_page.py",
+        "frontend/tests/project-closure.e2e.mjs"
+      ],
+      "remaining": []
     }
   }
 }

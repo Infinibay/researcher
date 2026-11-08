@@ -1,0 +1,3038 @@
+{
+  "status": "passed",
+  "decisions": [
+    {
+      "body": {
+        "operation_key": "6fec9aba-adbd-4ab8-ac99-7a394e33a749",
+        "report_sha256": "95f5d55dfd3c911ca750b55b7a254d3ee349c6ed5d9be4c79c99a6f04f490e16",
+        "acknowledged_unpublished_attempts": [],
+        "statement": "Acepto sólo la documentación del ejemplo y su relación de campos. No confirma mediciones reales ni implementa un exportador; esas cosas quedan fuera de este alcance sintético."
+      },
+      "receipt": {
+        "kind": "project.completion",
+        "project_id": 101,
+        "task_id": 1,
+        "plan_run_id": "dcb46d86-14dd-4412-a298-733b46b80495",
+        "operation_key": "6fec9aba-adbd-4ab8-ac99-7a394e33a749",
+        "report_sha256": "95f5d55dfd3c911ca750b55b7a254d3ee349c6ed5d9be4c79c99a6f04f490e16",
+        "acknowledged_unpublished_attempts": [],
+        "statement": "Acepto sólo la documentación del ejemplo y su relación de campos. No confirma mediciones reales ni implementa un exportador; esas cosas quedan fuera de este alcance sintético.",
+        "snapshot": {
+          "schema_version": 1,
+          "project": {
+            "id": 101,
+            "name": "Relación ilustrativa de datos",
+            "description": "Documentar el ejemplo y explicar su fila CSV y sus límites; no programar un exportador.",
+            "original_description": "Documentar el ejemplo y explicar su fila CSV y sus límites; no programar un exportador."
+          },
+          "plan_run_id": "dcb46d86-14dd-4412-a298-733b46b80495",
+          "original_plan_input": {
+            "instruction_origin": "owner_message",
+            "owner_request": "Documentar el ejemplo y explicar su fila CSV y sus límites; no programar un exportador.",
+            "project": {
+              "description": "Documentar el ejemplo y explicar su fila CSV y sus límites; no programar un exportador.",
+              "name": "Relación ilustrativa de datos"
+            },
+            "project_history": {
+              "legacy_snapshot": null,
+              "limits": [],
+              "task_inventory": {
+                "captured": 0,
+                "complete": true,
+                "status_authority": "Observed labels are not proof of native acceptance or current execution.",
+                "total": 0
+              }
+            },
+            "source_origins": {
+              "acceptance_criteria": "task_metadata",
+              "owner_request": "owner_message",
+              "project_description": "project_metadata",
+              "project_name": "project_metadata",
+              "project_tasks": "project_task_inventory",
+              "task_description": "task_metadata"
+            },
+            "sources": {
+              "acceptance_criteria": "",
+              "owner_request": "Documentar el ejemplo y explicar su fila CSV y sus límites; no programar un exportador.",
+              "project_description": "Documentar el ejemplo y explicar su fila CSV y sus límites; no programar un exportador.",
+              "project_name": "Relación ilustrativa de datos",
+              "project_tasks": "[]",
+              "task_description": "Documentar el ejemplo y explicar su fila CSV y sus límites; no programar un exportador."
+            },
+            "task_context": {
+              "context_version": 1,
+              "corrections": [],
+              "task": {
+                "acceptance_criteria": null,
+                "assigned_to": null,
+                "branch_name": null,
+                "context_json": null,
+                "description": "Documentar el ejemplo y explicar su fila CSV y sus límites; no programar un exportador.",
+                "epic_id": null,
+                "estimated_complexity": "medium",
+                "milestone_id": null,
+                "parent_task_id": null,
+                "priority": 2,
+                "reviewer": null,
+                "status": "backlog",
+                "title": "Documentar la relación ilustrativa",
+                "type": "plan"
+              },
+              "task_changes": [],
+              "user_answers": []
+            }
+          },
+          "manifest": {
+            "plan_run_id": "dcb46d86-14dd-4412-a298-733b46b80495",
+            "plan_task_id": 1,
+            "plan_context_version": 1,
+            "acceptance_id": "e87d035ea4e8402d855f3f3b71f8fda7",
+            "proposal_id": "292b46f3d35f4f59b107564e53542b4b",
+            "repository": {
+              "repository_id": 11,
+              "repository_name": "observaciones",
+              "registration_path": "/home/andres/.codex/worktrees/b09e/researcher/.researcher/evaluations/project-closure-20261108/host/sources/observations",
+              "workspace": "/home/andres/.codex/worktrees/b09e/researcher/.researcher/evaluations/project-closure-20261108/host/sources/observations",
+              "device": 53,
+              "inode": 9207551,
+              "requested_repository_id": 11
+            },
+            "tasks": [
+              {
+                "task_id": 2,
+                "context_version": 1,
+                "type": "research",
+                "title": "Documentar una observación ilustrativa",
+                "priority": 2,
+                "depends_on": []
+              },
+              {
+                "task_id": 3,
+                "context_version": 1,
+                "type": "research",
+                "title": "Explicar la fila CSV y sus límites",
+                "priority": 2,
+                "depends_on": [
+                  2
+                ]
+              }
+            ]
+          },
+          "deliveries": [
+            {
+              "delivery_id": "6f5f2264b867476e9f185b59eee54172",
+              "task_id": 2,
+              "run_id": "e0bd4981-77ee-4b80-b929-69ccc15d3dd5",
+              "status": "accepted"
+            },
+            {
+              "delivery_id": "14fa37f518974181a890f433ba023b0a",
+              "task_id": 3,
+              "run_id": "c4437a62-4a00-41c0-b369-c5e63bc7761f",
+              "status": "accepted"
+            }
+          ],
+          "tasks": [
+            {
+              "id": 1,
+              "type": "plan",
+              "title": "Documentar la relación ilustrativa",
+              "description": "Documentar el ejemplo y explicar su fila CSV y sus límites; no programar un exportador.",
+              "acceptance_criteria": null,
+              "status": "done",
+              "epic_id": null,
+              "milestone_id": null,
+              "context_version": 1,
+              "evidence": {
+                "kind": "accepted_plan",
+                "run_id": "dcb46d86-14dd-4412-a298-733b46b80495",
+                "context_version": 1,
+                "acceptance": {
+                  "context_version": 1,
+                  "epics": {
+                    "docs": 1
+                  },
+                  "execution_started": false,
+                  "operation_key": "fixture-plan-acceptance",
+                  "project_id": 101,
+                  "proposal_sha256": "b643e9306b3b6162eeff2ccb670ccd702efc34e5867d43b613766e84c7849abe",
+                  "run_id": "dcb46d86-14dd-4412-a298-733b46b80495",
+                  "task_id": 1,
+                  "tasks": {
+                    "explain": 3,
+                    "learn": 2
+                  }
+                },
+                "owner_graph_revision": 0
+              }
+            },
+            {
+              "id": 2,
+              "type": "research",
+              "title": "Documentar una observación ilustrativa",
+              "description": "Explicar id y measurement como datos inventados.",
+              "acceptance_criteria": "Entrada y su procedencia ilustrativa explícitas.",
+              "status": "done",
+              "epic_id": 1,
+              "milestone_id": null,
+              "context_version": 1,
+              "evidence": {
+                "task_id": 2,
+                "run_id": "e0bd4981-77ee-4b80-b929-69ccc15d3dd5",
+                "attempt_id": "59869e13-e783-4430-a600-c56020ca08b4",
+                "actor_id": "native-researcher",
+                "context_version": 1,
+                "kind": "accepted_research_reports",
+                "acceptance": {
+                  "id": 1,
+                  "subject_sha256": "ac7e2ef633f39df731b82537e09bd2781124a2bf73eacd6eff6b833f957bb525",
+                  "review_sha256": "1a98ceb8a7bcd61d923a96964d3e52ccf20d161bb63e6b9943d4b5093b8d49b3"
+                },
+                "snapshot": {
+                  "acceptance_scope": "owner acceptance of research reports; not code or publication authorization",
+                  "findings": [
+                    {
+                      "author": {
+                        "actor_id": "native-researcher",
+                        "attempt_id": "59869e13-e783-4430-a600-c56020ca08b4",
+                        "context_version": 1,
+                        "fence": 1,
+                        "run_id": "e0bd4981-77ee-4b80-b929-69ccc15d3dd5",
+                        "thread_id": "synthetic-closure-learn-thread",
+                        "turn_id": "synthetic-closure-learn-turn",
+                        "version_proof": "committed_finding_version"
+                      },
+                      "evidence": [
+                        {
+                          "quote": "En el ejemplo sintético, measurement se escribe en la columna value.",
+                          "source_id": 1
+                        }
+                      ],
+                      "finding": {
+                        "agent_id": "native-researcher",
+                        "agent_run_id": null,
+                        "artifact_id": null,
+                        "confidence": null,
+                        "content": "En el ejemplo sintético, measurement se escribe en la columna value.",
+                        "created_at": "2026-11-08 11:09:50",
+                        "finding_type": "observation",
+                        "id": 1,
+                        "project_id": 101,
+                        "reproducibility_score": null,
+                        "sources_json": "[\"synthetic:csv-example\"]",
+                        "status": "provisional",
+                        "task_id": 2,
+                        "topic": "Relación entre entrada y salida",
+                        "validation_method": null,
+                        "wiki_page_id": null
+                      }
+                    }
+                  ],
+                  "kind": "research_reports",
+                  "limitations": [
+                    "El ejemplo no es una medición real.",
+                    "Falta comprobar los datos reales."
+                  ],
+                  "report_ids": [
+                    1
+                  ],
+                  "reports": [
+                    {
+                      "artifact_id": 1,
+                      "content": "# Una observación y su fila CSV\n\nEntrada ilustrativa: {\"id\":7,\"measurement\":12}. Salida ilustrativa: columnas id,value y fila7,12. No se comprobó la estructura de los registros reales.",
+                      "content_sha256": "7848bd7bd790165c19258735bcdfe93dcc80f63084310a1f17d8740cc45cd26c",
+                      "finding_ids": [
+                        1
+                      ],
+                      "producer": {
+                        "actor_id": "native-researcher",
+                        "attempt_id": "59869e13-e783-4430-a600-c56020ca08b4",
+                        "operation_key": "fixture-report",
+                        "run_id": "e0bd4981-77ee-4b80-b929-69ccc15d3dd5",
+                        "writer_intent_sha256": "9fb0f2a4b41fb0add4cfb4ad16eb9600c578eabc0f87b1c939a87ecc63ef05df"
+                      },
+                      "report_type": "research",
+                      "title": "Una observación y su fila CSV"
+                    }
+                  ],
+                  "schema_version": 1,
+                  "scientific_confidence": null,
+                  "scope": {
+                    "actor_id": "native-researcher",
+                    "attempt_id": "59869e13-e783-4430-a600-c56020ca08b4",
+                    "context_version": 1,
+                    "fence": 1,
+                    "project_id": 101,
+                    "run_id": "e0bd4981-77ee-4b80-b929-69ccc15d3dd5",
+                    "task_id": 2
+                  },
+                  "sources": [
+                    {
+                      "metadata_sha256": "a6b9d985f8a08d3ee007e3ffe6c1b9a4cc6d82460811c394fc9fe031618b99b7",
+                      "source": {
+                        "captured_at": 1794136190.1689308,
+                        "content": "En el ejemplo sintético, measurement se escribe en la columna value.",
+                        "id": 1,
+                        "kind": "attachment",
+                        "locator": "synthetic:csv-example",
+                        "project_id": 101,
+                        "provenance": {},
+                        "sha256": "b419b9fe5dc6ac8e73c5b1cebabfe5cbfcae053d28a11a6e6d96483c73776b4d",
+                        "task_id": 2,
+                        "title": "Relación ilustrativa"
+                      }
+                    }
+                  ],
+                  "summary": "Relación de campos ilustrada.",
+                  "task": {
+                    "acceptance_criteria": "Entrada y su procedencia ilustrativa explícitas.",
+                    "assigned_to": null,
+                    "branch_name": null,
+                    "context_json": null,
+                    "description": "Explicar id y measurement como datos inventados.",
+                    "epic_id": 1,
+                    "estimated_complexity": "medium",
+                    "milestone_id": null,
+                    "parent_task_id": null,
+                    "priority": 2,
+                    "reviewer": null,
+                    "title": "Documentar una observación ilustrativa",
+                    "type": "research"
+                  }
+                },
+                "owner_acceptance": {
+                  "acceptance_scope": "research_reports",
+                  "accepted_at": 1794136190.2741582,
+                  "acknowledged_limits": true,
+                  "actor_source": "paired_owner_action",
+                  "candidate_id": 1,
+                  "candidate_sha256": "ac7e2ef633f39df731b82537e09bd2781124a2bf73eacd6eff6b833f957bb525",
+                  "context_version": 1,
+                  "operation_key": "fixture-research-acceptance",
+                  "owner_note": "Synthetic domain decision, not human or scientific acceptance.",
+                  "project_id": 101,
+                  "publication_performed": false,
+                  "review_sha256": "1a98ceb8a7bcd61d923a96964d3e52ccf20d161bb63e6b9943d4b5093b8d49b3",
+                  "run_id": "e0bd4981-77ee-4b80-b929-69ccc15d3dd5",
+                  "scientific_confidence": null,
+                  "task_accepted": true,
+                  "task_id": 2,
+                  "acceptance_id": 1
+                }
+              }
+            },
+            {
+              "id": 3,
+              "type": "research",
+              "title": "Explicar la fila CSV y sus límites",
+              "description": "Relacionar la entrada documentada con id,value y distinguirla de datos reales.",
+              "acceptance_criteria": "Salida relacionada con entrada y límites explícitos.",
+              "status": "done",
+              "epic_id": 1,
+              "milestone_id": null,
+              "context_version": 1,
+              "evidence": {
+                "task_id": 3,
+                "run_id": "c4437a62-4a00-41c0-b369-c5e63bc7761f",
+                "attempt_id": "6c2990cb-6da9-4da0-af14-2d63ba9993e9",
+                "actor_id": "native-researcher",
+                "context_version": 1,
+                "kind": "accepted_research_reports",
+                "acceptance": {
+                  "id": 2,
+                  "subject_sha256": "552aac4321b501438abc9b37a9bcdd72d32e2508da5292bf3c3b6aed20da8703",
+                  "review_sha256": "60dc6e71666bfee4fd5780e33bcdbe48fef1106a3b3b0b75f4918d838b701516"
+                },
+                "snapshot": {
+                  "acceptance_scope": "owner acceptance of research reports; not code or publication authorization",
+                  "findings": [
+                    {
+                      "author": {
+                        "actor_id": "native-researcher",
+                        "attempt_id": "6c2990cb-6da9-4da0-af14-2d63ba9993e9",
+                        "context_version": 1,
+                        "fence": 1,
+                        "run_id": "c4437a62-4a00-41c0-b369-c5e63bc7761f",
+                        "thread_id": "synthetic-closure-explain-thread",
+                        "turn_id": "synthetic-closure-explain-turn",
+                        "version_proof": "committed_finding_version"
+                      },
+                      "evidence": [
+                        {
+                          "quote": "En el ejemplo sintético, measurement se escribe en la columna value.",
+                          "source_id": 2
+                        }
+                      ],
+                      "finding": {
+                        "agent_id": "native-researcher",
+                        "agent_run_id": null,
+                        "artifact_id": null,
+                        "confidence": null,
+                        "content": "En el ejemplo sintético, measurement se escribe en la columna value.",
+                        "created_at": "2026-11-08 11:09:50",
+                        "finding_type": "observation",
+                        "id": 2,
+                        "project_id": 101,
+                        "reproducibility_score": null,
+                        "sources_json": "[\"synthetic:csv-example\"]",
+                        "status": "provisional",
+                        "task_id": 3,
+                        "topic": "Relación entre entrada y salida",
+                        "validation_method": null,
+                        "wiki_page_id": null
+                      }
+                    }
+                  ],
+                  "kind": "research_reports",
+                  "limitations": [
+                    "El ejemplo no es una medición real.",
+                    "Falta comprobar los datos reales."
+                  ],
+                  "report_ids": [
+                    2
+                  ],
+                  "reports": [
+                    {
+                      "artifact_id": 2,
+                      "content": "# Una observación y su fila CSV\n\nEntrada ilustrativa: {\"id\":7,\"measurement\":12}. Salida ilustrativa: columnas id,value y fila7,12. No se comprobó la estructura de los registros reales.",
+                      "content_sha256": "7848bd7bd790165c19258735bcdfe93dcc80f63084310a1f17d8740cc45cd26c",
+                      "finding_ids": [
+                        2
+                      ],
+                      "producer": {
+                        "actor_id": "native-researcher",
+                        "attempt_id": "6c2990cb-6da9-4da0-af14-2d63ba9993e9",
+                        "operation_key": "fixture-report",
+                        "run_id": "c4437a62-4a00-41c0-b369-c5e63bc7761f",
+                        "writer_intent_sha256": "280f4b0db7de23bb92d28e0c9495d1565f20bce8c1dd2955e6b9f6e6ac7bc2e8"
+                      },
+                      "report_type": "research",
+                      "title": "Una observación y su fila CSV"
+                    }
+                  ],
+                  "schema_version": 1,
+                  "scientific_confidence": null,
+                  "scope": {
+                    "actor_id": "native-researcher",
+                    "attempt_id": "6c2990cb-6da9-4da0-af14-2d63ba9993e9",
+                    "context_version": 1,
+                    "fence": 1,
+                    "project_id": 101,
+                    "run_id": "c4437a62-4a00-41c0-b369-c5e63bc7761f",
+                    "task_id": 3
+                  },
+                  "sources": [
+                    {
+                      "metadata_sha256": "f96e2e2c95cf795439afa5a74e31b5f83efbbd0c0fa5ed4563d257e6a7bd2e07",
+                      "source": {
+                        "captured_at": 1794136190.385937,
+                        "content": "En el ejemplo sintético, measurement se escribe en la columna value.",
+                        "id": 2,
+                        "kind": "attachment",
+                        "locator": "synthetic:csv-example",
+                        "project_id": 101,
+                        "provenance": {},
+                        "sha256": "b419b9fe5dc6ac8e73c5b1cebabfe5cbfcae053d28a11a6e6d96483c73776b4d",
+                        "task_id": 3,
+                        "title": "Relación ilustrativa"
+                      }
+                    }
+                  ],
+                  "summary": "Relación de campos ilustrada.",
+                  "task": {
+                    "acceptance_criteria": "Salida relacionada con entrada y límites explícitos.",
+                    "assigned_to": null,
+                    "branch_name": null,
+                    "context_json": null,
+                    "description": "Relacionar la entrada documentada con id,value y distinguirla de datos reales.",
+                    "epic_id": 1,
+                    "estimated_complexity": "medium",
+                    "milestone_id": null,
+                    "parent_task_id": null,
+                    "priority": 2,
+                    "reviewer": null,
+                    "title": "Explicar la fila CSV y sus límites",
+                    "type": "research"
+                  }
+                },
+                "owner_acceptance": {
+                  "acceptance_scope": "research_reports",
+                  "accepted_at": 1794136190.4917018,
+                  "acknowledged_limits": true,
+                  "actor_source": "paired_owner_action",
+                  "candidate_id": 2,
+                  "candidate_sha256": "552aac4321b501438abc9b37a9bcdd72d32e2508da5292bf3c3b6aed20da8703",
+                  "context_version": 1,
+                  "operation_key": "fixture-research-acceptance",
+                  "owner_note": "Synthetic domain decision, not human or scientific acceptance.",
+                  "project_id": 101,
+                  "publication_performed": false,
+                  "review_sha256": "60dc6e71666bfee4fd5780e33bcdbe48fef1106a3b3b0b75f4918d838b701516",
+                  "run_id": "c4437a62-4a00-41c0-b369-c5e63bc7761f",
+                  "scientific_confidence": null,
+                  "task_accepted": true,
+                  "task_id": 3,
+                  "acceptance_id": 2
+                }
+              }
+            }
+          ],
+          "epics": [
+            {
+              "id": 1,
+              "title": "Entrada y salida del ejemplo",
+              "description": "Documentación del ejemplo, sin implementación ni mediciones.",
+              "status": "open"
+            }
+          ],
+          "milestones": [],
+          "active_work": [],
+          "open_peers": [],
+          "unrevoked_grants": [],
+          "registered_legacy_work": false,
+          "unpublished_attempts": [],
+          "blockers": [],
+          "interpretation": "Recorded acceptance is evidence of an owner decision, not proof of shared understanding, semantic scope coverage, scientific confidence or current remote branch state."
+        },
+        "report_markdown": "# Informe del proyecto: Relación ilustrativa de datos\n\nEste informe reúne decisiones y evidencia guardadas. Que una tarea termine no demuestra que se hayan cumplido todos los objetivos.\n\n## Alcance que se revisa\n\nDescripción original registrada:\nDocumentar el ejemplo y explicar su fila CSV y sus límites; no programar un exportador.\n\nDescripción actual registrada:\nDocumentar el ejemplo y explicar su fila CSV y sus límites; no programar un exportador.\n\nSolicitud original de planificación:\nDocumentar el ejemplo y explicar su fila CSV y sus límites; no programar un exportador.\n\n## Resultados por tarea\n\n### Documentar la relación ilustrativa · tarea 1\n\nCriterio registrado: No registrado.\n\nPlan aceptado como propuesta de trabajo; no demuestra por sí solo cobertura de los objetivos.\n\n### Documentar una observación ilustrativa · tarea 2\n\nCriterio registrado: Entrada y su procedencia ilustrativa explícitas.\n\nResultado documental aceptado: Relación de campos ilustrada.\n\nLimitaciones declaradas: [\"El ejemplo no es una medición real.\",\"Falta comprobar los datos reales.\"]\n\n#### Una observación y su fila CSV\n# Una observación y su fila CSV\n\nEntrada ilustrativa: {\"id\":7,\"measurement\":12}. Salida ilustrativa: columnas id,value y fila7,12. No se comprobó la estructura de los registros reales.\n\nFuentes, citas y revisiones originales conservadas en la evidencia de este informe.\nNo se infiere confianza científica por haber aceptado un informe.\n\n### Explicar la fila CSV y sus límites · tarea 3\n\nCriterio registrado: Salida relacionada con entrada y límites explícitos.\n\nResultado documental aceptado: Relación de campos ilustrada.\n\nLimitaciones declaradas: [\"El ejemplo no es una medición real.\",\"Falta comprobar los datos reales.\"]\n\n#### Una observación y su fila CSV\n# Una observación y su fila CSV\n\nEntrada ilustrativa: {\"id\":7,\"measurement\":12}. Salida ilustrativa: columnas id,value y fila7,12. No se comprobó la estructura de los registros reales.\n\nFuentes, citas y revisiones originales conservadas en la evidencia de este informe.\nNo se infiere confianza científica por haber aceptado un informe.\n\n## Límites y decisión pendiente\n\nLas fuentes y decisiones completas se incluyen en el snapshot, con sus hashes y versiones. Una publicación registrada describe lo observado entonces; no prueba el estado remoto actual.\nEl propietario debe comparar este alcance con su intención, revisar los límites y reconocer cada candidato sin publicación antes de aceptar el cierre.\n\nNo hay impedimentos estructurales registrados. Esto no demuestra comprensión compartida ni cumplimiento semántico; falta tu decisión explícita.",
+        "project_status": "completed",
+        "publication_performed": false,
+        "accepted_at": 1794136195.168848
+      },
+      "status": 200
+    }
+  ],
+  "completion_reads": [
+    {
+      "report_sha256": "95f5d55dfd3c911ca750b55b7a254d3ee349c6ed5d9be4c79c99a6f04f490e16",
+      "acceptance": null,
+      "acceptance_current": false,
+      "eligible": true
+    },
+    {
+      "report_sha256": "95f5d55dfd3c911ca750b55b7a254d3ee349c6ed5d9be4c79c99a6f04f490e16",
+      "acceptance": {
+        "accepted_at": 1794136195.168848,
+        "acknowledged_unpublished_attempts": [],
+        "kind": "project.completion",
+        "operation_key": "6fec9aba-adbd-4ab8-ac99-7a394e33a749",
+        "plan_run_id": "dcb46d86-14dd-4412-a298-733b46b80495",
+        "project_id": 101,
+        "project_status": "completed",
+        "publication_performed": false,
+        "report_markdown": "# Informe del proyecto: Relación ilustrativa de datos\n\nEste informe reúne decisiones y evidencia guardadas. Que una tarea termine no demuestra que se hayan cumplido todos los objetivos.\n\n## Alcance que se revisa\n\nDescripción original registrada:\nDocumentar el ejemplo y explicar su fila CSV y sus límites; no programar un exportador.\n\nDescripción actual registrada:\nDocumentar el ejemplo y explicar su fila CSV y sus límites; no programar un exportador.\n\nSolicitud original de planificación:\nDocumentar el ejemplo y explicar su fila CSV y sus límites; no programar un exportador.\n\n## Resultados por tarea\n\n### Documentar la relación ilustrativa · tarea 1\n\nCriterio registrado: No registrado.\n\nPlan aceptado como propuesta de trabajo; no demuestra por sí solo cobertura de los objetivos.\n\n### Documentar una observación ilustrativa · tarea 2\n\nCriterio registrado: Entrada y su procedencia ilustrativa explícitas.\n\nResultado documental aceptado: Relación de campos ilustrada.\n\nLimitaciones declaradas: [\"El ejemplo no es una medición real.\",\"Falta comprobar los datos reales.\"]\n\n#### Una observación y su fila CSV\n# Una observación y su fila CSV\n\nEntrada ilustrativa: {\"id\":7,\"measurement\":12}. Salida ilustrativa: columnas id,value y fila7,12. No se comprobó la estructura de los registros reales.\n\nFuentes, citas y revisiones originales conservadas en la evidencia de este informe.\nNo se infiere confianza científica por haber aceptado un informe.\n\n### Explicar la fila CSV y sus límites · tarea 3\n\nCriterio registrado: Salida relacionada con entrada y límites explícitos.\n\nResultado documental aceptado: Relación de campos ilustrada.\n\nLimitaciones declaradas: [\"El ejemplo no es una medición real.\",\"Falta comprobar los datos reales.\"]\n\n#### Una observación y su fila CSV\n# Una observación y su fila CSV\n\nEntrada ilustrativa: {\"id\":7,\"measurement\":12}. Salida ilustrativa: columnas id,value y fila7,12. No se comprobó la estructura de los registros reales.\n\nFuentes, citas y revisiones originales conservadas en la evidencia de este informe.\nNo se infiere confianza científica por haber aceptado un informe.\n\n## Límites y decisión pendiente\n\nLas fuentes y decisiones completas se incluyen en el snapshot, con sus hashes y versiones. Una publicación registrada describe lo observado entonces; no prueba el estado remoto actual.\nEl propietario debe comparar este alcance con su intención, revisar los límites y reconocer cada candidato sin publicación antes de aceptar el cierre.\n\nNo hay impedimentos estructurales registrados. Esto no demuestra comprensión compartida ni cumplimiento semántico; falta tu decisión explícita.",
+        "report_sha256": "95f5d55dfd3c911ca750b55b7a254d3ee349c6ed5d9be4c79c99a6f04f490e16",
+        "snapshot": {
+          "active_work": [],
+          "blockers": [],
+          "deliveries": [
+            {
+              "delivery_id": "6f5f2264b867476e9f185b59eee54172",
+              "run_id": "e0bd4981-77ee-4b80-b929-69ccc15d3dd5",
+              "status": "accepted",
+              "task_id": 2
+            },
+            {
+              "delivery_id": "14fa37f518974181a890f433ba023b0a",
+              "run_id": "c4437a62-4a00-41c0-b369-c5e63bc7761f",
+              "status": "accepted",
+              "task_id": 3
+            }
+          ],
+          "epics": [
+            {
+              "description": "Documentación del ejemplo, sin implementación ni mediciones.",
+              "id": 1,
+              "status": "open",
+              "title": "Entrada y salida del ejemplo"
+            }
+          ],
+          "interpretation": "Recorded acceptance is evidence of an owner decision, not proof of shared understanding, semantic scope coverage, scientific confidence or current remote branch state.",
+          "manifest": {
+            "acceptance_id": "e87d035ea4e8402d855f3f3b71f8fda7",
+            "plan_context_version": 1,
+            "plan_run_id": "dcb46d86-14dd-4412-a298-733b46b80495",
+            "plan_task_id": 1,
+            "proposal_id": "292b46f3d35f4f59b107564e53542b4b",
+            "repository": {
+              "device": 53,
+              "inode": 9207551,
+              "registration_path": "/home/andres/.codex/worktrees/b09e/researcher/.researcher/evaluations/project-closure-20261108/host/sources/observations",
+              "repository_id": 11,
+              "repository_name": "observaciones",
+              "requested_repository_id": 11,
+              "workspace": "/home/andres/.codex/worktrees/b09e/researcher/.researcher/evaluations/project-closure-20261108/host/sources/observations"
+            },
+            "tasks": [
+              {
+                "context_version": 1,
+                "depends_on": [],
+                "priority": 2,
+                "task_id": 2,
+                "title": "Documentar una observación ilustrativa",
+                "type": "research"
+              },
+              {
+                "context_version": 1,
+                "depends_on": [
+                  2
+                ],
+                "priority": 2,
+                "task_id": 3,
+                "title": "Explicar la fila CSV y sus límites",
+                "type": "research"
+              }
+            ]
+          },
+          "milestones": [],
+          "open_peers": [],
+          "original_plan_input": {
+            "instruction_origin": "owner_message",
+            "owner_request": "Documentar el ejemplo y explicar su fila CSV y sus límites; no programar un exportador.",
+            "project": {
+              "description": "Documentar el ejemplo y explicar su fila CSV y sus límites; no programar un exportador.",
+              "name": "Relación ilustrativa de datos"
+            },
+            "project_history": {
+              "legacy_snapshot": null,
+              "limits": [],
+              "task_inventory": {
+                "captured": 0,
+                "complete": true,
+                "status_authority": "Observed labels are not proof of native acceptance or current execution.",
+                "total": 0
+              }
+            },
+            "source_origins": {
+              "acceptance_criteria": "task_metadata",
+              "owner_request": "owner_message",
+              "project_description": "project_metadata",
+              "project_name": "project_metadata",
+              "project_tasks": "project_task_inventory",
+              "task_description": "task_metadata"
+            },
+            "sources": {
+              "acceptance_criteria": "",
+              "owner_request": "Documentar el ejemplo y explicar su fila CSV y sus límites; no programar un exportador.",
+              "project_description": "Documentar el ejemplo y explicar su fila CSV y sus límites; no programar un exportador.",
+              "project_name": "Relación ilustrativa de datos",
+              "project_tasks": "[]",
+              "task_description": "Documentar el ejemplo y explicar su fila CSV y sus límites; no programar un exportador."
+            },
+            "task_context": {
+              "context_version": 1,
+              "corrections": [],
+              "task": {
+                "acceptance_criteria": null,
+                "assigned_to": null,
+                "branch_name": null,
+                "context_json": null,
+                "description": "Documentar el ejemplo y explicar su fila CSV y sus límites; no programar un exportador.",
+                "epic_id": null,
+                "estimated_complexity": "medium",
+                "milestone_id": null,
+                "parent_task_id": null,
+                "priority": 2,
+                "reviewer": null,
+                "status": "backlog",
+                "title": "Documentar la relación ilustrativa",
+                "type": "plan"
+              },
+              "task_changes": [],
+              "user_answers": []
+            }
+          },
+          "plan_run_id": "dcb46d86-14dd-4412-a298-733b46b80495",
+          "project": {
+            "description": "Documentar el ejemplo y explicar su fila CSV y sus límites; no programar un exportador.",
+            "id": 101,
+            "name": "Relación ilustrativa de datos",
+            "original_description": "Documentar el ejemplo y explicar su fila CSV y sus límites; no programar un exportador."
+          },
+          "registered_legacy_work": false,
+          "schema_version": 1,
+          "tasks": [
+            {
+              "acceptance_criteria": null,
+              "context_version": 1,
+              "description": "Documentar el ejemplo y explicar su fila CSV y sus límites; no programar un exportador.",
+              "epic_id": null,
+              "evidence": {
+                "acceptance": {
+                  "context_version": 1,
+                  "epics": {
+                    "docs": 1
+                  },
+                  "execution_started": false,
+                  "operation_key": "fixture-plan-acceptance",
+                  "project_id": 101,
+                  "proposal_sha256": "b643e9306b3b6162eeff2ccb670ccd702efc34e5867d43b613766e84c7849abe",
+                  "run_id": "dcb46d86-14dd-4412-a298-733b46b80495",
+                  "task_id": 1,
+                  "tasks": {
+                    "explain": 3,
+                    "learn": 2
+                  }
+                },
+                "context_version": 1,
+                "kind": "accepted_plan",
+                "owner_graph_revision": 0,
+                "run_id": "dcb46d86-14dd-4412-a298-733b46b80495"
+              },
+              "id": 1,
+              "milestone_id": null,
+              "status": "done",
+              "title": "Documentar la relación ilustrativa",
+              "type": "plan"
+            },
+            {
+              "acceptance_criteria": "Entrada y su procedencia ilustrativa explícitas.",
+              "context_version": 1,
+              "description": "Explicar id y measurement como datos inventados.",
+              "epic_id": 1,
+              "evidence": {
+                "acceptance": {
+                  "id": 1,
+                  "review_sha256": "1a98ceb8a7bcd61d923a96964d3e52ccf20d161bb63e6b9943d4b5093b8d49b3",
+                  "subject_sha256": "ac7e2ef633f39df731b82537e09bd2781124a2bf73eacd6eff6b833f957bb525"
+                },
+                "actor_id": "native-researcher",
+                "attempt_id": "59869e13-e783-4430-a600-c56020ca08b4",
+                "context_version": 1,
+                "kind": "accepted_research_reports",
+                "owner_acceptance": {
+                  "acceptance_id": 1,
+                  "acceptance_scope": "research_reports",
+                  "accepted_at": 1794136190.2741582,
+                  "acknowledged_limits": true,
+                  "actor_source": "paired_owner_action",
+                  "candidate_id": 1,
+                  "candidate_sha256": "ac7e2ef633f39df731b82537e09bd2781124a2bf73eacd6eff6b833f957bb525",
+                  "context_version": 1,
+                  "operation_key": "fixture-research-acceptance",
+                  "owner_note": "Synthetic domain decision, not human or scientific acceptance.",
+                  "project_id": 101,
+                  "publication_performed": false,
+                  "review_sha256": "1a98ceb8a7bcd61d923a96964d3e52ccf20d161bb63e6b9943d4b5093b8d49b3",
+                  "run_id": "e0bd4981-77ee-4b80-b929-69ccc15d3dd5",
+                  "scientific_confidence": null,
+                  "task_accepted": true,
+                  "task_id": 2
+                },
+                "run_id": "e0bd4981-77ee-4b80-b929-69ccc15d3dd5",
+                "snapshot": {
+                  "acceptance_scope": "owner acceptance of research reports; not code or publication authorization",
+                  "findings": [
+                    {
+                      "author": {
+                        "actor_id": "native-researcher",
+                        "attempt_id": "59869e13-e783-4430-a600-c56020ca08b4",
+                        "context_version": 1,
+                        "fence": 1,
+                        "run_id": "e0bd4981-77ee-4b80-b929-69ccc15d3dd5",
+                        "thread_id": "synthetic-closure-learn-thread",
+                        "turn_id": "synthetic-closure-learn-turn",
+                        "version_proof": "committed_finding_version"
+                      },
+                      "evidence": [
+                        {
+                          "quote": "En el ejemplo sintético, measurement se escribe en la columna value.",
+                          "source_id": 1
+                        }
+                      ],
+                      "finding": {
+                        "agent_id": "native-researcher",
+                        "agent_run_id": null,
+                        "artifact_id": null,
+                        "confidence": null,
+                        "content": "En el ejemplo sintético, measurement se escribe en la columna value.",
+                        "created_at": "2026-11-08 11:09:50",
+                        "finding_type": "observation",
+                        "id": 1,
+                        "project_id": 101,
+                        "reproducibility_score": null,
+                        "sources_json": "[\"synthetic:csv-example\"]",
+                        "status": "provisional",
+                        "task_id": 2,
+                        "topic": "Relación entre entrada y salida",
+                        "validation_method": null,
+                        "wiki_page_id": null
+                      }
+                    }
+                  ],
+                  "kind": "research_reports",
+                  "limitations": [
+                    "El ejemplo no es una medición real.",
+                    "Falta comprobar los datos reales."
+                  ],
+                  "report_ids": [
+                    1
+                  ],
+                  "reports": [
+                    {
+                      "artifact_id": 1,
+                      "content": "# Una observación y su fila CSV\n\nEntrada ilustrativa: {\"id\":7,\"measurement\":12}. Salida ilustrativa: columnas id,value y fila7,12. No se comprobó la estructura de los registros reales.",
+                      "content_sha256": "7848bd7bd790165c19258735bcdfe93dcc80f63084310a1f17d8740cc45cd26c",
+                      "finding_ids": [
+                        1
+                      ],
+                      "producer": {
+                        "actor_id": "native-researcher",
+                        "attempt_id": "59869e13-e783-4430-a600-c56020ca08b4",
+                        "operation_key": "fixture-report",
+                        "run_id": "e0bd4981-77ee-4b80-b929-69ccc15d3dd5",
+                        "writer_intent_sha256": "9fb0f2a4b41fb0add4cfb4ad16eb9600c578eabc0f87b1c939a87ecc63ef05df"
+                      },
+                      "report_type": "research",
+                      "title": "Una observación y su fila CSV"
+                    }
+                  ],
+                  "schema_version": 1,
+                  "scientific_confidence": null,
+                  "scope": {
+                    "actor_id": "native-researcher",
+                    "attempt_id": "59869e13-e783-4430-a600-c56020ca08b4",
+                    "context_version": 1,
+                    "fence": 1,
+                    "project_id": 101,
+                    "run_id": "e0bd4981-77ee-4b80-b929-69ccc15d3dd5",
+                    "task_id": 2
+                  },
+                  "sources": [
+                    {
+                      "metadata_sha256": "a6b9d985f8a08d3ee007e3ffe6c1b9a4cc6d82460811c394fc9fe031618b99b7",
+                      "source": {
+                        "captured_at": 1794136190.1689308,
+                        "content": "En el ejemplo sintético, measurement se escribe en la columna value.",
+                        "id": 1,
+                        "kind": "attachment",
+                        "locator": "synthetic:csv-example",
+                        "project_id": 101,
+                        "provenance": {},
+                        "sha256": "b419b9fe5dc6ac8e73c5b1cebabfe5cbfcae053d28a11a6e6d96483c73776b4d",
+                        "task_id": 2,
+                        "title": "Relación ilustrativa"
+                      }
+                    }
+                  ],
+                  "summary": "Relación de campos ilustrada.",
+                  "task": {
+                    "acceptance_criteria": "Entrada y su procedencia ilustrativa explícitas.",
+                    "assigned_to": null,
+                    "branch_name": null,
+                    "context_json": null,
+                    "description": "Explicar id y measurement como datos inventados.",
+                    "epic_id": 1,
+                    "estimated_complexity": "medium",
+                    "milestone_id": null,
+                    "parent_task_id": null,
+                    "priority": 2,
+                    "reviewer": null,
+                    "title": "Documentar una observación ilustrativa",
+                    "type": "research"
+                  }
+                },
+                "task_id": 2
+              },
+              "id": 2,
+              "milestone_id": null,
+              "status": "done",
+              "title": "Documentar una observación ilustrativa",
+              "type": "research"
+            },
+            {
+              "acceptance_criteria": "Salida relacionada con entrada y límites explícitos.",
+              "context_version": 1,
+              "description": "Relacionar la entrada documentada con id,value y distinguirla de datos reales.",
+              "epic_id": 1,
+              "evidence": {
+                "acceptance": {
+                  "id": 2,
+                  "review_sha256": "60dc6e71666bfee4fd5780e33bcdbe48fef1106a3b3b0b75f4918d838b701516",
+                  "subject_sha256": "552aac4321b501438abc9b37a9bcdd72d32e2508da5292bf3c3b6aed20da8703"
+                },
+                "actor_id": "native-researcher",
+                "attempt_id": "6c2990cb-6da9-4da0-af14-2d63ba9993e9",
+                "context_version": 1,
+                "kind": "accepted_research_reports",
+                "owner_acceptance": {
+                  "acceptance_id": 2,
+                  "acceptance_scope": "research_reports",
+                  "accepted_at": 1794136190.4917018,
+                  "acknowledged_limits": true,
+                  "actor_source": "paired_owner_action",
+                  "candidate_id": 2,
+                  "candidate_sha256": "552aac4321b501438abc9b37a9bcdd72d32e2508da5292bf3c3b6aed20da8703",
+                  "context_version": 1,
+                  "operation_key": "fixture-research-acceptance",
+                  "owner_note": "Synthetic domain decision, not human or scientific acceptance.",
+                  "project_id": 101,
+                  "publication_performed": false,
+                  "review_sha256": "60dc6e71666bfee4fd5780e33bcdbe48fef1106a3b3b0b75f4918d838b701516",
+                  "run_id": "c4437a62-4a00-41c0-b369-c5e63bc7761f",
+                  "scientific_confidence": null,
+                  "task_accepted": true,
+                  "task_id": 3
+                },
+                "run_id": "c4437a62-4a00-41c0-b369-c5e63bc7761f",
+                "snapshot": {
+                  "acceptance_scope": "owner acceptance of research reports; not code or publication authorization",
+                  "findings": [
+                    {
+                      "author": {
+                        "actor_id": "native-researcher",
+                        "attempt_id": "6c2990cb-6da9-4da0-af14-2d63ba9993e9",
+                        "context_version": 1,
+                        "fence": 1,
+                        "run_id": "c4437a62-4a00-41c0-b369-c5e63bc7761f",
+                        "thread_id": "synthetic-closure-explain-thread",
+                        "turn_id": "synthetic-closure-explain-turn",
+                        "version_proof": "committed_finding_version"
+                      },
+                      "evidence": [
+                        {
+                          "quote": "En el ejemplo sintético, measurement se escribe en la columna value.",
+                          "source_id": 2
+                        }
+                      ],
+                      "finding": {
+                        "agent_id": "native-researcher",
+                        "agent_run_id": null,
+                        "artifact_id": null,
+                        "confidence": null,
+                        "content": "En el ejemplo sintético, measurement se escribe en la columna value.",
+                        "created_at": "2026-11-08 11:09:50",
+                        "finding_type": "observation",
+                        "id": 2,
+                        "project_id": 101,
+                        "reproducibility_score": null,
+                        "sources_json": "[\"synthetic:csv-example\"]",
+                        "status": "provisional",
+                        "task_id": 3,
+                        "topic": "Relación entre entrada y salida",
+                        "validation_method": null,
+                        "wiki_page_id": null
+                      }
+                    }
+                  ],
+                  "kind": "research_reports",
+                  "limitations": [
+                    "El ejemplo no es una medición real.",
+                    "Falta comprobar los datos reales."
+                  ],
+                  "report_ids": [
+                    2
+                  ],
+                  "reports": [
+                    {
+                      "artifact_id": 2,
+                      "content": "# Una observación y su fila CSV\n\nEntrada ilustrativa: {\"id\":7,\"measurement\":12}. Salida ilustrativa: columnas id,value y fila7,12. No se comprobó la estructura de los registros reales.",
+                      "content_sha256": "7848bd7bd790165c19258735bcdfe93dcc80f63084310a1f17d8740cc45cd26c",
+                      "finding_ids": [
+                        2
+                      ],
+                      "producer": {
+                        "actor_id": "native-researcher",
+                        "attempt_id": "6c2990cb-6da9-4da0-af14-2d63ba9993e9",
+                        "operation_key": "fixture-report",
+                        "run_id": "c4437a62-4a00-41c0-b369-c5e63bc7761f",
+                        "writer_intent_sha256": "280f4b0db7de23bb92d28e0c9495d1565f20bce8c1dd2955e6b9f6e6ac7bc2e8"
+                      },
+                      "report_type": "research",
+                      "title": "Una observación y su fila CSV"
+                    }
+                  ],
+                  "schema_version": 1,
+                  "scientific_confidence": null,
+                  "scope": {
+                    "actor_id": "native-researcher",
+                    "attempt_id": "6c2990cb-6da9-4da0-af14-2d63ba9993e9",
+                    "context_version": 1,
+                    "fence": 1,
+                    "project_id": 101,
+                    "run_id": "c4437a62-4a00-41c0-b369-c5e63bc7761f",
+                    "task_id": 3
+                  },
+                  "sources": [
+                    {
+                      "metadata_sha256": "f96e2e2c95cf795439afa5a74e31b5f83efbbd0c0fa5ed4563d257e6a7bd2e07",
+                      "source": {
+                        "captured_at": 1794136190.385937,
+                        "content": "En el ejemplo sintético, measurement se escribe en la columna value.",
+                        "id": 2,
+                        "kind": "attachment",
+                        "locator": "synthetic:csv-example",
+                        "project_id": 101,
+                        "provenance": {},
+                        "sha256": "b419b9fe5dc6ac8e73c5b1cebabfe5cbfcae053d28a11a6e6d96483c73776b4d",
+                        "task_id": 3,
+                        "title": "Relación ilustrativa"
+                      }
+                    }
+                  ],
+                  "summary": "Relación de campos ilustrada.",
+                  "task": {
+                    "acceptance_criteria": "Salida relacionada con entrada y límites explícitos.",
+                    "assigned_to": null,
+                    "branch_name": null,
+                    "context_json": null,
+                    "description": "Relacionar la entrada documentada con id,value y distinguirla de datos reales.",
+                    "epic_id": 1,
+                    "estimated_complexity": "medium",
+                    "milestone_id": null,
+                    "parent_task_id": null,
+                    "priority": 2,
+                    "reviewer": null,
+                    "title": "Explicar la fila CSV y sus límites",
+                    "type": "research"
+                  }
+                },
+                "task_id": 3
+              },
+              "id": 3,
+              "milestone_id": null,
+              "status": "done",
+              "title": "Explicar la fila CSV y sus límites",
+              "type": "research"
+            }
+          ],
+          "unpublished_attempts": [],
+          "unrevoked_grants": []
+        },
+        "statement": "Acepto sólo la documentación del ejemplo y su relación de campos. No confirma mediciones reales ni implementa un exportador; esas cosas quedan fuera de este alcance sintético.",
+        "task_id": 1
+      },
+      "acceptance_current": true,
+      "eligible": false
+    },
+    {
+      "report_sha256": "95f5d55dfd3c911ca750b55b7a254d3ee349c6ed5d9be4c79c99a6f04f490e16",
+      "acceptance": {
+        "accepted_at": 1794136195.168848,
+        "acknowledged_unpublished_attempts": [],
+        "kind": "project.completion",
+        "operation_key": "6fec9aba-adbd-4ab8-ac99-7a394e33a749",
+        "plan_run_id": "dcb46d86-14dd-4412-a298-733b46b80495",
+        "project_id": 101,
+        "project_status": "completed",
+        "publication_performed": false,
+        "report_markdown": "# Informe del proyecto: Relación ilustrativa de datos\n\nEste informe reúne decisiones y evidencia guardadas. Que una tarea termine no demuestra que se hayan cumplido todos los objetivos.\n\n## Alcance que se revisa\n\nDescripción original registrada:\nDocumentar el ejemplo y explicar su fila CSV y sus límites; no programar un exportador.\n\nDescripción actual registrada:\nDocumentar el ejemplo y explicar su fila CSV y sus límites; no programar un exportador.\n\nSolicitud original de planificación:\nDocumentar el ejemplo y explicar su fila CSV y sus límites; no programar un exportador.\n\n## Resultados por tarea\n\n### Documentar la relación ilustrativa · tarea 1\n\nCriterio registrado: No registrado.\n\nPlan aceptado como propuesta de trabajo; no demuestra por sí solo cobertura de los objetivos.\n\n### Documentar una observación ilustrativa · tarea 2\n\nCriterio registrado: Entrada y su procedencia ilustrativa explícitas.\n\nResultado documental aceptado: Relación de campos ilustrada.\n\nLimitaciones declaradas: [\"El ejemplo no es una medición real.\",\"Falta comprobar los datos reales.\"]\n\n#### Una observación y su fila CSV\n# Una observación y su fila CSV\n\nEntrada ilustrativa: {\"id\":7,\"measurement\":12}. Salida ilustrativa: columnas id,value y fila7,12. No se comprobó la estructura de los registros reales.\n\nFuentes, citas y revisiones originales conservadas en la evidencia de este informe.\nNo se infiere confianza científica por haber aceptado un informe.\n\n### Explicar la fila CSV y sus límites · tarea 3\n\nCriterio registrado: Salida relacionada con entrada y límites explícitos.\n\nResultado documental aceptado: Relación de campos ilustrada.\n\nLimitaciones declaradas: [\"El ejemplo no es una medición real.\",\"Falta comprobar los datos reales.\"]\n\n#### Una observación y su fila CSV\n# Una observación y su fila CSV\n\nEntrada ilustrativa: {\"id\":7,\"measurement\":12}. Salida ilustrativa: columnas id,value y fila7,12. No se comprobó la estructura de los registros reales.\n\nFuentes, citas y revisiones originales conservadas en la evidencia de este informe.\nNo se infiere confianza científica por haber aceptado un informe.\n\n## Límites y decisión pendiente\n\nLas fuentes y decisiones completas se incluyen en el snapshot, con sus hashes y versiones. Una publicación registrada describe lo observado entonces; no prueba el estado remoto actual.\nEl propietario debe comparar este alcance con su intención, revisar los límites y reconocer cada candidato sin publicación antes de aceptar el cierre.\n\nNo hay impedimentos estructurales registrados. Esto no demuestra comprensión compartida ni cumplimiento semántico; falta tu decisión explícita.",
+        "report_sha256": "95f5d55dfd3c911ca750b55b7a254d3ee349c6ed5d9be4c79c99a6f04f490e16",
+        "snapshot": {
+          "active_work": [],
+          "blockers": [],
+          "deliveries": [
+            {
+              "delivery_id": "6f5f2264b867476e9f185b59eee54172",
+              "run_id": "e0bd4981-77ee-4b80-b929-69ccc15d3dd5",
+              "status": "accepted",
+              "task_id": 2
+            },
+            {
+              "delivery_id": "14fa37f518974181a890f433ba023b0a",
+              "run_id": "c4437a62-4a00-41c0-b369-c5e63bc7761f",
+              "status": "accepted",
+              "task_id": 3
+            }
+          ],
+          "epics": [
+            {
+              "description": "Documentación del ejemplo, sin implementación ni mediciones.",
+              "id": 1,
+              "status": "open",
+              "title": "Entrada y salida del ejemplo"
+            }
+          ],
+          "interpretation": "Recorded acceptance is evidence of an owner decision, not proof of shared understanding, semantic scope coverage, scientific confidence or current remote branch state.",
+          "manifest": {
+            "acceptance_id": "e87d035ea4e8402d855f3f3b71f8fda7",
+            "plan_context_version": 1,
+            "plan_run_id": "dcb46d86-14dd-4412-a298-733b46b80495",
+            "plan_task_id": 1,
+            "proposal_id": "292b46f3d35f4f59b107564e53542b4b",
+            "repository": {
+              "device": 53,
+              "inode": 9207551,
+              "registration_path": "/home/andres/.codex/worktrees/b09e/researcher/.researcher/evaluations/project-closure-20261108/host/sources/observations",
+              "repository_id": 11,
+              "repository_name": "observaciones",
+              "requested_repository_id": 11,
+              "workspace": "/home/andres/.codex/worktrees/b09e/researcher/.researcher/evaluations/project-closure-20261108/host/sources/observations"
+            },
+            "tasks": [
+              {
+                "context_version": 1,
+                "depends_on": [],
+                "priority": 2,
+                "task_id": 2,
+                "title": "Documentar una observación ilustrativa",
+                "type": "research"
+              },
+              {
+                "context_version": 1,
+                "depends_on": [
+                  2
+                ],
+                "priority": 2,
+                "task_id": 3,
+                "title": "Explicar la fila CSV y sus límites",
+                "type": "research"
+              }
+            ]
+          },
+          "milestones": [],
+          "open_peers": [],
+          "original_plan_input": {
+            "instruction_origin": "owner_message",
+            "owner_request": "Documentar el ejemplo y explicar su fila CSV y sus límites; no programar un exportador.",
+            "project": {
+              "description": "Documentar el ejemplo y explicar su fila CSV y sus límites; no programar un exportador.",
+              "name": "Relación ilustrativa de datos"
+            },
+            "project_history": {
+              "legacy_snapshot": null,
+              "limits": [],
+              "task_inventory": {
+                "captured": 0,
+                "complete": true,
+                "status_authority": "Observed labels are not proof of native acceptance or current execution.",
+                "total": 0
+              }
+            },
+            "source_origins": {
+              "acceptance_criteria": "task_metadata",
+              "owner_request": "owner_message",
+              "project_description": "project_metadata",
+              "project_name": "project_metadata",
+              "project_tasks": "project_task_inventory",
+              "task_description": "task_metadata"
+            },
+            "sources": {
+              "acceptance_criteria": "",
+              "owner_request": "Documentar el ejemplo y explicar su fila CSV y sus límites; no programar un exportador.",
+              "project_description": "Documentar el ejemplo y explicar su fila CSV y sus límites; no programar un exportador.",
+              "project_name": "Relación ilustrativa de datos",
+              "project_tasks": "[]",
+              "task_description": "Documentar el ejemplo y explicar su fila CSV y sus límites; no programar un exportador."
+            },
+            "task_context": {
+              "context_version": 1,
+              "corrections": [],
+              "task": {
+                "acceptance_criteria": null,
+                "assigned_to": null,
+                "branch_name": null,
+                "context_json": null,
+                "description": "Documentar el ejemplo y explicar su fila CSV y sus límites; no programar un exportador.",
+                "epic_id": null,
+                "estimated_complexity": "medium",
+                "milestone_id": null,
+                "parent_task_id": null,
+                "priority": 2,
+                "reviewer": null,
+                "status": "backlog",
+                "title": "Documentar la relación ilustrativa",
+                "type": "plan"
+              },
+              "task_changes": [],
+              "user_answers": []
+            }
+          },
+          "plan_run_id": "dcb46d86-14dd-4412-a298-733b46b80495",
+          "project": {
+            "description": "Documentar el ejemplo y explicar su fila CSV y sus límites; no programar un exportador.",
+            "id": 101,
+            "name": "Relación ilustrativa de datos",
+            "original_description": "Documentar el ejemplo y explicar su fila CSV y sus límites; no programar un exportador."
+          },
+          "registered_legacy_work": false,
+          "schema_version": 1,
+          "tasks": [
+            {
+              "acceptance_criteria": null,
+              "context_version": 1,
+              "description": "Documentar el ejemplo y explicar su fila CSV y sus límites; no programar un exportador.",
+              "epic_id": null,
+              "evidence": {
+                "acceptance": {
+                  "context_version": 1,
+                  "epics": {
+                    "docs": 1
+                  },
+                  "execution_started": false,
+                  "operation_key": "fixture-plan-acceptance",
+                  "project_id": 101,
+                  "proposal_sha256": "b643e9306b3b6162eeff2ccb670ccd702efc34e5867d43b613766e84c7849abe",
+                  "run_id": "dcb46d86-14dd-4412-a298-733b46b80495",
+                  "task_id": 1,
+                  "tasks": {
+                    "explain": 3,
+                    "learn": 2
+                  }
+                },
+                "context_version": 1,
+                "kind": "accepted_plan",
+                "owner_graph_revision": 0,
+                "run_id": "dcb46d86-14dd-4412-a298-733b46b80495"
+              },
+              "id": 1,
+              "milestone_id": null,
+              "status": "done",
+              "title": "Documentar la relación ilustrativa",
+              "type": "plan"
+            },
+            {
+              "acceptance_criteria": "Entrada y su procedencia ilustrativa explícitas.",
+              "context_version": 1,
+              "description": "Explicar id y measurement como datos inventados.",
+              "epic_id": 1,
+              "evidence": {
+                "acceptance": {
+                  "id": 1,
+                  "review_sha256": "1a98ceb8a7bcd61d923a96964d3e52ccf20d161bb63e6b9943d4b5093b8d49b3",
+                  "subject_sha256": "ac7e2ef633f39df731b82537e09bd2781124a2bf73eacd6eff6b833f957bb525"
+                },
+                "actor_id": "native-researcher",
+                "attempt_id": "59869e13-e783-4430-a600-c56020ca08b4",
+                "context_version": 1,
+                "kind": "accepted_research_reports",
+                "owner_acceptance": {
+                  "acceptance_id": 1,
+                  "acceptance_scope": "research_reports",
+                  "accepted_at": 1794136190.2741582,
+                  "acknowledged_limits": true,
+                  "actor_source": "paired_owner_action",
+                  "candidate_id": 1,
+                  "candidate_sha256": "ac7e2ef633f39df731b82537e09bd2781124a2bf73eacd6eff6b833f957bb525",
+                  "context_version": 1,
+                  "operation_key": "fixture-research-acceptance",
+                  "owner_note": "Synthetic domain decision, not human or scientific acceptance.",
+                  "project_id": 101,
+                  "publication_performed": false,
+                  "review_sha256": "1a98ceb8a7bcd61d923a96964d3e52ccf20d161bb63e6b9943d4b5093b8d49b3",
+                  "run_id": "e0bd4981-77ee-4b80-b929-69ccc15d3dd5",
+                  "scientific_confidence": null,
+                  "task_accepted": true,
+                  "task_id": 2
+                },
+                "run_id": "e0bd4981-77ee-4b80-b929-69ccc15d3dd5",
+                "snapshot": {
+                  "acceptance_scope": "owner acceptance of research reports; not code or publication authorization",
+                  "findings": [
+                    {
+                      "author": {
+                        "actor_id": "native-researcher",
+                        "attempt_id": "59869e13-e783-4430-a600-c56020ca08b4",
+                        "context_version": 1,
+                        "fence": 1,
+                        "run_id": "e0bd4981-77ee-4b80-b929-69ccc15d3dd5",
+                        "thread_id": "synthetic-closure-learn-thread",
+                        "turn_id": "synthetic-closure-learn-turn",
+                        "version_proof": "committed_finding_version"
+                      },
+                      "evidence": [
+                        {
+                          "quote": "En el ejemplo sintético, measurement se escribe en la columna value.",
+                          "source_id": 1
+                        }
+                      ],
+                      "finding": {
+                        "agent_id": "native-researcher",
+                        "agent_run_id": null,
+                        "artifact_id": null,
+                        "confidence": null,
+                        "content": "En el ejemplo sintético, measurement se escribe en la columna value.",
+                        "created_at": "2026-11-08 11:09:50",
+                        "finding_type": "observation",
+                        "id": 1,
+                        "project_id": 101,
+                        "reproducibility_score": null,
+                        "sources_json": "[\"synthetic:csv-example\"]",
+                        "status": "provisional",
+                        "task_id": 2,
+                        "topic": "Relación entre entrada y salida",
+                        "validation_method": null,
+                        "wiki_page_id": null
+                      }
+                    }
+                  ],
+                  "kind": "research_reports",
+                  "limitations": [
+                    "El ejemplo no es una medición real.",
+                    "Falta comprobar los datos reales."
+                  ],
+                  "report_ids": [
+                    1
+                  ],
+                  "reports": [
+                    {
+                      "artifact_id": 1,
+                      "content": "# Una observación y su fila CSV\n\nEntrada ilustrativa: {\"id\":7,\"measurement\":12}. Salida ilustrativa: columnas id,value y fila7,12. No se comprobó la estructura de los registros reales.",
+                      "content_sha256": "7848bd7bd790165c19258735bcdfe93dcc80f63084310a1f17d8740cc45cd26c",
+                      "finding_ids": [
+                        1
+                      ],
+                      "producer": {
+                        "actor_id": "native-researcher",
+                        "attempt_id": "59869e13-e783-4430-a600-c56020ca08b4",
+                        "operation_key": "fixture-report",
+                        "run_id": "e0bd4981-77ee-4b80-b929-69ccc15d3dd5",
+                        "writer_intent_sha256": "9fb0f2a4b41fb0add4cfb4ad16eb9600c578eabc0f87b1c939a87ecc63ef05df"
+                      },
+                      "report_type": "research",
+                      "title": "Una observación y su fila CSV"
+                    }
+                  ],
+                  "schema_version": 1,
+                  "scientific_confidence": null,
+                  "scope": {
+                    "actor_id": "native-researcher",
+                    "attempt_id": "59869e13-e783-4430-a600-c56020ca08b4",
+                    "context_version": 1,
+                    "fence": 1,
+                    "project_id": 101,
+                    "run_id": "e0bd4981-77ee-4b80-b929-69ccc15d3dd5",
+                    "task_id": 2
+                  },
+                  "sources": [
+                    {
+                      "metadata_sha256": "a6b9d985f8a08d3ee007e3ffe6c1b9a4cc6d82460811c394fc9fe031618b99b7",
+                      "source": {
+                        "captured_at": 1794136190.1689308,
+                        "content": "En el ejemplo sintético, measurement se escribe en la columna value.",
+                        "id": 1,
+                        "kind": "attachment",
+                        "locator": "synthetic:csv-example",
+                        "project_id": 101,
+                        "provenance": {},
+                        "sha256": "b419b9fe5dc6ac8e73c5b1cebabfe5cbfcae053d28a11a6e6d96483c73776b4d",
+                        "task_id": 2,
+                        "title": "Relación ilustrativa"
+                      }
+                    }
+                  ],
+                  "summary": "Relación de campos ilustrada.",
+                  "task": {
+                    "acceptance_criteria": "Entrada y su procedencia ilustrativa explícitas.",
+                    "assigned_to": null,
+                    "branch_name": null,
+                    "context_json": null,
+                    "description": "Explicar id y measurement como datos inventados.",
+                    "epic_id": 1,
+                    "estimated_complexity": "medium",
+                    "milestone_id": null,
+                    "parent_task_id": null,
+                    "priority": 2,
+                    "reviewer": null,
+                    "title": "Documentar una observación ilustrativa",
+                    "type": "research"
+                  }
+                },
+                "task_id": 2
+              },
+              "id": 2,
+              "milestone_id": null,
+              "status": "done",
+              "title": "Documentar una observación ilustrativa",
+              "type": "research"
+            },
+            {
+              "acceptance_criteria": "Salida relacionada con entrada y límites explícitos.",
+              "context_version": 1,
+              "description": "Relacionar la entrada documentada con id,value y distinguirla de datos reales.",
+              "epic_id": 1,
+              "evidence": {
+                "acceptance": {
+                  "id": 2,
+                  "review_sha256": "60dc6e71666bfee4fd5780e33bcdbe48fef1106a3b3b0b75f4918d838b701516",
+                  "subject_sha256": "552aac4321b501438abc9b37a9bcdd72d32e2508da5292bf3c3b6aed20da8703"
+                },
+                "actor_id": "native-researcher",
+                "attempt_id": "6c2990cb-6da9-4da0-af14-2d63ba9993e9",
+                "context_version": 1,
+                "kind": "accepted_research_reports",
+                "owner_acceptance": {
+                  "acceptance_id": 2,
+                  "acceptance_scope": "research_reports",
+                  "accepted_at": 1794136190.4917018,
+                  "acknowledged_limits": true,
+                  "actor_source": "paired_owner_action",
+                  "candidate_id": 2,
+                  "candidate_sha256": "552aac4321b501438abc9b37a9bcdd72d32e2508da5292bf3c3b6aed20da8703",
+                  "context_version": 1,
+                  "operation_key": "fixture-research-acceptance",
+                  "owner_note": "Synthetic domain decision, not human or scientific acceptance.",
+                  "project_id": 101,
+                  "publication_performed": false,
+                  "review_sha256": "60dc6e71666bfee4fd5780e33bcdbe48fef1106a3b3b0b75f4918d838b701516",
+                  "run_id": "c4437a62-4a00-41c0-b369-c5e63bc7761f",
+                  "scientific_confidence": null,
+                  "task_accepted": true,
+                  "task_id": 3
+                },
+                "run_id": "c4437a62-4a00-41c0-b369-c5e63bc7761f",
+                "snapshot": {
+                  "acceptance_scope": "owner acceptance of research reports; not code or publication authorization",
+                  "findings": [
+                    {
+                      "author": {
+                        "actor_id": "native-researcher",
+                        "attempt_id": "6c2990cb-6da9-4da0-af14-2d63ba9993e9",
+                        "context_version": 1,
+                        "fence": 1,
+                        "run_id": "c4437a62-4a00-41c0-b369-c5e63bc7761f",
+                        "thread_id": "synthetic-closure-explain-thread",
+                        "turn_id": "synthetic-closure-explain-turn",
+                        "version_proof": "committed_finding_version"
+                      },
+                      "evidence": [
+                        {
+                          "quote": "En el ejemplo sintético, measurement se escribe en la columna value.",
+                          "source_id": 2
+                        }
+                      ],
+                      "finding": {
+                        "agent_id": "native-researcher",
+                        "agent_run_id": null,
+                        "artifact_id": null,
+                        "confidence": null,
+                        "content": "En el ejemplo sintético, measurement se escribe en la columna value.",
+                        "created_at": "2026-11-08 11:09:50",
+                        "finding_type": "observation",
+                        "id": 2,
+                        "project_id": 101,
+                        "reproducibility_score": null,
+                        "sources_json": "[\"synthetic:csv-example\"]",
+                        "status": "provisional",
+                        "task_id": 3,
+                        "topic": "Relación entre entrada y salida",
+                        "validation_method": null,
+                        "wiki_page_id": null
+                      }
+                    }
+                  ],
+                  "kind": "research_reports",
+                  "limitations": [
+                    "El ejemplo no es una medición real.",
+                    "Falta comprobar los datos reales."
+                  ],
+                  "report_ids": [
+                    2
+                  ],
+                  "reports": [
+                    {
+                      "artifact_id": 2,
+                      "content": "# Una observación y su fila CSV\n\nEntrada ilustrativa: {\"id\":7,\"measurement\":12}. Salida ilustrativa: columnas id,value y fila7,12. No se comprobó la estructura de los registros reales.",
+                      "content_sha256": "7848bd7bd790165c19258735bcdfe93dcc80f63084310a1f17d8740cc45cd26c",
+                      "finding_ids": [
+                        2
+                      ],
+                      "producer": {
+                        "actor_id": "native-researcher",
+                        "attempt_id": "6c2990cb-6da9-4da0-af14-2d63ba9993e9",
+                        "operation_key": "fixture-report",
+                        "run_id": "c4437a62-4a00-41c0-b369-c5e63bc7761f",
+                        "writer_intent_sha256": "280f4b0db7de23bb92d28e0c9495d1565f20bce8c1dd2955e6b9f6e6ac7bc2e8"
+                      },
+                      "report_type": "research",
+                      "title": "Una observación y su fila CSV"
+                    }
+                  ],
+                  "schema_version": 1,
+                  "scientific_confidence": null,
+                  "scope": {
+                    "actor_id": "native-researcher",
+                    "attempt_id": "6c2990cb-6da9-4da0-af14-2d63ba9993e9",
+                    "context_version": 1,
+                    "fence": 1,
+                    "project_id": 101,
+                    "run_id": "c4437a62-4a00-41c0-b369-c5e63bc7761f",
+                    "task_id": 3
+                  },
+                  "sources": [
+                    {
+                      "metadata_sha256": "f96e2e2c95cf795439afa5a74e31b5f83efbbd0c0fa5ed4563d257e6a7bd2e07",
+                      "source": {
+                        "captured_at": 1794136190.385937,
+                        "content": "En el ejemplo sintético, measurement se escribe en la columna value.",
+                        "id": 2,
+                        "kind": "attachment",
+                        "locator": "synthetic:csv-example",
+                        "project_id": 101,
+                        "provenance": {},
+                        "sha256": "b419b9fe5dc6ac8e73c5b1cebabfe5cbfcae053d28a11a6e6d96483c73776b4d",
+                        "task_id": 3,
+                        "title": "Relación ilustrativa"
+                      }
+                    }
+                  ],
+                  "summary": "Relación de campos ilustrada.",
+                  "task": {
+                    "acceptance_criteria": "Salida relacionada con entrada y límites explícitos.",
+                    "assigned_to": null,
+                    "branch_name": null,
+                    "context_json": null,
+                    "description": "Relacionar la entrada documentada con id,value y distinguirla de datos reales.",
+                    "epic_id": 1,
+                    "estimated_complexity": "medium",
+                    "milestone_id": null,
+                    "parent_task_id": null,
+                    "priority": 2,
+                    "reviewer": null,
+                    "title": "Explicar la fila CSV y sus límites",
+                    "type": "research"
+                  }
+                },
+                "task_id": 3
+              },
+              "id": 3,
+              "milestone_id": null,
+              "status": "done",
+              "title": "Explicar la fila CSV y sus límites",
+              "type": "research"
+            }
+          ],
+          "unpublished_attempts": [],
+          "unrevoked_grants": []
+        },
+        "statement": "Acepto sólo la documentación del ejemplo y su relación de campos. No confirma mediciones reales ni implementa un exportador; esas cosas quedan fuera de este alcance sintético.",
+        "task_id": 1
+      },
+      "acceptance_current": true,
+      "eligible": false
+    },
+    {
+      "report_sha256": "95f5d55dfd3c911ca750b55b7a254d3ee349c6ed5d9be4c79c99a6f04f490e16",
+      "acceptance": {
+        "accepted_at": 1794136195.168848,
+        "acknowledged_unpublished_attempts": [],
+        "kind": "project.completion",
+        "operation_key": "6fec9aba-adbd-4ab8-ac99-7a394e33a749",
+        "plan_run_id": "dcb46d86-14dd-4412-a298-733b46b80495",
+        "project_id": 101,
+        "project_status": "completed",
+        "publication_performed": false,
+        "report_markdown": "# Informe del proyecto: Relación ilustrativa de datos\n\nEste informe reúne decisiones y evidencia guardadas. Que una tarea termine no demuestra que se hayan cumplido todos los objetivos.\n\n## Alcance que se revisa\n\nDescripción original registrada:\nDocumentar el ejemplo y explicar su fila CSV y sus límites; no programar un exportador.\n\nDescripción actual registrada:\nDocumentar el ejemplo y explicar su fila CSV y sus límites; no programar un exportador.\n\nSolicitud original de planificación:\nDocumentar el ejemplo y explicar su fila CSV y sus límites; no programar un exportador.\n\n## Resultados por tarea\n\n### Documentar la relación ilustrativa · tarea 1\n\nCriterio registrado: No registrado.\n\nPlan aceptado como propuesta de trabajo; no demuestra por sí solo cobertura de los objetivos.\n\n### Documentar una observación ilustrativa · tarea 2\n\nCriterio registrado: Entrada y su procedencia ilustrativa explícitas.\n\nResultado documental aceptado: Relación de campos ilustrada.\n\nLimitaciones declaradas: [\"El ejemplo no es una medición real.\",\"Falta comprobar los datos reales.\"]\n\n#### Una observación y su fila CSV\n# Una observación y su fila CSV\n\nEntrada ilustrativa: {\"id\":7,\"measurement\":12}. Salida ilustrativa: columnas id,value y fila7,12. No se comprobó la estructura de los registros reales.\n\nFuentes, citas y revisiones originales conservadas en la evidencia de este informe.\nNo se infiere confianza científica por haber aceptado un informe.\n\n### Explicar la fila CSV y sus límites · tarea 3\n\nCriterio registrado: Salida relacionada con entrada y límites explícitos.\n\nResultado documental aceptado: Relación de campos ilustrada.\n\nLimitaciones declaradas: [\"El ejemplo no es una medición real.\",\"Falta comprobar los datos reales.\"]\n\n#### Una observación y su fila CSV\n# Una observación y su fila CSV\n\nEntrada ilustrativa: {\"id\":7,\"measurement\":12}. Salida ilustrativa: columnas id,value y fila7,12. No se comprobó la estructura de los registros reales.\n\nFuentes, citas y revisiones originales conservadas en la evidencia de este informe.\nNo se infiere confianza científica por haber aceptado un informe.\n\n## Límites y decisión pendiente\n\nLas fuentes y decisiones completas se incluyen en el snapshot, con sus hashes y versiones. Una publicación registrada describe lo observado entonces; no prueba el estado remoto actual.\nEl propietario debe comparar este alcance con su intención, revisar los límites y reconocer cada candidato sin publicación antes de aceptar el cierre.\n\nNo hay impedimentos estructurales registrados. Esto no demuestra comprensión compartida ni cumplimiento semántico; falta tu decisión explícita.",
+        "report_sha256": "95f5d55dfd3c911ca750b55b7a254d3ee349c6ed5d9be4c79c99a6f04f490e16",
+        "snapshot": {
+          "active_work": [],
+          "blockers": [],
+          "deliveries": [
+            {
+              "delivery_id": "6f5f2264b867476e9f185b59eee54172",
+              "run_id": "e0bd4981-77ee-4b80-b929-69ccc15d3dd5",
+              "status": "accepted",
+              "task_id": 2
+            },
+            {
+              "delivery_id": "14fa37f518974181a890f433ba023b0a",
+              "run_id": "c4437a62-4a00-41c0-b369-c5e63bc7761f",
+              "status": "accepted",
+              "task_id": 3
+            }
+          ],
+          "epics": [
+            {
+              "description": "Documentación del ejemplo, sin implementación ni mediciones.",
+              "id": 1,
+              "status": "open",
+              "title": "Entrada y salida del ejemplo"
+            }
+          ],
+          "interpretation": "Recorded acceptance is evidence of an owner decision, not proof of shared understanding, semantic scope coverage, scientific confidence or current remote branch state.",
+          "manifest": {
+            "acceptance_id": "e87d035ea4e8402d855f3f3b71f8fda7",
+            "plan_context_version": 1,
+            "plan_run_id": "dcb46d86-14dd-4412-a298-733b46b80495",
+            "plan_task_id": 1,
+            "proposal_id": "292b46f3d35f4f59b107564e53542b4b",
+            "repository": {
+              "device": 53,
+              "inode": 9207551,
+              "registration_path": "/home/andres/.codex/worktrees/b09e/researcher/.researcher/evaluations/project-closure-20261108/host/sources/observations",
+              "repository_id": 11,
+              "repository_name": "observaciones",
+              "requested_repository_id": 11,
+              "workspace": "/home/andres/.codex/worktrees/b09e/researcher/.researcher/evaluations/project-closure-20261108/host/sources/observations"
+            },
+            "tasks": [
+              {
+                "context_version": 1,
+                "depends_on": [],
+                "priority": 2,
+                "task_id": 2,
+                "title": "Documentar una observación ilustrativa",
+                "type": "research"
+              },
+              {
+                "context_version": 1,
+                "depends_on": [
+                  2
+                ],
+                "priority": 2,
+                "task_id": 3,
+                "title": "Explicar la fila CSV y sus límites",
+                "type": "research"
+              }
+            ]
+          },
+          "milestones": [],
+          "open_peers": [],
+          "original_plan_input": {
+            "instruction_origin": "owner_message",
+            "owner_request": "Documentar el ejemplo y explicar su fila CSV y sus límites; no programar un exportador.",
+            "project": {
+              "description": "Documentar el ejemplo y explicar su fila CSV y sus límites; no programar un exportador.",
+              "name": "Relación ilustrativa de datos"
+            },
+            "project_history": {
+              "legacy_snapshot": null,
+              "limits": [],
+              "task_inventory": {
+                "captured": 0,
+                "complete": true,
+                "status_authority": "Observed labels are not proof of native acceptance or current execution.",
+                "total": 0
+              }
+            },
+            "source_origins": {
+              "acceptance_criteria": "task_metadata",
+              "owner_request": "owner_message",
+              "project_description": "project_metadata",
+              "project_name": "project_metadata",
+              "project_tasks": "project_task_inventory",
+              "task_description": "task_metadata"
+            },
+            "sources": {
+              "acceptance_criteria": "",
+              "owner_request": "Documentar el ejemplo y explicar su fila CSV y sus límites; no programar un exportador.",
+              "project_description": "Documentar el ejemplo y explicar su fila CSV y sus límites; no programar un exportador.",
+              "project_name": "Relación ilustrativa de datos",
+              "project_tasks": "[]",
+              "task_description": "Documentar el ejemplo y explicar su fila CSV y sus límites; no programar un exportador."
+            },
+            "task_context": {
+              "context_version": 1,
+              "corrections": [],
+              "task": {
+                "acceptance_criteria": null,
+                "assigned_to": null,
+                "branch_name": null,
+                "context_json": null,
+                "description": "Documentar el ejemplo y explicar su fila CSV y sus límites; no programar un exportador.",
+                "epic_id": null,
+                "estimated_complexity": "medium",
+                "milestone_id": null,
+                "parent_task_id": null,
+                "priority": 2,
+                "reviewer": null,
+                "status": "backlog",
+                "title": "Documentar la relación ilustrativa",
+                "type": "plan"
+              },
+              "task_changes": [],
+              "user_answers": []
+            }
+          },
+          "plan_run_id": "dcb46d86-14dd-4412-a298-733b46b80495",
+          "project": {
+            "description": "Documentar el ejemplo y explicar su fila CSV y sus límites; no programar un exportador.",
+            "id": 101,
+            "name": "Relación ilustrativa de datos",
+            "original_description": "Documentar el ejemplo y explicar su fila CSV y sus límites; no programar un exportador."
+          },
+          "registered_legacy_work": false,
+          "schema_version": 1,
+          "tasks": [
+            {
+              "acceptance_criteria": null,
+              "context_version": 1,
+              "description": "Documentar el ejemplo y explicar su fila CSV y sus límites; no programar un exportador.",
+              "epic_id": null,
+              "evidence": {
+                "acceptance": {
+                  "context_version": 1,
+                  "epics": {
+                    "docs": 1
+                  },
+                  "execution_started": false,
+                  "operation_key": "fixture-plan-acceptance",
+                  "project_id": 101,
+                  "proposal_sha256": "b643e9306b3b6162eeff2ccb670ccd702efc34e5867d43b613766e84c7849abe",
+                  "run_id": "dcb46d86-14dd-4412-a298-733b46b80495",
+                  "task_id": 1,
+                  "tasks": {
+                    "explain": 3,
+                    "learn": 2
+                  }
+                },
+                "context_version": 1,
+                "kind": "accepted_plan",
+                "owner_graph_revision": 0,
+                "run_id": "dcb46d86-14dd-4412-a298-733b46b80495"
+              },
+              "id": 1,
+              "milestone_id": null,
+              "status": "done",
+              "title": "Documentar la relación ilustrativa",
+              "type": "plan"
+            },
+            {
+              "acceptance_criteria": "Entrada y su procedencia ilustrativa explícitas.",
+              "context_version": 1,
+              "description": "Explicar id y measurement como datos inventados.",
+              "epic_id": 1,
+              "evidence": {
+                "acceptance": {
+                  "id": 1,
+                  "review_sha256": "1a98ceb8a7bcd61d923a96964d3e52ccf20d161bb63e6b9943d4b5093b8d49b3",
+                  "subject_sha256": "ac7e2ef633f39df731b82537e09bd2781124a2bf73eacd6eff6b833f957bb525"
+                },
+                "actor_id": "native-researcher",
+                "attempt_id": "59869e13-e783-4430-a600-c56020ca08b4",
+                "context_version": 1,
+                "kind": "accepted_research_reports",
+                "owner_acceptance": {
+                  "acceptance_id": 1,
+                  "acceptance_scope": "research_reports",
+                  "accepted_at": 1794136190.2741582,
+                  "acknowledged_limits": true,
+                  "actor_source": "paired_owner_action",
+                  "candidate_id": 1,
+                  "candidate_sha256": "ac7e2ef633f39df731b82537e09bd2781124a2bf73eacd6eff6b833f957bb525",
+                  "context_version": 1,
+                  "operation_key": "fixture-research-acceptance",
+                  "owner_note": "Synthetic domain decision, not human or scientific acceptance.",
+                  "project_id": 101,
+                  "publication_performed": false,
+                  "review_sha256": "1a98ceb8a7bcd61d923a96964d3e52ccf20d161bb63e6b9943d4b5093b8d49b3",
+                  "run_id": "e0bd4981-77ee-4b80-b929-69ccc15d3dd5",
+                  "scientific_confidence": null,
+                  "task_accepted": true,
+                  "task_id": 2
+                },
+                "run_id": "e0bd4981-77ee-4b80-b929-69ccc15d3dd5",
+                "snapshot": {
+                  "acceptance_scope": "owner acceptance of research reports; not code or publication authorization",
+                  "findings": [
+                    {
+                      "author": {
+                        "actor_id": "native-researcher",
+                        "attempt_id": "59869e13-e783-4430-a600-c56020ca08b4",
+                        "context_version": 1,
+                        "fence": 1,
+                        "run_id": "e0bd4981-77ee-4b80-b929-69ccc15d3dd5",
+                        "thread_id": "synthetic-closure-learn-thread",
+                        "turn_id": "synthetic-closure-learn-turn",
+                        "version_proof": "committed_finding_version"
+                      },
+                      "evidence": [
+                        {
+                          "quote": "En el ejemplo sintético, measurement se escribe en la columna value.",
+                          "source_id": 1
+                        }
+                      ],
+                      "finding": {
+                        "agent_id": "native-researcher",
+                        "agent_run_id": null,
+                        "artifact_id": null,
+                        "confidence": null,
+                        "content": "En el ejemplo sintético, measurement se escribe en la columna value.",
+                        "created_at": "2026-11-08 11:09:50",
+                        "finding_type": "observation",
+                        "id": 1,
+                        "project_id": 101,
+                        "reproducibility_score": null,
+                        "sources_json": "[\"synthetic:csv-example\"]",
+                        "status": "provisional",
+                        "task_id": 2,
+                        "topic": "Relación entre entrada y salida",
+                        "validation_method": null,
+                        "wiki_page_id": null
+                      }
+                    }
+                  ],
+                  "kind": "research_reports",
+                  "limitations": [
+                    "El ejemplo no es una medición real.",
+                    "Falta comprobar los datos reales."
+                  ],
+                  "report_ids": [
+                    1
+                  ],
+                  "reports": [
+                    {
+                      "artifact_id": 1,
+                      "content": "# Una observación y su fila CSV\n\nEntrada ilustrativa: {\"id\":7,\"measurement\":12}. Salida ilustrativa: columnas id,value y fila7,12. No se comprobó la estructura de los registros reales.",
+                      "content_sha256": "7848bd7bd790165c19258735bcdfe93dcc80f63084310a1f17d8740cc45cd26c",
+                      "finding_ids": [
+                        1
+                      ],
+                      "producer": {
+                        "actor_id": "native-researcher",
+                        "attempt_id": "59869e13-e783-4430-a600-c56020ca08b4",
+                        "operation_key": "fixture-report",
+                        "run_id": "e0bd4981-77ee-4b80-b929-69ccc15d3dd5",
+                        "writer_intent_sha256": "9fb0f2a4b41fb0add4cfb4ad16eb9600c578eabc0f87b1c939a87ecc63ef05df"
+                      },
+                      "report_type": "research",
+                      "title": "Una observación y su fila CSV"
+                    }
+                  ],
+                  "schema_version": 1,
+                  "scientific_confidence": null,
+                  "scope": {
+                    "actor_id": "native-researcher",
+                    "attempt_id": "59869e13-e783-4430-a600-c56020ca08b4",
+                    "context_version": 1,
+                    "fence": 1,
+                    "project_id": 101,
+                    "run_id": "e0bd4981-77ee-4b80-b929-69ccc15d3dd5",
+                    "task_id": 2
+                  },
+                  "sources": [
+                    {
+                      "metadata_sha256": "a6b9d985f8a08d3ee007e3ffe6c1b9a4cc6d82460811c394fc9fe031618b99b7",
+                      "source": {
+                        "captured_at": 1794136190.1689308,
+                        "content": "En el ejemplo sintético, measurement se escribe en la columna value.",
+                        "id": 1,
+                        "kind": "attachment",
+                        "locator": "synthetic:csv-example",
+                        "project_id": 101,
+                        "provenance": {},
+                        "sha256": "b419b9fe5dc6ac8e73c5b1cebabfe5cbfcae053d28a11a6e6d96483c73776b4d",
+                        "task_id": 2,
+                        "title": "Relación ilustrativa"
+                      }
+                    }
+                  ],
+                  "summary": "Relación de campos ilustrada.",
+                  "task": {
+                    "acceptance_criteria": "Entrada y su procedencia ilustrativa explícitas.",
+                    "assigned_to": null,
+                    "branch_name": null,
+                    "context_json": null,
+                    "description": "Explicar id y measurement como datos inventados.",
+                    "epic_id": 1,
+                    "estimated_complexity": "medium",
+                    "milestone_id": null,
+                    "parent_task_id": null,
+                    "priority": 2,
+                    "reviewer": null,
+                    "title": "Documentar una observación ilustrativa",
+                    "type": "research"
+                  }
+                },
+                "task_id": 2
+              },
+              "id": 2,
+              "milestone_id": null,
+              "status": "done",
+              "title": "Documentar una observación ilustrativa",
+              "type": "research"
+            },
+            {
+              "acceptance_criteria": "Salida relacionada con entrada y límites explícitos.",
+              "context_version": 1,
+              "description": "Relacionar la entrada documentada con id,value y distinguirla de datos reales.",
+              "epic_id": 1,
+              "evidence": {
+                "acceptance": {
+                  "id": 2,
+                  "review_sha256": "60dc6e71666bfee4fd5780e33bcdbe48fef1106a3b3b0b75f4918d838b701516",
+                  "subject_sha256": "552aac4321b501438abc9b37a9bcdd72d32e2508da5292bf3c3b6aed20da8703"
+                },
+                "actor_id": "native-researcher",
+                "attempt_id": "6c2990cb-6da9-4da0-af14-2d63ba9993e9",
+                "context_version": 1,
+                "kind": "accepted_research_reports",
+                "owner_acceptance": {
+                  "acceptance_id": 2,
+                  "acceptance_scope": "research_reports",
+                  "accepted_at": 1794136190.4917018,
+                  "acknowledged_limits": true,
+                  "actor_source": "paired_owner_action",
+                  "candidate_id": 2,
+                  "candidate_sha256": "552aac4321b501438abc9b37a9bcdd72d32e2508da5292bf3c3b6aed20da8703",
+                  "context_version": 1,
+                  "operation_key": "fixture-research-acceptance",
+                  "owner_note": "Synthetic domain decision, not human or scientific acceptance.",
+                  "project_id": 101,
+                  "publication_performed": false,
+                  "review_sha256": "60dc6e71666bfee4fd5780e33bcdbe48fef1106a3b3b0b75f4918d838b701516",
+                  "run_id": "c4437a62-4a00-41c0-b369-c5e63bc7761f",
+                  "scientific_confidence": null,
+                  "task_accepted": true,
+                  "task_id": 3
+                },
+                "run_id": "c4437a62-4a00-41c0-b369-c5e63bc7761f",
+                "snapshot": {
+                  "acceptance_scope": "owner acceptance of research reports; not code or publication authorization",
+                  "findings": [
+                    {
+                      "author": {
+                        "actor_id": "native-researcher",
+                        "attempt_id": "6c2990cb-6da9-4da0-af14-2d63ba9993e9",
+                        "context_version": 1,
+                        "fence": 1,
+                        "run_id": "c4437a62-4a00-41c0-b369-c5e63bc7761f",
+                        "thread_id": "synthetic-closure-explain-thread",
+                        "turn_id": "synthetic-closure-explain-turn",
+                        "version_proof": "committed_finding_version"
+                      },
+                      "evidence": [
+                        {
+                          "quote": "En el ejemplo sintético, measurement se escribe en la columna value.",
+                          "source_id": 2
+                        }
+                      ],
+                      "finding": {
+                        "agent_id": "native-researcher",
+                        "agent_run_id": null,
+                        "artifact_id": null,
+                        "confidence": null,
+                        "content": "En el ejemplo sintético, measurement se escribe en la columna value.",
+                        "created_at": "2026-11-08 11:09:50",
+                        "finding_type": "observation",
+                        "id": 2,
+                        "project_id": 101,
+                        "reproducibility_score": null,
+                        "sources_json": "[\"synthetic:csv-example\"]",
+                        "status": "provisional",
+                        "task_id": 3,
+                        "topic": "Relación entre entrada y salida",
+                        "validation_method": null,
+                        "wiki_page_id": null
+                      }
+                    }
+                  ],
+                  "kind": "research_reports",
+                  "limitations": [
+                    "El ejemplo no es una medición real.",
+                    "Falta comprobar los datos reales."
+                  ],
+                  "report_ids": [
+                    2
+                  ],
+                  "reports": [
+                    {
+                      "artifact_id": 2,
+                      "content": "# Una observación y su fila CSV\n\nEntrada ilustrativa: {\"id\":7,\"measurement\":12}. Salida ilustrativa: columnas id,value y fila7,12. No se comprobó la estructura de los registros reales.",
+                      "content_sha256": "7848bd7bd790165c19258735bcdfe93dcc80f63084310a1f17d8740cc45cd26c",
+                      "finding_ids": [
+                        2
+                      ],
+                      "producer": {
+                        "actor_id": "native-researcher",
+                        "attempt_id": "6c2990cb-6da9-4da0-af14-2d63ba9993e9",
+                        "operation_key": "fixture-report",
+                        "run_id": "c4437a62-4a00-41c0-b369-c5e63bc7761f",
+                        "writer_intent_sha256": "280f4b0db7de23bb92d28e0c9495d1565f20bce8c1dd2955e6b9f6e6ac7bc2e8"
+                      },
+                      "report_type": "research",
+                      "title": "Una observación y su fila CSV"
+                    }
+                  ],
+                  "schema_version": 1,
+                  "scientific_confidence": null,
+                  "scope": {
+                    "actor_id": "native-researcher",
+                    "attempt_id": "6c2990cb-6da9-4da0-af14-2d63ba9993e9",
+                    "context_version": 1,
+                    "fence": 1,
+                    "project_id": 101,
+                    "run_id": "c4437a62-4a00-41c0-b369-c5e63bc7761f",
+                    "task_id": 3
+                  },
+                  "sources": [
+                    {
+                      "metadata_sha256": "f96e2e2c95cf795439afa5a74e31b5f83efbbd0c0fa5ed4563d257e6a7bd2e07",
+                      "source": {
+                        "captured_at": 1794136190.385937,
+                        "content": "En el ejemplo sintético, measurement se escribe en la columna value.",
+                        "id": 2,
+                        "kind": "attachment",
+                        "locator": "synthetic:csv-example",
+                        "project_id": 101,
+                        "provenance": {},
+                        "sha256": "b419b9fe5dc6ac8e73c5b1cebabfe5cbfcae053d28a11a6e6d96483c73776b4d",
+                        "task_id": 3,
+                        "title": "Relación ilustrativa"
+                      }
+                    }
+                  ],
+                  "summary": "Relación de campos ilustrada.",
+                  "task": {
+                    "acceptance_criteria": "Salida relacionada con entrada y límites explícitos.",
+                    "assigned_to": null,
+                    "branch_name": null,
+                    "context_json": null,
+                    "description": "Relacionar la entrada documentada con id,value y distinguirla de datos reales.",
+                    "epic_id": 1,
+                    "estimated_complexity": "medium",
+                    "milestone_id": null,
+                    "parent_task_id": null,
+                    "priority": 2,
+                    "reviewer": null,
+                    "title": "Explicar la fila CSV y sus límites",
+                    "type": "research"
+                  }
+                },
+                "task_id": 3
+              },
+              "id": 3,
+              "milestone_id": null,
+              "status": "done",
+              "title": "Explicar la fila CSV y sus límites",
+              "type": "research"
+            }
+          ],
+          "unpublished_attempts": [],
+          "unrevoked_grants": []
+        },
+        "statement": "Acepto sólo la documentación del ejemplo y su relación de campos. No confirma mediciones reales ni implementa un exportador; esas cosas quedan fuera de este alcance sintético.",
+        "task_id": 1
+      },
+      "acceptance_current": true,
+      "eligible": false
+    },
+    {
+      "report_sha256": "95f5d55dfd3c911ca750b55b7a254d3ee349c6ed5d9be4c79c99a6f04f490e16",
+      "acceptance": {
+        "accepted_at": 1794136195.168848,
+        "acknowledged_unpublished_attempts": [],
+        "kind": "project.completion",
+        "operation_key": "6fec9aba-adbd-4ab8-ac99-7a394e33a749",
+        "plan_run_id": "dcb46d86-14dd-4412-a298-733b46b80495",
+        "project_id": 101,
+        "project_status": "completed",
+        "publication_performed": false,
+        "report_markdown": "# Informe del proyecto: Relación ilustrativa de datos\n\nEste informe reúne decisiones y evidencia guardadas. Que una tarea termine no demuestra que se hayan cumplido todos los objetivos.\n\n## Alcance que se revisa\n\nDescripción original registrada:\nDocumentar el ejemplo y explicar su fila CSV y sus límites; no programar un exportador.\n\nDescripción actual registrada:\nDocumentar el ejemplo y explicar su fila CSV y sus límites; no programar un exportador.\n\nSolicitud original de planificación:\nDocumentar el ejemplo y explicar su fila CSV y sus límites; no programar un exportador.\n\n## Resultados por tarea\n\n### Documentar la relación ilustrativa · tarea 1\n\nCriterio registrado: No registrado.\n\nPlan aceptado como propuesta de trabajo; no demuestra por sí solo cobertura de los objetivos.\n\n### Documentar una observación ilustrativa · tarea 2\n\nCriterio registrado: Entrada y su procedencia ilustrativa explícitas.\n\nResultado documental aceptado: Relación de campos ilustrada.\n\nLimitaciones declaradas: [\"El ejemplo no es una medición real.\",\"Falta comprobar los datos reales.\"]\n\n#### Una observación y su fila CSV\n# Una observación y su fila CSV\n\nEntrada ilustrativa: {\"id\":7,\"measurement\":12}. Salida ilustrativa: columnas id,value y fila7,12. No se comprobó la estructura de los registros reales.\n\nFuentes, citas y revisiones originales conservadas en la evidencia de este informe.\nNo se infiere confianza científica por haber aceptado un informe.\n\n### Explicar la fila CSV y sus límites · tarea 3\n\nCriterio registrado: Salida relacionada con entrada y límites explícitos.\n\nResultado documental aceptado: Relación de campos ilustrada.\n\nLimitaciones declaradas: [\"El ejemplo no es una medición real.\",\"Falta comprobar los datos reales.\"]\n\n#### Una observación y su fila CSV\n# Una observación y su fila CSV\n\nEntrada ilustrativa: {\"id\":7,\"measurement\":12}. Salida ilustrativa: columnas id,value y fila7,12. No se comprobó la estructura de los registros reales.\n\nFuentes, citas y revisiones originales conservadas en la evidencia de este informe.\nNo se infiere confianza científica por haber aceptado un informe.\n\n## Límites y decisión pendiente\n\nLas fuentes y decisiones completas se incluyen en el snapshot, con sus hashes y versiones. Una publicación registrada describe lo observado entonces; no prueba el estado remoto actual.\nEl propietario debe comparar este alcance con su intención, revisar los límites y reconocer cada candidato sin publicación antes de aceptar el cierre.\n\nNo hay impedimentos estructurales registrados. Esto no demuestra comprensión compartida ni cumplimiento semántico; falta tu decisión explícita.",
+        "report_sha256": "95f5d55dfd3c911ca750b55b7a254d3ee349c6ed5d9be4c79c99a6f04f490e16",
+        "snapshot": {
+          "active_work": [],
+          "blockers": [],
+          "deliveries": [
+            {
+              "delivery_id": "6f5f2264b867476e9f185b59eee54172",
+              "run_id": "e0bd4981-77ee-4b80-b929-69ccc15d3dd5",
+              "status": "accepted",
+              "task_id": 2
+            },
+            {
+              "delivery_id": "14fa37f518974181a890f433ba023b0a",
+              "run_id": "c4437a62-4a00-41c0-b369-c5e63bc7761f",
+              "status": "accepted",
+              "task_id": 3
+            }
+          ],
+          "epics": [
+            {
+              "description": "Documentación del ejemplo, sin implementación ni mediciones.",
+              "id": 1,
+              "status": "open",
+              "title": "Entrada y salida del ejemplo"
+            }
+          ],
+          "interpretation": "Recorded acceptance is evidence of an owner decision, not proof of shared understanding, semantic scope coverage, scientific confidence or current remote branch state.",
+          "manifest": {
+            "acceptance_id": "e87d035ea4e8402d855f3f3b71f8fda7",
+            "plan_context_version": 1,
+            "plan_run_id": "dcb46d86-14dd-4412-a298-733b46b80495",
+            "plan_task_id": 1,
+            "proposal_id": "292b46f3d35f4f59b107564e53542b4b",
+            "repository": {
+              "device": 53,
+              "inode": 9207551,
+              "registration_path": "/home/andres/.codex/worktrees/b09e/researcher/.researcher/evaluations/project-closure-20261108/host/sources/observations",
+              "repository_id": 11,
+              "repository_name": "observaciones",
+              "requested_repository_id": 11,
+              "workspace": "/home/andres/.codex/worktrees/b09e/researcher/.researcher/evaluations/project-closure-20261108/host/sources/observations"
+            },
+            "tasks": [
+              {
+                "context_version": 1,
+                "depends_on": [],
+                "priority": 2,
+                "task_id": 2,
+                "title": "Documentar una observación ilustrativa",
+                "type": "research"
+              },
+              {
+                "context_version": 1,
+                "depends_on": [
+                  2
+                ],
+                "priority": 2,
+                "task_id": 3,
+                "title": "Explicar la fila CSV y sus límites",
+                "type": "research"
+              }
+            ]
+          },
+          "milestones": [],
+          "open_peers": [],
+          "original_plan_input": {
+            "instruction_origin": "owner_message",
+            "owner_request": "Documentar el ejemplo y explicar su fila CSV y sus límites; no programar un exportador.",
+            "project": {
+              "description": "Documentar el ejemplo y explicar su fila CSV y sus límites; no programar un exportador.",
+              "name": "Relación ilustrativa de datos"
+            },
+            "project_history": {
+              "legacy_snapshot": null,
+              "limits": [],
+              "task_inventory": {
+                "captured": 0,
+                "complete": true,
+                "status_authority": "Observed labels are not proof of native acceptance or current execution.",
+                "total": 0
+              }
+            },
+            "source_origins": {
+              "acceptance_criteria": "task_metadata",
+              "owner_request": "owner_message",
+              "project_description": "project_metadata",
+              "project_name": "project_metadata",
+              "project_tasks": "project_task_inventory",
+              "task_description": "task_metadata"
+            },
+            "sources": {
+              "acceptance_criteria": "",
+              "owner_request": "Documentar el ejemplo y explicar su fila CSV y sus límites; no programar un exportador.",
+              "project_description": "Documentar el ejemplo y explicar su fila CSV y sus límites; no programar un exportador.",
+              "project_name": "Relación ilustrativa de datos",
+              "project_tasks": "[]",
+              "task_description": "Documentar el ejemplo y explicar su fila CSV y sus límites; no programar un exportador."
+            },
+            "task_context": {
+              "context_version": 1,
+              "corrections": [],
+              "task": {
+                "acceptance_criteria": null,
+                "assigned_to": null,
+                "branch_name": null,
+                "context_json": null,
+                "description": "Documentar el ejemplo y explicar su fila CSV y sus límites; no programar un exportador.",
+                "epic_id": null,
+                "estimated_complexity": "medium",
+                "milestone_id": null,
+                "parent_task_id": null,
+                "priority": 2,
+                "reviewer": null,
+                "status": "backlog",
+                "title": "Documentar la relación ilustrativa",
+                "type": "plan"
+              },
+              "task_changes": [],
+              "user_answers": []
+            }
+          },
+          "plan_run_id": "dcb46d86-14dd-4412-a298-733b46b80495",
+          "project": {
+            "description": "Documentar el ejemplo y explicar su fila CSV y sus límites; no programar un exportador.",
+            "id": 101,
+            "name": "Relación ilustrativa de datos",
+            "original_description": "Documentar el ejemplo y explicar su fila CSV y sus límites; no programar un exportador."
+          },
+          "registered_legacy_work": false,
+          "schema_version": 1,
+          "tasks": [
+            {
+              "acceptance_criteria": null,
+              "context_version": 1,
+              "description": "Documentar el ejemplo y explicar su fila CSV y sus límites; no programar un exportador.",
+              "epic_id": null,
+              "evidence": {
+                "acceptance": {
+                  "context_version": 1,
+                  "epics": {
+                    "docs": 1
+                  },
+                  "execution_started": false,
+                  "operation_key": "fixture-plan-acceptance",
+                  "project_id": 101,
+                  "proposal_sha256": "b643e9306b3b6162eeff2ccb670ccd702efc34e5867d43b613766e84c7849abe",
+                  "run_id": "dcb46d86-14dd-4412-a298-733b46b80495",
+                  "task_id": 1,
+                  "tasks": {
+                    "explain": 3,
+                    "learn": 2
+                  }
+                },
+                "context_version": 1,
+                "kind": "accepted_plan",
+                "owner_graph_revision": 0,
+                "run_id": "dcb46d86-14dd-4412-a298-733b46b80495"
+              },
+              "id": 1,
+              "milestone_id": null,
+              "status": "done",
+              "title": "Documentar la relación ilustrativa",
+              "type": "plan"
+            },
+            {
+              "acceptance_criteria": "Entrada y su procedencia ilustrativa explícitas.",
+              "context_version": 1,
+              "description": "Explicar id y measurement como datos inventados.",
+              "epic_id": 1,
+              "evidence": {
+                "acceptance": {
+                  "id": 1,
+                  "review_sha256": "1a98ceb8a7bcd61d923a96964d3e52ccf20d161bb63e6b9943d4b5093b8d49b3",
+                  "subject_sha256": "ac7e2ef633f39df731b82537e09bd2781124a2bf73eacd6eff6b833f957bb525"
+                },
+                "actor_id": "native-researcher",
+                "attempt_id": "59869e13-e783-4430-a600-c56020ca08b4",
+                "context_version": 1,
+                "kind": "accepted_research_reports",
+                "owner_acceptance": {
+                  "acceptance_id": 1,
+                  "acceptance_scope": "research_reports",
+                  "accepted_at": 1794136190.2741582,
+                  "acknowledged_limits": true,
+                  "actor_source": "paired_owner_action",
+                  "candidate_id": 1,
+                  "candidate_sha256": "ac7e2ef633f39df731b82537e09bd2781124a2bf73eacd6eff6b833f957bb525",
+                  "context_version": 1,
+                  "operation_key": "fixture-research-acceptance",
+                  "owner_note": "Synthetic domain decision, not human or scientific acceptance.",
+                  "project_id": 101,
+                  "publication_performed": false,
+                  "review_sha256": "1a98ceb8a7bcd61d923a96964d3e52ccf20d161bb63e6b9943d4b5093b8d49b3",
+                  "run_id": "e0bd4981-77ee-4b80-b929-69ccc15d3dd5",
+                  "scientific_confidence": null,
+                  "task_accepted": true,
+                  "task_id": 2
+                },
+                "run_id": "e0bd4981-77ee-4b80-b929-69ccc15d3dd5",
+                "snapshot": {
+                  "acceptance_scope": "owner acceptance of research reports; not code or publication authorization",
+                  "findings": [
+                    {
+                      "author": {
+                        "actor_id": "native-researcher",
+                        "attempt_id": "59869e13-e783-4430-a600-c56020ca08b4",
+                        "context_version": 1,
+                        "fence": 1,
+                        "run_id": "e0bd4981-77ee-4b80-b929-69ccc15d3dd5",
+                        "thread_id": "synthetic-closure-learn-thread",
+                        "turn_id": "synthetic-closure-learn-turn",
+                        "version_proof": "committed_finding_version"
+                      },
+                      "evidence": [
+                        {
+                          "quote": "En el ejemplo sintético, measurement se escribe en la columna value.",
+                          "source_id": 1
+                        }
+                      ],
+                      "finding": {
+                        "agent_id": "native-researcher",
+                        "agent_run_id": null,
+                        "artifact_id": null,
+                        "confidence": null,
+                        "content": "En el ejemplo sintético, measurement se escribe en la columna value.",
+                        "created_at": "2026-11-08 11:09:50",
+                        "finding_type": "observation",
+                        "id": 1,
+                        "project_id": 101,
+                        "reproducibility_score": null,
+                        "sources_json": "[\"synthetic:csv-example\"]",
+                        "status": "provisional",
+                        "task_id": 2,
+                        "topic": "Relación entre entrada y salida",
+                        "validation_method": null,
+                        "wiki_page_id": null
+                      }
+                    }
+                  ],
+                  "kind": "research_reports",
+                  "limitations": [
+                    "El ejemplo no es una medición real.",
+                    "Falta comprobar los datos reales."
+                  ],
+                  "report_ids": [
+                    1
+                  ],
+                  "reports": [
+                    {
+                      "artifact_id": 1,
+                      "content": "# Una observación y su fila CSV\n\nEntrada ilustrativa: {\"id\":7,\"measurement\":12}. Salida ilustrativa: columnas id,value y fila7,12. No se comprobó la estructura de los registros reales.",
+                      "content_sha256": "7848bd7bd790165c19258735bcdfe93dcc80f63084310a1f17d8740cc45cd26c",
+                      "finding_ids": [
+                        1
+                      ],
+                      "producer": {
+                        "actor_id": "native-researcher",
+                        "attempt_id": "59869e13-e783-4430-a600-c56020ca08b4",
+                        "operation_key": "fixture-report",
+                        "run_id": "e0bd4981-77ee-4b80-b929-69ccc15d3dd5",
+                        "writer_intent_sha256": "9fb0f2a4b41fb0add4cfb4ad16eb9600c578eabc0f87b1c939a87ecc63ef05df"
+                      },
+                      "report_type": "research",
+                      "title": "Una observación y su fila CSV"
+                    }
+                  ],
+                  "schema_version": 1,
+                  "scientific_confidence": null,
+                  "scope": {
+                    "actor_id": "native-researcher",
+                    "attempt_id": "59869e13-e783-4430-a600-c56020ca08b4",
+                    "context_version": 1,
+                    "fence": 1,
+                    "project_id": 101,
+                    "run_id": "e0bd4981-77ee-4b80-b929-69ccc15d3dd5",
+                    "task_id": 2
+                  },
+                  "sources": [
+                    {
+                      "metadata_sha256": "a6b9d985f8a08d3ee007e3ffe6c1b9a4cc6d82460811c394fc9fe031618b99b7",
+                      "source": {
+                        "captured_at": 1794136190.1689308,
+                        "content": "En el ejemplo sintético, measurement se escribe en la columna value.",
+                        "id": 1,
+                        "kind": "attachment",
+                        "locator": "synthetic:csv-example",
+                        "project_id": 101,
+                        "provenance": {},
+                        "sha256": "b419b9fe5dc6ac8e73c5b1cebabfe5cbfcae053d28a11a6e6d96483c73776b4d",
+                        "task_id": 2,
+                        "title": "Relación ilustrativa"
+                      }
+                    }
+                  ],
+                  "summary": "Relación de campos ilustrada.",
+                  "task": {
+                    "acceptance_criteria": "Entrada y su procedencia ilustrativa explícitas.",
+                    "assigned_to": null,
+                    "branch_name": null,
+                    "context_json": null,
+                    "description": "Explicar id y measurement como datos inventados.",
+                    "epic_id": 1,
+                    "estimated_complexity": "medium",
+                    "milestone_id": null,
+                    "parent_task_id": null,
+                    "priority": 2,
+                    "reviewer": null,
+                    "title": "Documentar una observación ilustrativa",
+                    "type": "research"
+                  }
+                },
+                "task_id": 2
+              },
+              "id": 2,
+              "milestone_id": null,
+              "status": "done",
+              "title": "Documentar una observación ilustrativa",
+              "type": "research"
+            },
+            {
+              "acceptance_criteria": "Salida relacionada con entrada y límites explícitos.",
+              "context_version": 1,
+              "description": "Relacionar la entrada documentada con id,value y distinguirla de datos reales.",
+              "epic_id": 1,
+              "evidence": {
+                "acceptance": {
+                  "id": 2,
+                  "review_sha256": "60dc6e71666bfee4fd5780e33bcdbe48fef1106a3b3b0b75f4918d838b701516",
+                  "subject_sha256": "552aac4321b501438abc9b37a9bcdd72d32e2508da5292bf3c3b6aed20da8703"
+                },
+                "actor_id": "native-researcher",
+                "attempt_id": "6c2990cb-6da9-4da0-af14-2d63ba9993e9",
+                "context_version": 1,
+                "kind": "accepted_research_reports",
+                "owner_acceptance": {
+                  "acceptance_id": 2,
+                  "acceptance_scope": "research_reports",
+                  "accepted_at": 1794136190.4917018,
+                  "acknowledged_limits": true,
+                  "actor_source": "paired_owner_action",
+                  "candidate_id": 2,
+                  "candidate_sha256": "552aac4321b501438abc9b37a9bcdd72d32e2508da5292bf3c3b6aed20da8703",
+                  "context_version": 1,
+                  "operation_key": "fixture-research-acceptance",
+                  "owner_note": "Synthetic domain decision, not human or scientific acceptance.",
+                  "project_id": 101,
+                  "publication_performed": false,
+                  "review_sha256": "60dc6e71666bfee4fd5780e33bcdbe48fef1106a3b3b0b75f4918d838b701516",
+                  "run_id": "c4437a62-4a00-41c0-b369-c5e63bc7761f",
+                  "scientific_confidence": null,
+                  "task_accepted": true,
+                  "task_id": 3
+                },
+                "run_id": "c4437a62-4a00-41c0-b369-c5e63bc7761f",
+                "snapshot": {
+                  "acceptance_scope": "owner acceptance of research reports; not code or publication authorization",
+                  "findings": [
+                    {
+                      "author": {
+                        "actor_id": "native-researcher",
+                        "attempt_id": "6c2990cb-6da9-4da0-af14-2d63ba9993e9",
+                        "context_version": 1,
+                        "fence": 1,
+                        "run_id": "c4437a62-4a00-41c0-b369-c5e63bc7761f",
+                        "thread_id": "synthetic-closure-explain-thread",
+                        "turn_id": "synthetic-closure-explain-turn",
+                        "version_proof": "committed_finding_version"
+                      },
+                      "evidence": [
+                        {
+                          "quote": "En el ejemplo sintético, measurement se escribe en la columna value.",
+                          "source_id": 2
+                        }
+                      ],
+                      "finding": {
+                        "agent_id": "native-researcher",
+                        "agent_run_id": null,
+                        "artifact_id": null,
+                        "confidence": null,
+                        "content": "En el ejemplo sintético, measurement se escribe en la columna value.",
+                        "created_at": "2026-11-08 11:09:50",
+                        "finding_type": "observation",
+                        "id": 2,
+                        "project_id": 101,
+                        "reproducibility_score": null,
+                        "sources_json": "[\"synthetic:csv-example\"]",
+                        "status": "provisional",
+                        "task_id": 3,
+                        "topic": "Relación entre entrada y salida",
+                        "validation_method": null,
+                        "wiki_page_id": null
+                      }
+                    }
+                  ],
+                  "kind": "research_reports",
+                  "limitations": [
+                    "El ejemplo no es una medición real.",
+                    "Falta comprobar los datos reales."
+                  ],
+                  "report_ids": [
+                    2
+                  ],
+                  "reports": [
+                    {
+                      "artifact_id": 2,
+                      "content": "# Una observación y su fila CSV\n\nEntrada ilustrativa: {\"id\":7,\"measurement\":12}. Salida ilustrativa: columnas id,value y fila7,12. No se comprobó la estructura de los registros reales.",
+                      "content_sha256": "7848bd7bd790165c19258735bcdfe93dcc80f63084310a1f17d8740cc45cd26c",
+                      "finding_ids": [
+                        2
+                      ],
+                      "producer": {
+                        "actor_id": "native-researcher",
+                        "attempt_id": "6c2990cb-6da9-4da0-af14-2d63ba9993e9",
+                        "operation_key": "fixture-report",
+                        "run_id": "c4437a62-4a00-41c0-b369-c5e63bc7761f",
+                        "writer_intent_sha256": "280f4b0db7de23bb92d28e0c9495d1565f20bce8c1dd2955e6b9f6e6ac7bc2e8"
+                      },
+                      "report_type": "research",
+                      "title": "Una observación y su fila CSV"
+                    }
+                  ],
+                  "schema_version": 1,
+                  "scientific_confidence": null,
+                  "scope": {
+                    "actor_id": "native-researcher",
+                    "attempt_id": "6c2990cb-6da9-4da0-af14-2d63ba9993e9",
+                    "context_version": 1,
+                    "fence": 1,
+                    "project_id": 101,
+                    "run_id": "c4437a62-4a00-41c0-b369-c5e63bc7761f",
+                    "task_id": 3
+                  },
+                  "sources": [
+                    {
+                      "metadata_sha256": "f96e2e2c95cf795439afa5a74e31b5f83efbbd0c0fa5ed4563d257e6a7bd2e07",
+                      "source": {
+                        "captured_at": 1794136190.385937,
+                        "content": "En el ejemplo sintético, measurement se escribe en la columna value.",
+                        "id": 2,
+                        "kind": "attachment",
+                        "locator": "synthetic:csv-example",
+                        "project_id": 101,
+                        "provenance": {},
+                        "sha256": "b419b9fe5dc6ac8e73c5b1cebabfe5cbfcae053d28a11a6e6d96483c73776b4d",
+                        "task_id": 3,
+                        "title": "Relación ilustrativa"
+                      }
+                    }
+                  ],
+                  "summary": "Relación de campos ilustrada.",
+                  "task": {
+                    "acceptance_criteria": "Salida relacionada con entrada y límites explícitos.",
+                    "assigned_to": null,
+                    "branch_name": null,
+                    "context_json": null,
+                    "description": "Relacionar la entrada documentada con id,value y distinguirla de datos reales.",
+                    "epic_id": 1,
+                    "estimated_complexity": "medium",
+                    "milestone_id": null,
+                    "parent_task_id": null,
+                    "priority": 2,
+                    "reviewer": null,
+                    "title": "Explicar la fila CSV y sus límites",
+                    "type": "research"
+                  }
+                },
+                "task_id": 3
+              },
+              "id": 3,
+              "milestone_id": null,
+              "status": "done",
+              "title": "Explicar la fila CSV y sus límites",
+              "type": "research"
+            }
+          ],
+          "unpublished_attempts": [],
+          "unrevoked_grants": []
+        },
+        "statement": "Acepto sólo la documentación del ejemplo y su relación de campos. No confirma mediciones reales ni implementa un exportador; esas cosas quedan fuera de este alcance sintético.",
+        "task_id": 1
+      },
+      "acceptance_current": true,
+      "eligible": false
+    },
+    {
+      "report_sha256": "95f5d55dfd3c911ca750b55b7a254d3ee349c6ed5d9be4c79c99a6f04f490e16",
+      "acceptance": {
+        "accepted_at": 1794136195.168848,
+        "acknowledged_unpublished_attempts": [],
+        "kind": "project.completion",
+        "operation_key": "6fec9aba-adbd-4ab8-ac99-7a394e33a749",
+        "plan_run_id": "dcb46d86-14dd-4412-a298-733b46b80495",
+        "project_id": 101,
+        "project_status": "completed",
+        "publication_performed": false,
+        "report_markdown": "# Informe del proyecto: Relación ilustrativa de datos\n\nEste informe reúne decisiones y evidencia guardadas. Que una tarea termine no demuestra que se hayan cumplido todos los objetivos.\n\n## Alcance que se revisa\n\nDescripción original registrada:\nDocumentar el ejemplo y explicar su fila CSV y sus límites; no programar un exportador.\n\nDescripción actual registrada:\nDocumentar el ejemplo y explicar su fila CSV y sus límites; no programar un exportador.\n\nSolicitud original de planificación:\nDocumentar el ejemplo y explicar su fila CSV y sus límites; no programar un exportador.\n\n## Resultados por tarea\n\n### Documentar la relación ilustrativa · tarea 1\n\nCriterio registrado: No registrado.\n\nPlan aceptado como propuesta de trabajo; no demuestra por sí solo cobertura de los objetivos.\n\n### Documentar una observación ilustrativa · tarea 2\n\nCriterio registrado: Entrada y su procedencia ilustrativa explícitas.\n\nResultado documental aceptado: Relación de campos ilustrada.\n\nLimitaciones declaradas: [\"El ejemplo no es una medición real.\",\"Falta comprobar los datos reales.\"]\n\n#### Una observación y su fila CSV\n# Una observación y su fila CSV\n\nEntrada ilustrativa: {\"id\":7,\"measurement\":12}. Salida ilustrativa: columnas id,value y fila7,12. No se comprobó la estructura de los registros reales.\n\nFuentes, citas y revisiones originales conservadas en la evidencia de este informe.\nNo se infiere confianza científica por haber aceptado un informe.\n\n### Explicar la fila CSV y sus límites · tarea 3\n\nCriterio registrado: Salida relacionada con entrada y límites explícitos.\n\nResultado documental aceptado: Relación de campos ilustrada.\n\nLimitaciones declaradas: [\"El ejemplo no es una medición real.\",\"Falta comprobar los datos reales.\"]\n\n#### Una observación y su fila CSV\n# Una observación y su fila CSV\n\nEntrada ilustrativa: {\"id\":7,\"measurement\":12}. Salida ilustrativa: columnas id,value y fila7,12. No se comprobó la estructura de los registros reales.\n\nFuentes, citas y revisiones originales conservadas en la evidencia de este informe.\nNo se infiere confianza científica por haber aceptado un informe.\n\n## Límites y decisión pendiente\n\nLas fuentes y decisiones completas se incluyen en el snapshot, con sus hashes y versiones. Una publicación registrada describe lo observado entonces; no prueba el estado remoto actual.\nEl propietario debe comparar este alcance con su intención, revisar los límites y reconocer cada candidato sin publicación antes de aceptar el cierre.\n\nNo hay impedimentos estructurales registrados. Esto no demuestra comprensión compartida ni cumplimiento semántico; falta tu decisión explícita.",
+        "report_sha256": "95f5d55dfd3c911ca750b55b7a254d3ee349c6ed5d9be4c79c99a6f04f490e16",
+        "snapshot": {
+          "active_work": [],
+          "blockers": [],
+          "deliveries": [
+            {
+              "delivery_id": "6f5f2264b867476e9f185b59eee54172",
+              "run_id": "e0bd4981-77ee-4b80-b929-69ccc15d3dd5",
+              "status": "accepted",
+              "task_id": 2
+            },
+            {
+              "delivery_id": "14fa37f518974181a890f433ba023b0a",
+              "run_id": "c4437a62-4a00-41c0-b369-c5e63bc7761f",
+              "status": "accepted",
+              "task_id": 3
+            }
+          ],
+          "epics": [
+            {
+              "description": "Documentación del ejemplo, sin implementación ni mediciones.",
+              "id": 1,
+              "status": "open",
+              "title": "Entrada y salida del ejemplo"
+            }
+          ],
+          "interpretation": "Recorded acceptance is evidence of an owner decision, not proof of shared understanding, semantic scope coverage, scientific confidence or current remote branch state.",
+          "manifest": {
+            "acceptance_id": "e87d035ea4e8402d855f3f3b71f8fda7",
+            "plan_context_version": 1,
+            "plan_run_id": "dcb46d86-14dd-4412-a298-733b46b80495",
+            "plan_task_id": 1,
+            "proposal_id": "292b46f3d35f4f59b107564e53542b4b",
+            "repository": {
+              "device": 53,
+              "inode": 9207551,
+              "registration_path": "/home/andres/.codex/worktrees/b09e/researcher/.researcher/evaluations/project-closure-20261108/host/sources/observations",
+              "repository_id": 11,
+              "repository_name": "observaciones",
+              "requested_repository_id": 11,
+              "workspace": "/home/andres/.codex/worktrees/b09e/researcher/.researcher/evaluations/project-closure-20261108/host/sources/observations"
+            },
+            "tasks": [
+              {
+                "context_version": 1,
+                "depends_on": [],
+                "priority": 2,
+                "task_id": 2,
+                "title": "Documentar una observación ilustrativa",
+                "type": "research"
+              },
+              {
+                "context_version": 1,
+                "depends_on": [
+                  2
+                ],
+                "priority": 2,
+                "task_id": 3,
+                "title": "Explicar la fila CSV y sus límites",
+                "type": "research"
+              }
+            ]
+          },
+          "milestones": [],
+          "open_peers": [],
+          "original_plan_input": {
+            "instruction_origin": "owner_message",
+            "owner_request": "Documentar el ejemplo y explicar su fila CSV y sus límites; no programar un exportador.",
+            "project": {
+              "description": "Documentar el ejemplo y explicar su fila CSV y sus límites; no programar un exportador.",
+              "name": "Relación ilustrativa de datos"
+            },
+            "project_history": {
+              "legacy_snapshot": null,
+              "limits": [],
+              "task_inventory": {
+                "captured": 0,
+                "complete": true,
+                "status_authority": "Observed labels are not proof of native acceptance or current execution.",
+                "total": 0
+              }
+            },
+            "source_origins": {
+              "acceptance_criteria": "task_metadata",
+              "owner_request": "owner_message",
+              "project_description": "project_metadata",
+              "project_name": "project_metadata",
+              "project_tasks": "project_task_inventory",
+              "task_description": "task_metadata"
+            },
+            "sources": {
+              "acceptance_criteria": "",
+              "owner_request": "Documentar el ejemplo y explicar su fila CSV y sus límites; no programar un exportador.",
+              "project_description": "Documentar el ejemplo y explicar su fila CSV y sus límites; no programar un exportador.",
+              "project_name": "Relación ilustrativa de datos",
+              "project_tasks": "[]",
+              "task_description": "Documentar el ejemplo y explicar su fila CSV y sus límites; no programar un exportador."
+            },
+            "task_context": {
+              "context_version": 1,
+              "corrections": [],
+              "task": {
+                "acceptance_criteria": null,
+                "assigned_to": null,
+                "branch_name": null,
+                "context_json": null,
+                "description": "Documentar el ejemplo y explicar su fila CSV y sus límites; no programar un exportador.",
+                "epic_id": null,
+                "estimated_complexity": "medium",
+                "milestone_id": null,
+                "parent_task_id": null,
+                "priority": 2,
+                "reviewer": null,
+                "status": "backlog",
+                "title": "Documentar la relación ilustrativa",
+                "type": "plan"
+              },
+              "task_changes": [],
+              "user_answers": []
+            }
+          },
+          "plan_run_id": "dcb46d86-14dd-4412-a298-733b46b80495",
+          "project": {
+            "description": "Documentar el ejemplo y explicar su fila CSV y sus límites; no programar un exportador.",
+            "id": 101,
+            "name": "Relación ilustrativa de datos",
+            "original_description": "Documentar el ejemplo y explicar su fila CSV y sus límites; no programar un exportador."
+          },
+          "registered_legacy_work": false,
+          "schema_version": 1,
+          "tasks": [
+            {
+              "acceptance_criteria": null,
+              "context_version": 1,
+              "description": "Documentar el ejemplo y explicar su fila CSV y sus límites; no programar un exportador.",
+              "epic_id": null,
+              "evidence": {
+                "acceptance": {
+                  "context_version": 1,
+                  "epics": {
+                    "docs": 1
+                  },
+                  "execution_started": false,
+                  "operation_key": "fixture-plan-acceptance",
+                  "project_id": 101,
+                  "proposal_sha256": "b643e9306b3b6162eeff2ccb670ccd702efc34e5867d43b613766e84c7849abe",
+                  "run_id": "dcb46d86-14dd-4412-a298-733b46b80495",
+                  "task_id": 1,
+                  "tasks": {
+                    "explain": 3,
+                    "learn": 2
+                  }
+                },
+                "context_version": 1,
+                "kind": "accepted_plan",
+                "owner_graph_revision": 0,
+                "run_id": "dcb46d86-14dd-4412-a298-733b46b80495"
+              },
+              "id": 1,
+              "milestone_id": null,
+              "status": "done",
+              "title": "Documentar la relación ilustrativa",
+              "type": "plan"
+            },
+            {
+              "acceptance_criteria": "Entrada y su procedencia ilustrativa explícitas.",
+              "context_version": 1,
+              "description": "Explicar id y measurement como datos inventados.",
+              "epic_id": 1,
+              "evidence": {
+                "acceptance": {
+                  "id": 1,
+                  "review_sha256": "1a98ceb8a7bcd61d923a96964d3e52ccf20d161bb63e6b9943d4b5093b8d49b3",
+                  "subject_sha256": "ac7e2ef633f39df731b82537e09bd2781124a2bf73eacd6eff6b833f957bb525"
+                },
+                "actor_id": "native-researcher",
+                "attempt_id": "59869e13-e783-4430-a600-c56020ca08b4",
+                "context_version": 1,
+                "kind": "accepted_research_reports",
+                "owner_acceptance": {
+                  "acceptance_id": 1,
+                  "acceptance_scope": "research_reports",
+                  "accepted_at": 1794136190.2741582,
+                  "acknowledged_limits": true,
+                  "actor_source": "paired_owner_action",
+                  "candidate_id": 1,
+                  "candidate_sha256": "ac7e2ef633f39df731b82537e09bd2781124a2bf73eacd6eff6b833f957bb525",
+                  "context_version": 1,
+                  "operation_key": "fixture-research-acceptance",
+                  "owner_note": "Synthetic domain decision, not human or scientific acceptance.",
+                  "project_id": 101,
+                  "publication_performed": false,
+                  "review_sha256": "1a98ceb8a7bcd61d923a96964d3e52ccf20d161bb63e6b9943d4b5093b8d49b3",
+                  "run_id": "e0bd4981-77ee-4b80-b929-69ccc15d3dd5",
+                  "scientific_confidence": null,
+                  "task_accepted": true,
+                  "task_id": 2
+                },
+                "run_id": "e0bd4981-77ee-4b80-b929-69ccc15d3dd5",
+                "snapshot": {
+                  "acceptance_scope": "owner acceptance of research reports; not code or publication authorization",
+                  "findings": [
+                    {
+                      "author": {
+                        "actor_id": "native-researcher",
+                        "attempt_id": "59869e13-e783-4430-a600-c56020ca08b4",
+                        "context_version": 1,
+                        "fence": 1,
+                        "run_id": "e0bd4981-77ee-4b80-b929-69ccc15d3dd5",
+                        "thread_id": "synthetic-closure-learn-thread",
+                        "turn_id": "synthetic-closure-learn-turn",
+                        "version_proof": "committed_finding_version"
+                      },
+                      "evidence": [
+                        {
+                          "quote": "En el ejemplo sintético, measurement se escribe en la columna value.",
+                          "source_id": 1
+                        }
+                      ],
+                      "finding": {
+                        "agent_id": "native-researcher",
+                        "agent_run_id": null,
+                        "artifact_id": null,
+                        "confidence": null,
+                        "content": "En el ejemplo sintético, measurement se escribe en la columna value.",
+                        "created_at": "2026-11-08 11:09:50",
+                        "finding_type": "observation",
+                        "id": 1,
+                        "project_id": 101,
+                        "reproducibility_score": null,
+                        "sources_json": "[\"synthetic:csv-example\"]",
+                        "status": "provisional",
+                        "task_id": 2,
+                        "topic": "Relación entre entrada y salida",
+                        "validation_method": null,
+                        "wiki_page_id": null
+                      }
+                    }
+                  ],
+                  "kind": "research_reports",
+                  "limitations": [
+                    "El ejemplo no es una medición real.",
+                    "Falta comprobar los datos reales."
+                  ],
+                  "report_ids": [
+                    1
+                  ],
+                  "reports": [
+                    {
+                      "artifact_id": 1,
+                      "content": "# Una observación y su fila CSV\n\nEntrada ilustrativa: {\"id\":7,\"measurement\":12}. Salida ilustrativa: columnas id,value y fila7,12. No se comprobó la estructura de los registros reales.",
+                      "content_sha256": "7848bd7bd790165c19258735bcdfe93dcc80f63084310a1f17d8740cc45cd26c",
+                      "finding_ids": [
+                        1
+                      ],
+                      "producer": {
+                        "actor_id": "native-researcher",
+                        "attempt_id": "59869e13-e783-4430-a600-c56020ca08b4",
+                        "operation_key": "fixture-report",
+                        "run_id": "e0bd4981-77ee-4b80-b929-69ccc15d3dd5",
+                        "writer_intent_sha256": "9fb0f2a4b41fb0add4cfb4ad16eb9600c578eabc0f87b1c939a87ecc63ef05df"
+                      },
+                      "report_type": "research",
+                      "title": "Una observación y su fila CSV"
+                    }
+                  ],
+                  "schema_version": 1,
+                  "scientific_confidence": null,
+                  "scope": {
+                    "actor_id": "native-researcher",
+                    "attempt_id": "59869e13-e783-4430-a600-c56020ca08b4",
+                    "context_version": 1,
+                    "fence": 1,
+                    "project_id": 101,
+                    "run_id": "e0bd4981-77ee-4b80-b929-69ccc15d3dd5",
+                    "task_id": 2
+                  },
+                  "sources": [
+                    {
+                      "metadata_sha256": "a6b9d985f8a08d3ee007e3ffe6c1b9a4cc6d82460811c394fc9fe031618b99b7",
+                      "source": {
+                        "captured_at": 1794136190.1689308,
+                        "content": "En el ejemplo sintético, measurement se escribe en la columna value.",
+                        "id": 1,
+                        "kind": "attachment",
+                        "locator": "synthetic:csv-example",
+                        "project_id": 101,
+                        "provenance": {},
+                        "sha256": "b419b9fe5dc6ac8e73c5b1cebabfe5cbfcae053d28a11a6e6d96483c73776b4d",
+                        "task_id": 2,
+                        "title": "Relación ilustrativa"
+                      }
+                    }
+                  ],
+                  "summary": "Relación de campos ilustrada.",
+                  "task": {
+                    "acceptance_criteria": "Entrada y su procedencia ilustrativa explícitas.",
+                    "assigned_to": null,
+                    "branch_name": null,
+                    "context_json": null,
+                    "description": "Explicar id y measurement como datos inventados.",
+                    "epic_id": 1,
+                    "estimated_complexity": "medium",
+                    "milestone_id": null,
+                    "parent_task_id": null,
+                    "priority": 2,
+                    "reviewer": null,
+                    "title": "Documentar una observación ilustrativa",
+                    "type": "research"
+                  }
+                },
+                "task_id": 2
+              },
+              "id": 2,
+              "milestone_id": null,
+              "status": "done",
+              "title": "Documentar una observación ilustrativa",
+              "type": "research"
+            },
+            {
+              "acceptance_criteria": "Salida relacionada con entrada y límites explícitos.",
+              "context_version": 1,
+              "description": "Relacionar la entrada documentada con id,value y distinguirla de datos reales.",
+              "epic_id": 1,
+              "evidence": {
+                "acceptance": {
+                  "id": 2,
+                  "review_sha256": "60dc6e71666bfee4fd5780e33bcdbe48fef1106a3b3b0b75f4918d838b701516",
+                  "subject_sha256": "552aac4321b501438abc9b37a9bcdd72d32e2508da5292bf3c3b6aed20da8703"
+                },
+                "actor_id": "native-researcher",
+                "attempt_id": "6c2990cb-6da9-4da0-af14-2d63ba9993e9",
+                "context_version": 1,
+                "kind": "accepted_research_reports",
+                "owner_acceptance": {
+                  "acceptance_id": 2,
+                  "acceptance_scope": "research_reports",
+                  "accepted_at": 1794136190.4917018,
+                  "acknowledged_limits": true,
+                  "actor_source": "paired_owner_action",
+                  "candidate_id": 2,
+                  "candidate_sha256": "552aac4321b501438abc9b37a9bcdd72d32e2508da5292bf3c3b6aed20da8703",
+                  "context_version": 1,
+                  "operation_key": "fixture-research-acceptance",
+                  "owner_note": "Synthetic domain decision, not human or scientific acceptance.",
+                  "project_id": 101,
+                  "publication_performed": false,
+                  "review_sha256": "60dc6e71666bfee4fd5780e33bcdbe48fef1106a3b3b0b75f4918d838b701516",
+                  "run_id": "c4437a62-4a00-41c0-b369-c5e63bc7761f",
+                  "scientific_confidence": null,
+                  "task_accepted": true,
+                  "task_id": 3
+                },
+                "run_id": "c4437a62-4a00-41c0-b369-c5e63bc7761f",
+                "snapshot": {
+                  "acceptance_scope": "owner acceptance of research reports; not code or publication authorization",
+                  "findings": [
+                    {
+                      "author": {
+                        "actor_id": "native-researcher",
+                        "attempt_id": "6c2990cb-6da9-4da0-af14-2d63ba9993e9",
+                        "context_version": 1,
+                        "fence": 1,
+                        "run_id": "c4437a62-4a00-41c0-b369-c5e63bc7761f",
+                        "thread_id": "synthetic-closure-explain-thread",
+                        "turn_id": "synthetic-closure-explain-turn",
+                        "version_proof": "committed_finding_version"
+                      },
+                      "evidence": [
+                        {
+                          "quote": "En el ejemplo sintético, measurement se escribe en la columna value.",
+                          "source_id": 2
+                        }
+                      ],
+                      "finding": {
+                        "agent_id": "native-researcher",
+                        "agent_run_id": null,
+                        "artifact_id": null,
+                        "confidence": null,
+                        "content": "En el ejemplo sintético, measurement se escribe en la columna value.",
+                        "created_at": "2026-11-08 11:09:50",
+                        "finding_type": "observation",
+                        "id": 2,
+                        "project_id": 101,
+                        "reproducibility_score": null,
+                        "sources_json": "[\"synthetic:csv-example\"]",
+                        "status": "provisional",
+                        "task_id": 3,
+                        "topic": "Relación entre entrada y salida",
+                        "validation_method": null,
+                        "wiki_page_id": null
+                      }
+                    }
+                  ],
+                  "kind": "research_reports",
+                  "limitations": [
+                    "El ejemplo no es una medición real.",
+                    "Falta comprobar los datos reales."
+                  ],
+                  "report_ids": [
+                    2
+                  ],
+                  "reports": [
+                    {
+                      "artifact_id": 2,
+                      "content": "# Una observación y su fila CSV\n\nEntrada ilustrativa: {\"id\":7,\"measurement\":12}. Salida ilustrativa: columnas id,value y fila7,12. No se comprobó la estructura de los registros reales.",
+                      "content_sha256": "7848bd7bd790165c19258735bcdfe93dcc80f63084310a1f17d8740cc45cd26c",
+                      "finding_ids": [
+                        2
+                      ],
+                      "producer": {
+                        "actor_id": "native-researcher",
+                        "attempt_id": "6c2990cb-6da9-4da0-af14-2d63ba9993e9",
+                        "operation_key": "fixture-report",
+                        "run_id": "c4437a62-4a00-41c0-b369-c5e63bc7761f",
+                        "writer_intent_sha256": "280f4b0db7de23bb92d28e0c9495d1565f20bce8c1dd2955e6b9f6e6ac7bc2e8"
+                      },
+                      "report_type": "research",
+                      "title": "Una observación y su fila CSV"
+                    }
+                  ],
+                  "schema_version": 1,
+                  "scientific_confidence": null,
+                  "scope": {
+                    "actor_id": "native-researcher",
+                    "attempt_id": "6c2990cb-6da9-4da0-af14-2d63ba9993e9",
+                    "context_version": 1,
+                    "fence": 1,
+                    "project_id": 101,
+                    "run_id": "c4437a62-4a00-41c0-b369-c5e63bc7761f",
+                    "task_id": 3
+                  },
+                  "sources": [
+                    {
+                      "metadata_sha256": "f96e2e2c95cf795439afa5a74e31b5f83efbbd0c0fa5ed4563d257e6a7bd2e07",
+                      "source": {
+                        "captured_at": 1794136190.385937,
+                        "content": "En el ejemplo sintético, measurement se escribe en la columna value.",
+                        "id": 2,
+                        "kind": "attachment",
+                        "locator": "synthetic:csv-example",
+                        "project_id": 101,
+                        "provenance": {},
+                        "sha256": "b419b9fe5dc6ac8e73c5b1cebabfe5cbfcae053d28a11a6e6d96483c73776b4d",
+                        "task_id": 3,
+                        "title": "Relación ilustrativa"
+                      }
+                    }
+                  ],
+                  "summary": "Relación de campos ilustrada.",
+                  "task": {
+                    "acceptance_criteria": "Salida relacionada con entrada y límites explícitos.",
+                    "assigned_to": null,
+                    "branch_name": null,
+                    "context_json": null,
+                    "description": "Relacionar la entrada documentada con id,value y distinguirla de datos reales.",
+                    "epic_id": 1,
+                    "estimated_complexity": "medium",
+                    "milestone_id": null,
+                    "parent_task_id": null,
+                    "priority": 2,
+                    "reviewer": null,
+                    "title": "Explicar la fila CSV y sus límites",
+                    "type": "research"
+                  }
+                },
+                "task_id": 3
+              },
+              "id": 3,
+              "milestone_id": null,
+              "status": "done",
+              "title": "Explicar la fila CSV y sus límites",
+              "type": "research"
+            }
+          ],
+          "unpublished_attempts": [],
+          "unrevoked_grants": []
+        },
+        "statement": "Acepto sólo la documentación del ejemplo y su relación de campos. No confirma mediciones reales ni implementa un exportador; esas cosas quedan fuera de este alcance sintético.",
+        "task_id": 1
+      },
+      "acceptance_current": true,
+      "eligible": false
+    }
+  ],
+  "states": [
+    {
+      "name": "01-nonempty-original-report-and-limits",
+      "width": 1440,
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "02-one-closure-committed-with-reply-lost",
+      "width": 390,
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "03-original-acceptance-recovered-through-exact-read",
+      "width": 1440,
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "04-overview-original-accepted-report-link",
+      "width": 1440,
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "05-mobile-overview-original-report-link",
+      "width": 390,
+      "fits": true,
+      "violations": []
+    }
+  ],
+  "errors": [],
+  "checks": [
+    "three-accepted-task-evidence-records-two-causal-deliveries",
+    "original-scope-input-output-limits-present",
+    "keyboard-readable-full-report",
+    "statement-required-before-closure",
+    "one-exact-owner-closure-committed",
+    "lost-post-receipt-recovered-by-original-acceptance-read",
+    "no-second-post-for-read-recovery",
+    "original-overview-report-link",
+    "keyboard-original-plan-run-return-rechecks-current-acceptance",
+    "desktop-mobile-regional-axe-and-overflow"
+  ]
+}

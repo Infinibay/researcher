@@ -36,7 +36,7 @@ def accepted_plan(runs,binding,title,key):
     return {'run':run.run_id,'task':task['id'],'title':title,'learn':graph['tasks']['learn'],'export':graph['tasks']['export']}
 
 
-def accept_research(runs,research,spec,binding):
+def accept_research(runs,research,spec,binding,*,fixture_key="research"):
     """Record one exact illustrative report under closed logical peers and explicit synthetic owner acceptance."""
     from backend.research.models import RESEARCH_PERMISSIONS,EvidenceReference,FindingDraft,ReportDraft,ResultDraft,SourceDraft
     from backend.runtime.peer_registry import AttemptPeers
@@ -44,7 +44,7 @@ def accept_research(runs,research,spec,binding):
     run=runs.admit(spec,binding=binding)
     lease,peers=AttemptPeers.claim(runs,101,run.run_id,'synthetic-research-owner-never-launched')
     try:
-        runs.bind_native(lease,thread_id='synthetic-research-thread',turn_id='synthetic-research-turn')
+        runs.bind_native(lease,thread_id=f'synthetic-{fixture_key}-thread',turn_id=f'synthetic-{fixture_key}-turn')
         token=research.issue_grant(project_id=101,task_id=run.task_id,agent_id=lease.actor_id,permissions=set(RESEARCH_PERMISSIONS))
         scope=research.authorize(token);runs.bind_grant(lease,scope.grant_id)
         quote='En el ejemplo sintético, measurement se escribe en la columna value.'

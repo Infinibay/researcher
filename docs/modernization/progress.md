@@ -9244,3 +9244,12 @@ Basecc0434e,10:51:41–11:03:35UTC,11min54s hasta verificar/inspeccionar.
 lecturas tras error de selector del driver.0modelos/autoridad nueva. Esquema71.
 11/12páginas,41/43escenarios;Proyectos/AuthorityBusyabierto. Sigue cierre no vacío
 yrecomprobación deResumen; luego U08/C10/ciencia ygatesglobales. DetallesDD144al final.
+
+## 2026-11-08 — cierre no vacío y enlace original
+
+Base273c1a6,11:05:21–11:12:24UTC,7min3s. [Alcance](nonempty-closure-review.md):
+5estados/10checks, una decisión de cierre de3tareas/2entregas documentales; recibo
+GEToriginal yResumen real. Driverfailed por título ambiguo tras efecto; continuación
+sólo lectura sobre el mismo host,0modelos. Sin cambios de producto/paquete.
+11/12páginas,41/43escenarios. Siguiente: nuevo caso científico con350k máximo,
+conservando el fallo anterior sin reejecutarlo ni cambiar sus presupuestos.

@@ -1,0 +1,375 @@
+{
+  "original": {
+    "status": "failed",
+    "synthetic_project_data": true,
+    "actual_model_turns": 0,
+    "before": {
+      "table_sha256": {
+        "projects": "e8486dd39f8d2d1aadc815655a1a08982226aef7388bf8e38fbd85660832c983",
+        "tasks": "ddb46faa746e572d8cb7897326a5303fe5d1d9270e0b2dd1f005dab07d5f3cd8",
+        "task_dependencies": "7caada40da298bc014a498844726d50848a1d41eda3c689c2e2d68e41b913ae3",
+        "task_contexts": "45a8ddfccddbf2a48b735ff69df70dd2d09c2104c7b396ef4057b2a7092c2639",
+        "runtime_runs": "b7ee7344b95f02271a34390a19b31f7d4fe5a66992ee69b4c36d3b31b9526db9",
+        "runtime_attempts": "071e7504616baa153eae039495e3c04fc01ef1f5008778fbb7fde96e1482f7dd",
+        "runtime_peers": "1391263868fd28b8db8534d0d4dfae7decff338d557ff8b776f9d36ec4460330",
+        "runtime_commands": "61a0aff24ed30c3f9c128e718f1bc4fae6ac1d23f4d12822ef733cc044ed1481",
+        "runtime_plan_executions": "5c6402075ec6dce6a13adf8a5dedd24babeced36994e4eb8a90f41cd8f05e9cb",
+        "runtime_plan_deliveries": "c1b9d66da15c8700fac58b021a1c8ba0abc7ac2f632e150eff94aafecff7ace4",
+        "runtime_plan_handoffs": "c226e26eabc81954bc441c0829ed0e8a62d0fbb4916357bdd4a0540fdd9a6b9d",
+        "runtime_context_causes": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "runtime_context_affected": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "runtime_context_revisions": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "tool_grants": "27a7cee9608955af589dfd139a9616d12784cbe55459165b50852ab95efe9bea",
+        "research_reports": "5fc4a182a6e4dd2185a653e244c9db7220cac4bb6d140d69fb07334b9b4d5216",
+        "artifacts": "76b6a4c78fc48e8dbd7cd9b570f3b5de25fb33993db5f589f20ef44dd2d92570",
+        "events_log": "1f1323ad6ff1931d2a6355761b6e6b1520582878f9bb9b3d28245442481ed30c",
+        "runtime_inference_dispatches": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "source_sha256": "4591ef9322993c37d5060a1b259159823a145a58e2c1817173aa5e2925c015e7",
+      "runs": [
+        {
+          "id": "c4437a62-4a00-41c0-b369-c5e63bc7761f",
+          "status": "accepted"
+        },
+        {
+          "id": "dcb46d86-14dd-4412-a298-733b46b80495",
+          "status": "accepted"
+        },
+        {
+          "id": "e0bd4981-77ee-4b80-b929-69ccc15d3dd5",
+          "status": "accepted"
+        }
+      ],
+      "peers": [
+        {
+          "kind": "native",
+          "state": "closed"
+        },
+        {
+          "kind": "native",
+          "state": "closed"
+        },
+        {
+          "kind": "business",
+          "state": "closed"
+        },
+        {
+          "kind": "business",
+          "state": "closed"
+        },
+        {
+          "kind": "business",
+          "state": "closed"
+        },
+        {
+          "kind": "native",
+          "state": "closed"
+        }
+      ],
+      "dispatches": 0,
+      "synthetic_bound_turn_ids": 3,
+      "integrity": "ok",
+      "foreign_keys": [],
+      "project_status": "new",
+      "completion_events": 0,
+      "completion_receipts": 0
+    },
+    "backend": "/home/andres/.codex/worktrees/b09e/researcher/.superpowers/sdd/2026-10-31-actualizacion-proyecto/native-runtime-env/lib/python3.12/site-packages/backend/__init__.py",
+    "web_index_sha256": "4c0359a6eb11108e9417a03785240d62c5314897e54d39726cf581c91564b5b0",
+    "browser_exit": 1,
+    "error_type": "AssertionError",
+    "service_exit": 143,
+    "after": {
+      "table_sha256": {
+        "projects": "b006ee8b1d8d7032892a7a560ba96f3419ce1845723ff8ee0567f80c12abd55a",
+        "tasks": "ddb46faa746e572d8cb7897326a5303fe5d1d9270e0b2dd1f005dab07d5f3cd8",
+        "task_dependencies": "7caada40da298bc014a498844726d50848a1d41eda3c689c2e2d68e41b913ae3",
+        "task_contexts": "45a8ddfccddbf2a48b735ff69df70dd2d09c2104c7b396ef4057b2a7092c2639",
+        "runtime_runs": "b7ee7344b95f02271a34390a19b31f7d4fe5a66992ee69b4c36d3b31b9526db9",
+        "runtime_attempts": "071e7504616baa153eae039495e3c04fc01ef1f5008778fbb7fde96e1482f7dd",
+        "runtime_peers": "1391263868fd28b8db8534d0d4dfae7decff338d557ff8b776f9d36ec4460330",
+        "runtime_commands": "54b917b5f1b87ed7eb5a0b379eb405177e78969ab4158e8b451d591414f367a1",
+        "runtime_plan_executions": "5c6402075ec6dce6a13adf8a5dedd24babeced36994e4eb8a90f41cd8f05e9cb",
+        "runtime_plan_deliveries": "c1b9d66da15c8700fac58b021a1c8ba0abc7ac2f632e150eff94aafecff7ace4",
+        "runtime_plan_handoffs": "c226e26eabc81954bc441c0829ed0e8a62d0fbb4916357bdd4a0540fdd9a6b9d",
+        "runtime_context_causes": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "runtime_context_affected": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "runtime_context_revisions": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "tool_grants": "27a7cee9608955af589dfd139a9616d12784cbe55459165b50852ab95efe9bea",
+        "research_reports": "5fc4a182a6e4dd2185a653e244c9db7220cac4bb6d140d69fb07334b9b4d5216",
+        "artifacts": "76b6a4c78fc48e8dbd7cd9b570f3b5de25fb33993db5f589f20ef44dd2d92570",
+        "events_log": "73b33adc748c6b25ba620f23ad1ded9174fb2858453bf714907696cdffbe1254",
+        "runtime_inference_dispatches": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "source_sha256": "4591ef9322993c37d5060a1b259159823a145a58e2c1817173aa5e2925c015e7",
+      "runs": [
+        {
+          "id": "c4437a62-4a00-41c0-b369-c5e63bc7761f",
+          "status": "accepted"
+        },
+        {
+          "id": "dcb46d86-14dd-4412-a298-733b46b80495",
+          "status": "accepted"
+        },
+        {
+          "id": "e0bd4981-77ee-4b80-b929-69ccc15d3dd5",
+          "status": "accepted"
+        }
+      ],
+      "peers": [
+        {
+          "kind": "native",
+          "state": "closed"
+        },
+        {
+          "kind": "native",
+          "state": "closed"
+        },
+        {
+          "kind": "business",
+          "state": "closed"
+        },
+        {
+          "kind": "business",
+          "state": "closed"
+        },
+        {
+          "kind": "business",
+          "state": "closed"
+        },
+        {
+          "kind": "native",
+          "state": "closed"
+        }
+      ],
+      "dispatches": 0,
+      "synthetic_bound_turn_ids": 3,
+      "integrity": "ok",
+      "foreign_keys": [],
+      "project_status": "completed",
+      "completion_events": 1,
+      "completion_receipts": 1
+    }
+  },
+  "readonly_continuation": {
+    "status": "passed",
+    "original_result": "/home/andres/.codex/worktrees/b09e/researcher/.researcher/evaluations/project-closure-20261108/result.json",
+    "before": {
+      "table_sha256": {
+        "projects": "e8486dd39f8d2d1aadc815655a1a08982226aef7388bf8e38fbd85660832c983",
+        "tasks": "ddb46faa746e572d8cb7897326a5303fe5d1d9270e0b2dd1f005dab07d5f3cd8",
+        "task_dependencies": "7caada40da298bc014a498844726d50848a1d41eda3c689c2e2d68e41b913ae3",
+        "task_contexts": "45a8ddfccddbf2a48b735ff69df70dd2d09c2104c7b396ef4057b2a7092c2639",
+        "runtime_runs": "b7ee7344b95f02271a34390a19b31f7d4fe5a66992ee69b4c36d3b31b9526db9",
+        "runtime_attempts": "071e7504616baa153eae039495e3c04fc01ef1f5008778fbb7fde96e1482f7dd",
+        "runtime_peers": "1391263868fd28b8db8534d0d4dfae7decff338d557ff8b776f9d36ec4460330",
+        "runtime_commands": "61a0aff24ed30c3f9c128e718f1bc4fae6ac1d23f4d12822ef733cc044ed1481",
+        "runtime_plan_executions": "5c6402075ec6dce6a13adf8a5dedd24babeced36994e4eb8a90f41cd8f05e9cb",
+        "runtime_plan_deliveries": "c1b9d66da15c8700fac58b021a1c8ba0abc7ac2f632e150eff94aafecff7ace4",
+        "runtime_plan_handoffs": "c226e26eabc81954bc441c0829ed0e8a62d0fbb4916357bdd4a0540fdd9a6b9d",
+        "runtime_context_causes": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "runtime_context_affected": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "runtime_context_revisions": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "tool_grants": "27a7cee9608955af589dfd139a9616d12784cbe55459165b50852ab95efe9bea",
+        "research_reports": "5fc4a182a6e4dd2185a653e244c9db7220cac4bb6d140d69fb07334b9b4d5216",
+        "artifacts": "76b6a4c78fc48e8dbd7cd9b570f3b5de25fb33993db5f589f20ef44dd2d92570",
+        "events_log": "1f1323ad6ff1931d2a6355761b6e6b1520582878f9bb9b3d28245442481ed30c",
+        "runtime_inference_dispatches": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "source_sha256": "4591ef9322993c37d5060a1b259159823a145a58e2c1817173aa5e2925c015e7",
+      "runs": [
+        {
+          "id": "c4437a62-4a00-41c0-b369-c5e63bc7761f",
+          "status": "accepted"
+        },
+        {
+          "id": "dcb46d86-14dd-4412-a298-733b46b80495",
+          "status": "accepted"
+        },
+        {
+          "id": "e0bd4981-77ee-4b80-b929-69ccc15d3dd5",
+          "status": "accepted"
+        }
+      ],
+      "peers": [
+        {
+          "kind": "native",
+          "state": "closed"
+        },
+        {
+          "kind": "native",
+          "state": "closed"
+        },
+        {
+          "kind": "business",
+          "state": "closed"
+        },
+        {
+          "kind": "business",
+          "state": "closed"
+        },
+        {
+          "kind": "business",
+          "state": "closed"
+        },
+        {
+          "kind": "native",
+          "state": "closed"
+        }
+      ],
+      "dispatches": 0,
+      "synthetic_bound_turn_ids": 3,
+      "integrity": "ok",
+      "foreign_keys": [],
+      "project_status": "new",
+      "completion_events": 0,
+      "completion_receipts": 0
+    },
+    "continuation_start": {
+      "table_sha256": {
+        "projects": "b006ee8b1d8d7032892a7a560ba96f3419ce1845723ff8ee0567f80c12abd55a",
+        "tasks": "ddb46faa746e572d8cb7897326a5303fe5d1d9270e0b2dd1f005dab07d5f3cd8",
+        "task_dependencies": "7caada40da298bc014a498844726d50848a1d41eda3c689c2e2d68e41b913ae3",
+        "task_contexts": "45a8ddfccddbf2a48b735ff69df70dd2d09c2104c7b396ef4057b2a7092c2639",
+        "runtime_runs": "b7ee7344b95f02271a34390a19b31f7d4fe5a66992ee69b4c36d3b31b9526db9",
+        "runtime_attempts": "071e7504616baa153eae039495e3c04fc01ef1f5008778fbb7fde96e1482f7dd",
+        "runtime_peers": "1391263868fd28b8db8534d0d4dfae7decff338d557ff8b776f9d36ec4460330",
+        "runtime_commands": "54b917b5f1b87ed7eb5a0b379eb405177e78969ab4158e8b451d591414f367a1",
+        "runtime_plan_executions": "5c6402075ec6dce6a13adf8a5dedd24babeced36994e4eb8a90f41cd8f05e9cb",
+        "runtime_plan_deliveries": "c1b9d66da15c8700fac58b021a1c8ba0abc7ac2f632e150eff94aafecff7ace4",
+        "runtime_plan_handoffs": "c226e26eabc81954bc441c0829ed0e8a62d0fbb4916357bdd4a0540fdd9a6b9d",
+        "runtime_context_causes": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "runtime_context_affected": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "runtime_context_revisions": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "tool_grants": "27a7cee9608955af589dfd139a9616d12784cbe55459165b50852ab95efe9bea",
+        "research_reports": "5fc4a182a6e4dd2185a653e244c9db7220cac4bb6d140d69fb07334b9b4d5216",
+        "artifacts": "76b6a4c78fc48e8dbd7cd9b570f3b5de25fb33993db5f589f20ef44dd2d92570",
+        "events_log": "73b33adc748c6b25ba620f23ad1ded9174fb2858453bf714907696cdffbe1254",
+        "runtime_inference_dispatches": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "source_sha256": "4591ef9322993c37d5060a1b259159823a145a58e2c1817173aa5e2925c015e7",
+      "runs": [
+        {
+          "id": "c4437a62-4a00-41c0-b369-c5e63bc7761f",
+          "status": "accepted"
+        },
+        {
+          "id": "dcb46d86-14dd-4412-a298-733b46b80495",
+          "status": "accepted"
+        },
+        {
+          "id": "e0bd4981-77ee-4b80-b929-69ccc15d3dd5",
+          "status": "accepted"
+        }
+      ],
+      "peers": [
+        {
+          "kind": "native",
+          "state": "closed"
+        },
+        {
+          "kind": "native",
+          "state": "closed"
+        },
+        {
+          "kind": "business",
+          "state": "closed"
+        },
+        {
+          "kind": "business",
+          "state": "closed"
+        },
+        {
+          "kind": "business",
+          "state": "closed"
+        },
+        {
+          "kind": "native",
+          "state": "closed"
+        }
+      ],
+      "dispatches": 0,
+      "synthetic_bound_turn_ids": 3,
+      "integrity": "ok",
+      "foreign_keys": [],
+      "project_status": "completed",
+      "completion_events": 1,
+      "completion_receipts": 1
+    },
+    "scope": "Readonly original-state continuation; original effects are verified before restart, never repeated.",
+    "browser_exit": 0,
+    "service_exit": 143,
+    "after": {
+      "table_sha256": {
+        "projects": "b006ee8b1d8d7032892a7a560ba96f3419ce1845723ff8ee0567f80c12abd55a",
+        "tasks": "ddb46faa746e572d8cb7897326a5303fe5d1d9270e0b2dd1f005dab07d5f3cd8",
+        "task_dependencies": "7caada40da298bc014a498844726d50848a1d41eda3c689c2e2d68e41b913ae3",
+        "task_contexts": "45a8ddfccddbf2a48b735ff69df70dd2d09c2104c7b396ef4057b2a7092c2639",
+        "runtime_runs": "b7ee7344b95f02271a34390a19b31f7d4fe5a66992ee69b4c36d3b31b9526db9",
+        "runtime_attempts": "071e7504616baa153eae039495e3c04fc01ef1f5008778fbb7fde96e1482f7dd",
+        "runtime_peers": "1391263868fd28b8db8534d0d4dfae7decff338d557ff8b776f9d36ec4460330",
+        "runtime_commands": "54b917b5f1b87ed7eb5a0b379eb405177e78969ab4158e8b451d591414f367a1",
+        "runtime_plan_executions": "5c6402075ec6dce6a13adf8a5dedd24babeced36994e4eb8a90f41cd8f05e9cb",
+        "runtime_plan_deliveries": "c1b9d66da15c8700fac58b021a1c8ba0abc7ac2f632e150eff94aafecff7ace4",
+        "runtime_plan_handoffs": "c226e26eabc81954bc441c0829ed0e8a62d0fbb4916357bdd4a0540fdd9a6b9d",
+        "runtime_context_causes": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "runtime_context_affected": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "runtime_context_revisions": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "tool_grants": "27a7cee9608955af589dfd139a9616d12784cbe55459165b50852ab95efe9bea",
+        "research_reports": "5fc4a182a6e4dd2185a653e244c9db7220cac4bb6d140d69fb07334b9b4d5216",
+        "artifacts": "76b6a4c78fc48e8dbd7cd9b570f3b5de25fb33993db5f589f20ef44dd2d92570",
+        "events_log": "73b33adc748c6b25ba620f23ad1ded9174fb2858453bf714907696cdffbe1254",
+        "runtime_inference_dispatches": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "source_sha256": "4591ef9322993c37d5060a1b259159823a145a58e2c1817173aa5e2925c015e7",
+      "runs": [
+        {
+          "id": "c4437a62-4a00-41c0-b369-c5e63bc7761f",
+          "status": "accepted"
+        },
+        {
+          "id": "dcb46d86-14dd-4412-a298-733b46b80495",
+          "status": "accepted"
+        },
+        {
+          "id": "e0bd4981-77ee-4b80-b929-69ccc15d3dd5",
+          "status": "accepted"
+        }
+      ],
+      "peers": [
+        {
+          "kind": "native",
+          "state": "closed"
+        },
+        {
+          "kind": "native",
+          "state": "closed"
+        },
+        {
+          "kind": "business",
+          "state": "closed"
+        },
+        {
+          "kind": "business",
+          "state": "closed"
+        },
+        {
+          "kind": "business",
+          "state": "closed"
+        },
+        {
+          "kind": "native",
+          "state": "closed"
+        }
+      ],
+      "dispatches": 0,
+      "synthetic_bound_turn_ids": 3,
+      "integrity": "ok",
+      "foreign_keys": [],
+      "project_status": "completed",
+      "completion_events": 1,
+      "completion_receipts": 1
+    }
+  },
+  "scope": "One original completion decision over nonempty documentary evidence; then exact acceptance GET and readonly original overview navigation. Initial driver heading ambiguity retained."
+}
