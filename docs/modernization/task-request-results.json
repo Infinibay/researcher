@@ -1,0 +1,320 @@
+{
+  "status": "passed",
+  "model_turns": 0,
+  "synthetic_project_data": true,
+  "before": {
+    "groups": [
+      {
+        "id": 1,
+        "project_id": 101,
+        "title": "Exportación documentada"
+      }
+    ],
+    "milestones": [
+      {
+        "id": 1,
+        "epic_id": 1
+      }
+    ],
+    "tasks": [
+      {
+        "id": 1,
+        "epic_id": 1,
+        "milestone_id": 1,
+        "status": "in_progress"
+      },
+      {
+        "id": 2,
+        "epic_id": 1,
+        "milestone_id": null,
+        "status": "backlog"
+      }
+    ],
+    "dependencies": [
+      {
+        "task_id": 2,
+        "depends_on_task_id": 1
+      }
+    ],
+    "runs": [
+      {
+        "id": "cdb5bd86-320f-4a96-98d9-e0ac0286325b",
+        "status": "needs_review"
+      }
+    ],
+    "peers": [
+      {
+        "kind": "business",
+        "state": "closed"
+      },
+      {
+        "kind": "native",
+        "state": "closed"
+      }
+    ],
+    "dispatches": 0,
+    "native_starts": 0,
+    "integrity": "ok",
+    "foreign_keys": [],
+    "task_records": [
+      {
+        "id": 1,
+        "project_id": 101,
+        "epic_id": 1,
+        "milestone_id": 1,
+        "title": "Leer una observación real",
+        "description": "",
+        "type": "research",
+        "status": "in_progress",
+        "priority": 2,
+        "estimated_complexity": "medium",
+        "created_by": "api"
+      },
+      {
+        "id": 2,
+        "project_id": 101,
+        "epic_id": 1,
+        "milestone_id": null,
+        "title": "Exportar columnas comprobadas",
+        "description": "",
+        "type": "code",
+        "status": "backlog",
+        "priority": 2,
+        "estimated_complexity": "medium",
+        "created_by": "api"
+      }
+    ],
+    "owner_commands": [
+      {
+        "project_id": 101,
+        "operation_key": "fixture-group",
+        "kind": "group.create",
+        "resource_id": 1,
+        "request_sha256": "6a5a53d60bfe322987457da25fd3a06c1274087909686d77aa2bfc5be93282d7",
+        "response_sha256": "7fc8f4309dd53766a8092d8637ab6d46f8d106c7cb38115f461d99b76a828cf6"
+      },
+      {
+        "project_id": 101,
+        "operation_key": "fixture-input",
+        "kind": "task.create",
+        "resource_id": 1,
+        "request_sha256": "60bc5881a222a2c744ddff6445f359e701037168d06a7f570040c346195e0b8c",
+        "response_sha256": "e20675c583a3f8467a79d55ddbdbab6c960dc243f4465a39518667e0172e3b35"
+      },
+      {
+        "project_id": 101,
+        "operation_key": "fixture-milestone",
+        "kind": "milestone.create",
+        "resource_id": 1,
+        "request_sha256": "2232dfa05664d418d45450e0ad1dd80cfc0723c8ca87a5e39497621469e7f7a4",
+        "response_sha256": "ea4c97b50ff5f55558a273fa11d2ad5a651ded665916313c4c22613bd6adde58"
+      },
+      {
+        "project_id": 101,
+        "operation_key": "fixture-output",
+        "kind": "task.create",
+        "resource_id": 2,
+        "request_sha256": "dace83ae407c32a91d4b2af6883cc611b90262cb1c218c0f2e2ec3eabfabe36b",
+        "response_sha256": "a8ab640e3e1263cf9764b4c26f80097930a1a157d5c259a11d680eea27b6c22e"
+      }
+    ],
+    "events": 10,
+    "contexts": [
+      {
+        "task_id": 1,
+        "version": 1
+      }
+    ],
+    "corrections": [],
+    "controls": [
+      {
+        "project_id": 101,
+        "task_id": 1,
+        "operation_key": "synthetic-original-instruction",
+        "result_json": "{\"run_id\":\"cdb5bd86-320f-4a96-98d9-e0ac0286325b\"}"
+      }
+    ],
+    "source_sha256": "33abd286d72623760d3adccae2c4f83bf1bf063e2bd2238f2fee178f92c2f0fb"
+  },
+  "backend": "/home/andres/.codex/worktrees/b09e/researcher/.superpowers/sdd/2026-10-31-actualizacion-proyecto/native-runtime-env/lib/python3.12/site-packages/backend/__init__.py",
+  "web_index_sha256": "af3eff295ad9ca11f5ec3ad90e15e7f35e8c9d8686de6345061f5fb14472c1fa",
+  "browser_exit": 0,
+  "original_run_id": "cdb5bd86-320f-4a96-98d9-e0ac0286325b",
+  "final_context_version": 2,
+  "service_exit": 143,
+  "after": {
+    "groups": [
+      {
+        "id": 1,
+        "project_id": 101,
+        "title": "Exportación documentada"
+      }
+    ],
+    "milestones": [
+      {
+        "id": 1,
+        "epic_id": 1
+      }
+    ],
+    "tasks": [
+      {
+        "id": 1,
+        "epic_id": 1,
+        "milestone_id": 1,
+        "status": "in_progress"
+      },
+      {
+        "id": 2,
+        "epic_id": 1,
+        "milestone_id": null,
+        "status": "backlog"
+      }
+    ],
+    "dependencies": [
+      {
+        "task_id": 2,
+        "depends_on_task_id": 1
+      }
+    ],
+    "runs": [
+      {
+        "id": "cdb5bd86-320f-4a96-98d9-e0ac0286325b",
+        "status": "cancelled"
+      }
+    ],
+    "peers": [
+      {
+        "kind": "business",
+        "state": "closed"
+      },
+      {
+        "kind": "native",
+        "state": "closed"
+      }
+    ],
+    "dispatches": 0,
+    "native_starts": 0,
+    "integrity": "ok",
+    "foreign_keys": [],
+    "task_records": [
+      {
+        "id": 1,
+        "project_id": 101,
+        "epic_id": 1,
+        "milestone_id": 1,
+        "title": "Leer una observación real",
+        "description": "",
+        "type": "research",
+        "status": "in_progress",
+        "priority": 2,
+        "estimated_complexity": "medium",
+        "created_by": "api"
+      },
+      {
+        "id": 2,
+        "project_id": 101,
+        "epic_id": 1,
+        "milestone_id": null,
+        "title": "Exportar columnas comprobadas",
+        "description": "",
+        "type": "code",
+        "status": "backlog",
+        "priority": 2,
+        "estimated_complexity": "medium",
+        "created_by": "api"
+      }
+    ],
+    "owner_commands": [
+      {
+        "project_id": 101,
+        "operation_key": "fixture-group",
+        "kind": "group.create",
+        "resource_id": 1,
+        "request_sha256": "6a5a53d60bfe322987457da25fd3a06c1274087909686d77aa2bfc5be93282d7",
+        "response_sha256": "7fc8f4309dd53766a8092d8637ab6d46f8d106c7cb38115f461d99b76a828cf6"
+      },
+      {
+        "project_id": 101,
+        "operation_key": "fixture-input",
+        "kind": "task.create",
+        "resource_id": 1,
+        "request_sha256": "60bc5881a222a2c744ddff6445f359e701037168d06a7f570040c346195e0b8c",
+        "response_sha256": "e20675c583a3f8467a79d55ddbdbab6c960dc243f4465a39518667e0172e3b35"
+      },
+      {
+        "project_id": 101,
+        "operation_key": "fixture-milestone",
+        "kind": "milestone.create",
+        "resource_id": 1,
+        "request_sha256": "2232dfa05664d418d45450e0ad1dd80cfc0723c8ca87a5e39497621469e7f7a4",
+        "response_sha256": "ea4c97b50ff5f55558a273fa11d2ad5a651ded665916313c4c22613bd6adde58"
+      },
+      {
+        "project_id": 101,
+        "operation_key": "fixture-output",
+        "kind": "task.create",
+        "resource_id": 2,
+        "request_sha256": "dace83ae407c32a91d4b2af6883cc611b90262cb1c218c0f2e2ec3eabfabe36b",
+        "response_sha256": "a8ab640e3e1263cf9764b4c26f80097930a1a157d5c259a11d680eea27b6c22e"
+      }
+    ],
+    "events": 12,
+    "contexts": [
+      {
+        "task_id": 1,
+        "version": 2
+      }
+    ],
+    "corrections": [
+      {
+        "project_id": 101,
+        "task_id": 1,
+        "version": 2,
+        "statement": "Entrada del ejemplo sintético: {\"id\": 7, \"measurement\": 12}. Para el CSV, extrae measurement y escribe la columna value.",
+        "source_kind": "user_example",
+        "source_reference": "owner-correction:4fdc3ef8-c246-40b1-8f04-5712e9570ce6"
+      }
+    ],
+    "controls": [
+      {
+        "project_id": 101,
+        "task_id": 1,
+        "operation_key": "4fdc3ef8-c246-40b1-8f04-5712e9570ce6",
+        "result_json": "{\"version\":2}"
+      },
+      {
+        "project_id": 101,
+        "task_id": 1,
+        "operation_key": "synthetic-original-instruction",
+        "result_json": "{\"run_id\":\"cdb5bd86-320f-4a96-98d9-e0ac0286325b\"}"
+      }
+    ],
+    "source_sha256": "33abd286d72623760d3adccae2c4f83bf1bf063e2bd2238f2fee178f92c2f0fb"
+  },
+  "base_commit": "f0d57bf",
+  "raw_evaluation": ".researcher/evaluations/task-requests-page-20261108-v4",
+  "browser_states": 7,
+  "browser_checks": [
+    "original-pre-admitted-request-recovered-not-rescheduled",
+    "same-body-key-context-thread-repository",
+    "instruction-copy-survives-tasks-to-conversation",
+    "actual-original-stop-202",
+    "correction-committed-before-reply-loss",
+    "correction-copy-survives-conversation-to-tasks",
+    "original-expected-version-retained",
+    "same-correction-receipt-not-another-revision",
+    "mounted-acknowledgements-clear-exact-packets",
+    "original-history-and-model-unknown",
+    "foreign-link-not-retargeted",
+    "no-new-native-run-or-model"
+  ],
+  "frontend_contracts": 157,
+  "frontend_ui": 57,
+  "original_run_count": 1,
+  "final_run_count": 1,
+  "new_context_revisions": 1,
+  "actual_generative_turns": 0,
+  "global_suite_rerun": false,
+  "raw_result_sha256": "585150501361e1cda4dba9a95769882f0b3034d7b5521b08a827bf280f125a26",
+  "browser_receipt_sha256": "b60d112747264a798d32d848a963c5a9e2a939f4a58d47de5b771dabdde5a8a5"
+}

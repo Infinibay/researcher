@@ -1,0 +1,125 @@
+{
+  "status": "passed",
+  "scope": "Existing synthetic admission recovery, actual owner Stop and context correction; no generative model",
+  "states": [
+    {
+      "name": "01-original-pending-request",
+      "width": 1440,
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "02-original-admission-reply-lost",
+      "width": 390,
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "03-original-request-recovered-in-conversation",
+      "width": 1440,
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "04-original-correction-reply-lost",
+      "width": 390,
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "05-one-correction-recovered-in-tasks",
+      "width": 1440,
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "06-original-history-with-unknown-model",
+      "width": 390,
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "07-foreign-task-link-not-retargeted",
+      "width": 390,
+      "fits": true,
+      "violations": []
+    }
+  ],
+  "instructions": [
+    {
+      "body": {
+        "task_id": 1,
+        "context_version": 1,
+        "thread_id": "synthetic-original-thread",
+        "message": "Describe los campos de una observación y cómo se relacionan con las columnas del CSV. Primero muestra una entrada y la salida esperada; distingue el ejemplo de lo comprobado.",
+        "repository_id": 11,
+        "operation_key": "synthetic-original-instruction"
+      },
+      "status": 202,
+      "run": "cdb5bd86-320f-4a96-98d9-e0ac0286325b"
+    },
+    {
+      "body": {
+        "task_id": 1,
+        "context_version": 1,
+        "thread_id": "synthetic-original-thread",
+        "message": "Describe los campos de una observación y cómo se relacionan con las columnas del CSV. Primero muestra una entrada y la salida esperada; distingue el ejemplo de lo comprobado.",
+        "repository_id": 11,
+        "operation_key": "synthetic-original-instruction"
+      },
+      "status": 202,
+      "run": "cdb5bd86-320f-4a96-98d9-e0ac0286325b"
+    }
+  ],
+  "corrections": [
+    {
+      "body": {
+        "expected_version": 1,
+        "statement": "Entrada del ejemplo sintético: {\"id\": 7, \"measurement\": 12}. Para el CSV, extrae measurement y escribe la columna value.",
+        "source_kind": "user_example",
+        "operation_key": "4fdc3ef8-c246-40b1-8f04-5712e9570ce6"
+      },
+      "status": 200,
+      "receipt": {
+        "context_version": 2,
+        "application": "recorded_for_next_run",
+        "inference_started": false
+      }
+    },
+    {
+      "body": {
+        "expected_version": 1,
+        "statement": "Entrada del ejemplo sintético: {\"id\": 7, \"measurement\": 12}. Para el CSV, extrae measurement y escribe la columna value.",
+        "source_kind": "user_example",
+        "operation_key": "4fdc3ef8-c246-40b1-8f04-5712e9570ce6"
+      },
+      "status": 200,
+      "receipt": {
+        "context_version": 2,
+        "application": "recorded_for_next_run",
+        "inference_started": false
+      }
+    }
+  ],
+  "stops": [
+    {
+      "path": "/api/projects/101/runs/cdb5bd86-320f-4a96-98d9-e0ac0286325b/stop",
+      "status": 202
+    }
+  ],
+  "errors": [],
+  "checks": [
+    "original-pre-admitted-request-recovered-not-rescheduled",
+    "same-body-key-context-thread-repository",
+    "instruction-copy-survives-tasks-to-conversation",
+    "actual-original-stop-202",
+    "correction-committed-before-reply-loss",
+    "correction-copy-survives-conversation-to-tasks",
+    "original-expected-version-retained",
+    "same-correction-receipt-not-another-revision",
+    "mounted-acknowledgements-clear-exact-packets",
+    "original-history-and-model-unknown",
+    "foreign-link-not-retargeted",
+    "no-new-native-run-or-model"
+  ]
+}

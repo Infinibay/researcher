@@ -9120,3 +9120,27 @@ No nueva página aceptada:8/12y41/43. Sigue recorrido Trabajo/historia/correccio
 controles de Tareas, luego Conversación/Ejecución/Proyectos, U08/C10 y gatesfinales.
 Inversasglobales ahora hasta70, no declaradas verdes. No modelos ni datos del usuario.
 [Alcance](task-creation-review.md).
+
+
+## Solicitudes y correcciones duraderas entre Tareas/Conversación, 2026-11-08
+
+07:33:01–08:01:05UTC,28min4s hasta verificar/inspeccionar,basef0d57bf. Dos REDDOM
+reproducen pérdida local tras recarga; almacenamiento antes de transporte conserva
+cuerpo/clave/contexto yselecciones. Copia dañada/fallo de guardado bloquean envío;
+recibo ajeno no confirma, cambio de instalación archiva sin enviar. Reutilizada
+validación de instrucciones sin regenerar claves; no runID ficticio preadmisión.
+57UI/157contratos,tipos/build yESLintseleccionado pasan. Pythonmódulo/3funciones y
+helpers/modificaciones relevantesTSdocumentados. DetallesDD139al final.
+
+7estados/12checks deHTTPinstalado: mismaadmisión sintética202 tras respuesta perdida
+entre Tareas/Conversación;Stop202original, corrección200perdida yrecuperada enTareas
+con expected_version1mantenida: contexto1→2una vez. Unrun/0dispatches/0IDs de turno,
+fuente/metadatos/relaciones iguales, servicio143. Dos preparaciones fallidas por
+campos supuestos del evaluador conservadas sinservicio/turnos/peers abiertos.
+Tercer caso detectó labelenvuelto con texto restaurado: IDs/labels separados;
+v4completo pasa. No revisión científica/humana ni generación de modelo.
+
+Backend689fuentes igual al wheelb2103c057f25443db82254c626f0f1b7962eaa7f23c35bbf499509d8a74ada51;
+no reinstalación o nueva suitebackend/global.8/12páginas/41de43escenarios. Continúa
+aceptación de resultados ylecturas/ediciones del inspector deTareas; luego otras
+páginas y gatesglobales. [Resultados y límites](task-request-review.md).

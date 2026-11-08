@@ -57,3 +57,37 @@ el proyecto original. No cambiar producto para forzar su limpieza prematura.
 Puntos4–5restan para página completa: Trabajo/historia/corrección/controles sobre
 originales. Sigue8/12páginas,41/43escenarios. DetallesDD138al final.
 [Pruebas y límites](../../modernization/task-creation-review.md).
+
+## Trabajo siguiente: solicitudes y correcciones duraderas
+
+Inicio07:33:01UTC, basef0d57bf. TaskRunWorkspace guarda InstructionIntent y la
+corrección sólo en useRef; recarga/navegación pierde la clave del envío incierto.
+Afecta también TaskConversation. Reproducir en DOM con mutaciones reales y red
+controlada: respuesta perdida, desmontar/montar con contexto observado cambiado,
+y exigir mismo cuerpo/clave. No inventar otra intención al recuperar.
+
+Persistir ambos cuerpos antes del transporte, con ámbito proyecto/tarea/kind,
+parser estricto, validación de recibo y retirada sólo de la copia exacta. Reutilizar
+validación de prepareInstruction para preservar importaciones seleccionadas; no
+usar runId ficticio para reutilizar ownerActionStore. Solicitud aún no tiene runId.
+El prefijo researcher: participa del archivo de cambio de instalación existente.
+Copia dañada/fallo de guardado bloquea envío; descarte sólo explícito y sin afirmar
+que revierte efectos. Recuperación de copia pendiente no depende de canStart de
+un nuevo intento ni de elegir otro repositorio. No autoenvíos al montar.
+
+Ensayo instalado: recuperar una admisión preexistente exacta sin programar otro
+modelo, corregir mediante endpoint real/perder respuesta y recuperar el mismo
+recibo tras recarga. Guardar pruebas de contexto/efectos/runs antes/después. No
+iniciar trabajo generativo para probar identidad. Después continuar historial/
+controles y errores de comentarios/dependencias del inspector. Detalles al final.
+
+## Solicitudes/correcciones verificadas08:01:05UTC
+
+Identidad duradera antes del transporte y recuperación entre Tareas/Conversación
+implementadas. Dos REDDOM→57UI/157contratos verdes; caso instalado7estados/12checks,
+mismaadmisión202,Stop202 yuna corrección1→2tras perder respuesta.0modelos. Labels
+estables para texto restaurado. [Alcance](../../modernization/task-request-review.md).
+
+Continúan: aceptación de resultados ylecturas/ediciones auxiliares del inspector
+(comentarios/dependencias no pueden inventar vacío por fallo); después cierre de
+página. No sustituir ese recorrido por otro test sólo de paquetes. Detalles al final.

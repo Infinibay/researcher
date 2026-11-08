@@ -1,0 +1,8 @@
+{
+  "scope": "New Python evaluation module; changed/new TypeScript request helpers and relevant workspace functions have JSDoc, no whole-project documentation claim",
+  "python_definitions": 3,
+  "module_documented": true,
+  "missing": [],
+  "path": "evals/operation/task_requests_page.py",
+  "sha256": "bfd2ff53ad31eb4fb154500ba0ebc3d231609a509f6115b83c4df23d6ed546c8"
+}

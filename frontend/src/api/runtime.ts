@@ -279,6 +279,7 @@ export function priorPatchText(encoded:string):string|null {
   try {return new TextDecoder('utf-8',{fatal:true}).decode(Uint8Array.from(atob(encoded),character=>character.charCodeAt(0)))} catch {return null}
 }
 
+/** Owner-selected request fields, distinct from any later native attempt or inferred shared context. */
 export interface InstructionDraft {
   task_id: number
   context_version: number
@@ -287,25 +288,39 @@ export interface InstructionDraft {
   repository_id?: number
   prior_code?: Readonly<PriorMaterialSelection>
 }
+/** Complete immutable delivery identity, including the original task/context/thread and optional material. */
 export interface InstructionIntent {
   readonly projectId: number
   readonly body: Readonly<InstructionDraft & { operation_key: string }>
 }
 
 /** Freeze the complete original request and prior-code observation so uncertain sends cannot silently change intent. */
-export function prepareInstruction(projectId: number, draft: InstructionDraft): InstructionIntent {
+function freezeInstruction(projectId: number, draft: InstructionDraft, operationKey: string): InstructionIntent {
   if (![projectId, draft.task_id, draft.context_version].every(x => Number.isSafeInteger(x) && x > 0)
-    || !/^[A-Za-z0-9_.:-]{1,128}$/.test(draft.thread_id)
-    || !draft.message.trim() || draft.message.length > 50000
+    || typeof draft.thread_id!=='string' || !/^[A-Za-z0-9_.:-]{1,128}$/.test(draft.thread_id)
+    || typeof operationKey!=='string' || !/^[A-Za-z0-9_.:-]{1,128}$/.test(operationKey)
+    || typeof draft.message!=='string' || !draft.message.trim() || draft.message.length > 50000
     || (draft.repository_id != null && (!Number.isSafeInteger(draft.repository_id) || draft.repository_id <= 0))
     || (draft.prior_code != null && ('commit_sha' in draft.prior_code ? draft.prior_code.source_kind!=='legacy_branch'||!Number.isSafeInteger(draft.prior_code.branch_id)||draft.prior_code.branch_id<=0||!/^(?:[0-9a-f]{40}|[0-9a-f]{64})$/.test(draft.prior_code.commit_sha) : !/^[0-9a-f]{64}$/.test(draft.prior_code.snapshot_sha256)||('attempt_id' in draft.prior_code&&(!draft.prior_code.attempt_id.trim()||draft.prior_code.attempt_id.length>128))))) {
     throw new Error('Revisa la tarea, el contexto y el contenido de la solicitud.')
   }
   if(draft.prior_code&&'paths' in draft.prior_code)checkFileSelection(draft.prior_code)
   const selected=draft.prior_code?Object.freeze({...draft.prior_code,...('paths' in draft.prior_code?{paths:Object.freeze([...draft.prior_code.paths])}:{})}):undefined
-  return Object.freeze({ projectId, body: Object.freeze({ ...draft, ...(selected?{prior_code:selected}:{}), operation_key: crypto.randomUUID() }) })
+  return Object.freeze({ projectId, body: Object.freeze({ ...draft, ...(selected?{prior_code:selected}:{}), operation_key: operationKey }) })
 }
 
+/** Capture a new request only when the owner prepares a fresh intent. */
+export function prepareInstruction(projectId: number, draft: InstructionDraft): InstructionIntent {
+  return freezeInstruction(projectId,draft,crypto.randomUUID())
+}
+
+/** Revalidate saved request bytes without generating a replacement key or changing selected prior material. */
+export function restoreInstruction(intent: InstructionIntent): InstructionIntent {
+  const {operation_key,...draft}=intent.body
+  return freezeInstruction(intent.projectId,draft,operation_key)
+}
+
+/** Send the captured original body; callers acknowledge only the matching scoped receipt. */
 export function sendInstruction(intent: InstructionIntent) {
   return fetchApi<{ run: RuntimeRun; message: { id: number; thread_id: string } }>(`/api/chat/${intent.projectId}/instructions`, {
     method: 'POST', body: JSON.stringify(intent.body),

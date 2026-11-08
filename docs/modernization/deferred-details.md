@@ -1198,3 +1198,14 @@ pasan ESLint. Inventario55definiciones lista12omisiones heredadas en clases/help
 no modificados; nuevas/relevantes modificadas sí documentadas. Completar esas
 omisiones con documentación útil para Ken al pulido, sin afirmar documentación
 global completa. Inversa70y cadena forwardverdes no cierran todas las inversas.
+
+
+## DD139 — densidad y encuadre de solicitudes/contexto
+
+La columna de fuentes/correcciones queda estrecha en escritorio; pulir distribución
+al final sin perder solicitud original, origen o diferencia entre contexto actual
+yresultado anterior. La captura móvil de historia conserva scroll y no encuadra
+el disclosure completo; no repetir un recorrido sólo por ello. Avisos técnicos en
+DD132. Copia dañada se conserva y bloquea una nueva mutación; no descartar o crear
+otra clave automáticamente. EstiloPythonen[task-request-lint.json](task-request-lint.json);
+selecciónfrontendpasa[ESLint](task-request-eslint.json). BundleDD121.

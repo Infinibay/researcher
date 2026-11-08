@@ -1,9 +1,9 @@
 /** Project-scoped task workbench, original native attempts, delivered results and explicit owner corrections. @module */
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import type { ReactNode } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import { prepareInstruction, prepareRecovery, prepareStartRetry, presentRun, recoveryInspection, sourceWindow } from '../../api/runtime'
-import type { InstructionIntent, RecoveryIntent, RuntimeRun, StartRetryIntent, PriorMaterialSelection } from '../../api/runtime'
+import type { RecoveryIntent, RuntimeRun, StartRetryIntent, PriorMaterialSelection } from '../../api/runtime'
 import { useCorrection, useInstruction, useRecovery, useStartRetry, useStopRun, useTaskWorkspace } from '../../hooks/useRuntime'
 import { QuestionCard } from '../chat/QuestionCard'
 import { MarkdownRenderer } from '../common/MarkdownRenderer'
@@ -18,10 +18,15 @@ import { TaskCodeResults } from './CodeDelivery'
 import { TaskRemotePublications } from './RemotePublications'
 import { TaskProjectPlan } from './ProjectPlanDelivery'
 import { TaskRunHistory } from './ExecutionHistory'
+import {instructionPacket,prepareTaskCorrection,taskRequestPackets,verifyInstructionReceipt,verifyCorrectionReceipt,type TaskRequestPacket} from '../../api/taskRequests'
 
 const inputClass = 'w-full rounded-md border border-[var(--work-line)] bg-[var(--work-paper)] px-3 py-2 text-sm text-[var(--work-ink)] focus:outline-hidden focus:ring-2 focus:ring-[var(--work-accent)]'
 const buttonClass = 'rounded-md border border-[var(--work-line)] px-3 py-2 text-sm text-[var(--work-ink)] hover:bg-[var(--work-wash)] disabled:opacity-50'
 
+/** Restore saved input independently for each mutation family; damage blocks a fresh delivery. */
+function restored<K extends TaskRequestPacket['kind']>(kind:K,project:number,task:number){if(typeof window==='undefined')return {packet:null,issue:null as string|null,blocked:false};try{return {packet:taskRequestPackets.load(window.sessionStorage,kind,project,task),issue:null as string|null,blocked:false}}catch(error){return {packet:null,issue:error instanceof Error?error.message:'No se pudo recuperar la solicitud original.',blocked:true}}}
+
+/** Retry only the already admitted original request without changing its task, repository or context. */
 function QueuedStart({ projectId, taskId, run }: { projectId: number; taskId: number; run: RuntimeRun }) {
   const retry = useStartRetry()
   const intent = useRef<StartRetryIntent | null>(null)
@@ -38,6 +43,7 @@ function QueuedStart({ projectId, taskId, run }: { projectId: number; taskId: nu
   </section>
 }
 
+/** Inspect original attempt closure without replaying work or accepting its result. */
 function RecoveryCard({ projectId, taskId, runId }: { projectId: number; taskId: number; runId: string }) {
   const details = useQuery({ queryKey: ['run-recovery', projectId, runId], queryFn: () => recoveryInspection(projectId, runId), retry: false, refetchInterval: 2000 })
   const recover = useRecovery()
@@ -72,6 +78,7 @@ function RecoveryCard({ projectId, taskId, runId }: { projectId: number; taskId:
 }
 
 
+/** Page saved source text and preserve failures as unknown content. */
 function SourceReader({ projectId, sourceId }: { projectId: number; sourceId: number }) {
   const [offset, setOffset] = useState(0)
   const source = useQuery({ queryKey: ['owner-source', projectId, sourceId, offset], queryFn: () => sourceWindow(projectId, sourceId, offset), retry: false })
@@ -99,17 +106,20 @@ export function TaskRunWorkspace({ projectId, taskId, conversationThreadId, onCo
   const send = useInstruction()
   const stop = useStopRun(projectId, taskId)
   const correct = useCorrection(projectId, taskId)
-  const [message, setMessage] = useState('')
-  const [repositoryId, setRepositoryId] = useState<number | undefined>()
-  const [priorCode, setPriorCode] = useState<Readonly<PriorMaterialSelection> | null>(null)
-  const [statement, setStatement] = useState('')
-  const [kind, setKind] = useState<'user_message' | 'user_example'>('user_message')
+  const [instructionState,setInstructionState]=useState(()=>restored('instruction',projectId,taskId))
+  const [correctionState,setCorrectionState]=useState(()=>restored('correction',projectId,taskId))
+  const intent=instructionState.packet,correctionIntent=correctionState.packet?.body??null
+  const alive=useRef(true)
+  useEffect(()=>{alive.current=true;return()=>{alive.current=false}},[])
+  const [message, setMessage] = useState(intent?.body.message??'')
+  const [repositoryId, setRepositoryId] = useState<number | undefined>(intent?.body.repository_id)
+  const [priorCode, setPriorCode] = useState<Readonly<PriorMaterialSelection> | null>(intent?.body.prior_code??null)
+  const [statement, setStatement] = useState(correctionIntent?.statement??'')
+  const [kind, setKind] = useState<'user_message' | 'user_example'>(correctionIntent?.source_kind??'user_message')
   const [sourceId, setSourceId] = useState<number | null>(null)
   const [notice, setNotice] = useState('')
   const [newConversation, setNewConversation] = useState(false)
   const thread = useRef(crypto.randomUUID())
-  const intent = useRef<InstructionIntent | null>(null)
-  const correction = useRef<Parameters<typeof correct.mutate>[0] | null>(null)
 
   if (workspace.isPending) return <p role="status" className="text-sm text-[var(--work-muted)]">Recuperando trabajo y contexto…</p>
   if (workspace.error || !workspace.data) return <div role="alert" className="space-y-2 text-sm text-[var(--work-error)]">
@@ -126,31 +136,55 @@ export function TaskRunWorkspace({ projectId, taskId, conversationThreadId, onCo
   const chooseRepository = data.repositories.length > 1 && repositoryId == null
   const sourceLabels: Record<string, string> = { user_message: 'Indicación del usuario', user_example: 'Ejemplo del usuario', tool_evidence: 'Evidencia registrada', assumption: 'Suposición' }
 
+  /** Save the original request before transport; acknowledge only its exact scoped admission receipt. */
   const submit = () => {
-    if (!intent.current) intent.current = prepareInstruction(projectId, {
-      task_id: taskId, context_version: data.context.context_version,
-      thread_id: newConversation ? thread.current : conversationThreadId ?? current?.conversation_thread_id ?? thread.current,
-      message: message.trim(), ...(repositoryId != null ? { repository_id: repositoryId } : {}),
-      ...(priorCode ? { prior_code: priorCode } : {}),
-    })
-    send.mutate(intent.current, { onSuccess: result => {
-      intent.current = null
-      thread.current = crypto.randomUUID()
-      setNewConversation(false)
-      setMessage('')
-      setPriorCode(null)
-      setNotice('Solicitud registrada. Consulta su estado para ver cuándo comienza.')
-      onConversation?.(result.message.thread_id)
-    } })
+    if(instructionState.blocked)return
+    try{
+      const selectedRepository=repositoryId??(data.repositories.length===1?data.repositories[0].id:undefined)
+      const packet=intent??instructionPacket(prepareInstruction(projectId,{
+        task_id:taskId,context_version:data.context.context_version,
+        thread_id:newConversation?thread.current:conversationThreadId??current?.conversation_thread_id??thread.current,
+        message:message.trim(),...(selectedRepository!=null?{repository_id:selectedRepository}:{}),
+        ...(priorCode?{prior_code:priorCode}:{}),
+      }))
+      taskRequestPackets.save(window.sessionStorage,packet)
+      setInstructionState({packet,issue:null,blocked:false})
+      send.mutate(packet,{onSuccess:result=>{
+        try{verifyInstructionReceipt(packet,result);taskRequestPackets.clear(window.sessionStorage,packet)}catch(error){if(alive.current)setInstructionState(state=>({...state,issue:error instanceof Error?error.message:'No se confirmó el recibo original.'}));return}
+        if(!alive.current)return
+        setInstructionState({packet:null,issue:null,blocked:false})
+        thread.current=crypto.randomUUID();setNewConversation(false);setMessage('');setPriorCode(null)
+        setNotice('Solicitud registrada. Consulta su estado para ver cuándo comienza.')
+        onConversation?.(result.message.thread_id)
+      }})
+    }catch(error){setInstructionState(state=>({...state,issue:error instanceof Error?error.message:'No se guardó la solicitud; no se envió.'}))}
   }
 
+  /** Persist the correction's original expected version; recovery never silently upgrades it to current context. */
   const saveCorrection = () => {
-    if (!correction.current) correction.current = { operation_key: crypto.randomUUID(), expected_version: data.context.context_version, statement: statement.trim(), source_kind: kind }
-    correct.mutate(correction.current, { onSuccess: result => {
-      correction.current = null
-      setStatement('')
-      setNotice(`Corrección registrada en el contexto ${result.context_version}. Inicia otra ejecución cuando quieras usarla.`)
-    } })
+    if(correctionState.blocked)return
+    try{
+      const packet=correctionState.packet??prepareTaskCorrection(projectId,taskId,{expected_version:data.context.context_version,statement:statement.trim(),source_kind:kind})
+      taskRequestPackets.save(window.sessionStorage,packet)
+      setCorrectionState({packet,issue:null,blocked:false})
+      correct.mutate(packet.body,{onSuccess:result=>{
+        try{verifyCorrectionReceipt(packet,result);taskRequestPackets.clear(window.sessionStorage,packet)}catch(error){if(alive.current)setCorrectionState(state=>({...state,issue:error instanceof Error?error.message:'No se confirmó la corrección original.'}));return}
+        if(!alive.current)return
+        setCorrectionState({packet:null,issue:null,blocked:false});setStatement('')
+        setNotice(`Corrección registrada en el contexto ${result.context_version}. Inicia otra ejecución cuando quieras usarla.`)
+      }})
+    }catch(error){setCorrectionState(state=>({...state,issue:error instanceof Error?error.message:'No se guardó la corrección; no se envió.'}))}
+  }
+
+  /** Discard only an explicitly chosen local copy, without cancelling, undoing or denying its server effects. */
+  const discard = (kind:'instruction'|'correction') => {
+    const packet=kind==='instruction'?instructionState.packet:correctionState.packet
+    if(!packet)return
+    try{
+      taskRequestPackets.clear(window.sessionStorage,packet)
+      if(kind==='instruction'){setInstructionState({packet:null,issue:null,blocked:false});send.reset()}else{setCorrectionState({packet:null,issue:null,blocked:false});correct.reset()}
+      setNotice('Se retiró sólo la copia local. La solicitud anterior todavía puede existir: consulta su historial antes de preparar otra.')
+    }catch(error){const issue=error instanceof Error?error.message:'No se pudo retirar la copia original.';if(kind==='instruction')setInstructionState(state=>({...state,issue}));else setCorrectionState(state=>({...state,issue}))}
   }
 
   return <section className="task-execution text-sm" aria-label="Trabajo de la tarea">
@@ -184,26 +218,25 @@ export function TaskRunWorkspace({ projectId, taskId, conversationThreadId, onCo
       <h4 className="font-medium text-[var(--work-ink)]">{current.status === 'needs_review' ? 'Propuesta' : 'Resultado conservado'}</h4>
       <MarkdownRenderer content={current.result.summary} />
     </section>}
-    {(data.runtime.development_task_types ?? []).includes(data.context.task.type)&&<PriorCodeInput key={`prior:${projectId}:${taskId}`} projectId={projectId} taskId={taskId} runs={data.runs} selected={priorCode} locked={intent.current!=null||send.isPending} onSelect={setPriorCode}/>}
-    {(data.runtime.development_task_types ?? []).includes(data.context.task.type)&&<FileImportInput key={`files:${projectId}:${taskId}`} projectId={projectId} taskId={taskId} selected={priorCode} locked={intent.current!=null||send.isPending} configured={data.runtime.configured} onSelect={setPriorCode}/>}
-    {(data.runtime.development_task_types ?? []).includes(data.context.task.type)&&<BranchImportInput key={`branch:${projectId}:${taskId}`} projectId={projectId} taskId={taskId} selected={priorCode} locked={intent.current!=null||send.isPending} configured={data.runtime.configured} onSelect={setPriorCode}/>}
+    {(data.runtime.development_task_types ?? []).includes(data.context.task.type)&&<PriorCodeInput key={`prior:${projectId}:${taskId}`} projectId={projectId} taskId={taskId} runs={data.runs} selected={priorCode} locked={intent!=null||send.isPending} onSelect={setPriorCode}/>}
+    {(data.runtime.development_task_types ?? []).includes(data.context.task.type)&&<FileImportInput key={`files:${projectId}:${taskId}`} projectId={projectId} taskId={taskId} selected={priorCode} locked={intent!=null||send.isPending} configured={data.runtime.configured} onSelect={setPriorCode}/>}
+    {(data.runtime.development_task_types ?? []).includes(data.context.task.type)&&<BranchImportInput key={`branch:${projectId}:${taskId}`} projectId={projectId} taskId={taskId} selected={priorCode} locked={intent!=null||send.isPending} configured={data.runtime.configured} onSelect={setPriorCode}/>}
     <form className="space-y-2" onSubmit={event => { event.preventDefault(); submit() }}>
       <label className="block text-[var(--work-ink)]" htmlFor={`request-${taskId}`}>Solicitud para esta tarea</label>
-      <textarea id={`request-${taskId}`} className={inputClass} rows={3} value={message} maxLength={50000} readOnly={intent.current != null} onChange={event => setMessage(event.target.value)} placeholder="Explica qué quieres comprobar y qué resultado necesitas. Puedes incluir un ejemplo." />
-      <label className="flex items-start gap-2 text-[var(--work-ink)]"><input type="checkbox" checked={newConversation} disabled={intent.current != null || send.isPending} onChange={event => setNewConversation(event.target.checked)} />Iniciar sin los mensajes anteriores</label>
-      {newConversation && <p className="text-[var(--work-muted)]">Se conservan la tarea, las correcciones y las respuestas registradas. Incluye en la nueva solicitud las condiciones del historial que quieras mantener.</p>}
-      {data.repositories.length > 1 && <label className="block space-y-1 text-[var(--work-ink)]">Repositorio
-        <select className={inputClass} value={repositoryId ?? ''} disabled={intent.current != null} onChange={event => setRepositoryId(event.target.value ? Number(event.target.value) : undefined)}>
+      <textarea id={`request-${taskId}`} className={inputClass} rows={3} value={message} maxLength={50000} readOnly={intent != null||instructionState.blocked} onChange={event => setMessage(event.target.value)} placeholder="Explica qué quieres comprobar y qué resultado necesitas. Puedes incluir un ejemplo." />
+      {!intent&&<label className="flex items-start gap-2 text-[var(--work-ink)]"><input type="checkbox" checked={newConversation} disabled={send.isPending||instructionState.blocked} onChange={event => setNewConversation(event.target.checked)} />Iniciar sin los mensajes anteriores</label>}
+      {!intent&&newConversation && <p className="text-[var(--work-muted)]">Se conservan la tarea, las correcciones y las respuestas registradas. Incluye en la nueva solicitud las condiciones del historial que quieras mantener.</p>}
+      {!intent&&data.repositories.length > 1 && <label className="block space-y-1 text-[var(--work-ink)]">Repositorio
+        <select className={inputClass} value={repositoryId ?? ''} disabled={intent != null} onChange={event => setRepositoryId(event.target.value ? Number(event.target.value) : undefined)}>
           <option value="">Elige el repositorio</option>
           {data.repositories.map(repository => <option key={repository.id} value={repository.id}>{repository.name}</option>)}
         </select>
       </label>}
-      {send.error && <div role="alert" className="space-y-2 text-[var(--work-error)]">
-        <p>El envío no quedó confirmado. Reenviarlo conserva la misma solicitud. {send.error.message}</p>
-        <button type="button" className={buttonClass} onClick={() => { intent.current = null; send.reset(); setNotice('Revisa el historial: el envío anterior todavía puede existir.'); }}>Editar la solicitud</button>
-      </div>}
+      {intent&&<p role="status">Solicitud original guardada · contexto {intent.body.context_version}. Recuperarla conserva el texto, la conversación y la selección de repositorio originales.</p>}
+      {(send.error||instructionState.issue)&&<div role="alert" className="space-y-2 text-[var(--work-error)]"><p>El envío no quedó confirmado. {instructionState.issue??send.error?.message}</p><p>{intent?'La solicitud original se conserva; reenviarla usa la misma clave.':'No se envió una solicitud nueva desde este formulario.'}</p></div>}
+      {intent&&<div><p>Retirar la copia no detiene ni revierte el trabajo ya admitido. Consulta primero el historial.</p><button type="button" className={buttonClass} disabled={send.isPending} onClick={()=>discard('instruction')}>Retirar copia y editar solicitud</button></div>}
       <div className="flex flex-wrap gap-2">
-        <button className="rounded-md bg-[var(--work-accent-fill)] px-3 py-2 font-medium text-white hover:bg-[var(--work-accent-strong)] disabled:opacity-50" disabled={!available || !message.trim() || send.isPending || chooseRepository || (!state.canStart && !intent.current)}>{send.isPending ? 'Registrando…' : intent.current ? 'Reenviar la misma solicitud' : 'Iniciar trabajo'}</button>
+        <button className="rounded-md bg-[var(--work-accent-fill)] px-3 py-2 font-medium text-white hover:bg-[var(--work-accent-strong)] disabled:opacity-50" disabled={instructionState.blocked || !message.trim() || send.isPending || (!intent&&(!available||chooseRepository||!state.canStart))}>{send.isPending ? 'Registrando…' : intent ? 'Reenviar la misma solicitud' : 'Iniciar trabajo'}</button>
         <button type="button" className={buttonClass} onClick={() => workspace.refetch()}>Consultar estado</button>
         {current && !message && <button type="button" className={buttonClass} onClick={() => setMessage(current.prompt)}>Usar solicitud anterior</button>}
       </div>
@@ -217,10 +250,12 @@ export function TaskRunWorkspace({ projectId, taskId, conversationThreadId, onCo
       <summary className="cursor-pointer font-medium text-[var(--work-ink)]">Corregir el contexto</summary>
       <p className="mt-2 text-[var(--work-muted)]">Una corrección retira el trabajo basado en el contexto anterior. Queda registrada para la próxima ejecución; no inicia otra por su cuenta.</p>
       <form className="mt-2 space-y-2" onSubmit={event => { event.preventDefault(); saveCorrection() }}>
-        <label className="block text-[var(--work-ink)]">Tipo de corrección<select className={inputClass} value={kind} disabled={correction.current != null} onChange={event => setKind(event.target.value as typeof kind)}><option value="user_message">Indicación</option><option value="user_example">Ejemplo concreto</option></select></label>
-        <label className="block text-[var(--work-ink)]">Qué cambia<textarea className={inputClass} rows={2} value={statement} readOnly={correction.current != null} maxLength={12000} onChange={event => setStatement(event.target.value)} /></label>
-        {correct.error && <div role="alert" className="text-[var(--work-error)]"><p>No se confirmó la corrección. {correct.error.message}</p><button type="button" className={buttonClass} onClick={() => { correction.current = null; correct.reset() }}>Revisar la corrección</button></div>}
-        <button className={buttonClass} disabled={!available || !statement.trim() || correct.isPending}>{correct.isPending ? 'Guardando…' : correction.current ? 'Reenviar la misma corrección' : 'Guardar corrección'}</button>
+        <label className="block text-[var(--work-ink)]" htmlFor={`correction-kind-${taskId}`}>Tipo de corrección</label><select id={`correction-kind-${taskId}`} className={inputClass} value={kind} disabled={correctionIntent != null||correctionState.blocked} onChange={event => setKind(event.target.value as typeof kind)}><option value="user_message">Indicación</option><option value="user_example">Ejemplo concreto</option></select>
+        <label className="block text-[var(--work-ink)]" htmlFor={`correction-statement-${taskId}`}>Qué cambia</label><textarea id={`correction-statement-${taskId}`} className={inputClass} rows={2} value={statement} readOnly={correctionIntent != null||correctionState.blocked} maxLength={12000} onChange={event => setStatement(event.target.value)} />
+        {correctionIntent&&<p role="status">Corrección original guardada · contexto de origen {correctionIntent.expected_version}. Recuperarla conserva esa versión y el mismo texto.</p>}
+        {(correct.error||correctionState.issue)&&<div role="alert" className="text-[var(--work-error)]"><p>No se confirmó la corrección. {correctionState.issue??correct.error?.message}</p><p>{correctionIntent?'Se conserva la corrección original para recuperarla.':'No se envió una corrección nueva desde este formulario.'}</p></div>}
+        <button className={buttonClass} disabled={correctionState.blocked || (!correctionIntent&&!available) || !statement.trim() || correct.isPending}>{correct.isPending ? 'Guardando…' : correctionIntent ? 'Reenviar la misma corrección' : 'Guardar corrección'}</button>
+        {correctionIntent&&<div><p>Retirar la copia no revierte una corrección ya registrada.</p><button type="button" className={buttonClass} disabled={correct.isPending} onClick={()=>discard('correction')}>Retirar copia y revisar corrección</button></div>}
       </form>
       {data.context.corrections.map(item => <div key={item.version} className="mt-3 border-t border-[var(--work-line)] pt-2"><p className="text-xs text-[var(--work-muted)]">Contexto {item.version} · {sourceLabels[item.source_kind] ?? 'Procedencia sin clasificar'}</p><p className="whitespace-pre-wrap text-[var(--work-ink)]">{item.statement}</p></div>)}
     </details>

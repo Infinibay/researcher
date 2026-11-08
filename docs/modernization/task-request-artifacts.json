@@ -1,0 +1,40 @@
+{
+  "backend_changed": false,
+  "backend_wheel_sha256": "b2103c057f25443db82254c626f0f1b7962eaa7f23c35bbf499509d8a74ada51",
+  "matching_backend_sources": 689,
+  "backend_test_receipt": "docs/modernization/task-creation-packaging.json",
+  "new_backend_suite_rerun": false,
+  "new_frontend_tests": {
+    "contracts": 157,
+    "ui": 57,
+    "types_exit": 0,
+    "vite_build_exit": 0
+  },
+  "web_index_sha256": "af3eff295ad9ca11f5ec3ad90e15e7f35e8c9d8686de6345061f5fb14472c1fa",
+  "frontend_sources": [
+    {
+      "path": "frontend/src/api/runtime.ts",
+      "sha256": "5d4a0b1f0cc1854fab939f71847303a5e543a5ed0b8560d1991d58385f3ca65a"
+    },
+    {
+      "path": "frontend/src/api/taskRequests.ts",
+      "sha256": "608bd08e4cd1556b6954fdbf4970228b817279458d17841e6bf6fbbfd21d4b57"
+    },
+    {
+      "path": "frontend/src/components/tasks/TaskRunWorkspace.tsx",
+      "sha256": "670d54790fb3d23d7ac2fa512c5fb11c02ffe34d5f7960671a0984dc23fdb7fa"
+    },
+    {
+      "path": "frontend/tests/ui/task-request-recovery.test.tsx",
+      "sha256": "7dfcce18cc92761580d0c47269f913eee24d46ce401c3dbae9d38f839e3415ac"
+    },
+    {
+      "path": "frontend/tests/task-requests.test.ts",
+      "sha256": "7ab00c01f2dcd0b725d30b7e5627cc76951ac9d3d73b60457ab896cee135873e"
+    },
+    {
+      "path": "frontend/tests/task-requests.e2e.mjs",
+      "sha256": "ca9ed01b6c5a0fb6bb5ceac2ca484fad77b883942d8ad2d574258a64895a54f2"
+    }
+  ]
+}

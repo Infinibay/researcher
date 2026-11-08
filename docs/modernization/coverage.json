@@ -6193,15 +6193,18 @@
             "docs/modernization/task-creation-review.md",
             "docs/modernization/task-creation-results.json",
             "docs/modernization/task-creation-packaging.json",
-            "docs/design/audits/2026-11-08-task-creation/report.md"
+            "docs/design/audits/2026-11-08-task-creation/report.md",
+            "docs/modernization/task-request-review.md",
+            "docs/modernization/task-request-results.json"
           ],
           "remaining": [
-            "Full original task work/history/context correction and owner command journey acceptance"
+            "Accept/dismiss actual original result delivery and complete auxiliary inspector read/edit journey; original request replay/Stop/correction/history now verified with synthetic admission and no model"
           ],
           "deferred": [
             "DD138",
             "DD132",
-            "DD121"
+            "DD121",
+            "DD139"
           ]
         }
       }
@@ -6301,6 +6304,25 @@
       "limits": [
         "No complete Tasks page, human/scientific or global suite acceptance",
         "Inverse70 checked locally; complete inverse chain to70 remains a final gate"
+      ]
+    },
+    "task_owner_request_recovery": {
+      "status": "verified",
+      "scope": "Durable pre-admission instruction and correction packets shared by Tasks/Conversation; original body/key/context/material and exact acknowledgements survive reload. Real installed replay of one synthetic domain admission202, Stop202 and one real correction1→2 across both pages,0generative dispatches. Not fresh generative admission or complete page/scientific/human acceptance.",
+      "evidence": [
+        "docs/modernization/task-request-review.md",
+        "docs/modernization/task-request-results.json",
+        "docs/modernization/task-request-artifacts.json",
+        "docs/design/audits/2026-11-08-task-request-recovery/report.md",
+        "frontend/tests/ui/task-request-recovery.test.tsx",
+        "frontend/tests/task-requests.test.ts",
+        "frontend/tests/task-requests.e2e.mjs"
+      ],
+      "remaining": [],
+      "limits": [
+        "No new global/backend suite; unchanged backend wheel retains prior test receipt",
+        "Corrupt local state blocks fresh mutation; no silent discard/rekey",
+        "Full Task/Conversation page acceptance remains open; U08/C10 remain open"
       ]
     }
   }
