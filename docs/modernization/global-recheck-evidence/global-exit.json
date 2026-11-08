@@ -1,0 +1,36 @@
+{
+  "base_commit": "cb4da1752c2b61642c2e244fd2b89fdfee2a9a25",
+  "started_utc": "2026-11-08T20:32:30.184828+00:00",
+  "scope": "Complete current common backend source suite, not isolated installed wheel; live excluded; explicit public offline Ken/semantic assets supplied",
+  "command": [
+    "systemd-run",
+    "--user",
+    "--scope",
+    "--quiet",
+    "--property=CPUQuota=800%",
+    "/home/andres/.codex/worktrees/b09e/researcher/.superpowers/sdd/2026-10-31-actualizacion-proyecto/native-runtime-env/bin/python",
+    "-m",
+    "pytest",
+    "backend/tests",
+    "-q",
+    "-m",
+    "not live",
+    "--disable-socket",
+    "--allow-unix-socket",
+    "--timeout=20",
+    "--junitxml=/home/andres/.codex/worktrees/b09e/researcher/.superpowers/sdd/2026-10-31-actualizacion-proyecto/global-recheck/global.xml"
+  ],
+  "source_files": 703,
+  "environment": {
+    "INFINIBAY_TEST_KEN_COMMAND": "/home/andres/.codex/worktrees/b09e/researcher/.superpowers/sdd/2026-10-31-actualizacion-proyecto/toolchains/uv-tools/ken-rank/bin/ken",
+    "INFINIBAY_TEST_KEN_MODEL_CACHE": "/home/andres/.cache/huggingface/hub",
+    "INFINIBAY_TEST_CASE_ROOT": "/home/andres/.codex/worktrees/b09e/researcher",
+    "RESEARCHER_TEST_RETRIEVAL_ASSETS": "/home/andres/.codex/worktrees/b09e/researcher/.superpowers/sdd/2026-10-31-actualizacion-proyecto/retrieval-assets/prepared",
+    "HF_HUB_OFFLINE": "1",
+    "TRANSFORMERS_OFFLINE": "1"
+  },
+  "no_real_subscription_turns_requested": true,
+  "exit": 1,
+  "ended_utc": "2026-11-08T21:07:52.605616+00:00",
+  "source_unchanged": true
+}

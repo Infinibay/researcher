@@ -1,0 +1,141 @@
+{
+  "base_commit": "cb4da17",
+  "same_backend_source_at_documentation_checkpoint": "353dbf9",
+  "scope": "Complete common backend source suite, explicit offline Ken and semantic assets; live excluded, no actual subscription turns requested. Not an installed-wheel global run.",
+  "process": {
+    "base_commit": "cb4da1752c2b61642c2e244fd2b89fdfee2a9a25",
+    "started_utc": "2026-11-08T20:32:30.184828+00:00",
+    "scope": "Complete current common backend source suite, not isolated installed wheel; live excluded; explicit public offline Ken/semantic assets supplied",
+    "command": [
+      "systemd-run",
+      "--user",
+      "--scope",
+      "--quiet",
+      "--property=CPUQuota=800%",
+      "/home/andres/.codex/worktrees/b09e/researcher/.superpowers/sdd/2026-10-31-actualizacion-proyecto/native-runtime-env/bin/python",
+      "-m",
+      "pytest",
+      "backend/tests",
+      "-q",
+      "-m",
+      "not live",
+      "--disable-socket",
+      "--allow-unix-socket",
+      "--timeout=20",
+      "--junitxml=/home/andres/.codex/worktrees/b09e/researcher/.superpowers/sdd/2026-10-31-actualizacion-proyecto/global-recheck/global.xml"
+    ],
+    "source_files": 703,
+    "environment": {
+      "INFINIBAY_TEST_KEN_COMMAND": "/home/andres/.codex/worktrees/b09e/researcher/.superpowers/sdd/2026-10-31-actualizacion-proyecto/toolchains/uv-tools/ken-rank/bin/ken",
+      "INFINIBAY_TEST_KEN_MODEL_CACHE": "/home/andres/.cache/huggingface/hub",
+      "INFINIBAY_TEST_CASE_ROOT": "/home/andres/.codex/worktrees/b09e/researcher",
+      "RESEARCHER_TEST_RETRIEVAL_ASSETS": "/home/andres/.codex/worktrees/b09e/researcher/.superpowers/sdd/2026-10-31-actualizacion-proyecto/retrieval-assets/prepared",
+      "HF_HUB_OFFLINE": "1",
+      "TRANSFORMERS_OFFLINE": "1"
+    },
+    "no_real_subscription_turns_requested": true,
+    "exit": 1,
+    "ended_utc": "2026-11-08T21:07:52.605616+00:00",
+    "source_unchanged": true
+  },
+  "cases": 2578,
+  "outcomes": {
+    "passed": 2576,
+    "failed": 2,
+    "error": 0,
+    "skipped": 0
+  },
+  "seconds": 2121.12,
+  "failures": [
+    {
+      "classname": "backend.tests.runtime.test_owner_history",
+      "name": "test_archive_requires_the_actual_project_and_preserves_native_receipts",
+      "seconds": 1.098,
+      "kind": "failure",
+      "message": "backend.research.models.ResearchForbidden: Tool scope expired, revoked or superseded by a context correction"
+    },
+    {
+      "classname": "backend.tests.runtime.test_workspace_delivery",
+      "name": "test_owner_can_inspect_sources_and_closed_task_runs_without_runtime_config",
+      "seconds": 0.958,
+      "kind": "failure",
+      "message": "assert True is False"
+    }
+  ],
+  "source_membership_unchanged_at_exit": true,
+  "later_changed_files": [
+    "backend/tests/runtime/test_host_installation.py"
+  ],
+  "classification": "Both failures reproduce after one semantic-assets launcher test leaves INFINIBAY_RUNTIME_CONFIG and other host env keys untracked. Existing neighboring launcher test already tracks/restores every export. Production code not changed.",
+  "reproduction": {
+    "sequence_cases": 3,
+    "red": {
+      "passed": 1,
+      "failed": 2,
+      "seconds": 4.24
+    },
+    "green": {
+      "passed": 3,
+      "failed": 0,
+      "seconds": 3.82
+    },
+    "change": "Track then unset every prepared environment key through monkeypatch before calling launcher.main, and verify the complete exported mapping. Later fixture teardown restores absence/original values."
+  },
+  "source_product_changed": false,
+  "full_global_green": false,
+  "limits": [
+    "Original global remains2fail/2576pass. Directed fix is not a rerun of the complete suite.",
+    "Documentation210units remains separate drafts; no claims of applied documentation, schema validation or Ken retrieval improvement.",
+    "Final package/global/review and other known gates remain open."
+  ],
+  "artifacts": {
+    "global.log": {
+      "path": "docs/modernization/global-recheck-evidence/global.log",
+      "sha256": "8a4f7f9e18f475165080d105a269df7d9706f4ad8209b386421f6aaff6a3a156"
+    },
+    "global.xml": {
+      "path": "docs/modernization/global-recheck-evidence/global.xml",
+      "sha256": "789e3266089e25a79664bb3a5e71d376cf2dca73e6c73c1de8e67c9ffba3181e"
+    },
+    "global-exit.json": {
+      "path": "docs/modernization/global-recheck-evidence/global-exit.json",
+      "sha256": "2f3c024ade50025866ca4015ed6c7bae10c1b5ac9b28259c2c7f50c7542a70d0"
+    },
+    "global-source-sha256.json": {
+      "path": "docs/modernization/global-recheck-evidence/global-source-sha256.json",
+      "sha256": "7f31c135c3ebebced021d23ab6f9d94edd212144c943d3c11c083e8dc1c49ac2"
+    },
+    "environment-red.log": {
+      "path": "docs/modernization/global-recheck-evidence/environment-red.log",
+      "sha256": "14761eb4e77f898f231a124755b48a6d1343e250501b1dfcfa108e3501d4f488"
+    },
+    "environment-red.xml": {
+      "path": "docs/modernization/global-recheck-evidence/environment-red.xml",
+      "sha256": "f74830b30ed5a3582e3861e44731ac37c9c8ff452164f19c7592f36669b2d99e"
+    },
+    "environment-green.log": {
+      "path": "docs/modernization/global-recheck-evidence/environment-green.log",
+      "sha256": "61bae60f53176a418aecc83f2c7fee860e3bfd07b081fdffb56c2fcb27a8f7d5"
+    },
+    "environment-green.xml": {
+      "path": "docs/modernization/global-recheck-evidence/environment-green.xml",
+      "sha256": "e28c1133fa757c48c1b98fa5f3e4318bd67efb417e2ea6d025fcc0ab3e302f0a"
+    }
+  },
+  "expanded_after_test_repair": {
+    "passed": 22,
+    "failed": 0,
+    "skipped": 0,
+    "seconds": 16.34,
+    "files": [
+      "backend/tests/runtime/test_host_installation.py",
+      "backend/tests/runtime/test_owner_history.py",
+      "backend/tests/runtime/test_workspace_delivery.py"
+    ]
+  },
+  "diff_check": {
+    "non_raw_evidence_exit": 0,
+    "verbatim_evidence_whitespace_diagnostics": 20,
+    "raw_evidence_modified_for_style": false
+  }
+}

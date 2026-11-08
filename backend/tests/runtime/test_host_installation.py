@@ -135,10 +135,15 @@ def test_prepared_semantic_assets_reach_reopened_host_and_launcher(tmp_path, hos
     assert json.loads((root / 'runtime.json').read_text())['retrieval_asset_dir'] == assets['retrieval_asset_dir']
     semantic = inspect_host(root)['resource_observations']['semantic_assets']
     assert semantic == {'configured': True, 'fingerprint': FINGERPRINT, 'files_verified': 2}
-    monkeypatch.delenv('INFINIBAY_RETRIEVAL_ASSET_DIR', raising=False)
+    # Track every key before the CLI exports directly into os.environ, then
+    # start genuinely unset; teardown must not configure another test's app.
+    for key in prepared['environment']:
+        monkeypatch.setenv(key, '')
+        monkeypatch.delenv(key, raising=False)
     monkeypatch.setattr(launcher, 'run_services', lambda _: 0)
     assert launcher.main(['--installation', str(root)]) == 0
     assert os.environ['INFINIBAY_RETRIEVAL_ASSET_DIR'] == assets['retrieval_asset_dir']
+    assert {key: os.environ[key] for key in prepared['environment']} == prepared['environment']
     assert prepared['model_turns'] == 0
 
 

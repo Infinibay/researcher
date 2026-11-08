@@ -1,0 +1,191 @@
+.FF                                                                      [100%]
+=================================== FAILURES ===================================
+____ test_archive_requires_the_actual_project_and_preserves_native_receipts ____
+
+coordination = namespace(store=<backend.runtime.sqlite_runs.SQLiteRunStore object at 0x7f483c093e00>, spec=RunSpec(project_id=101, ta...bject at 0x7f483bc8e8d0>, database='/tmp/pytest-of-andres/pytest-20/test_archive_requires_the_actu0/test_infinibay.db')
+workspace_app = <fastapi.applications.FastAPI object at 0x7f483bbf1640>
+
+    async def test_archive_requires_the_actual_project_and_preserves_native_receipts(coordination, workspace_app):
+        """Archive is idempotent presentation state, not permission to cancel work, erase messages or acknowledge another actor's question."""
+        from backend.research.models import OperationConflict
+        from backend.tests.runtime.test_agent_messages import packet, peers
+    
+        c = coordination
+        messages, sender, recipient = peers(c)
+        saved = messages.send(sender[2], "archive-question", **packet(recipient, intent="question"))
+        thread = saved["thread_id"]
+        before = tuple(c.conn.execute("SELECT * FROM chat_messages WHERE id=?", (saved["message_id"],)).fetchone())
+        async with workspace_app.router.lifespan_context(workspace_app), owner_client(workspace_app) as owner:
+            runs_before_archive = [tuple(row) for row in c.conn.execute('SELECT * FROM runtime_runs ORDER BY id')]
+            wrong = await owner.post(f"/api/chat/202/threads/{thread}/archive")
+            assert wrong.status_code == 404
+            assert c.conn.execute("SELECT status FROM conversation_threads WHERE thread_id=?", (thread,)).fetchone()[0] == "active"
+            assert (await owner.post("/api/chat/101/threads/missing/archive")).status_code == 404
+            first = await owner.post(f"/api/chat/101/threads/{thread}/archive")
+            assert first.status_code == 200, first.text
+            assert (await owner.post(f"/api/chat/101/threads/{thread}/archive")).json() == first.json()
+            viewed = await owner.get(f"/api/chat/101/threads/{thread}")
+            assert viewed.json()[0]["peer_message"]["delivery"] == "recorded"
+        assert tuple(c.conn.execute("SELECT * FROM chat_messages WHERE id=?", (saved["message_id"],)).fetchone()) == before
+        assert c.conn.execute("SELECT count(*) FROM events_log WHERE event_type='conversation.archived'").fetchone()[0] == 1
+        assert c.conn.execute("SELECT count(*) FROM agent_events").fetchone()[0] == 0
+        assert [tuple(row) for row in c.conn.execute('SELECT * FROM runtime_runs ORDER BY id')] == runs_before_archive
+        with pytest.raises(OperationConflict, match="closed"):
+>           messages.send(recipient[2], "closed-reply", recipient_run_id=sender[0].run_id, intent="answer", message="An answer", in_reply_to=saved["message_id"])
+
+backend/tests/runtime/test_owner_history.py:38: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+backend/communication/agent_messages.py:281: in send
+    return self.store._write(scope, key, "message.send", packet, apply)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+backend/research/sqlite_store.py:306: in _write
+    self._check_scope(conn, scope, self._permission(kind))
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <backend.research.sqlite_store.SQLiteResearchStore object at 0x7f483bc8e8d0>
+conn = <sqlite3.Connection object at 0x7f483a7667a0>
+scope = ResearchScope(grant_id='9ed39f95bec149debcb54941b0441bfb', project_id=101, task_id=1002, agent_id='author-b', context_...te', 'messages.ack', 'questions.ask', 'wiki.read', 'reports.read', 'continuity.write', 'tasks.read', 'tasks.comment'}))
+permission = 'messages.send'
+
+    def _check_scope(self, conn, scope: ResearchScope, permission: str | None = None):
+        """Recheck stored grant, live attempt, context and review-subject authority in this transaction."""
+        row = conn.execute(
+            "SELECT g.*,c.version AS current_version FROM tool_grants g JOIN task_contexts c ON c.task_id=g.task_id WHERE g.id=?",
+            (scope.grant_id,),
+        ).fetchone()
+        if (
+            row is None
+            or row["revoked_at"] is not None
+            or row["expires_at"] <= self.clock()
+            or (
+                row["project_id"],
+                row["task_id"],
+                row["agent_id"],
+                row["context_version"],
+            )
+            != (scope.project_id, scope.task_id, scope.agent_id, scope.context_version)
+            or row["context_version"] != row["current_version"]
+        ):
+>           raise ResearchForbidden(
+                "Tool scope expired, revoked or superseded by a context correction"
+            )
+E           backend.research.models.ResearchForbidden: Tool scope expired, revoked or superseded by a context correction
+
+backend/research/sqlite_store.py:170: ResearchForbidden
+------------------------------ Captured log call -------------------------------
+INFO     backend.api.run:run.py:61 File logging enabled → /tmp/pytest-of-andres/pytest-20/test_prepared_semantic_assets_0/installation/logs/infinibay.log
+INFO     backend.api.main:main.py:88 Shutdown signal received — stopping active flows
+INFO     backend.api.main:main.py:107 Shutdown reconciliation finished for 0 active project(s)
+__ test_owner_can_inspect_sources_and_closed_task_runs_without_runtime_config __
+
+coordination = namespace(store=<backend.runtime.sqlite_runs.SQLiteRunStore object at 0x7f483abd2720>, spec=RunSpec(project_id=101, ta...bject at 0x7f483a7a67e0>, database='/tmp/pytest-of-andres/pytest-20/test_owner_can_inspect_sources0/test_infinibay.db')
+workspace_app = <fastapi.applications.FastAPI object at 0x7f483a60c0b0>
+
+    async def test_owner_can_inspect_sources_and_closed_task_runs_without_runtime_config(
+        coordination, workspace_app
+    ):
+        """Inspect original sources and accepted native history without configuration or newly minted tool authority."""
+        from backend.research.models import SourceDraft
+        from backend.tests.runtime.test_result_acceptance import make_accepted_result
+    
+        c = coordination
+        token = c.research.issue_grant(
+            project_id=101,
+            task_id=1001,
+            agent_id="researcher-a",
+            permissions={"sources.capture", "sources.read"},
+        )
+        scope = c.research.authorize(token)
+        source = c.research.capture_source(
+            scope,
+            "capture",
+            SourceDraft(
+                "attachment", "reference:1", "Policy", "Tax 0.21 means 21 percent."
+            ),
+            intent={"reference_id": 1},
+        )
+        _, run = make_accepted_result(c)
+        async with workspace_app.router.lifespan_context(workspace_app):
+            async with httpx.AsyncClient(
+                transport=httpx.ASGITransport(app=workspace_app),
+                base_url="http://localhost",
+            ) as anonymous:
+                assert (
+                    await anonymous.get(
+                        "/api/projects/101/tasks/1001/workspace",
+                        headers={"Authorization": "Bearer " + token},
+                    )
+                ).status_code == 401
+            async with owner_client(workspace_app) as owner:
+                response = await owner.get("/api/projects/101/tasks/1001/workspace")
+                assert response.status_code == 200, response.text
+                data = response.json()
+>               assert data["runtime"]["configured"] is False
+E               assert True is False
+
+backend/tests/runtime/test_workspace_delivery.py:159: AssertionError
+------------------------------ Captured log setup ------------------------------
+INFO     backend.tools.base.db:db.py:269 Migration 15: added embedding columns and artifacts_fts
+INFO     backend.tools.base.db:db.py:305 Migration 18: backend.db.research_migration:apply_research_schema
+INFO     backend.tools.base.db:db.py:305 Migration 19: runtime_schema.sql
+INFO     backend.tools.base.db:db.py:305 Migration 20: job_schema.sql
+INFO     backend.tools.base.db:db.py:305 Migration 21: inference_schema.sql
+INFO     backend.tools.base.db:db.py:305 Migration 22: conversation_schema.sql
+INFO     backend.tools.base.db:db.py:305 Migration 23: model_schema.sql
+INFO     backend.tools.base.db:db.py:305 Migration 24: backend.db.question_migration:apply_question_schema
+INFO     backend.tools.base.db:db.py:305 Migration 25: peer_schema.sql
+INFO     backend.tools.base.db:db.py:305 Migration 26: peer_origin_schema.sql
+INFO     backend.tools.base.db:db.py:305 Migration 27: command_peer_schema.sql
+INFO     backend.tools.base.db:db.py:305 Migration 28: admission_schema.sql
+INFO     backend.tools.base.db:db.py:305 Migration 29: task_inputs_schema.sql
+INFO     backend.tools.base.db:db.py:305 Migration 30: run_input_schema.sql
+INFO     backend.tools.base.db:db.py:305 Migration 31: backend.db.peer_kind_migration:migrate_ken_peers
+INFO     backend.tools.base.db:db.py:305 Migration 32: native_state_schema.sql
+INFO     backend.tools.base.db:db.py:305 Migration 33: backend.db.wiki_migration:apply_wiki_schema
+INFO     backend.tools.base.db:db.py:305 Migration 34: review_schema.sql
+INFO     backend.tools.base.db:db.py:305 Migration 35: result_schema.sql
+INFO     backend.tools.base.db:db.py:305 Migration 36: development_schema.sql
+INFO     backend.tools.base.db:db.py:305 Migration 37: development_workspace_schema.sql
+INFO     backend.tools.base.db:db.py:305 Migration 38: code_candidate_schema.sql
+INFO     backend.tools.base.db:db.py:305 Migration 39: code_check_schema.sql
+INFO     backend.tools.base.db:db.py:305 Migration 40: code_review_schema.sql
+INFO     backend.tools.base.db:db.py:305 Migration 41: code_review_record_schema.sql
+INFO     backend.tools.base.db:db.py:305 Migration 42: code_acceptance_schema.sql
+INFO     backend.tools.base.db:db.py:305 Migration 43: code_publication_schema.sql
+INFO     backend.tools.base.db:db.py:305 Migration 44: publication_recovery_schema.sql
+INFO     backend.tools.base.db:db.py:305 Migration 45: remote_publication_schema.sql
+INFO     backend.tools.base.db:db.py:305 Migration 46: remote_recovery_schema.sql
+INFO     backend.tools.base.db:db.py:305 Migration 47: project_planning_schema.sql
+INFO     backend.tools.base.db:db.py:305 Migration 48: plan_execution_schema.sql
+INFO     backend.tools.base.db:db.py:305 Migration 49: owner_note_schema.sql
+INFO     backend.tools.base.db:db.py:305 Migration 50: plan_continuation_schema.sql
+INFO     backend.tools.base.db:db.py:305 Migration 51: plan_reauthorization_schema.sql
+INFO     backend.tools.base.db:db.py:305 Migration 52: investigation_schema.sql
+INFO     backend.tools.base.db:db.py:305 Migration 53: scientific_schema.sql
+INFO     backend.tools.base.db:db.py:305 Migration 54: native_task_cutover_schema.sql
+INFO     backend.tools.base.db:db.py:305 Migration 55: model_settings_schema.sql
+INFO     backend.tools.base.db:db.py:305 Migration 56: agent_messages_schema.sql
+INFO     backend.tools.base.db:db.py:305 Migration 57: peer_archive_schema.sql
+INFO     backend.tools.base.db:db.py:305 Migration 58: reference_provenance_schema.sql
+INFO     backend.tools.base.db:db.py:305 Migration 59: event_retention_schema.sql
+INFO     backend.tools.base.db:db.py:305 Migration 60: project_budget_schema.sql
+INFO     backend.tools.base.db:db.py:305 Migration 61: auxiliary_budget_schema.sql
+INFO     backend.tools.base.db:db.py:305 Migration 62: auxiliary_continuation_schema.sql
+INFO     backend.tools.base.db:db.py:305 Migration 63: auxiliary_origin_schema.sql
+INFO     backend.tools.base.db:db.py:305 Migration 64: preparation_budget_schema.sql
+INFO     backend.tools.base.db:db.py:305 Migration 65: project_check_policy_schema.sql
+INFO     backend.tools.base.db:db.py:305 Migration 66: reference_operations_schema.sql
+INFO     backend.tools.base.db:db.py:305 Migration 67: git_identity_schema.sql
+INFO     backend.tools.base.db:db.py:305 Migration 68: workspace_retention_schema.sql
+INFO     backend.tools.base.db:db.py:305 Migration 69: planning_commands_schema.sql
+INFO     backend.tools.base.db:db.py:305 Migration 70: task_commands_schema.sql
+INFO     backend.tools.base.db:db.py:305 Migration 71: context_causality_schema.sql
+DEBUG    asyncio:selector_events.py:64 Using selector: EpollSelector
+------------------------------ Captured log call -------------------------------
+INFO     backend.api.run:run.py:61 File logging enabled → /tmp/pytest-of-andres/pytest-20/test_prepared_semantic_assets_0/installation/logs/infinibay.log
+INFO     backend.api.main:main.py:88 Shutdown signal received — stopping active flows
+INFO     backend.api.main:main.py:107 Shutdown reconciliation finished for 0 active project(s)
+=========================== short test summary info ============================
+FAILED backend/tests/runtime/test_owner_history.py::test_archive_requires_the_actual_project_and_preserves_native_receipts
+FAILED backend/tests/runtime/test_workspace_delivery.py::test_owner_can_inspect_sources_and_closed_task_runs_without_runtime_config
+2 failed, 1 passed in 4.24s

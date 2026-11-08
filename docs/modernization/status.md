@@ -4,15 +4,15 @@ La implementación del [plan completo](../superpowers/plans/2026-10-31-actualiza
 
 ## Último avance
 
-Los fallos medidos de accesibilidad quedan corregidos: las doce rutas pasan
-24 estados de página completa a1440/320px, sin infracciones Axe ni desbordamientos;
-24 transiciones por teclado correctas.167 contratos y80 pruebas UI pasan, al igual
-que el build. La regla lint anterior de controles de terminal se conserva como
-DD161. Zoom nativo/lector de pantalla y comprensión humana siguen pendientes.
-[Informe y límites](../design/audits/2026-11-08-accessibility-final/report.md),
-[resultados](accessibility-final-results.json). Siguiente: Ken/ONNX y documentación
-relevante; después detalles y cierre integrado. Estado amplio42/43, sin nueva
-suite global verde ni despliegue.
+La suite backend completa termina con **2576 aprobadas y2fallos**, sin omisiones,
+en35min21s. Ambos fallos se reprodujeron por entorno filtrado desde una prueba del
+lanzador; corregido sólo el aislamiento de esa prueba,3casos dirigidos y22ampliados
+pasan. **Todavía no hay nueva suite completa verde.**
+[Informe](global-source-20261108-review.md), [resultados](global-source-20261108-results.json).
+
+Accesibilidad medida ya corregida; queda aplicar/verificar205docstrings de función/
+clase y5de paquete, preparados en copias durante el global. Ken/ONNX, U08 humano,
+zoom nativo/lector, detalles y controles finales siguen en el [tablero](execution-dashboard.md).
 
 ## Resultados disponibles
 

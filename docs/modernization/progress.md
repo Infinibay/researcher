@@ -9858,3 +9858,32 @@ source/schema/prompt validation and packaging remain. No automatic filler and no
 claim of better Ken ranking. Current implemented Python count remains416, missing
 205definitions plus5empty package module docstrings; these are separate metrics.
 No source/installs/concurrent tests changed during the frozen global run.
+
+
+## 2026-11-08 — Full source regression and exact launcher-test contamination fixed
+
+Full original session23453 terminal exit1 at21:07:52UTC:2578cases,2576pass2fail,
+0skip/error,2121.12pytest seconds. Backend703Python/SQL/C bytes stayed frozen at
+cb4da17 (same source as353dbf9); original logs/JUnit/source manifest retained.
+Both failures causally reproduce after prepared semantic assets launcher test:
+1pass2fail4.24s; it failed to track all direct CLI environment exports, leaving
+INFINIBAY_RUNTIME_CONFIG for later readonly-owner apps. Match the existing nearby
+launcher test's track-then-unset pattern for every key and assert the whole map.
+No production behavior/authority changed. Same sequence3pass3.82s; expanded three
+files22pass16.34s. No global green yet. Report global-source-20261108-review.md.
+
+Complete source-grounded documentation proposal prepared during the frozen run:
+205function/class plus5empty-package docs in61files. Projected317modules2942defs
+have no missing presence; NOT APPLIED YET. documentation-draft-index.json binds
+all copies, source/draft hashes and guarded apply order; no stale copy over a fix.
+Independent six-file semantic review found cancellation/join, JSON-vs-receipt and
+configured TLS overclaims: corrected, plus related synchronous-client/result/DNS/
+serialization wording. Sampling is not acceptance of every doc or runtime.
+
+Source metadata baseline captured without lifespan/requests/DB/native actor/model:
+7policies48tools143OpenAPI schemas, sha604f78923d8ab5c9cf49917a00e51d7212421200047131c212a963fbebb69b55.
+Capture helper, full draft index and post-global handoff under private plan scratch.
+Native zoom primitive probe is prepared only, based on Chromium default-zoom prefs;
+no real zoom or screen-reader acceptance inferred. All earlier asks pending, no repeat.
+Next: apply all authored docs, compare AST/catalog/OpenAPI/prompt deltas, run appropriate
+checks, then final coherent distribution/global/review gates. No push/merge/deploy.
