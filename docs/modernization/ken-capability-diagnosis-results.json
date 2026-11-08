@@ -1,0 +1,55 @@
+{
+  "base_commit": "dac2b4e",
+  "started_at": "2026-11-08T03:53:45Z",
+  "status": "two_causes_demonstrated_no_product_repair_yet",
+  "model_turns": 0,
+  "root": ".researcher/evaluations/ken-capabilities-v3-20261108",
+  "isolated_worker": "Existing worker_process, copied source/meta and SQLite backup; no original install re-enrollment or replay",
+  "tests": {
+    "bad_args": {
+      "scope": "tests",
+      "query": "observations.py",
+      "response_format": "compact"
+    },
+    "mcp_is_error": true,
+    "cause": "Ken0.18.0 restricts compact/evidence to files/symbols; server.py lines1028–1030 raises ValueError before tests dispatch",
+    "valid_args": {
+      "scope": "tests",
+      "query": "observations.py"
+    },
+    "mcp_is_error_with_valid_args": false,
+    "direct_search_result": {
+      "ok": true,
+      "path": "observations.py",
+      "tests": []
+    },
+    "limits": "No test candidates in the indexed one-file fixture; this does not prove completeness for arbitrary code"
+  },
+  "callers": {
+    "mcp_is_error": false,
+    "analysis_ok": false,
+    "cause": "ken.structure.get_parser catches the grammar loader DownloadError and caches None; supports(python) false. Isolated cache lacks language-pack grammar; offline worker cannot download manifest.",
+    "parser_exception": {
+      "parser": false,
+      "error_type": "DownloadError",
+      "error": "Download error: Failed to fetch manifest from https://github.com/xberg-io/tree-sitter-language-pack/releases/download/v1.22.1/parsers.json: io: failed to lookup address information: Temporary failure in name resolution"
+    },
+    "versions": {
+      "ken-rank": "0.18.0",
+      "tree-sitter": "0.25.2",
+      "tree-sitter-language-pack": "1.22.1"
+    },
+    "fixed": false
+  },
+  "retained_failed_probe": {
+    "root": ".researcher/evaluations/ken-capabilities-20261108",
+    "reason": "Diagnostic copy omitted meta.json; MCP refused project before initialize; not a product failure"
+  },
+  "limits": [
+    "Zero native/model inference; direct isolated diagnostic is not an end-to-end product repaired test",
+    "Original proposal, source and project history retained; no sibling Ken source edits",
+    "Native AuthorityBusy and U08 remain open"
+  ],
+  "verified_at": "2026-11-08T03:57:01Z",
+  "seconds_until_verification": 196
+}

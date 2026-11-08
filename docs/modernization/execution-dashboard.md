@@ -28,7 +28,7 @@ que se pueda comparar el avance; no presentar microajustes como tareas principal
 - Última suite global: `9fb873c`,2210 casos,2178 pasan,31 fallan y1 error de fixture; sin omisiones. La carrera de backup encontrada se corrigió después con40 pruebas instaladas. No se declara una nueva corrida global verde; la referencia `0c8b8d9` queda como evidencia histórica.
 - U01–U07, E01–E12, C01–C09 y D01–D13 quedan comprobados con el alcance de sus matrices; siguen 2 de 43 escenarios amplios sin aceptación completa en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Estado actual: plan español y lectura Ken comprobados; dos análisis pendientes
+## Estado actual: causas Ken identificadas; provisión offline pendiente
 
 **03:18:47–03:51:45 UTC, 32 min 58 s hasta verificar**, base `3d8b33a`.
 Documentación/checkpoint posteriores excluidos. [Evidencia y límites](spanish-plan-ken-review.md).
@@ -37,9 +37,11 @@ Documentación/checkpoint posteriores excluidos. [Evidencia y límites](spanish-
   pendientes, cero ejecución hija. Respuestas reales de `ken_find`/`ken_read`
   contienen la implementación. Un turno, 138800 tokens observados, original intacto,
   peers/operaciones/grant cerrados y dominios retirados. Cinco definiciones documentadas.
-- En curso/siguiente principal: diagnóstico sin modelo de dos análisis Ken fallidos:
-  búsqueda de pruebas y llamadores. Transporte exitoso no implica contenido válido.
-  Todavía sin causa atribuida ni aceptación de esa capacidad.
+- Diagnóstico cerrado: **03:53:45–03:57:01 UTC,3min16s**, cero modelos. Tests
+  rechazaba `compact`; con argumentos válidos responde. Llamadores falla porque
+  falta la gramática Python en la caché aislada sin red. [Causas y límites](ken-capability-diagnosis.md).
+- Siguiente principal: provisión verificada y montaje offline de gramáticas, con
+  preflight y regresión MCP real. Todavía no implementado ni declarado reparado.
 - Pendiente principal: contención original AuthorityBusy sin reproducir/corregir;
   Proyectos sigue incompleto. **3/12 páginas** aceptadas (Documentos, Archivos,
   Repositorios), **41/43 escenarios**. Faltan Resumen, Proyectos, Planificación,

@@ -1,0 +1,67 @@
+{
+  "exit": -15,
+  "responses": [
+    {
+      "jsonrpc": "2.0",
+      "id": 1,
+      "result": {
+        "capabilities": {
+          "prompts": {
+            "listChanged": false
+          },
+          "resources": {
+            "listChanged": false,
+            "subscribe": false
+          },
+          "tools": {
+            "listChanged": false
+          }
+        },
+        "protocolVersion": "2024-11-05",
+        "serverInfo": {
+          "name": "ken",
+          "version": ""
+        }
+      }
+    },
+    {
+      "jsonrpc": "2.0",
+      "id": 2,
+      "result": {
+        "content": [
+          {
+            "text": "Error executing tool ken_find",
+            "type": "text"
+          }
+        ],
+        "isError": true
+      }
+    },
+    {
+      "jsonrpc": "2.0",
+      "id": 3,
+      "result": {
+        "content": [
+          {
+            "text": "list_observations\nok: false\nerror: language not parseable: python",
+            "type": "text"
+          }
+        ],
+        "isError": false
+      }
+    },
+    {
+      "jsonrpc": "2.0",
+      "id": 4,
+      "result": {
+        "content": [
+          {
+            "text": "observations.py",
+            "type": "text"
+          }
+        ],
+        "isError": false
+      }
+    }
+  ]
+}

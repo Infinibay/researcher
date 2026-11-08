@@ -6108,10 +6108,12 @@
         "docs/modernization/spanish-plan-ken-review.md",
         "docs/modernization/spanish-plan-ken-results.json",
         "docs/modernization/spanish-plan-proposal.json",
-        "docs/modernization/spanish-plan-ken-tools.json"
+        "docs/modernization/spanish-plan-ken-tools.json",
+        "docs/modernization/ken-capability-diagnosis.md",
+        "docs/modernization/ken-capability-diagnosis-results.json"
       ],
       "remaining": [
-        "Diagnose tests-search execution error and callers language-not-parseable result without another model turn",
+        "Causes diagnosed: tests compact format invalid; valid default format verified. Structural Python grammar not provisioned in offline worker. Implement verified grammar provisioning/mount and regression before declaring repaired.",
         "Human communication evaluation with purpose and input/output framing remains open"
       ]
     }

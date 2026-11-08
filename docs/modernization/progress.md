@@ -8851,3 +8851,19 @@ una explicación contextualizada; no repetir ahora el cuestionario abstracto.
 **3/12 páginas, 41/43 escenarios**, Proyectos y contención originales abiertos;
 restantes páginas/evaluaciones/distribución siguen, detalles y revisión final al final.
 No nueva suite global ni causalidad aislada de prompting. [Evidencia](spanish-plan-ken-review.md).
+
+
+## Causas Ken separadas, 2026-11-08
+
+03:53:45–03:57:01UTC, **3min16s**, base `dac2b4e`, cero modelos.
+El mismo MCP aislado rechaza tests+compact y acepta tests sin ese formato; búsqueda
+directa devuelve lista vacía en el índice de la fuente mínima. Llamadores falla
+porque el loader intenta descargar la gramática Python en el peer sin red;
+get_parser captura DownloadError y supports devuelve falso. No es incompatibilidad
+probada de Python. Primera copia diagnóstica omitió meta.json y fue rechazada:
+fallo del auxiliar conservado, no producto. [Recibo](ken-capability-diagnosis-results.json).
+
+Siguiente capacidad: recursos de gramáticas fijados, preflight y montaje de sólo
+lectura con análisis real sin red. Reparación todavía pendiente; no tocar Ken
+hermano ni abrir red al peer. Siguen3/12páginas,41/43escenarios, contención/U08/C10,
+otras páginas/evaluaciones/distribución; detalles y revisión final al final.
