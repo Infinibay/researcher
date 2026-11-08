@@ -28,7 +28,31 @@ que se pueda comparar el avance; no presentar microajustes como tareas principal
 - Última suite global: `9fb873c`,2210 casos,2178 pasan,31 fallan y1 error de fixture; sin omisiones. La carrera de backup encontrada se corrigió después con40 pruebas instaladas. No se declara una nueva corrida global verde; la referencia `0c8b8d9` queda como evidencia histórica.
 - U01–U07, E01–E12, C01–C10 y D01–D13 quedan comprobados con el alcance de sus matrices; sigue 1 de 43 escenarios amplios sin aceptación completa en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Estado actual: composición de entrega comprobada sin modelo
+## Estado actual: política 11 conectada; explicación real fallida
+
+[Informe](coarse-delivery-policy-review.md). **19:22:51–19:35:06 UTC: 12 min 15 s**
+hasta comprobación/análisis; informe/checkpoint después. Pruebas fuente 19,04 s,
+instaladas 20,53 s; ensayo real 38,842 s.
+
+- Terminado por alcance: política de pasos gruesos para investigación e identidad
+  histórica 2–10 preservada; **55 pruebas fuente y 55 instaladas pasan**, sin omisiones.
+  Paquete de este corte: 700 fuentes Python/SQL coincidentes, 371 de producto;
+  235 módulos sólo instalados. Inventario 85/322 vigente, doce deltas revisados.
+- Resultado real: **falló**, cuatro rondas/126 302 tokens frente a 120 000; dos
+  fuentes y cero hallazgos/informes/propuestas/final. Política exacta y Ken completo
+  verificados; cinco peers cerrados, cero grants sin revocar. No eficacia declarada.
+- Siguiente: probar una adquisición ejecutable que observe el cierre, capture el
+  recibo y lea la fuente canónica sin reenviar base64 completo; preservar cobertura,
+  citas y autoridad, después entrega y margen para el final nativo. No otro ensayo
+  basado sólo en instrucciones. DD157 continúa diferido.
+- Pendientes: U08/entrega/adaptación/comprensión humana; Ken/ONNX; documentación
+  relevante (416 añadidos, 205 faltantes por presencia), accesibilidad/detalles;
+  paquete final, suite global y revisión independiente finales.
+- Estado amplio: **12/12 páginas por alcance, 42/43 escenarios**. La nueva
+  observación no cierra U08. El wheel de este corte ya incluye la documentación;
+  no hay global verde ni push/merge/despliegue.
+
+## Etapa anterior: composición de entrega comprobada sin modelo
 
 [Informe](composed-investigation-delivery-review.md) y
 [revisión con contexto limpio](u08-delivery-proportionality-review.md).

@@ -1,0 +1,8 @@
+{
+  "tools": 54,
+  "compact_json_utf8_bytes": 59363,
+  "top_level_description_characters": 29624,
+  "schema_and_description_scope": "Actual retained native catalog; byte/character measurements are not token cost, achievable round savings or permission to remove capabilities.",
+  "command_read_response_characters": 20562,
+  "ken_read_response_characters": 9157
+}

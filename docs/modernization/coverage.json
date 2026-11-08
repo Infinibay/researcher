@@ -2406,13 +2406,17 @@
         "docs/modernization/u08-delivery-proportionality-review.md",
         "docs/modernization/composed-investigation-delivery-review.md",
         "docs/modernization/composed-investigation-delivery-results.json",
-        "backend/tests/runtime/test_investigation_delivery_cell.py"
+        "backend/tests/runtime/test_investigation_delivery_cell.py",
+        "docs/modernization/coarse-delivery-policy-review.md",
+        "docs/modernization/coarse-delivery-policy-results.json",
+        "docs/modernization/coarse-delivery-policy-evidence/native-result.json"
       ],
       "remaining": [
         "Initial example rejected by the user as unhelpful; revised task-grounded example has no human acceptance yet",
         "Evaluate actual generated explanations and correction/adaptation under final policy; rendering and scripted tests do not establish understanding",
         "Actual-plan question had insufficient framing per owner feedback; no comprehension acceptance established",
-        "Coarse composed delivery is viable in one real offline code-host cell with authored fixture code; native policy guidance, actual generated budget fit and human acceptance remain unproven. Original failed explanation remains failed."
+        "Coarse composed delivery is viable in one real offline code-host cell with authored fixture code; native policy guidance, actual generated budget fit and human acceptance remain unproven. Original failed explanation remains failed.",
+        "Catalog11 orientation is connected but actual same-case delivery failed at126302observed tokens/120000; validate executable acquisition and reserve native final before another observation."
       ]
     }
   },
@@ -2877,7 +2881,10 @@
         "docs/modernization/purpose-framing-evidence/registration.json",
         "backend/prompts/native.py",
         "backend/tests/runtime/test_prompt_catalog.py",
-        "evals/communication/purpose_framing.py"
+        "evals/communication/purpose_framing.py",
+        "docs/modernization/coarse-delivery-policy-review.md",
+        "docs/modernization/coarse-delivery-policy-results.json",
+        "docs/modernization/coarse-delivery-policy-evidence/native-result.json"
       ],
       "remaining": [
         "Observe human comprehension, useful correction and adaptation on a recognizable task with purpose, data relationships and input/output framing; U08 is not accepted.",
@@ -2899,6 +2906,18 @@
         "actual_native_observation": "One actual subscription+Ken turn, exact policy10 and complete source verified;147058observedtokens vs120000ceiling, one partial finding, no final explanation, all5peers/grants closed",
         "human_comprehension": null,
         "limits": "Not a new paired comparison or demonstrated efficacy. Original failed outcome retained, no replay."
+      },
+      "coarse_delivery_catalog11": {
+        "policy_implemented": true,
+        "actual_explanation_status": "failed_token_limit",
+        "observed_tokens": 126302,
+        "token_ceiling": 120000,
+        "real_subscription_turns": 1,
+        "findings": 0,
+        "reports": 0,
+        "proposals": 0,
+        "human_comprehension": null,
+        "scope": "One registered development observation; not causal or held-out. Executable acquisition composition remains unverified."
       }
     },
     "prompt_inventory": {
@@ -2973,7 +2992,10 @@
         "docs/modernization/purpose-framing-evidence/registration.json",
         "evals/communication/purpose_framing.py",
         "docs/modernization/core-docstrings-review.md",
-        "docs/modernization/core-docstrings-results.json"
+        "docs/modernization/core-docstrings-results.json",
+        "docs/modernization/coarse-delivery-policy-review.md",
+        "docs/modernization/coarse-delivery-policy-results.json",
+        "docs/modernization/coarse-delivery-policy-evidence/native-result.json"
       ],
       "implemented": "Current catalog10static semantic source/consumer review:322owned Python files,85candidates,85current decisions.12delta reviews against64d9e28,73unchanged; exact historical2–9headers preserved. One new actual explanation observation failed at147058/120000observedtokens before final delivery; no human acceptance.",
       "remaining": [
@@ -3004,7 +3026,19 @@
         "policy_catalog": 10,
         "model_visible_policy_changed": false
       },
-      "current_documentation_state": "Catalog10policy bytes unchanged after88core docstrings;85/322reviews current,3direct-consumer delta reviews and82unchanged. No new model generation or efficacy claim."
+      "current_documentation_state": "Catalog10policy bytes unchanged after88core docstrings;85/322reviews current,3direct-consumer delta reviews and82unchanged. No new model generation or efficacy claim.",
+      "coarse_delivery_catalog11": {
+        "policy_implemented": true,
+        "actual_explanation_status": "failed_token_limit",
+        "observed_tokens": 126302,
+        "token_ceiling": 120000,
+        "real_subscription_turns": 1,
+        "findings": 0,
+        "reports": 0,
+        "proposals": 0,
+        "human_comprehension": null,
+        "scope": "One registered development observation; not causal or held-out. Executable acquisition composition remains unverified."
+      }
     },
     "context_evals": {
       "status": "in_progress",
@@ -3111,7 +3145,10 @@
         "docs/modernization/purpose-framing-evidence/registration.json",
         "backend/prompts/native.py",
         "backend/tests/runtime/test_prompt_catalog.py",
-        "evals/communication/purpose_framing.py"
+        "evals/communication/purpose_framing.py",
+        "docs/modernization/coarse-delivery-policy-review.md",
+        "docs/modernization/coarse-delivery-policy-results.json",
+        "docs/modernization/coarse-delivery-policy-evidence/native-result.json"
       ],
       "remaining": [
         "Observe human comprehension, useful correction and adaptation on a recognizable task with purpose, data relationships and input/output framing; U08 is not accepted.",
@@ -3132,6 +3169,18 @@
         "actual_native_observation": "One actual subscription+Ken turn, exact policy10 and complete source verified;147058observedtokens vs120000ceiling, one partial finding, no final explanation, all5peers/grants closed",
         "human_comprehension": null,
         "limits": "Not a new paired comparison or demonstrated efficacy. Original failed outcome retained, no replay."
+      },
+      "coarse_delivery_catalog11": {
+        "policy_implemented": true,
+        "actual_explanation_status": "failed_token_limit",
+        "observed_tokens": 126302,
+        "token_ceiling": 120000,
+        "real_subscription_turns": 1,
+        "findings": 0,
+        "reports": 0,
+        "proposals": 0,
+        "human_comprehension": null,
+        "scope": "One registered development observation; not causal or held-out. Executable acquisition composition remains unverified."
       }
     },
     "data_migrations": {
@@ -5934,7 +5983,10 @@
         "docs/modernization/purpose-framing-evidence/registration.json",
         "backend/prompts/native.py",
         "backend/tests/runtime/test_prompt_catalog.py",
-        "evals/communication/purpose_framing.py"
+        "evals/communication/purpose_framing.py",
+        "docs/modernization/coarse-delivery-policy-review.md",
+        "docs/modernization/coarse-delivery-policy-results.json",
+        "docs/modernization/coarse-delivery-policy-evidence/native-result.json"
       ],
       "remaining": [
         "Observe human comprehension, useful correction and adaptation on a recognizable task with purpose, data relationships and input/output framing; U08 is not accepted.",
@@ -5958,6 +6010,18 @@
         "actual_native_observation": "One actual subscription+Ken turn, exact policy10 and complete source verified;147058observedtokens vs120000ceiling, one partial finding, no final explanation, all5peers/grants closed",
         "human_comprehension": null,
         "limits": "Not a new paired comparison or demonstrated efficacy. Original failed outcome retained, no replay."
+      },
+      "coarse_delivery_catalog11": {
+        "policy_implemented": true,
+        "actual_explanation_status": "failed_token_limit",
+        "observed_tokens": 126302,
+        "token_ceiling": 120000,
+        "real_subscription_turns": 1,
+        "findings": 0,
+        "reports": 0,
+        "proposals": 0,
+        "human_comprehension": null,
+        "scope": "One registered development observation; not causal or held-out. Executable acquisition composition remains unverified."
       }
     },
     "observed_delivery_budget": {
@@ -6226,7 +6290,10 @@
         "docs/modernization/purpose-framing-evidence/registration.json",
         "backend/prompts/native.py",
         "backend/tests/runtime/test_prompt_catalog.py",
-        "evals/communication/purpose_framing.py"
+        "evals/communication/purpose_framing.py",
+        "docs/modernization/coarse-delivery-policy-review.md",
+        "docs/modernization/coarse-delivery-policy-results.json",
+        "docs/modernization/coarse-delivery-policy-evidence/native-result.json"
       ],
       "remaining": [
         "Initial example rejected by the user as unhelpful; revised task-grounded example has no human acceptance yet",
@@ -6241,6 +6308,18 @@
         "actual_native_observation": "One actual subscription+Ken turn, exact policy10 and complete source verified;147058observedtokens vs120000ceiling, one partial finding, no final explanation, all5peers/grants closed",
         "human_comprehension": null,
         "limits": "Not a new paired comparison or demonstrated efficacy. Original failed outcome retained, no replay."
+      },
+      "coarse_delivery_catalog11": {
+        "policy_implemented": true,
+        "actual_explanation_status": "failed_token_limit",
+        "observed_tokens": 126302,
+        "token_ceiling": 120000,
+        "real_subscription_turns": 1,
+        "findings": 0,
+        "reports": 0,
+        "proposals": 0,
+        "human_comprehension": null,
+        "scope": "One registered development observation; not causal or held-out. Executable acquisition composition remains unverified."
       }
     },
     "owner_historical_data_acceptance": {
@@ -7005,6 +7084,29 @@
       "cumulative_added_docstrings": 416,
       "cumulative_modules": 26,
       "remaining_presence_count": 205
+    },
+    "coarse_delivery_policy": {
+      "status": "implemented_runtime_actual_delivery_failed",
+      "scope": "Investigation-only scheduling guidance with current catalog11 and historical2–10 identities preserved",
+      "evidence": [
+        "docs/modernization/coarse-delivery-policy-review.md",
+        "docs/modernization/coarse-delivery-policy-results.json",
+        "docs/modernization/coarse-delivery-policy-evidence/native-result.json"
+      ],
+      "verified": [
+        "55source and55installed tests pass with zero skips",
+        "700Python/SQL files match sdist/wheel;235backend modules only installed",
+        "Actual registered policy11 and complete118line Ken source observed;all5peers closed/0unrevokedgrants"
+      ],
+      "remaining": [
+        "Executable acquisition composition with canonical source output and strict provenance/authority/failure handling",
+        "Native final explanation within unchanged limits and useful observed human correction/acceptance"
+      ],
+      "limits": [
+        "No causal efficacy or general budget-fit proof",
+        "Observed ceiling crossed by consumed native round;not provider billing/cost estimate",
+        "Original failed observation retained"
+      ]
     }
   }
 }

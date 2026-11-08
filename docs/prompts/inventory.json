@@ -145,7 +145,7 @@
     "backend/planning/tools.py": "0efb502494147b93dab33a883e865aae946e0250d75c5924b130492c78e34b5d",
     "backend/project_records.py": "3a2765c13018d7ccd2cd8eb590ec9428c5ebb1edf93fc213185291250a5be016",
     "backend/prompts/__init__.py": "581a39370021a34e2cadea4a9a654a681b34bfdb8047fb7a8e217439b55f89e6",
-    "backend/prompts/native.py": "297fdc8b419909bdb6e465d93233ebb3dad61cf0bed754d9000cca328155b6d4",
+    "backend/prompts/native.py": "845237ff6b118afe5f931258d73169ff139d25680604b92ddf043db0f7260df7",
     "backend/research/__init__.py": "75a8b541dec5915760704a03d44432cdbf0bb5cbf7c22e1a8c1c0008536d0649",
     "backend/research/acquisition.py": "3544ba18b252cf36284fa317bbe67427cd919bbfd9dd72f485d556c04040263f",
     "backend/research/async_http_client.py": "36423e84c48c5593218a35ff6413eda1ff5e12e078a2285c2b0b06355aaa9d0b",
@@ -243,7 +243,7 @@
     "backend/runtime/host_installation.py": "3503fb7ee55761197c449e894e9d080de921109ff7f8c9a59d8f4c7bf19a4dc1",
     "backend/runtime/installation_backup.py": "6acb2547115256f401c2f82845eeec9cb25c905d33bc3fbfed1f52348b9c1bca",
     "backend/runtime/installation_restore.py": "6481274c5681fb6cac423bc3d38080444c8cdb2b6e66fade7d63ece5fb1f98a0",
-    "backend/runtime/investigation_instructions.py": "ceecf2ff65d95086bd4931b758090e6be8d692be89739e5d39610e40429c181a",
+    "backend/runtime/investigation_instructions.py": "4f54a8bc8295e191bfb375d68230b04f6adfe3d0b6b803e44706a87fa8ac1af9",
     "backend/runtime/ken_development.py": "8121763ec085e341e35030be760ba1ad0c83fd4e2f1166aae7c2ae51540890f8",
     "backend/runtime/ken_grammars.py": "8b4f4a1735be1cd7b378e3491e11bb627c658d54953b21dc075f43ea433c23be",
     "backend/runtime/ken_mediation.py": "7521def04d637cdcc053d6b38073e232340c3a477ffd2908bcfabb8b64bee45d",
@@ -908,13 +908,13 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "890880f3f6da6e6204e3dca680fbcb8473db57cbb5f08dd1b1649dd6e4dfbfd7",
+      "dependencies_sha256": "845ad25ba0d994517b26d8a7b0c5f3139c25b0a40d8fdbd90ac1bba7e5599be6",
       "direct_module_consumers": {
-        "backend/prompts/native.py": "297fdc8b419909bdb6e465d93233ebb3dad61cf0bed754d9000cca328155b6d4"
+        "backend/prompts/native.py": "845237ff6b118afe5f931258d73169ff139d25680604b92ddf043db0f7260df7"
       },
       "suggested_disposition": "reviewed_native",
       "review_status": "reviewed",
-      "review_rationale": "Capability policy source is byte-identical to64d9e28. Reviewed its changed native.py consumer: existing capability selection/tool authority and delivery contracts are unchanged; common framing and catalog10 apply once. No role-specific policy or permission was widened. Static review only; no general model efficacy or human comprehension claim.",
+      "review_rationale": "Delta review against6181b9a. Capability source and candidate AST are byte-identical. Its sole changed direct module consumer is native.py: catalog11 changes the header but this capability body is identical. Shared common/source policy and selector/authority remain unchanged; investigation-only scheduling does not enter this profile. Seven profile identities and48business tool descriptions/schemas/annotations checked;55source policy/input/budget/investigation tests pass. Static review is not prompting efficacy, measured budget fit, scientific validation or human acceptance.",
       "review_evidence": [
         "backend/planning/instructions.py",
         "docs/prompts/review-2026-11-07.md",
@@ -930,7 +930,11 @@
         "backend/prompts/native.py",
         "backend/runtime/owned_runtime.py",
         "docs/modernization/purpose-framing-review.md",
-        "backend/tests/runtime/test_prompt_catalog.py"
+        "backend/tests/runtime/test_prompt_catalog.py",
+        "docs/modernization/coarse-delivery-policy-review.md",
+        "docs/modernization/coarse-delivery-policy-results.json",
+        "docs/modernization/coarse-delivery-policy-evidence/prior-reviews.json",
+        "docs/modernization/composed-investigation-delivery-review.md"
       ],
       "review_conflicts": []
     },
@@ -992,7 +996,7 @@
       "family": "native_common_catalog",
       "disposition": "retained_and_revised",
       "objective": "Versioned native policy composition owns common communication and capability selection; historical role templates never enter this catalog.",
-      "source_sha256": "297fdc8b419909bdb6e465d93233ebb3dad61cf0bed754d9000cca328155b6d4",
+      "source_sha256": "845237ff6b118afe5f931258d73169ff139d25680604b92ddf043db0f7260df7",
       "source_bytes": 7806,
       "rendered_utf8_bytes": 7800,
       "variables_kind": "referenced_identifiers",
@@ -1008,13 +1012,13 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "d5322d94d2f3dbaf429a4c47cb637c84e8f264d2b89ceaf8da0441e8f7928b75",
+      "dependencies_sha256": "4b4ff087089e252066a6366664c5a375527e52047ad8beb66580fb9fc52ccb85",
       "direct_module_consumers": {
         "backend/runtime/owned_runtime.py": "5d28a1b3909b77d9699c0770889a788a0365e25282b7c8eb4b3e13e9048a2145"
       },
       "suggested_disposition": "rewritten",
       "review_status": "reviewed",
-      "review_rationale": "The only policy-body delta is four lines: establish purpose/data relationships before a decision, use illustrative input/output when useful, and rebuild framing after clarity feedback without a comprehension quiz. Existing evidence/authority/question/budget rules remain intact. This implements stated owner feedback; efficacy and human understanding are not inferred. Static review only; no general model efficacy or human comprehension claim.",
+      "review_rationale": "Delta review against6181b9a. Current catalog header advances10→11; instruction_identity explicitly preserves historical2–10. Common and source instruction bodies, builder dispatch and generic composition AST are unchanged. Fresh render compares seven profiles: six bodies identical after the first header, only investigation adds the reviewed coarse-delivery guidance. Canonical host consumer remains byte-identical. Seven profile identities and48business tool descriptions/schemas/annotations checked;55source policy/input/budget/investigation tests pass. Static review is not prompting efficacy, measured budget fit, scientific validation or human acceptance.",
       "review_evidence": [
         "backend/prompts/native.py",
         "docs/prompts/review-2026-11-07.md",
@@ -1034,7 +1038,11 @@
         "backend/runtime/questions.py",
         "backend/runtime/sqlite_questions.py",
         "docs/modernization/c10-independent-review.md",
-        "docs/modernization/purpose-framing-review.md"
+        "docs/modernization/purpose-framing-review.md",
+        "docs/modernization/coarse-delivery-policy-review.md",
+        "docs/modernization/coarse-delivery-policy-results.json",
+        "docs/modernization/coarse-delivery-policy-evidence/prior-reviews.json",
+        "docs/modernization/composed-investigation-delivery-review.md"
       ],
       "review_conflicts": []
     },
@@ -1048,7 +1056,7 @@
       "family": "native_common_catalog",
       "disposition": "retained",
       "objective": "Versioned native policy composition owns common communication and capability selection; historical role templates never enter this catalog.",
-      "source_sha256": "297fdc8b419909bdb6e465d93233ebb3dad61cf0bed754d9000cca328155b6d4",
+      "source_sha256": "845237ff6b118afe5f931258d73169ff139d25680604b92ddf043db0f7260df7",
       "source_bytes": 2788,
       "rendered_utf8_bytes": 2782,
       "variables_kind": "referenced_identifiers",
@@ -1064,13 +1072,13 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "d5322d94d2f3dbaf429a4c47cb637c84e8f264d2b89ceaf8da0441e8f7928b75",
+      "dependencies_sha256": "4b4ff087089e252066a6366664c5a375527e52047ad8beb66580fb9fc52ccb85",
       "direct_module_consumers": {
         "backend/runtime/owned_runtime.py": "5d28a1b3909b77d9699c0770889a788a0365e25282b7c8eb4b3e13e9048a2145"
       },
       "suggested_disposition": "rewritten",
       "review_status": "reviewed",
-      "review_rationale": "This exact source-acquisition literal is unchanged by AST comparison to64d9e28. Its module now composes catalog10 and a purpose-framing common policy; source-capture/continuation/quotation authority remains unchanged. Static review only; no general model efficacy or human comprehension claim.",
+      "review_rationale": "Delta review against6181b9a. Current catalog header advances10→11; instruction_identity explicitly preserves historical2–10. Common and source instruction bodies, builder dispatch and generic composition AST are unchanged. Fresh render compares seven profiles: six bodies identical after the first header, only investigation adds the reviewed coarse-delivery guidance. Canonical host consumer remains byte-identical. Seven profile identities and48business tool descriptions/schemas/annotations checked;55source policy/input/budget/investigation tests pass. Static review is not prompting efficacy, measured budget fit, scientific validation or human acceptance.",
       "review_evidence": [
         "backend/prompts/native.py",
         "docs/prompts/review-2026-11-07.md",
@@ -1090,7 +1098,11 @@
         "backend/runtime/questions.py",
         "backend/runtime/sqlite_questions.py",
         "docs/modernization/c10-independent-review.md",
-        "docs/modernization/purpose-framing-review.md"
+        "docs/modernization/purpose-framing-review.md",
+        "docs/modernization/coarse-delivery-policy-review.md",
+        "docs/modernization/coarse-delivery-policy-results.json",
+        "docs/modernization/coarse-delivery-policy-evidence/prior-reviews.json",
+        "docs/modernization/composed-investigation-delivery-review.md"
       ],
       "review_conflicts": []
     },
@@ -1104,7 +1116,7 @@
       "family": "native_common_catalog",
       "disposition": "retained",
       "objective": "Versioned native policy composition owns common communication and capability selection; historical role templates never enter this catalog.",
-      "source_sha256": "297fdc8b419909bdb6e465d93233ebb3dad61cf0bed754d9000cca328155b6d4",
+      "source_sha256": "845237ff6b118afe5f931258d73169ff139d25680604b92ddf043db0f7260df7",
       "source_bytes": 1186,
       "rendered_utf8_bytes": null,
       "variables_kind": "function_parameters",
@@ -1130,13 +1142,13 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "d5322d94d2f3dbaf429a4c47cb637c84e8f264d2b89ceaf8da0441e8f7928b75",
+      "dependencies_sha256": "4b4ff087089e252066a6366664c5a375527e52047ad8beb66580fb9fc52ccb85",
       "direct_module_consumers": {
         "backend/runtime/owned_runtime.py": "5d28a1b3909b77d9699c0770889a788a0365e25282b7c8eb4b3e13e9048a2145"
       },
       "suggested_disposition": "rewritten",
       "review_status": "reviewed",
-      "review_rationale": "The selector function AST and actual owned_runtime consumer are unchanged. Seven capability profiles still include the common policy exactly once and freeze exact bytes/budgets, now with catalog10 and the four added framing lines. Static review only; no general model efficacy or human comprehension claim.",
+      "review_rationale": "Delta review against6181b9a. Current catalog header advances10→11; instruction_identity explicitly preserves historical2–10. Common and source instruction bodies, builder dispatch and generic composition AST are unchanged. Fresh render compares seven profiles: six bodies identical after the first header, only investigation adds the reviewed coarse-delivery guidance. Canonical host consumer remains byte-identical. Seven profile identities and48business tool descriptions/schemas/annotations checked;55source policy/input/budget/investigation tests pass. Static review is not prompting efficacy, measured budget fit, scientific validation or human acceptance.",
       "review_evidence": [
         "backend/prompts/native.py",
         "docs/prompts/review-2026-11-07.md",
@@ -1156,7 +1168,11 @@
         "backend/runtime/questions.py",
         "backend/runtime/sqlite_questions.py",
         "docs/modernization/c10-independent-review.md",
-        "docs/modernization/purpose-framing-review.md"
+        "docs/modernization/purpose-framing-review.md",
+        "docs/modernization/coarse-delivery-policy-review.md",
+        "docs/modernization/coarse-delivery-policy-results.json",
+        "docs/modernization/coarse-delivery-policy-evidence/prior-reviews.json",
+        "docs/modernization/composed-investigation-delivery-review.md"
       ],
       "review_conflicts": []
     },
@@ -1170,8 +1186,8 @@
       "family": "native_common_catalog",
       "disposition": "retained",
       "objective": "Versioned native policy composition owns common communication and capability selection; historical role templates never enter this catalog.",
-      "source_sha256": "297fdc8b419909bdb6e465d93233ebb3dad61cf0bed754d9000cca328155b6d4",
-      "source_bytes": 526,
+      "source_sha256": "845237ff6b118afe5f931258d73169ff139d25680604b92ddf043db0f7260df7",
+      "source_bytes": 529,
       "rendered_utf8_bytes": null,
       "variables_kind": "function_parameters",
       "variables": [
@@ -1188,13 +1204,13 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "d5322d94d2f3dbaf429a4c47cb637c84e8f264d2b89ceaf8da0441e8f7928b75",
+      "dependencies_sha256": "4b4ff087089e252066a6366664c5a375527e52047ad8beb66580fb9fc52ccb85",
       "direct_module_consumers": {
         "backend/runtime/owned_runtime.py": "5d28a1b3909b77d9699c0770889a788a0365e25282b7c8eb4b3e13e9048a2145"
       },
       "suggested_disposition": "rewritten",
       "review_status": "reviewed",
-      "review_rationale": "The allowed catalog set adds historical9 while current becomes10. Versions2–9 preserve their original header/hash; unknown versions still returnNone. This does not relabel any stored prior instructions. Static review only; no general model efficacy or human comprehension claim.",
+      "review_rationale": "Delta review against6181b9a. Current catalog header advances10→11; instruction_identity explicitly preserves historical2–10. Common and source instruction bodies, builder dispatch and generic composition AST are unchanged. Fresh render compares seven profiles: six bodies identical after the first header, only investigation adds the reviewed coarse-delivery guidance. Canonical host consumer remains byte-identical. Seven profile identities and48business tool descriptions/schemas/annotations checked;55source policy/input/budget/investigation tests pass. Static review is not prompting efficacy, measured budget fit, scientific validation or human acceptance.",
       "review_evidence": [
         "backend/prompts/native.py",
         "docs/prompts/review-2026-11-07.md",
@@ -1214,7 +1230,11 @@
         "backend/runtime/questions.py",
         "backend/runtime/sqlite_questions.py",
         "docs/modernization/c10-independent-review.md",
-        "docs/modernization/purpose-framing-review.md"
+        "docs/modernization/purpose-framing-review.md",
+        "docs/modernization/coarse-delivery-policy-review.md",
+        "docs/modernization/coarse-delivery-policy-results.json",
+        "docs/modernization/coarse-delivery-policy-evidence/prior-reviews.json",
+        "docs/modernization/composed-investigation-delivery-review.md"
       ],
       "review_conflicts": []
     },
@@ -1228,7 +1248,7 @@
       "family": "native_common_catalog",
       "disposition": "retained",
       "objective": "Versioned native policy composition owns common communication and capability selection; historical role templates never enter this catalog.",
-      "source_sha256": "297fdc8b419909bdb6e465d93233ebb3dad61cf0bed754d9000cca328155b6d4",
+      "source_sha256": "845237ff6b118afe5f931258d73169ff139d25680604b92ddf043db0f7260df7",
       "source_bytes": 50,
       "rendered_utf8_bytes": null,
       "variables_kind": "referenced_identifiers",
@@ -1247,13 +1267,13 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "d5322d94d2f3dbaf429a4c47cb637c84e8f264d2b89ceaf8da0441e8f7928b75",
+      "dependencies_sha256": "4b4ff087089e252066a6366664c5a375527e52047ad8beb66580fb9fc52ccb85",
       "direct_module_consumers": {
         "backend/runtime/owned_runtime.py": "5d28a1b3909b77d9699c0770889a788a0365e25282b7c8eb4b3e13e9048a2145"
       },
       "suggested_disposition": "rewritten",
       "review_status": "reviewed",
-      "review_rationale": "Compatibility composition AST is unchanged; resulting bytes inherit catalog10/common framing. The normal selector still has seven destinations and does not newly route requests into reference_research. Static review only; no general model efficacy or human comprehension claim.",
+      "review_rationale": "Delta review against6181b9a. Current catalog header advances10→11; instruction_identity explicitly preserves historical2–10. Common and source instruction bodies, builder dispatch and generic composition AST are unchanged. Fresh render compares seven profiles: six bodies identical after the first header, only investigation adds the reviewed coarse-delivery guidance. Canonical host consumer remains byte-identical. Seven profile identities and48business tool descriptions/schemas/annotations checked;55source policy/input/budget/investigation tests pass. Static review is not prompting efficacy, measured budget fit, scientific validation or human acceptance.",
       "review_evidence": [
         "backend/prompts/native.py",
         "docs/prompts/review-2026-11-07.md",
@@ -1273,7 +1293,11 @@
         "backend/runtime/questions.py",
         "backend/runtime/sqlite_questions.py",
         "docs/modernization/c10-independent-review.md",
-        "docs/modernization/purpose-framing-review.md"
+        "docs/modernization/purpose-framing-review.md",
+        "docs/modernization/coarse-delivery-policy-review.md",
+        "docs/modernization/coarse-delivery-policy-results.json",
+        "docs/modernization/coarse-delivery-policy-evidence/prior-reviews.json",
+        "docs/modernization/composed-investigation-delivery-review.md"
       ],
       "review_conflicts": []
     },
@@ -4178,13 +4202,13 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "9773ca012f0a5c4c0ec335b2a2922850749b71cd7b154e3e37cd38c0eb7b7ad4",
+      "dependencies_sha256": "c49460d7415024468b965549001a800fb85ad95219e71e48af385f8fb859aa28",
       "direct_module_consumers": {
-        "backend/prompts/native.py": "297fdc8b419909bdb6e465d93233ebb3dad61cf0bed754d9000cca328155b6d4"
+        "backend/prompts/native.py": "845237ff6b118afe5f931258d73169ff139d25680604b92ddf043db0f7260df7"
       },
       "suggested_disposition": "reviewed_native",
       "review_status": "reviewed",
-      "review_rationale": "Capability policy source is byte-identical to64d9e28. Reviewed its changed native.py consumer: existing capability selection/tool authority and delivery contracts are unchanged; common framing and catalog10 apply once. No role-specific policy or permission was widened. Static review only; no general model efficacy or human comprehension claim.",
+      "review_rationale": "Delta review against6181b9a. Capability source and candidate AST are byte-identical. Its sole changed direct module consumer is native.py: catalog11 changes the header but this capability body is identical. Shared common/source policy and selector/authority remain unchanged; investigation-only scheduling does not enter this profile. Seven profile identities and48business tool descriptions/schemas/annotations checked;55source policy/input/budget/investigation tests pass. Static review is not prompting efficacy, measured budget fit, scientific validation or human acceptance.",
       "review_evidence": [
         "backend/runtime/code_audit_instructions.py",
         "docs/prompts/review-2026-11-07.md",
@@ -4200,7 +4224,11 @@
         "docs/prompts/review-2026-11-08.md",
         "backend/runtime/owned_runtime.py",
         "docs/modernization/purpose-framing-review.md",
-        "backend/tests/runtime/test_prompt_catalog.py"
+        "backend/tests/runtime/test_prompt_catalog.py",
+        "docs/modernization/coarse-delivery-policy-review.md",
+        "docs/modernization/coarse-delivery-policy-results.json",
+        "docs/modernization/coarse-delivery-policy-evidence/prior-reviews.json",
+        "docs/modernization/composed-investigation-delivery-review.md"
       ],
       "review_conflicts": []
     },
@@ -4273,13 +4301,13 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "6a6c211e1c5059ee09b8d810adedf7a2614e16a904761e5969ed5c659bb8ced6",
+      "dependencies_sha256": "9aa962e1c55b2ebbd6e246fd7672117cdab71a2dc50e7fe0320879cf0375968c",
       "direct_module_consumers": {
-        "backend/prompts/native.py": "297fdc8b419909bdb6e465d93233ebb3dad61cf0bed754d9000cca328155b6d4"
+        "backend/prompts/native.py": "845237ff6b118afe5f931258d73169ff139d25680604b92ddf043db0f7260df7"
       },
       "suggested_disposition": "reviewed_native",
       "review_status": "reviewed",
-      "review_rationale": "Capability policy source is byte-identical to64d9e28. Reviewed its changed native.py consumer: existing capability selection/tool authority and delivery contracts are unchanged; common framing and catalog10 apply once. No role-specific policy or permission was widened. Static review only; no general model efficacy or human comprehension claim.",
+      "review_rationale": "Delta review against6181b9a. Capability source and candidate AST are byte-identical. Its sole changed direct module consumer is native.py: catalog11 changes the header but this capability body is identical. Shared common/source policy and selector/authority remain unchanged; investigation-only scheduling does not enter this profile. Seven profile identities and48business tool descriptions/schemas/annotations checked;55source policy/input/budget/investigation tests pass. Static review is not prompting efficacy, measured budget fit, scientific validation or human acceptance.",
       "review_evidence": [
         "backend/runtime/code_review_instructions.py",
         "docs/prompts/review-2026-11-07.md",
@@ -4295,7 +4323,11 @@
         "docs/prompts/review-2026-11-08.md",
         "backend/runtime/owned_runtime.py",
         "docs/modernization/purpose-framing-review.md",
-        "backend/tests/runtime/test_prompt_catalog.py"
+        "backend/tests/runtime/test_prompt_catalog.py",
+        "docs/modernization/coarse-delivery-policy-review.md",
+        "docs/modernization/coarse-delivery-policy-results.json",
+        "docs/modernization/coarse-delivery-policy-evidence/prior-reviews.json",
+        "docs/modernization/composed-investigation-delivery-review.md"
       ],
       "review_conflicts": []
     },
@@ -4436,15 +4468,15 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "12efd4b20c8fde3311eece8724e7650a933cefcadec00ac78d959d5c71e0e804",
+      "dependencies_sha256": "ca9ad9dcc97697a0d03e863d0a1da43cce9af2f932be9d0ac94aa25894b37afb",
       "direct_module_consumers": {
         "backend/api/runtime_dependencies.py": "ee0b6b403981f1c41edd4a934a138541f0a53bd487ac805905acf46561caaf30",
         "backend/runtime/host_installation.py": "3503fb7ee55761197c449e894e9d080de921109ff7f8c9a59d8f4c7bf19a4dc1",
-        "backend/prompts/native.py": "297fdc8b419909bdb6e465d93233ebb3dad61cf0bed754d9000cca328155b6d4"
+        "backend/prompts/native.py": "845237ff6b118afe5f931258d73169ff139d25680604b92ddf043db0f7260df7"
       },
       "suggested_disposition": "reviewed_native",
       "review_status": "reviewed",
-      "review_rationale": "Capability policy source is byte-identical to64d9e28. Reviewed its changed native.py consumer: existing capability selection/tool authority and delivery contracts are unchanged; common framing and catalog10 apply once. No role-specific policy or permission was widened. Static review only; no general model efficacy or human comprehension claim.",
+      "review_rationale": "Delta review against6181b9a. Capability source and candidate AST are byte-identical. Its sole changed direct module consumer is native.py: catalog11 changes the header but this capability body is identical. Shared common/source policy and selector/authority remain unchanged; investigation-only scheduling does not enter this profile. Seven profile identities and48business tool descriptions/schemas/annotations checked;55source policy/input/budget/investigation tests pass. Static review is not prompting efficacy, measured budget fit, scientific validation or human acceptance.",
       "review_evidence": [
         "backend/runtime/development_policy.py",
         "docs/prompts/review-2026-11-07.md",
@@ -4466,7 +4498,11 @@
         "backend/api/runtime_dependencies.py",
         "docs/modernization/purpose-framing-review.md",
         "backend/tests/runtime/test_prompt_catalog.py",
-        "backend/runtime/owned_runtime.py"
+        "backend/runtime/owned_runtime.py",
+        "docs/modernization/coarse-delivery-policy-review.md",
+        "docs/modernization/coarse-delivery-policy-results.json",
+        "docs/modernization/coarse-delivery-policy-evidence/prior-reviews.json",
+        "docs/modernization/composed-investigation-delivery-review.md"
       ],
       "review_conflicts": []
     },
@@ -4475,14 +4511,14 @@
       "path": "backend/runtime/investigation_instructions.py",
       "symbol": "INVESTIGATION_INSTRUCTIONS",
       "line": 3,
-      "end_line": 18,
+      "end_line": 39,
       "owner": "backend.runtime.investigation_instructions",
       "family": "native_capability_policy",
       "disposition": "rewritten",
       "objective": "Exploratory investigation behavior uses explicit scope, grouped evidence and correction opportunities without a host-owned LLM loop.",
-      "source_sha256": "ceecf2ff65d95086bd4931b758090e6be8d692be89739e5d39610e40429c181a",
-      "source_bytes": 1069,
-      "rendered_utf8_bytes": 1063,
+      "source_sha256": "4f54a8bc8295e191bfb375d68230b04f6adfe3d0b6b803e44706a87fa8ac1af9",
+      "source_bytes": 2501,
+      "rendered_utf8_bytes": 2495,
       "variables_kind": "referenced_identifiers",
       "variables": [],
       "direct_import_consumers": [
@@ -4501,13 +4537,13 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "c3eb6d56e33d752cb4a8130b54e3605c37f8301cd8f5a82620ee8b50b8067c1e",
+      "dependencies_sha256": "363631ef7249d2e25f28eb8b7ad2bb51c59eb12f39e0696d585ea922756c4096",
       "direct_module_consumers": {
-        "backend/prompts/native.py": "297fdc8b419909bdb6e465d93233ebb3dad61cf0bed754d9000cca328155b6d4"
+        "backend/prompts/native.py": "845237ff6b118afe5f931258d73169ff139d25680604b92ddf043db0f7260df7"
       },
       "suggested_disposition": "reviewed_native",
       "review_status": "reviewed",
-      "review_rationale": "Capability policy source is byte-identical to64d9e28. Reviewed its changed native.py consumer: existing capability selection/tool authority and delivery contracts are unchanged; common framing and catalog10 apply once. No role-specific policy or permission was widened. Static review only; no general model efficacy or human comprehension claim.",
+      "review_rationale": "Delta review against6181b9a. Investigation policy adds bounded code-mode stages: acquire independent known reads, stop for semantic judgment, and after inspecting evidence sequentially record findings, typed summary and explicit proposal in one exec using validated returned IDs. Stop on uncertain/error replies, preserve original operation keys/receipts, retain citations/limits and budget for final user explanation. No automatic replay, budget increase, new tool or authority. Existing real-code-host composition test proves viability, not generated compliance. Seven profile identities and48business tool descriptions/schemas/annotations checked;55source policy/input/budget/investigation tests pass. Static review is not prompting efficacy, measured budget fit, scientific validation or human acceptance.",
       "review_evidence": [
         "backend/runtime/investigation_instructions.py",
         "docs/prompts/review-2026-11-07.md",
@@ -4523,7 +4559,11 @@
         "docs/prompts/review-2026-11-08.md",
         "backend/runtime/owned_runtime.py",
         "docs/modernization/purpose-framing-review.md",
-        "backend/tests/runtime/test_prompt_catalog.py"
+        "backend/tests/runtime/test_prompt_catalog.py",
+        "docs/modernization/coarse-delivery-policy-review.md",
+        "docs/modernization/coarse-delivery-policy-results.json",
+        "docs/modernization/coarse-delivery-policy-evidence/prior-reviews.json",
+        "docs/modernization/composed-investigation-delivery-review.md"
       ],
       "review_conflicts": []
     },
@@ -4684,13 +4724,13 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "f676a65bfe50d7b212020f864073b60d8b5d423da60c0f7c9f9d4aa0527b7b81",
+      "dependencies_sha256": "18d6f1e33d14b6bf9eeb66b532a4b00e434747146d69129f40277123d121e28f",
       "direct_module_consumers": {
-        "backend/prompts/native.py": "297fdc8b419909bdb6e465d93233ebb3dad61cf0bed754d9000cca328155b6d4"
+        "backend/prompts/native.py": "845237ff6b118afe5f931258d73169ff139d25680604b92ddf043db0f7260df7"
       },
       "suggested_disposition": "reviewed_native",
       "review_status": "reviewed",
-      "review_rationale": "Capability policy source is byte-identical to64d9e28. Reviewed its changed native.py consumer: existing capability selection/tool authority and delivery contracts are unchanged; common framing and catalog10 apply once. No role-specific policy or permission was widened. Static review only; no general model efficacy or human comprehension claim.",
+      "review_rationale": "Delta review against6181b9a. Capability source and candidate AST are byte-identical. Its sole changed direct module consumer is native.py: catalog11 changes the header but this capability body is identical. Shared common/source policy and selector/authority remain unchanged; investigation-only scheduling does not enter this profile. Seven profile identities and48business tool descriptions/schemas/annotations checked;55source policy/input/budget/investigation tests pass. Static review is not prompting efficacy, measured budget fit, scientific validation or human acceptance.",
       "review_evidence": [
         "backend/runtime/review_instructions.py",
         "docs/prompts/review-2026-11-07.md",
@@ -4706,7 +4746,11 @@
         "docs/prompts/review-2026-11-08.md",
         "backend/runtime/owned_runtime.py",
         "docs/modernization/purpose-framing-review.md",
-        "backend/tests/runtime/test_prompt_catalog.py"
+        "backend/tests/runtime/test_prompt_catalog.py",
+        "docs/modernization/coarse-delivery-policy-review.md",
+        "docs/modernization/coarse-delivery-policy-results.json",
+        "docs/modernization/coarse-delivery-policy-evidence/prior-reviews.json",
+        "docs/modernization/composed-investigation-delivery-review.md"
       ],
       "review_conflicts": []
     },
@@ -4873,13 +4917,13 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "708031594487d3b575c251642fab329e95fb4a6e3f04f10f73a0a56600db0226",
+      "dependencies_sha256": "338e4f1a6f8bd5f674458dd34bb386435df506a5394e34d57ff45b718f81852a",
       "direct_module_consumers": {
-        "backend/prompts/native.py": "297fdc8b419909bdb6e465d93233ebb3dad61cf0bed754d9000cca328155b6d4"
+        "backend/prompts/native.py": "845237ff6b118afe5f931258d73169ff139d25680604b92ddf043db0f7260df7"
       },
       "suggested_disposition": "reviewed_native",
       "review_status": "reviewed",
-      "review_rationale": "Capability policy source is byte-identical to64d9e28. Reviewed its changed native.py consumer: existing capability selection/tool authority and delivery contracts are unchanged; common framing and catalog10 apply once. No role-specific policy or permission was widened. Static review only; no general model efficacy or human comprehension claim.",
+      "review_rationale": "Delta review against6181b9a. Capability source and candidate AST are byte-identical. Its sole changed direct module consumer is native.py: catalog11 changes the header but this capability body is identical. Shared common/source policy and selector/authority remain unchanged; investigation-only scheduling does not enter this profile. Seven profile identities and48business tool descriptions/schemas/annotations checked;55source policy/input/budget/investigation tests pass. Static review is not prompting efficacy, measured budget fit, scientific validation or human acceptance.",
       "review_evidence": [
         "backend/runtime/scientific_instructions.py",
         "docs/prompts/review-2026-11-07.md",
@@ -4895,7 +4939,11 @@
         "docs/prompts/review-2026-11-08.md",
         "backend/runtime/owned_runtime.py",
         "docs/modernization/purpose-framing-review.md",
-        "backend/tests/runtime/test_prompt_catalog.py"
+        "backend/tests/runtime/test_prompt_catalog.py",
+        "docs/modernization/coarse-delivery-policy-review.md",
+        "docs/modernization/coarse-delivery-policy-results.json",
+        "docs/modernization/coarse-delivery-policy-evidence/prior-reviews.json",
+        "docs/modernization/composed-investigation-delivery-review.md"
       ],
       "review_conflicts": []
     },

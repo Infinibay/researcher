@@ -144,3 +144,10 @@ añade cuatro descripciones a los esquemas de argumentos realmente emitidos. Se
 revisan como metadata visible al modelo: no cambian campos, límites ni política
 de despacho. Una decisión revalidada, 84 conservadas; inventario actual 85/322.
 No implica mejor cumplimiento del modelo ni cierre de DD157/U08.
+
+
+[Catálogo 11](../modernization/coarse-delivery-policy-review.md): orientación de
+adquisición/entrega en pasos gruesos para investigación, con versiones 2–10
+preservadas. Doce revisiones de fuente/consumidor actualizadas, 73 sin renovar;
+85/322 vigentes. La nueva observación real falló por presupuesto sin explicación;
+la revalidación estática no acredita eficacia ni comprensión humana.

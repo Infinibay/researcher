@@ -1,0 +1,24 @@
+{
+  "original_failed_observation": ".researcher/evaluations/purpose-framing-models-20261108",
+  "new_observation": ".researcher/evaluations/coarse-delivery-models-20261108",
+  "unchanged_protocol_fields": [
+    "limits",
+    "criteria",
+    "maximum_model_turns",
+    "original_sources",
+    "harness_sha256",
+    "operator_resources_sha256"
+  ],
+  "unchanged_fixture_files": [
+    "evidence.py",
+    "reference.md",
+    "case.json"
+  ],
+  "current_policy_version": 11,
+  "semantic_change": "Investigation scheduling: coarse acquisition and chained delivery with actual receipts; no budget/authority/citation expansion",
+  "other_model_visible_delta": "Installed package also includes previously reviewed four analysis argument schema descriptions from docstrings; no isolated causal claim",
+  "maximum_model_turns": 1,
+  "max_observed_tokens": 120000,
+  "original_failed_result_preserved": true,
+  "human_comprehension": null
+}

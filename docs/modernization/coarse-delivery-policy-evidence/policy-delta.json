@@ -1,0 +1,76 @@
+{
+  "base_commit": "6181b9a",
+  "catalog_version": 11,
+  "historical_versions_preserved": [
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10
+  ],
+  "common_body_unchanged": true,
+  "business_descriptions_schemas_annotations_unchanged": 48,
+  "owned_consumer_unchanged": true,
+  "profiles": [
+    {
+      "profile": "research:research",
+      "body_unchanged_except_catalog_header": true,
+      "before_sha256": "efc8ddfcfb5dd728238a33e498ee8381d55734694811140c9fbb4f7111f8b08c",
+      "after_sha256": "a8c4ad6763302deadfada6e84dde5733fb88ada7ca45c2f4a525d1af4bd295e0",
+      "before_bytes": 15408,
+      "after_bytes": 15408
+    },
+    {
+      "profile": "research:review",
+      "body_unchanged_except_catalog_header": true,
+      "before_sha256": "9bbdcddbda718251114adcdab59ed4662d0682e3db707a21431c9316a2bf991e",
+      "after_sha256": "50bf0773f2ca020fe8bce22000ec70e549a5007657429c57ec9f1c018b7cf02c",
+      "before_bytes": 11521,
+      "after_bytes": 11521
+    },
+    {
+      "profile": "research:investigation",
+      "body_unchanged_except_catalog_header": false,
+      "before_sha256": "6ee80d32f55854cb2e1574a6641152c9fc197d93c281114540da4ccbb57102d5",
+      "after_sha256": "fbe6f404d032005d8736c6469ccde3fb4cbde32eb8a6253f6a176fb5b9c24370",
+      "before_bytes": 8900,
+      "after_bytes": 10332
+    },
+    {
+      "profile": "research:plan",
+      "body_unchanged_except_catalog_header": true,
+      "before_sha256": "ccf59716479c81f4698cf79aeddeb75adb2165ece90e600e0f4cfa28ef3f618a",
+      "after_sha256": "2be62d56b7addac821a42c1dcd4dddd68dbfdef594bea91a5dfdc46b8a32c2d2",
+      "before_bytes": 11227,
+      "after_bytes": 11227
+    },
+    {
+      "profile": "development:code",
+      "body_unchanged_except_catalog_header": true,
+      "before_sha256": "4c0fe59bab3ece609f10a710698cd4d90bc6a8174cad8a98e9455daf1bc18609",
+      "after_sha256": "320fd68dce2ea80bdb0f631de7192208f488756bbe5498ef7f86bc0db00b4eb8",
+      "before_bytes": 11233,
+      "after_bytes": 11233
+    },
+    {
+      "profile": "code_review:code",
+      "body_unchanged_except_catalog_header": true,
+      "before_sha256": "4c7b202f584191a1ead6b456ee0c36ae569a91c597b552fbf254df479c194941",
+      "after_sha256": "ba76cdf393b2f08d23b0dd889cfd9935de5712bf68583bde587b8793881da5e0",
+      "before_bytes": 10174,
+      "after_bytes": 10174
+    },
+    {
+      "profile": "finding_review:research",
+      "body_unchanged_except_catalog_header": true,
+      "before_sha256": "72403e58cc98b8d94985725ffd209a8edae1388b1984388d184d6c18cb5c7520",
+      "after_sha256": "25d42c451f4eda313600a475337caf8fc991cf5760a9fff18ccbbaab4789bb3f",
+      "before_bytes": 9678,
+      "after_bytes": 9678
+    }
+  ]
+}

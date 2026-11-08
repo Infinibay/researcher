@@ -1,0 +1,210 @@
+{
+  "base_commit": "6181b9a",
+  "status": "policy_implemented_actual_explanation_failed",
+  "catalog_version": 11,
+  "source_sha256": {
+    "backend/prompts/native.py": "845237ff6b118afe5f931258d73169ff139d25680604b92ddf043db0f7260df7",
+    "backend/runtime/investigation_instructions.py": "4f54a8bc8295e191bfb375d68230b04f6adfe3d0b6b803e44706a87fa8ac1af9",
+    "backend/tests/runtime/test_prompt_catalog.py": "20135f5fb8d815db11bd962e0841ccbd5b0edf45c7a73c18979151dfd8ab85e7",
+    "backend/runtime/owned_runtime.py": "5d28a1b3909b77d9699c0770889a788a0365e25282b7c8eb4b3e13e9048a2145"
+  },
+  "policy_delta": {
+    "base_commit": "6181b9a",
+    "catalog_version": 11,
+    "historical_versions_preserved": [
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
+    ],
+    "common_body_unchanged": true,
+    "business_descriptions_schemas_annotations_unchanged": 48,
+    "owned_consumer_unchanged": true,
+    "profiles": [
+      {
+        "profile": "research:research",
+        "body_unchanged_except_catalog_header": true,
+        "before_sha256": "efc8ddfcfb5dd728238a33e498ee8381d55734694811140c9fbb4f7111f8b08c",
+        "after_sha256": "a8c4ad6763302deadfada6e84dde5733fb88ada7ca45c2f4a525d1af4bd295e0",
+        "before_bytes": 15408,
+        "after_bytes": 15408
+      },
+      {
+        "profile": "research:review",
+        "body_unchanged_except_catalog_header": true,
+        "before_sha256": "9bbdcddbda718251114adcdab59ed4662d0682e3db707a21431c9316a2bf991e",
+        "after_sha256": "50bf0773f2ca020fe8bce22000ec70e549a5007657429c57ec9f1c018b7cf02c",
+        "before_bytes": 11521,
+        "after_bytes": 11521
+      },
+      {
+        "profile": "research:investigation",
+        "body_unchanged_except_catalog_header": false,
+        "before_sha256": "6ee80d32f55854cb2e1574a6641152c9fc197d93c281114540da4ccbb57102d5",
+        "after_sha256": "fbe6f404d032005d8736c6469ccde3fb4cbde32eb8a6253f6a176fb5b9c24370",
+        "before_bytes": 8900,
+        "after_bytes": 10332
+      },
+      {
+        "profile": "research:plan",
+        "body_unchanged_except_catalog_header": true,
+        "before_sha256": "ccf59716479c81f4698cf79aeddeb75adb2165ece90e600e0f4cfa28ef3f618a",
+        "after_sha256": "2be62d56b7addac821a42c1dcd4dddd68dbfdef594bea91a5dfdc46b8a32c2d2",
+        "before_bytes": 11227,
+        "after_bytes": 11227
+      },
+      {
+        "profile": "development:code",
+        "body_unchanged_except_catalog_header": true,
+        "before_sha256": "4c0fe59bab3ece609f10a710698cd4d90bc6a8174cad8a98e9455daf1bc18609",
+        "after_sha256": "320fd68dce2ea80bdb0f631de7192208f488756bbe5498ef7f86bc0db00b4eb8",
+        "before_bytes": 11233,
+        "after_bytes": 11233
+      },
+      {
+        "profile": "code_review:code",
+        "body_unchanged_except_catalog_header": true,
+        "before_sha256": "4c7b202f584191a1ead6b456ee0c36ae569a91c597b552fbf254df479c194941",
+        "after_sha256": "ba76cdf393b2f08d23b0dd889cfd9935de5712bf68583bde587b8793881da5e0",
+        "before_bytes": 10174,
+        "after_bytes": 10174
+      },
+      {
+        "profile": "finding_review:research",
+        "body_unchanged_except_catalog_header": true,
+        "before_sha256": "72403e58cc98b8d94985725ffd209a8edae1388b1984388d184d6c18cb5c7520",
+        "after_sha256": "25d42c451f4eda313600a475337caf8fc991cf5760a9fff18ccbbaab4789bb3f",
+        "before_bytes": 9678,
+        "after_bytes": 9678
+      }
+    ]
+  },
+  "tests": {
+    "red": {
+      "failed": 7,
+      "reason": "Provenance contract required11 while old runtime still emitted10"
+    },
+    "source": {
+      "passed": 55,
+      "failed": 0,
+      "skipped": 0,
+      "seconds": 19.04
+    },
+    "installed": {
+      "passed": 55,
+      "failed": 0,
+      "skipped": 0,
+      "seconds": 20.53,
+      "backend_modules_only_from_package": 235
+    }
+  },
+  "packaging": {
+    "source_files_matching_sdist_and_wheel": 700,
+    "product_files_matching": 371,
+    "wheel": ".superpowers/sdd/2026-10-31-actualizacion-proyecto/coarse-delivery-dist/researcher-0.1.0-cp312-cp312-linux_x86_64.whl",
+    "wheel_sha256": "af08a86518868164fc9cf65dbc4b4a87a05d3b6de27f715553baefea50eceabc",
+    "sdist": ".superpowers/sdd/2026-10-31-actualizacion-proyecto/coarse-delivery-dist/researcher-0.1.0.tar.gz",
+    "sdist_sha256": "10d40e18b596c98047101446c35f9646fbe111b0ba8478af1c0456a9f04f1320",
+    "source_commit": "6181b9a plus coarse-delivery policy11 and provenance tests",
+    "exclusions": [
+      "backend/db/seeds/dev_data.sql"
+    ],
+    "scope": "All owned backend Python/SQL membership and bytes checked, including tests. Not whole-service/global acceptance."
+  },
+  "prompt_inventory": {
+    "base_commit": "6181b9a",
+    "catalog_version": 11,
+    "scanned": 322,
+    "candidates": 85,
+    "revalidated": 12,
+    "retained_current": 73,
+    "scope": "Static policy/value/consumer review; not efficacy or human acceptance"
+  },
+  "live_observation": {
+    "status": "failed",
+    "seconds": 38.842,
+    "policy_version": 11,
+    "exact_registered_policy_observed": true,
+    "ken_complete_registered_source_lines": 118,
+    "source_hash": "876a6af6da86055532ac3bb663fd1af7c62aec8ea407fbded04b1fd0e6fdd4eb",
+    "source_captures": [
+      {
+        "source_id": 1,
+        "kind": "attachment",
+        "sha256_matches_content": true,
+        "matches_registered_code": false,
+        "bytes": 3558
+      },
+      {
+        "source_id": 2,
+        "kind": "attachment",
+        "sha256_matches_content": true,
+        "matches_registered_code": false,
+        "bytes": 9332
+      }
+    ],
+    "stored_counts": {
+      "findings": 0,
+      "research_reports": 0,
+      "runtime_result_proposals": 0,
+      "runtime_result_acceptances": 0
+    },
+    "observed_token_totals": [
+      26195,
+      53773,
+      84586,
+      126302
+    ],
+    "model_control": {
+      "model": "gpt-6.1-sol",
+      "reasoning_effort": "low",
+      "source": "host",
+      "revision": 0,
+      "project_id": 101,
+      "actor_id": "researcher",
+      "fence": 1
+    },
+    "admissions_sent": 1,
+    "peers_closed": 5,
+    "unrevoked_grants": 0,
+    "owned_backend_terminal": true,
+    "service_exit": -15,
+    "native_result": null,
+    "limit_kind": "tokens",
+    "limits": {
+      "max_answer_bytes": 12000,
+      "max_observed_tokens": 120000,
+      "max_tool_calls": 20,
+      "max_turns": 1,
+      "no_progress_seconds": 90,
+      "wall_seconds": 180
+    },
+    "interpretation": "Acquisition did not compose as directed: catalog discovery, evidence acquisition, output reading, then code capture consumed four model rounds; no finding/summary/proposal/final explanation. Instruction guidance has no demonstrated efficacy here.",
+    "human_comprehension": null
+  },
+  "generative_model_turns": 1,
+  "human_comprehension": null,
+  "next_action": "Validate executable evidence acquisition plus delivery through actual wrappers; no further policy-only rerun",
+  "limits": [
+    "No causal policy efficacy or held-out comparison; earlier four analysis schema descriptions also newly installed",
+    "Original policy10 failed sample remains failed",
+    "Observed token ceiling can be exceeded by an already consumed native round before host withdrawal",
+    "No global-suite/scientific/accessibility/human acceptance"
+  ],
+  "time": {
+    "start_utc": "2026-11-08 19:22:51",
+    "verification_cut_utc": "2026-11-08 19:35:06",
+    "elapsed_seconds": 735,
+    "scope": "Includes source/install checks, one live observation and analysis; report/checkpoint later"
+  },
+  "quality_checks": {
+    "diff_check_excluding_raw_red_log": "passed",
+    "raw_red_log_trailing_whitespace_lines": 7,
+    "raw_log_preserved_verbatim": true
+  }
+}

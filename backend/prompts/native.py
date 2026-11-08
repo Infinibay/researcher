@@ -13,7 +13,7 @@ from backend.runtime.investigation_instructions import INVESTIGATION_INSTRUCTION
 from backend.runtime.review_instructions import REVIEW_INSTRUCTIONS
 from backend.runtime.scientific_instructions import SCIENTIFIC_RESEARCH_INSTRUCTIONS
 
-CATALOG_VERSION=10
+CATALOG_VERSION=11
 
 COMMON_INSTRUCTIONS="""# Scope and authority
 Work on the host-admitted task and current context. Follow the actual owner request,
@@ -185,7 +185,7 @@ def build_instructions(execution_kind,task_type,*,checks=(),limits=None):
 def instruction_identity(instructions):
     """Describe only an actually recorded catalog header and complete text hash; historical unversioned policy stays unknown rather than being retroactively labelled."""
     match=re.match(r'RESEARCHER_POLICY (\d+) ([a-z_]+)\n\n',instructions)
-    if match is None or int(match[1]) not in (2,3,4,5,6,7,8,9,CATALOG_VERSION) or match[2] not in _PROFILES:return None
+    if match is None or int(match[1]) not in (2,3,4,5,6,7,8,9,10,CATALOG_VERSION) or match[2] not in _PROFILES:return None
     return {'catalog_version':int(match[1]),'profile':match[2],'sha256':hashlib.sha256(instructions.encode()).hexdigest()}
 
 

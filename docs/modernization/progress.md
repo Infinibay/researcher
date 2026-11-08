@@ -9718,3 +9718,32 @@ Ruling: usar composición existente antes de añadir otra API o elevar límites;
 si el modelo no sigue la orientación, la viabilidad determinista no basta y
 seguirá pendiente la entrega real. Próximo: política versionada y observación
 registrada sólo por cambio semántico. U08 sigue abierto y DD157 diferido.
+
+## 2026-11-08 — Política 11 integrada y observación real fallida
+
+[Informe](coarse-delivery-policy-review.md). Nueva orientación de investigación
+para pasos gruesos y entrega por IDs reales; común y otras seis capacidades
+intactas salvo cabecera. Versiones 2–10 preservadas. RED siete casos de identidad;
+GREEN 55 fuente/19,04 s y 55 instalados/20,53 s, sin omisiones. Sdist/wheel contienen
+700 fuentes Python/SQL coincidentes (371 de producto), 235 módulos backend sólo
+instalados. Inventario 85/322 vigente: doce deltas revisados, 73 sin renovar.
+
+Un ensayo registrado, mismos fuentes/pregunta/criterios/límites, modelo/esfuerzo
+preservados. También se instalan cuatro descripciones de esquema ya revisadas;
+no comparación causal. Política 11 exacta y 118 líneas Ken comprobadas. Falló:
+26 195→53 773→84 586→126 302 tokens, límite 120 000. Dos fuentes y cero hallazgos,
+informes, propuestas, aceptación o final. Cinco peers cerrados/cero grants,
+servicio -15; 38,842 s. Ambos fallos originales se conservan. El techo se observa
+tras una ronda consumida; no se afirma contención exacta de tokens remotos.
+
+Revisión readonly adicional: el comando adquiría procedencia válida; su salida
+texto/base64 duplicaba contexto. capture_command lee bytes persistidos por job_id;
+próximo comprobar adquisición ejecutable con lectura mínima de estado, cierre,
+captura y lectura canónica, conservando cobertura/citas/autoridad/fallos y margen
+para final nativo. No otro ensayo de instrucciones ni aumento de límites. Una
+captura Ken nueva o compactación de catálogo requieren justificación adicional.
+19:22:51–19:35:06 UTC: 12 min 15 s hasta comprobar/analizar; informe/checkpoint después.
+Siguen U08, Ken/ONNX, documentación, accesibilidad y cierre integrado; sin global
+verde/push/merge/despliegue. El turno anterior fue progreso:233docstrings y prueba
+real offline de composición; este bloque añade política, paquete y evidencia real
+que obliga a revisar la adquisición, sin dar por logrado el resultado humano.

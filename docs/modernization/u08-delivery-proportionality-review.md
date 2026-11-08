@@ -57,3 +57,26 @@ congelado. Sólo después justificar una nueva observación real registrada por 
 cambio semántico, con los mismos límites y sin reemplazar el ensayo fallido.
 Hasta entonces no hay evidencia de que el modelo elija esta estrategia o cumpla
 el presupuesto. DD157, pulido y comparaciones adicionales siguen diferidos.
+
+## Seguimiento tras el ensayo de catálogo 11
+
+El mismo revisor inspeccionó el nuevo recorrido en sólo lectura, sin ejecutar
+pruebas/modelos ni modificar archivos. El implementador contrastó el resultado,
+política exacta, 118 líneas Ken y conteos con los originales.
+[Observación y límites](coarse-delivery-policy-review.md).
+
+La orientación no produjo composición suficiente: cuatro rondas consumieron
+126 302 tokens antes de hallazgos, resumen, propuesta o final. El `cat` adquiría
+procedencia capturable; su lectura completa en texto/base64 era prescindible para
+`capture_command`, que obtiene bytes del recibo persistido. La próxima acción
+recomendada es probar una composición ejecutable de adquisición y entrega con
+wrappers reales, salida canónica interpretable, cobertura/citas y parada ante
+fallo o incertidumbre. No otra repetición basada sólo en instrucciones.
+
+El renderizado de `InvestigationSummary` crea un draft; `result_propose` guarda la
+selección explícita. La elegibilidad todavía exige finalización nativa. El cierre
+anticipado `DeliveryReady` pertenece al planificador; no extenderlo a investigación
+para hacer pasar este caso. Una captura Ken automática exigiría semántica nueva de
+formato, estabilidad, autoridad y procedencia; el código no demuestra que haga falta.
+La reducción de catálogo es otra hipótesis de rendimiento, no ahorro de tokens
+probado. DD157 y pulido continúan diferidos.

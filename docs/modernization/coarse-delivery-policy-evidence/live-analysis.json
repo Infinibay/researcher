@@ -1,0 +1,196 @@
+{
+  "status": "failed",
+  "seconds": 38.842,
+  "policy_version": 11,
+  "exact_registered_policy_observed": true,
+  "ken_complete_registered_source_lines": 118,
+  "source_hash": "876a6af6da86055532ac3bb663fd1af7c62aec8ea407fbded04b1fd0e6fdd4eb",
+  "source_captures": [
+    {
+      "source_id": 1,
+      "kind": "attachment",
+      "sha256_matches_content": true,
+      "matches_registered_code": false,
+      "bytes": 3558
+    },
+    {
+      "source_id": 2,
+      "kind": "attachment",
+      "sha256_matches_content": true,
+      "matches_registered_code": false,
+      "bytes": 9332
+    }
+  ],
+  "stored_counts": {
+    "findings": 0,
+    "research_reports": 0,
+    "runtime_result_proposals": 0,
+    "runtime_result_acceptances": 0
+  },
+  "observed_token_totals": [
+    26195,
+    53773,
+    84586,
+    126302
+  ],
+  "usage_records": [
+    {
+      "total_token_usage": {
+        "input_tokens": 26062,
+        "cached_input_tokens": 0,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 133,
+        "reasoning_output_tokens": 0,
+        "total_tokens": 26195
+      },
+      "last_token_usage": {
+        "input_tokens": 26062,
+        "cached_input_tokens": 0,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 133,
+        "reasoning_output_tokens": 0,
+        "total_tokens": 26195
+      },
+      "last_usage_includes_reasoning": true,
+      "model_context_window": 475000
+    },
+    {
+      "total_token_usage": {
+        "input_tokens": 53527,
+        "cached_input_tokens": 25984,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 246,
+        "reasoning_output_tokens": 0,
+        "total_tokens": 53773
+      },
+      "last_token_usage": {
+        "input_tokens": 27465,
+        "cached_input_tokens": 25984,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 113,
+        "reasoning_output_tokens": 0,
+        "total_tokens": 27578
+      },
+      "last_usage_includes_reasoning": true,
+      "model_context_window": 475000
+    },
+    {
+      "total_token_usage": {
+        "input_tokens": 84263,
+        "cached_input_tokens": 53376,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 323,
+        "reasoning_output_tokens": 0,
+        "total_tokens": 84586
+      },
+      "last_token_usage": {
+        "input_tokens": 30736,
+        "cached_input_tokens": 27392,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 77,
+        "reasoning_output_tokens": 0,
+        "total_tokens": 30813
+      },
+      "last_usage_includes_reasoning": true,
+      "model_context_window": 475000
+    },
+    {
+      "total_token_usage": {
+        "input_tokens": 125919,
+        "cached_input_tokens": 83968,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 383,
+        "reasoning_output_tokens": 0,
+        "total_tokens": 126302
+      },
+      "last_token_usage": {
+        "input_tokens": 41656,
+        "cached_input_tokens": 30592,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 60,
+        "reasoning_output_tokens": 0,
+        "total_tokens": 41716
+      },
+      "last_usage_includes_reasoning": true,
+      "model_context_window": 475000
+    }
+  ],
+  "model_control": {
+    "model": "gpt-6.1-sol",
+    "reasoning_effort": "low",
+    "source": "host",
+    "revision": 0,
+    "project_id": 101,
+    "actor_id": "researcher",
+    "fence": 1
+  },
+  "tool_calls": [
+    {
+      "name": "ken_find",
+      "success": true
+    },
+    {
+      "name": "researcher_reference_list",
+      "success": true
+    },
+    {
+      "name": "ken_read",
+      "success": true
+    },
+    {
+      "name": "researcher_capture_reference",
+      "success": true
+    },
+    {
+      "name": "researcher_command_start",
+      "success": true
+    },
+    {
+      "name": "researcher_source_read",
+      "success": true
+    },
+    {
+      "name": "researcher_command_read",
+      "success": true
+    },
+    {
+      "name": "researcher_capture_command",
+      "success": true
+    }
+  ],
+  "execs": [
+    {
+      "name": "exec",
+      "code": "text(ALL_TOOLS.filter(x=>/ken_|reference|capture|source_read/.test(x.name)).map(x=>({name:x.name,description:x.description.slice(0,90)})));\ntext(await tools.ken_find({query:\"Find the evidence.py module copied from backend/runtime/model_settings.py and policy.md configuration documentation\",scope:\"files\",piece_kind:\"file\"}));\ntext(await tools.researcher_reference_list({}));\n"
+    },
+    {
+      "name": "exec",
+      "code": "const r=await Promise.allSettled([\ntools.ken_read({path:\"evidence.py\",include:[\"source\"],start_line:1,end_line:220,max_chars:30000}),\ntools.researcher_capture_reference({reference_file_id:1,operation_key:\"capture-policy-45f3859f\"}),\ntools.researcher_command_start({argv:[\"cat\",\"evidence.py\"],operation_key:\"capture-code-read-45f3859f\",output_bytes:40000})\n]);r.forEach(text);\n"
+    },
+    {
+      "name": "exec",
+      "code": "text(await tools.researcher_source_read({source_id:1,max_chars:12000}));\ntext(await tools.researcher_command_read({job_id:\"3b5425cc-dbb3-45fb-8a3e-b3e03853fb62\",max_bytes:16000,wait_ms:1000}));\n"
+    },
+    {
+      "name": "exec",
+      "code": "text(await tools.researcher_capture_command({job_id:\"3b5425cc-dbb3-45fb-8a3e-b3e03853fb62\",operation_key:\"capture-code-source-45f3859f\"}));\n"
+    }
+  ],
+  "admissions_sent": 1,
+  "peers_closed": 5,
+  "unrevoked_grants": 0,
+  "owned_backend_terminal": true,
+  "service_exit": -15,
+  "native_result": null,
+  "limit_kind": "tokens",
+  "limits": {
+    "max_answer_bytes": 12000,
+    "max_observed_tokens": 120000,
+    "max_tool_calls": 20,
+    "max_turns": 1,
+    "no_progress_seconds": 90,
+    "wall_seconds": 180
+  },
+  "interpretation": "Acquisition did not compose as directed: catalog discovery, evidence acquisition, output reading, then code capture consumed four model rounds; no finding/summary/proposal/final explanation. Instruction guidance has no demonstrated efficacy here.",
+  "human_comprehension": null
+}
