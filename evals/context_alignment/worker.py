@@ -9,14 +9,16 @@ import time
 from pathlib import Path
 
 
-def bind_policy(policy, registered_task_type):
-    """Bind a frozen evaluation policy to one research capability; reject cross-profile dispatch."""
-    if registered_task_type not in ('investigation', 'research', 'plan', 'review'):
-        raise ValueError('Unsupported evaluation task type')
+def bind_policy(policy, registered_task_type, *, execution_kind='research'):
+    """Bind frozen bytes to one exact admitted capability; no evaluation can widen a role's authority."""
+    allowed = {('research', task) for task in ('investigation', 'research', 'plan', 'review')}
+    allowed.update({('development', 'code'), ('code_review', 'code'), ('finding_review', 'research')})
+    if (execution_kind, registered_task_type) not in allowed:
+        raise ValueError('Unsupported evaluation capability and task type')
 
     def instructions(kind, task_type, *, checks=(), limits=None):
         """Return exact registered bytes, without adding live policy/budgets, only for the selected profile."""
-        if (kind, task_type) != ('research', registered_task_type):
+        if (kind, task_type) != (execution_kind, registered_task_type):
             raise ValueError('Evaluation policy cannot override another capability')
         return policy.decode()
 
@@ -31,7 +33,8 @@ def main():
     parser.add_argument('--sha256',required=True)
     parser.add_argument('--port',type=int,required=True)
     parser.add_argument('--gate',action='store_true')
-    parser.add_argument('--task-type', choices=('investigation', 'research', 'plan', 'review'), default='investigation')
+    parser.add_argument('--task-type', choices=('investigation', 'research', 'plan', 'review', 'code'), default='investigation')
+    parser.add_argument('--execution-kind', choices=('research', 'development', 'code_review', 'finding_review'), default='research')
     args=parser.parse_args()
     policy=args.policy.read_bytes()
     if hashlib.sha256(policy).hexdigest()!=args.sha256:
@@ -61,7 +64,7 @@ def main():
                     await asyncio.sleep(.05)
         return response
 
-    owned_runtime.build_instructions=bind_policy(policy, args.task_type)
+    owned_runtime.build_instructions=bind_policy(policy, args.task_type, execution_kind=args.execution_kind)
     ProjectTools.call=record_call
     import uvicorn
     from backend.api.main import create_app

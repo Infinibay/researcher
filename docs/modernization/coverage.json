@@ -2829,17 +2829,23 @@
         "docs/modernization/atomic-planning-review.md",
         "docs/modernization/communication-flow-review.md",
         "docs/modernization/c10-independent-review.md",
-        "docs/modernization/interaction-human-review.json"
+        "docs/modernization/interaction-human-review.json",
+        "docs/modernization/development-communication-review.md",
+        "docs/modernization/development-communication-results.json",
+        "docs/modernization/development-communication-live.json",
+        "docs/modernization/development-communication-responses.json",
+        "evals/profile_communication/development.py"
       ],
       "remaining": [
         "Observe human comprehension, useful correction and adaptation on a recognizable task with purpose, data relationships and input/output framing; U08 is not accepted.",
         "Evaluate the real-UI communication contract for long waits, recoverable failures and partial results, reusing existing persistence/Stop evidence.",
-        "New preregistered before/after communication comparisons for development, code_review and finding_review; historical real reviewer turns already exist.",
+        "New preregistered before/after communication comparisons for code_review and finding_review; historical real reviewer turns already exist.",
         "Broader scientific material/questions remain unrepresented; preserve the primary-abstract frozen five-pass/one-partial result instead of rerunning to improve its score."
       ],
       "context_comparison_observed": "7 paired cases:2 development/5 reserved;16 Codex subscription turns with actual published Ken, matching substantive inputs/model/catalog and exact delivered policies. Initial no-dispatch context-version failure and development receipt-identity amendment retained.19 directed tests pass; human measures unknown.",
       "later_bounded_observations": "Later bounded development observations: catalog4 audit346386/350000 and weighted means305543/350000 delivered; aggregate/individual distinction explicit. Catalog6 atomic plan/explanation81685/120000 delivered. Material-question/continuity flow and C10 independently useful50EUR delivery observed. Not new reserved comparisons, final-policy general efficacy or human acceptance; original failures preserved.",
-      "historical_catalog3_profile_observations": "4 paired synthetic cases/8 actual subscription+Ken turns;2pairs deliver both explanations. Catalog3 planning exceeds120000observedtokens after saving a proposal; catalog3 audit starts21tools with20allowed after saving a draft, no final delivery. All services/peers closed; all controls match after retained cutoff-alias amendment. Candidate weighted-mean report makes an unsupported per-batch claim. No causal superiority or human-comprehension claim."
+      "historical_catalog3_profile_observations": "4 paired synthetic cases/8 actual subscription+Ken turns;2pairs deliver both explanations. Catalog3 planning exceeds120000observedtokens after saving a proposal; catalog3 audit starts21tools with20allowed after saving a draft, no final delivery. All services/peers closed; all controls match after retained cutoff-alias amendment. Candidate weighted-mean report makes an unsupported per-batch claim. No causal superiority or human-comprehension claim.",
+      "development_comparison_observed": "One new purposive native development pair, two actual subscription+published-Ken turns. Same original request/source/six tests/Git base/input/catalog/model-effort controls verified. Both deliver private CSV candidates and Spanish explanations; six named tests per arm pass, original/test/listing unchanged; peers67/65closed, grants0. Historical231480/current205048 observed tokens. Not held-out, causal superiority, human acceptance or independent host checks."
     },
     "prompt_inventory": {
       "status": "in_progress",
@@ -2891,21 +2897,27 @@
         "docs/modernization/delivery-budget-responses.json",
         "docs/modernization/atomic-planning-review.md",
         "docs/modernization/c10-independent-review.md",
-        "docs/modernization/interaction-human-review.json"
+        "docs/modernization/interaction-human-review.json",
+        "docs/modernization/development-communication-review.md",
+        "docs/modernization/development-communication-results.json",
+        "docs/modernization/development-communication-live.json",
+        "docs/modernization/development-communication-responses.json",
+        "evals/profile_communication/development.py"
       ],
       "implemented": "Current static semantic/source-consumer review:322owned Python files,85syntax-selected candidates,85current decisions,0stale and0unreviewed.68explicit delta reviews against matched dd1be91 source/consumer hashes,17unchanged. Catalogue9 and historic identities preserved. No new generation or human-comprehension acceptance.",
       "remaining": [
         "Static inventory/source-consumer review is complete for the recorded cut; revalidate changed dependencies only, not all prompts without a delta.",
         "Observe human comprehension, useful correction and adaptation on a recognizable task with purpose, data relationships and input/output framing; U08 is not accepted.",
         "Evaluate the real-UI communication contract for long waits, recoverable failures and partial results, reusing existing persistence/Stop evidence.",
-        "New preregistered before/after communication comparisons for development, code_review and finding_review; historical real reviewer turns already exist.",
+        "New preregistered before/after communication comparisons for code_review and finding_review; historical real reviewer turns already exist.",
         "Broader scientific material/questions remain unrepresented; preserve the primary-abstract frozen five-pass/one-partial result instead of rerunning to improve its score."
       ],
       "context_comparison_observed": "7 paired cases:2 development/5 reserved;16 Codex subscription turns with actual published Ken, matching substantive inputs/model/catalog and exact delivered policies. Initial no-dispatch context-version failure and development receipt-identity amendment retained.19 directed tests pass; human measures unknown.",
       "historical_implementation_snapshot": "Catalog3 unchanged;83 candidates/287 files with83 current static decisions after69 explicit revalidations and14 unchanged reviews.516 historical identities preserved. Seven actual profile hashes/sizes verified; evaluator version metadata corrected.45 directed source cases pass, including four initially skipped and then run with existing offline semantic assets. No new LLM evaluation or human acceptance.",
       "static_review_limits": "Current85candidate/source-direct-consumer review is complete atd278653, not exhaustive dynamic calls or isolated efficacy. Future source/consumer changes need delta review. Existing paired results, scientific frozen5pass1partial and U08/human remain separately bounded.",
       "later_bounded_observations": "Later bounded development observations: catalog4 audit346386/350000 and weighted means305543/350000 delivered; aggregate/individual distinction explicit. Catalog6 atomic plan/explanation81685/120000 delivered. Material-question/continuity flow and C10 independently useful50EUR delivery observed. Not new reserved comparisons, final-policy general efficacy or human acceptance; original failures preserved.",
-      "historical_catalog3_profile_observations": "4 paired synthetic cases/8 actual subscription+Ken turns;2pairs deliver both explanations. Catalog3 planning exceeds120000observedtokens after saving a proposal; catalog3 audit starts21tools with20allowed after saving a draft, no final delivery. All services/peers closed; all controls match after retained cutoff-alias amendment. Candidate weighted-mean report makes an unsupported per-batch claim. No causal superiority or human-comprehension claim."
+      "historical_catalog3_profile_observations": "4 paired synthetic cases/8 actual subscription+Ken turns;2pairs deliver both explanations. Catalog3 planning exceeds120000observedtokens after saving a proposal; catalog3 audit starts21tools with20allowed after saving a draft, no final delivery. All services/peers closed; all controls match after retained cutoff-alias amendment. Candidate weighted-mean report makes an unsupported per-batch claim. No causal superiority or human-comprehension claim.",
+      "development_comparison_observed": "One new purposive native development pair, two actual subscription+published-Ken turns. Same original request/source/six tests/Git base/input/catalog/model-effort controls verified. Both deliver private CSV candidates and Spanish explanations; six named tests per arm pass, original/test/listing unchanged; peers67/65closed, grants0. Historical231480/current205048 observed tokens. Not held-out, causal superiority, human acceptance or independent host checks."
     },
     "context_evals": {
       "status": "in_progress",
@@ -2978,16 +2990,22 @@
         "docs/modernization/atomic-planning-review.md",
         "docs/modernization/communication-flow-review.md",
         "docs/modernization/c10-independent-review.md",
-        "docs/modernization/interaction-human-review.json"
+        "docs/modernization/interaction-human-review.json",
+        "docs/modernization/development-communication-review.md",
+        "docs/modernization/development-communication-results.json",
+        "docs/modernization/development-communication-live.json",
+        "docs/modernization/development-communication-responses.json",
+        "evals/profile_communication/development.py"
       ],
       "remaining": [
         "Observe human comprehension, useful correction and adaptation on a recognizable task with purpose, data relationships and input/output framing; U08 is not accepted.",
         "Evaluate the real-UI communication contract for long waits, recoverable failures and partial results, reusing existing persistence/Stop evidence.",
-        "New preregistered before/after communication comparisons for development, code_review and finding_review; historical real reviewer turns already exist.",
+        "New preregistered before/after communication comparisons for code_review and finding_review; historical real reviewer turns already exist.",
         "Broader scientific material/questions remain unrepresented; preserve the primary-abstract frozen five-pass/one-partial result instead of rerunning to improve its score."
       ],
       "context_comparison_observed": "7 paired cases:2 development/5 reserved;16 Codex subscription turns with actual published Ken, matching substantive inputs/model/catalog and exact delivered policies. Initial no-dispatch context-version failure and development receipt-identity amendment retained.19 directed tests pass; human measures unknown.",
-      "later_bounded_observations": "Later bounded development observations: catalog4 audit346386/350000 and weighted means305543/350000 delivered; aggregate/individual distinction explicit. Catalog6 atomic plan/explanation81685/120000 delivered. Material-question/continuity flow and C10 independently useful50EUR delivery observed. Not new reserved comparisons, final-policy general efficacy or human acceptance; original failures preserved."
+      "later_bounded_observations": "Later bounded development observations: catalog4 audit346386/350000 and weighted means305543/350000 delivered; aggregate/individual distinction explicit. Catalog6 atomic plan/explanation81685/120000 delivered. Material-question/continuity flow and C10 independently useful50EUR delivery observed. Not new reserved comparisons, final-policy general efficacy or human acceptance; original failures preserved.",
+      "development_comparison_observed": "One new purposive native development pair, two actual subscription+published-Ken turns. Same original request/source/six tests/Git base/input/catalog/model-effort controls verified. Both deliver private CSV candidates and Spanish explanations; six named tests per arm pass, original/test/listing unchanged; peers67/65closed, grants0. Historical231480/current205048 observed tokens. Not held-out, causal superiority, human acceptance or independent host checks."
     },
     "data_migrations": {
       "status": "in_progress",
@@ -5755,19 +5773,25 @@
         "docs/modernization/atomic-planning-review.md",
         "docs/modernization/communication-flow-review.md",
         "docs/modernization/c10-independent-review.md",
-        "docs/modernization/interaction-human-review.json"
+        "docs/modernization/interaction-human-review.json",
+        "docs/modernization/development-communication-review.md",
+        "docs/modernization/development-communication-results.json",
+        "docs/modernization/development-communication-live.json",
+        "docs/modernization/development-communication-responses.json",
+        "evals/profile_communication/development.py"
       ],
       "remaining": [
         "Observe human comprehension, useful correction and adaptation on a recognizable task with purpose, data relationships and input/output framing; U08 is not accepted.",
         "Evaluate the real-UI communication contract for long waits, recoverable failures and partial results, reusing existing persistence/Stop evidence.",
-        "New preregistered before/after communication comparisons for development, code_review and finding_review; historical real reviewer turns already exist.",
+        "New preregistered before/after communication comparisons for code_review and finding_review; historical real reviewer turns already exist.",
         "Broader scientific material/questions remain unrepresented; preserve the primary-abstract frozen five-pass/one-partial result instead of rerunning to improve its score."
       ],
       "limitations": [
         "Purposive cases and previously observed development regressions, not population or causal efficacy.",
         "Later receipts do not amend original controls/scores or independently establish final-policy general efficacy, global-suite success or page/human acceptance."
       ],
-      "later_bounded_observations": "Later bounded development observations: catalog4 audit346386/350000 and weighted means305543/350000 delivered; aggregate/individual distinction explicit. Catalog6 atomic plan/explanation81685/120000 delivered. Material-question/continuity flow and C10 independently useful50EUR delivery observed. Not new reserved comparisons, final-policy general efficacy or human acceptance; original failures preserved."
+      "later_bounded_observations": "Later bounded development observations: catalog4 audit346386/350000 and weighted means305543/350000 delivered; aggregate/individual distinction explicit. Catalog6 atomic plan/explanation81685/120000 delivered. Material-question/continuity flow and C10 independently useful50EUR delivery observed. Not new reserved comparisons, final-policy general efficacy or human acceptance; original failures preserved.",
+      "development_comparison_observed": "One new purposive native development pair, two actual subscription+published-Ken turns. Same original request/source/six tests/Git base/input/catalog/model-effort controls verified. Both deliver private CSV candidates and Spanish explanations; six named tests per arm pass, original/test/listing unchanged; peers67/65closed, grants0. Historical231480/current205048 observed tokens. Not held-out, causal superiority, human acceptance or independent host checks."
     },
     "observed_delivery_budget": {
       "status": "in_progress",
@@ -6575,6 +6599,26 @@
         "Directed220unique current source case outcomes and43installed; not new whole-suite green, page or human acceptance",
         "Legacy observations without policy require refreshed /code; polish DD147 deferred",
         "No new subscription inference; native generation/Ken controlled"
+      ]
+    },
+    "development_communication_evaluation": {
+      "status": "complete",
+      "scope": "One preregistered purposive development-profile comparison, with matched substantive controls and preserved original outcomes; this does not close general communication or U08.",
+      "evidence": [
+        "docs/modernization/development-communication-review.md",
+        "docs/modernization/development-communication-results.json",
+        "docs/modernization/development-communication-live.json",
+        "docs/modernization/development-communication-responses.json",
+        "evals/profile_communication/development.py"
+      ],
+      "real_subscription_turns": 2,
+      "source_checks_passed": 32,
+      "human_comprehension": null,
+      "limits": [
+        "No representativeness or causal superiority claim.",
+        "No independent host checks configured; actual six-test receipts verified separately.",
+        "Incidental bytecode and import ordering deferred DD151.",
+        "Other reviewer profiles, real-UI journeys, human adaptation and final global suite remain in their parent scopes."
       ]
     }
   }

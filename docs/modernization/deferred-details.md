@@ -1341,3 +1341,15 @@ bloque sí existen. Después de las capacidades principales, revisar enlaces de
 evidencia a código retirado y asociarlos a su commit histórico o sucesor real,
 conservando los recibos originales. No borrar evidencia ni inferir que una prueba
 histórica no ocurrió porque su evaluador se haya retirado.
+
+## DD151 — bytecode incidental en el caso de comunicación de desarrollo
+
+Ambos candidatos del ensayo CSV incluyen dos archivos `__pycache__/*.pyc`, creados
+al ejecutar unittest en una fuente sintética sin reglas de ignore. El código y las
+seis pruebas cumplen el contrato; los originales y tests se conservan. Mantener
+los diffs binarios y recibos de esos intentos. Para futuros casos, declarar antes
+de registrarlos si se omite bytecode o se comprueba la limpieza del candidato.
+No editar ni repetir resultados históricos para presentar un diff más limpio.
+El mismo bloque conserva seis avisos I001 de orden de imports en los archivos
+previos del evaluador; el módulo nuevo no tiene avisos. Pulirlos al final sin
+reinterpretar los hashes históricos de los scripts usados en el ensayo.

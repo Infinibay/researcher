@@ -1,5 +1,36 @@
 # Comunicación en planificación, ciencia y auditoría
 
+La [conciliación vigente](../../docs/modernization/communication-evidence-reconciliation.md)
+separa los fallos históricos descritos aquí de sus regresiones posteriores.
+
+## Comparación adicional de desarrollo
+
+`development.py` registra un par nuevo sobre exportación CSV. La capacidad es
+desarrollo real en una copia privada: no se inyecta ese prompt en una tarea de
+investigación con herramientas incompatibles. Ambas políticas reciben el mismo
+contrato de entrada/salida, código, seis pruebas, base Git, catálogo, modelo y
+límites. La política anterior es el texto histórico completo; no se atribuye
+una diferencia a una frase aislada ni se llama reservada a esta muestra.
+
+```bash
+python -m evals.profile_communication.development --prepare \
+  --assets /ruta/recursos-host.json --output /ruta/nueva
+python -m evals.profile_communication.development --live \
+  --assets /ruta/recursos-host.json --output /ruta/nueva
+```
+
+La preparación congela fuente, pruebas, petición, criterios, políticas y hashes
+del evaluador antes de admitir un turno. Máximo dos turnos, uno por brazo;
+180 segundos, 20 herramientas y 350000 tokens observados por brazo, o los
+límites menores del operador. Sin comprobaciones independientes del host
+configuradas: conservar por separado las pruebas que el agente efectivamente
+ejecute. No se permite aceptar/publicar ni modificar el repositorio original.
+Un brazo ya iniciado bloquea replay; un fallo conserva sus recibos. Comprensión
+y esfuerzo humanos siguen `null`. Los resultados se registran después de observar
+el cierre original; esta descripción no afirma que hayan pasado.
+
+## Comparaciones históricas de planificación, ciencia y auditoría
+
 Este ensayo extiende el evaluador instalado de `context_alignment`: mismo
 runtime/suscripción, herramientas, modelo/esfuerzo y material por par; sólo cambia
 la política de desarrollador. No implementa un loop de inferencia nuevo.

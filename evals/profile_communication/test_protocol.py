@@ -6,6 +6,89 @@ import json
 import pytest
 
 
+def test_development_registration_freezes_source_tests_and_lower_operator_limits(tmp_path):
+    """A development comparison must freeze its input/output contract without raising account or execution ceilings."""
+    from evals.profile_communication.development import register
+    from evals.context_alignment.protocol import load_registered
+
+    assets = tmp_path / 'assets.json'
+    assets.write_text(json.dumps({'limits': {'wall_seconds': 100, 'max_tool_calls': 12},
+                                 'project_token_limit': 100000}))
+    root = tmp_path / 'development'
+    register(root, assets)
+    frozen = load_registered(root)
+    assert frozen['execution_kind'] == 'development'
+    assert frozen['task_type'] == 'code'
+    assert frozen['maximum_model_turns'] == 2
+    assert frozen['workspace_files'] == ['evidence.py', 'test_evidence.py']
+    assert frozen['limits']['wall_seconds'] == 100
+    assert frozen['limits']['max_tool_calls'] == 12
+    assert frozen['limits']['max_observed_tokens'] == 100000
+    assert frozen['human_comprehension'] is None
+    assert frozen['human_effort_seconds'] is None
+    (root / 'test_evidence.py').write_text('Changed after registration.')
+    with pytest.raises(ValueError, match='Registered input changed'):
+        load_registered(root)
+
+
+def test_development_fixture_has_identical_git_base_and_preserves_registered_bytes(tmp_path):
+    """Fresh arm directories must not introduce different Git bases or accidentally retain the invoice challenge."""
+    from types import SimpleNamespace
+    from evals.profile_communication.development import prepare_workspace, register
+
+    assets = tmp_path / 'assets.json'
+    assets.write_text('{}')
+    root = tmp_path / 'study'
+    protocol = register(root, assets)
+    bases = []
+    for name in ['baseline', 'candidate']:
+        workspace = tmp_path / name
+        workspace.mkdir()
+        for file in ['invoice.py', 'test_invoice.py']:
+            (workspace / file).write_text('Original native_trial fixture.')
+        bases.append(prepare_workspace(SimpleNamespace(workspace=workspace), root, protocol))
+        assert (workspace / 'evidence.py').read_bytes() == (root / 'evidence.py').read_bytes()
+        assert (workspace / 'test_evidence.py').read_bytes() == (root / 'test_evidence.py').read_bytes()
+        assert not (workspace / 'test_invoice.py').exists()
+    assert bases[0] == bases[1]
+    with pytest.raises(FileExistsError, match='fresh'):
+        prepare_workspace(SimpleNamespace(workspace=workspace), root, protocol)
+
+
+async def test_started_development_comparison_cannot_replay_even_before_reading_assets(tmp_path):
+    """A retained first arm, including a partial failed one, blocks all new admissions under that registration."""
+    from evals.profile_communication.development import register, run
+
+    assets = tmp_path / 'assets.json'
+    assets.write_text('{}')
+    root = tmp_path / 'study'
+    register(root, assets)
+    (root / 'development_csv-baseline').mkdir()
+    assets.unlink()
+    with pytest.raises(FileExistsError, match='original receipts'):
+        await run(root, assets)
+
+
+@pytest.mark.parametrize('kind,task', [
+    ('development', 'code'), ('code_review', 'code'), ('finding_review', 'research'),
+])
+def test_frozen_policy_is_bound_to_one_explicit_native_capability(kind, task):
+    """A paired native evaluation cannot inject another role's instructions into a differently authorized turn."""
+    from evals.context_alignment.worker import bind_policy
+
+    bound = bind_policy(b'Frozen capability policy.', task, execution_kind=kind)
+    assert bound(kind, task) == 'Frozen capability policy.'
+    for other_kind, other_task in [
+        ('research', 'research'), ('development', 'code'), ('code_review', 'code'),
+        ('finding_review', 'research'), ('remote_publication', 'code'),
+    ]:
+        if (other_kind, other_task) != (kind, task):
+            with pytest.raises(ValueError, match='another capability'):
+                bound(other_kind, other_task)
+    with pytest.raises(ValueError, match='Unsupported'):
+        bind_policy(b'Invalid pairing.', 'plan', execution_kind=kind)
+
+
 def test_budget_regression_selection_freezes_only_one_attempt_and_honors_lower_operator_limits(tmp_path):
     """A targeted planning regression cannot silently run other profiles or enlarge the operator's limits."""
     from evals.profile_communication.delivery_budget import register

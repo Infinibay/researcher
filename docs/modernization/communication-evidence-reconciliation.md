@@ -29,8 +29,9 @@ ni cuota restante. Tampoco es necesario repetirlos para volver a demostrar lo mi
   una tarea reconocible, explicar objetivo y ejemplo de entrada/salida, y permitir
   una corrección útil; evitar otro cuestionario abstracto. La adaptación posterior
   también necesita observarse. [Registro humano](interaction-human-review.json).
-- **Comparaciones de comunicación:** faltan casos nuevos antes/después para
-  `development`, `code_review` y `finding_review`. Los revisores sí tienen turnos
+- **Comparaciones de comunicación:** el [par de desarrollo](development-communication-review.md) ya se ejecutó con
+  ambos resultados entregados y controles iguales; faltan casos nuevos antes/después
+  para `code_review` y `finding_review`. Los revisores sí tienen turnos
   funcionales reales históricos: [código](native-code-review-live.json) y
   [hallazgos](native-review-live.json). Eso no es una comparación de comunicación
   bajo la política final ni una prueba de calidad general.

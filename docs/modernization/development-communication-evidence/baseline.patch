@@ -1,0 +1,97 @@
+diff --git a/__pycache__/evidence.cpython-314.pyc b/__pycache__/evidence.cpython-314.pyc
+new file mode 100644
+index 0000000000000000000000000000000000000000..44bff5f4fffdabd24b575b5be80a8ca67746cf7b
+GIT binary patch
+literal 1286
+zcmdPq<K<#tU|_h^`625o69dCz5C?{tpp4II3=9kn3_%Pf3~>xWjGl}oj9{9ngeizg
+zoS}p{h*_MWge8bknL(4K%F`#axI`g8sW`Q$EU_drKd)FJGfyEiub{L<A-^akwMZc`
+zFGV4>q9DJhM4==jHCG|ASfRL}C^a#qI3qQ+M8P>YOra#TqD0RxnGxy&5XH>Ez`)GF
+z!17rF?3x(3To{81l&#F5$yntblv+|+l!xJhl8n^MB8B48f`XjP)D);w$}>wc@=Hq;
+zGV{_>i;6Py(m^f)DND{s%}vzPWW2?alUZD%$#{#sC^b31D5ba<WS814CH<n(JpH27
+z;?%^V<c!oJ-QxVxqU2Ql)UwQ!)V$<Wy@JYHf*`H&$RSb0#=yY9&cMJ>%mens6K?(q
+z?A^8(SR_7!yolmokW#RJtr$U}9|KYV#sRQ+0rMb)B0~^k5R*B`Z43+y1&lE)5OD^E
+z0FXH_4wP182xAOl4q`EfnpD6P#uUH_l|-U~IA9?w&k(~6lR$*G0E3$?1499G5NjB-
+zB_jhvItK%T3_}nbgqOkt;>Ga7^aZiQOv_-zZeJL45UY+9Og#fb7;_LCGT)d9W`aC}
+zw><*`CxaYA7-IlGLI;dx0%a&OXmVD0LQ_O$ihfyQPH8GQg@IyT!N*OZD8F1GH7_MI
+zFTGetp(r&gHMs<o401Dzi$QczYGG++QEG}pc4}p@-Yo`DO2|ts&&kY7y~W6-$#{zo
+z#4JfI%FWD6EXgmr#gv(Hixq55m6mH_at3lbRLCtYE>TF%&nrm;Wr-AUP5`UbWGVuM
+zQxP8n1A`{VEvC%;TO7e9pakjZe~US}xa<~Nc~NFbYSAqY2%TRJPD{7A!azQ9Eh@?{
+zy2X*6S^_bRr3e)Nx7hMaOA1O$ii8*#7;dpa6EH|dO+i7Sh!rF%49SS7sT7pMKnb+C
+z4w6cF`TL{0q8A8V;Z<pHyTdEcAJr8#gKb606<(7Dw;L>6?f#Aa6a25RsN4}!Uf_OB
+zNT-AC1~>nNvMb!O3&c0DT~Rc<BP4S{*7LHE*99K08ytN7{GI$W#1^p3m03`>B7JH7
+z1qt(O92Oth8H9B|a4_%)_1kyaU*?v%z#>xw$}O6#x7g$3Q}UDJ<BJ3t7#NB`F%I^B
+z5y+`48NjL_9^$ac%}*)KNwq7IW?*0dWr$*snh(s3jEpxK{2w!L-DcqY#Ky!Z`Gt#<
+IQ5LKd00$5)JOBUy
+
+literal 0
+HcmV?d00001
+
+diff --git a/__pycache__/test_evidence.cpython-314.pyc b/__pycache__/test_evidence.cpython-314.pyc
+new file mode 100644
+index 0000000000000000000000000000000000000000..ecd91249d103876f0ae9b10bbc4a6eed5a326381
+GIT binary patch
+literal 2816
+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
+
+literal 0
+HcmV?d00001
+
+diff --git a/evidence.py b/evidence.py
+index e4f06d8ff6a9a1951cdf35967c3a5273e1a64c9b..0447f8f1874eaa1ae6d14c5a9bac6d5f71b1a781 100644
+--- a/evidence.py
++++ b/evidence.py
+@@ -1,5 +1,21 @@
+-"""Retain observation order for listing; CSV export is not implemented yet."""
++"""List observations in input order and export them as spreadsheet CSV text."""
++
++import csv
++import io
++
+ 
+ def list_observations(records):
+     """Return observations in their supplied order without inferring their schema."""
+     return list(records)
++
++
++def export_observations(records):
++    """Return id/value CSV with LF row endings, rejecting missing required keys."""
++    output = io.StringIO(newline="")
++    writer = csv.writer(output, lineterminator="\n")
++    writer.writerow(("id", "value"))
++    for record in list_observations(records):
++        if "id" not in record or "value" not in record:
++            raise ValueError("Each observation must contain id and value")
++        writer.writerow((record["id"], record["value"]))
++    return output.getvalue()

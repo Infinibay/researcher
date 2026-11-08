@@ -9424,3 +9424,31 @@ Su cabecera enlaza evidencia vigente en lugar de declarar que aún no hubo model
 Es una corrección documental; no se declara implementación nueva de prompting,
 respuesta generada mejor ni aceptación humana. No requiere otra generación para
 verificar texto/enlaces. Enlaces históricos retirados se anotaron en DD150.
+
+
+## 2026-11-08 — Comparación real de comunicación de desarrollo
+
+[Registro y resultados](development-communication-review.md): dos turnos nuevos
+por suscripción + Ken publicado, gpt-6.1-sol/low, sin replay. Mismo contrato CSV,
+fuente, seis tests, Git base, contexto sustantivo, catálogo y modelo/esfuerzo.
+Ambos entregan candidato y explicación:231480/205048 tokens observados,
+81,104/77,039s. Original/test/listing conservados,67/65peers cerrados,0grants,
+servicios -15; tarea in_progress, ninguna aceptación/publicación. No se confunde
+zero exit de un comando compuesto con seis pruebas: recibo completo de cada test
+verificado. Docstrings ingleses presentes en el módulo nuevo y código de muestra.
+
+Cinco RED iniciales;32comprobaciones dirigidas finales pasan. Una colección falló
+por nombres de módulo repetidos, corregida con import-mode=importlib sin cambios
+al producto. Ruff deja6I001 en archivos previos y0en el nuevo; orden de imports y
+bytecode incidental del candidato se anotan DD151. Registros/diffs originales
+intactos. Sin nueva política, wheel, aceptación humana o suite global.
+
+Ahora faltan comparaciones code_review/finding_review, contrato UI de espera/error/
+parcial y observación/adaptación humana. Ken/ONNX sigue pendiente de preferencia.
+Después docstrings/detalles y controles finales.42/43 escenarios,12/12 páginas por
+alcance. No inferir superioridad ni comprensión de este único par exploratorio.
+
+Bloque14:33:40–14:49:56UTC:16min16s hasta la verificación; checkpoint posterior
+excluido. Dos fallos de comando al exportar recibos (Python del sistema sin httpx y
+uso incorrecto de runpy) se corrigieron usando el entorno CP312; ninguna ejecución
+de modelo repetida ni modificación de sus resultados.

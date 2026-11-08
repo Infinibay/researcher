@@ -24,14 +24,15 @@ def save(path, value):
     path.write_text(json.dumps(value,ensure_ascii=False,indent=2)+'\n')
 
 
-def start_policy(root, output, port, ordinal, *, policy, expected_hash, gate, task_type='investigation'):
+def start_policy(root, output, port, ordinal, *, policy, expected_hash, gate, task_type='investigation', execution_kind='research'):
     """Start one installed evaluation worker and keep its original process handle until actual closure."""
     import httpx
     from evals.operation.host_smoke import stop
 
     log=(output/'service.log').open('w')
     command=[sys.executable,'-I',str(Path(__file__).with_name('worker.py')),'--installation',str(root),
-             '--policy',str(policy),'--sha256',expected_hash,'--port',str(port),'--task-type',task_type]
+             '--policy',str(policy),'--sha256',expected_hash,'--port',str(port),'--task-type',task_type,
+             '--execution-kind',execution_kind]
     if gate:command.append('--gate')
     env={k:v for k,v in os.environ.items() if not k.startswith('INFINIBAY_') and not any(p in k for p in ('API_KEY','TOKEN','SECRET')) and k not in ('PYTHONPATH','CODEX_HOME')}
     process=subprocess.Popen(command,cwd=root/'service',env=env,stdout=log,stderr=subprocess.STDOUT)
@@ -88,12 +89,17 @@ async def run_arm(root, protocol, case, arm, assets_path):
     """Admit each planned turn once in a fresh installation; retain failed trials rather than replaying them."""
     folder=root/(case['id']+'-'+arm)
     if folder.exists():raise FileExistsError('Arm already exists; inspect its original receipt instead of replaying')
+    execution_kind=protocol.get('execution_kind','research')
+    if execution_kind not in ('research','development'):
+        raise ValueError('This runner requires research or development admission; reviewers need exact subjects')
     turns=2 if case.get('live_correction') else 1
     assets=json.loads(assets_path.read_text())
     ceilings={key:min(assets.get('limits',{}).get(key,cap),cap) for key,cap in protocol['limits'].items()}
     assets['limits']={**assets.get('limits',{}),**ceilings}
     assets['project_turn_limit']=turns
     assets['project_token_limit']=min(assets.get('project_token_limit',350000),ceilings['max_observed_tokens']*turns)
+    if execution_kind=='development':
+        assets['development_checks']=[]  # The registered comparison discloses ad hoc checks only.
     private_assets=root/(case['id']+'-'+arm+'-assets.json')
     fd=os.open(private_assets,os.O_WRONLY|os.O_CREAT|os.O_EXCL,0o600)
     with os.fdopen(fd,'w') as out:json.dump(assets,out)
@@ -101,6 +107,9 @@ async def run_arm(root, protocol, case, arm, assets_path):
     trial=prepare(folder,private_assets,live=True,turns=turns,
                   task_type=task_type,task_title=protocol.get('task_title','Context alignment'),task_context=case.get('context',{}))
     (trial.workspace/'evidence.py').write_bytes((root/'evidence.py').read_bytes())
+    if execution_kind=='development':
+        from evals.profile_communication.development import prepare_workspace
+        prepare_workspace(trial,root,protocol)
     if protocol.get('reference_file'):
         data=(root/protocol['reference_file']).read_bytes()
         with closing(sqlite3.connect(trial.database)) as db, db:
@@ -110,7 +119,7 @@ async def run_arm(root, protocol, case, arm, assets_path):
     evidence={'case_id':case['id'],'arm':arm,'status':'running','runs':[],'model_turn_budget':turns,'admissions_sent':0}
     save(folder/'result.json',evidence)
     started=time.monotonic()
-    starter=partial(start_policy,policy=root/(arm+'.txt'),expected_hash=protocol['files'][arm+'.txt'],gate=bool(case.get('live_correction')),task_type=task_type)
+    starter=partial(start_policy,policy=root/(arm+'.txt'),expected_hash=protocol['files'][arm+'.txt'],gate=bool(case.get('live_correction')),task_type=task_type,execution_kind=execution_kind)
     try:
         async with backend(trial,evidence,starter=starter) as (_store,owner,_api,_database):
             async def correct(statement,key):
@@ -126,7 +135,9 @@ async def run_arm(root, protocol, case, arm, assets_path):
                 """Persist intent before one POST so lost replies cannot trigger an automatic second admission."""
                 evidence['admissions_sent']+=1
                 save(folder/'result.json',evidence)
-                response=await owner.post('/api/projects/101/tasks/1001/runs',json={'operation_key':key,'context_version':version,'request':protocol['request_prefix']+request})
+                body={'operation_key':key,'context_version':version,'request':protocol['request_prefix']+request}
+                if execution_kind=='development':body['repository_id']=protocol['repository_id']
+                response=await owner.post('/api/projects/101/tasks/1001/runs',json=body)
                 evidence.setdefault('admission_receipts',[]).append({'status':response.status_code,'body':response.json()})
                 save(folder/'result.json',evidence)
                 response.raise_for_status()
@@ -146,6 +157,13 @@ async def run_arm(root, protocol, case, arm, assets_path):
                 run_id=await admit(case['followup'],version,'registered-corrected')
             evidence['runs'].append(await terminal(owner,run_id))
             evidence.update(observations(trial))
+            if execution_kind=='development':
+                response=await owner.get('/api/projects/101/runs/'+run_id+'/code-result')
+                response.raise_for_status()
+                evidence['code_result']=response.json()
+                evidence['original_source_unchanged']=all((trial.workspace/name).read_bytes()==(root/name).read_bytes() for name in protocol['workspace_files'])
+                if not evidence['original_source_unchanged']:
+                    raise RuntimeError('Development changed the registered original source')
             if evidence['runs'][-1]['status'] not in ('needs_review','waiting_input'):
                 raise RuntimeError('No complete explanation or material question; preserve this arm as failed')
             if evidence['unrevoked_grants'] or any(row['state']!='closed' for row in evidence['peers']):

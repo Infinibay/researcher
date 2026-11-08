@@ -28,7 +28,29 @@ que se pueda comparar el avance; no presentar microajustes como tareas principal
 - Última suite global: `9fb873c`,2210 casos,2178 pasan,31 fallan y1 error de fixture; sin omisiones. La carrera de backup encontrada se corrigió después con40 pruebas instaladas. No se declara una nueva corrida global verde; la referencia `0c8b8d9` queda como evidencia histórica.
 - U01–U07, E01–E12, C01–C10 y D01–D13 quedan comprobados con el alcance de sus matrices; sigue 1 de 43 escenarios amplios sin aceptación completa en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Estado actual: comunicación conciliada; faltan evaluaciones concretas
+## Estado actual: desarrollo comparado; continúan perfiles revisores
+
+[Par de desarrollo](development-communication-review.md), iniciado el bloque a
+**14:33:40 UTC**, verificación cerrada **14:49:56 UTC:16min16s**.
+Dos brazos suman **158,143 s**; preparación/análisis/documentación
+fuera de ese tiempo. Se conservan registro, respuestas y diffs binarios originales.
+
+- Terminado: **12/12 páginas por alcance, 42/43 escenarios**, 85 candidatos a prompt
+ vigentes. Nueva comparación de desarrollo con dos turnos reales: ambas políticas
+ entregan candidato CSV y explicación, seis tests por brazo pasan, originales
+ conservados, controles iguales y procesos cerrados. 32 casos dirigidos pasan.
+- En curso: comparaciones de comunicación de `code_review` y `finding_review`.
+ Los ensayos funcionales históricos de revisores se conservan; la brecha es la
+ comparación bajo políticas registradas, no su primer uso real.
+- Pendiente en orden: esas dos comparaciones; contrato UI de espera/fallo recuperable/
+ parcial y observación humana/adaptación. Distribución Ken/ONNX sigue pendiente
+ de la respuesta ya solicitada. Luego docstrings/detalles, revisión independiente
+ final y una suite global final única. Ciencia adicional exige material/pregunta
+ nuevos si se pretende mayor representatividad, sin repetir para mejorar una nota.
+- Detalles al final: DD145–151 y anteriores. No se afirma superioridad, comprensión
+ humana, lint limpio ni suite global verde. Sin push, merge o despliegue.
+
+## Etapa anterior: comunicación conciliada; faltan evaluaciones concretas
 
 [Revisión con contexto limpio](communication-evidence-reconciliation.md), sin nuevas
 llamadas de modelo ni cambios productivos. Los resultados históricos se conservan.
