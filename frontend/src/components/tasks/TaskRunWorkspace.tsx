@@ -129,7 +129,9 @@ export function TaskRunWorkspace({ projectId, taskId, conversationThreadId, onCo
   const data = workspace.data
   const active = data.runs.find(run => ['queued', 'running', 'cancelling', 'reconciling', 'waiting_input', 'needs_review'].includes(run.status))
   const current = active ?? data.runs[0] ?? null
-  const state = presentRun(current?.status ?? null)
+  // Historical acceptance remains intact while a reopened context permits an explicit new request.
+  const historicalAcceptance = !active && current?.status === 'accepted' && current.context_version < data.context.context_version
+  const state = presentRun(historicalAcceptance ? 'superseded' : current?.status ?? null)
   const supported = data.runtime.supported_task_types.includes(data.context.task.type)
   const closed = ['done', 'cancelled', 'failed'].includes(data.context.task.status)
   const available = data.runtime.configured && supported && !closed

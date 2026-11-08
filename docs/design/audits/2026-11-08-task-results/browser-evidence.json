@@ -1,0 +1,151 @@
+{
+  "status": "passed",
+  "scope": "Synthetic delivered report; actual owner acceptance/change, original receipts and explicit new-request availability",
+  "states": [
+    {
+      "name": "01-original-delivery-input-output",
+      "width": 1440,
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "02-acceptance-committed-reply-lost",
+      "width": 390,
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "03-original-acceptance-recovered",
+      "width": 1440,
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "04-change-committed-reply-lost",
+      "width": 390,
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "05-reopened-context-explicit-new-request",
+      "width": 390,
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "06-original-report-and-historic-acceptance",
+      "width": 1440,
+      "fits": true,
+      "violations": []
+    }
+  ],
+  "acceptances": [
+    {
+      "body": {
+        "operation_key": "4d87f579-0449-4a3f-98b0-a6450086283f",
+        "candidate_id": 1,
+        "candidate_sha256": "6bc25298f93f452fb4f4bf7608162dd45cbd8a14497fe094df89ecb317aea988",
+        "context_version": 1,
+        "review_sha256": "1a98ceb8a7bcd61d923a96964d3e52ccf20d161bb63e6b9943d4b5093b8d49b3",
+        "acknowledge_limits": true,
+        "note": "Decisión sintética para probar el recorrido; no aceptación humana ni científica."
+      },
+      "receipt": {
+        "project_id": 101,
+        "task_id": 1,
+        "run_id": "16b0e550-5737-4861-9740-7c9739532688",
+        "candidate_id": 1,
+        "candidate_sha256": "6bc25298f93f452fb4f4bf7608162dd45cbd8a14497fe094df89ecb317aea988",
+        "context_version": 1,
+        "review_sha256": "1a98ceb8a7bcd61d923a96964d3e52ccf20d161bb63e6b9943d4b5093b8d49b3",
+        "operation_key": "4d87f579-0449-4a3f-98b0-a6450086283f",
+        "actor_source": "paired_owner_action",
+        "owner_note": "Decisión sintética para probar el recorrido; no aceptación humana ni científica.",
+        "acknowledged_limits": true,
+        "accepted_at": 1794128482.3917797,
+        "task_accepted": true,
+        "acceptance_scope": "research_reports",
+        "publication_performed": false,
+        "scientific_confidence": null,
+        "acceptance_id": 1
+      },
+      "status": 200
+    },
+    {
+      "body": {
+        "operation_key": "4d87f579-0449-4a3f-98b0-a6450086283f",
+        "candidate_id": 1,
+        "candidate_sha256": "6bc25298f93f452fb4f4bf7608162dd45cbd8a14497fe094df89ecb317aea988",
+        "context_version": 1,
+        "review_sha256": "1a98ceb8a7bcd61d923a96964d3e52ccf20d161bb63e6b9943d4b5093b8d49b3",
+        "acknowledge_limits": true,
+        "note": "Decisión sintética para probar el recorrido; no aceptación humana ni científica."
+      },
+      "receipt": {
+        "acceptance_scope": "research_reports",
+        "accepted_at": 1794128482.3917797,
+        "acknowledged_limits": true,
+        "actor_source": "paired_owner_action",
+        "candidate_id": 1,
+        "candidate_sha256": "6bc25298f93f452fb4f4bf7608162dd45cbd8a14497fe094df89ecb317aea988",
+        "context_version": 1,
+        "operation_key": "4d87f579-0449-4a3f-98b0-a6450086283f",
+        "owner_note": "Decisión sintética para probar el recorrido; no aceptación humana ni científica.",
+        "project_id": 101,
+        "publication_performed": false,
+        "review_sha256": "1a98ceb8a7bcd61d923a96964d3e52ccf20d161bb63e6b9943d4b5093b8d49b3",
+        "run_id": "16b0e550-5737-4861-9740-7c9739532688",
+        "scientific_confidence": null,
+        "task_accepted": true,
+        "task_id": 1,
+        "acceptance_id": 1
+      },
+      "status": 200
+    }
+  ],
+  "corrections": [
+    {
+      "body": {
+        "operation_key": "fcdfb997-3e6d-4dc9-9310-cb83b44940e6",
+        "expected_version": 1,
+        "statement": "Añade una segunda observación de ejemplo y muestra cómo se conserva su orden en el CSV; los ejemplos siguen siendo sintéticos.",
+        "source_kind": "user_message"
+      },
+      "receipt": {
+        "context_version": 2,
+        "application": "recorded_for_next_run",
+        "inference_started": false
+      },
+      "status": 200
+    },
+    {
+      "body": {
+        "operation_key": "fcdfb997-3e6d-4dc9-9310-cb83b44940e6",
+        "expected_version": 1,
+        "statement": "Añade una segunda observación de ejemplo y muestra cómo se conserva su orden en el CSV; los ejemplos siguen siendo sintéticos.",
+        "source_kind": "user_message"
+      },
+      "receipt": {
+        "context_version": 2,
+        "application": "recorded_for_next_run",
+        "inference_started": false
+      },
+      "status": 200
+    }
+  ],
+  "errors": [],
+  "checks": [
+    "original-frozen-input-output-report",
+    "acknowledgement-required",
+    "acceptance-commit-before-reply-loss",
+    "exact-acceptance-receipt-after-reload",
+    "closed-current-acceptance-blocks-new-work",
+    "change-commit-before-reply-loss",
+    "exact-change-receipt-after-reload",
+    "historic-acceptance-retained",
+    "current-context-two-original-context-one",
+    "explicit-new-request-enabled-never-sent",
+    "original-frozen-report-retained",
+    "no-page-errors-or-regional-axe-violations"
+  ]
+}

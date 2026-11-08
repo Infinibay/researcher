@@ -9154,3 +9154,13 @@ rollback, proyectos y borrado protegidos.58definiciones Python documentadas.
 Revisión limpia parcial registra asimetría de admisión manual como principal
 pendiente, sin inventar intención universal.8/12páginas y41/43escenarios.
 Sigue resultado→aceptar→pedir cambios→nuevo trabajo; detalles DD140 al final.
+
+## 2026-11-08 — aceptación histórica y tarea reabierta
+
+Baseeba4e97; [recorrido](task-reopen-review.md):1RED→70UI/157contratos verdes,
+tipos/build;6estados/12checks instalados. Aceptación y petición de cambios reales
+con respuesta perdida/recarga recuperan originales. Contexto1→2sin nuevo modelo;
+informe/aceptación conservados, nueva solicitud habilitada. Backend sin cambio.
+8/12páginas,41/43escenarios. Contrato manual y dependientes siguen principales;
+detallesDD141al final. La respuesta del usuario no se trata como comprensión
+validada ni se le repite una pregunta abstracta.

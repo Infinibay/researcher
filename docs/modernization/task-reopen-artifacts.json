@@ -1,0 +1,21 @@
+{
+  "base_commit": "eba4e97",
+  "files": [
+    {
+      "path": "frontend/src/components/tasks/TaskRunWorkspace.tsx",
+      "sha256": "f55286e8a28e2b6982f7732606431b5ae3c74450c86451a848503b175280a0e4"
+    },
+    {
+      "path": "frontend/tests/ui/task-reopened-work.test.tsx",
+      "sha256": "c57bc1aab98c5b077d076c790fffae8c80dd231b12893122a316b472cd962d43"
+    },
+    {
+      "path": "frontend/tests/task-results.e2e.mjs",
+      "sha256": "ee7dd7eda58c1d5295fff35379961348933f4ca3625043d7f4fd942dbd3136c8"
+    },
+    {
+      "path": "evals/operation/task_results_page.py",
+      "sha256": "d641c9408d3994dd40af2a470fa50a294902c8395be94c50c46831903b924f67"
+    }
+  ]
+}

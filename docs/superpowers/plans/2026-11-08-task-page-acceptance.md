@@ -134,3 +134,14 @@ proyecto y retiro de autoridad protegidos. No se acepta toda Tareas aún.
 Siguiente bloque principal: resultado aceptado→pedir cambios→contexto nuevo→
 solicitud nueva habilitada sin perder informe/recibo. La asimetría blocks manual
 queda documentada para resolver después del recorrido. Detalles DD140 al final.
+
+## Resultado y reapertura verificados09:01:45UTC
+
+[Recorrido](../../modernization/task-reopen-review.md):70UI/157contratos verdes,
+6estados/12checks instalados, aceptación y corrección exactas tras recarga.
+La solicitud nueva queda habilitada sin modificar resultado/decisión históricos;
+no se envía otro modelo. Backend sin cambios. Falta resolver contrato manual de
+blocks y propagación al cambiar un padre con hijos activos; no basta quitar la
+condición de pertenencia a plan en _task. Revisar admisión/claim/herramientas/
+aceptación y contexto congelado antes de modificar autoridad. Edición auxiliar
+por navegador también pendiente. Sigue8/12páginas. DetallesDD141al final.

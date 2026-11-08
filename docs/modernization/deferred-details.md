@@ -1219,3 +1219,10 @@ de tipos en [ESLint](task-inspector-eslint.json). Nuevos paneles/hook pasan.
 Las omisiones Python seleccionadas de DD138 quedan resueltas:58definiciones
 documentadas en5módulos. Bundle DD121. Contrato de admisión manual y reapertura
 de trabajo son pendientes principales, no detalles secundarios.
+
+## DD141 — resultado conservado y estilo del evaluador
+
+Densidad y encuadre de lectura histórica (cabecera fija/scroll) se pulen al final.
+El ejemplo muestra propósito, entrada, relación y salida, pero no fue generado ni
+validado por el usuario.2I001 del evaluador en [lista](task-reopen-lint.json);
+[ESLint](task-reopen-eslint.json) seleccionado verde. Bundle DD121.

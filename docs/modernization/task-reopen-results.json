@@ -1,0 +1,29 @@
+{
+  "base_commit": "eba4e97",
+  "ui_tests": {
+    "passed": 70,
+    "files": 20
+  },
+  "contract_tests": 157,
+  "type_check": "passed",
+  "build": "passed",
+  "browser": {
+    "states": 6,
+    "checks": 12,
+    "acceptance_deliveries": 2,
+    "change_deliveries": 2,
+    "service_exit": 143,
+    "actual_model_turns": 0,
+    "synthetic_bound_turn_ids": 1,
+    "dispatches_before": 0,
+    "dispatches_after": 0,
+    "report_sha256": "a0725ef4124ed8b82f65ab6d34bf762e97969c0a47b7072052492a1f6563f5b4"
+  },
+  "documented_evaluator_definitions": 3,
+  "backend_changes": false,
+  "limits": [
+    "Synthetic report/history; no model or human/scientific acceptance",
+    "Real owner HTTP mutations on installed backend; new request enabled but deliberately never sent",
+    "Selected UI/contract tests; no new global backend suite"
+  ]
+}
