@@ -9416,3 +9416,11 @@ registrada como corrección al encuadre, sin inferir comprensión. **42/43 escen
 12/12 páginas por alcance**. Distribución Ken pendiente; luego docstrings/detalles,
 revisión independiente y suite global final. No repetir ciencia para mejorar una
 rúbrica congelada. Sin push, merge ni despliegue.
+
+
+La guía incorpora el encuadre pedido: objetivo, datos/relaciones y entrada/salida
+ilustrativa para la exportación CSV, antes de discutir la estructura desconocida.
+Su cabecera enlaza evidencia vigente en lugar de declarar que aún no hubo modelos.
+Es una corrección documental; no se declara implementación nueva de prompting,
+respuesta generada mejor ni aceptación humana. No requiere otra generación para
+verificar texto/enlaces. Enlaces históricos retirados se anotaron en DD150.

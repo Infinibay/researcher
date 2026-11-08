@@ -1,15 +1,13 @@
 # Comunicación de Researcher con el usuario
 
-Versión 1. Guía de producto para agentes, prompts, estados y conversaciones de
-la interfaz. Su existencia no implica que el motor antiguo ya la aplique:
-la integración y las evaluaciones se siguen en `docs/modernization/coverage.json`.
-
-La política común del catálogo nativo versión2 ya aplica estas distinciones en
-los perfiles del runtime. La prueba de integración conserva el texto exacto enviado;
-eso no prueba que un modelo o una persona lo hayan comprendido. Véanse el
+Guía de producto para agentes, prompts, estados y conversaciones de la interfaz.
+La política común del catálogo nativo vigente incorpora distinciones de evidencia
+y explicación corregible; cada intento conserva el texto exacto enviado.
+La guía también contiene criterios pendientes de evaluación. Su existencia no
+prueba que un modelo o una persona los hayan comprendido. Véanse el
 [inventario revisado](../prompts/inventory.md) y los
-[casos de evaluación](../../evals/prompts/cases.json), todavía sin comparación con
-modelos ni evaluación humana de comprensión.
+[resultados y brechas concretas](../modernization/communication-evidence-reconciliation.md):
+hay comparaciones reales acotadas, pero no aceptación humana de comprensión.
 
 ## Qué debe conseguir cada explicación
 
@@ -52,6 +50,26 @@ saltos injustificados, aunque requiera introducir un concepto nuevo.
 Preferir ejemplos pequeños del problema real. Una metáfora puede ayudar si
 conserva la propiedad que se explica; indicar dónde deja de servir. Retirarla
 si deforma el concepto. No exigir siempre ejemplos, tablas o diagramas.
+
+Antes de pedir una decisión, dar el encuadre que permite tomarla: qué se intenta
+conseguir, qué datos hay y cómo se relacionan con el resultado. En una transformación
+de datos, mostrar entradas y salidas si ayudan. No convertir la evaluación en un
+acertijo sobre una premisa que el agente aún no explicó. Esta precisión responde
+al comentario del usuario: «intentar entender la idea, los datos y como se
+relacionan. Cuales son las entradas y las salidas».
+
+Ejemplo de encuadre para el plan de exportación, **ilustrativo, no datos observados**:
+
+> Queremos convertir observaciones guardadas en un CSV: un archivo de texto con
+> una fila por observación. Si la entrada fuera `[{"id": 1, "value": 12}]`, la salida
+> tendría la cabecera `id,value` y la fila `1,12`. Cada clave se corresponde con una
+> columna y cada observación con una fila. El código examinado permite listar
+> observaciones y conserva su orden, pero no demuestra que estén guardadas con esas
+> dos claves. Antes de implementar la exportación, comprobaríamos su estructura
+> real; el ejemplo no la confirma. La tarea actual sólo propone el plan.
+
+Este ejemplo explica la relación antes de señalar la incertidumbre. Es una revisión
+de la guía; todavía no acredita una respuesta generada mejor ni comprensión humana.
 
 Ejemplo de un fallo de cálculo:
 

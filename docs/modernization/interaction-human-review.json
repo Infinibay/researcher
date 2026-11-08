@@ -17,7 +17,8 @@
     "agent_interpretation": "The evaluation question lacks sufficient problem framing; the user asks for purpose, data relationships and inputs/outputs. This interpretation is not proof of comprehension or a diagnosis of the user.",
     "required_next_evaluation": "Present the goal and a concrete related input/output example before asking for a useful decision; distinguish observed data from invented illustrations. Do not repeat an abstract comprehension quiz.",
     "implemented_in_product": false,
-    "evidence": "docs/modernization/spanish-plan-ken-review.md"
+    "evidence": "docs/modernization/spanish-plan-ken-review.md",
+    "guide_revision": "docs/interaction/communication-guide.md: purpose and data relationship before asking for a decision, with explicitly illustrative observation-to-CSV input/output. Not a generated product response or human acceptance."
   },
   "actual_scientific_followup": {
     "response": "docs/modernization/current-scientific-final-evidence/response.md",
