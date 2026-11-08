@@ -1,0 +1,117 @@
+{
+  "status": "passed",
+  "scope": "Actual installed graph/receipt reads over synthetic domain history; no new execution authorization",
+  "states": [
+    {
+      "name": "01-accepted-prerequisite-and-original-handoff",
+      "width": 1440,
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "02-mobile-evidence-inspector",
+      "width": 390,
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "03-prerequisite-navigation",
+      "width": 1440,
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "04-original-pause-receipt-lost",
+      "width": 390,
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "05-original-pause-recovered-without-dispatch",
+      "width": 1440,
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "06-stale-graph-remains-history",
+      "width": 390,
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "07-plan-acceptance-is-not-execution",
+      "width": 1440,
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "08-cached-read-error-disables-new-authorization",
+      "width": 390,
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "09-project-switch-clears-original-plan",
+      "width": 390,
+      "fits": true,
+      "violations": []
+    }
+  ],
+  "controls": [
+    {
+      "body": {
+        "operation_key": "fixture-original-pause",
+        "manifest_sha256": "8c0bdcbe8a9d0a523b3a9915c037006d784553fdf7f077f5c8af25cfc0767d14",
+        "status": "paused"
+      },
+      "receipt": {
+        "execution_id": "afae52b209164ed38fc6cea5a5bed0bf",
+        "manifest_sha256": "8c0bdcbe8a9d0a523b3a9915c037006d784553fdf7f077f5c8af25cfc0767d14",
+        "operation_key": "fixture-original-pause",
+        "plan_run_id": "c6322f37-da0e-4d3c-8bd3-c29636281263",
+        "project_id": 101,
+        "status": "paused",
+        "task_id": 1
+      },
+      "status": 200
+    },
+    {
+      "body": {
+        "operation_key": "fixture-original-pause",
+        "manifest_sha256": "8c0bdcbe8a9d0a523b3a9915c037006d784553fdf7f077f5c8af25cfc0767d14",
+        "status": "paused"
+      },
+      "receipt": {
+        "execution_id": "afae52b209164ed38fc6cea5a5bed0bf",
+        "manifest_sha256": "8c0bdcbe8a9d0a523b3a9915c037006d784553fdf7f077f5c8af25cfc0767d14",
+        "operation_key": "fixture-original-pause",
+        "plan_run_id": "c6322f37-da0e-4d3c-8bd3-c29636281263",
+        "project_id": 101,
+        "status": "paused",
+        "task_id": 1
+      },
+      "status": 200
+    }
+  ],
+  "readFaults": [
+    "/api/projects/101/workspace"
+  ],
+  "errors": [],
+  "checks": [
+    "real-accepted-graph-two-nodes",
+    "current-accepted-prerequisite-linked",
+    "original-typed-handoff-not-chat-guess",
+    "task-recovery-link-original-scope",
+    "keyboard-focus-on-prerequisite-navigation",
+    "reading-never-authorizes-work",
+    "exact-preexisting-pause-body-key-receipt-after-reload",
+    "local-original-packet-cleared-only-after-ack",
+    "paused-dispatch-distinct-from-physical-closure",
+    "stale-graph-not-current-progress",
+    "accepted-plan-not-execution-authority",
+    "cached-project-error-blocks-new-authorization",
+    "retry-restores-observed-controls",
+    "project-switch-clears-original-selection",
+    "desktop-mobile-no-overflow-or-regional-axe-violations"
+  ]
+}

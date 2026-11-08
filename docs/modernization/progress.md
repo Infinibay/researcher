@@ -9216,3 +9216,12 @@ productora antes de construir IDs/manifest/propuesta. En el evaluador, viewport
 explícito y esperar el cambio de selección antes de teclado; no repetir efectos
 conocidos por un fallo de navegación. Sólo reporte/coverage/tablero al cerrar,
 sin otra capa de informes redundantes por cada comprobación.
+
+## 2026-11-08 — aceptación principal de Ejecución
+
+Base64b6cf3,10:31:26–10:44:29UTC,13min3s hasta verificar/inspeccionar.
+[Alcance](execution-page-review.md):9estados/15checks instalados, mismo recibo de
+pausa tras pérdida/recarga,0dispatches/modelos;19tablas yfuente sin cambio.
+11/12páginas técnicas/delegadas;41/43escenarios. Producto ypaquete sin cambios.
+Continúa Proyectos/AuthorityBusy: variable causal nueva antes de repetir ensayo;
+luego comentarios de tarea, cierre no vacío y gatesglobales. Detalles al final.

@@ -1,0 +1,169 @@
+{
+  "status": "passed",
+  "synthetic_project_data": true,
+  "actual_model_turns": 0,
+  "before": {
+    "table_sha256": {
+      "projects": "ef62d038e06ec8bca568e1ee08fa9ac398301222813b8945432e5f27a3166c74",
+      "tasks": "dfa41f6558080e110216cdcdffc3471a67590c6deb992b021f77736a80bf0197",
+      "task_dependencies": "a99fb888125ec91c9b4dbd63514db55753bfb188d5b3a3d6ee7b4efe549f2642",
+      "task_contexts": "a0856c8b532ad610a28b3b5ca2fa46c7b490d0be59ede00b36b688eb4f1e34a1",
+      "runtime_runs": "14cdf72a3dc253bc994da2cf684a18cc6fd5d263947e9259ec0e8683aa5c0eed",
+      "runtime_attempts": "a928f2cd7bc1bb37f4eb85dcf682308e94fb34d413350996208604c34f0adcfd",
+      "runtime_peers": "972afbbb74c67a74bce433488dcf552d44c791df62e697c43dba5a5aeedf021a",
+      "runtime_commands": "667e4b0b2aec059fade1a8dd9ab0f657360f143255cca269c0615cba69ba2636",
+      "runtime_plan_executions": "7c161bba6b720ca5f89864c055ea4acf04ff6031e95eab6f37dd5702979972b9",
+      "runtime_plan_deliveries": "ae1edbbc164704f7c02cf9f0231824366a70205fa88d8ae445455de31e943055",
+      "runtime_plan_handoffs": "037bef10821bf5b51c50273434fde8d41343bae9d7ba4da844c7d3296f3ad6cf",
+      "runtime_context_causes": "a464241a8dd52db8195e7297c59e217f7bbe53acc10b4681ff705ca5c45f5f8f",
+      "runtime_context_affected": "4d4111eaa5b26cc8f8db11a024beeda500652ca49bf74bdb38c4332c6a8f1de6",
+      "runtime_context_revisions": "e67b0f27d7461420f55e6e60b250aeaa656660a7bca19f3bbbab323044dcd5ec",
+      "tool_grants": "89bd22276cf2a52f78867bb374042d8bab07061e27447ce45078b41482417c4f",
+      "research_reports": "a3fc6d875a1366567e65c763e666b7125c18f5499dd80214214dc0a7863115ec",
+      "artifacts": "a44550c860b87271948f238129e3c93a70a5dcf852d99f2da55f5808d1fdaf5b",
+      "events_log": "c04d329adcf01162bf50dfd9b489c54956c7cb6665db7f9115cc10ebd66cf656",
+      "runtime_inference_dispatches": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "source_sha256": "73132cbd5d3017e9d8c6459ed4c74edab3f5fc2d3926f27f73836373947cb9d8",
+    "runs": [
+      {
+        "id": "0b67baf9-159f-4f95-a78f-ba4e8a10ff5e",
+        "status": "accepted"
+      },
+      {
+        "id": "39e0397f-4df1-494f-89e6-f7434564cc56",
+        "status": "accepted"
+      },
+      {
+        "id": "a450331a-287c-42ca-93cd-8234b5c5a0bf",
+        "status": "accepted"
+      },
+      {
+        "id": "c6322f37-da0e-4d3c-8bd3-c29636281263",
+        "status": "accepted"
+      }
+    ],
+    "peers": [
+      {
+        "kind": "native",
+        "state": "closed"
+      },
+      {
+        "kind": "business",
+        "state": "closed"
+      },
+      {
+        "kind": "native",
+        "state": "closed"
+      },
+      {
+        "kind": "business",
+        "state": "closed"
+      },
+      {
+        "kind": "native",
+        "state": "closed"
+      },
+      {
+        "kind": "business",
+        "state": "closed"
+      },
+      {
+        "kind": "native",
+        "state": "closed"
+      },
+      {
+        "kind": "business",
+        "state": "closed"
+      }
+    ],
+    "dispatches": 0,
+    "synthetic_bound_turn_ids": 4,
+    "integrity": "ok",
+    "foreign_keys": []
+  },
+  "backend": "/home/andres/.codex/worktrees/b09e/researcher/.superpowers/sdd/2026-10-31-actualizacion-proyecto/native-runtime-env/lib/python3.12/site-packages/backend/__init__.py",
+  "web_index_sha256": "5d0fce2aa32342063669ae8f5fc2c476ceb27a8e10b355c26f2b49ff48305091",
+  "browser_exit": 0,
+  "service_exit": 143,
+  "after": {
+    "table_sha256": {
+      "projects": "ef62d038e06ec8bca568e1ee08fa9ac398301222813b8945432e5f27a3166c74",
+      "tasks": "dfa41f6558080e110216cdcdffc3471a67590c6deb992b021f77736a80bf0197",
+      "task_dependencies": "a99fb888125ec91c9b4dbd63514db55753bfb188d5b3a3d6ee7b4efe549f2642",
+      "task_contexts": "a0856c8b532ad610a28b3b5ca2fa46c7b490d0be59ede00b36b688eb4f1e34a1",
+      "runtime_runs": "14cdf72a3dc253bc994da2cf684a18cc6fd5d263947e9259ec0e8683aa5c0eed",
+      "runtime_attempts": "a928f2cd7bc1bb37f4eb85dcf682308e94fb34d413350996208604c34f0adcfd",
+      "runtime_peers": "972afbbb74c67a74bce433488dcf552d44c791df62e697c43dba5a5aeedf021a",
+      "runtime_commands": "667e4b0b2aec059fade1a8dd9ab0f657360f143255cca269c0615cba69ba2636",
+      "runtime_plan_executions": "7c161bba6b720ca5f89864c055ea4acf04ff6031e95eab6f37dd5702979972b9",
+      "runtime_plan_deliveries": "ae1edbbc164704f7c02cf9f0231824366a70205fa88d8ae445455de31e943055",
+      "runtime_plan_handoffs": "037bef10821bf5b51c50273434fde8d41343bae9d7ba4da844c7d3296f3ad6cf",
+      "runtime_context_causes": "a464241a8dd52db8195e7297c59e217f7bbe53acc10b4681ff705ca5c45f5f8f",
+      "runtime_context_affected": "4d4111eaa5b26cc8f8db11a024beeda500652ca49bf74bdb38c4332c6a8f1de6",
+      "runtime_context_revisions": "e67b0f27d7461420f55e6e60b250aeaa656660a7bca19f3bbbab323044dcd5ec",
+      "tool_grants": "89bd22276cf2a52f78867bb374042d8bab07061e27447ce45078b41482417c4f",
+      "research_reports": "a3fc6d875a1366567e65c763e666b7125c18f5499dd80214214dc0a7863115ec",
+      "artifacts": "a44550c860b87271948f238129e3c93a70a5dcf852d99f2da55f5808d1fdaf5b",
+      "events_log": "c04d329adcf01162bf50dfd9b489c54956c7cb6665db7f9115cc10ebd66cf656",
+      "runtime_inference_dispatches": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "source_sha256": "73132cbd5d3017e9d8c6459ed4c74edab3f5fc2d3926f27f73836373947cb9d8",
+    "runs": [
+      {
+        "id": "0b67baf9-159f-4f95-a78f-ba4e8a10ff5e",
+        "status": "accepted"
+      },
+      {
+        "id": "39e0397f-4df1-494f-89e6-f7434564cc56",
+        "status": "accepted"
+      },
+      {
+        "id": "a450331a-287c-42ca-93cd-8234b5c5a0bf",
+        "status": "accepted"
+      },
+      {
+        "id": "c6322f37-da0e-4d3c-8bd3-c29636281263",
+        "status": "accepted"
+      }
+    ],
+    "peers": [
+      {
+        "kind": "native",
+        "state": "closed"
+      },
+      {
+        "kind": "business",
+        "state": "closed"
+      },
+      {
+        "kind": "native",
+        "state": "closed"
+      },
+      {
+        "kind": "business",
+        "state": "closed"
+      },
+      {
+        "kind": "native",
+        "state": "closed"
+      },
+      {
+        "kind": "business",
+        "state": "closed"
+      },
+      {
+        "kind": "native",
+        "state": "closed"
+      },
+      {
+        "kind": "business",
+        "state": "closed"
+      }
+    ],
+    "dispatches": 0,
+    "synthetic_bound_turn_ids": 4,
+    "integrity": "ok",
+    "foreign_keys": []
+  }
+}
