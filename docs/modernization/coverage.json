@@ -2402,12 +2402,17 @@
         "docs/design/audits/2026-11-08-live-wait/report.md",
         "docs/modernization/purpose-framing-review.md",
         "docs/modernization/purpose-framing-results.json",
-        "docs/modernization/purpose-framing-evidence/registration.json"
+        "docs/modernization/purpose-framing-evidence/registration.json",
+        "docs/modernization/u08-delivery-proportionality-review.md",
+        "docs/modernization/composed-investigation-delivery-review.md",
+        "docs/modernization/composed-investigation-delivery-results.json",
+        "backend/tests/runtime/test_investigation_delivery_cell.py"
       ],
       "remaining": [
         "Initial example rejected by the user as unhelpful; revised task-grounded example has no human acceptance yet",
         "Evaluate actual generated explanations and correction/adaptation under final policy; rendering and scripted tests do not establish understanding",
-        "Actual-plan question had insufficient framing per owner feedback; no comprehension acceptance established"
+        "Actual-plan question had insufficient framing per owner feedback; no comprehension acceptance established",
+        "Coarse composed delivery is viable in one real offline code-host cell with authored fixture code; native policy guidance, actual generated budget fit and human acceptance remain unproven. Original failed explanation remains failed."
       ]
     }
   },
