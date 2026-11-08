@@ -1,0 +1,3 @@
+docs/design/audits/2026-11-08-native-zoom/native-zoom-build.log:163: trailing whitespace.
++[plugin builtin:vite-reporter] 
+docs/design/audits/2026-11-08-native-zoom/native-zoom-frontend-tests.log:200: new blank line at EOF.

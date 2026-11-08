@@ -1,0 +1,32 @@
+{"factor":2,"route":"/","failures":0}
+{"factor":2,"route":"/projects","failures":0}
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+ExpectError: expect(received).toBeGreaterThanOrEqual(expected)
+
+Expected: >= 0.99
+Received:    0.9817116477272727
+
+Call Log:
+- Timeout 5000ms exceeded while waiting on the predicate
+    at captureRawStack (/home/andres/.codex/worktrees/b09e/researcher/frontend/node_modules/playwright-core/lib/coreBundle.js:9282:17)
+    at callMatcherAsStep (/home/andres/.codex/worktrees/b09e/researcher/frontend/node_modules/playwright/lib/matchers/expect.js:13316:57)
+    at Object.toBeGreaterThanOrEqual (/home/andres/.codex/worktrees/b09e/researcher/frontend/node_modules/playwright/lib/matchers/expect.js:13308:23)
+    at auditNativeZoom (/home/andres/.codex/worktrees/b09e/researcher/frontend/tests/native-zoom-audit.mjs:183:89)
+    at async file:///home/andres/.codex/worktrees/b09e/researcher/frontend/tests/workspace.e2e.mjs:192:27 {
+  matcherResult: {
+    pass: false,
+    message: 'expect(received).toBeGreaterThanOrEqual(expected)\n' +
+      '\n' +
+      'Expected: >= 0.99\n' +
+      'Received:    0.9817116477272727\n' +
+      '\n' +
+      'Call Log:\n' +
+      '- Timeout 5000ms exceeded while waiting on the predicate',
+    name: 'toBeGreaterThanOrEqual'
+  }
+}
+
+Node.js v24.22.2

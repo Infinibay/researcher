@@ -28,7 +28,28 @@ que se pueda comparar el avance; no presentar microajustes como tareas principal
 - Última suite global: `cb4da17`,2578 casos,2576 pasan y2fallan,0omisiones. Ambos fallos reproducidos por contaminación de entorno de una prueba del lanzador; corrección posterior con3casos dirigidos/22ampliados aprobados. No se declara una nueva corrida completa verde. `9fb873c` y sus31fallos/1error quedan como referencia histórica.
 - U01–U07, E01–E12, C01–C10 y D01–D13 quedan comprobados con el alcance de sus matrices; sigue 1 de 43 escenarios amplios sin aceptación completa en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Estado actual: backend Python documentado y empaquetado; accesibilidad restante
+## Estado actual: zoom nativo comprobado; siguiente lector de pantalla
+
+[Informe](../design/audits/2026-11-08-native-zoom/report.md),
+[resultados](native-zoom-results.json). Entre creación del primer host y recibo
+final baseline:22:06:02,730–22:17:24,488UTC, **11min21,758s**. Preparación previa
+y documentación/checkpoint posteriores aparte.
+
+- Terminado por alcance: doce rutas a200/400% nativos,24estados sin fallos ni Axe,
+ 24desplazamientos con scrollend y24primeros controles de contenido totalmente
+ visibles. Otros24estados1440/320px sin fallos.167contratos/80UI y build pasan.
+ Cabecera con ejecución en fila propia, documento desplazable en ventana corta,
+ foco de ruta revelado y margen de controles. Fallos intermedios retenidos; revisor
+ independiente confirmó la carrera del ensayo PageDown/Tab y el pase corregido.
+- Ahora: preparar y ejecutar una evaluación con lector real. No confundir Axe,
+ árbol accesible o este recorrido de zoom con esa evaluación.
+- Pendientes: lector; JSDoc/C relevantes; U08 humano; decisión Ken/ONNX ya
+ consultada; detalles y paquete/global/revisión independiente finales. La última
+ global sigue2576pass/2fallos con corrección posterior sólo comprobada en22casos.
+- Estado amplio:42/43escenarios y12/12páginas por alcance. Sin nueva global verde,
+ push, merge o despliegue. Cero llamadas de modelo en este bloque.
+
+## Etapa anterior: backend Python documentado y empaquetado
 
 [Informe](all-python-docstrings-review.md), [resultados](all-python-docstrings-results.json).
 Baseline21:15:01UTC, lectura final21:42:02UTC: **27min1s** hasta verificación;

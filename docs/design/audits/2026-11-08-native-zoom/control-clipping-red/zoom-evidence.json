@@ -1,0 +1,3279 @@
+{
+  "status": "failed",
+  "scope": "Native browser zoom; real installed HTTP/SQLite, keyboard, whole-page Axe; not a screen-reader or human comprehension test",
+  "states": [
+    {
+      "factor": 2,
+      "route": "/",
+      "tabs": 2,
+      "before": {
+        "innerWidth": 640,
+        "innerHeight": 468,
+        "outerWidth": 1280,
+        "outerHeight": 1024,
+        "dpr": 2,
+        "rootZoom": "1",
+        "rootTransform": "none",
+        "visualScale": 1,
+        "projectLabelLines": 14,
+        "documentFits": true,
+        "main": {
+          "width": 640,
+          "height": 105.5,
+          "top": 363,
+          "bottom": 468.5,
+          "scrollWidth": 640,
+          "clientWidth": 640,
+          "scrollHeight": 1624,
+          "clientHeight": 106,
+          "scrollTop": 0
+        },
+        "focus": {
+          "tag": "MAIN",
+          "id": "main-content",
+          "inMain": true,
+          "width": 640,
+          "height": 105.5,
+          "visibleFraction": 0.995260663507109,
+          "intersectsViewport": true
+        }
+      },
+      "png": {
+        "width": 1280,
+        "height": 937
+      },
+      "afterKeyboardScroll": {
+        "innerWidth": 640,
+        "innerHeight": 468,
+        "outerWidth": 1280,
+        "outerHeight": 1024,
+        "dpr": 2,
+        "rootZoom": "1",
+        "rootTransform": "none",
+        "visualScale": 1,
+        "projectLabelLines": 14,
+        "documentFits": true,
+        "main": {
+          "width": 640,
+          "height": 105.5,
+          "top": 363,
+          "bottom": 468.5,
+          "scrollWidth": 640,
+          "clientWidth": 640,
+          "scrollHeight": 1663,
+          "clientHeight": 106,
+          "scrollTop": 72
+        },
+        "focus": {
+          "tag": "MAIN",
+          "id": "main-content",
+          "inMain": true,
+          "width": 640,
+          "height": 105.5,
+          "visibleFraction": 0.995260663507109,
+          "intersectsViewport": true
+        }
+      },
+      "contentControlTabs": 15,
+      "contentControlFocus": {
+        "innerWidth": 640,
+        "innerHeight": 468,
+        "outerWidth": 1280,
+        "outerHeight": 1024,
+        "dpr": 2,
+        "rootZoom": "1",
+        "rootTransform": "none",
+        "visualScale": 1,
+        "projectLabelLines": 14,
+        "documentFits": true,
+        "main": {
+          "width": 640,
+          "height": 105.5,
+          "top": 363,
+          "bottom": 468.5,
+          "scrollWidth": 640,
+          "clientWidth": 640,
+          "scrollHeight": 1624,
+          "clientHeight": 106,
+          "scrollTop": 142
+        },
+        "focus": {
+          "tag": "BUTTON",
+          "id": "",
+          "inMain": true,
+          "width": 126.703125,
+          "height": 44,
+          "visibleFraction": 1,
+          "intersectsViewport": true
+        }
+      },
+      "beforeAxeFocus": {
+        "tag": "BUTTON",
+        "id": "",
+        "inMain": true,
+        "width": 126.703125,
+        "height": 44,
+        "visibleFraction": 1,
+        "intersectsViewport": true
+      },
+      "violations": [],
+      "afterAxeFocus": {
+        "tag": "BUTTON",
+        "id": "",
+        "inMain": true,
+        "width": 126.703125,
+        "height": 44,
+        "visibleFraction": 1,
+        "intersectsViewport": true
+      }
+    },
+    {
+      "factor": 2,
+      "route": "/projects",
+      "tabs": 3,
+      "before": {
+        "innerWidth": 640,
+        "innerHeight": 468,
+        "outerWidth": 1280,
+        "outerHeight": 1024,
+        "dpr": 2,
+        "rootZoom": "1",
+        "rootTransform": "none",
+        "visualScale": 1,
+        "projectLabelLines": 14,
+        "documentFits": true,
+        "main": {
+          "width": 640,
+          "height": 105.5,
+          "top": 363,
+          "bottom": 468.5,
+          "scrollWidth": 640,
+          "clientWidth": 640,
+          "scrollHeight": 428,
+          "clientHeight": 106,
+          "scrollTop": 0
+        },
+        "focus": {
+          "tag": "MAIN",
+          "id": "main-content",
+          "inMain": true,
+          "width": 640,
+          "height": 105.5,
+          "visibleFraction": 0.995260663507109,
+          "intersectsViewport": true
+        }
+      },
+      "png": {
+        "width": 1280,
+        "height": 937
+      },
+      "afterKeyboardScroll": {
+        "innerWidth": 640,
+        "innerHeight": 468,
+        "outerWidth": 1280,
+        "outerHeight": 1024,
+        "dpr": 2,
+        "rootZoom": "1",
+        "rootTransform": "none",
+        "visualScale": 1,
+        "projectLabelLines": 14,
+        "documentFits": true,
+        "main": {
+          "width": 640,
+          "height": 105.5,
+          "top": 363,
+          "bottom": 468.5,
+          "scrollWidth": 640,
+          "clientWidth": 640,
+          "scrollHeight": 428,
+          "clientHeight": 106,
+          "scrollTop": 73.5
+        },
+        "focus": {
+          "tag": "MAIN",
+          "id": "main-content",
+          "inMain": true,
+          "width": 640,
+          "height": 105.5,
+          "visibleFraction": 0.995260663507109,
+          "intersectsViewport": true
+        }
+      },
+      "contentControlTabs": 1,
+      "contentControlFocus": {
+        "innerWidth": 640,
+        "innerHeight": 468,
+        "outerWidth": 1280,
+        "outerHeight": 1024,
+        "dpr": 2,
+        "rootZoom": "1",
+        "rootTransform": "none",
+        "visualScale": 1,
+        "projectLabelLines": 14,
+        "documentFits": true,
+        "main": {
+          "width": 640,
+          "height": 105.5,
+          "top": 363,
+          "bottom": 468.5,
+          "scrollWidth": 640,
+          "clientWidth": 640,
+          "scrollHeight": 428,
+          "clientHeight": 106,
+          "scrollTop": 0
+        },
+        "focus": {
+          "tag": "BUTTON",
+          "id": "",
+          "inMain": true,
+          "width": 103.71875,
+          "height": 44,
+          "visibleFraction": 1,
+          "intersectsViewport": true
+        }
+      },
+      "beforeAxeFocus": {
+        "tag": "BUTTON",
+        "id": "",
+        "inMain": true,
+        "width": 103.71875,
+        "height": 44,
+        "visibleFraction": 1,
+        "intersectsViewport": true
+      },
+      "violations": [],
+      "afterAxeFocus": {
+        "tag": "A",
+        "id": "",
+        "inMain": false,
+        "width": 145.046875,
+        "height": 52,
+        "visibleFraction": 1,
+        "intersectsViewport": true
+      }
+    },
+    {
+      "factor": 2,
+      "route": "/epics",
+      "tabs": 4,
+      "before": {
+        "innerWidth": 640,
+        "innerHeight": 468,
+        "outerWidth": 1280,
+        "outerHeight": 1024,
+        "dpr": 2,
+        "rootZoom": "1",
+        "rootTransform": "none",
+        "visualScale": 1,
+        "projectLabelLines": 14,
+        "documentFits": true,
+        "main": {
+          "width": 640,
+          "height": 105.5,
+          "top": 363,
+          "bottom": 468.5,
+          "scrollWidth": 640,
+          "clientWidth": 640,
+          "scrollHeight": 541,
+          "clientHeight": 106,
+          "scrollTop": 0
+        },
+        "focus": {
+          "tag": "MAIN",
+          "id": "main-content",
+          "inMain": true,
+          "width": 640,
+          "height": 105.5,
+          "visibleFraction": 0.995260663507109,
+          "intersectsViewport": true
+        }
+      },
+      "png": {
+        "width": 1280,
+        "height": 937
+      },
+      "afterKeyboardScroll": {
+        "innerWidth": 640,
+        "innerHeight": 468,
+        "outerWidth": 1280,
+        "outerHeight": 1024,
+        "dpr": 2,
+        "rootZoom": "1",
+        "rootTransform": "none",
+        "visualScale": 1,
+        "projectLabelLines": 14,
+        "documentFits": true,
+        "main": {
+          "width": 640,
+          "height": 105.5,
+          "top": 363,
+          "bottom": 468.5,
+          "scrollWidth": 640,
+          "clientWidth": 640,
+          "scrollHeight": 541,
+          "clientHeight": 106,
+          "scrollTop": 73.5
+        },
+        "focus": {
+          "tag": "MAIN",
+          "id": "main-content",
+          "inMain": true,
+          "width": 640,
+          "height": 105.5,
+          "visibleFraction": 0.995260663507109,
+          "intersectsViewport": true
+        }
+      },
+      "contentControlTabs": 1,
+      "contentControlFocus": {
+        "innerWidth": 640,
+        "innerHeight": 468,
+        "outerWidth": 1280,
+        "outerHeight": 1024,
+        "dpr": 2,
+        "rootZoom": "1",
+        "rootTransform": "none",
+        "visualScale": 1,
+        "projectLabelLines": 14,
+        "documentFits": true,
+        "main": {
+          "width": 640,
+          "height": 105.5,
+          "top": 363,
+          "bottom": 468.5,
+          "scrollWidth": 640,
+          "clientWidth": 640,
+          "scrollHeight": 541,
+          "clientHeight": 106,
+          "scrollTop": 11
+        },
+        "focus": {
+          "tag": "BUTTON",
+          "id": "planning-new",
+          "inMain": true,
+          "width": 122.75,
+          "height": 44,
+          "visibleFraction": 1,
+          "intersectsViewport": true
+        }
+      },
+      "beforeAxeFocus": {
+        "tag": "BUTTON",
+        "id": "planning-new",
+        "inMain": true,
+        "width": 122.75,
+        "height": 44,
+        "visibleFraction": 1,
+        "intersectsViewport": true
+      },
+      "violations": [],
+      "afterAxeFocus": {
+        "tag": "BUTTON",
+        "id": "planning-new",
+        "inMain": true,
+        "width": 122.75,
+        "height": 44,
+        "visibleFraction": 1,
+        "intersectsViewport": true
+      }
+    },
+    {
+      "factor": 2,
+      "route": "/tasks",
+      "tabs": 5,
+      "before": {
+        "innerWidth": 640,
+        "innerHeight": 468,
+        "outerWidth": 1280,
+        "outerHeight": 1024,
+        "dpr": 2,
+        "rootZoom": "1",
+        "rootTransform": "none",
+        "visualScale": 1,
+        "projectLabelLines": 14,
+        "documentFits": true,
+        "main": {
+          "width": 640,
+          "height": 105.5,
+          "top": 363,
+          "bottom": 468.5,
+          "scrollWidth": 640,
+          "clientWidth": 640,
+          "scrollHeight": 822,
+          "clientHeight": 106,
+          "scrollTop": 0
+        },
+        "focus": {
+          "tag": "MAIN",
+          "id": "main-content",
+          "inMain": true,
+          "width": 640,
+          "height": 105.5,
+          "visibleFraction": 0.995260663507109,
+          "intersectsViewport": true
+        }
+      },
+      "png": {
+        "width": 1280,
+        "height": 937
+      },
+      "afterKeyboardScroll": {
+        "innerWidth": 640,
+        "innerHeight": 468,
+        "outerWidth": 1280,
+        "outerHeight": 1024,
+        "dpr": 2,
+        "rootZoom": "1",
+        "rootTransform": "none",
+        "visualScale": 1,
+        "projectLabelLines": 14,
+        "documentFits": true,
+        "main": {
+          "width": 640,
+          "height": 105.5,
+          "top": 363,
+          "bottom": 468.5,
+          "scrollWidth": 640,
+          "clientWidth": 640,
+          "scrollHeight": 822,
+          "clientHeight": 106,
+          "scrollTop": 71.5
+        },
+        "focus": {
+          "tag": "MAIN",
+          "id": "main-content",
+          "inMain": true,
+          "width": 640,
+          "height": 105.5,
+          "visibleFraction": 0.995260663507109,
+          "intersectsViewport": true
+        }
+      },
+      "contentControlTabs": 1,
+      "contentControlFocus": {
+        "innerWidth": 640,
+        "innerHeight": 468,
+        "outerWidth": 1280,
+        "outerHeight": 1024,
+        "dpr": 2,
+        "rootZoom": "1",
+        "rootTransform": "none",
+        "visualScale": 1,
+        "projectLabelLines": 14,
+        "documentFits": true,
+        "main": {
+          "width": 640,
+          "height": 105.5,
+          "top": 363,
+          "bottom": 468.5,
+          "scrollWidth": 640,
+          "clientWidth": 640,
+          "scrollHeight": 822,
+          "clientHeight": 106,
+          "scrollTop": 92
+        },
+        "focus": {
+          "tag": "BUTTON",
+          "id": "",
+          "inMain": true,
+          "width": 128.7265625,
+          "height": 44,
+          "visibleFraction": 1,
+          "intersectsViewport": true
+        }
+      },
+      "beforeAxeFocus": {
+        "tag": "BUTTON",
+        "id": "",
+        "inMain": true,
+        "width": 128.7265625,
+        "height": 44,
+        "visibleFraction": 1,
+        "intersectsViewport": true
+      },
+      "violations": [],
+      "afterAxeFocus": {
+        "tag": "BUTTON",
+        "id": "",
+        "inMain": true,
+        "width": 128.7265625,
+        "height": 44,
+        "visibleFraction": 1,
+        "intersectsViewport": true
+      }
+    },
+    {
+      "factor": 2,
+      "route": "/agents",
+      "tabs": 6,
+      "before": {
+        "innerWidth": 640,
+        "innerHeight": 468,
+        "outerWidth": 1280,
+        "outerHeight": 1024,
+        "dpr": 2,
+        "rootZoom": "1",
+        "rootTransform": "none",
+        "visualScale": 1,
+        "projectLabelLines": 14,
+        "documentFits": true,
+        "main": {
+          "width": 640,
+          "height": 105.5,
+          "top": 363,
+          "bottom": 468.5,
+          "scrollWidth": 640,
+          "clientWidth": 640,
+          "scrollHeight": 1235,
+          "clientHeight": 106,
+          "scrollTop": 0
+        },
+        "focus": {
+          "tag": "MAIN",
+          "id": "main-content",
+          "inMain": true,
+          "width": 640,
+          "height": 105.5,
+          "visibleFraction": 0.995260663507109,
+          "intersectsViewport": true
+        }
+      },
+      "png": {
+        "width": 1280,
+        "height": 937
+      },
+      "afterKeyboardScroll": {
+        "innerWidth": 640,
+        "innerHeight": 468,
+        "outerWidth": 1280,
+        "outerHeight": 1024,
+        "dpr": 2,
+        "rootZoom": "1",
+        "rootTransform": "none",
+        "visualScale": 1,
+        "projectLabelLines": 14,
+        "documentFits": true,
+        "main": {
+          "width": 640,
+          "height": 105.5,
+          "top": 363,
+          "bottom": 468.5,
+          "scrollWidth": 640,
+          "clientWidth": 640,
+          "scrollHeight": 1235,
+          "clientHeight": 106,
+          "scrollTop": 73.5
+        },
+        "focus": {
+          "tag": "MAIN",
+          "id": "main-content",
+          "inMain": true,
+          "width": 640,
+          "height": 105.5,
+          "visibleFraction": 0.995260663507109,
+          "intersectsViewport": true
+        }
+      },
+      "contentControlTabs": 2,
+      "contentControlFocus": {
+        "innerWidth": 640,
+        "innerHeight": 468,
+        "outerWidth": 1280,
+        "outerHeight": 1024,
+        "dpr": 2,
+        "rootZoom": "1",
+        "rootTransform": "none",
+        "visualScale": 1,
+        "projectLabelLines": 14,
+        "documentFits": true,
+        "main": {
+          "width": 640,
+          "height": 105.5,
+          "top": 363,
+          "bottom": 468.5,
+          "scrollWidth": 640,
+          "clientWidth": 640,
+          "scrollHeight": 1235,
+          "clientHeight": 106,
+          "scrollTop": 864.5
+        },
+        "focus": {
+          "tag": "BUTTON",
+          "id": "",
+          "inMain": true,
+          "width": 177.890625,
+          "height": 44,
+          "visibleFraction": 1,
+          "intersectsViewport": true
+        }
+      },
+      "beforeAxeFocus": {
+        "tag": "BUTTON",
+        "id": "",
+        "inMain": true,
+        "width": 177.890625,
+        "height": 44,
+        "visibleFraction": 1,
+        "intersectsViewport": true
+      },
+      "violations": [],
+      "afterAxeFocus": {
+        "tag": "BUTTON",
+        "id": "",
+        "inMain": true,
+        "width": 177.890625,
+        "height": 44,
+        "visibleFraction": 1,
+        "intersectsViewport": true
+      }
+    },
+    {
+      "factor": 2,
+      "route": "/chat",
+      "tabs": 7,
+      "before": {
+        "innerWidth": 640,
+        "innerHeight": 468,
+        "outerWidth": 1280,
+        "outerHeight": 1024,
+        "dpr": 2,
+        "rootZoom": "1",
+        "rootTransform": "none",
+        "visualScale": 1,
+        "projectLabelLines": 14,
+        "documentFits": true,
+        "main": {
+          "width": 640,
+          "height": 105.5,
+          "top": 363,
+          "bottom": 468.5,
+          "scrollWidth": 640,
+          "clientWidth": 640,
+          "scrollHeight": 922,
+          "clientHeight": 106,
+          "scrollTop": 0
+        },
+        "focus": {
+          "tag": "MAIN",
+          "id": "main-content",
+          "inMain": true,
+          "width": 640,
+          "height": 105.5,
+          "visibleFraction": 0.995260663507109,
+          "intersectsViewport": true
+        }
+      },
+      "png": {
+        "width": 1280,
+        "height": 937
+      },
+      "afterKeyboardScroll": {
+        "innerWidth": 640,
+        "innerHeight": 468,
+        "outerWidth": 1280,
+        "outerHeight": 1024,
+        "dpr": 2,
+        "rootZoom": "1",
+        "rootTransform": "none",
+        "visualScale": 1,
+        "projectLabelLines": 14,
+        "documentFits": true,
+        "main": {
+          "width": 640,
+          "height": 105.5,
+          "top": 363,
+          "bottom": 468.5,
+          "scrollWidth": 640,
+          "clientWidth": 640,
+          "scrollHeight": 922,
+          "clientHeight": 106,
+          "scrollTop": 71.5
+        },
+        "focus": {
+          "tag": "MAIN",
+          "id": "main-content",
+          "inMain": true,
+          "width": 640,
+          "height": 105.5,
+          "visibleFraction": 0.995260663507109,
+          "intersectsViewport": true
+        }
+      },
+      "contentControlTabs": 1,
+      "contentControlFocus": {
+        "innerWidth": 640,
+        "innerHeight": 468,
+        "outerWidth": 1280,
+        "outerHeight": 1024,
+        "dpr": 2,
+        "rootZoom": "1",
+        "rootTransform": "none",
+        "visualScale": 1,
+        "projectLabelLines": 14,
+        "documentFits": true,
+        "main": {
+          "width": 640,
+          "height": 105.5,
+          "top": 363,
+          "bottom": 468.5,
+          "scrollWidth": 640,
+          "clientWidth": 640,
+          "scrollHeight": 922,
+          "clientHeight": 106,
+          "scrollTop": 2
+        },
+        "focus": {
+          "tag": "A",
+          "id": "",
+          "inMain": true,
+          "width": 108.7265625,
+          "height": 22.3984375,
+          "visibleFraction": 1,
+          "intersectsViewport": true
+        }
+      },
+      "beforeAxeFocus": {
+        "tag": "A",
+        "id": "",
+        "inMain": true,
+        "width": 108.7265625,
+        "height": 22.3984375,
+        "visibleFraction": 1,
+        "intersectsViewport": true
+      },
+      "violations": [],
+      "afterAxeFocus": {
+        "tag": "A",
+        "id": "",
+        "inMain": true,
+        "width": 108.7265625,
+        "height": 22.3984375,
+        "visibleFraction": 1,
+        "intersectsViewport": true
+      }
+    },
+    {
+      "factor": 2,
+      "route": "/wiki",
+      "tabs": 8,
+      "before": {
+        "innerWidth": 640,
+        "innerHeight": 468,
+        "outerWidth": 1280,
+        "outerHeight": 1024,
+        "dpr": 2,
+        "rootZoom": "1",
+        "rootTransform": "none",
+        "visualScale": 1,
+        "projectLabelLines": 14,
+        "documentFits": true,
+        "main": {
+          "width": 640,
+          "height": 105.5,
+          "top": 363,
+          "bottom": 468.5,
+          "scrollWidth": 640,
+          "clientWidth": 640,
+          "scrollHeight": 406,
+          "clientHeight": 106,
+          "scrollTop": 0
+        },
+        "focus": {
+          "tag": "H1",
+          "id": "",
+          "inMain": true,
+          "width": 177.2890625,
+          "height": 38.640625,
+          "visibleFraction": 1,
+          "intersectsViewport": true
+        }
+      },
+      "png": {
+        "width": 1280,
+        "height": 937
+      },
+      "afterKeyboardScroll": {
+        "innerWidth": 640,
+        "innerHeight": 468,
+        "outerWidth": 1280,
+        "outerHeight": 1024,
+        "dpr": 2,
+        "rootZoom": "1",
+        "rootTransform": "none",
+        "visualScale": 1,
+        "projectLabelLines": 14,
+        "documentFits": true,
+        "main": {
+          "width": 640,
+          "height": 105.5,
+          "top": 363,
+          "bottom": 468.5,
+          "scrollWidth": 640,
+          "clientWidth": 640,
+          "scrollHeight": 406,
+          "clientHeight": 106,
+          "scrollTop": 74.5
+        },
+        "focus": {
+          "tag": "H1",
+          "id": "",
+          "inMain": true,
+          "width": 177.2890625,
+          "height": 38.640625,
+          "visibleFraction": 0,
+          "intersectsViewport": true
+        }
+      },
+      "contentControlTabs": 1,
+      "contentControlFocus": {
+        "innerWidth": 640,
+        "innerHeight": 468,
+        "outerWidth": 1280,
+        "outerHeight": 1024,
+        "dpr": 2,
+        "rootZoom": "1",
+        "rootTransform": "none",
+        "visualScale": 1,
+        "projectLabelLines": 14,
+        "documentFits": true,
+        "main": {
+          "width": 640,
+          "height": 105.5,
+          "top": 363,
+          "bottom": 468.5,
+          "scrollWidth": 640,
+          "clientWidth": 640,
+          "scrollHeight": 406,
+          "clientHeight": 106,
+          "scrollTop": 1
+        },
+        "focus": {
+          "tag": "BUTTON",
+          "id": "",
+          "inMain": true,
+          "width": 136.265625,
+          "height": 44,
+          "visibleFraction": 1,
+          "intersectsViewport": true
+        }
+      },
+      "beforeAxeFocus": {
+        "tag": "BUTTON",
+        "id": "",
+        "inMain": true,
+        "width": 136.265625,
+        "height": 44,
+        "visibleFraction": 1,
+        "intersectsViewport": true
+      },
+      "violations": [],
+      "afterAxeFocus": {
+        "tag": "A",
+        "id": "",
+        "inMain": false,
+        "width": 145.046875,
+        "height": 52,
+        "visibleFraction": 1,
+        "intersectsViewport": true
+      }
+    },
+    {
+      "factor": 2,
+      "route": "/findings",
+      "tabs": 9,
+      "before": {
+        "innerWidth": 640,
+        "innerHeight": 468,
+        "outerWidth": 1280,
+        "outerHeight": 1024,
+        "dpr": 2,
+        "rootZoom": "1",
+        "rootTransform": "none",
+        "visualScale": 1,
+        "projectLabelLines": 14,
+        "documentFits": true,
+        "main": {
+          "width": 640,
+          "height": 105.5,
+          "top": 363,
+          "bottom": 468.5,
+          "scrollWidth": 640,
+          "clientWidth": 640,
+          "scrollHeight": 677,
+          "clientHeight": 106,
+          "scrollTop": 0
+        },
+        "focus": {
+          "tag": "MAIN",
+          "id": "main-content",
+          "inMain": true,
+          "width": 640,
+          "height": 105.5,
+          "visibleFraction": 0.995260663507109,
+          "intersectsViewport": true
+        }
+      },
+      "png": {
+        "width": 1280,
+        "height": 937
+      },
+      "afterKeyboardScroll": {
+        "innerWidth": 640,
+        "innerHeight": 468,
+        "outerWidth": 1280,
+        "outerHeight": 1024,
+        "dpr": 2,
+        "rootZoom": "1",
+        "rootTransform": "none",
+        "visualScale": 1,
+        "projectLabelLines": 14,
+        "documentFits": true,
+        "main": {
+          "width": 640,
+          "height": 105.5,
+          "top": 363,
+          "bottom": 468.5,
+          "scrollWidth": 640,
+          "clientWidth": 640,
+          "scrollHeight": 677,
+          "clientHeight": 106,
+          "scrollTop": 75
+        },
+        "focus": {
+          "tag": "MAIN",
+          "id": "main-content",
+          "inMain": true,
+          "width": 640,
+          "height": 105.5,
+          "visibleFraction": 0.995260663507109,
+          "intersectsViewport": true
+        }
+      },
+      "contentControlTabs": 1,
+      "contentControlFocus": {
+        "innerWidth": 640,
+        "innerHeight": 468,
+        "outerWidth": 1280,
+        "outerHeight": 1024,
+        "dpr": 2,
+        "rootZoom": "1",
+        "rootTransform": "none",
+        "visualScale": 1,
+        "projectLabelLines": 14,
+        "documentFits": true,
+        "main": {
+          "width": 640,
+          "height": 105.5,
+          "top": 363,
+          "bottom": 468.5,
+          "scrollWidth": 640,
+          "clientWidth": 640,
+          "scrollHeight": 677,
+          "clientHeight": 106,
+          "scrollTop": 92
+        },
+        "focus": {
+          "tag": "INPUT",
+          "id": "finding-query",
+          "inMain": true,
+          "width": 600,
+          "height": 44,
+          "visibleFraction": 1,
+          "intersectsViewport": true
+        }
+      },
+      "beforeAxeFocus": {
+        "tag": "INPUT",
+        "id": "finding-query",
+        "inMain": true,
+        "width": 600,
+        "height": 44,
+        "visibleFraction": 1,
+        "intersectsViewport": true
+      },
+      "violations": [],
+      "afterAxeFocus": {
+        "tag": "INPUT",
+        "id": "finding-query",
+        "inMain": true,
+        "width": 600,
+        "height": 44,
+        "visibleFraction": 1,
+        "intersectsViewport": true
+      }
+    },
+    {
+      "factor": 2,
+      "route": "/reports",
+      "tabs": 10,
+      "before": {
+        "innerWidth": 640,
+        "innerHeight": 468,
+        "outerWidth": 1280,
+        "outerHeight": 1024,
+        "dpr": 2,
+        "rootZoom": "1",
+        "rootTransform": "none",
+        "visualScale": 1,
+        "projectLabelLines": 14,
+        "documentFits": true,
+        "main": {
+          "width": 640,
+          "height": 105.5,
+          "top": 363,
+          "bottom": 468.5,
+          "scrollWidth": 640,
+          "clientWidth": 640,
+          "scrollHeight": 468,
+          "clientHeight": 106,
+          "scrollTop": 0
+        },
+        "focus": {
+          "tag": "MAIN",
+          "id": "main-content",
+          "inMain": true,
+          "width": 640,
+          "height": 105.5,
+          "visibleFraction": 0.995260663507109,
+          "intersectsViewport": true
+        }
+      },
+      "png": {
+        "width": 1280,
+        "height": 937
+      },
+      "afterKeyboardScroll": {
+        "innerWidth": 640,
+        "innerHeight": 468,
+        "outerWidth": 1280,
+        "outerHeight": 1024,
+        "dpr": 2,
+        "rootZoom": "1",
+        "rootTransform": "none",
+        "visualScale": 1,
+        "projectLabelLines": 14,
+        "documentFits": true,
+        "main": {
+          "width": 640,
+          "height": 105.5,
+          "top": 363,
+          "bottom": 468.5,
+          "scrollWidth": 640,
+          "clientWidth": 640,
+          "scrollHeight": 468,
+          "clientHeight": 106,
+          "scrollTop": 74.5
+        },
+        "focus": {
+          "tag": "MAIN",
+          "id": "main-content",
+          "inMain": true,
+          "width": 640,
+          "height": 105.5,
+          "visibleFraction": 0.995260663507109,
+          "intersectsViewport": true
+        }
+      },
+      "contentControlTabs": 1,
+      "contentControlFocus": {
+        "innerWidth": 640,
+        "innerHeight": 468,
+        "outerWidth": 1280,
+        "outerHeight": 1024,
+        "dpr": 2,
+        "rootZoom": "1",
+        "rootTransform": "none",
+        "visualScale": 1,
+        "projectLabelLines": 14,
+        "documentFits": true,
+        "main": {
+          "width": 640,
+          "height": 105.5,
+          "top": 363,
+          "bottom": 468.5,
+          "scrollWidth": 640,
+          "clientWidth": 640,
+          "scrollHeight": 468,
+          "clientHeight": 106,
+          "scrollTop": 92
+        },
+        "focus": {
+          "tag": "BUTTON",
+          "id": "",
+          "inMain": true,
+          "width": 34.6953125,
+          "height": 44,
+          "visibleFraction": 0.9962713068181818,
+          "intersectsViewport": true
+        }
+      },
+      "beforeAxeFocus": {
+        "tag": "BUTTON",
+        "id": "",
+        "inMain": true,
+        "width": 34.6953125,
+        "height": 44,
+        "visibleFraction": 0.9962713068181818,
+        "intersectsViewport": true
+      },
+      "violations": [],
+      "afterAxeFocus": {
+        "tag": "BUTTON",
+        "id": "",
+        "inMain": true,
+        "width": 34.6953125,
+        "height": 44,
+        "visibleFraction": 0.9962713068181818,
+        "intersectsViewport": true
+      }
+    },
+    {
+      "factor": 2,
+      "route": "/files",
+      "tabs": 11,
+      "before": {
+        "innerWidth": 640,
+        "innerHeight": 468,
+        "outerWidth": 1280,
+        "outerHeight": 1024,
+        "dpr": 2,
+        "rootZoom": "1",
+        "rootTransform": "none",
+        "visualScale": 1,
+        "projectLabelLines": 14,
+        "documentFits": true,
+        "main": {
+          "width": 640,
+          "height": 105.5,
+          "top": 363,
+          "bottom": 468.5,
+          "scrollWidth": 640,
+          "clientWidth": 640,
+          "scrollHeight": 994,
+          "clientHeight": 106,
+          "scrollTop": 0
+        },
+        "focus": {
+          "tag": "MAIN",
+          "id": "main-content",
+          "inMain": true,
+          "width": 640,
+          "height": 105.5,
+          "visibleFraction": 0.995260663507109,
+          "intersectsViewport": true
+        }
+      },
+      "png": {
+        "width": 1280,
+        "height": 937
+      },
+      "afterKeyboardScroll": {
+        "innerWidth": 640,
+        "innerHeight": 468,
+        "outerWidth": 1280,
+        "outerHeight": 1024,
+        "dpr": 2,
+        "rootZoom": "1",
+        "rootTransform": "none",
+        "visualScale": 1,
+        "projectLabelLines": 14,
+        "documentFits": true,
+        "main": {
+          "width": 640,
+          "height": 105.5,
+          "top": 363,
+          "bottom": 468.5,
+          "scrollWidth": 640,
+          "clientWidth": 640,
+          "scrollHeight": 994,
+          "clientHeight": 106,
+          "scrollTop": 73.5
+        },
+        "focus": {
+          "tag": "MAIN",
+          "id": "main-content",
+          "inMain": true,
+          "width": 640,
+          "height": 105.5,
+          "visibleFraction": 0.995260663507109,
+          "intersectsViewport": true
+        }
+      },
+      "contentControlTabs": 1,
+      "contentControlFocus": {
+        "innerWidth": 640,
+        "innerHeight": 468,
+        "outerWidth": 1280,
+        "outerHeight": 1024,
+        "dpr": 2,
+        "rootZoom": "1",
+        "rootTransform": "none",
+        "visualScale": 1,
+        "projectLabelLines": 14,
+        "documentFits": true,
+        "main": {
+          "width": 640,
+          "height": 105.5,
+          "top": 363,
+          "bottom": 468.5,
+          "scrollWidth": 640,
+          "clientWidth": 640,
+          "scrollHeight": 994,
+          "clientHeight": 106,
+          "scrollTop": 92
+        },
+        "focus": {
+          "tag": "A",
+          "id": "",
+          "inMain": true,
+          "width": 172.8984375,
+          "height": 44,
+          "visibleFraction": 1,
+          "intersectsViewport": true
+        }
+      },
+      "beforeAxeFocus": {
+        "tag": "A",
+        "id": "",
+        "inMain": true,
+        "width": 172.8984375,
+        "height": 44,
+        "visibleFraction": 1,
+        "intersectsViewport": true
+      },
+      "violations": [],
+      "afterAxeFocus": {
+        "tag": "A",
+        "id": "",
+        "inMain": true,
+        "width": 172.8984375,
+        "height": 44,
+        "visibleFraction": 1,
+        "intersectsViewport": true
+      }
+    },
+    {
+      "factor": 2,
+      "route": "/repositories",
+      "tabs": 12,
+      "before": {
+        "innerWidth": 640,
+        "innerHeight": 468,
+        "outerWidth": 1280,
+        "outerHeight": 1024,
+        "dpr": 2,
+        "rootZoom": "1",
+        "rootTransform": "none",
+        "visualScale": 1,
+        "projectLabelLines": 14,
+        "documentFits": true,
+        "main": {
+          "width": 640,
+          "height": 105.5,
+          "top": 363,
+          "bottom": 468.5,
+          "scrollWidth": 640,
+          "clientWidth": 640,
+          "scrollHeight": 491,
+          "clientHeight": 106,
+          "scrollTop": 0
+        },
+        "focus": {
+          "tag": "MAIN",
+          "id": "main-content",
+          "inMain": true,
+          "width": 640,
+          "height": 105.5,
+          "visibleFraction": 0.995260663507109,
+          "intersectsViewport": true
+        }
+      },
+      "png": {
+        "width": 1280,
+        "height": 937
+      },
+      "afterKeyboardScroll": {
+        "innerWidth": 640,
+        "innerHeight": 468,
+        "outerWidth": 1280,
+        "outerHeight": 1024,
+        "dpr": 2,
+        "rootZoom": "1",
+        "rootTransform": "none",
+        "visualScale": 1,
+        "projectLabelLines": 14,
+        "documentFits": true,
+        "main": {
+          "width": 640,
+          "height": 105.5,
+          "top": 363,
+          "bottom": 468.5,
+          "scrollWidth": 640,
+          "clientWidth": 640,
+          "scrollHeight": 491,
+          "clientHeight": 106,
+          "scrollTop": 75
+        },
+        "focus": {
+          "tag": "MAIN",
+          "id": "main-content",
+          "inMain": true,
+          "width": 640,
+          "height": 105.5,
+          "visibleFraction": 0.995260663507109,
+          "intersectsViewport": true
+        }
+      },
+      "contentControlTabs": 1,
+      "contentControlFocus": {
+        "innerWidth": 640,
+        "innerHeight": 468,
+        "outerWidth": 1280,
+        "outerHeight": 1024,
+        "dpr": 2,
+        "rootZoom": "1",
+        "rootTransform": "none",
+        "visualScale": 1,
+        "projectLabelLines": 14,
+        "documentFits": true,
+        "main": {
+          "width": 640,
+          "height": 105.5,
+          "top": 363,
+          "bottom": 468.5,
+          "scrollWidth": 640,
+          "clientWidth": 640,
+          "scrollHeight": 491,
+          "clientHeight": 106,
+          "scrollTop": 73
+        },
+        "focus": {
+          "tag": "BUTTON",
+          "id": "",
+          "inMain": true,
+          "width": 568,
+          "height": 44,
+          "visibleFraction": 0.9772727272727273,
+          "intersectsViewport": true
+        }
+      },
+      "beforeAxeFocus": {
+        "tag": "BUTTON",
+        "id": "",
+        "inMain": true,
+        "width": 568,
+        "height": 44,
+        "visibleFraction": 0.9772727272727273,
+        "intersectsViewport": true
+      },
+      "violations": [],
+      "afterAxeFocus": {
+        "tag": "BUTTON",
+        "id": "",
+        "inMain": true,
+        "width": 568,
+        "height": 44,
+        "visibleFraction": 0.9772727272727273,
+        "intersectsViewport": true
+      }
+    },
+    {
+      "factor": 2,
+      "route": "/flow",
+      "tabs": 13,
+      "before": {
+        "innerWidth": 640,
+        "innerHeight": 468,
+        "outerWidth": 1280,
+        "outerHeight": 1024,
+        "dpr": 2,
+        "rootZoom": "1",
+        "rootTransform": "none",
+        "visualScale": 1,
+        "projectLabelLines": 14,
+        "documentFits": true,
+        "main": {
+          "width": 640,
+          "height": 105.5,
+          "top": 363,
+          "bottom": 468.5,
+          "scrollWidth": 640,
+          "clientWidth": 640,
+          "scrollHeight": 405,
+          "clientHeight": 106,
+          "scrollTop": 0
+        },
+        "focus": {
+          "tag": "MAIN",
+          "id": "main-content",
+          "inMain": true,
+          "width": 640,
+          "height": 105.5,
+          "visibleFraction": 0.995260663507109,
+          "intersectsViewport": true
+        }
+      },
+      "png": {
+        "width": 1280,
+        "height": 937
+      },
+      "afterKeyboardScroll": {
+        "innerWidth": 640,
+        "innerHeight": 468,
+        "outerWidth": 1280,
+        "outerHeight": 1024,
+        "dpr": 2,
+        "rootZoom": "1",
+        "rootTransform": "none",
+        "visualScale": 1,
+        "projectLabelLines": 14,
+        "documentFits": true,
+        "main": {
+          "width": 640,
+          "height": 105.5,
+          "top": 363,
+          "bottom": 468.5,
+          "scrollWidth": 640,
+          "clientWidth": 640,
+          "scrollHeight": 405,
+          "clientHeight": 106,
+          "scrollTop": 74.5
+        },
+        "focus": {
+          "tag": "MAIN",
+          "id": "main-content",
+          "inMain": true,
+          "width": 640,
+          "height": 105.5,
+          "visibleFraction": 0.995260663507109,
+          "intersectsViewport": true
+        }
+      },
+      "contentControlTabs": 1,
+      "contentControlFocus": {
+        "innerWidth": 640,
+        "innerHeight": 468,
+        "outerWidth": 1280,
+        "outerHeight": 1024,
+        "dpr": 2,
+        "rootZoom": "1",
+        "rootTransform": "none",
+        "visualScale": 1,
+        "projectLabelLines": 14,
+        "documentFits": true,
+        "main": {
+          "width": 640,
+          "height": 105.5,
+          "top": 363,
+          "bottom": 468.5,
+          "scrollWidth": 640,
+          "clientWidth": 640,
+          "scrollHeight": 405,
+          "clientHeight": 106,
+          "scrollTop": 178
+        },
+        "focus": {
+          "tag": "BUTTON",
+          "id": "",
+          "inMain": true,
+          "width": 64.671875,
+          "height": 44,
+          "visibleFraction": 1,
+          "intersectsViewport": true
+        }
+      },
+      "beforeAxeFocus": {
+        "tag": "BUTTON",
+        "id": "",
+        "inMain": true,
+        "width": 64.671875,
+        "height": 44,
+        "visibleFraction": 1,
+        "intersectsViewport": true
+      },
+      "violations": [],
+      "afterAxeFocus": {
+        "tag": "A",
+        "id": "",
+        "inMain": false,
+        "width": 145.046875,
+        "height": 52,
+        "visibleFraction": 1,
+        "intersectsViewport": true
+      }
+    },
+    {
+      "factor": 4,
+      "route": "/",
+      "tabs": 2,
+      "before": {
+        "innerWidth": 320,
+        "innerHeight": 234,
+        "outerWidth": 1280,
+        "outerHeight": 1024,
+        "dpr": 4,
+        "rootZoom": "1",
+        "rootTransform": "none",
+        "visualScale": 1,
+        "projectLabelLines": 1,
+        "documentFits": true,
+        "main": {
+          "width": 320,
+          "height": 43.25,
+          "top": 191,
+          "bottom": 234.25,
+          "scrollWidth": 320,
+          "clientWidth": 320,
+          "scrollHeight": 1948,
+          "clientHeight": 43,
+          "scrollTop": 0
+        },
+        "focus": {
+          "tag": "MAIN",
+          "id": "main-content",
+          "inMain": true,
+          "width": 320,
+          "height": 43.25,
+          "visibleFraction": 0.9942196531791907,
+          "intersectsViewport": true
+        }
+      },
+      "png": {
+        "width": 1280,
+        "height": 937
+      },
+      "afterKeyboardScroll": {
+        "innerWidth": 320,
+        "innerHeight": 234,
+        "outerWidth": 1280,
+        "outerHeight": 1024,
+        "dpr": 4,
+        "rootZoom": "1",
+        "rootTransform": "none",
+        "visualScale": 1,
+        "projectLabelLines": 1,
+        "documentFits": true,
+        "main": {
+          "width": 320,
+          "height": 43.25,
+          "top": 191,
+          "bottom": 234.25,
+          "scrollWidth": 320,
+          "clientWidth": 320,
+          "scrollHeight": 1987,
+          "clientHeight": 43,
+          "scrollTop": 28.75
+        },
+        "focus": {
+          "tag": "MAIN",
+          "id": "main-content",
+          "inMain": true,
+          "width": 320,
+          "height": 43.25,
+          "visibleFraction": 0.9942196531791907,
+          "intersectsViewport": true
+        }
+      },
+      "contentControlTabs": 28,
+      "contentControlFocus": {
+        "innerWidth": 320,
+        "innerHeight": 234,
+        "outerWidth": 1280,
+        "outerHeight": 1024,
+        "dpr": 4,
+        "rootZoom": "1",
+        "rootTransform": "none",
+        "visualScale": 1,
+        "projectLabelLines": 1,
+        "documentFits": true,
+        "main": {
+          "width": 320,
+          "height": 43.25,
+          "top": 191,
+          "bottom": 234.25,
+          "scrollWidth": 320,
+          "clientWidth": 320,
+          "scrollHeight": 1948,
+          "clientHeight": 43,
+          "scrollTop": 218.75
+        },
+        "focus": {
+          "tag": "BUTTON",
+          "id": "",
+          "inMain": true,
+          "width": 126.703125,
+          "height": 44,
+          "visibleFraction": 0.9772727272727273,
+          "intersectsViewport": true
+        }
+      },
+      "beforeAxeFocus": {
+        "tag": "BUTTON",
+        "id": "",
+        "inMain": true,
+        "width": 126.703125,
+        "height": 44,
+        "visibleFraction": 0.9772727272727273,
+        "intersectsViewport": true
+      },
+      "violations": [],
+      "afterAxeFocus": {
+        "tag": "BUTTON",
+        "id": "",
+        "inMain": true,
+        "width": 126.703125,
+        "height": 44,
+        "visibleFraction": 0.9772727272727273,
+        "intersectsViewport": true
+      }
+    },
+    {
+      "factor": 4,
+      "route": "/projects",
+      "tabs": 3,
+      "before": {
+        "innerWidth": 320,
+        "innerHeight": 234,
+        "outerWidth": 1280,
+        "outerHeight": 1024,
+        "dpr": 4,
+        "rootZoom": "1",
+        "rootTransform": "none",
+        "visualScale": 1,
+        "projectLabelLines": 1,
+        "documentFits": true,
+        "main": {
+          "width": 320,
+          "height": 43.25,
+          "top": 191,
+          "bottom": 234.25,
+          "scrollWidth": 320,
+          "clientWidth": 320,
+          "scrollHeight": 449,
+          "clientHeight": 43,
+          "scrollTop": 0
+        },
+        "focus": {
+          "tag": "MAIN",
+          "id": "main-content",
+          "inMain": true,
+          "width": 320,
+          "height": 43.25,
+          "visibleFraction": 0.9942196531791907,
+          "intersectsViewport": true
+        }
+      },
+      "png": {
+        "width": 1280,
+        "height": 937
+      },
+      "afterKeyboardScroll": {
+        "innerWidth": 320,
+        "innerHeight": 234,
+        "outerWidth": 1280,
+        "outerHeight": 1024,
+        "dpr": 4,
+        "rootZoom": "1",
+        "rootTransform": "none",
+        "visualScale": 1,
+        "projectLabelLines": 1,
+        "documentFits": true,
+        "main": {
+          "width": 320,
+          "height": 43.25,
+          "top": 191,
+          "bottom": 234.25,
+          "scrollWidth": 320,
+          "clientWidth": 320,
+          "scrollHeight": 449,
+          "clientHeight": 43,
+          "scrollTop": 30.25
+        },
+        "focus": {
+          "tag": "MAIN",
+          "id": "main-content",
+          "inMain": true,
+          "width": 320,
+          "height": 43.25,
+          "visibleFraction": 0.9942196531791907,
+          "intersectsViewport": true
+        }
+      },
+      "contentControlTabs": 1,
+      "contentControlFocus": {
+        "innerWidth": 320,
+        "innerHeight": 234,
+        "outerWidth": 1280,
+        "outerHeight": 1024,
+        "dpr": 4,
+        "rootZoom": "1",
+        "rootTransform": "none",
+        "visualScale": 1,
+        "projectLabelLines": 1,
+        "documentFits": true,
+        "main": {
+          "width": 320,
+          "height": 43.25,
+          "top": 191,
+          "bottom": 234.25,
+          "scrollWidth": 320,
+          "clientWidth": 320,
+          "scrollHeight": 449,
+          "clientHeight": 43,
+          "scrollTop": 24.75
+        },
+        "focus": {
+          "tag": "BUTTON",
+          "id": "",
+          "inMain": true,
+          "width": 103.71484375,
+          "height": 44,
+          "visibleFraction": 0.9772727272727273,
+          "intersectsViewport": true
+        }
+      },
+      "beforeAxeFocus": {
+        "tag": "BUTTON",
+        "id": "",
+        "inMain": true,
+        "width": 103.71484375,
+        "height": 44,
+        "visibleFraction": 0.9772727272727273,
+        "intersectsViewport": true
+      },
+      "violations": [],
+      "afterAxeFocus": {
+        "tag": "BUTTON",
+        "id": "",
+        "inMain": true,
+        "width": 103.71484375,
+        "height": 44,
+        "visibleFraction": 0.9772727272727273,
+        "intersectsViewport": true
+      }
+    },
+    {
+      "factor": 4,
+      "route": "/epics",
+      "tabs": 4,
+      "before": {
+        "innerWidth": 320,
+        "innerHeight": 234,
+        "outerWidth": 1280,
+        "outerHeight": 1024,
+        "dpr": 4,
+        "rootZoom": "1",
+        "rootTransform": "none",
+        "visualScale": 1,
+        "projectLabelLines": 1,
+        "documentFits": true,
+        "main": {
+          "width": 320,
+          "height": 43.25,
+          "top": 191,
+          "bottom": 234.25,
+          "scrollWidth": 320,
+          "clientWidth": 320,
+          "scrollHeight": 670,
+          "clientHeight": 43,
+          "scrollTop": 0
+        },
+        "focus": {
+          "tag": "MAIN",
+          "id": "main-content",
+          "inMain": true,
+          "width": 320,
+          "height": 43.25,
+          "visibleFraction": 0.9942196531791907,
+          "intersectsViewport": true
+        }
+      },
+      "png": {
+        "width": 1280,
+        "height": 937
+      },
+      "afterKeyboardScroll": {
+        "innerWidth": 320,
+        "innerHeight": 234,
+        "outerWidth": 1280,
+        "outerHeight": 1024,
+        "dpr": 4,
+        "rootZoom": "1",
+        "rootTransform": "none",
+        "visualScale": 1,
+        "projectLabelLines": 1,
+        "documentFits": true,
+        "main": {
+          "width": 320,
+          "height": 43.25,
+          "top": 191,
+          "bottom": 234.25,
+          "scrollWidth": 320,
+          "clientWidth": 320,
+          "scrollHeight": 670,
+          "clientHeight": 43,
+          "scrollTop": 30.25
+        },
+        "focus": {
+          "tag": "MAIN",
+          "id": "main-content",
+          "inMain": true,
+          "width": 320,
+          "height": 43.25,
+          "visibleFraction": 0.9942196531791907,
+          "intersectsViewport": true
+        }
+      },
+      "contentControlTabs": 1,
+      "contentControlFocus": {
+        "innerWidth": 320,
+        "innerHeight": 234,
+        "outerWidth": 1280,
+        "outerHeight": 1024,
+        "dpr": 4,
+        "rootZoom": "1",
+        "rootTransform": "none",
+        "visualScale": 1,
+        "projectLabelLines": 1,
+        "documentFits": true,
+        "main": {
+          "width": 320,
+          "height": 43.25,
+          "top": 191,
+          "bottom": 234.25,
+          "scrollWidth": 320,
+          "clientWidth": 320,
+          "scrollHeight": 670,
+          "clientHeight": 43,
+          "scrollTop": 155.25
+        },
+        "focus": {
+          "tag": "BUTTON",
+          "id": "planning-new",
+          "inMain": true,
+          "width": 122.75,
+          "height": 44,
+          "visibleFraction": 0.9772727272727273,
+          "intersectsViewport": true
+        }
+      },
+      "beforeAxeFocus": {
+        "tag": "BUTTON",
+        "id": "planning-new",
+        "inMain": true,
+        "width": 122.75,
+        "height": 44,
+        "visibleFraction": 0.9772727272727273,
+        "intersectsViewport": true
+      },
+      "violations": [],
+      "afterAxeFocus": {
+        "tag": "BUTTON",
+        "id": "planning-new",
+        "inMain": true,
+        "width": 122.75,
+        "height": 44,
+        "visibleFraction": 0.9772727272727273,
+        "intersectsViewport": true
+      }
+    },
+    {
+      "factor": 4,
+      "route": "/tasks",
+      "tabs": 5,
+      "before": {
+        "innerWidth": 320,
+        "innerHeight": 234,
+        "outerWidth": 1280,
+        "outerHeight": 1024,
+        "dpr": 4,
+        "rootZoom": "1",
+        "rootTransform": "none",
+        "visualScale": 1,
+        "projectLabelLines": 1,
+        "documentFits": true,
+        "main": {
+          "width": 320,
+          "height": 43.25,
+          "top": 191,
+          "bottom": 234.25,
+          "scrollWidth": 320,
+          "clientWidth": 320,
+          "scrollHeight": 867,
+          "clientHeight": 43,
+          "scrollTop": 0
+        },
+        "focus": {
+          "tag": "MAIN",
+          "id": "main-content",
+          "inMain": true,
+          "width": 320,
+          "height": 43.25,
+          "visibleFraction": 0.9942196531791907,
+          "intersectsViewport": true
+        }
+      },
+      "png": {
+        "width": 1280,
+        "height": 937
+      },
+      "afterKeyboardScroll": {
+        "innerWidth": 320,
+        "innerHeight": 234,
+        "outerWidth": 1280,
+        "outerHeight": 1024,
+        "dpr": 4,
+        "rootZoom": "1",
+        "rootTransform": "none",
+        "visualScale": 1,
+        "projectLabelLines": 1,
+        "documentFits": true,
+        "main": {
+          "width": 320,
+          "height": 43.25,
+          "top": 191,
+          "bottom": 234.25,
+          "scrollWidth": 320,
+          "clientWidth": 320,
+          "scrollHeight": 867,
+          "clientHeight": 43,
+          "scrollTop": 30
+        },
+        "focus": {
+          "tag": "MAIN",
+          "id": "main-content",
+          "inMain": true,
+          "width": 320,
+          "height": 43.25,
+          "visibleFraction": 0.9942196531791907,
+          "intersectsViewport": true
+        }
+      },
+      "contentControlTabs": 1,
+      "contentControlFocus": {
+        "innerWidth": 320,
+        "innerHeight": 234,
+        "outerWidth": 1280,
+        "outerHeight": 1024,
+        "dpr": 4,
+        "rootZoom": "1",
+        "rootTransform": "none",
+        "visualScale": 1,
+        "projectLabelLines": 1,
+        "documentFits": true,
+        "main": {
+          "width": 320,
+          "height": 43.25,
+          "top": 191,
+          "bottom": 234.25,
+          "scrollWidth": 320,
+          "clientWidth": 320,
+          "scrollHeight": 867,
+          "clientHeight": 43,
+          "scrollTop": 159.5
+        },
+        "focus": {
+          "tag": "BUTTON",
+          "id": "",
+          "inMain": true,
+          "width": 128.7265625,
+          "height": 44,
+          "visibleFraction": 0.9772727272727273,
+          "intersectsViewport": true
+        }
+      },
+      "beforeAxeFocus": {
+        "tag": "BUTTON",
+        "id": "",
+        "inMain": true,
+        "width": 128.7265625,
+        "height": 44,
+        "visibleFraction": 0.9772727272727273,
+        "intersectsViewport": true
+      },
+      "violations": [],
+      "afterAxeFocus": {
+        "tag": "BUTTON",
+        "id": "",
+        "inMain": true,
+        "width": 128.7265625,
+        "height": 44,
+        "visibleFraction": 0.9772727272727273,
+        "intersectsViewport": true
+      }
+    },
+    {
+      "factor": 4,
+      "route": "/agents",
+      "tabs": 6,
+      "before": {
+        "innerWidth": 320,
+        "innerHeight": 234,
+        "outerWidth": 1280,
+        "outerHeight": 1024,
+        "dpr": 4,
+        "rootZoom": "1",
+        "rootTransform": "none",
+        "visualScale": 1,
+        "projectLabelLines": 1,
+        "documentFits": true,
+        "main": {
+          "width": 320,
+          "height": 43.25,
+          "top": 191,
+          "bottom": 234.25,
+          "scrollWidth": 320,
+          "clientWidth": 320,
+          "scrollHeight": 1764,
+          "clientHeight": 43,
+          "scrollTop": 0
+        },
+        "focus": {
+          "tag": "MAIN",
+          "id": "main-content",
+          "inMain": true,
+          "width": 320,
+          "height": 43.25,
+          "visibleFraction": 0.9942196531791907,
+          "intersectsViewport": true
+        }
+      },
+      "png": {
+        "width": 1280,
+        "height": 937
+      },
+      "afterKeyboardScroll": {
+        "innerWidth": 320,
+        "innerHeight": 234,
+        "outerWidth": 1280,
+        "outerHeight": 1024,
+        "dpr": 4,
+        "rootZoom": "1",
+        "rootTransform": "none",
+        "visualScale": 1,
+        "projectLabelLines": 1,
+        "documentFits": true,
+        "main": {
+          "width": 320,
+          "height": 43.25,
+          "top": 191,
+          "bottom": 234.25,
+          "scrollWidth": 320,
+          "clientWidth": 320,
+          "scrollHeight": 1764,
+          "clientHeight": 43,
+          "scrollTop": 29.5
+        },
+        "focus": {
+          "tag": "MAIN",
+          "id": "main-content",
+          "inMain": true,
+          "width": 320,
+          "height": 43.25,
+          "visibleFraction": 0.9942196531791907,
+          "intersectsViewport": true
+        }
+      },
+      "contentControlTabs": 2,
+      "contentControlFocus": {
+        "innerWidth": 320,
+        "innerHeight": 234,
+        "outerWidth": 1280,
+        "outerHeight": 1024,
+        "dpr": 4,
+        "rootZoom": "1",
+        "rootTransform": "none",
+        "visualScale": 1,
+        "projectLabelLines": 1,
+        "documentFits": true,
+        "main": {
+          "width": 320,
+          "height": 43.25,
+          "top": 191,
+          "bottom": 234.25,
+          "scrollWidth": 320,
+          "clientWidth": 320,
+          "scrollHeight": 1764,
+          "clientHeight": 43,
+          "scrollTop": 1400.75
+        },
+        "focus": {
+          "tag": "BUTTON",
+          "id": "",
+          "inMain": true,
+          "width": 177.88671875,
+          "height": 44,
+          "visibleFraction": 0.9772727272727273,
+          "intersectsViewport": true
+        }
+      },
+      "beforeAxeFocus": {
+        "tag": "BUTTON",
+        "id": "",
+        "inMain": true,
+        "width": 177.88671875,
+        "height": 44,
+        "visibleFraction": 0.9772727272727273,
+        "intersectsViewport": true
+      },
+      "violations": [],
+      "afterAxeFocus": {
+        "tag": "A",
+        "id": "",
+        "inMain": false,
+        "width": 145.04296875,
+        "height": 52,
+        "visibleFraction": 1,
+        "intersectsViewport": true
+      }
+    },
+    {
+      "factor": 4,
+      "route": "/chat",
+      "tabs": 7,
+      "before": {
+        "innerWidth": 320,
+        "innerHeight": 234,
+        "outerWidth": 1280,
+        "outerHeight": 1024,
+        "dpr": 4,
+        "rootZoom": "1",
+        "rootTransform": "none",
+        "visualScale": 1,
+        "projectLabelLines": 1,
+        "documentFits": true,
+        "main": {
+          "width": 320,
+          "height": 43.25,
+          "top": 191,
+          "bottom": 234.25,
+          "scrollWidth": 320,
+          "clientWidth": 320,
+          "scrollHeight": 1055,
+          "clientHeight": 43,
+          "scrollTop": 0
+        },
+        "focus": {
+          "tag": "MAIN",
+          "id": "main-content",
+          "inMain": true,
+          "width": 320,
+          "height": 43.25,
+          "visibleFraction": 0.9942196531791907,
+          "intersectsViewport": true
+        }
+      },
+      "png": {
+        "width": 1280,
+        "height": 937
+      },
+      "afterKeyboardScroll": {
+        "innerWidth": 320,
+        "innerHeight": 234,
+        "outerWidth": 1280,
+        "outerHeight": 1024,
+        "dpr": 4,
+        "rootZoom": "1",
+        "rootTransform": "none",
+        "visualScale": 1,
+        "projectLabelLines": 1,
+        "documentFits": true,
+        "main": {
+          "width": 320,
+          "height": 43.25,
+          "top": 191,
+          "bottom": 234.25,
+          "scrollWidth": 320,
+          "clientWidth": 320,
+          "scrollHeight": 1055,
+          "clientHeight": 43,
+          "scrollTop": 29.25
+        },
+        "focus": {
+          "tag": "MAIN",
+          "id": "main-content",
+          "inMain": true,
+          "width": 320,
+          "height": 43.25,
+          "visibleFraction": 0.9942196531791907,
+          "intersectsViewport": true
+        }
+      },
+      "contentControlTabs": 1,
+      "contentControlFocus": {
+        "innerWidth": 320,
+        "innerHeight": 234,
+        "outerWidth": 1280,
+        "outerHeight": 1024,
+        "dpr": 4,
+        "rootZoom": "1",
+        "rootTransform": "none",
+        "visualScale": 1,
+        "projectLabelLines": 1,
+        "documentFits": true,
+        "main": {
+          "width": 320,
+          "height": 43.25,
+          "top": 191,
+          "bottom": 234.25,
+          "scrollWidth": 320,
+          "clientWidth": 320,
+          "scrollHeight": 1055,
+          "clientHeight": 43,
+          "scrollTop": 101.5
+        },
+        "focus": {
+          "tag": "A",
+          "id": "",
+          "inMain": true,
+          "width": 108.7265625,
+          "height": 22.3984375,
+          "visibleFraction": 1,
+          "intersectsViewport": true
+        }
+      },
+      "beforeAxeFocus": {
+        "tag": "A",
+        "id": "",
+        "inMain": true,
+        "width": 108.7265625,
+        "height": 22.3984375,
+        "visibleFraction": 1,
+        "intersectsViewport": true
+      },
+      "violations": [],
+      "afterAxeFocus": {
+        "tag": "A",
+        "id": "",
+        "inMain": true,
+        "width": 108.7265625,
+        "height": 22.3984375,
+        "visibleFraction": 1,
+        "intersectsViewport": true
+      }
+    },
+    {
+      "factor": 4,
+      "route": "/wiki",
+      "tabs": 8,
+      "before": {
+        "innerWidth": 320,
+        "innerHeight": 234,
+        "outerWidth": 1280,
+        "outerHeight": 1024,
+        "dpr": 4,
+        "rootZoom": "1",
+        "rootTransform": "none",
+        "visualScale": 1,
+        "projectLabelLines": 1,
+        "documentFits": true,
+        "main": {
+          "width": 320,
+          "height": 43.25,
+          "top": 191,
+          "bottom": 234.25,
+          "scrollWidth": 320,
+          "clientWidth": 320,
+          "scrollHeight": 522,
+          "clientHeight": 43,
+          "scrollTop": 15.5
+        },
+        "focus": {
+          "tag": "H1",
+          "id": "",
+          "inMain": true,
+          "width": 177.2890625,
+          "height": 38.640625,
+          "visibleFraction": 0.9963606955115245,
+          "intersectsViewport": true
+        }
+      },
+      "png": {
+        "width": 1280,
+        "height": 937
+      },
+      "afterKeyboardScroll": {
+        "innerWidth": 320,
+        "innerHeight": 234,
+        "outerWidth": 1280,
+        "outerHeight": 1024,
+        "dpr": 4,
+        "rootZoom": "1",
+        "rootTransform": "none",
+        "visualScale": 1,
+        "projectLabelLines": 1,
+        "documentFits": true,
+        "main": {
+          "width": 320,
+          "height": 43.25,
+          "top": 191,
+          "bottom": 234.25,
+          "scrollWidth": 320,
+          "clientWidth": 320,
+          "scrollHeight": 522,
+          "clientHeight": 43,
+          "scrollTop": 45
+        },
+        "focus": {
+          "tag": "H1",
+          "id": "",
+          "inMain": true,
+          "width": 177.2890625,
+          "height": 38.640625,
+          "visibleFraction": 0.35301253538212696,
+          "intersectsViewport": true
+        }
+      },
+      "contentControlTabs": 1,
+      "contentControlFocus": {
+        "innerWidth": 320,
+        "innerHeight": 234,
+        "outerWidth": 1280,
+        "outerHeight": 1024,
+        "dpr": 4,
+        "rootZoom": "1",
+        "rootTransform": "none",
+        "visualScale": 1,
+        "projectLabelLines": 1,
+        "documentFits": true,
+        "main": {
+          "width": 320,
+          "height": 43.25,
+          "top": 191,
+          "bottom": 234.25,
+          "scrollWidth": 320,
+          "clientWidth": 320,
+          "scrollHeight": 522,
+          "clientHeight": 43,
+          "scrollTop": 67.5
+        },
+        "focus": {
+          "tag": "BUTTON",
+          "id": "",
+          "inMain": true,
+          "width": 136.296875,
+          "height": 44,
+          "visibleFraction": 0.9772727272727273,
+          "intersectsViewport": true
+        }
+      },
+      "beforeAxeFocus": {
+        "tag": "BUTTON",
+        "id": "",
+        "inMain": true,
+        "width": 136.296875,
+        "height": 44,
+        "visibleFraction": 0.9772727272727273,
+        "intersectsViewport": true
+      },
+      "violations": [],
+      "afterAxeFocus": {
+        "tag": "BUTTON",
+        "id": "",
+        "inMain": true,
+        "width": 136.296875,
+        "height": 44,
+        "visibleFraction": 0.9772727272727273,
+        "intersectsViewport": true
+      }
+    },
+    {
+      "factor": 4,
+      "route": "/findings",
+      "tabs": 9,
+      "before": {
+        "innerWidth": 320,
+        "innerHeight": 234,
+        "outerWidth": 1280,
+        "outerHeight": 1024,
+        "dpr": 4,
+        "rootZoom": "1",
+        "rootTransform": "none",
+        "visualScale": 1,
+        "projectLabelLines": 1,
+        "documentFits": true,
+        "main": {
+          "width": 320,
+          "height": 43.25,
+          "top": 191,
+          "bottom": 234.25,
+          "scrollWidth": 320,
+          "clientWidth": 320,
+          "scrollHeight": 726,
+          "clientHeight": 43,
+          "scrollTop": 0
+        },
+        "focus": {
+          "tag": "MAIN",
+          "id": "main-content",
+          "inMain": true,
+          "width": 320,
+          "height": 43.25,
+          "visibleFraction": 0.9942196531791907,
+          "intersectsViewport": true
+        }
+      },
+      "png": {
+        "width": 1280,
+        "height": 937
+      },
+      "afterKeyboardScroll": {
+        "innerWidth": 320,
+        "innerHeight": 234,
+        "outerWidth": 1280,
+        "outerHeight": 1024,
+        "dpr": 4,
+        "rootZoom": "1",
+        "rootTransform": "none",
+        "visualScale": 1,
+        "projectLabelLines": 1,
+        "documentFits": true,
+        "main": {
+          "width": 320,
+          "height": 43.25,
+          "top": 191,
+          "bottom": 234.25,
+          "scrollWidth": 320,
+          "clientWidth": 320,
+          "scrollHeight": 726,
+          "clientHeight": 43,
+          "scrollTop": 30.25
+        },
+        "focus": {
+          "tag": "MAIN",
+          "id": "main-content",
+          "inMain": true,
+          "width": 320,
+          "height": 43.25,
+          "visibleFraction": 0.9942196531791907,
+          "intersectsViewport": true
+        }
+      },
+      "contentControlTabs": 1,
+      "contentControlFocus": {
+        "innerWidth": 320,
+        "innerHeight": 234,
+        "outerWidth": 1280,
+        "outerHeight": 1024,
+        "dpr": 4,
+        "rootZoom": "1",
+        "rootTransform": "none",
+        "visualScale": 1,
+        "projectLabelLines": 1,
+        "documentFits": true,
+        "main": {
+          "width": 320,
+          "height": 43.25,
+          "top": 191,
+          "bottom": 234.25,
+          "scrollWidth": 320,
+          "clientWidth": 320,
+          "scrollHeight": 726,
+          "clientHeight": 43,
+          "scrollTop": 143.25
+        },
+        "focus": {
+          "tag": "INPUT",
+          "id": "finding-query",
+          "inMain": true,
+          "width": 280,
+          "height": 44,
+          "visibleFraction": 0.9772727272727273,
+          "intersectsViewport": true
+        }
+      },
+      "beforeAxeFocus": {
+        "tag": "INPUT",
+        "id": "finding-query",
+        "inMain": true,
+        "width": 280,
+        "height": 44,
+        "visibleFraction": 0.9772727272727273,
+        "intersectsViewport": true
+      },
+      "violations": [],
+      "afterAxeFocus": {
+        "tag": "INPUT",
+        "id": "finding-query",
+        "inMain": true,
+        "width": 280,
+        "height": 44,
+        "visibleFraction": 0.9772727272727273,
+        "intersectsViewport": true
+      }
+    },
+    {
+      "factor": 4,
+      "route": "/reports",
+      "tabs": 10,
+      "before": {
+        "innerWidth": 320,
+        "innerHeight": 234,
+        "outerWidth": 1280,
+        "outerHeight": 1024,
+        "dpr": 4,
+        "rootZoom": "1",
+        "rootTransform": "none",
+        "visualScale": 1,
+        "projectLabelLines": 1,
+        "documentFits": true,
+        "main": {
+          "width": 320,
+          "height": 43.25,
+          "top": 191,
+          "bottom": 234.25,
+          "scrollWidth": 320,
+          "clientWidth": 320,
+          "scrollHeight": 494,
+          "clientHeight": 43,
+          "scrollTop": 0
+        },
+        "focus": {
+          "tag": "MAIN",
+          "id": "main-content",
+          "inMain": true,
+          "width": 320,
+          "height": 43.25,
+          "visibleFraction": 0.9942196531791907,
+          "intersectsViewport": true
+        }
+      },
+      "png": {
+        "width": 1280,
+        "height": 937
+      },
+      "afterKeyboardScroll": {
+        "innerWidth": 320,
+        "innerHeight": 234,
+        "outerWidth": 1280,
+        "outerHeight": 1024,
+        "dpr": 4,
+        "rootZoom": "1",
+        "rootTransform": "none",
+        "visualScale": 1,
+        "projectLabelLines": 1,
+        "documentFits": true,
+        "main": {
+          "width": 320,
+          "height": 43.25,
+          "top": 191,
+          "bottom": 234.25,
+          "scrollWidth": 320,
+          "clientWidth": 320,
+          "scrollHeight": 494,
+          "clientHeight": 43,
+          "scrollTop": 29.75
+        },
+        "focus": {
+          "tag": "MAIN",
+          "id": "main-content",
+          "inMain": true,
+          "width": 320,
+          "height": 43.25,
+          "visibleFraction": 0.9942196531791907,
+          "intersectsViewport": true
+        }
+      },
+      "contentControlTabs": 1,
+      "contentControlFocus": {
+        "innerWidth": 320,
+        "innerHeight": 234,
+        "outerWidth": 1280,
+        "outerHeight": 1024,
+        "dpr": 4,
+        "rootZoom": "1",
+        "rootTransform": "none",
+        "visualScale": 1,
+        "projectLabelLines": 1,
+        "documentFits": true,
+        "main": {
+          "width": 320,
+          "height": 43.25,
+          "top": 191,
+          "bottom": 234.25,
+          "scrollWidth": 320,
+          "clientWidth": 320,
+          "scrollHeight": 494,
+          "clientHeight": 43,
+          "scrollTop": 92.25
+        },
+        "focus": {
+          "tag": "BUTTON",
+          "id": "",
+          "inMain": true,
+          "width": 34.6953125,
+          "height": 44,
+          "visibleFraction": 0.9772727272727273,
+          "intersectsViewport": true
+        }
+      },
+      "beforeAxeFocus": {
+        "tag": "BUTTON",
+        "id": "",
+        "inMain": true,
+        "width": 34.6953125,
+        "height": 44,
+        "visibleFraction": 0.9772727272727273,
+        "intersectsViewport": true
+      },
+      "violations": [],
+      "afterAxeFocus": {
+        "tag": "BUTTON",
+        "id": "",
+        "inMain": true,
+        "width": 34.6953125,
+        "height": 44,
+        "visibleFraction": 0.9772727272727273,
+        "intersectsViewport": true
+      }
+    },
+    {
+      "factor": 4,
+      "route": "/files",
+      "tabs": 11,
+      "before": {
+        "innerWidth": 320,
+        "innerHeight": 234,
+        "outerWidth": 1280,
+        "outerHeight": 1024,
+        "dpr": 4,
+        "rootZoom": "1",
+        "rootTransform": "none",
+        "visualScale": 1,
+        "projectLabelLines": 1,
+        "documentFits": true,
+        "main": {
+          "width": 320,
+          "height": 43.25,
+          "top": 191,
+          "bottom": 234.25,
+          "scrollWidth": 320,
+          "clientWidth": 320,
+          "scrollHeight": 1200,
+          "clientHeight": 43,
+          "scrollTop": 0
+        },
+        "focus": {
+          "tag": "MAIN",
+          "id": "main-content",
+          "inMain": true,
+          "width": 320,
+          "height": 43.25,
+          "visibleFraction": 0.9942196531791907,
+          "intersectsViewport": true
+        }
+      },
+      "png": {
+        "width": 1280,
+        "height": 937
+      },
+      "afterKeyboardScroll": {
+        "innerWidth": 320,
+        "innerHeight": 234,
+        "outerWidth": 1280,
+        "outerHeight": 1024,
+        "dpr": 4,
+        "rootZoom": "1",
+        "rootTransform": "none",
+        "visualScale": 1,
+        "projectLabelLines": 1,
+        "documentFits": true,
+        "main": {
+          "width": 320,
+          "height": 43.25,
+          "top": 191,
+          "bottom": 234.25,
+          "scrollWidth": 320,
+          "clientWidth": 320,
+          "scrollHeight": 1200,
+          "clientHeight": 43,
+          "scrollTop": 29.25
+        },
+        "focus": {
+          "tag": "MAIN",
+          "id": "main-content",
+          "inMain": true,
+          "width": 320,
+          "height": 43.25,
+          "visibleFraction": 0.9942196531791907,
+          "intersectsViewport": true
+        }
+      },
+      "contentControlTabs": 1,
+      "contentControlFocus": {
+        "innerWidth": 320,
+        "innerHeight": 234,
+        "outerWidth": 1280,
+        "outerHeight": 1024,
+        "dpr": 4,
+        "rootZoom": "1",
+        "rootTransform": "none",
+        "visualScale": 1,
+        "projectLabelLines": 1,
+        "documentFits": true,
+        "main": {
+          "width": 320,
+          "height": 43.25,
+          "top": 191,
+          "bottom": 234.25,
+          "scrollWidth": 320,
+          "clientWidth": 320,
+          "scrollHeight": 1200,
+          "clientHeight": 43,
+          "scrollTop": 161.5
+        },
+        "focus": {
+          "tag": "A",
+          "id": "",
+          "inMain": true,
+          "width": 172.8984375,
+          "height": 44,
+          "visibleFraction": 0.9772727272727273,
+          "intersectsViewport": true
+        }
+      },
+      "beforeAxeFocus": {
+        "tag": "A",
+        "id": "",
+        "inMain": true,
+        "width": 172.8984375,
+        "height": 44,
+        "visibleFraction": 0.9772727272727273,
+        "intersectsViewport": true
+      },
+      "violations": [],
+      "afterAxeFocus": {
+        "tag": "A",
+        "id": "",
+        "inMain": false,
+        "width": 145.04296875,
+        "height": 52,
+        "visibleFraction": 1,
+        "intersectsViewport": true
+      }
+    },
+    {
+      "factor": 4,
+      "route": "/repositories",
+      "tabs": 12,
+      "before": {
+        "innerWidth": 320,
+        "innerHeight": 234,
+        "outerWidth": 1280,
+        "outerHeight": 1024,
+        "dpr": 4,
+        "rootZoom": "1",
+        "rootTransform": "none",
+        "visualScale": 1,
+        "projectLabelLines": 1,
+        "documentFits": true,
+        "main": {
+          "width": 320,
+          "height": 43.25,
+          "top": 191,
+          "bottom": 234.25,
+          "scrollWidth": 320,
+          "clientWidth": 320,
+          "scrollHeight": 653,
+          "clientHeight": 43,
+          "scrollTop": 0
+        },
+        "focus": {
+          "tag": "MAIN",
+          "id": "main-content",
+          "inMain": true,
+          "width": 320,
+          "height": 43.25,
+          "visibleFraction": 0.9942196531791907,
+          "intersectsViewport": true
+        }
+      },
+      "png": {
+        "width": 1280,
+        "height": 937
+      },
+      "afterKeyboardScroll": {
+        "innerWidth": 320,
+        "innerHeight": 234,
+        "outerWidth": 1280,
+        "outerHeight": 1024,
+        "dpr": 4,
+        "rootZoom": "1",
+        "rootTransform": "none",
+        "visualScale": 1,
+        "projectLabelLines": 1,
+        "documentFits": true,
+        "main": {
+          "width": 320,
+          "height": 43.25,
+          "top": 191,
+          "bottom": 234.25,
+          "scrollWidth": 320,
+          "clientWidth": 320,
+          "scrollHeight": 653,
+          "clientHeight": 43,
+          "scrollTop": 29.75
+        },
+        "focus": {
+          "tag": "MAIN",
+          "id": "main-content",
+          "inMain": true,
+          "width": 320,
+          "height": 43.25,
+          "visibleFraction": 0.9942196531791907,
+          "intersectsViewport": true
+        }
+      },
+      "contentControlTabs": 1,
+      "contentControlFocus": {
+        "innerWidth": 320,
+        "innerHeight": 234,
+        "outerWidth": 1280,
+        "outerHeight": 1024,
+        "dpr": 4,
+        "rootZoom": "1",
+        "rootTransform": "none",
+        "visualScale": 1,
+        "projectLabelLines": 1,
+        "documentFits": true,
+        "main": {
+          "width": 320,
+          "height": 43.25,
+          "top": 191,
+          "bottom": 234.25,
+          "scrollWidth": 320,
+          "clientWidth": 320,
+          "scrollHeight": 653,
+          "clientHeight": 43,
+          "scrollTop": 72
+        },
+        "focus": {
+          "tag": "BUTTON",
+          "id": "",
+          "inMain": true,
+          "width": 248,
+          "height": 44,
+          "visibleFraction": 0.9772727272727273,
+          "intersectsViewport": true
+        }
+      },
+      "beforeAxeFocus": {
+        "tag": "BUTTON",
+        "id": "",
+        "inMain": true,
+        "width": 248,
+        "height": 44,
+        "visibleFraction": 0.9772727272727273,
+        "intersectsViewport": true
+      },
+      "violations": [],
+      "afterAxeFocus": {
+        "tag": "BUTTON",
+        "id": "",
+        "inMain": true,
+        "width": 248,
+        "height": 44,
+        "visibleFraction": 0.9772727272727273,
+        "intersectsViewport": true
+      }
+    },
+    {
+      "factor": 4,
+      "route": "/flow",
+      "tabs": 13,
+      "before": {
+        "innerWidth": 320,
+        "innerHeight": 234,
+        "outerWidth": 1280,
+        "outerHeight": 1024,
+        "dpr": 4,
+        "rootZoom": "1",
+        "rootTransform": "none",
+        "visualScale": 1,
+        "projectLabelLines": 1,
+        "documentFits": true,
+        "main": {
+          "width": 320,
+          "height": 43.25,
+          "top": 191,
+          "bottom": 234.25,
+          "scrollWidth": 320,
+          "clientWidth": 320,
+          "scrollHeight": 455,
+          "clientHeight": 43,
+          "scrollTop": 0
+        },
+        "focus": {
+          "tag": "MAIN",
+          "id": "main-content",
+          "inMain": true,
+          "width": 320,
+          "height": 43.25,
+          "visibleFraction": 0.9942196531791907,
+          "intersectsViewport": true
+        }
+      },
+      "png": {
+        "width": 1280,
+        "height": 937
+      },
+      "afterKeyboardScroll": {
+        "innerWidth": 320,
+        "innerHeight": 234,
+        "outerWidth": 1280,
+        "outerHeight": 1024,
+        "dpr": 4,
+        "rootZoom": "1",
+        "rootTransform": "none",
+        "visualScale": 1,
+        "projectLabelLines": 1,
+        "documentFits": true,
+        "main": {
+          "width": 320,
+          "height": 43.25,
+          "top": 191,
+          "bottom": 234.25,
+          "scrollWidth": 320,
+          "clientWidth": 320,
+          "scrollHeight": 455,
+          "clientHeight": 43,
+          "scrollTop": 29.25
+        },
+        "focus": {
+          "tag": "MAIN",
+          "id": "main-content",
+          "inMain": true,
+          "width": 320,
+          "height": 43.25,
+          "visibleFraction": 0.9942196531791907,
+          "intersectsViewport": true
+        }
+      },
+      "contentControlTabs": 1,
+      "contentControlFocus": {
+        "innerWidth": 320,
+        "innerHeight": 234,
+        "outerWidth": 1280,
+        "outerHeight": 1024,
+        "dpr": 4,
+        "rootZoom": "1",
+        "rootTransform": "none",
+        "visualScale": 1,
+        "projectLabelLines": 1,
+        "documentFits": true,
+        "main": {
+          "width": 320,
+          "height": 43.25,
+          "top": 191,
+          "bottom": 234.25,
+          "scrollWidth": 320,
+          "clientWidth": 320,
+          "scrollHeight": 455,
+          "clientHeight": 43,
+          "scrollTop": 303.25
+        },
+        "focus": {
+          "tag": "BUTTON",
+          "id": "",
+          "inMain": true,
+          "width": 64.66796875,
+          "height": 44,
+          "visibleFraction": 0.9772727272727273,
+          "intersectsViewport": true
+        }
+      },
+      "beforeAxeFocus": {
+        "tag": "BUTTON",
+        "id": "",
+        "inMain": true,
+        "width": 64.66796875,
+        "height": 44,
+        "visibleFraction": 0.9772727272727273,
+        "intersectsViewport": true
+      },
+      "violations": [],
+      "afterAxeFocus": {
+        "tag": "BUTTON",
+        "id": "",
+        "inMain": true,
+        "width": 64.66796875,
+        "height": 44,
+        "visibleFraction": 0.9772727272727273,
+        "intersectsViewport": true
+      }
+    }
+  ],
+  "controls": [
+    {
+      "factor": 2,
+      "action": "keyboard-pairing-and-project-selection",
+      "metrics": {
+        "innerWidth": 640,
+        "innerHeight": 468,
+        "outerWidth": 1280,
+        "outerHeight": 1024,
+        "dpr": 2,
+        "rootZoom": "1",
+        "rootTransform": "none",
+        "visualScale": 1,
+        "projectLabelLines": 14,
+        "documentFits": true,
+        "main": {
+          "width": 640,
+          "height": 105.5,
+          "top": 363,
+          "bottom": 468.5,
+          "scrollWidth": 640,
+          "clientWidth": 640,
+          "scrollHeight": 1469,
+          "clientHeight": 106,
+          "scrollTop": 87.5
+        },
+        "focus": {
+          "tag": "H2",
+          "id": "project-dossier-title",
+          "inMain": true,
+          "width": 608,
+          "height": 35.9921875,
+          "visibleFraction": 1,
+          "intersectsViewport": true
+        }
+      },
+      "browser": "156.0.8078.4"
+    },
+    {
+      "factor": 2,
+      "action": "skip-link",
+      "passed": true
+    },
+    {
+      "factor": 2,
+      "action": "menu-escape-restores-trigger",
+      "passed": true
+    },
+    {
+      "factor": 4,
+      "action": "keyboard-pairing-and-project-selection",
+      "metrics": {
+        "innerWidth": 320,
+        "innerHeight": 234,
+        "outerWidth": 1280,
+        "outerHeight": 1024,
+        "dpr": 4,
+        "rootZoom": "1",
+        "rootTransform": "none",
+        "visualScale": 1,
+        "projectLabelLines": 1,
+        "documentFits": true,
+        "main": {
+          "width": 320,
+          "height": 43.25,
+          "top": 191,
+          "bottom": 234.25,
+          "scrollWidth": 320,
+          "clientWidth": 320,
+          "scrollHeight": 1828,
+          "clientHeight": 43,
+          "scrollTop": 126.5
+        },
+        "focus": {
+          "tag": "H2",
+          "id": "project-dossier-title",
+          "inMain": true,
+          "width": 288,
+          "height": 36,
+          "visibleFraction": 0.8859592013888888,
+          "intersectsViewport": true
+        }
+      },
+      "browser": "156.0.8078.4"
+    },
+    {
+      "factor": 4,
+      "action": "skip-link",
+      "passed": true
+    },
+    {
+      "factor": 4,
+      "action": "menu-escape-restores-trigger",
+      "passed": true
+    }
+  ],
+  "failures": [
+    {
+      "factor": 2,
+      "kind": "short-project-label-wrap",
+      "lines": 14
+    },
+    {
+      "factor": 2,
+      "route": "/repositories",
+      "kind": "clipped-content-control",
+      "focus": {
+        "tag": "BUTTON",
+        "id": "",
+        "inMain": true,
+        "width": 568,
+        "height": 44,
+        "visibleFraction": 0.9772727272727273,
+        "intersectsViewport": true
+      }
+    },
+    {
+      "factor": 4,
+      "route": "/",
+      "kind": "clipped-content-control",
+      "focus": {
+        "tag": "BUTTON",
+        "id": "",
+        "inMain": true,
+        "width": 126.703125,
+        "height": 44,
+        "visibleFraction": 0.9772727272727273,
+        "intersectsViewport": true
+      }
+    },
+    {
+      "factor": 4,
+      "route": "/projects",
+      "kind": "clipped-content-control",
+      "focus": {
+        "tag": "BUTTON",
+        "id": "",
+        "inMain": true,
+        "width": 103.71484375,
+        "height": 44,
+        "visibleFraction": 0.9772727272727273,
+        "intersectsViewport": true
+      }
+    },
+    {
+      "factor": 4,
+      "route": "/epics",
+      "kind": "clipped-content-control",
+      "focus": {
+        "tag": "BUTTON",
+        "id": "planning-new",
+        "inMain": true,
+        "width": 122.75,
+        "height": 44,
+        "visibleFraction": 0.9772727272727273,
+        "intersectsViewport": true
+      }
+    },
+    {
+      "factor": 4,
+      "route": "/tasks",
+      "kind": "clipped-content-control",
+      "focus": {
+        "tag": "BUTTON",
+        "id": "",
+        "inMain": true,
+        "width": 128.7265625,
+        "height": 44,
+        "visibleFraction": 0.9772727272727273,
+        "intersectsViewport": true
+      }
+    },
+    {
+      "factor": 4,
+      "route": "/agents",
+      "kind": "clipped-content-control",
+      "focus": {
+        "tag": "BUTTON",
+        "id": "",
+        "inMain": true,
+        "width": 177.88671875,
+        "height": 44,
+        "visibleFraction": 0.9772727272727273,
+        "intersectsViewport": true
+      }
+    },
+    {
+      "factor": 4,
+      "route": "/wiki",
+      "kind": "clipped-content-control",
+      "focus": {
+        "tag": "BUTTON",
+        "id": "",
+        "inMain": true,
+        "width": 136.296875,
+        "height": 44,
+        "visibleFraction": 0.9772727272727273,
+        "intersectsViewport": true
+      }
+    },
+    {
+      "factor": 4,
+      "route": "/findings",
+      "kind": "clipped-content-control",
+      "focus": {
+        "tag": "INPUT",
+        "id": "finding-query",
+        "inMain": true,
+        "width": 280,
+        "height": 44,
+        "visibleFraction": 0.9772727272727273,
+        "intersectsViewport": true
+      }
+    },
+    {
+      "factor": 4,
+      "route": "/reports",
+      "kind": "clipped-content-control",
+      "focus": {
+        "tag": "BUTTON",
+        "id": "",
+        "inMain": true,
+        "width": 34.6953125,
+        "height": 44,
+        "visibleFraction": 0.9772727272727273,
+        "intersectsViewport": true
+      }
+    },
+    {
+      "factor": 4,
+      "route": "/files",
+      "kind": "clipped-content-control",
+      "focus": {
+        "tag": "A",
+        "id": "",
+        "inMain": true,
+        "width": 172.8984375,
+        "height": 44,
+        "visibleFraction": 0.9772727272727273,
+        "intersectsViewport": true
+      }
+    },
+    {
+      "factor": 4,
+      "route": "/repositories",
+      "kind": "clipped-content-control",
+      "focus": {
+        "tag": "BUTTON",
+        "id": "",
+        "inMain": true,
+        "width": 248,
+        "height": 44,
+        "visibleFraction": 0.9772727272727273,
+        "intersectsViewport": true
+      }
+    },
+    {
+      "factor": 4,
+      "route": "/flow",
+      "kind": "clipped-content-control",
+      "focus": {
+        "tag": "BUTTON",
+        "id": "",
+        "inMain": true,
+        "width": 64.66796875,
+        "height": 44,
+        "visibleFraction": 0.9772727272727273,
+        "intersectsViewport": true
+      }
+    }
+  ],
+  "apiErrors": [],
+  "pageErrors": []
+}

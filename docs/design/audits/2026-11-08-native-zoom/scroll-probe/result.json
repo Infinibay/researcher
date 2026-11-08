@@ -1,0 +1,10 @@
+{
+  "status": "passed",
+  "scope": "Focused real UI on retained synthetic host; no resource seeds or model requests",
+  "browser_exit": 0,
+  "service_exit": 143,
+  "storage_unchanged": true,
+  "runs": 0,
+  "dispatches": 0,
+  "integrity": "ok"
+}

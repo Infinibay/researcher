@@ -3490,7 +3490,8 @@
         "frontend/tests/navigation-audit.mjs"
       ],
       "notes": [
-        "Real desktop/mobile read-only owner capture now passes; full rendered state, keyboard, screen-reader/zoom and human acceptance remain pending. See browser-evidence.json."
+        "Real desktop/mobile read-only owner capture now passes; full rendered state, keyboard, screen-reader/zoom and human acceptance remain pending. See browser-evidence.json.",
+        "November8: native Chromium200/400zoom now verifies24real route states and24keyboard scroll completions; baseline1440/320 verifies24states. Earlier zoom-pending wording is superseded for this scope only. Screen reader/human and integrated final acceptance remain open. See native-zoom-results.json."
       ]
     },
     "36_desktop_concepts": {
@@ -7293,6 +7294,20 @@
         "Deferred link/header/error/efficiency details and final whole-branch validation"
       ],
       "human_comprehension": null
+    },
+    "native_zoom_validation": {
+      "status": "verified_scoped",
+      "scope": "Native Chromium200/400 product route, keyboard and layout validation; not screen-reader, human comprehension or universal WCAG acceptance",
+      "evidence": [
+        "docs/modernization/native-zoom-results.json",
+        "docs/design/audits/2026-11-08-native-zoom/report.md",
+        "docs/design/audits/2026-11-08-native-zoom/independent-review.md",
+        "frontend/tests/native-zoom-audit.mjs"
+      ],
+      "remaining": [
+        "Screen-reader and human evaluation",
+        "Final integrated accessibility acceptance; no universal WCAG claim"
+      ]
     }
   }
 }

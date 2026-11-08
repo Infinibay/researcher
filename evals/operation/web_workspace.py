@@ -55,7 +55,7 @@ def main():
     parser.add_argument("--assets", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--node", type=Path, required=True)
-    parser.add_argument("--journey", choices=("workspace", "knowledge", "wiki", "files", "navigation", "interaction", "projects"), default="workspace")
+    parser.add_argument("--journey", choices=("workspace", "knowledge", "wiki", "files", "navigation", "native_zoom", "interaction", "projects"), default="workspace")
     parser.add_argument("--live-projects", action="store_true", help="Authorize up to two real subscription planning attempts in the projects journey")
     args = parser.parse_args()
     if (args.journey == 'projects') != args.live_projects:
@@ -114,6 +114,9 @@ def main():
         if args.journey == "navigation":
             script = "workspace"
             env["RESEARCHER_E2E_NAVIGATION"] = "1"
+        if args.journey == "native_zoom":
+            script = "workspace"
+            env["RESEARCHER_E2E_NATIVE_ZOOM"] = "1"
         if args.journey == "interaction":
             script = "workspace"
             env["RESEARCHER_E2E_INTERACTION"] = "1"
@@ -135,7 +138,7 @@ def main():
             assert source_before == hashlib.sha256((source/'observations.py').read_bytes()).hexdigest()
             result['model_turns'] = result['storage']['native_starts']
             result['source_unchanged'] = True
-        elif args.journey in ("workspace", "navigation", "interaction"):
+        elif args.journey in ("workspace", "navigation", "native_zoom", "interaction"):
             assert len(result["storage"]["tasks"]) == 2
             assert len(result["storage"]["groups"]) == len(result["storage"]["milestones"]) == 1
             assert len(result["storage"]["dependencies"]) == 1

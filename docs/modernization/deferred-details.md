@@ -109,6 +109,11 @@ retirar su interpretación de actividad basada en metadatos pertenece al bloque
 principal de engine/estados; el ajuste visual de altura sí pertenece al pulido.
 No se certifica aceptación integral de Resumen por el pase de fixtures/Axe.
 
+Actualización8noviembre: corregida la compresión del nombre del proyecto y el
+acceso al contenido en viewport corto por zoom nativo;24estados200/400% y24de
+baseline1440/320px pasan. [Informe](../design/audits/2026-11-08-native-zoom/report.md).
+No cierra los otros puntos de densidad/espaciado de esta entrada ni el lector.
+
 ## DD042 — densidad y vocabulario secundario de Planificación
 
 Tras todas las capacidades principales: compactar espacios entre hitos/tareas,

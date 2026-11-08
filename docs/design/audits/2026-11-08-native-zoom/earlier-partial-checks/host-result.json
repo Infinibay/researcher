@@ -1,0 +1,147 @@
+{
+  "status": "passed",
+  "journey": "native_zoom",
+  "backend": "/home/andres/.codex/worktrees/b09e/researcher/.superpowers/sdd/2026-10-31-actualizacion-proyecto/native-runtime-env/lib/python3.12/site-packages/backend/__init__.py",
+  "model_turns": 0,
+  "maximum_model_turns": 0,
+  "mocked_api_responses": false,
+  "web_index_sha256": "9d309d86363502797a51dcaf4ccc4e83532edf45504cde5e03eaacbd9b21b473",
+  "browser_exit": 0,
+  "storage": {
+    "projects": [
+      {
+        "id": 1,
+        "name": "Atlas comprobable",
+        "description": "Comparar resultados con fuentes verificables. No presuponer que una propuesta est\u00e1 aceptada."
+      },
+      {
+        "id": 2,
+        "name": "Contexto separado",
+        "description": "No debe heredar las tareas de Atlas."
+      }
+    ],
+    "groups": [
+      {
+        "id": 1,
+        "project_id": 1,
+        "title": "Reunir evidencia"
+      }
+    ],
+    "milestones": [
+      {
+        "id": 1,
+        "epic_id": 1,
+        "title": "Datos contrastados"
+      }
+    ],
+    "tasks": [
+      {
+        "id": 1,
+        "project_id": 1,
+        "epic_id": 1,
+        "title": "Capturar fuente",
+        "status": "backlog"
+      },
+      {
+        "id": 2,
+        "project_id": 1,
+        "epic_id": 1,
+        "title": "Contrastar resultado",
+        "status": "backlog"
+      }
+    ],
+    "dependencies": [
+      {
+        "task_id": 2,
+        "depends_on_task_id": 1
+      }
+    ],
+    "corrections": [
+      {
+        "project_id": 1,
+        "task_id": 2,
+        "version": 2,
+        "statement": "Ejemplo concreto: dos fuentes con el mismo t\u00edtulo pueden describir versiones diferentes. Compara fecha y contenido antes de tratarlas como equivalentes.",
+        "source_kind": "user_example"
+      }
+    ],
+    "files": [],
+    "file_operations": [],
+    "captured_sources": 0,
+    "wiki": [],
+    "wiki_revisions": [],
+    "runs": 0,
+    "dispatches": 0,
+    "native_starts": 0,
+    "integrity": "ok"
+  },
+  "service_exit": 143,
+  "storage_after_close": {
+    "projects": [
+      {
+        "id": 1,
+        "name": "Atlas comprobable",
+        "description": "Comparar resultados con fuentes verificables. No presuponer que una propuesta est\u00e1 aceptada."
+      },
+      {
+        "id": 2,
+        "name": "Contexto separado",
+        "description": "No debe heredar las tareas de Atlas."
+      }
+    ],
+    "groups": [
+      {
+        "id": 1,
+        "project_id": 1,
+        "title": "Reunir evidencia"
+      }
+    ],
+    "milestones": [
+      {
+        "id": 1,
+        "epic_id": 1,
+        "title": "Datos contrastados"
+      }
+    ],
+    "tasks": [
+      {
+        "id": 1,
+        "project_id": 1,
+        "epic_id": 1,
+        "title": "Capturar fuente",
+        "status": "backlog"
+      },
+      {
+        "id": 2,
+        "project_id": 1,
+        "epic_id": 1,
+        "title": "Contrastar resultado",
+        "status": "backlog"
+      }
+    ],
+    "dependencies": [
+      {
+        "task_id": 2,
+        "depends_on_task_id": 1
+      }
+    ],
+    "corrections": [
+      {
+        "project_id": 1,
+        "task_id": 2,
+        "version": 2,
+        "statement": "Ejemplo concreto: dos fuentes con el mismo t\u00edtulo pueden describir versiones diferentes. Compara fecha y contenido antes de tratarlas como equivalentes.",
+        "source_kind": "user_example"
+      }
+    ],
+    "files": [],
+    "file_operations": [],
+    "captured_sources": 0,
+    "wiki": [],
+    "wiki_revisions": [],
+    "runs": 0,
+    "dispatches": 0,
+    "native_starts": 0,
+    "integrity": "ok"
+  }
+}

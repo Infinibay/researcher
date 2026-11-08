@@ -1,0 +1,86 @@
+[
+  {
+    "case": "initial-axe-focus",
+    "host_status": "failed",
+    "browser_exit": 1,
+    "service_exit": 143,
+    "states": 3,
+    "failures": 1,
+    "runs": 0,
+    "dispatches": 0,
+    "integrity": "ok",
+    "index_sha256": "9d309d86363502797a51dcaf4ccc4e83532edf45504cde5e03eaacbd9b21b473"
+  },
+  {
+    "case": "earlier-partial-checks",
+    "host_status": "passed",
+    "browser_exit": 0,
+    "service_exit": 143,
+    "states": 24,
+    "failures": 0,
+    "runs": 0,
+    "dispatches": 0,
+    "integrity": "ok",
+    "index_sha256": "9d309d86363502797a51dcaf4ccc4e83532edf45504cde5e03eaacbd9b21b473"
+  },
+  {
+    "case": "control-clipping-red",
+    "host_status": "failed",
+    "browser_exit": 1,
+    "service_exit": 143,
+    "states": 24,
+    "failures": 13,
+    "runs": 0,
+    "dispatches": 0,
+    "integrity": "ok",
+    "index_sha256": "9d309d86363502797a51dcaf4ccc4e83532edf45504cde5e03eaacbd9b21b473"
+  },
+  {
+    "case": "document-reflow",
+    "host_status": "failed",
+    "browser_exit": 1,
+    "service_exit": 143,
+    "states": 24,
+    "failures": 2,
+    "runs": 0,
+    "dispatches": 0,
+    "integrity": "ok",
+    "index_sha256": "707523150435fdd0f0bb36d81c91bfd8b678832fd13ba8fe58af6dc50d2093ed"
+  },
+  {
+    "case": "focus-poll",
+    "host_status": "failed",
+    "browser_exit": 1,
+    "service_exit": 143,
+    "states": 3,
+    "failures": 1,
+    "runs": 0,
+    "dispatches": 0,
+    "integrity": "ok",
+    "index_sha256": "707523150435fdd0f0bb36d81c91bfd8b678832fd13ba8fe58af6dc50d2093ed"
+  },
+  {
+    "case": "focus-margin",
+    "host_status": "failed",
+    "browser_exit": 1,
+    "service_exit": 143,
+    "states": 15,
+    "failures": 1,
+    "runs": 0,
+    "dispatches": 0,
+    "integrity": "ok",
+    "index_sha256": "be011881958834d8e2c34e5fb5f460c3e5cfbdb1801877b815d9d54341f5b8dd"
+  },
+  {
+    "case": "scrollend-final",
+    "host_status": "passed",
+    "browser_exit": 0,
+    "service_exit": 143,
+    "states": 24,
+    "failures": 0,
+    "runs": 0,
+    "dispatches": 0,
+    "integrity": "ok",
+    "index_sha256": "be011881958834d8e2c34e5fb5f460c3e5cfbdb1801877b815d9d54341f5b8dd"
+  }
+]

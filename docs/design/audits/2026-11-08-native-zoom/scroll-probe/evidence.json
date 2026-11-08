@@ -1,0 +1,51 @@
+{
+  "status": "passed",
+  "states": [
+    {
+      "waitEnd": false,
+      "before": {
+        "scrollTop": 295,
+        "top": 154.79296875,
+        "bottom": 198.79296875,
+        "height": 44,
+        "innerHeight": 234,
+        "focused": false
+      },
+      "early": {
+        "scrollTop": 355.5,
+        "top": -9.70703125,
+        "bottom": 34.29296875,
+        "height": 44,
+        "innerHeight": 234,
+        "focused": false
+      },
+      "final": {
+        "scrollTop": 362,
+        "top": -16.20703125,
+        "bottom": 27.79296875,
+        "height": 44,
+        "innerHeight": 234,
+        "focused": true
+      }
+    },
+    {
+      "waitEnd": true,
+      "before": {
+        "scrollTop": 295,
+        "top": 154.79296875,
+        "bottom": 198.79296875,
+        "height": 44,
+        "innerHeight": 234,
+        "focused": false
+      },
+      "final": {
+        "scrollTop": 295,
+        "top": 154.79296875,
+        "bottom": 198.79296875,
+        "height": 44,
+        "innerHeight": 234,
+        "focused": true
+      }
+    }
+  ]
+}

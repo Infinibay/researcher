@@ -1,0 +1,573 @@
+{"factor":2,"route":"/","failures":1}
+{"factor":2,"route":"/projects","failures":1}
+{"factor":2,"route":"/epics","failures":1}
+{"factor":2,"route":"/tasks","failures":1}
+{"factor":2,"route":"/agents","failures":1}
+{"factor":2,"route":"/chat","failures":1}
+{"factor":2,"route":"/wiki","failures":1}
+{"factor":2,"route":"/findings","failures":1}
+{"factor":2,"route":"/reports","failures":1}
+{"factor":2,"route":"/files","failures":1}
+{"factor":2,"route":"/repositories","failures":2}
+{"factor":2,"route":"/flow","failures":2}
+{"factor":4,"route":"/","failures":3}
+{"factor":4,"route":"/projects","failures":4}
+{"factor":4,"route":"/epics","failures":5}
+{"factor":4,"route":"/tasks","failures":6}
+{"factor":4,"route":"/agents","failures":7}
+{"factor":4,"route":"/chat","failures":7}
+{"factor":4,"route":"/wiki","failures":8}
+{"factor":4,"route":"/findings","failures":9}
+{"factor":4,"route":"/reports","failures":10}
+{"factor":4,"route":"/files","failures":11}
+{"factor":4,"route":"/repositories","failures":12}
+{"factor":4,"route":"/flow","failures":13}
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+ExpectError: expect(received).toEqual(expected) // deep equality
+
+- Expected  -   1
++ Received  + 175
+
+- Array []
++ Array [
++   Object {
++     "factor": 2,
++     "kind": "short-project-label-wrap",
++     "lines": 14,
++   },
++   Object {
++     "factor": 2,
++     "focus": Object {
++       "height": 44,
++       "id": "",
++       "inMain": true,
++       "intersectsViewport": true,
++       "tag": "BUTTON",
++       "visibleFraction": 0.9772727272727273,
++       "width": 568,
++     },
++     "kind": "clipped-content-control",
++     "route": "/repositories",
++   },
++   Object {
++     "factor": 4,
++     "focus": Object {
++       "height": 44,
++       "id": "",
++       "inMain": true,
++       "intersectsViewport": true,
++       "tag": "BUTTON",
++       "visibleFraction": 0.9772727272727273,
++       "width": 126.703125,
++     },
++     "kind": "clipped-content-control",
++     "route": "/",
++   },
++   Object {
++     "factor": 4,
++     "focus": Object {
++       "height": 44,
++       "id": "",
++       "inMain": true,
++       "intersectsViewport": true,
++       "tag": "BUTTON",
++       "visibleFraction": 0.9772727272727273,
++       "width": 103.71484375,
++     },
++     "kind": "clipped-content-control",
++     "route": "/projects",
++   },
++   Object {
++     "factor": 4,
++     "focus": Object {
++       "height": 44,
++       "id": "planning-new",
++       "inMain": true,
++       "intersectsViewport": true,
++       "tag": "BUTTON",
++       "visibleFraction": 0.9772727272727273,
++       "width": 122.75,
++     },
++     "kind": "clipped-content-control",
++     "route": "/epics",
++   },
++   Object {
++     "factor": 4,
++     "focus": Object {
++       "height": 44,
++       "id": "",
++       "inMain": true,
++       "intersectsViewport": true,
++       "tag": "BUTTON",
++       "visibleFraction": 0.9772727272727273,
++       "width": 128.7265625,
++     },
++     "kind": "clipped-content-control",
++     "route": "/tasks",
++   },
++   Object {
++     "factor": 4,
++     "focus": Object {
++       "height": 44,
++       "id": "",
++       "inMain": true,
++       "intersectsViewport": true,
++       "tag": "BUTTON",
++       "visibleFraction": 0.9772727272727273,
++       "width": 177.88671875,
++     },
++     "kind": "clipped-content-control",
++     "route": "/agents",
++   },
++   Object {
++     "factor": 4,
++     "focus": Object {
++       "height": 44,
++       "id": "",
++       "inMain": true,
++       "intersectsViewport": true,
++       "tag": "BUTTON",
++       "visibleFraction": 0.9772727272727273,
++       "width": 136.296875,
++     },
++     "kind": "clipped-content-control",
++     "route": "/wiki",
++   },
++   Object {
++     "factor": 4,
++     "focus": Object {
++       "height": 44,
++       "id": "finding-query",
++       "inMain": true,
++       "intersectsViewport": true,
++       "tag": "INPUT",
++       "visibleFraction": 0.9772727272727273,
++       "width": 280,
++     },
++     "kind": "clipped-content-control",
++     "route": "/findings",
++   },
++   Object {
++     "factor": 4,
++     "focus": Object {
++       "height": 44,
++       "id": "",
++       "inMain": true,
++       "intersectsViewport": true,
++       "tag": "BUTTON",
++       "visibleFraction": 0.9772727272727273,
++       "width": 34.6953125,
++     },
++     "kind": "clipped-content-control",
++     "route": "/reports",
++   },
++   Object {
++     "factor": 4,
++     "focus": Object {
++       "height": 44,
++       "id": "",
++       "inMain": true,
++       "intersectsViewport": true,
++       "tag": "A",
++       "visibleFraction": 0.9772727272727273,
++       "width": 172.8984375,
++     },
++     "kind": "clipped-content-control",
++     "route": "/files",
++   },
++   Object {
++     "factor": 4,
++     "focus": Object {
++       "height": 44,
++       "id": "",
++       "inMain": true,
++       "intersectsViewport": true,
++       "tag": "BUTTON",
++       "visibleFraction": 0.9772727272727273,
++       "width": 248,
++     },
++     "kind": "clipped-content-control",
++     "route": "/repositories",
++   },
++   Object {
++     "factor": 4,
++     "focus": Object {
++       "height": 44,
++       "id": "",
++       "inMain": true,
++       "intersectsViewport": true,
++       "tag": "BUTTON",
++       "visibleFraction": 0.9772727272727273,
++       "width": 64.66796875,
++     },
++     "kind": "clipped-content-control",
++     "route": "/flow",
++   },
++ ]
+    at captureRawStack (/home/andres/.codex/worktrees/b09e/researcher/frontend/node_modules/playwright-core/lib/coreBundle.js:9282:17)
+    at callMatcherAsStep (/home/andres/.codex/worktrees/b09e/researcher/frontend/node_modules/playwright/lib/matchers/expect.js:13316:57)
+    at Object.toEqual (/home/andres/.codex/worktrees/b09e/researcher/frontend/node_modules/playwright/lib/matchers/expect.js:13308:23)
+    at /home/andres/.codex/worktrees/b09e/researcher/frontend/tests/workspace.e2e.mjs:193:42 {
+  matcherResult: {
+    actual: [
+      { factor: 2, kind: 'short-project-label-wrap', lines: 14 },
+      {
+        factor: 2,
+        route: '/repositories',
+        kind: 'clipped-content-control',
+        focus: {
+          tag: 'BUTTON',
+          id: '',
+          inMain: true,
+          width: 568,
+          height: 44,
+          visibleFraction: 0.9772727272727273,
+          intersectsViewport: true
+        }
+      },
+      {
+        factor: 4,
+        route: '/',
+        kind: 'clipped-content-control',
+        focus: {
+          tag: 'BUTTON',
+          id: '',
+          inMain: true,
+          width: 126.703125,
+          height: 44,
+          visibleFraction: 0.9772727272727273,
+          intersectsViewport: true
+        }
+      },
+      {
+        factor: 4,
+        route: '/projects',
+        kind: 'clipped-content-control',
+        focus: {
+          tag: 'BUTTON',
+          id: '',
+          inMain: true,
+          width: 103.71484375,
+          height: 44,
+          visibleFraction: 0.9772727272727273,
+          intersectsViewport: true
+        }
+      },
+      {
+        factor: 4,
+        route: '/epics',
+        kind: 'clipped-content-control',
+        focus: {
+          tag: 'BUTTON',
+          id: 'planning-new',
+          inMain: true,
+          width: 122.75,
+          height: 44,
+          visibleFraction: 0.9772727272727273,
+          intersectsViewport: true
+        }
+      },
+      {
+        factor: 4,
+        route: '/tasks',
+        kind: 'clipped-content-control',
+        focus: {
+          tag: 'BUTTON',
+          id: '',
+          inMain: true,
+          width: 128.7265625,
+          height: 44,
+          visibleFraction: 0.9772727272727273,
+          intersectsViewport: true
+        }
+      },
+      {
+        factor: 4,
+        route: '/agents',
+        kind: 'clipped-content-control',
+        focus: {
+          tag: 'BUTTON',
+          id: '',
+          inMain: true,
+          width: 177.88671875,
+          height: 44,
+          visibleFraction: 0.9772727272727273,
+          intersectsViewport: true
+        }
+      },
+      {
+        factor: 4,
+        route: '/wiki',
+        kind: 'clipped-content-control',
+        focus: {
+          tag: 'BUTTON',
+          id: '',
+          inMain: true,
+          width: 136.296875,
+          height: 44,
+          visibleFraction: 0.9772727272727273,
+          intersectsViewport: true
+        }
+      },
+      {
+        factor: 4,
+        route: '/findings',
+        kind: 'clipped-content-control',
+        focus: {
+          tag: 'INPUT',
+          id: 'finding-query',
+          inMain: true,
+          width: 280,
+          height: 44,
+          visibleFraction: 0.9772727272727273,
+          intersectsViewport: true
+        }
+      },
+      {
+        factor: 4,
+        route: '/reports',
+        kind: 'clipped-content-control',
+        focus: {
+          tag: 'BUTTON',
+          id: '',
+          inMain: true,
+          width: 34.6953125,
+          height: 44,
+          visibleFraction: 0.9772727272727273,
+          intersectsViewport: true
+        }
+      },
+      {
+        factor: 4,
+        route: '/files',
+        kind: 'clipped-content-control',
+        focus: {
+          tag: 'A',
+          id: '',
+          inMain: true,
+          width: 172.8984375,
+          height: 44,
+          visibleFraction: 0.9772727272727273,
+          intersectsViewport: true
+        }
+      },
+      {
+        factor: 4,
+        route: '/repositories',
+        kind: 'clipped-content-control',
+        focus: {
+          tag: 'BUTTON',
+          id: '',
+          inMain: true,
+          width: 248,
+          height: 44,
+          visibleFraction: 0.9772727272727273,
+          intersectsViewport: true
+        }
+      },
+      {
+        factor: 4,
+        route: '/flow',
+        kind: 'clipped-content-control',
+        focus: {
+          tag: 'BUTTON',
+          id: '',
+          inMain: true,
+          width: 64.66796875,
+          height: 44,
+          visibleFraction: 0.9772727272727273,
+          intersectsViewport: true
+        }
+      }
+    ],
+    expected: [],
+    message: 'expect(received).toEqual(expected) // deep equality\n' +
+      '\n' +
+      '- Expected  -   1\n' +
+      '+ Received  + 175\n' +
+      '\n' +
+      '- Array []\n' +
+      '+ Array [\n' +
+      '+   Object {\n' +
+      '+     "factor": 2,\n' +
+      '+     "kind": "short-project-label-wrap",\n' +
+      '+     "lines": 14,\n' +
+      '+   },\n' +
+      '+   Object {\n' +
+      '+     "factor": 2,\n' +
+      '+     "focus": Object {\n' +
+      '+       "height": 44,\n' +
+      '+       "id": "",\n' +
+      '+       "inMain": true,\n' +
+      '+       "intersectsViewport": true,\n' +
+      '+       "tag": "BUTTON",\n' +
+      '+       "visibleFraction": 0.9772727272727273,\n' +
+      '+       "width": 568,\n' +
+      '+     },\n' +
+      '+     "kind": "clipped-content-control",\n' +
+      '+     "route": "/repositories",\n' +
+      '+   },\n' +
+      '+   Object {\n' +
+      '+     "factor": 4,\n' +
+      '+     "focus": Object {\n' +
+      '+       "height": 44,\n' +
+      '+       "id": "",\n' +
+      '+       "inMain": true,\n' +
+      '+       "intersectsViewport": true,\n' +
+      '+       "tag": "BUTTON",\n' +
+      '+       "visibleFraction": 0.9772727272727273,\n' +
+      '+       "width": 126.703125,\n' +
+      '+     },\n' +
+      '+     "kind": "clipped-content-control",\n' +
+      '+     "route": "/",\n' +
+      '+   },\n' +
+      '+   Object {\n' +
+      '+     "factor": 4,\n' +
+      '+     "focus": Object {\n' +
+      '+       "height": 44,\n' +
+      '+       "id": "",\n' +
+      '+       "inMain": true,\n' +
+      '+       "intersectsViewport": true,\n' +
+      '+       "tag": "BUTTON",\n' +
+      '+       "visibleFraction": 0.9772727272727273,\n' +
+      '+       "width": 103.71484375,\n' +
+      '+     },\n' +
+      '+     "kind": "clipped-content-control",\n' +
+      '+     "route": "/projects",\n' +
+      '+   },\n' +
+      '+   Object {\n' +
+      '+     "factor": 4,\n' +
+      '+     "focus": Object {\n' +
+      '+       "height": 44,\n' +
+      '+       "id": "planning-new",\n' +
+      '+       "inMain": true,\n' +
+      '+       "intersectsViewport": true,\n' +
+      '+       "tag": "BUTTON",\n' +
+      '+       "visibleFraction": 0.9772727272727273,\n' +
+      '+       "width": 122.75,\n' +
+      '+     },\n' +
+      '+     "kind": "clipped-content-control",\n' +
+      '+     "route": "/epics",\n' +
+      '+   },\n' +
+      '+   Object {\n' +
+      '+     "factor": 4,\n' +
+      '+     "focus": Object {\n' +
+      '+       "height": 44,\n' +
+      '+       "id": "",\n' +
+      '+       "inMain": true,\n' +
+      '+       "intersectsViewport": true,\n' +
+      '+       "tag": "BUTTON",\n' +
+      '+       "visibleFraction": 0.9772727272727273,\n' +
+      '+       "width": 128.7265625,\n' +
+      '+     },\n' +
+      '+     "kind": "clipped-content-control",\n' +
+      '+     "route": "/tasks",\n' +
+      '+   },\n' +
+      '+   Object {\n' +
+      '+     "factor": 4,\n' +
+      '+     "focus": Object {\n' +
+      '+       "height": 44,\n' +
+      '+       "id": "",\n' +
+      '+       "inMain": true,\n' +
+      '+       "intersectsViewport": true,\n' +
+      '+       "tag": "BUTTON",\n' +
+      '+       "visibleFraction": 0.9772727272727273,\n' +
+      '+       "width": 177.88671875,\n' +
+      '+     },\n' +
+      '+     "kind": "clipped-content-control",\n' +
+      '+     "route": "/agents",\n' +
+      '+   },\n' +
+      '+   Object {\n' +
+      '+     "factor": 4,\n' +
+      '+     "focus": Object {\n' +
+      '+       "height": 44,\n' +
+      '+       "id": "",\n' +
+      '+       "inMain": true,\n' +
+      '+       "intersectsViewport": true,\n' +
+      '+       "tag": "BUTTON",\n' +
+      '+       "visibleFraction": 0.9772727272727273,\n' +
+      '+       "width": 136.296875,\n' +
+      '+     },\n' +
+      '+     "kind": "clipped-content-control",\n' +
+      '+     "route": "/wiki",\n' +
+      '+   },\n' +
+      '+   Object {\n' +
+      '+     "factor": 4,\n' +
+      '+     "focus": Object {\n' +
+      '+       "height": 44,\n' +
+      '+       "id": "finding-query",\n' +
+      '+       "inMain": true,\n' +
+      '+       "intersectsViewport": true,\n' +
+      '+       "tag": "INPUT",\n' +
+      '+       "visibleFraction": 0.9772727272727273,\n' +
+      '+       "width": 280,\n' +
+      '+     },\n' +
+      '+     "kind": "clipped-content-control",\n' +
+      '+     "route": "/findings",\n' +
+      '+   },\n' +
+      '+   Object {\n' +
+      '+     "factor": 4,\n' +
+      '+     "focus": Object {\n' +
+      '+       "height": 44,\n' +
+      '+       "id": "",\n' +
+      '+       "inMain": true,\n' +
+      '+       "intersectsViewport": true,\n' +
+      '+       "tag": "BUTTON",\n' +
+      '+       "visibleFraction": 0.9772727272727273,\n' +
+      '+       "width": 34.6953125,\n' +
+      '+     },\n' +
+      '+     "kind": "clipped-content-control",\n' +
+      '+     "route": "/reports",\n' +
+      '+   },\n' +
+      '+   Object {\n' +
+      '+     "factor": 4,\n' +
+      '+     "focus": Object {\n' +
+      '+       "height": 44,\n' +
+      '+       "id": "",\n' +
+      '+       "inMain": true,\n' +
+      '+       "intersectsViewport": true,\n' +
+      '+       "tag": "A",\n' +
+      '+       "visibleFraction": 0.9772727272727273,\n' +
+      '+       "width": 172.8984375,\n' +
+      '+     },\n' +
+      '+     "kind": "clipped-content-control",\n' +
+      '+     "route": "/files",\n' +
+      '+   },\n' +
+      '+   Object {\n' +
+      '+     "factor": 4,\n' +
+      '+     "focus": Object {\n' +
+      '+       "height": 44,\n' +
+      '+       "id": "",\n' +
+      '+       "inMain": true,\n' +
+      '+       "intersectsViewport": true,\n' +
+      '+       "tag": "BUTTON",\n' +
+      '+       "visibleFraction": 0.9772727272727273,\n' +
+      '+       "width": 248,\n' +
+      '+     },\n' +
+      '+     "kind": "clipped-content-control",\n' +
+      '+     "route": "/repositories",\n' +
+      '+   },\n' +
+      '+   Object {\n' +
+      '+     "factor": 4,\n' +
+      '+     "focus": Object {\n' +
+      '+       "height": 44,\n' +
+      '+       "id": "",\n' +
+      '+       "inMain": true,\n' +
+      '+       "intersectsViewport": true,\n' +
+      '+       "tag": "BUTTON",\n' +
+      '+       "visibleFraction": 0.9772727272727273,\n' +
+      '+       "width": 64.66796875,\n' +
+      '+     },\n' +
+      '+     "kind": "clipped-content-control",\n' +
+      '+     "route": "/flow",\n' +
+      '+   },\n' +
+      '+ ]',
+    name: 'toEqual',
+    pass: false
+  }
+}
+
+Node.js v24.22.2

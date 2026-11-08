@@ -185,11 +185,18 @@ try {
     evidence.interaction = await auditInteraction(page, output, navigate)
     expect(evidence.errors).toEqual([])
   }
+  if (process.env.RESEARCHER_E2E_NATIVE_ZOOM === '1') {
+    // Finish baseline seeding before launching each real-zoom browser serially.
+    await browser.close()
+    const { auditNativeZoom } = await import('./native-zoom-audit.mjs')
+    evidence.nativeZoom = await auditNativeZoom({ origin, ownerFile, output, projectId: alpha })
+    expect(evidence.nativeZoom.failures).toEqual([])
+  }
   evidence.status = 'passed'
 } catch (error) {
   evidence.status = 'failed'
   evidence.error = String(error)
-  if (page) {
+  if (page && !page.isClosed()) {
     await page.screenshot({ path: path.join(output, 'failure.png'), fullPage: true }).catch(() => {})
     await fs.writeFile(path.join(output, 'failure.txt'), await page.locator('body').innerText()).catch(() => {})
   }

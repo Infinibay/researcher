@@ -1,3 +1,4 @@
+/** Assemble owner routes and keep newly selected content reachable by keyboard, including short zoomed viewports. @module */
 import './styles/workspace.css'
 import { useEffect, useRef } from 'react'
 import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom'
@@ -19,6 +20,7 @@ import { ReportsPage } from './components/pages/ReportsPage'
 import { AgentsPage } from './components/pages/AgentsPage'
 import { ActivityFeed } from './components/chat/ActivityFeed'
 
+/** Reset a changed route's content and reveal its focused main region when the document itself must scroll. */
 function RouteFocus() {
   const { pathname } = useLocation()
   const previousPath = useRef(pathname)
@@ -27,11 +29,12 @@ function RouteFocus() {
     previousPath.current = pathname
     const main = document.getElementById('main-content')
     main?.scrollTo(0, 0)
-    main?.focus({ preventScroll: true })
+    main?.focus()
   }, [pathname])
   return null
 }
 
+/** Share navigation, project controls and optional activity across the twelve owner workspace routes. */
 export default function App() {
   useWebSocketSync()
   const feedOpen = useActivityFeedStore((s) => s.feedOpen)
@@ -46,7 +49,7 @@ export default function App() {
           <button className="workspace-menu-close" popoverTarget="workspace-menu" popoverTargetAction="hide">Cerrar menú</button>
           <Sidebar onNavigate={() => document.getElementById('workspace-menu')?.hidePopover()} />
         </div>
-        <div className="flex min-w-0 flex-1 flex-col overflow-hidden">
+        <div className="workspace-column flex min-w-0 flex-1 flex-col overflow-hidden">
           <Header />
           <div className="workspace-body relative flex flex-1 overflow-hidden">
             <main id="main-content" tabIndex={-1} className="workspace-content min-w-0 flex-1 overflow-auto p-6">

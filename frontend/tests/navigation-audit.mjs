@@ -4,7 +4,7 @@ import AxeBuilder from '@axe-core/playwright'
 import fs from 'node:fs/promises'
 import path from 'node:path'
 
-const routes = [
+export const routes = [
   ['Resumen', '/', '.overview-workbench'],
   ['Proyectos', '/projects', '.project-workbench'],
   ['Planificación', '/epics', '.planning-workbench'],
@@ -20,7 +20,7 @@ const routes = [
 ]
 
 /** Reach a control with actual Tab presses, reporting inaccessible controls instead of forcing DOM focus. */
-async function tabTo(page, target, limit = 100) {
+export async function tabTo(page, target, limit = 100) {
   for (let presses = 0; presses <= limit; presses += 1) {
     if (await target.evaluate(node => document.activeElement === node)) return presses
     await page.keyboard.press('Tab')

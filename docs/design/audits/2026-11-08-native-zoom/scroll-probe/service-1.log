@@ -1,0 +1,33 @@
+Native runtime requested; API startup must validate its host configuration. This check does not prove account or Ken readiness.
+Starting API in a bounded service group.
+INFO:     Started server process [105073]
+INFO:     Waiting for application startup.
+Researcher local access code file: /home/andres/.codex/worktrees/b09e/researcher/.researcher/evaluations/native-zoom-20261108-focus-margin/host/auth/owner-105073-62604a4ffdaa4818a4297eb23edb2cc9.key
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://127.0.0.1:56581 (Press CTRL+C to quit)
+INFO:     127.0.0.1:48660 - "GET /api/health/ready HTTP/1.1" 200 OK
+INFO:     127.0.0.1:48664 - "GET /projects HTTP/1.1" 200 OK
+INFO:     127.0.0.1:48670 - "GET /assets/index-ddkiIo8H.css HTTP/1.1" 200 OK
+INFO:     127.0.0.1:48664 - "GET /assets/index-tWEbzxHF.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:48664 - "GET /api/session HTTP/1.1" 200 OK
+INFO:     127.0.0.1:48664 - "GET /favicon.ico HTTP/1.1" 200 OK
+INFO:     127.0.0.1:48664 - "POST /api/session HTTP/1.1" 200 OK
+INFO:     127.0.0.1:48664 - "GET /api/projects HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40040 - "GET /epics HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40040 - "GET /api/session HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40070 - "WebSocket /ws?project_id=1&after_id=0" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:40040 - "GET /api/projects/1/workspace HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40056 - "GET /api/projects/1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40058 - "GET /api/epics?project_id=1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40048 - "GET /api/projects HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40048 - "GET /api/session HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40074 - "WebSocket /ws?project_id=1&after_id=0" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:40040 - "GET /api/epics?project_id=1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40056 - "GET /api/projects/1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40048 - "GET /api/projects/1/workspace HTTP/1.1" 200 OK
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [105073]
