@@ -1,7 +1,7 @@
 # Aceptación integral de las doce páginas
 
-Actualización8noviembre2026: **5/12 páginas** en alcance delegado (Documentos, Archivos,
-Repositorios, Planificación y Resumen). Resumen verifica lectura/navegación; enlace
+Actualización8noviembre2026: **6/12 páginas** en alcance delegado (Documentos, Archivos,
+Repositorios, Planificación, Resumen y Agentes). Resumen verifica lectura/navegación; enlace
 de cierre no vacío queda como recheck explícito del cierre global. Planificación completa el recorrido de propietario;
 la historia de propuestas de esta revisión es un fixture de dominio, sin inferencia.
 [Trabajo vigente](2026-11-08-planning-page-acceptance.md). Los cortes anteriores se

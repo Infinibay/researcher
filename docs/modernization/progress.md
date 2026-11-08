@@ -8993,3 +8993,25 @@ histórico sólo controlado. U08/C10 y contención original siguen abiertos. Sig
 Agentes; restantes Tareas/Conversación/Hallazgos/Informes/Ejecución/Proyectos,
 evaluaciones/distribución/prompts/inversas/global/revisión. Detalles al final.
 [Alcance y límites](overview-page-review.md).
+
+
+## Agentes: registro/presupuesto/Stop comprobados, 2026-11-08
+
+05:55:41–06:01:59UTC,6min18s hasta verificar e inspeccionar;11estados/13checks,
+30runs/5actores y25+5. Host instalado con historia/medición/turno sintéticos, no
+modelos lanzados. Un recibo de dispatch/55tokens sintéticos no acredita consumo
+real. Presupuesto real2→4turnos/200→1000tokens y revisión0→1; una sola escritura,
+recuperada por GET tras perder respuesta y recargar. Stopdel mismo run sintético:
+corte antes de envío y luego tras202/commit; consulta posterior muestra cancelled,
+no recibo de cierre perdido ni procesos físicos. Otros runs/tareas/grupos/peers
+se conservan, servicio143/dominio eliminado. Lecturas fallidas/recuperación,
+A→B→A con entrega tardía esperada y comprobada, teclado, Axe regional0yoverflow0.
+
+v1fixtureomitía retiro tras nativefailed (correctamente reconciling); v2esperaba200
+enendpoint202. Evaluador corregido sin cambiar producto/relajar políticas y sin
+repetir trabajo real; originales retenidos. Tres funciones y módulo documentados,
+sintaxis JSverde/I001enDD134. Capturas actuales revisadas contra roster; densidad/
+mensajes al final.6/12páginas en alcance registrado,41/43escenarios; sin nueva
+suiteglobal. Siguiente Hallazgos/Informes (fuentes y recibos de dominio), después
+Tareas/Conversación/Ejecución/Proyectos, evaluaciones y gates globales.
+[Alcance](agents-page-review.md).

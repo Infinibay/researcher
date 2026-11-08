@@ -1,0 +1,283 @@
+{
+  "status": "passed",
+  "scope": "Installed HTTP/SQLite controls; synthetic history/usage/turns, no model execution",
+  "states": [
+    {
+      "name": "01-no-selection",
+      "width": 1440,
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "02-budget-edit-desktop",
+      "width": 1440,
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "03-budget-committed-reply-lost",
+      "width": 390,
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "04-receipted-model-and-attempt",
+      "width": 1440,
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "05-model-and-attempt-mobile",
+      "width": 390,
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "06-unmeasured-is-unknown",
+      "width": 390,
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "07-stop-delivery-uncertain",
+      "width": 390,
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "08-stop-committed-observed-by-read",
+      "width": 390,
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "09-ledger-budget-read-failed",
+      "width": 1440,
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "10-beta-after-late-alpha",
+      "width": 390,
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "11-alpha-return",
+      "width": 1440,
+      "fits": true,
+      "violations": []
+    }
+  ],
+  "checks": [
+    "no-selection",
+    "budget-real-commit-read-only-recovery-after-reload",
+    "run-pagination-25-plus-5",
+    "keyboard-selection-and-return",
+    "original-task-link",
+    "original-attempt-and-model",
+    "unknown-usage-not-zero",
+    "stop-before-send-not-success",
+    "stop-after-commit-observed-by-read-not-receipt",
+    "partial-read-errors-not-empty",
+    "explicit-read-recovery",
+    "late-original-ledger-project-isolation",
+    "alpha-beta-alpha-no-selection-leak"
+  ],
+  "faults": [
+    {
+      "path": "/api/projects/101/runs/37348fcf-006a-40f8-a89e-f6bcc3380071/stop",
+      "kind": "stop-request-not-forwarded"
+    },
+    {
+      "path": "/api/projects/101/runs/37348fcf-006a-40f8-a89e-f6bcc3380071/stop",
+      "kind": "stop-committed-reply-lost"
+    },
+    {
+      "path": "/api/projects/101/work-budget",
+      "kind": "abort-read"
+    },
+    {
+      "path": "/api/projects/101/agent-runs",
+      "kind": "abort-read"
+    },
+    {
+      "path": "/api/projects/101/agent-runs",
+      "kind": "abort-read"
+    },
+    {
+      "path": "/api/projects/101/work-budget",
+      "kind": "abort-read"
+    },
+    {
+      "path": "/api/projects/101/agent-runs",
+      "kind": "late-original-alpha-read"
+    }
+  ],
+  "writes": [],
+  "errors": [],
+  "pages": [
+    {
+      "before": null,
+      "count": 25,
+      "total": 30,
+      "next": "6"
+    },
+    {
+      "before": null,
+      "count": 25,
+      "total": 30,
+      "next": "6"
+    },
+    {
+      "before": null,
+      "count": 25,
+      "total": 30,
+      "next": "6"
+    },
+    {
+      "before": null,
+      "count": 25,
+      "total": 30,
+      "next": "6"
+    },
+    {
+      "before": "6",
+      "count": 5,
+      "total": 30,
+      "next": null
+    },
+    {
+      "before": null,
+      "count": 25,
+      "total": 30,
+      "next": "6"
+    },
+    {
+      "before": "6",
+      "count": 5,
+      "total": 30,
+      "next": null
+    },
+    {
+      "before": null,
+      "count": 25,
+      "total": 30,
+      "next": "6"
+    },
+    {
+      "before": "6",
+      "count": 5,
+      "total": 30,
+      "next": null
+    },
+    {
+      "before": null,
+      "count": 25,
+      "total": 30,
+      "next": "6"
+    },
+    {
+      "before": null,
+      "count": 25,
+      "total": 30,
+      "next": "6"
+    },
+    {
+      "before": null,
+      "count": 25,
+      "total": 30,
+      "next": "6"
+    }
+  ],
+  "budgetCommits": [
+    {
+      "request": {
+        "operation_key": "e1ebaa3d-8edc-4ba8-ab78-2e354b7290b1",
+        "expected_revision": 0,
+        "turn_limit": 4,
+        "token_limit": 1000,
+        "reason": "Ensayo sint\u00e9tico: ampliar capacidad sin iniciar ni repetir trabajo.",
+        "auxiliary_operation_limit": 200,
+        "auxiliary_cpu_ms_limit": 600000
+      },
+      "receipt": {
+        "project_id": 101,
+        "operation_key": "e1ebaa3d-8edc-4ba8-ab78-2e354b7290b1",
+        "expected_revision": 0,
+        "turn_limit": 4,
+        "token_limit": 1000,
+        "reason": "Ensayo sint\u00e9tico: ampliar capacidad sin iniciar ni repetir trabajo.",
+        "auxiliary_operation_limit": 200,
+        "auxiliary_cpu_ms_limit": 600000,
+        "revision": 1,
+        "previous_policy": {
+          "turn_limit": 2,
+          "token_limit": 200,
+          "revision": 0
+        },
+        "usage_at_decision": {
+          "used_turns": 1,
+          "observed_tokens": 55,
+          "unmeasured_dispatches": 0,
+          "preparation_only": 0,
+          "unsettled_dispatches": 0,
+          "accounted_tokens": 55,
+          "held_tokens": 0
+        },
+        "recorded_at": 1794117661.586428,
+        "inference_started": false,
+        "previous_auxiliary": {
+          "policy": {
+            "operation_limit": 200,
+            "cpu_ms_limit": 600000
+          },
+          "policy_origin": "default",
+          "used_operations": 0,
+          "observed_cpu_ms": null,
+          "unknown_operations": 0,
+          "pending_operations": 0,
+          "input_bytes": 0,
+          "accounted_cpu_ms": 0,
+          "held_cpu_ms": 0,
+          "remaining_operations": 200,
+          "remaining_cpu_ms": 600000,
+          "attempt_policy": {
+            "operation_limit": 50,
+            "cpu_ms_limit": 120000
+          }
+        }
+      }
+    }
+  ],
+  "stopCommits": [
+    {
+      "status": 202,
+      "receipt": {
+        "run_id": "37348fcf-006a-40f8-a89e-f6bcc3380071",
+        "project_id": 101,
+        "task_id": 1200,
+        "actor_id": "synthetic-question-author",
+        "context_version": 1,
+        "status": "cancelled",
+        "fence": 4,
+        "attempt_id": "1f1873b8-f6f2-4139-87de-4b652a8b9298",
+        "thread_id": "synthetic-never-launched-thread",
+        "turn_id": "synthetic-never-launched-turn",
+        "prompt": "Comprobar qu\u00e9 campos contienen las observaciones.",
+        "runtime": "codex",
+        "result": null,
+        "cancel_requested": true,
+        "operation_key": "fixture-question-run",
+        "conversation_thread_id": "synthetic-overview-thread",
+        "model": null,
+        "repository_id": 11,
+        "repository_name": "planning-fixture",
+        "issue": null,
+        "review": null,
+        "execution_kind": "research",
+        "model_selection": null
+      }
+    }
+  ]
+}

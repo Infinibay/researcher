@@ -5993,7 +5993,7 @@
       "status": "in_progress",
       "pilots": 12,
       "concept_images": 48,
-      "fully_accepted": 5,
+      "fully_accepted": 6,
       "pages": {
         "projects": {
           "status": "in_progress",
@@ -6115,6 +6115,24 @@
           ],
           "deferred": [
             "DD133",
+            "DD132",
+            "DD121"
+          ]
+        },
+        "agents": {
+          "status": "verified",
+          "selected_concept": "roster",
+          "scope": "Installed agent ledger, original attempt/model receipts, owner budget update/recovery and Stop over explicitly synthetic domain history; not real generation, usage, physical peer closure or human acceptance. Shared LocalWork has no job in this fixture and retains separate auxiliary-work gates.",
+          "evidence": [
+            "docs/modernization/agents-page-review.md",
+            "docs/modernization/agents-page-results.json",
+            "docs/design/audits/2026-11-08-agents-acceptance/report.md",
+            "frontend/tests/agents.e2e.mjs",
+            "evals/operation/agents_page.py"
+          ],
+          "remaining": [],
+          "deferred": [
+            "DD134",
             "DD132",
             "DD121"
           ]

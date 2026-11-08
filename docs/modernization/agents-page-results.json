@@ -1,0 +1,1346 @@
+{
+  "status": "verified",
+  "scope": "Installed agent ledger, original attempt/model receipts, owner budget update/recovery and Stop over explicitly synthetic domain history; not real generation, usage, physical peer closure or human acceptance. Shared LocalWork has no job in this fixture and retains separate auxiliary-work gates.",
+  "base_commit": "444af41",
+  "retained_evaluation": ".researcher/evaluations/agents-page-20261108-v3",
+  "actual_model_turns": 0,
+  "synthetic_bound_turn_ids": 1,
+  "synthetic_dispatch_receipts": 1,
+  "synthetic_observed_tokens": 55,
+  "browser_exit": 0,
+  "service_exit": 143,
+  "states": 11,
+  "checks": [
+    "no-selection",
+    "budget-real-commit-read-only-recovery-after-reload",
+    "run-pagination-25-plus-5",
+    "keyboard-selection-and-return",
+    "original-task-link",
+    "original-attempt-and-model",
+    "unknown-usage-not-zero",
+    "stop-before-send-not-success",
+    "stop-after-commit-observed-by-read-not-receipt",
+    "partial-read-errors-not-empty",
+    "explicit-read-recovery",
+    "late-original-ledger-project-isolation",
+    "alpha-beta-alpha-no-selection-leak"
+  ],
+  "pages": [
+    {
+      "before": null,
+      "count": 25,
+      "total": 30,
+      "next": "6"
+    },
+    {
+      "before": null,
+      "count": 25,
+      "total": 30,
+      "next": "6"
+    },
+    {
+      "before": null,
+      "count": 25,
+      "total": 30,
+      "next": "6"
+    },
+    {
+      "before": null,
+      "count": 25,
+      "total": 30,
+      "next": "6"
+    },
+    {
+      "before": "6",
+      "count": 5,
+      "total": 30,
+      "next": null
+    },
+    {
+      "before": null,
+      "count": 25,
+      "total": 30,
+      "next": "6"
+    },
+    {
+      "before": "6",
+      "count": 5,
+      "total": 30,
+      "next": null
+    },
+    {
+      "before": null,
+      "count": 25,
+      "total": 30,
+      "next": "6"
+    },
+    {
+      "before": "6",
+      "count": 5,
+      "total": 30,
+      "next": null
+    },
+    {
+      "before": null,
+      "count": 25,
+      "total": 30,
+      "next": "6"
+    },
+    {
+      "before": null,
+      "count": 25,
+      "total": 30,
+      "next": "6"
+    },
+    {
+      "before": null,
+      "count": 25,
+      "total": 30,
+      "next": "6"
+    }
+  ],
+  "faults": [
+    {
+      "path": "/api/projects/101/runs/37348fcf-006a-40f8-a89e-f6bcc3380071/stop",
+      "kind": "stop-request-not-forwarded"
+    },
+    {
+      "path": "/api/projects/101/runs/37348fcf-006a-40f8-a89e-f6bcc3380071/stop",
+      "kind": "stop-committed-reply-lost"
+    },
+    {
+      "path": "/api/projects/101/work-budget",
+      "kind": "abort-read"
+    },
+    {
+      "path": "/api/projects/101/agent-runs",
+      "kind": "abort-read"
+    },
+    {
+      "path": "/api/projects/101/agent-runs",
+      "kind": "abort-read"
+    },
+    {
+      "path": "/api/projects/101/work-budget",
+      "kind": "abort-read"
+    },
+    {
+      "path": "/api/projects/101/agent-runs",
+      "kind": "late-original-alpha-read"
+    }
+  ],
+  "budget_commits": [
+    {
+      "request": {
+        "operation_key": "e1ebaa3d-8edc-4ba8-ab78-2e354b7290b1",
+        "expected_revision": 0,
+        "turn_limit": 4,
+        "token_limit": 1000,
+        "reason": "Ensayo sint\u00e9tico: ampliar capacidad sin iniciar ni repetir trabajo.",
+        "auxiliary_operation_limit": 200,
+        "auxiliary_cpu_ms_limit": 600000
+      },
+      "receipt": {
+        "project_id": 101,
+        "operation_key": "e1ebaa3d-8edc-4ba8-ab78-2e354b7290b1",
+        "expected_revision": 0,
+        "turn_limit": 4,
+        "token_limit": 1000,
+        "reason": "Ensayo sint\u00e9tico: ampliar capacidad sin iniciar ni repetir trabajo.",
+        "auxiliary_operation_limit": 200,
+        "auxiliary_cpu_ms_limit": 600000,
+        "revision": 1,
+        "previous_policy": {
+          "turn_limit": 2,
+          "token_limit": 200,
+          "revision": 0
+        },
+        "usage_at_decision": {
+          "used_turns": 1,
+          "observed_tokens": 55,
+          "unmeasured_dispatches": 0,
+          "preparation_only": 0,
+          "unsettled_dispatches": 0,
+          "accounted_tokens": 55,
+          "held_tokens": 0
+        },
+        "recorded_at": 1794117661.586428,
+        "inference_started": false,
+        "previous_auxiliary": {
+          "policy": {
+            "operation_limit": 200,
+            "cpu_ms_limit": 600000
+          },
+          "policy_origin": "default",
+          "used_operations": 0,
+          "observed_cpu_ms": null,
+          "unknown_operations": 0,
+          "pending_operations": 0,
+          "input_bytes": 0,
+          "accounted_cpu_ms": 0,
+          "held_cpu_ms": 0,
+          "remaining_operations": 200,
+          "remaining_cpu_ms": 600000,
+          "attempt_policy": {
+            "operation_limit": 50,
+            "cpu_ms_limit": 120000
+          }
+        }
+      }
+    }
+  ],
+  "stop_commits": [
+    {
+      "status": 202,
+      "receipt": {
+        "run_id": "37348fcf-006a-40f8-a89e-f6bcc3380071",
+        "project_id": 101,
+        "task_id": 1200,
+        "actor_id": "synthetic-question-author",
+        "context_version": 1,
+        "status": "cancelled",
+        "fence": 4,
+        "attempt_id": "1f1873b8-f6f2-4139-87de-4b652a8b9298",
+        "thread_id": "synthetic-never-launched-thread",
+        "turn_id": "synthetic-never-launched-turn",
+        "prompt": "Comprobar qu\u00e9 campos contienen las observaciones.",
+        "runtime": "codex",
+        "result": null,
+        "cancel_requested": true,
+        "operation_key": "fixture-question-run",
+        "conversation_thread_id": "synthetic-overview-thread",
+        "model": null,
+        "repository_id": 11,
+        "repository_name": "planning-fixture",
+        "issue": null,
+        "review": null,
+        "execution_kind": "research",
+        "model_selection": null
+      }
+    }
+  ],
+  "errors": [],
+  "all_widths_fit": true,
+  "axe_violations": 0,
+  "before": {
+    "groups": [
+      {
+        "id": 1,
+        "project_id": 101,
+        "title": "Organizar observaciones manuales"
+      },
+      {
+        "id": 2,
+        "project_id": 101,
+        "title": "Conservar historia del planificador"
+      },
+      {
+        "id": 3,
+        "project_id": 101,
+        "title": "Exportaci\u00f3n aceptada"
+      },
+      {
+        "id": 4,
+        "project_id": 101,
+        "title": "Archivo de observaciones 01: criterios, fuentes y comprobaciones de un objetivo extenso"
+      },
+      {
+        "id": 5,
+        "project_id": 101,
+        "title": "Archivo de observaciones 02: criterios, fuentes y comprobaciones de un objetivo extenso"
+      },
+      {
+        "id": 6,
+        "project_id": 101,
+        "title": "Archivo de observaciones 03: criterios, fuentes y comprobaciones de un objetivo extenso"
+      },
+      {
+        "id": 7,
+        "project_id": 101,
+        "title": "Archivo de observaciones 04: criterios, fuentes y comprobaciones de un objetivo extenso"
+      },
+      {
+        "id": 8,
+        "project_id": 101,
+        "title": "Archivo de observaciones 05: criterios, fuentes y comprobaciones de un objetivo extenso"
+      },
+      {
+        "id": 9,
+        "project_id": 101,
+        "title": "Archivo de observaciones 06: criterios, fuentes y comprobaciones de un objetivo extenso"
+      },
+      {
+        "id": 10,
+        "project_id": 101,
+        "title": "Archivo de observaciones 07: criterios, fuentes y comprobaciones de un objetivo extenso"
+      },
+      {
+        "id": 11,
+        "project_id": 101,
+        "title": "Archivo de observaciones 08: criterios, fuentes y comprobaciones de un objetivo extenso"
+      },
+      {
+        "id": 12,
+        "project_id": 101,
+        "title": "Archivo de observaciones 09: criterios, fuentes y comprobaciones de un objetivo extenso"
+      },
+      {
+        "id": 13,
+        "project_id": 101,
+        "title": "Archivo de observaciones 10: criterios, fuentes y comprobaciones de un objetivo extenso"
+      },
+      {
+        "id": 14,
+        "project_id": 101,
+        "title": "Archivo de observaciones 11: criterios, fuentes y comprobaciones de un objetivo extenso"
+      },
+      {
+        "id": 15,
+        "project_id": 101,
+        "title": "Archivo de observaciones 12: criterios, fuentes y comprobaciones de un objetivo extenso"
+      },
+      {
+        "id": 16,
+        "project_id": 101,
+        "title": "Archivo de observaciones 13: criterios, fuentes y comprobaciones de un objetivo extenso"
+      },
+      {
+        "id": 17,
+        "project_id": 101,
+        "title": "Archivo de observaciones 14: criterios, fuentes y comprobaciones de un objetivo extenso"
+      },
+      {
+        "id": 18,
+        "project_id": 101,
+        "title": "Archivo de observaciones 15: criterios, fuentes y comprobaciones de un objetivo extenso"
+      },
+      {
+        "id": 19,
+        "project_id": 101,
+        "title": "Archivo de observaciones 16: criterios, fuentes y comprobaciones de un objetivo extenso"
+      }
+    ],
+    "milestones": [
+      {
+        "id": 1,
+        "epic_id": 1
+      }
+    ],
+    "tasks": [
+      {
+        "id": 1001,
+        "epic_id": 1,
+        "milestone_id": 1,
+        "status": "pending"
+      },
+      {
+        "id": 1002,
+        "epic_id": 1,
+        "milestone_id": 1,
+        "status": "pending"
+      },
+      {
+        "id": 1101,
+        "epic_id": 2,
+        "milestone_id": null,
+        "status": "in_progress"
+      },
+      {
+        "id": 1102,
+        "epic_id": null,
+        "milestone_id": null,
+        "status": "done"
+      },
+      {
+        "id": 1103,
+        "epic_id": 3,
+        "milestone_id": null,
+        "status": "pending"
+      },
+      {
+        "id": 1104,
+        "epic_id": 3,
+        "milestone_id": null,
+        "status": "pending"
+      },
+      {
+        "id": 1200,
+        "epic_id": null,
+        "milestone_id": null,
+        "status": "in_progress"
+      },
+      {
+        "id": 1300,
+        "epic_id": null,
+        "milestone_id": null,
+        "status": "in_progress"
+      },
+      {
+        "id": 3001,
+        "epic_id": null,
+        "milestone_id": null,
+        "status": "done"
+      },
+      {
+        "id": 3002,
+        "epic_id": null,
+        "milestone_id": null,
+        "status": "done"
+      }
+    ],
+    "dependencies": [
+      {
+        "task_id": 1002,
+        "depends_on_task_id": 1001
+      },
+      {
+        "task_id": 1104,
+        "depends_on_task_id": 1103
+      }
+    ],
+    "runs": [
+      {
+        "id": "0888a64b-1f98-4f6c-a0e6-9d4044750055",
+        "status": "failed"
+      },
+      {
+        "id": "091d4154-4cf9-4a31-a585-876385190618",
+        "status": "failed"
+      },
+      {
+        "id": "10a645db-e2cc-41d9-8981-063d3bc3980a",
+        "status": "failed"
+      },
+      {
+        "id": "190af4e0-e28a-4e22-8ce0-6340dbf6cb77",
+        "status": "failed"
+      },
+      {
+        "id": "242951bf-1c46-4fa3-b7c2-033f74511c32",
+        "status": "failed"
+      },
+      {
+        "id": "24f79aa6-87f6-43f5-8791-46b13c0716f0",
+        "status": "failed"
+      },
+      {
+        "id": "267ccfe9-1dfa-4304-a19b-d4e20a8c1cea",
+        "status": "failed"
+      },
+      {
+        "id": "37348fcf-006a-40f8-a89e-f6bcc3380071",
+        "status": "waiting_input"
+      },
+      {
+        "id": "43360db6-3c0b-47df-baef-21ee65a09a86",
+        "status": "failed"
+      },
+      {
+        "id": "47db0a26-dabd-4ecd-9807-88b7b9653114",
+        "status": "failed"
+      },
+      {
+        "id": "4aee0daf-a36d-47a5-8369-5ad449530e00",
+        "status": "failed"
+      },
+      {
+        "id": "4ed0518f-3e20-4f26-b71f-b1d121738663",
+        "status": "failed"
+      },
+      {
+        "id": "5154d9ee-ebfa-4a24-8d74-862f56964b6d",
+        "status": "failed"
+      },
+      {
+        "id": "623c9fc2-92a5-4202-8922-6f62936b5e4c",
+        "status": "failed"
+      },
+      {
+        "id": "627e6d75-fbae-461a-91d3-97ad714e986f",
+        "status": "failed"
+      },
+      {
+        "id": "65b369b6-1ec8-4cfe-b993-63d401c20a56",
+        "status": "needs_review"
+      },
+      {
+        "id": "6bdf9ce5-e19e-46de-93e5-2be21335957a",
+        "status": "failed"
+      },
+      {
+        "id": "6db1d341-0e01-4b5a-93d4-0630ff5559cb",
+        "status": "failed"
+      },
+      {
+        "id": "74f25ba0-1763-459b-a4b8-7d5c1d56626b",
+        "status": "failed"
+      },
+      {
+        "id": "7dbcd5d5-aacd-440f-910a-88fd9093be7e",
+        "status": "failed"
+      },
+      {
+        "id": "9859fbe7-b660-4ec1-be23-1f791bc8657a",
+        "status": "failed"
+      },
+      {
+        "id": "9988d52b-784d-40f5-b44f-03335261f88b",
+        "status": "failed"
+      },
+      {
+        "id": "a0021cff-09dc-4ae9-bcd0-75184ea84167",
+        "status": "failed"
+      },
+      {
+        "id": "ac7c863f-1d94-42ce-aed8-1635ff02950b",
+        "status": "accepted"
+      },
+      {
+        "id": "c0bf9aac-c538-4b29-be73-9dd33baa55ea",
+        "status": "failed"
+      },
+      {
+        "id": "d18a1d3b-2312-458e-80cd-fe7d6d358610",
+        "status": "failed"
+      },
+      {
+        "id": "dad721d7-1b49-43f2-b7c7-3a4a81586a18",
+        "status": "failed"
+      },
+      {
+        "id": "e17fe545-7a3f-442a-99e6-31d9a4f67582",
+        "status": "failed"
+      },
+      {
+        "id": "e2c2171a-8a64-47b8-bf8d-6113e5525a5c",
+        "status": "failed"
+      },
+      {
+        "id": "fa0e5bf0-b0cc-4fe1-9ea2-9741e61a2701",
+        "status": "failed"
+      }
+    ],
+    "peers": [
+      {
+        "kind": "business",
+        "state": "closed"
+      },
+      {
+        "kind": "native",
+        "state": "closed"
+      },
+      {
+        "kind": "business",
+        "state": "closed"
+      },
+      {
+        "kind": "native",
+        "state": "closed"
+      },
+      {
+        "kind": "business",
+        "state": "closed"
+      },
+      {
+        "kind": "native",
+        "state": "closed"
+      },
+      {
+        "kind": "business",
+        "state": "closed"
+      },
+      {
+        "kind": "native",
+        "state": "closed"
+      },
+      {
+        "kind": "business",
+        "state": "closed"
+      },
+      {
+        "kind": "native",
+        "state": "closed"
+      },
+      {
+        "kind": "business",
+        "state": "closed"
+      },
+      {
+        "kind": "native",
+        "state": "closed"
+      },
+      {
+        "kind": "business",
+        "state": "closed"
+      },
+      {
+        "kind": "native",
+        "state": "closed"
+      },
+      {
+        "kind": "business",
+        "state": "closed"
+      },
+      {
+        "kind": "native",
+        "state": "closed"
+      },
+      {
+        "kind": "business",
+        "state": "closed"
+      },
+      {
+        "kind": "native",
+        "state": "closed"
+      },
+      {
+        "kind": "business",
+        "state": "closed"
+      },
+      {
+        "kind": "native",
+        "state": "closed"
+      },
+      {
+        "kind": "business",
+        "state": "closed"
+      },
+      {
+        "kind": "native",
+        "state": "closed"
+      },
+      {
+        "kind": "business",
+        "state": "closed"
+      },
+      {
+        "kind": "native",
+        "state": "closed"
+      },
+      {
+        "kind": "business",
+        "state": "closed"
+      },
+      {
+        "kind": "native",
+        "state": "closed"
+      },
+      {
+        "kind": "business",
+        "state": "closed"
+      },
+      {
+        "kind": "native",
+        "state": "closed"
+      },
+      {
+        "kind": "business",
+        "state": "closed"
+      },
+      {
+        "kind": "native",
+        "state": "closed"
+      },
+      {
+        "kind": "business",
+        "state": "closed"
+      },
+      {
+        "kind": "native",
+        "state": "closed"
+      },
+      {
+        "kind": "business",
+        "state": "closed"
+      },
+      {
+        "kind": "native",
+        "state": "closed"
+      },
+      {
+        "kind": "business",
+        "state": "closed"
+      },
+      {
+        "kind": "native",
+        "state": "closed"
+      },
+      {
+        "kind": "business",
+        "state": "closed"
+      },
+      {
+        "kind": "native",
+        "state": "closed"
+      },
+      {
+        "kind": "business",
+        "state": "closed"
+      },
+      {
+        "kind": "native",
+        "state": "closed"
+      },
+      {
+        "kind": "business",
+        "state": "closed"
+      },
+      {
+        "kind": "native",
+        "state": "closed"
+      },
+      {
+        "kind": "business",
+        "state": "closed"
+      },
+      {
+        "kind": "native",
+        "state": "closed"
+      },
+      {
+        "kind": "business",
+        "state": "closed"
+      },
+      {
+        "kind": "native",
+        "state": "closed"
+      },
+      {
+        "kind": "business",
+        "state": "closed"
+      },
+      {
+        "kind": "native",
+        "state": "closed"
+      },
+      {
+        "kind": "business",
+        "state": "closed"
+      },
+      {
+        "kind": "native",
+        "state": "closed"
+      },
+      {
+        "kind": "business",
+        "state": "closed"
+      },
+      {
+        "kind": "native",
+        "state": "closed"
+      },
+      {
+        "kind": "business",
+        "state": "closed"
+      },
+      {
+        "kind": "native",
+        "state": "closed"
+      },
+      {
+        "kind": "business",
+        "state": "closed"
+      },
+      {
+        "kind": "native",
+        "state": "closed"
+      },
+      {
+        "kind": "business",
+        "state": "closed"
+      },
+      {
+        "kind": "native",
+        "state": "closed"
+      },
+      {
+        "kind": "business",
+        "state": "closed"
+      },
+      {
+        "kind": "native",
+        "state": "closed"
+      }
+    ],
+    "dispatches": 1,
+    "native_starts": 1,
+    "integrity": "ok",
+    "foreign_keys": [],
+    "budget": {
+      "project_id": 101,
+      "turn_limit": 2,
+      "token_limit": 200,
+      "revision": 0
+    },
+    "policy_changes": 0
+  },
+  "after": {
+    "groups": [
+      {
+        "id": 1,
+        "project_id": 101,
+        "title": "Organizar observaciones manuales"
+      },
+      {
+        "id": 2,
+        "project_id": 101,
+        "title": "Conservar historia del planificador"
+      },
+      {
+        "id": 3,
+        "project_id": 101,
+        "title": "Exportaci\u00f3n aceptada"
+      },
+      {
+        "id": 4,
+        "project_id": 101,
+        "title": "Archivo de observaciones 01: criterios, fuentes y comprobaciones de un objetivo extenso"
+      },
+      {
+        "id": 5,
+        "project_id": 101,
+        "title": "Archivo de observaciones 02: criterios, fuentes y comprobaciones de un objetivo extenso"
+      },
+      {
+        "id": 6,
+        "project_id": 101,
+        "title": "Archivo de observaciones 03: criterios, fuentes y comprobaciones de un objetivo extenso"
+      },
+      {
+        "id": 7,
+        "project_id": 101,
+        "title": "Archivo de observaciones 04: criterios, fuentes y comprobaciones de un objetivo extenso"
+      },
+      {
+        "id": 8,
+        "project_id": 101,
+        "title": "Archivo de observaciones 05: criterios, fuentes y comprobaciones de un objetivo extenso"
+      },
+      {
+        "id": 9,
+        "project_id": 101,
+        "title": "Archivo de observaciones 06: criterios, fuentes y comprobaciones de un objetivo extenso"
+      },
+      {
+        "id": 10,
+        "project_id": 101,
+        "title": "Archivo de observaciones 07: criterios, fuentes y comprobaciones de un objetivo extenso"
+      },
+      {
+        "id": 11,
+        "project_id": 101,
+        "title": "Archivo de observaciones 08: criterios, fuentes y comprobaciones de un objetivo extenso"
+      },
+      {
+        "id": 12,
+        "project_id": 101,
+        "title": "Archivo de observaciones 09: criterios, fuentes y comprobaciones de un objetivo extenso"
+      },
+      {
+        "id": 13,
+        "project_id": 101,
+        "title": "Archivo de observaciones 10: criterios, fuentes y comprobaciones de un objetivo extenso"
+      },
+      {
+        "id": 14,
+        "project_id": 101,
+        "title": "Archivo de observaciones 11: criterios, fuentes y comprobaciones de un objetivo extenso"
+      },
+      {
+        "id": 15,
+        "project_id": 101,
+        "title": "Archivo de observaciones 12: criterios, fuentes y comprobaciones de un objetivo extenso"
+      },
+      {
+        "id": 16,
+        "project_id": 101,
+        "title": "Archivo de observaciones 13: criterios, fuentes y comprobaciones de un objetivo extenso"
+      },
+      {
+        "id": 17,
+        "project_id": 101,
+        "title": "Archivo de observaciones 14: criterios, fuentes y comprobaciones de un objetivo extenso"
+      },
+      {
+        "id": 18,
+        "project_id": 101,
+        "title": "Archivo de observaciones 15: criterios, fuentes y comprobaciones de un objetivo extenso"
+      },
+      {
+        "id": 19,
+        "project_id": 101,
+        "title": "Archivo de observaciones 16: criterios, fuentes y comprobaciones de un objetivo extenso"
+      }
+    ],
+    "milestones": [
+      {
+        "id": 1,
+        "epic_id": 1
+      }
+    ],
+    "tasks": [
+      {
+        "id": 1001,
+        "epic_id": 1,
+        "milestone_id": 1,
+        "status": "pending"
+      },
+      {
+        "id": 1002,
+        "epic_id": 1,
+        "milestone_id": 1,
+        "status": "pending"
+      },
+      {
+        "id": 1101,
+        "epic_id": 2,
+        "milestone_id": null,
+        "status": "in_progress"
+      },
+      {
+        "id": 1102,
+        "epic_id": null,
+        "milestone_id": null,
+        "status": "done"
+      },
+      {
+        "id": 1103,
+        "epic_id": 3,
+        "milestone_id": null,
+        "status": "pending"
+      },
+      {
+        "id": 1104,
+        "epic_id": 3,
+        "milestone_id": null,
+        "status": "pending"
+      },
+      {
+        "id": 1200,
+        "epic_id": null,
+        "milestone_id": null,
+        "status": "in_progress"
+      },
+      {
+        "id": 1300,
+        "epic_id": null,
+        "milestone_id": null,
+        "status": "in_progress"
+      },
+      {
+        "id": 3001,
+        "epic_id": null,
+        "milestone_id": null,
+        "status": "done"
+      },
+      {
+        "id": 3002,
+        "epic_id": null,
+        "milestone_id": null,
+        "status": "done"
+      }
+    ],
+    "dependencies": [
+      {
+        "task_id": 1002,
+        "depends_on_task_id": 1001
+      },
+      {
+        "task_id": 1104,
+        "depends_on_task_id": 1103
+      }
+    ],
+    "runs": [
+      {
+        "id": "0888a64b-1f98-4f6c-a0e6-9d4044750055",
+        "status": "failed"
+      },
+      {
+        "id": "091d4154-4cf9-4a31-a585-876385190618",
+        "status": "failed"
+      },
+      {
+        "id": "10a645db-e2cc-41d9-8981-063d3bc3980a",
+        "status": "failed"
+      },
+      {
+        "id": "190af4e0-e28a-4e22-8ce0-6340dbf6cb77",
+        "status": "failed"
+      },
+      {
+        "id": "242951bf-1c46-4fa3-b7c2-033f74511c32",
+        "status": "failed"
+      },
+      {
+        "id": "24f79aa6-87f6-43f5-8791-46b13c0716f0",
+        "status": "failed"
+      },
+      {
+        "id": "267ccfe9-1dfa-4304-a19b-d4e20a8c1cea",
+        "status": "failed"
+      },
+      {
+        "id": "37348fcf-006a-40f8-a89e-f6bcc3380071",
+        "status": "cancelled"
+      },
+      {
+        "id": "43360db6-3c0b-47df-baef-21ee65a09a86",
+        "status": "failed"
+      },
+      {
+        "id": "47db0a26-dabd-4ecd-9807-88b7b9653114",
+        "status": "failed"
+      },
+      {
+        "id": "4aee0daf-a36d-47a5-8369-5ad449530e00",
+        "status": "failed"
+      },
+      {
+        "id": "4ed0518f-3e20-4f26-b71f-b1d121738663",
+        "status": "failed"
+      },
+      {
+        "id": "5154d9ee-ebfa-4a24-8d74-862f56964b6d",
+        "status": "failed"
+      },
+      {
+        "id": "623c9fc2-92a5-4202-8922-6f62936b5e4c",
+        "status": "failed"
+      },
+      {
+        "id": "627e6d75-fbae-461a-91d3-97ad714e986f",
+        "status": "failed"
+      },
+      {
+        "id": "65b369b6-1ec8-4cfe-b993-63d401c20a56",
+        "status": "needs_review"
+      },
+      {
+        "id": "6bdf9ce5-e19e-46de-93e5-2be21335957a",
+        "status": "failed"
+      },
+      {
+        "id": "6db1d341-0e01-4b5a-93d4-0630ff5559cb",
+        "status": "failed"
+      },
+      {
+        "id": "74f25ba0-1763-459b-a4b8-7d5c1d56626b",
+        "status": "failed"
+      },
+      {
+        "id": "7dbcd5d5-aacd-440f-910a-88fd9093be7e",
+        "status": "failed"
+      },
+      {
+        "id": "9859fbe7-b660-4ec1-be23-1f791bc8657a",
+        "status": "failed"
+      },
+      {
+        "id": "9988d52b-784d-40f5-b44f-03335261f88b",
+        "status": "failed"
+      },
+      {
+        "id": "a0021cff-09dc-4ae9-bcd0-75184ea84167",
+        "status": "failed"
+      },
+      {
+        "id": "ac7c863f-1d94-42ce-aed8-1635ff02950b",
+        "status": "accepted"
+      },
+      {
+        "id": "c0bf9aac-c538-4b29-be73-9dd33baa55ea",
+        "status": "failed"
+      },
+      {
+        "id": "d18a1d3b-2312-458e-80cd-fe7d6d358610",
+        "status": "failed"
+      },
+      {
+        "id": "dad721d7-1b49-43f2-b7c7-3a4a81586a18",
+        "status": "failed"
+      },
+      {
+        "id": "e17fe545-7a3f-442a-99e6-31d9a4f67582",
+        "status": "failed"
+      },
+      {
+        "id": "e2c2171a-8a64-47b8-bf8d-6113e5525a5c",
+        "status": "failed"
+      },
+      {
+        "id": "fa0e5bf0-b0cc-4fe1-9ea2-9741e61a2701",
+        "status": "failed"
+      }
+    ],
+    "peers": [
+      {
+        "kind": "business",
+        "state": "closed"
+      },
+      {
+        "kind": "native",
+        "state": "closed"
+      },
+      {
+        "kind": "business",
+        "state": "closed"
+      },
+      {
+        "kind": "native",
+        "state": "closed"
+      },
+      {
+        "kind": "business",
+        "state": "closed"
+      },
+      {
+        "kind": "native",
+        "state": "closed"
+      },
+      {
+        "kind": "business",
+        "state": "closed"
+      },
+      {
+        "kind": "native",
+        "state": "closed"
+      },
+      {
+        "kind": "business",
+        "state": "closed"
+      },
+      {
+        "kind": "native",
+        "state": "closed"
+      },
+      {
+        "kind": "business",
+        "state": "closed"
+      },
+      {
+        "kind": "native",
+        "state": "closed"
+      },
+      {
+        "kind": "business",
+        "state": "closed"
+      },
+      {
+        "kind": "native",
+        "state": "closed"
+      },
+      {
+        "kind": "business",
+        "state": "closed"
+      },
+      {
+        "kind": "native",
+        "state": "closed"
+      },
+      {
+        "kind": "business",
+        "state": "closed"
+      },
+      {
+        "kind": "native",
+        "state": "closed"
+      },
+      {
+        "kind": "business",
+        "state": "closed"
+      },
+      {
+        "kind": "native",
+        "state": "closed"
+      },
+      {
+        "kind": "business",
+        "state": "closed"
+      },
+      {
+        "kind": "native",
+        "state": "closed"
+      },
+      {
+        "kind": "business",
+        "state": "closed"
+      },
+      {
+        "kind": "native",
+        "state": "closed"
+      },
+      {
+        "kind": "business",
+        "state": "closed"
+      },
+      {
+        "kind": "native",
+        "state": "closed"
+      },
+      {
+        "kind": "business",
+        "state": "closed"
+      },
+      {
+        "kind": "native",
+        "state": "closed"
+      },
+      {
+        "kind": "business",
+        "state": "closed"
+      },
+      {
+        "kind": "native",
+        "state": "closed"
+      },
+      {
+        "kind": "business",
+        "state": "closed"
+      },
+      {
+        "kind": "native",
+        "state": "closed"
+      },
+      {
+        "kind": "business",
+        "state": "closed"
+      },
+      {
+        "kind": "native",
+        "state": "closed"
+      },
+      {
+        "kind": "business",
+        "state": "closed"
+      },
+      {
+        "kind": "native",
+        "state": "closed"
+      },
+      {
+        "kind": "business",
+        "state": "closed"
+      },
+      {
+        "kind": "native",
+        "state": "closed"
+      },
+      {
+        "kind": "business",
+        "state": "closed"
+      },
+      {
+        "kind": "native",
+        "state": "closed"
+      },
+      {
+        "kind": "business",
+        "state": "closed"
+      },
+      {
+        "kind": "native",
+        "state": "closed"
+      },
+      {
+        "kind": "business",
+        "state": "closed"
+      },
+      {
+        "kind": "native",
+        "state": "closed"
+      },
+      {
+        "kind": "business",
+        "state": "closed"
+      },
+      {
+        "kind": "native",
+        "state": "closed"
+      },
+      {
+        "kind": "business",
+        "state": "closed"
+      },
+      {
+        "kind": "native",
+        "state": "closed"
+      },
+      {
+        "kind": "business",
+        "state": "closed"
+      },
+      {
+        "kind": "native",
+        "state": "closed"
+      },
+      {
+        "kind": "business",
+        "state": "closed"
+      },
+      {
+        "kind": "native",
+        "state": "closed"
+      },
+      {
+        "kind": "business",
+        "state": "closed"
+      },
+      {
+        "kind": "native",
+        "state": "closed"
+      },
+      {
+        "kind": "business",
+        "state": "closed"
+      },
+      {
+        "kind": "native",
+        "state": "closed"
+      },
+      {
+        "kind": "business",
+        "state": "closed"
+      },
+      {
+        "kind": "native",
+        "state": "closed"
+      },
+      {
+        "kind": "business",
+        "state": "closed"
+      },
+      {
+        "kind": "native",
+        "state": "closed"
+      }
+    ],
+    "dispatches": 1,
+    "native_starts": 1,
+    "integrity": "ok",
+    "foreign_keys": [],
+    "budget": {
+      "project_id": 101,
+      "turn_limit": 4,
+      "token_limit": 1000,
+      "revision": 1
+    },
+    "policy_changes": 1
+  },
+  "service_domain": {
+    "status": "closed",
+    "domain_removed": true
+  },
+  "initial_harness_failures": [
+    "v1: omitted retirement of synthetic failed turn, leaving reconciling; corrected fixture through retire_inference after closed never-launched peers, no source policy relaxed.",
+    "v2: expected200 for Stop but actual endpoint correctly uses202; corrected harness. Both original installations/logs retained; no replay of real native work."
+  ],
+  "source_sha256": {
+    "evals/operation/agents_page.py": "447e81c5e0bb8e4847286d77529d639a9fd5d1049065203780ca4e8995099933",
+    "frontend/tests/agents.e2e.mjs": "d4215d00f86a83762833463af5562fbe04a85f3e878be20c42266c4f85b55f5d",
+    "frontend/src/components/pages/AgentsPage.tsx": "ff979c927e304760ea89f05c71082615b8400dad545a4ab7eb73ce12318e09ab",
+    "frontend/src/components/tasks/WorkBudget.tsx": "20310e9ab7e1d6bf6366d2ab4f8af17f7603b37b05555a412a51d2635c3fd2da",
+    "frontend/src/components/tasks/BudgetPolicyEditor.tsx": "8835804e2d4d45c0d616c0c7a35f56c842d47282ee98e208782f94bc16c625e6",
+    "frontend/src/components/tasks/ExecutionHistory.tsx": "b104f3b0281b256d027ff8c9080bebc3787df0f79f8ffb073f5a28df6edd99de"
+  },
+  "package_receipt": "docs/modernization/planning-commands-packaging.json"
+}

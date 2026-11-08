@@ -24,32 +24,32 @@ que se pueda comparar el avance; no presentar microajustes como tareas principal
 ## Estado comprobado
 
 - Codex por suscripción y Ken publicado ensayados. Fuentes/citas, informes draft y revisión documental independiente conectados. Desarrollo admitido desde Tareas/Conversación con captura y comprobaciones explícitas; revisión independiente solicitada desde Tareas y aceptación del propietario conectada. Publicación local desde aceptación conectada; recuperación local de sólo lectura conectada; transporte remoto configurable conectado; recuperación remota y controles de Tareas conectados; ejecución/activación antiguas por tarea y proyecto retiradas; auxiliares de generación/proveedor, herramientas antiguas y sus cinco bibliotecas retirados. También se retiraron API interna, CLI, servicios/listeners y flows/helpers antiguos. También se retiraron autonomía, plantillas históricas y lectores de proveedor sin consumidores; se conserva el control de parada de trabajadores registrados.
-- Interfaz: doce pilotos, 36/36 conceptos de escritorio y 12/12 móviles; todas las rutas tienen piloto y 5/12 páginas tienen aceptación técnica y visual delegada.
+- Interfaz: doce pilotos, 36/36 conceptos de escritorio y 12/12 móviles; todas las rutas tienen piloto y 6/12 páginas tienen aceptación técnica y visual delegada.
 - Última suite global: `9fb873c`,2210 casos,2178 pasan,31 fallan y1 error de fixture; sin omisiones. La carrera de backup encontrada se corrigió después con40 pruebas instaladas. No se declara una nueva corrida global verde; la referencia `0c8b8d9` queda como evidencia histórica.
 - U01–U07, E01–E12, C01–C09 y D01–D13 quedan comprobados con el alcance de sus matrices; siguen 2 de 43 escenarios amplios sin aceptación completa en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Estado actual: Resumen leído y verificado; continúa Agentes
+## Estado actual: Agentes verificado; continúa Hallazgos/Informes
 
-**05:49:21–05:53:58UTC,4min37s hasta verificar/inspeccionar**, base73d419d.
-Documentación/checkpoint posteriores excluidos. [Alcance](overview-page-review.md).
+**05:55:41–06:01:59UTC,6min18s hasta verificar/inspeccionar**, base444af41,
+incluidas dos correcciones del evaluador. [Alcance](agents-page-review.md).
 
-- Terminado: **5/12páginas** en alcance técnico/visual delegado: Documentos,
- Archivos, Repositorios, Planificación y Resumen. Resumen8estados/16comprobaciones,
- paginación50+2, identidades originales, fallos/recuperación yA→B→A reales.
- 0escrituras de negocio/0inferencia, estado observado sin cambios. Historia de
- planes y pregunta sintética; un ID de turno almacenado no equivale a un inicio real.
-- En curso: **Agentes**, reusar concepto existente, observar identidad/estados y
- controles reales sin volver a implementar el motor anterior ni lanzar modelos.
-- Pendiente en orden: Agentes, Tareas, Conversación, Hallazgos, Informes, Ejecución;
- Proyectos abierto por AuthorityBusy original sin causa reproducida/corregida.
- Recheck del enlace no vacío de cierre en el recorrido final completo; el host de
- Resumen sólo tiene su estado vacío. U08/C10 y evaluación científica; distribución,
+- Terminado: **6/12páginas** en alcance delegado: Documentos, Archivos,
+ Repositorios, Planificación, Resumen y Agentes. Agentes11estados/13comprobaciones,
+30runs/5actores,25+5; presupuesto200→1000tokens/2→4turnos una sola vez, perdido
+ recibo recuperado por GET; Stop202real sobre pregunta sintética observado por
+ lectura tras perder la respuesta.0modelos lanzados, servicio/dominio cerrados.
+ Un ID de turno y recibo/consumo55son sintéticos; no uso de suscripción.
+- En curso: **Hallazgos e Informes**, revisar lecturas/fuentes/procedencia y enlaces
+ originales de las páginas existentes sobre datos de dominio, sin generación.
+- Pendiente en orden: Hallazgos/Informes, Tareas, Conversación y Ejecución;
+ Proyectos por AuthorityBusy original. Recheck de enlace no vacío de cierre al
+ completar el recorrido global. U08/C10 y evaluación científica; distribución,
  dependencias, prompts, inversas69, suite y revisión independiente final.
 - Seguimos **41/43escenarios**, sin porcentaje/ETA global defendible. Última suite
- global31fallos y1error, sin nueva afirmación de verde.67de85revisiones estáticas
- desactualizadas en318archivos: no actualizar huellas sin revisar.
-- Detalles al final: DD133y anteriores; densidad de preguntas/cabecera, mensajes,
- estilo/accesibilidad completa. No push, merge o despliegue.
+ global31fallos y1error;67de85revisiones estáticas desactualizadas en318archivos.
+ No nueva afirmación de verde ni huellas renovadas sin revisar.
+- Detalles al final: DD134y anteriores; densidad/presupuesto, mensaje de respuesta
+ perdida frente a estado actualizado, estilo/accesibilidad completa. No push/merge.
 
 ## Etapa anterior: Ken estructural offline verificado; continúa aceptación de páginas
 

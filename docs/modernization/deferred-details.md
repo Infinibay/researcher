@@ -1133,3 +1133,15 @@ sin ocultar pendientes. Cabecera compartida enDD132. I001 del nuevo
 `evals/operation/overview_page.py` en[overview-page-lint.json](overview-page-lint.json).
 La navegación de una decisión de cierre no vacía es un recheck funcional del cierre
 completo, registrado aparte; no se rebaja a detalle de estilo.
+
+## DD134 — densidad y mensajes del registro de Agentes
+
+Presupuesto compartido y trabajo local desplazan el registro, sobre todo en móvil.
+Simplificar presentación al final, sin duplicar protocolos ni ocultar capacidad.
+Cuando se pierde la respuesta de Stop pero una consulta posterior muestra cancelled,
+el aviso conserva «No se confirmó la parada»: distinguir la entrega original de la
+última observación sin atribuir cierre físico. Error técnico inglés enDD132.
+El encuadre03del presupuesto no contiene todo el aviso, aunque la aserción lo
+comprobó. No repetir un recorrido por ese detalle. I001del evaluador en
+[agents-page-lint.json](agents-page-lint.json). Helpers de instalación repetidos en
+evaluadores son candidatos a unificar después, no ahora ni dentro del producto.
