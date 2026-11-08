@@ -32,7 +32,7 @@ try{
  const resume=process.env.RESEARCHER_E2E_PROJECT_RESUME?JSON.parse(process.env.RESEARCHER_E2E_PROJECT_RESUME):null
  if(resume?.mode==='fresh-generation'){
   beta=resume.beta
-  alpha=await create(process.env.RESEARCHER_E2E_PROJECT_NAME||'Plan CSV comprobado','Sólo prepara un plan pequeño de dos o tres tareas para añadir exportación CSV a observations.py. Columnas id y value, orden original y cabecera, biblioteca csv estándar y pruebas unittest. Reutiliza list_observations. No implementes ni ejecutes el trabajo propuesto. No hacen falta fechas ni elegir otro formato.')
+  alpha=await create(process.env.RESEARCHER_E2E_PROJECT_NAME||'Plan CSV comprobado',process.env.RESEARCHER_E2E_PROJECT_DESCRIPTION||'Sólo prepara un plan pequeño de dos o tres tareas para añadir exportación CSV a observations.py. Columnas id y value, orden original y cabecera, biblioteca csv estándar y pruebas unittest. Reutiliza list_observations. No implementes ni ejecutes el trabajo propuesto. No hacen falta fechas ni elegir otro formato.')
   await page.getByRole('button',{name:'Registrar carpeta existente',exact:true}).click();await page.getByLabel('Nombre del registro',{exact:true}).fill('observations-fresh');await page.getByLabel('Ruta absoluta de la carpeta',{exact:true}).fill(source);await page.getByRole('button',{name:'Registrar esta fuente',exact:true}).click();await expect(page.getByText('Carpeta registrada. No se cambió ningún archivo ni remoto.')).toBeVisible();await capture('03c-independent-project-before-generation')
  }
  else if(resume){alpha=resume.alpha;beta=resume.beta;await page.locator('#project-select-'+alpha).click();await capture('03b-original-installation-resumed')}

@@ -231,3 +231,26 @@ y cero solicitudes de inferencia. El archivo de cuenta real no se copia.
 El proceso original conserva `result.json` incluso ante fallo; no reintenta.
 [Guía del operador](../../docs/architecture/legacy-import.md),
 [resultados y límites](../../docs/modernization/legacy-import-results.json).
+
+
+## Plan español con respuestas Ken reales (suscripción, un turno)
+
+`plan_language.py` requiere autorización explícita mediante `--live`; usa la cuenta
+real provisionada y los prompts de producción. El límite es un turno,180s/90s sin
+progreso,25herramientas y350000tokens observados, conservando límites menores del
+operador. El modo fresh-generation de la prueba web admite un solo plan en este
+ensayo aunque el encabezado genérico de otros modos mencione hasta dos.
+
+```bash
+/ruta/al/entorno/bin/python -I evals/operation/plan_language.py --live \
+  --assets /ruta/privada/recursos-host.json \
+  --output /ruta/privada/caso-nuevo \
+  --node /ruta/a/node
+```
+
+La carpeta debe ser nueva. Registra respuestas devueltas de mediación sin
+reemplazarlas; no es un ledger completo de llamadas ni prueba de facturación.
+Conserva instalación y fallos sin reintentar, no ejecuta hijas y comprueba fuente
+intacta. Las trazas privadas pueden contener contexto: no publicar el log completo.
+El recibo separa éxito MCP de éxito de análisis y cierre de servicio de cierre de
+actores. [Caso observado y limitaciones](../../docs/modernization/spanish-plan-ken-review.md).

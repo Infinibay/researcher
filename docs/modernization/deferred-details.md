@@ -1085,3 +1085,11 @@ fallo del log no puede sustituir el error original. Revisar una anotación expl�
 o forma equivalente sin introducir otro log recursivo ni mover I/O antes del
 cierre físico. Ruff de esta selección no se declara verde. El resto de detalles
 previos y la contención original siguen separados de este diagnóstico comprobado.
+
+
+## DD130 — orden de imports del ensayo español
+
+Dos I001 en `evals/operation/plan_language.py`, líneas18 y65. Resolver junto con
+los detalles después de las capacidades mayores; no repetir un turno de suscripción
+por formato. El ensayo funcional y la comprobación sintáctica pasan; estilo no verde.
+Los fallos Ken de pruebas/llamadores son una capacidad pendiente separada, no estilo.

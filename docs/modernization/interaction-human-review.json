@@ -9,5 +9,14 @@
   "sources": [
     "docs/design/audits/2026-11-07-interaction/interaction-1440.png",
     "docs/design/audits/2026-11-07-interaction/revised-interaction-1440.png"
-  ]
+  ],
+  "actual_plan_followup": {
+    "question": "Prueba de claridad con una salida real del planificador sobre un proyecto sintético: «El código conserva el orden de las observaciones. Se pidió exportar las columnas id y value. Supongo que cada observación permite leer esas dos claves, pero el código no demuestra esa estructura; la primera tarea la comprobará». ¿Qué dato concreto pedirías o comprobarías antes de programar? Me sirve también que señales qué parte no se entiende.",
+    "user_feedback": "intentar entender la idea, los datos y como se relacionan. Cuales son las entradas y las salidas. No se si entiendo bien la pregunta",
+    "acceptance": "not_established",
+    "agent_interpretation": "The evaluation question lacks sufficient problem framing; the user asks for purpose, data relationships and inputs/outputs. This interpretation is not proof of comprehension or a diagnosis of the user.",
+    "required_next_evaluation": "Present the goal and a concrete related input/output example before asking for a useful decision; distinguish observed data from invented illustrations. Do not repeat an abstract comprehension quiz.",
+    "implemented_in_product": false,
+    "evidence": "docs/modernization/spanish-plan-ken-review.md"
+  }
 }

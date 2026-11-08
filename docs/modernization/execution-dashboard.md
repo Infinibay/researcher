@@ -28,7 +28,34 @@ que se pueda comparar el avance; no presentar microajustes como tareas principal
 - Última suite global: `9fb873c`,2210 casos,2178 pasan,31 fallan y1 error de fixture; sin omisiones. La carrera de backup encontrada se corrigió después con40 pruebas instaladas. No se declara una nueva corrida global verde; la referencia `0c8b8d9` queda como evidencia histórica.
 - U01–U07, E01–E12, C01–C09 y D01–D13 quedan comprobados con el alcance de sus matrices; siguen 2 de 43 escenarios amplios sin aceptación completa en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Estado actual: diagnóstico del productor verificado; contención abierta
+## Estado actual: plan español y lectura Ken comprobados; dos análisis pendientes
+
+**03:18:47–03:51:45 UTC, 32 min 58 s hasta verificar**, base `3d8b33a`.
+Documentación/checkpoint posteriores excluidos. [Evidencia y límites](spanish-plan-ken-review.md).
+
+- Terminado: un plan real en español aceptado con su hash exacto; dos hijas
+  pendientes, cero ejecución hija. Respuestas reales de `ken_find`/`ken_read`
+  contienen la implementación. Un turno, 138800 tokens observados, original intacto,
+  peers/operaciones/grant cerrados y dominios retirados. Cinco definiciones documentadas.
+- En curso/siguiente principal: diagnóstico sin modelo de dos análisis Ken fallidos:
+  búsqueda de pruebas y llamadores. Transporte exitoso no implica contenido válido.
+  Todavía sin causa atribuida ni aceptación de esa capacidad.
+- Pendiente principal: contención original AuthorityBusy sin reproducir/corregir;
+  Proyectos sigue incompleto. **3/12 páginas** aceptadas (Documentos, Archivos,
+  Repositorios), **41/43 escenarios**. Faltan Resumen, Proyectos, Planificación,
+  Tareas, Agentes, Conversación, Hallazgos, Informes y Ejecución; evaluaciones,
+  U08/C10, dependencias/distribución. No hay historial del usuario que migrar.
+- Comunicación: el usuario pidió entender objetivo, datos, relaciones y entradas/salidas;
+  la pregunta de comprensión fue insuficientemente contextualizada. Incorporar ese
+  criterio y evaluar; **no** contar su respuesta como aceptación humana ni cambiar
+  los prompts sin una comprobación nueva. Ver [revisión humana](interaction-human-review.json).
+- Al final: DD130 (dos I001 del evaluador) y detalles anteriores, accesibilidad
+  completa, suite global y revisión independiente. No hay porcentaje/ETA global defendible.
+
+El éxito de esta descripción explícita en español no aísla el efecto de los prompts
+ni corrige la contención. No hubo nueva suite global, push, merge o despliegue.
+
+## Etapa anterior: diagnóstico del productor verificado; contención abierta
 
 **Arranque: 02:28:30–03:01:09 UTC, 32 min 39 s hasta verificar**, base `b5b2b3c`.
 Documentación/checkpoint posteriores no incluidos. [Alcance y límites](native-startup-origin-review.md).

@@ -1,0 +1,35 @@
+{
+  "base_commit": "3d8b33a",
+  "path": "evals/operation/plan_language.py",
+  "sha256": "7baa7d32b61345bf16d6b12536a20ea22157c827ab486b7e3193febea473f09d",
+  "module_documented": true,
+  "definitions_documented": 5,
+  "missing": [],
+  "contracts": [
+    {
+      "symbol": "worker",
+      "line": 16,
+      "docstring": "Instrument actual tool results without replacing prompts, native generation, authority or the returned response."
+    },
+    {
+      "symbol": "worker.recorded",
+      "line": 25,
+      "docstring": "Append the original mediated result before forwarding it unchanged, retaining tool identity and timing in private evaluation output."
+    },
+    {
+      "symbol": "supervisor",
+      "line": 40,
+      "docstring": "Keep the instrumented API inside the unchanged production service guardian and configured resource limits."
+    },
+    {
+      "symbol": "observe",
+      "line": 51,
+      "docstring": "Count durable starts independently and preserve terminal state without loading prompts, credentials or model prose."
+    },
+    {
+      "symbol": "main",
+      "line": 63,
+      "docstring": "Create a fresh synthetic case, admit at most one real planning turn, and retain its original installation on every outcome."
+    }
+  ]
+}

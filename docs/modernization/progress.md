@@ -8833,3 +8833,21 @@ AuthorityBusy original, plan español y auditoría real Ken siguen pendientes
 principales; U08/C10, nueve páginas, evaluaciones/distribución, detalles y revisión
 independiente al cierre. No repetir proyectos fallidos ni devolver sus reservas
 por suposición. [Alcance](native-startup-origin-review.md).
+
+
+## Plan español y Ken observados, 2026-11-08
+
+03:18:47–03:51:45 UTC, **32 min 58 s hasta verificar**, base `3d8b33a`;
+documentación/checkpoint posteriores excluidos. Un turno real de suscripción,
+138800 tokens observados; plan español aceptado con hash exacto, hijas pendientes,
+fuente intacta y cierres originales comprobados. `ken_find` y `ken_read` contienen
+el código real; búsqueda de pruebas falla y llamadores devuelve `ok:false` aunque
+el transporte sea exitoso. Causa desconocida, siguiente diagnóstico sin modelo.
+Cinco definiciones y módulo documentados, sintaxis Node pasa; dos I001 DD130.
+
+La respuesta humana pide objetivo/datos/relaciones/entradas/salidas y expresa duda
+sobre la pregunta: no hay aceptación U08. El criterio queda registrado para evaluar
+una explicación contextualizada; no repetir ahora el cuestionario abstracto.
+**3/12 páginas, 41/43 escenarios**, Proyectos y contención originales abiertos;
+restantes páginas/evaluaciones/distribución siguen, detalles y revisión final al final.
+No nueva suite global ni causalidad aislada de prompting. [Evidencia](spanish-plan-ken-review.md).

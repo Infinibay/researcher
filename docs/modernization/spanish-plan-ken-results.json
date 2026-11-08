@@ -1,0 +1,214 @@
+{
+  "base_commit": "3d8b33a",
+  "started_at": "2026-11-08T03:18:47Z",
+  "status": "spanish_plan_and_basic_ken_observed_advanced_queries_incomplete",
+  "retained_root": ".researcher/evaluations/spanish-plan-ken-20261108",
+  "observation": {
+    "status": "observed",
+    "maximum_native_turns": 1,
+    "source_sha256": "8b925a4f40dee5ea1a4212bfd6f4ebbbf200bf77662bc8be9805c7db1bfbc33b",
+    "scope": "One new authorized subscription plan; unchanged production prompts; actual mediated Ken results; no child task execution",
+    "limits": {
+      "wall_seconds": 180,
+      "no_progress_seconds": 90,
+      "max_turns": 1,
+      "max_tool_calls": 25,
+      "max_observed_tokens": 350000
+    },
+    "model": "gpt-6.1-sol",
+    "browser_exit": 0,
+    "service_exit": 143,
+    "storage": {
+      "runs": [
+        {
+          "id": "ed3d0705-70b3-4eb8-b3e1-ca84fcfca845",
+          "project_id": 2,
+          "status": "accepted"
+        }
+      ],
+      "dispatches": [
+        {
+          "model": "gpt-6.1-sol",
+          "status": "settled",
+          "native_status": "interrupted"
+        }
+      ],
+      "native_starts": 1,
+      "unclosed_peers": 0,
+      "tasks": [
+        {
+          "id": 1,
+          "project_id": 2,
+          "title": "Planificar el proyecto",
+          "status": "done"
+        },
+        {
+          "id": 2,
+          "project_id": 2,
+          "title": "Añadir la función de exportación CSV",
+          "status": "pending"
+        },
+        {
+          "id": 3,
+          "project_id": 2,
+          "title": "Verificar el contrato de exportación con unittest",
+          "status": "pending"
+        }
+      ],
+      "integrity": "ok"
+    },
+    "source_unchanged": true
+  },
+  "run": {
+    "id": "ed3d0705-70b3-4eb8-b3e1-ca84fcfca845",
+    "status": "accepted",
+    "issue_json": null
+  },
+  "attempt": {
+    "id": "30dce0da-7f38-47b3-b1c5-8c656de11b52",
+    "status": "finished"
+  },
+  "proposal_sha256": "207368c382024c36981252c73d3158c81cce18212273a41a09aa01164424ba73",
+  "exact_proposal_accepted": true,
+  "dispatch": {
+    "model": "gpt-6.1-sol",
+    "status": "settled",
+    "native_status": "interrupted",
+    "observed_tokens": 138800,
+    "token_ceiling": 350000
+  },
+  "business_events": [
+    {
+      "event_type": "plan.proposed",
+      "data": {
+        "creates_work": false,
+        "proposal_sha256": "207368c382024c36981252c73d3158c81cce18212273a41a09aa01164424ba73",
+        "run_id": "ed3d0705-70b3-4eb8-b3e1-ca84fcfca845",
+        "schema_version": 1
+      }
+    },
+    {
+      "event_type": "plan.delivery_requested",
+      "data": {
+        "attempt_id": "30dce0da-7f38-47b3-b1c5-8c656de11b52",
+        "native_completed": false,
+        "owner_accepted": false,
+        "proposal_sha256": "207368c382024c36981252c73d3158c81cce18212273a41a09aa01164424ba73",
+        "run_id": "ed3d0705-70b3-4eb8-b3e1-ca84fcfca845",
+        "schema_version": 1
+      }
+    },
+    {
+      "event_type": "run.peers_retired",
+      "data": {
+        "attempt_id": "30dce0da-7f38-47b3-b1c5-8c656de11b52",
+        "native_and_business_closed": true,
+        "run_id": "ed3d0705-70b3-4eb8-b3e1-ca84fcfca845",
+        "schema_version": 1,
+        "status": "needs_review"
+      }
+    },
+    {
+      "event_type": "plan.delivered",
+      "data": {
+        "native_status": "interrupted",
+        "owner_accepted": false,
+        "proposal_sha256": "207368c382024c36981252c73d3158c81cce18212273a41a09aa01164424ba73",
+        "run_id": "ed3d0705-70b3-4eb8-b3e1-ca84fcfca845",
+        "schema_version": 1
+      }
+    },
+    {
+      "event_type": "plan.accepted",
+      "data": {
+        "context_version": 1,
+        "epics": {
+          "csv": 1
+        },
+        "execution_started": false,
+        "operation_key": "d9f1774a-e736-42e6-9281-0f5eed7c41d9",
+        "project_id": 2,
+        "proposal_sha256": "207368c382024c36981252c73d3158c81cce18212273a41a09aa01164424ba73",
+        "run_id": "ed3d0705-70b3-4eb8-b3e1-ca84fcfca845",
+        "schema_version": 1,
+        "task_id": 1,
+        "tasks": {
+          "csv-export": 2,
+          "csv-tests": 3
+        }
+      }
+    }
+  ],
+  "authority": {
+    "active": null,
+    "grants": 1,
+    "all_retired_and_domains_removed": true,
+    "operations": 3,
+    "all_closed_and_execution_closed": true
+  },
+  "guardian": {
+    "status": "closed",
+    "domain_removed": true,
+    "native_actor_closure_proven": false,
+    "limitation": "Service guardian does not attest native actor closure; separate original broker records attest it."
+  },
+  "ken": {
+    "returned_records": 5,
+    "find_implementation": "verified",
+    "read_source": "verified_all_four_actual_lines",
+    "tests_search": "outer_success_false",
+    "callers": "outer_success_true_content_ok_false_language_not_parseable_python",
+    "cause": "unknown",
+    "neighbors": "filename_only_not_call_graph_proof"
+  },
+  "visual": {
+    "inspected": [
+      "06-real-plan-ready.png",
+      "07-real-plan-mobile.png"
+    ],
+    "scope": "Existing Projects views, not a capture of the full saved explanation; no whole page or human acceptance claimed",
+    "images": [
+      {
+        "path": ".researcher/evaluations/spanish-plan-ken-20261108/browser/03c-independent-project-before-generation.png",
+        "sha256": "edd6dade880dc6a89067d4c3a99eafe14fba77019b912b3a2e1aecfede975983"
+      },
+      {
+        "path": ".researcher/evaluations/spanish-plan-ken-20261108/browser/06-real-plan-ready.png",
+        "sha256": "18d21a5daec09cfbe088ab5888353ac5db708c7b3ff8b557f8ee184a28dc46d2"
+      },
+      {
+        "path": ".researcher/evaluations/spanish-plan-ken-20261108/browser/07-real-plan-mobile.png",
+        "sha256": "85e62f93ba81df851abd687e76f4c148db2f5e1bf32720f244295ecd8cfa19e9"
+      },
+      {
+        "path": ".researcher/evaluations/spanish-plan-ken-20261108/browser/08-plan-decision-after-reload.png",
+        "sha256": "7b83fefcac5f8a6a7b5eb867ff4a73bafad84c45b78a848740e05d55549bddd3"
+      },
+      {
+        "path": ".researcher/evaluations/spanish-plan-ken-20261108/browser/09-other-project-isolated.png",
+        "sha256": "434f0d4320993e13fa2d4698fca424af97dcbd3856d8ee7e9f04de93968c231f"
+      }
+    ]
+  },
+  "limitations": [
+    "Explicit project description also requested Spanish and Ken; no isolated causal comparison of prompting changes",
+    "Original AuthorityBusy remains unreproduced and unfixed",
+    "No child execution, new product code, global suite, push or deployment",
+    "Observed tokens are not billing evidence; returned tool records are not a complete native call ledger",
+    "U08/C10 remain open; user reported insufficient framing for comprehension question"
+  ],
+  "verified_at": "2026-11-08T03:51:45Z",
+  "seconds_until_verification": 1978,
+  "checks": {
+    "storage_hash_closure_source": "passed",
+    "node_syntax": "passed",
+    "ruff": {
+      "status": "not_green",
+      "findings": [
+        "I001:18",
+        "I001:65"
+      ],
+      "deferred": "DD130"
+    }
+  }
+}
