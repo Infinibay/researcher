@@ -1,0 +1,64 @@
+{
+  "status": "passed",
+  "scope": "Screenshot primitive only; synthetic HTML, not a product UI acceptance",
+  "metrics": {
+    "innerWidth": 320,
+    "innerHeight": 234,
+    "outerWidth": 1280,
+    "outerHeight": 1024,
+    "devicePixelRatio": 4,
+    "rootZoom": "1",
+    "visualScale": 1
+  },
+  "layout": {
+    "layoutViewport": {
+      "pageX": 0,
+      "pageY": 0,
+      "clientWidth": 1280,
+      "clientHeight": 937
+    },
+    "visualViewport": {
+      "offsetX": 0,
+      "offsetY": 0,
+      "pageX": 0,
+      "pageY": 0,
+      "clientWidth": 1280,
+      "clientHeight": 937,
+      "scale": 1,
+      "zoom": 4
+    },
+    "contentSize": {
+      "x": 0,
+      "y": 0,
+      "width": 1280,
+      "height": 937
+    },
+    "cssLayoutViewport": {
+      "pageX": 0,
+      "pageY": 0,
+      "clientWidth": 320,
+      "clientHeight": 234
+    },
+    "cssVisualViewport": {
+      "offsetX": 0,
+      "offsetY": 0,
+      "pageX": 0,
+      "pageY": 0,
+      "clientWidth": 320,
+      "clientHeight": 234.25,
+      "scale": 1,
+      "zoom": 4
+    },
+    "cssContentSize": {
+      "x": 0,
+      "y": 0,
+      "width": 320,
+      "height": 234
+    }
+  },
+  "png": {
+    "width": 1280,
+    "height": 937
+  },
+  "version": "156.0.8078.4"
+}

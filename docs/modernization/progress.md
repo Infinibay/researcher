@@ -9918,3 +9918,29 @@ Then actual UI zoom/reader if capability exists, relevant JSDoc/C/details and fi
 coherent package/global/independent review. Ken distribution choice and useful human
 feedback remain pending; do not repeat either question or infer acceptance. Scope
 12/12pages/42of43 scenarios, active full plan, no push/merge/deployment.
+
+
+## 2026-11-08 — Native browser zoom and reliable viewport capture primitive
+
+Documentation committeda4c800c, all previous handles terminal. Native-zoom-probe
+returned0: Chromium156.0.8078.4 profile default zoom factors1/2/4, fixed outer
+1280x1024, inner1280x937/640x468/320x234, DPR1/2/4, rootCSSzoom1,transformnone,
+visualscale1. No CSS/viewport/deviceScaleFactor emulation; syntheticHTML only.
+Visual inspection found Playwright page.screenshot cropped native zoom captures
+(640x468/320x234). Preserve originals. Separate native-zoom-capture returned0:
+Page.captureScreenshot fromSurface true,captureBeyondViewport false, NOclip gives
+full1280x937 at actualCSS320x234/DPR4, dimension assertion and image inspected.
+All four browser contexts and both local servers closed through finally. No
+product/model/account/profile data. No new product-page or scenario acceptance.
+Evidence docs/design/audits/2026-11-08-native-zoom-primitive/report.md. Upstreamlkgr
+source is exploratory, not matched exact binary tag (tag open failed); runtime
+metrics prove observed mechanism. Do not use cropped screenshots for productQA.
+
+Next: actual installed synthetic owner12route keyboard/reflow/control journey
+at native200/400 with full viewport capture. React navigation menu follows actual
+visible responsive controls, not only hardcoded320width. At native400 viewport
+CSS320x234, old160CSSpx minimum main-height heuristic is not automatically a WCAG
+failure; observe actual focus/control visibility and scroll before changes.
+No code or UI edits made for this primitive. Private post-global-handoff.json
+records next steps. U08human and Ken choice already pending; do not repeat asks.
+Final global/source-package/independent review still open, no push/merge/deploy.

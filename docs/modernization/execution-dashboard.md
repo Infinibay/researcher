@@ -44,8 +44,11 @@ preparación de borradores durante la suite anterior y checkpoint posteriores ap
   desplazados por líneas enlazados explícitamente. Sin cambio de política, modelos
   generativos ni mejora de ranking Ken atribuida. La revisión semántica de seis
   módulos acotó tres sobreafirmaciones del borrador; no certifica todos los textos.
-- Ahora: prueba primitiva de zoom nativo de Chromium en perfiles desechables;
-  aún NO ejecutada ni aceptada. Después acceso real/lector y detalles.
+- Ahora: [mecanismo nativo de zoom](../design/audits/2026-11-08-native-zoom-primitive/report.md)
+  comprobado en Chromium156:100/200/400%, ventana fija y viewport CSS1280/640/320.
+  Captura automática recortada detectada; segunda prueba obtiene1280×937 completa
+  a400% mediante CDP sin clip. Sólo HTML sintético: siguiente recorrido real de
+  doce rutas, sin aceptar todavía zoom del producto ni lector.
 - Pendientes: JSDoc/C relevantes en revisión final; Ken/ONNX (elección ya consultada,
   sin repetir pregunta ni adoptar/publicar); U08 humano; accesibilidad restante;
   detalles y conjunto final coherente de paquete/global/revisión independiente.

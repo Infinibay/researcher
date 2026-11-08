@@ -1,0 +1,196 @@
+{
+  "status": "passed",
+  "scope": "Browser primitive on synthetic HTML only; no product acceptance, model, account or operator profile",
+  "states": [
+    {
+      "factor": 1,
+      "preferenceLevel": 0,
+      "metrics": {
+        "innerWidth": 1280,
+        "innerHeight": 937,
+        "outerWidth": 1280,
+        "outerHeight": 1024,
+        "devicePixelRatio": 1,
+        "visualScale": 1,
+        "visualWidth": 1280,
+        "rootZoom": "1",
+        "rootTransform": "none",
+        "scrollWidth": 1280
+      },
+      "layout": {
+        "layoutViewport": {
+          "pageX": 0,
+          "pageY": 0,
+          "clientWidth": 1280,
+          "clientHeight": 937
+        },
+        "visualViewport": {
+          "offsetX": 0,
+          "offsetY": 0,
+          "pageX": 0,
+          "pageY": 0,
+          "clientWidth": 1280,
+          "clientHeight": 937,
+          "scale": 1,
+          "zoom": 1
+        },
+        "contentSize": {
+          "x": 0,
+          "y": 0,
+          "width": 1280,
+          "height": 937
+        },
+        "cssLayoutViewport": {
+          "pageX": 0,
+          "pageY": 0,
+          "clientWidth": 1280,
+          "clientHeight": 937
+        },
+        "cssVisualViewport": {
+          "offsetX": 0,
+          "offsetY": 0,
+          "pageX": 0,
+          "pageY": 0,
+          "clientWidth": 1280,
+          "clientHeight": 937,
+          "scale": 1,
+          "zoom": 1
+        },
+        "cssContentSize": {
+          "x": 0,
+          "y": 0,
+          "width": 1280,
+          "height": 937
+        }
+      },
+      "version": "156.0.8078.4"
+    },
+    {
+      "factor": 2,
+      "preferenceLevel": 3.8017840169239308,
+      "metrics": {
+        "innerWidth": 640,
+        "innerHeight": 468,
+        "outerWidth": 1280,
+        "outerHeight": 1024,
+        "devicePixelRatio": 2,
+        "visualScale": 1,
+        "visualWidth": 640,
+        "rootZoom": "1",
+        "rootTransform": "none",
+        "scrollWidth": 640
+      },
+      "layout": {
+        "layoutViewport": {
+          "pageX": 0,
+          "pageY": 0,
+          "clientWidth": 1280,
+          "clientHeight": 937
+        },
+        "visualViewport": {
+          "offsetX": 0,
+          "offsetY": 0,
+          "pageX": 0,
+          "pageY": 0,
+          "clientWidth": 1280,
+          "clientHeight": 937,
+          "scale": 1,
+          "zoom": 2
+        },
+        "contentSize": {
+          "x": 0,
+          "y": 0,
+          "width": 1280,
+          "height": 937
+        },
+        "cssLayoutViewport": {
+          "pageX": 0,
+          "pageY": 0,
+          "clientWidth": 640,
+          "clientHeight": 468
+        },
+        "cssVisualViewport": {
+          "offsetX": 0,
+          "offsetY": 0,
+          "pageX": 0,
+          "pageY": 0,
+          "clientWidth": 640,
+          "clientHeight": 468.5,
+          "scale": 1,
+          "zoom": 2
+        },
+        "cssContentSize": {
+          "x": 0,
+          "y": 0,
+          "width": 640,
+          "height": 468
+        }
+      },
+      "version": "156.0.8078.4"
+    },
+    {
+      "factor": 4,
+      "preferenceLevel": 7.6035680338478615,
+      "metrics": {
+        "innerWidth": 320,
+        "innerHeight": 234,
+        "outerWidth": 1280,
+        "outerHeight": 1024,
+        "devicePixelRatio": 4,
+        "visualScale": 1,
+        "visualWidth": 320,
+        "rootZoom": "1",
+        "rootTransform": "none",
+        "scrollWidth": 320
+      },
+      "layout": {
+        "layoutViewport": {
+          "pageX": 0,
+          "pageY": 0,
+          "clientWidth": 1280,
+          "clientHeight": 937
+        },
+        "visualViewport": {
+          "offsetX": 0,
+          "offsetY": 0,
+          "pageX": 0,
+          "pageY": 0,
+          "clientWidth": 1280,
+          "clientHeight": 937,
+          "scale": 1,
+          "zoom": 4
+        },
+        "contentSize": {
+          "x": 0,
+          "y": 0,
+          "width": 1280,
+          "height": 937
+        },
+        "cssLayoutViewport": {
+          "pageX": 0,
+          "pageY": 0,
+          "clientWidth": 320,
+          "clientHeight": 234
+        },
+        "cssVisualViewport": {
+          "offsetX": 0,
+          "offsetY": 0,
+          "pageX": 0,
+          "pageY": 0,
+          "clientWidth": 320,
+          "clientHeight": 234.25,
+          "scale": 1,
+          "zoom": 4
+        },
+        "cssContentSize": {
+          "x": 0,
+          "y": 0,
+          "width": 320,
+          "height": 234
+        }
+      },
+      "version": "156.0.8078.4"
+    }
+  ],
+  "source": "https://chromium.googlesource.com/chromium/src/+/lkgr/chrome/browser/ui/zoom/chrome_zoom_level_prefs.cc"
+}
