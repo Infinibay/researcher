@@ -9264,3 +9264,26 @@ regenerar; cierre global/nativo comprobado y0grants. No comprensión humana ni
 aceptación de propietario.11/12páginas (contador agregado corregido de10a11),
 41/43escenarios. SigueC10/entrega parcial durable antes de preguntar; resto de
 gates aún abierto. No repetir el viejo fallo120k ni este resultado para pulirlo.
+
+## Siguiente preflight: C10
+
+Desde11:25:46UTC,base9280815. La omisión real del50EURdel caso anterior queda
+conservada. why_neededya existe (2000caracteres), se guarda enQuestionSet/chat y
+se muestra enQuestionCard; no hace falta schema/tool/loop nuevo. Cambio acotado:
+la política compartida sitúa resultado independiente/base factual en ese registro
+antes de la llamada que cierra el turno. No basta un cálculo interno o una
+respuesta que se pensaba entregar después. Probar sólo la contradicción nueva
+con --only; dejar simple anterior intacto. Registro previo exacto y1turno; ninguna
+comparación causal de prompting entre catálogos distintos. Perfil/preguntas/budget,
+paquete instalado yresultado durable reales deben verificarse antes de cerrar.
+
+## 2026-11-08 — C10completo funcionalmente
+
+Base9280815,11:25:46–11:32:10UTC,6min24s. [Alcance](c10-independent-review.md):
+52fuente/49instaladas, política vincula resultado/base factual al registrodurable
+antes de preguntar.1turno31.358s/52431observados, unknownremoto conservado;50EUR
+visible enpregunta real, no unidad operativa elegida.2estados/6checks de lectura
+instalada sin cambiar16tablas/fuentes.4peerscerrados, dominio retirado. Esquema71.
+**42/43escenarios**,11/12páginas; U08/Proyectos/AuthorityBusysiguen abiertos.
+Siguiente: dependencias/distribución ylicencias con estado final del árbol; después
+prompts/inversas/global/revisiónfinal. DD145al final; sin push/merge/despliegue.

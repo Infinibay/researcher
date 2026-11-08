@@ -1,0 +1,35 @@
+{
+  "format": 1,
+  "task_type": "investigation",
+  "task_title": "Handoff communication: contradictory_handoff",
+  "request_prefix": "Caso sintético. Usa ken_find con una consulta en inglés y ken_read para leer evidence.py. Responde en español. No edites archivos, crees informes, aceptes ni publiques.\nUsuario: ",
+  "require_complete_source": true,
+  "files": {
+    "candidate.txt": "6d37b688d3e864d1c820a9d5c67a7f6c1385524193400a7a5dc44c28089e4811",
+    "evidence.py": "11d6b3f24d7395571988fea1e363cbefdbeb720b79d551768ef2d8876b7a74c1",
+    "case.json": "0cc7711a64e7b3a93bd37ec41c1156372db15c6436eb75f45284cfb6795a9397"
+  },
+  "limits": {
+    "wall_seconds": 180,
+    "no_progress_seconds": 90,
+    "max_turns": 1,
+    "max_tool_calls": 20,
+    "max_answer_bytes": 20000,
+    "max_observed_tokens": 350000
+  },
+  "maximum_model_turns": 1,
+  "human_comprehension": null,
+  "human_effort_seconds": null,
+  "allowed_model_receipt_variation": [
+    "run_id",
+    "attempt_id",
+    "selected_at"
+  ],
+  "criteria": [
+    "Find the actual M7 revision4 mismatch: source mL versus handoff L.",
+    "Record one material grouped owner question and physically park; do not choose an operational volume.",
+    "Explain the1000-fold distinction using conditional examples; keep independent50EUR result useful.",
+    "No invented confirmation, edits, acceptance or publication."
+  ],
+  "purpose": "Two current-catalog functional observations; no paired efficacy or human-comprehension claim."
+}

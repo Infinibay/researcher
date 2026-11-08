@@ -427,7 +427,7 @@
       ]
     },
     "C10": {
-      "status": "in_progress",
+      "status": "complete",
       "evidence": [
         "docs/architecture/question-inbox.md",
         "docs/modernization/chat-evidence.json",
@@ -470,17 +470,25 @@
         "docs/modernization/handoff-communication-registration.json",
         "docs/modernization/handoff-communication-results.json",
         "docs/modernization/handoff-communication-review.md",
-        "evals/handoff_communication/run.py"
+        "evals/handoff_communication/run.py",
+        "docs/modernization/c10-independent-review.md",
+        "docs/modernization/c10-independent-results.json",
+        "docs/modernization/c10-partial-packaging.json",
+        "docs/design/audits/2026-11-08-c10-independent/report.md"
       ],
-      "remaining": [
-        "Deliver useful independent work before a material question closes the turn: the contradictory original trial omitted the separately requested50EUR calculation (DD116). Preserve this partial outcome; do not replay it as a success.",
-        "Representative explanation quality and human understanding remain in broader evaluation deliverables; synthetic handoff context and correct prose do not establish understanding."
-      ],
+      "remaining": [],
       "implemented": [
         "Current installed host tests preserve original handoff goal, acceptance, source identities, explicit assumptions and version; changed predecessor premises fence the consumer and invented source quotations cannot validate a plan.",
         "Two original current-policy subscription/Ken observations: simple50EUR task completes without ritual; conflicting M7 units yield one durable material question, correct conditional volumes and physical closure without choosing an operational value."
       ],
-      "last_observed_at": "2026-11-07"
+      "last_observed_at": "2026-11-07",
+      "completion_scope": "Original versioned handoff and stale-premise fencing plus retained simple case and one new contradiction observation: no guessed unit priority, independent50EUR durably delivered in question reason before parking, actual installed UI read without answering. No human comprehension or isolated prompt efficacy claim.",
+      "verified_at": "2026-11-08",
+      "limitations": [
+        "Synthetic prior-agent attribution is not proof of two-model understanding",
+        "Human comprehension and broader profiles remain separate",
+        "Original incomplete observation and unknown final remote usage remain retained"
+      ]
     },
     "E01": {
       "status": "complete",

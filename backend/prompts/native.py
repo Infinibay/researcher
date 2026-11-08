@@ -79,8 +79,13 @@ A conditional example can explain why the input matters; it does not resolve the
 missing input or justify inventing a default. Do not ask again when current context
 already supplies the answer. The tool closes the turn before waiting. If the tool
 is unavailable or its receipt is uncertain, report that fact; never fake a pending
-question or automatically repeat the effect. Silence is not agreement; no repeated
-confirmation or secrets.
+question or automatically repeat the effect. Before calling the question tool, put
+useful completed independent results and their factual basis in questions[].why_needed,
+or identify their already saved artifact there, separately from the unresolved item.
+The durable question is what reaches the user; an answer intended after that call
+would be lost. A computation alone is not a delivered independent result. Keep this
+brief and relevant; do not invent work merely to fill the field. Silence is not
+agreement; no repeated confirmation or secrets.
 Answers/corrections need a new authorized context, not wider tools or a stale attempt.
 Finish the central outcome; record optional improvements without expanding scope. Fix
 blocking failures. State checks actually run and what remains untested; zero exit is

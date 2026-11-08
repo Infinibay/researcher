@@ -1,5 +1,9 @@
 # C10: delegación simple y contradicción material
 
+Actualización2026-11-08: [nuevo caso ycriterios](c10-independent-review.md) completa
+el alcance funcionalC10. El ensayo parcial descrito abajo permanece intacto;
+no se reemplaza su omisión por una respuesta regenerada.
+
 Base `4cca5d4`. Dos intentos originales, seriales, con la suscripción existente,
 Ken publicado y catálogo actual 8. **Resultado parcial; C10 permanece abierto.**
 No hubo cambios de producto ni repetición de respuestas. Registro previo y fuentes

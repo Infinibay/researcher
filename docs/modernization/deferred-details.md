@@ -1262,3 +1262,16 @@ Fechas/enums siguenDD142; bundleDD121. No cambiar ahora para pulir el recorrido.
 Si se añade edición/borrado individual de notas, sacar o conservar el recibo
 inmutable fuera de la fila; hoy sólo se añaden por las APIs soportadas. La
 idempotencia principal ya está verificada en task-comment-review.md.
+
+## DD145 — explicación y auditoría después de las tareas gruesas
+
+Ciencia actual:5/6criterios y4parcial; explicar denominador inicial del cambio
+relativo (5.86%frente4.57puntos), quitar auditoría de herramientas/cierre de la
+explicación breve yaclararautoría«evaluador». No regenerar el caso para ocultarlo.
+C10yaentrega50EURdurable. Pulir densidad/compositor/vocabulario de espera en la
+cabecera yreferencias técnicas del motivo. La cabecera cuenta trabajo pendiente,
+no prueba un proceso vivo; hacer más inmediata su lectura. Elharnessdehandoff
+mantiene unbase_commit4cca5d4hardcoded: no atribuirlo al checkoutactual9280815;
+corregir metadato en futuras inscripciones sin editar el registro congelado.
+Lint del nuevo lector: imports/estilo pendiente; docstrings de módulo/funciones
+presentes. Gates humanos/perfiles/suite global siguen principales.

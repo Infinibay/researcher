@@ -1,0 +1,24 @@
+{
+  "status": "passed",
+  "states": [
+    {
+      "width": 1440,
+      "fits": true,
+      "violations": []
+    },
+    {
+      "width": 390,
+      "fits": true,
+      "violations": []
+    }
+  ],
+  "errors": [],
+  "checks": [
+    "actual-generated-independent-result-visible",
+    "literal-basis-quantity-unit-price",
+    "conflict-no-priority-or-operational-volume",
+    "conditional-factor1000-options-visible",
+    "no-answer-no-work-admission",
+    "desktop-mobile-regional-axe-no-overflow"
+  ]
+}

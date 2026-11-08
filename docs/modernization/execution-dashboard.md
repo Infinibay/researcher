@@ -26,25 +26,25 @@ que se pueda comparar el avance; no presentar microajustes como tareas principal
 - Codex por suscripción y Ken publicado ensayados. Fuentes/citas, informes draft y revisión documental independiente conectados. Desarrollo admitido desde Tareas/Conversación con captura y comprobaciones explícitas; revisión independiente solicitada desde Tareas y aceptación del propietario conectada. Publicación local desde aceptación conectada; recuperación local de sólo lectura conectada; transporte remoto configurable conectado; recuperación remota y controles de Tareas conectados; ejecución/activación antiguas por tarea y proyecto retiradas; auxiliares de generación/proveedor, herramientas antiguas y sus cinco bibliotecas retirados. También se retiraron API interna, CLI, servicios/listeners y flows/helpers antiguos. También se retiraron autonomía, plantillas históricas y lectores de proveedor sin consumidores; se conserva el control de parada de trabajadores registrados.
 - Interfaz: doce pilotos, 36/36 conceptos de escritorio y 12/12 móviles; todas las rutas tienen piloto y 11/12 páginas tienen aceptación técnica y visual delegada.
 - Última suite global: `9fb873c`,2210 casos,2178 pasan,31 fallan y1 error de fixture; sin omisiones. La carrera de backup encontrada se corrigió después con40 pruebas instaladas. No se declara una nueva corrida global verde; la referencia `0c8b8d9` queda como evidencia histórica.
-- U01–U07, E01–E12, C01–C09 y D01–D13 quedan comprobados con el alcance de sus matrices; siguen 2 de 43 escenarios amplios sin aceptación completa en [coverage.json](coverage.json). No hay un porcentaje global defendible.
+- U01–U07, E01–E12, C01–C09 y D01–D13 quedan comprobados con el alcance de sus matrices; sigue 1 de 43 escenarios amplios sin aceptación completa en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Estado actual: ciencia entregada con límites; continúa C10
+## Estado actual: C10verificado; sigue distribución/dependencias
 
-**11:14:52–11:22:21UTC,7min29s hasta verificar/revisar**, base478ab0a.
-[Alcance](current-scientific-final-review.md). Bibliografía previa ycheckpoint excluidos.
+**11:25:46–11:32:10UTC,6min24s hasta verificar/inspeccionar**, base9280815.
+[Alcance](c10-independent-review.md). Documentación/checkpoint excluidos.
 
-- Terminado: **11/12páginas**, comentarios duraderos/cierre no vacío y un caso
-  científico actual entregado.1turno/104.289s/343406tokens observados, informe con
-  citas/cálculo exacto. Revisión limpia5/6pasan y1parcial; no ciencia/U08globalverde.
-  Respuesta original conservada.0grants/peers abiertos ydominio eliminado.
-- En curso: **C10**, trabajo independiente visible/durable antes de una pregunta
-  que termina el turno. Investigar el contrato existente antes de añadir otroloop.
-- Pendiente: Proyectos/AuthorityBusy (no corregido); U08/C10 yresto de evaluación
+- Terminado: **11/12páginas y42/43escenarios**. C10entrega50EURen la pregunta
+  durable, bloquea volumenambiguo sin prioridad inventada.1turno31.358s/52431tokens
+  observados, despacho unknownconservado;2estados/6checks de sólo lectura.52fuente/
+  49instaladas pasan. Ciencia: entrega real,5/6criterios y1parcial, no U08aceptado.
+- En curso: **dependencias/distribución/licencias**, revisión gruesa sobre el árbol
+  actual. Reutilizar recibos; no otra instalación si no cambia producto.
+- Pendiente: Proyectos/AuthorityBusy (no corregido); U08 yresto de evaluación
   de comunicación/perfiles; distribución/dependencias, prompts, inversas71,
-  global y revisión final. Criterio científico4yclaridad pendiente registrados.
-- Seguimos **41/43escenarios**. Última global31fallos/1error; prompts al último
-  corte67de85desactualizados/318archivos. Sin historial de usuario que migrar.
-- Detalles al final: DD144y anteriores; lint/fechas/enums/densidad/accesibilidad
+  global y revisión final. Sin historial de usuario que migrar.
+- Última global31fallos/1error; prompts al último corte67de85desactualizados/
+  318archivos. No se declara globalverde. U08esel escenario amplio restante.
+- Detalles al final: DD145y anteriores; lint/fechas/enums/densidad/accesibilidad
   completa. Sin porcentaje/ETA global inventados, push o merge.
 
 ## Etapa anterior: Ken estructural offline verificado; continúa aceptación de páginas
