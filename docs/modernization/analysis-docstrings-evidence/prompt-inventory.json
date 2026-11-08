@@ -1,0 +1,14 @@
+{
+  "base_commit": "b223f10",
+  "files_scanned": 322,
+  "candidates": 85,
+  "revalidated_ids": [
+    "backend/runtime/analysis_tools.py::_TOOLS"
+  ],
+  "unchanged_review_count": 84,
+  "candidate_assignment_ast_equal": true,
+  "source_module_changed": true,
+  "direct_consumers_unchanged": true,
+  "model_visible_schema_descriptions_added": 4,
+  "rationale": "Reviewed full analysis-tool documentation delta against b223f10. The _TOOLS assignment and executable AST are unchanged, but four argument-class docstrings deliberately add top-level inputSchema descriptions to the actual emitted catalog. Fresh-process comparison proves these four descriptions are the only catalog changes: names, tool descriptions, fields, bounds, defaults, extra-field policy and dispatch constraints remain equal. New prose explains stable operation/job identities, byte-window reads and cancellation without task acceptance or credential selection. Seven native policy bodies and48business tool descriptions/schemas/annotations are unchanged. Existing authority/cancellation/receipt tests are directed runtime evidence, not model compliance, human comprehension or a fix for the failed budgeted delivery; DD157 remains deferred."
+}

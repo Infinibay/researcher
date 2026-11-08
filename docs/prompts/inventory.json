@@ -179,7 +179,7 @@
     "backend/research/worker_transport.py": "78f212cc9a728dd3aa6fa6fa920ad8f7f3d21e2bd70da830db1a8fe5ec3ff7b7",
     "backend/runtime/__init__.py": "4cd821bf227b55f0037304a924016d3827baaa924797487a6392154d7ac3c19e",
     "backend/runtime/administration_process.py": "5971275b06d07bdc4ae74448486da78ee778632e056e0d9639d8f0e56c940cb9",
-    "backend/runtime/analysis_tools.py": "f71a9b777994c454e5b235acc7ae672b5479dc2111408c6a0d5ba1529a2ce314",
+    "backend/runtime/analysis_tools.py": "510942b0c5cffc6ff733a3231b1c177a2addfcc49c8fc6fc037b15be03f5c6bf",
     "backend/runtime/authority_journal.py": "eed98cada4ab678c47ef9bdcd37ec0781442b6b9a63dc90b82c5455c740e6756",
     "backend/runtime/auxiliary_budget.py": "feabcf27930484e4d516a710f0f45f05ee248360528c5f516a791d635bcea027",
     "backend/runtime/auxiliary_execution.py": "e16dcf41249b80efff3d60caf1204fa523d1d2fd6fbc1a6b9d1b1cae141330ec",
@@ -1322,13 +1322,13 @@
       "id": "backend/runtime/analysis_tools.py::_TOOLS",
       "path": "backend/runtime/analysis_tools.py",
       "symbol": "_TOOLS",
-      "line": 53,
-      "end_line": 85,
+      "line": 68,
+      "end_line": 100,
       "owner": "backend.runtime.analysis_tools",
       "family": "other_owned_prompt_candidate",
       "disposition": "retained_native_tool_contract",
       "objective": "Lease-bound analysis tools. The host owns every command peer and its policy.\n\nProduct callers must supply the read-only native command factory. No credentials,\nfilesystem grants, interpreter selection or process ownership come from the model.",
-      "source_sha256": "f71a9b777994c454e5b235acc7ae672b5479dc2111408c6a0d5ba1529a2ce314",
+      "source_sha256": "510942b0c5cffc6ff733a3231b1c177a2addfcc49c8fc6fc037b15be03f5c6bf",
       "source_bytes": 1480,
       "rendered_utf8_bytes": null,
       "variables_kind": "referenced_identifiers",
@@ -1349,13 +1349,13 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "3d84a0a0268d85c1a1197efadddbfb2f9fdc4c7b3f32f05fa4f23c49d407afa7",
+      "dependencies_sha256": "2442829e98b19e2cf3710e5b095ee528c610843cc382e8f42d2d937e54c8e179",
       "direct_module_consumers": {
         "backend/runtime/owned_runtime.py": "5d28a1b3909b77d9699c0770889a788a0365e25282b7c8eb4b3e13e9048a2145"
       },
       "suggested_disposition": "requires_review",
       "review_status": "reviewed",
-      "review_rationale": "Delta review against ab36dc5; preserve the earlier full semantic review below. Read the complete changed common policy and selector, exact owned factory call, native reply mediation and durable issue consumer. Catalog4 adds observed budget/delivery guidance, bounded discovery and faithful examples; exact initial limits enter the frozen instructions. Versions2/3 retain their recorded identity. This candidate source is byte-identical; only the native composition or owned factory consumer changed. Existing capability-specific prerequisites, source windows and permission boundaries still apply, including under delivery pressure. Directed source and installed tests verify budget/provenance/closure contracts, not general model compliance, scientific validity or human comprehension. Three development regressions are evaluated separately; prior reserved results are not replaced.",
+      "review_rationale": "Reviewed full analysis-tool documentation delta against b223f10. The _TOOLS assignment and executable AST are unchanged, but four argument-class docstrings deliberately add top-level inputSchema descriptions to the actual emitted catalog. Fresh-process comparison proves these four descriptions are the only catalog changes: names, tool descriptions, fields, bounds, defaults, extra-field policy and dispatch constraints remain equal. New prose explains stable operation/job identities, byte-window reads and cancellation without task acceptance or credential selection. Seven native policy bodies and48business tool descriptions/schemas/annotations are unchanged. Existing authority/cancellation/receipt tests are directed runtime evidence, not model compliance, human comprehension or a fix for the failed budgeted delivery; DD157 remains deferred.",
       "review_evidence": [
         "backend/runtime/analysis_tools.py",
         "docs/prompts/review-2026-11-07.md",
@@ -1366,7 +1366,11 @@
         "backend/tests/runtime/test_delivery_budget.py",
         "docs/modernization/delivery-budget-review.md",
         "docs/modernization/domain-resources-review.md",
-        "backend/tests/runtime/test_domain_resources.py"
+        "backend/tests/runtime/test_domain_resources.py",
+        "docs/modernization/analysis-docstrings-review.md",
+        "docs/modernization/analysis-docstrings-results.json",
+        "docs/modernization/analysis-docstrings-evidence/schema-delta.json",
+        "docs/modernization/analysis-docstrings-evidence/prior-review.json"
       ],
       "review_conflicts": [
         "Descriptions document capabilities; they never grant authority or prove a tool was run. Static catalogue text is not a complete live catalogue or a scientific certificate."

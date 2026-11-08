@@ -919,9 +919,9 @@
       "conflicts": []
     },
     "backend/runtime/analysis_tools.py::_TOOLS": {
-      "dependencies_sha256": "3d84a0a0268d85c1a1197efadddbfb2f9fdc4c7b3f32f05fa4f23c49d407afa7",
+      "dependencies_sha256": "2442829e98b19e2cf3710e5b095ee528c610843cc382e8f42d2d937e54c8e179",
       "decision": "retained_native_tool_contract",
-      "rationale": "Delta review against ab36dc5; preserve the earlier full semantic review below. Read the complete changed common policy and selector, exact owned factory call, native reply mediation and durable issue consumer. Catalog4 adds observed budget/delivery guidance, bounded discovery and faithful examples; exact initial limits enter the frozen instructions. Versions2/3 retain their recorded identity. This candidate source is byte-identical; only the native composition or owned factory consumer changed. Existing capability-specific prerequisites, source windows and permission boundaries still apply, including under delivery pressure. Directed source and installed tests verify budget/provenance/closure contracts, not general model compliance, scientific validity or human comprehension. Three development regressions are evaluated separately; prior reserved results are not replaced.",
+      "rationale": "Reviewed full analysis-tool documentation delta against b223f10. The _TOOLS assignment and executable AST are unchanged, but four argument-class docstrings deliberately add top-level inputSchema descriptions to the actual emitted catalog. Fresh-process comparison proves these four descriptions are the only catalog changes: names, tool descriptions, fields, bounds, defaults, extra-field policy and dispatch constraints remain equal. New prose explains stable operation/job identities, byte-window reads and cancellation without task acceptance or credential selection. Seven native policy bodies and48business tool descriptions/schemas/annotations are unchanged. Existing authority/cancellation/receipt tests are directed runtime evidence, not model compliance, human comprehension or a fix for the failed budgeted delivery; DD157 remains deferred.",
       "evidence": [
         "backend/runtime/analysis_tools.py",
         "docs/prompts/review-2026-11-07.md",
@@ -932,7 +932,11 @@
         "backend/tests/runtime/test_delivery_budget.py",
         "docs/modernization/delivery-budget-review.md",
         "docs/modernization/domain-resources-review.md",
-        "backend/tests/runtime/test_domain_resources.py"
+        "backend/tests/runtime/test_domain_resources.py",
+        "docs/modernization/analysis-docstrings-review.md",
+        "docs/modernization/analysis-docstrings-results.json",
+        "docs/modernization/analysis-docstrings-evidence/schema-delta.json",
+        "docs/modernization/analysis-docstrings-evidence/prior-review.json"
       ],
       "conflicts": [
         "Descriptions document capabilities; they never grant authority or prove a tool was run. Static catalogue text is not a complete live catalogue or a scientific certificate."
@@ -973,9 +977,12 @@
         "reviewed_at": "2026-11-07",
         "source_base_commit": "035b46c"
       },
-      "reviewed_at": "2026-11-07",
+      "reviewed_at": "2026-11-08",
       "source_base_commit": "ab36dc5",
-      "revalidation": "Prompt source text and catalog6 remain unchanged. Reviewed direct-consumer changes: broker CPU/memory/process limits and post-closure kernel observations; resource_exhaustion is owner feedback, not model authority. Existing tool descriptions and frozen input policy retain their capabilities and exact source attribution. No human comprehension inference."
+      "revalidation": "Reviewed full analysis-tool documentation delta against b223f10. The _TOOLS assignment and executable AST are unchanged, but four argument-class docstrings deliberately add top-level inputSchema descriptions to the actual emitted catalog. Fresh-process comparison proves these four descriptions are the only catalog changes: names, tool descriptions, fields, bounds, defaults, extra-field policy and dispatch constraints remain equal. New prose explains stable operation/job identities, byte-window reads and cancellation without task acceptance or credential selection. Seven native policy bodies and48business tool descriptions/schemas/annotations are unchanged. Existing authority/cancellation/receipt tests are directed runtime evidence, not model compliance, human comprehension or a fix for the failed budgeted delivery; DD157 remains deferred.",
+      "previous_dependencies_sha256": "3d84a0a0268d85c1a1197efadddbfb2f9fdc4c7b3f32f05fa4f23c49d407afa7",
+      "revalidation_baseline_commit": "b223f10",
+      "reviewer": "Codex, source and emitted-catalog metadata review"
     },
     "backend/runtime/business_definitions.py::INSTRUCTIONS": {
       "dependencies_sha256": "aa8a1415b537f83a0f5e60a9a83815e0fddac27b6b15f213e5feed249b087d3a",

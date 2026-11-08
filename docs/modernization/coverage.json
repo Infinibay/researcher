@@ -6962,7 +6962,9 @@
         "docs/modernization/subscription-mediation-docstrings-review.md",
         "docs/modernization/subscription-mediation-docstrings-results.json",
         "docs/modernization/network-recovery-docstrings-review.md",
-        "docs/modernization/network-recovery-docstrings-results.json"
+        "docs/modernization/network-recovery-docstrings-results.json",
+        "docs/modernization/analysis-docstrings-review.md",
+        "docs/modernization/analysis-docstrings-results.json"
       ],
       "verified": [
         "88authored English docstrings across coordinator/contracts/SQLite/peer registry",
@@ -6976,21 +6978,24 @@
         "53 English docstrings across subscription auth/provider, native state and business mediation; 307 cumulative in 16 modules",
         "Executable AST, 7 policies and 48 business wire definitions unchanged; 42 source tests pass",
         "48 English docstrings across egress proxy/channel, network assets, process identity and run recovery; 355 cumulative in 21 modules",
-        "Executable AST, 7 policies and 48 business wire definitions unchanged; 88 source tests pass"
+        "Executable AST, 7 policies and 48 business wire definitions unchanged; 88 source tests pass",
+        "18 English docstrings in analysis tools; 373 cumulative in 22 modules",
+        "Exactly four model-visible argument schema descriptions added; fields/types/bounds/defaults/tool descriptions unchanged; 43 source tests pass"
       ],
       "remaining": [
-        "Review analysis tool schema documentation as model-visible metadata and other relevant boundaries/JSDoc",
-        "266 definitions outside completed scope lack docstrings; assess actual responsibility/relevance, do not auto-fill",
+        "Review other relevant interfaces and JSDoc",
+        "248 definitions outside completed scope lack docstrings; assess actual responsibility/relevance, do not auto-fill",
         "Final package/global validation"
       ],
       "limits": [
         "No Ken ranking benchmark or MCP worktree reindex",
         "Not all existing docstrings reviewed",
-        "Older installed wheel does not contain these new documentation bytes"
+        "Older installed wheel does not contain these new documentation bytes",
+        "Four analysis argument schema descriptions intentionally change model-visible metadata; no efficacy claim"
       ],
-      "cumulative_added_docstrings": 355,
-      "cumulative_modules": 21,
-      "remaining_presence_count": 266
+      "cumulative_added_docstrings": 373,
+      "cumulative_modules": 22,
+      "remaining_presence_count": 248
     }
   }
 }

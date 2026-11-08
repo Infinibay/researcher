@@ -1,0 +1,171 @@
+[
+  {
+    "description": "Start one bounded analysis command (argv, no implicit shell). Workspace is read-only; network and inherited credentials are unavailable. Returns a durable job ID, not a result. Preserve operation_key on retries. Read its output before drawing conclusions.",
+    "inputSchema": {
+      "additionalProperties": false,
+      "properties": {
+        "argv": {
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 128,
+          "minItems": 1,
+          "title": "Argv",
+          "type": "array"
+        },
+        "cwd": {
+          "default": ".",
+          "maxLength": 4096,
+          "minLength": 1,
+          "title": "Cwd",
+          "type": "string"
+        },
+        "operation_key": {
+          "pattern": "^[A-Za-z0-9_.:-]{1,128}$",
+          "title": "Operation Key",
+          "type": "string"
+        },
+        "output_bytes": {
+          "default": 65536,
+          "maximum": 65536,
+          "minimum": 1,
+          "title": "Output Bytes",
+          "type": "integer"
+        },
+        "timeout_seconds": {
+          "default": 30,
+          "exclusiveMinimum": 0,
+          "maximum": 300,
+          "title": "Timeout Seconds",
+          "type": "number"
+        }
+      },
+      "required": [
+        "operation_key",
+        "argv"
+      ],
+      "title": "StartCommand",
+      "type": "object"
+    },
+    "name": "researcher_command_start",
+    "type": "function"
+  },
+  {
+    "description": "Start Python standard-library analysis using the host-selected isolated interpreter. Workspace is read-only; no network, credentials, packages or installs. Print needed results; temporary files are discarded on peer closure. Preserve operation_key and read the returned job.",
+    "inputSchema": {
+      "additionalProperties": false,
+      "properties": {
+        "code": {
+          "maxLength": 16384,
+          "minLength": 1,
+          "title": "Code",
+          "type": "string"
+        },
+        "cwd": {
+          "default": ".",
+          "maxLength": 4096,
+          "minLength": 1,
+          "title": "Cwd",
+          "type": "string"
+        },
+        "operation_key": {
+          "pattern": "^[A-Za-z0-9_.:-]{1,128}$",
+          "title": "Operation Key",
+          "type": "string"
+        },
+        "output_bytes": {
+          "default": 65536,
+          "maximum": 65536,
+          "minimum": 1,
+          "title": "Output Bytes",
+          "type": "integer"
+        },
+        "timeout_seconds": {
+          "default": 30,
+          "exclusiveMinimum": 0,
+          "maximum": 300,
+          "title": "Timeout Seconds",
+          "type": "number"
+        }
+      },
+      "required": [
+        "operation_key",
+        "code"
+      ],
+      "title": "StartPython",
+      "type": "object"
+    },
+    "name": "researcher_python",
+    "type": "function"
+  },
+  {
+    "description": "Read this attempt's job receipt and byte windows. Canonical output is persisted at termination, so an active job may have no output yet. Use next_offset/has_more. Base64 is exact; UTF-8 preview may be lossy. Exit code, physical closure and product acceptance are different facts.",
+    "inputSchema": {
+      "additionalProperties": false,
+      "properties": {
+        "job_id": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Job Id",
+          "type": "string"
+        },
+        "max_bytes": {
+          "default": 8192,
+          "maximum": 16384,
+          "minimum": 1,
+          "title": "Max Bytes",
+          "type": "integer"
+        },
+        "stderr_offset": {
+          "default": 0,
+          "maximum": 65536,
+          "minimum": 0,
+          "title": "Stderr Offset",
+          "type": "integer"
+        },
+        "stdout_offset": {
+          "default": 0,
+          "maximum": 65536,
+          "minimum": 0,
+          "title": "Stdout Offset",
+          "type": "integer"
+        },
+        "wait_ms": {
+          "default": 0,
+          "maximum": 1000,
+          "minimum": 0,
+          "title": "Wait Ms",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "job_id"
+      ],
+      "title": "ReadCommand",
+      "type": "object"
+    },
+    "name": "researcher_command_read",
+    "type": "function"
+  },
+  {
+    "description": "Cancel this attempt's job and close its dedicated peer, including detached children. A missing exit receipt stays unknown, never success. Cancellation does not accept the task.",
+    "inputSchema": {
+      "additionalProperties": false,
+      "properties": {
+        "job_id": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Job Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "job_id"
+      ],
+      "title": "CancelCommand",
+      "type": "object"
+    },
+    "name": "researcher_command_cancel",
+    "type": "function"
+  }
+]

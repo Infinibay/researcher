@@ -1,0 +1,12 @@
+{
+  "base_commit": "b223f10",
+  "scope": "Documentation-only source edit; four Pydantic schema descriptions intentionally model-visible",
+  "files": {
+    "backend/runtime/analysis_tools.py": {
+      "added_docstrings": 18,
+      "executable_ast_equal": true,
+      "before_sha256": "f71a9b777994c454e5b235acc7ae672b5479dc2111408c6a0d5ba1529a2ce314",
+      "after_sha256": "510942b0c5cffc6ff733a3231b1c177a2addfcc49c8fc6fc037b15be03f5c6bf"
+    }
+  }
+}

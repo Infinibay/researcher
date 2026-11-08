@@ -19,10 +19,16 @@ from backend.runtime.contracts import CommandSpec, RunConflict, RunNotFound
 
 
 class _Arguments(BaseModel):
+    """Validate only explicitly declared typed analysis-tool arguments; reject coercion and extra
+    authority or environment fields.
+    """
     model_config = ConfigDict(extra="forbid", strict=True)
 
 
 class StartCommand(_Arguments):
+    """Request one bounded argv command under host-owned execution policy, identified by a stable
+    operation key; its receipt is a job identity, not task acceptance.
+    """
     operation_key: str = Field(pattern=r"^[A-Za-z0-9_.:-]{1,128}$")
     argv: list[str] = Field(min_length=1, max_length=128)
     cwd: str = Field(default=".", min_length=1, max_length=4096)
@@ -31,6 +37,9 @@ class StartCommand(_Arguments):
 
 
 class StartPython(_Arguments):
+    """Request bounded standard-library Python analysis through the host-selected interpreter,
+    preserving the operation key rather than choosing credentials or an execution environment.
+    """
     operation_key: str = Field(pattern=r"^[A-Za-z0-9_.:-]{1,128}$")
     code: str = Field(min_length=1, max_length=16384)
     cwd: str = Field(default=".", min_length=1, max_length=4096)
@@ -39,6 +48,9 @@ class StartPython(_Arguments):
 
 
 class ReadCommand(_Arguments):
+    """Read byte windows or briefly observe the existing job; offsets count bytes, max_bytes is per
+    stream and a read never starts the command again.
+    """
     job_id: str = Field(min_length=1, max_length=128)
     stdout_offset: int = Field(default=0, ge=0, le=65536)
     stderr_offset: int = Field(default=0, ge=0, le=65536)
@@ -47,6 +59,9 @@ class ReadCommand(_Arguments):
 
 
 class CancelCommand(_Arguments):
+    """Request cancellation of the existing attempt-owned job by its exact identity without accepting
+    the task or creating replacement work.
+    """
     job_id: str = Field(min_length=1, max_length=128)
 
 
@@ -87,6 +102,9 @@ _TOOLS = {
 
 @dataclass
 class _Owned:
+    """Retain one admitted command scope, worker and handle together with the shared cleanup task that
+    preserves original resource ownership.
+    """
     scope: object
     worker: object
     handle: object
@@ -94,12 +112,18 @@ class _Owned:
 
 
 def _window(data, offset, count):
+    """Project one byte slice with exact base64, byte offsets and an explicitly lossy UTF-8 preview
+    through the canonical output-window formatter.
+    """
     return output_window(
         data[offset : offset + count], offset=offset, total_bytes=len(data)
     )
 
 
 def _receipt(job, *, stdout_offset=0, stderr_offset=0, max_bytes=8192, **_):
+    """Render persisted job facts and requested stdout/stderr windows while keeping exit status, local
+    closure and product acceptance separate.
+    """
     return {
         "job_id": job.job_id,
         "status": job.status,
@@ -173,9 +197,15 @@ class AnalysisTools:
             return row["execution_kind"] == "development"
 
     async def __aexit__(self, *_):
+        """Drain shared cleanup of this attempt's original command resources before leaving the tool
+        scope.
+        """
         await self.aclose()
 
     async def _authorized(self):
+        """Require local scope availability, the current host activity predicate and the durable
+        attempt lease before dispatch or response delivery.
+        """
         return (
             self._closing is None
             and self._active()
@@ -192,6 +222,10 @@ class AnalysisTools:
             return not self._owned
 
     async def call(self, params):
+        """Validate one admitted tool envelope and arguments, serialize owned command operations and
+        recheck authority before returning results; uncertain effects require original receipt
+        recovery.
+        """
         if not self._entered or not await self._authorized():
             return _failure(
                 "Attempt authority ended; do not retry effects. Owner recovery can inspect receipts."
@@ -252,6 +286,9 @@ class AnalysisTools:
             )
 
     async def _start(self, args):
+        """Recover the same durable command receipt or admit one new dedicated worker after prior jobs
+        close, constraining cwd to the bound workspace without replaying uncertain work.
+        """
         argv = (
             tuple(args.argv)
             if isinstance(args, StartCommand)
@@ -293,6 +330,9 @@ class AnalysisTools:
         return await self._settle(await self._get(handle.job_id))
 
     async def _get(self, job_id):
+        """Read a durable job only if its run and attempt match this tool scope, rejecting foreign job
+        identities.
+        """
         job = await asyncio.to_thread(
             self.journal.get_job, self.lease.project_id, job_id
         )
@@ -301,12 +341,18 @@ class AnalysisTools:
         return job
 
     async def _settle(self, job):
+        """Close this scope's owned terminal or uncertain peer before rereading its durable receipt;
+        unknown process outcome never becomes an invented exit code.
+        """
         if job.status in ("exited", "unknown") and job.job_id in self._owned:
             await self._close_owned(job.job_id)
             job = await self._get(job.job_id)
         return job
 
     async def _read(self, args):
+        """Observe or cancel the original attempt-owned job, bound optional waiting and settle terminal
+        peers; unowned uncertain work requires recovery instead of replay.
+        """
         job = await self._get(args.job_id)
         owned = self._owned.get(job.job_id)
         if isinstance(args, CancelCommand):
@@ -327,6 +373,9 @@ class AnalysisTools:
         return await self._settle(job)
 
     async def _close_owned(self, job_id):
+        """Share one shielded original scope-exit task and remove ownership only after cleanup
+        completes, so a cancelled reader cannot abandon or reenter teardown.
+        """
         owned = self._owned[job_id]
         if owned.cleanup is None:
             owned.cleanup = asyncio.create_task(owned.scope.__aexit__(None, None, None))
@@ -336,12 +385,18 @@ class AnalysisTools:
         del self._owned[job_id]
 
     async def aclose(self):
+        """Start or join one shielded shutdown task, immediately preventing further admitted tool work
+        while retaining the original cleanup owner.
+        """
         if self._closing is None:
             self._closing = asyncio.create_task(self._shutdown())
         await asyncio.shield(self._closing)
 
     async def _shutdown(self):
         # Stop physical work before waiting on a reader or a database writer.
+        """Request physical worker closure before waiting for the tool lock, drain each original scope
+        and mark closed only after successful cleanup.
+        """
         await asyncio.gather(
             *(owned.worker.aclose() for owned in tuple(self._owned.values()))
         )

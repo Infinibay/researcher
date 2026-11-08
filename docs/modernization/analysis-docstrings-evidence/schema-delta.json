@@ -1,0 +1,21 @@
+{
+  "scope": "Only four top-level inputSchema descriptions added; all other keys/values, argument constraints and tool descriptions identical",
+  "changes": [
+    {
+      "name": "researcher_command_start",
+      "added_schema_description": "Request one bounded argv command under host-owned execution policy, identified by a stable\noperation key; its receipt is a job identity, not task acceptance."
+    },
+    {
+      "name": "researcher_python",
+      "added_schema_description": "Request bounded standard-library Python analysis through the host-selected interpreter,\npreserving the operation key rather than choosing credentials or an execution environment."
+    },
+    {
+      "name": "researcher_command_read",
+      "added_schema_description": "Read byte windows or briefly observe the existing job; offsets count bytes, max_bytes is per\nstream and a read never starts the command again."
+    },
+    {
+      "name": "researcher_command_cancel",
+      "added_schema_description": "Request cancellation of the existing attempt-owned job by its exact identity without accepting\nthe task or creating replacement work."
+    }
+  ]
+}

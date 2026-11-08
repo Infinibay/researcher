@@ -1,0 +1,67 @@
+{
+  "base_commit": "b223f10",
+  "scope": "Documentation-only source edit, four argument-schema descriptions intentionally model-visible",
+  "added_docstrings": 18,
+  "cumulative_added_docstrings": 373,
+  "cumulative_modules": 22,
+  "files": {
+    "backend/runtime/analysis_tools.py": {
+      "added_docstrings": 18,
+      "executable_ast_equal": true,
+      "before_sha256": "f71a9b777994c454e5b235acc7ae672b5479dc2111408c6a0d5ba1529a2ce314",
+      "after_sha256": "510942b0c5cffc6ff733a3231b1c177a2addfcc49c8fc6fc037b15be03f5c6bf"
+    }
+  },
+  "introspection": {
+    "policy_bodies_unchanged": 7,
+    "business_descriptions_schemas_annotations_unchanged": 48,
+    "analysis_schema_descriptions_added": 4,
+    "other_analysis_catalog_values_unchanged": true,
+    "remaining_owned_definitions_without_docstring": 248,
+    "scope": "Presence only, not adequacy or equal relevance. Model-visible schema metadata intentionally changed."
+  },
+  "tests": {
+    "passed": 43,
+    "failed": 0,
+    "skipped": 0,
+    "seconds": 35.13,
+    "files": [
+      "backend/tests/runtime/test_analysis_tools.py",
+      "backend/tests/runtime/test_command_executor.py",
+      "backend/tests/runtime/test_business_mediation.py",
+      "backend/tests/runtime/test_code_mode_host.py"
+    ],
+    "initial_attempt": "Command named nonexistent test_native_business_tools.py; exited4 with no tests. Corrected to existing test_business_mediation.py; original log retained."
+  },
+  "prompt_inventory": {
+    "base_commit": "b223f10",
+    "files_scanned": 322,
+    "candidates": 85,
+    "revalidated_ids": [
+      "backend/runtime/analysis_tools.py::_TOOLS"
+    ],
+    "unchanged_review_count": 84,
+    "candidate_assignment_ast_equal": true,
+    "source_module_changed": true,
+    "direct_consumers_unchanged": true,
+    "model_visible_schema_descriptions_added": 4,
+    "rationale": "Reviewed full analysis-tool documentation delta against b223f10. The _TOOLS assignment and executable AST are unchanged, but four argument-class docstrings deliberately add top-level inputSchema descriptions to the actual emitted catalog. Fresh-process comparison proves these four descriptions are the only catalog changes: names, tool descriptions, fields, bounds, defaults, extra-field policy and dispatch constraints remain equal. New prose explains stable operation/job identities, byte-window reads and cancellation without task acceptance or credential selection. Seven native policy bodies and48business tool descriptions/schemas/annotations are unchanged. Existing authority/cancellation/receipt tests are directed runtime evidence, not model compliance, human comprehension or a fix for the failed budgeted delivery; DD157 remains deferred."
+  },
+  "generative_model_turns": 0,
+  "package_rebuilt": false,
+  "human_comprehension": null,
+  "limits": [
+    "Four inputSchema descriptions added; not a claim that all model-visible input is unchanged",
+    "Presence is not adequacy or measured Ken ranking",
+    "Original connected MCP index was not reindexed",
+    "Older installed packages do not contain new docstrings",
+    "Not a fix for DD157 or failed whole explanation delivery",
+    "Not global-suite/scientific/human/accessibility acceptance"
+  ],
+  "time": {
+    "start_utc": "2026-11-08 19:05:35",
+    "verification_cut_utc": "2026-11-08 19:07:03",
+    "elapsed_seconds": 88,
+    "scope": "Report and checkpoint later"
+  }
+}

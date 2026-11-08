@@ -1334,6 +1334,12 @@ políticas y 48 herramientas iguales; 88 pruebas fuente pasan. Tratar los docstr
 de modelos Pydantic de análisis como metadata visible al modelo, no sólo comentarios.
 
 
+Sexto bloque: [18 docstrings de análisis](analysis-docstrings-review.md), 373
+acumulados en 22 módulos; 248 definiciones restantes por presencia. Cuatro nuevas
+descripciones Pydantic son visibles al modelo; campos, límites y demás catálogo
+iguales. Pasan 43 pruebas fuente. No se declara DD157 ni U08 resueltos.
+
+
 ## DD147 — recuperar observaciones CLI anteriores a la política
 
 La corrección de aceptación enlaza la política observada al request y al recibo.

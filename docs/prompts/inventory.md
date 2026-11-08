@@ -137,3 +137,10 @@ El inventario actual conserva 85 candidatos en 322 archivos. Se revalidó única
 el consumidor de `read_feedback` modificado por doce docstrings del broker; fuente
 del candidato, AST ejecutable, siete políticas y 48 herramientas siguen iguales.
 Las otras 84 decisiones no se renovaron. No cambia la eficacia demostrada ni U08.
+
+
+La [documentación de análisis](../modernization/analysis-docstrings-review.md)
+añade cuatro descripciones a los esquemas de argumentos realmente emitidos. Se
+revisan como metadata visible al modelo: no cambian campos, límites ni política
+de despacho. Una decisión revalidada, 84 conservadas; inventario actual 85/322.
+No implica mejor cumplimiento del modelo ni cierre de DD157/U08.

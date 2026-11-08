@@ -9674,3 +9674,16 @@ pasan (71 en 21,26 s y 17 en 16,38 s), sin omisiones ni nuevos modelos. Inventar
 verificación, informe/checkpoint después. Siguen análisis/Pydantic como metadata
 visible, otras interfaces/JSDoc, U08, Ken/ONNX, accesibilidad y cierre integrado.
 No nuevo wheel/global/push/merge/despliegue; DD157 permanece diferido.
+
+## 2026-11-08 — Análisis documentado con metadata explícita
+
+[Informe](analysis-docstrings-review.md). 18 docstrings nuevos; 373 acumulados en
+22 módulos, 248 faltantes por presencia. Cuatro descripciones nuevas en los
+esquemas Pydantic se reconocen como metadata visible al modelo. Catálogo restante,
+siete políticas y 48 herramientas de negocio iguales. 43 pruebas fuente pasan,
+35,13 s; se conserva el primer comando con archivo inexistente y cero pruebas.
+Inventario 85/322 vigente, una revisión de metadata y 84 decisiones sin renovar.
+19:05:35–19:07:03 UTC: 1 min 28 s hasta verificación; informe/checkpoint después.
+Sin modelos/wheel/global nuevos. DD157 y entrega humana no se declaran resueltos.
+Siguen interfaces/JSDoc, U08, Ken/ONNX, accesibilidad y cierre integrado; sin push,
+merge ni despliegue.

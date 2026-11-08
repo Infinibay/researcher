@@ -1,0 +1,22 @@
+{
+  "analysis_tools.py": {
+    "_Arguments": "Validate only explicitly declared typed analysis-tool arguments; reject coercion and extra authority or environment fields.",
+    "StartCommand": "Request one bounded argv command under host-owned execution policy, identified by a stable operation key; its receipt is a job identity, not task acceptance.",
+    "StartPython": "Request bounded standard-library Python analysis through the host-selected interpreter, preserving the operation key rather than choosing credentials or an execution environment.",
+    "ReadCommand": "Read byte windows or briefly observe the existing job; offsets count bytes, max_bytes is per stream and a read never starts the command again.",
+    "CancelCommand": "Request cancellation of the existing attempt-owned job by its exact identity without accepting the task or creating replacement work.",
+    "_Owned": "Retain one admitted command scope, worker and handle together with the shared cleanup task that preserves original resource ownership.",
+    "_window": "Project one byte slice with exact base64, byte offsets and an explicitly lossy UTF-8 preview through the canonical output-window formatter.",
+    "_receipt": "Render persisted job facts and requested stdout/stderr windows while keeping exit status, local closure and product acceptance separate.",
+    "AnalysisTools.__aexit__": "Drain shared cleanup of this attempt's original command resources before leaving the tool scope.",
+    "AnalysisTools._authorized": "Require local scope availability, the current host activity predicate and the durable attempt lease before dispatch or response delivery.",
+    "AnalysisTools.call": "Validate one admitted tool envelope and arguments, serialize owned command operations and recheck authority before returning results; uncertain effects require original receipt recovery.",
+    "AnalysisTools._start": "Recover the same durable command receipt or admit one new dedicated worker after prior jobs close, constraining cwd to the bound workspace without replaying uncertain work.",
+    "AnalysisTools._get": "Read a durable job only if its run and attempt match this tool scope, rejecting foreign job identities.",
+    "AnalysisTools._settle": "Close this scope's owned terminal or uncertain peer before rereading its durable receipt; unknown process outcome never becomes an invented exit code.",
+    "AnalysisTools._read": "Observe or cancel the original attempt-owned job, bound optional waiting and settle terminal peers; unowned uncertain work requires recovery instead of replay.",
+    "AnalysisTools._close_owned": "Share one shielded original scope-exit task and remove ownership only after cleanup completes, so a cancelled reader cannot abandon or reenter teardown.",
+    "AnalysisTools.aclose": "Start or join one shielded shutdown task, immediately preventing further admitted tool work while retaining the original cleanup owner.",
+    "AnalysisTools._shutdown": "Request physical worker closure before waiting for the tool lock, drain each original scope and mark closed only after successful cleanup."
+  }
+}
