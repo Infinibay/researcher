@@ -23,9 +23,15 @@ class PeerRegistry:
     """Register fenced owned peers and distinguish original sources from private execution copies."""
 
     def __init__(self, runs):
+        """Use the existing run store as the transaction and authority boundary; constructing a
+        registry creates no process or peer.
+        """
         self.runs = runs
 
     def _database_identity(self):
+        """Bind peer observations to the canonical database path and current device/inode, so a copied
+        database cannot silently inherit control.
+        """
         path = Path(self.runs.database).resolve(strict=True)
         info = path.stat()
         return hashlib.sha256(
@@ -33,6 +39,9 @@ class PeerRegistry:
         ).hexdigest()
 
     def _check_origin(self, row):
+        """Require the recorded database origin and, for open peers, the same boot and observer
+        namespace before allowing physical control.
+        """
         if (
             row["database_identity"] is None
             or row["database_identity"] != self._database_identity()
@@ -47,6 +56,9 @@ class PeerRegistry:
             raise PeerUncertain("Registered kernel or observer namespace differs")
 
     def prepare(self, lease, kind):
+        """Register one allowed peer kind under a current lease before releasing any process; retain
+        its origin and capacity checks atomically.
+        """
         with self.runs._transaction(write=True) as conn:
             return self._prepare(conn, lease, kind)
 
@@ -101,6 +113,9 @@ class PeerRegistry:
 
     @staticmethod
     def _row(conn, peer_id):
+        """Find one registered peer by its opaque identity or raise RunNotFound; caller-specific
+        authority checks remain separate.
+        """
         row = conn.execute(
             "SELECT * FROM runtime_peers WHERE id=?", (peer_id,)
         ).fetchone()
@@ -109,6 +124,7 @@ class PeerRegistry:
         return row
 
     def inspect(self, peer_id):
+        """Read retained peer metadata without spawning, closing or asserting current process liveness."""
         with self.runs._transaction() as conn:
             return dict(self._row(conn, peer_id))
 
@@ -261,6 +277,9 @@ class PeerRegistry:
 
     @staticmethod
     def _lease(conn, peer):
+        """Recover the original attempt identity and the peer's recorded fence for later authority
+        validation; reconstruction alone is not authorization.
+        """
         row = conn.execute(
             """SELECT r.*,a.id AS attempt_id,a.owner_id,a.lease_expires_at FROM runtime_runs r
             JOIN runtime_attempts a ON a.run_id=r.id WHERE a.id=?""",
@@ -324,6 +343,9 @@ class PeerRegistry:
             )
 
     def close(self, peer_id):
+        """Prove closure of the originally bound namespace before recording closed state; validate
+        origin and binding again around physical teardown.
+        """
         while True:
             # A WAL read does not wait behind the writer that closure may need
             # to interrupt. Never acquire a write transaction before killing a
@@ -354,6 +376,9 @@ class PeerRegistry:
             return self._closed(conn, row, reason)
 
     def _closed(self, conn, row, reason):
+        """Persist a peer's closure reason and runtime event after the caller has established
+        never-release or physical-closure proof.
+        """
         conn.execute(
             "UPDATE runtime_peers SET state='closed',reason=?,closed_at=? WHERE id=?",
             (reason, self.runs.clock(), row["id"]),
@@ -377,6 +402,9 @@ class PeerRegistry:
         return dict(self._row(conn, row["id"]))
 
     def command(self, peer_id, command):
+        """Build the guard invocation for an existing registered peer; returning argv neither starts
+        nor releases its payload.
+        """
         if not command:
             raise ValueError("Owned peer payload command is required")
         self.inspect(peer_id)
@@ -397,10 +425,16 @@ class AttemptPeers:
     """One host scope for all contained peers of an original attempt."""
 
     def __init__(self, registry, lease, ids):
+        """Retain one attempt lease and its initially registered peer identities without claiming they
+        have been spawned or closed.
+        """
         self.registry, self.lease, self.ids = registry, lease, ids
 
     @classmethod
     def claim(cls, runs, project_id, run_id, owner_id, *, lease_seconds=30):
+        """Claim a fenced attempt and register its initial peer scope in one transaction, before any
+        native or business payload can run.
+        """
         with runs._transaction(write=True) as conn:
             lease = runs._claim(
                 conn, project_id, run_id, owner_id, lease_seconds=lease_seconds
@@ -410,6 +444,9 @@ class AttemptPeers:
 
     @classmethod
     def prepare(cls, runs, lease):
+        """Register initial peers for an already authoritative lease, preserving host-only publication
+        scopes without fictitious inference peers.
+        """
         with runs._transaction(write=True) as conn:
             return cls._prepare(conn, runs, lease)
 
@@ -432,9 +469,15 @@ class AttemptPeers:
         return cls(registry, lease, ids)
 
     def command(self, kind, command):
+        """Construct the owned guard command for one of this attempt's initial peer kinds; execution
+        remains the caller's responsibility.
+        """
         return self.registry.command(self.ids[kind], command)
 
     def _rows(self):
+        """Read every retained peer for this attempt, including later command and Ken peers outside the
+        initial identity map.
+        """
         with self.registry.runs._transaction() as conn:
             return [
                 dict(row)
@@ -445,12 +488,18 @@ class AttemptPeers:
             ]
 
     def closed(self):
+        """Require every retained peer and initial identity to have recorded closure; a host-only scope
+        may legitimately contain no peers.
+        """
         rows = self._rows()
         return set(self.ids.values()) <= {row["id"] for row in rows} and all(
             row["state"] == "closed" for row in rows
         )
 
     async def aclose(self):
+        """Request closure of every retained attempt peer in worker threads and propagate failures;
+        callers must not assume all peers closed after an error.
+        """
         rows = await asyncio.to_thread(self._rows)
         await asyncio.gather(
             *(asyncio.to_thread(self.registry.close, row["id"]) for row in rows)

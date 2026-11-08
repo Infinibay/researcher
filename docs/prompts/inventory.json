@@ -225,7 +225,7 @@
     "backend/runtime/codex_session.py": "988f384a499585c67223efb3a4d8c1a73e019d9732b36490a2b588978fabc38c",
     "backend/runtime/command_jobs.py": "ce8fb588398e6ab25df6b69dd96ea875e3b89cf3a1b8424d1c71a681b31f3fba",
     "backend/runtime/command_output.py": "581b6f609e59adeeed2688c10c3b94f7a7351e7abb4580c783e987e2f1b0593e",
-    "backend/runtime/contracts.py": "e9e202e0ad2e06bba9b9aa21200689ee624fd1a7ac3a4c61aecd25ad19188b2f",
+    "backend/runtime/contracts.py": "a90182329cc33f72dc4030caf0eb37e1f103c4221ed801448941994494ff3cd0",
     "backend/runtime/development_instructions.py": "44cc94a81c09943e7233c8eaa65a9ef88be22e1542209f12f0f8767c3648770a",
     "backend/runtime/development_policy.py": "d78723c49e3ad3212cdf6a759083c2530b4455dec1b45053166d5c0963cbe5fe",
     "backend/runtime/development_state.py": "876ec97e34c01736ecd748301149ca96fe5bd0059579ef01a75ee4d23377a0f3",
@@ -265,7 +265,7 @@
     "backend/runtime/peer_guard.py": "82fb8a472a96142d470db4a8af992f4d48faf3b04596be7dde4116f1dfa8b8be",
     "backend/runtime/peer_payload.py": "21d725e1011e447d96ea78b3fb5597a5e7691cebfdb1e46aa5ecb1d14a05d1d7",
     "backend/runtime/peer_process.py": "6f6bba2b29098b3960814e3bd40a9badbda86e8d508b999935b9e0441097cd34",
-    "backend/runtime/peer_registry.py": "fa5080b175d63da114839c7c64b125c619f6cc27a207857a117475a7e5fd67b1",
+    "backend/runtime/peer_registry.py": "223efa1a43a6000937475a60b8f62030270a6e81cecfe492ea0714bd50d1bb31",
     "backend/runtime/predecessor_tools.py": "9798c843370678aa545c5748792a3892bfdfa41e5d8f563bcf0a75c47c84eff8",
     "backend/runtime/project_budget.py": "1e0734950b549df579b64b14c42108982896b7bc1bbcff42af14af33f32c5438",
     "backend/runtime/project_check_policy.py": "1750bed758ab59cf7ed60ba148a3547ee02a207b86173d1d951e2864d5fcffd7",
@@ -296,11 +296,11 @@
     "backend/runtime/review_instructions.py": "592050b6b0dd44ef9026bfcbff78d1989a69473a54de1159bcc09c70f196be24",
     "backend/runtime/run_inputs.py": "013b13f5a960d176192c606632a82e4c87dd65f94db389c604f2aea4f0381b12",
     "backend/runtime/scientific_instructions.py": "c63f5637f02b47088399e285fe98df4b7eed99cadff035c21fd7938c384497c9",
-    "backend/runtime/service.py": "7edeaad2708eac926423e016ae6e4fb659065ab7e8c2982213de7d8fed8c68b1",
+    "backend/runtime/service.py": "a1970933f71146454535043ad113e7d03bed97ce05cb5f4ba3defc8018daad21",
     "backend/runtime/service_process.py": "0036d73e3a61bd1e2bec72a386a29a3c9bdad120da4f3f501d0df3b1fabcf6a7",
     "backend/runtime/snapshot_files.py": "07be9cc59b2d9b92973715320527bec1860b911cebf9a6c8a03d504570d518f3",
     "backend/runtime/sqlite_questions.py": "9315a4d6aa01bf82780e4996cddebca689892492a414da5c291d9bfe442b89c1",
-    "backend/runtime/sqlite_runs.py": "16a7efff3a260ccd3b684143fd079959d3c315904695b6af9e8e40718294667e",
+    "backend/runtime/sqlite_runs.py": "9b6ea15d678d527a7f3d4cecb46be799f34e5dadda6105113c017dd18a8a0ede",
     "backend/runtime/storage_volume.py": "45b9e33e4bdab46f8f8bf4516ae8ada11bf0ef526c2330a8d1ac04e90bbc7643",
     "backend/runtime/subscription_auth.py": "a8405d2833bf5712532ff00163b2b86a21b38aa06051e0fae4e9ae3529d5668b",
     "backend/runtime/subscription_provider.py": "f5c65595fd3b64aede88e3a4a27ce8629804b68796d9a4ca02466480ee1fa813",
@@ -805,7 +805,7 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "dc7f98fd63f92adf714c384650cdad8256fcda72bbc4b700c9684ea87e8467d3",
+      "dependencies_sha256": "8008b36a34994a23ad60f5b419a332c0b68bfe6de7b7c1df35a82c776e69ce71",
       "direct_module_consumers": {
         "backend/api/routes/projects.py": "40bcd939312f048aa22eea9f47967115638effe831ec75786e29a4e1749689e3",
         "backend/communication/owner_notes.py": "27d60b5640960cd647bf3fd4ce8c9fb136e7b614a62326c3cf599336ad35ab51",
@@ -835,11 +835,11 @@
         "backend/runtime/remote_publication.py": "4827e5095b4eb3f627abde15cb63a72719afa3ccd34ea2979aab7138b1c5b30c",
         "backend/knowledge/findings.py": "7af6d8e2bf6a268666dbc75728ff9fa67493757a6537ebad8ee927b85474f221",
         "backend/research/sqlite_store.py": "5b2cf93c021b0d477b09e112b9d6cb2caadc32c0cd24cf3b8d3dffd860ca77d2",
-        "backend/runtime/sqlite_runs.py": "16a7efff3a260ccd3b684143fd079959d3c315904695b6af9e8e40718294667e"
+        "backend/runtime/sqlite_runs.py": "9b6ea15d678d527a7f3d4cecb46be799f34e5dadda6105113c017dd18a8a0ede"
       },
       "suggested_disposition": "requires_review",
       "review_status": "reviewed",
-      "review_rationale": "read_feedback and its two actual callers are unchanged: Findings.reviews uses the host snapshot; SQLiteResearchStore.read_reviews checks findings.read in the same transaction. Reviewed changed module consumers findings.py, sqlite_runs.py, materials.py, new manual_prerequisites.py and peer_broker.py; their canonical/digest imports are not new feedback calls. Scoped identity, original subject windows, currentness and scientific_confidence=None remain explicit. Static source and inspected consumer review only; not exhaustive dynamic calls, isolated prompt efficacy, human comprehension or general scientific correctness.",
+      "review_rationale": "Candidate source is byte-identical to416abed. Its only changed direct module consumer is sqlite_runs.py, with41authored docstrings and an executable AST identical after removing documentation. Existing imports/calls to review subject/current-state helpers and freeze_input are unchanged. Checked7native instruction bodies and48business tool descriptions/schemas/annotations byte-for-byte: no model-visible policy delta. No authority, persistence or rendering behavior change is claimed from comments; broader introspection is outside this check.",
       "review_evidence": [
         "backend/knowledge/reviews.py",
         "docs/prompts/review-2026-11-07.md",
@@ -869,7 +869,9 @@
         "backend/runtime/sqlite_runs.py",
         "backend/planning/materials.py",
         "backend/planning/manual_prerequisites.py",
-        "backend/runtime/peer_broker.py"
+        "backend/runtime/peer_broker.py",
+        "docs/modernization/core-docstrings-review.md",
+        "docs/modernization/core-docstrings-results.json"
       ],
       "review_conflicts": []
     },
@@ -4731,14 +4733,14 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "a28284e3374b00feb2cf428703d831e5468c19f17fbccb88e34d89f452a782c8",
+      "dependencies_sha256": "52da21faa41f8e8129f78b0bfc8f134116ddf606b90cce059888492acc6f62c4",
       "direct_module_consumers": {
-        "backend/runtime/sqlite_runs.py": "16a7efff3a260ccd3b684143fd079959d3c315904695b6af9e8e40718294667e",
+        "backend/runtime/sqlite_runs.py": "9b6ea15d678d527a7f3d4cecb46be799f34e5dadda6105113c017dd18a8a0ede",
         "backend/runtime/views.py": "54b952846ba01a80b942d44e4abaf489bcb2d141d726d51f0040dfa10eef8206"
       },
       "suggested_disposition": "retained",
       "review_status": "reviewed",
-      "review_rationale": "Candidate AST is unchanged. Reviewed selected-conversation scope, causal cutoff, original text/hash and owner_note work_authorized=False. Its real caller remains freeze_input; views imports MESSAGE_SELECT only, and its inbox delta does not alter history. Static source and inspected consumer review only; not exhaustive dynamic calls, isolated prompt efficacy, human comprehension or general scientific correctness.",
+      "review_rationale": "Candidate source is byte-identical to416abed. Its only changed direct module consumer is sqlite_runs.py, with41authored docstrings and an executable AST identical after removing documentation. Existing imports/calls to review subject/current-state helpers and freeze_input are unchanged. Checked7native instruction bodies and48business tool descriptions/schemas/annotations byte-for-byte: no model-visible policy delta. No authority, persistence or rendering behavior change is claimed from comments; broader introspection is outside this check.",
       "review_evidence": [
         "backend/runtime/run_inputs.py",
         "docs/prompts/review-2026-11-07.md",
@@ -4757,7 +4759,9 @@
         "backend/planning/manual_prerequisites.py",
         "backend/planning/materials.py",
         "backend/tests/runtime/test_manual_prerequisite_review.py",
-        "backend/tests/runtime/test_dependency_authority.py"
+        "backend/tests/runtime/test_dependency_authority.py",
+        "docs/modernization/core-docstrings-review.md",
+        "docs/modernization/core-docstrings-results.json"
       ],
       "review_conflicts": []
     },
@@ -4783,7 +4787,7 @@
       "direct_import_consumers": [
         {
           "path": "backend/runtime/sqlite_runs.py",
-          "line": 523
+          "line": 560
         }
       ],
       "consumer_coverage": "Direct from-imports only; local/dynamic/attribute callers require review. Empty does not prove unused.",
@@ -4796,14 +4800,14 @@
         "COMM01"
       ],
       "review_limits": "Disposition classifies the family; requires_review and pending_legacy_removal entries are not semantically accepted or proof of runtime reachability.",
-      "dependencies_sha256": "a28284e3374b00feb2cf428703d831e5468c19f17fbccb88e34d89f452a782c8",
+      "dependencies_sha256": "52da21faa41f8e8129f78b0bfc8f134116ddf606b90cce059888492acc6f62c4",
       "direct_module_consumers": {
-        "backend/runtime/sqlite_runs.py": "16a7efff3a260ccd3b684143fd079959d3c315904695b6af9e8e40718294667e",
+        "backend/runtime/sqlite_runs.py": "9b6ea15d678d527a7f3d4cecb46be799f34e5dadda6105113c017dd18a8a0ede",
         "backend/runtime/views.py": "54b952846ba01a80b942d44e4abaf489bcb2d141d726d51f0040dfa10eef8206"
       },
       "suggested_disposition": "retained",
       "review_status": "reviewed",
-      "review_rationale": "Candidate changed semantically: resolve causal_source_row from the exact original review author and immutable prerequisite_material from original manual admission when no plan handoff exists. Reviewed project/task/context/actor/attempt checks, original hash/scope, current authority before rendering, atomic snapshot and explicit input-size refusal. This replaces the stale statement that the candidate was unchanged. Static source and inspected consumer review only; not exhaustive dynamic calls, isolated prompt efficacy, human comprehension or general scientific correctness.",
+      "review_rationale": "Candidate source is byte-identical to416abed. Its only changed direct module consumer is sqlite_runs.py, with41authored docstrings and an executable AST identical after removing documentation. Existing imports/calls to review subject/current-state helpers and freeze_input are unchanged. Checked7native instruction bodies and48business tool descriptions/schemas/annotations byte-for-byte: no model-visible policy delta. No authority, persistence or rendering behavior change is claimed from comments; broader introspection is outside this check.",
       "review_evidence": [
         "backend/runtime/run_inputs.py",
         "docs/prompts/review-2026-11-07.md",
@@ -4822,7 +4826,9 @@
         "backend/planning/manual_prerequisites.py",
         "backend/planning/materials.py",
         "backend/tests/runtime/test_manual_prerequisite_review.py",
-        "backend/tests/runtime/test_dependency_authority.py"
+        "backend/tests/runtime/test_dependency_authority.py",
+        "docs/modernization/core-docstrings-review.md",
+        "docs/modernization/core-docstrings-results.json"
       ],
       "review_conflicts": []
     },

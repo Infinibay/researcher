@@ -92,9 +92,9 @@
       "reviewer": "Codex with independent clean-context source/consumer reviews"
     },
     "backend/knowledge/reviews.py::read_feedback": {
-      "dependencies_sha256": "dc7f98fd63f92adf714c384650cdad8256fcda72bbc4b700c9684ea87e8467d3",
+      "dependencies_sha256": "8008b36a34994a23ad60f5b419a332c0b68bfe6de7b7c1df35a82c776e69ce71",
       "decision": "retained_input_renderer",
-      "rationale": "read_feedback and its two actual callers are unchanged: Findings.reviews uses the host snapshot; SQLiteResearchStore.read_reviews checks findings.read in the same transaction. Reviewed changed module consumers findings.py, sqlite_runs.py, materials.py, new manual_prerequisites.py and peer_broker.py; their canonical/digest imports are not new feedback calls. Scoped identity, original subject windows, currentness and scientific_confidence=None remain explicit. Static source and inspected consumer review only; not exhaustive dynamic calls, isolated prompt efficacy, human comprehension or general scientific correctness.",
+      "rationale": "Candidate source is byte-identical to416abed. Its only changed direct module consumer is sqlite_runs.py, with41authored docstrings and an executable AST identical after removing documentation. Existing imports/calls to review subject/current-state helpers and freeze_input are unchanged. Checked7native instruction bodies and48business tool descriptions/schemas/annotations byte-for-byte: no model-visible policy delta. No authority, persistence or rendering behavior change is claimed from comments; broader introspection is outside this check.",
       "evidence": [
         "backend/knowledge/reviews.py",
         "docs/prompts/review-2026-11-07.md",
@@ -124,10 +124,12 @@
         "backend/runtime/sqlite_runs.py",
         "backend/planning/materials.py",
         "backend/planning/manual_prerequisites.py",
-        "backend/runtime/peer_broker.py"
+        "backend/runtime/peer_broker.py",
+        "docs/modernization/core-docstrings-review.md",
+        "docs/modernization/core-docstrings-results.json"
       ],
       "conflicts": [],
-      "revalidation": "read_feedback and its two actual callers are unchanged: Findings.reviews uses the host snapshot; SQLiteResearchStore.read_reviews checks findings.read in the same transaction. Reviewed changed module consumers findings.py, sqlite_runs.py, materials.py, new manual_prerequisites.py and peer_broker.py; their canonical/digest imports are not new feedback calls. Scoped identity, original subject windows, currentness and scientific_confidence=None remain explicit.",
+      "revalidation": "Candidate source is byte-identical to416abed. Its only changed direct module consumer is sqlite_runs.py, with41authored docstrings and an executable AST identical after removing documentation. Existing imports/calls to review subject/current-state helpers and freeze_input are unchanged. Checked7native instruction bodies and48business tool descriptions/schemas/annotations byte-for-byte: no model-visible policy delta. No authority, persistence or rendering behavior change is claimed from comments; broader introspection is outside this check.",
       "previous_review": {
         "dependencies_sha256": "b66b34d5d8b18599bb15a22c72ef7e77a107fa044b9f0d7c36bf45630c3d53af",
         "decision": "retained_input_renderer",
@@ -143,9 +145,11 @@
         "revalidation": "Candidate AST/value unchanged. Direct consumers reviewed after extracting project metadata helpers and removing unused task event import and historical flow consumers; native authority and historical-template exclusion unchanged. See docs/architecture/native-flow-retirement.md."
       },
       "reviewed_at": "2026-11-08",
-      "source_base_commit": "d278653",
+      "source_base_commit": "416abedd2415d8164bb7de77d97230335e5e974a",
       "revalidation_baseline_commit": "dd1be91",
-      "reviewer": "Codex with independent clean-context source/consumer reviews"
+      "reviewer": "Codex, executable-AST and source/consumer delta review",
+      "previous_dependencies_sha256": "dc7f98fd63f92adf714c384650cdad8256fcda72bbc4b700c9684ea87e8467d3",
+      "reviewed_source_state": "Base plus documentation-only changes to four core modules"
     },
     "backend/planning/instructions.py::PLANNING_INSTRUCTIONS": {
       "dependencies_sha256": "890880f3f6da6e6204e3dca680fbcb8473db57cbb5f08dd1b1649dd6e4dfbfd7",
@@ -2719,9 +2723,9 @@
       "previous_dependencies_sha256": "9e237badd19bfe7d39ac5485bd809b08bf24ab6bfb2d78ac7bdd85a4765bfc79"
     },
     "backend/runtime/run_inputs.py::conversation_history": {
-      "dependencies_sha256": "a28284e3374b00feb2cf428703d831e5468c19f17fbccb88e34d89f452a782c8",
+      "dependencies_sha256": "52da21faa41f8e8129f78b0bfc8f134116ddf606b90cce059888492acc6f62c4",
       "decision": "retained_input_renderer",
-      "rationale": "Candidate AST is unchanged. Reviewed selected-conversation scope, causal cutoff, original text/hash and owner_note work_authorized=False. Its real caller remains freeze_input; views imports MESSAGE_SELECT only, and its inbox delta does not alter history. Static source and inspected consumer review only; not exhaustive dynamic calls, isolated prompt efficacy, human comprehension or general scientific correctness.",
+      "rationale": "Candidate source is byte-identical to416abed. Its only changed direct module consumer is sqlite_runs.py, with41authored docstrings and an executable AST identical after removing documentation. Existing imports/calls to review subject/current-state helpers and freeze_input are unchanged. Checked7native instruction bodies and48business tool descriptions/schemas/annotations byte-for-byte: no model-visible policy delta. No authority, persistence or rendering behavior change is claimed from comments; broader introspection is outside this check.",
       "evidence": [
         "backend/runtime/run_inputs.py",
         "docs/prompts/review-2026-11-07.md",
@@ -2740,7 +2744,9 @@
         "backend/planning/manual_prerequisites.py",
         "backend/planning/materials.py",
         "backend/tests/runtime/test_manual_prerequisite_review.py",
-        "backend/tests/runtime/test_dependency_authority.py"
+        "backend/tests/runtime/test_dependency_authority.py",
+        "docs/modernization/core-docstrings-review.md",
+        "docs/modernization/core-docstrings-results.json"
       ],
       "conflicts": [],
       "previous_review": {
@@ -2758,15 +2764,17 @@
         "conflicts": []
       },
       "reviewed_at": "2026-11-08",
-      "source_base_commit": "d278653",
-      "revalidation": "Candidate AST is unchanged. Reviewed selected-conversation scope, causal cutoff, original text/hash and owner_note work_authorized=False. Its real caller remains freeze_input; views imports MESSAGE_SELECT only, and its inbox delta does not alter history.",
+      "source_base_commit": "416abedd2415d8164bb7de77d97230335e5e974a",
+      "revalidation": "Candidate source is byte-identical to416abed. Its only changed direct module consumer is sqlite_runs.py, with41authored docstrings and an executable AST identical after removing documentation. Existing imports/calls to review subject/current-state helpers and freeze_input are unchanged. Checked7native instruction bodies and48business tool descriptions/schemas/annotations byte-for-byte: no model-visible policy delta. No authority, persistence or rendering behavior change is claimed from comments; broader introspection is outside this check.",
       "revalidation_baseline_commit": "dd1be91",
-      "reviewer": "Codex with independent clean-context source/consumer reviews"
+      "reviewer": "Codex, executable-AST and source/consumer delta review",
+      "previous_dependencies_sha256": "a28284e3374b00feb2cf428703d831e5468c19f17fbccb88e34d89f452a782c8",
+      "reviewed_source_state": "Base plus documentation-only changes to four core modules"
     },
     "backend/runtime/run_inputs.py::freeze_input": {
-      "dependencies_sha256": "a28284e3374b00feb2cf428703d831e5468c19f17fbccb88e34d89f452a782c8",
+      "dependencies_sha256": "52da21faa41f8e8129f78b0bfc8f134116ddf606b90cce059888492acc6f62c4",
       "decision": "retained_input_renderer",
-      "rationale": "Candidate changed semantically: resolve causal_source_row from the exact original review author and immutable prerequisite_material from original manual admission when no plan handoff exists. Reviewed project/task/context/actor/attempt checks, original hash/scope, current authority before rendering, atomic snapshot and explicit input-size refusal. This replaces the stale statement that the candidate was unchanged. Static source and inspected consumer review only; not exhaustive dynamic calls, isolated prompt efficacy, human comprehension or general scientific correctness.",
+      "rationale": "Candidate source is byte-identical to416abed. Its only changed direct module consumer is sqlite_runs.py, with41authored docstrings and an executable AST identical after removing documentation. Existing imports/calls to review subject/current-state helpers and freeze_input are unchanged. Checked7native instruction bodies and48business tool descriptions/schemas/annotations byte-for-byte: no model-visible policy delta. No authority, persistence or rendering behavior change is claimed from comments; broader introspection is outside this check.",
       "evidence": [
         "backend/runtime/run_inputs.py",
         "docs/prompts/review-2026-11-07.md",
@@ -2785,7 +2793,9 @@
         "backend/planning/manual_prerequisites.py",
         "backend/planning/materials.py",
         "backend/tests/runtime/test_manual_prerequisite_review.py",
-        "backend/tests/runtime/test_dependency_authority.py"
+        "backend/tests/runtime/test_dependency_authority.py",
+        "docs/modernization/core-docstrings-review.md",
+        "docs/modernization/core-docstrings-results.json"
       ],
       "conflicts": [],
       "previous_review": {
@@ -2803,10 +2813,12 @@
         "conflicts": []
       },
       "reviewed_at": "2026-11-08",
-      "source_base_commit": "d278653",
-      "revalidation": "Candidate changed semantically: resolve causal_source_row from the exact original review author and immutable prerequisite_material from original manual admission when no plan handoff exists. Reviewed project/task/context/actor/attempt checks, original hash/scope, current authority before rendering, atomic snapshot and explicit input-size refusal. This replaces the stale statement that the candidate was unchanged.",
+      "source_base_commit": "416abedd2415d8164bb7de77d97230335e5e974a",
+      "revalidation": "Candidate source is byte-identical to416abed. Its only changed direct module consumer is sqlite_runs.py, with41authored docstrings and an executable AST identical after removing documentation. Existing imports/calls to review subject/current-state helpers and freeze_input are unchanged. Checked7native instruction bodies and48business tool descriptions/schemas/annotations byte-for-byte: no model-visible policy delta. No authority, persistence or rendering behavior change is claimed from comments; broader introspection is outside this check.",
       "revalidation_baseline_commit": "dd1be91",
-      "reviewer": "Codex with independent clean-context source/consumer reviews"
+      "reviewer": "Codex, executable-AST and source/consumer delta review",
+      "previous_dependencies_sha256": "a28284e3374b00feb2cf428703d831e5468c19f17fbccb88e34d89f452a782c8",
+      "reviewed_source_state": "Base plus documentation-only changes to four core modules"
     },
     "backend/runtime/scientific_instructions.py::SCIENTIFIC_RESEARCH_INSTRUCTIONS": {
       "dependencies_sha256": "708031594487d3b575c251642fab329e95fb4a6e3f04f10f73a0a56600db0226",

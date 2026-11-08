@@ -1,0 +1,26 @@
+{
+  "base_commit": "416abed",
+  "scope": "Four core modules; source AST equality after removing only documentation. Introspection is checked separately.",
+  "files": {
+    "backend/runtime/service.py": {
+      "added_docstrings": 11,
+      "missing_definitions": [],
+      "executable_ast_equal": true
+    },
+    "backend/runtime/contracts.py": {
+      "added_docstrings": 19,
+      "missing_definitions": [],
+      "executable_ast_equal": true
+    },
+    "backend/runtime/sqlite_runs.py": {
+      "added_docstrings": 41,
+      "missing_definitions": [],
+      "executable_ast_equal": true
+    },
+    "backend/runtime/peer_registry.py": {
+      "added_docstrings": 17,
+      "missing_definitions": [],
+      "executable_ast_equal": true
+    }
+  }
+}

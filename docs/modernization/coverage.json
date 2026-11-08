@@ -2966,7 +2966,9 @@
         "docs/modernization/purpose-framing-review.md",
         "docs/modernization/purpose-framing-results.json",
         "docs/modernization/purpose-framing-evidence/registration.json",
-        "evals/communication/purpose_framing.py"
+        "evals/communication/purpose_framing.py",
+        "docs/modernization/core-docstrings-review.md",
+        "docs/modernization/core-docstrings-results.json"
       ],
       "implemented": "Current catalog10static semantic source/consumer review:322owned Python files,85candidates,85current decisions.12delta reviews against64d9e28,73unchanged; exact historical2–9headers preserved. One new actual explanation observation failed at147058/120000observedtokens before final delivery; no human acceptance.",
       "remaining": [
@@ -2990,7 +2992,14 @@
         "actual_native_observation": "One actual subscription+Ken turn, exact policy10 and complete source verified;147058observedtokens vs120000ceiling, one partial finding, no final explanation, all5peers/grants closed",
         "human_comprehension": null,
         "limits": "Not a new paired comparison or demonstrated efficacy. Original failed outcome retained, no replay."
-      }
+      },
+      "documentation_delta_revalidation": {
+        "revalidated": 3,
+        "retained_current": 82,
+        "policy_catalog": 10,
+        "model_visible_policy_changed": false
+      },
+      "current_documentation_state": "Catalog10policy bytes unchanged after88core docstrings;85/322reviews current,3direct-consumer delta reviews and82unchanged. No new model generation or efficacy claim."
     },
     "context_evals": {
       "status": "in_progress",
@@ -6936,6 +6945,32 @@
       "limits": [
         "Stale historical coverage lists do not create fresh requirements",
         "OriginalAuthorityBusyremains unknown; no broad defect fix claimed"
+      ]
+    },
+    "relevant_code_documentation": {
+      "status": "in_progress",
+      "scope": "Explicit owner requirement for searchable meaningful documentation, presence is not adequacy",
+      "evidence": [
+        "docs/modernization/core-docstrings-review.md",
+        "docs/modernization/core-docstrings-results.json",
+        "docs/modernization/core-docstrings-evidence/ast-equivalence.json",
+        "docs/modernization/core-docstrings-evidence/authored-docstrings.json"
+      ],
+      "verified": [
+        "88authored English docstrings across coordinator/contracts/SQLite/peer registry",
+        "No missing definitions in those four modules",
+        "Executable AST unchanged, seven policies and48business wire schemas/descriptions unchanged",
+        "51source tests pass, zero model calls"
+      ],
+      "remaining": [
+        "Review authority journal, native RPC, command and process boundaries",
+        "533definitions elsewhere lack docstrings; assess relevance and actual contracts, do not auto-fill",
+        "Broader JSDoc/documentation and final package/global validation"
+      ],
+      "limits": [
+        "No Ken ranking benchmark or MCP worktree reindex",
+        "Not all existing docstrings reviewed",
+        "Older installed wheel does not contain these new documentation bytes"
       ]
     }
   }

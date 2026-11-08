@@ -9581,3 +9581,25 @@ revisión acotada de pendientes, no aceptación independiente final.42/43escenar
 12/12páginas por alcance. Restan humano/adaptación, Ken pendiente, documentación/
 accesibilidad/detalles y controles finales; global no verde.17:01:34–17:19:51UTC,
 18min17s hasta corte; documentación/checkpoint posteriores aparte.
+
+## 2026-11-08 — Documentación semántica del núcleo para Ken
+
+[Informe](core-docstrings-review.md).88docstrings ingleses revisados: service11,
+contracts19,sqlite_runs41,peer_registry17. Incluyen callback anidado; cero
+definiciones faltantes en esos archivos. Describen propósito, efectos y límites,
+no frases derivadas automáticamente del nombre. La revisión corrige de forma
+explícita el conjunto vacío legítimo de publicación y no promete drenaje de todos
+los peers tras un error de gather. No se cambia esa implementación.
+
+AST idéntico al quitar sólo documentación; siete políticas y48descripciones/
+esquemas/anotaciones de negocio iguales.51pruebas fuente pasan sin omisiones,
+38,760s; sin nuevos modelos ni wheel. Tres revisiones de consumidor SQLite
+revalidadas después de inspeccionar deltas;82vigentes,85/322actuales.533definiciones
+siguen sin docstring fuera del alcance, con distinta relevancia. No afirmar
+documentación completa, ranking Ken mejorado o bytes instalados actualizados.
+
+La pasada de lectura anterior identificó piezas pero no las había documentado;
+el bloque actual sí cambia fuente/evidencia.18:23:48–18:32:56UTC:9min8s hasta corte,
+documentación/checkpoint posteriores aparte. Sigue documentación de autoridad/
+RPC/comandos/procesos y demás gates;42/43escenarios,12/12páginas por alcance,
+U08/entrega y Ken pendientes. No push, merge o despliegue.

@@ -43,6 +43,9 @@ from backend.runtime.work_budget import project_work_usage
 
 
 def _json(value):
+    """Serialize deterministic finite JSON for durable intent fingerprints and receipts; non-finite
+    numbers are rejected rather than normalized.
+    """
     return json.dumps(
         value,
         sort_keys=True,
@@ -53,10 +56,14 @@ def _json(value):
 
 
 def _digest(value):
+    """Hash the canonical serialized intent so an operation key cannot silently acquire different
+    arguments.
+    """
     return hashlib.sha256(_json(value).encode()).hexdigest()
 
 
 def _duration(seconds):
+    """Require an explicit positive lease interval of at most120seconds, excluding booleans."""
     if (
         isinstance(seconds, bool)
         or not isinstance(seconds, (int, float))
@@ -75,12 +82,18 @@ class SQLiteRunStore:
 
     @contextmanager
     def _transaction(self, *, write=False):
+        """Open only an existing database and commit or roll back one transaction; writes acquire the
+        SQLite writer lock before yielding.
+        """
         with closing(connect(self.database, existing_only=True)) as conn, conn:
             conn.execute("BEGIN IMMEDIATE" if write else "BEGIN")
             yield conn
 
     @staticmethod
     def _existing_task(conn, project_id, task_id):
+        """Validate and find a task within its project, raising RunNotFound instead of leaking another
+        project's task.
+        """
         identity(project_id)
         identity(task_id)
         row = conn.execute(
@@ -115,6 +128,9 @@ class SQLiteRunStore:
 
     @staticmethod
     def _context(conn, task_id):
+        """Read the stored task context revision, using the original version1 only when no context row
+        exists.
+        """
         row = conn.execute(
             "SELECT version FROM task_contexts WHERE task_id=?", (task_id,)
         ).fetchone()
@@ -187,6 +203,9 @@ class SQLiteRunStore:
 
     @staticmethod
     def _event(conn, project_id, task_id, event_type, data):
+        """Append a versioned runtime task event in the caller's transaction and return its durable
+        replay cursor.
+        """
         cursor = conn.execute(
             """INSERT INTO events_log(project_id,event_type,event_source,entity_type,entity_id,event_data_json)
             VALUES(?,?,'runtime','task',?,?)""",
@@ -196,6 +215,9 @@ class SQLiteRunStore:
 
     @staticmethod
     def _receipt(conn, project, task, key, intent):
+        """Recover the saved result for an exact project/task/key intent; conflicting reuse raises
+        instead of creating another effect.
+        """
         row = conn.execute(
             "SELECT request_hash,result_json FROM runtime_commands WHERE project_id=? AND task_id=? AND operation_key=?",
             (project, task, key),
@@ -207,16 +229,25 @@ class SQLiteRunStore:
         return json.loads(row["result_json"])
 
     def _save_receipt(self, conn, project, task, key, intent, result):
+        """Persist an intent hash and its result inside the same transaction as the effect it
+        identifies.
+        """
         conn.execute(
             "INSERT INTO runtime_commands(project_id,task_id,operation_key,request_hash,result_json,created_at) VALUES(?,?,?,?,?,?)",
             (project, task, key, _digest(intent), _json(result), self.clock()),
         )
 
     def get(self, project_id: int, run_id: str) -> RunView:
+        """Read the current project-scoped run projection without granting authority or launching
+        recovery.
+        """
         with self._transaction() as conn:
             return self._view(self._row(conn, project_id, run_id))
 
     def context_snapshot(self, project_id, task_id):
+        """Read one consistent task/context snapshot including attributed corrections, metadata changes
+        and recorded answers.
+        """
         with self._transaction() as conn:
             return self._context_snapshot(conn, project_id, task_id)
 
@@ -333,6 +364,9 @@ class SQLiteRunStore:
             return finding_review_detail(conn, project_id, request_id)
 
     def _context_snapshot(self, conn, project_id, task_id):
+        """Build the input context from current task metadata and ordered provenance records; metadata
+        edits are not reattributed to the owner.
+        """
         self._existing_task(conn, project_id, task_id)
         task = conn.execute(
             """SELECT title,description,type,status,acceptance_criteria,context_json,
@@ -389,6 +423,9 @@ class SQLiteRunStore:
         }
 
     def task_runs(self, project_id, task_id, *, limit=30):
+        """Return a bounded newest-first run history for one existing project task, without changing
+        prior execution states.
+        """
         if type(limit) is not int or not 1 <= limit <= 100:
             raise ValueError("Invalid task execution history limit")
         with self._transaction() as conn:
@@ -781,6 +818,9 @@ class SQLiteRunStore:
             )
 
     def settle_inference(self, lease, *, observed_tokens, native_status):
+        """Record terminal usage for the original reserved attempt, preserving the greatest observation
+        and unknown values while rejecting conflicting settled receipts.
+        """
         native_outcome(native_status)
         if observed_tokens is not None and (
             type(observed_tokens) is not int or observed_tokens < 0
@@ -960,6 +1000,9 @@ class SQLiteRunStore:
                 raise RunConflict("Owned peer closure has not been proven")
 
     def _retire_closed(self, conn, row, outcome):
+        """Retire a physically closed attempt and its grants, marking missing command/native receipts
+        unknown rather than inventing terminal results.
+        """
         attempt_id = row["current_attempt_id"]
         self._closed_peer_proof(conn, attempt_id)
         if conn.execute(
@@ -1089,6 +1132,9 @@ class SQLiteRunStore:
 
     @staticmethod
     def _correction_intent(command):
+        """Build the canonical validated correction intent while keeping its replay key separate from
+        the hashed request body.
+        """
         validate_correction(**command)
         return {
             "kind": "correct_context",
@@ -1096,6 +1142,9 @@ class SQLiteRunStore:
         }
 
     def correction_receipt(self, **command):
+        """Recover the original context version for an exact correction intent without applying the
+        correction again.
+        """
         intent = self._correction_intent(command)
         with self._transaction() as conn:
             receipt = self._receipt(
@@ -1268,6 +1317,9 @@ class SQLiteRunStore:
 
     @staticmethod
     def _check_registration(conn, project_id, binding):
+        """Reject an admitted binding when its project repository registration is absent, inactive or
+        points to a different recorded path.
+        """
         repository = conn.execute(
             "SELECT local_path FROM repositories WHERE id=? AND project_id=? AND status='active'",
             (binding.repository_id, project_id),
@@ -1276,6 +1328,9 @@ class SQLiteRunStore:
             raise WorkspaceChanged("Admitted repository registration changed")
 
     def workspace_binding(self, project_id, run_id):
+        """Read the retained repository binding for a scoped run, returningNone only when that history
+        has no binding.
+        """
         with self._transaction() as conn:
             self._row(conn, project_id, run_id)
             row = conn.execute(
@@ -1285,6 +1340,9 @@ class SQLiteRunStore:
 
     @staticmethod
     def _binding_view(row):
+        """Reconstruct the validated immutable workspace-binding value from its retained database
+        fields.
+        """
         return WorkspaceBinding(
             **{
                 name: row[name]
@@ -1336,6 +1394,9 @@ class SQLiteRunStore:
     def request_start(
         self, *, project_id, run_id, expected_fence, context_version, operation_key
     ):
+        """Record one retry intent only for the unchanged, unclaimed queued request; returnFalse for an
+        already recorded retry instead of scheduling again.
+        """
         identity(context_version)
         command_key(operation_key)
         if type(expected_fence) is not int or expected_fence < 0:
@@ -1386,6 +1447,9 @@ class SQLiteRunStore:
             return self._view(row), True
 
     def record_issue(self, project_id, run_id, issue, *, attempt_id=None):
+        """Attach a bounded diagnostic only to the still-matching queued or failed/reconciling attempt;
+        stale observations leave current work unchanged.
+        """
         command_key(issue["code"])
         text(issue["message"], "issue message", 4096)
         if (
@@ -1419,6 +1483,9 @@ class SQLiteRunStore:
 
     @staticmethod
     def _attach_conversation(conn, spec, run_id, thread_id):
+        """Bind an admission to a compatible active owner conversation and persist its original
+        request/message link in the caller's transaction.
+        """
         thread = conn.execute(
             "SELECT * FROM conversation_threads WHERE thread_id=?", (thread_id,)
         ).fetchone()
@@ -1468,6 +1535,9 @@ class SQLiteRunStore:
 
     @staticmethod
     def _deliver_proposal(conn, lease, summary):
+        """Append the first linked proposal message as explicitly unaccepted; a repeated terminal
+        observation cannot duplicate that delivery.
+        """
         link = conn.execute(
             "SELECT * FROM runtime_chat_links WHERE run_id=?", (lease.run_id,)
         ).fetchone()
@@ -1502,6 +1572,9 @@ class SQLiteRunStore:
         )
 
     def claim(self, project_id, run_id, owner_id, *, lease_seconds=30) -> AttemptLease:
+        """Atomically claim the existing queued request as a new fenced attempt; this operation alone
+        does not dispatch a model.
+        """
         with self._transaction(write=True) as conn:
             return self._claim(
                 conn, project_id, run_id, owner_id, lease_seconds=lease_seconds
@@ -1639,6 +1712,9 @@ class SQLiteRunStore:
         return row
 
     def heartbeat(self, lease: AttemptLease, *, lease_seconds=30) -> AttemptLease:
+        """Extend only a currently authoritative attempt's lease and return its updated expiry without
+        replacing its owner or fence.
+        """
         _duration(lease_seconds)
         with self._transaction(write=True) as conn:
             self._authority(conn, lease)
@@ -1740,6 +1816,9 @@ class SQLiteRunStore:
             )
 
     def bind_grant(self, lease, grant_id):
+        """Bind an unexpired matching business grant to its original live attempt; a grant already
+        bound elsewhere cannot be transferred.
+        """
         text(grant_id, "grant_id", 128)
         with self._transaction(write=True) as conn:
             self._authority(conn, lease)
@@ -1785,6 +1864,9 @@ class SQLiteRunStore:
             )
 
     def finish(self, lease, *, native_status, summary):
+        """Persist one exact native terminal observation after peer closure, revoke grants and deliver
+        completed text for review without accepting the task.
+        """
         status = native_outcome(native_status)
         text(summary, "summary", 200000)
         result = {"native_status": native_status, "summary": summary}
@@ -1829,6 +1911,9 @@ class SQLiteRunStore:
 
     @staticmethod
     def _original_attempt(conn, lease):
+        """Validate an observation's original project, task, actor, owner and fence even when that
+        attempt no longer has current mutation authority.
+        """
         attempt = conn.execute(
             """SELECT a.*,r.project_id,r.task_id,r.actor_id,r.context_version
                 FROM runtime_attempts a JOIN runtime_runs r ON r.id=a.run_id
@@ -1916,6 +2001,9 @@ class SQLiteRunStore:
             return event_id
 
     def attempt_active(self, lease) -> bool:
+        """Report whether current durable authority still matches the lease; absent or stale attempts
+        returnFalse without mutation.
+        """
         with self._transaction() as conn:
             try:
                 self._authority(conn, lease)
@@ -1937,6 +2025,9 @@ class SQLiteRunStore:
 
     @staticmethod
     def _job_view(row):
+        """Decode a command row into its bounded spec, binary receipts and independently observed
+        local-closure flag.
+        """
         return CommandJob(
             job_id=row["id"],
             run_id=row["run_id"],
@@ -1963,6 +2054,9 @@ class SQLiteRunStore:
 
     @staticmethod
     def _job_row(conn, project_id, job_id):
+        """Read a project-scoped command with closure evidence from its own closed registered peer; a
+        missing peer never proves closure.
+        """
         row = conn.execute(
             """SELECT j.*,EXISTS(SELECT 1 FROM runtime_peers p WHERE p.id=j.peer_id
             AND p.attempt_id=j.attempt_id AND p.kind='command' AND p.state='closed'
@@ -1975,6 +2069,9 @@ class SQLiteRunStore:
         return row
 
     def get_job(self, project_id, job_id) -> CommandJob:
+        """Inspect an existing project command and its retained output without revalidating execution
+        permission or redispatching it.
+        """
         identity(project_id)
         text(job_id, "job_id", 128)
         with self._transaction() as conn:
@@ -2015,6 +2112,9 @@ class SQLiteRunStore:
         executor_id,
         peer_id=None,
     ) -> JobReservation:
+        """Reserve one command under the current attempt/workspace and bound peer, or recover the
+        identical original receipt with dispatch disabled.
+        """
         command_key(operation_key)
         command_key(executor_id)
         text(workspace, "workspace", 4096)
@@ -2106,6 +2206,9 @@ class SQLiteRunStore:
             )
 
     def _owned_job(self, conn, lease, job_id):
+        """Require the command to belong to the lease's original attempt; receipt observation does not
+        restore current execution authority.
+        """
         self._original_attempt(conn, lease)
         row = self._job_row(conn, lease.project_id, job_id)
         if row["run_id"] != lease.run_id or row["attempt_id"] != lease.attempt_id:
@@ -2113,6 +2216,9 @@ class SQLiteRunStore:
         return row
 
     def cancel_job(self, lease, job_id) -> CommandJob:
+        """Record cancellation intent once for the original command, preserving unknown effects and
+        never converting a request into physical closure.
+        """
         with self._transaction(write=True) as conn:
             row = self._owned_job(conn, lease, job_id)
             if row["status"] == "exited" or row["cancel_requested"]:
@@ -2147,6 +2253,9 @@ class SQLiteRunStore:
         output_limited,
         error=None,
     ) -> CommandJob:
+        """Retain bounded append-only output from the original executor, reject conflicting terminal
+        receipts and withdraw current authority when the exit remains unknown.
+        """
         if exit_code is not None and type(exit_code) is not int:
             raise ValueError("Command exit code must be an integer or unknown")
         if (
@@ -2228,6 +2337,9 @@ class SQLiteRunStore:
             return self._job_view(self._job_row(conn, lease.project_id, job_id))
 
     def _withdraw(self, conn, row, status, *, cancel_requested=None):
+        """Advance the run fence and revoke its attempt grants in the current transaction; this state
+        change does not terminate operating-system processes.
+        """
         now = self.clock()
         conn.execute(
             "UPDATE runtime_runs SET status=?,fence=fence+1,updated_at=?,cancel_requested=COALESCE(?,cancel_requested) WHERE id=?",
@@ -2275,11 +2387,17 @@ class SQLiteRunStore:
         return self._view(self._row(conn, project_id, run_id))
 
     def expire(self, project_id, run_id) -> bool:
+        """Retire an elapsed current run lease if necessary and return whether authority changed; no
+        new attempt is started.
+        """
         with self._transaction(write=True) as conn:
             row = self._row(conn, project_id, run_id)
             return self._expire_current(conn, row, self.clock())
 
     def _expire_current(self, conn, row, now):
+        """Withdraw only an actually elapsed running lease, record the expiry event and preserve
+        reconciliation until effects are known.
+        """
         if (
             row["status"] != "running"
             or row["lease_expires_at"] is None
@@ -2391,6 +2509,9 @@ class SQLiteRunStore:
         source_kind,
         source_reference,
     ):
+        """Atomically apply an attributed, version-checked correction and save its original receipt; an
+        exact retry returns the same version.
+        """
         validate_correction(
             project_id=project_id,
             task_id=task_id,

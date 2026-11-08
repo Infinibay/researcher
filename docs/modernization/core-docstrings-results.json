@@ -1,0 +1,62 @@
+{
+  "base_commit": "416abed",
+  "scope": "Documentation-only completion of four runtime core modules, not complete project documentation or measured Ken ranking",
+  "docstrings_added": 88,
+  "files": {
+    "backend/runtime/service.py": {
+      "added_docstrings": 11,
+      "missing_definitions": [],
+      "executable_ast_equal": true
+    },
+    "backend/runtime/contracts.py": {
+      "added_docstrings": 19,
+      "missing_definitions": [],
+      "executable_ast_equal": true
+    },
+    "backend/runtime/sqlite_runs.py": {
+      "added_docstrings": 41,
+      "missing_definitions": [],
+      "executable_ast_equal": true
+    },
+    "backend/runtime/peer_registry.py": {
+      "added_docstrings": 17,
+      "missing_definitions": [],
+      "executable_ast_equal": true
+    }
+  },
+  "introspection": {
+    "policy_bodies_unchanged": 7,
+    "business_tool_descriptions_schemas_annotations_unchanged": 48,
+    "remaining_owned_definitions_without_docstring": 533,
+    "scope": "Presence only; remaining definitions have unequal relevance and must not be automatically filled."
+  },
+  "tests": {
+    "passed": 51,
+    "failed": 0,
+    "skipped": 0,
+    "seconds": 38.76,
+    "kind": "Source tests with controlled processes, no generative model work"
+  },
+  "prompt_reviews": {
+    "base_commit": "416abedd2415d8164bb7de77d97230335e5e974a",
+    "files_scanned": 322,
+    "candidates": 85,
+    "revalidated": 3,
+    "retained_current": 82,
+    "changed_ids": [
+      "backend/knowledge/reviews.py::read_feedback",
+      "backend/runtime/run_inputs.py::conversation_history",
+      "backend/runtime/run_inputs.py::freeze_input"
+    ],
+    "policy_version": 10,
+    "policy_changed": false
+  },
+  "package": "Not rebuilt; current final distribution remains pending",
+  "human_comprehension": null,
+  "sources_sha256": {
+    "backend/runtime/service.py": "a1970933f71146454535043ad113e7d03bed97ce05cb5f4ba3defc8018daad21",
+    "backend/runtime/contracts.py": "a90182329cc33f72dc4030caf0eb37e1f103c4221ed801448941994494ff3cd0",
+    "backend/runtime/sqlite_runs.py": "9b6ea15d678d527a7f3d4cecb46be799f34e5dadda6105113c017dd18a8a0ede",
+    "backend/runtime/peer_registry.py": "223efa1a43a6000937475a60b8f62030270a6e81cecfe492ea0714bd50d1bb31"
+  }
+}

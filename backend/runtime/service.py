@@ -48,6 +48,9 @@ logger = logging.getLogger(__name__)
 
 @dataclass
 class _Worker:
+    """Retain the local handles, live authority and requested outcome of one admitted run; this slot is
+    not durable ownership proof.
+    """
     spec: object
     workspace: Path
     binding: WorkspaceBinding
@@ -181,6 +184,9 @@ class RuntimeService:
     def _acquire(self):
         # The canonical DB path, rather than a configurable control path, owns
         # the lock identity. O_CLOEXEC prevents a native child retaining it.
+        """Exclusively lock the canonical business database for this serving owner and recover prior
+        owner records; never let children inherit the lock.
+        """
         path = Path(self.store.database).resolve()
         fd = os.open(
             str(path) + ".runtime-owner",
@@ -675,6 +681,9 @@ class RuntimeService:
         return await asyncio.to_thread(recovery.complete, lease, result[0], result[1])
 
     async def retry_start(self, **command):
+        """Schedule only a newly recorded retry of the original queued request; an existing receipt
+        returns its run without another scheduling decision.
+        """
         self._accepting()
         run, requested = await asyncio.to_thread(self.store.request_start, **command)
         return await self._schedule(run) if requested else run
@@ -942,17 +951,26 @@ class RuntimeService:
         )
 
     async def wait(self, run_id):
+        """Wait for this owner's existing worker without propagating observer cancellation into it; an
+        absent local slot does not prove durable completion.
+        """
         slot = self._workers.get(run_id)
         if slot is not None:
             await asyncio.shield(slot.task)
 
     def _end_tool_authority(self, slot):
+        """Immediately disable the local slot and withdraw its live grant before potentially blocking
+        persistence or native teardown.
+        """
         slot.active = False
         if slot.grant_id:
             self.live_grants.withdraw(slot.grant_id)
 
     @asynccontextmanager
     async def _tool_authority(self, slot):
+        """Ensure live tool authority ends on every exit from the worker scope, including errors and
+        deadline cancellation.
+        """
         try:
             yield
         finally:
@@ -961,6 +979,9 @@ class RuntimeService:
             self._end_tool_authority(slot)
 
     def _withdraw(self, slot, outcome):
+        """Retire local tool authority, retain the requested outcome and request one native
+        interruption; durable state is recorded separately.
+        """
         self._end_tool_authority(slot)
         slot.outcome = outcome
         if slot.session is not None and slot.control is None:
@@ -968,6 +989,9 @@ class RuntimeService:
 
     @staticmethod
     async def _interrupt(session):
+        """Request native cancellation while recording an unavailable receipt by exception type;
+        failure to receive a reply is not proof of closure.
+        """
         try:
             await session.cancel()
         except Exception as exc:  # noqa: BLE001 — native/AnyIO boundary; redact exception details
@@ -976,6 +1000,9 @@ class RuntimeService:
             )
 
     async def stop(self, project_id, run_id):
+        """Withdraw the observed local worker before recording cancellation and release its persistence
+        gate afterward; no native completion is invented.
+        """
         slot = self._workers.get(run_id)
         if slot is not None:
             if slot.spec.project_id != project_id:
@@ -1005,6 +1032,9 @@ class RuntimeService:
                 self._withdraw(slot, "superseded")
 
     async def reconcile(self, **command):
+        """Share one shielded recovery task per exact intent and operation key, rejecting conflicting
+        reuse and bounding outstanding local recovery work.
+        """
         if self._lock_fd is None or self._closing:
             raise RunConflict("Runtime owner is not accepting recovery controls")
         intent = self.recovery._intent(**command)
@@ -1264,6 +1294,9 @@ class RuntimeService:
                         return
 
                     async def on_started(thread_id, turn_id):
+                        """Retain the observed native-start flag and bind the reported thread and turn
+                        to the original attempt lease without granting new authority.
+                        """
                         nonlocal native_started
                         native_started = True
                         await asyncio.to_thread(

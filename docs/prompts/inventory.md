@@ -8,6 +8,11 @@ La nueva observación real no entregó explicación dentro de120000tokens: no se
 acredita eficacia ni comprensión humana. Las cifras y tablas de cortes anteriores
 que siguen son históricas; consultar inventory.json para el árbol actual.
 
+La [documentación posterior del núcleo](../modernization/core-docstrings-review.md)
+revalida tres consumidores con delta sólo de docstrings y conserva82decisiones;
+85/322siguen vigentes. No cambia el texto de las políticas del catálogo10 ni
+sus descripciones/esquemas de negocio; no se repiten generaciones.
+
 Corte de Planificación del8noviembre2026:318archivos,85candidatos,18revisiones
 vigentes y67desactualizadas;0sin revisión previa. El cambio de fuentes/consumidores
 no prueba que67textos estén mal; tampoco permite contar sus revisiones anteriores

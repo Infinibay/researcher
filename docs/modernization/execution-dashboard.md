@@ -28,7 +28,30 @@ que se pueda comparar el avance; no presentar microajustes como tareas principal
 - Última suite global: `9fb873c`,2210 casos,2178 pasan,31 fallan y1 error de fixture; sin omisiones. La carrera de backup encontrada se corrigió después con40 pruebas instaladas. No se declara una nueva corrida global verde; la referencia `0c8b8d9` queda como evidencia histórica.
 - U01–U07, E01–E12, C01–C10 y D01–D13 quedan comprobados con el alcance de sus matrices; sigue 1 de 43 escenarios amplios sin aceptación completa en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Estado actual: encuadre conectado; nueva explicación real no entregada
+## Estado actual: documentación del núcleo completada por alcance
+
+[Docstrings y comprobaciones](core-docstrings-review.md). Bloque actual iniciado
+**18:23:48UTC**, corte de verificación **18:32:56UTC:9min8s**; documentación/
+checkpoint posteriores aparte.51pruebas38,760s, no tiempo total del bloque.
+
+- Terminado con evidencia: **88docstrings en inglés** en coordinador, contratos,
+ SQLite y registro de peers. Cero definiciones sin docstring en esos cuatro
+ módulos; AST ejecutable idéntico, siete políticas y48herramientas de negocio
+ conservan sus textos/esquemas/anotaciones.51pruebas fuente pasan sin omisiones.
+ Inventario85/322vigente, tres revisiones de consumidor revalidadas,82sin cambios.
+- En curso/siguiente: documentación relevante de autoridad, RPC, comandos y
+ fronteras de proceso. La auditoría deja533definiciones sin docstring fuera del
+ bloque, con distinta relevancia; no completarlas automáticamente. La presencia
+ no acredita calidad ni una mejora de ranking Ken.
+- Pendiente: entrega/adaptación/comprensión humana U08 y revisión de proporcionalidad
+ antes de otra evaluación; Ken/ONNX según decisión ya consultada; accesibilidad
+ integral y detalles después de capacidades; revisión independiente, paquete y
+ suite global finales. El ensayo de encuadre fallido no se repite por docstrings.
+- Estado amplio sin cambios: **12/12páginas por alcance,42/43escenarios**. No nuevo
+ wheel para este bloque documental ni afirmación de bytes instalados vigentes;
+ no nuevas generaciones, global verde, aceptación U08, push/merge/despliegue.
+
+## Etapa anterior: encuadre conectado; nueva explicación real no entregada
 
 [Política, pruebas y fallo conservado](purpose-framing-review.md). Bloque
 **17:01:34–17:19:51UTC:18min17s** hasta comprobar resultados/revalidación;

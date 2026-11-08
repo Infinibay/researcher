@@ -1297,6 +1297,14 @@ las descripciones de herramientas que realmente recibe el modelo bajo su revisi�
 de prompts. No declarar toda la documentación completa por verificar módulos o
 solo las funciones nuevas de una entrega.
 
+Avance posterior sobre416abed: [88docstrings del núcleo](core-docstrings-review.md)
+en service/contracts/sqlite_runs/peer_registry. Esos cuatro módulos quedan sin
+definiciones faltantes;533permanecen en el resto según presencia sintáctica,
+no necesariamente533tareas igual de relevantes. Sigue autoridad/RPC/comandos/
+fronteras de proceso. AST ejecutable, siete políticas y48descripciones/esquemas
+de negocio iguales;51pruebas fuente pasan. No es toda la documentación terminada,
+un benchmark de ranking Ken ni un paquete final actualizado.
+
 
 ## DD147 — recuperar observaciones CLI anteriores a la política
 

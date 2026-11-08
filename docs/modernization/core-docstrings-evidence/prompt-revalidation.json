@@ -1,0 +1,14 @@
+{
+  "base_commit": "416abedd2415d8164bb7de77d97230335e5e974a",
+  "files_scanned": 322,
+  "candidates": 85,
+  "revalidated": 3,
+  "retained_current": 82,
+  "changed_ids": [
+    "backend/knowledge/reviews.py::read_feedback",
+    "backend/runtime/run_inputs.py::conversation_history",
+    "backend/runtime/run_inputs.py::freeze_input"
+  ],
+  "policy_version": 10,
+  "policy_changed": false
+}
