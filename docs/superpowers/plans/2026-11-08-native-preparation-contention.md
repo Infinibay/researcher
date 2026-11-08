@@ -51,3 +51,9 @@ Antes de construir otro artefacto, consultar la regla de sdist + wheel limpio en
 `docs/architecture/native-python-installation.md`. Un build directo arrastró306
 módulos retirados y fue rechazado antes de ejecutar pruebas. Se sustituyó por
 una rueda limpia verificada; no reutilizar el artefacto descartado.
+
+
+La preparación HTTP bajo guardián/uvloop tampoco reprodujo el fallo; conservó
+fuente, límites y reserva,0turnos y cierre comprobado. No se repiten casos iguales
+indefinidamente. La fiabilidad queda como pendiente principal mientras se verifica
+una capacidad independiente sin inferencia (Documentos), sin afirmar su corrección.

@@ -6,7 +6,8 @@ El bloque de Proyectos sigue abierto tras cuatro correcciones funcionales.
 Existen 12 pilotos, 36 conceptos desktop y 12 móviles. El plan exige páginas completas:
 reutilizar imágenes, selección, dirección visual y funcionalidad ya implementadas;
 no generar otras alternativas ni rediseñar por iniciativa cada control menor.
-0/12 páginas están aceptadas actualmente.
+1/12 páginas tiene aceptación técnica y visual actual: Documentos (8noviembre).
+Proyectos sigue abierto; el historial de su bloqueo se conserva abajo.
 
 1. Empezar por Proyectos y el concepto seleccionado `project-dossier`. Leer su
    brief, selección, capturas y código actual; establecer qué evidencia vigente
@@ -37,3 +38,10 @@ Comprobación: un plan real aceptado y su lectura/móvil/recarga pasan, pero la
 regresión española terminó con AuthorityBusy antes de inferir. Cero páginas se
 aceptan integralmente. Continuar con el plan2026-11-08-native-preparation-contention
 y después cerrar esta aceptación; conservar los resultados originales.
+
+
+2026-11-08: Documentos obtiene aceptación técnica/visual completa de su recorrido,
+con25estados canónicos y comprobaciones complementarias actuales. La contención
+nativa sigue sin causa demostrada; no bloquea esta capacidad sin inferencia y no
+se reclasifica como detalle. Siguiente: Archivos, sin rediseñar el piloto ni resolver
+cada ajuste fino. Ver2026-11-08-documents-page-acceptance y wiki-page-review.md.

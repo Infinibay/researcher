@@ -39,6 +39,25 @@ homónimos y documentos con igual ruta en dos proyectos y biblioteca global.
 `npm run test:e2e:knowledge` ejecuta sólo el navegador con las mismas variables.
 [Capturas y límites](../../docs/design/audits/2026-11-07-knowledge-live/report.md).
 
+`--journey wiki` comprueba la ruta completa de Documentos en un host nuevo:
+
+```sh
+<python-del-producto> evals/operation/web_workspace.py --journey wiki \
+  --assets <recursos-host.json> --output <otra-carpeta-nueva> \
+  --node <node24>/bin/node
+```
+
+Crea dos proyectos y documentos con igual ruta en ámbitos distintos. Recorre
+conflicto y comparación, recibo perdido/tardío, borradores al cambiar de proyecto,
+revocación real de sesión y recuperación, eliminación con historia retenida,
+55documentos en dos páginas de índice,25revisiones y lectura de110KB a320px.
+El coordinador contrasta el resultado con SQLite después del navegador y conserva
+el host cerrado; no inicia inferencia. `npm run test:e2e:wiki` ejecuta sólo el
+navegador con las mismas variables y requiere una biblioteca global nueva.
+El fichero del navegador es `browser/evidence.json`; no reutilizar una instalación
+anterior para obtener otra observación del mismo intento. Las pruebas de una
+página no aceptan U08 ni sustituyen un ensayo humano de comprensión/lector de pantalla.
+
 `--journey navigation` reutiliza la preparación por formularios de `workspace`
 y recorre las12rutas con Tab/Enter a1440y320px CSS. Mide el contenido interior,
 captura cada estado, ejecuta Axe sobre la página completa y comprueba salto al

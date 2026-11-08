@@ -28,7 +28,56 @@ que se pueda comparar el avance; no presentar microajustes como tareas principal
 - Última suite global: `9fb873c`,2210 casos,2178 pasan,31 fallan y1 error de fixture; sin omisiones. La carrera de backup encontrada se corrigió después con40 pruebas instaladas. No se declara una nueva corrida global verde; la referencia `0c8b8d9` queda como evidencia histórica.
 - U01–U07, E01–E12, C01–C09 y D01–D13 quedan comprobados con el alcance de sus matrices; siguen 2 de 43 escenarios amplios sin aceptación completa en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Estado actual: explicación del fallo corregida; contención sin reproducir
+## Estado actual: Documentos aceptado; siguiente Archivos
+
+**Documentos:01:08:25–01:27:09UTC,18min44s hasta verificar**, base`a8e1e8b`.
+Documentación/checkpoint posteriores no incluidos. [Alcance y límites](wiki-page-review.md).
+
+- Terminado: **Documentos**, aceptación técnica y visual delegada: **1/12páginas**.
+ 25estados del recorrido canónico, comparación/biblioteca vacía complementarias,
+ lectura a320y720px,55documentos en dos páginas de índice,25revisiones y110674bytes
+ de Markdown; sesión/conectividad/conflictos/recibos y borradores comprobados.
+ **18pruebas backend instaladas y8contratos frontend pasan**, sin omisiones.
+- Próxima tarea principal: **aceptación de Archivos**. Reusar el concepto/recorrido
+ existente; falta terminar sus operaciones y estados completos. Todavía no empezó
+ ese bloque, registrar hora al iniciarlo.
+- Pendiente principal: contención del engine sin causa confirmada; plan español
+ con auditoría Ken; Proyectos y otras10páginas. Siguen U08/C10/evaluaciones,
+ dependencias y distribución. **41/43escenarios amplios**, sin porcentaje global.
+- Al final: detalles aplazados, suite global y revisión independiente. DD125 recoge
+ avisos/etiquetas/cabecera de Documentos y zoom nativo/lector; DD126, imports del
+ evaluador. No se usa la captura CSS200% rechazada como aceptación de zoom.
+
+El primer wrapper falló por un nombre de fichero de evidencia; el navegador había
+pasado. Se corrigió el contrato y el comando `--journey wiki` pasa íntegro en otro
+host nuevo. Se conserva el fallo original y no se suman repeticiones como casos
+nuevos. Cero runs/despachos/inferencias en la aceptación, servidor y peers cerrados.
+El diagnóstico HTTP anterior tampoco reprodujo la contención: se conserva como
+pendiente principal, sin degradarlo a pulido. U08 continúa sin aceptación humana.
+
+## Etapa anterior: Documentos en aceptación; contención sigue abierta
+
+Diagnóstico HTTP: **01:04:50–01:08:25UTC**, **3min35s hasta revisar el resultado**,
+base`a8e1e8b`. Una admisión HTTP real bajo guardián/recursos productivos y uvloop
+llegó a la guardia que prohíbe inferencia:0turnos, peers cerrados, fuente intacta.
+No reprodujo el fallo; la causa de AuthorityBusy/Conflict continúa desconocida.
+[Recibo](native-preparation-http-results.json). Se evita seguir repitiendo casos
+idénticos: el bloqueo permanece como pendiente principal, sin bajar prioridad ni
+relajar locks/CAS/presupuestos. Su diagnóstico está listo para el próximo fallo.
+
+- Comprobado: **41/43escenarios**, explicación y diagnóstico seguro del runtime.
+- En curso desde **01:08:25UTC**: aceptación completa de **Documentos**; el recorrido
+  Archivos/Documentos actual pasa. Se verifica el concepto existente, edición,
+  conflictos, recibos perdidos/tardíos, borradores, sesión/conectividad,
+  paginación/historia y carga de lectura, con HTTP/SQLite reales y sin inferencia.
+- Pendiente principal: contención, plan español con auditoría Ken, Proyectos y
+  otras páginas; U08/C10/evaluaciones, dependencias y distribución.
+- Al final: detalles aplazados, suite global y revisión independiente.
+
+Siguen **0/12páginas aceptadas integralmente** hasta terminar esta comprobación.
+[Trabajo actual](../superpowers/plans/2026-11-08-documents-page-acceptance.md).
+
+## Etapa anterior: explicación del fallo corregida; contención sin reproducir
 
 Bloque **2026-11-08 00:49:17–01:02:11 UTC**, desde `ee39fd2`:
 **12 min 54 s hasta verificar**, sin documentación/checkpoint posteriores.

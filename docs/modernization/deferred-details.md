@@ -1023,3 +1023,27 @@ La selección instalada pasó 40 casos y se detuvo en ese fallo. El parámetro h
 no se ejecutó tras maxfail; no presentarlo como un fallo observado. Actualizar la
 expectativa al contrato atómico conservando validación de plan, citas de historia y
 explicación. Ejecutar ambos antes del cierre global, sin skips ni relajar el producto.
+
+
+## DD125 — ajustes de presentación de Documentos
+
+Después de las capacidades principales: limpiar o contextualizar el aviso de un
+último guardado al seleccionar otro documento/ámbito; actualmente nombra el
+resultado original y no redirige la selección, pero sigue ocupando el panel.
+Traducir la etiqueta técnica `owner` de la historia y revisar la altura de la
+cabecera global en móvil. No cambiar revisiones ni el origen de un guardado para
+ajustar presentación. Capturas: auditoría2026-11-08-wiki-acceptance.
+
+La magnificación CSS200% produjo un lector demasiado estrecho aunque el checker
+geométrico pasara. Esa captura se rechaza como prueba de accesibilidad/zoom; no es
+una observación de zoom nativo. El viewport720px y la lectura320px sí se comprueban
+por separado. Completar zoom nativo y lector de pantalla con herramientas/capacidades
+apropiadas; no declarar esos ensayos hechos a partir de Axe o de una imagen.
+
+## DD126 — orden de imports del evaluador web
+
+Ruff señala I001 en el bloque de imports ya existente de
+`evals/operation/web_workspace.py`. El cambio de aceptación Wiki no altera ese
+bloque. Resolver el formato junto con los demás detalles, después de las
+capacidades mayores. La ejecución funcional del nuevo recorrido se registra aparte;
+no presentar esta comprobación de estilo como verde.

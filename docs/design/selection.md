@@ -252,3 +252,13 @@ usa objetos Git reales completos, registro existente y origen de PR. El móvil
 recompone la navegación y revela el archivo tras cargarlo. Alta/clonado/remoto/
 reparación y aceptación integral siguen pendientes.
 [QA final acotado](audits/2026-11-06-repositories/report.md).
+
+
+## Aceptación de Documentos — 2026-11-08
+
+El concepto `scoped-notebook` conserva su selección. La ruta completa tiene
+aceptación técnica/visual mediante HTTP/SQLite reales,25estados canónicos,
+recuperación de sesión/recibos/borradores, historia/paginación y lectura actual.
+No se generan más alternativas ni se cambia el estilo. Es la primera de12páginas
+aceptadas; U08 y el cierre global siguen abiertos. La magnificación CSS exploratoria
+no se acepta como prueba de zoom nativo. [Auditoría](audits/2026-11-08-wiki-acceptance/report.md).

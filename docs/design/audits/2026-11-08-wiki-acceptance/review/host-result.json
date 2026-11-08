@@ -1,0 +1,11 @@
+{
+  "status": "passed",
+  "scope": "Current document acceptance, actual installed HTTP/SQLite with synthetic account; no model calls; original knowledge journey retained",
+  "browser_exit": 0,
+  "service_exit": 143,
+  "runs": 0,
+  "integrity": "ok",
+  "wiki_pages": 61,
+  "retained_revisions": 88,
+  "unclosed_peers": 0
+}

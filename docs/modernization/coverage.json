@@ -5988,7 +5988,7 @@
       "status": "in_progress",
       "pilots": 12,
       "concept_images": 48,
-      "fully_accepted": 0,
+      "fully_accepted": 1,
       "pages": {
         "projects": {
           "status": "in_progress",
@@ -6005,6 +6005,26 @@
             "Spanish UI request verified at server, actual generated Spanish plan unverified",
             "Finish complete page acceptance without hiding original failures"
           ]
+        },
+        "wiki": {
+          "status": "verified",
+          "scope": "Complete technical and delegated visual route acceptance for current installed product; human comprehension U08 and final accessibility/release audit remain independent",
+          "selected_concept": "scoped-notebook",
+          "evidence": [
+            "docs/modernization/wiki-page-review.md",
+            "docs/modernization/wiki-page-results.json",
+            "docs/modernization/wiki-page-packaging.json",
+            "docs/modernization/wiki-page-docstrings.json",
+            "docs/design/audits/2026-11-08-wiki-acceptance/report.md",
+            "frontend/tests/wiki.e2e.mjs",
+            "frontend/tests/wiki-review.e2e.mjs",
+            "evals/operation/web_workspace.py"
+          ],
+          "remaining": [],
+          "deferred": [
+            "DD125",
+            "DD126"
+          ]
         }
       }
     },
@@ -6018,7 +6038,8 @@
         "docs/modernization/native-preparation-review.md",
         "docs/modernization/native-preparation-results.json",
         "docs/modernization/native-preparation-packaging.json",
-        "docs/modernization/native-preparation-docstrings.json"
+        "docs/modernization/native-preparation-docstrings.json",
+        "docs/modernization/native-preparation-http-results.json"
       ],
       "remaining": [
         "Reproduce and fix demonstrated contention without ignoring authority locks or replaying uncertain effects",

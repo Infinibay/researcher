@@ -81,3 +81,12 @@ evaluaciones, dependencias/distribución, detalles y cierre global siguen abiert
 [paquete instalado](native-preparation-packaging.json),
 [docstrings](native-preparation-docstrings.json),
 [plan vigente](../superpowers/plans/2026-11-08-native-preparation-contention.md).
+
+
+## Observación posterior de HTTP, 2026-11-08
+
+Una quinta preparación se observó desde HTTP real con uvloop, guardián de servicio
+y límites originales. Llegó a la guardia de generación, envió0turnos y cerró sus
+peers; no reprodujo la contención. [Recibo independiente](native-preparation-http-results.json).
+La causa permanece abierta. Se continúa con capacidades independientes de la web,
+sin reclasificar la fiabilidad nativa como detalle ni repetir ensayos equivalentes.

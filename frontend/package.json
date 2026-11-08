@@ -13,6 +13,7 @@
     "test:ui": "vitest run",
     "test:e2e": "node tests/workspace.e2e.mjs",
     "test:e2e:knowledge": "node tests/knowledge.e2e.mjs",
+    "test:e2e:wiki": "node tests/wiki.e2e.mjs",
     "lint": "eslint src tests/ui vite.config.ts vitest.config.ts"
   },
   "dependencies": {

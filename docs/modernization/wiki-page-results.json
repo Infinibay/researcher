@@ -1,0 +1,415 @@
+{
+  "base_commit": "a8e1e8b",
+  "started_at": "2026-11-08T01:08:25Z",
+  "verified_at": "2026-11-08T01:27:09Z",
+  "seconds_until_verification": 1124,
+  "status": "page_technical_visual_acceptance_verified",
+  "accepted_route": "/wiki",
+  "selected_concept": "scoped-notebook",
+  "selected_concept_manifest": "docs/design/concepts/wiki/manifest.json",
+  "whole_pages_accepted": 1,
+  "whole_pages_total": 12,
+  "product_renderer_changes_this_block": false,
+  "current_web_index_sha256": "f5b43b1611ce69c1b4cf249f65518bf44ec101143249501549821264bc3b73fa",
+  "browser": {
+    "canonical_wrapper": "passed",
+    "canonical_states": 25,
+    "canonical_actions": 10,
+    "directly_reviewed_additional_states": 4,
+    "reduced_viewport": 720,
+    "minimum_reading_viewport": 320,
+    "representative_index_pages": 2,
+    "representative_documents_before_long_read": 55,
+    "context_revisions": 25,
+    "context_history_pages": 2,
+    "long_document_utf8_bytes": 110674,
+    "observed_axe_violations_in_checked_workbench_states": 0,
+    "session_gate_axe": "not checked",
+    "no_page_errors": true,
+    "real_session_revocation_and_repair": true,
+    "real_save_reply_lost_after_commit_then_exact_retry": true,
+    "concurrent_edit_conflict_and_explicit_rebase": true,
+    "late_save_retains_new_selected_document": true,
+    "literal_html_not_executed": true,
+    "keyboard_delete_focus_trap_and_return": true,
+    "delete_retains_original_history": true,
+    "actual_empty_project_checked": true
+  },
+  "original_wrapper_failure": {
+    "status": "failed",
+    "browser_exit": 0,
+    "reason": "Browser wrote interaction-evidence.json while the generic wrapper expects evidence.json; canonical browser artifact name fixed. Original failure retained. Independent storage verification also passed on that original closed installation.",
+    "product_failure": false,
+    "native_starts": 0
+  },
+  "native_browser_zoom_observed": false,
+  "css_magnification_exploration": "Geometric checker passed at200% but visual inspection rejected the narrow reader. Not used to establish browser zoom or accessibility. Current720px/320px checks are separate.",
+  "installed_selection": {
+    "cases": 18,
+    "passed": 18,
+    "failed": 0,
+    "skipped": 0,
+    "backend_modules": 198,
+    "all_backend_imports_from_native_env": true,
+    "seconds": 7.396,
+    "exit_code": 0
+  },
+  "frontend_contracts": {
+    "passed": 8,
+    "failed": 0,
+    "skipped": 0
+  },
+  "python_changed_definitions_documented": 2,
+  "new_frontend_harness_modules": "English module/helper JSDoc",
+  "native_starts": 0,
+  "dispatches": 0,
+  "runs": 0,
+  "service_exit": 143,
+  "service_resource_closure": "closed, domain_removed=true",
+  "integrity": "ok",
+  "style_check": "Ruff I001 in the unchanged import block of evals/operation/web_workspace.py; DD126, not reported green",
+  "source_unchanged": "No frontend/src or backend product source changed in this block; current wheel/source/install match676files",
+  "scope_limits": [
+    "Technical and delegated visual route acceptance, not human comprehension acceptance/U08",
+    "Axe and keyboard checks do not certify every screen reader, native browser zoom or operating system",
+    "Repeated independent fixtures are not added as distinct scenario or scientific trial counts",
+    "Native preparation AuthorityBusy/AuthorityConflict cause remains open; this route requires no inference",
+    "No new global green suite, no sibling changes, no push/deploy"
+  ],
+  "deferred": [
+    "DD125: contextualize stale save notices, owner label and mobile global header; native zoom/screen reader verification",
+    "DD126: pre-existing evaluator import order"
+  ],
+  "images": [
+    {
+      "path": "docs/design/audits/2026-11-08-wiki-acceptance/canonical-fresh/desktop-comparison.png",
+      "sha256": "c4ce9ac60957cde6b16e68c99bcad08df5bdca6889700ce7bdbbcd419df1b969",
+      "inspected": false,
+      "visual_acceptance": "partial_comparison_header_only_use_review_panel"
+    },
+    {
+      "path": "docs/design/audits/2026-11-08-wiki-acceptance/canonical-fresh/desktop-conflict.png",
+      "sha256": "bab017bbcdb6b75ee9f2059bbf457c280286c4ebe65685679898a197fb61b63a",
+      "inspected": false,
+      "visual_acceptance": "programmatic_capture_not_individually_visually_audited"
+    },
+    {
+      "path": "docs/design/audits/2026-11-08-wiki-acceptance/canonical-fresh/desktop-current-reading-final.png",
+      "sha256": "1ef439fea9c20b47299f535751cb62c94caf6a4fcd9088a95edd0f5ea6a8a360",
+      "inspected": true,
+      "visual_acceptance": "inspected_current_build"
+    },
+    {
+      "path": "docs/design/audits/2026-11-08-wiki-acceptance/canonical-fresh/desktop-history.png",
+      "sha256": "3c831fde1546eff713f1128831c0af4d7b453f2fbe719f35be22227f8cf8de91",
+      "inspected": false,
+      "visual_acceptance": "programmatic_capture_not_individually_visually_audited"
+    },
+    {
+      "path": "docs/design/audits/2026-11-08-wiki-acceptance/canonical-fresh/desktop-late-response-new-document.png",
+      "sha256": "17fcbf312ff069a531a313b94a2469549e504e07c767c73fc8c17abd15a78042",
+      "inspected": false,
+      "visual_acceptance": "programmatic_capture_not_individually_visually_audited"
+    },
+    {
+      "path": "docs/design/audits/2026-11-08-wiki-acceptance/canonical-fresh/desktop-project-changed.png",
+      "sha256": "bde5e6da69d07434f94895ed793d32693eb2d7117637d087e8b1f42d22f423d5",
+      "inspected": false,
+      "visual_acceptance": "programmatic_capture_not_individually_visually_audited"
+    },
+    {
+      "path": "docs/design/audits/2026-11-08-wiki-acceptance/canonical-fresh/desktop-reading-final.png",
+      "sha256": "52a3e7e0ddedb4bdf842cc7f776c61131e7c39d566288d7212c2ffe554913a70",
+      "inspected": false,
+      "visual_acceptance": "programmatic_capture_not_individually_visually_audited"
+    },
+    {
+      "path": "docs/design/audits/2026-11-08-wiki-acceptance/canonical-fresh/desktop-recovered-draft.png",
+      "sha256": "7be01e702202fe8cc0f084babef4f654ac722bdfceeca6c9030783a27e037f73",
+      "inspected": false,
+      "visual_acceptance": "programmatic_capture_not_individually_visually_audited"
+    },
+    {
+      "path": "docs/design/audits/2026-11-08-wiki-acceptance/canonical-fresh/desktop-saved.png",
+      "sha256": "2e12df2d190449dc90f269c2726924241c1fbed06e7b3eda3e89390917e47583",
+      "inspected": false,
+      "visual_acceptance": "programmatic_capture_not_individually_visually_audited"
+    },
+    {
+      "path": "docs/design/audits/2026-11-08-wiki-acceptance/canonical-fresh/desktop-uncertain-receipt.png",
+      "sha256": "7b8fd46ca58b022950037ab496bcb789c937e221f4232c803c8be17dbf67cb1f",
+      "inspected": false,
+      "visual_acceptance": "programmatic_capture_not_individually_visually_audited"
+    },
+    {
+      "path": "docs/design/audits/2026-11-08-wiki-acceptance/canonical-fresh/mobile-connectivity-error.png",
+      "sha256": "48e84ddd50fab825a40ba3e8d09fe1461d60b68bc1d9c2eba6daf954e3bfe767",
+      "inspected": false,
+      "visual_acceptance": "programmatic_capture_not_individually_visually_audited"
+    },
+    {
+      "path": "docs/design/audits/2026-11-08-wiki-acceptance/canonical-fresh/mobile-connectivity-recovered.png",
+      "sha256": "c39e2fef9b73ed6d9711f19a649a90125f9a7aa94490fac5b26425fcc0d69de1",
+      "inspected": false,
+      "visual_acceptance": "programmatic_capture_not_individually_visually_audited"
+    },
+    {
+      "path": "docs/design/audits/2026-11-08-wiki-acceptance/canonical-fresh/mobile-delete-dialog.png",
+      "sha256": "20379576922f1230d4bd9de130fc1db105f3145c69f084d4da20d2cfaed81cce",
+      "inspected": false,
+      "visual_acceptance": "programmatic_capture_not_individually_visually_audited"
+    },
+    {
+      "path": "docs/design/audits/2026-11-08-wiki-acceptance/canonical-fresh/mobile-deleted-history.png",
+      "sha256": "2334a5ab178e5a8f7bc8ce56a82e64f47867afcfd3a2647b4c08a407b578e05c",
+      "inspected": false,
+      "visual_acceptance": "programmatic_capture_not_individually_visually_audited"
+    },
+    {
+      "path": "docs/design/audits/2026-11-08-wiki-acceptance/canonical-fresh/mobile-foreign-link.png",
+      "sha256": "7226ad72de0923f9c46c40f8737a1490d52af6fff6d1d8fb978e71bb02ac7944",
+      "inspected": false,
+      "visual_acceptance": "programmatic_capture_not_individually_visually_audited"
+    },
+    {
+      "path": "docs/design/audits/2026-11-08-wiki-acceptance/canonical-fresh/mobile-global-reader.png",
+      "sha256": "e4b94dcb6b983786009a864673d7e7322991b8de9e3efd66495215c227b26001",
+      "inspected": false,
+      "visual_acceptance": "programmatic_capture_not_individually_visually_audited"
+    },
+    {
+      "path": "docs/design/audits/2026-11-08-wiki-acceptance/canonical-fresh/mobile-index.png",
+      "sha256": "1ec3be206ee69a6d9a65c96b1646b712c884d19133ba7ac4ec5a0c3a4ba1d2dd",
+      "inspected": false,
+      "visual_acceptance": "programmatic_capture_not_individually_visually_audited"
+    },
+    {
+      "path": "docs/design/audits/2026-11-08-wiki-acceptance/canonical-fresh/mobile-literal-reader.png",
+      "sha256": "0e4a317bef642e9a2c7f6fb11399907c2fe29f2fcd851f123552c6c5b36aa682",
+      "inspected": false,
+      "visual_acceptance": "programmatic_capture_not_individually_visually_audited"
+    },
+    {
+      "path": "docs/design/audits/2026-11-08-wiki-acceptance/canonical-fresh/mobile-new-document.png",
+      "sha256": "7ed55cfc36de287c1808dba6a102789b05dcd236d22835efd693240ca87f3bbb",
+      "inspected": false,
+      "visual_acceptance": "programmatic_capture_not_individually_visually_audited"
+    },
+    {
+      "path": "docs/design/audits/2026-11-08-wiki-acceptance/canonical-fresh/mobile-no-search-result.png",
+      "sha256": "b53d136be6abe1d007726b982d1a7b5adec89d2e7ea937759d0da02e53c71075",
+      "inspected": false,
+      "visual_acceptance": "programmatic_capture_not_individually_visually_audited"
+    },
+    {
+      "path": "docs/design/audits/2026-11-08-wiki-acceptance/canonical-fresh/mobile-paginated-retained-history.png",
+      "sha256": "ddca62dfdbb7190fde969a36bcefe7947d295d08961075955bbef3d58133e761",
+      "inspected": false,
+      "visual_acceptance": "programmatic_capture_not_individually_visually_audited"
+    },
+    {
+      "path": "docs/design/audits/2026-11-08-wiki-acceptance/canonical-fresh/mobile-paginated-search.png",
+      "sha256": "6b14bd98feedb3cbbef4d6ee9e9039613865f7ff03086c9f4ab3c253cd449b80",
+      "inspected": false,
+      "visual_acceptance": "programmatic_capture_not_individually_visually_audited"
+    },
+    {
+      "path": "docs/design/audits/2026-11-08-wiki-acceptance/canonical-fresh/mobile-session-restored-draft.png",
+      "sha256": "1a454822aa9a39c69d8204ba8563d5689e18a6f3d90bc0d37b9985ea0872758d",
+      "inspected": false,
+      "visual_acceptance": "programmatic_capture_not_individually_visually_audited"
+    },
+    {
+      "path": "docs/design/audits/2026-11-08-wiki-acceptance/canonical-fresh/narrow-long-document-tail.png",
+      "sha256": "ed3863215d23c56bda9be6b17c3d93868fe66d870ec97ddf3043de7ba265e5a8",
+      "inspected": false,
+      "visual_acceptance": "programmatic_capture_not_individually_visually_audited"
+    },
+    {
+      "path": "docs/design/audits/2026-11-08-wiki-acceptance/canonical-fresh/session-locked-draft-retained.png",
+      "sha256": "1115fdec3d30c49fc80c198ce4fdeb3220a9c4a397bceb56f8b9218730613be3",
+      "inspected": false,
+      "visual_acceptance": "programmatic_capture_not_individually_visually_audited"
+    },
+    {
+      "path": "docs/design/audits/2026-11-08-wiki-acceptance/initial-current/desktop-comparison.png",
+      "sha256": "ac368c9231a21057a293425f196c50d768c6bad0dd79190ac76e9251b29263bc",
+      "inspected": true,
+      "visual_acceptance": "partial_comparison_header_only_use_review_panel"
+    },
+    {
+      "path": "docs/design/audits/2026-11-08-wiki-acceptance/initial-current/desktop-conflict.png",
+      "sha256": "dbe2b1db74f5ddcf6dd47687157e2b9d93746888c44b9e72a0e7a5cec743f9be",
+      "inspected": true,
+      "visual_acceptance": "inspected_current_build"
+    },
+    {
+      "path": "docs/design/audits/2026-11-08-wiki-acceptance/initial-current/desktop-css-magnification-200.png",
+      "sha256": "14146eb688bc71e8e987265bcd5c6a777aba50b0cc3d924c3cb093ea76e2cd25",
+      "inspected": true,
+      "visual_acceptance": "rejected_as_accessibility_zoom_evidence"
+    },
+    {
+      "path": "docs/design/audits/2026-11-08-wiki-acceptance/initial-current/desktop-history.png",
+      "sha256": "63eecc545a9c5573f608a3cb8a52fcedc80f8a8dc88486bf533a2694661b72f4",
+      "inspected": true,
+      "visual_acceptance": "inspected_current_build"
+    },
+    {
+      "path": "docs/design/audits/2026-11-08-wiki-acceptance/initial-current/desktop-late-response-new-document.png",
+      "sha256": "9048b65fb666821a60953bbcca1fd548e9374ca8a8274f2026fa31de76649fd0",
+      "inspected": true,
+      "visual_acceptance": "inspected_current_build"
+    },
+    {
+      "path": "docs/design/audits/2026-11-08-wiki-acceptance/initial-current/desktop-project-changed.png",
+      "sha256": "bde5e6da69d07434f94895ed793d32693eb2d7117637d087e8b1f42d22f423d5",
+      "inspected": true,
+      "visual_acceptance": "inspected_current_build"
+    },
+    {
+      "path": "docs/design/audits/2026-11-08-wiki-acceptance/initial-current/desktop-reading-final.png",
+      "sha256": "e2101f2c22c8101e49bbc4cb9101185a5ea8171495cdf06c48904a981a2a9173",
+      "inspected": true,
+      "visual_acceptance": "inspected_current_build"
+    },
+    {
+      "path": "docs/design/audits/2026-11-08-wiki-acceptance/initial-current/desktop-recovered-draft.png",
+      "sha256": "7be01e702202fe8cc0f084babef4f654ac722bdfceeca6c9030783a27e037f73",
+      "inspected": true,
+      "visual_acceptance": "inspected_current_build"
+    },
+    {
+      "path": "docs/design/audits/2026-11-08-wiki-acceptance/initial-current/desktop-saved.png",
+      "sha256": "db5e41524a229b9c44db8abbd63dfa174eee36d435c4b0cb8b4f3eda73e141b4",
+      "inspected": true,
+      "visual_acceptance": "inspected_current_build"
+    },
+    {
+      "path": "docs/design/audits/2026-11-08-wiki-acceptance/initial-current/desktop-uncertain-receipt.png",
+      "sha256": "6d31aa052d894fb21fbd6b2b1ac019d3c84204e2195cac4b835d6246b890e50e",
+      "inspected": true,
+      "visual_acceptance": "inspected_current_build"
+    },
+    {
+      "path": "docs/design/audits/2026-11-08-wiki-acceptance/initial-current/mobile-connectivity-error.png",
+      "sha256": "48e84ddd50fab825a40ba3e8d09fe1461d60b68bc1d9c2eba6daf954e3bfe767",
+      "inspected": true,
+      "visual_acceptance": "inspected_current_build"
+    },
+    {
+      "path": "docs/design/audits/2026-11-08-wiki-acceptance/initial-current/mobile-connectivity-recovered.png",
+      "sha256": "7dc3305f6209a68e66623a4dea7f13405786b98d4e3eed4a8e1ab9a0a116212d",
+      "inspected": true,
+      "visual_acceptance": "inspected_current_build"
+    },
+    {
+      "path": "docs/design/audits/2026-11-08-wiki-acceptance/initial-current/mobile-delete-dialog.png",
+      "sha256": "66d989cb3907e7ddef1c688c3d4d4d3faf381ab2d07d3e7cf801494cb91c5b80",
+      "inspected": true,
+      "visual_acceptance": "inspected_current_build"
+    },
+    {
+      "path": "docs/design/audits/2026-11-08-wiki-acceptance/initial-current/mobile-deleted-history.png",
+      "sha256": "60b7293b72d5770e51b172b65420785ea37b2d8ec6e240b56ea3b82792392503",
+      "inspected": true,
+      "visual_acceptance": "inspected_current_build"
+    },
+    {
+      "path": "docs/design/audits/2026-11-08-wiki-acceptance/initial-current/mobile-foreign-link.png",
+      "sha256": "7226ad72de0923f9c46c40f8737a1490d52af6fff6d1d8fb978e71bb02ac7944",
+      "inspected": true,
+      "visual_acceptance": "inspected_current_build"
+    },
+    {
+      "path": "docs/design/audits/2026-11-08-wiki-acceptance/initial-current/mobile-global-reader.png",
+      "sha256": "3d0e095158de09687db8bc05723501b5b052da617d4f8bcdf7d8d370d3f356db",
+      "inspected": true,
+      "visual_acceptance": "inspected_current_build"
+    },
+    {
+      "path": "docs/design/audits/2026-11-08-wiki-acceptance/initial-current/mobile-index.png",
+      "sha256": "1ec3be206ee69a6d9a65c96b1646b712c884d19133ba7ac4ec5a0c3a4ba1d2dd",
+      "inspected": true,
+      "visual_acceptance": "inspected_current_build"
+    },
+    {
+      "path": "docs/design/audits/2026-11-08-wiki-acceptance/initial-current/mobile-literal-reader.png",
+      "sha256": "a563645f1a0c8efd49ac1b8d9542c5770352e989c76aa5a2722aec12ba9b1112",
+      "inspected": true,
+      "visual_acceptance": "inspected_current_build"
+    },
+    {
+      "path": "docs/design/audits/2026-11-08-wiki-acceptance/initial-current/mobile-new-document.png",
+      "sha256": "7ed55cfc36de287c1808dba6a102789b05dcd236d22835efd693240ca87f3bbb",
+      "inspected": true,
+      "visual_acceptance": "inspected_current_build"
+    },
+    {
+      "path": "docs/design/audits/2026-11-08-wiki-acceptance/initial-current/mobile-no-search-result.png",
+      "sha256": "b53d136be6abe1d007726b982d1a7b5adec89d2e7ea937759d0da02e53c71075",
+      "inspected": true,
+      "visual_acceptance": "inspected_current_build"
+    },
+    {
+      "path": "docs/design/audits/2026-11-08-wiki-acceptance/initial-current/mobile-paginated-retained-history.png",
+      "sha256": "00892ce18b3fe484ad0f7f21e192023b115e7b25f871c07e62e58d098fd4bf81",
+      "inspected": true,
+      "visual_acceptance": "inspected_current_build"
+    },
+    {
+      "path": "docs/design/audits/2026-11-08-wiki-acceptance/initial-current/mobile-paginated-search.png",
+      "sha256": "6b14bd98feedb3cbbef4d6ee9e9039613865f7ff03086c9f4ab3c253cd449b80",
+      "inspected": true,
+      "visual_acceptance": "inspected_current_build"
+    },
+    {
+      "path": "docs/design/audits/2026-11-08-wiki-acceptance/initial-current/mobile-session-restored-draft.png",
+      "sha256": "1a454822aa9a39c69d8204ba8563d5689e18a6f3d90bc0d37b9985ea0872758d",
+      "inspected": true,
+      "visual_acceptance": "inspected_current_build"
+    },
+    {
+      "path": "docs/design/audits/2026-11-08-wiki-acceptance/initial-current/narrow-long-document-tail.png",
+      "sha256": "ed3863215d23c56bda9be6b17c3d93868fe66d870ec97ddf3043de7ba265e5a8",
+      "inspected": true,
+      "visual_acceptance": "inspected_current_build"
+    },
+    {
+      "path": "docs/design/audits/2026-11-08-wiki-acceptance/initial-current/session-locked-draft-retained.png",
+      "sha256": "1115fdec3d30c49fc80c198ce4fdeb3220a9c4a397bceb56f8b9218730613be3",
+      "inspected": true,
+      "visual_acceptance": "inspected_current_build"
+    },
+    {
+      "path": "docs/design/audits/2026-11-08-wiki-acceptance/reflow/01-reduced-reading-720.png",
+      "sha256": "c8caf74ec0e551545cc65f36bb81190b1ee0599a7d64ec3e41f3a4022e6d9c66",
+      "inspected": true,
+      "visual_acceptance": "inspected_current_build"
+    },
+    {
+      "path": "docs/design/audits/2026-11-08-wiki-acceptance/review/01-current-comparison-panel.png",
+      "sha256": "2b864aff4f25d52463add9b94b9993233abf18a3938dc8d4fc534f75cfd1d653",
+      "inspected": true,
+      "visual_acceptance": "inspected_current_build"
+    },
+    {
+      "path": "docs/design/audits/2026-11-08-wiki-acceptance/review/02-original-retained-text.png",
+      "sha256": "df6dde7862dc3b5ebd1fa8bd35a2a9def1a2fe7b9fa85ad59ea6db7a2a4e8bea",
+      "inspected": true,
+      "visual_acceptance": "inspected_current_build"
+    },
+    {
+      "path": "docs/design/audits/2026-11-08-wiki-acceptance/review/03-actual-empty-mobile.png",
+      "sha256": "1de38e6a51fbdcc82e19ff8296512f9fa333721348f4425243f474c5b4723c74",
+      "inspected": true,
+      "visual_acceptance": "inspected_current_build"
+    },
+    {
+      "path": "docs/design/audits/2026-11-08-wiki-acceptance/review/04-actual-empty-desktop.png",
+      "sha256": "40153ef2471fa512c911f19715257143c9f82c621a588c830fe8d2ee2bf31756",
+      "inspected": true,
+      "visual_acceptance": "inspected_current_build"
+    }
+  ]
+}

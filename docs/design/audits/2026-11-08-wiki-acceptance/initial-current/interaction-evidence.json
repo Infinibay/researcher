@@ -1,0 +1,804 @@
+{
+  "result": "passed",
+  "states": [
+    {
+      "name": "desktop-reading-final",
+      "viewport": {
+        "width": 1440,
+        "height": 1024
+      },
+      "layout": {
+        "viewport": 1440,
+        "scroll": 1440,
+        "heading": {
+          "x": 592,
+          "y": 138.203125,
+          "width": 816,
+          "height": 51.328125,
+          "top": 138.203125,
+          "right": 1408,
+          "bottom": 189.53125,
+          "left": 592
+        },
+        "workbench": {
+          "x": 192,
+          "y": 75.78125,
+          "width": 1248,
+          "height": 960,
+          "top": 75.78125,
+          "right": 1440,
+          "bottom": 1035.78125,
+          "left": 192
+        }
+      },
+      "violations": [],
+      "screenshot": "desktop-reading-final.png",
+      "sha256": "e2101f2c22c8101e49bbc4cb9101185a5ea8171495cdf06c48904a981a2a9173"
+    },
+    {
+      "name": "desktop-history",
+      "viewport": {
+        "width": 1440,
+        "height": 1024
+      },
+      "layout": {
+        "viewport": 1440,
+        "scroll": 1440,
+        "heading": {
+          "x": 592,
+          "y": 138.203125,
+          "width": 816,
+          "height": 51.328125,
+          "top": 138.203125,
+          "right": 1408,
+          "bottom": 189.53125,
+          "left": 592
+        },
+        "workbench": {
+          "x": 192,
+          "y": 75.78125,
+          "width": 1248,
+          "height": 1176.015625,
+          "top": 75.78125,
+          "right": 1440,
+          "bottom": 1251.796875,
+          "left": 192
+        }
+      },
+      "violations": [],
+      "screenshot": "desktop-history.png",
+      "sha256": "63eecc545a9c5573f608a3cb8a52fcedc80f8a8dc88486bf533a2694661b72f4"
+    },
+    {
+      "name": "desktop-conflict",
+      "viewport": {
+        "width": 1440,
+        "height": 1024
+      },
+      "layout": {
+        "viewport": 1440,
+        "scroll": 1440,
+        "heading": {
+          "x": 592,
+          "y": -238.796875,
+          "width": 816,
+          "height": 51.328125,
+          "top": -238.796875,
+          "right": 1408,
+          "bottom": -187.46875,
+          "left": 592
+        },
+        "workbench": {
+          "x": 192,
+          "y": -301.21875,
+          "width": 1248,
+          "height": 1432.53125,
+          "top": -301.21875,
+          "right": 1440,
+          "bottom": 1131.3125,
+          "left": 192
+        }
+      },
+      "violations": [],
+      "screenshot": "desktop-conflict.png",
+      "sha256": "dbe2b1db74f5ddcf6dd47687157e2b9d93746888c44b9e72a0e7a5cec743f9be"
+    },
+    {
+      "name": "desktop-comparison",
+      "viewport": {
+        "width": 1440,
+        "height": 1024
+      },
+      "layout": {
+        "viewport": 1440,
+        "scroll": 1440,
+        "heading": {
+          "x": 592,
+          "y": -238.796875,
+          "width": 816,
+          "height": 51.328125,
+          "top": -238.796875,
+          "right": 1408,
+          "bottom": -187.46875,
+          "left": 592
+        },
+        "workbench": {
+          "x": 192,
+          "y": -301.21875,
+          "width": 1248,
+          "height": 2025.640625,
+          "top": -301.21875,
+          "right": 1440,
+          "bottom": 1724.421875,
+          "left": 192
+        }
+      },
+      "violations": [],
+      "screenshot": "desktop-comparison.png",
+      "sha256": "ac368c9231a21057a293425f196c50d768c6bad0dd79190ac76e9251b29263bc"
+    },
+    {
+      "name": "desktop-saved",
+      "viewport": {
+        "width": 1440,
+        "height": 1024
+      },
+      "layout": {
+        "viewport": 1440,
+        "scroll": 1440,
+        "heading": {
+          "x": 592,
+          "y": 184.59375,
+          "width": 816,
+          "height": 51.328125,
+          "top": 184.59375,
+          "right": 1408,
+          "bottom": 235.921875,
+          "left": 592
+        },
+        "workbench": {
+          "x": 192,
+          "y": 63.78125,
+          "width": 1248,
+          "height": 960,
+          "top": 63.78125,
+          "right": 1440,
+          "bottom": 1023.78125,
+          "left": 192
+        }
+      },
+      "violations": [],
+      "screenshot": "desktop-saved.png",
+      "sha256": "db5e41524a229b9c44db8abbd63dfa174eee36d435c4b0cb8b4f3eda73e141b4"
+    },
+    {
+      "name": "desktop-uncertain-receipt",
+      "viewport": {
+        "width": 1440,
+        "height": 1024
+      },
+      "layout": {
+        "viewport": 1440,
+        "scroll": 1440,
+        "heading": {
+          "x": 592,
+          "y": -238.40625,
+          "width": 816,
+          "height": 51.328125,
+          "top": -238.40625,
+          "right": 1408,
+          "bottom": -187.078125,
+          "left": 592
+        },
+        "workbench": {
+          "x": 192,
+          "y": -359.21875,
+          "width": 1248,
+          "height": 1517.3125,
+          "top": -359.21875,
+          "right": 1440,
+          "bottom": 1158.09375,
+          "left": 192
+        }
+      },
+      "violations": [],
+      "screenshot": "desktop-uncertain-receipt.png",
+      "sha256": "6d31aa052d894fb21fbd6b2b1ac019d3c84204e2195cac4b835d6246b890e50e"
+    },
+    {
+      "name": "desktop-late-response-new-document",
+      "viewport": {
+        "width": 1440,
+        "height": 1024
+      },
+      "layout": {
+        "viewport": 1440,
+        "scroll": 1440,
+        "heading": {
+          "x": 592,
+          "y": 184.59375,
+          "width": 816,
+          "height": 51.328125,
+          "top": 184.59375,
+          "right": 1408,
+          "bottom": 235.921875,
+          "left": 592
+        },
+        "workbench": {
+          "x": 192,
+          "y": 63.78125,
+          "width": 1248,
+          "height": 960,
+          "top": 63.78125,
+          "right": 1440,
+          "bottom": 1023.78125,
+          "left": 192
+        }
+      },
+      "violations": [],
+      "screenshot": "desktop-late-response-new-document.png",
+      "sha256": "9048b65fb666821a60953bbcca1fd548e9374ca8a8274f2026fa31de76649fd0"
+    },
+    {
+      "name": "desktop-project-changed",
+      "viewport": {
+        "width": 1440,
+        "height": 1024
+      },
+      "layout": {
+        "viewport": 1440,
+        "scroll": 1440,
+        "workbench": {
+          "x": 192,
+          "y": 63.78125,
+          "width": 1248,
+          "height": 960,
+          "top": 63.78125,
+          "right": 1440,
+          "bottom": 1023.78125,
+          "left": 192
+        }
+      },
+      "violations": [],
+      "screenshot": "desktop-project-changed.png",
+      "sha256": "bde5e6da69d07434f94895ed793d32693eb2d7117637d087e8b1f42d22f423d5"
+    },
+    {
+      "name": "desktop-recovered-draft",
+      "viewport": {
+        "width": 1440,
+        "height": 1024
+      },
+      "layout": {
+        "viewport": 1440,
+        "scroll": 1440,
+        "heading": {
+          "x": 592,
+          "y": 126.203125,
+          "width": 816,
+          "height": 51.328125,
+          "top": 126.203125,
+          "right": 1408,
+          "bottom": 177.53125,
+          "left": 592
+        },
+        "workbench": {
+          "x": 192,
+          "y": 63.78125,
+          "width": 1248,
+          "height": 1324.546875,
+          "top": 63.78125,
+          "right": 1440,
+          "bottom": 1388.328125,
+          "left": 192
+        }
+      },
+      "violations": [],
+      "screenshot": "desktop-recovered-draft.png",
+      "sha256": "7be01e702202fe8cc0f084babef4f654ac722bdfceeca6c9030783a27e037f73"
+    },
+    {
+      "name": "mobile-index",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "layout": {
+        "viewport": 390,
+        "scroll": 390,
+        "workbench": {
+          "x": -8,
+          "y": 171,
+          "width": 406,
+          "height": 732,
+          "top": 171,
+          "right": 398,
+          "bottom": 903,
+          "left": -8
+        }
+      },
+      "violations": [],
+      "screenshot": "mobile-index.png",
+      "sha256": "1ec3be206ee69a6d9a65c96b1646b712c884d19133ba7ac4ec5a0c3a4ba1d2dd"
+    },
+    {
+      "name": "mobile-global-reader",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "layout": {
+        "viewport": 390,
+        "scroll": 390,
+        "heading": {
+          "x": 8,
+          "y": 289.421875,
+          "width": 374,
+          "height": 38.625,
+          "top": 289.421875,
+          "right": 382,
+          "bottom": 328.046875,
+          "left": 8
+        },
+        "workbench": {
+          "x": -8,
+          "y": 171,
+          "width": 406,
+          "height": 768.390625,
+          "top": 171,
+          "right": 398,
+          "bottom": 939.390625,
+          "left": -8
+        }
+      },
+      "violations": [],
+      "screenshot": "mobile-global-reader.png",
+      "sha256": "3d0e095158de09687db8bc05723501b5b052da617d4f8bcdf7d8d370d3f356db"
+    },
+    {
+      "name": "mobile-new-document",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "layout": {
+        "viewport": 390,
+        "scroll": 390,
+        "heading": {
+          "x": 8,
+          "y": 300.203125,
+          "width": 374,
+          "height": 38.625,
+          "top": 300.203125,
+          "right": 382,
+          "bottom": 338.828125,
+          "left": 8
+        },
+        "workbench": {
+          "x": -8,
+          "y": 97,
+          "width": 406,
+          "height": 1576.59375,
+          "top": 97,
+          "right": 398,
+          "bottom": 1673.59375,
+          "left": -8
+        }
+      },
+      "violations": [],
+      "screenshot": "mobile-new-document.png",
+      "sha256": "7ed55cfc36de287c1808dba6a102789b05dcd236d22835efd693240ca87f3bbb"
+    },
+    {
+      "name": "mobile-literal-reader",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "layout": {
+        "viewport": 390,
+        "scroll": 390,
+        "heading": {
+          "x": 8,
+          "y": 315.203125,
+          "width": 374,
+          "height": 38.625,
+          "top": 315.203125,
+          "right": 382,
+          "bottom": 353.828125,
+          "left": 8
+        },
+        "workbench": {
+          "x": -8,
+          "y": 112,
+          "width": 406,
+          "height": 732,
+          "top": 112,
+          "right": 398,
+          "bottom": 844,
+          "left": -8
+        }
+      },
+      "violations": [],
+      "screenshot": "mobile-literal-reader.png",
+      "sha256": "a563645f1a0c8efd49ac1b8d9542c5770352e989c76aa5a2722aec12ba9b1112"
+    },
+    {
+      "name": "mobile-delete-dialog",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "layout": {
+        "viewport": 390,
+        "scroll": 390,
+        "heading": {
+          "x": 8,
+          "y": 315.203125,
+          "width": 374,
+          "height": 38.625,
+          "top": 315.203125,
+          "right": 382,
+          "bottom": 353.828125,
+          "left": 8
+        },
+        "workbench": {
+          "x": -8,
+          "y": 112,
+          "width": 406,
+          "height": 732,
+          "top": 112,
+          "right": 398,
+          "bottom": 844,
+          "left": -8
+        }
+      },
+      "violations": [],
+      "screenshot": "mobile-delete-dialog.png",
+      "sha256": "66d989cb3907e7ddef1c688c3d4d4d3faf381ab2d07d3e7cf801494cb91c5b80"
+    },
+    {
+      "name": "mobile-deleted-history",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "layout": {
+        "viewport": 390,
+        "scroll": 390,
+        "heading": {
+          "x": 40,
+          "y": 311,
+          "width": 310,
+          "height": 77.25,
+          "top": 311,
+          "right": 350,
+          "bottom": 388.25,
+          "left": 40
+        },
+        "workbench": {
+          "x": -8,
+          "y": 183,
+          "width": 406,
+          "height": 901.59375,
+          "top": 183,
+          "right": 398,
+          "bottom": 1084.59375,
+          "left": -8
+        }
+      },
+      "violations": [],
+      "screenshot": "mobile-deleted-history.png",
+      "sha256": "60b7293b72d5770e51b172b65420785ea37b2d8ec6e240b56ea3b82792392503"
+    },
+    {
+      "name": "mobile-foreign-link",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "layout": {
+        "viewport": 390,
+        "scroll": 390,
+        "workbench": {
+          "x": -8,
+          "y": 183,
+          "width": 406,
+          "height": 732,
+          "top": 183,
+          "right": 398,
+          "bottom": 915,
+          "left": -8
+        }
+      },
+      "violations": [],
+      "screenshot": "mobile-foreign-link.png",
+      "sha256": "7226ad72de0923f9c46c40f8737a1490d52af6fff6d1d8fb978e71bb02ac7944"
+    },
+    {
+      "name": "mobile-connectivity-error",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "layout": {
+        "viewport": 390,
+        "scroll": 390,
+        "heading": {
+          "x": 40,
+          "y": 311,
+          "width": 310,
+          "height": 77.25,
+          "top": 311,
+          "right": 350,
+          "bottom": 388.25,
+          "left": 40
+        },
+        "workbench": {
+          "x": -8,
+          "y": 183,
+          "width": 406,
+          "height": 732,
+          "top": 183,
+          "right": 398,
+          "bottom": 915,
+          "left": -8
+        }
+      },
+      "violations": [],
+      "screenshot": "mobile-connectivity-error.png",
+      "sha256": "48e84ddd50fab825a40ba3e8d09fe1461d60b68bc1d9c2eba6daf954e3bfe767"
+    },
+    {
+      "name": "mobile-connectivity-recovered",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "layout": {
+        "viewport": 390,
+        "scroll": 390,
+        "heading": {
+          "x": 8,
+          "y": 301.421875,
+          "width": 374,
+          "height": 38.625,
+          "top": 301.421875,
+          "right": 382,
+          "bottom": 340.046875,
+          "left": 8
+        },
+        "workbench": {
+          "x": -8,
+          "y": 183,
+          "width": 406,
+          "height": 995.109375,
+          "top": 183,
+          "right": 398,
+          "bottom": 1178.109375,
+          "left": -8
+        }
+      },
+      "violations": [],
+      "screenshot": "mobile-connectivity-recovered.png",
+      "sha256": "7dc3305f6209a68e66623a4dea7f13405786b98d4e3eed4a8e1ab9a0a116212d"
+    },
+    {
+      "name": "session-locked-draft-retained",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "session_gate": true,
+      "screenshot": "session-locked-draft-retained.png"
+    },
+    {
+      "name": "mobile-session-restored-draft",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "layout": {
+        "viewport": 390,
+        "scroll": 390,
+        "heading": {
+          "x": 8,
+          "y": 301.421875,
+          "width": 374,
+          "height": 38.625,
+          "top": 301.421875,
+          "right": 382,
+          "bottom": 340.046875,
+          "left": 8
+        },
+        "workbench": {
+          "x": -8,
+          "y": 183,
+          "width": 406,
+          "height": 1465.421875,
+          "top": 183,
+          "right": 398,
+          "bottom": 1648.421875,
+          "left": -8
+        }
+      },
+      "violations": [],
+      "screenshot": "mobile-session-restored-draft.png",
+      "sha256": "1a454822aa9a39c69d8204ba8563d5689e18a6f3d90bc0d37b9985ea0872758d"
+    },
+    {
+      "name": "mobile-paginated-search",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "layout": {
+        "viewport": 390,
+        "scroll": 390,
+        "workbench": {
+          "x": -8,
+          "y": 112,
+          "width": 406,
+          "height": 732,
+          "top": 112,
+          "right": 398,
+          "bottom": 844,
+          "left": -8
+        }
+      },
+      "violations": [],
+      "screenshot": "mobile-paginated-search.png",
+      "sha256": "6b14bd98feedb3cbbef4d6ee9e9039613865f7ff03086c9f4ab3c253cd449b80"
+    },
+    {
+      "name": "mobile-no-search-result",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "layout": {
+        "viewport": 390,
+        "scroll": 390,
+        "workbench": {
+          "x": -8,
+          "y": 112,
+          "width": 406,
+          "height": 732,
+          "top": 112,
+          "right": 398,
+          "bottom": 844,
+          "left": -8
+        }
+      },
+      "violations": [],
+      "screenshot": "mobile-no-search-result.png",
+      "sha256": "b53d136be6abe1d007726b982d1a7b5adec89d2e7ea937759d0da02e53c71075"
+    },
+    {
+      "name": "mobile-paginated-retained-history",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "layout": {
+        "viewport": 390,
+        "scroll": 390,
+        "heading": {
+          "x": 8,
+          "y": -1931.578125,
+          "width": 374,
+          "height": 38.625,
+          "top": -1931.578125,
+          "right": 382,
+          "bottom": -1892.953125,
+          "left": 8
+        },
+        "workbench": {
+          "x": -8,
+          "y": -2050,
+          "width": 406,
+          "height": 3664.890625,
+          "top": -2050,
+          "right": 398,
+          "bottom": 1614.890625,
+          "left": -8
+        }
+      },
+      "violations": [],
+      "screenshot": "mobile-paginated-retained-history.png",
+      "sha256": "00892ce18b3fe484ad0f7f21e192023b115e7b25f871c07e62e58d098fd4bf81"
+    },
+    {
+      "name": "narrow-long-document-tail",
+      "viewport": {
+        "width": 320,
+        "height": 844
+      },
+      "layout": {
+        "viewport": 320,
+        "scroll": 320,
+        "heading": {
+          "x": 8,
+          "y": -101560.15625,
+          "width": 304,
+          "height": 38.625,
+          "top": -101560.15625,
+          "right": 312,
+          "bottom": -101521.53125,
+          "left": 8
+        },
+        "workbench": {
+          "x": -8,
+          "y": -101701,
+          "width": 336,
+          "height": 102545.15625,
+          "top": -101701,
+          "right": 328,
+          "bottom": 844.15625,
+          "left": -8
+        }
+      },
+      "violations": [],
+      "screenshot": "narrow-long-document-tail.png",
+      "sha256": "ed3863215d23c56bda9be6b17c3d93868fe66d870ec97ddf3043de7ba265e5a8"
+    },
+    {
+      "name": "desktop-css-magnification-200",
+      "viewport": {
+        "width": 1440,
+        "height": 1024
+      },
+      "layout": {
+        "viewport": 1440,
+        "scroll": 1440,
+        "heading": {
+          "x": 1184,
+          "y": 635.96875,
+          "width": 192,
+          "height": 513.359375,
+          "top": 635.96875,
+          "right": 1376,
+          "bottom": 1149.328125,
+          "left": 1184
+        },
+        "workbench": {
+          "x": 384,
+          "y": 331.59375,
+          "width": 1056,
+          "height": 12201.421875,
+          "top": 331.59375,
+          "right": 1440,
+          "bottom": 12533.015625,
+          "left": 384
+        }
+      },
+      "violations": [],
+      "screenshot": "desktop-css-magnification-200.png",
+      "sha256": "14146eb688bc71e8e987265bcd5c6a777aba50b0cc3d924c3cb093ea76e2cd25"
+    }
+  ],
+  "actions": [
+    "Concurrent external edit produces409; draft retained, exact comparison shown, explicit overwrite preparation preserves local text and guarded save succeeds",
+    "A lost HTTP receipt after committed write is retried with the same intent; one revision only",
+    "Late successful save is recorded but never redirects a newer selected document or leaves a false pending draft",
+    "Draft survives project switch and returns to original scope; cancelling logout preserves it; explicit discard is separate",
+    "Owner global edit is explicit and leaves same-path project page intact; mobile create handles path punctuation and literal HTML; delete traps/restores keyboard focus and retained history remains readable",
+    "Actual GET transport failure is visible; retry recovers the original retained document without a write",
+    "Real session revocation locks protected content; pairing restores the original unsent draft; cancelling browser reload preserves it",
+    "55 real scoped documents span two index pages; lexical search finds the last page and empty results explain their limits",
+    "25 retained revisions span two history pages; original text remains exact without restoring or mutating the current revision",
+    "A long actual saved Markdown document exposes its final limitation at320px; CSS200% magnification stays within the layout (not a native browser zoom or screen-reader claim)"
+  ],
+  "errors": [],
+  "model_turns": 0,
+  "identities": {
+    "alpha": 3,
+    "beta": 4,
+    "context": 4,
+    "foreign": 6
+  },
+  "history_revisions": 25,
+  "long_document_utf8_bytes": 110674,
+  "css_magnification": 2,
+  "new_reference_deleted": true
+}

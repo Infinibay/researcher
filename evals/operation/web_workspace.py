@@ -53,7 +53,7 @@ def main():
     parser.add_argument("--assets", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--node", type=Path, required=True)
-    parser.add_argument("--journey", choices=("workspace", "knowledge", "navigation", "interaction", "projects"), default="workspace")
+    parser.add_argument("--journey", choices=("workspace", "knowledge", "wiki", "navigation", "interaction", "projects"), default="workspace")
     parser.add_argument("--live-projects", action="store_true", help="Authorize up to two real subscription planning attempts in the projects journey")
     args = parser.parse_args()
     if (args.journey == 'projects') != args.live_projects:
@@ -136,6 +136,8 @@ def main():
             assert all(task["project_id"] == ids["alpha"] for task in result["storage"]["tasks"])
             correction, = result["storage"]["corrections"]
             assert (correction["project_id"], correction["task_id"], correction["version"], correction["source_kind"]) == (ids["alpha"], ids["compare"], 2, "user_example")
+        elif args.journey == "wiki":
+            verify_wiki(result["storage"], browser_evidence)
         else:
             verify_knowledge(result["storage"], browser_evidence)
         result["status"] = "passed"
@@ -151,6 +153,33 @@ def main():
             result['source_unchanged'] = source_before == hashlib.sha256((source/'observations.py').read_bytes()).hexdigest()
         (output / "result.json").write_text(json.dumps(result, indent=2) + "\n")
         print(json.dumps({"status": result["status"], "receipt": str(output / "result.json")}), flush=True)
+
+
+def verify_wiki(storage, browser):
+    """Check real route effects independently: scoped current pages, exact retained history and deletion without losing the original text."""
+    ids = browser["identities"]
+    assert browser["result"] == "passed" and not browser["errors"]
+    assert not storage["tasks"] and not storage["files"]
+    assert len(storage["wiki"]) == 58
+    pages = {row["id"]: row for row in storage["wiki"]}
+    own, foreign = pages[ids["context"]], pages[ids["foreign"]]
+    assert own["project_id"] == ids["alpha"] and foreign["project_id"] == ids["beta"]
+    assert own["path"] == foreign["path"] == "modernization/context"
+    assert foreign["content"] == "OTHER PROJECT SECRET"
+    history = sorted(
+        (row for row in storage["wiki_revisions"] if row["page_id"] == own["id"]),
+        key=lambda row: row["revision"],
+    )
+    assert [row["revision"] for row in history] == list(range(1, 26))
+    assert all(row["project_id"] == ids["alpha"] for row in history)
+    assert history[-1]["content"] == own["content"]
+    assert "Revisión adicional 20." in own["content"]
+    deleted = [row for row in storage["wiki_revisions"] if "<img src=x onerror=window.wikiXss=1>" in row["content"]]
+    assert len(deleted) == 1 and deleted[0]["project_id"] == ids["alpha"]
+    assert deleted[0]["page_id"] not in pages
+    assert sum(row["project_id"] == ids["alpha"] for row in pages.values()) == 56
+    globals_ = [row for row in pages.values() if row["project_id"] is None]
+    assert len(globals_) == 1 and "Nota global actualizada" in globals_[0]["content"]
 
 
 def verify_knowledge(storage, browser):

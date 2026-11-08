@@ -1,0 +1,38 @@
+{
+  "result": "passed",
+  "scope": "Actual current document comparison and retained text; one new empty metadata project, zero document writes or inference",
+  "states": [
+    {
+      "name": "01-current-comparison-panel",
+      "width": 1440,
+      "violations": [],
+      "fits": true
+    },
+    {
+      "name": "02-original-retained-text",
+      "width": 390,
+      "violations": [],
+      "fits": true
+    },
+    {
+      "name": "03-actual-empty-mobile",
+      "width": 390,
+      "violations": [],
+      "fits": true
+    },
+    {
+      "name": "04-actual-empty-desktop",
+      "width": 1440,
+      "violations": [],
+      "fits": true
+    }
+  ],
+  "errors": [],
+  "identities": {
+    "alpha": 3,
+    "beta": 4,
+    "context": 4,
+    "foreign": 6
+  },
+  "empty_project": 5
+}

@@ -8705,3 +8705,42 @@ preparation diagnosis from a demonstrated caller; then actual Spanish/Ken eviden
 Proyectos and11remaining pages, U08/C10/evaluations,dependencies/distribution.
 Fine details, global suite and independent review remain last. See
 native-preparation-review.md/results.json/packaging.json/docstrings.json.
+
+
+## Document route accepted independently of unresolved native preparation, 2026-11-08
+
+HTTP preparation diagnosis01:04:50–01:08:25UTC (3m35s until review) used the actual
+bounded service guardian, uvloop and one explicit planning admission with generation
+forbidden.0native starts, all peers closed and original source intact; no contention
+reproduced. The root cause remains major unfinished work. No more equivalent blind
+repetitions were made; independent page acceptance proceeded with that issue open.
+
+Document acceptance01:08:25–01:27:09UTC,18m44s until verification, basea8e1e8b.
+Current chosen notebook concept retained; no frontend/backend product renderer source
+changed. New repeatable `--journey wiki` and two committed browser test modules cover
+actual owner HTTP/SQLite, not mocked business responses.25canonical states include
+concurrent edit, exact retry after lost save receipt, late response preserving
+selection, temporary drafts across project/session, actual session revocation,
+read-failure recovery, local/global isolation, literal HTML, deletion with original
+history and keyboard focus,55documents/index pagination,25history revisions and
+110674bytes of Markdown at320px. Additional actual empty scope/comparison/retained
+text and720px reading inspected.18installed backend cases and8frontend contracts
+pass with0skips.2changed Python functions and browser helpers documented in English.
+
+First integrated wrapper failed only because the browser wrote interaction-evidence
+instead of evidence.json. Original closed installation retained; its independent
+store verifier passes. Browser output contract fixed; canonical full CLI passes on
+another new host. Repetitions are not summed as independent cases. All service/test
+handles terminal; canonical host has0runs/dispatches/native starts and integrityok.
+
+CSS200% geometry falsely looked acceptable to the automated width check; visual
+inspection rejected its narrow reader. It is not native browser zoom evidence.
+Shortcuts did not change viewport/DPR in headless Chromium;720px reading is recorded
+separately. No human comprehension, full screen-reader compliance or global green
+suite claimed. DD125 defers presentation/native zoom/reader work; DD126 records the
+pre-existing Ruff I001 import layout, not a green style check.
+
+Technical/visual page acceptance now1/12, Wiki only;41/43broad scenarios unchanged.
+Next: Files acceptance, then other pages alongside unresolved preparation, actual
+Spanish/Ken evidence,U08/C10/evaluations,dependencies/distribution. Fine details,
+global suite and independent review remain last. See wiki-page-review.md/results.json.

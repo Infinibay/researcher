@@ -1,0 +1,50 @@
+{
+  "status": "passed",
+  "document_writes": 0,
+  "before": {
+    "width": 1440,
+    "dpr": 1,
+    "heading": {
+      "x": 592,
+      "y": 138.203125,
+      "width": 816,
+      "height": 51.328125,
+      "top": 138.203125,
+      "right": 1408,
+      "bottom": 189.53125,
+      "left": 592
+    },
+    "scroll": 1440
+  },
+  "after_shortcuts": {
+    "width": 1440,
+    "dpr": 1,
+    "heading": {
+      "x": 592,
+      "y": 138.203125,
+      "width": 816,
+      "height": 51.328125,
+      "top": 138.203125,
+      "right": 1408,
+      "bottom": 189.53125,
+      "left": 592
+    },
+    "scroll": 1440
+  },
+  "native_zoom_observed": false,
+  "reduced": {
+    "width": 720,
+    "dpr": 1,
+    "heading": {
+      "x": 16,
+      "y": 261.421875,
+      "width": 688,
+      "height": 38.625,
+      "top": 261.421875,
+      "right": 704,
+      "bottom": 300.046875,
+      "left": 16
+    },
+    "scroll": 720
+  }
+}

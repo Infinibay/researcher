@@ -1,0 +1,51 @@
+{
+  "status": "observed",
+  "maximum_model_turns": 0,
+  "admissions_sent": 1,
+  "original_key": "preparation-http-b8af5b008dd243d6b6bcad03e73aa254",
+  "original_source_sha256": "8b925a4f40dee5ea1a4212bfd6f4ebbbf200bf77662bc8be9805c7db1bfbc33b",
+  "mocked_api_responses": false,
+  "production_service_guardian": true,
+  "project_id": 1,
+  "request": {
+    "operation_key": "preparation-http-b8af5b008dd243d6b6bcad03e73aa254",
+    "prompt": "Prepara un plan concreto para el alcance registrado del proyecto. Distingue los datos observados de las suposiciones. Entrega las tareas, sus criterios y la explicaci\u00f3n del plan en espa\u00f1ol. S\u00f3lo propone el trabajo; no lo ejecutes.",
+    "repository_id": 1
+  },
+  "run_id": "de1a343b-30c8-4292-8b0b-b4df2d49b97d",
+  "polls": 6,
+  "terminal_status": "failed",
+  "reached_generation_guard": true,
+  "diagnostics": [
+    {
+      "stage": "prepared_generation_forbidden",
+      "loop": "uvloop"
+    }
+  ],
+  "service_exit": 143,
+  "storage": {
+    "runs": [
+      {
+        "id": "de1a343b-30c8-4292-8b0b-b4df2d49b97d",
+        "status": "failed",
+        "issue_json": "{\"closure_confirmed\":true,\"code\":\"runtime_failed\",\"inference_started\":null,\"message\":\"La ejecuci\u00f3n fall\u00f3 y se comprob\u00f3 el cierre de sus procesos. No se pudo confirmar si se inici\u00f3 inferencia. Conservamos el trabajo y los recibos guardados; revisa el intento y su presupuesto antes de continuar. No se repetir\u00e1 por su cuenta.\",\"next_action\":\"inspect_saved_work\"}"
+      }
+    ],
+    "native_starts": 0,
+    "dispatches": 1,
+    "unclosed_peers": 0,
+    "unrevoked_grants": 0,
+    "integrity": "ok"
+  },
+  "source_unchanged": true,
+  "service_resource_closure": {
+    "status": "closed",
+    "domain_removed": true,
+    "native_actor_closure_proven": false
+  },
+  "base_commit": "a8e1e8b",
+  "work_started_at": "2026-11-08T01:04:50Z",
+  "reviewed_at": "2026-11-08T01:08:25Z",
+  "seconds_until_review": 215,
+  "interpretation": "One actual installed HTTP planning admission with production service guardian/ceilings and uvloop reached an explicit inference guard.0native starts, all peers closed, saved source unchanged. No AuthorityBusy/Conflict reproduced; root cause remains unknown. Deliberate failed run and reserved-dispatch uncertainty are expected, not an actual generated plan."
+}

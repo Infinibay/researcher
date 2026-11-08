@@ -1,0 +1,22 @@
+{
+  "base_commit": "a8e1e8b",
+  "changed_or_new_definitions_documented": 2,
+  "missing": [],
+  "contracts": [
+    {
+      "path": "evals/operation/web_workspace.py",
+      "symbol": "main",
+      "line": 47,
+      "docstring": "Prepare synthetic resources, own the live service/browser, and preserve every result on failure.",
+      "file_sha256": "03694e7cf7bcec8c2ad9ee0113ae9bc895c4b42d4d154e7dadec8b9d6689e0e9"
+    },
+    {
+      "path": "evals/operation/web_workspace.py",
+      "symbol": "verify_wiki",
+      "line": 158,
+      "docstring": "Check real route effects independently: scoped current pages, exact retained history and deletion without losing the original text.",
+      "file_sha256": "03694e7cf7bcec8c2ad9ee0113ae9bc895c4b42d4d154e7dadec8b9d6689e0e9"
+    }
+  ],
+  "scope": "New/changed Python definitions and modules in this delivery. New frontend modules and exported behavior have English JSDoc; this Python audit does not certify all historical definitions."
+}

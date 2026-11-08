@@ -117,5 +117,11 @@
       ],
       "inspected": true
     }
-  ]
+  ],
+  "page_acceptance": {
+    "date": "2026-11-08",
+    "status": "technical_visual_verified",
+    "evidence": "../../audits/2026-11-08-wiki-acceptance/report.md",
+    "human_comprehension": "not_claimed_U08_open"
+  }
 }
