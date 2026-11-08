@@ -41,8 +41,12 @@ y documentación/checkpoint posteriores aparte.
  Cabecera con ejecución en fila propia, documento desplazable en ventana corta,
  foco de ruta revelado y margen de controles. Fallos intermedios retenidos; revisor
  independiente confirmó la carrera del ensayo PageDown/Tab y el pase corregido.
-- Ahora: preparar y ejecutar una evaluación con lector real. No confundir Axe,
- árbol accesible o este recorrido de zoom con esa evaluación.
+- Ahora: [Orca/Xvfb preparados](../design/audits/2026-11-08-reader-capability/report.md).
+ Página sintética comprobada con Tab/Return nativos, anuncios Orca y ambas frases
+ sintetizadas hasta END mediante Speech Dispatcher/espeak-ng hacia ALSAnull.
+ Cuatro procesos y contenedor con salida0. No es aceptación de la aplicación ni
+ evaluación auditiva humana. Siguiente: doce rutas y contenido real del host
+ sintético instalado, emparejando antes de iniciar el registro del lector.
 - Pendientes: lector; JSDoc/C relevantes; U08 humano; decisión Ken/ONNX ya
  consultada; detalles y paquete/global/revisión independiente finales. La última
  global sigue2576pass/2fallos con corrección posterior sólo comprobada en22casos.

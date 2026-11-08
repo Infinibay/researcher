@@ -1,0 +1,160 @@
+{
+  "status": "verified_capability_only",
+  "scope": "Real Orca AT-SPI speech generation, completed espeak-ng synthesis and native X keyboard on synthetic HTML; NOT product acceptance, physical listening or human evaluation",
+  "orca": "43.1",
+  "speech_dispatcher": "0.11.4",
+  "chromium": "156.0.8078.4",
+  "tooling_image": "bf56c2ebe47ab61283c64f8cf4c83b0dc4572426f4ce1c0ea0aac72dbab6dd1f",
+  "native_keyboard": [
+    "Tab",
+    "Return"
+  ],
+  "speech_output_events": [
+    {
+      "line": 108,
+      "text": "22:28:27.954546 - SPEECH OUTPUT: 'Screen reader on.'{'established': False}"
+    },
+    {
+      "line": 267,
+      "text": "22:28:28.018018 - SPEECH OUTPUT: 'Prueba de lectura - Google Chrome for Testing frame.'{'established': False}"
+    },
+    {
+      "line": 349,
+      "text": "22:28:28.050423 - SPEECH OUTPUT: 'tab ' {'established': False}"
+    },
+    {
+      "line": 379,
+      "text": "22:28:28.058376 - SPEECH OUTPUT: 'Comparar dos fuentes.'{'established': False}"
+    },
+    {
+      "line": 813,
+      "text": "22:28:28.099669 - SPEECH OUTPUT: 'Loading.  Please wait.'{'established': False}"
+    },
+    {
+      "line": 849,
+      "text": "22:28:28.104474 - SPEECH OUTPUT: 'Finished loading Prueba de lectura.'{'established': False}"
+    },
+    {
+      "line": 861,
+      "text": "22:28:28.107741 - SPEECH OUTPUT: 'Page has 1 landmark, 1 heading.'{'established': False}"
+    },
+    {
+      "line": 1054,
+      "text": "22:28:28.139834 - SPEECH OUTPUT: 'Revisar fuentes push button.'{'established': False}"
+    },
+    {
+      "line": 1192,
+      "text": "22:28:28.355175 - SPEECH OUTPUT: 'return ' {'established': False}"
+    },
+    {
+      "line": 1428,
+      "text": "22:28:28.468746 - SPEECH OUTPUT: 'La segunda fuente no indica fecha. Comprueba la versión antes de comparar.'{'established': False}"
+    },
+    {
+      "line": 1445,
+      "text": "22:28:30.650673 - SPEECH OUTPUT: 'Screen reader off.'{'established': False}"
+    }
+  ],
+  "module_utterances": [
+    {
+      "text": "Screen reader on.",
+      "offset": 11533,
+      "end_after": true
+    },
+    {
+      "text": "Prueba de lectura - Google Chrome for Testing frame.",
+      "offset": 49911,
+      "end_after": false
+    },
+    {
+      "text": "tab ",
+      "offset": 111208,
+      "end_after": true
+    },
+    {
+      "text": "Comparar dos fuentes.",
+      "offset": 127890,
+      "end_after": true
+    },
+    {
+      "text": "Loading.  Please wait.",
+      "offset": 172299,
+      "end_after": true
+    },
+    {
+      "text": "Finished loading Prueba de lectura.",
+      "offset": 214168,
+      "end_after": true
+    },
+    {
+      "text": "Page has 1 landmark, 1 heading.",
+      "offset": 255737,
+      "end_after": true
+    },
+    {
+      "text": "Comparar dos fuentes",
+      "offset": 307158,
+      "end_after": true
+    },
+    {
+      "text": "Revisar fuentes push button.",
+      "offset": 337383,
+      "end_after": true
+    },
+    {
+      "text": "heading level 1",
+      "offset": 381190,
+      "end_after": true
+    },
+    {
+      "text": "Entrada: dos fuentes. ",
+      "offset": 415723,
+      "end_after": true
+    },
+    {
+      "text": "return ",
+      "offset": 457046,
+      "end_after": true
+    },
+    {
+      "text": "La segunda fuente no indica fecha. Comprueba la versión antes de comparar.",
+      "offset": 480984,
+      "end_after": true
+    },
+    {
+      "text": "Screen reader off.",
+      "offset": 572817,
+      "end_after": true
+    }
+  ],
+  "required_phrases": [
+    "Revisar fuentes",
+    "La segunda fuente no indica fecha. Comprueba la versión antes de comparar."
+  ],
+  "audio_blocks": 206,
+  "audio_format": "16bit mono22050Hz observed",
+  "audio_sink": "ALSA null",
+  "voice_default": "en-us; Spanish labels retained, pronunciation and Spanish role localization unassessed",
+  "children": [
+    {
+      "name": "browser",
+      "exit": 0
+    },
+    {
+      "name": "orca",
+      "exit": 0
+    },
+    {
+      "name": "speech",
+      "exit": 0
+    },
+    {
+      "name": "xvfb",
+      "exit": 0
+    }
+  ],
+  "initial_diagnostic": "Orca initially starts without active browser; subsequent focused-control and alert speech observed",
+  "first_attempt": "Failed before reader/browser launch: gsettings CLI absent; replaced with installed Gio.Settings library",
+  "second_attempt": "Orca generated control speech but native Return interrupted before control reached output module. Alert synthesized. Not full synthesis acceptance; retained. Final probe waits for exact phrase plus module END before next key/teardown.",
+  "remaining": "Run installed owner routes with real reader. Pair before starting reader logs to avoid capturing private pairing code. Do not substitute accessible-tree/DOM label checks for Orca/Speech Dispatcher output."
+}

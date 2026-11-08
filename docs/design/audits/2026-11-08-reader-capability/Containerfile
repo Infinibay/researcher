@@ -1,0 +1,4 @@
+# Disposable accessibility tooling only; no product account, operator profile or project data is built in.
+FROM docker.io/library/node:24.22.2-bookworm-slim
+ENV LANG=C.UTF-8
+RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends orca xvfb xauth dbus-x11 speech-dispatcher-espeak-ng espeak-ng xdotool python3-gi python3-pyatspi libnss3 libgbm1 libasound2 libcups2 fonts-dejavu-core && rm -rf /var/lib/apt/lists/*

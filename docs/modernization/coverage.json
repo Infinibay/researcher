@@ -7308,6 +7308,18 @@
         "Screen-reader and human evaluation",
         "Final integrated accessibility acceptance; no universal WCAG claim"
       ]
+    },
+    "screen_reader_tooling": {
+      "status": "verified_capability_only",
+      "scope": "Orca/Speech Dispatcher/espeak-ng with native X keyboard and completed phrase synthesis on synthetic HTML; not product/physical-audio/human acceptance",
+      "evidence": [
+        "docs/design/audits/2026-11-08-reader-capability/report.md",
+        "docs/modernization/reader-capability-results.json"
+      ],
+      "remaining": [
+        "Actual installed product screen-reader journey",
+        "No inferred universal WCAG or human comprehension acceptance"
+      ]
     }
   }
 }

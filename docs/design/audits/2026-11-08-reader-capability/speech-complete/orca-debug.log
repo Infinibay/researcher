@@ -1,0 +1,1495 @@
+22:28:27.379688 - INFO: Preparing to launch.
+22:28:27.425385 - SCRIPT MANAGER: Initializing
+22:28:27.432948 - SCRIPT MANAGER: Initialized
+22:28:27.434879 - SETTINGS MANAGER: Initializing
+22:28:27.436837 - SETTINGS MANAGER: Initialized
+22:28:27.436925 - BRAILLE: About to import brlapi.
+22:28:27.438923 - BRAILLE: brlapi imported <module 'brlapi' from '/usr/lib/python3/dist-packages/brlapi.cpython-311-x86_64-linux-gnu.so'>
+22:28:27.438934 - BRAILLE: About to import louis.
+22:28:27.440411 - BRAILLE: liblouis imported <module 'louis' from '/usr/lib/python3/dist-packages/louis/__init__.py'>
+22:28:27.440420 - BRAILLE: tables location: /usr/share/liblouis/tables
+22:28:27.468542 - BRAILLE: User locale is en_US
+22:28:27.468796 - BRAILLE: 5 candidate tables for locale found: en-us-comp6.ctb, en-us-comp8-ext.utb, en-us-comp8.ctb, en-us-g1.ctb, en-us-g2.ctb
+22:28:27.468809 - BRAILLE: Default contraction table is: /usr/share/liblouis/tables/en-us-g1.ctb
+22:28:27.471786 - EVENT MANAGER: Initializing
+22:28:27.471796 - EVENT MANAGER: Async Mode is True
+22:28:27.471834 - Event manager initialized
+22:28:27.834119 - INFO: About to activate settings manager.
+22:28:27.834162 - SETTINGS MANAGER: Activating
+22:28:27.834404 - SETTINGS MANAGER: Attempt to load orca-customizations failed due to ImportError. Giving up.
+22:28:27.837343 - SETTINGS MANAGER: Activated
+22:28:27.837355 - SETTINGS MANAGER: Current profile is None
+22:28:27.837360 - SETTINGS MANAGER: Current profile is now default
+22:28:27.837366 - SETTINGS MANAGER: Setting profile to: default
+22:28:27.837387 - SETTINGS MANAGER: Loading settings for default profile
+22:28:27.837630 - SETTINGS MANAGER: Settings for default profile loaded
+22:28:27.837640 - SETTINGS MANAGER: Merging settings.
+22:28:27.837648 - SETTINGS MANAGER: Settings merged.
+22:28:27.837652 - SETTINGS MANAGER: Setting runtime settings.
+22:28:27.837673 - SETTINGS MANAGER: Runtime settings set.
+22:28:27.844859 - INFO: About to launch Orca.
+22:28:27.844911 - ORCA: Launching version 43.1
+22:28:27.845072 - ORCA: Enabling accessibility (if needed).
+22:28:27.845082 - SETTINGS MANAGER: Checking if accessibility is enabled.
+22:28:27.846293 - SETTINGS MANAGER: Accessibility enabled: True
+22:28:27.846303 - ORCA: Initializing ATSPI registry.
+22:28:27.846311 - ORCA: Initializing
+22:28:27.846330 - ORCA: Loading User Settings
+22:28:27.846509 - SPEECH: Shutting down
+22:28:27.846526 - BRAILLE: Attempting braille shutdown.
+22:28:27.846530 - BRAILLE: Braille was not running.
+22:28:27.846537 - SCRIPT MANAGER: Dectivating
+22:28:27.846546 - SCRIPT MANAGER: Deactivated
+22:28:27.876836 - DEFAULT: Getting braille bindings.
+22:28:27.876870 - DEFAULT: Finished getting braille bindings.
+22:28:27.883965 - SCRIPT: default (module=orca.scripts.default) initialized
+22:28:27.884048 - ORCA: About to enable speech
+22:28:27.884065 - SPEECH: Initializing
+22:28:27.889007 - SPEECH: Using speech server factory: speechdispatcherfactory
+22:28:27.889056 - SPEECH: Initialized
+22:28:27.889071 - ORCA: Braille is not enabled in settings
+22:28:27.895933 - SCRIPT MANAGER: Activating
+22:28:27.896002 - EVENT MANAGER: registering listeners for: <orca.scripts.default.Script object at 0x7f0130536a10>
+22:28:27.896012 - EVENT MANAGER: registering listener for: focus:
+22:28:27.897178 - EVENT MANAGER: registering listener for: document:reload
+22:28:27.897421 - EVENT MANAGER: registering listener for: document:load-complete
+22:28:27.897634 - EVENT MANAGER: registering listener for: document:load-stopped
+22:28:27.897810 - EVENT MANAGER: registering listener for: mouse:button
+22:28:27.898010 - EVENT MANAGER: registering listener for: object:property-change:accessible-name
+22:28:27.898251 - EVENT MANAGER: registering listener for: object:property-change:accessible-description
+22:28:27.898550 - EVENT MANAGER: registering listener for: object:text-caret-moved
+22:28:27.898751 - EVENT MANAGER: registering listener for: object:text-changed:delete
+22:28:27.899022 - EVENT MANAGER: registering listener for: object:text-changed:insert
+22:28:27.899267 - EVENT MANAGER: registering listener for: object:active-descendant-changed
+22:28:27.899472 - EVENT MANAGER: registering listener for: object:children-changed:add
+22:28:27.899718 - EVENT MANAGER: registering listener for: object:children-changed:remove
+22:28:27.899955 - EVENT MANAGER: registering listener for: object:state-changed:active
+22:28:27.900153 - EVENT MANAGER: registering listener for: object:state-changed:busy
+22:28:27.900351 - EVENT MANAGER: registering listener for: object:state-changed:focused
+22:28:27.900621 - EVENT MANAGER: registering listener for: object:state-changed:showing
+22:28:27.900912 - EVENT MANAGER: registering listener for: object:state-changed:checked
+22:28:27.901223 - EVENT MANAGER: registering listener for: object:state-changed:pressed
+22:28:27.901506 - EVENT MANAGER: registering listener for: object:state-changed:indeterminate
+22:28:27.901809 - EVENT MANAGER: registering listener for: object:state-changed:expanded
+22:28:27.902063 - EVENT MANAGER: registering listener for: object:state-changed:selected
+22:28:27.902307 - EVENT MANAGER: registering listener for: object:state-changed:sensitive
+22:28:27.902534 - EVENT MANAGER: registering listener for: object:text-attributes-changed
+22:28:27.902693 - EVENT MANAGER: registering listener for: object:text-selection-changed
+22:28:27.902835 - EVENT MANAGER: registering listener for: object:selection-changed
+22:28:27.902970 - EVENT MANAGER: registering listener for: object:property-change:accessible-value
+22:28:27.903144 - EVENT MANAGER: registering listener for: object:value-changed
+22:28:27.903291 - EVENT MANAGER: registering listener for: object:column-reordered
+22:28:27.903480 - EVENT MANAGER: registering listener for: object:row-reordered
+22:28:27.903731 - EVENT MANAGER: registering listener for: window:activate
+22:28:27.903954 - EVENT MANAGER: registering listener for: window:deactivate
+22:28:27.904132 - EVENT MANAGER: registering listener for: window:create
+22:28:27.904292 - EVENT MANAGER: registering listener for: window:destroy
+22:28:27.905003 - DEFAULT: activating script for None
+22:28:27.905020 - BRAILLE: Checking braille setting.
+22:28:27.905029 - BRAILLE: Disabling braille. BrlAPI running: False
+22:28:27.905034 - BRAILLE: Setting up key ranges.
+22:28:27.905039 - BRAILLE: Not setting up key ranges: BrlAPI not running.
+22:28:27.905046 - SPEECH: Checking speech setting.
+22:28:27.905050 - SPEECH: Initializing
+22:28:27.905054 - SPEECH: Already initialized
+22:28:27.905327 - EVENT MANAGER: registering keystroke listener function: <bound method EventManager._processKeyboardEvent of <orca.event_manager.EventManager object at 0x7f012d3dc050>>
+22:28:27.954147 - DEFAULT: Script for None activated
+22:28:27.954190 - SCRIPT MANAGER: Setting active script: default (module=orca.scripts.default) (reason=activate)
+22:28:27.954195 - SCRIPT MANAGER: Activated
+22:28:27.954201 - EVENT MANAGER: Activating
+22:28:27.954206 - EVENT MANAGER: Activated
+22:28:27.954209 - ORCA: User Settings Loaded
+22:28:27.954262 - ORCA: Initialized
+22:28:27.954266 - ORCA: ATSPI registry initialized.
+22:28:27.954287 - SETTINGS MANAGER: Setting runtime settings.
+22:28:27.954296 - SETTINGS MANAGER: Runtime settings set.
+22:28:27.954459 - SETTINGS MANAGER: Setting runtime settings.
+22:28:27.954465 - SETTINGS MANAGER: Runtime settings set.
+22:28:27.954546 - SPEECH OUTPUT: 'Screen reader on.'{'established': False}
+22:28:27.955304 - SPEECH DISPATCHER: Speaking '<speak><mark name="0:6"/>Screen <mark name="7:13"/>reader <mark name="14:17"/>on.</speak>' 
+                  ORCA rate 5.0, pitch 5.0, volume 5.0, language en, punctuation: NONE 
+                  SD rate 2, pitch 10, volume 100, language en-us
+22:28:27.955539 - SETTINGS MANAGER: Setting runtime settings.
+22:28:27.955549 - SETTINGS MANAGER: Runtime settings set.
+22:28:27.955620 - SETTINGS MANAGER: Setting runtime settings.
+22:28:27.955629 - SETTINGS MANAGER: Runtime settings set.
+
+22:28:27.964599 - EVENT MANAGER: object:children-changed:add for [desktop frame | main] in None (0, 0, [application | Google Chrome for Testing])
+22:28:27.966252 - EVENT MANAGER: Ignoring event due to empty state set
+
+22:28:27.966847 - EVENT MANAGER: object:state-changed:active for [frame | Prueba de lectura - Google Chrome for Testing] in [application | Google Chrome for Testing] (1, 0, 0)
+22:28:27.967117 - EVENT MANAGER: Not ignoring due to lack of cause
+22:28:27.967821 - EVENT MANAGER: Queueing object:state-changed:active [frame | Prueba de lectura - Google Chrome for Testing] (1,0,0) from [application | Google Chrome for Testing]
+22:28:27.968944 - SCRIPT MANAGER: mapped Google Chrome for Testing to Google Chrome for Testing
+22:28:27.976578 - SCRIPT MANAGER: Found orca.scripts.toolkits.Chromium
+22:28:27.979801 - DEFAULT: Getting braille bindings.
+22:28:27.979819 - DEFAULT: Finished getting braille bindings.
+22:28:27.985831 - SCRIPT: Google Chrome for Testing (module=orca.scripts.toolkits.Chromium.script) initialized
+22:28:27.985890 - SETTINGS MANAGER: Setting runtime settings.
+22:28:27.985898 - SETTINGS MANAGER: Runtime settings set.
+22:28:27.985902 - SETTINGS MANAGER: Setting runtime settings.
+22:28:27.985906 - SETTINGS MANAGER: Runtime settings set.
+22:28:27.985910 - SETTINGS MANAGER: Setting runtime settings.
+22:28:27.985913 - SETTINGS MANAGER: Runtime settings set.
+
+22:28:27.986911 - EVENT MANAGER: object:state-changed:focused for [entry | Address and search bar] in [application | Google Chrome for Testing] (1, 0, 0)
+22:28:27.986946 - EVENT MANAGER: Not ignoring due to lack of cause
+22:28:27.987094 - EVENT MANAGER: Queueing object:state-changed:focused [entry | Address and search bar] (1,0,0) from [application | Google Chrome for Testing]
+
+22:28:27.987403 - EVENT MANAGER: object:text-changed:delete for [entry | Address and search bar] in [application | Google Chrome for Testing] (0, 11, about:blank)
+22:28:27.987427 - EVENT MANAGER: Not ignoring due to lack of cause
+22:28:27.987567 - EVENT MANAGER: Queueing object:text-changed:delete [entry | Address and search bar] (0,11,about:blank) from [application | Google Chrome for Testing]
+
+22:28:27.987821 - EVENT MANAGER: object:text-changed:insert for [entry | Address and search bar] in [application | Google Chrome for Testing] (0, 15, 127.0.0.1:44875)
+22:28:27.987877 - EVENT MANAGER: Not ignoring due to lack of cause
+22:28:27.988006 - EVENT MANAGER: Queueing object:text-changed:insert [entry | Address and search bar] (0,15,127.0.0.1:44875) from [application | Google Chrome for Testing]
+
+22:28:27.988263 - EVENT MANAGER: object:property-change:accessible-name for [static | 127.0.0.1:44875] in [application | Google Chrome for Testing] (0, 0, 127.0.0.1:44875)
+22:28:27.988286 - EVENT MANAGER: Not ignoring due to lack of cause
+22:28:27.988415 - EVENT MANAGER: Queueing object:property-change:accessible-name [static | 127.0.0.1:44875] (0,0,127.0.0.1:44875) from [application | Google Chrome for Testing]
+
+22:28:27.988687 - EVENT MANAGER: object:property-change:accessible-name for [frame | Prueba de lectura - Google Chrome for Testing] in [application | Google Chrome for Testing] (0, 0, 127.0.0.1:44875 - Google Chrome for Testing)
+22:28:27.988708 - EVENT MANAGER: Not ignoring due to lack of cause
+22:28:27.988846 - EVENT MANAGER: Queueing object:property-change:accessible-name [frame | Prueba de lectura - Google Chrome for Testing] (0,0,127.0.0.1:44875 - Google Chrome for Testing) from [application | Google Chrome for Testing]
+
+22:28:27.989105 - EVENT MANAGER: object:property-change:accessible-name for [page tab | Prueba de lectura] in [application | Google Chrome for Testing] (0, 0, 127.0.0.1:44875)
+22:28:27.989130 - EVENT MANAGER: Not ignoring due to lack of cause
+22:28:27.989278 - EVENT MANAGER: Queueing object:property-change:accessible-name [page tab | Prueba de lectura] (0,0,127.0.0.1:44875) from [application | Google Chrome for Testing]
+
+22:28:27.989750 - EVENT MANAGER: object:property-change:accessible-name for [static | Prueba de lectura] in [application | Google Chrome for Testing] (0, 0, 127.0.0.1:44875)
+22:28:27.989856 - EVENT MANAGER: Not ignoring due to lack of cause
+22:28:27.989992 - EVENT MANAGER: Queueing object:property-change:accessible-name [static | Prueba de lectura] (0,0,127.0.0.1:44875) from [application | Google Chrome for Testing]
+
+22:28:27.990241 - EVENT MANAGER: object:state-changed:sensitive for [push button | Back] in [application | Google Chrome for Testing] (1, 0, 0)
+22:28:27.990259 - EVENT MANAGER: Ignoring because event is not from active app
+
+22:28:27.990622 - EVENT MANAGER: object:property-change:accessible-name for [frame | Prueba de lectura - Google Chrome for Testing] in [application | Google Chrome for Testing] (0, 0, Prueba de lectura - Google Chrome for Testing)
+22:28:27.990641 - EVENT MANAGER: Not ignoring due to lack of cause
+22:28:27.990803 - EVENT MANAGER: Queueing object:property-change:accessible-name [frame | Prueba de lectura - Google Chrome for Testing] (0,0,Prueba de lectura - Google Chrome for Testing) from [application | Google Chrome for Testing]
+
+22:28:27.991658 - EVENT MANAGER: object:property-change:accessible-name for [page tab | Prueba de lectura] in [application | Google Chrome for Testing] (0, 0, Prueba de lectura)
+22:28:27.991679 - EVENT MANAGER: Not ignoring due to lack of cause
+22:28:27.991983 - EVENT MANAGER: Queueing object:property-change:accessible-name [page tab | Prueba de lectura] (0,0,Prueba de lectura) from [application | Google Chrome for Testing]
+
+22:28:27.992291 - EVENT MANAGER: object:property-change:accessible-name for [static | Prueba de lectura] in [application | Google Chrome for Testing] (0, 0, Prueba de lectura)
+22:28:27.992326 - EVENT MANAGER: Not ignoring due to lack of cause
+22:28:27.992524 - EVENT MANAGER: Queueing object:property-change:accessible-name [static | Prueba de lectura] (0,0,Prueba de lectura) from [application | Google Chrome for Testing]
+
+22:28:27.993045 - EVENT MANAGER: object:state-changed:focused for [entry | Address and search bar] in [application | Google Chrome for Testing] (0, 0, 0)
+22:28:27.993073 - EVENT MANAGER: Not ignoring due to lack of cause
+22:28:27.993442 - EVENT MANAGER: Queueing object:state-changed:focused [entry | Address and search bar] (0,0,0) from [application | Google Chrome for Testing]
+
+22:28:27.993935 - EVENT MANAGER: object:state-changed:focused for [document web | Prueba de lectura] in [application | Google Chrome for Testing] (1, 0, 0)
+22:28:27.994042 - EVENT MANAGER: Not ignoring due to lack of cause
+22:28:27.994205 - EVENT MANAGER: Queueing object:state-changed:focused [document web | Prueba de lectura] (1,0,0) from [application | Google Chrome for Testing]
+
+22:28:27.994734 - EVENT MANAGER: object:children-changed:remove for [landmark | ] in [application | Google Chrome for Testing] (3, 0, [notification | ])
+22:28:27.994755 - EVENT MANAGER: Ignoring because event is not from active app
+
+22:28:27.995162 - EVENT MANAGER: object:children-changed:add for [landmark | ] in [application | Google Chrome for Testing] (3, 0, [notification | ])
+22:28:27.995280 - EVENT MANAGER: Ignoring because event is not from active app
+
+22:28:27.995587 - EVENT MANAGER: object:state-changed:busy for [document web | Prueba de lectura] in [application | Google Chrome for Testing] (1, 0, 0)
+22:28:27.995630 - EVENT MANAGER: Not ignoring due to lack of cause
+22:28:27.995816 - EVENT MANAGER: Queueing object:state-changed:busy [document web | Prueba de lectura] (1,0,0) from [application | Google Chrome for Testing]
+
+22:28:27.996167 - EVENT MANAGER: object:state-changed:busy for [document web | Prueba de lectura] in [application | Google Chrome for Testing] (0, 0, 0)
+22:28:27.996194 - EVENT MANAGER: Not ignoring due to lack of cause
+22:28:27.996371 - EVENT MANAGER: Queueing object:state-changed:busy [document web | Prueba de lectura] (0,0,0) from [application | Google Chrome for Testing]
+
+22:28:27.996698 - EVENT MANAGER: document:load-complete for [document web | Prueba de lectura] in [application | Google Chrome for Testing] (0, 0, Prueba de lectura)
+22:28:27.996725 - EVENT MANAGER: Not ignoring due to lack of cause
+22:28:27.996899 - EVENT MANAGER: Queueing document:load-complete [document web | Prueba de lectura] (0,0,Prueba de lectura) from [application | Google Chrome for Testing]
+22:28:27.999685 - INFO: Looking at [frame | Prueba de lectura - Google Chrome for Testing] from [application | Google Chrome for Testing] /opt/chromium/chrome --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-edgeupdater --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,BlockOriginHeaderModificationOnRedirect,AvoidCorsURLLoaderRestartOnRedirect,Translate,AutoDeElevate,OptimizationHints,NetworkTimeServiceQuerying,AimEnabled,msForceBrowserSignIn,msEdgeUpdateLaunchServicesPreferredVersion --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --disable-updater-scheduler --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --no-sandbox --force-renderer-accessibility --disable-dev-shm-usage --user-data-dir=/tmp/playwright_chromiumdev_profile-bzSBWO --remote-debugging-pipe --no-startup-window 
+22:28:27.999907 - INFO: [frame | Prueba de lectura - Google Chrome for Testing] can be active window
+22:28:28.001712 - INFO: Looking at [frame | ] from [application | Google Chrome for Testing] /opt/chromium/chrome --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-edgeupdater --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,BlockOriginHeaderModificationOnRedirect,AvoidCorsURLLoaderRestartOnRedirect,Translate,AutoDeElevate,OptimizationHints,NetworkTimeServiceQuerying,AimEnabled,msForceBrowserSignIn,msEdgeUpdateLaunchServicesPreferredVersion --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --disable-updater-scheduler --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --no-sandbox --force-renderer-accessibility --disable-dev-shm-usage --user-data-dir=/tmp/playwright_chromiumdev_profile-bzSBWO --remote-debugging-pipe --no-startup-window 
+22:28:28.002018 - INFO: [frame | ] lacks state active
+22:28:28.002268 - INFO: [frame | ] is not active and showing, or is iconified
+22:28:28.003981 - INFO: Looking at [frame | ] from [application | Google Chrome for Testing] /opt/chromium/chrome --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-edgeupdater --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,BlockOriginHeaderModificationOnRedirect,AvoidCorsURLLoaderRestartOnRedirect,Translate,AutoDeElevate,OptimizationHints,NetworkTimeServiceQuerying,AimEnabled,msForceBrowserSignIn,msEdgeUpdateLaunchServicesPreferredVersion --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --disable-updater-scheduler --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --no-sandbox --force-renderer-accessibility --disable-dev-shm-usage --user-data-dir=/tmp/playwright_chromiumdev_profile-bzSBWO --remote-debugging-pipe --no-startup-window 
+22:28:28.004430 - INFO: [frame | ] lacks state active
+22:28:28.004668 - INFO: [frame | ] is not active and showing, or is iconified
+22:28:28.004781 - INFO: Active window is [frame | Prueba de lectura - Google Chrome for Testing]
+22:28:28.004934 - INFO: removing key grabs
+22:28:28.005309 - DEFAULT: activating script for [application | Google Chrome for Testing]
+22:28:28.005829 - SETTINGS MANAGER: Loading settings for None profile
+22:28:28.006160 - SETTINGS MANAGER: Settings for default profile loaded
+22:28:28.006168 - SETTINGS MANAGER: Merging settings.
+22:28:28.006180 - SETTINGS MANAGER: Settings merged.
+22:28:28.006184 - SETTINGS MANAGER: Setting runtime settings.
+22:28:28.006232 - SETTINGS MANAGER: Runtime settings set.
+22:28:28.006381 - BRAILLE: Checking braille setting.
+22:28:28.006388 - BRAILLE: Disabling braille. BrlAPI running: False
+22:28:28.006393 - BRAILLE: Setting up key ranges.
+22:28:28.006398 - BRAILLE: Not setting up key ranges: BrlAPI not running.
+22:28:28.006403 - SPEECH: Checking speech setting.
+22:28:28.006407 - SPEECH: Initializing
+22:28:28.006411 - SPEECH: Already initialized
+22:28:28.006768 - DEFAULT: Script for [application | Google Chrome for Testing] activated
+22:28:28.006781 - SCRIPT MANAGER: Setting active script: Google Chrome for Testing (module=orca.scripts.toolkits.Chromium.script) (reason=Launching.)
+22:28:28.006795 - ORCA: Old locusOfFocus is null or defunct
+22:28:28.006803 - ORCA: Active script is: <orca.scripts.toolkits.Chromium.script.Script object at 0x7f0119f17590>
+22:28:28.008692 - ORCA: Changing locusOfFocus from None to [frame | Prueba de lectura - Google Chrome for Testing]. Notify: True
+22:28:28.008884 - WEB: Locus of focus changed to non-document obj
+22:28:28.008895 - INFO: removing key grabs
+22:28:28.008901 - CHROMIUM: Passing along event to default script
+22:28:28.009107 - INFO: [frame | Prueba de lectura - Google Chrome for Testing] is top-level object: True
+22:28:28.009273 - INFO: [frame | Prueba de lectura - Google Chrome for Testing] is top-level object: True
+22:28:28.009347 - BRAILLE: disabled
+22:28:28.009631 - WEB: [frame | Prueba de lectura - Google Chrome for Testing] is not in document content. Calling default speech generator.
+22:28:28.010251 - SPEECH GENERATOR: Starting unfocused generation for [frame | Prueba de lectura - Google Chrome for Testing] (<enum ATSPI_ROLE_FRAME of type Atspi.Role>)
+                  GENERATION TIME: 0.0010  ---->  oldAncestors=[]
+                  GENERATION TIME: 0.0002  ---->  newAncestors=[]
+22:28:28.013866 - SPEECH GENERATOR: default voice requested with language='None', dialect='None'
+                  GENERATION TIME: 0.0024  ---->  labelOrName=[Prueba de lectura - Google Chrome for Testing]
+22:28:28.015544 - SPEECH GENERATOR: system voice requested with language='None', dialect='None'
+                  GENERATION TIME: 0.0016  ---->  roleName=[frame]
+                  GENERATION TIME: 0.0002  ---->  unfocusedDialogCount=[]
+                  GENERATION TIME: 0.0002  ---->  availability=[]
+                  GENERATION TIME: 0.0002  ---->  newNodeLevel=[]
+                  GENERATION TIME: 0.0002  ---->  unselectedCell=[]
+                  GENERATION TIME: 0.0001  ---->  clickable=[]
+                  GENERATION TIME: 0.0001  ---->  pause=[PAUSE]
+                  GENERATION TIME: 0.0001  ---->  hasLongDesc=[]
+                  GENERATION TIME: 0.0001  ---->  hasDetails=[]
+                  GENERATION TIME: 0.0001  ---->  detailsFor=[]
+                  GENERATION TIME: 0.0001  ---->  tutorial=[]
+                  GENERATION TIME: 0.0005  ---->  description=[]
+                  GENERATION TIME: 0.0002  ---->  hasPopup=[]
+                  COMPLETION TIME: 0.0078
+                  SPEECH GENERATOR: Results: 
+                  'Prueba de lectura - Google Chrome for Testing' 
+                  '{'established': False}' 
+                  'frame' 
+                  '{'established': False}' 
+                  'PAUSE' 
+                  'PAUSE'
+22:28:28.017985 - SPEECH: Last spoke 0.0634 seconds ago
+22:28:28.018018 - SPEECH OUTPUT: 'Prueba de lectura - Google Chrome for Testing frame.'{'established': False}
+22:28:28.018815 - SPEECH DISPATCHER: Speaking '<speak><mark name="0:6"/>Prueba <mark name="7:9"/>de <mark name="10:17"/>lectura <mark name="18:19"/>- <mark name="20:26"/>Google <mark name="27:33"/>Chrome <mark name="34:37"/>for <mark name="38:45"/>Testing <mark name="46:52"/>frame.</speak>' 
+                  ORCA rate 5.0, pitch 5.0, volume 5.0, language en, punctuation: MOST 
+                  SD rate 2, pitch 10, volume 100, language en-us
+22:28:28.019172 - ORCA: Switching active mode from None to focus-tracking
+22:28:28.019282 - ORCA: Region of interest: [frame | Prueba de lectura - Google Chrome for Testing] (0, 0)
+22:28:28.020363 - INFO: New selection for [frame | Prueba de lectura - Google Chrome for Testing] is '' (0, 0)
+22:28:28.021174 - ORCA: Active script is: <orca.scripts.toolkits.Chromium.script.Script object at 0x7f0119f17590>
+22:28:28.021400 - ORCA: Changing locusOfFocus from [frame | Prueba de lectura - Google Chrome for Testing] to [document web | Prueba de lectura]. Notify: True
+22:28:28.021639 - WEB: Getting caret context for [document web | Prueba de lectura]
+22:28:28.021819 - WEB: Searching for caret context in [document web | Prueba de lectura]
+22:28:28.023654 - INFO: Verified [document web | Prueba de lectura] can have caret context. (0.0012s)
+22:28:28.025544 - INFO: Hyperlink object at index 0 for [document web | Prueba de lectura] is [landmark | ]
+22:28:28.026962 - INFO: Verified [landmark | ] can have caret context. (0.0012s)
+22:28:28.027876 - INFO: Hyperlink object at index 0 for [landmark | ] is [heading | Comparar dos fuentes]
+22:28:28.029641 - INFO: Verified [heading | Comparar dos fuentes] can have caret context. (0.0015s)
+22:28:28.031158 - INFO: Next caret in order for [document web | Prueba de lectura], -1: [heading | Comparar dos fuentes], 0 (0.0086s)
+22:28:28.032162 - BRAILLE: disabled
+22:28:28.032566 - ORCA: Region of interest: [heading | Comparar dos fuentes] (0, 0)
+22:28:28.033217 - WEB: New focus [heading | Comparar dos fuentes] is heading. Generating object contents.
+22:28:28.034147 - WEB: Results for text at offset 0 for [heading | Comparar dos fuentes] using None:
+                       String: 'Comparar dos fuentes', Start: 0, End: 20.
+22:28:28.034397 - INFO: Getting text attributes for [heading | Comparar dos fuentes] (chars: 0-20)
+22:28:28.034829 - INFO: Attributes at 0: ['weight:700', 'bg-color:255,255,255', 'size:24pt', 'language:es', 'direction:lr', 'fg-color:0,0,0', 'family-name:DejaVu Sans'] (0-20)
+22:28:28.034871 - INFO: 1 attribute ranges found in 0.0005s
+22:28:28.037127 - INFO: Hyperlink object at index 1 for [landmark | ] is [paragraph | ]
+22:28:28.038763 - INFO: Verified [paragraph | ] can have caret context. (0.0014s)
+22:28:28.039384 - INFO: Next caret in order for [heading | Comparar dos fuentes], 19: [paragraph | ], 0 (0.0039s)
+22:28:28.039731 - WEB: Results for text at offset 0 for [paragraph | ] using None:
+                       String: 'Entrada: dos fuentes. Salida: una comparación con sus límites.', Start: 0, End: 62.
+22:28:28.039831 - INFO: Getting text attributes for [paragraph | ] (chars: 0-62)
+22:28:28.039961 - INFO: Attributes at 0: ['bg-color:255,255,255', 'size:12pt', 'language:es', 'direction:lr', 'fg-color:0,0,0', 'family-name:DejaVu Sans'] (0-62)
+22:28:28.039979 - INFO: 1 attribute ranges found in 0.0001s
+22:28:28.040453 - WEB: Object (not cached) for [heading | Comparar dos fuentes] at offset 0:
+22:28:28.041700 -      0. chars: 0-20: 'Comparar dos fuentes' extents=[18, 118, 400, 39]
+                          app.name='Google Chrome for Testing' name='Comparar dos fuentes' role='heading'
+                          description=''
+                          states='enabled sensitive showing visible'
+                          relations=''
+                          actions='clickancestor showcontextmenu'
+                          interfaces='Accessible Action Collection Component Document Hypertext Hyperlink Text'
+                          attributes='text-align:left, name-from:contents, level:1, tag:h1, display:block'
+                          path=[-1, 0, 0, 0, 5, 2, 1, 3, 0, 0]
+                  
+22:28:28.041865 - WEB: Generating speech contents (length: 1)
+22:28:28.041979 - ITEM 0: [heading | Comparar dos fuentes], start: 0, end: 20, string: 'Comparar dos fuentes'
+22:28:28.042080 - WEB: Generating speech for document object [heading | Comparar dos fuentes]
+22:28:28.042493 - INFO: Getting text attributes for [heading | Comparar dos fuentes] (chars: 0-20)
+22:28:28.042650 - INFO: Attributes at 0: ['weight:700', 'bg-color:255,255,255', 'size:24pt', 'language:es', 'direction:lr', 'fg-color:0,0,0', 'family-name:DejaVu Sans'] (0-20)
+22:28:28.042671 - INFO: 1 attribute ranges found in 0.0002s
+22:28:28.042885 - SPEECH GENERATOR: Starting unfocused generation for [heading | Comparar dos fuentes] (<enum ATSPI_ROLE_HEADING of type Atspi.Role>)
+                  GENERATION TIME: 0.0004  ---->  oldAncestors=[]
+                  GENERATION TIME: 0.0002  ---->  newAncestors=[]
+22:28:28.043994 - SPEECH GENERATOR: default voice requested with language='es', dialect=''
+                  GENERATION TIME: 0.0007  ---->  displayedText=[Comparar dos fuentes]
+                  GENERATION TIME: 0.0002  ---->  roleName=[]
+                  GENERATION TIME: 0.0002  ---->  expandableState=[]
+                  GENERATION TIME: 0.0002  ---->  newNodeLevel=[]
+                  GENERATION TIME: 0.0002  ---->  unselectedCell=[]
+
+KEYBOARD_EVENT:  type=ATSPI_KEY_PRESSED_EVENT
+                 id=65289
+                 hw_code=23
+                 modifiers=0
+                 event_string=(Tab)
+                 keyval_name=(Tab)
+                 timestamp=18085035
+                 time=1794176908.047523
+                 keyType=action
+                 clickCount=1
+                 shouldEcho=True
+
+
+vvvvv PROCESS ATSPI_KEY_PRESSED_EVENT: 'Tab' (23) vvvvv
+22:28:28.047690 - HOST_APP: [application | Google Chrome for Testing]
+22:28:28.047786 - WINDOW:   [frame | Prueba de lectura - Google Chrome for Testing]
+22:28:28.047856 - LOCATION: [document web | Prueba de lectura]
+22:28:28.047863 - CONSUME:  False (No handler)
+22:28:28.047875 - DEFAULT: Interrupting presentation
+22:28:28.050355 - WEB: Flushing live region messages
+22:28:28.050382 - DEFAULT: Presenting keyboard event
+22:28:28.050399 - SPEECH GENERATOR: None voice requested with language='None', dialect='None'
+22:28:28.050423 - SPEECH OUTPUT: 'tab ' {'established': False}
+22:28:28.051281 - SPEECH DISPATCHER: Speaking '<speak><mark name="0:3"/>tab </speak>' 
+                  ORCA rate 5.0, pitch 5.0, volume 5.0, language en, punctuation: MOST 
+                  SD rate 2, pitch 10, volume 100, language en-us
+22:28:28.051501 - INPUT EVENT: _lastCommandWasCaretNav: False
+22:28:28.051509 - INPUT EVENT: _lastCommandWasStructNav: False
+22:28:28.051512 - INPUT EVENT: _lastCommandWasMouseButton: False
+22:28:28.051515 - INPUT EVENT: _inFocusMode: False
+22:28:28.051518 - INPUT EVENT: _focusModeIsSticky: False
+22:28:28.051521 - INPUT EVENT: _browseModeIsSticky: False
+22:28:28.051527 - TOTAL PROCESSING TIME: 0.0040
+^^^^^ PROCESS ATSPI_KEY_PRESSED_EVENT: 'Tab' (23) ^^^^^
+
+                  GENERATION TIME: 0.0099  ---->  clickable=[]
+                  GENERATION TIME: 0.0003  ---->  pause=[PAUSE]
+                  GENERATION TIME: 0.0004  ---->  hasLongDesc=[]
+                  GENERATION TIME: 0.0004  ---->  hasDetails=[]
+                  GENERATION TIME: 0.0004  ---->  detailsFor=[]
+                  GENERATION TIME: 0.0002  ---->  tutorial=[]
+                  GENERATION TIME: 0.0009  ---->  description=[]
+                  GENERATION TIME: 0.0003  ---->  hasPopup=[]
+                  COMPLETION TIME: 0.0153
+                  SPEECH GENERATOR: Results: 
+                  'Comparar dos fuentes' 
+                  '{'established': False}' 
+                  'PAUSE' 
+                  'PAUSE'
+22:28:28.058245 - WEB: Speech generation for document object [heading | Comparar dos fuentes] complete.
+22:28:28.058316 - SPEECH: Last spoke 0.0403 seconds ago
+22:28:28.058340 - SPEECH: Last spoke 0.0000 seconds ago
+22:28:28.058376 - SPEECH OUTPUT: 'Comparar dos fuentes.'{'established': False}
+22:28:28.059371 - SPEECH DISPATCHER: Speaking '<speak><mark name="0:8"/>Comparar <mark name="9:12"/>dos <mark name="13:21"/>fuentes.</speak>' 
+                  ORCA rate 5.0, pitch 5.0, volume 5.0, language en, punctuation: MOST 
+                  SD rate 2, pitch 10, volume 100, language en-us
+22:28:28.060858 - INFO: New selection for [heading | Comparar dos fuentes] is '' (0, 0)
+22:28:28.061022 - DEFAULT: Not in SayAll
+22:28:28.061212 - WEB: Not using focus mode for [heading | Comparar dos fuentes] due to lack of cause
+22:28:28.061230 - INFO: removing key grabs
+22:28:28.061350 - ORCA: Starting ATSPI registry.
+22:28:28.061361 - ORCA: Starting
+22:28:28.061961 - ORCA: Startup complete notification made
+22:28:28.061993 - ORCA: Starting registry
+
+KEYBOARD_EVENT:  type=ATSPI_KEY_RELEASED_EVENT
+                 id=65289
+                 hw_code=23
+                 modifiers=0
+                 event_string=(Tab)
+                 keyval_name=(Tab)
+                 timestamp=18085042
+                 time=1794176908.062545
+                 keyType=action
+                 clickCount=1
+                 shouldEcho=False
+
+
+vvvvv PROCESS ATSPI_KEY_RELEASED_EVENT: 'Tab' (23) vvvvv
+22:28:28.062690 - HOST_APP: [application | Google Chrome for Testing]
+22:28:28.062774 - WINDOW:   [frame | Prueba de lectura - Google Chrome for Testing]
+22:28:28.062842 - LOCATION: [document web | Prueba de lectura]
+22:28:28.062849 - CONSUME:  False (Is release for last non-modifier keyevent)
+22:28:28.062870 - INPUT EVENT: _lastCommandWasCaretNav: False
+22:28:28.062875 - INPUT EVENT: _lastCommandWasStructNav: False
+22:28:28.062878 - INPUT EVENT: _lastCommandWasMouseButton: False
+22:28:28.062880 - INPUT EVENT: _inFocusMode: False
+22:28:28.062883 - INPUT EVENT: _focusModeIsSticky: False
+22:28:28.062886 - INPUT EVENT: _browseModeIsSticky: False
+22:28:28.062892 - TOTAL PROCESSING TIME: 0.0003
+^^^^^ PROCESS ATSPI_KEY_RELEASED_EVENT: 'Tab' (23) ^^^^^
+
+22:28:28.063449 - EVENT MANAGER: Dequeued object:state-changed:active [frame | Prueba de lectura - Google Chrome for Testing] (1,0,0) from [application | Google Chrome for Testing]
+
+vvvvv PROCESS OBJECT EVENT object:state-changed:active vvvvv
+22:28:28.063486 - OBJECT EVENT: object:state-changed:active (1, 0, 0)
+                                app.name='Google Chrome for Testing' name='Prueba de lectura - Google Chrome for Testing' role='frame'
+                                description=''
+                                states='active enabled sensitive showing visible'
+                                relations='embeds'
+                                actions='dodefault showcontextmenu'
+                                interfaces='Accessible Action Collection Component Document Hypertext Hyperlink Text'
+                                attributes='class:BrowserRootView, explicit-name:true, name-from:attribute'
+                                path=[-1, 0]
+
+22:28:28.065624 - EVENT MANAGER: Getting script for [application | Google Chrome for Testing] (check: True)
+22:28:28.066071 - EVENT MANAGER: Script is <orca.scripts.toolkits.Chromium.script.Script object at 0x7f0119f17590>
+22:28:28.066127 - EVENT MANAGER: Change active script: False (The script for this event is already active.)
+22:28:28.066165 - WEB: Event source is not in document content
+22:28:28.068028 - INFO: Looking at [frame | Prueba de lectura - Google Chrome for Testing] from [application | Google Chrome for Testing] /opt/chromium/chrome --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-edgeupdater --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,BlockOriginHeaderModificationOnRedirect,AvoidCorsURLLoaderRestartOnRedirect,Translate,AutoDeElevate,OptimizationHints,NetworkTimeServiceQuerying,AimEnabled,msForceBrowserSignIn,msEdgeUpdateLaunchServicesPreferredVersion --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --disable-updater-scheduler --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --no-sandbox --force-renderer-accessibility --disable-dev-shm-usage --user-data-dir=/tmp/playwright_chromiumdev_profile-bzSBWO --remote-debugging-pipe --no-startup-window 
+22:28:28.068146 - INFO: [frame | Prueba de lectura - Google Chrome for Testing] can be active window
+22:28:28.068156 - CHROMIUM: Passing along event to default script
+22:28:28.070056 - INFO: Looking at [frame | Prueba de lectura - Google Chrome for Testing] from [application | Google Chrome for Testing] /opt/chromium/chrome --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-edgeupdater --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,BlockOriginHeaderModificationOnRedirect,AvoidCorsURLLoaderRestartOnRedirect,Translate,AutoDeElevate,OptimizationHints,NetworkTimeServiceQuerying,AimEnabled,msForceBrowserSignIn,msEdgeUpdateLaunchServicesPreferredVersion --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --disable-updater-scheduler --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --no-sandbox --force-renderer-accessibility --disable-dev-shm-usage --user-data-dir=/tmp/playwright_chromiumdev_profile-bzSBWO --remote-debugging-pipe --no-startup-window 
+22:28:28.070243 - INFO: [frame | Prueba de lectura - Google Chrome for Testing] can be active window
+22:28:28.070370 - EVENT MANAGER: locusOfFocus: [document web | Prueba de lectura] activeScript: <orca.scripts.toolkits.Chromium.script.Script object at 0x7f0119f17590>
+22:28:28.070385 - EVENT MANAGER: _lastCommandWasCaretNav: False
+22:28:28.070390 - EVENT MANAGER: _lastCommandWasStructNav: False
+22:28:28.070393 - EVENT MANAGER: _lastCommandWasMouseButton: False
+22:28:28.070396 - EVENT MANAGER: _inFocusMode: False
+22:28:28.070399 - EVENT MANAGER: _focusModeIsSticky: False
+22:28:28.070402 - EVENT MANAGER: _browseModeIsSticky: False
+TOTAL PROCESSING TIME: 0.0069
+^^^^^ PROCESS OBJECT EVENT object:state-changed:active ^^^^^
+
+
+22:28:28.071018 - EVENT MANAGER: object:children-changed:add for [desktop frame | main] in None (1, 0, [application | orca])
+22:28:28.071043 - EVENT MANAGER: Ignoring because event is not from active app
+
+22:28:28.071278 - EVENT MANAGER: object:state-changed:focused for [document web | Prueba de lectura] in [application | Google Chrome for Testing] (0, 0, 0)
+22:28:28.071344 - EVENT MANAGER: Not ignoring due to lack of cause
+22:28:28.071542 - EVENT MANAGER: Queueing object:state-changed:focused [document web | Prueba de lectura] (0,0,0) from [application | Google Chrome for Testing]
+
+22:28:28.072291 - EVENT MANAGER: object:state-changed:focused for [push button | Revisar fuentes] in [application | Google Chrome for Testing] (1, 0, 0)
+22:28:28.072424 - EVENT MANAGER: Not ignoring due to lack of cause
+22:28:28.072673 - EVENT MANAGER: Queueing object:state-changed:focused [push button | Revisar fuentes] (1,0,0) from [application | Google Chrome for Testing]
+22:28:28.072929 - EVENT MANAGER: Dequeued object:state-changed:focused [entry | Address and search bar] (1,0,0) from [application | Google Chrome for Testing]
+
+vvvvv PROCESS OBJECT EVENT object:state-changed:focused vvvvv
+22:28:28.072975 - OBJECT EVENT: object:state-changed:focused (1, 0, 0)
+                                app.name='Google Chrome for Testing' name='Address and search bar' role='entry'
+                                description=''
+                                states='editable enabled focusable sensitive showing single line visible supports autocompletion selectable text'
+                                relations=''
+                                actions='activate showcontextmenu'
+                                interfaces='Accessible Action Collection Component Document Hyperlink Text'
+                                attributes='text-model:a1, id:view_1012, class:OmniboxViewViews, explicit-name:true, name-from:attribute, keyshortcuts:Ctrl+L, autocomplete:both, placeholder:Search Google or type a URL'
+                                path=[-1, 0, 0, 0, 5, 1, 0, 5, 2]
+
+22:28:28.074114 - EVENT MANAGER: Getting script for [application | Google Chrome for Testing] (check: True)
+22:28:28.074579 - EVENT MANAGER: Script is <orca.scripts.toolkits.Chromium.script.Script object at 0x7f0119f17590>
+22:28:28.074602 - EVENT MANAGER: Change active script: False (The script for this event is already active.)
+22:28:28.075353 - SCRIPT: Skipping object event due to more recent event of the same type in a different object
+                          object:state-changed:focused(1, 0, 0)
+                          source: [push button | Revisar fuentes]
+                          host_application: [application | Google Chrome for Testing]
+                          sender: [application | Google Chrome for Testing]
+22:28:28.075482 - EVENT MANAGER: locusOfFocus: [document web | Prueba de lectura] activeScript: <orca.scripts.toolkits.Chromium.script.Script object at 0x7f0119f17590>
+22:28:28.075495 - EVENT MANAGER: _lastCommandWasCaretNav: False
+22:28:28.075499 - EVENT MANAGER: _lastCommandWasStructNav: False
+22:28:28.075502 - EVENT MANAGER: _lastCommandWasMouseButton: False
+22:28:28.075505 - EVENT MANAGER: _inFocusMode: False
+22:28:28.075508 - EVENT MANAGER: _focusModeIsSticky: False
+22:28:28.075512 - EVENT MANAGER: _browseModeIsSticky: False
+TOTAL PROCESSING TIME: 0.0026
+^^^^^ PROCESS OBJECT EVENT object:state-changed:focused ^^^^^
+
+22:28:28.075871 - EVENT MANAGER: Dequeued object:text-changed:delete [entry | Address and search bar] (0,11,about:blank) from [application | Google Chrome for Testing]
+
+vvvvv PROCESS OBJECT EVENT object:text-changed:delete vvvvv
+22:28:28.075897 - OBJECT EVENT: object:text-changed:delete (0, 11, about:blank)
+                                app.name='Google Chrome for Testing' name='Address and search bar' role='entry'
+                                description=''
+                                states='editable enabled focusable sensitive showing single line visible supports autocompletion selectable text'
+                                relations=''
+                                actions='activate showcontextmenu'
+                                interfaces='Accessible Action Collection Component Document Hyperlink Text'
+                                attributes='text-model:a1, id:view_1012, class:OmniboxViewViews, explicit-name:true, name-from:attribute, keyshortcuts:Ctrl+L, autocomplete:both, placeholder:Search Google or type a URL'
+                                path=[-1, 0, 0, 0, 5, 1, 0, 5, 2]
+
+22:28:28.076904 - EVENT MANAGER: Getting script for [application | Google Chrome for Testing] (check: False)
+22:28:28.077037 - EVENT MANAGER: Script is <orca.scripts.toolkits.Chromium.script.Script object at 0x7f0119f17590>
+22:28:28.077056 - EVENT MANAGER: Change active script: False (The script for this event is already active.)
+22:28:28.077155 - WEB: Event source is not in document content
+22:28:28.077161 - CHROMIUM: Passing along event to default script
+22:28:28.077260 - INFO: Event is not being presented due to lack of cause
+22:28:28.077346 - EVENT MANAGER: locusOfFocus: [document web | Prueba de lectura] activeScript: <orca.scripts.toolkits.Chromium.script.Script object at 0x7f0119f17590>
+22:28:28.077358 - EVENT MANAGER: _lastCommandWasCaretNav: False
+22:28:28.077362 - EVENT MANAGER: _lastCommandWasStructNav: False
+22:28:28.077365 - EVENT MANAGER: _lastCommandWasMouseButton: False
+22:28:28.077368 - EVENT MANAGER: _inFocusMode: False
+22:28:28.077372 - EVENT MANAGER: _focusModeIsSticky: False
+22:28:28.077375 - EVENT MANAGER: _browseModeIsSticky: False
+TOTAL PROCESSING TIME: 0.0015
+^^^^^ PROCESS OBJECT EVENT object:text-changed:delete ^^^^^
+
+22:28:28.077591 - EVENT MANAGER: Dequeued object:text-changed:insert [entry | Address and search bar] (0,15,127.0.0.1:44875) from [application | Google Chrome for Testing]
+
+vvvvv PROCESS OBJECT EVENT object:text-changed:insert vvvvv
+22:28:28.077614 - OBJECT EVENT: object:text-changed:insert (0, 15, 127.0.0.1:44875)
+                                app.name='Google Chrome for Testing' name='Address and search bar' role='entry'
+                                description=''
+                                states='editable enabled focusable sensitive showing single line visible supports autocompletion selectable text'
+                                relations=''
+                                actions='activate showcontextmenu'
+                                interfaces='Accessible Action Collection Component Document Hyperlink Text'
+                                attributes='text-model:a1, id:view_1012, class:OmniboxViewViews, explicit-name:true, name-from:attribute, keyshortcuts:Ctrl+L, autocomplete:both, placeholder:Search Google or type a URL'
+                                path=[-1, 0, 0, 0, 5, 1, 0, 5, 2]
+
+22:28:28.078475 - EVENT MANAGER: Getting script for [application | Google Chrome for Testing] (check: False)
+22:28:28.078600 - EVENT MANAGER: Script is <orca.scripts.toolkits.Chromium.script.Script object at 0x7f0119f17590>
+22:28:28.078617 - EVENT MANAGER: Change active script: False (The script for this event is already active.)
+22:28:28.078675 - WEB: Event source is not in document content
+22:28:28.078680 - CHROMIUM: Passing along event to default script
+22:28:28.078773 - INFO: Event is not being presented due to lack of cause
+22:28:28.078854 - EVENT MANAGER: locusOfFocus: [document web | Prueba de lectura] activeScript: <orca.scripts.toolkits.Chromium.script.Script object at 0x7f0119f17590>
+22:28:28.078863 - EVENT MANAGER: _lastCommandWasCaretNav: False
+22:28:28.078868 - EVENT MANAGER: _lastCommandWasStructNav: False
+22:28:28.078871 - EVENT MANAGER: _lastCommandWasMouseButton: False
+22:28:28.078874 - EVENT MANAGER: _inFocusMode: False
+22:28:28.078876 - EVENT MANAGER: _focusModeIsSticky: False
+22:28:28.078879 - EVENT MANAGER: _browseModeIsSticky: False
+TOTAL PROCESSING TIME: 0.0013
+^^^^^ PROCESS OBJECT EVENT object:text-changed:insert ^^^^^
+
+22:28:28.079065 - EVENT MANAGER: Dequeued object:property-change:accessible-name [static | 127.0.0.1:44875] (0,0,127.0.0.1:44875) from [application | Google Chrome for Testing]
+
+vvvvv PROCESS OBJECT EVENT object:property-change:accessible-name vvvvv
+22:28:28.079086 - OBJECT EVENT: object:property-change:accessible-name (0, 0, 127.0.0.1:44875)
+                                app.name='Google Chrome for Testing' name='127.0.0.1:44875' role='static'
+                                description='http://127.0.0.1:44875/'
+                                states='enabled sensitive'
+                                relations=''
+                                actions='dodefault showcontextmenu'
+                                interfaces='Accessible Action Collection Component Document Hypertext Text'
+                                attributes='class:Label, name-from:contents, hidden:true, description-from:aria-description, description:http://127.0.0.1:44875/'
+                                path=[-1, 0, 0, 0, 5, 2, 1, 11, 0]
+
+22:28:28.080148 - EVENT MANAGER: Getting script for [application | Google Chrome for Testing] (check: False)
+22:28:28.080333 - EVENT MANAGER: Script is <orca.scripts.toolkits.Chromium.script.Script object at 0x7f0119f17590>
+22:28:28.080355 - EVENT MANAGER: Change active script: False (The script for this event is already active.)
+22:28:28.080553 - EVENT MANAGER: locusOfFocus: [document web | Prueba de lectura] activeScript: <orca.scripts.toolkits.Chromium.script.Script object at 0x7f0119f17590>
+22:28:28.080574 - EVENT MANAGER: _lastCommandWasCaretNav: False
+22:28:28.080579 - EVENT MANAGER: _lastCommandWasStructNav: False
+22:28:28.080582 - EVENT MANAGER: _lastCommandWasMouseButton: False
+22:28:28.080585 - EVENT MANAGER: _inFocusMode: False
+22:28:28.080589 - EVENT MANAGER: _focusModeIsSticky: False
+22:28:28.080592 - EVENT MANAGER: _browseModeIsSticky: False
+TOTAL PROCESSING TIME: 0.0015
+^^^^^ PROCESS OBJECT EVENT object:property-change:accessible-name ^^^^^
+
+22:28:28.080872 - EVENT MANAGER: Dequeued object:property-change:accessible-name [frame | Prueba de lectura - Google Chrome for Testing] (0,0,127.0.0.1:44875 - Google Chrome for Testing) from [application | Google Chrome for Testing]
+
+vvvvv PROCESS OBJECT EVENT object:property-change:accessible-name vvvvv
+22:28:28.080904 - OBJECT EVENT: object:property-change:accessible-name (0, 0, 127.0.0.1:44875 - Google Chrome for Testing)
+                                app.name='Google Chrome for Testing' name='Prueba de lectura - Google Chrome for Testing' role='frame'
+                                description=''
+                                states='active enabled sensitive showing visible'
+                                relations='embeds'
+                                actions='dodefault showcontextmenu'
+                                interfaces='Accessible Action Collection Component Document Hypertext Hyperlink Text'
+                                attributes='class:BrowserRootView, explicit-name:true, name-from:attribute'
+                                path=[-1, 0]
+
+22:28:28.081827 - EVENT MANAGER: Getting script for [application | Google Chrome for Testing] (check: False)
+22:28:28.081939 - EVENT MANAGER: Script is <orca.scripts.toolkits.Chromium.script.Script object at 0x7f0119f17590>
+22:28:28.081957 - EVENT MANAGER: Change active script: False (The script for this event is already active.)
+22:28:28.082069 - EVENT MANAGER: locusOfFocus: [document web | Prueba de lectura] activeScript: <orca.scripts.toolkits.Chromium.script.Script object at 0x7f0119f17590>
+22:28:28.082079 - EVENT MANAGER: _lastCommandWasCaretNav: False
+22:28:28.082083 - EVENT MANAGER: _lastCommandWasStructNav: False
+22:28:28.082086 - EVENT MANAGER: _lastCommandWasMouseButton: False
+22:28:28.082089 - EVENT MANAGER: _inFocusMode: False
+22:28:28.082092 - EVENT MANAGER: _focusModeIsSticky: False
+22:28:28.082095 - EVENT MANAGER: _browseModeIsSticky: False
+TOTAL PROCESSING TIME: 0.0012
+^^^^^ PROCESS OBJECT EVENT object:property-change:accessible-name ^^^^^
+
+22:28:28.082281 - EVENT MANAGER: Dequeued object:property-change:accessible-name [page tab | Prueba de lectura] (0,0,127.0.0.1:44875) from [application | Google Chrome for Testing]
+
+vvvvv PROCESS OBJECT EVENT object:property-change:accessible-name vvvvv
+22:28:28.082303 - OBJECT EVENT: object:property-change:accessible-name (0, 0, 127.0.0.1:44875)
+                                app.name='Google Chrome for Testing' name='Prueba de lectura' role='page tab'
+                                description=''
+                                states='enabled focusable selectable selected sensitive showing visible'
+                                relations=''
+                                actions='dodefault showcontextmenu'
+                                interfaces='Accessible Action Collection Component Document Hypertext Hyperlink Text'
+                                attributes='id:view_20, class:Tab, explicit-name:true, name-from:attribute, posinset:1, setsize:1'
+                                path=[-1, 0, 0, 0, 5, 6, 1, 0, 0]
+
+22:28:28.083235 - EVENT MANAGER: Getting script for [application | Google Chrome for Testing] (check: False)
+22:28:28.083354 - EVENT MANAGER: Script is <orca.scripts.toolkits.Chromium.script.Script object at 0x7f0119f17590>
+22:28:28.083372 - EVENT MANAGER: Change active script: False (The script for this event is already active.)
+22:28:28.083520 - EVENT MANAGER: locusOfFocus: [document web | Prueba de lectura] activeScript: <orca.scripts.toolkits.Chromium.script.Script object at 0x7f0119f17590>
+22:28:28.083531 - EVENT MANAGER: _lastCommandWasCaretNav: False
+22:28:28.083535 - EVENT MANAGER: _lastCommandWasStructNav: False
+22:28:28.083538 - EVENT MANAGER: _lastCommandWasMouseButton: False
+22:28:28.083541 - EVENT MANAGER: _inFocusMode: False
+22:28:28.083544 - EVENT MANAGER: _focusModeIsSticky: False
+22:28:28.083547 - EVENT MANAGER: _browseModeIsSticky: False
+TOTAL PROCESSING TIME: 0.0013
+^^^^^ PROCESS OBJECT EVENT object:property-change:accessible-name ^^^^^
+
+22:28:28.083742 - EVENT MANAGER: Dequeued object:property-change:accessible-name [static | Prueba de lectura] (0,0,127.0.0.1:44875) from [application | Google Chrome for Testing]
+
+vvvvv PROCESS OBJECT EVENT object:property-change:accessible-name vvvvv
+22:28:28.083766 - OBJECT EVENT: object:property-change:accessible-name (0, 0, 127.0.0.1:44875)
+                                app.name='Google Chrome for Testing' name='Prueba de lectura' role='static'
+                                description=''
+                                states='enabled sensitive'
+                                relations=''
+                                actions='dodefault showcontextmenu'
+                                interfaces='Accessible Action Collection Component Document Hypertext Text'
+                                attributes='class:TabTitle, name-from:contents, hidden:true'
+                                path=[-1, 0, 0, 0, 5, 6, 1, 0, 0, -1]
+
+22:28:28.084754 - EVENT MANAGER: Getting script for [application | Google Chrome for Testing] (check: False)
+22:28:28.084887 - EVENT MANAGER: Script is <orca.scripts.toolkits.Chromium.script.Script object at 0x7f0119f17590>
+22:28:28.084909 - EVENT MANAGER: Change active script: False (The script for this event is already active.)
+22:28:28.085042 - EVENT MANAGER: locusOfFocus: [document web | Prueba de lectura] activeScript: <orca.scripts.toolkits.Chromium.script.Script object at 0x7f0119f17590>
+22:28:28.085051 - EVENT MANAGER: _lastCommandWasCaretNav: False
+22:28:28.085055 - EVENT MANAGER: _lastCommandWasStructNav: False
+22:28:28.085058 - EVENT MANAGER: _lastCommandWasMouseButton: False
+22:28:28.085061 - EVENT MANAGER: _inFocusMode: False
+22:28:28.085063 - EVENT MANAGER: _focusModeIsSticky: False
+22:28:28.085066 - EVENT MANAGER: _browseModeIsSticky: False
+TOTAL PROCESSING TIME: 0.0013
+^^^^^ PROCESS OBJECT EVENT object:property-change:accessible-name ^^^^^
+
+22:28:28.085248 - EVENT MANAGER: Dequeued object:property-change:accessible-name [frame | Prueba de lectura - Google Chrome for Testing] (0,0,Prueba de lectura - Google Chrome for Testing) from [application | Google Chrome for Testing]
+
+vvvvv PROCESS OBJECT EVENT object:property-change:accessible-name vvvvv
+22:28:28.085268 - OBJECT EVENT: object:property-change:accessible-name (0, 0, Prueba de lectura - Google Chrome for Testing)
+                                app.name='Google Chrome for Testing' name='Prueba de lectura - Google Chrome for Testing' role='frame'
+                                description=''
+                                states='active enabled sensitive showing visible'
+                                relations='embeds'
+                                actions='dodefault showcontextmenu'
+                                interfaces='Accessible Action Collection Component Document Hypertext Hyperlink Text'
+                                attributes='class:BrowserRootView, explicit-name:true, name-from:attribute'
+                                path=[-1, 0]
+
+22:28:28.086147 - EVENT MANAGER: Getting script for [application | Google Chrome for Testing] (check: False)
+22:28:28.086256 - EVENT MANAGER: Script is <orca.scripts.toolkits.Chromium.script.Script object at 0x7f0119f17590>
+22:28:28.086272 - EVENT MANAGER: Change active script: False (The script for this event is already active.)
+22:28:28.086372 - EVENT MANAGER: locusOfFocus: [document web | Prueba de lectura] activeScript: <orca.scripts.toolkits.Chromium.script.Script object at 0x7f0119f17590>
+22:28:28.086381 - EVENT MANAGER: _lastCommandWasCaretNav: False
+22:28:28.086384 - EVENT MANAGER: _lastCommandWasStructNav: False
+22:28:28.086387 - EVENT MANAGER: _lastCommandWasMouseButton: False
+22:28:28.086390 - EVENT MANAGER: _inFocusMode: False
+22:28:28.086393 - EVENT MANAGER: _focusModeIsSticky: False
+22:28:28.086396 - EVENT MANAGER: _browseModeIsSticky: False
+TOTAL PROCESSING TIME: 0.0011
+^^^^^ PROCESS OBJECT EVENT object:property-change:accessible-name ^^^^^
+
+22:28:28.086626 - EVENT MANAGER: Dequeued object:property-change:accessible-name [page tab | Prueba de lectura] (0,0,Prueba de lectura) from [application | Google Chrome for Testing]
+
+vvvvv PROCESS OBJECT EVENT object:property-change:accessible-name vvvvv
+22:28:28.086647 - OBJECT EVENT: object:property-change:accessible-name (0, 0, Prueba de lectura)
+                                app.name='Google Chrome for Testing' name='Prueba de lectura' role='page tab'
+                                description=''
+                                states='enabled focusable selectable selected sensitive showing visible'
+                                relations=''
+                                actions='dodefault showcontextmenu'
+                                interfaces='Accessible Action Collection Component Document Hypertext Hyperlink Text'
+                                attributes='id:view_20, class:Tab, explicit-name:true, name-from:attribute, posinset:1, setsize:1'
+                                path=[-1, 0, 0, 0, 5, 6, 1, 0, 0]
+
+22:28:28.087478 - EVENT MANAGER: Getting script for [application | Google Chrome for Testing] (check: False)
+22:28:28.087593 - EVENT MANAGER: Script is <orca.scripts.toolkits.Chromium.script.Script object at 0x7f0119f17590>
+22:28:28.087610 - EVENT MANAGER: Change active script: False (The script for this event is already active.)
+22:28:28.087723 - EVENT MANAGER: locusOfFocus: [document web | Prueba de lectura] activeScript: <orca.scripts.toolkits.Chromium.script.Script object at 0x7f0119f17590>
+22:28:28.087734 - EVENT MANAGER: _lastCommandWasCaretNav: False
+22:28:28.087738 - EVENT MANAGER: _lastCommandWasStructNav: False
+22:28:28.087741 - EVENT MANAGER: _lastCommandWasMouseButton: False
+22:28:28.087744 - EVENT MANAGER: _inFocusMode: False
+22:28:28.087747 - EVENT MANAGER: _focusModeIsSticky: False
+22:28:28.087750 - EVENT MANAGER: _browseModeIsSticky: False
+TOTAL PROCESSING TIME: 0.0011
+^^^^^ PROCESS OBJECT EVENT object:property-change:accessible-name ^^^^^
+
+22:28:28.088064 - EVENT MANAGER: Dequeued object:property-change:accessible-name [static | Prueba de lectura] (0,0,Prueba de lectura) from [application | Google Chrome for Testing]
+
+vvvvv PROCESS OBJECT EVENT object:property-change:accessible-name vvvvv
+22:28:28.088089 - OBJECT EVENT: object:property-change:accessible-name (0, 0, Prueba de lectura)
+                                app.name='Google Chrome for Testing' name='Prueba de lectura' role='static'
+                                description=''
+                                states='enabled sensitive'
+                                relations=''
+                                actions='dodefault showcontextmenu'
+                                interfaces='Accessible Action Collection Component Document Hypertext Text'
+                                attributes='class:TabTitle, name-from:contents, hidden:true'
+                                path=[-1, 0, 0, 0, 5, 6, 1, 0, 0, -1]
+
+22:28:28.089236 - EVENT MANAGER: Getting script for [application | Google Chrome for Testing] (check: False)
+22:28:28.089357 - EVENT MANAGER: Script is <orca.scripts.toolkits.Chromium.script.Script object at 0x7f0119f17590>
+22:28:28.089374 - EVENT MANAGER: Change active script: False (The script for this event is already active.)
+22:28:28.089488 - EVENT MANAGER: locusOfFocus: [document web | Prueba de lectura] activeScript: <orca.scripts.toolkits.Chromium.script.Script object at 0x7f0119f17590>
+22:28:28.089497 - EVENT MANAGER: _lastCommandWasCaretNav: False
+22:28:28.089501 - EVENT MANAGER: _lastCommandWasStructNav: False
+22:28:28.089504 - EVENT MANAGER: _lastCommandWasMouseButton: False
+22:28:28.089507 - EVENT MANAGER: _inFocusMode: False
+22:28:28.089510 - EVENT MANAGER: _focusModeIsSticky: False
+22:28:28.089513 - EVENT MANAGER: _browseModeIsSticky: False
+TOTAL PROCESSING TIME: 0.0014
+^^^^^ PROCESS OBJECT EVENT object:property-change:accessible-name ^^^^^
+
+22:28:28.089712 - EVENT MANAGER: Dequeued object:state-changed:focused [entry | Address and search bar] (0,0,0) from [application | Google Chrome for Testing]
+
+vvvvv PROCESS OBJECT EVENT object:state-changed:focused vvvvv
+22:28:28.089733 - OBJECT EVENT: object:state-changed:focused (0, 0, 0)
+                                app.name='Google Chrome for Testing' name='Address and search bar' role='entry'
+                                description=''
+                                states='editable enabled focusable sensitive showing single line visible supports autocompletion selectable text'
+                                relations=''
+                                actions='activate showcontextmenu'
+                                interfaces='Accessible Action Collection Component Document Hyperlink Text'
+                                attributes='text-model:a1, id:view_1012, class:OmniboxViewViews, explicit-name:true, name-from:attribute, keyshortcuts:Ctrl+L, autocomplete:both, placeholder:Search Google or type a URL'
+                                path=[-1, 0, 0, 0, 5, 1, 0, 5, 2]
+
+22:28:28.090653 - EVENT MANAGER: Getting script for [application | Google Chrome for Testing] (check: True)
+22:28:28.091093 - EVENT MANAGER: Script is <orca.scripts.toolkits.Chromium.script.Script object at 0x7f0119f17590>
+22:28:28.091119 - EVENT MANAGER: Change active script: False (The script for this event is already active.)
+22:28:28.091154 - WEB: Ignoring because event source lost focus
+22:28:28.091404 - EVENT MANAGER: locusOfFocus: [document web | Prueba de lectura] activeScript: <orca.scripts.toolkits.Chromium.script.Script object at 0x7f0119f17590>
+22:28:28.091422 - EVENT MANAGER: _lastCommandWasCaretNav: False
+22:28:28.091427 - EVENT MANAGER: _lastCommandWasStructNav: False
+22:28:28.091430 - EVENT MANAGER: _lastCommandWasMouseButton: False
+22:28:28.091433 - EVENT MANAGER: _inFocusMode: False
+22:28:28.091452 - EVENT MANAGER: _focusModeIsSticky: False
+22:28:28.091455 - EVENT MANAGER: _browseModeIsSticky: False
+TOTAL PROCESSING TIME: 0.0017
+^^^^^ PROCESS OBJECT EVENT object:state-changed:focused ^^^^^
+
+22:28:28.091838 - EVENT MANAGER: Dequeued object:state-changed:focused [document web | Prueba de lectura] (1,0,0) from [application | Google Chrome for Testing]
+
+vvvvv PROCESS OBJECT EVENT object:state-changed:focused vvvvv
+22:28:28.091872 - OBJECT EVENT: object:state-changed:focused (1, 0, 0)
+                                app.name='Google Chrome for Testing' name='Prueba de lectura' role='document web'
+                                description=''
+                                states='enabled focusable sensitive showing visible'
+                                relations='embedded by'
+                                actions='dodefault showcontextmenu'
+                                interfaces='Accessible Action Collection Component Document Hypertext Hyperlink Text'
+                                attributes='text-align:left, explicit-name:true, name-from:related-element, tag:#document'
+                                path=[-1, 0, 0, 0, 5, 2, 1, 3]
+
+22:28:28.095443 - EVENT MANAGER: Getting script for [application | Google Chrome for Testing] (check: True)
+22:28:28.096057 - EVENT MANAGER: Script is <orca.scripts.toolkits.Chromium.script.Script object at 0x7f0119f17590>
+22:28:28.096083 - EVENT MANAGER: Change active script: False (The script for this event is already active.)
+22:28:28.096384 - SCRIPT: Skipping object event due to more recent event of the same type in a different object
+                          object:state-changed:focused(1, 0, 0)
+                          source: [push button | Revisar fuentes]
+                          host_application: [application | Google Chrome for Testing]
+                          sender: [application | Google Chrome for Testing]
+22:28:28.096471 - EVENT MANAGER: locusOfFocus: [document web | Prueba de lectura] activeScript: <orca.scripts.toolkits.Chromium.script.Script object at 0x7f0119f17590>
+22:28:28.096482 - EVENT MANAGER: _lastCommandWasCaretNav: False
+22:28:28.096486 - EVENT MANAGER: _lastCommandWasStructNav: False
+22:28:28.096489 - EVENT MANAGER: _lastCommandWasMouseButton: False
+22:28:28.096492 - EVENT MANAGER: _inFocusMode: False
+22:28:28.096495 - EVENT MANAGER: _focusModeIsSticky: False
+22:28:28.096498 - EVENT MANAGER: _browseModeIsSticky: False
+TOTAL PROCESSING TIME: 0.0047
+^^^^^ PROCESS OBJECT EVENT object:state-changed:focused ^^^^^
+
+22:28:28.096886 - EVENT MANAGER: Dequeued object:state-changed:busy [document web | Prueba de lectura] (1,0,0) from [application | Google Chrome for Testing]
+
+vvvvv PROCESS OBJECT EVENT object:state-changed:busy vvvvv
+22:28:28.096910 - OBJECT EVENT: object:state-changed:busy (1, 0, 0)
+                                app.name='Google Chrome for Testing' name='Prueba de lectura' role='document web'
+                                description=''
+                                states='enabled focusable sensitive showing visible'
+                                relations='embedded by'
+                                actions='dodefault showcontextmenu'
+                                interfaces='Accessible Action Collection Component Document Hypertext Hyperlink Text'
+                                attributes='text-align:left, explicit-name:true, name-from:related-element, tag:#document'
+                                path=[-1, 0, 0, 0, 5, 2, 1, 3]
+
+22:28:28.098259 - EVENT MANAGER: Getting script for [application | Google Chrome for Testing] (check: True)
+22:28:28.098679 - EVENT MANAGER: Script is <orca.scripts.toolkits.Chromium.script.Script object at 0x7f0119f17590>
+22:28:28.098701 - EVENT MANAGER: Change active script: False (The script for this event is already active.)
+22:28:28.099000 - WEB: Getting caret context for None
+22:28:28.099451 - SETTINGS MANAGER: Setting runtime settings.
+22:28:28.099468 - SETTINGS MANAGER: Runtime settings set.
+22:28:28.099578 - SETTINGS MANAGER: Setting runtime settings.
+22:28:28.099584 - SETTINGS MANAGER: Runtime settings set.
+22:28:28.099653 - SPEECH: Last spoke 0.0413 seconds ago
+22:28:28.099669 - SPEECH OUTPUT: 'Loading.  Please wait.'{'established': False}
+22:28:28.100252 - SPEECH DISPATCHER: Speaking '<speak><mark name="0:8"/>Loading.  <mark name="10:16"/>Please <mark name="17:22"/>wait.</speak>' 
+                  ORCA rate 5.0, pitch 5.0, volume 5.0, language en, punctuation: NONE 
+                  SD rate 2, pitch 10, volume 100, language en-us
+22:28:28.100494 - SETTINGS MANAGER: Setting runtime settings.
+22:28:28.100502 - SETTINGS MANAGER: Runtime settings set.
+22:28:28.100564 - SETTINGS MANAGER: Setting runtime settings.
+22:28:28.100570 - SETTINGS MANAGER: Runtime settings set.
+22:28:28.100847 - EVENT MANAGER: locusOfFocus: [document web | Prueba de lectura] activeScript: <orca.scripts.toolkits.Chromium.script.Script object at 0x7f0119f17590>
+22:28:28.100858 - EVENT MANAGER: _lastCommandWasCaretNav: False
+22:28:28.100862 - EVENT MANAGER: _lastCommandWasStructNav: False
+22:28:28.100865 - EVENT MANAGER: _lastCommandWasMouseButton: False
+22:28:28.100868 - EVENT MANAGER: _inFocusMode: False
+22:28:28.100870 - EVENT MANAGER: _focusModeIsSticky: False
+22:28:28.100874 - EVENT MANAGER: _browseModeIsSticky: False
+TOTAL PROCESSING TIME: 0.0040
+^^^^^ PROCESS OBJECT EVENT object:state-changed:busy ^^^^^
+
+22:28:28.101248 - EVENT MANAGER: Dequeued object:state-changed:busy [document web | Prueba de lectura] (0,0,0) from [application | Google Chrome for Testing]
+
+vvvvv PROCESS OBJECT EVENT object:state-changed:busy vvvvv
+22:28:28.101285 - OBJECT EVENT: object:state-changed:busy (0, 0, 0)
+                                app.name='Google Chrome for Testing' name='Prueba de lectura' role='document web'
+                                description=''
+                                states='enabled focusable sensitive showing visible'
+                                relations='embedded by'
+                                actions='dodefault showcontextmenu'
+                                interfaces='Accessible Action Collection Component Document Hypertext Hyperlink Text'
+                                attributes='text-align:left, explicit-name:true, name-from:related-element, tag:#document'
+                                path=[-1, 0, 0, 0, 5, 2, 1, 3]
+
+22:28:28.103228 - EVENT MANAGER: Getting script for [application | Google Chrome for Testing] (check: True)
+22:28:28.103624 - EVENT MANAGER: Script is <orca.scripts.toolkits.Chromium.script.Script object at 0x7f0119f17590>
+22:28:28.103652 - EVENT MANAGER: Change active script: False (The script for this event is already active.)
+22:28:28.103877 - WEB: Getting caret context for None
+22:28:28.104459 - SPEECH: Last spoke 0.0048 seconds ago
+22:28:28.104474 - SPEECH OUTPUT: 'Finished loading Prueba de lectura.'{'established': False}
+22:28:28.104957 - SPEECH DISPATCHER: Speaking '<speak><mark name="0:8"/>Finished <mark name="9:16"/>loading <mark name="17:23"/>Prueba <mark name="24:26"/>de <mark name="27:35"/>lectura.</speak>' 
+                  ORCA rate 5.0, pitch 5.0, volume 5.0, language en, punctuation: MOST 
+                  SD rate 2, pitch 10, volume 100, language en-us
+22:28:28.105316 - WEB: cleaning up cached objects
+22:28:28.105688 - WEB: Getting page summary for obj [heading | Comparar dos fuentes]
+22:28:28.106747 - WEB: Document frame for [heading | Comparar dos fuentes] is [document web | Prueba de lectura]
+22:28:28.107549 - SETTINGS MANAGER: Setting runtime settings.
+22:28:28.107562 - SETTINGS MANAGER: Runtime settings set.
+22:28:28.107654 - SETTINGS MANAGER: Setting runtime settings.
+22:28:28.107666 - SETTINGS MANAGER: Runtime settings set.
+22:28:28.107733 - SPEECH: Last spoke 0.0033 seconds ago
+22:28:28.107741 - SPEECH OUTPUT: 'Page has 1 landmark, 1 heading.'{'established': False}
+22:28:28.108465 - SPEECH DISPATCHER: Speaking '<speak><mark name="0:4"/>Page <mark name="5:8"/>has <mark name="9:10"/>1 <mark name="11:20"/>landmark, <mark name="21:22"/>1 <mark name="23:31"/>heading.</speak>' 
+                  ORCA rate 5.0, pitch 5.0, volume 5.0, language en, punctuation: NONE 
+                  SD rate 2, pitch 10, volume 100, language en-us
+22:28:28.108759 - SETTINGS MANAGER: Setting runtime settings.
+22:28:28.108770 - SETTINGS MANAGER: Runtime settings set.
+22:28:28.108833 - SETTINGS MANAGER: Setting runtime settings.
+22:28:28.108839 - SETTINGS MANAGER: Runtime settings set.
+22:28:28.108895 - WEB: Getting caret context for None
+22:28:28.109091 - DEFAULT: Not in SayAll
+22:28:28.109729 - WEB: Not using focus mode for [heading | Comparar dos fuentes] due to lack of cause
+22:28:28.109951 - WEB: Setting locus of focus to context obj [heading | Comparar dos fuentes] (no notification)
+22:28:28.109973 - ORCA: Active script is: <orca.scripts.toolkits.Chromium.script.Script object at 0x7f0119f17590>
+22:28:28.110282 - ORCA: Changing locusOfFocus from [document web | Prueba de lectura] to [heading | Comparar dos fuentes]. Notify: False
+22:28:28.110297 - BRAILLE: disabled
+22:28:28.110560 - WEB: Doing SayAll
+22:28:28.110656 - WEB: SayAll called for document content [heading | Comparar dos fuentes]
+22:28:28.110772 - EVENT MANAGER: locusOfFocus: [heading | Comparar dos fuentes] activeScript: <orca.scripts.toolkits.Chromium.script.Script object at 0x7f0119f17590>
+22:28:28.110784 - EVENT MANAGER: _lastCommandWasCaretNav: False
+22:28:28.110788 - EVENT MANAGER: _lastCommandWasStructNav: False
+22:28:28.110790 - EVENT MANAGER: _lastCommandWasMouseButton: False
+22:28:28.110793 - EVENT MANAGER: _inFocusMode: False
+22:28:28.110796 - EVENT MANAGER: _focusModeIsSticky: False
+22:28:28.110799 - EVENT MANAGER: _browseModeIsSticky: False
+TOTAL PROCESSING TIME: 0.0095
+^^^^^ PROCESS OBJECT EVENT object:state-changed:busy ^^^^^
+
+22:28:28.111047 - EVENT MANAGER: Dequeued document:load-complete [document web | Prueba de lectura] (0,0,Prueba de lectura) from [application | Google Chrome for Testing]
+
+vvvvv PROCESS OBJECT EVENT document:load-complete vvvvv
+22:28:28.111069 - OBJECT EVENT: document:load-complete (0, 0, Prueba de lectura)
+                                app.name='Google Chrome for Testing' name='Prueba de lectura' role='document web'
+                                description=''
+                                states='enabled focusable sensitive showing visible'
+                                relations='embedded by'
+                                actions='dodefault showcontextmenu'
+                                interfaces='Accessible Action Collection Component Document Hypertext Hyperlink Text'
+                                attributes='text-align:left, explicit-name:true, name-from:related-element, tag:#document'
+                                path=[-1, 0, 0, 0, 5, 2, 1, 3]
+
+22:28:28.112234 - EVENT MANAGER: Getting script for [application | Google Chrome for Testing] (check: True)
+22:28:28.112643 - EVENT MANAGER: Script is <orca.scripts.toolkits.Chromium.script.Script object at 0x7f0119f17590>
+22:28:28.112670 - EVENT MANAGER: Change active script: False (The script for this event is already active.)
+22:28:28.112882 - WEB: Updating loading state and resetting live regions
+22:28:28.113232 - EVENT MANAGER: locusOfFocus: [heading | Comparar dos fuentes] activeScript: <orca.scripts.toolkits.Chromium.script.Script object at 0x7f0119f17590>
+22:28:28.113243 - EVENT MANAGER: _lastCommandWasCaretNav: False
+22:28:28.113247 - EVENT MANAGER: _lastCommandWasStructNav: False
+22:28:28.113250 - EVENT MANAGER: _lastCommandWasMouseButton: False
+22:28:28.113253 - EVENT MANAGER: _inFocusMode: False
+22:28:28.113257 - EVENT MANAGER: _focusModeIsSticky: False
+22:28:28.113260 - EVENT MANAGER: _browseModeIsSticky: False
+TOTAL PROCESSING TIME: 0.0022
+^^^^^ PROCESS OBJECT EVENT document:load-complete ^^^^^
+
+22:28:28.113287 - WEB: Getting caret context for None
+22:28:28.114247 - WEB: Results for text at offset 0 for [heading | Comparar dos fuentes] using TEXT_BOUNDARY_SENTENCE_START:
+                       String: 'Comparar dos fuentes', Start: 0, End: 20.
+22:28:28.114356 - INFO: Getting text attributes for [heading | Comparar dos fuentes] (chars: 0-20)
+22:28:28.114494 - INFO: Attributes at 0: ['weight:700', 'bg-color:255,255,255', 'size:24pt', 'language:es', 'direction:lr', 'fg-color:0,0,0', 'family-name:DejaVu Sans'] (0-20)
+22:28:28.114510 - INFO: 1 attribute ranges found in 0.0001s
+22:28:28.115302 - WEB SAY ALL CONTENT: 0. [heading | Comparar dos fuentes] 'Comparar dos fuentes' (0-20)
+22:28:28.115444 - WEB: Generating speech contents (length: 1)
+22:28:28.115534 - ITEM 0: [heading | Comparar dos fuentes], start: 0, end: 20, string: 'Comparar dos fuentes'
+22:28:28.115634 - WEB: Generating speech for document object [heading | Comparar dos fuentes]
+22:28:28.115914 - INFO: Getting text attributes for [heading | Comparar dos fuentes] (chars: 0-20)
+22:28:28.116027 - INFO: Attributes at 0: ['weight:700', 'bg-color:255,255,255', 'size:24pt', 'language:es', 'direction:lr', 'fg-color:0,0,0', 'family-name:DejaVu Sans'] (0-20)
+22:28:28.116041 - INFO: 1 attribute ranges found in 0.0001s
+22:28:28.116226 - SPEECH GENERATOR: Starting unfocused generation for [heading | Comparar dos fuentes] (<enum ATSPI_ROLE_HEADING of type Atspi.Role>)
+                  GENERATION TIME: 0.0002  ---->  oldAncestors=[]
+                  GENERATION TIME: 0.0002  ---->  newAncestors=[]
+22:28:28.117075 - SPEECH GENERATOR: default voice requested with language='es', dialect=''
+                  GENERATION TIME: 0.0007  ---->  displayedText=[Comparar dos fuentes]
+22:28:28.117624 - DEFAULT: In SayAll
+22:28:28.117751 - SPEECH GENERATOR: system voice requested with language='es', dialect=''
+                  GENERATION TIME: 0.0004  ---->  roleName=[heading level 1]
+                  GENERATION TIME: 0.0002  ---->  expandableState=[]
+                  GENERATION TIME: 0.0001  ---->  newNodeLevel=[]
+                  GENERATION TIME: 0.0001  ---->  unselectedCell=[]
+                  GENERATION TIME: 0.0004  ---->  clickable=[]
+                  GENERATION TIME: 0.0001  ---->  pause=[]
+                  GENERATION TIME: 0.0003  ---->  hasLongDesc=[]
+                  GENERATION TIME: 0.0002  ---->  hasDetails=[]
+                  GENERATION TIME: 0.0002  ---->  detailsFor=[]
+                  GENERATION TIME: 0.0002  ---->  tutorial=[]
+                  GENERATION TIME: 0.0007  ---->  description=[]
+                  GENERATION TIME: 0.0002  ---->  hasPopup=[]
+                  COMPLETION TIME: 0.0045
+                  SPEECH GENERATOR: Results: 
+                  'Comparar dos fuentes' 
+                  '{'established': False}' 
+                  'heading level 1' 
+                  '{'established': False}'
+22:28:28.120687 - WEB: Speech generation for document object [heading | Comparar dos fuentes] complete.
+22:28:28.120794 - WEB SAY ALL: [heading | Comparar dos fuentes] 'Comparar dos fuentes' (0-20, current: 0)
+22:28:28.121295 - EVENT SYNTHESIZER: scrolled [heading | Comparar dos fuentes] (0,20) to SCROLL_ANYWHERE: True
+22:28:28.121408 - EVENT SYNTHESIZER: Before scroll: 18,118. After scroll: 18,118.
+22:28:28.122075 - SPEECH DISPATCHER: Speaking '<speak><mark name="0:8"/>Comparar <mark name="9:12"/>dos <mark name="13:20"/>fuentes</speak>' 
+                  ORCA rate 5.0, pitch 5.0, volume 5.0, language en, punctuation: MOST 
+                  SD rate 2, pitch 10, volume 100, language en-us
+22:28:28.122548 - EVENT MANAGER: Dequeued object:state-changed:focused [document web | Prueba de lectura] (0,0,0) from [application | Google Chrome for Testing]
+
+vvvvv PROCESS OBJECT EVENT object:state-changed:focused vvvvv
+22:28:28.122572 - OBJECT EVENT: object:state-changed:focused (0, 0, 0)
+                                app.name='Google Chrome for Testing' name='Prueba de lectura' role='document web'
+                                description=''
+                                states='enabled focusable sensitive showing visible'
+                                relations='embedded by'
+                                actions='dodefault showcontextmenu'
+                                interfaces='Accessible Action Collection Component Document Hypertext Hyperlink Text'
+                                attributes='text-align:left, explicit-name:true, name-from:related-element, tag:#document'
+                                path=[-1, 0, 0, 0, 5, 2, 1, 3]
+
+22:28:28.123815 - EVENT MANAGER: Getting script for [application | Google Chrome for Testing] (check: True)
+22:28:28.124141 - EVENT MANAGER: Script is <orca.scripts.toolkits.Chromium.script.Script object at 0x7f0119f17590>
+22:28:28.124161 - EVENT MANAGER: Change active script: False (The script for this event is already active.)
+22:28:28.124346 - WEB: Ignoring because event source lost focus
+22:28:28.124476 - EVENT MANAGER: locusOfFocus: [heading | Comparar dos fuentes] activeScript: <orca.scripts.toolkits.Chromium.script.Script object at 0x7f0119f17590>
+22:28:28.124486 - EVENT MANAGER: _lastCommandWasCaretNav: False
+22:28:28.124490 - EVENT MANAGER: _lastCommandWasStructNav: False
+22:28:28.124493 - EVENT MANAGER: _lastCommandWasMouseButton: False
+22:28:28.124496 - EVENT MANAGER: _inFocusMode: False
+22:28:28.124499 - EVENT MANAGER: _focusModeIsSticky: False
+22:28:28.124501 - EVENT MANAGER: _browseModeIsSticky: False
+TOTAL PROCESSING TIME: 0.0019
+^^^^^ PROCESS OBJECT EVENT object:state-changed:focused ^^^^^
+
+22:28:28.124718 - EVENT MANAGER: Dequeued object:state-changed:focused [push button | Revisar fuentes] (1,0,0) from [application | Google Chrome for Testing]
+
+vvvvv PROCESS OBJECT EVENT object:state-changed:focused vvvvv
+22:28:28.124740 - OBJECT EVENT: object:state-changed:focused (1, 0, 0)
+                                app.name='Google Chrome for Testing' name='Revisar fuentes' role='push button'
+                                description=''
+                                states='enabled focusable focused sensitive showing visible'
+                                relations=''
+                                actions='press showcontextmenu'
+                                interfaces='Accessible Action Collection Component Document Hypertext Hyperlink Text'
+                                attributes='text-align:center, id:review, name-from:contents, tag:button, display:inline-block'
+                                path=[-1, 0, 0, 0, 5, 2, 1, 3, 0, 2]
+
+22:28:28.127047 - EVENT MANAGER: Getting script for [application | Google Chrome for Testing] (check: True)
+22:28:28.127376 - EVENT MANAGER: Script is <orca.scripts.toolkits.Chromium.script.Script object at 0x7f0119f17590>
+22:28:28.127406 - EVENT MANAGER: Change active script: False (The script for this event is already active.)
+22:28:28.127802 - WEB: Not event from context replicant. locusOfFocus [heading | Comparar dos fuentes] is not dead.
+22:28:28.127815 - WEB: Getting caret context for None
+22:28:28.128110 - WEB: Caret context is [heading | Comparar dos fuentes], 0 (focus: [heading | Comparar dos fuentes])
+22:28:28.128197 - WEB: Deferring to other scripts for handling non-document source
+22:28:28.128208 - CHROMIUM: Passing along event to default script
+22:28:28.129933 - INFO: Looking at [frame | Prueba de lectura - Google Chrome for Testing] from [application | Google Chrome for Testing] /opt/chromium/chrome --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-edgeupdater --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,BlockOriginHeaderModificationOnRedirect,AvoidCorsURLLoaderRestartOnRedirect,Translate,AutoDeElevate,OptimizationHints,NetworkTimeServiceQuerying,AimEnabled,msForceBrowserSignIn,msEdgeUpdateLaunchServicesPreferredVersion --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --disable-updater-scheduler --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --no-sandbox --force-renderer-accessibility --disable-dev-shm-usage --user-data-dir=/tmp/playwright_chromiumdev_profile-bzSBWO --remote-debugging-pipe --no-startup-window 
+22:28:28.130091 - INFO: [frame | Prueba de lectura - Google Chrome for Testing] can be active window
+22:28:28.130203 - ORCA: Active script is: <orca.scripts.toolkits.Chromium.script.Script object at 0x7f0119f17590>
+22:28:28.130604 - ORCA: Changing locusOfFocus from [heading | Comparar dos fuentes] to [push button | Revisar fuentes]. Notify: True
+22:28:28.131092 - WEB: Treating [push button | Revisar fuentes] as non-text: named object treated as whole.
+22:28:28.131362 - BRAILLE: disabled
+22:28:28.131484 - ORCA: Region of interest: [push button | Revisar fuentes] (0, 0)
+22:28:28.131829 - WEB: New focus [push button | Revisar fuentes] is not a special case. Generating speech.
+22:28:28.131982 - WEB: Generating speech for document object [push button | Revisar fuentes]
+22:28:28.132336 - INFO: Getting text attributes for [push button | Revisar fuentes] (chars: 0-15)
+22:28:28.132479 - INFO: Attributes at 0: ['bg-color:239,239,239', 'size:10pt', 'language:es', 'direction:lr', 'fg-color:0,0,0', 'family-name:DejaVu Sans'] (0-15)
+22:28:28.132494 - INFO: 1 attribute ranges found in 0.0001s
+22:28:28.132659 - SPEECH GENERATOR: Starting unfocused generation for [push button | Revisar fuentes] (<enum ATSPI_ROLE_PUSH_BUTTON of type Atspi.Role>)
+22:28:28.133039 - DEFAULT: In SayAll
+                  GENERATION TIME: 0.0004  ---->  oldAncestors=[]
+22:28:28.133290 - DEFAULT: In SayAll
+                  GENERATION TIME: 0.0002  ---->  newAncestors=[]
+22:28:28.134250 - SPEECH GENERATOR: default voice requested with language='es', dialect=''
+                  GENERATION TIME: 0.0010  ---->  labelAndName=[Revisar fuentes]
+                  GENERATION TIME: 0.0003  ---->  expandableState=[]
+22:28:28.134792 - DEFAULT: In SayAll
+22:28:28.135134 - SPEECH GENERATOR: system voice requested with language='es', dialect=''
+                  GENERATION TIME: 0.0006  ---->  roleName=[push button]
+                  GENERATION TIME: 0.0002  ---->  availability=[]
+                  GENERATION TIME: 0.0002  ---->  mnemonic=[]
+                  GENERATION TIME: 0.0006  ---->  accelerator=[]
+                  GENERATION TIME: 0.0002  ---->  newNodeLevel=[]
+                  GENERATION TIME: 0.0001  ---->  unselectedCell=[]
+                  GENERATION TIME: 0.0007  ---->  clickable=[]
+                  GENERATION TIME: 0.0003  ---->  pause=[PAUSE]
+                  GENERATION TIME: 0.0004  ---->  hasLongDesc=[]
+                  GENERATION TIME: 0.0003  ---->  hasDetails=[]
+                  GENERATION TIME: 0.0003  ---->  detailsFor=[]
+                  GENERATION TIME: 0.0002  ---->  tutorial=[]
+                  GENERATION TIME: 0.0006  ---->  description=[]
+                  GENERATION TIME: 0.0002  ---->  hasPopup=[]
+                  COMPLETION TIME: 0.0071
+                  SPEECH GENERATOR: Results: 
+                  'Revisar fuentes' 
+                  '{'established': False}' 
+                  'push button' 
+                  '{'established': False}' 
+                  'PAUSE' 
+                  'PAUSE'
+22:28:28.139794 - WEB: Speech generation for document object [push button | Revisar fuentes] complete.
+22:28:28.139812 - SPEECH: Last spoke 0.0321 seconds ago
+22:28:28.139834 - SPEECH OUTPUT: 'Revisar fuentes push button.'{'established': False}
+22:28:28.140559 - SPEECH DISPATCHER: Speaking '<speak><mark name="0:7"/>Revisar <mark name="8:15"/>fuentes <mark name="16:20"/>push <mark name="21:28"/>button.</speak>' 
+                  ORCA rate 5.0, pitch 5.0, volume 5.0, language en, punctuation: MOST 
+                  SD rate 2, pitch 10, volume 100, language en-us
+22:28:28.141290 - DEFAULT: In SayAll
+22:28:28.141301 - WEB: Not using focus mode because we're in SayAll.
+22:28:28.141387 - EVENT MANAGER: locusOfFocus: [push button | Revisar fuentes] activeScript: <orca.scripts.toolkits.Chromium.script.Script object at 0x7f0119f17590>
+22:28:28.141397 - EVENT MANAGER: _lastCommandWasCaretNav: False
+22:28:28.141401 - EVENT MANAGER: _lastCommandWasStructNav: False
+22:28:28.141429 - EVENT MANAGER: _lastCommandWasMouseButton: False
+22:28:28.141433 - EVENT MANAGER: _inFocusMode: False
+22:28:28.141441 - EVENT MANAGER: _focusModeIsSticky: False
+22:28:28.141444 - EVENT MANAGER: _browseModeIsSticky: False
+TOTAL PROCESSING TIME: 0.0167
+^^^^^ PROCESS OBJECT EVENT object:state-changed:focused ^^^^^
+
+22:28:28.225028 - SPEECH DISPATCHER: Got mark 0:8 / 0-20
+22:28:28.225105 - ORCA: Active script is: <orca.scripts.toolkits.Chromium.script.Script object at 0x7f0119f17590>
+22:28:28.225713 - ORCA: Changing locusOfFocus from [push button | Revisar fuentes] to [heading | Comparar dos fuentes]. Notify: False
+22:28:28.225820 - ORCA: Switching active mode from focus-tracking to say-all
+22:28:28.225917 - ORCA: Region of interest: [heading | Comparar dos fuentes] (0, 0)
+22:28:28.226501 - ORCA: Setting locusOfFocus to existing locusOfFocus
+22:28:28.226629 - ORCA: Region of interest: [heading | Comparar dos fuentes] (0, 8)
+22:28:28.233025 - SPEECH DISPATCHER: Got mark 9:12 / 0-20
+22:28:28.233077 - ORCA: Setting locusOfFocus to existing locusOfFocus
+22:28:28.233218 - ORCA: Region of interest: [heading | Comparar dos fuentes] (9, 12)
+22:28:28.237334 - SPEECH DISPATCHER: Got mark 13:20 / 0-20
+22:28:28.237393 - ORCA: Setting locusOfFocus to existing locusOfFocus
+22:28:28.237564 - ORCA: Region of interest: [heading | Comparar dos fuentes] (13, 20)
+22:28:28.252929 - ORCA: Setting locusOfFocus to existing locusOfFocus
+22:28:28.253217 - ORCA: Region of interest: [heading | Comparar dos fuentes] (20, 20)
+22:28:28.253691 - WEB SAY ALL: [heading | Comparar dos fuentes] 'heading level 1' (0-20, current: 0)
+22:28:28.254126 - EVENT SYNTHESIZER: scrolled [heading | Comparar dos fuentes] (0,20) to SCROLL_ANYWHERE: True
+22:28:28.254222 - EVENT SYNTHESIZER: Before scroll: 18,118. After scroll: 18,118.
+22:28:28.255043 - SPEECH DISPATCHER: Speaking '<speak><mark name="0:7"/>heading <mark name="8:13"/>level <mark name="14:15"/>1</speak>' 
+                  ORCA rate 5.0, pitch 5.0, volume 5.0, language en, punctuation: MOST 
+                  SD rate 2, pitch 10, volume 100, language en-us
+22:28:28.286845 - SPEECH DISPATCHER: Got mark 0:7 / 0-20
+22:28:28.286925 - ORCA: Setting locusOfFocus to existing locusOfFocus
+22:28:28.287168 - ORCA: Region of interest: [heading | Comparar dos fuentes] (0, 0)
+22:28:28.287536 - ORCA: Setting locusOfFocus to existing locusOfFocus
+22:28:28.287646 - ORCA: Region of interest: [heading | Comparar dos fuentes] (0, 7)
+22:28:28.292673 - SPEECH DISPATCHER: Got mark 8:13 / 0-20
+22:28:28.292723 - ORCA: Setting locusOfFocus to existing locusOfFocus
+22:28:28.292854 - ORCA: Region of interest: [heading | Comparar dos fuentes] (8, 13)
+22:28:28.297553 - SPEECH DISPATCHER: Got mark 14:15 / 0-20
+22:28:28.297604 - ORCA: Setting locusOfFocus to existing locusOfFocus
+22:28:28.297754 - ORCA: Region of interest: [heading | Comparar dos fuentes] (14, 15)
+22:28:28.309066 - ORCA: Setting locusOfFocus to existing locusOfFocus
+22:28:28.309230 - ORCA: Region of interest: [heading | Comparar dos fuentes] (20, 20)
+22:28:28.310521 - INFO: Verified [heading | Comparar dos fuentes] can have caret context. (0.0008s)
+22:28:28.312058 - INFO: Verified [landmark | ] can have caret context. (0.0006s)
+22:28:28.312598 - INFO: Hyperlink object at index 1 for [landmark | ] is [paragraph | ]
+22:28:28.313815 - INFO: Verified [paragraph | ] can have caret context. (0.0011s)
+22:28:28.314365 - INFO: Next caret in order for [heading | Comparar dos fuentes], 19: [paragraph | ], 0 (0.0047s)
+22:28:28.315179 - WEB: Results for text at offset 0 for [paragraph | ] using TEXT_BOUNDARY_SENTENCE_START:
+                       String: 'Entrada: dos fuentes. ', Start: 0, End: 22.
+                       Not checking for broken text.
+22:28:28.315284 - INFO: Getting text attributes for [paragraph | ] (chars: 0-22)
+22:28:28.315402 - INFO: Attributes at 0: ['bg-color:255,255,255', 'size:12pt', 'language:es', 'direction:lr', 'fg-color:0,0,0', 'family-name:DejaVu Sans'] (0-62)
+22:28:28.315417 - INFO: 1 attribute ranges found in 0.0001s
+22:28:28.316046 - WEB SAY ALL CONTENT: 0. [paragraph | ] 'Entrada: dos fuentes. ' (0-22)
+22:28:28.316184 - WEB: Generating speech contents (length: 1)
+22:28:28.316263 - ITEM 0: [paragraph | ], start: 0, end: 22, string: 'Entrada: dos fuentes. '
+22:28:28.316351 - WEB: Generating speech for document object [paragraph | ]
+22:28:28.316636 - INFO: Getting text attributes for [paragraph | ] (chars: 0-22)
+22:28:28.316745 - INFO: Attributes at 0: ['bg-color:255,255,255', 'size:12pt', 'language:es', 'direction:lr', 'fg-color:0,0,0', 'family-name:DejaVu Sans'] (0-62)
+22:28:28.316758 - INFO: 1 attribute ranges found in 0.0001s
+22:28:28.316929 - SPEECH GENERATOR: Starting unfocused generation for [paragraph | ] (<enum ATSPI_ROLE_PARAGRAPH of type Atspi.Role>)
+22:28:28.317347 - DEFAULT: In SayAll
+                  GENERATION TIME: 0.0006  ---->  oldAncestors=[]
+22:28:28.317789 - DEFAULT: In SayAll
+                  GENERATION TIME: 0.0004  ---->  newAncestors=[]
+                  GENERATION TIME: 0.0002  ---->  labelOrName=[]
+                  GENERATION TIME: 0.0001  ---->  readOnly=[]
+22:28:28.318473 - DEFAULT: In SayAll
+                  GENERATION TIME: 0.0002  ---->  textRole=[]
+                  GENERATION TIME: 0.0001  ---->  textIndentation=[]
+22:28:28.319055 - SPEECH GENERATOR: default voice requested with language='es', dialect=''
+                  GENERATION TIME: 0.0005  ---->  currentLineText=[Entrada: dos fuentes. ]
+                  GENERATION TIME: 0.0002  ---->  allTextSelection=[]
+                  GENERATION TIME: 0.0002  ---->  mnemonic=[]
+                  GENERATION TIME: 0.0001  ---->  newNodeLevel=[]
+                  GENERATION TIME: 0.0001  ---->  unselectedCell=[]
+                  GENERATION TIME: 0.0005  ---->  clickable=[]
+                  GENERATION TIME: 0.0002  ---->  pause=[]
+                  GENERATION TIME: 0.0003  ---->  hasLongDesc=[]
+                  GENERATION TIME: 0.0002  ---->  hasDetails=[]
+                  GENERATION TIME: 0.0002  ---->  detailsFor=[]
+                  GENERATION TIME: 0.0001  ---->  tutorial=[]
+                  GENERATION TIME: 0.0004  ---->  description=[]
+                  GENERATION TIME: 0.0002  ---->  hasPopup=[]
+                  COMPLETION TIME: 0.0052
+                  SPEECH GENERATOR: Results: 
+                  'Entrada: dos fuentes. ' 
+                  '{'established': False}'
+22:28:28.322131 - WEB: Speech generation for document object [paragraph | ] complete.
+22:28:28.322226 - WEB SAY ALL: [paragraph | ] 'Entrada: dos fuentes. ' (0-22, current: 0)
+22:28:28.322604 - EVENT SYNTHESIZER: scrolled [paragraph | ] (0,22) to SCROLL_ANYWHERE: True
+22:28:28.322727 - EVENT SYNTHESIZER: Before scroll: 18,177. After scroll: 18,177.
+22:28:28.323580 - SPEECH DISPATCHER: Speaking '<speak><mark name="0:8"/>Entrada: <mark name="9:12"/>dos <mark name="13:21"/>fuentes. </speak>' 
+                  ORCA rate 5.0, pitch 5.0, volume 5.0, language en, punctuation: MOST 
+                  SD rate 2, pitch 10, volume 100, language en-us
+22:28:28.324477 - ORCA: Active script is: <orca.scripts.toolkits.Chromium.script.Script object at 0x7f0119f17590>
+22:28:28.324550 - SPEECH DISPATCHER: Got mark 0:8 / 0-22
+22:28:28.324836 - ORCA: Changing locusOfFocus from [heading | Comparar dos fuentes] to [paragraph | ]. Notify: False
+22:28:28.324960 - ORCA: Region of interest: [paragraph | ] (0, 0)
+22:28:28.325414 - ORCA: Setting locusOfFocus to existing locusOfFocus
+22:28:28.325536 - ORCA: Region of interest: [paragraph | ] (0, 8)
+22:28:28.336877 - SPEECH DISPATCHER: Got mark 9:12 / 0-22
+22:28:28.336936 - ORCA: Setting locusOfFocus to existing locusOfFocus
+22:28:28.337084 - ORCA: Region of interest: [paragraph | ] (9, 12)
+22:28:28.340802 - SPEECH DISPATCHER: Got mark 13:21 / 0-22
+22:28:28.340847 - ORCA: Setting locusOfFocus to existing locusOfFocus
+22:28:28.340993 - ORCA: Region of interest: [paragraph | ] (13, 21)
+
+KEYBOARD_EVENT:  type=ATSPI_KEY_PRESSED_EVENT
+                 id=65293
+                 hw_code=36
+                 modifiers=0
+                 event_string=(Return)
+                 keyval_name=(Return)
+                 timestamp=18085354
+                 time=1794176908.354211
+                 keyType=action
+                 clickCount=1
+                 shouldEcho=True
+
+
+vvvvv PROCESS ATSPI_KEY_PRESSED_EVENT: 'Return' (36) vvvvv
+22:28:28.354403 - HOST_APP: [application | Google Chrome for Testing]
+22:28:28.354536 - WINDOW:   [frame | Prueba de lectura - Google Chrome for Testing]
+22:28:28.354606 - LOCATION: [paragraph | ]
+22:28:28.354613 - CONSUME:  False (No handler)
+22:28:28.354625 - DEFAULT: Interrupting presentation
+22:28:28.355096 - WEB: Flushing live region messages
+22:28:28.355129 - DEFAULT: Presenting keyboard event
+22:28:28.355150 - SPEECH GENERATOR: None voice requested with language='None', dialect='None'
+22:28:28.355175 - SPEECH OUTPUT: 'return ' {'established': False}
+22:28:28.355898 - SPEECH DISPATCHER: Speaking '<speak><mark name="0:6"/>return </speak>' 
+                  ORCA rate 5.0, pitch 5.0, volume 5.0, language en, punctuation: MOST 
+                  SD rate 2, pitch 10, volume 100, language en-us
+22:28:28.356103 - INPUT EVENT: _lastCommandWasCaretNav: False
+22:28:28.356110 - INPUT EVENT: _lastCommandWasStructNav: False
+22:28:28.356113 - INPUT EVENT: _lastCommandWasMouseButton: False
+22:28:28.356116 - INPUT EVENT: _inFocusMode: False
+22:28:28.356119 - INPUT EVENT: _focusModeIsSticky: False
+22:28:28.356122 - INPUT EVENT: _browseModeIsSticky: False
+22:28:28.356127 - TOTAL PROCESSING TIME: 0.0018
+^^^^^ PROCESS ATSPI_KEY_PRESSED_EVENT: 'Return' (36) ^^^^^
+
+
+22:28:28.358678 - EVENT MANAGER: object:text-changed:insert for [notification | ] in [application | Google Chrome for Testing] (0, 74, La segunda fuente no indica fecha. Comprueba la versión antes de comparar.)
+22:28:28.358795 - EVENT MANAGER: Not ignoring due to lack of cause
+22:28:28.358955 - EVENT MANAGER: Queueing object:text-changed:insert [notification | ] (0,74,La segunda fuente no indica fecha. Comprueba la versión antes de comparar.) from [application | Google Chrome for Testing]
+
+22:28:28.359786 - EVENT MANAGER: object:children-changed:add for [notification | ] in [application | Google Chrome for Testing] (0, 0, [static | La segunda fuente no indica fecha. Comprueba la versión antes de comparar.])
+22:28:28.360074 - EVENT MANAGER: Not ignoring due to lack of cause
+22:28:28.360343 - EVENT MANAGER: Queueing object:children-changed:add [notification | ] (0,0,[static | La segunda fuente no indica fecha. Comprueba la versión antes de comparar.]) from [application | Google Chrome for Testing]
+22:28:28.360732 - EVENT MANAGER: Dequeued object:children-changed:add [notification | ] (0,0,[static | La segunda fuente no indica fecha. Comprueba la versión antes de comparar.]) from [application | Google Chrome for Testing]
+
+vvvvv PROCESS OBJECT EVENT object:children-changed:add vvvvv
+22:28:28.360822 - OBJECT EVENT: object:children-changed:add (0, 0, [static | La segunda fuente no indica fecha. Comprueba la versión antes de comparar.])
+                                app.name='Google Chrome for Testing' name='' role='notification'
+                                description=''
+                                states='enabled sensitive showing visible'
+                                relations=''
+                                actions='clickancestor showcontextmenu'
+                                interfaces='Accessible Action Collection Component Document Hypertext Hyperlink Text'
+                                attributes='text-align:left, id:notice, container-busy:false, container-atomic:true, container-relevant:additions text, container-live:assertive, atomic:true, relevant:additions text, live:assertive, xml-roles:alert, tag:p, display:block'
+                                path=[-1, 0, 0, 0, 5, 2, 1, 3, 0, 3]
+
+                                ANY DATA:
+                                name='La segunda fuente no indica fecha. Comprueba la versión antes de comparar.' role='static'
+                                description=''
+                                states='enabled sensitive showing visible'
+                                relations='member of'
+                                actions='clickancestor showcontextmenu'
+                                interfaces='Accessible Action Collection Component Document Hypertext Text'
+                                attributes='name-from:contents, container-busy:false, container-atomic:true, container-relevant:additions text, container-live:assertive, atomic:false, relevant:additions text'
+                                path=[-1, 0, 0, 0, 5, 2, 1, 3, 0, 3, 0]
+
+22:28:28.363425 - EVENT MANAGER: Getting script for [application | Google Chrome for Testing] (check: False)
+22:28:28.363572 - EVENT MANAGER: Script is <orca.scripts.toolkits.Chromium.script.Script object at 0x7f0119f17590>
+22:28:28.363591 - EVENT MANAGER: Change active script: False (The script for this event is already active.)
+22:28:28.363867 - CHROMIUM: [static | La segunda fuente no indica fecha. Comprueba la versión antes de comparar.] believed to be static text leaf
+22:28:28.363880 - CHROMIUM: Ignoring because child is static text leaf
+22:28:28.363952 - EVENT MANAGER: locusOfFocus: [paragraph | ] activeScript: <orca.scripts.toolkits.Chromium.script.Script object at 0x7f0119f17590>
+22:28:28.363963 - EVENT MANAGER: _lastCommandWasCaretNav: False
+22:28:28.363966 - EVENT MANAGER: _lastCommandWasStructNav: False
+22:28:28.363969 - EVENT MANAGER: _lastCommandWasMouseButton: False
+22:28:28.363972 - EVENT MANAGER: _inFocusMode: False
+22:28:28.363975 - EVENT MANAGER: _focusModeIsSticky: False
+22:28:28.363977 - EVENT MANAGER: _browseModeIsSticky: False
+TOTAL PROCESSING TIME: 0.0032
+^^^^^ PROCESS OBJECT EVENT object:children-changed:add ^^^^^
+
+22:28:28.364105 - EVENT MANAGER: Dequeued object:text-changed:insert [notification | ] (0,74,La segunda fuente no indica fecha. Comprueba la versión antes de comparar.) from [application | Google Chrome for Testing]
+
+vvvvv PROCESS OBJECT EVENT object:text-changed:insert vvvvv
+22:28:28.364130 - OBJECT EVENT: object:text-changed:insert (0, 74, La segunda fuente no indica fecha. Comprueba la versión antes de comparar.)
+                                app.name='Google Chrome for Testing' name='' role='notification'
+                                description=''
+                                states='enabled sensitive showing visible'
+                                relations=''
+                                actions='clickancestor showcontextmenu'
+                                interfaces='Accessible Action Collection Component Document Hypertext Hyperlink Text'
+                                attributes='text-align:left, id:notice, container-busy:false, container-atomic:true, container-relevant:additions text, container-live:assertive, atomic:true, relevant:additions text, live:assertive, xml-roles:alert, tag:p, display:block'
+                                path=[-1, 0, 0, 0, 5, 2, 1, 3, 0, 3]
+
+22:28:28.364988 - EVENT MANAGER: Getting script for [application | Google Chrome for Testing] (check: False)
+22:28:28.365088 - EVENT MANAGER: Script is <orca.scripts.toolkits.Chromium.script.Script object at 0x7f0119f17590>
+22:28:28.365104 - EVENT MANAGER: Change active script: False (The script for this event is already active.)
+22:28:28.366251 - WEB: Event to be handled as live region
+22:28:28.367375 - EVENT MANAGER: locusOfFocus: [paragraph | ] activeScript: <orca.scripts.toolkits.Chromium.script.Script object at 0x7f0119f17590>
+22:28:28.367388 - EVENT MANAGER: _lastCommandWasCaretNav: False
+22:28:28.367392 - EVENT MANAGER: _lastCommandWasStructNav: False
+22:28:28.367395 - EVENT MANAGER: _lastCommandWasMouseButton: False
+22:28:28.367398 - EVENT MANAGER: _inFocusMode: False
+22:28:28.367401 - EVENT MANAGER: _focusModeIsSticky: False
+22:28:28.367404 - EVENT MANAGER: _browseModeIsSticky: False
+TOTAL PROCESSING TIME: 0.0033
+^^^^^ PROCESS OBJECT EVENT object:text-changed:insert ^^^^^
+
+22:28:28.367493 - ORCA: Switching active mode from say-all to focus-tracking
+
+KEYBOARD_EVENT:  type=ATSPI_KEY_RELEASED_EVENT
+                 id=65293
+                 hw_code=36
+                 modifiers=0
+                 event_string=(Return)
+                 keyval_name=(Return)
+                 timestamp=18085361
+                 time=1794176908.367917
+                 keyType=action
+                 clickCount=1
+                 shouldEcho=False
+
+
+vvvvv PROCESS ATSPI_KEY_RELEASED_EVENT: 'Return' (36) vvvvv
+22:28:28.368032 - HOST_APP: [application | Google Chrome for Testing]
+22:28:28.368138 - WINDOW:   [frame | Prueba de lectura - Google Chrome for Testing]
+22:28:28.368228 - LOCATION: [paragraph | ]
+22:28:28.368239 - CONSUME:  False (Is release for last non-modifier keyevent)
+22:28:28.368258 - INPUT EVENT: _lastCommandWasCaretNav: False
+22:28:28.368263 - INPUT EVENT: _lastCommandWasStructNav: False
+22:28:28.368267 - INPUT EVENT: _lastCommandWasMouseButton: False
+22:28:28.368272 - INPUT EVENT: _inFocusMode: False
+22:28:28.368276 - INPUT EVENT: _focusModeIsSticky: False
+22:28:28.368280 - INPUT EVENT: _browseModeIsSticky: False
+22:28:28.368286 - TOTAL PROCESSING TIME: 0.0004
+^^^^^ PROCESS ATSPI_KEY_RELEASED_EVENT: 'Return' (36) ^^^^^
+
+22:28:28.368318 - ORCA: Region of interest: [paragraph | ] (13, 13)
+22:28:28.368683 - WEB: Looking for first caret context for [paragraph | ], 13
+22:28:28.369048 - WEB: First caret context for [paragraph | ], 13 is unchanged
+22:28:28.369366 - ORCA: Setting locusOfFocus to existing locusOfFocus
+22:28:28.369595 - WEB: Caret set to 13 in [paragraph | ]
+22:28:28.369607 - DEFAULT: In SayAll
+22:28:28.369612 - WEB: Not using focus mode because we're in SayAll.
+22:28:28.370984 - INFO: New selection for [paragraph | ] is '' (0, 0)
+22:28:28.371157 - BRAILLE: disabled
+
+22:28:28.371416 - EVENT MANAGER: object:text-caret-moved for [paragraph | ] in [application | Google Chrome for Testing] (13, 0, 0)
+22:28:28.371468 - EVENT MANAGER: Not ignoring due to lack of cause
+22:28:28.371626 - EVENT MANAGER: Queueing object:text-caret-moved [paragraph | ] (13,0,0) from [application | Google Chrome for Testing]
+22:28:28.372004 - EVENT MANAGER: Dequeued object:text-caret-moved [paragraph | ] (13,0,0) from [application | Google Chrome for Testing]
+
+vvvvv PROCESS OBJECT EVENT object:text-caret-moved vvvvv
+22:28:28.372028 - OBJECT EVENT: object:text-caret-moved (13, 0, 0)
+                                app.name='Google Chrome for Testing' name='' role='paragraph'
+                                description=''
+                                states='enabled sensitive showing visible'
+                                relations=''
+                                actions='clickancestor showcontextmenu'
+                                interfaces='Accessible Action Collection Component Document Hypertext Hyperlink Text'
+                                attributes='text-align:left, tag:p, display:block'
+                                path=[-1, 0, 0, 0, 5, 2, 1, 3, 0, 1]
+
+22:28:28.372964 - EVENT MANAGER: Getting script for [application | Google Chrome for Testing] (check: True)
+22:28:28.373256 - EVENT MANAGER: Script is <orca.scripts.toolkits.Chromium.script.Script object at 0x7f0119f17590>
+22:28:28.373274 - EVENT MANAGER: Change active script: False (The script for this event is already active.)
+22:28:28.373570 - WEB: Getting caret context for [document web | Prueba de lectura]
+22:28:28.373749 - WEB: Context: [paragraph | ], 13 (focus: [paragraph | ])
+22:28:28.373952 - WEB: Event doc: [document web | Prueba de lectura]. Focus doc: [document web | Prueba de lectura].
+22:28:28.374217 - WEB: Looking for first caret context for [paragraph | ], 13
+22:28:28.374609 - WEB: First caret context for [paragraph | ], 13 is unchanged
+22:28:28.374992 - WEB: Setting context and focus to: [paragraph | ], 13
+22:28:28.375090 - ORCA: Setting locusOfFocus to existing locusOfFocus
+22:28:28.375099 - CHROMIUM: Passing along event to default script
+22:28:28.375111 - DEFAULT: Event is for last saved cursor position
+22:28:28.375346 - EVENT MANAGER: locusOfFocus: [paragraph | ] activeScript: <orca.scripts.toolkits.Chromium.script.Script object at 0x7f0119f17590>
+22:28:28.375357 - EVENT MANAGER: _lastCommandWasCaretNav: False
+22:28:28.375361 - EVENT MANAGER: _lastCommandWasStructNav: False
+22:28:28.375364 - EVENT MANAGER: _lastCommandWasMouseButton: False
+22:28:28.375367 - EVENT MANAGER: _inFocusMode: False
+22:28:28.375370 - EVENT MANAGER: _focusModeIsSticky: False
+22:28:28.375372 - EVENT MANAGER: _browseModeIsSticky: False
+TOTAL PROCESSING TIME: 0.0034
+^^^^^ PROCESS OBJECT EVENT object:text-caret-moved ^^^^^
+
+
+22:28:28.375639 - EVENT MANAGER: object:state-changed:focused for [push button | Revisar fuentes] in [application | Google Chrome for Testing] (0, 0, 0)
+22:28:28.375664 - EVENT MANAGER: Not ignoring due to lack of cause
+22:28:28.375830 - EVENT MANAGER: Queueing object:state-changed:focused [push button | Revisar fuentes] (0,0,0) from [application | Google Chrome for Testing]
+
+22:28:28.376199 - EVENT MANAGER: object:state-changed:focused for [document web | Prueba de lectura] in [application | Google Chrome for Testing] (1, 0, 0)
+22:28:28.376224 - EVENT MANAGER: Not ignoring due to lack of cause
+22:28:28.376378 - EVENT MANAGER: Queueing object:state-changed:focused [document web | Prueba de lectura] (1,0,0) from [application | Google Chrome for Testing]
+22:28:28.376665 - EVENT MANAGER: Dequeued object:state-changed:focused [push button | Revisar fuentes] (0,0,0) from [application | Google Chrome for Testing]
+
+vvvvv PROCESS OBJECT EVENT object:state-changed:focused vvvvv
+22:28:28.376685 - OBJECT EVENT: object:state-changed:focused (0, 0, 0)
+                                app.name='Google Chrome for Testing' name='Revisar fuentes' role='push button'
+                                description=''
+                                states='enabled focusable sensitive showing visible'
+                                relations=''
+                                actions='press showcontextmenu'
+                                interfaces='Accessible Action Collection Component Document Hypertext Hyperlink Text'
+                                attributes='text-align:center, id:review, name-from:contents, tag:button, display:inline-block'
+                                path=[-1, 0, 0, 0, 5, 2, 1, 3, 0, 2]
+
+22:28:28.377564 - EVENT MANAGER: Getting script for [application | Google Chrome for Testing] (check: True)
+22:28:28.377861 - EVENT MANAGER: Script is <orca.scripts.toolkits.Chromium.script.Script object at 0x7f0119f17590>
+22:28:28.377879 - EVENT MANAGER: Change active script: False (The script for this event is already active.)
+22:28:28.377910 - WEB: Ignoring because event source lost focus
+22:28:28.377995 - EVENT MANAGER: locusOfFocus: [paragraph | ] activeScript: <orca.scripts.toolkits.Chromium.script.Script object at 0x7f0119f17590>
+22:28:28.378006 - EVENT MANAGER: _lastCommandWasCaretNav: False
+22:28:28.378010 - EVENT MANAGER: _lastCommandWasStructNav: False
+22:28:28.378012 - EVENT MANAGER: _lastCommandWasMouseButton: False
+22:28:28.378015 - EVENT MANAGER: _inFocusMode: False
+22:28:28.378018 - EVENT MANAGER: _focusModeIsSticky: False
+22:28:28.378021 - EVENT MANAGER: _browseModeIsSticky: False
+TOTAL PROCESSING TIME: 0.0014
+^^^^^ PROCESS OBJECT EVENT object:state-changed:focused ^^^^^
+
+22:28:28.378197 - EVENT MANAGER: Dequeued object:state-changed:focused [document web | Prueba de lectura] (1,0,0) from [application | Google Chrome for Testing]
+
+vvvvv PROCESS OBJECT EVENT object:state-changed:focused vvvvv
+22:28:28.378217 - OBJECT EVENT: object:state-changed:focused (1, 0, 0)
+                                app.name='Google Chrome for Testing' name='Prueba de lectura' role='document web'
+                                description=''
+                                states='enabled focusable focused sensitive showing visible'
+                                relations='embedded by'
+                                actions='dodefault showcontextmenu'
+                                interfaces='Accessible Action Collection Component Document Hypertext Hyperlink Text'
+                                attributes='text-align:left, explicit-name:true, name-from:related-element, tag:#document'
+                                path=[-1, 0, 0, 0, 5, 2, 1, 3]
+
+22:28:28.379239 - EVENT MANAGER: Getting script for [application | Google Chrome for Testing] (check: True)
+22:28:28.379561 - EVENT MANAGER: Script is <orca.scripts.toolkits.Chromium.script.Script object at 0x7f0119f17590>
+22:28:28.379580 - EVENT MANAGER: Change active script: False (The script for this event is already active.)
+22:28:28.379995 - WEB: Not event from context replicant. locusOfFocus [paragraph | ] is not dead.
+22:28:28.380009 - WEB: Getting caret context for None
+22:28:28.380286 - WEB: Caret context is [paragraph | ], 13 (focus: [paragraph | ])
+22:28:28.380686 - WEB: Event handled: Setting locusOfFocus to [paragraph | ] (Context is not a non-focused link)
+22:28:28.380698 - ORCA: Setting locusOfFocus to existing locusOfFocus
+22:28:28.380776 - EVENT MANAGER: locusOfFocus: [paragraph | ] activeScript: <orca.scripts.toolkits.Chromium.script.Script object at 0x7f0119f17590>
+22:28:28.380785 - EVENT MANAGER: _lastCommandWasCaretNav: False
+22:28:28.380789 - EVENT MANAGER: _lastCommandWasStructNav: False
+22:28:28.380791 - EVENT MANAGER: _lastCommandWasMouseButton: False
+22:28:28.380795 - EVENT MANAGER: _inFocusMode: False
+22:28:28.380797 - EVENT MANAGER: _focusModeIsSticky: False
+22:28:28.380800 - EVENT MANAGER: _browseModeIsSticky: False
+TOTAL PROCESSING TIME: 0.0026
+^^^^^ PROCESS OBJECT EVENT object:state-changed:focused ^^^^^
+
+
+vvvvv PRESENT LIVE REGION MESSAGE vvvvv
+22:28:28.468391 - SETTINGS MANAGER: Setting runtime settings.
+22:28:28.468461 - SETTINGS MANAGER: Runtime settings set.
+22:28:28.468643 - SETTINGS MANAGER: Setting runtime settings.
+22:28:28.468648 - SETTINGS MANAGER: Runtime settings set.
+22:28:28.468718 - SPEECH: Last spoke 0.3289 seconds ago
+22:28:28.468746 - SPEECH OUTPUT: 'La segunda fuente no indica fecha. Comprueba la versión antes de comparar.'{'established': False}
+22:28:28.469421 - SPEECH DISPATCHER: Speaking '<speak><mark name="0:2"/>La <mark name="3:10"/>segunda <mark name="11:17"/>fuente <mark name="18:20"/>no <mark name="21:27"/>indica <mark name="28:34"/>fecha. <mark name="35:44"/>Comprueba <mark name="45:47"/>la <mark name="48:55"/>versión <mark name="56:61"/>antes <mark name="62:64"/>de <mark name="65:74"/>comparar.</speak>' 
+                  ORCA rate 5.0, pitch 5.0, volume 5.0, language en, punctuation: NONE 
+                  SD rate 2, pitch 10, volume 100, language en-us
+22:28:28.469733 - SETTINGS MANAGER: Setting runtime settings.
+22:28:28.469741 - SETTINGS MANAGER: Runtime settings set.
+22:28:28.469808 - SETTINGS MANAGER: Setting runtime settings.
+22:28:28.469814 - SETTINGS MANAGER: Runtime settings set.
+22:28:28.469888 - LIVE REGIONS: messages in queue: 0
+^^^^^ PRESENT LIVE REGION MESSAGE ^^^^^
+
+
+22:28:28.883927 - EVENT MANAGER: object:children-changed:remove for [desktop frame | main] in None (0, 0, [DEAD])
+22:28:28.884025 - EVENT MANAGER: Ignoring because event is not from active app
+22:28:30.650524 - ORCA: Shutting down and exiting due to signal=15 (Terminated)
+22:28:30.650626 - ORCA: Shutting down
+22:28:30.650660 - SPEECH: Last spoke 2.1819 seconds ago
+22:28:30.650673 - SPEECH OUTPUT: 'Screen reader off.'{'established': False}
+22:28:30.650839 - WEB: Exception getting role for [DEAD]
+22:28:30.651325 - SPEECH DISPATCHER: Speaking '<speak><mark name="0:6"/>Screen <mark name="7:13"/>reader <mark name="14:18"/>off.</speak>' 
+                  ORCA rate 5.0, pitch 5.0, volume 5.0, language en, punctuation: MOST 
+                  SD rate 2, pitch 10, volume 100, language en-us
+22:28:30.651561 - SCRIPT MANAGER: Dectivating
+22:28:30.651575 - EVENT MANAGER: deregistering listeners for: <orca.scripts.default.Script object at 0x7f0130536a10>
+22:28:30.651580 - EVENT MANAGER: deregistering listener for: focus:
+22:28:30.651877 - EVENT MANAGER: deregistering listener for: document:reload
+22:28:30.651986 - EVENT MANAGER: deregistering listener for: document:load-complete
+22:28:30.652088 - EVENT MANAGER: deregistering listener for: document:load-stopped
+22:28:30.652191 - EVENT MANAGER: deregistering listener for: mouse:button
+22:28:30.652295 - EVENT MANAGER: deregistering listener for: object:property-change:accessible-name
+22:28:30.652517 - EVENT MANAGER: deregistering listener for: object:property-change:accessible-description
+22:28:30.652662 - EVENT MANAGER: deregistering listener for: object:text-caret-moved
+22:28:30.652773 - EVENT MANAGER: deregistering listener for: object:text-changed:delete
+22:28:30.652903 - EVENT MANAGER: deregistering listener for: object:text-changed:insert
+22:28:30.653032 - EVENT MANAGER: deregistering listener for: object:active-descendant-changed
+22:28:30.653139 - EVENT MANAGER: deregistering listener for: object:children-changed:add
+22:28:30.653269 - EVENT MANAGER: deregistering listener for: object:children-changed:remove
+22:28:30.653397 - EVENT MANAGER: deregistering listener for: object:state-changed:active
+22:28:30.653567 - EVENT MANAGER: deregistering listener for: object:state-changed:busy
+22:28:30.653695 - EVENT MANAGER: deregistering listener for: object:state-changed:focused
+22:28:30.653823 - EVENT MANAGER: deregistering listener for: object:state-changed:showing
+22:28:30.653946 - EVENT MANAGER: deregistering listener for: object:state-changed:checked
+22:28:30.654069 - EVENT MANAGER: deregistering listener for: object:state-changed:pressed
+22:28:30.654191 - EVENT MANAGER: deregistering listener for: object:state-changed:indeterminate
+22:28:30.654315 - EVENT MANAGER: deregistering listener for: object:state-changed:expanded
+22:28:30.654443 - EVENT MANAGER: deregistering listener for: object:state-changed:selected
+22:28:30.654571 - EVENT MANAGER: deregistering listener for: object:state-changed:sensitive
+22:28:30.654694 - EVENT MANAGER: deregistering listener for: object:text-attributes-changed
+22:28:30.654802 - EVENT MANAGER: deregistering listener for: object:text-selection-changed
+22:28:30.654908 - EVENT MANAGER: deregistering listener for: object:selection-changed
+22:28:30.655012 - EVENT MANAGER: deregistering listener for: object:property-change:accessible-value
+22:28:30.655135 - EVENT MANAGER: deregistering listener for: object:value-changed
+22:28:30.655241 - EVENT MANAGER: deregistering listener for: object:column-reordered
+22:28:30.655366 - EVENT MANAGER: deregistering listener for: object:row-reordered
+22:28:30.655504 - EVENT MANAGER: deregistering listener for: window:activate
+22:28:30.655641 - EVENT MANAGER: deregistering listener for: window:deactivate
+22:28:30.655761 - EVENT MANAGER: deregistering listener for: window:create
+22:28:30.655876 - EVENT MANAGER: deregistering listener for: window:destroy
+22:28:30.656078 - WEB: cleaning up cached objects
+22:28:30.656161 - ZOMBIE: [DEAD] is null or dead
+22:28:30.656178 - INFO: removing key grabs
+22:28:30.656185 - SCRIPT MANAGER: Deactivated
+22:28:30.656193 - EVENT MANAGER: Dectivating
+22:28:30.656202 - EVENT MANAGER: deregistering keystroke listener function: <bound method EventManager._processKeyboardEvent of <orca.event_manager.EventManager object at 0x7f012d3dc050>>
+22:28:30.692470 - EVENT MANAGER: Deactivated
+22:28:30.692517 - SPEECH: Shutting down
+22:28:30.698888 - ORCA: Stopping registry
+22:28:30.698931 - ORCA: Shutdown complete

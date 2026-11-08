@@ -1,0 +1,30 @@
+{
+  "status": "observed_requires_speech_log_review",
+  "scope": "Orca on synthetic HTML; ALSA null sink, no physical listening or product acceptance",
+  "browser": {
+    "version": "156.0.8078.4",
+    "title": "Prueba de lectura"
+  },
+  "native_keyboard": [
+    "Tab",
+    "Return"
+  ],
+  "children": [
+    {
+      "name": "browser",
+      "exit": 0
+    },
+    {
+      "name": "orca",
+      "exit": 0
+    },
+    {
+      "name": "speech",
+      "exit": 0
+    },
+    {
+      "name": "xvfb",
+      "exit": 0
+    }
+  ]
+}

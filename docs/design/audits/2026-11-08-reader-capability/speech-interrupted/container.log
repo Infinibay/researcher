@@ -1,0 +1,18 @@
+dbus-daemon[3]: [session uid=0 pid=3] Activating service name='ca.desrt.dconf' requested by ':1.0' (uid=0 pid=4 comm="python3 /opt/audit/probe.py")
+dbus-daemon[3]: [session uid=0 pid=3] Successfully activated service 'ca.desrt.dconf'
+dbus-daemon[3]: [session uid=0 pid=3] Activating service name='org.a11y.Bus' requested by ':1.3' (uid=0 pid=22 comm="/usr/bin/python3 /usr/bin/orca --debug --debug-fil")
+dbus-daemon[3]: [session uid=0 pid=3] Successfully activated service 'org.a11y.Bus'
+dbus-daemon[40]: Activating service name='org.a11y.atspi.Registry' requested by ':1.0' (uid=0 pid=22 comm="/usr/bin/python3 /usr/bin/orca --debug --debug-fil")
+dbus-daemon[40]: Successfully activated service 'org.a11y.atspi.Registry'
+SpiRegistry daemon is running with well-known name - org.a11y.atspi.Registry
+dbus-run-session: ignoring unknown child process 65
+dbus-run-session: ignoring unknown child process 64
+dbus-run-session: ignoring unknown child process 98
+dbus-run-session: ignoring unknown child process 210
+dbus-run-session: ignoring unknown child process 91
+dbus-run-session: ignoring unknown child process 212
+dbus-run-session: ignoring unknown child process 320
+dbus-run-session: ignoring unknown child process 199
+dbus-run-session: ignoring unknown child process 57
+dbus-run-session: ignoring unknown child process 59
+{"status": "observed_requires_speech_log_review", "scope": "Orca on synthetic HTML; ALSA null sink, no physical listening or product acceptance", "browser": {"version": "156.0.8078.4", "title": "Prueba de lectura"}, "native_keyboard": ["Tab", "Return"], "children": [{"name": "browser", "exit": 0}, {"name": "orca", "exit": 0}, {"name": "speech", "exit": 0}, {"name": "xvfb", "exit": 0}]}

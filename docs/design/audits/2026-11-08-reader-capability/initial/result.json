@@ -1,0 +1,11 @@
+{
+  "status": "failed",
+  "scope": "Orca on synthetic HTML; ALSA null sink, no physical listening or product acceptance",
+  "error": "[Errno 2] No such file or directory: 'gsettings'",
+  "children": [
+    {
+      "name": "xvfb",
+      "exit": 0
+    }
+  ]
+}
