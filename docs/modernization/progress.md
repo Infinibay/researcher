@@ -8973,3 +8973,23 @@ entradas/salidas de este fixture no acredita mejora de generación ni comprensi�
 el concepto existente. Restan además Tareas/Agentes/Conversación/Hallazgos/Informes/
 Ejecución y Proyectos con contención original; evaluaciones/distribución/prompts,
 inversas69, detalles y revisión global al final. Política de tareas gruesas vigente.
+
+
+## Resumen: lectura y navegación verificadas, 2026-11-08
+
+05:49:21–05:53:58UTC,4min37s hasta verificar e inspeccionar capturas.8estados/
+16comprobaciones contra host instalado,0escrituras de negocio/0inferencia.
+Planes y pregunta nativa son fixtures de dominio; un ID de turno sintético no
+representa ejecución real. Paginación SQLite/HTTP50+2, origen de pregunta/plan/tarea,
+fallos independientes/recuperación, recarga y entrega tardíaA→B esperada antes de
+comprobar aislamiento pasan. Etiquetas done/completed no se presentan como cierre.
+Antes/después coinciden todas las tablas observadas; servicio143/dominio retirado.
+Dos funciones y módulo documentados; sintaxis JS pasa, I001enDD133. Ocho capturas
+inspeccionadas contra situation-notebook, Axe regional0y sin overflow1440/390.
+
+5/12páginas en alcance delegado,41/43escenarios. No hubo decisión de cierre no
+vacía en este host: recheck funcional explícito al completar cierre global, piloto
+histórico sólo controlado. U08/C10 y contención original siguen abiertos. Siguiente
+Agentes; restantes Tareas/Conversación/Hallazgos/Informes/Ejecución/Proyectos,
+evaluaciones/distribución/prompts/inversas/global/revisión. Detalles al final.
+[Alcance y límites](overview-page-review.md).

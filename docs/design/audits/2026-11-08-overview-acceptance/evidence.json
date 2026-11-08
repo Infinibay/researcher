@@ -1,0 +1,160 @@
+{
+  "status": "passed",
+  "scope": "Real installed owner reads; synthetic domain plans/question, no model",
+  "states": [
+    {
+      "name": "01-no-selection",
+      "width": 1440,
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "02-desktop-overview",
+      "width": 1440,
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "03-mobile-attention",
+      "width": 390,
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "04-mobile-context",
+      "width": 390,
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "05-independent-reads-failed",
+      "width": 1440,
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "06-empty-beta-after-late-alpha",
+      "width": 390,
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "07-all-done-is-not-acceptance",
+      "width": 390,
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "08-alpha-return",
+      "width": 1440,
+      "fits": true,
+      "violations": []
+    }
+  ],
+  "checks": [
+    "no-selection-navigation",
+    "seven-tasks-six-visible",
+    "real-question-pagination",
+    "legacy-question-has-no-native-authority",
+    "keyboard-original-question-task-link",
+    "source-availability-read",
+    "accepted-closure-empty-state",
+    "original-plan-run-navigation",
+    "project-scoped-complete-task-list",
+    "read-errors-never-false-zero",
+    "explicit-refresh-recovery",
+    "reload-preserves-original-links",
+    "late-original-workspace-project-isolation",
+    "empty-project-is-known-empty",
+    "done-and-project-labels-are-not-accepted-report",
+    "return-to-original-project"
+  ],
+  "faults": [
+    {
+      "path": "/api/projects/101/workspace",
+      "kind": "abort-read"
+    },
+    {
+      "path": "/api/projects/101/questions",
+      "kind": "abort-read"
+    },
+    {
+      "path": "/api/tasks",
+      "kind": "abort-read"
+    },
+    {
+      "path": "/api/projects/101/workspace",
+      "kind": "abort-read"
+    },
+    {
+      "path": "/api/projects/101/questions",
+      "kind": "abort-read"
+    },
+    {
+      "path": "/api/tasks",
+      "kind": "abort-read"
+    },
+    {
+      "path": "/api/projects/101/workspace",
+      "kind": "late-original-alpha-read"
+    }
+  ],
+  "writes": [],
+  "errors": [],
+  "pages": [
+    {
+      "after": "0",
+      "count": 50,
+      "total": 52,
+      "next": 50
+    },
+    {
+      "after": "0",
+      "count": 50,
+      "total": 52,
+      "next": 50
+    },
+    {
+      "after": "50",
+      "count": 2,
+      "total": 52,
+      "next": null
+    },
+    {
+      "after": "0",
+      "count": 50,
+      "total": 52,
+      "next": 50
+    },
+    {
+      "after": "0",
+      "count": 50,
+      "total": 52,
+      "next": 50
+    },
+    {
+      "after": "0",
+      "count": 50,
+      "total": 52,
+      "next": 50
+    },
+    {
+      "after": "0",
+      "count": 50,
+      "total": 52,
+      "next": 50
+    },
+    {
+      "after": "0",
+      "count": 50,
+      "total": 52,
+      "next": 50
+    },
+    {
+      "after": "0",
+      "count": 50,
+      "total": 52,
+      "next": 50
+    }
+  ]
+}

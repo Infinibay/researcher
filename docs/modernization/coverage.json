@@ -5993,7 +5993,7 @@
       "status": "in_progress",
       "pilots": 12,
       "concept_images": 48,
-      "fully_accepted": 4,
+      "fully_accepted": 5,
       "pages": {
         "projects": {
           "status": "in_progress",
@@ -6094,6 +6094,27 @@
           "remaining": [],
           "scope": "Technical/delegated visual acceptance of owner reads/creation recovery/deletion on installed HTTP/SQLite; proposal/acceptance fixtures are synthetic domain history. Real generation and human comprehension remain separate.",
           "deferred": [
+            "DD132",
+            "DD121"
+          ]
+        },
+        "home": {
+          "status": "verified",
+          "selected_concept": "situation-notebook",
+          "scope": "Installed overview read/navigation route and delegated visual acceptance. Synthetic domain plan/question records, not real generation or human acceptance; nonempty closure-report link was controlled in the historical pilot and remains subject to final closure-flow validation.",
+          "evidence": [
+            "docs/modernization/overview-page-review.md",
+            "docs/modernization/overview-page-results.json",
+            "docs/design/audits/2026-11-08-overview-acceptance/report.md",
+            "frontend/tests/overview.e2e.mjs",
+            "evals/operation/overview_page.py"
+          ],
+          "remaining": [],
+          "release_recheck": [
+            "Nonempty accepted closure-report navigation in the final complete closure flow; historical pilot is controlled HTTP evidence only"
+          ],
+          "deferred": [
+            "DD133",
             "DD132",
             "DD121"
           ]

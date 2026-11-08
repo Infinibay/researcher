@@ -1,0 +1,563 @@
+{
+  "status": "verified",
+  "scope": "Installed overview read/navigation route and delegated visual acceptance. Synthetic domain plan/question records, not real generation or human acceptance; nonempty closure-report link was controlled in the historical pilot and remains subject to final closure-flow validation.",
+  "base_commit": "73d419d",
+  "retained_evaluation": ".researcher/evaluations/overview-page-20261108",
+  "actual_model_turns": 0,
+  "synthetic_bound_turn_ids": 1,
+  "synthetic_turn_caveat": "A clearly synthetic stored native turn ID is required by the question domain fixture. It is not an observed model/process launch.",
+  "browser_exit": 0,
+  "service_exit": 143,
+  "states": 8,
+  "checks": [
+    "no-selection-navigation",
+    "seven-tasks-six-visible",
+    "real-question-pagination",
+    "legacy-question-has-no-native-authority",
+    "keyboard-original-question-task-link",
+    "source-availability-read",
+    "accepted-closure-empty-state",
+    "original-plan-run-navigation",
+    "project-scoped-complete-task-list",
+    "read-errors-never-false-zero",
+    "explicit-refresh-recovery",
+    "reload-preserves-original-links",
+    "late-original-workspace-project-isolation",
+    "empty-project-is-known-empty",
+    "done-and-project-labels-are-not-accepted-report",
+    "return-to-original-project"
+  ],
+  "question_pages": [
+    {
+      "after": "0",
+      "count": 50,
+      "total": 52,
+      "next": 50
+    },
+    {
+      "after": "0",
+      "count": 50,
+      "total": 52,
+      "next": 50
+    },
+    {
+      "after": "50",
+      "count": 2,
+      "total": 52,
+      "next": null
+    },
+    {
+      "after": "0",
+      "count": 50,
+      "total": 52,
+      "next": 50
+    },
+    {
+      "after": "0",
+      "count": 50,
+      "total": 52,
+      "next": 50
+    },
+    {
+      "after": "0",
+      "count": 50,
+      "total": 52,
+      "next": 50
+    },
+    {
+      "after": "0",
+      "count": 50,
+      "total": 52,
+      "next": 50
+    },
+    {
+      "after": "0",
+      "count": 50,
+      "total": 52,
+      "next": 50
+    },
+    {
+      "after": "0",
+      "count": 50,
+      "total": 52,
+      "next": 50
+    }
+  ],
+  "faults": [
+    {
+      "path": "/api/projects/101/workspace",
+      "kind": "abort-read"
+    },
+    {
+      "path": "/api/projects/101/questions",
+      "kind": "abort-read"
+    },
+    {
+      "path": "/api/tasks",
+      "kind": "abort-read"
+    },
+    {
+      "path": "/api/projects/101/workspace",
+      "kind": "abort-read"
+    },
+    {
+      "path": "/api/projects/101/questions",
+      "kind": "abort-read"
+    },
+    {
+      "path": "/api/tasks",
+      "kind": "abort-read"
+    },
+    {
+      "path": "/api/projects/101/workspace",
+      "kind": "late-original-alpha-read"
+    }
+  ],
+  "writes": [],
+  "errors": [],
+  "all_widths_fit": true,
+  "axe_violations": 0,
+  "before": {
+    "groups": [
+      {
+        "id": 1,
+        "project_id": 101,
+        "title": "Organizar observaciones manuales"
+      },
+      {
+        "id": 2,
+        "project_id": 101,
+        "title": "Conservar historia del planificador"
+      },
+      {
+        "id": 3,
+        "project_id": 101,
+        "title": "Exportaci\u00f3n aceptada"
+      },
+      {
+        "id": 4,
+        "project_id": 101,
+        "title": "Archivo de observaciones 01: criterios, fuentes y comprobaciones de un objetivo extenso"
+      },
+      {
+        "id": 5,
+        "project_id": 101,
+        "title": "Archivo de observaciones 02: criterios, fuentes y comprobaciones de un objetivo extenso"
+      },
+      {
+        "id": 6,
+        "project_id": 101,
+        "title": "Archivo de observaciones 03: criterios, fuentes y comprobaciones de un objetivo extenso"
+      },
+      {
+        "id": 7,
+        "project_id": 101,
+        "title": "Archivo de observaciones 04: criterios, fuentes y comprobaciones de un objetivo extenso"
+      },
+      {
+        "id": 8,
+        "project_id": 101,
+        "title": "Archivo de observaciones 05: criterios, fuentes y comprobaciones de un objetivo extenso"
+      },
+      {
+        "id": 9,
+        "project_id": 101,
+        "title": "Archivo de observaciones 06: criterios, fuentes y comprobaciones de un objetivo extenso"
+      },
+      {
+        "id": 10,
+        "project_id": 101,
+        "title": "Archivo de observaciones 07: criterios, fuentes y comprobaciones de un objetivo extenso"
+      },
+      {
+        "id": 11,
+        "project_id": 101,
+        "title": "Archivo de observaciones 08: criterios, fuentes y comprobaciones de un objetivo extenso"
+      },
+      {
+        "id": 12,
+        "project_id": 101,
+        "title": "Archivo de observaciones 09: criterios, fuentes y comprobaciones de un objetivo extenso"
+      },
+      {
+        "id": 13,
+        "project_id": 101,
+        "title": "Archivo de observaciones 10: criterios, fuentes y comprobaciones de un objetivo extenso"
+      },
+      {
+        "id": 14,
+        "project_id": 101,
+        "title": "Archivo de observaciones 11: criterios, fuentes y comprobaciones de un objetivo extenso"
+      },
+      {
+        "id": 15,
+        "project_id": 101,
+        "title": "Archivo de observaciones 12: criterios, fuentes y comprobaciones de un objetivo extenso"
+      },
+      {
+        "id": 16,
+        "project_id": 101,
+        "title": "Archivo de observaciones 13: criterios, fuentes y comprobaciones de un objetivo extenso"
+      },
+      {
+        "id": 17,
+        "project_id": 101,
+        "title": "Archivo de observaciones 14: criterios, fuentes y comprobaciones de un objetivo extenso"
+      },
+      {
+        "id": 18,
+        "project_id": 101,
+        "title": "Archivo de observaciones 15: criterios, fuentes y comprobaciones de un objetivo extenso"
+      },
+      {
+        "id": 19,
+        "project_id": 101,
+        "title": "Archivo de observaciones 16: criterios, fuentes y comprobaciones de un objetivo extenso"
+      }
+    ],
+    "milestones": [
+      {
+        "id": 1,
+        "epic_id": 1
+      }
+    ],
+    "tasks": [
+      {
+        "id": 1001,
+        "epic_id": 1,
+        "milestone_id": 1,
+        "status": "pending"
+      },
+      {
+        "id": 1002,
+        "epic_id": 1,
+        "milestone_id": 1,
+        "status": "pending"
+      },
+      {
+        "id": 1101,
+        "epic_id": 2,
+        "milestone_id": null,
+        "status": "in_progress"
+      },
+      {
+        "id": 1102,
+        "epic_id": null,
+        "milestone_id": null,
+        "status": "done"
+      },
+      {
+        "id": 1103,
+        "epic_id": 3,
+        "milestone_id": null,
+        "status": "pending"
+      },
+      {
+        "id": 1104,
+        "epic_id": 3,
+        "milestone_id": null,
+        "status": "pending"
+      },
+      {
+        "id": 1200,
+        "epic_id": null,
+        "milestone_id": null,
+        "status": "in_progress"
+      },
+      {
+        "id": 3001,
+        "epic_id": null,
+        "milestone_id": null,
+        "status": "done"
+      },
+      {
+        "id": 3002,
+        "epic_id": null,
+        "milestone_id": null,
+        "status": "done"
+      }
+    ],
+    "dependencies": [
+      {
+        "task_id": 1002,
+        "depends_on_task_id": 1001
+      },
+      {
+        "task_id": 1104,
+        "depends_on_task_id": 1103
+      }
+    ],
+    "runs": [
+      {
+        "id": "c8bfe7e6-6d3d-4ef1-ba8b-8ce4475c0018",
+        "status": "accepted"
+      },
+      {
+        "id": "e8be62ec-43a2-4747-813d-e22b2b12283c",
+        "status": "needs_review"
+      },
+      {
+        "id": "f2937219-989d-497a-b037-b6ab908c1644",
+        "status": "waiting_input"
+      }
+    ],
+    "peers": [
+      {
+        "kind": "business",
+        "state": "closed"
+      },
+      {
+        "kind": "native",
+        "state": "closed"
+      },
+      {
+        "kind": "business",
+        "state": "closed"
+      },
+      {
+        "kind": "native",
+        "state": "closed"
+      },
+      {
+        "kind": "business",
+        "state": "closed"
+      },
+      {
+        "kind": "native",
+        "state": "closed"
+      }
+    ],
+    "dispatches": 0,
+    "native_starts": 1,
+    "integrity": "ok",
+    "foreign_keys": []
+  },
+  "after": {
+    "groups": [
+      {
+        "id": 1,
+        "project_id": 101,
+        "title": "Organizar observaciones manuales"
+      },
+      {
+        "id": 2,
+        "project_id": 101,
+        "title": "Conservar historia del planificador"
+      },
+      {
+        "id": 3,
+        "project_id": 101,
+        "title": "Exportaci\u00f3n aceptada"
+      },
+      {
+        "id": 4,
+        "project_id": 101,
+        "title": "Archivo de observaciones 01: criterios, fuentes y comprobaciones de un objetivo extenso"
+      },
+      {
+        "id": 5,
+        "project_id": 101,
+        "title": "Archivo de observaciones 02: criterios, fuentes y comprobaciones de un objetivo extenso"
+      },
+      {
+        "id": 6,
+        "project_id": 101,
+        "title": "Archivo de observaciones 03: criterios, fuentes y comprobaciones de un objetivo extenso"
+      },
+      {
+        "id": 7,
+        "project_id": 101,
+        "title": "Archivo de observaciones 04: criterios, fuentes y comprobaciones de un objetivo extenso"
+      },
+      {
+        "id": 8,
+        "project_id": 101,
+        "title": "Archivo de observaciones 05: criterios, fuentes y comprobaciones de un objetivo extenso"
+      },
+      {
+        "id": 9,
+        "project_id": 101,
+        "title": "Archivo de observaciones 06: criterios, fuentes y comprobaciones de un objetivo extenso"
+      },
+      {
+        "id": 10,
+        "project_id": 101,
+        "title": "Archivo de observaciones 07: criterios, fuentes y comprobaciones de un objetivo extenso"
+      },
+      {
+        "id": 11,
+        "project_id": 101,
+        "title": "Archivo de observaciones 08: criterios, fuentes y comprobaciones de un objetivo extenso"
+      },
+      {
+        "id": 12,
+        "project_id": 101,
+        "title": "Archivo de observaciones 09: criterios, fuentes y comprobaciones de un objetivo extenso"
+      },
+      {
+        "id": 13,
+        "project_id": 101,
+        "title": "Archivo de observaciones 10: criterios, fuentes y comprobaciones de un objetivo extenso"
+      },
+      {
+        "id": 14,
+        "project_id": 101,
+        "title": "Archivo de observaciones 11: criterios, fuentes y comprobaciones de un objetivo extenso"
+      },
+      {
+        "id": 15,
+        "project_id": 101,
+        "title": "Archivo de observaciones 12: criterios, fuentes y comprobaciones de un objetivo extenso"
+      },
+      {
+        "id": 16,
+        "project_id": 101,
+        "title": "Archivo de observaciones 13: criterios, fuentes y comprobaciones de un objetivo extenso"
+      },
+      {
+        "id": 17,
+        "project_id": 101,
+        "title": "Archivo de observaciones 14: criterios, fuentes y comprobaciones de un objetivo extenso"
+      },
+      {
+        "id": 18,
+        "project_id": 101,
+        "title": "Archivo de observaciones 15: criterios, fuentes y comprobaciones de un objetivo extenso"
+      },
+      {
+        "id": 19,
+        "project_id": 101,
+        "title": "Archivo de observaciones 16: criterios, fuentes y comprobaciones de un objetivo extenso"
+      }
+    ],
+    "milestones": [
+      {
+        "id": 1,
+        "epic_id": 1
+      }
+    ],
+    "tasks": [
+      {
+        "id": 1001,
+        "epic_id": 1,
+        "milestone_id": 1,
+        "status": "pending"
+      },
+      {
+        "id": 1002,
+        "epic_id": 1,
+        "milestone_id": 1,
+        "status": "pending"
+      },
+      {
+        "id": 1101,
+        "epic_id": 2,
+        "milestone_id": null,
+        "status": "in_progress"
+      },
+      {
+        "id": 1102,
+        "epic_id": null,
+        "milestone_id": null,
+        "status": "done"
+      },
+      {
+        "id": 1103,
+        "epic_id": 3,
+        "milestone_id": null,
+        "status": "pending"
+      },
+      {
+        "id": 1104,
+        "epic_id": 3,
+        "milestone_id": null,
+        "status": "pending"
+      },
+      {
+        "id": 1200,
+        "epic_id": null,
+        "milestone_id": null,
+        "status": "in_progress"
+      },
+      {
+        "id": 3001,
+        "epic_id": null,
+        "milestone_id": null,
+        "status": "done"
+      },
+      {
+        "id": 3002,
+        "epic_id": null,
+        "milestone_id": null,
+        "status": "done"
+      }
+    ],
+    "dependencies": [
+      {
+        "task_id": 1002,
+        "depends_on_task_id": 1001
+      },
+      {
+        "task_id": 1104,
+        "depends_on_task_id": 1103
+      }
+    ],
+    "runs": [
+      {
+        "id": "c8bfe7e6-6d3d-4ef1-ba8b-8ce4475c0018",
+        "status": "accepted"
+      },
+      {
+        "id": "e8be62ec-43a2-4747-813d-e22b2b12283c",
+        "status": "needs_review"
+      },
+      {
+        "id": "f2937219-989d-497a-b037-b6ab908c1644",
+        "status": "waiting_input"
+      }
+    ],
+    "peers": [
+      {
+        "kind": "business",
+        "state": "closed"
+      },
+      {
+        "kind": "native",
+        "state": "closed"
+      },
+      {
+        "kind": "business",
+        "state": "closed"
+      },
+      {
+        "kind": "native",
+        "state": "closed"
+      },
+      {
+        "kind": "business",
+        "state": "closed"
+      },
+      {
+        "kind": "native",
+        "state": "closed"
+      }
+    ],
+    "dispatches": 0,
+    "native_starts": 1,
+    "integrity": "ok",
+    "foreign_keys": []
+  },
+  "unchanged_observed_domain_state": true,
+  "service_domain": {
+    "status": "closed",
+    "domain_removed": true
+  },
+  "source_sha256": {
+    "evals/operation/overview_page.py": "745a88adc98d72f3b74796dcf154737e6a556edd1e7b70a230e69030040209be",
+    "evals/operation/planning_page.py": "abdee82352936747ddb6f359be123c0241371601521acda5d18934478dfc8236",
+    "frontend/tests/overview.e2e.mjs": "64d2c9f28669633820bb7ca29f411ed7f7b4162c3a52a21f173cfd86a691d975",
+    "frontend/src/components/pages/Dashboard.tsx": "86d5d0355afef29d88a327e4f32792df6f333b63cff39619c770f1d7331991f2",
+    "frontend/src/components/chat/QuestionInbox.tsx": "b1d8e8b25d968a42a89be34f4fc9f11e033fef3332b027fb208e9a065b64526b"
+  },
+  "package_receipt": "docs/modernization/planning-commands-packaging.json"
+}

@@ -1124,3 +1124,12 @@ Aceptación completa de la página: añadir I001 de `evals/operation/planning_pa
 ([lista](planning-page-lint.json)). Cabecera y badge global densos en móvil;
 notificaciones del fixture no equivalen a actividad nativa. Todo queda para el
 pulido global; no repetir generación o rehacer distribución por estos detalles.
+
+## DD133 — densidad del Resumen y estilo del evaluador
+
+La lista de50preguntas visibles desplaza las tareas al final de una lectura larga.
+Revisar su distribución/resumen al pulir, manteniendo paginación e identidades y
+sin ocultar pendientes. Cabecera compartida enDD132. I001 del nuevo
+`evals/operation/overview_page.py` en[overview-page-lint.json](overview-page-lint.json).
+La navegación de una decisión de cierre no vacía es un recheck funcional del cierre
+completo, registrado aparte; no se rebaja a detalle de estilo.
