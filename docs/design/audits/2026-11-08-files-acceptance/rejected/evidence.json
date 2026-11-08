@@ -1,0 +1,50 @@
+{
+  "status": "passed",
+  "scope": "Read-only attachment review plus one explicit empty metadata project; zero attachment mutations or model calls",
+  "states": [
+    {
+      "name": "01-current-search-result",
+      "width": 390,
+      "region": ".files-index",
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "02-current-no-search-result",
+      "width": 390,
+      "region": ".files-index",
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "03-selected-original-mobile",
+      "width": 390,
+      "region": ".files-inspector",
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "04-current-pdf-text-mobile",
+      "width": 390,
+      "region": ".files-preview",
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "05-actual-empty-mobile",
+      "width": 390,
+      "region": ".files-index",
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "06-actual-empty-desktop",
+      "width": 1440,
+      "region": ".files-index",
+      "fits": true,
+      "violations": []
+    }
+  ],
+  "errors": [],
+  "empty_project": 3
+}

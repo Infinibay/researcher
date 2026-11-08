@@ -7,7 +7,7 @@
   "image_count": 4,
   "selected_desktop": "archive-inspector",
   "selection": "../../selection.md",
-  "implementation_status": "code pilot; owner upload/preview/download/delete and scoped keyboard/browser checks; complete route acceptance pending",
+  "implementation_status": "technical and delegated visual full-route acceptance verified; human comprehension U08 and final accessibility/release audit remain open",
   "assets": [
     {
       "id": "archive-inspector",
@@ -114,5 +114,6 @@
       "inspected": true
     }
   ],
-  "implementation_evidence": "../../audits/2026-11-01-files/report.md"
+  "implementation_evidence": "../../audits/2026-11-01-files/report.md",
+  "acceptance_evidence": "../../audits/2026-11-08-files-acceptance/report.md"
 }

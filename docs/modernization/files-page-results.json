@@ -1,0 +1,78 @@
+{
+  "base_commit": "9706d8b",
+  "started_at": "2026-11-08T01:32:48Z",
+  "verified_at": "2026-11-08T01:59:03Z",
+  "seconds_until_verification": 1575,
+  "status": "page_technical_visual_acceptance_verified",
+  "accepted_route": "/files",
+  "selected_concept": "archive-inspector",
+  "whole_pages_accepted": 2,
+  "whole_pages_total": 12,
+  "current_web_index_sha256": "06b973e29d5a66868d567af4946021618f843e061622c981957207fa1d2c1907",
+  "observed_earlier_web_index_sha256": "d740d4c175e2daac93ec35ffd0990345a4019c0e9840dedb04cae518b06e386e",
+  "browser": {
+    "states": 25,
+    "check_groups": 7,
+    "review_states": 6,
+    "representative_references": 55,
+    "current_files": 65,
+    "operations": 70,
+    "captured_sources": 0,
+    "layout_top_before": 4858.375,
+    "layout_top_after": 649,
+    "observed_axe_violations": 0,
+    "real_sqlite_fault_injection": true,
+    "original_incomplete_bytes_retained": "PART",
+    "page_errors": []
+  },
+  "installed_selection": {
+    "cases": 48,
+    "passed": 48,
+    "failed": 0,
+    "skipped": 0,
+    "backend_modules": 235,
+    "all_backend_imports_from_native_env": true,
+    "seconds": 26.111,
+    "exit_code": 0
+  },
+  "frontend_ui": {
+    "passed": 5,
+    "failed": 0,
+    "skipped": 0,
+    "red_before_fix": [
+      "history displaces catalog",
+      "first50 pending make older history unreachable"
+    ]
+  },
+  "frontend_contracts": {
+    "passed": 5,
+    "failed": 0,
+    "skipped": 0
+  },
+  "build": "passed; existing large-chunk warning",
+  "eslint_changed_typescript": "passed",
+  "python_changed_definitions_documented": 4,
+  "backend_product_changed": false,
+  "source_installation_match": 676,
+  "runs": 0,
+  "dispatches": 0,
+  "native_starts": 0,
+  "integrity": "ok",
+  "service_exit": 143,
+  "service_resource_closure": "closed, domain_removed=true",
+  "review_original_attachment_rows_unchanged": true,
+  "rejected_visual_evidence": "First review accepted transient zero rows while loading and then showed prior project; both empty captures rejected. Corrected review waits for selected project and final empty message. One real metadata project created and reused; zero repeated attachment mutations.",
+  "repetitions": "Final build repeats full25state command after all-pending pagination fix; counts do not add repetitions. One review wrapper refused existing output before starting any service.",
+  "limits": [
+    "Technical and delegated visual route acceptance, not U08/human comprehension",
+    "No native browser zoom or exhaustive screen reader check",
+    "No global green suite or native contention/Spanish plan/Ken-query acceptance",
+    "No real user migration, push, merge or deploy"
+  ],
+  "deferred": [
+    "DD127",
+    "DD126",
+    "DD121"
+  ],
+  "evidence": "docs/design/audits/2026-11-08-files-acceptance/report.md"
+}

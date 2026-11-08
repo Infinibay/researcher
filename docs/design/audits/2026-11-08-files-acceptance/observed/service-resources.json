@@ -1,0 +1,33 @@
+{
+  "format": 1,
+  "status": "closed",
+  "domain_path": "/sys/fs/cgroup/user.slice/user-1000.slice/user@1000.service/app.slice/researcher-service-90baaafd2a914f71b37cd601c38ca426",
+  "domain_identity": {
+    "device": 28,
+    "inode": 302557,
+    "boot_id": "76501fdb-12f8-4e41-802a-5d65e9bc7ea6",
+    "observer_namespace": 4026531836,
+    "observer_cgroup_namespace": 4026531835
+  },
+  "limits": {
+    "pids": 128,
+    "memory_bytes": 2147483648,
+    "cpu_millis": 2000
+  },
+  "domain_removed": true,
+  "native_actor_closure_proven": false,
+  "reason": "stop_requested",
+  "resources": {
+    "observed": true,
+    "cpu_usage_usec": 5005925,
+    "cpu_throttled_periods": 11,
+    "memory_oom_kills": 0,
+    "memory_group_oom_kills": 0,
+    "pids_denied": 0,
+    "limits": {
+      "cpu_max": "200000 100000",
+      "memory_max": "2147483648",
+      "pids_max": "128"
+    }
+  }
+}

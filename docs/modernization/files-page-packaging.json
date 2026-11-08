@@ -1,0 +1,35 @@
+{
+  "validation_environment": {
+    "runner_cgroup": "/sys/fs/cgroup/user.slice/user-1000.slice/user@1000.service/app.slice/run-p1354286-i1354287.scope",
+    "parent_controllers_before": "cpu memory pids",
+    "runner_cpu_max": "800000 100000",
+    "purpose": "Transient systemd scope with CPUQuota=800% retains CPU-controller availability during validation; it does not relax any product limit.",
+    "parent_controllers_after": "cpu memory pids"
+  },
+  "base_commit": "9706d8b",
+  "wheel": "researcher-0.1.0-cp312-cp312-linux_x86_64.whl",
+  "wheel_sha256": "a379e56f2e0934dd271eb91317c86d182ee56f7cb7d4a5a6e5bc2a8902188352",
+  "source_files_matching_wheel_and_installation": 676,
+  "product_files_matching": 360,
+  "observed": {
+    "cases": 48,
+    "passed": 48,
+    "failed": 0,
+    "skipped": 0,
+    "backend_modules": 235,
+    "all_backend_imports_from_native_env": true,
+    "seconds": 26.111,
+    "exit_code": 0
+  },
+  "tests": [
+    "backend/tests/api/test_reference_files.py",
+    "backend/tests/api/test_reference_recovery.py",
+    "backend/tests/runtime/test_file_imports.py"
+  ],
+  "real_model_turns": 0,
+  "limits": [
+    "Selected installed tests, not the global suite",
+    "Current installed attachment upload/preview/download/recovery/import cases; browser page acceptance is recorded separately",
+    "Actual SQLite/files, capture preservation and original-operation recovery; controlled native/import fixtures, no paid inference or human comprehension claim"
+  ]
+}

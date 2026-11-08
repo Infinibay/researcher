@@ -1,0 +1,1096 @@
+{
+  "status": "passed",
+  "states": [
+    {
+      "name": "01-representative-archive",
+      "width": 1440,
+      "layout": {
+        "x": 224,
+        "y": 649,
+        "width": 1184,
+        "height": 4565.5625
+      },
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "02-paginated-search",
+      "width": 390,
+      "layout": {
+        "x": 8,
+        "y": 1036.21875,
+        "width": 374,
+        "height": 283.703125
+      },
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "03-no-search-result",
+      "width": 390,
+      "layout": {
+        "x": 8,
+        "y": 961.21875,
+        "width": 374,
+        "height": 243.5625
+      },
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "04-actual-empty",
+      "width": 390,
+      "layout": {
+        "x": 8,
+        "y": 875.625,
+        "width": 374,
+        "height": 243.5625
+      },
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "05-independent-same-name",
+      "width": 390,
+      "layout": {
+        "x": 8,
+        "y": -79.953125,
+        "width": 374,
+        "height": 1255.515625
+      },
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "06-lost-upload-receipt",
+      "width": 1440,
+      "layout": {
+        "x": 224,
+        "y": 707.4375,
+        "width": 1184,
+        "height": 4552.296875
+      },
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "07-late-upload-keeps-new-visit",
+      "width": 1440,
+      "layout": {
+        "x": 224,
+        "y": 649,
+        "width": 1184,
+        "height": 4539.03125
+      },
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "08-preview-pdf",
+      "width": 1440,
+      "layout": {
+        "x": 224,
+        "y": 12,
+        "width": 1184,
+        "height": 4539.03125
+      },
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "08-preview-csv",
+      "width": 390,
+      "layout": {
+        "x": 8,
+        "y": -622.953125,
+        "width": 374,
+        "height": 1807.65625
+      },
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "08-preview-json",
+      "width": 390,
+      "layout": {
+        "x": 8,
+        "y": -121.953125,
+        "width": 374,
+        "height": 1657.1875
+      },
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "08-preview-xml",
+      "width": 390,
+      "layout": {
+        "x": 8,
+        "y": -121.953125,
+        "width": 374,
+        "height": 1680.296875
+      },
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "08-preview-docx",
+      "width": 390,
+      "layout": {
+        "x": 8,
+        "y": -164.953125,
+        "width": 374,
+        "height": 1781.828125
+      },
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "09-narrow-literal-preview",
+      "width": 320,
+      "layout": {
+        "x": 8,
+        "y": -261.765625,
+        "width": 304,
+        "height": 1639.859375
+      },
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "10-size-rejected",
+      "width": 1440,
+      "layout": {
+        "x": 224,
+        "y": 686.59375,
+        "width": 1184,
+        "height": 4684.390625
+      },
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "11-multiple-selection-rejected",
+      "width": 1440,
+      "layout": {
+        "x": 224,
+        "y": 686.59375,
+        "width": 1184,
+        "height": 4684.390625
+      },
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "12-invalid-preview-keeps-original",
+      "width": 390,
+      "layout": {
+        "x": 8,
+        "y": -121.953125,
+        "width": 374,
+        "height": 1232.09375
+      },
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "13-download-error",
+      "width": 1440,
+      "layout": {
+        "x": 224,
+        "y": -98,
+        "width": 1184,
+        "height": 4684.390625
+      },
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "14-preview-error-retains-prior",
+      "width": 1440,
+      "layout": {
+        "x": 224,
+        "y": -98,
+        "width": 1184,
+        "height": 4684.390625
+      },
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "15-pending-recovery-visible",
+      "width": 1440,
+      "layout": {
+        "x": 224,
+        "y": 920.40625,
+        "width": 1184,
+        "height": 4684.390625
+      },
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "16-incomplete-recovery-refused",
+      "width": 1440,
+      "layout": {
+        "x": 224,
+        "y": 958,
+        "width": 1184,
+        "height": 4671.125
+      },
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "17-delete-dialog",
+      "width": 390,
+      "layout": {
+        "x": 8,
+        "y": 31.046875,
+        "width": 374,
+        "height": 1226.296875
+      },
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "18-delete-failure-keeps-bytes",
+      "width": 390,
+      "layout": {
+        "x": 8,
+        "y": 31.046875,
+        "width": 374,
+        "height": 1226.296875
+      },
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "19-lost-delete-receipt-history",
+      "width": 1440,
+      "layout": {
+        "x": 224,
+        "y": 4893.375,
+        "width": 1184,
+        "height": 4614.84375
+      },
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "20-foreign-link",
+      "width": 390,
+      "layout": {
+        "x": 8,
+        "y": 1168.40625,
+        "width": 374,
+        "height": 164.21875
+      },
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "21-current-mobile-after-reload",
+      "width": 390,
+      "layout": {
+        "x": 8,
+        "y": 515.046875,
+        "width": 374,
+        "height": 1078.3125
+      },
+      "fits": true,
+      "violations": []
+    }
+  ],
+  "errors": [],
+  "checks": [
+    "Confirmed historical operations do not displace the primary archive below the first viewport",
+    "Lost actual upload response reuses the original operation and one reference only",
+    "Late successful upload does not take over a replacement A visit after A-B-A",
+    "PDF/DOCX/CSV/JSON/XML extraction is explicit, normalized and scoped; original byte hashes survive downloads",
+    "Oversize/multiple selections and broken preview are explicit; failed download/refresh cannot become success or erase prior text",
+    "Actual SQLite publication failure recovers only complete original bytes; incomplete original is refused and retained after explicit abandonment",
+    "Keyboard deletion preserves focus; failed commit preserves original bytes; lost delete reply remains inspectable as the exact original result"
+  ],
+  "files": [
+    {
+      "id": 1,
+      "project": 1,
+      "name": "registro-00.txt",
+      "sha256": "91c259a53f53314877f584c20816d98c19b6dd4c0e2b791ce710a6ed41d04ca1",
+      "operation_key": "e977825b-7cee-4765-9533-b83806fa54bb"
+    },
+    {
+      "id": 2,
+      "project": 1,
+      "name": "registro-01.txt",
+      "sha256": "ad486a89f021c76320a4b8723cda7d30c9860be2e4586619796c681a1f4d5696",
+      "operation_key": "46a00df1-2d8c-46ab-941a-9283fc3ae504"
+    },
+    {
+      "id": 3,
+      "project": 1,
+      "name": "registro-02.txt",
+      "sha256": "69ace96797cc227e80f911392b2dccf2cba193485a9ca2d9b24131efdc2bd7e9",
+      "operation_key": "6a588487-fad5-4701-b486-0b0d773595c1"
+    },
+    {
+      "id": 4,
+      "project": 1,
+      "name": "registro-03.txt",
+      "sha256": "577df5f73cc6d88d20df4a522426dd6660bfd73292e9aafeb3c28a9233aa65f6",
+      "operation_key": "2cc3278c-101b-4d89-81ea-79ad60d18497"
+    },
+    {
+      "id": 5,
+      "project": 1,
+      "name": "registro-04.txt",
+      "sha256": "d297fbf7d075ce23d54a8bd6788f086b7d4e45071f408cc21be376db7b1ca796",
+      "operation_key": "395175dc-4ae5-4e34-9de1-98de64fff4ac"
+    },
+    {
+      "id": 6,
+      "project": 1,
+      "name": "registro-05.txt",
+      "sha256": "417e77a920857f42c67efbf2aa7003795a4a312323c3cc267ecf328fbf32695f",
+      "operation_key": "8c957491-ed95-48b7-b5f3-95e869773bf3"
+    },
+    {
+      "id": 7,
+      "project": 1,
+      "name": "registro-06.txt",
+      "sha256": "3fd5e9d896fecf784d91f29d76453335c9a65ebebf19a550488cf302b8e8a7a8",
+      "operation_key": "5f5a23d7-a233-4c1a-963f-c195fe9e3542"
+    },
+    {
+      "id": 8,
+      "project": 1,
+      "name": "registro-07.txt",
+      "sha256": "6a6ace1a58461c89b0b4a04642264869855155c2517a4f28dd90b065f56cda79",
+      "operation_key": "37f88a93-7dbe-408c-8b6e-c15209cc8c30"
+    },
+    {
+      "id": 9,
+      "project": 1,
+      "name": "registro-08.txt",
+      "sha256": "090f8b2abf7b5eaf1777461d4452e3f43dcd856bef000c0a2fdab41ffb1eb257",
+      "operation_key": "8fc9431a-2bf5-44b8-8d9c-f215851c19e5"
+    },
+    {
+      "id": 10,
+      "project": 1,
+      "name": "registro-09.txt",
+      "sha256": "0d3c71d73438a19f4b31fe997f4a8aa494c7a19034c3b84f6a2efdd286ddb0f0",
+      "operation_key": "386a68a1-0710-45aa-8a20-29152a750752"
+    },
+    {
+      "id": 11,
+      "project": 1,
+      "name": "registro-10.txt",
+      "sha256": "e3eb9dbf6e286a375d3e5130a366c4f8c8ca0695d97fccb53d7403104b186c1e",
+      "operation_key": "04f4eaa7-b28f-4be7-a9fa-510f86698487"
+    },
+    {
+      "id": 12,
+      "project": 1,
+      "name": "registro-11.txt",
+      "sha256": "f7a5cb7508144ac2799e252b871647070495dce7cf8876d65561eae427d4c945",
+      "operation_key": "51713976-71e8-4ad6-8ca0-1dc15f5887e5"
+    },
+    {
+      "id": 13,
+      "project": 1,
+      "name": "registro-12.txt",
+      "sha256": "2318efea1b2656ec88d9b6e27046e04b0582fb13c636938c4473231267aa2402",
+      "operation_key": "01d0cba1-41ca-462b-b548-0d8d610b3720"
+    },
+    {
+      "id": 14,
+      "project": 1,
+      "name": "registro-13.txt",
+      "sha256": "0e6fbb0540d8ea1266201b6f32381eb3deca9058248afaf417135679fd23dd93",
+      "operation_key": "5954bec1-ff3f-43f1-ae63-b914a3008f23"
+    },
+    {
+      "id": 15,
+      "project": 1,
+      "name": "registro-14.txt",
+      "sha256": "0207cce29165f5ec5f23e2d3249835165c38dbd00b1971f7ca247f1a5b3dac56",
+      "operation_key": "76a859c4-eee9-4762-ae9e-326678edcc66"
+    },
+    {
+      "id": 16,
+      "project": 1,
+      "name": "registro-15.txt",
+      "sha256": "02f03443d53c1063aa6de862d7545ea834e80eb20ca4b5abf041bce00310ee30",
+      "operation_key": "21c8aeb5-d9bc-452b-b509-0ae6462e5243"
+    },
+    {
+      "id": 17,
+      "project": 1,
+      "name": "registro-16.txt",
+      "sha256": "c722f2dc5f65e86a38ea0fbbaa814e244b114e926af3ec472d63a20675674a77",
+      "operation_key": "684d4469-ba72-481c-9c25-a6100dcd9567"
+    },
+    {
+      "id": 18,
+      "project": 1,
+      "name": "registro-17.txt",
+      "sha256": "6f6a92f2176948d7c711f7bf9391decd207ad3b64324c6be2b93e576864a54a9",
+      "operation_key": "3ab7cc46-a652-4297-b6cb-d06656d1cfbe"
+    },
+    {
+      "id": 19,
+      "project": 1,
+      "name": "registro-18.txt",
+      "sha256": "ece564ae0d494a319ffa6cfa6fc6004d8bef63aaf8c9bd7fc0bd1e220da8136c",
+      "operation_key": "02d9ecf3-7cc8-4489-876d-d4061079d061"
+    },
+    {
+      "id": 20,
+      "project": 1,
+      "name": "registro-19.txt",
+      "sha256": "471d77c9ed79dc0953eccb40f8814d31dde1ef0775c43de4685c85bb189ee054",
+      "operation_key": "48a87e37-b046-42b2-a7c8-6a2b9f8a9351"
+    },
+    {
+      "id": 21,
+      "project": 1,
+      "name": "registro-20.txt",
+      "sha256": "e271760969b5c889d3f1e299669ee41a5c1c9b0a80ee4209d9ea91c214f71415",
+      "operation_key": "574ef2f7-f409-4729-8668-8343b0227128"
+    },
+    {
+      "id": 22,
+      "project": 1,
+      "name": "registro-21.txt",
+      "sha256": "8d963ff475d0b83a0ca1640a44ebe5aaef396daee60d82f87eef4338e59566c6",
+      "operation_key": "17dd7a9e-be77-48a6-9db3-ffb5915f8002"
+    },
+    {
+      "id": 23,
+      "project": 1,
+      "name": "registro-22.txt",
+      "sha256": "150107544f9b083742efe5ca5c18da4a2e083657b4fb58e57a7da571436fbf23",
+      "operation_key": "8b415a79-106c-426d-b4e0-07df30e81b96"
+    },
+    {
+      "id": 24,
+      "project": 1,
+      "name": "registro-23.txt",
+      "sha256": "d732d5d4d86560db2092dd490fe4de59b2af6a821f0140a055fe3559b0a24f5e",
+      "operation_key": "2860fccc-0115-4e57-b51d-6047749318fb"
+    },
+    {
+      "id": 25,
+      "project": 1,
+      "name": "registro-24.txt",
+      "sha256": "62dbd40d00e0089ed530bee98deaca0ceca55a4fb67ded90628696e1abe4ab13",
+      "operation_key": "9d3299be-e2c6-4a35-be73-f2ff174c8456"
+    },
+    {
+      "id": 26,
+      "project": 1,
+      "name": "registro-25.txt",
+      "sha256": "3fa53f56260e0555e1288a026721a92e6e97c3e780f24a5c132bdee096cb075a",
+      "operation_key": "3d6979ec-b89f-4f9c-80f7-4a5afdfda3e3"
+    },
+    {
+      "id": 27,
+      "project": 1,
+      "name": "registro-26.txt",
+      "sha256": "bf6f7c9bc0035f292e523177a2cd6467c5dff8d556c143e3e1154c54d8bcadf4",
+      "operation_key": "550e6d0b-9e80-4902-82c0-77f923ae19bc"
+    },
+    {
+      "id": 28,
+      "project": 1,
+      "name": "registro-27.txt",
+      "sha256": "91045741e3a6918fd5579ec8c69d08a0f07e715251cf0ae912de627bc742cf98",
+      "operation_key": "7cba18da-2d11-4a7a-98e9-db14bb92e2af"
+    },
+    {
+      "id": 29,
+      "project": 1,
+      "name": "registro-28.txt",
+      "sha256": "e4e0a0d181f7e90e08e4626d9d730968b5574b9e1bb757f07c853323b28166dd",
+      "operation_key": "332ef4e8-4a09-4fb8-b9bc-8167ff663374"
+    },
+    {
+      "id": 30,
+      "project": 1,
+      "name": "registro-29.txt",
+      "sha256": "4d1919c0eda40c5c00aae93c63d8db0b702680d33bd9e419e2f9d7959cabdb69",
+      "operation_key": "73c8007f-e31d-4e64-97ca-60464bb27ab6"
+    },
+    {
+      "id": 31,
+      "project": 1,
+      "name": "registro-30.txt",
+      "sha256": "b8cbfc4197202200a5b474a68e1559dfe4d5479ec81221854f43e674957323f3",
+      "operation_key": "19b9e2fd-db5d-4cfc-b8e1-a40d59f0b879"
+    },
+    {
+      "id": 32,
+      "project": 1,
+      "name": "registro-31.txt",
+      "sha256": "5862f24df217f0a6e3de04dd8366fa00ba05c60d40410adfbe60b897acb7e82a",
+      "operation_key": "443008a7-b956-46b0-877d-defac9135e9f"
+    },
+    {
+      "id": 33,
+      "project": 1,
+      "name": "registro-32.txt",
+      "sha256": "dd02d88f9b91e83c8692b5bc6815758dcb31a93a55fbfd2a3f04682e033d1998",
+      "operation_key": "2211d3e4-6e41-4c46-b5e3-2558fe1b64fd"
+    },
+    {
+      "id": 34,
+      "project": 1,
+      "name": "registro-33.txt",
+      "sha256": "656d8abef4cb9871f3a27f887780392ebd4c3f882079a362db1b707b09244e58",
+      "operation_key": "4286a3ac-f6c5-464c-abc0-ab29d6d09ce4"
+    },
+    {
+      "id": 35,
+      "project": 1,
+      "name": "registro-34.txt",
+      "sha256": "d2f1e5bf330256304b0dbab30ab277ce2b5e0cab924146f60232f0e3d2b8d607",
+      "operation_key": "7a6425e0-0f9a-4ccc-b927-a5c90858d4e2"
+    },
+    {
+      "id": 36,
+      "project": 1,
+      "name": "registro-35.txt",
+      "sha256": "0a8b92a796dd3e130b12120dda43e45709685b9b6093b5da72e941c2ab011b63",
+      "operation_key": "f1dd6604-4a61-438c-aa9c-5cc48b84aaf7"
+    },
+    {
+      "id": 37,
+      "project": 1,
+      "name": "registro-36.txt",
+      "sha256": "313b10a0149532b5a60e70acb4ac0e61d36b46eba9536da34ab5900ebbee84c3",
+      "operation_key": "f1e8dc9a-a6f0-49b5-9603-da6fd753f1df"
+    },
+    {
+      "id": 38,
+      "project": 1,
+      "name": "registro-37.txt",
+      "sha256": "fa609d17f84892f54979c4b6c12c7ad74efee4454951b7841573f12028ab8161",
+      "operation_key": "633aaa65-58bf-484e-9242-90ae8f000e46"
+    },
+    {
+      "id": 39,
+      "project": 1,
+      "name": "registro-38.txt",
+      "sha256": "4c387117f1cd10140793c2e8e76c52f29db86036960078323105143db350c875",
+      "operation_key": "63aae227-9040-4b74-9dc2-78f1afac6e0c"
+    },
+    {
+      "id": 40,
+      "project": 1,
+      "name": "registro-39.txt",
+      "sha256": "c4e0cb767b266cf10736b827f75651acb5e869a40e3a3f7925d23cf7e90e9ec2",
+      "operation_key": "e78dce5d-d22e-421c-807a-7312c2265543"
+    },
+    {
+      "id": 41,
+      "project": 1,
+      "name": "registro-40.txt",
+      "sha256": "ab56f6abfc1ff01cc60c87c2f6b76e6583100af7537b15bd52287791e8aad3ce",
+      "operation_key": "82ddd661-ab8b-4f11-9e2c-1734e779b9c5"
+    },
+    {
+      "id": 42,
+      "project": 1,
+      "name": "registro-41.txt",
+      "sha256": "604dfb2c7ba2f271c11e1216b3d0b258639477557a01a88371c9dd97f0e16073",
+      "operation_key": "c227c310-bc2b-484d-9212-d341422c51a5"
+    },
+    {
+      "id": 43,
+      "project": 1,
+      "name": "registro-42.txt",
+      "sha256": "c22ef24cdb0637f0594b6e17094461bf7a54bf14744c780e8246744ca0625e3d",
+      "operation_key": "13d78748-80dd-48da-8a47-0d093bb15ee8"
+    },
+    {
+      "id": 44,
+      "project": 1,
+      "name": "registro-43.txt",
+      "sha256": "b06e8156112808690f662c1f461985d3ad381b8fdaa73a14efa4633b68ca5c49",
+      "operation_key": "93eb1925-274f-4399-8316-a8ac0c7aeecc"
+    },
+    {
+      "id": 45,
+      "project": 1,
+      "name": "registro-44.txt",
+      "sha256": "03cd1dcaebcaad1a431ef41016fb43fc208ba5d52501119e406a7b96e7b78a8f",
+      "operation_key": "65021e99-aa5e-4dd2-b7a0-23a838478e89"
+    },
+    {
+      "id": 46,
+      "project": 1,
+      "name": "registro-45.txt",
+      "sha256": "06e2569cfa9b0c1e274b7db67994873dea85c60a617ba55e5e109839f28451fe",
+      "operation_key": "773d9870-c91b-4e1d-974a-850a17730be6"
+    },
+    {
+      "id": 47,
+      "project": 1,
+      "name": "registro-46.txt",
+      "sha256": "5b6cc65a9a59a730ea09d6d7da8e55bf063cf89f5893cbc9bc9d64cbf67706ed",
+      "operation_key": "85b9e93e-0db1-45a8-85f9-50f5645121c5"
+    },
+    {
+      "id": 48,
+      "project": 1,
+      "name": "registro-47.txt",
+      "sha256": "a77f7ef8544e6b122e041affedb79c9366dc2e5da4c5efc180dbec3fefb68be3",
+      "operation_key": "422ec182-1967-4540-a3c4-dae20773cbc4"
+    },
+    {
+      "id": 49,
+      "project": 1,
+      "name": "registro-48.txt",
+      "sha256": "3b52c5336f4d0df47efeb0b7c8f853ca80f4b8f0b9ee9b5ba86c6eafda1f0300",
+      "operation_key": "33f32a87-4697-4774-b378-074883116f82"
+    },
+    {
+      "id": 50,
+      "project": 1,
+      "name": "registro-49.txt",
+      "sha256": "6779cda7cea5f8cbf5ccc6b166644a4d6d63330cf0c8194a90f0080e3241fb63",
+      "operation_key": "49b6b733-cbb9-4ad3-a78f-0ef47df86da3"
+    },
+    {
+      "id": 51,
+      "project": 1,
+      "name": "registro-50.txt",
+      "sha256": "31f308aa82acd43c66465378cd84ae533fb232313c9b31574ed85df50968b819",
+      "operation_key": "3edc1786-98f0-48c2-87d0-52a63a4ca5c4"
+    },
+    {
+      "id": 52,
+      "project": 1,
+      "name": "registro-51.txt",
+      "sha256": "2e0dcaace849bafd9cfbb8e1b726e13b9da82c5c235127b507d39e79ed60d513",
+      "operation_key": "86d53645-a582-4132-a39b-60d8f9a21025"
+    },
+    {
+      "id": 53,
+      "project": 1,
+      "name": "registro-52.txt",
+      "sha256": "4cd2a97599e4496ace1245ec5e666f2e12d5db3bf777142c5a1b4d30ff4373a1",
+      "operation_key": "00297418-bdad-4164-adf4-ea37d2449c1e"
+    },
+    {
+      "id": 54,
+      "project": 1,
+      "name": "registro-53.txt",
+      "sha256": "b7153f2d3ba1261f515cf7308b59664801567eff5dac9553d66e06b427afd866",
+      "operation_key": "500938ee-0140-4660-9630-c66e1173add3"
+    },
+    {
+      "id": 55,
+      "project": 1,
+      "name": "registro-54.txt",
+      "sha256": "5615a30a10860a14215998c9228ac8798c6e75b27de142d0eba42d5f708afdf0",
+      "operation_key": "7e56a27a-33a8-4b20-b4dd-8d1d551e05d5"
+    },
+    {
+      "id": 56,
+      "project": 2,
+      "name": "registro-54.txt",
+      "sha256": "ec8896fe9c53ca8db32669b8ce8f2af414d56847fff3cd28bacb6ed2614ab6e8",
+      "operation_key": "b476924a-6f8c-4446-a8e6-46d94cbb7048"
+    },
+    {
+      "id": 57,
+      "project": 1,
+      "name": "respuesta-perdida.txt",
+      "sha256": "41fe5ce8eb6537e7d9b617a4f9e0fae7ecd893172f63f7a3e586bc32f08df21c",
+      "operation_key": "b476c576-c534-403a-822f-f5da1d5d52fd"
+    },
+    {
+      "id": 58,
+      "project": 1,
+      "name": "respuesta-tardia.txt",
+      "sha256": "d62b8596b1618c43d8db28e988218ebace229a861b846d4761256e47516110bf",
+      "operation_key": "ab031213-b4bf-4069-b50b-f4d52b9c2c0d"
+    },
+    {
+      "id": 59,
+      "project": 1,
+      "name": "original.pdf",
+      "sha256": "dfdce157a7ff43d9b253a6014cf14687efd197b0d56d3e059e67c7968a377a99",
+      "operation_key": "541f12e8-54c2-4aae-aea8-18f8f0d8a7f8"
+    },
+    {
+      "id": 60,
+      "project": 1,
+      "name": "original.csv",
+      "sha256": "03d28539be94ddfea3c4139ed629cd306fea546688bc951e0a350c6e6e856925",
+      "operation_key": "6e6e7d9d-138c-4690-806a-9e1b32324aff"
+    },
+    {
+      "id": 61,
+      "project": 1,
+      "name": "original.json",
+      "sha256": "12782b3be9d418586321535ef99d01f87c6ac162d508a380e3b9cf4af29c1902",
+      "operation_key": "bb68b7b9-877c-423c-99f9-7be3fbad0373"
+    },
+    {
+      "id": 62,
+      "project": 1,
+      "name": "original.xml",
+      "sha256": "e5d3bc1c7eaa573be20929e0c58745002f87a587efe180a1bc97b82fbe228a5d",
+      "operation_key": "c4c320ed-7396-4640-8783-15a2d4d521f8"
+    },
+    {
+      "id": 63,
+      "project": 1,
+      "name": "original.docx",
+      "sha256": "4bdffb7491ba15ddcd055dd696527458e2fc0de9fe4e7ba4b87de0b9ef78fb95",
+      "operation_key": "6212b9e9-f829-4371-bf77-f6557e4cc01d"
+    },
+    {
+      "id": 64,
+      "project": 1,
+      "name": "observaciones-registro-registro-registro-registro-registro-registro-registro-registro-contexto.txt",
+      "sha256": "775efe1ccf1876eccc959ca93c0c04d39597abc0c47c6561a9e7b40a95b6ea3b",
+      "operation_key": "e7b5e828-f63a-4b7b-9b6c-36d3089ad441"
+    },
+    {
+      "id": 65,
+      "project": 1,
+      "name": "invalido.pdf",
+      "sha256": "3564bf8140dfb9a0efa3e9ee08f2ea4b455c707272c07717fdcad6c20d325025",
+      "operation_key": "26d517eb-515e-43ad-ae28-2308d5ba2a50"
+    },
+    {
+      "id": 66,
+      "project": 1,
+      "name": "pendiente.txt",
+      "sha256": "d2004ca0c6225ecea25823e4bba9965f36857d4c189f8f9c10f0c6c838d0a384",
+      "operation_key": "099a7e7f-d525-40ab-8d7f-4efc884c7493"
+    },
+    {
+      "id": 67,
+      "project": 1,
+      "name": "borrado-sin-respuesta.txt",
+      "sha256": "15fc1eb7b8c460184d6a922e5b0f10843208bbbadca896133ef725fef7131957",
+      "operation_key": "72ae6907-d4e5-4fdd-ac7d-02e8bfe70f12"
+    }
+  ],
+  "model_turns": 0,
+  "identities": {
+    "alpha": 1,
+    "beta": 2
+  },
+  "previews": [
+    {
+      "file_id": 56,
+      "project_id": 2,
+      "content_sha256": "ec8896fe9c53ca8db32669b8ce8f2af414d56847fff3cd28bacb6ed2614ab6e8",
+      "persisted_source": false,
+      "provenance": {
+        "reference_file_id": 56,
+        "byte_sha256": "ec8896fe9c53ca8db32669b8ce8f2af414d56847fff3cd28bacb6ed2614ab6e8",
+        "file_size_bytes": 38,
+        "mime_type": "text/plain",
+        "extraction": "utf8-v1"
+      }
+    },
+    {
+      "file_id": 59,
+      "project_id": 1,
+      "content_sha256": "40a5b230d5bf62f06618135b6304136a24ac897f982b61e7c2ea12b476295076",
+      "persisted_source": false,
+      "provenance": {
+        "reference_file_id": 59,
+        "byte_sha256": "dfdce157a7ff43d9b253a6014cf14687efd197b0d56d3e059e67c7968a377a99",
+        "file_size_bytes": 1001,
+        "mime_type": "application/pdf",
+        "extraction": "pypdf-text-v1",
+        "parser_version": "6.21.4",
+        "limits": {
+          "max_pages": 100,
+          "max_text_bytes": 200000,
+          "max_decoded_stream_bytes": 1000000
+        },
+        "page_count": 2,
+        "pages": [
+          {
+            "page_number": 1,
+            "text_start_offset": 9,
+            "end_offset": 43,
+            "has_text": true
+          },
+          {
+            "page_number": 2,
+            "text_start_offset": 54,
+            "end_offset": 94,
+            "has_text": true
+          }
+        ],
+        "pages_without_text": [],
+        "ocr_performed": false,
+        "extraction_note": "Text extraction only; visual reading order, tables and images are not verified. Pages without text may require OCR.",
+        "execution": {
+          "peak_rss_kib": 116592,
+          "cpu_used_seconds": 0.105208,
+          "cpu_limit_seconds": 2,
+          "cpu_hard_limit_seconds": 3,
+          "address_space_limit_bytes": 268435456,
+          "sandbox": {
+            "landlock_abi": 7,
+            "filesystem": "selected_public_reads_no_writes",
+            "network": "denied",
+            "new_processes_and_threads": "denied"
+          },
+          "worker_closed": true,
+          "wall_limit_seconds": 5,
+          "local_accounting": {
+            "project_id": 1,
+            "operation_id": "1b9c341976ae7a8fcd0e6082dd983ecdf8a1bf5c0a35172fd08d86493debcda8",
+            "reused": false,
+            "original_attempt_id": null,
+            "observed_cpu_ms": 106,
+            "cpu_ceiling_ms": 3000,
+            "measurement_origin": "original_worker"
+          }
+        }
+      }
+    },
+    {
+      "file_id": 60,
+      "project_id": 1,
+      "content_sha256": "27ff00796dcb177f2e1bb7b6d481aa37382395d49ac3a2cc889cb688efcda063",
+      "persisted_source": false,
+      "provenance": {
+        "reference_file_id": 60,
+        "byte_sha256": "03d28539be94ddfea3c4139ed629cd306fea546688bc951e0a350c6e6e856925",
+        "file_size_bytes": 37,
+        "mime_type": "text/csv",
+        "format": "csv",
+        "extraction": "structured-csv-v1",
+        "unit_count": 2,
+        "quote_scope": "normalized_snapshot",
+        "limits": {
+          "max_text_bytes": 200000,
+          "max_units": 5000,
+          "max_depth": 64,
+          "max_nodes": 20000
+        },
+        "delimiter": ",",
+        "header_assumed": true,
+        "extraction_note": "First record is retained and assumed to be headers; missing and empty cells differ. Record numbers are logical CSV records, not physical lines.",
+        "execution": {
+          "peak_rss_kib": 116592,
+          "cpu_used_seconds": 0.056643,
+          "cpu_limit_seconds": 2,
+          "cpu_hard_limit_seconds": 3,
+          "address_space_limit_bytes": 268435456,
+          "sandbox": {
+            "landlock_abi": 7,
+            "filesystem": "selected_public_reads_no_writes",
+            "network": "denied",
+            "new_processes_and_threads": "denied"
+          },
+          "worker_closed": true,
+          "wall_limit_seconds": 5,
+          "local_accounting": {
+            "project_id": 1,
+            "operation_id": "91da7b2b74a27015215ebce16e25d1a3f95df8f4813478fd30f28bdcb08df8ea",
+            "reused": false,
+            "original_attempt_id": null,
+            "observed_cpu_ms": 57,
+            "cpu_ceiling_ms": 3000,
+            "measurement_origin": "original_worker"
+          }
+        },
+        "structure_paged": true
+      }
+    },
+    {
+      "file_id": 61,
+      "project_id": 1,
+      "content_sha256": "5d1107afad884506555eb06953cab06604a24d5eb962da2ccfa10a23ebc4ed0c",
+      "persisted_source": false,
+      "provenance": {
+        "reference_file_id": 61,
+        "byte_sha256": "12782b3be9d418586321535ef99d01f87c6ac162d508a380e3b9cf4af29c1902",
+        "file_size_bytes": 67,
+        "mime_type": "application/json",
+        "format": "json",
+        "extraction": "structured-json-v1",
+        "unit_count": 2,
+        "quote_scope": "normalized_snapshot",
+        "limits": {
+          "max_text_bytes": 200000,
+          "max_units": 5000,
+          "max_depth": 64,
+          "max_nodes": 20000
+        },
+        "extraction_note": "RFC 6901 pointers address normalized values; numeric tokens are preserved. Whitespace/escaping of the original serialization is not quoted.",
+        "execution": {
+          "peak_rss_kib": 118128,
+          "cpu_used_seconds": 0.058374999999999996,
+          "cpu_limit_seconds": 2,
+          "cpu_hard_limit_seconds": 3,
+          "address_space_limit_bytes": 268435456,
+          "sandbox": {
+            "landlock_abi": 7,
+            "filesystem": "selected_public_reads_no_writes",
+            "network": "denied",
+            "new_processes_and_threads": "denied"
+          },
+          "worker_closed": true,
+          "wall_limit_seconds": 5,
+          "local_accounting": {
+            "project_id": 1,
+            "operation_id": "404b7910eb5238cb2cfade2b6420bd24f3b3c02b062affff6f00482adf6ef2ed",
+            "reused": false,
+            "original_attempt_id": null,
+            "observed_cpu_ms": 59,
+            "cpu_ceiling_ms": 3000,
+            "measurement_origin": "original_worker"
+          }
+        },
+        "structure_paged": true
+      }
+    },
+    {
+      "file_id": 62,
+      "project_id": 1,
+      "content_sha256": "af3cc29d7875403d8b86f30443964783ef090089e9c777d6b03887be4afcb07a",
+      "persisted_source": false,
+      "provenance": {
+        "reference_file_id": 62,
+        "byte_sha256": "e5d3bc1c7eaa573be20929e0c58745002f87a587efe180a1bc97b82fbe228a5d",
+        "file_size_bytes": 76,
+        "mime_type": "application/xml",
+        "format": "xml",
+        "extraction": "structured-xml-v1",
+        "unit_count": 2,
+        "quote_scope": "normalized_snapshot",
+        "limits": {
+          "max_text_bytes": 200000,
+          "max_units": 5000,
+          "max_depth": 64,
+          "max_nodes": 20000
+        },
+        "extraction_note": "Paths use namespace-expanded names escaped as pointer components. Attributes, text, tails and empty elements are retained; comments/processing instructions and original markup serialization are outside extraction scope.",
+        "execution": {
+          "peak_rss_kib": 118128,
+          "cpu_used_seconds": 0.05960599999999999,
+          "cpu_limit_seconds": 2,
+          "cpu_hard_limit_seconds": 3,
+          "address_space_limit_bytes": 268435456,
+          "sandbox": {
+            "landlock_abi": 7,
+            "filesystem": "selected_public_reads_no_writes",
+            "network": "denied",
+            "new_processes_and_threads": "denied"
+          },
+          "worker_closed": true,
+          "wall_limit_seconds": 5,
+          "local_accounting": {
+            "project_id": 1,
+            "operation_id": "0b52224537c45104935ddb18c7b01ce84bc5a6207dc5acf815954a58ae3904ca",
+            "reused": false,
+            "original_attempt_id": null,
+            "observed_cpu_ms": 60,
+            "cpu_ceiling_ms": 3000,
+            "measurement_origin": "original_worker"
+          }
+        },
+        "structure_paged": true
+      }
+    },
+    {
+      "file_id": 63,
+      "project_id": 1,
+      "content_sha256": "20fe22f40a995fc299b6370dc3e95b22ead45d626cfef9f132eb331a9ccfb19d",
+      "persisted_source": false,
+      "provenance": {
+        "reference_file_id": 63,
+        "byte_sha256": "4bdffb7491ba15ddcd055dd696527458e2fc0de9fe4e7ba4b87de0b9ef78fb95",
+        "file_size_bytes": 560,
+        "mime_type": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+        "format": "docx",
+        "extraction": "structured-docx-v1",
+        "unit_count": 2,
+        "quote_scope": "normalized_snapshot",
+        "limits": {
+          "max_text_bytes": 200000,
+          "max_units": 5000,
+          "max_depth": 64,
+          "max_nodes": 20000
+        },
+        "extraction_note": "Main document body paragraphs and table cell text only; no page layout, headers/footers, footnotes, comments, images, embedded objects, deleted revisions or field instructions. Displayed field results may be cached and stale; extraction is not full-document review.",
+        "execution": {
+          "peak_rss_kib": 118640,
+          "cpu_used_seconds": 0.057783,
+          "cpu_limit_seconds": 2,
+          "cpu_hard_limit_seconds": 3,
+          "address_space_limit_bytes": 268435456,
+          "sandbox": {
+            "landlock_abi": 7,
+            "filesystem": "selected_public_reads_no_writes",
+            "network": "denied",
+            "new_processes_and_threads": "denied"
+          },
+          "worker_closed": true,
+          "wall_limit_seconds": 5,
+          "local_accounting": {
+            "project_id": 1,
+            "operation_id": "511120ee781f63cb964d5554c8fa72dd34d55e27fa2478eace37e6c47719be16",
+            "reused": false,
+            "original_attempt_id": null,
+            "observed_cpu_ms": 58,
+            "cpu_ceiling_ms": 3000,
+            "measurement_origin": "original_worker"
+          }
+        },
+        "structure_paged": true
+      }
+    },
+    {
+      "file_id": 64,
+      "project_id": 1,
+      "content_sha256": "775efe1ccf1876eccc959ca93c0c04d39597abc0c47c6561a9e7b40a95b6ea3b",
+      "persisted_source": false,
+      "provenance": {
+        "reference_file_id": 64,
+        "byte_sha256": "775efe1ccf1876eccc959ca93c0c04d39597abc0c47c6561a9e7b40a95b6ea3b",
+        "file_size_bytes": 105,
+        "mime_type": "text/plain",
+        "extraction": "utf8-v1"
+      }
+    },
+    {
+      "file_id": 64,
+      "project_id": 1,
+      "content_sha256": "775efe1ccf1876eccc959ca93c0c04d39597abc0c47c6561a9e7b40a95b6ea3b",
+      "persisted_source": false,
+      "provenance": {
+        "reference_file_id": 64,
+        "byte_sha256": "775efe1ccf1876eccc959ca93c0c04d39597abc0c47c6561a9e7b40a95b6ea3b",
+        "file_size_bytes": 105,
+        "mime_type": "text/plain",
+        "extraction": "utf8-v1"
+      }
+    }
+  ],
+  "abandoned": {
+    "project_id": 1,
+    "operation_key": "dba36413-98bf-4472-a24e-22a3bc3e43cb",
+    "expected_bytes": "PART"
+  },
+  "deleted": [
+    64,
+    67
+  ]
+}

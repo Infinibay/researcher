@@ -24,36 +24,40 @@ que se pueda comparar el avance; no presentar microajustes como tareas principal
 ## Estado comprobado
 
 - Codex por suscripción y Ken publicado ensayados. Fuentes/citas, informes draft y revisión documental independiente conectados. Desarrollo admitido desde Tareas/Conversación con captura y comprobaciones explícitas; revisión independiente solicitada desde Tareas y aceptación del propietario conectada. Publicación local desde aceptación conectada; recuperación local de sólo lectura conectada; transporte remoto configurable conectado; recuperación remota y controles de Tareas conectados; ejecución/activación antiguas por tarea y proyecto retiradas; auxiliares de generación/proveedor, herramientas antiguas y sus cinco bibliotecas retirados. También se retiraron API interna, CLI, servicios/listeners y flows/helpers antiguos. También se retiraron autonomía, plantillas históricas y lectores de proveedor sin consumidores; se conserva el control de parada de trabajadores registrados.
-- Interfaz: doce pilotos, 36/36 conceptos de escritorio y 12/12 móviles; todas las rutas tienen piloto y 0/12 páginas están completamente aceptadas.
+- Interfaz: doce pilotos, 36/36 conceptos de escritorio y 12/12 móviles; todas las rutas tienen piloto y 2/12 páginas tienen aceptación técnica y visual delegada.
 - Última suite global: `9fb873c`,2210 casos,2178 pasan,31 fallan y1 error de fixture; sin omisiones. La carrera de backup encontrada se corrigió después con40 pruebas instaladas. No se declara una nueva corrida global verde; la referencia `0c8b8d9` queda como evidencia histórica.
 - U01–U07, E01–E12, C01–C09 y D01–D13 quedan comprobados con el alcance de sus matrices; siguen 2 de 43 escenarios amplios sin aceptación completa en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Estado actual: Documentos aceptado; siguiente Archivos
+## Estado actual: Documentos y Archivos aceptados; siguiente Repositorios
 
-**Documentos:01:08:25–01:27:09UTC,18min44s hasta verificar**, base`a8e1e8b`.
-Documentación/checkpoint posteriores no incluidos. [Alcance y límites](wiki-page-review.md).
+**Archivos: 01:32:48–01:59:03 UTC, 26 min 15 s hasta verificar**, base `9706d8b`.
+Documentación/checkpoint posteriores no incluidos. [Alcance y límites](files-page-review.md).
 
-- Terminado: **Documentos**, aceptación técnica y visual delegada: **1/12páginas**.
- 25estados del recorrido canónico, comparación/biblioteca vacía complementarias,
- lectura a320y720px,55documentos en dos páginas de índice,25revisiones y110674bytes
- de Markdown; sesión/conectividad/conflictos/recibos y borradores comprobados.
- **18pruebas backend instaladas y8contratos frontend pasan**, sin omisiones.
-- Próxima tarea principal: **aceptación de Archivos**. Reusar el concepto/recorrido
- existente; falta terminar sus operaciones y estados completos. Todavía no empezó
- ese bloque, registrar hora al iniciarlo.
-- Pendiente principal: contención del engine sin causa confirmada; plan español
- con auditoría Ken; Proyectos y otras10páginas. Siguen U08/C10/evaluaciones,
- dependencias y distribución. **41/43escenarios amplios**, sin porcentaje global.
-- Al final: detalles aplazados, suite global y revisión independiente. DD125 recoge
- avisos/etiquetas/cabecera de Documentos y zoom nativo/lector; DD126, imports del
- evaluador. No se usa la captura CSS200% rechazada como aceptación de zoom.
+- Terminado: **Archivos**, aceptación técnica y visual delegada; junto con
+  Documentos son **2/12 páginas**. Recorrido final de 25 estados, 55 referencias,
+  búsqueda/paginación, bytes exactos, previas, recuperación y borrado comprobados.
+  **48 pruebas backend instaladas, 5 de interacción y 5 contratos frontend pasan**.
+  El catálogo tiene prioridad sobre la historia confirmada; pendientes y consulta
+  de operaciones anteriores siguen accesibles. Cero runs, despachos o inferencias.
+- Próxima tarea principal: **aceptación de Repositorios**, sin empezar todavía.
+  Reusar el concepto y comprobar alta/clonado/lectura/reparación/origen con efectos
+  reales y acotados. Registrar hora al iniciar el bloque; sin publicar en remoto.
+- Pendiente principal: causa de la contención nativa, plan español con auditoría
+  real de consultas Ken y cierre de Proyectos. Interfaz aún sin aceptación total:
+  Resumen, Proyectos, Planificación, Tareas, Agentes, Conversación, Hallazgos,
+  Informes, Repositorios y Ejecución. Siguen U08/C10/evaluaciones, dependencias y
+  distribución: **41/43 escenarios amplios**, sin porcentaje global defendible.
+- Al final: detalles aplazados, accesibilidad completa, suite global y revisión
+  independiente. DD127 recoge densidad móvil/mensajes de Archivos; DD125/126 y
+  los detalles anteriores continúan abiertos. No hay historial que migrar,
+  confirmado explícitamente por el usuario.
 
-El primer wrapper falló por un nombre de fichero de evidencia; el navegador había
-pasado. Se corrigió el contrato y el comando `--journey wiki` pasa íntegro en otro
-host nuevo. Se conserva el fallo original y no se suman repeticiones como casos
-nuevos. Cero runs/despachos/inferencias en la aceptación, servidor y peers cerrados.
-El diagnóstico HTTP anterior tampoco reprodujo la contención: se conserva como
-pendiente principal, sin degradarlo a pulido. U08 continúa sin aceptación humana.
+El ensayo visual inicial de vacío aceptó una lista durante la carga y luego mostró
+el proyecto anterior; se rechazan esas dos capturas. La revisión corregida exige
+proyecto y mensaje final, sin repetir mutaciones de adjuntos. Se conservan los
+fallos iniciales y las repeticiones no incrementan el número de casos. Servidores
+cerrados; guardianes con `closed` y `domain_removed=true`. Esto no acepta U08 ni
+soluciona la contención. Última suite global y alcance de escenarios sin cambios.
 
 ## Etapa anterior: Documentos en aceptación; contención sigue abierta
 

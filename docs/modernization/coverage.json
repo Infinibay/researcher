@@ -5988,7 +5988,7 @@
       "status": "in_progress",
       "pilots": 12,
       "concept_images": 48,
-      "fully_accepted": 1,
+      "fully_accepted": 2,
       "pages": {
         "projects": {
           "status": "in_progress",
@@ -6024,6 +6024,28 @@
           "deferred": [
             "DD125",
             "DD126"
+          ]
+        },
+        "files": {
+          "status": "verified",
+          "scope": "Complete technical and delegated visual route acceptance on installed HTTP/SQLite/filesystem; human comprehension U08 and final accessibility/release audit remain independent",
+          "selected_concept": "archive-inspector",
+          "evidence": [
+            "docs/modernization/files-page-review.md",
+            "docs/modernization/files-page-results.json",
+            "docs/modernization/files-page-packaging.json",
+            "docs/modernization/files-page-docstrings.json",
+            "docs/design/audits/2026-11-08-files-acceptance/report.md",
+            "frontend/tests/files.e2e.mjs",
+            "frontend/tests/files-review.e2e.mjs",
+            "frontend/tests/ui/file-recovery.test.tsx",
+            "evals/operation/web_workspace.py"
+          ],
+          "remaining": [],
+          "deferred": [
+            "DD127",
+            "DD126",
+            "DD121"
           ]
         }
       }

@@ -1,0 +1,16 @@
+{
+  "status": "passed",
+  "journey": "files",
+  "browser_exit": 0,
+  "service_exit": 143,
+  "web_index_sha256": "d740d4c175e2daac93ec35ffd0990345a4019c0e9840dedb04cae518b06e386e",
+  "storage": {
+    "runs": 0,
+    "dispatches": 0,
+    "native_starts": 0,
+    "integrity": "ok",
+    "captured_sources": 0
+  },
+  "current_files": 65,
+  "operations": 70
+}

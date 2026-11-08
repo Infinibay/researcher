@@ -8744,3 +8744,32 @@ Technical/visual page acceptance now1/12, Wiki only;41/43broad scenarios unchang
 Next: Files acceptance, then other pages alongside unresolved preparation, actual
 Spanish/Ken evidence,U08/C10/evaluations,dependencies/distribution. Fine details,
 global suite and independent review remain last. See wiki-page-review.md/results.json.
+
+
+## Archivos aceptado técnicamente y visualmente, 2026-11-08
+
+Bloque 01:32:48–01:59:03 UTC, **26 min 15 s hasta verificar**, base `9706d8b`;
+documentación/checkpoint posteriores no incluidos. Se mantiene Archivo con inspector.
+Se demuestra y corrige el catálogo desplazado por historia confirmada (4858→649 px),
+con pendientes visibles y acceso anterior incluso si los primeros 50 son pendientes.
+Recorrido final: 25 estados reales, 55 referencias, búsqueda/paginación, bytes exactos,
+PDF/DOCX/CSV/JSON/XML, errores, recibos perdidos/tardíos, recuperación y borrado.
+Triggers SQLite y truncación reales sólo en instalaciones sintéticas. Los bytes
+incompletos se rechazan y se conservan al cerrar el intento; ninguna previa guarda
+fuentes capturadas. 65 adjuntos y 70 operaciones finales verificados por almacenamiento.
+
+48 casos backend instalados, 5 de interacción y 5 contratos frontend pasan, cero
+omisiones; build/ESLint de TypeScript modificado pasan. Cuatro definiciones Python
+documentadas en inglés; nuevo JSDoc. Mismo backend/wheel limpio, 676 fuentes coinciden.
+Se conserva RED→GREEN y se repite el recorrido tras el cambio de paginación, sin
+sumar ejecuciones como casos nuevos. Primer ensayo de vacío aceptó carga transitoria
+y luego proyecto anterior: dos capturas rechazadas, aserción corregida para exigir
+proyecto/mensaje final. Un proyecto vacío real creado; cero mutaciones de adjuntos
+en la revisión complementaria. Cero runs/despachos/inferencias, cierres confirmados.
+
+**2/12 páginas** junto con Documentos, **41/43 escenarios** sin cambios. Siguiente
+Repositorio(s), todavía sin iniciar; contención del engine, plan español/auditoría
+Ken, otras páginas, U08/C10 y evaluaciones siguen principales. DD127 y todos los
+detalles secundarios después de capacidades mayores; suite global y revisión
+independiente al cierre. No hay historial del propietario que migrar (confirmado).
+[Resultados y límites](files-page-review.md).

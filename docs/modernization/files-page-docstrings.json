@@ -1,0 +1,36 @@
+{
+  "base_commit": "9706d8b",
+  "changed_or_new_definitions_documented": 4,
+  "missing": [],
+  "contracts": [
+    {
+      "path": "evals/operation/web_workspace.py",
+      "symbol": "observe",
+      "line": 26,
+      "docstring": "Read durable owner records and inference counts independently of visible browser labels.",
+      "file_sha256": "d6b17601a35b69b02c2a0029e20df9f437b9f6358705b0b39f663aa63f7dd3c8"
+    },
+    {
+      "path": "evals/operation/web_workspace.py",
+      "symbol": "main",
+      "line": 49,
+      "docstring": "Prepare synthetic resources, own the live service/browser, and preserve every result on failure.",
+      "file_sha256": "d6b17601a35b69b02c2a0029e20df9f437b9f6358705b0b39f663aa63f7dd3c8"
+    },
+    {
+      "path": "evals/operation/web_workspace.py",
+      "symbol": "verify_files",
+      "line": 166,
+      "docstring": "Match scoped original upload receipts to actual retained bytes and explicit deletions/abandonment, independently of UI success labels.",
+      "file_sha256": "d6b17601a35b69b02c2a0029e20df9f437b9f6358705b0b39f663aa63f7dd3c8"
+    },
+    {
+      "path": "evals/operation/web_workspace.py",
+      "symbol": "prepare_file_fixtures",
+      "line": 197,
+      "docstring": "Reuse real test-format byte builders for a disposable owner journey, without new office dependencies or model calls.",
+      "file_sha256": "d6b17601a35b69b02c2a0029e20df9f437b9f6358705b0b39f663aa63f7dd3c8"
+    }
+  ],
+  "scope": "New/changed Python definitions and modules in this delivery. New frontend modules and exported behavior have English JSDoc; this Python audit does not certify all historical definitions."
+}

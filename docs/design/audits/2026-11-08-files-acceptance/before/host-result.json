@@ -1,0 +1,15 @@
+{
+  "status": "failed",
+  "journey": "files",
+  "browser_exit": 1,
+  "service_exit": 143,
+  "web_index_sha256": "f5b43b1611ce69c1b4cf249f65518bf44ec101143249501549821264bc3b73fa",
+  "storage": {
+    "runs": 0,
+    "dispatches": 0,
+    "native_starts": 0,
+    "integrity": "ok"
+  },
+  "current_files": 55,
+  "operations": 0
+}

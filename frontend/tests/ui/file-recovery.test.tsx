@@ -25,6 +25,35 @@ function json(value: unknown, status = 200) { return new Response(JSON.stringify
 
 beforeEach(() => { vi.clearAllMocks(); useProjectStore.setState({ activeProjectId: 101 }) })
 
+it('keeps pending recovery visible while confirmed history opens explicitly without another write', async () => {
+  const user = userEvent.setup()
+  const completed = Array.from({ length: 49 }, (_, index) => ({ ...pending, operation_key: `published-${index}`, filename: `completed-${index}.txt`, state: 'published' }))
+  transport.ownerFetch.mockImplementation(async () => json([pending, ...completed]))
+  render(<FileOperations projectId={101} />, { wrapper: wrapper() })
+  expect(await screen.findByText('Pendiente de comprobar')).toBeVisible()
+  expect(screen.getByRole('button', { name: 'Comprobar y recuperar' })).toBeVisible()
+  expect(screen.queryByText('completed-48.txt')).toBeNull()
+  const history = screen.getByRole('button', { name: 'Ver historial de cargas y borrados' })
+  expect(history).toHaveAttribute('aria-expanded', 'false')
+  await user.click(history)
+  expect(screen.getByText('completed-48.txt')).toBeVisible()
+  await user.click(screen.getByRole('button', { name: 'Ocultar historial confirmado' }))
+  expect(screen.queryByText('completed-48.txt')).toBeNull()
+  expect(screen.getByText('Pendiente de comprobar')).toBeVisible()
+  expect(transport.ownerFetch.mock.calls.filter(([, options]) => options?.method === 'POST')).toHaveLength(0)
+})
+
+it('can reach an older pending operation when the first page is entirely pending', async () => {
+  const user = userEvent.setup()
+  const first = Array.from({ length: 50 }, (_, index) => ({ ...pending, operation_key: `pending-${index}`, filename: `pending-${index}.txt` }))
+  transport.ownerFetch.mockImplementation(async path => json(path.includes('offset=50') ? [{ ...pending, operation_key: 'older', filename: 'older.txt' }] : first))
+  render(<FileOperations projectId={101} />, { wrapper: wrapper() })
+  await user.click(await screen.findByRole('button', { name: 'Ver historial de cargas y borrados' }))
+  await user.click(screen.getByRole('button', { name: 'Ver operaciones anteriores' }))
+  expect(await screen.findByText('older.txt')).toBeVisible()
+  expect(transport.ownerFetch.mock.calls.filter(([, options]) => options?.method === 'POST')).toHaveLength(0)
+})
+
 it('recovers only the explicitly selected original operation and preserves project scope', async () => {
   const user = userEvent.setup()
   let row = { ...pending }

@@ -1047,3 +1047,14 @@ Ruff señala I001 en el bloque de imports ya existente de
 bloque. Resolver el formato junto con los demás detalles, después de las
 capacidades mayores. La ejecución funcional del nuevo recorrido se registra aparte;
 no presentar esta comprobación de estilo como verde.
+
+## DD127 — densidad móvil y mensajes de Archivos
+
+Después de las capacidades mayores: reducir espacio de cabecera y del bloque de
+operaciones sin esconder los pendientes recuperables; traducir el error técnico
+`Failed to fetch` y compactar tipos MIME largos en el catálogo. La revisión móvil
+permite leer el inspector y realizar sus acciones, pero aún requiere demasiado
+desplazamiento. Mantener las identidades de los intentos y sus resultados; no
+ocultar una operación incierta para mejorar la presentación. Auditoría:
+`docs/design/audits/2026-11-08-files-acceptance/report.md`. Zoom nativo y lectores
+de pantalla completos siguen en el cierre de accesibilidad, no acreditados por Axe.

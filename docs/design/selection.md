@@ -262,3 +262,14 @@ recuperación de sesión/recibos/borradores, historia/paginación y lectura actu
 No se generan más alternativas ni se cambia el estilo. Es la primera de12páginas
 aceptadas; U08 y el cierre global siguen abiertos. La magnificación CSS exploratoria
 no se acepta como prueba de zoom nativo. [Auditoría](audits/2026-11-08-wiki-acceptance/report.md).
+
+## Aceptación de Archivos — 2026-11-08
+
+Se mantiene `archive-inspector` y su adaptación móvil. La aceptación técnica y
+visual delegada cubre 25 estados con HTTP/SQLite/filesystem reales y cero
+inferencias. El historial confirmado se abre a demanda para priorizar el catálogo;
+los intentos pendientes cargados siguen visibles y los anteriores son accesibles.
+Se comprueban bytes exactos, cinco formatos de documento, recuperación y borrado.
+Dos capturas iniciales de vacío se rechazan; la revisión corregida espera el
+proyecto y mensaje final. Son **2 de 12 páginas** junto con Documentos; DD127 y
+U08 quedan abiertos. [Auditoría](audits/2026-11-08-files-acceptance/report.md).

@@ -1,0 +1,11 @@
+{
+  "status": "passed",
+  "browser_exit": 0,
+  "service_exit": 143,
+  "runs": 0,
+  "integrity": "ok",
+  "unclosed_peers": 0,
+  "original_attachment_rows_unchanged": true,
+  "reference_files": 65,
+  "operations": 70
+}

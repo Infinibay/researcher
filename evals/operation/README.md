@@ -58,6 +58,24 @@ El fichero del navegador es `browser/evidence.json`; no reutilizar una instalaci
 anterior para obtener otra observación del mismo intento. Las pruebas de una
 página no aceptan U08 ni sustituyen un ensayo humano de comprensión/lector de pantalla.
 
+`--journey files` acepta Archivos contra un host nuevo, sin inferencias:
+
+```sh
+<python-del-producto> evals/operation/web_workspace.py --journey files \
+  --assets <recursos-host.json> --output <otra-carpeta-nueva> \
+  --node <node24>/bin/node
+```
+
+Comprueba55adjuntos, búsqueda/paginación, subida/descarga exacta y previas de texto,
+PDF,DOCX,CSV,JSON/XML; recibos perdidos/tardíos, errores y eliminación por teclado.
+Inyecta fallos SQLite reales sólo en ese host sintético: recuperación de bytes
+completos y rechazo/conservación de un original truncado. Al terminar contrasta
+recibos y bytes desde SQLite/filesystem, sin convertir previas en fuentes capturadas.
+`npm run test:e2e:files` ejecuta el navegador con las variables comunes y
+`RESEARCHER_E2E_FILE_FIXTURES`, `RESEARCHER_E2E_DATABASE`, `RESEARCHER_E2E_PYTHON`,
+preparadas por el coordinador. El Python debe ser el del producto instalado;
+nunca apuntar esta inyección a datos del propietario. [Resultados y límites](../../docs/modernization/files-page-review.md).
+
 `--journey navigation` reutiliza la preparación por formularios de `workspace`
 y recorre las12rutas con Tab/Enter a1440y320px CSS. Mide el contenido interior,
 captura cada estado, ejecuta Axe sobre la página completa y comprueba salto al

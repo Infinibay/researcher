@@ -1,0 +1,312 @@
+{
+  "current_web_index_sha256": "06b973e29d5a66868d567af4946021618f843e061622c981957207fa1d2c1907",
+  "groups": "current: final full run; observed: earlier passing bundle before pagination extension; review: final bundle on original stopped fixture; before: demonstrated failure; rejected: invalid empty proof",
+  "images": [
+    {
+      "path": "docs/design/audits/2026-11-08-files-acceptance/current/01-representative-archive.png",
+      "sha256": "be17d9cd6d1c5c39d1e8e86faa09bdafb68239c3ee79669580896d841bc2083a",
+      "inspected": true,
+      "visual_acceptance": "inspected"
+    },
+    {
+      "path": "docs/design/audits/2026-11-08-files-acceptance/current/02-paginated-search.png",
+      "sha256": "02206c66d7191b0906a3c0bb5bda497de4481f88bbf8142906fa7f3803521b72",
+      "inspected": false,
+      "visual_acceptance": "programmatic_capture_not_individually_visually_audited"
+    },
+    {
+      "path": "docs/design/audits/2026-11-08-files-acceptance/current/03-no-search-result.png",
+      "sha256": "a428bf4860837d4fefd654694df9663c7e7ff981b641e13fd488900795a0d074",
+      "inspected": false,
+      "visual_acceptance": "programmatic_capture_not_individually_visually_audited"
+    },
+    {
+      "path": "docs/design/audits/2026-11-08-files-acceptance/current/04-actual-empty.png",
+      "sha256": "5e30193d8df8612d0066247947dd63b487941a061c041fff970d925550951d5d",
+      "inspected": false,
+      "visual_acceptance": "programmatic_capture_not_individually_visually_audited"
+    },
+    {
+      "path": "docs/design/audits/2026-11-08-files-acceptance/current/05-independent-same-name.png",
+      "sha256": "3594f9041ea7522d57f104bed79fae70667e11a5dbc10387bfac0fba74d704d9",
+      "inspected": false,
+      "visual_acceptance": "programmatic_capture_not_individually_visually_audited"
+    },
+    {
+      "path": "docs/design/audits/2026-11-08-files-acceptance/current/06-lost-upload-receipt.png",
+      "sha256": "fa5c348f71842a3e71a114dc37885f1c9f897f7da84c0685326af6689a7bad3b",
+      "inspected": false,
+      "visual_acceptance": "programmatic_capture_not_individually_visually_audited"
+    },
+    {
+      "path": "docs/design/audits/2026-11-08-files-acceptance/current/07-late-upload-keeps-new-visit.png",
+      "sha256": "dfe521cf617b5798ed88c707954218391c1b63529211cc9cb0275fbd56e84586",
+      "inspected": false,
+      "visual_acceptance": "programmatic_capture_not_individually_visually_audited"
+    },
+    {
+      "path": "docs/design/audits/2026-11-08-files-acceptance/current/08-preview-csv.png",
+      "sha256": "7df2dd9ea832974592ba2c8eacba4530d12e0c30785331419eadcf566e8875ac",
+      "inspected": false,
+      "visual_acceptance": "programmatic_capture_not_individually_visually_audited"
+    },
+    {
+      "path": "docs/design/audits/2026-11-08-files-acceptance/current/08-preview-docx.png",
+      "sha256": "6405b885eff8624d8cdaba061431dba069bb1221afffccab06b9cb9b4496881c",
+      "inspected": false,
+      "visual_acceptance": "programmatic_capture_not_individually_visually_audited"
+    },
+    {
+      "path": "docs/design/audits/2026-11-08-files-acceptance/current/08-preview-json.png",
+      "sha256": "651dd7315aa888e90f3e95dcf0878cf1577cc43d2021af73e08f267864554a28",
+      "inspected": false,
+      "visual_acceptance": "programmatic_capture_not_individually_visually_audited"
+    },
+    {
+      "path": "docs/design/audits/2026-11-08-files-acceptance/current/08-preview-pdf.png",
+      "sha256": "7b0889ff69030a94fea6978881d28a0cfb5a37c0ce1b9245a8ef30b9d065fb71",
+      "inspected": false,
+      "visual_acceptance": "programmatic_capture_not_individually_visually_audited"
+    },
+    {
+      "path": "docs/design/audits/2026-11-08-files-acceptance/current/08-preview-xml.png",
+      "sha256": "2bcae488ca89bf78d48273137ab09c5b31faed21be5a4941f3710683ca72882b",
+      "inspected": false,
+      "visual_acceptance": "programmatic_capture_not_individually_visually_audited"
+    },
+    {
+      "path": "docs/design/audits/2026-11-08-files-acceptance/current/09-narrow-literal-preview.png",
+      "sha256": "9948cc4c8e14116dd062277e9862cc941d382716e0585522486704970eca1b32",
+      "inspected": false,
+      "visual_acceptance": "programmatic_capture_not_individually_visually_audited"
+    },
+    {
+      "path": "docs/design/audits/2026-11-08-files-acceptance/current/10-size-rejected.png",
+      "sha256": "4d396514c35fd6bbf8ae67d1836cb63937a83d1a2e943bbc4b441bb0c27769c7",
+      "inspected": false,
+      "visual_acceptance": "programmatic_capture_not_individually_visually_audited"
+    },
+    {
+      "path": "docs/design/audits/2026-11-08-files-acceptance/current/11-multiple-selection-rejected.png",
+      "sha256": "5bb33721e748c2c0f97c0d757d0114d594545a5c2f9e7752bb888d6f2aa75343",
+      "inspected": false,
+      "visual_acceptance": "programmatic_capture_not_individually_visually_audited"
+    },
+    {
+      "path": "docs/design/audits/2026-11-08-files-acceptance/current/12-invalid-preview-keeps-original.png",
+      "sha256": "cf6775f86f215826bf5cc578b0591f43ebf7cca431e8855d9a972d15953e234b",
+      "inspected": false,
+      "visual_acceptance": "programmatic_capture_not_individually_visually_audited"
+    },
+    {
+      "path": "docs/design/audits/2026-11-08-files-acceptance/current/13-download-error.png",
+      "sha256": "eb69917ec94fc5932ccaa01bea37df99a0762508958d770af2780d2cf8d23c8b",
+      "inspected": false,
+      "visual_acceptance": "programmatic_capture_not_individually_visually_audited"
+    },
+    {
+      "path": "docs/design/audits/2026-11-08-files-acceptance/current/14-preview-error-retains-prior.png",
+      "sha256": "de77338b9e631d930b8c9a8d009dcb78f4f7153a7e23c39f23e3b70bad8051e3",
+      "inspected": false,
+      "visual_acceptance": "programmatic_capture_not_individually_visually_audited"
+    },
+    {
+      "path": "docs/design/audits/2026-11-08-files-acceptance/current/15-pending-recovery-visible.png",
+      "sha256": "e5429b5ef19f0eb3dc25c1a5d4b90a1c43fc94a7a76b378cea2d7b11b11bba95",
+      "inspected": false,
+      "visual_acceptance": "programmatic_capture_not_individually_visually_audited"
+    },
+    {
+      "path": "docs/design/audits/2026-11-08-files-acceptance/current/16-incomplete-recovery-refused.png",
+      "sha256": "fe336f134218c72af2778390a4dd8521f95a566b71cb23747aceeec2b0db30ea",
+      "inspected": false,
+      "visual_acceptance": "programmatic_capture_not_individually_visually_audited"
+    },
+    {
+      "path": "docs/design/audits/2026-11-08-files-acceptance/current/17-delete-dialog.png",
+      "sha256": "cdb505cc72346973db46efcc48d65b3a4f928bbcfd91b2a87492acb25c6e58ed",
+      "inspected": false,
+      "visual_acceptance": "programmatic_capture_not_individually_visually_audited"
+    },
+    {
+      "path": "docs/design/audits/2026-11-08-files-acceptance/current/18-delete-failure-keeps-bytes.png",
+      "sha256": "83a90e3a7cd0c60e225dbcf64b0e9e2077ef4dd9cfb5cb65a601a9463bbdb701",
+      "inspected": false,
+      "visual_acceptance": "programmatic_capture_not_individually_visually_audited"
+    },
+    {
+      "path": "docs/design/audits/2026-11-08-files-acceptance/current/19-lost-delete-receipt-history.png",
+      "sha256": "910cb8f6d39d0eed1a5fa3c4dc542637b3d40004928fb7ce18ba153466de6321",
+      "inspected": false,
+      "visual_acceptance": "programmatic_capture_not_individually_visually_audited"
+    },
+    {
+      "path": "docs/design/audits/2026-11-08-files-acceptance/current/20-foreign-link.png",
+      "sha256": "e34a76206d5e8999feaa5a4befa70964dc4fb9b0a9b575024c17e745928d0d4f",
+      "inspected": false,
+      "visual_acceptance": "programmatic_capture_not_individually_visually_audited"
+    },
+    {
+      "path": "docs/design/audits/2026-11-08-files-acceptance/current/21-current-mobile-after-reload.png",
+      "sha256": "61cbdca1aacea689efe787a59d4482ea17aad0a5a44ed107abd80c3f7f05c4e4",
+      "inspected": true,
+      "visual_acceptance": "inspected"
+    },
+    {
+      "path": "docs/design/audits/2026-11-08-files-acceptance/observed/02-paginated-search.png",
+      "sha256": "02206c66d7191b0906a3c0bb5bda497de4481f88bbf8142906fa7f3803521b72",
+      "inspected": true,
+      "visual_acceptance": "inspected_but_result_region_outside_viewport"
+    },
+    {
+      "path": "docs/design/audits/2026-11-08-files-acceptance/observed/03-no-search-result.png",
+      "sha256": "a428bf4860837d4fefd654694df9663c7e7ff981b641e13fd488900795a0d074",
+      "inspected": true,
+      "visual_acceptance": "inspected_but_result_region_outside_viewport"
+    },
+    {
+      "path": "docs/design/audits/2026-11-08-files-acceptance/observed/04-actual-empty.png",
+      "sha256": "5e30193d8df8612d0066247947dd63b487941a061c041fff970d925550951d5d",
+      "inspected": true,
+      "visual_acceptance": "inspected_but_result_region_outside_viewport"
+    },
+    {
+      "path": "docs/design/audits/2026-11-08-files-acceptance/observed/08-preview-csv.png",
+      "sha256": "7df2dd9ea832974592ba2c8eacba4530d12e0c30785331419eadcf566e8875ac",
+      "inspected": true,
+      "visual_acceptance": "inspected"
+    },
+    {
+      "path": "docs/design/audits/2026-11-08-files-acceptance/observed/08-preview-docx.png",
+      "sha256": "7fc89e12a4671a98cf3618dc05d5087025e8bf423800c07aa0f38bad2af856ce",
+      "inspected": true,
+      "visual_acceptance": "inspected"
+    },
+    {
+      "path": "docs/design/audits/2026-11-08-files-acceptance/observed/08-preview-json.png",
+      "sha256": "f243ce5da2d6f3c79b4ccc3116e6032475c7a4e713af7d23ead92f3599927daa",
+      "inspected": true,
+      "visual_acceptance": "inspected"
+    },
+    {
+      "path": "docs/design/audits/2026-11-08-files-acceptance/observed/08-preview-pdf.png",
+      "sha256": "1a7ad3945a083976821b989f95f3fdb9b685e417129b10d343bafd8be2e30e23",
+      "inspected": true,
+      "visual_acceptance": "inspected"
+    },
+    {
+      "path": "docs/design/audits/2026-11-08-files-acceptance/observed/08-preview-xml.png",
+      "sha256": "55620b9abf4490f211b30d1c5c8620d4c578d40514878a4c175c104cb115a09d",
+      "inspected": true,
+      "visual_acceptance": "inspected"
+    },
+    {
+      "path": "docs/design/audits/2026-11-08-files-acceptance/observed/09-narrow-literal-preview.png",
+      "sha256": "87bf46296008b3f95cd7b67afc3ce3ee1b281f728538f1555faee73bc9dd2325",
+      "inspected": true,
+      "visual_acceptance": "inspected"
+    },
+    {
+      "path": "docs/design/audits/2026-11-08-files-acceptance/observed/12-invalid-preview-keeps-original.png",
+      "sha256": "83050d051a247bdd1136658f6f02d84da91d8c27117c1ea804906de43f589386",
+      "inspected": true,
+      "visual_acceptance": "inspected"
+    },
+    {
+      "path": "docs/design/audits/2026-11-08-files-acceptance/observed/13-download-error.png",
+      "sha256": "cd303b3bd3019284575bb0e339dacdf0fc6312974a9f955b01f96a42ba83ee38",
+      "inspected": true,
+      "visual_acceptance": "inspected"
+    },
+    {
+      "path": "docs/design/audits/2026-11-08-files-acceptance/observed/14-preview-error-retains-prior.png",
+      "sha256": "c0b8bd40c53c38ef2c52694a57c516fc27d1e973490b1173020b3ea855c4521a",
+      "inspected": true,
+      "visual_acceptance": "inspected"
+    },
+    {
+      "path": "docs/design/audits/2026-11-08-files-acceptance/observed/15-pending-recovery-visible.png",
+      "sha256": "9cc114e19ab743399b8479c26d2e77d3674d20384e921606be07526fb4aff6ec",
+      "inspected": true,
+      "visual_acceptance": "inspected"
+    },
+    {
+      "path": "docs/design/audits/2026-11-08-files-acceptance/observed/16-incomplete-recovery-refused.png",
+      "sha256": "562a6dd227c9baf33fca4edea5fc09ac9d98f2915fbbdd81f72c1e1f77b38ecd",
+      "inspected": true,
+      "visual_acceptance": "inspected"
+    },
+    {
+      "path": "docs/design/audits/2026-11-08-files-acceptance/observed/17-delete-dialog.png",
+      "sha256": "cdb505cc72346973db46efcc48d65b3a4f928bbcfd91b2a87492acb25c6e58ed",
+      "inspected": true,
+      "visual_acceptance": "inspected"
+    },
+    {
+      "path": "docs/design/audits/2026-11-08-files-acceptance/observed/18-delete-failure-keeps-bytes.png",
+      "sha256": "83a90e3a7cd0c60e225dbcf64b0e9e2077ef4dd9cfb5cb65a601a9463bbdb701",
+      "inspected": true,
+      "visual_acceptance": "inspected"
+    },
+    {
+      "path": "docs/design/audits/2026-11-08-files-acceptance/observed/19-lost-delete-receipt-history.png",
+      "sha256": "26ddd8354dff901a8bcd68fad0f87dcd59a946398af606e8693dd7742233afeb",
+      "inspected": true,
+      "visual_acceptance": "inspected"
+    },
+    {
+      "path": "docs/design/audits/2026-11-08-files-acceptance/before/01-representative-archive.png",
+      "sha256": "0ea74442326439160037d0f0214df94bae9784781bb4006285d653302b66223d",
+      "inspected": true,
+      "visual_acceptance": "inspected"
+    },
+    {
+      "path": "docs/design/audits/2026-11-08-files-acceptance/rejected/05-actual-empty-mobile.png",
+      "sha256": "bd03cc397528b3f46c2e45c63b9d6939d2b95d55ec5c0cb9ba33f77c1e4a1b37",
+      "inspected": true,
+      "visual_acceptance": "rejected_as_empty_catalog_evidence"
+    },
+    {
+      "path": "docs/design/audits/2026-11-08-files-acceptance/rejected/06-actual-empty-desktop.png",
+      "sha256": "8b56039da96db27e57f9c29d34feb1c56bf50ca4905b07ed777e54c1266543f4",
+      "inspected": true,
+      "visual_acceptance": "rejected_as_empty_catalog_evidence"
+    },
+    {
+      "path": "docs/design/audits/2026-11-08-files-acceptance/review/01-current-search-result.png",
+      "sha256": "3ba15057af7a079e80f5d9cda3dd6a7ac9d91e78483466591c9dc5a697188714",
+      "inspected": false,
+      "visual_acceptance": "programmatic_capture_not_individually_visually_audited"
+    },
+    {
+      "path": "docs/design/audits/2026-11-08-files-acceptance/review/02-current-no-search-result.png",
+      "sha256": "9ee2bf98401298c2d93d2b33607a8380674f19a81af275e4614ce9309b8cb982",
+      "inspected": false,
+      "visual_acceptance": "programmatic_capture_not_individually_visually_audited"
+    },
+    {
+      "path": "docs/design/audits/2026-11-08-files-acceptance/review/03-selected-original-mobile.png",
+      "sha256": "c6f765d342c25bc0891ce517b0442d3cf21178357a15f40b814870e500388294",
+      "inspected": true,
+      "visual_acceptance": "inspected"
+    },
+    {
+      "path": "docs/design/audits/2026-11-08-files-acceptance/review/04-current-pdf-text-mobile.png",
+      "sha256": "999f2a8540d1acae2acab588cf327c1fd898e838f58bfbf75a3d1d9bf237c6e2",
+      "inspected": false,
+      "visual_acceptance": "programmatic_capture_not_individually_visually_audited"
+    },
+    {
+      "path": "docs/design/audits/2026-11-08-files-acceptance/review/05-actual-empty-mobile.png",
+      "sha256": "29506921690b3c816414b398f08b5713a375edb58885e12e1232133f0376021c",
+      "inspected": true,
+      "visual_acceptance": "inspected"
+    },
+    {
+      "path": "docs/design/audits/2026-11-08-files-acceptance/review/06-actual-empty-desktop.png",
+      "sha256": "3a22777522b377397666006c15bd537cb3e937025905820158e1cf38d56c87e9",
+      "inspected": false,
+      "visual_acceptance": "programmatic_capture_not_individually_visually_audited"
+    }
+  ]
+}
