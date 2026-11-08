@@ -145,3 +145,38 @@ blocks y propagación al cambiar un padre con hijos activos; no basta quitar la
 condición de pertenencia a plan en _task. Revisar admisión/claim/herramientas/
 aceptación y contexto congelado antes de modificar autoridad. Edición auxiliar
 por navegador también pendiente. Sigue8/12páginas. DetallesDD141al final.
+
+## Preflight de coordinación de dependientes, desde09:03:36UTC
+
+No implementado aún. Evidencia del checkout administrado:
+
+- SQLiteRunStore._task condiciona la barrera blocks a runtime_project_plan_tasks.
+  _execution_subject la consulta en claim/heartbeat/operaciones del runtime.
+- SQLiteResearchStore._check_scope comprueba versión/grant/intento, pero su _task
+  sólo comprueba existencia/estado. Ampliar la barrera de admisión por sí solo no
+  retira inmediatamente las herramientas de un hijo que ya trabaja.
+- Hay **dos productores de contexto**: _advance_context (correcciones/respuestas/
+  reemplazo de relaciones) y trigger version_task_inputs en
+  backend/db/task_inputs_schema.sql (metadatos, incluso otros escritores).
+  Añadir propagación sólo al método Python dejaría el segundo camino sin cubrir.
+- version_children_of_changed_plan en backend/db/project_planning_schema.sql
+  ya propaga cambios del plan a sus hijas. No demuestra propagación transitiva de
+  un prerrequisito individual. Evitar versiones duplicadas al combinar caminos.
+- RuntimeService.task_inputs_changed sólo avisa al worker de la tarea recibida.
+  La autoridad debe quedar retirada transaccionalmente antes de depender del
+  aviso local o del próximo heartbeat; cierre físico sigue sin inferirse del fence.
+
+Alternativas a resolver antes de tocar el contrato: (A) invalidación transaccional
+común a todos los escritores, con una revisión causal por descendiente y manejo
+explícito de ciclos/diamantes; (B) capturar las premisas de dependencias en cada
+admisión y comprobar la misma identidad en herramientas/heartbeat/aceptación,
+sin permitir que aceptar de nuevo al padre reactive silenciosamente un hijo viejo.
+La alternativa B requiere además explicar/entregar el material previo en el input.
+No elegir basándose sólo en el menor diff ni cambiar triggers históricos: cualquier
+cambio de persistencia requiere migración forward e inversa nueva y ensayos reales.
+
+Ensayos principales: padre pendiente, done sin aceptación, aceptación vigente y
+obsoleta; related_to/parent_of no bloqueantes; padre cambiado antes de claim y con
+hijo activo/con grant; hijo aceptado, nieto, diamante/ciclo, aislamiento de proyecto,
+fallo transaccional/reintento sin duplicación, no reactivación al reaceptar padre.
+No buscar de nuevo historial del usuario ni pedirle aprobar decisiones rutinarias.
