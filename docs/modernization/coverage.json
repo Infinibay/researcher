@@ -6493,6 +6493,17 @@
         "docs/modernization/dependencies-final-evidence/ken-live.json"
       ],
       "remaining": []
+    },
+    "product_python313_compatibility": {
+      "status": "verified",
+      "scope": "CPython3.13.18 GIL/Linuxx86-64 clean source→wheel/hashed isolated install with83compatiblepackages,85selected kernel/host/profile/owner-access tests, exact current notices/Csource and3helpentrypoints. No whole-suite or real model proof on3.13.",
+      "evidence": [
+        "docs/modernization/distribution-py313-review.md",
+        "docs/modernization/distribution-py313-results.json",
+        "docs/modernization/distribution-py313-packaging.json",
+        "docs/modernization/distribution-py313-artifacts.json"
+      ],
+      "remaining": []
     }
   }
 }

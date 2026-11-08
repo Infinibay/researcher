@@ -1,0 +1,63 @@
+{
+  "base_commit": "44d2253",
+  "artifact": {
+    "base_commit": "44d2253",
+    "wheel": "researcher-0.1.0-cp313-cp313-linux_x86_64.whl",
+    "sha256": "8058c687125bf6ecd5dcb0fc45772a5fa400578911a01f7caceb2379c9289a8e",
+    "source_files": 698,
+    "product_files": 371,
+    "extensions": [
+      "backend/runtime/_domain_spawn.cpython-313-x86_64-linux-gnu.so"
+    ],
+    "notice_sha256": {
+      "LICENSE.md": "c50f239b57bc97261453eb0f8a0298a04cf58573a466259590a54b997e86924a",
+      "THIRD_PARTY_NOTICES.md": "237fa7accb34b0dc05e7ab1a58ac6806395775f052e534e9e4f389ef765adf54"
+    }
+  },
+  "installed": {
+    "validation_environment": {
+      "runner_cgroup": "/sys/fs/cgroup/user.slice/user-1000.slice/user@1000.service/app.slice/run-p1441662-i1441663.scope",
+      "parent_controllers_before": "cpu memory pids",
+      "runner_cpu_max": "800000 100000",
+      "purpose": "Transient systemd scope with CPUQuota=800% retains CPU-controller availability during validation; it does not relax any product limit.",
+      "parent_controllers_after": "cpu memory pids"
+    },
+    "base_commit": "44d2253",
+    "wheel": "researcher-0.1.0-cp313-cp313-linux_x86_64.whl",
+    "wheel_sha256": "8058c687125bf6ecd5dcb0fc45772a5fa400578911a01f7caceb2379c9289a8e",
+    "source_files_matching_wheel_and_installation": 698,
+    "product_files_matching": 371,
+    "observed": {
+      "cases": 85,
+      "passed": 85,
+      "failed": 0,
+      "skipped": 0,
+      "backend_modules": 236,
+      "all_backend_imports_from_native_env": true,
+      "seconds": 40.604,
+      "exit_code": 0
+    },
+    "tests": [
+      "backend/tests/runtime/test_execution_domain.py",
+      "backend/tests/runtime/test_owned_factory.py",
+      "backend/tests/runtime/test_host_installation.py",
+      "backend/tests/runtime/test_runtime_profile.py",
+      "backend/tests/api/test_local_access.py"
+    ],
+    "real_model_turns": 0,
+    "limits": [
+      "Selected installed tests, not the global suite",
+      "CPython3.13 compiled domain/kernel behavior, installed owned factory/host resources, runtime profile and local owner authentication; schema71 unchanged",
+      "Real installed SQLite/owner HTTP; controlled research workspace scope; no paid model or human/scientific acceptance"
+    ]
+  },
+  "additional_artifact_checks": "docs/modernization/distribution-py313-artifacts.json",
+  "compatible_packages": 83,
+  "real_model_turns": 0,
+  "limits": [
+    "CPython3.13.18 with GIL onLinuxx86-64 only; targeted85cases, not full platform/version/browser matrix",
+    "No real subscription turn on3.13 in this observation",
+    "Current3.12 installed code still matches; its older notice document will be rebuilt in final packaging",
+    "Native/model/fonts/bundle notice completeness and security dependencies remain independent"
+  ]
+}

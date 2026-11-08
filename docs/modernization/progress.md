@@ -9299,3 +9299,12 @@ ONNX19entradas/12IDs yChroma5/4siguen. PruebaONNXcandidateprevia no repetida.
 Sin cambio de backend; avisos apuntan al inventario nuevo yexigen verificar bytes
 al próximo empaque.42/43escenarios,11/12páginas. Siguiente matrizPython3.13y
 artefactos; residualKen/Chroma ylosgatesfinales siguen principales.
+
+## 2026-11-08 — matriz deResearcherPython3.13
+
+Base44d2253,12:01:20–12:07:28UTC,6min8s. [Alcance](distribution-py313-review.md):
+wheelcp313con698fuentes/371producto,83paquetes compatibles,85instaladas0skip,
+236importsdelprefix. Extensiónkernelreal yavisos/fuenteCcoinciden;3CLIhelp0.
+Sin cambios de producto/cuenta oenvenv3.12.42/43escenarios,11/12páginas.
+Siguiente: suite global actual para separar fallos funcionales de fixtures viejos,
+antes de pulir. Seguridad residual/prompts/inversas/U08/Proyectos/revisiónfinal abiertos.

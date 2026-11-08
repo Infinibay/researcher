@@ -1,0 +1,24 @@
+{
+  "python": "3.13.18 (main, Oct 26 2026, 14:08:20) [Clang 23.1.3 ]",
+  "gil_disabled": false,
+  "console": {
+    "researcher": {
+      "exit": 0,
+      "stdout_sha256": "0fdbff78205dee430b3f0c61d2ebd9f4597413f5f350fb619a5c21f7adc11df6"
+    },
+    "researcher-bootstrap": {
+      "exit": 0,
+      "stdout_sha256": "75cb801da208aa06bfbcacdd5a53aa0a89d7e888b3f60f77ed9490a1fd171b8b"
+    },
+    "researcher-start": {
+      "exit": 0,
+      "stdout_sha256": "1f97a72ef9838e5756b21f04686a616325c92ba09914856643210c25c849bfb5"
+    }
+  },
+  "sdist_member_sha256": {
+    "LICENSE.md": "c50f239b57bc97261453eb0f8a0298a04cf58573a466259590a54b997e86924a",
+    "THIRD_PARTY_NOTICES.md": "237fa7accb34b0dc05e7ab1a58ac6806395775f052e534e9e4f389ef765adf54",
+    "backend/runtime/_domain_spawn.c": "09e2262b0ddddb475f2a19c5e6b5a2cfd9e58829a41fd77664606254f0c97743"
+  },
+  "console_created_files": false
+}
