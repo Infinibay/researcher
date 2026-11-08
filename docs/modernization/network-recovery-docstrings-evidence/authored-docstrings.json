@@ -1,0 +1,60 @@
+{
+  "egress_proxy.py": {
+    "_Denied": "Reject a malformed or disallowed CONNECT destination before establishing its upstream tunnel.",
+    "_Withdrawn": "Stop tunnel work after the original proxy owner withdraws admission.",
+    "_hostname": "Normalize one explicit DNS hostname and reject numeric, single-label or malformed destinations without resolving it.",
+    "EgressPolicy": "Bound exact DNS destinations, TLS port, live/total connection counts, transferred bytes and deadlines for one host-owned proxy.",
+    "TunnelReceipt": "Record the tunnel outcome and forwarded upload/download byte counts without claiming application success or TLS-content inspection.",
+    "_numeric_dial": "Validate one public numeric IP, register its socket with the owner before a bounded connect, and close it on failure without another DNS lookup.",
+    "EgressPolicy.__post_init__": "Normalize and deduplicate the explicit host allowlist and reject unbounded, nonfinite or invalid capacities and deadlines.",
+    "EgressPolicy.request_host": "Require bounded ASCII CONNECT syntax, exact allowed DNS authority on port 443 and a matching Host header; do not inspect tunneled TLS.",
+    "TunnelProxy.__init__": "Configure one bounded worker pool and socket/byte accounting around injected resolver and dial functions; no listener is opened.",
+    "TunnelProxy.submit": "Take ownership of one connected stream, reserve live and total capacity, and return its worker future; rejected input is closed.",
+    "TunnelProxy._check": "Reject further tunnel progress once the original owner has withdrawn egress.",
+    "TunnelProxy._admit": "Track an upstream socket under the withdrawal lock or close it immediately if admission has ended.",
+    "TunnelProxy.withdraw": "Permanently reject new work and shut down all currently tracked sockets without waiting for worker receipts.",
+    "TunnelProxy.close": "Withdraw sockets, stop queued work and wait within the supplied budget; unfinished workers remain an explicit closure failure.",
+    "TunnelProxy._header": "Read a CONNECT header within the byte/deadline bound and return any already received tunnel tail without dropping its bytes.",
+    "TunnelProxy._handle": "Validate authority and all resolved IPs, dial one deterministic public address and forward opaque bytes; always release owned sockets and return a bounded outcome.",
+    "TunnelProxy._pump": "Forward both directions with bounded buffers, aggregate byte accounting, idle/wall deadlines and half-close propagation; counts measure sent payload bytes.",
+    "TunnelProxy.submit.finished": "Release settled worker capacity under the proxy lock without decrementing the total lifetime connection count.",
+    "TunnelProxy._handle.admit": "Retain an upstream socket for this tunnel cleanup before registering it against global proxy withdrawal."
+  },
+  "egress_channel.py": {
+    "EgressChannel": "Own a private inherited descriptor channel and its receiver thread, forwarding accepted streams to the bounded host proxy without exposing a TCP listener.",
+    "EgressChannel.__init__": "Create the private sequenced socketpair and start its descriptor receiver; this host setup does not spawn a native actor.",
+    "EgressChannel.close_child_end": "Close only the host copy of the child endpoint after spawn; separately duplicated pinned descriptors remain their callers' responsibility.",
+    "EgressChannel.withdraw": "Withdraw proxy work and close both retained channel ends, waking the descriptor receiver without waiting for its final receipt.",
+    "EgressChannel.close": "Withdraw the channel, bound receiver/proxy shutdown by one deadline and fail if the receiver thread remains alive.",
+    "EgressChannel._receive": "Accept exactly one FD per typed private frame within the lifetime budget, close malformed/unclaimed descriptors and withdraw on channel loss without logging raw frames."
+  },
+  "native_network.py": {
+    "_validate": "Validate numeric resolver directives or a parseable public-certificate PEM bundle; these inputs enable DNS/TLS and do not restrict destinations.",
+    "PublicNetworkFile": "Fingerprint one host-selected public resolver or CA asset by path, physical identity and exact content for later sealed mounting.",
+    "NativeNetwork": "Pair explicitly inspected resolver and public CA manifests; the pair supplies network inputs rather than credentials or destination authority.",
+    "PublicNetworkFile._read": "Read and validate a trusted bounded regular file while checking descriptor metadata and path identity, returning its manifest and exact bytes.",
+    "PublicNetworkFile.inspect": "Inspect a selected existing resolver or CA file without retaining its descriptor, sanitizing unavailable or invalid source errors.",
+    "NativeNetwork.inspect": "Inspect both host-selected public network assets without opening a network connection or creating native state."
+  },
+  "peer_process.py": {
+    "boot_id": "Read the current Linux boot identity used to reject recovery against a different kernel lifetime.",
+    "observer_namespace": "Read the current observer PID-namespace inode so recovery can reject a changed observation domain.",
+    "start_ticks": "Read a process start time from procfs while accounting for spaces and closing parentheses in its command name; this alone does not pin its identity.",
+    "_libc": "Configure libc pidfd entry points for descriptor-based process observation and signaling.",
+    "_pidfd": "Open a kernel handle for the currently observed process or expose the actual errno; a numeric PID alone is never used for signaling.",
+    "_signal": "Send SIGKILL only through the pinned pidfd, accepting an already absent target and propagating other kernel failures.",
+    "_init_fields": "Read start ticks, PID-namespace inode and namespace-init status from procfs; the caller must pin and validate the surrounding observation.",
+    "NamespaceIdentity": "Retain the originally captured private namespace-init and observer identities for later pidfd-based closure checks.",
+    "NamespaceIdentity.capture": "Pin a live reported PID, require private namespace-init identity and optional launcher parent, then capture recovery metadata before payload release.",
+    "NamespaceIdentity.from_record": "Reconstruct only declared identity fields from an existing record; this conversion does not recapture or validate a live process."
+  },
+  "recovery.py": {
+    "RunRecovery.__init__": "Bind recovery to the existing run store and its peer registry without discovering or starting replacement actors.",
+    "RunRecovery.inspection": "Return bounded current peer/job/effect evidence and protocol/origin blockers for owner recovery without retiring actors or replaying effects.",
+    "RunRecovery._intent": "Validate the explicit recovery command and build the attempt/fence-bound intent used to compare durable operation receipts.",
+    "RunRecovery._protocol": "Require the original recoverable native/business peer protocol and validate each stored origin before allowing recovery work.",
+    "RunRecovery.begin": "Persist one original recovery intent, withdraw run authority and return scoped peer/grant identities, or recover its existing completion receipt.",
+    "RunRecovery.complete": "Require matching recovery intent and closed-peer proof before retiring the attempt and storing its receipt/event; never start inference or accept the task.",
+    "RunRecovery.reconcile": "Recover an existing receipt or retire each originally registered peer and complete the same recovery intent without replaying business work."
+  }
+}

@@ -12,10 +12,16 @@ class RunRecovery:
     """Plan and record recovery from original peer/grant identities, preserving receipts."""
 
     def __init__(self, runs):
+        """Bind recovery to the existing run store and its peer registry without discovering or
+        starting replacement actors.
+        """
         self.runs = runs
         self.peers = PeerRegistry(runs)
 
     def inspection(self, project_id, run_id):
+        """Return bounded current peer/job/effect evidence and protocol/origin blockers for owner
+        recovery without retiring actors or replaying effects.
+        """
         with self.runs._transaction() as conn:
             row = self.runs._row(conn, project_id, run_id)
             scope = conn.execute(
@@ -109,6 +115,9 @@ class RunRecovery:
 
     @staticmethod
     def _intent(project_id, run_id, attempt_id, expected_fence, operation_key):
+        """Validate the explicit recovery command and build the attempt/fence-bound intent used to
+        compare durable operation receipts.
+        """
         identity(project_id)
         identity(expected_fence)
         text(run_id, "run_id", 128)
@@ -122,6 +131,9 @@ class RunRecovery:
         }
 
     def _protocol(self, conn, attempt_id):
+        """Require the original recoverable native/business peer protocol and validate each stored
+        origin before allowing recovery work.
+        """
         scope = conn.execute(
             "SELECT protocol_version FROM runtime_peer_scopes WHERE attempt_id=?",
             (attempt_id,),
@@ -147,6 +159,9 @@ class RunRecovery:
         return self._prepare_command(command, write=False)
 
     def begin(self, **command):
+        """Persist one original recovery intent, withdraw run authority and return scoped peer/grant
+        identities, or recover its existing completion receipt.
+        """
         return self._prepare_command(command, write=True)
 
     def _prepare_command(self, command, *, write):
@@ -214,6 +229,9 @@ class RunRecovery:
             }
 
     def complete(self, **command):
+        """Require matching recovery intent and closed-peer proof before retiring the attempt and
+        storing its receipt/event; never start inference or accept the task.
+        """
         intent = self._intent(**command)
         with self.runs._transaction(write=True) as conn:
             row = self.runs._row(conn, command["project_id"], command["run_id"])
@@ -291,6 +309,9 @@ class RunRecovery:
             return result
 
     def reconcile(self, **command):
+        """Recover an existing receipt or retire each originally registered peer and complete the same
+        recovery intent without replaying business work.
+        """
         work = self.begin(**command)
         if work["completed"] is not None:
             return work["completed"]

@@ -18,6 +18,9 @@ from backend.runtime import _domain_spawn
 
 
 def _validate(data, kind):
+    """Validate numeric resolver directives or a parseable public-certificate PEM bundle; these inputs
+    enable DNS/TLS and do not restrict destinations.
+    """
     value = data.decode("utf-8")
     if kind == "resolver":
         nameservers = 0
@@ -67,6 +70,9 @@ def _validate(data, kind):
 
 @dataclass(frozen=True)
 class PublicNetworkFile:
+    """Fingerprint one host-selected public resolver or CA asset by path, physical identity and exact
+    content for later sealed mounting.
+    """
     path: str
     kind: str
     device: int
@@ -78,6 +84,9 @@ class PublicNetworkFile:
 
     @classmethod
     def _read(cls, fd, path, kind):
+        """Read and validate a trusted bounded regular file while checking descriptor metadata and path
+        identity, returning its manifest and exact bytes.
+        """
         maximum = {"resolver": 65536, "ca_bundle": 4 * 1024**2}[kind]
         before = os.fstat(fd)
         if (
@@ -117,6 +126,9 @@ class PublicNetworkFile:
 
     @classmethod
     def inspect(cls, path, kind):
+        """Inspect a selected existing resolver or CA file without retaining its descriptor, sanitizing
+        unavailable or invalid source errors.
+        """
         try:
             path = Path(path).resolve(strict=True)
             fd = os.open(
@@ -132,11 +144,17 @@ class PublicNetworkFile:
 
 @dataclass(frozen=True)
 class NativeNetwork:
+    """Pair explicitly inspected resolver and public CA manifests; the pair supplies network inputs
+    rather than credentials or destination authority.
+    """
     resolver: PublicNetworkFile
     ca_bundle: PublicNetworkFile
 
     @classmethod
     def inspect(cls, *, resolver, ca_bundle):
+        """Inspect both host-selected public network assets without opening a network connection or
+        creating native state.
+        """
         return cls(
             PublicNetworkFile.inspect(resolver, "resolver"),
             PublicNetworkFile.inspect(ca_bundle, "ca_bundle"),

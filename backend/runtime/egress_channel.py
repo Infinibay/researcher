@@ -13,7 +13,13 @@ import time
 
 
 class EgressChannel:
+    """Own a private inherited descriptor channel and its receiver thread, forwarding accepted streams
+    to the bounded host proxy without exposing a TCP listener.
+    """
     def __init__(self, proxy):
+        """Create the private sequenced socketpair and start its descriptor receiver; this host setup
+        does not spawn a native actor.
+        """
         self.proxy = proxy
         self._lock = threading.Lock()
         self._parent, self._child = socket.socketpair(
@@ -32,12 +38,18 @@ class EgressChannel:
             return os.dup(self._child.fileno())
 
     def close_child_end(self):
+        """Close only the host copy of the child endpoint after spawn; separately duplicated pinned
+        descriptors remain their callers' responsibility.
+        """
         with self._lock:
             child, self._child = self._child, None
         if child is not None:
             child.close()
 
     def withdraw(self):
+        """Withdraw proxy work and close both retained channel ends, waking the descriptor receiver
+        without waiting for its final receipt.
+        """
         self.proxy.withdraw()
         self.close_child_end()
         try:
@@ -47,6 +59,9 @@ class EgressChannel:
         self._parent.close()
 
     def close(self, *, timeout=4):
+        """Withdraw the channel, bound receiver/proxy shutdown by one deadline and fail if the receiver
+        thread remains alive.
+        """
         deadline = time.monotonic() + timeout
         self.withdraw()
         self._reader.join(timeout=min(timeout, 1))
@@ -55,6 +70,9 @@ class EgressChannel:
             raise RuntimeError("Egress descriptor reader has not closed")
 
     def _receive(self):
+        """Accept exactly one FD per typed private frame within the lifetime budget, close
+        malformed/unclaimed descriptors and withdraw on channel loss without logging raw frames.
+        """
         received = 0
         try:
             while True:

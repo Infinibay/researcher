@@ -18,21 +18,31 @@ class PeerUncertain(RuntimeError):
 
 
 def boot_id():
+    """Read the current Linux boot identity used to reject recovery against a different kernel
+    lifetime.
+    """
     return Path("/proc/sys/kernel/random/boot_id").read_text().strip()
 
 
 def observer_namespace():
+    """Read the current observer PID-namespace inode so recovery can reject a changed observation
+    domain.
+    """
     return os.stat("/proc/self/ns/pid").st_ino
 
 
 def start_ticks(pid):
     # comm may contain spaces or ')' characters; fields after its last ') '
     # begin at state (field 3), so starttime (field 22) is index 19.
+    """Read a process start time from procfs while accounting for spaces and closing parentheses in its
+    command name; this alone does not pin its identity.
+    """
     fields = Path(f"/proc/{pid}/stat").read_text().rsplit(") ", 1)[1].split()
     return int(fields[19])
 
 
 def _libc():
+    """Configure libc pidfd entry points for descriptor-based process observation and signaling."""
     libc = ctypes.CDLL(None, use_errno=True)
     libc.pidfd_open.argtypes = [ctypes.c_int, ctypes.c_uint]
     libc.pidfd_send_signal.argtypes = [
@@ -45,6 +55,9 @@ def _libc():
 
 
 def _pidfd(pid):
+    """Open a kernel handle for the currently observed process or expose the actual errno; a numeric
+    PID alone is never used for signaling.
+    """
     fd = _libc().pidfd_open(pid, 0)
     if fd < 0:
         number = ctypes.get_errno()
@@ -53,6 +66,9 @@ def _pidfd(pid):
 
 
 def _signal(fd):
+    """Send SIGKILL only through the pinned pidfd, accepting an already absent target and propagating
+    other kernel failures.
+    """
     if _libc().pidfd_send_signal(fd, signal.SIGKILL, None, 0) < 0:
         number = ctypes.get_errno()
         if number != errno.ESRCH:
@@ -60,6 +76,9 @@ def _signal(fd):
 
 
 def _init_fields(pid):
+    """Read start ticks, PID-namespace inode and namespace-init status from procfs; the caller must pin
+    and validate the surrounding observation.
+    """
     ticks = start_ticks(pid)
     namespace = os.stat(f"/proc/{pid}/ns/pid").st_ino
     lines = Path(f"/proc/{pid}/status").read_text().splitlines()
@@ -69,6 +88,9 @@ def _init_fields(pid):
 
 @dataclass(frozen=True)
 class NamespaceIdentity:
+    """Retain the originally captured private namespace-init and observer identities for later pidfd-
+    based closure checks.
+    """
     init_pid: int
     start_ticks: int
     boot_id: str
@@ -77,6 +99,9 @@ class NamespaceIdentity:
 
     @classmethod
     def capture(cls, pid, *, expected_parent=None):
+        """Pin a live reported PID, require private namespace-init identity and optional launcher
+        parent, then capture recovery metadata before payload release.
+        """
         fd = _pidfd(pid)
         try:
             ticks, namespace, is_init = _init_fields(pid)
@@ -99,6 +124,9 @@ class NamespaceIdentity:
 
     @classmethod
     def from_record(cls, record):
+        """Reconstruct only declared identity fields from an existing record; this conversion does not
+        recapture or validate a live process.
+        """
         return cls(**{key: record[key] for key in cls.__dataclass_fields__})
 
 

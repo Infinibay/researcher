@@ -1328,6 +1328,12 @@ replay ni pérdida de respuesta con ausencia de efecto. Siguen otras fronteras
 relevantes y JSDoc; no se declara toda la documentación terminada.
 
 
+Quinto bloque: [48 docstrings de red y recuperación](network-recovery-docstrings-review.md),
+355 acumulados en 21 módulos; 266 definiciones restantes por presencia. AST, siete
+políticas y 48 herramientas iguales; 88 pruebas fuente pasan. Tratar los docstrings
+de modelos Pydantic de análisis como metadata visible al modelo, no sólo comentarios.
+
+
 ## DD147 — recuperar observaciones CLI anteriores a la política
 
 La corrección de aceptación enlaza la política observada al request y al recibo.

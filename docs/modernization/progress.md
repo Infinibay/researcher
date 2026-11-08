@@ -9663,3 +9663,14 @@ con onnx==1.20.1 a las 19:00 UTC. No apareció una distribución pública nueva 
 haga innecesaria la decisión pendiente. Sólo se consultaron metadatos: ninguna
 instalación, inferencia, auditoría repetida ni selección de variante. Sigue el
 trabajo independiente de documentación relevante.
+
+## 2026-11-08 — Red, procesos y recuperación documentados
+
+[Informe](network-recovery-docstrings-review.md). 48 docstrings nuevos, 355
+acumulados en 21 módulos; 266 faltantes por presencia, relevancia desigual.
+AST ejecutable, siete políticas y 48 herramientas iguales; 88 pruebas fuente
+pasan (71 en 21,26 s y 17 en 16,38 s), sin omisiones ni nuevos modelos. Inventario
+85/322 vigente sin renovar revisiones. 19:00:59–19:03:49 UTC: 2 min 50 s hasta
+verificación, informe/checkpoint después. Siguen análisis/Pydantic como metadata
+visible, otras interfaces/JSDoc, U08, Ken/ONNX, accesibilidad y cierre integrado.
+No nuevo wheel/global/push/merge/despliegue; DD157 permanece diferido.

@@ -1,0 +1,8 @@
+{
+  "base_commit": "38ad7a3",
+  "files_scanned": 322,
+  "candidates": 85,
+  "stale_ids": [],
+  "revalidated": 0,
+  "note": "Five source-tree hashes changed; no candidate or direct-consumer review became stale."
+}

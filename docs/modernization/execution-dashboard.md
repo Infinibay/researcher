@@ -28,7 +28,26 @@ que se pueda comparar el avance; no presentar microajustes como tareas principal
 - Última suite global: `9fb873c`,2210 casos,2178 pasan,31 fallan y1 error de fixture; sin omisiones. La carrera de backup encontrada se corrigió después con40 pruebas instaladas. No se declara una nueva corrida global verde; la referencia `0c8b8d9` queda como evidencia histórica.
 - U01–U07, E01–E12, C01–C10 y D01–D13 quedan comprobados con el alcance de sus matrices; sigue 1 de 43 escenarios amplios sin aceptación completa en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Estado actual: suscripción, estado y mediación documentados
+## Estado actual: red, procesos y recuperación documentados
+
+[Informe](network-recovery-docstrings-review.md). **19:00:59–19:03:49 UTC: 2 min 50 s**
+hasta verificación; informe/checkpoint posteriores aparte. Dos tramos de pruebas:
+21,26 s y 16,38 s.
+
+- Terminado: 48 docstrings nuevos; **355 acumulados en 21 módulos**. AST ejecutable,
+  siete políticas y 48 herramientas iguales; **88 pruebas fuente pasan**, sin
+  omisiones/modelos nuevos. Inventario 85/322 vigente, ninguna revisión renovada.
+- Siguiente: herramientas de análisis y otras interfaces relevantes/JSDoc. Los
+  docstrings de modelos Pydantic cambian metadata visible al modelo: requieren
+  revisar ese contrato. Quedan 266 definiciones por presencia, relevancia desigual.
+- Pendientes: U08/entrega/adaptación/comprensión humana; Ken/ONNX (PyPI aún anuncia
+  0.18.0 con ONNX 1.20.1); documentación relevante; accesibilidad/detalles; paquete,
+  suite global y revisión independiente finales.
+- Estado amplio: **12/12 páginas por alcance, 42/43 escenarios**. Sin nueva global
+  verde ni aceptación humana. Paquete anterior conserva sus bytes; no hay push,
+  merge ni despliegue.
+
+## Etapa anterior: suscripción, estado y mediación documentados
 
 [Informe y pruebas](subscription-mediation-docstrings-review.md).
 **18:56:35–18:58:51 UTC: 2 min 16 s** hasta verificación; informe/checkpoint

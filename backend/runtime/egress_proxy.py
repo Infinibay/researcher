@@ -22,14 +22,19 @@ from backend.network_destinations import (
 
 
 class _Denied(ValueError):
+    """Reject a malformed or disallowed CONNECT destination before establishing its upstream tunnel."""
     pass
 
 
 class _Withdrawn(RuntimeError):
+    """Stop tunnel work after the original proxy owner withdraws admission."""
     pass
 
 
 def _hostname(value):
+    """Normalize one explicit DNS hostname and reject numeric, single-label or malformed destinations
+    without resolving it.
+    """
     if not isinstance(value, str) or not 1 <= len(value) <= 253:
         raise _Denied("Invalid destination")
     value = value.lower()
@@ -48,6 +53,9 @@ def _hostname(value):
 
 @dataclass(frozen=True)
 class EgressPolicy:
+    """Bound exact DNS destinations, TLS port, live/total connection counts, transferred bytes and
+    deadlines for one host-owned proxy.
+    """
     hosts: tuple[str, ...]
     max_tunnels: int = 8
     max_connections: int = 64
@@ -59,6 +67,9 @@ class EgressPolicy:
     connect_seconds: float = 3
 
     def __post_init__(self):
+        """Normalize and deduplicate the explicit host allowlist and reject unbounded, nonfinite or
+        invalid capacities and deadlines.
+        """
         if not isinstance(self.hosts, tuple) or not 1 <= len(self.hosts) <= 16:
             raise ValueError("Explicit bounded destination hosts required")
         object.__setattr__(
@@ -86,6 +97,9 @@ class EgressPolicy:
                 raise ValueError("Bounded egress deadlines required")
 
     def request_host(self, header):
+        """Require bounded ASCII CONNECT syntax, exact allowed DNS authority on port 443 and a matching
+        Host header; do not inspect tunneled TLS.
+        """
         try:
             lines = header.decode("ascii").split("\r\n")
         except UnicodeError:
@@ -128,12 +142,18 @@ class EgressPolicy:
 
 @dataclass(frozen=True)
 class TunnelReceipt:
+    """Record the tunnel outcome and forwarded upload/download byte counts without claiming application
+    success or TLS-content inspection.
+    """
     outcome: str
     uploaded: int
     downloaded: int
 
 
 def _numeric_dial(address, port, timeout, admit):
+    """Validate one public numeric IP, register its socket with the owner before a bounded connect, and
+    close it on failure without another DNS lookup.
+    """
     parsed = public_address(address)
     raw = socket.socket(
         socket.AF_INET if parsed.version == 4 else socket.AF_INET6, socket.SOCK_STREAM
@@ -152,6 +172,9 @@ class TunnelProxy:
     """One host owner's bounded tunnels and nonblocking retirement authority."""
 
     def __init__(self, policy, *, resolver=resolve_addresses, dial=_numeric_dial):
+        """Configure one bounded worker pool and socket/byte accounting around injected resolver and
+        dial functions; no listener is opened.
+        """
         self.policy, self.resolver, self.dial = policy, resolver, dial
         self._lock = threading.Lock()
         self._withdrawn = threading.Event()
@@ -163,6 +186,9 @@ class TunnelProxy:
         )
 
     def submit(self, client):
+        """Take ownership of one connected stream, reserve live and total capacity, and return its
+        worker future; rejected input is closed.
+        """
         try:
             if (
                 client.getsockopt(socket.SOL_SOCKET, socket.SO_TYPE)
@@ -186,6 +212,9 @@ class TunnelProxy:
             raise
 
         def finished(done):
+            """Release settled worker capacity under the proxy lock without decrementing the total
+            lifetime connection count.
+            """
             with self._lock:
                 self._futures.discard(done)
 
@@ -193,10 +222,14 @@ class TunnelProxy:
         return future
 
     def _check(self):
+        """Reject further tunnel progress once the original owner has withdrawn egress."""
         if self._withdrawn.is_set():
             raise _Withdrawn("Egress withdrawn")
 
     def _admit(self, raw):
+        """Track an upstream socket under the withdrawal lock or close it immediately if admission has
+        ended.
+        """
         with self._lock:
             if self._withdrawn.is_set():
                 raw.close()
@@ -204,6 +237,9 @@ class TunnelProxy:
             self._sockets.add(raw)
 
     def withdraw(self):
+        """Permanently reject new work and shut down all currently tracked sockets without waiting for
+        worker receipts.
+        """
         with self._lock:
             self._withdrawn.set()
             sockets = tuple(self._sockets)
@@ -215,6 +251,9 @@ class TunnelProxy:
             raw.close()
 
     def close(self, *, timeout=4):
+        """Withdraw sockets, stop queued work and wait within the supplied budget; unfinished workers
+        remain an explicit closure failure.
+        """
         self.withdraw()
         with self._lock:
             pending = tuple(self._futures)
@@ -224,6 +263,9 @@ class TunnelProxy:
             raise RuntimeError("Egress workers have not confirmed closure")
 
     def _header(self, client, deadline):
+        """Read a CONNECT header within the byte/deadline bound and return any already received tunnel
+        tail without dropping its bytes.
+        """
         data = bytearray()
         while True:
             self._check()
@@ -242,12 +284,18 @@ class TunnelProxy:
                 return bytes(data[:end]), bytes(data[end + 4 :])
 
     def _handle(self, client):
+        """Validate authority and all resolved IPs, dial one deterministic public address and forward
+        opaque bytes; always release owned sockets and return a bounded outcome.
+        """
         owned = [client]
         counts = [0, 0]
         established = False
         started = time.monotonic()
 
         def admit(raw):
+            """Retain an upstream socket for this tunnel cleanup before registering it against global
+            proxy withdrawal.
+            """
             owned.append(raw)
             self._admit(raw)
 
@@ -314,6 +362,9 @@ class TunnelProxy:
         return TunnelReceipt(outcome, *counts)
 
     def _pump(self, client, upstream, tail, counts, deadline):
+        """Forward both directions with bounded buffers, aggregate byte accounting, idle/wall deadlines
+        and half-close propagation; counts measure sent payload bytes.
+        """
         client.setblocking(False)
         upstream.setblocking(False)
         peers = {client: upstream, upstream: client}
