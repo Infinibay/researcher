@@ -1,5 +1,9 @@
 # Planificación: margen observado y fallo de entrega
 
+**Corte histórico, catálogo5.** La entrega atómica posterior se comprobó dentro
+del presupuesto en [catálogo6](atomic-planning-review.md). El fallo de este
+documento se conserva; no representa por sí solo el pendiente actual.
+
 Base `babeaa6`. Bloque **10:33:57–10:52:20 UTC**, **18 min 23 s** hasta la
 validación. **La entrega de planificación sigue sin resolver.** Se corrigió el
 aviso de presupuesto, se ejecutó un intento nuevo y su fallo cambia el siguiente

@@ -9397,3 +9397,22 @@ La distribución Ken/ONNX queda consultada: variante local probada o esperar
 publicación; respuesta aún pendiente, sin asumir aceptación de riesgo. Después
 siguen comunicación, docstrings/detalles, revisión independiente y suite global
 final. Sin push, merge ni despliegue.
+
+
+## 2026-11-08 — Conciliación de comunicación sin repetir ensayos
+
+Un revisor con contexto limpio contrastó el plan y los recibos existentes:
+[conciliación](communication-evidence-reconciliation.md). La lista presentaba como
+pendientes fallos históricos ya cubiertos acotadamente por catálogo4 (auditoría y
+medias), catálogo6 (plan atómico), continuidad/preguntas y C10. Se actualizaron
+coverage/tablero y se enlazaron los cortes históricos sin modificar sus resultados.
+Cero nuevas generaciones; ningún cambio de producto ni nueva aceptación general.
+
+Siguen abiertos U08/humano, comparaciones concretas development/code_review/
+finding_review y comunicación conjunta de espera/fallo/parcial en UI. Los revisores
+ya tienen ensayos funcionales reales históricos; falta la comparación, no su primer
+turno. La respuesta humana pide propósito, datos, relaciones y entradas/salidas:
+registrada como corrección al encuadre, sin inferir comprensión. **42/43 escenarios,
+12/12 páginas por alcance**. Distribución Ken pendiente; luego docstrings/detalles,
+revisión independiente y suite global final. No repetir ciencia para mejorar una
+rúbrica congelada. Sin push, merge ni despliegue.

@@ -1,5 +1,10 @@
 # Presupuesto visible, entrega y trabajo parcial
 
+**Corte histórico, catálogo4.** Este ensayo entregó auditoría y medias; el fallo
+de planificación tuvo una [comprobación posterior](atomic-planning-review.md).
+La [lista vigente](communication-evidence-reconciliation.md) distingue esas
+regresiones de la evaluación de comunicación que todavía falta.
+
 Base `ab36dc5`; bloque iniciado el 7 de noviembre de 2026 a las 09:29:55 UTC.
 El cambio atiende los fallos de [la evaluación por perfiles](profile-communication-review.md).
 No declara aceptada la comunicación general ni sustituye sus respuestas originales.

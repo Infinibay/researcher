@@ -1332,3 +1332,12 @@ confirmó ausencia de historial real. Si pasa a ser herramienta servida, se exig
 procesar almacenamiento hostil o aparece un defecto concreto, revisar entonces
 la frontera agregada y el parser. No ocultar los avisos conocidos ni ampliar sus
 mitigaciones actuales a otros formatos/servidores.
+
+## DD150 — enlaces de evidencia tras retirar evaluadores antiguos
+
+La conciliación de comunicación detectó una referencia histórica de coverage a
+`evals/runtime/run_crash_recovery.py`, ya ausente. Las nuevas referencias del
+bloque sí existen. Después de las capacidades principales, revisar enlaces de
+evidencia a código retirado y asociarlos a su commit histórico o sucesor real,
+conservando los recibos originales. No borrar evidencia ni inferir que una prueba
+histórica no ocurrió porque su evaluador se haya retirado.

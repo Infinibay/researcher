@@ -24,11 +24,30 @@ que se pueda comparar el avance; no presentar microajustes como tareas principal
 ## Estado comprobado
 
 - Codex por suscripción y Ken publicado ensayados. Fuentes/citas, informes draft y revisión documental independiente conectados. Desarrollo admitido desde Tareas/Conversación con captura y comprobaciones explícitas; revisión independiente solicitada desde Tareas y aceptación del propietario conectada. Publicación local desde aceptación conectada; recuperación local de sólo lectura conectada; transporte remoto configurable conectado; recuperación remota y controles de Tareas conectados; ejecución/activación antiguas por tarea y proyecto retiradas; auxiliares de generación/proveedor, herramientas antiguas y sus cinco bibliotecas retirados. También se retiraron API interna, CLI, servicios/listeners y flows/helpers antiguos. También se retiraron autonomía, plantillas históricas y lectores de proveedor sin consumidores; se conserva el control de parada de trabajadores registrados.
-- Interfaz: doce pilotos, 36/36 conceptos de escritorio y 12/12 móviles; todas las rutas tienen piloto y 11/12 páginas tienen aceptación técnica y visual delegada.
+- Interfaz: doce pilotos, 36/36 conceptos de escritorio y 12/12 móviles; todas las rutas tienen piloto y 12/12 páginas tienen aceptación técnica y visual delegada por alcance.
 - Última suite global: `9fb873c`,2210 casos,2178 pasan,31 fallan y1 error de fixture; sin omisiones. La carrera de backup encontrada se corrigió después con40 pruebas instaladas. No se declara una nueva corrida global verde; la referencia `0c8b8d9` queda como evidencia histórica.
 - U01–U07, E01–E12, C01–C10 y D01–D13 quedan comprobados con el alcance de sus matrices; sigue 1 de 43 escenarios amplios sin aceptación completa en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Estado actual: doce páginas verificadas; distribución Ken pendiente de decisión
+## Estado actual: comunicación conciliada; faltan evaluaciones concretas
+
+[Revisión con contexto limpio](communication-evidence-reconciliation.md), sin nuevas
+llamadas de modelo ni cambios productivos. Los resultados históricos se conservan.
+
+- Terminado: **12/12 páginas por alcance, 42/43 escenarios**; revisión estática de
+ 85 candidatos vigente. Auditoría, medias y plan atómico ya tienen comprobaciones
+ de entrega posteriores a sus fallos originales. Preguntas/continuidad y C10 tienen
+ evidencia funcional acotada. No volver a ejecutar esos casos por una lista obsoleta.
+- En curso: cerrar las brechas concretas de comunicación. La respuesta del usuario
+ pide objetivo, datos, relaciones y entradas/salidas; no equivale a aceptación.
+- Pendiente en orden: comparaciones nuevas de development/code_review/finding_review;
+ contrato UI de espera/fallo recuperable/parcial; observación humana y adaptación;
+ ampliar material científico si se pretende representatividad. Distribución
+ Ken/ONNX sigue pendiente de la respuesta ya solicitada. Después, docstrings y
+ detalles, revisión independiente final y una suite global final única.
+- Detalles al final: DD145–149 y anteriores. AuthorityBusy original sigue sin causa
+ demostrada. No hay historial real que migrar; sin push, merge o despliegue.
+
+## Etapa anterior: doce páginas verificadas; distribución Ken pendiente de decisión
 
 **Proyectos: continuación instalada 13:46:32–13:46:41 UTC, 9,229 s.**
 Inspección y preparación anteriores fuera de ese cronómetro.

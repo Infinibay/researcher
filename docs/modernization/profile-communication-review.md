@@ -1,5 +1,9 @@
 # Evaluación de comunicación en otros perfiles
 
+**Corte histórico, catálogo3.** Auditoría, medias y planificación tienen
+comprobaciones posteriores acotadas. Véase la [conciliación vigente](communication-evidence-reconciliation.md).
+Los fallos y respuestas de esta comparación se conservan sin reescribirlos.
+
 Se ejecutaron **cuatro comparaciones y ocho turnos reales** con la suscripción de
 OpenAI y Ken publicado. Los controles coinciden en los cuatro pares tras corregir
 una identidad del comparador. **Sólo dos pares entregaron ambas explicaciones.**
