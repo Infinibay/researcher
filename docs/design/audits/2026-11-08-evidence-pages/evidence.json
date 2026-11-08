@@ -1,0 +1,147 @@
+{
+  "status": "passed",
+  "scope": "Installed owner reads of synthetic documentary domain history, no generative model",
+  "pageStatus": {
+    "reports": "passed",
+    "findings": "readers-passed-review-admission-and-semantic-acceptance-separate"
+  },
+  "states": [
+    {
+      "name": "01-reports-no-selection",
+      "width": 1440,
+      "region": ".report-workbench",
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "02-report-desktop-citations",
+      "width": 1440,
+      "region": ".report-workbench",
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "03-report-mobile-body",
+      "width": 390,
+      "region": ".report-workbench",
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "04-report-mobile-provenance",
+      "width": 390,
+      "region": ".report-workbench",
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "05-accepted-documentary-fixture",
+      "width": 1440,
+      "region": ".report-workbench",
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "06-report-list-failed",
+      "width": 1440,
+      "region": ".report-workbench",
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "07-report-citations-failed",
+      "width": 390,
+      "region": ".report-workbench",
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "08-empty-beta-no-alpha-report",
+      "width": 390,
+      "region": ".report-workbench",
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "09-finding-desktop-evidence",
+      "width": 1440,
+      "region": ".findings-workbench",
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "10-finding-mobile-captured-quote",
+      "width": 390,
+      "region": ".findings-workbench",
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "11-legacy-declaration-not-review",
+      "width": 390,
+      "region": ".findings-workbench",
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "12-actual-semantic-availability",
+      "width": 1440,
+      "region": ".findings-workbench",
+      "fits": true,
+      "violations": []
+    }
+  ],
+  "checks": [
+    "reports-pagination-50-plus-3",
+    "saved-markdown-title-not-duplicated",
+    "captured-citation-hash-and-limits",
+    "original-correction-task-link",
+    "accepted-documentary-state-filter",
+    "legacy-code-not-accepted-report",
+    "report-keyboard-return",
+    "report-query-and-known-no-results",
+    "report-list-failure-not-empty",
+    "citation-failure-not-no-sources",
+    "read-only-recovery",
+    "late-original-report-project-isolation",
+    "foreign-link-not-retargeted",
+    "report-reload-alpha-beta-alpha",
+    "findings-pagination-50-plus-3",
+    "original-body-window",
+    "captured-source-quote-highlight-and-hash",
+    "citation-focus-return",
+    "legacy-confidence-not-scientific-certainty",
+    "combined-type-and-word-filter",
+    "actual-semantic-availability-no-lexical-fallback"
+  ],
+  "faults": [
+    {
+      "path": "/api/artifacts",
+      "kind": "abort-read"
+    },
+    {
+      "path": "/api/artifacts",
+      "kind": "abort-read"
+    },
+    {
+      "path": "/api/artifacts/1/evidence",
+      "kind": "abort-read"
+    },
+    {
+      "path": "/api/artifacts/1/evidence",
+      "kind": "abort-read"
+    },
+    {
+      "path": "/api/artifacts/1",
+      "kind": "late-original-alpha-report"
+    }
+  ],
+  "writes": [],
+  "errors": [],
+  "semantic": {
+    "status": 503,
+    "search_kind": null,
+    "full_coverage": null,
+    "scientific_confidence": null
+  }
+}

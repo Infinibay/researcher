@@ -5993,7 +5993,7 @@
       "status": "in_progress",
       "pilots": 12,
       "concept_images": 48,
-      "fully_accepted": 6,
+      "fully_accepted": 7,
       "pages": {
         "projects": {
           "status": "in_progress",
@@ -6135,6 +6135,43 @@
             "DD134",
             "DD132",
             "DD121"
+          ]
+        },
+        "reports": {
+          "status": "verified",
+          "selected_concept": "reading-with-provenance",
+          "scope": "Installed owner report read/navigation with real scoped sources/citations and documentary acceptance projection; underlying domain history/turn IDs are synthetic. No human comprehension or scientific validity claim.",
+          "evidence": [
+            "docs/modernization/evidence-pages-review.md",
+            "docs/modernization/evidence-pages-results.json",
+            "docs/modernization/artifact-acceptance-review.md",
+            "docs/modernization/artifact-acceptance-results.json",
+            "docs/modernization/artifact-acceptance-packaging.json",
+            "docs/design/audits/2026-11-08-evidence-pages/report.md",
+            "frontend/tests/evidence.e2e.mjs",
+            "evals/operation/evidence_pages.py"
+          ],
+          "remaining": [],
+          "deferred": [
+            "DD135",
+            "DD132",
+            "DD121"
+          ]
+        },
+        "findings": {
+          "status": "in_progress",
+          "selected_concept": "evidence-ledger",
+          "evidence": [
+            "docs/modernization/evidence-pages-review.md",
+            "docs/modernization/evidence-pages-results.json",
+            "docs/design/audits/2026-11-08-evidence-pages/report.md"
+          ],
+          "remaining": [
+            "Managed installed host semantic retrieval returns503; inspect actual configuration/wiring and prove positive local retrieval without a lexical fallback",
+            "Complete independent review admission/history and protected original-task flow acceptance; reader alone does not close this capability"
+          ],
+          "deferred": [
+            "DD135"
           ]
         }
       }

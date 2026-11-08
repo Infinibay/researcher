@@ -1,0 +1,53 @@
+[
+  {
+    "path": "frontend/src/components/pages/ReportsPage.tsx",
+    "messages": []
+  },
+  {
+    "path": "frontend/src/types/api.ts",
+    "messages": [
+      {
+        "ruleId": "@typescript-eslint/no-explicit-any",
+        "severity": 2,
+        "message": "Unexpected any. Specify a different type.",
+        "line": 283,
+        "column": 10,
+        "messageId": "unexpectedAny",
+        "endLine": 283,
+        "endColumn": 13,
+        "suggestions": [
+          {
+            "messageId": "suggestUnknown",
+            "fix": {
+              "range": [
+                6994,
+                6997
+              ],
+              "text": "unknown"
+            },
+            "desc": "Use `unknown` instead, this will force you to explicitly, and safely assert the type is correct."
+          },
+          {
+            "messageId": "suggestNever",
+            "fix": {
+              "range": [
+                6994,
+                6997
+              ],
+              "text": "never"
+            },
+            "desc": "Use `never` instead, this is useful when instantiating generic type parameters that you don't need to know the type of."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "path": "frontend/tests/report-design-fixture.tsx",
+    "messages": []
+  },
+  {
+    "path": "frontend/tests/report-design.test.ts",
+    "messages": []
+  }
+]

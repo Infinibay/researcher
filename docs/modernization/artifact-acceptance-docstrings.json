@@ -1,0 +1,33 @@
+{
+  "definitions": 17,
+  "files": [
+    {
+      "path": "backend/api/routes/artifacts.py",
+      "sha256": "2069e459f8c72fa47eed77fde1ec4f393118ed64dfbfef9d8f5750766ffcc7b8",
+      "module_documented": true,
+      "definitions": 7,
+      "missing": []
+    },
+    {
+      "path": "backend/api/models/artifact.py",
+      "sha256": "d916beb0e7d0bcf94f69a140bce3f0f3150226c2847c262371d568ba3371e6c3",
+      "module_documented": true,
+      "definitions": 4,
+      "missing": []
+    },
+    {
+      "path": "backend/tests/runtime/test_artifact_acceptance.py",
+      "sha256": "d29dcd1b474eb24175ee52c6762cb6e5cf003f5c16f634b2a55becd03f5573c0",
+      "module_documented": true,
+      "definitions": 3,
+      "missing": []
+    },
+    {
+      "path": "evals/operation/evidence_pages.py",
+      "sha256": "3e242521fbca874471b59f5407ae651c2d10f2f61c141b5a4eb102eb3b219182",
+      "module_documented": true,
+      "definitions": 3,
+      "missing": []
+    }
+  ]
+}

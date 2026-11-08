@@ -416,6 +416,17 @@ export interface FindingSource {
   content:string; offset:number; total_chars:number; next_offset:number|null
 }
 
+/** Exact historical owner decision; matching bytes alone do not establish current task/context validity. */
+export interface ArtifactOwnerAcceptance {
+  run_id: string
+  task_id: number
+  context_version: number
+  accepted_at: number
+  report_sha256: string
+  validity: 'not_rechecked'
+  matches_current_content: boolean | null
+}
+
 export interface Artifact {
   id: number
   project_id?: number
@@ -424,6 +435,7 @@ export interface Artifact {
   file_path: string
   title?: string | null
   research_status?: 'draft' | 'accepted' | 'superseded' | null
+  owner_acceptance?: ArtifactOwnerAcceptance | null
   description?: string
   content?: string
   created_at?: string

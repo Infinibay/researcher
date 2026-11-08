@@ -24,32 +24,35 @@ que se pueda comparar el avance; no presentar microajustes como tareas principal
 ## Estado comprobado
 
 - Codex por suscripción y Ken publicado ensayados. Fuentes/citas, informes draft y revisión documental independiente conectados. Desarrollo admitido desde Tareas/Conversación con captura y comprobaciones explícitas; revisión independiente solicitada desde Tareas y aceptación del propietario conectada. Publicación local desde aceptación conectada; recuperación local de sólo lectura conectada; transporte remoto configurable conectado; recuperación remota y controles de Tareas conectados; ejecución/activación antiguas por tarea y proyecto retiradas; auxiliares de generación/proveedor, herramientas antiguas y sus cinco bibliotecas retirados. También se retiraron API interna, CLI, servicios/listeners y flows/helpers antiguos. También se retiraron autonomía, plantillas históricas y lectores de proveedor sin consumidores; se conserva el control de parada de trabajadores registrados.
-- Interfaz: doce pilotos, 36/36 conceptos de escritorio y 12/12 móviles; todas las rutas tienen piloto y 6/12 páginas tienen aceptación técnica y visual delegada.
+- Interfaz: doce pilotos, 36/36 conceptos de escritorio y 12/12 móviles; todas las rutas tienen piloto y 7/12 páginas tienen aceptación técnica y visual delegada.
 - Última suite global: `9fb873c`,2210 casos,2178 pasan,31 fallan y1 error de fixture; sin omisiones. La carrera de backup encontrada se corrigió después con40 pruebas instaladas. No se declara una nueva corrida global verde; la referencia `0c8b8d9` queda como evidencia histórica.
 - U01–U07, E01–E12, C01–C09 y D01–D13 quedan comprobados con el alcance de sus matrices; siguen 2 de 43 escenarios amplios sin aceptación completa en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Estado actual: Agentes verificado; continúa Hallazgos/Informes
+## Estado actual: Informes aceptado; continúa Hallazgos
 
-**05:55:41–06:01:59UTC,6min18s hasta verificar/inspeccionar**, base444af41,
-incluidas dos correcciones del evaluador. [Alcance](agents-page-review.md).
+**06:04:08–06:26:36 UTC,22min28s hasta verificar/inspeccionar**, base1e6e0f0;
+incluye corrección funcional y evaluador. [Alcance](evidence-pages-review.md).
 
-- Terminado: **6/12páginas** en alcance delegado: Documentos, Archivos,
- Repositorios, Planificación, Resumen y Agentes. Agentes11estados/13comprobaciones,
-30runs/5actores,25+5; presupuesto200→1000tokens/2→4turnos una sola vez, perdido
- recibo recuperado por GET; Stop202real sobre pregunta sintética observado por
- lectura tras perder la respuesta.0modelos lanzados, servicio/dominio cerrados.
- Un ID de turno y recibo/consumo55son sintéticos; no uso de suscripción.
-- En curso: **Hallazgos e Informes**, revisar lecturas/fuentes/procedencia y enlaces
- originales de las páginas existentes sobre datos de dominio, sin generación.
-- Pendiente en orden: Hallazgos/Informes, Tareas, Conversación y Ejecución;
- Proyectos por AuthorityBusy original. Recheck de enlace no vacío de cierre al
- completar el recorrido global. U08/C10 y evaluación científica; distribución,
- dependencias, prompts, inversas69, suite y revisión independiente final.
-- Seguimos **41/43escenarios**, sin porcentaje/ETA global defendible. Última suite
- global31fallos y1error;67de85revisiones estáticas desactualizadas en318archivos.
- No nueva afirmación de verde ni huellas renovadas sin revisar.
-- Detalles al final: DD134y anteriores; densidad/presupuesto, mensaje de respuesta
- perdida frente a estado actualizado, estilo/accesibilidad completa. No push/merge.
+- Terminado: **7/12 páginas** en alcance delegado: Documentos, Archivos,
+ Repositorios, Planificación, Resumen, Agentes e Informes. Se reparó la lectura de
+ aceptación original de informes sin cambiar su flag draft ni inferir vigencia.
+35fuente/94instalados,150contratos/51UI verdes;685fuentes/365producto coinciden,
+ pip check83paquetes, tipos/build pasan. Ocho estados actuales de Informes.
+- En curso: **Hallazgos**. Cuatro estados de lector pasan (texto/citas/hash,
+ declaraciones históricas, paginación/filtros); búsqueda semántica real devuelve503
+ en este host administrado. Diagnosticar configuración/wiring y probar ruta positiva;
+ completar admisión/historia de revisión independiente. No aceptado por lector solo.
+- Pendiente en orden: Hallazgos, Tareas, Conversación, Ejecución; Proyectos por
+ AuthorityBusy original. Enlace no vacío de cierre en recorrido global; U08/C10 y
+ evaluación científica; distribución/dependencias, prompts, inversas69, suite y
+ revisión independiente final. No nueva suite global verde.
+- Seguimos **41/43 escenarios**. Sin porcentaje/ETA global defendible. Última suite
+ global31fallos/1error. Último corte de prompts:67de85desactualizadas en318archivos;
+ revalidar sobre árbol final, no renovar huellas sin revisar.
+- Detalles al final: DD135y anteriores, presentación/densidad/mensajes/estilo y
+ accesibilidad completa. El503y revisión son capacidades pendientes, no detalles.
+0turnos generativos; dos IDs de turno del fixture no equivalen a ejecuciones.
+ No push, merge o despliegue.
 
 ## Etapa anterior: Ken estructural offline verificado; continúa aceptación de páginas
 

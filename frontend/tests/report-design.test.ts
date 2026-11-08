@@ -5,7 +5,7 @@ import { before,after,test } from 'node:test'
 import { createServer,type ViteDevServer } from 'vite'
 let server:ViteDevServer
 let renderTaskLink:(options?:{foreignProject?:boolean;foreignTask?:boolean})=>Promise<string>
-let renderReport:(options?:{detailFailure?:boolean;evidenceFailure?:boolean;legacy?:boolean;noProject?:boolean;wrongProject?:boolean})=>string
+let renderReport:(options?:{detailFailure?:boolean;evidenceFailure?:boolean;legacy?:boolean;noProject?:boolean;wrongProject?:boolean;ownerAccepted?:boolean;changedBody?:boolean})=>string
 before(async()=>{
   server = await createServer({configFile:false,server:{middlewareMode:true,hmr:false,ws:false,watch:null},esbuild:{jsx:'automatic'},optimizeDeps:{noDiscovery:true},resolve:{alias:[{find:/^react-router-dom$/,replacement:new URL('../node_modules/react-router-dom/dist/index.mjs',import.meta.url).pathname},{find:/^react-router$/,replacement:new URL('../node_modules/react-router/dist/development/index.mjs',import.meta.url).pathname},{find:/^react-router\/dom$/,replacement:new URL('../node_modules/react-router/dist/development/dom-export.mjs',import.meta.url).pathname}]},ssr:{noExternal:[/react-router/]}})
  ;({renderReport,renderTaskLink}=await server.ssrLoadModule('/tests/report-design-fixture.tsx'))
@@ -18,6 +18,20 @@ test('saved report reads as one document with explicit review state and a scoped
  assert.match(html,/Contenido original, sin aceptar/)
  assert.equal((html.match(/<h1[ >]/g)||[]).length,1)
  assert.match(html,/Todos los informes/)
+})
+test('owner acceptance is historical context, separate from stored draft state and current validity',()=>{
+ const html=renderReport({ownerAccepted:true})
+ assert.match(html,/Aceptación guardada · vigencia por comprobar/)
+ assert.match(html,/Estado del documento original: Borrador/)
+ assert.match(html,/contexto 3/)
+ assert.match(html,/original-author-run/)
+ assert.match(html,/Ver aceptación en la tarea original/)
+ assert.doesNotMatch(html,/Aceptación vigente|Validado científicamente/)
+})
+test('changed current bytes are never represented as the version with owner acceptance',()=>{
+ const html=renderReport({ownerAccepted:true,changedBody:true})
+ assert.match(html,/El contenido actual no coincide con la versión aceptada/)
+ assert.match(html,/cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc/)
 })
 test('source panel renders captured quotes safely and retains source/hash provenance',()=>{
  const html=renderReport()

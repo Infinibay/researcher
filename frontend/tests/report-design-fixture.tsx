@@ -8,12 +8,12 @@ import { ReportsPage } from '../src/components/pages/ReportsPage'
 import { useProjectStore } from '../src/stores/project'
 
 /** Render saved content, source errors and project mismatch without HTTP or inference. */
-export function renderReport({ detailFailure=false, evidenceFailure=false, legacy=false, noProject=false, wrongProject=false }={}) {
+export function renderReport({ detailFailure=false, evidenceFailure=false, legacy=false, noProject=false, wrongProject=false, ownerAccepted=false, changedBody=false }={}) {
  const client=new QueryClient({defaultOptions:{queries:{retry:false,retryOnMount:false,staleTime:Infinity,gcTime:Infinity}}})
  const initial=useProjectStore.getInitialState()
  const previous=initial.activeProjectId
  initial.activeProjectId=noProject?null:101
- const artifact={id:9,project_id:101,task_id:24,type:legacy?'code':'report',file_path:'reports/9.md',title:'Informe <guardado>',research_status:legacy?null:'draft',created_at:'2026-11-01 17:39:00',content:'# Informe <guardado>\n\nContenido original, sin aceptar.'}
+ const artifact={id:9,project_id:101,task_id:24,type:legacy?'code':'report',file_path:'reports/9.md',title:'Informe <guardado>',research_status:legacy?null:'draft',created_at:'2026-11-01 17:39:00',content:'# Informe <guardado>\n\nContenido original, sin aceptar.',owner_acceptance:ownerAccepted?{run_id:'original-author-run',task_id:24,context_version:3,accepted_at:1793550000,report_sha256:'c'.repeat(64),validity:'not_rechecked',matches_current_content:!changedBody}:null}
  client.setQueryData(['artifacts',101,undefined],[artifact])
  client.setQueryData(['artifacts',101,{q:''}],{pages:[[artifact]],pageParams:[0]})
  if(detailFailure)client.getQueryCache().build(client,{queryKey:['artifact',101,9]}).setState({status:'error',error:new Error('Fixture detail unavailable')})

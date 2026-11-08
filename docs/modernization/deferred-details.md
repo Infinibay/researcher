@@ -1145,3 +1145,17 @@ El encuadre03del presupuesto no contiene todo el aviso, aunque la aserción lo
 comprobó. No repetir un recorrido por ese detalle. I001del evaluador en
 [agents-page-lint.json](agents-page-lint.json). Helpers de instalación repetidos en
 evaluadores son candidatos a unificar después, no ahora ni dentro del producto.
+
+## DD135 — presentación y estilo de evidencia documental
+
+La insignia de aceptación histórica conserva el color del estado original draft;
+ajustar presentación/densidad al final sin fusionar las dos cosas. Mejorar el
+mensaje de límite de revisión (más de20reportes vinculados): actualmente explica
+indisponibilidad de forma genérica, aunque no inventa revisión. Errores técnicos
+ingleses/cabecera siguen enDD132. No cambiar límites para satisfacer un fixture.
+
+DosI001en[artifact-acceptance-lint.json](artifact-acceptance-lint.json); el único
+ESLint de la selección es el any heredado de tipos, línea283, yaDD132. Los archivos
+de Informes y sus pruebas pasan ESLint. BundleDD121. Configuración semántica503y
+aceptación de revisión independiente son capacidades principales pendientes,
+no detalles de estilo.

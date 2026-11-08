@@ -7,8 +7,16 @@ import { useArtifacts, useArtifact, useArtifactEvidence } from '../../hooks/useA
 import { MarkdownRenderer } from '../common/MarkdownRenderer'
 import { reportDocument, reportTimestamp, artifactTypes, reportStates } from '../reports/presentation'
 import { scopedEntityId } from '../../utils/projectSelection'
+import type {Artifact} from '../../types/api'
 import '../../styles/tasks.css'
 import '../../styles/reports.css'
+
+/** Keep original document flags separate from an exact historical owner decision and its unassessed validity. */
+function statusLabel(artifact:Artifact) {
+  if(artifact.owner_acceptance)return 'Aceptación guardada · vigencia por comprobar'
+  if(artifact.research_status==='accepted')return 'Aceptado · estado del registro, sin decisión vinculada'
+  return artifact.research_status ? reportStates[artifact.research_status] ?? artifact.research_status : artifactTypes[artifact.type] ?? artifact.type
+}
 
 /** Pair the readable UTC date with a machine timestamp when a valid date was recorded. */
 function SavedDate({ value }: { value?: string | number | null }) {
@@ -68,7 +76,7 @@ function ProjectReports({ projectId }: { projectId: number }) {
         </header>
         {catalog.isPending ? <p className="report-message" role="status">Consultando informes…</p> : catalog.isError && !catalog.data ? <div className="report-message report-error" role="alert"><p>No se pudo consultar la lista.</p><button className="task-secondary" onClick={() => catalog.refetch()}>Volver a consultar</button></div> : <>
           <ul className="report-list">{artifacts.map(item => <li key={item.id}><button id={`report-select-${item.id}`} type="button" aria-current={selectedId === item.id ? 'true' : undefined} onClick={() => choose(item.id)}>
-            <strong>{item.title ?? item.file_path}</strong><span className="report-row-meta"><span className="report-status" data-status={item.research_status ?? 'unknown'}>{item.research_status ? reportStates[item.research_status] ?? item.research_status : artifactTypes[item.type] ?? item.type}</span></span><SavedDate value={item.created_at} />
+            <strong>{item.title ?? item.file_path}</strong><span className="report-row-meta"><span className="report-status" data-status={item.research_status ?? 'unknown'}>{statusLabel(item)}</span></span><SavedDate value={item.created_at} />
             {item.description && <span className="report-row-description">{item.description}</span>}
           </button></li>)}</ul>
           {artifacts.length === 0 && <p className="report-message">No hay archivos con estos filtros. Puedes cambiar el tipo, el estado o la búsqueda.</p>}
@@ -80,9 +88,16 @@ function ProjectReports({ projectId }: { projectId: number }) {
           <button className="report-back" onClick={() => choose(null)}>Todos los informes</button>
           {detail.isPending ? <p className="report-message" role="status">Cargando el informe…</p> : detail.isError ? <div className="report-message report-error" role="alert"><h1>No se pudo cargar el informe</h1><p>Puede no estar disponible en este proyecto. Vuelve a consultar o regresa a la lista.</p><button className="task-secondary" onClick={() => detail.refetch()}>Volver a consultar</button></div> : selected && <>
             <header className="report-heading">
-              <div><p className="task-eyebrow">{selected.type === 'report' ? 'INFORME GUARDADO' : 'ARCHIVO GUARDADO'}</p><h1 ref={title} tabIndex={-1}>{selected.title ?? selected.file_path}</h1><div className="report-meta"><span className="report-status" data-status={selected.research_status ?? 'unknown'}>{selected.research_status ? reportStates[selected.research_status] ?? selected.research_status : 'Sin revisión registrada'}</span><SavedDate value={selected.created_at} /></div></div>
+              <div><p className="task-eyebrow">{selected.type === 'report' ? 'INFORME GUARDADO' : 'ARCHIVO GUARDADO'}</p><h1 ref={title} tabIndex={-1}>{selected.title ?? selected.file_path}</h1><div className="report-meta"><span className="report-status" data-status={selected.research_status ?? 'unknown'}>{selected.owner_acceptance||selected.research_status?statusLabel(selected):'Sin revisión registrada'}</span><SavedDate value={selected.created_at} /></div></div>
               {selected.task_id && <Link className="report-primary report-action-desktop" to={`/tasks?project=${projectId}&task=${selected.task_id}&fromArtifact=${selected.id}`}>Ver tarea y corregir contexto</Link>}
             </header>
+            {selected.owner_acceptance&&<section className="report-document-footer" aria-label="Aceptación del resultado">
+              <p>Este informe formó parte de un resultado con aceptación guardada para el contexto {selected.owner_acceptance.context_version}. Su vigencia actual se comprueba en la tarea original.</p>
+              <p>Estado del documento original: {selected.research_status?reportStates[selected.research_status]??selected.research_status:'Sin estado registrado'}.</p>
+              {selected.owner_acceptance.matches_current_content===false&&<p role="alert">El contenido actual no coincide con la versión aceptada. Consulta la decisión y su informe original antes de usarlo.</p>}
+              <Link to={`/tasks?project=${projectId}&task=${selected.owner_acceptance.task_id}&fromArtifact=${selected.id}`}>Ver aceptación en la tarea original</Link>
+              <details><summary>Identidad de la aceptación</summary><p>Ejecución original: {selected.owner_acceptance.run_id}</p><p>SHA-256 de la versión aceptada</p><code>{selected.owner_acceptance.report_sha256}</code></details>
+            </section>}
             <div className="report-document-layout">
               <article className="report-document" aria-label="Contenido guardado">
                 {selected.content ? selected.type === 'report' ? <MarkdownRenderer content={reportDocument(selected.content, selected.title ?? selected.file_path)} /> : <pre><code>{selected.content}</code></pre> : <p>No hay contenido guardado para este archivo.</p>}

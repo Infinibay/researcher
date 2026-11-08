@@ -2,9 +2,23 @@
 
 from __future__ import annotations
 
+from typing import Literal
+
 from pydantic import BaseModel
 
 from backend.api.models.research import EvidenceResponse
+
+
+class ArtifactOwnerAcceptance(BaseModel):
+    """Identify a historical exact owner decision; current context validity is deliberately not inferred."""
+
+    run_id: str
+    task_id: int
+    context_version: int
+    accepted_at: float
+    report_sha256: str
+    validity: Literal["not_rechecked"] = "not_rechecked"
+    matches_current_content: bool | None = None
 
 
 class ArtifactListResponse(BaseModel):
@@ -21,6 +35,7 @@ class ArtifactListResponse(BaseModel):
     description: str | None = None
     title: str | None = None
     research_status: str | None = None
+    owner_acceptance: ArtifactOwnerAcceptance | None = None
     created_at: str | None = None
 
 

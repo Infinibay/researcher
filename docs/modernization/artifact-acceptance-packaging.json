@@ -1,0 +1,39 @@
+{
+  "validation_environment": {
+    "runner_cgroup": "/sys/fs/cgroup/user.slice/user-1000.slice/user@1000.service/app.slice/run-p1391981-i1391982.scope",
+    "parent_controllers_before": "cpu memory pids",
+    "runner_cpu_max": "800000 100000",
+    "purpose": "Transient systemd scope with CPUQuota=800% retains CPU-controller availability during validation; it does not relax any product limit.",
+    "parent_controllers_after": "cpu memory pids"
+  },
+  "base_commit": "1e6e0f0",
+  "wheel": "researcher-0.1.0-cp312-cp312-linux_x86_64.whl",
+  "wheel_sha256": "ac90bf7978b02419fab107422fa28d6dabeb2518b1688a82e7a8ba64cb882727",
+  "source_files_matching_wheel_and_installation": 685,
+  "product_files_matching": 365,
+  "observed": {
+    "cases": 94,
+    "passed": 94,
+    "failed": 0,
+    "skipped": 0,
+    "backend_modules": 241,
+    "all_backend_imports_from_native_env": true,
+    "seconds": 54.479,
+    "exit_code": 0
+  },
+  "tests": [
+    "backend/tests/runtime/test_artifact_acceptance.py",
+    "backend/tests/runtime/test_result_acceptance.py",
+    "backend/tests/research/test_http.py",
+    "backend/tests/research/test_persistence.py",
+    "backend/tests/research/test_finding_registry.py",
+    "backend/tests/research/test_finding_semantic.py",
+    "backend/tests/runtime/test_project_completion.py"
+  ],
+  "real_model_turns": 0,
+  "limits": [
+    "Selected installed tests, not the global suite",
+    "Installed artifact owner acceptance projection, original result policy, evidence/HTTP/current finding registry and whole-project completion regression selection; browser acceptance separate",
+    "Real SQLite/files and controlled documentary domain records; no real native actor/generative turn or human understanding claim"
+  ]
+}

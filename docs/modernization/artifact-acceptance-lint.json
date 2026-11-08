@@ -1,0 +1,72 @@
+[
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 54,
+      "row": 18
+    },
+    "filename": "evals/operation/evidence_pages.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "import argparse\nimport hashlib\nimport json\nimport os\nimport socket\nimport subprocess\nimport sys\nfrom contextlib import closing\nfrom pathlib import Path\n\nfrom host_smoke import start, stop\nfrom planning_page import observe as observe_planning\n\n",
+          "end_location": {
+            "column": 1,
+            "row": 20
+          },
+          "location": {
+            "column": 1,
+            "row": 7
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 1,
+      "row": 7
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 7,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  },
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 61,
+      "row": 31
+    },
+    "filename": "evals/operation/evidence_pages.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "    from backend.db.connection import connect\n    from backend.research.models import (\n        RESEARCH_PERMISSIONS,\n        EvidenceReference,\n        FindingDraft,\n        ReportDraft,\n        ResultDraft,\n        SourceDraft,\n    )\n    from backend.research.sqlite_store import SQLiteResearchStore\n    from backend.runtime.contracts import RunSpec\n    from backend.runtime.peer_registry import AttemptPeers\n    from backend.runtime.sqlite_runs import SQLiteRunStore\n    from backend.runtime.workspaces import WorkspaceRegistry\n",
+          "end_location": {
+            "column": 1,
+            "row": 32
+          },
+          "location": {
+            "column": 1,
+            "row": 25
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 5,
+      "row": 25
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 25,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  }
+]

@@ -1,0 +1,61 @@
+{
+  "status": "verified",
+  "base_commit": "1e6e0f0",
+  "source_tests": [
+    {
+      "receipt": "artifact-acceptance-red-v2.xml",
+      "cases": 3,
+      "failures": [
+        {
+          "test": "test_accepted_report_filter_reads_original_receipt_without_rewriting_draft",
+          "message": "assert [] == [1]\n  \n  Right contains one more item: 1\n  Use -v to get more diff"
+        },
+        {
+          "test": "test_historical_acceptance_does_not_certify_changed_content_or_context",
+          "message": "KeyError: 'owner_acceptance'"
+        },
+        {
+          "test": "test_legacy_accepted_label_does_not_fabricate_an_owner_receipt",
+          "message": "KeyError: 'owner_acceptance'"
+        }
+      ],
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "receipt": "artifact-acceptance-source.xml",
+      "cases": 35,
+      "failures": [],
+      "errors": 0,
+      "skipped": 0
+    }
+  ],
+  "frontend_contract_cases": 150,
+  "frontend_ui_cases": 51,
+  "docstring_definitions": 17,
+  "real_generative_model_turns": 0,
+  "semantics": "Original report status remains draft; exact historical acceptance is projected separately, current validity is not inferred and detail compares actual content against original accepted hash.",
+  "schema_version": 69,
+  "installed_tests": {
+    "cases": 94,
+    "passed": 94,
+    "failed": 0,
+    "skipped": 0,
+    "seconds": 54.479,
+    "backend_modules": 241,
+    "all_backend_imports_from_native_env": true
+  },
+  "browser_receipt": "docs/modernization/evidence-pages-results.json",
+  "source_sha256": {
+    "backend/api/routes/artifacts.py": "2069e459f8c72fa47eed77fde1ec4f393118ed64dfbfef9d8f5750766ffcc7b8",
+    "backend/api/models/artifact.py": "d916beb0e7d0bcf94f69a140bce3f0f3150226c2847c262371d568ba3371e6c3",
+    "backend/tests/runtime/test_artifact_acceptance.py": "d29dcd1b474eb24175ee52c6762cb6e5cf003f5c16f634b2a55becd03f5573c0",
+    "frontend/src/components/pages/ReportsPage.tsx": "59b6a938eea7ccce766fbbaf414c8b7333fe1e758e119ce625072c60a9eae768",
+    "frontend/src/types/api.ts": "c507acf17a2f7602dedc00eb58126225e2c904e34241812b715c8e7112097dd1",
+    "frontend/tests/report-design.test.ts": "abc8bbc50b03321f1cb84bfd136117e3b2777dff0f5db709bd29185b30cb5ebb",
+    "frontend/tests/report-design-fixture.tsx": "c2747d43e9a76452851f7b7b5a5df9eebcf37ab6223d5825008f86fb19172388",
+    "evals/operation/evidence_pages.py": "3e242521fbca874471b59f5407ae651c2d10f2f61c141b5a4eb102eb3b219182",
+    "frontend/tests/evidence.e2e.mjs": "4181e434e5d68dde8f4090b466b3226541778bc5cc2a35d7ea017802939ec644"
+  },
+  "wheel_sha256": "ac90bf7978b02419fab107422fa28d6dabeb2518b1688a82e7a8ba64cb882727"
+}

@@ -9015,3 +9015,31 @@ mensajes al final.6/12páginas en alcance registrado,41/43escenarios; sin nueva
 suiteglobal. Siguiente Hallazgos/Informes (fuentes y recibos de dominio), después
 Tareas/Conversación/Ejecución/Proyectos, evaluaciones y gates globales.
 [Alcance](agents-page-review.md).
+
+
+## Informes aceptado y Hallazgos parcial, 2026-11-08
+
+06:04:08–06:26:36UTC,22min28s hasta verificar/inspeccionar. Se encontró desconexión
+entre aceptación documental y catálogo: el informe conserva draft por contrato,
+pero no se podía encontrar como aceptado. DTO/proyección añade decisión original
+por proyecto/tarea/artefacto, contexto/hash/run y vigencia no recomprobada; detalle
+compara bytes actuales sin promover vigencia. Filtros/etiquetas distinguen las dos
+cosas. Tres RED API y dos RED SSR;35fuente/94instalados,150contratos/51UI pasan.
+Paquete685Python/SQL,365producto; SHAac90bf7978b02419fab107422fa28d6dabeb2518b1688a82e7a8ba64cb882727.
+83paquetes compatibles,17definiciones documentadas, tipos/build verdes. DosI001,
+any heredado y bundle al finalDD135/DD132/DD121; no estilo o suite global verde.
+
+Navegador real v4:12estados/21checks, ocho Informes y cuatro Hallazgos, sin confundir
+el total compartido.53artifacts/52reports/53findings, fuentes/citas/hashes, aceptación
+sintética documental, filtros/paginación, errores/recuperación y entrega tardíaA→B
+esperada antes de comprobar aislamiento. Sin escrituras de negocio ni generación,
+dos IDs sintéticos nunca lanzados y0dispatches; estado observado no cambia.
+Servicio143y dominio cerrado. Capturas actuales inspeccionadas contra selecciones.
+
+v1locatorEstadoincorrecto; v2fixturevinculaba51reportes al mismo hallazgo y violaba
+límite20de revisión; v3selectorCSSambiguo. Se corrigieron evaluadores sin relajar
+políticas. v4pasa en alcance explícito: búsqueda semántica503no es capacidad positiva.
+**7/12páginas**,41/43escenarios; Hallazgos abierto por configuración/búsqueda local
+positiva y revisión independiente. Después Tareas/Conversación/Ejecución/Proyectos,
+evaluaciones/distribución/prompts/inversas69/global/revisión. U08/C10/AuthorityBusy
+original continúan. [Evidencia](evidence-pages-review.md).
