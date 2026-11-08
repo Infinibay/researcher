@@ -8642,7 +8642,7 @@ posteriores a la verificación quedan fuera de esa duración.
 ### 2026-11-07 — caso científico primario actual: entrega fallida conservada
 
 Auditoría23:45:08–23:55:42UTC (10min34s hasta verificar); ejecución de este turno
-desde23:48:05. Una admisión real con catálogo9, suscripción y Ken publicado;
+desde23:48:05. Una admisión real con catálogo 9, suscripción y Ken publicado;
 fuente capturada, código leído y cálculo correcto, pero sin informe ni explicación
 final tras140692tokens observados frente al techo120000del ensayo. Los cinco
 peers y el servidor originales están cerrados;0grants activos, consumo remoto
@@ -8654,3 +8654,24 @@ del operador; no cambia el registro original ni prueba una entrega futura.
 Tres pruebas del protocolo pasan; siete funciones documentadas. Evaluación abierta,
 U08/C10 abiertos,41/43 escenarios y0/12 páginas. Siguiente bloque preparado:
 aceptación integral de páginas, empezando por Proyectos. Detalles menores al final.
+
+
+### 2026-11-08 — Proyectos: cuatro correcciones, aceptación todavía abierta
+
+23:58:35–00:37:32UTC (38min57s hasta verificar), base107240c. Se reproducen y
+corrigen creación tardía que cambia selección, planificación retirada A→B→A,
+recuperación obsoleta y solicitud UI en inglés. Pasan3DOM,11contratos y build.
+Un plan real aceptado, tareas pendientes sin ejecutar,139193tokens settled;
+cuarenta casos instalados pasan y falla una expectativa obsoleta de fixture.
+
+Ruling: conservar la reserva del proyecto de prueba original y comprobar generación
+en otro contexto explícito, sin elevar sus límites ni borrar fallos. Un solo turno
+real en total; la regresión española llegó al servidor pero falló antes de inferir.
+El log identifica AuthorityConflict y AuthorityBusy, sin causa exacta demostrada.
+Cierre original confirmado, cero grants. La explicación runtime_failed debe distinguir
+esa preparación fallida de cierre desconocido. Es trabajo principal.
+
+41/43 escenarios y0/12 páginas. Siguiente: diagnóstico acotado de preparación nativa,
+luego cerrar Proyectos y seguir páginas. Ken está configurado y sus peers fueron
+preparados, pero este harness normal no registra consultas/resultados por nombre;
+no equiparar eso ni la prosa del modelo con su verificación. DD123/124 al final.

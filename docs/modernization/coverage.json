@@ -5983,6 +5983,44 @@
         "A delivered explanation must be evaluated in another separately registered case; no replay of original failure",
         "Other profiles, human comprehension and full-page/global acceptance remain open"
       ]
+    },
+    "full_pages_acceptance": {
+      "status": "in_progress",
+      "pilots": 12,
+      "concept_images": 48,
+      "fully_accepted": 0,
+      "pages": {
+        "projects": {
+          "status": "in_progress",
+          "evidence": [
+            "docs/modernization/projects-page-review.md",
+            "docs/modernization/projects-page-results.json",
+            "docs/modernization/projects-page-packaging.json",
+            "docs/design/audits/2026-11-08-projects-acceptance/report.md",
+            "frontend/tests/ui/projects-navigation.test.tsx",
+            "frontend/tests/project-plan-actions.test.ts"
+          ],
+          "remaining": [
+            "Native preparation AuthorityBusy/AuthorityConflict callers and cause need diagnosis",
+            "Spanish UI request verified at server, actual generated Spanish plan unverified",
+            "Finish complete page acceptance without hiding original failures"
+          ]
+        }
+      }
+    },
+    "native_preparation_reliability": {
+      "status": "in_progress",
+      "scope": "Repeated real host preparation failures before inference: AuthorityConflict and AuthorityBusy; original peers closed, reservations preserved",
+      "evidence": [
+        "docs/modernization/projects-page-review.md",
+        "docs/modernization/projects-page-results.json",
+        "docs/superpowers/plans/2026-11-08-native-preparation-contention.md"
+      ],
+      "remaining": [
+        "Reproduce and fix demonstrated contention without ignoring authority locks or replaying uncertain effects",
+        "Differentiate preparation failure from unconfirmed closure in owner issue messages",
+        "Record actual Ken query/result evidence in the verification harness"
+      ]
     }
   }
 }

@@ -43,3 +43,16 @@ test('planning source selection is explicit and a lost reply cannot switch the o
   await assert.rejects(startProjectPlanning(saved,101,12),/lost/);await startProjectPlanning(saved,101,99);assert.deepEqual(sent[0],sent[1]);assert.equal((sent[0] as {repository_id:number}).repository_id,12)
  }finally{globalThis.fetch=previous}
 })
+
+test('new starts request the Spanish interface language while historical pending starts keep their original null prompt',async()=>{
+ const {startProjectPlanning}=await import('../src/api/projectPlans.ts')
+ const saved=storage(),previous=globalThis.fetch,sent:any[]=[]
+ try{
+  globalThis.fetch=async(_url,options)=>{const body=JSON.parse(String(options?.body));sent.push(body);return Response.json({request:body,planning_task_id:42,run:{project_id:101,task_id:42,run_id:'planner:a',actor_id:'native-project-planner',execution_kind:'research'}})}
+  await startProjectPlanning(saved,101,12)
+  assert.match(sent[0].prompt??'',/en español/)
+  saved.setItem('researcher:project-plan-start:v1:101',JSON.stringify({schema:1,projectId:101,body:{operation_key:'original-old-start',prompt:null,repository_id:12}}))
+  await startProjectPlanning(saved,101,99)
+  assert.deepEqual(sent[1],{operation_key:'original-old-start',prompt:null,repository_id:12})
+ }finally{globalThis.fetch=previous}
+})

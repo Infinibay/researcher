@@ -1,0 +1,422 @@
+{
+  "base_commit": "107240c",
+  "started_at": "2026-11-07T23:58:35Z",
+  "verified_at": "2026-11-08T00:37:32Z",
+  "seconds_until_verification": 2337,
+  "status": "functional_fixes_verified_full_page_acceptance_open",
+  "fixes": [
+    "Retired creation cannot select its result over the current project",
+    "Retired planning response cannot redirect a new A visit after A-B-A",
+    "Acknowledged planning packets cannot remain a recovery control that creates a new admission",
+    "New UI planning requests explicitly ask for Spanish; historical null packets retain original body"
+  ],
+  "frontend": {
+    "dom_cases_passed": 3,
+    "contract_cases_passed": 11,
+    "build": "passed",
+    "new_language_request_reached_durable_server_intent": true,
+    "spanish_generation_verified": false
+  },
+  "native": {
+    "real_native_turns": 1,
+    "usage": [
+      {
+        "status": "settled",
+        "observed_tokens": 139193,
+        "model": "gpt-6.1-sol"
+      }
+    ],
+    "runs": [
+      {
+        "id": "a8fcad5d-749b-4cf4-be4c-49561a40bb86",
+        "project_id": 2,
+        "task_id": 1,
+        "status": "cancelled",
+        "issue_json": null
+      },
+      {
+        "id": "a1ee4b2b-47c3-4183-92c0-37fee25537f4",
+        "project_id": 2,
+        "task_id": 2,
+        "status": "failed",
+        "issue_json": "{\"code\":\"project_budget_exhausted\",\"inference_started\":false,\"message\":\"No se inició un turno nuevo: el proyecto tiene 1 de 1 solicitudes reservadas y 350000 de 350000 tokens contabilizados; esta solicitud necesita reservar 350000 tokens. Revisa el presupuesto del proyecto y sus intentos anteriores antes de continuar. Las mediciones ausentes conservan su reserva; esto no indica la cuota restante de la suscripción.\",\"next_action\":\"inspect_project_budget\",\"project_budget\":{\"accounted_tokens\":350000,\"basis\":\"Recorded lifetime project admission, not provider billing or remaining subscription quota.\",\"blocked_by\":[\"turns\",\"tokens\"],\"held_tokens\":350000,\"observed_tokens\":null,\"preparation_only\":1,\"project_id\":2,\"requested_tokens\":350000,\"requested_turns\":1,\"token_limit\":350000,\"turn_limit\":1,\"unmeasured_dispatches\":0,\"unsettled_dispatches\":0,\"used_turns\":1}}"
+      },
+      {
+        "id": "44e4d211-68c3-4ffa-b190-ee9a4d3fd391",
+        "project_id": 3,
+        "task_id": 3,
+        "status": "accepted",
+        "issue_json": null
+      },
+      {
+        "id": "dff92343-be0a-4bad-93ad-8bc8aa2ef2de",
+        "project_id": 5,
+        "task_id": 6,
+        "status": "failed",
+        "issue_json": "{\"code\":\"runtime_failed\",\"inference_started\":false,\"message\":\"No se pudo confirmar el cierre de la ejecución. Conservamos el trabajo y los recibos guardados; revisa qué quedó completo y qué falta. No se repetirá por su cuenta.\",\"next_action\":\"inspect_saved_work\"}"
+      }
+    ],
+    "peers": [
+      {
+        "kind": "business",
+        "state": "closed"
+      },
+      {
+        "kind": "native",
+        "state": "closed"
+      },
+      {
+        "kind": "ken",
+        "state": "closed"
+      },
+      {
+        "kind": "business",
+        "state": "closed"
+      },
+      {
+        "kind": "native",
+        "state": "closed"
+      },
+      {
+        "kind": "business",
+        "state": "closed"
+      },
+      {
+        "kind": "native",
+        "state": "closed"
+      },
+      {
+        "kind": "ken",
+        "state": "closed"
+      },
+      {
+        "kind": "ken",
+        "state": "closed"
+      },
+      {
+        "kind": "business",
+        "state": "closed"
+      },
+      {
+        "kind": "native",
+        "state": "closed"
+      },
+      {
+        "kind": "ken",
+        "state": "closed"
+      },
+      {
+        "kind": "ken",
+        "state": "closed"
+      }
+    ],
+    "unrevoked_grants": 0,
+    "integrity": "ok",
+    "foreign_key_errors": [],
+    "diagnostic_lines": [
+      "2026-11-07 21:11:34 [WARNING] backend.runtime.service: Research run stopped (AuthorityConflict)",
+      "2026-11-07 21:15:08 [WARNING] backend.runtime.service: Research run stopped (ProjectBudgetExhausted)",
+      "2026-11-07 21:15:09 [WARNING] backend.runtime.service: Research run has no proposal (ProjectBudgetExhausted)",
+      "2026-11-07 21:27:38 [WARNING] backend.runtime.service: Research run stopped (AuthorityBusy)",
+      "2026-11-07 21:27:38 [WARNING] backend.runtime.service: Research run has no proposal (AuthorityBusy)"
+    ],
+    "observed_native_events": [
+      {
+        "attempt_id": "6460bfcc-090d-414b-be73-57e617b8fd1a",
+        "context_version": 1,
+        "fence": 1,
+        "native_kind": "tool.started",
+        "payload": {
+          "item_id": "exec-91c9e737-6147-4233-b59f-fee812ada4ba",
+          "thread_id": "01a1b886-914e-7770-8507-28c035ec648a",
+          "type": "dynamicToolCall"
+        },
+        "run_id": "44e4d211-68c3-4ffa-b190-ee9a4d3fd391",
+        "schema_version": 1
+      },
+      {
+        "attempt_id": "6460bfcc-090d-414b-be73-57e617b8fd1a",
+        "context_version": 1,
+        "fence": 1,
+        "native_kind": "tool.completed",
+        "payload": {
+          "item_id": "exec-91c9e737-6147-4233-b59f-fee812ada4ba",
+          "thread_id": "01a1b886-914e-7770-8507-28c035ec648a",
+          "type": "dynamicToolCall"
+        },
+        "run_id": "44e4d211-68c3-4ffa-b190-ee9a4d3fd391",
+        "schema_version": 1
+      },
+      {
+        "attempt_id": "6460bfcc-090d-414b-be73-57e617b8fd1a",
+        "context_version": 1,
+        "fence": 1,
+        "native_kind": "tool.started",
+        "payload": {
+          "item_id": "exec-81ebdab2-f368-493d-9264-1a98cb5f10e8",
+          "thread_id": "01a1b886-914e-7770-8507-28c035ec648a",
+          "type": "dynamicToolCall"
+        },
+        "run_id": "44e4d211-68c3-4ffa-b190-ee9a4d3fd391",
+        "schema_version": 1
+      },
+      {
+        "attempt_id": "6460bfcc-090d-414b-be73-57e617b8fd1a",
+        "context_version": 1,
+        "fence": 1,
+        "native_kind": "tool.completed",
+        "payload": {
+          "item_id": "exec-81ebdab2-f368-493d-9264-1a98cb5f10e8",
+          "thread_id": "01a1b886-914e-7770-8507-28c035ec648a",
+          "type": "dynamicToolCall"
+        },
+        "run_id": "44e4d211-68c3-4ffa-b190-ee9a4d3fd391",
+        "schema_version": 1
+      },
+      {
+        "attempt_id": "6460bfcc-090d-414b-be73-57e617b8fd1a",
+        "context_version": 1,
+        "fence": 1,
+        "native_kind": "tool.started",
+        "payload": {
+          "item_id": "exec-05b8d2af-cf5a-4e16-b611-5b2c963c8b0f",
+          "thread_id": "01a1b886-914e-7770-8507-28c035ec648a",
+          "type": "dynamicToolCall"
+        },
+        "run_id": "44e4d211-68c3-4ffa-b190-ee9a4d3fd391",
+        "schema_version": 1
+      },
+      {
+        "attempt_id": "6460bfcc-090d-414b-be73-57e617b8fd1a",
+        "context_version": 1,
+        "fence": 1,
+        "native_kind": "tool.completed",
+        "payload": {
+          "item_id": "exec-05b8d2af-cf5a-4e16-b611-5b2c963c8b0f",
+          "thread_id": "01a1b886-914e-7770-8507-28c035ec648a",
+          "type": "dynamicToolCall"
+        },
+        "run_id": "44e4d211-68c3-4ffa-b190-ee9a4d3fd391",
+        "schema_version": 1
+      },
+      {
+        "attempt_id": "6460bfcc-090d-414b-be73-57e617b8fd1a",
+        "context_version": 1,
+        "fence": 1,
+        "native_kind": "tool.started",
+        "payload": {
+          "item_id": "exec-21489754-e1cf-4592-a543-331a6bc030fa",
+          "thread_id": "01a1b886-914e-7770-8507-28c035ec648a",
+          "type": "dynamicToolCall"
+        },
+        "run_id": "44e4d211-68c3-4ffa-b190-ee9a4d3fd391",
+        "schema_version": 1
+      },
+      {
+        "attempt_id": "6460bfcc-090d-414b-be73-57e617b8fd1a",
+        "context_version": 1,
+        "fence": 1,
+        "native_kind": "tool.started",
+        "payload": {
+          "item_id": "exec-16721cae-3ffd-4fe7-8f7d-ffc6d67e927d",
+          "thread_id": "01a1b886-914e-7770-8507-28c035ec648a",
+          "type": "dynamicToolCall"
+        },
+        "run_id": "44e4d211-68c3-4ffa-b190-ee9a4d3fd391",
+        "schema_version": 1
+      },
+      {
+        "attempt_id": "6460bfcc-090d-414b-be73-57e617b8fd1a",
+        "context_version": 1,
+        "fence": 1,
+        "native_kind": "tool.started",
+        "payload": {
+          "item_id": "exec-0f22573b-2f4e-4aee-b22f-51cabdb39d75",
+          "thread_id": "01a1b886-914e-7770-8507-28c035ec648a",
+          "type": "dynamicToolCall"
+        },
+        "run_id": "44e4d211-68c3-4ffa-b190-ee9a4d3fd391",
+        "schema_version": 1
+      },
+      {
+        "attempt_id": "6460bfcc-090d-414b-be73-57e617b8fd1a",
+        "context_version": 1,
+        "fence": 1,
+        "native_kind": "tool.completed",
+        "payload": {
+          "item_id": "exec-21489754-e1cf-4592-a543-331a6bc030fa",
+          "thread_id": "01a1b886-914e-7770-8507-28c035ec648a",
+          "type": "dynamicToolCall"
+        },
+        "run_id": "44e4d211-68c3-4ffa-b190-ee9a4d3fd391",
+        "schema_version": 1
+      },
+      {
+        "attempt_id": "6460bfcc-090d-414b-be73-57e617b8fd1a",
+        "context_version": 1,
+        "fence": 1,
+        "native_kind": "tool.completed",
+        "payload": {
+          "item_id": "exec-16721cae-3ffd-4fe7-8f7d-ffc6d67e927d",
+          "thread_id": "01a1b886-914e-7770-8507-28c035ec648a",
+          "type": "dynamicToolCall"
+        },
+        "run_id": "44e4d211-68c3-4ffa-b190-ee9a4d3fd391",
+        "schema_version": 1
+      },
+      {
+        "attempt_id": "6460bfcc-090d-414b-be73-57e617b8fd1a",
+        "context_version": 1,
+        "fence": 1,
+        "native_kind": "tool.completed",
+        "payload": {
+          "item_id": "exec-0f22573b-2f4e-4aee-b22f-51cabdb39d75",
+          "thread_id": "01a1b886-914e-7770-8507-28c035ec648a",
+          "type": "dynamicToolCall"
+        },
+        "run_id": "44e4d211-68c3-4ffa-b190-ee9a4d3fd391",
+        "schema_version": 1
+      },
+      {
+        "attempt_id": "6460bfcc-090d-414b-be73-57e617b8fd1a",
+        "context_version": 1,
+        "fence": 1,
+        "native_kind": "tool.started",
+        "payload": {
+          "item_id": "exec-977d7e46-74f8-4da6-b946-842571054c90",
+          "thread_id": "01a1b886-914e-7770-8507-28c035ec648a",
+          "type": "dynamicToolCall"
+        },
+        "run_id": "44e4d211-68c3-4ffa-b190-ee9a4d3fd391",
+        "schema_version": 1
+      },
+      {
+        "attempt_id": "6460bfcc-090d-414b-be73-57e617b8fd1a",
+        "context_version": 1,
+        "fence": 1,
+        "native_kind": "tool.started",
+        "payload": {
+          "item_id": "exec-f3d0e886-3134-41a6-a87e-274048b2f329",
+          "thread_id": "01a1b886-914e-7770-8507-28c035ec648a",
+          "type": "dynamicToolCall"
+        },
+        "run_id": "44e4d211-68c3-4ffa-b190-ee9a4d3fd391",
+        "schema_version": 1
+      },
+      {
+        "attempt_id": "6460bfcc-090d-414b-be73-57e617b8fd1a",
+        "context_version": 1,
+        "fence": 1,
+        "native_kind": "tool.started",
+        "payload": {
+          "item_id": "exec-3b3dc0bf-8a60-46d7-b352-f925f796b506",
+          "thread_id": "01a1b886-914e-7770-8507-28c035ec648a",
+          "type": "dynamicToolCall"
+        },
+        "run_id": "44e4d211-68c3-4ffa-b190-ee9a4d3fd391",
+        "schema_version": 1
+      },
+      {
+        "attempt_id": "6460bfcc-090d-414b-be73-57e617b8fd1a",
+        "context_version": 1,
+        "fence": 1,
+        "native_kind": "tool.completed",
+        "payload": {
+          "item_id": "exec-977d7e46-74f8-4da6-b946-842571054c90",
+          "thread_id": "01a1b886-914e-7770-8507-28c035ec648a",
+          "type": "dynamicToolCall"
+        },
+        "run_id": "44e4d211-68c3-4ffa-b190-ee9a4d3fd391",
+        "schema_version": 1
+      },
+      {
+        "attempt_id": "6460bfcc-090d-414b-be73-57e617b8fd1a",
+        "context_version": 1,
+        "fence": 1,
+        "native_kind": "tool.completed",
+        "payload": {
+          "item_id": "exec-f3d0e886-3134-41a6-a87e-274048b2f329",
+          "thread_id": "01a1b886-914e-7770-8507-28c035ec648a",
+          "type": "dynamicToolCall"
+        },
+        "run_id": "44e4d211-68c3-4ffa-b190-ee9a4d3fd391",
+        "schema_version": 1
+      },
+      {
+        "attempt_id": "6460bfcc-090d-414b-be73-57e617b8fd1a",
+        "context_version": 1,
+        "fence": 1,
+        "native_kind": "tool.completed",
+        "payload": {
+          "item_id": "exec-3b3dc0bf-8a60-46d7-b352-f925f796b506",
+          "thread_id": "01a1b886-914e-7770-8507-28c035ec648a",
+          "type": "dynamicToolCall"
+        },
+        "run_id": "44e4d211-68c3-4ffa-b190-ee9a4d3fd391",
+        "schema_version": 1
+      },
+      {
+        "attempt_id": "6460bfcc-090d-414b-be73-57e617b8fd1a",
+        "context_version": 1,
+        "fence": 1,
+        "native_kind": "tool.started",
+        "payload": {
+          "item_id": "exec-8140c58e-d999-41cb-a6a0-d9bad166d2dc",
+          "thread_id": "01a1b886-914e-7770-8507-28c035ec648a",
+          "type": "dynamicToolCall"
+        },
+        "run_id": "44e4d211-68c3-4ffa-b190-ee9a4d3fd391",
+        "schema_version": 1
+      },
+      {
+        "attempt_id": "6460bfcc-090d-414b-be73-57e617b8fd1a",
+        "context_version": 1,
+        "fence": 1,
+        "native_kind": "turn.interrupted",
+        "payload": {
+          "status": "interrupted",
+          "thread_id": "01a1b886-914e-7770-8507-28c035ec648a",
+          "turn_id": "01a1b886-91c7-7e90-bb18-f19a15149b3e"
+        },
+        "run_id": "44e4d211-68c3-4ffa-b190-ee9a4d3fd391",
+        "schema_version": 1
+      }
+    ],
+    "auxiliary_work_rows_for_project": [],
+    "ken_tool_call_audit": "Not recorded by normal server harness. Published Ken peers were prepared; native progress events omit method names. Do not equate preparation or model prose with a verified query."
+  },
+  "browser": {
+    "successful_generation_and_owner_plan_acceptance": true,
+    "read_only_desktop_mobile_focus_transport_recovery": true,
+    "spanish_regression": "failed",
+    "additional_native_turns_for_spanish": 0,
+    "accepted_plan_created_pending_tasks_only": true,
+    "source_unchanged": true,
+    "scope": "One actual generated English plan, accepted through owner UI. Read-only GET interruption is controlled transport failure. Spanish request stored but native preparation raised AuthorityBusy before inference; not accepted as a successful language regression."
+  },
+  "installed_selection": {
+    "cases": 41,
+    "passed": 40,
+    "failed": 1,
+    "skipped": 0,
+    "backend_modules": 236,
+    "all_backend_imports_from_native_env": true,
+    "seconds": 22.68,
+    "exit_code": 1
+  },
+  "deferred_test_fixture": "DD124: atomic planner fixture now delivers; old test still expects researcher_plan_propose. One parameter actually failed; related parameter not executed after maxfail.",
+  "open_major": [
+    "Trace AuthorityBusy and earlier AuthorityConflict during native preparation; do not relax locks or replay actors speculatively",
+    "Explain runtime failure without claiming closure is unconfirmed when original peers are actually closed",
+    "Verify an actual Spanish generated plan after the preparation defect is resolved",
+    "Finish Proyectos acceptance, then remaining11pages; do not count this page complete yet"
+  ],
+  "fully_accepted_pages": 0,
+  "limits": [
+    "No extra model generation was replayed; one real model turn in this block",
+    "Original project preparation reservation and budget refusal retained; no owner ceiling raised",
+    "Renderer screenshots precede the language-request patch; the renderer did not change afterward",
+    "No full global green suite, whole-page acceptance or new human-comprehension evidence",
+    "Actual Ken query names/results need instrumented verification; this normal server harness records only generic native tool events."
+  ]
+}

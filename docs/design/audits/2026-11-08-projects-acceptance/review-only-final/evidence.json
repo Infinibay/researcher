@@ -1,0 +1,27 @@
+{
+  "status": "passed",
+  "scope": "Real owner UI/HTTP/SQLite; held replies are fetched from the server, never fabricated; maximum two real planning requests",
+  "states": [
+    {
+      "name": "10-current-desktop-review",
+      "width": 1440,
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "11-current-mobile-review",
+      "width": 390,
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "12-transport-error-keeps-history",
+      "width": 390,
+      "fits": true,
+      "violations": []
+    }
+  ],
+  "errors": [],
+  "planning": [],
+  "review_only": true
+}

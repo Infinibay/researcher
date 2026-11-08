@@ -1,0 +1,69 @@
+{
+  "attempt_id": "6460bfcc-090d-414b-be73-57e617b8fd1a",
+  "context_version": 1,
+  "delivery": {
+    "explanation": "The proposal contains two tasks: add CSV export, then validate it with unittest. The registered project specifies columns id and value, a header, original order, the standard csv library, and reuse of list_observations. The complete observed task inventory contains zero tasks, so this proposal duplicates none in that inventory.\n\nI read all four lines of observations.py. Its list_observations(records) currently returns list(records); the file contains no CSV export. A literal search found only that definition. The caller graph was unavailable, and the test lookup did not establish existing test coverage. No code was changed and no tests were run.\n\nThe proposed interface accepts records and a writable text stream. For example, an illustrative input with IDs 9 then 2 would produce a header id,value and rows in that same order, even though the IDs are unsorted. Mapping-shaped records and the stream interface are explicit proposal assumptions that the owner can correct. A stream supports both files and in-memory unittest checks without introducing another format or a command-line interface.\n\nEach task includes checks, independent candidate review, and owner acceptance before completion. This delivery proposes work only; it does not execute it or establish acceptance.",
+    "version": 1
+  },
+  "draft": {
+    "assumptions": [
+      "The proposed input contract is an iterable of mappings containing id and value; the inspected list_observations function does not constrain record shape.",
+      "The proposed public interface is export_observations_csv(records, stream), where the caller owns a writable text stream and the function writes CSV without closing that stream.",
+      "Empty input should produce only the id,value header. Missing fields and custom value conversion are outside this small change unless an existing repository contract requires them.",
+      "No dates are proposed. Independent candidate review and owner acceptance are completion gates for future repository work, not actions performed by this proposal."
+    ],
+    "basis": [
+      {
+        "quote": "Sólo prepara un plan pequeño de dos o tres tareas para añadir exportación CSV a observations.py.",
+        "source": "project_description"
+      },
+      {
+        "quote": "Columnas id y value, orden original y cabecera, biblioteca csv estándar y pruebas unittest. Reutiliza list_observations.",
+        "source": "project_description"
+      },
+      {
+        "quote": "No implementes ni ejecutes el trabajo propuesto. No hacen falta fechas ni elegir otro formato.",
+        "source": "project_description"
+      },
+      {
+        "quote": "[]",
+        "source": "project_tasks"
+      }
+    ],
+    "epics": [
+      {
+        "description": "Add a small CSV export API in observations.py and verify its required behavior with standard-library unittest.",
+        "key": "csv",
+        "title": "CSV export with focused verification"
+      }
+    ],
+    "rationale": "Keep the change small and follow the registered project’s explicit CSV requirements. Implement one export function that reuses list_observations, followed by focused unittest coverage. A writable text stream is proposed because it supports both caller-managed files and in-memory tests; taking a filesystem path would require additional file-opening and encoding decisions. Repository inspection found list_observations returning list(records) in the four-line module. The observed task inventory is complete and empty. No implementation or test execution is part of this planning delivery.",
+    "tasks": [
+      {
+        "acceptance_criteria": "The candidate exports exactly the id,value header and corresponding field values, preserves original row order, uses csv rather than manual delimiter concatenation, and calls list_observations. Empty input emits the header only. The stream remains open and existing list_observations behavior is preserved. Document actual checks and results; independent review is recorded, blocking findings are resolved, and owner acceptance is recorded.",
+        "depends_on": [],
+        "description": "In private development, add export_observations_csv(records, stream) using the standard csv library. Obtain rows through list_observations, write id and value in that order, retain input order, and leave the caller’s stream open. Document the input and stream contract. Check the candidate, submit it for independent review, resolve blocking findings, and obtain owner acceptance before marking the task complete.",
+        "epic_key": "csv",
+        "key": "csv-export",
+        "priority": 2,
+        "title": "Implement the CSV export function",
+        "type": "code"
+      },
+      {
+        "acceptance_criteria": "Tests assert header order id,value, original row order, correct field round-tripping through csv.reader, header-only output for empty input, support for a single-use iterable, stream ownership, and preservation of list_observations behavior. The recorded unittest command passes, with any untested limits stated. Independent candidate review is recorded, blocking findings are resolved, and owner acceptance is recorded.",
+        "depends_on": [
+          "csv-export"
+        ],
+        "description": "Add unittest coverage using io.StringIO for ordinary rows, deliberately unsorted IDs, empty input, values containing commas, quotes and newlines, and a single-use iterable. Read generated output with csv.reader to verify rows and field values. Confirm the stream remains usable and list_observations retains its original behavior. Run the relevant unittest suite during future execution; independently review the test candidate and obtain owner acceptance.",
+        "epic_key": "csv",
+        "key": "csv-tests",
+        "priority": 2,
+        "title": "Verify CSV behavior with unittest",
+        "type": "test"
+      }
+    ],
+    "title": "Add CSV export to observations.py"
+  },
+  "run_id": "44e4d211-68c3-4ffa-b190-ee9a4d3fd391",
+  "snapshot_sha256": "c8a35d721b454c71a23e618598e891b01dc1ed82777758c6e32f0be9bc7fe21f"
+}

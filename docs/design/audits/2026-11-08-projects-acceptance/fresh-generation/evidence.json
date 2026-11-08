@@ -1,0 +1,79 @@
+{
+  "status": "passed",
+  "scope": "Real owner UI/HTTP/SQLite; held replies are fetched from the server, never fabricated; maximum two real planning requests",
+  "states": [
+    {
+      "name": "03c-independent-project-before-generation",
+      "width": 1440,
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "06-real-plan-ready",
+      "width": 1440,
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "07-real-plan-mobile",
+      "width": 390,
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "08-plan-decision-after-reload",
+      "width": 1440,
+      "fits": true,
+      "violations": []
+    },
+    {
+      "name": "09-other-project-isolated",
+      "width": 1440,
+      "fits": true,
+      "violations": []
+    }
+  ],
+  "errors": [],
+  "planning": [
+    {
+      "message": "Planificación nativa guardada; la propuesta requerirá tu aceptación.",
+      "status": "planning",
+      "planning_task_id": 3,
+      "request": {
+        "operation_key": "58a7a0b9-6240-49c3-ab9c-93aa4528c0d2",
+        "prompt": null,
+        "repository_id": 2
+      },
+      "run": {
+        "run_id": "44e4d211-68c3-4ffa-b190-ee9a4d3fd391",
+        "project_id": 3,
+        "task_id": 3,
+        "actor_id": "native-project-planner",
+        "context_version": 1,
+        "status": "queued",
+        "fence": 0,
+        "attempt_id": null,
+        "thread_id": null,
+        "turn_id": null,
+        "prompt": "Propose an actionable plan for the registered project. Separate observed project data from assumptions. Do not execute the proposed work.",
+        "runtime": "codex",
+        "result": null,
+        "cancel_requested": false,
+        "operation_key": "plan-9a8ad08d1a7393a503f788f70760ae3b0397a7de92bc81281b5a02f5f861e890",
+        "conversation_thread_id": null,
+        "model": null,
+        "repository_id": 2,
+        "repository_name": "observations-fresh",
+        "issue": null,
+        "review": null,
+        "execution_kind": "research",
+        "model_selection": null
+      }
+    }
+  ],
+  "identities": {
+    "alpha": 3,
+    "beta": 1,
+    "unused": 4
+  }
+}

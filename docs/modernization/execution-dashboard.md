@@ -28,7 +28,40 @@ que se pueda comparar el avance; no presentar microajustes como tareas principal
 - Última suite global: `9fb873c`,2210 casos,2178 pasan,31 fallan y1 error de fixture; sin omisiones. La carrera de backup encontrada se corrigió después con40 pruebas instaladas. No se declara una nueva corrida global verde; la referencia `0c8b8d9` queda como evidencia histórica.
 - U01–U07, E01–E12, C01–C09 y D01–D13 quedan comprobados con el alcance de sus matrices; siguen 2 de 43 escenarios amplios sin aceptación completa en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Estado actual: aceptación de páginas preparada; evaluación conservada con fallo
+## Estado actual: Proyectos corregido; preparación nativa por investigar
+
+Bloque **2026-11-07 23:58:35–2026-11-08 00:37:32 UTC**, desde `107240c`:
+**38 min 57 s hasta verificar**, sin documentación/checkpoint posteriores.
+
+- Comprobado: **41/43 escenarios**; historial sin migración necesaria. En Proyectos
+  se corrigen selección tras creación tardía, redirección A→B→A, recuperación
+  obsoleta que podía crear otra solicitud e idioma explícito de planes nuevos.
+- En curso: **aceptación de Proyectos**, todavía incompleta. Un plan real fue
+  generado y aceptado desde la interfaz; sus tareas quedaron pendientes sin
+  ejecución. Pasan escritorio/móvil, recarga, aislamiento y recuperación de GET.
+- Siguiente principal: **fiabilidad de preparación del engine**. El ensayo español
+  terminó con AuthorityBusy antes de inferir; el log anterior registra también
+  AuthorityConflict. Falta localizar el llamador y reproducir la causa, conservando
+  locks y efectos. [Plan preparado](../superpowers/plans/2026-11-08-native-preparation-contention.md).
+  La investigación correctiva todavía no comenzó.
+- Después: cerrar Proyectos, continuar las otras 11 páginas, evaluaciones abiertas,
+  dependencias y distribución.
+- Al final: detalles aplazados, suite global y revisión independiente. DD123 es
+  presentación; DD124 es un test obsoleto del actor controlado. La contención del
+  engine y su explicación engañosa de cierre son trabajo funcional principal.
+
+**3 DOM y 11 contratos frontend pasan**, junto con la compilación. Selección instalada:
+**40 correctos y 1 fallo** de fixture que espera `plan_propose` cuando el actor ahora
+usa `plan_deliver`; no se declara verde global. Un turno real,139193 tokens observados,
+settled; cero inferencias en la regresión española, todos los peers cerrados y
+ningún grant activo. Se mantienen la propuesta inglesa y los fallos originales.
+
+**0/12 páginas completamente aceptadas**. La solicitud española llegó al servidor,
+pero no se puede afirmar que produjo una explicación española. Las capturas no
+prueban comprensión humana ni el nombre de las consultas Ken; se necesita trazado
+instrumentado en la próxima verificación. [Alcance y evidencia](projects-page-review.md).
+
+## Etapa anterior: evaluación conservada con fallo
 
 Evaluaciones: **23:45:08–23:55:42 UTC**, **10 min 34 s hasta verificación**,
 base `4709252`. La ejecución de este turno empezó 23:48:05 UTC; el tramo anterior

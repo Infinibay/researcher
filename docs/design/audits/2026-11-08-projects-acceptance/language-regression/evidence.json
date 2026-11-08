@@ -1,0 +1,51 @@
+{
+  "status": "failed",
+  "scope": "Real owner UI/HTTP/SQLite; held replies are fetched from the server, never fabricated; maximum two real planning requests",
+  "states": [
+    {
+      "name": "03c-independent-project-before-generation",
+      "width": 1440,
+      "fits": true,
+      "violations": []
+    }
+  ],
+  "errors": [],
+  "planning": [
+    {
+      "message": "Planificación nativa guardada; la propuesta requerirá tu aceptación.",
+      "status": "planning",
+      "planning_task_id": 6,
+      "request": {
+        "operation_key": "1e3635f0-9895-44ef-98d8-f41079c7a2ba",
+        "prompt": "Prepara un plan concreto para el alcance registrado del proyecto. Distingue los datos observados de las suposiciones. Entrega las tareas, sus criterios y la explicación del plan en español. Sólo propone el trabajo; no lo ejecutes.",
+        "repository_id": 3
+      },
+      "run": {
+        "run_id": "dff92343-be0a-4bad-93ad-8bc8aa2ef2de",
+        "project_id": 5,
+        "task_id": 6,
+        "actor_id": "native-project-planner",
+        "context_version": 1,
+        "status": "queued",
+        "fence": 0,
+        "attempt_id": null,
+        "thread_id": null,
+        "turn_id": null,
+        "prompt": "Prepara un plan concreto para el alcance registrado del proyecto. Distingue los datos observados de las suposiciones. Entrega las tareas, sus criterios y la explicación del plan en español. Sólo propone el trabajo; no lo ejecutes.",
+        "runtime": "codex",
+        "result": null,
+        "cancel_requested": false,
+        "operation_key": "plan-6c3687cf2345879b9479999ef33436ac8b8ddd05169e8ee9a66c306fe78b5cb2",
+        "conversation_thread_id": null,
+        "model": null,
+        "repository_id": 3,
+        "repository_name": "observations-fresh",
+        "issue": null,
+        "review": null,
+        "execution_kind": "research",
+        "model_selection": null
+      }
+    }
+  ],
+  "error": "Error: expect(locator).toBeVisible() failed\n\nLocator: getByText('Propuesta guardada · revisar decisión', { exact: true })\nExpected: visible\nTimeout: 240000ms\nError: element(s) not found\n\nCall log:\n  - Expect \"toBeVisible\" getByText('Propuesta guardada · revisar decisión', { exact: true }) with timeout 240000ms\n  - waiting for getByText('Propuesta guardada · revisar decisión', { exact: true })\n"
+}

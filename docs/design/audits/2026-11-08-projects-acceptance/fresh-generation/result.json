@@ -1,0 +1,88 @@
+{
+  "status": "passed",
+  "scope": "Same retained installation; original project preparation hold preserved. One first inference in a new explicitly created project with its unchanged one-turn budget; no inference replay.",
+  "maximum_new_native_turns": 1,
+  "mocked_api_responses": false,
+  "browser_exit": 0,
+  "service_exit": 143,
+  "storage": {
+    "projects": [
+      {
+        "id": 1,
+        "name": "Beta separado",
+        "description": "No hereda el alcance ni el plan de otro proyecto."
+      },
+      {
+        "id": 2,
+        "name": "Atlas CSV",
+        "description": "S\u00f3lo prepara un plan peque\u00f1o de dos o tres tareas para a\u00f1adir exportaci\u00f3n CSV a observations.py. Columnas id y value, orden original y cabecera, biblioteca csv est\u00e1ndar y pruebas unittest. Reutiliza list_observations. No implementes ni ejecutes el trabajo propuesto. No hacen falta fechas ni elegir otro formato."
+      },
+      {
+        "id": 3,
+        "name": "Plan CSV comprobado",
+        "description": "S\u00f3lo prepara un plan peque\u00f1o de dos o tres tareas para a\u00f1adir exportaci\u00f3n CSV a observations.py. Columnas id y value, orden original y cabecera, biblioteca csv est\u00e1ndar y pruebas unittest. Reutiliza list_observations. No implementes ni ejecutes el trabajo propuesto. No hacen falta fechas ni elegir otro formato."
+      }
+    ],
+    "groups": [
+      {
+        "id": 1,
+        "project_id": 3,
+        "title": "CSV export with focused verification"
+      }
+    ],
+    "milestones": [],
+    "tasks": [
+      {
+        "id": 1,
+        "project_id": 2,
+        "epic_id": null,
+        "title": "Planificar el proyecto",
+        "status": "in_progress"
+      },
+      {
+        "id": 2,
+        "project_id": 2,
+        "epic_id": null,
+        "title": "Planificar el proyecto",
+        "status": "in_progress"
+      },
+      {
+        "id": 3,
+        "project_id": 3,
+        "epic_id": null,
+        "title": "Planificar el proyecto",
+        "status": "done"
+      },
+      {
+        "id": 4,
+        "project_id": 3,
+        "epic_id": 1,
+        "title": "Implement the CSV export function",
+        "status": "pending"
+      },
+      {
+        "id": 5,
+        "project_id": 3,
+        "epic_id": 1,
+        "title": "Verify CSV behavior with unittest",
+        "status": "pending"
+      }
+    ],
+    "dependencies": [
+      {
+        "task_id": 5,
+        "depends_on_task_id": 4
+      }
+    ],
+    "corrections": [],
+    "files": [],
+    "wiki": [],
+    "wiki_revisions": [],
+    "runs": 3,
+    "dispatches": 1,
+    "native_starts": 1,
+    "integrity": "ok"
+  },
+  "model_turns": 1,
+  "source_unchanged": true
+}

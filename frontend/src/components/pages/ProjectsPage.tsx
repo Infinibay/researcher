@@ -14,6 +14,13 @@ import '../../styles/projects.css'
 const statuses:Record<string,string>={new:'Nuevo',planning:'Planificación',executing:'En ejecución (registro)',paused:'Pausado',completed:'Completado (registro)',cancelled:'Cancelado',failed:'Fallo registrado'}
 const activityLabels:Record<string,string>={queued:'En cola',running:'Ejecutándose',waiting_input:'Espera tu respuesta',cancelling:'Cierre solicitado',reconciling:'Requiere reconciliación'}
 
+/** Track this view's lifetime so a completed older request cannot redirect a replacement, including A→B→A. */
+function useMounted(){
+ const mounted=useRef(false)
+ useEffect(()=>{mounted.current=true;return()=>{mounted.current=false}},[])
+ return mounted
+}
+
 /** Preserve global project selection while mobile alternates the same list and dossier; choosing a project never starts work. */
 export function ProjectsPage(){
  const projects=useProjects(),active=useProjectStore(s=>s.activeProjectId),setActive=useProjectStore(s=>s.setActiveProject)
@@ -46,9 +53,10 @@ export function ProjectsPage(){
 
 /** One exact creation request survives reload and response loss without minting duplicate project resources. */
 function ProjectCreation({onClose,onCreated}:{onClose:()=>void;onCreated:(id:number)=>void}){
+ const mounted=useMounted(),client=useQueryClient()
  const [saved,setSaved]=useState<ProjectCreateAction|null>(null),[ready,setReady]=useState(false),[name,setName]=useState(''),[description,setDescription]=useState(''),[error,setError]=useState('')
  useEffect(()=>{try{const p=projectPackets.load(sessionStorage,'create',0);setSaved(p);if(p){setName(p.body.name);setDescription(p.body.description)}setReady(true)}catch(e){setError(e instanceof Error?e.message:'No se pudo recuperar la creación.')}},[])
- const create=useMutation({mutationFn:sendProjectCreate,onSuccess:(r,a)=>{projectPackets.clear(sessionStorage,a);onCreated(r.id)}})
+ const create=useMutation({mutationFn:sendProjectCreate,onSuccess:(r,a)=>{projectPackets.clear(sessionStorage,a);client.invalidateQueries({queryKey:['projects']});if(mounted.current)onCreated(r.id)}})
  /** Store the full original name/scope before the first POST; a retry always uses that same packet. */
  function submit(){try{let a=saved;if(!a){a=prepareProjectCreate(name.trim(),description);projectPackets.save(sessionStorage,a);setSaved(a)}create.mutate(a)}catch(e){setError(e instanceof Error?e.message:'No se pudo guardar la solicitud.')}}
  const rejected=create.error instanceof ApiError&&[409,422].includes(create.error.status)
@@ -57,13 +65,15 @@ function ProjectCreation({onClose,onCreated}:{onClose:()=>void;onCreated:(id:num
 
 /** Show only this selected project's actual observations and original decisions; forms/requests never drift when global selection changes. */
 function ProjectDossier({project,onBack}:{project:Project;onBack:()=>void}){
+ const mounted=useMounted()
  const client=useQueryClient(),navigate=useNavigate(),update=useUpdateProject(),remove=useDeleteProject(),legacyStop=useStopProject()
  const state=useQuery({queryKey:['project-workspace',project.id],queryFn:()=>projectWorkspace(project.id),refetchInterval:3000,retry:false})
  const [ready,setReady]=useState(false),[stopSaved,setStopSaved]=useState<ProjectStopAction|null>(null),[sourceSaved,setSourceSaved]=useState<ProjectSourceAction|null>(null),[pendingStart,setPendingStart]=useState(false),[error,setError]=useState(''),[notice,setNotice]=useState(''),[editing,setEditing]=useState(false),[editName,setEditName]=useState(''),[editDescription,setEditDescription]=useState(''),[editScope,setEditScope]=useState(''),[sourceForm,setSourceForm]=useState(false),[sourceName,setSourceName]=useState(''),[sourcePath,setSourcePath]=useState(''),[selectedSource,setSelectedSource]=useState<number|null>(null),[deleting,setDeleting]=useState(false)
  useEffect(()=>{try{setStopSaved(projectPackets.load(sessionStorage,'stop',project.id));const p=projectPackets.load(sessionStorage,'source',project.id);setSourceSaved(p);if(p){setSourceName(p.body.name);setSourcePath(p.body.path);setSourceForm(true)}setPendingStart(sessionStorage.getItem(`researcher:project-plan-start:v1:${project.id}`)!==null);setReady(true)}catch(e){setError(e instanceof Error?e.message:'No se pudieron recuperar las solicitudes del proyecto.')}},[project.id])
+ useEffect(()=>{try{setPendingStart(sessionStorage.getItem(`researcher:project-plan-start:v1:${project.id}`)!==null)}catch{setError('No se pudo consultar la solicitud original de planificación.')}},[project.id,state.dataUpdatedAt])
  const stop=useMutation({mutationFn:sendProjectStop,onSuccess:(_r,a)=>{projectPackets.clear(sessionStorage,a);setStopSaved(null);setNotice('Solicitud de detención guardada para esos intentos. Consulta su cierre; el recibo no demuestra que hayan terminado.');refresh()}})
  const source=useMutation({mutationFn:sendProjectSource,onSuccess:(r,a)=>{projectPackets.clear(sessionStorage,a);setSourceSaved(null);setSourceForm(false);setSelectedSource(r.repository_id);setNotice('Carpeta registrada. No se cambió ningún archivo ni remoto.');refresh()}})
- const start=useMutation({mutationFn:(repository:number|null)=>startProjectPlanning(sessionStorage,project.id,repository),onSuccess:r=>{setPendingStart(false);refresh();navigate(`/tasks?project=${project.id}&task=${r.planning_task_id}&planRun=${encodeURIComponent(r.run.run_id)}`)},onError:()=>setPendingStart(true)})
+ const start=useMutation({mutationFn:(repository:number|null)=>startProjectPlanning(sessionStorage,project.id,repository),onSuccess:r=>{client.invalidateQueries({queryKey:['project-workspace',project.id]});client.invalidateQueries({queryKey:['projects']});if(!mounted.current||useProjectStore.getState().activeProjectId!==project.id)return;setPendingStart(false);navigate(`/tasks?project=${project.id}&task=${r.planning_task_id}&planRun=${encodeURIComponent(r.run.run_id)}`)},onError:()=>{if(mounted.current)setPendingStart(true)}})
  /** Refresh observations without reissuing a request whose response is unknown. */
  function refresh(){state.refetch();client.invalidateQueries({queryKey:['projects']})}
  /** Freeze the displayed metadata scope so another edit cannot be silently overwritten. */
@@ -72,6 +82,8 @@ function ProjectDossier({project,onBack}:{project:Project;onBack:()=>void}){
  function registerSource(){try{let a=sourceSaved;if(!a){a=prepareProjectSource(project.id,sourceName,sourcePath);projectPackets.save(sessionStorage,a);setSourceSaved(a)}source.mutate(a)}catch(e){setError(e instanceof Error?e.message:'No se pudo guardar la selección.')}}
  /** Pause/withdraw only the observed work, never enumerate a new target set after response loss. */
  function requestStop(){try{let a=stopSaved;if(!a){if(!state.data?.stop)throw new Error('Consulta la actividad original antes de detener.');a=prepareProjectStop(project.id,state.data.stop);projectPackets.save(sessionStorage,a);setStopSaved(a)}stop.mutate(a)}catch(e){setError(e instanceof Error?e.message:'No se pudo guardar la detención.')}}
+ /** A recovery label cannot mint a new admission if another view already acknowledged its original packet. */
+ function requestPlan(repository:number|null){try{if(pendingStart&&sessionStorage.getItem(`researcher:project-plan-start:v1:${project.id}`)===null){setPendingStart(false);setNotice('La solicitud anterior ya recibió confirmación. Consulta sus planes guardados antes de iniciar otra.');return}start.mutate(repository)}catch{setError('No se pudo consultar la solicitud original de planificación.')}}
  const data=state.data,sources=data?.sources??[],chosen=selectedSource??(sources.length===1?sources[0].repository_id:null),usable=sources.some(s=>s.repository_id===chosen&&s.availability==='available'),planning=data?.activity.filter(r=>data.plans.some(p=>p.run_id===r.run_id))??[],working=!!data?.activity.length,blocked=!ready||!!error
  return <section className="project-dossier" aria-label="Expediente del proyecto">
   <button className="project-back project-link" onClick={onBack}>Volver a proyectos</button><p className="project-eyebrow">EXPEDIENTE DEL PROYECTO</p><h2 id="project-dossier-title" tabIndex={-1}>{data?.project.name??project.name}</h2><p className="project-purpose">{data?.project.description||project.description||'No hay alcance registrado. Añade una descripción antes de interpretar qué debe lograrse.'}</p><p className="project-muted">Estado registrado: {statuses[data?.project.status??project.status]??project.status}. La actividad y la vigencia del cierre se consultan por separado.</p>
@@ -91,7 +103,7 @@ function ProjectDossier({project,onBack}:{project:Project;onBack:()=>void}){
   <section className="project-section"><h3>Planificar propone trabajo. Tú decides qué se ejecuta.</h3><p className="project-copy">El agente prepara tareas y dependencias a partir del alcance registrado. Aceptar el plan crea trabajo pendiente; ejecutarlo y aceptar sus resultados son decisiones distintas.</p>
    {!!planning.length&&<p>Ya hay planificación en curso. Ábrela en «Planes y decisiones» para continuar con su contexto original.</p>}
    <label className="project-source-choice">Fuente para el plan<select value={chosen??''} disabled={blocked||pendingStart||working} onChange={e=>setSelectedSource(e.target.value?Number(e.target.value):null)}><option value="">Elige una fuente</option>{sources.map(s=><option key={s.repository_id} value={s.repository_id} disabled={s.availability!=='available'}>{s.name} · {s.availability==='available'?'disponible':'sin comprobar/no disponible'}</option>)}</select></label>
-   <button className="project-primary" disabled={blocked||start.isPending||(!pendingStart&&(!data?.runtime_available||!usable||working||data.legacy_registered))} onClick={()=>start.mutate(chosen)}>{pendingStart?'Recuperar planificación original':start.isPending?'Guardando solicitud…':'Preparar un plan'}</button>{working&&!pendingStart&&<p className="project-muted">Consulta el intento activo y su cierre antes de iniciar otro desde este expediente.</p>}{pendingStart&&<p>Se enviará la solicitud ya guardada, con su fuente original; no se reemplazará por una selección nueva.</p>}{start.error&&<p role="alert">No se confirmó la planificación. {start.error.message} La solicitud original se conserva.</p>}
+   <button className="project-primary" disabled={blocked||start.isPending||(!pendingStart&&(!data?.runtime_available||!usable||working||data.legacy_registered))} onClick={()=>requestPlan(chosen)}>{pendingStart?'Recuperar planificación original':start.isPending?'Guardando solicitud…':'Preparar un plan'}</button>{working&&!pendingStart&&<p className="project-muted">Consulta el intento activo y su cierre antes de iniciar otro desde este expediente.</p>}{pendingStart&&<p>Se enviará la solicitud ya guardada, con su fuente original; no se reemplazará por una selección nueva.</p>}{start.error&&<p role="alert">No se confirmó la planificación. {start.error.message} La solicitud original se conserva.</p>}
   </section>
   <section className="project-section"><h3>Planes y decisiones guardadas</h3>{data&&!data.plans.length&&<p>No hay planes nativos guardados. No convertimos una tarea cualquiera en el plan del proyecto.</p>}<ul className="project-records">{data?.plans.map(p=><li key={p.run_id}><Link to={`/tasks?project=${project.id}&task=${p.task_id}&planRun=${encodeURIComponent(p.run_id)}`}>{p.title}</Link><p>{!p.context_current?'Contexto original cambió · consultar revisión':p.accepted?'Plan aceptado':p.proposed?'Propuesta guardada · revisar decisión':activityLabels[p.status]??p.status}</p></li>)}</ul>
    <h3>Informes de cierre</h3>{data&&!data.reports.length&&<p>No hay decisiones de cierre registradas, aunque la etiqueta del proyecto indique «completado».</p>}<ul className="project-records">{data?.reports.map(r=><li key={r.operation_key}><Link to={`/tasks?project=${project.id}&task=${r.task_id}&planRun=${encodeURIComponent(r.plan_run_id)}`}>Abrir informe aceptado y su contexto original</Link><p className="project-muted">Corresponde a una versión concreta. Al abrirlo se comprueba si el alcance y la evidencia siguen vigentes.</p></li>)}</ul>

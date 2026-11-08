@@ -1,0 +1,39 @@
+{
+  "validation_environment": {
+    "runner_cgroup": "/sys/fs/cgroup/user.slice/user-1000.slice/user@1000.service/app.slice/run-p1339383-i1339384.scope",
+    "parent_controllers_before": "cpu memory pids",
+    "runner_cpu_max": "800000 100000",
+    "purpose": "Transient systemd scope with CPUQuota=800% retains CPU-controller availability during validation; it does not relax any product limit.",
+    "parent_controllers_after": "cpu memory pids"
+  },
+  "base_commit": "107240c",
+  "wheel": "researcher-0.1.0-cp312-cp312-linux_x86_64.whl",
+  "wheel_sha256": "45ac60967d937afa384279298ecd5e082586eb23f0bcd2dd9dc8ceb6ccd757e1",
+  "source_files_matching_wheel_and_installation": 676,
+  "product_files_matching": 360,
+  "observed": {
+    "cases": 41,
+    "passed": 40,
+    "failed": 1,
+    "skipped": 0,
+    "backend_modules": 236,
+    "all_backend_imports_from_native_env": true,
+    "seconds": 22.68,
+    "exit_code": 1
+  },
+  "tests": [
+    "backend/tests/runtime/test_project_workspace.py",
+    "backend/tests/runtime/test_project_planning.py",
+    "backend/tests/runtime/test_owned_project_stop.py",
+    "backend/tests/runtime/test_project_owner_cutover.py",
+    "backend/tests/runtime/test_project_completion.py",
+    "backend/tests/runtime/test_project_producer_retirement.py"
+  ],
+  "real_model_turns": 0,
+  "limits": [
+    "Selected installed project workspace/planning/completion/legacy control tests, not global suite",
+    "Actual kernel original-worker Stop with controlled generation is separate from real subscription UI planning",
+    "40passed and1outdated controlled-planner assertion failed; related remaining parameter not executed. No omitted/skipped success claim."
+  ],
+  "scope_correction": "Original generated receipt copied unrelated interaction labels; observations, wheel hashes and actual test paths are unchanged."
+}

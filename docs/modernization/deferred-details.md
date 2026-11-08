@@ -1004,3 +1004,22 @@ introducir un lanzador de checkout en site-packages. DD120 sigue independiente.
 El control de diff staged señaló una línea vacía adicional al final de
 `frontend/src/components/chat/QuestionCard.tsx`. Se registra como detalle de
 formato, sin cambiar comportamiento ni repetir pruebas para ese ajuste menor.
+
+
+## DD123 — densidad y etiquetas de Proyectos
+
+Después de las capacidades mayores: limitar la vista previa del alcance en el
+registro lateral sin perder su texto completo en el expediente; traducir etiquetas
+técnicas de intentos terminados y revisar copy repetitivo. Las capturas finales
+restauran el inicio del panel; no confundir una captura transitoria posterior a
+mutación con el estado ya recuperado. No incluye AuthorityBusy/Conflict ni una
+explicación de cierre incorrecta: esos problemas son funcionales y están abiertos.
+
+## DD124 — fixture de planificación anterior a la entrega atómica
+
+`test_project_producer_retirement.py::test_controlled_planner_fixture_cites_the_actual_supplied_history[False]`
+falló: espera researcher_plan_propose y el actor controlado emite researcher_plan_deliver.
+La selección instalada pasó 40 casos y se detuvo en ese fallo. El parámetro historic=True
+no se ejecutó tras maxfail; no presentarlo como un fallo observado. Actualizar la
+expectativa al contrato atómico conservando validación de plan, citas de historia y
+explicación. Ejecutar ambos antes del cierre global, sin skips ni relajar el producto.
