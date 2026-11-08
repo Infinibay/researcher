@@ -1,0 +1,63 @@
+{
+  "subscription_auth.py": {
+    "ChatGPTCredentials": "Carry a validated access-token snapshot with a redacted representation; syntax validation does not verify its signature, expiry or remote subscription entitlement.",
+    "ChatGPTCredentials.__post_init__": "Validate bounded token/account/plan fields before they can become RPC parameters; never perform network authentication here.",
+    "ChatGPTCredentials.__repr__": "Return a fixed redacted identity without exposing account or access-token contents.",
+    "ChatGPTCredentials.rpc_params": "Export only the access-token snapshot, account ID and optional plan for private authentication RPC; no refresh token or provider fallback is included.",
+    "ManagedTokenFile.__init__": "Select an existing absolute credential path and optional host renewal hook without reading, creating or modifying credential storage.",
+    "ManagedTokenFile.read": "Read one bounded private owner-only regular file with stable descriptor/path identity and require ChatGPT mode; return only access credentials and sanitize source errors.",
+    "ManagedTokenFile.tokens": "Optionally invoke the configured host renewal hook for a refresh reason, then read off the event loop; rereading alone does not prove a token rotated.",
+    "ExternalChatGPTAuth.__init__": "Configure bounded account-bound authentication for one RPC connection, initially unattached and without credentials or a login attempt.",
+    "ExternalChatGPTAuth.bind": "Attach the guarded private refresh handler once to the selected RPC connection without starting login or a model turn.",
+    "ExternalChatGPTAuth._reject": "Retain a non-secret failure code and raise a subscription error without copying credential payloads into it.",
+    "ExternalChatGPTAuth._check_active": "Reject credential delivery after connection withdrawal or loss of the host activity predicate.",
+    "ExternalChatGPTAuth._can_send": "Check local connection attachment and current host authority; this predicate does not validate remote entitlement.",
+    "ExternalChatGPTAuth.withdraw": "Irreversibly stop further credential sends for this connection without cancelling or replaying a native turn.",
+    "ExternalChatGPTAuth._load": "Load a bounded typed snapshot only while active and preserve the original account; sanitize source failures that may contain credentials.",
+    "ExternalChatGPTAuth.login": "Attempt one guarded access-token login on the bound connection and require its expected local receipt; an unconfirmed login is not retried here.",
+    "ExternalChatGPTAuth._refresh": "Serialize bounded unauthorized refreshes for the same account and require a changed token before replying; never replay the client turn.",
+    "ExternalChatGPTAuth.close": "Withdraw this connection and clear retained account, token digest and RPC references without closing the shared host credential provider."
+  },
+  "subscription_provider.py": {
+    "HostSubscription.__init__": "Configure one managed RPC owner with finite deadlines and a bounded resolution queue; construction does not read credentials or open the peer.",
+    "HostSubscription.__aenter__": "Open the managed owner once, initialize RPC and verify its ChatGPT account plus stable source account before making connections available.",
+    "HostSubscription.__aexit__": "Await the shared original provider shutdown when its ownership scope exits.",
+    "HostSubscription.aclose": "Withdraw new resolutions immediately and share one shielded shutdown task so cancelling a waiter cannot transfer shutdown ownership.",
+    "HostSubscription._shutdown": "Close the managed RPC before cancelling and draining owned resolution tasks, then clear the retained account identity.",
+    "HostSubscription._digest": "Fingerprint an access token for rotation comparison without retaining another plaintext copy or treating the hash as authentication.",
+    "HostSubscription._check": "Reject a withdrawn consumer or unavailable host owner before admitting managed credential work.",
+    "HostSubscription._check_response": "Require the managed account-read response shape and ChatGPT auth mode; do not infer remote entitlement from this local response.",
+    "HostSubscription._snapshot": "Read current host-managed credentials off the event loop and reject a change from the original account.",
+    "HostSubscription._resolve": "Admit one bounded host-owned resolution and shield it from consumer cancellation; host-cancelled work fails the waiting connection without replay.",
+    "HostSubscription._work": "Serialize account snapshots and necessary rotation; reuse an externally changed token and retire the provider after uncertain managed work instead of retrying it.",
+    "HostSubscription.connection.tokens": "Resolve this connection against its last delivered token digest and update that digest only after a successful host snapshot.",
+    "HostSubscription._resolve.finished": "Remove a settled resolution from capacity accounting and consume its failure even if the requesting connection has stopped waiting."
+  },
+  "native_state.py": {
+    "_origin": "Project the admitted database, attempt, fence, task/context and workspace binding into the immutable native-state origin.",
+    "_directory": "Require a private mode-0700 directory owned by the current user and return its device/inode identity without adopting another directory.",
+    "_origin_key": "Derive the deterministic journal lookup key for one original admission; the hash identifies data rather than granting execution authority.",
+    "NativeState.key": "Return this retained state identity's journal key without creating or reopening state.",
+    "NativeState.load": "Require the existing witnessed receipt, original authority/origin and unchanged private directories; never recreate missing state or authorize a turn.",
+    "NativeState.opened": "Yield the pinned original home descriptor after verifying both directory identities and absence of auth.json, then close its descriptors on scope exit.",
+    "NativeState._record": "Require the exact stored identity, journal authority and origin-to-state mapping in the supplied snapshot before returning the record.",
+    "NativeState.reservation": "Return a proposed writer reservation for the original admission only after its previous operation is proved closed; the caller must commit the returned record.",
+    "NativeState._active": "Require the same reserved operation under the active broker grant with its gate sent and execution still open; return its witnessed snapshot and record.",
+    "NativeState.bind_thread": "Bind one validated thread receipt to the frozen original session intent, accepting the same receipt again without creating another thread.",
+    "NativeState.reserve_turn": "Durably reserve the first input hash for the active original thread before dispatch; an existing reservation requires reconciliation rather than replay."
+  },
+  "business_mediation.py": {
+    "_failure": "Build the native tool-failure envelope as input text without dispatching, retrying or resolving a possible durable effect.",
+    "catalog_digest": "Fingerprint the exact ordered catalog with deterministic JSON; matching metadata does not itself grant permission to call its tools.",
+    "_BusinessPeer": "Adapt one existing MCP SDK client while the enclosing business-peer scope records whether SDK teardown completed.",
+    "ProjectTools.__init__": "Combine host-selected provider catalogs and require globally unique names before recording the dispatch map; construction does not call a tool.",
+    "ProjectTools.catalog_hash": "Fingerprint the current combined catalog used for native thread admission.",
+    "ProjectTools.call": "Route known names to their original provider and delegate invalid or unknown envelopes to the business boundary for rejection.",
+    "McpTools.__init__": "Bind one existing peer, admitted catalog and live authority predicate without expanding capabilities or invoking the peer.",
+    "McpTools.catalog_hash": "Fingerprint this admitted MCP projection for the native session intent.",
+    "McpTools.call": "Validate current authority and the admitted envelope, dispatch once, and project bounded text results; late withdrawal or unsupported output requires receipt reconciliation.",
+    "_BusinessPeer.__init__": "Retain the existing SDK client and start with teardown unconfirmed; the enclosing scope alone marks it closed.",
+    "_BusinessPeer.list_tools": "Read capabilities through the already initialized client without opening another MCP connection.",
+    "_BusinessPeer.call_tool": "Forward one call to the existing SDK client without adding retries or changing its operation arguments."
+  }
+}

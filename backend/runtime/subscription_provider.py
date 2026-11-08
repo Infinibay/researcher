@@ -26,6 +26,9 @@ class HostSubscription:
     """
 
     def __init__(self, source, rpc, *, timeout=6, max_pending=8):
+        """Configure one managed RPC owner with finite deadlines and a bounded resolution queue;
+        construction does not read credentials or open the peer.
+        """
         if (
             isinstance(timeout, bool)
             or not math.isfinite(timeout)
@@ -44,6 +47,9 @@ class HostSubscription:
         self._closing = None
 
     async def __aenter__(self):
+        """Open the managed owner once, initialize RPC and verify its ChatGPT account plus stable
+        source account before making connections available.
+        """
         if self._used:
             raise RuntimeError("Managed subscription owner cannot be reused")
         self._used = True
@@ -78,9 +84,13 @@ class HostSubscription:
             ) from None
 
     async def __aexit__(self, *_):
+        """Await the shared original provider shutdown when its ownership scope exits."""
         await self.aclose()
 
     async def aclose(self):
+        """Withdraw new resolutions immediately and share one shielded shutdown task so cancelling a
+        waiter cannot transfer shutdown ownership.
+        """
         self._live = False
         if self._closing is None:
             self._closing = asyncio.create_task(self._shutdown())
@@ -90,6 +100,9 @@ class HostSubscription:
         await asyncio.shield(self._closing)
 
     async def _shutdown(self):
+        """Close the managed RPC before cancelling and draining owned resolution tasks, then clear the
+        retained account identity.
+        """
         try:
             # Retire physical control before draining credential callbacks.
             await self.rpc.aclose()
@@ -108,6 +121,9 @@ class HostSubscription:
         last_digest = None
 
         async def tokens(*, reason=None, account_id=None):
+            """Resolve this connection against its last delivered token digest and update that digest
+            only after a successful host snapshot.
+            """
             nonlocal last_digest
             result = await self._resolve(
                 reason, account_id, last_digest, auth._can_send
@@ -124,14 +140,23 @@ class HostSubscription:
 
     @staticmethod
     def _digest(credential):
+        """Fingerprint an access token for rotation comparison without retaining another plaintext copy
+        or treating the hash as authentication.
+        """
         return hashlib.sha256(credential.access_token.encode()).digest()
 
     def _check(self, allowed):
+        """Reject a withdrawn consumer or unavailable host owner before admitting managed credential
+        work.
+        """
         if not self._live or not allowed():
             raise _ConsumerWithdrawn("Managed subscription authority withdrawn")
 
     @staticmethod
     def _check_response(response):
+        """Require the managed account-read response shape and ChatGPT auth mode; do not infer remote
+        entitlement from this local response.
+        """
         if (
             not isinstance(response, dict)
             or (response.get("account") or {}).get("type") != "chatgpt"
@@ -140,12 +165,18 @@ class HostSubscription:
             raise SubscriptionRequired("Managed subscription account unavailable")
 
     async def _snapshot(self):
+        """Read current host-managed credentials off the event loop and reject a change from the
+        original account.
+        """
         credential = await asyncio.to_thread(self.source.read)
         if credential.account_id != self._account:
             raise SubscriptionRequired("Managed subscription account changed")
         return credential
 
     async def _resolve(self, reason, account, digest, allowed):
+        """Admit one bounded host-owned resolution and shield it from consumer cancellation; host-
+        cancelled work fails the waiting connection without replay.
+        """
         self._check(allowed)
         if account != self._account or reason not in (None, "unauthorized"):
             raise SubscriptionRequired("Invalid managed subscription request")
@@ -155,6 +186,9 @@ class HostSubscription:
         self._pending.add(task)
 
         def finished(done):
+            """Remove a settled resolution from capacity accounting and consume its failure even if the
+            requesting connection has stopped waiting.
+            """
             self._pending.discard(done)
             # The requesting session may already have been cancelled; consume
             # owned task failures without exposing source/SDK error details.
@@ -175,6 +209,9 @@ class HostSubscription:
             raise
 
     async def _work(self, reason, digest, allowed):
+        """Serialize account snapshots and necessary rotation; reuse an externally changed token and
+        retire the provider after uncertain managed work instead of retrying it.
+        """
         try:
             async with asyncio.timeout(self.timeout), self._lock:
                 self._check(allowed)

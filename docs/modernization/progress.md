@@ -9641,3 +9641,17 @@ suscripción/estado/mediación y documentación relevante, después accesibilida
 cierre integrado. U08 y distribución Ken/ONNX abiertos. El turno anterior de
 estado no cambió el producto; este bloque sí añade documentación y evidencia.
 Sin nuevo wheel, suite global, push, merge ni despliegue.
+
+## 2026-11-08 — Suscripción, estado nativo y mediación documentados
+
+[Informe](subscription-mediation-docstrings-review.md). 53 docstrings nuevos;
+307 acumulados en dieciséis módulos. Se documentan credencial frente a vigencia
+remota, rotación compartida frente a cancelación de consumidor, reserva durable
+frente a replay y respuesta perdida frente a efecto inexistente. AST ejecutable,
+siete políticas y 48 herramientas iguales. 42 pruebas fuente pasan, 30,18 s,
+sin omisiones ni modelos nuevos. Inventario 85/322 vigente sin renovar revisiones.
+
+18:56:35–18:58:51 UTC: 2 min 16 s hasta verificación, informe/checkpoint posteriores
+aparte. Quedan 314 definiciones por presencia, relevancia desigual. Siguen otras
+fronteras/JSDoc, U08/entrega, Ken/ONNX, accesibilidad y cierre integrado. Sin nuevo
+wheel ni suite global, sin push/merge/despliegue.

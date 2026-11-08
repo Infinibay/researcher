@@ -1,0 +1,8 @@
+{
+  "base_commit": "1e2539b",
+  "files_scanned": 322,
+  "candidates": 85,
+  "stale_ids": [],
+  "revalidated": 0,
+  "note": "Only four source-tree hashes changed. Candidate sources and direct-consumer fingerprints are unchanged; no review decision renewed."
+}

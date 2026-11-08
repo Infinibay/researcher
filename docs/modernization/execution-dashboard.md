@@ -28,7 +28,26 @@ que se pueda comparar el avance; no presentar microajustes como tareas principal
 - Última suite global: `9fb873c`,2210 casos,2178 pasan,31 fallan y1 error de fixture; sin omisiones. La carrera de backup encontrada se corrigió después con40 pruebas instaladas. No se declara una nueva corrida global verde; la referencia `0c8b8d9` queda como evidencia histórica.
 - U01–U07, E01–E12, C01–C10 y D01–D13 quedan comprobados con el alcance de sus matrices; sigue 1 de 43 escenarios amplios sin aceptación completa en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Estado actual: broker y canales documentados por alcance
+## Estado actual: suscripción, estado y mediación documentados
+
+[Informe y pruebas](subscription-mediation-docstrings-review.md).
+**18:56:35–18:58:51 UTC: 2 min 16 s** hasta verificación; informe/checkpoint
+posteriores aparte. Pruebas: 30,18 segundos.
+
+- Terminado: 53 docstrings nuevos; **307 acumulados en dieciséis módulos**.
+  AST ejecutable, siete políticas y 48 herramientas iguales. **42 pruebas fuente
+  pasan**, sin omisiones ni nuevos modelos; inventario 85/322 vigente.
+- En curso/siguiente: otras fronteras relevantes de proceso/red/recuperación y
+  JSDoc. Quedan 314 definiciones por presencia, relevancia desigual. No hacer
+  relleno automático ni actualizar el paquete por cada lote documental.
+- Pendientes: entrega/adaptación/comprensión humana U08; distribución Ken/ONNX;
+  documentación relevante restante; accesibilidad y detalles; paquete, suite
+  global y revisión independiente finales.
+- Estado amplio: **12/12 páginas por alcance, 42/43 escenarios**. Sin aceptación
+  humana ni nueva global verde. Paquete anterior conserva sus bytes; sin push,
+  merge o despliegue.
+
+## Etapa anterior: broker y canales documentados por alcance
 
 [Informe y pruebas](broker-docstrings-review.md). **18:46:38–18:55:14 UTC: 8 min 36 s**
 hasta verificación, incluida recuperación de contexto/consulta de estado;

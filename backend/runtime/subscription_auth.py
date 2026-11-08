@@ -19,11 +19,17 @@ from backend.runtime.codex_session import SubscriptionRequired
 
 @dataclass(frozen=True, repr=False)
 class ChatGPTCredentials:
+    """Carry a validated access-token snapshot with a redacted representation; syntax validation does
+    not verify its signature, expiry or remote subscription entitlement.
+    """
     access_token: str
     account_id: str
     plan_type: str | None = None
 
     def __post_init__(self):
+        """Validate bounded token/account/plan fields before they can become RPC parameters; never
+        perform network authentication here.
+        """
         if (
             not isinstance(self.access_token, str)
             or len(self.access_token) > 65536
@@ -43,9 +49,13 @@ class ChatGPTCredentials:
             raise SubscriptionRequired("Invalid host subscription credential snapshot")
 
     def __repr__(self):
+        """Return a fixed redacted identity without exposing account or access-token contents."""
         return "<ChatGPTCredentials redacted>"
 
     def rpc_params(self):
+        """Export only the access-token snapshot, account ID and optional plan for private
+        authentication RPC; no refresh token or provider fallback is included.
+        """
         return {
             "accessToken": self.access_token,
             "chatgptAccountId": self.account_id,
@@ -62,10 +72,16 @@ class ManagedTokenFile:
     """
 
     def __init__(self, path, *, renew=None):
+        """Select an existing absolute credential path and optional host renewal hook without reading,
+        creating or modifying credential storage.
+        """
         self.path = Path(path).absolute()
         self.renew = renew
 
     def read(self):
+        """Read one bounded private owner-only regular file with stable descriptor/path identity and
+        require ChatGPT mode; return only access credentials and sanitize source errors.
+        """
         fd = None
         try:
             fd = os.open(
@@ -112,6 +128,9 @@ class ManagedTokenFile:
                 os.close(fd)
 
     async def tokens(self, *, reason=None, account_id=None):
+        """Optionally invoke the configured host renewal hook for a refresh reason, then read off the
+        event loop; rereading alone does not prove a token rotated.
+        """
         if reason is not None and self.renew is not None:
             await self.renew(account_id)
         return await asyncio.to_thread(self.read)
@@ -136,6 +155,9 @@ class ExternalChatGPTAuth:
         max_refreshes=2,
         expected_account_id=None,
     ):
+        """Configure bounded account-bound authentication for one RPC connection, initially unattached
+        and without credentials or a login attempt.
+        """
         if (
             not callable(tokens)
             or not 0 < timeout <= 8
@@ -156,6 +178,9 @@ class ExternalChatGPTAuth:
         self._withdrawn = False
 
     def bind(self, rpc):
+        """Attach the guarded private refresh handler once to the selected RPC connection without
+        starting login or a model turn.
+        """
         if self._attached:
             raise RuntimeError("Subscription auth cannot be reused across connections")
         rpc.register_private_request(self.METHOD, self._refresh, allowed=self._can_send)
@@ -163,22 +188,37 @@ class ExternalChatGPTAuth:
         self._rpc = rpc
 
     def _reject(self, code):
+        """Retain a non-secret failure code and raise a subscription error without copying credential
+        payloads into it.
+        """
         self.failure_code = code
         raise SubscriptionRequired(
             "Host subscription authentication unavailable: " + code
         )
 
     def _check_active(self):
+        """Reject credential delivery after connection withdrawal or loss of the host activity
+        predicate.
+        """
         if not self._can_send():
             self._reject("inactive")
 
     def _can_send(self):
+        """Check local connection attachment and current host authority; this predicate does not
+        validate remote entitlement.
+        """
         return self._rpc is not None and not self._withdrawn and self.active()
 
     def withdraw(self):
+        """Irreversibly stop further credential sends for this connection without cancelling or
+        replaying a native turn.
+        """
         self._withdrawn = True
 
     async def _load(self, reason):
+        """Load a bounded typed snapshot only while active and preserve the original account; sanitize
+        source failures that may contain credentials.
+        """
         self._check_active()
         try:
             async with asyncio.timeout(self.timeout):
@@ -196,6 +236,9 @@ class ExternalChatGPTAuth:
         return result
 
     async def login(self):
+        """Attempt one guarded access-token login on the bound connection and require its expected
+        local receipt; an unconfirmed login is not retried here.
+        """
         if self._login_started or self._rpc is None:
             raise RuntimeError("Bind one subscription login to an open connection")
         self._login_started = True
@@ -219,6 +262,9 @@ class ExternalChatGPTAuth:
             self._reject("login_mode_changed")
 
     async def _refresh(self, params):
+        """Serialize bounded unauthorized refreshes for the same account and require a changed token
+        before replying; never replay the client turn.
+        """
         async with asyncio.timeout(self.timeout), self._refresh_lock:
             self._check_active()
             if self.account_id is None or params.get("previousAccountId") not in (
@@ -240,6 +286,9 @@ class ExternalChatGPTAuth:
             return credential.rpc_params()
 
     def close(self):
+        """Withdraw this connection and clear retained account, token digest and RPC references without
+        closing the shared host credential provider.
+        """
         self.withdraw()
         self.account_id = None
         self._digest = None

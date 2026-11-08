@@ -83,10 +83,16 @@ ALL_BUSINESS_NAMES = RESEARCH_NAMES | REVIEW_NAMES | INVESTIGATION_NAMES
 
 
 def _failure(message):
+    """Build the native tool-failure envelope as input text without dispatching, retrying or resolving
+    a possible durable effect.
+    """
     return {"success": False, "contentItems": [{"type": "inputText", "text": message}]}
 
 
 def catalog_digest(catalog):
+    """Fingerprint the exact ordered catalog with deterministic JSON; matching metadata does not itself
+    grant permission to call its tools.
+    """
     return hashlib.sha256(
         json.dumps(
             catalog, sort_keys=True, separators=(",", ":"), ensure_ascii=False
@@ -98,6 +104,9 @@ class ProjectTools:
     """One pre-admission catalog with explicit host/business dispatch ownership."""
 
     def __init__(self, business, analysis, *host_tools):
+        """Combine host-selected provider catalogs and require globally unique names before recording
+        the dispatch map; construction does not call a tool.
+        """
         self.business, self.analysis = business, analysis
         providers = (business, analysis, *host_tools)
         self.catalog = [row for provider in providers for row in provider.catalog]
@@ -112,9 +121,13 @@ class ProjectTools:
 
     @property
     def catalog_hash(self):
+        """Fingerprint the current combined catalog used for native thread admission."""
         return catalog_digest(self.catalog)
 
     async def call(self, params):
+        """Route known names to their original provider and delegate invalid or unknown envelopes to
+        the business boundary for rejection.
+        """
         if (
             isinstance(params, dict)
             and isinstance(params.get("tool"), str)
@@ -128,6 +141,9 @@ class McpTools:
     """Shared MCP result/authority boundary; subclasses admit their own catalog."""
 
     def __init__(self, peer, catalog, active):
+        """Bind one existing peer, admitted catalog and live authority predicate without expanding
+        capabilities or invoking the peer.
+        """
         self._peer = peer
         self.catalog = catalog
         self._names = frozenset(tool["name"] for tool in catalog)
@@ -135,9 +151,13 @@ class McpTools:
 
     @property
     def catalog_hash(self):
+        """Fingerprint this admitted MCP projection for the native session intent."""
         return catalog_digest(self.catalog)
 
     async def call(self, params):
+        """Validate current authority and the admitted envelope, dispatch once, and project bounded
+        text results; late withdrawal or unsupported output requires receipt reconciliation.
+        """
         if not self._active():
             return _failure(
                 "Attempt authority ended. Do not dispatch or retry effects; reconcile existing receipts."
@@ -199,14 +219,26 @@ class BusinessTools(McpTools):
 
 
 class _BusinessPeer:
+    """Adapt one existing MCP SDK client while the enclosing business-peer scope records whether SDK
+    teardown completed.
+    """
     def __init__(self, client):
+        """Retain the existing SDK client and start with teardown unconfirmed; the enclosing scope
+        alone marks it closed.
+        """
         self.client = client
         self.closed = False
 
     async def list_tools(self):
+        """Read capabilities through the already initialized client without opening another MCP
+        connection.
+        """
         return await self.client.list_tools()
 
     async def call_tool(self, name, arguments):
+        """Forward one call to the existing SDK client without adding retries or changing its operation
+        arguments.
+        """
         return await self.client.call_tool(name, arguments)
 
 

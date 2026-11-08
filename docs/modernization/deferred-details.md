@@ -1320,6 +1320,14 @@ estado nativo, mediación y demás fronteras relevantes; no es documentación gl
 terminada ni un paquete actualizado.
 
 
+Cuarto bloque: [53 docstrings de suscripción/mediación](subscription-mediation-docstrings-review.md),
+307 acumulados en dieciséis módulos. Quedan 314 definiciones por presencia. AST,
+siete políticas y 48 definiciones de negocio iguales; 42 pruebas fuente pasan.
+No confundir credenciales locales con vigencia remota, estado con permiso de
+replay ni pérdida de respuesta con ausencia de efecto. Siguen otras fronteras
+relevantes y JSDoc; no se declara toda la documentación terminada.
+
+
 ## DD147 — recuperar observaciones CLI anteriores a la política
 
 La corrección de aceptación enlaza la política observada al request y al recibo.

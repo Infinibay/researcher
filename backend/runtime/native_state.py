@@ -14,6 +14,9 @@ from backend.runtime.contracts import text
 
 
 def _origin(admission):
+    """Project the admitted database, attempt, fence, task/context and workspace binding into the
+    immutable native-state origin.
+    """
     return {
         **{
             key: admission[key]
@@ -31,6 +34,9 @@ def _origin(admission):
 
 
 def _directory(fd):
+    """Require a private mode-0700 directory owned by the current user and return its device/inode
+    identity without adopting another directory.
+    """
     info = os.fstat(fd)
     if (
         not stat.S_ISDIR(info.st_mode)
@@ -42,6 +48,9 @@ def _directory(fd):
 
 
 def _origin_key(origin):
+    """Derive the deterministic journal lookup key for one original admission; the hash identifies data
+    rather than granting execution authority.
+    """
     return (
         "broker:native-origin:"
         + hashlib.sha256(
@@ -64,6 +73,7 @@ class NativeState:
 
     @property
     def key(self):
+        """Return this retained state identity's journal key without creating or reopening state."""
         return "broker:native-state:" + self.state_id
 
     @classmethod
@@ -130,6 +140,9 @@ class NativeState:
 
     @classmethod
     def load(cls, journal, state_id):
+        """Require the existing witnessed receipt, original authority/origin and unchanged private
+        directories; never recreate missing state or authorize a turn.
+        """
         text(state_id, "native state id", 128)
         record = journal.load().records.get("broker:native-state:" + state_id)
         if record is None:
@@ -142,6 +155,9 @@ class NativeState:
 
     @contextmanager
     def opened(self):
+        """Yield the pinned original home descriptor after verifying both directory identities and
+        absence of auth.json, then close its descriptors on scope exit.
+        """
         flags = os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW | os.O_CLOEXEC
         root_fd = os.open(self.path, flags)
         try:
@@ -164,6 +180,9 @@ class NativeState:
             os.close(root_fd)
 
     def _record(self, journal, snapshot):
+        """Require the exact stored identity, journal authority and origin-to-state mapping in the
+        supplied snapshot before returning the record.
+        """
         record = snapshot.records.get(self.key)
         if (
             journal.authority_id != self.authority_id
@@ -175,6 +194,9 @@ class NativeState:
         return record
 
     def reservation(self, journal, snapshot, admission, grant_id, operation_id):
+        """Return a proposed writer reservation for the original admission only after its previous
+        operation is proved closed; the caller must commit the returned record.
+        """
         record = self._record(journal, snapshot)
         if record["origin"] != _origin(admission) or record["grant_id"] not in (
             None,
@@ -196,6 +218,9 @@ class NativeState:
         return {**record, "grant_id": grant_id, "operation_id": operation_id}
 
     def _active(self, journal, operation_id):
+        """Require the same reserved operation under the active broker grant with its gate sent and
+        execution still open; return its witnessed snapshot and record.
+        """
         snapshot = journal.load()
         record = self._record(journal, snapshot)
         operation = snapshot.records.get("broker:op:" + operation_id, {})
@@ -254,6 +279,9 @@ class NativeState:
         )
 
     def bind_thread(self, journal, operation_id, thread_id):
+        """Bind one validated thread receipt to the frozen original session intent, accepting the same
+        receipt again without creating another thread.
+        """
         text(thread_id, "native thread id", 256)
         snapshot, record = self._active(journal, operation_id)
         if record["session_intent"] is None or record["thread_id"] not in (
@@ -269,6 +297,9 @@ class NativeState:
             )
 
     def reserve_turn(self, journal, operation_id, input_text):
+        """Durably reserve the first input hash for the active original thread before dispatch; an
+        existing reservation requires reconciliation rather than replay.
+        """
         snapshot, record = self._active(journal, operation_id)
         if record["thread_id"] is None or record["turn"] is not None:
             raise AuthorityConflict(

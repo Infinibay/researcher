@@ -1,0 +1,30 @@
+{
+  "base_commit": "1e2539b",
+  "scope": "Documentation-only subscription/native-state/business-mediation changes",
+  "files": {
+    "backend/runtime/subscription_auth.py": {
+      "added_docstrings": 17,
+      "executable_ast_equal": true,
+      "before_sha256": "a8405d2833bf5712532ff00163b2b86a21b38aa06051e0fae4e9ae3529d5668b",
+      "after_sha256": "d2eab329cf049f77d39c98c2ddbeb38b12864793ee3e8c3ec9d4aaef0eb305f3"
+    },
+    "backend/runtime/subscription_provider.py": {
+      "added_docstrings": 13,
+      "executable_ast_equal": true,
+      "before_sha256": "f5c65595fd3b64aede88e3a4a27ce8629804b68796d9a4ca02466480ee1fa813",
+      "after_sha256": "9738f27e5369f3521fd7c92066b756235be1193a82631fa12cc00ad9ffd644a4"
+    },
+    "backend/runtime/native_state.py": {
+      "added_docstrings": 11,
+      "executable_ast_equal": true,
+      "before_sha256": "e5cc1b82c97cb9cac06b53c231d0ccef33283980e72195233ef57ca4c232ceaf",
+      "after_sha256": "4f07566906bdb9c551a333a6211fc021bc6b264aff130e2e8fa2dd04f74e9402"
+    },
+    "backend/runtime/business_mediation.py": {
+      "added_docstrings": 12,
+      "executable_ast_equal": true,
+      "before_sha256": "e9dec784b48d473d2914a88ad5efdf110ab1f63dfec2f49a710efa1e16ac765e",
+      "after_sha256": "dd3607a369472989d96ba508971322abb8a58ff3f1ad384b615b15e19574aac0"
+    }
+  }
+}

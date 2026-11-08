@@ -6958,7 +6958,9 @@
         "docs/modernization/authority-transport-docstrings-review.md",
         "docs/modernization/authority-transport-docstrings-results.json",
         "docs/modernization/broker-docstrings-review.md",
-        "docs/modernization/broker-docstrings-results.json"
+        "docs/modernization/broker-docstrings-results.json",
+        "docs/modernization/subscription-mediation-docstrings-review.md",
+        "docs/modernization/subscription-mediation-docstrings-results.json"
       ],
       "verified": [
         "88authored English docstrings across coordinator/contracts/SQLite/peer registry",
@@ -6968,21 +6970,23 @@
         "95English docstrings across authority/native RPC/command executor/execution domain;183cumulative in8modules",
         "Executable AST,7policies and48business tool wire schemas/descriptions unchanged;83source tests pass",
         "71 English docstrings across broker profiles/stdio/MCP/peer broker; 254 cumulative in 12 modules",
-        "Executable AST, 7 policies and 48 business wire definitions unchanged; 63 source tests pass"
+        "Executable AST, 7 policies and 48 business wire definitions unchanged; 63 source tests pass",
+        "53 English docstrings across subscription auth/provider, native state and business mediation; 307 cumulative in 16 modules",
+        "Executable AST, 7 policies and 48 business wire definitions unchanged; 42 source tests pass"
       ],
       "remaining": [
-        "Review subscription, native state, mediation and other relevant boundaries",
-        "367 definitions outside completed scope lack docstrings; assess actual responsibility/relevance, do not auto-fill",
-        "Broader JSDoc/documentation and final package/global validation"
+        "Review other relevant process/network/recovery boundaries and JSDoc",
+        "314 definitions outside completed scope lack docstrings; assess actual responsibility/relevance, do not auto-fill",
+        "Final package/global validation"
       ],
       "limits": [
         "No Ken ranking benchmark or MCP worktree reindex",
         "Not all existing docstrings reviewed",
         "Older installed wheel does not contain these new documentation bytes"
       ],
-      "cumulative_added_docstrings": 254,
-      "cumulative_modules": 12,
-      "remaining_presence_count": 367
+      "cumulative_added_docstrings": 307,
+      "cumulative_modules": 16,
+      "remaining_presence_count": 314
     }
   }
 }
