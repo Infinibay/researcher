@@ -35,6 +35,9 @@ class CommandNeedsReconciliation(RuntimeError):
 
 @dataclass
 class _Command:
+    """Retain one reserved command's bounded output buffers, execution/cancellation tasks and response
+    barrier on its original connection.
+    """
     lease: AttemptLease
     job: CommandJob
     stdout: bytearray = field(default_factory=bytearray)
@@ -47,21 +50,36 @@ class _Command:
 
 
 class CommandHandle:
+    """Observe or cancel one existing command through its original executor; the handle does not grant
+    another dispatch.
+    """
     def __init__(self, executor, job_id):
+        """Bind a lightweight handle to the original executor and durable job identity without
+        launching work.
+        """
         self._executor = executor
         self.job_id = job_id
 
     async def wait(self) -> CommandJob:
+        """Shield the existing local execution task from observer cancellation, then read the original
+        durable receipt instead of restarting it.
+        """
         state = self._executor._commands.get(self.job_id)
         if state is not None and state.task is not None:
             await asyncio.shield(state.task)
         return await self._executor._get(self.job_id)
 
     async def cancel(self) -> CommandJob:
+        """Request cancellation through the original executor and return the resulting retained
+        receipt.
+        """
         return await self._executor.cancel(self.job_id)
 
 
 class OwnedCommandExecutor:
+    """Own one account-free command peer and its original-attempt receipts, separating streamed output,
+    cancellation intent and physical peer closure.
+    """
     def __init__(
         self,
         rpc: JsonRpcClient,
@@ -74,6 +92,9 @@ class OwnedCommandExecutor:
         monitor_interval=0.25,
         cancel_grace=1.0,
     ):
+        """Bind journal, workspace and lease only to their own registered command transport; connection
+        and account checks occur on async entry.
+        """
         if monitor_interval <= 0 or cancel_grace <= 0:
             raise ValueError("Positive command lifecycle limits are required")
         self.rpc = rpc
@@ -129,6 +150,9 @@ class OwnedCommandExecutor:
         self._supervisor = None
 
     async def __aenter__(self):
+        """Initialize the dedicated RPC peer, reject an attached account and require its bound identity
+        before starting event and authority monitors.
+        """
         try:
             await self.rpc.__aenter__()
             await self.rpc.request(
@@ -161,11 +185,15 @@ class OwnedCommandExecutor:
             raise
 
     async def __aexit__(self, exc_type, exc, traceback):
+        """Await the executor's shared cancellation and peer teardown when its scope exits."""
         await self.aclose()
 
     async def start(
         self, lease: AttemptLease, operation_key: str, spec: CommandSpec
     ) -> CommandHandle:
+        """Reserve one scoped command before its first dispatch, or recover its original
+        handle/receipt; an uncertain command from another connection requires reconciliation.
+        """
         if (
             self._reader is None
             or self._closing is not None
@@ -228,6 +256,9 @@ class OwnedCommandExecutor:
             return CommandHandle(self, job.job_id)
 
     async def _get(self, job_id):
+        """Read a retained command only within this executor's admitted run, independently of whether
+        that command may still execute.
+        """
         if self._owner is None:
             raise RunNotFound("This executor has no admitted attempt")
         record = await asyncio.to_thread(
@@ -238,6 +269,9 @@ class OwnedCommandExecutor:
         return record
 
     async def _read_events(self):
+        """Consume command-only notifications and advance the reply barrier; unexpected interactive
+        requests or malformed transport trigger peer retirement.
+        """
         try:
             while True:
                 event = await self.rpc.next_message()
@@ -255,6 +289,9 @@ class OwnedCommandExecutor:
             await self._close_peer()
 
     def _output(self, params):
+        """Append decoded bytes only to the matching active command up to its stream limit, requesting
+        cancellation when capture reaches its bound.
+        """
         if not isinstance(params, dict):
             raise RpcProtocolError("Expected a command output object")
         if (
@@ -278,6 +315,9 @@ class OwnedCommandExecutor:
             self._ensure_cancel(state)
 
     async def _barrier(self, target):
+        """Wait for the event consumer to process every public wire message preceding a command reply,
+        exposing reader failures or the bounded wait timeout.
+        """
         async with asyncio.timeout(2):
             while self._handled_messages < target:
                 if self._reader_error is not None:
@@ -286,6 +326,9 @@ class OwnedCommandExecutor:
                 await self._changed.wait()
 
     async def _execute(self, state, cwd):
+        """Dispatch the reserved command once, account for preceding output and persist its recognized
+        terminal observation; transport failure closes the peer and retains an unknown exit.
+        """
         exit_code, error = None, None
         try:
             if not await asyncio.to_thread(self.journal.attempt_active, state.lease):
@@ -344,6 +387,9 @@ class OwnedCommandExecutor:
         state.stderr.clear()
 
     async def _watch_owner(self):
+        """Supervise durable attempt authority and stop active command effects when authority is absent
+        or cannot be established.
+        """
         while True:
             await asyncio.sleep(self.monitor_interval)
             try:
@@ -369,11 +415,15 @@ class OwnedCommandExecutor:
                 return
 
     def _ensure_cancel(self, state):
+        """Create or recover one cancellation task for this command without repeating execution."""
         if state.cancellation is None:
             state.cancellation = asyncio.create_task(self._cancel(state))
         return state.cancellation
 
     async def cancel(self, job_id) -> CommandJob:
+        """Share cancellation for a locally tracked command or inspect an older retained receipt
+        without acquiring a new execution owner.
+        """
         state = self._commands.get(job_id)
         if state is None:
             return await self._get(job_id)
@@ -381,6 +431,9 @@ class OwnedCommandExecutor:
         return await self._get(job_id)
 
     async def _cancel(self, state):
+        """Record cancellation intent and retry only termination control within grace, then cross the
+        physical peer closure barrier before collecting the original command outcome.
+        """
         if state.task.done():
             return
         if state.response_settled.is_set():
@@ -415,11 +468,15 @@ class OwnedCommandExecutor:
         await asyncio.shield(state.task)
 
     async def aclose(self):
+        """Await one shared executor shutdown while shielding it from cancellation of an observer."""
         if self._closing is None:
             self._closing = asyncio.create_task(self._shutdown())
         await asyncio.shield(self._closing)
 
     async def _shutdown(self):
+        """Request cancellation of active jobs, always close the peer and drain the event reader; peer
+        teardown errors remain visible.
+        """
         if self._supervisor is not None:
             self._supervisor.cancel()
             await asyncio.gather(self._supervisor, return_exceptions=True)
@@ -440,11 +497,15 @@ class OwnedCommandExecutor:
                     await asyncio.gather(self._reader, return_exceptions=True)
 
     async def _close_peer(self):
+        """Create or recover one shielded retirement task for the executor's original peer."""
         if self._peer_closing is None:
             self._peer_closing = asyncio.create_task(self._retire_peer())
         await asyncio.shield(self._peer_closing)
 
     async def _retire_peer(self):
+        """Use broker-owned closure when available; otherwise drain RPC and registered namespace
+        closure together and propagate unresolved teardown errors.
+        """
         if self._broker_owned:
             # Endpoint closure owns physical Stop and original global→SQL proof.
             await self.rpc.aclose()

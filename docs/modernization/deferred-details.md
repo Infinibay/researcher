@@ -1305,6 +1305,12 @@ fronteras de proceso. AST ejecutable, siete políticas y48descripciones/esquemas
 de negocio iguales;51pruebas fuente pasan. No es toda la documentación terminada,
 un benchmark de ranking Ken ni un paquete final actualizado.
 
+Segundo bloque: [95docstrings de autoridad/transporte](authority-transport-docstrings-review.md),
+183acumulados en ocho módulos.438definiciones restantes según presencia, no una
+estimación de relevancia/calidad. AST ejecutable, siete políticas y48esquemas/
+descripciones de negocio sin cambios;83pruebas fuente pasan. Continúan broker,
+perfiles de aislamiento, suscripción/mediación y otras fronteras relevantes.
+
 
 ## DD147 — recuperar observaciones CLI anteriores a la política
 

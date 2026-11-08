@@ -49,6 +49,9 @@ class AuthorityCapacity(RuntimeError):
 
 @dataclass(frozen=True)
 class AuthoritySnapshot:
+    """Carry a verified authority sequence, state hash and decoded records, including transitions
+    recovered from the witness; this is storage evidence, not a launch permit.
+    """
     sequence: int
     state_hash: str
     records: dict
@@ -57,6 +60,9 @@ class AuthoritySnapshot:
 
 @dataclass(frozen=True)
 class CommitReceipt:
+    """Identify a witnessed data transition and whether it was newly committed; receipt recovery does
+    not repeat actor effects or grant execution.
+    """
     sequence: int
     state_hash: str
     transition_id: str
@@ -65,6 +71,9 @@ class CommitReceipt:
 
 @dataclass
 class _History:
+    """Retain parsed witness progress, pending transition, replay receipts and a bounded
+    incomplete-tail location for cross-store reconciliation.
+    """
     commit: dict
     pending: dict | None
     head: str
@@ -74,6 +83,9 @@ class _History:
 
 
 def _canonical(value):
+    """Encode deterministic finite JSON bytes for this journal format; reject non-finite values instead
+    of changing their meaning.
+    """
     return json.dumps(
         value,
         sort_keys=True,
@@ -84,10 +96,12 @@ def _canonical(value):
 
 
 def _hash(value):
+    """Fingerprint the journal's canonical value representation for chain and state agreement checks."""
     return hashlib.sha256(_canonical(value)).hexdigest()
 
 
 def _unique(pairs):
+    """Reject duplicate JSON object keys so witness parsing cannot silently replace an earlier field."""
     result = {}
     for key, value in pairs:
         if key in result:
@@ -97,22 +111,27 @@ def _unique(pairs):
 
 
 def _decode(raw):
+    """Decode journal JSON while rejecting duplicate keys and non-finite numeric constants."""
     return json.loads(raw, object_pairs_hook=_unique, parse_constant=_nonfinite)
 
 
 def _nonfinite(_value):
+    """Reject an unsupported JSON numeric constant rather than admitting a non-finite authority value."""
     raise ValueError("Nonfinite JSON")
 
 
 def _sequence(value):
+    """Recognize a nonnegative signed-64-bit journal sequence, excluding boolean lookalikes."""
     return type(value) is int and 0 <= value <= MAX_SEQUENCE
 
 
 def _state_digest(value):
+    """Recognize the exact lowercase hexadecimal SHA-256 representation required by the journal format."""
     return isinstance(value, str) and re.fullmatch(r"[a-f0-9]{64}", value) is not None
 
 
 def _key(value):
+    """Validate a nonempty printable authority record key within the format's character bound."""
     if (
         not isinstance(value, str)
         or not value
@@ -123,6 +142,9 @@ def _key(value):
 
 
 def _operation_id(value):
+    """Validate a replayable transition identity while reserving genesis for externally provisioned
+    history.
+    """
     if (
         not isinstance(value, str)
         or not re.fullmatch(r"[A-Za-z0-9_.:-]{1,128}", value)
@@ -132,6 +154,9 @@ def _operation_id(value):
 
 
 def _delta(puts, deletes):
+    """Validate disjoint bounded record updates/deletions and detach mutable caller values by canonical
+    serialization before any write.
+    """
     if not isinstance(puts, dict) or not isinstance(deletes, (tuple, list)):
         raise TypeError("Expected record puts and deletes")
     for key, value in puts.items():
@@ -147,6 +172,7 @@ def _delta(puts, deletes):
 
 
 def _apply(records, puts, deletes):
+    """Produce a new bounded authority record set from a delta without mutating the supplied mapping."""
     result = {key: value for key, value in records.items() if key not in deletes}
     result.update(puts)
     if len(result) > MAX_RECORDS or len(_canonical(result)) > MAX_STATE_BYTES:
@@ -157,12 +183,16 @@ def _apply(records, puts, deletes):
 
 
 def _envelope(payload, previous):
+    """Bind a witness payload to the preceding chain digest and compute its record fingerprint."""
     record = {"payload": payload, "previous": previous}
     record["digest"] = _hash(record)
     return record
 
 
 def _intent(prepare):
+    """Fingerprint a transition's original predecessor and record delta, independently of later commit
+    metadata.
+    """
     return _hash(
         {key: prepare[key] for key in ("from_sequence", "from_hash", "puts", "deletes")}
     )
@@ -216,9 +246,15 @@ class WitnessedAuthorityJournal:
             raise
 
     def __enter__(self):
+        """Use the already opened journal in a context; missing authority is never initialized by
+        context entry.
+        """
         return self
 
     def __exit__(self, *_):
+        """Release this journal's file handles without treating context exit as actor closure or
+        rollback of an already witnessed transition.
+        """
         self.close()
 
     def close(self):
@@ -233,9 +269,15 @@ class WitnessedAuthorityJournal:
 
     @staticmethod
     def _identity(info):
+        """Represent the physical device/inode pair used to detect replacement of an opened authority
+        file.
+        """
         return {"device": info.st_dev, "inode": info.st_ino}
 
     def _check_files(self):
+        """Reject inherited, closed, replaced or unsafe original files and enforce the provisioned
+        database capacity before further journal operations.
+        """
         if self._pid != os.getpid() or len(self._fds) != 3:
             raise AuthorityUncertain("Reopen authority handles after fork or close")
         for name, path in self._paths.items():
@@ -259,6 +301,9 @@ class WitnessedAuthorityJournal:
     @contextmanager
     def _operation(self):
         # Check before acquiring an inherited Python lock, not just after it.
+        """Serialize local access and take a nonblocking cross-process lock over revalidated authority
+        handles; roll back any transaction left open by the operation.
+        """
         if self._pid != os.getpid():
             raise AuthorityUncertain("Reopen authority handles after fork")
         with self._local:
@@ -305,6 +350,9 @@ class WitnessedAuthorityJournal:
                     fcntl.flock(self._fds["mutex"], fcntl.LOCK_UN)
 
     def _connection(self):
+        """Open the existing authority database with zero lock wait and required DELETE/EXTRA
+        durability settings; never create or migrate its format.
+        """
         conn = sqlite3.connect(
             self._paths["database"].as_uri() + "?mode=rw",
             uri=True,
@@ -332,6 +380,9 @@ class WitnessedAuthorityJournal:
             raise
 
     def _state(self, conn):
+        """Validate bounded canonical SQL rows against their recorded state hash and authority
+        identity; agreement with the external witness is checked separately.
+        """
         rows = conn.execute("SELECT * FROM authority_meta").fetchall()
         if (
             len(rows) != 1
@@ -527,6 +578,9 @@ class WitnessedAuthorityJournal:
 
     @staticmethod
     def _prepare(payload, commit):
+        """Validate the exact PREPARE fields, canonical delta and immediate committed predecessor
+        without applying the transition.
+        """
         if set(payload) != {
             "kind",
             "from_sequence",
@@ -556,6 +610,9 @@ class WitnessedAuthorityJournal:
             raise ValueError("Noncanonical prepare")
 
     def _append_record(self, payload, previous):
+        """Append and fsync one bounded witness record linked to the previous digest, retaining history
+        when capacity is exhausted.
+        """
         raw = _canonical(_envelope(payload, previous)) + b"\n"
         if (
             len(raw) > MAX_LINE_BYTES
@@ -575,6 +632,7 @@ class WitnessedAuthorityJournal:
         return _hash({"payload": payload, "previous": previous})
 
     def _sync_database(self):
+        """Fsync the original database and its parent directory after authority state changes."""
         os.fsync(self._fds["database"])
         fd = os.open(
             self._paths["database"].parent, os.O_RDONLY | os.O_DIRECTORY | os.O_CLOEXEC
@@ -585,6 +643,9 @@ class WitnessedAuthorityJournal:
             os.close(fd)
 
     def _write_database(self, conn, prepare):
+        """Apply the already witnessed delta, verify the resulting state hash, commit SQL and
+        synchronize its durable files.
+        """
         for key in prepare["deletes"]:
             conn.execute("DELETE FROM authority_records WHERE key=?", (key,))
         conn.executemany(
@@ -608,6 +669,9 @@ class WitnessedAuthorityJournal:
         self._sync_database()
 
     def _verified(self, conn):
+        """Reconcile SQL and witness forward through a durable PREPARE, trimming only a mutually
+        validated torn tail; never replay actor execution or accept a rewind.
+        """
         recovered = []
         while True:
             conn.execute("BEGIN IMMEDIATE")
@@ -669,6 +733,9 @@ class WitnessedAuthorityJournal:
             recovered.append(pending["transition_id"])
 
     def load(self):
+        """Return verified authority state, potentially completing witnessed storage recovery; loading
+        is not a read-only operation or an execution authorization.
+        """
         with self._operation() as conn:
             snapshot, _ = self._verified(conn)
             return snapshot
@@ -692,6 +759,9 @@ class WitnessedAuthorityJournal:
             raise failure[0].with_traceback(failure[1])
 
     def commit(self, expected, *, transition_id, puts, deletes=()):
+        """Compare the original expected state and commit one bounded witnessed delta; the same
+        transition ID recovers its original receipt, while changed intent conflicts.
+        """
         _operation_id(transition_id)
         puts, deletes = _delta(puts, deletes)
         if not isinstance(expected, AuthoritySnapshot):

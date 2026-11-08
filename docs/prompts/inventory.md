@@ -13,6 +13,10 @@ revalida tres consumidores con delta sólo de docstrings y conserva82decisiones;
 85/322siguen vigentes. No cambia el texto de las políticas del catálogo10 ni
 sus descripciones/esquemas de negocio; no se repiten generaciones.
 
+Los95docstrings siguientes de autoridad/transporte sólo cambian cuatro hashes
+del árbol escaneado:85decisiones continúan vigentes, sin renovaciones de revisión.
+[Alcance y pruebas](../modernization/authority-transport-docstrings-review.md).
+
 Corte de Planificación del8noviembre2026:318archivos,85candidatos,18revisiones
 vigentes y67desactualizadas;0sin revisión previa. El cambio de fuentes/consumidores
 no prueba que67textos estén mal; tampoco permite contar sus revisiones anteriores

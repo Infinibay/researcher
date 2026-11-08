@@ -9603,3 +9603,25 @@ el bloque actual sí cambia fuente/evidencia.18:23:48–18:32:56UTC:9min8s hasta
 documentación/checkpoint posteriores aparte. Sigue documentación de autoridad/
 RPC/comandos/procesos y demás gates;42/43escenarios,12/12páginas por alcance,
 U08/entrega y Ken pendientes. No push, merge o despliegue.
+
+## 2026-11-08 — Documentación de autoridad, RPC, comandos y dominios
+
+[Informe y evidencia](authority-transport-docstrings-review.md).95docstrings
+ingleses: authority_journal30,codex_rpc29,command_jobs23,execution_domain13.
+Incluyen getters/setters diferenciados; cero definiciones sin docstring en esos
+cuatro archivos.183acumulados en ocho módulos y438faltantes fuera del alcance.
+Textos escritos por identidad y revisados contra código, sin generarlos del nombre.
+
+Se explicitan load con recuperación/escritura, recibo de datos frente a permiso,
+barrera de mensajes anteriores a respuesta, cancelación frente a ejecución,
+adaptador stdio frente a dominio registrado y cierre de handles frente a retiro
+de todo el subárbol. AST ejecutable igual; siete políticas y48descripciones/
+esquemas/anotaciones de negocio idénticos.83pruebas fuente pasan en12,500s:
+autoridad,crash,RPC,ejecutor y dominio. Cero modelos nuevos, sin wheel por el lote.
+
+Inventario85/322vigente: ningún candidato/consumidor requiere renovar revisión;
+sólo cuatro hashes del árbol cambian. No ranking Ken medido ni todo consumidor
+de introspección auditado.18:36:07–18:42:00UTC,5min53s hasta corte de verificación,
+informe/checkpoint posteriores aparte. Siguen broker/aislamiento/suscripción/
+mediación/JSDoc, U08/entrega, Ken, accesibilidad y cierre integrado.42/43escenarios,
+12/12páginas por alcance; sin nueva global verde ni push/merge/despliegue.

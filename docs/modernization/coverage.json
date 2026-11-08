@@ -6954,24 +6954,31 @@
         "docs/modernization/core-docstrings-review.md",
         "docs/modernization/core-docstrings-results.json",
         "docs/modernization/core-docstrings-evidence/ast-equivalence.json",
-        "docs/modernization/core-docstrings-evidence/authored-docstrings.json"
+        "docs/modernization/core-docstrings-evidence/authored-docstrings.json",
+        "docs/modernization/authority-transport-docstrings-review.md",
+        "docs/modernization/authority-transport-docstrings-results.json"
       ],
       "verified": [
         "88authored English docstrings across coordinator/contracts/SQLite/peer registry",
         "No missing definitions in those four modules",
         "Executable AST unchanged, seven policies and48business wire schemas/descriptions unchanged",
-        "51source tests pass, zero model calls"
+        "51source tests pass, zero model calls",
+        "95English docstrings across authority/native RPC/command executor/execution domain;183cumulative in8modules",
+        "Executable AST,7policies and48business tool wire schemas/descriptions unchanged;83source tests pass"
       ],
       "remaining": [
-        "Review authority journal, native RPC, command and process boundaries",
-        "533definitions elsewhere lack docstrings; assess relevance and actual contracts, do not auto-fill",
+        "Review broker/containment profiles, subscription, mediation and other relevant boundaries",
+        "438definitions outside completed scope lack docstrings; assess actual responsibility/relevance, do not auto-fill",
         "Broader JSDoc/documentation and final package/global validation"
       ],
       "limits": [
         "No Ken ranking benchmark or MCP worktree reindex",
         "Not all existing docstrings reviewed",
         "Older installed wheel does not contain these new documentation bytes"
-      ]
+      ],
+      "cumulative_added_docstrings": 183,
+      "cumulative_modules": 8,
+      "remaining_presence_count": 438
     }
   }
 }

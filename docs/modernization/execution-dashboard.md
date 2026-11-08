@@ -28,7 +28,29 @@ que se pueda comparar el avance; no presentar microajustes como tareas principal
 - Última suite global: `9fb873c`,2210 casos,2178 pasan,31 fallan y1 error de fixture; sin omisiones. La carrera de backup encontrada se corrigió después con40 pruebas instaladas. No se declara una nueva corrida global verde; la referencia `0c8b8d9` queda como evidencia histórica.
 - U01–U07, E01–E12, C01–C10 y D01–D13 quedan comprobados con el alcance de sus matrices; sigue 1 de 43 escenarios amplios sin aceptación completa en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Estado actual: documentación del núcleo completada por alcance
+## Estado actual: autoridad y transporte documentados por alcance
+
+[Docstrings y verificación](authority-transport-docstrings-review.md). Bloque
+**18:36:07–18:42:00UTC:5min53s** hasta comprobación; informe/checkpoint posteriores
+aparte.83pruebas12,500s, sin confundir ese tiempo con todo el bloque.
+
+- Terminado: **95docstrings nuevos**,183acumulados en ocho módulos. Autoridad,
+ RPC, ejecutor y dominio quedan sin definiciones faltantes; AST ejecutable igual,
+ siete políticas y48descripciones/esquemas/anotaciones de negocio sin cambios.
+83pruebas fuente pasan, sin omisiones; cero generaciones nuevas.
+- En curso/siguiente: broker/perfiles de aislamiento, suscripción, mediación y
+ fronteras relevantes restantes.438definiciones sin docstring fuera del alcance,
+ con distinta relevancia. No completar frases automáticamente ni afirmar ranking
+ Ken mejorado. No actualizar revisiones de prompts sin delta:85/322vigentes.
+- Pendientes: entrega/adaptación/comprensión humana U08 y revisión de proporcionalidad
+ antes de otro ensayo; decisión Ken/ONNX ya consultada; documentación/JSDoc,
+ accesibilidad integral y detalles; paquete, suite global y revisión independiente
+ finales. El nuevo paquete se hará sobre el árbol final, no por cada lote documental.
+- Estado amplio: **12/12páginas por alcance,42/43escenarios**. El ensayo humano
+ fallido conserva su resultado. Sin nueva global verde, aceptación U08, push,
+ merge o despliegue. Los paquetes anteriores no contienen los nuevos docstrings.
+
+## Etapa anterior: documentación del núcleo completada por alcance
 
 [Docstrings y comprobaciones](core-docstrings-review.md). Bloque actual iniciado
 **18:23:48UTC**, corte de verificación **18:32:56UTC:9min8s**; documentación/

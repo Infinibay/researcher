@@ -32,12 +32,18 @@ class RpcError(RuntimeError):
     """An explicit error response from the peer, not a successful result."""
 
     def __init__(self, code: int, message: str) -> None:
+        """Preserve the peer's explicit error code and message as a failed response rather than a
+        successful result.
+        """
         super().__init__(message)
         self.code = code
 
 
 @dataclass(frozen=True)
 class RpcReply:
+    """Pair a matched RPC result with the count of preceding public wire messages so consumers can
+    account for streamed events before accepting the result.
+    """
     result: Any
     preceding_messages: int
 
@@ -59,6 +65,9 @@ class JsonRpcClient:
         max_message_bytes=1024 * 1024,
         max_pending_requests=32,
     ):
+        """Configure bounded requests, frames and event queues around a lifecycle-owned endpoint;
+        construction starts no process or protocol reader.
+        """
         if (
             min(
                 request_timeout,
@@ -111,6 +120,9 @@ class JsonRpcClient:
         self._private_handlers[method] = (handler, allowed)
 
     async def _serve_private(self, message, registration):
+        """Serve one separately registered host control request under its current guard and deadline,
+        sanitizing callback failures before closing the connection.
+        """
         if self._failure is not None:
             return
         try:
@@ -129,6 +141,9 @@ class JsonRpcClient:
             self._begin_close()
 
     async def __aenter__(self) -> Self:
+        """Open the endpoint exactly once and start frame/stderr consumers; failed or cancelled startup
+        drains owned endpoint cleanup.
+        """
         if self._started:
             raise RuntimeError("A connection cannot be started twice")
         self._started = True
@@ -147,6 +162,7 @@ class JsonRpcClient:
         return self
 
     async def __aexit__(self, exc_type, exc, traceback) -> None:
+        """Await the shared owned connection shutdown when the async scope exits."""
         await self.aclose()
 
     async def request(
@@ -157,6 +173,9 @@ class JsonRpcClient:
         timeout: float | None = None,
         _guard=None,
     ) -> Any:
+        """Send one correlated request and return its matched result, discarding only the event barrier
+        metadata; a lost response is never replayed automatically.
+        """
         if _guard is None:
             return (await self.request_ordered(method, params, timeout=timeout)).result
         return (
@@ -201,12 +220,18 @@ class JsonRpcClient:
                 future.exception()
 
     async def notify(self, method: str, params: dict | None = None) -> None:
+        """Write a notification without registering a response future; successful writing is not peer
+        acknowledgement or effect completion.
+        """
         message: dict[str, Any] = {"method": method}
         if params is not None:
             message["params"] = params
         await self._send(message)
 
     async def respond(self, request_id: int | str, result: Any, *, _guard=None) -> None:
+        """Reply to the peer's original request identity, optionally rechecking private control
+        authority at the write boundary.
+        """
         if _guard is None:
             await self._send({"id": request_id, "result": result})
         else:
@@ -231,12 +256,18 @@ class JsonRpcClient:
             await asyncio.gather(item, failure, return_exceptions=True)
 
     def _check_connection(self) -> None:
+        """Expose the first permanent transport failure or reject use before startup; this check does
+        not reconnect.
+        """
         if self._failure is not None:
             raise self._failure
         if self._process is None:
             raise RpcDisconnected("Connection has not started")
 
     async def _send(self, message: dict[str, Any], *, _guard=None) -> None:
+        """Serialize one bounded finite JSON frame under the write lock and recheck any private guard
+        immediately before writing.
+        """
         self._check_connection()
         frame = (
             json.dumps(message, allow_nan=False, separators=(",", ":")).encode() + b"\n"
@@ -259,6 +290,9 @@ class JsonRpcClient:
                 raise error from exc
 
     def _fail(self, error: RpcDisconnected) -> None:
+        """Retain the first connection failure and wake pending request and event observers without
+        synthesizing successful receipts.
+        """
         if self._failure is not None:
             return
         self._failure = error
@@ -268,6 +302,9 @@ class JsonRpcClient:
                 future.set_exception(error)
 
     async def _read_messages(self) -> None:
+        """Parse bounded frames, correlate only matching live reply IDs and route private controls
+        separately from queued events; malformed or overloaded input ends the connection.
+        """
         assert self._process is not None and self._process.stdout is not None
         try:
             while True:
@@ -354,6 +391,9 @@ class JsonRpcClient:
             raise
 
     async def _drain_stderr(self) -> None:
+        """Consume peer diagnostic bytes until EOF without retaining or logging them through this
+        transport.
+        """
         assert self._process is not None and self._process.stderr is not None
         # Drain rather than log raw provider diagnostics, which may contain secrets.
         while await self._process.stderr.read(8192):
@@ -366,6 +406,9 @@ class JsonRpcClient:
         await asyncio.shield(self._begin_close())
 
     def _begin_close(self):
+        """Create or recover one shared endpoint shutdown task so concurrent close requests cannot
+        start competing teardown paths.
+        """
         if self._closing is None:
             self._closing = asyncio.create_task(self._shutdown())
             self._closing.add_done_callback(
@@ -374,6 +417,9 @@ class JsonRpcClient:
         return self._closing
 
     async def _shutdown(self):
+        """Fail pending RPC observers, close the owned endpoint and drain reader/private-control tasks
+        even when endpoint teardown raises.
+        """
         self._fail(RpcDisconnected("Connection closed"))
         try:
             await self._endpoint.aclose(timeout=self.close_timeout)
@@ -393,6 +439,9 @@ class _SubprocessEndpoint:
     """Compatibility adapter for the existing CLI/process-group lifetime."""
 
     def __init__(self, command, cwd, env, process_group_signals):
+        """Retain a compatibility subprocess invocation and environment copy without spawning or
+        claiming broker containment.
+        """
         self.command = tuple(command)
         self.cwd = cwd
         self.env = dict(env) if env is not None else None
@@ -401,6 +450,9 @@ class _SubprocessEndpoint:
         self._starting = None
 
     async def open(self, *, limit):
+        """Start one subprocess session with piped transport and a bounded reader; shield creation so
+        the owner can later drain a cancelled startup.
+        """
         if self._starting is not None:
             raise RuntimeError("Endpoint already started")
         self._starting = asyncio.create_task(
@@ -419,6 +471,9 @@ class _SubprocessEndpoint:
         return self._process
 
     def _signal(self, sig):
+        """Signal the configured original process or process group, tolerating an already missing
+        process without claiming namespace retirement.
+        """
         try:
             if self.process_group_signals:
                 os.killpg(self._process.pid, sig)
@@ -428,6 +483,9 @@ class _SubprocessEndpoint:
             pass
 
     async def aclose(self, *, timeout):
+        """Close input and reap the started compatibility child with TERM/KILL escalation;
+        process-group signaling is not the broker's registered-domain proof.
+        """
         if self._starting is None:
             return
         if self._starting.done() and self._starting.exception() is not None:
@@ -465,6 +523,9 @@ class StdioRpcClient(JsonRpcClient):
         max_pending_requests=32,
         process_group_signals=True,
     ):
+        """Configure the CLI compatibility endpoint and bounded JSON-RPC client without starting a
+        child or selecting subscription credentials.
+        """
         if not command:
             raise ValueError("A command is required")
         super().__init__(
@@ -478,32 +539,52 @@ class StdioRpcClient(JsonRpcClient):
 
     @property
     def command(self):
+        """Return the invocation vector retained by the compatibility endpoint; reading it does not
+        dispatch a command.
+        """
         return self._endpoint.command
 
     @command.setter
     def command(self, value):
+        """Replace the endpoint's configured invocation vector without restarting an existing
+        connection.
+        """
         self._endpoint.command = tuple(value)
 
     @property
     def cwd(self):
+        """Return the directory option configured for compatibility process creation."""
         return self._endpoint.cwd
 
     @cwd.setter
     def cwd(self, value):
+        """Replace the endpoint directory option without moving a process that is already running."""
         self._endpoint.cwd = value
 
     @property
     def env(self):
+        """Return the configured environment mapping; None retains the subprocess API's
+        parent-environment inheritance behavior.
+        """
         return self._endpoint.env
 
     @env.setter
     def env(self, value):
+        """Replace the environment passed to future endpoint creation; this compatibility property does
+        not filter credentials or validate its contents.
+        """
         self._endpoint.env = value
 
     @property
     def process_group_signals(self):
+        """Report whether compatibility teardown signals a process group rather than only its direct
+        child.
+        """
         return self._endpoint.process_group_signals
 
     @process_group_signals.setter
     def process_group_signals(self, value):
+        """Set compatibility signaling mode without registering or proving closure of a broker-owned
+        namespace.
+        """
         self._endpoint.process_group_signals = value

@@ -20,6 +20,9 @@ from backend.runtime.peer_process import boot_id, observer_namespace
 
 
 def _deadline(timeout):
+    """Validate a finite positive timeout of at most 60seconds and return its absolute monotonic
+    deadline.
+    """
     if (
         type(timeout) not in (int, float)
         or not math.isfinite(timeout)
@@ -35,6 +38,9 @@ class DomainUncertain(RuntimeError):
 
 @dataclass(frozen=True)
 class DomainIdentity:
+    """Pin an opened cgroup object together with boot, observer and cgroup-namespace identities; this
+    value is not an execution grant.
+    """
     device: int
     inode: int
     boot_id: str
@@ -55,6 +61,9 @@ class ContainedChild:
     """A transport/reaping handle; its exit does not certify domain closure."""
 
     def __init__(self, pid, pidfd, stdin, stdout, stderr):
+        """Own the child's pidfd and unbuffered transport pipes for later observation and reaping,
+        without certifying subtree closure.
+        """
         self.pid, self._pidfd = pid, pidfd
         self.stdin = os.fdopen(stdin, "wb", buffering=0)
         self.stdout = os.fdopen(stdout, "rb", buffering=0)
@@ -63,6 +72,9 @@ class ContainedChild:
         self._wait_lock = threading.Lock()
 
     def wait(self, *, timeout=5):
+        """Poll the owned pidfd and cache the reaped direct-child exit; timeout or external reaping
+        does not become an invented terminal receipt.
+        """
         with self._wait_lock:
             if self._status is None:
                 poller = select.poll()
@@ -79,6 +91,9 @@ class ContainedChild:
             return self._status
 
     def close_handles(self):
+        """Release transport streams and the pidfd without terminating or certifying retirement of the
+        execution domain.
+        """
         for stream in (self.stdin, self.stdout, self.stderr):
             stream.close()
         if self._pidfd is not None:
@@ -98,6 +113,9 @@ class ExecutionDomain:
 
     @classmethod
     def open(cls, path, *, expected=None):
+        """Open an existing non-threaded cgroup domain, reject the controller's ancestry and optionally
+        match an externally retained identity; never provision a new domain.
+        """
         self = cls.__new__(cls)
         self.path = Path(path).absolute()
         self._fd = self._parent_fd = None
@@ -139,12 +157,19 @@ class ExecutionDomain:
             raise
 
     def __enter__(self):
+        """Use the already opened domain without starting or releasing an actor."""
         return self
 
     def __exit__(self, *_):
+        """Release domain handles on context exit; actor retirement remains a separate explicit
+        operation.
+        """
         self.close()
 
     def close(self):
+        """Release local directory descriptors, including inherited handles after fork, without killing
+        actors or claiming the domain is empty.
+        """
         with self._lock if self._pid == os.getpid() else nullcontext():
             for name in ("_fd", "_parent_fd"):
                 fd = getattr(self, name)
@@ -154,6 +179,9 @@ class ExecutionDomain:
 
     def _reject_own_ancestors(self):
         # Never permit retirement of the broker/test runner or an ancestor.
+        """Reject a domain containing the controller or one of its ancestors before the object can be
+        used for subtree retirement.
+        """
         mount = Path("/sys/fs/cgroup")
         entries = Path("/proc/self/cgroup").read_text().splitlines()
         unified = [line[3:] for line in entries if line.startswith("0::")]
@@ -172,6 +200,9 @@ class ExecutionDomain:
         raise DomainUncertain("Cannot verify the controller cgroup ancestry")
 
     def _check(self):
+        """Require the same live opened object, process, boot and observer namespaces; replaced or
+        retired paths require explicit reconciliation.
+        """
         if self._pid != os.getpid() or self._fd is None or self._retired:
             raise DomainUncertain("Reopen domain after fork, close or retirement")
         info = os.stat(self.path.name, dir_fd=self._parent_fd, follow_symlinks=False)
@@ -191,6 +222,9 @@ class ExecutionDomain:
             raise DomainUncertain("Execution domain kernel/observer changed")
 
     def _read(self, name):
+        """Read one bounded ASCII control-file window relative to the pinned domain descriptor without
+        following a symlink leaf.
+        """
         fd = os.open(name, os.O_RDONLY | os.O_CLOEXEC | os.O_NOFOLLOW, dir_fd=self._fd)
         try:
             return os.read(fd, 4096).decode("ascii")
@@ -323,6 +357,9 @@ class ExecutionDomain:
     def _kill(self):
         # Pin/recheck before using a descriptor while another thread drains
         # startup. Never reopen a controller through an unverified numeric FD.
+        """Signal cgroup.kill through a duplicated, identity-checked subtree handle; the caller must
+        separately establish emptiness and removal.
+        """
         pinned = os.dup(self._fd)
         try:
             info = os.fstat(pinned)

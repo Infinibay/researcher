@@ -1,0 +1,30 @@
+{
+  "base_commit": "30a27a9",
+  "scope": "Documentation-only AST equivalence, including explicit property getter/setter identities",
+  "files": {
+    "backend/runtime/authority_journal.py": {
+      "added_docstrings": 30,
+      "executable_ast_equal": true,
+      "before_sha256": "3879a1b7107cfbc96e6c9e4e51262ecbef7e08363b90c653d82024a5230fd8c0",
+      "after_sha256": "eed98cada4ab678c47ef9bdcd37ec0781442b6b9a63dc90b82c5455c740e6756"
+    },
+    "backend/runtime/codex_rpc.py": {
+      "added_docstrings": 29,
+      "executable_ast_equal": true,
+      "before_sha256": "8ec057ae7e55e056c475d5f59651064c112bbfec5aed65ffa6ede1583c4e2767",
+      "after_sha256": "7f45df5053bc6ac443acf4e42095f29d708c92e5382506a05d47c77b52ffa905"
+    },
+    "backend/runtime/command_jobs.py": {
+      "added_docstrings": 23,
+      "executable_ast_equal": true,
+      "before_sha256": "ce8fb588398e6ab25df6b69dd96ea875e3b89cf3a1b8424d1c71a681b31f3fba",
+      "after_sha256": "b47507961349fbf7570c20b3f37fb7045c076e3ad432ed68d8f5ff16396094d0"
+    },
+    "backend/runtime/execution_domain.py": {
+      "added_docstrings": 13,
+      "executable_ast_equal": true,
+      "before_sha256": "639eb760a9b0ab27f7c1d604e2b32ccc30b7791f756bf8f2f5e4d2c996c43418",
+      "after_sha256": "04e6e8b216b314c16f5bbd9b9efe97de211ea8d6b52cf7db15df5f8e4db18f45"
+    }
+  }
+}
