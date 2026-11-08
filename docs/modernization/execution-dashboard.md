@@ -28,7 +28,7 @@ que se pueda comparar el avance; no presentar microajustes como tareas principal
 - Última suite global: `9fb873c`,2210 casos,2178 pasan,31 fallan y1 error de fixture; sin omisiones. La carrera de backup encontrada se corrigió después con40 pruebas instaladas. No se declara una nueva corrida global verde; la referencia `0c8b8d9` queda como evidencia histórica.
 - U01–U07, E01–E12, C01–C09 y D01–D13 quedan comprobados con el alcance de sus matrices; siguen 2 de 43 escenarios amplios sin aceptación completa en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Estado actual: Ejecución aceptada; continúa Proyectos
+## Estado actual: 11páginas aceptadas; comentarios de tarea en curso
 
 **10:31:26–10:44:29UTC,13min3s hasta verificar/inspeccionar**, base64b6cf3.
 [Alcance](execution-page-review.md). Documentación/checkpoint posteriores excluidos.
@@ -37,8 +37,10 @@ que se pueda comparar el avance; no presentar microajustes como tareas principal
   entrega causal original, recuperación exacta de pausa sin despacho, lectura
   desconocida/contexto anterior y aislamiento.9estados/15checks,0modelos;
  19tablas/fuente sin cambio. Producto/backend/esquema71sin modificaciones.
-- En curso: **Proyectos/AuthorityBusy**, investigar la preparación con una variable
-  causal nueva; no repetir generaciones ni aflojar la exclusión del journal.
+- En curso desde10:51:41UTC: **comentarios de tarea duraderos**. Proyectos/AuthorityBusy
+  sigue abierto: historia+reinicio no reprodujo el fallo (6min1s,0turnos). Revisión
+  limpia no encontró segundo journal en lecturas ordinarias; no cambiar locks por
+  hipótesis ni encadenar variantes equivalentes.
 - Pendiente en orden: Proyectos, idempotencia de comentarios de tarea (distinta
   de notas del hilo); cierre no vacío, U08/C10/ciencia, distribución/dependencias,
   prompts, inversas71, global y revisión final.

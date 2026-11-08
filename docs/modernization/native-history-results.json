@@ -1,0 +1,184 @@
+{
+  "status": "observed_no_contention",
+  "scope": "Two zero-generation preparations on one host, separated by API restart; compound retained-history/restart observation, not an accepted-plan reproduction.",
+  "backend": "/home/andres/.codex/worktrees/b09e/researcher/.superpowers/sdd/2026-10-31-actualizacion-proyecto/native-runtime-env/lib/python3.12/site-packages/backend/__init__.py",
+  "maximum_model_turns": 0,
+  "cycles": [
+    {
+      "cycle": 1,
+      "project_id": 1,
+      "admission": {
+        "message": "Planificaci\u00f3n nativa guardada; la propuesta requerir\u00e1 tu aceptaci\u00f3n.",
+        "status": "planning",
+        "planning_task_id": 1,
+        "request": {
+          "operation_key": "history-cycle-1-plan",
+          "prompt": "Prop\u00f3n un plan en espa\u00f1ol; no ejecutes las tareas.",
+          "repository_id": 1
+        },
+        "run": {
+          "run_id": "da33cecb-aad4-410e-901e-fbd394c47088",
+          "project_id": 1,
+          "task_id": 1,
+          "actor_id": "native-project-planner",
+          "context_version": 1,
+          "status": "queued",
+          "fence": 0,
+          "attempt_id": null,
+          "thread_id": null,
+          "turn_id": null,
+          "prompt": "Prop\u00f3n un plan en espa\u00f1ol; no ejecutes las tareas.",
+          "runtime": "codex",
+          "result": null,
+          "cancel_requested": false,
+          "operation_key": "plan-3af9461b9d36b8d13599fe1c42fe115bb4e549e22000fd4a39f61afe4ab4b30c",
+          "conversation_thread_id": null,
+          "model": null,
+          "repository_id": 1,
+          "repository_name": "observaciones",
+          "issue": null,
+          "review": null,
+          "execution_kind": "research",
+          "model_selection": null
+        }
+      },
+      "storage_before_shutdown": {
+        "runs": [
+          {
+            "id": "da33cecb-aad4-410e-901e-fbd394c47088",
+            "status": "failed",
+            "issue_json": "{\"closure_confirmed\":true,\"code\":\"runtime_failed\",\"inference_started\":null,\"message\":\"La ejecuci\u00f3n fall\u00f3 y se comprob\u00f3 el cierre de sus procesos. No se pudo confirmar si se inici\u00f3 inferencia. Conservamos el trabajo y los recibos guardados; revisa el intento y su presupuesto antes de continuar. No se repetir\u00e1 por su cuenta.\",\"next_action\":\"inspect_saved_work\"}"
+          }
+        ],
+        "native_starts": 0,
+        "dispatches": 1,
+        "unclosed_peers": 0,
+        "unrevoked_grants": 0,
+        "integrity": "ok"
+      },
+      "service_exit": 143,
+      "storage_after_shutdown": {
+        "runs": [
+          {
+            "id": "da33cecb-aad4-410e-901e-fbd394c47088",
+            "status": "failed",
+            "issue_json": "{\"closure_confirmed\":true,\"code\":\"runtime_failed\",\"inference_started\":null,\"message\":\"La ejecuci\u00f3n fall\u00f3 y se comprob\u00f3 el cierre de sus procesos. No se pudo confirmar si se inici\u00f3 inferencia. Conservamos el trabajo y los recibos guardados; revisa el intento y su presupuesto antes de continuar. No se repetir\u00e1 por su cuenta.\",\"next_action\":\"inspect_saved_work\"}"
+          }
+        ],
+        "native_starts": 0,
+        "dispatches": 1,
+        "unclosed_peers": 0,
+        "unrevoked_grants": 0,
+        "integrity": "ok"
+      },
+      "authority": {
+        "sequence": 18,
+        "witness_bytes": 110571,
+        "grants": [
+          {
+            "state": "retired",
+            "domain_removed": true
+          }
+        ]
+      }
+    },
+    {
+      "cycle": 2,
+      "project_id": 2,
+      "admission": {
+        "message": "Planificaci\u00f3n nativa guardada; la propuesta requerir\u00e1 tu aceptaci\u00f3n.",
+        "status": "planning",
+        "planning_task_id": 2,
+        "request": {
+          "operation_key": "history-cycle-2-plan",
+          "prompt": "Prop\u00f3n un plan en espa\u00f1ol; no ejecutes las tareas.",
+          "repository_id": 2
+        },
+        "run": {
+          "run_id": "cfa1c3b3-d500-44e3-a5df-09b8f7ff7c74",
+          "project_id": 2,
+          "task_id": 2,
+          "actor_id": "native-project-planner",
+          "context_version": 1,
+          "status": "queued",
+          "fence": 0,
+          "attempt_id": null,
+          "thread_id": null,
+          "turn_id": null,
+          "prompt": "Prop\u00f3n un plan en espa\u00f1ol; no ejecutes las tareas.",
+          "runtime": "codex",
+          "result": null,
+          "cancel_requested": false,
+          "operation_key": "plan-a5c7918fafd2211bd7f782c8459a7ae4923fd2b4f38ff106285d8459863e64a1",
+          "conversation_thread_id": null,
+          "model": null,
+          "repository_id": 2,
+          "repository_name": "observaciones",
+          "issue": null,
+          "review": null,
+          "execution_kind": "research",
+          "model_selection": null
+        }
+      },
+      "storage_before_shutdown": {
+        "runs": [
+          {
+            "id": "da33cecb-aad4-410e-901e-fbd394c47088",
+            "status": "failed",
+            "issue_json": "{\"closure_confirmed\":true,\"code\":\"runtime_failed\",\"inference_started\":null,\"message\":\"La ejecuci\u00f3n fall\u00f3 y se comprob\u00f3 el cierre de sus procesos. No se pudo confirmar si se inici\u00f3 inferencia. Conservamos el trabajo y los recibos guardados; revisa el intento y su presupuesto antes de continuar. No se repetir\u00e1 por su cuenta.\",\"next_action\":\"inspect_saved_work\"}"
+          },
+          {
+            "id": "cfa1c3b3-d500-44e3-a5df-09b8f7ff7c74",
+            "status": "failed",
+            "issue_json": "{\"closure_confirmed\":true,\"code\":\"runtime_failed\",\"inference_started\":null,\"message\":\"La ejecuci\u00f3n fall\u00f3 y se comprob\u00f3 el cierre de sus procesos. No se pudo confirmar si se inici\u00f3 inferencia. Conservamos el trabajo y los recibos guardados; revisa el intento y su presupuesto antes de continuar. No se repetir\u00e1 por su cuenta.\",\"next_action\":\"inspect_saved_work\"}"
+          }
+        ],
+        "native_starts": 0,
+        "dispatches": 2,
+        "unclosed_peers": 0,
+        "unrevoked_grants": 0,
+        "integrity": "ok"
+      },
+      "service_exit": 143,
+      "storage_after_shutdown": {
+        "runs": [
+          {
+            "id": "da33cecb-aad4-410e-901e-fbd394c47088",
+            "status": "failed",
+            "issue_json": "{\"closure_confirmed\":true,\"code\":\"runtime_failed\",\"inference_started\":null,\"message\":\"La ejecuci\u00f3n fall\u00f3 y se comprob\u00f3 el cierre de sus procesos. No se pudo confirmar si se inici\u00f3 inferencia. Conservamos el trabajo y los recibos guardados; revisa el intento y su presupuesto antes de continuar. No se repetir\u00e1 por su cuenta.\",\"next_action\":\"inspect_saved_work\"}"
+          },
+          {
+            "id": "cfa1c3b3-d500-44e3-a5df-09b8f7ff7c74",
+            "status": "failed",
+            "issue_json": "{\"closure_confirmed\":true,\"code\":\"runtime_failed\",\"inference_started\":null,\"message\":\"La ejecuci\u00f3n fall\u00f3 y se comprob\u00f3 el cierre de sus procesos. No se pudo confirmar si se inici\u00f3 inferencia. Conservamos el trabajo y los recibos guardados; revisa el intento y su presupuesto antes de continuar. No se repetir\u00e1 por su cuenta.\",\"next_action\":\"inspect_saved_work\"}"
+          }
+        ],
+        "native_starts": 0,
+        "dispatches": 2,
+        "unclosed_peers": 0,
+        "unrevoked_grants": 0,
+        "integrity": "ok"
+      },
+      "authority": {
+        "sequence": 36,
+        "witness_bytes": 220818,
+        "grants": [
+          {
+            "state": "retired",
+            "domain_removed": true
+          },
+          {
+            "state": "retired",
+            "domain_removed": true
+          }
+        ]
+      }
+    }
+  ],
+  "guard_cycles": [
+    "1",
+    "2"
+  ],
+  "authority_errors": [],
+  "source_unchanged": true
+}

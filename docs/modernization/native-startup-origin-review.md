@@ -57,3 +57,23 @@ o una diferencia causal comprobable; no se encadenan más arranques equivalentes
 [Resultados](native-startup-origin-results.json), [paquete](native-startup-origin-packaging.json),
 [docstrings](native-startup-origin-docstrings.json), [ensayo del navegador](native-preparation-browser-results.json),
 [plan vigente](../superpowers/plans/2026-11-08-native-preparation-contention.md).
+
+## Historia retenida y reinicio,2026-11-08
+
+29c061d,10:45:40–10:51:41UTC,6min1s hasta verificar. Una revisión limpia independiente
+trazó las lecturas ordinarias de Proyectos al store de negocio; no abren otro
+journal. La configuración usa un handle transitorio antes de servir y cada
+preparación comparte otro entre sus workers. No se encontró anidamiento durante
+preparación. AuthorityBusy también puede provenir de capacidad de endpoints,
+cola de lanzamiento o cierre de peer con gate ocupado: su clase no prueba flock.
+
+Dos admisiones guardadas en un host sintético, separadas por cierre143y reinicio,
+llegan a las dos guardias de generación.0turnos,0peers/grants abiertos,
+integridadok; ambas concesiones retiradas con dominio eliminado. Historia18→36
+transiciones,110571→220818bytes.45operaciones instrumentadas por sesión sobre
+configuración/preparación; se registran handle/PID/thread e intervalos sin mensajes
+privados. Ninguna excepción de autoridad. **No corrige el fallo original.**
+La historia es de preparación/cierre, no de un plan aceptado. No se continúan
+variantes equivalentes. Proyectos y fiabilidad original siguen principales;
+siguiente macroindependiente: idempotencia de comentarios de tarea.
+[Recibo](native-history-results.json), runner evals/operation/preparation_history.py.

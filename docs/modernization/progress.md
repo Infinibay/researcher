@@ -9225,3 +9225,13 @@ pausa tras pérdida/recarga,0dispatches/modelos;19tablas yfuente sin cambio.
 11/12páginas técnicas/delegadas;41/43escenarios. Producto ypaquete sin cambios.
 Continúa Proyectos/AuthorityBusy: variable causal nueva antes de repetir ensayo;
 luego comentarios de tarea, cierre no vacío y gatesglobales. Detalles al final.
+
+## 2026-11-08 — contención original aún abierta
+
+29c061d,10:45:40–10:51:41UTC,6min1s: revisión limpia y dos preparaciones guardadas
+en un host con reinicio/historia. No reprodujeron AuthorityBusy,0turnos,
+concesiones retiradas ydominios eliminados. Sin cambios de producto/locks.
+[Conclusión y límites](native-startup-origin-review.md#historia-retenida-y-reinicio2026-11-08).
+11/12páginas,41/43escenarios; Proyectos no aceptado. Desde10:51:41UTC sigue
+idempotencia de comentarios de tarea: cuerpo/clave/proyecto/tarea originales,
+recibo duradero yrecuperación local. No confundir con notas de conversación.
