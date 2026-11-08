@@ -1,0 +1,96 @@
+{
+  "base_commit": "cb4da17",
+  "observed_utc": "2026-11-08T20:39:57.319189+00:00",
+  "scope": "Four unambiguous superseded ledger fragments only; no product/scenario/deliverable status change",
+  "changes": [
+    {
+      "deliverable": "backup_restore",
+      "previous_status": "in_progress",
+      "status_unchanged": true,
+      "remaining_before": [
+        "Historical real-data location, inventory and migration acceptance; validate actual layouts and Chroma-version compatibility",
+        "Broader destructive-failure/active-actor disaster acceptance remains distinct from controlled synthetic recovery/import rehearsals",
+        "Final integrated acceptance and operator recovery review; no generic in-place downgrade promised for schemas18-32/43-56"
+      ],
+      "remaining_after": [
+        "Broader destructive-failure/active-actor disaster acceptance remains distinct from controlled synthetic recovery/import rehearsals",
+        "Final integrated acceptance and operator recovery review; no generic in-place downgrade promised for schemas18-32/43-56"
+      ],
+      "evidence": [
+        "docs/modernization/historical-data-acceptance.json",
+        "docs/modernization/remaining-plan-closure-review.md"
+      ]
+    },
+    {
+      "deliverable": "context_evals",
+      "previous_status": "in_progress",
+      "status_unchanged": true,
+      "remaining_before": [
+        "Human comprehension/effort observation and independent/representative evaluation; seven implementer-authored pairs do not establish a general or causal improvement.",
+        "Comparisons for remaining prompt profiles and source/provenance scenarios across summaries, delegation and user correction.",
+        "Historical prose-only questions and missing original direct-admission request addressed in two fresh functional scenarios with4 real turns and scripted owner input. Representative behavior, other profiles and human understanding remain unaccepted."
+      ],
+      "remaining_after": [
+        "Human comprehension/effort observation and independent/representative evaluation; seven implementer-authored pairs do not establish a general or causal improvement."
+      ],
+      "evidence": [
+        "docs/modernization/communication-evidence-reconciliation.md",
+        "docs/modernization/remaining-plan-closure-review.md"
+      ]
+    },
+    {
+      "deliverable": "dependency_license_inventory",
+      "previous_status": "in_progress",
+      "status_unchanged": true,
+      "remaining_before": [
+        "Actual final shipped-asset notices, native/fonts/models and concrete distribution compatibility; declarations alone do not approve compatibility",
+        "Product Python3.13 and final wheel/sdist notice bytes, complete frontend/backend older-client/global acceptance"
+      ],
+      "remaining_after": [
+        "Actual final shipped-asset notices, native/fonts/models and concrete distribution compatibility; declarations alone do not approve compatibility",
+        "final wheel/sdist notice bytes, complete frontend/backend older-client/global acceptance"
+      ],
+      "evidence": [
+        "docs/modernization/distribution-py313-review.md",
+        "docs/modernization/distribution-py313-packaging.json",
+        "docs/modernization/remaining-plan-closure-review.md"
+      ]
+    },
+    {
+      "deliverable": "remaining_coarse_audit",
+      "previous_status": "verified_scoped",
+      "status_unchanged": true,
+      "remaining_before": [
+        "U08human/adaptation",
+        "Ken/ONNXdistribution decision",
+        "Whole-document accessibility",
+        "Relevant documentation",
+        "Final package/global suite/independent review"
+      ],
+      "remaining_after": [
+        "U08human/adaptation",
+        "Ken/ONNXdistribution decision",
+        "Native browser zoom and screen-reader observation; measured whole-page Axe/reflow fixes verified in24states",
+        "Relevant documentation",
+        "Final package/global suite/independent review"
+      ],
+      "evidence": [
+        "docs/design/audits/2026-11-08-accessibility-final/report.md",
+        "docs/modernization/remaining-plan-closure-review.md"
+      ]
+    }
+  ],
+  "evidence_sha256": {
+    "docs/design/audits/2026-11-08-accessibility-final/report.md": "fa16294485e15f63b2343f6e9f27aa470fb4caaa9ed339628dc374f29206a29d",
+    "docs/modernization/communication-evidence-reconciliation.md": "66d8ae004db427f8ba5e99130353fc51c75d91fbb1014fa9c270387790c33bf0",
+    "docs/modernization/distribution-py313-packaging.json": "88d66b177d2749e8fbc97dca021ce7dade07c082789a684584ad50c05e2aaeb1",
+    "docs/modernization/distribution-py313-review.md": "9528bba327b38edcd47628bad44fa60abae4e2b1bcd1b6c3a1efcaeca165353f",
+    "docs/modernization/historical-data-acceptance.json": "ba3453295a53ff0f7775ac8b1d96676415eec69664b42de5b36d4ec19fbcbc63",
+    "docs/modernization/remaining-plan-closure-review.md": "e457528afd23e945acd77c3004760dc1cb2fdc021beea99be4dc80a83b9447d6"
+  },
+  "limits": [
+    "Clean-context review is readonly and not final acceptance",
+    "Global source suite remains live; no result inferred",
+    "Other historical statements retain their evidence pointers and do not create new scope by themselves"
+  ]
+}

@@ -28,7 +28,32 @@ que se pueda comparar el avance; no presentar microajustes como tareas principal
 - Última suite global: `9fb873c`,2210 casos,2178 pasan,31 fallan y1 error de fixture; sin omisiones. La carrera de backup encontrada se corrigió después con40 pruebas instaladas. No se declara una nueva corrida global verde; la referencia `0c8b8d9` queda como evidencia histórica.
 - U01–U07, E01–E12, C01–C10 y D01–D13 quedan comprobados con el alcance de sus matrices; sigue 1 de 43 escenarios amplios sin aceptación completa en [coverage.json](coverage.json). No hay un porcentaje global defendible.
 
-## Estado actual: fallos medidos de accesibilidad corregidos
+## Estado actual: suite global en ejecución; fallos anteriores revalidados
+
+Los32 selectores anteriores se expanden a33 casos actuales: **33 pasan en70,74s**,
+sin cambios nuevos de producto. [Resultados](global-recheck-results.json).
+Límite diagnóstico60s; los dos casos largos ya tienen marcas explícitas120/220s.
+No confundir esta selección con una suite global completa.
+
+- Terminado por alcance: accesibilidad medida; revalidación de todos los fallos
+  del global anterior, incluidas migraciones, estados, backup y fixture terminal.
+- En curso: suite backend común completa sobre703 archivos Python/SQL/C congelados,
+  con default20s, sin live y con activos Ken/semánticos offline explícitos.
+  Inicio registrado **2026-11-08T20:32:30.184828+00:00**. No hay resultado global todavía.
+- Ken/ONNX: metadata PyPI revalidada20:27:45UTC, sigue0.18.0/ONNX1.20.1. Parche
+  compatible previo conservado; elección entre preparar actualización oficial o
+  integrar variante reproducible solicitada. Ninguna publicación ni adopción.
+- Revisión con contexto limpio terminada: no encuentra otra capacidad gruesa
+  ausente demostrada. Cuatro fragmentos históricos conciliados sin cambiar estados;
+  [informe](remaining-plan-closure-review.md). No sustituye la revisión final.
+- Documentación preparada mientras corre la suite:68 docstrings en12 módulos, en
+  copias privadas y aún sin aplicar. AST ejecutable equivalente; no se cuentan como
+  implementados ni probados. Los703 archivos bajo prueba siguen congelados.
+- Pendientes: resultado/fallos del global; U08 humano; distribución Ken/ONNX;
+  documentación relevante y detalles; zoom nativo/lector; paquete y revisión
+  independiente finales.42/43 escenarios y12/12 páginas por alcance, sin global verde.
+
+## Etapa anterior: fallos medidos de accesibilidad corregidos
 
 [Informe](../design/audits/2026-11-08-accessibility-final/report.md) y
 [resultados](accessibility-final-results.json). **20:13:17–20:23:46 UTC: 10 min 29 s**

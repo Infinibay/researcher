@@ -3115,14 +3115,18 @@
         "docs/modernization/communication-flow-review.md",
         "docs/modernization/communication-flow-results.json",
         "docs/modernization/communication-flow-live.json",
-        "docs/modernization/communication-packaging.json"
+        "docs/modernization/communication-packaging.json",
+        "docs/modernization/communication-evidence-reconciliation.md",
+        "docs/modernization/remaining-plan-closure-review.md"
       ],
       "remaining": [
-        "Human comprehension/effort observation and independent/representative evaluation; seven implementer-authored pairs do not establish a general or causal improvement.",
-        "Comparisons for remaining prompt profiles and source/provenance scenarios across summaries, delegation and user correction.",
-        "Historical prose-only questions and missing original direct-admission request addressed in two fresh functional scenarios with4 real turns and scripted owner input. Representative behavior, other profiles and human understanding remain unaccepted."
+        "Human comprehension/effort observation and independent/representative evaluation; seven implementer-authored pairs do not establish a general or causal improvement."
       ],
-      "context_comparison_observed": "7 paired cases:2 development/5 reserved;16 Codex subscription turns with actual published Ken, matching substantive inputs/model/catalog and exact delivered policies. Initial no-dispatch context-version failure and development receipt-identity amendment retained.19 directed tests pass; human measures unknown."
+      "context_comparison_observed": "7 paired cases:2 development/5 reserved;16 Codex subscription turns with actual published Ken, matching substantive inputs/model/catalog and exact delivered policies. Initial no-dispatch context-version failure and development receipt-identity amendment retained.19 directed tests pass; human measures unknown.",
+      "notes": [
+        "2026-11-08: reconcile superseded remaining fragments without changing status. See closure-ledger-reconciliation.json and remaining-plan-closure-review.md; original scope and final gates retained.",
+        "All seven active profiles have bounded comparative observations. Historical prose-only questions and missing original request were addressed in recorded functional scenarios; no human comprehension or causal general improvement inferred."
+      ]
     },
     "communication_evals": {
       "status": "in_progress",
@@ -3420,7 +3424,9 @@
         "docs/modernization/operation-acceptance-packaging.json",
         "docs/modernization/operation-acceptance-artifact-comparison.json",
         "docs/modernization/operation-acceptance-source-comparison.json",
-        "docs/modernization/operation-acceptance-docstrings.json"
+        "docs/modernization/operation-acceptance-docstrings.json",
+        "docs/modernization/historical-data-acceptance.json",
+        "docs/modernization/remaining-plan-closure-review.md"
       ],
       "implemented": [
         "Managed installation data backup/verification/another-path restore preserves SQLite, uploads and linked Git worktrees.82source/82installed tests pass; restored execution remains pending enrollment. No production-data or operational recovery acceptance.",
@@ -3431,9 +3437,12 @@
         "Explicit snapshot limits after new writes; compact hash-bound restoration metadata permits321attachments and refuses damaged/path-redirected evidence. Actual interrupted metadata writer recovery and schema43->58post-write old/current snapshots verified.130source core plus28corrected historical inverse cases pass;160final installed pass,595matching files. Wiki inverse now refuses later schemas34/58before any rewrite;15directed migration/identity tests pass. Conditional inverse policy documented; no generic downgrade claim or owner-data acceptance."
       ],
       "remaining": [
-        "Historical real-data location, inventory and migration acceptance; validate actual layouts and Chroma-version compatibility",
         "Broader destructive-failure/active-actor disaster acceptance remains distinct from controlled synthetic recovery/import rehearsals",
         "Final integrated acceptance and operator recovery review; no generic in-place downgrade promised for schemas18-32/43-56"
+      ],
+      "notes": [
+        "2026-11-08: reconcile superseded remaining fragments without changing status. See closure-ledger-reconciliation.json and remaining-plan-closure-review.md; original scope and final gates retained.",
+        "Owner explicitly stated no historical data: owner migration is not applicable, not performed. Auxiliary CrewAI database remains unadopted with unknown ownership."
       ]
     },
     "design_audit": {
@@ -6162,13 +6171,20 @@
         "docs/modernization/interaction-dependency-review.json",
         "docs/modernization/dependencies-final-review.md",
         "docs/modernization/dependencies-final-results.json",
-        "docs/modernization/dependencies-final-evidence/licenses.json"
+        "docs/modernization/dependencies-final-evidence/licenses.json",
+        "docs/modernization/distribution-py313-review.md",
+        "docs/modernization/distribution-py313-packaging.json",
+        "docs/modernization/remaining-plan-closure-review.md"
       ],
       "remaining": [
         "Actual final shipped-asset notices, native/fonts/models and concrete distribution compatibility; declarations alone do not approve compatibility",
-        "Product Python3.13 and final wheel/sdist notice bytes, complete frontend/backend older-client/global acceptance"
+        "final wheel/sdist notice bytes, complete frontend/backend older-client/global acceptance"
       ],
-      "current_inventory_scope": "164Python versions/528frontend entries,0missing/unavailable/needs_review. Khroma exact npm MIT archive/file review bound bySHA; inventory collector14tests. Not compatibility approval."
+      "current_inventory_scope": "164Python versions/528frontend entries,0missing/unavailable/needs_review. Khroma exact npm MIT archive/file review bound bySHA; inventory collector14tests. Not compatibility approval.",
+      "notes": [
+        "2026-11-08: reconcile superseded remaining fragments without changing status. See closure-ledger-reconciliation.json and remaining-plan-closure-review.md; original scope and final gates retained.",
+        "Selected CPython3.13.18/GIL/Linux x86-64 installed compatibility is observed. Final artifact bytes/notices and broader final acceptance are still pending."
+      ]
     },
     "aggregate_kernel_resources": {
       "status": "in_progress",
@@ -7106,18 +7122,23 @@
       "status": "verified_scoped",
       "scope": "Clean-context readonly audit of up to five major remaining blocks, not final whole-branch review",
       "evidence": [
-        "docs/modernization/remaining-coarse-review-2026-11-08.md"
+        "docs/modernization/remaining-coarse-review-2026-11-08.md",
+        "docs/design/audits/2026-11-08-accessibility-final/report.md",
+        "docs/modernization/remaining-plan-closure-review.md"
       ],
       "remaining": [
         "U08human/adaptation",
         "Ken/ONNXdistribution decision",
-        "Whole-document accessibility",
+        "Native browser zoom and screen-reader observation; measured whole-page Axe/reflow fixes verified in24states",
         "Relevant documentation",
         "Final package/global suite/independent review"
       ],
       "limits": [
         "Stale historical coverage lists do not create fresh requirements",
         "OriginalAuthorityBusyremains unknown; no broad defect fix claimed"
+      ],
+      "notes": [
+        "2026-11-08: reconcile superseded remaining fragments without changing status. See closure-ledger-reconciliation.json and remaining-plan-closure-review.md; original scope and final gates retained."
       ]
     },
     "relevant_code_documentation": {

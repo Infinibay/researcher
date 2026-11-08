@@ -1,0 +1,21 @@
+{
+  "source": "https://pypi.org/pypi/ken-rank/json",
+  "observed_utc": "2026-11-08T20:27:45.336555+00:00",
+  "version": "0.18.0",
+  "onnx_requirements": [
+    "onnx==1.20.1"
+  ],
+  "release_artifacts": [
+    {
+      "filename": "ken_rank-0.18.0-py3-none-any.whl",
+      "sha256": "63393e337ef55495b4f3ddc361d0b84e424b7fe5d3b8309a17c8006950301719",
+      "upload_time": "2026-10-18T03:29:05.020517Z"
+    },
+    {
+      "filename": "ken_rank-0.18.0.tar.gz",
+      "sha256": "177490d5b3904a3b817fc21e64c088de7db9751ae3afb873f1062990328cc335",
+      "upload_time": "2026-10-18T03:29:09.144624Z"
+    }
+  ],
+  "scope": "Public metadata rechecked; no new compatibility or dependency audit. Published release still requires ONNX1.20.1; previous isolated patched candidate remains separate and is not adopted."
+}

@@ -9817,3 +9817,44 @@ zoom/screen reader remain unobserved; this does not close U08 or all accessibili
 See docs/design/audits/2026-11-08-accessibility-final/report.md and
 accessibility-final-results.json. Next: Ken/ONNX, relevant documentation, remaining
 details, final package/global suite/independent review. No push/merge/deployment.
+
+
+## 2026-11-08 — Previous global failures revalidated; full run active
+
+Base cb4da17. Previously failing32JUnit selectors expand to33current cases;
+33pass70.74s, no skips. Diagnostic default60s, with existing explicit120/220s
+marks for compound owned checks/terminal HTTP. This reruns earlier fixes; no
+new product fix or global-success claim. Initial venv-symlink and classname
+conversion runner errors executed no tests; preserved with amendments.
+
+Full source backend suite now starts with default20s, live excluded,703frozen
+Python/SQL/C files, explicit prepared public Ken and semantic assets, CPUQuota800%.
+Original live handle23453; do not restart on observation timeout. Registration
+and targeted results are under global-recheck-evidence and global-recheck-results.
+No source edits, installs or concurrent tests while it runs. Public metadata at
+20:27:45UTC stillKen0.18.0/ONNX1.20.1; candidate not adopted. User preference on
+official-Ken preparation vs reproducible local variant pending, no publication.
+A clean-context read-only review is checking remaining coarse scope.
+
+
+## 2026-11-08 — Readonly closure review and documentation drafts during global run
+
+Clean-context reviewer /root/remaining_plan_closure_review found no newly
+established missing macro capability after checking later evidence. Its two
+initial candidate gaps were withdrawn after source review; AuthorityBusy remains
+unexplained, seven profile comparisons are scoped, and no causal/human acceptance
+was inferred. See remaining-plan-closure-review.md. Four unambiguous stale
+remaining fragments reconciled in coverage; all statuses unchanged, original
+texts/evidence hashes in closure-ledger-reconciliation.json.
+
+While the complete source suite23453 remains live, prepared68English docstrings
+in12separate draft copies, NOT APPLIED OR TESTED. Drafts are private under
+.superpowers/sdd/2026-10-31-actualizacion-proyecto/research-docstrings-draft
+(52definitions/6modules) and payload-docstrings-draft(16definitions/6modules).
+Each manifest binds source/draft hashes and names; executable AST matches after
+removing docstrings. Protocol one-line ellipsis bodies preserved. Read the actual
+source/draft before applying only after global ends; then appropriate current
+source/schema/prompt validation and packaging remain. No automatic filler and no
+claim of better Ken ranking. Current implemented Python count remains416, missing
+205definitions plus5empty package module docstrings; these are separate metrics.
+No source/installs/concurrent tests changed during the frozen global run.

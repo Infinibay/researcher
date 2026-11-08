@@ -1,0 +1,190 @@
+{
+  "base_commit": "cb4da17",
+  "previous_global_commit": "9fb873c",
+  "scope": "Revalidation of all32selectors from the prior global failures only, not a new global pass",
+  "selectors": 32,
+  "cases": 33,
+  "passed": 33,
+  "failed": 0,
+  "skipped": 0,
+  "seconds_reported": 70.74,
+  "diagnostic_default_timeout": 60,
+  "explicit_long_case_marks_unchanged": {
+    "owned_checks": 120,
+    "terminal_http": 220
+  },
+  "code_changed_for_recheck": false,
+  "cases_detail": [
+    {
+      "classname": "backend.tests.runtime.test_agent_messages",
+      "name": "test_migration56_is_atomic_repeatable_and_preserves_historical_messages[56]",
+      "seconds": 0.29
+    },
+    {
+      "classname": "backend.tests.runtime.test_development_session",
+      "name": "test_owned_checks_persist_exact_results_and_invalidate_mutated_copy",
+      "seconds": 28.131
+    },
+    {
+      "classname": "backend.tests.runtime.test_legacy_import",
+      "name": "test_chroma_fragments_keep_exact_text_identity_and_explicit_project[58]",
+      "seconds": 0.476
+    },
+    {
+      "classname": "backend.tests.runtime.test_legacy_import",
+      "name": "test_chroma_fragments_keep_exact_text_identity_and_explicit_project[None]",
+      "seconds": 0.599
+    },
+    {
+      "classname": "backend.tests.runtime.test_reboot_backup",
+      "name": "test_reboot_backup_restores_live_old_peer_as_history[56]",
+      "seconds": 1.191
+    },
+    {
+      "classname": "backend.tests.runtime.test_reboot_backup",
+      "name": "test_reboot_backup_restores_live_old_peer_as_history[57]",
+      "seconds": 1.084
+    },
+    {
+      "classname": "backend.tests.runtime.test_reboot_backup",
+      "name": "test_unused_archive_inverse_and_future_refusal_preserve_data[57]",
+      "seconds": 0.447
+    },
+    {
+      "classname": "backend.tests.runtime.test_recovery_policy",
+      "name": "test_large_restoration_receipt_can_enroll_without_losing_any_registration",
+      "seconds": 1.249
+    },
+    {
+      "classname": "backend.tests.state.test_state_machine.TestCanTransition",
+      "name": "test_can_transition_invalid[backlog-done]",
+      "seconds": 0.028
+    },
+    {
+      "classname": "backend.tests.state.test_state_machine.TestCanTransition",
+      "name": "test_can_transition_invalid[backlog-in_progress]",
+      "seconds": 0.027
+    },
+    {
+      "classname": "backend.tests.state.test_state_machine.TestCanTransition",
+      "name": "test_can_transition_invalid[backlog-review_ready]",
+      "seconds": 0.026
+    },
+    {
+      "classname": "backend.tests.state.test_state_machine.TestCanTransition",
+      "name": "test_can_transition_invalid[backlog-failed]",
+      "seconds": 0.027
+    },
+    {
+      "classname": "backend.tests.state.test_state_machine.TestCanTransition",
+      "name": "test_can_transition_invalid[pending-done]",
+      "seconds": 0.029
+    },
+    {
+      "classname": "backend.tests.state.test_state_machine.TestCanTransition",
+      "name": "test_can_transition_invalid[pending-backlog]",
+      "seconds": 0.027
+    },
+    {
+      "classname": "backend.tests.state.test_state_machine.TestCanTransition",
+      "name": "test_can_transition_invalid[in_progress-done]",
+      "seconds": 0.027
+    },
+    {
+      "classname": "backend.tests.state.test_state_machine.TestCanTransition",
+      "name": "test_can_transition_invalid[in_progress-pending]",
+      "seconds": 0.026
+    },
+    {
+      "classname": "backend.tests.state.test_state_machine.TestCanTransition",
+      "name": "test_can_transition_invalid[done-pending]",
+      "seconds": 0.026
+    },
+    {
+      "classname": "backend.tests.state.test_state_machine.TestCanTransition",
+      "name": "test_can_transition_invalid[done-backlog]",
+      "seconds": 0.027
+    },
+    {
+      "classname": "backend.tests.state.test_state_machine.TestCanTransition",
+      "name": "test_can_transition_invalid[done-failed]",
+      "seconds": 0.023
+    },
+    {
+      "classname": "backend.tests.state.test_state_machine.TestCanTransition",
+      "name": "test_can_transition_invalid[cancelled-backlog]",
+      "seconds": 0.022
+    },
+    {
+      "classname": "backend.tests.state.test_state_machine.TestCanTransition",
+      "name": "test_can_transition_invalid[cancelled-failed]",
+      "seconds": 0.021
+    },
+    {
+      "classname": "backend.tests.state.test_state_machine.TestCanTransition",
+      "name": "test_can_transition_invalid[failed-in_progress]",
+      "seconds": 0.021
+    },
+    {
+      "classname": "backend.tests.state.test_state_machine.TestCanTransition",
+      "name": "test_can_transition_invalid[failed-done]",
+      "seconds": 0.022
+    },
+    {
+      "classname": "backend.tests.state.test_state_machine.TestValidateTransition",
+      "name": "test_validate_transition_raises_on_invalid_move",
+      "seconds": 0.021
+    },
+    {
+      "classname": "backend.tests.state.test_state_machine.TestGetAllowedTransitions",
+      "name": "test_backlog_transitions",
+      "seconds": 0.021
+    },
+    {
+      "classname": "backend.tests.state.test_state_machine.TestGetAllowedTransitions",
+      "name": "test_pending_transitions",
+      "seconds": 0.021
+    },
+    {
+      "classname": "backend.tests.state.test_state_machine.TestGetAllowedTransitions",
+      "name": "test_in_progress_transitions",
+      "seconds": 0.026
+    },
+    {
+      "classname": "backend.tests.state.test_state_machine.TestGetAllowedTransitions",
+      "name": "test_review_ready_transitions",
+      "seconds": 0.021
+    },
+    {
+      "classname": "backend.tests.state.test_state_machine.TestGetAllowedTransitions",
+      "name": "test_rejected_transitions",
+      "seconds": 0.021
+    },
+    {
+      "classname": "backend.tests.state.test_state_machine.TestGetAllowedTransitions",
+      "name": "test_done_transitions",
+      "seconds": 0.021
+    },
+    {
+      "classname": "backend.tests.state.test_state_machine.TestGetAllowedTransitions",
+      "name": "test_cancelled_transitions",
+      "seconds": 0.021
+    },
+    {
+      "classname": "backend.tests.state.test_state_machine.TestGetAllowedTransitions",
+      "name": "test_failed_transitions",
+      "seconds": 0.021
+    },
+    {
+      "classname": "backend.tests.test_orchestrator",
+      "name": "test_terminal_owns_no_engine_and_recovers_exact_work_through_real_owner_http",
+      "seconds": 36.504
+    }
+  ],
+  "global_run": "running; live exec session23453; registration in global-recheck-evidence/global-registration.json; no outcome yet",
+  "limits": [
+    "First two runner attempts executed no tests: resolved venv symlink and incorrect JUnit test-class conversion; originals retained",
+    "Published Ken metadata unchanged; no compatibility retest or candidate adoption",
+    "No new product fix, wheel, whole-plan acceptance or global green claim"
+  ]
+}
