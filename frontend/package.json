@@ -20,7 +20,7 @@
     "lint": "eslint src tests/ui vite.config.ts vitest.config.ts"
   },
   "dependencies": {
-    "@tanstack/react-query": "5.107.1",
+    "@tanstack/react-query": "5.108.1",
     "katex": "0.19.1",
     "mermaid": "12.3.0",
     "react": "19.3.1",
